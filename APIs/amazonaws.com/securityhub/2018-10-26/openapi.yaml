@@ -871,19 +871,19 @@ paths:
                     FirstObservedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured.
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     LastObservedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured.
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     CreatedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: An ISO8601-formatted timestamp that indicates when the security-findings provider captured the potential security issue that a finding captured.
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider captured the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     UpdatedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: 'An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. '
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. </p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     SeverityProduct:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
@@ -1017,11 +1017,11 @@ paths:
                     ProcessLaunchedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time that the process was launched.
+                        - description: '<p>A timestamp that identifies when the process was launched.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     ProcessTerminatedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time that the process was terminated.
+                        - description: '<p>A timestamp that identifies when the process was terminated.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     ThreatIntelIndicatorType:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1037,7 +1037,7 @@ paths:
                     ThreatIntelIndicatorLastObservedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time of the last observation of a threat intelligence indicator.
+                        - description: A timestamp that identifies the last observation of a threat intelligence indicator.
                     ThreatIntelIndicatorSource:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1146,7 +1146,7 @@ paths:
                     ResourceContainerLaunchedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time that the container was started.
+                        - description: '<p>A timestamp that identifies when the container was started.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     ResourceDetailsOther:
                       allOf:
                         - $ref: '#/components/schemas/MapFilterList'
@@ -1749,19 +1749,19 @@ paths:
                     FirstObservedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured.
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     LastObservedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured.
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     CreatedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: An ISO8601-formatted timestamp that indicates when the security-findings provider captured the potential security issue that a finding captured.
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider captured the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     UpdatedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: 'An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. '
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. </p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     SeverityProduct:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
@@ -1895,11 +1895,11 @@ paths:
                     ProcessLaunchedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time that the process was launched.
+                        - description: '<p>A timestamp that identifies when the process was launched.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     ProcessTerminatedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time that the process was terminated.
+                        - description: '<p>A timestamp that identifies when the process was terminated.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     ThreatIntelIndicatorType:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1915,7 +1915,7 @@ paths:
                     ThreatIntelIndicatorLastObservedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time of the last observation of a threat intelligence indicator.
+                        - description: A timestamp that identifies the last observation of a threat intelligence indicator.
                     ThreatIntelIndicatorSource:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -2024,7 +2024,7 @@ paths:
                     ResourceContainerLaunchedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time that the container was started.
+                        - description: '<p>A timestamp that identifies when the container was started.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     ResourceDetailsOther:
                       allOf:
                         - $ref: '#/components/schemas/MapFilterList'
@@ -2416,7 +2416,7 @@ paths:
       parameters: []
     post:
       operationId: EnableSecurityHub
-      description: '<p>Enables Security Hub for your account in the current Region or the Region you specify in the request.</p> <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub.</p> <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub, you also automatically enable the following standards.</p> <ul> <li> <p>CIS Amazon Web Services Foundations</p> </li> <li> <p>Amazon Web Services Foundational Security Best Practices</p> </li> </ul> <p>You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. </p> <p>To not enable the automatically enabled standards, set <code>EnableDefaultStandards</code> to <code>false</code>.</p> <p>After you enable Security Hub, to enable a standard, use the <code>BatchEnableStandards</code> operation. To disable a standard, use the <code>BatchDisableStandards</code> operation.</p> <p>To learn more, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html">setup information</a> in the <i>Security Hub User Guide</i>.</p>'
+      description: '<p>Enables Security Hub for your account in the current Region or the Region you specify in the request.</p> <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub.</p> <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub, you also automatically enable the following standards:</p> <ul> <li> <p>Center for Internet Security (CIS) Amazon Web Services Foundations Benchmark v1.2.0</p> </li> <li> <p>Amazon Web Services Foundational Security Best Practices</p> </li> </ul> <p>Other standards are not automatically enabled. </p> <p>To opt out of automatically enabled standards, set <code>EnableDefaultStandards</code> to <code>false</code>.</p> <p>After you enable Security Hub, to enable a standard, use the <code>BatchEnableStandards</code> operation. To disable a standard, use the <code>BatchDisableStandards</code> operation.</p> <p>To learn more, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html">setup information</a> in the <i>Security Hub User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -3471,19 +3471,19 @@ paths:
                     FirstObservedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured.
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     LastObservedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured.
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     CreatedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: An ISO8601-formatted timestamp that indicates when the security-findings provider captured the potential security issue that a finding captured.
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider captured the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     UpdatedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: 'An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. '
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. </p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     SeverityProduct:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
@@ -3617,11 +3617,11 @@ paths:
                     ProcessLaunchedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time that the process was launched.
+                        - description: '<p>A timestamp that identifies when the process was launched.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     ProcessTerminatedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time that the process was terminated.
+                        - description: '<p>A timestamp that identifies when the process was terminated.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     ThreatIntelIndicatorType:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3637,7 +3637,7 @@ paths:
                     ThreatIntelIndicatorLastObservedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time of the last observation of a threat intelligence indicator.
+                        - description: A timestamp that identifies the last observation of a threat intelligence indicator.
                     ThreatIntelIndicatorSource:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3746,7 +3746,7 @@ paths:
                     ResourceContainerLaunchedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time that the container was started.
+                        - description: '<p>A timestamp that identifies when the container was started.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     ResourceDetailsOther:
                       allOf:
                         - $ref: '#/components/schemas/MapFilterList'
@@ -3938,19 +3938,19 @@ paths:
                     FirstObservedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured.
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     LastObservedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured.
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     CreatedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: An ISO8601-formatted timestamp that indicates when the security-findings provider captured the potential security issue that a finding captured.
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider captured the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     UpdatedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: 'An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. '
+                        - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. </p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     SeverityProduct:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
@@ -4084,11 +4084,11 @@ paths:
                     ProcessLaunchedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time that the process was launched.
+                        - description: '<p>A timestamp that identifies when the process was launched.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     ProcessTerminatedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time that the process was terminated.
+                        - description: '<p>A timestamp that identifies when the process was terminated.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     ThreatIntelIndicatorType:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -4104,7 +4104,7 @@ paths:
                     ThreatIntelIndicatorLastObservedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time of the last observation of a threat intelligence indicator.
+                        - description: A timestamp that identifies the last observation of a threat intelligence indicator.
                     ThreatIntelIndicatorSource:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -4213,7 +4213,7 @@ paths:
                     ResourceContainerLaunchedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
-                        - description: The date/time that the container was started.
+                        - description: '<p>A timestamp that identifies when the container was started.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
                     ResourceDetailsOther:
                       allOf:
                         - $ref: '#/components/schemas/MapFilterList'
@@ -5276,19 +5276,19 @@ components:
         FirstObservedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the security-findings provider first observed the potential security issue that a finding captured.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the security-findings provider first observed the potential security issue that a finding captured.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         LastObservedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the security-findings provider most recently observed the potential security issue that a finding captured.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the security-findings provider most recently observed the potential security issue that a finding captured.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the security-findings provider created the potential security issue that a finding captured.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the security-findings provider created the potential security issue that a finding captured.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the security-findings provider last updated the finding record.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the security-findings provider last updated the finding record.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Severity:
           allOf:
             - $ref: '#/components/schemas/Severity'
@@ -6032,11 +6032,11 @@ components:
         FirstSeen:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: An ISO8601-formatted timestamp that indicates when the API call was first observed.
+            - description: '<p>An ISO8601-formatted timestamp that indicates when the API call was first observed.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
         LastSeen:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: An ISO8601-formatted timestamp that indicates when the API call was most recently observed.
+            - description: '<p>An ISO8601-formatted timestamp that indicates when the API call was most recently observed.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
       description: Provided if <code>ActionType</code> is <code>AWS_API_CALL</code>. It provides details about the API call that was detected.
     DnsRequestAction:
       type: object
@@ -6434,7 +6434,7 @@ components:
         CreatedDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the API was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the API was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Version:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6514,11 +6514,11 @@ components:
         CreatedDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the stage was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the stage was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         LastUpdatedDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the stage was most recently updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the stage was most recently updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         WebAclArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6570,7 +6570,7 @@ components:
         CreatedDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the API was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the API was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6630,7 +6630,7 @@ components:
         CreatedDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the stage was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the stage was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6646,7 +6646,7 @@ components:
         LastUpdatedDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the stage was most recently updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the stage was most recently updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         RouteSettings:
           allOf:
             - $ref: '#/components/schemas/AwsApiGatewayV2RouteSettings'
@@ -6742,7 +6742,7 @@ components:
         CreatedTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the auto scaling group was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the auto scaling group was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         MixedInstancesPolicy:
           allOf:
             - $ref: '#/components/schemas/AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails'
@@ -6930,7 +6930,7 @@ components:
         CreatedTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The creation date and time for the launch configuration.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>The creation date and time for the launch configuration.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         EbsOptimized:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -7312,7 +7312,7 @@ components:
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the renewal summary was last updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the renewal summary was last updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: Contains information about the Certificate Manager managed renewal for an <code>AMAZON_ISSUED</code> certificate.
     AwsCertificateManagerCertificateDetails:
       type: object
@@ -7324,7 +7324,7 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the certificate was requested.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the certificate was requested.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         DomainName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7344,7 +7344,7 @@ components:
         ImportedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the certificate was imported. Provided if the certificate type is <code>IMPORTED</code>.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the certificate was imported. Provided if the certificate type is <code>IMPORTED</code>.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         InUseBy:
           allOf:
             - $ref: '#/components/schemas/StringList'
@@ -7352,7 +7352,7 @@ components:
         IssuedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the certificate was issued. Provided if the certificate type is <code>AMAZON_ISSUED</code>.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the certificate was issued. Provided if the certificate type is <code>AMAZON_ISSUED</code>.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Issuer:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7368,11 +7368,11 @@ components:
         NotAfter:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The time after which the certificate becomes invalid.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>The time after which the certificate becomes invalid.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         NotBefore:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The time before which the certificate is not valid.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>The time before which the certificate is not valid.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Options:
           allOf:
             - $ref: '#/components/schemas/AwsCertificateManagerCertificateOptions'
@@ -7688,7 +7688,7 @@ components:
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when that the distribution was last modified.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when that the distribution was last modified.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Logging:
           allOf:
             - $ref: '#/components/schemas/AwsCloudFrontDistributionLogging'
@@ -8248,7 +8248,7 @@ components:
         LastUpdateToPayPerRequestDateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>If the billing mode is <code>PAY_PER_REQUEST</code>, indicates when the billing mode was set to that value.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>If the billing mode is <code>PAY_PER_REQUEST</code>, indicates when the billing mode was set to that value.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: Provides information about the billing for read/write capacity on the table.
     AwsDynamoDbTableGlobalSecondaryIndexList:
       type: array
@@ -8268,11 +8268,11 @@ components:
         LastDecreaseDateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the provisioned throughput was last decreased.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the provisioned throughput was last decreased.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         LastIncreaseDateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the provisioned throughput was last increased.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the provisioned throughput was last increased.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         NumberOfDecreasesToday:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -8304,7 +8304,7 @@ components:
         RestoreDateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates the point in time that the table was restored to.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates the point in time that the table was restored to.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         RestoreInProgress:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -8316,7 +8316,7 @@ components:
         InaccessibleEncryptionDateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>If the key is inaccessible, the date and time when DynamoDB detected that the key was inaccessible.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>If the key is inaccessible, the date and time when DynamoDB detected that the key was inaccessible.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Status:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -8358,7 +8358,7 @@ components:
         CreationDateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the table was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the table was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         GlobalSecondaryIndexes:
           allOf:
             - $ref: '#/components/schemas/AwsDynamoDbTableGlobalSecondaryIndexList'
@@ -8670,7 +8670,7 @@ components:
         LaunchedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the instance was launched.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the instance was launched.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         NetworkInterfaces:
           allOf:
             - $ref: '#/components/schemas/AwsEc2InstanceNetworkInterfacesList'
@@ -9578,7 +9578,7 @@ components:
         AttachTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the attachment initiated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the attachment initiated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         AttachmentId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -9958,7 +9958,7 @@ components:
         CreateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the volume was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the volume was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         DeviceName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -10346,7 +10346,7 @@ components:
         LastStatusChange:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The date and time of the last change in status.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>The date and time of the last change in status.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         OutsideIpAddress:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -10386,7 +10386,7 @@ components:
         ImagePublishedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The date and time when the image was pushed to the repository.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>The date and time when the image was pushed to the repository.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: Information about an Amazon ECR image.
     AwsEcrRepositoryImageScanningConfigurationDetails:
       type: object
@@ -12332,7 +12332,7 @@ components:
         CreatedTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the load balancer was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the load balancer was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         DnsName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -12472,7 +12472,7 @@ components:
         CreatedTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the load balancer was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the load balancer was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         DNSName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -12538,7 +12538,7 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the IAM access key was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the IAM access key was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         PrincipalId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -12574,7 +12574,7 @@ components:
         CreationDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the session was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the session was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: Attributes of the session that the key was used for.
     AwsIamAccessKeySessionContextSessionIssuer:
       type: object
@@ -12630,7 +12630,7 @@ components:
         CreateDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the IAM group was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the IAM group was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         GroupId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -12670,7 +12670,7 @@ components:
         CreateDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the instance profile was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the instance profile was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         InstanceProfileId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -12711,7 +12711,7 @@ components:
         CreateDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the role was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the role was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Path:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -12751,7 +12751,7 @@ components:
         CreateDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>When the policy was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>When the policy was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         DefaultVersionId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -12787,7 +12787,7 @@ components:
         UpdateDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>When the policy was most recently updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>When the policy was most recently updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: Represents an IAM permissions policy.
     AwsIamPolicyVersion:
       type: object
@@ -12803,7 +12803,7 @@ components:
         CreateDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the version was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the version was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: A version of an IAM policy.
     AwsIamRolePolicyList:
       type: array
@@ -12823,7 +12823,7 @@ components:
         CreateDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the role was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the role was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         InstanceProfileList:
           allOf:
             - $ref: '#/components/schemas/AwsIamInstanceProfileList'
@@ -12873,7 +12873,7 @@ components:
         CreateDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the user was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the user was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         GroupList:
           allOf:
             - $ref: '#/components/schemas/StringList'
@@ -12953,7 +12953,7 @@ components:
         CreationDate:
           allOf:
             - $ref: '#/components/schemas/Double'
-            - description: '<p>Indicates when the KMS key was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the KMS key was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         KeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -13081,7 +13081,7 @@ components:
         LastModified:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the function was last updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the function was last updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Layers:
           allOf:
             - $ref: '#/components/schemas/AwsLambdaFunctionLayerList'
@@ -13171,7 +13171,7 @@ components:
         CreatedDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the version was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the version was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: Details about a Lambda layer version.
     AwsMountPoint:
       type: object
@@ -13727,7 +13727,7 @@ components:
         ClusterCreateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         EnabledCloudWatchLogsExports:
           allOf:
             - $ref: '#/components/schemas/StringList'
@@ -13827,7 +13827,7 @@ components:
         SnapshotCreateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the snapshot was taken.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the snapshot was taken.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Engine:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -13851,7 +13851,7 @@ components:
         ClusterCreateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         MasterUsername:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -14115,7 +14115,7 @@ components:
         InstanceCreateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the DB instance was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the DB instance was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -14191,7 +14191,7 @@ components:
         LatestRestorableTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Specifies the latest time to which a database can be restored with point-in-time restore.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Specifies the latest time to which a database can be restored with point-in-time restore.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         AutoMinorVersionUpgrade:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -14621,7 +14621,7 @@ components:
         SubscriptionCreationTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The datetime when the event notification subscription was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>The datetime when the event notification subscription was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: Details about an Amazon RDS event notification subscription. The subscription allows Amazon RDS to post events to an SNS topic.
     AwsRedshiftClusterClusterNode:
       type: object
@@ -14725,7 +14725,7 @@ components:
         DeferMaintenanceEndTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The end of the time window for which maintenance was deferred.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>The end of the time window for which maintenance was deferred.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         DeferMaintenanceIdentifier:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -14733,7 +14733,7 @@ components:
         DeferMaintenanceStartTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The start of the time window for which maintenance was deferred.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>The start of the time window for which maintenance was deferred.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: A time windows during which maintenance was deferred for an Amazon Redshift cluster.
     AwsRedshiftClusterDeferredMaintenanceWindows:
       type: array
@@ -14889,11 +14889,11 @@ components:
         LastFailureTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The last time when logs failed to be delivered.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>The last time when logs failed to be delivered.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         LastSuccessfulDeliveryTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The last time that logs were delivered successfully.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>The last time that logs were delivered successfully.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         LoggingEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -14925,7 +14925,7 @@ components:
         ClusterCreateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the cluster was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the cluster was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -14997,7 +14997,7 @@ components:
         ExpectedNextSnapshotScheduleTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the next snapshot is expected to be taken. The cluster must have a valid snapshot schedule and have backups enabled.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the next snapshot is expected to be taken. The cluster must have a valid snapshot schedule and have backups enabled.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         ExpectedNextSnapshotScheduleTimeStatus:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -15029,7 +15029,7 @@ components:
         NextMaintenanceWindowStartTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates the start of the next maintenance window.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates the start of the next maintenance window.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         NodeType:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -15173,7 +15173,7 @@ components:
         ExpirationDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The date when objects are moved or deleted.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>The date when objects are moved or deleted.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         ExpirationInDays:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -15293,7 +15293,7 @@ components:
         Date:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>A date on which to transition objects to the specified storage class. If you provide <code>Date</code>, you cannot provide <code>Days</code>.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>A date on which to transition objects to the specified storage class. If you provide <code>Date</code>, you cannot provide <code>Days</code>.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Days:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -15381,7 +15381,7 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the S3 bucket was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the S3 bucket was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         ServerSideEncryptionConfiguration:
           allOf:
             - $ref: '#/components/schemas/AwsS3BucketServerSideEncryptionConfiguration'
@@ -15574,7 +15574,7 @@ components:
         LastModified:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the object was last modified.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the object was last modified.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         ETag:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -15846,11 +15846,11 @@ components:
         LaunchedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the process was launched.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the process was launched.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         TerminatedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the process was terminated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the process was terminated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: The details of process-related information about a finding.
     ThreatList:
       type: array
@@ -15940,7 +15940,7 @@ components:
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The timestamp of when the note was updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>The timestamp of when the note was updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: A user-defined note added to a finding.
     VulnerabilityList:
       type: array
@@ -15982,11 +15982,11 @@ components:
         OperationStartTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the operation started.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the operation started.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         OperationEndTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the operation completed.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the operation completed.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         RebootOption:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -16050,19 +16050,19 @@ components:
         FirstObservedAt:
           allOf:
             - $ref: '#/components/schemas/DateFilterList'
-            - description: An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured.
+            - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
         LastObservedAt:
           allOf:
             - $ref: '#/components/schemas/DateFilterList'
-            - description: An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured.
+            - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/DateFilterList'
-            - description: An ISO8601-formatted timestamp that indicates when the security-findings provider captured the potential security issue that a finding captured.
+            - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider captured the potential security issue that a finding captured.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/DateFilterList'
-            - description: 'An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. '
+            - description: '<p>An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. </p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
         SeverityProduct:
           allOf:
             - $ref: '#/components/schemas/NumberFilterList'
@@ -16196,11 +16196,11 @@ components:
         ProcessLaunchedAt:
           allOf:
             - $ref: '#/components/schemas/DateFilterList'
-            - description: The date/time that the process was launched.
+            - description: '<p>A timestamp that identifies when the process was launched.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
         ProcessTerminatedAt:
           allOf:
             - $ref: '#/components/schemas/DateFilterList'
-            - description: The date/time that the process was terminated.
+            - description: '<p>A timestamp that identifies when the process was terminated.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
         ThreatIntelIndicatorType:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
@@ -16216,7 +16216,7 @@ components:
         ThreatIntelIndicatorLastObservedAt:
           allOf:
             - $ref: '#/components/schemas/DateFilterList'
-            - description: The date/time of the last observation of a threat intelligence indicator.
+            - description: A timestamp that identifies the last observation of a threat intelligence indicator.
         ThreatIntelIndicatorSource:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
@@ -16325,7 +16325,7 @@ components:
         ResourceContainerLaunchedAt:
           allOf:
             - $ref: '#/components/schemas/DateFilterList'
-            - description: The date/time that the container was started.
+            - description: '<p>A timestamp that identifies when the container was started.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
         ResourceDetailsOther:
           allOf:
             - $ref: '#/components/schemas/MapFilterList'
@@ -17592,7 +17592,7 @@ components:
         LaunchedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the container started.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the container started.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         VolumeMounts:
           allOf:
             - $ref: '#/components/schemas/VolumeMountList'
@@ -17785,11 +17785,11 @@ components:
         Start:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: A start date for the date filter.
+            - description: '<p>A timestamp that provides the start date for the date filter.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
         End:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: An end date for the date filter.
+            - description: '<p>A timestamp that provides the end date for the date filter.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>.</p>'
         DateRange:
           allOf:
             - $ref: '#/components/schemas/DateRange'
@@ -19715,7 +19715,7 @@ components:
         LastObservedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the most recent instance of a threat intelligence indicator was observed.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the most recent instance of a threat intelligence indicator was observed.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Source:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -19876,11 +19876,11 @@ components:
         VendorCreatedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the vulnerability advisory was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the vulnerability advisory was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         VendorUpdatedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Indicates when the vulnerability advisory was last updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+            - description: '<p>Indicates when the vulnerability advisory was last updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: A vendor that generates a vulnerability report.
     VulnerabilityFixAvailable:
       type: string

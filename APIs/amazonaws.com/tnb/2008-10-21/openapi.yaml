@@ -1,0 +1,3942 @@
+openapi: 3.0.0
+info:
+  version: '2008-10-21'
+  x-release: v4
+  title: AWS Telco Network Builder
+  description: ' Amazon Web Services Telco Network Builder (TNB) is a network automation service that helps you deploy and manage telecom networks. AWS TNB helps you with the lifecycle management of your telecommunication network functions throughout planning, deployment, and post-deployment activities.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: tnb
+  x-aws-signingName: tnb
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/tnb-2008-10-21.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/tnb/'
+servers:
+  - url: 'http://tnb.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Telco Network Builder multi-region endpoint
+  - url: 'https://tnb.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Telco Network Builder multi-region endpoint
+  - url: 'http://tnb.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Telco Network Builder endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://tnb.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Telco Network Builder endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  '/sol/nslcm/v1/ns_lcm_op_occs/{nsLcmOpOccId}/cancel':
+    post:
+      operationId: CancelSolNetworkOperation
+      description: '<p>Cancels a network operation.</p> <p>A network operation is any operation that is done to your network, such as network instance instantiation or termination.</p>'
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nsLcmOpOccId
+          in: path
+          required: true
+          description: The ID of a network operation occurrence.
+          schema:
+            type: string
+            pattern: '^no-[a-f0-9]{17}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /sol/vnfpkgm/v1/vnf_packages:
+    post:
+      operationId: CreateSolFunctionPackage
+      description: '<p>Creates a function package.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network. For more information, see <a href="https://docs.aws.amazon.com/tnb/latest/ug/function-packages.html">Function packages</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>. </p> <p>Creating a function package is the first step for creating a network in AWS TNB. This request creates an empty container with an ID. The next step is to upload the actual CSAR zip file into that empty container. To upload function package content, see <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolFunctionPackageContent.html">PutSolFunctionPackageContent</a>.</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSolFunctionPackageOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tags:
+                  description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListSolFunctionPackages
+      description: <p>Lists information about function packages.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSolFunctionPackagesOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: max_results
+          in: query
+          required: false
+          description: The maximum number of results to include in the response.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextpage_opaque_marker
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /sol/nslcm/v1/ns_instances:
+    post:
+      operationId: CreateSolNetworkInstance
+      description: '<p>Creates a network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed. Creating a network instance is the third step after creating a network package. For more information about network instances, <a href="https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html">Network instances</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>.</p> <p>Once you create a network instance, you can instantiate it. To instantiate a network, see <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_InstantiateSolNetworkInstance.html">InstantiateSolNetworkInstance</a>.</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSolNetworkInstanceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nsName
+                - nsdInfoId
+              properties:
+                nsDescription:
+                  description: Network instance description.
+                  type: string
+                  minLength: 1
+                  maxLength: 124
+                nsName:
+                  description: Network instance name.
+                  type: string
+                  minLength: 1
+                  maxLength: 80
+                nsdInfoId:
+                  description: ID for network service descriptor.
+                  type: string
+                  pattern: '^np-[a-f0-9]{17}$'
+                tags:
+                  description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListSolNetworkInstances
+      description: '<p>Lists your network instances.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSolNetworkInstancesOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: max_results
+          in: query
+          required: false
+          description: The maximum number of results to include in the response.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextpage_opaque_marker
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /sol/nsd/v1/ns_descriptors:
+    post:
+      operationId: CreateSolNetworkPackage
+      description: '<p>Creates a network package.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on. For more information, see <a href="https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html">Network instances</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>. </p> <p>A network package consists of a network service descriptor (NSD) file (required) and any additional files (optional), such as scripts specific to your needs. For example, if you have multiple function packages in your network package, you can use the NSD to define which network functions should run in certain VPCs, subnets, or EKS clusters.</p> <p>This request creates an empty network package container with an ID. Once you create a network package, you can upload the network package content using <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolNetworkPackageContent.html">PutSolNetworkPackageContent</a>.</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSolNetworkPackageOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tags:
+                  description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListSolNetworkPackages
+      description: <p>Lists network packages.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSolNetworkPackagesOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: max_results
+          in: query
+          required: false
+          description: The maximum number of results to include in the response.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextpage_opaque_marker
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/sol/vnfpkgm/v1/vnf_packages/{vnfPkgId}':
+    delete:
+      operationId: DeleteSolFunctionPackage
+      description: '<p>Deletes a function package.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p> <p>To delete a function package, the package must be in a disabled state. To disable a function package, see <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_UpdateSolFunctionPackage.html">UpdateSolFunctionPackage</a>. </p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: vnfPkgId
+          in: path
+          required: true
+          description: ID of the function package.
+          schema:
+            type: string
+            pattern: '^fp-[a-f0-9]{17}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetSolFunctionPackage
+      description: '<p>Gets the details of an individual function package, such as the operational state and whether the package is in use.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network..</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSolFunctionPackageOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: vnfPkgId
+          in: path
+          required: true
+          description: ID of the function package.
+          schema:
+            type: string
+            pattern: '^fp-[a-f0-9]{17}$'
+    patch:
+      operationId: UpdateSolFunctionPackage
+      description: <p>Updates the operational state of function package.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSolFunctionPackageOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: vnfPkgId
+          in: path
+          required: true
+          description: ID of the function package.
+          schema:
+            type: string
+            pattern: '^fp-[a-f0-9]{17}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - operationalState
+              properties:
+                operationalState:
+                  description: Operational state of the function package.
+                  type: string
+                  enum:
+                    - ENABLED
+                    - DISABLED
+  '/sol/nslcm/v1/ns_instances/{nsInstanceId}':
+    delete:
+      operationId: DeleteSolNetworkInstance
+      description: '<p>Deletes a network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p> <p>To delete a network instance, the instance must be in a stopped or terminated state. To terminate a network instance, see <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_TerminateSolNetworkInstance.html">TerminateSolNetworkInstance</a>.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nsInstanceId
+          in: path
+          required: true
+          description: Network instance ID.
+          schema:
+            type: string
+            pattern: '^ni-[a-f0-9]{17}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetSolNetworkInstance
+      description: '<p>Gets the details of the network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSolNetworkInstanceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nsInstanceId
+          in: path
+          required: true
+          description: ID of the network instance.
+          schema:
+            type: string
+            pattern: '^ni-[a-f0-9]{17}$'
+  '/sol/nsd/v1/ns_descriptors/{nsdInfoId}':
+    delete:
+      operationId: DeleteSolNetworkPackage
+      description: '<p>Deletes network package.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p> <p>To delete a network package, the package must be in a disable state. To disable a network package, see <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_UpdateSolNetworkPackage.html">UpdateSolNetworkPackage</a>.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nsdInfoId
+          in: path
+          required: true
+          description: ID of the network service descriptor in the network package.
+          schema:
+            type: string
+            pattern: '^np-[a-f0-9]{17}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetSolNetworkPackage
+      description: <p>Gets the details of a network package.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSolNetworkPackageOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nsdInfoId
+          in: path
+          required: true
+          description: ID of the network service descriptor in the network package.
+          schema:
+            type: string
+            pattern: '^np-[a-f0-9]{17}$'
+    patch:
+      operationId: UpdateSolNetworkPackage
+      description: <p>Updates the operational state of a network package.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p> <p>A network service descriptor is a .yaml file in a network package that uses the TOSCA standard to describe the network functions you want to deploy and the Amazon Web Services infrastructure you want to deploy the network functions on.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSolNetworkPackageOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nsdInfoId
+          in: path
+          required: true
+          description: ID of the network service descriptor in the network package.
+          schema:
+            type: string
+            pattern: '^np-[a-f0-9]{17}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nsdOperationalState
+              properties:
+                nsdOperationalState:
+                  description: Operational state of the network service descriptor in the network package.
+                  type: string
+                  enum:
+                    - ENABLED
+                    - DISABLED
+  '/sol/vnflcm/v1/vnf_instances/{vnfInstanceId}':
+    get:
+      operationId: GetSolFunctionInstance
+      description: '<p>Gets the details of a network function instance, including the instantation state and metadata from the function package descriptor in the network function package.</p> <p>A network function instance is a function in a function package .</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSolFunctionInstanceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: vnfInstanceId
+          in: path
+          required: true
+          description: ID of the network function.
+          schema:
+            type: string
+            pattern: '^fi-[a-f0-9]{17}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/sol/vnfpkgm/v1/vnf_packages/{vnfPkgId}/package_content#Accept':
+    get:
+      operationId: GetSolFunctionPackageContent
+      description: <p>Gets the contents of a function package.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSolFunctionPackageContentOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: Accept
+          in: header
+          required: true
+          description: The format of the package that you want to download from the function packages.
+          schema:
+            type: string
+            enum:
+              - application/zip
+        - name: vnfPkgId
+          in: path
+          required: true
+          description: ID of the function package.
+          schema:
+            type: string
+            pattern: '^fp-[a-f0-9]{17}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/sol/vnfpkgm/v1/vnf_packages/{vnfPkgId}/vnfd#Accept':
+    get:
+      operationId: GetSolFunctionPackageDescriptor
+      description: <p>Gets a function package descriptor in a function package.</p> <p>A function package descriptor is a .yaml file in a function package that uses the TOSCA standard to describe how the network function in the function package should run on your network.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSolFunctionPackageDescriptorOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: Accept
+          in: header
+          required: true
+          description: 'Indicates which content types, expressed as MIME types, the client is able to understand.'
+          schema:
+            type: string
+            enum:
+              - text/plain
+        - name: vnfPkgId
+          in: path
+          required: true
+          description: ID of the function package.
+          schema:
+            type: string
+            pattern: '^fp-[a-f0-9]{17}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/sol/nslcm/v1/ns_lcm_op_occs/{nsLcmOpOccId}':
+    get:
+      operationId: GetSolNetworkOperation
+      description: '<p>Gets the details of a network operation, including the tasks involved in the network operation and the status of the tasks.</p> <p>A network operation is any operation that is done to your network, such as network instance instantiation or termination.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSolNetworkOperationOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nsLcmOpOccId
+          in: path
+          required: true
+          description: The identifier of the operation occurrence.
+          schema:
+            type: string
+            pattern: '^no-[a-f0-9]{17}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/sol/nsd/v1/ns_descriptors/{nsdInfoId}/nsd_content#Accept':
+    get:
+      operationId: GetSolNetworkPackageContent
+      description: <p>Gets the contents of a network package.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSolNetworkPackageContentOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: Accept
+          in: header
+          required: true
+          description: The format of the package you want to download from the network package.
+          schema:
+            type: string
+            enum:
+              - application/zip
+        - name: nsdInfoId
+          in: path
+          required: true
+          description: ID of the network service descriptor in the network package.
+          schema:
+            type: string
+            pattern: '^np-[a-f0-9]{17}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/sol/nsd/v1/ns_descriptors/{nsdInfoId}/nsd':
+    get:
+      operationId: GetSolNetworkPackageDescriptor
+      description: <p>Gets the content of the network service descriptor.</p> <p>A network service descriptor is a .yaml file in a network package that uses the TOSCA standard to describe the network functions you want to deploy and the Amazon Web Services infrastructure you want to deploy the network functions on.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSolNetworkPackageDescriptorOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nsdInfoId
+          in: path
+          required: true
+          description: ID of the network service descriptor in the network package.
+          schema:
+            type: string
+            pattern: '^np-[a-f0-9]{17}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/sol/nslcm/v1/ns_instances/{nsInstanceId}/instantiate':
+    post:
+      operationId: InstantiateSolNetworkInstance
+      description: '<p>Instantiates a network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p> <p>Before you can instantiate a network instance, you have to create a network instance. For more information, see <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_CreateSolNetworkInstance.html">CreateSolNetworkInstance</a>.</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstantiateSolNetworkInstanceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: dry_run
+          in: query
+          required: false
+          description: 'A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: nsInstanceId
+          in: path
+          required: true
+          description: ID of the network instance.
+          schema:
+            type: string
+            pattern: '^ni-[a-f0-9]{17}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                additionalParamsForNs:
+                  description: Provides values for the configurable properties.
+                  type: object
+                  properties: {}
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /sol/vnflcm/v1/vnf_instances:
+    get:
+      operationId: ListSolFunctionInstances
+      description: <p>Lists network function instances.</p> <p>A network function instance is a function in a function package .</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSolFunctionInstancesOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: max_results
+          in: query
+          required: false
+          description: The maximum number of results to include in the response.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextpage_opaque_marker
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /sol/nslcm/v1/ns_lcm_op_occs:
+    get:
+      operationId: ListSolNetworkOperations
+      description: '<p>Lists details for a network operation, including when the operation started and the status of the operation.</p> <p>A network operation is any operation that is done to your network, such as network instance instantiation or termination.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSolNetworkOperationsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: max_results
+          in: query
+          required: false
+          description: The maximum number of results to include in the response.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextpage_opaque_marker
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists tags for AWS TNB resources.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: Resource ARN.
+          schema:
+            type: string
+            pattern: '^arn:aws:tnb:[a-z0-9-]+:[^:]*:.*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: <p>Tags an AWS TNB resource.</p> <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: Resource ARN.
+          schema:
+            type: string
+            pattern: '^arn:aws:tnb:[a-z0-9-]+:[^:]*:.*$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/sol/vnfpkgm/v1/vnf_packages/{vnfPkgId}/package_content':
+    put:
+      operationId: PutSolFunctionPackageContent
+      description: <p>Uploads the contents of a function package.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutSolFunctionPackageContentOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: Content-Type
+          in: header
+          required: false
+          description: Function package content type.
+          schema:
+            type: string
+            enum:
+              - application/zip
+        - name: vnfPkgId
+          in: path
+          required: true
+          description: Function package ID.
+          schema:
+            type: string
+            pattern: '^fp-[a-f0-9]{17}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  description: Function package file.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/sol/nsd/v1/ns_descriptors/{nsdInfoId}/nsd_content':
+    put:
+      operationId: PutSolNetworkPackageContent
+      description: <p>Uploads the contents of a network package.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutSolNetworkPackageContentOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: Content-Type
+          in: header
+          required: false
+          description: Network package content type.
+          schema:
+            type: string
+            enum:
+              - application/zip
+        - name: nsdInfoId
+          in: path
+          required: true
+          description: Network service descriptor info ID.
+          schema:
+            type: string
+            pattern: '^np-[a-f0-9]{17}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  description: Network package file.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/sol/nslcm/v1/ns_instances/{nsInstanceId}/terminate':
+    post:
+      operationId: TerminateSolNetworkInstance
+      description: '<p>Terminates a network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p> <p>You must terminate a network instance before you can delete it.</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TerminateSolNetworkInstanceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nsInstanceId
+          in: path
+          required: true
+          description: ID of the network instance.
+          schema:
+            type: string
+            pattern: '^ni-[a-f0-9]{17}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: <p>Untags an AWS TNB resource.</p> <p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: Resource ARN.
+          schema:
+            type: string
+            pattern: '^arn:aws:tnb:[a-z0-9-]+:[^:]*:.*$'
+        - name: tagKeys
+          in: query
+          required: true
+          description: Tag keys.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 0
+            maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/sol/nslcm/v1/ns_instances/{nsInstanceId}/update':
+    post:
+      operationId: UpdateSolNetworkInstance
+      description: '<p>Update a network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSolNetworkInstanceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nsInstanceId
+          in: path
+          required: true
+          description: ID of the network instance.
+          schema:
+            type: string
+            pattern: '^ni-[a-f0-9]{17}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - updateType
+              properties:
+                modifyVnfInfoData:
+                  description: <p>Information parameters and/or the configurable properties for a network function.</p> <p>A network function instance is a function in a function package .</p>
+                  type: object
+                  properties:
+                    vnfConfigurableProperties:
+                      allOf:
+                        - $ref: '#/components/schemas/Document'
+                        - description: Provides values for the configurable properties declared in the function package descriptor.
+                    vnfInstanceId:
+                      allOf:
+                        - $ref: '#/components/schemas/VnfInstanceId'
+                        - description: <p>ID of the network function instance.</p> <p>A network function instance is a function in a function package .</p>
+                updateType:
+                  description: The type of update.
+                  type: string
+                  enum:
+                    - MODIFY_VNF_INFORMATION
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/sol/vnfpkgm/v1/vnf_packages/{vnfPkgId}/package_content/validate':
+    put:
+      operationId: ValidateSolFunctionPackageContent
+      description: '<p>Validates function package content. This can be used as a dry run before uploading function package content with <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolFunctionPackageContent.html">PutSolFunctionPackageContent</a>.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>'
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateSolFunctionPackageContentOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: Content-Type
+          in: header
+          required: false
+          description: Function package content type.
+          schema:
+            type: string
+            enum:
+              - application/zip
+        - name: vnfPkgId
+          in: path
+          required: true
+          description: Function package ID.
+          schema:
+            type: string
+            pattern: '^fp-[a-f0-9]{17}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  description: Function package file.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/sol/nsd/v1/ns_descriptors/{nsdInfoId}/nsd_content/validate':
+    put:
+      operationId: ValidateSolNetworkPackageContent
+      description: '<p>Validates network package content. This can be used as a dry run before uploading network package content with <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolNetworkPackageContent.html">PutSolNetworkPackageContent</a>.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateSolNetworkPackageContentOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: Content-Type
+          in: header
+          required: false
+          description: Network package content type.
+          schema:
+            type: string
+            enum:
+              - application/zip
+        - name: nsdInfoId
+          in: path
+          required: true
+          description: Network service descriptor file.
+          schema:
+            type: string
+            pattern: '^np-[a-f0-9]{17}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  description: Network package file.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    InternalServerException: {}
+    ThrottlingException: {}
+    ValidationException: {}
+    ResourceNotFoundException: {}
+    AccessDeniedException: {}
+    CreateSolFunctionPackageOutput:
+      type: object
+      required:
+        - arn
+        - id
+        - onboardingState
+        - operationalState
+        - usageState
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/VnfPkgArn'
+            - description: Function package ARN.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VnfPkgId'
+            - description: ID of the function package.
+        onboardingState:
+          allOf:
+            - $ref: '#/components/schemas/OnboardingState'
+            - description: Onboarding state of the function package.
+        operationalState:
+          allOf:
+            - $ref: '#/components/schemas/OperationalState'
+            - description: Operational state of the function package.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+        usageState:
+          allOf:
+            - $ref: '#/components/schemas/UsageState'
+            - description: Usage state of the function package.
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    ServiceQuotaExceededException: {}
+    CreateSolNetworkInstanceOutput:
+      type: object
+      required:
+        - arn
+        - id
+        - nsInstanceName
+        - nsdInfoId
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/NsInstanceArn'
+            - description: Network instance ARN.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/NsInstanceId'
+            - description: Network instance ID.
+        nsInstanceName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network instance name.
+        nsdInfoId:
+          allOf:
+            - $ref: '#/components/schemas/NsdInfoId'
+            - description: Network service descriptor ID.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+    CreateSolNetworkPackageOutput:
+      type: object
+      required:
+        - arn
+        - id
+        - nsdOnboardingState
+        - nsdOperationalState
+        - nsdUsageState
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/NsdInfoArn'
+            - description: Network package ARN.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/NsdInfoId'
+            - description: ID of the network package.
+        nsdOnboardingState:
+          allOf:
+            - $ref: '#/components/schemas/NsdOnboardingState'
+            - description: Onboarding state of the network service descriptor in the network package.
+        nsdOperationalState:
+          allOf:
+            - $ref: '#/components/schemas/NsdOperationalState'
+            - description: Operational state of the network service descriptor in the network package.
+        nsdUsageState:
+          allOf:
+            - $ref: '#/components/schemas/NsdUsageState'
+            - description: Usage state of the network service descriptor in the network package.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+    GetSolFunctionInstanceOutput:
+      type: object
+      required:
+        - arn
+        - id
+        - instantiationState
+        - metadata
+        - nsInstanceId
+        - vnfPkgId
+        - vnfdId
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/VnfInstanceArn'
+            - description: Network function instance ARN.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VnfInstanceId'
+            - description: Network function instance ID.
+        instantiatedVnfInfo:
+          $ref: '#/components/schemas/GetSolVnfInfo'
+        instantiationState:
+          allOf:
+            - $ref: '#/components/schemas/VnfInstantiationState'
+            - description: Network function instantiation state.
+        metadata:
+          $ref: '#/components/schemas/GetSolFunctionInstanceMetadata'
+        nsInstanceId:
+          allOf:
+            - $ref: '#/components/schemas/NsInstanceId'
+            - description: Network instance ID.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+        vnfPkgId:
+          allOf:
+            - $ref: '#/components/schemas/VnfPkgId'
+            - description: Function package ID.
+        vnfProductName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network function product name.
+        vnfProvider:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network function provider.
+        vnfdId:
+          allOf:
+            - $ref: '#/components/schemas/VnfdId'
+            - description: Function package descriptor ID.
+        vnfdVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Function package descriptor version.
+    GetSolFunctionPackageOutput:
+      type: object
+      required:
+        - arn
+        - id
+        - onboardingState
+        - operationalState
+        - usageState
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/VnfPkgArn'
+            - description: Function package ARN.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VnfPkgId'
+            - description: Function package ID.
+        metadata:
+          $ref: '#/components/schemas/GetSolFunctionPackageMetadata'
+        onboardingState:
+          allOf:
+            - $ref: '#/components/schemas/OnboardingState'
+            - description: Function package onboarding state.
+        operationalState:
+          allOf:
+            - $ref: '#/components/schemas/OperationalState'
+            - description: Function package operational state.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+        usageState:
+          allOf:
+            - $ref: '#/components/schemas/UsageState'
+            - description: Function package usage state.
+        vnfProductName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network function product name.
+        vnfProvider:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network function provider.
+        vnfdId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Function package descriptor ID.
+        vnfdVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Function package descriptor version.
+    GetSolFunctionPackageContentOutput:
+      type: object
+      properties:
+        packageContent:
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: Contents of the function package.
+    GetSolFunctionPackageDescriptorOutput:
+      type: object
+      properties:
+        vnfd:
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: Contents of the function package descriptor.
+    GetSolNetworkInstanceOutput:
+      type: object
+      required:
+        - arn
+        - id
+        - metadata
+        - nsInstanceDescription
+        - nsInstanceName
+        - nsdId
+        - nsdInfoId
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/NsInstanceArn'
+            - description: Network instance ARN.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/NsInstanceId'
+            - description: Network instance ID.
+        lcmOpInfo:
+          $ref: '#/components/schemas/LcmOperationInfo'
+        metadata:
+          $ref: '#/components/schemas/GetSolNetworkInstanceMetadata'
+        nsInstanceDescription:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network instance description.
+        nsInstanceName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network instance name.
+        nsState:
+          allOf:
+            - $ref: '#/components/schemas/NsState'
+            - description: Network instance state.
+        nsdId:
+          allOf:
+            - $ref: '#/components/schemas/NsdId'
+            - description: Network service descriptor ID.
+        nsdInfoId:
+          allOf:
+            - $ref: '#/components/schemas/NsdInfoId'
+            - description: Network service descriptor info ID.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+    GetSolNetworkOperationOutput:
+      type: object
+      required:
+        - arn
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/NsLcmOpOccArn'
+            - description: Network operation ARN.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/ProblemDetails'
+            - description: Error related to this specific network operation occurence.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/NsLcmOpOccId'
+            - description: ID of this network operation occurrence.
+        lcmOperationType:
+          allOf:
+            - $ref: '#/components/schemas/LcmOperationType'
+            - description: Type of the operation represented by this occurrence.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/GetSolNetworkOperationMetadata'
+            - description: Metadata of this network operation occurrence.
+        nsInstanceId:
+          allOf:
+            - $ref: '#/components/schemas/NsInstanceId'
+            - description: ID of the network operation instance.
+        operationState:
+          allOf:
+            - $ref: '#/components/schemas/NsLcmOperationState'
+            - description: The state of the network operation.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+        tasks:
+          allOf:
+            - $ref: '#/components/schemas/GetSolNetworkOperationTasksList'
+            - description: All tasks associated with this operation occurrence.
+    GetSolNetworkPackageOutput:
+      type: object
+      required:
+        - arn
+        - id
+        - metadata
+        - nsdId
+        - nsdName
+        - nsdOnboardingState
+        - nsdOperationalState
+        - nsdUsageState
+        - nsdVersion
+        - vnfPkgIds
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/NsdInfoArn'
+            - description: Network package ARN.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/NsdInfoId'
+            - description: Network package ID.
+        metadata:
+          $ref: '#/components/schemas/GetSolNetworkPackageMetadata'
+        nsdId:
+          allOf:
+            - $ref: '#/components/schemas/NsdId'
+            - description: Network service descriptor ID.
+        nsdName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network service descriptor name.
+        nsdOnboardingState:
+          allOf:
+            - $ref: '#/components/schemas/NsdOnboardingState'
+            - description: Network service descriptor onboarding state.
+        nsdOperationalState:
+          allOf:
+            - $ref: '#/components/schemas/NsdOperationalState'
+            - description: Network service descriptor operational state.
+        nsdUsageState:
+          allOf:
+            - $ref: '#/components/schemas/NsdUsageState'
+            - description: Network service descriptor usage state.
+        nsdVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network service descriptor version.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+        vnfPkgIds:
+          allOf:
+            - $ref: '#/components/schemas/VnfPkgIdList'
+            - description: Identifies the function package for the function package descriptor referenced by the onboarded network package.
+    GetSolNetworkPackageContentOutput:
+      type: object
+      properties:
+        nsdContent:
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: Content of the network service descriptor in the network package.
+    GetSolNetworkPackageDescriptorOutput:
+      type: object
+      properties:
+        nsd:
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: Contents of the network service descriptor in the network package.
+    InstantiateSolNetworkInstanceOutput:
+      type: object
+      required:
+        - nsLcmOpOccId
+      properties:
+        nsLcmOpOccId:
+          allOf:
+            - $ref: '#/components/schemas/NsLcmOpOccId'
+            - description: The identifier of the network instance.
+    ListSolFunctionInstancesOutput:
+      type: object
+      properties:
+        functionInstances:
+          allOf:
+            - $ref: '#/components/schemas/ListSolFunctionInstanceResources'
+            - description: Network function instances.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+    ListSolFunctionPackagesOutput:
+      type: object
+      required:
+        - functionPackages
+      properties:
+        functionPackages:
+          allOf:
+            - $ref: '#/components/schemas/ListSolFunctionPackageResources'
+            - description: Function packages. A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+    ListSolNetworkInstancesOutput:
+      type: object
+      properties:
+        networkInstances:
+          allOf:
+            - $ref: '#/components/schemas/ListSolNetworkInstanceResources'
+            - description: Lists network instances.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+    ListSolNetworkOperationsOutput:
+      type: object
+      properties:
+        networkOperations:
+          allOf:
+            - $ref: '#/components/schemas/ListSolNetworkOperationsResources'
+            - description: 'Lists network operation occurrences. Lifecycle management operations are deploy, update, or delete operations.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+    ListSolNetworkPackagesOutput:
+      type: object
+      required:
+        - networkPackages
+      properties:
+        networkPackages:
+          allOf:
+            - $ref: '#/components/schemas/ListSolNetworkPackageResources'
+            - description: Network packages. A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+    ListTagsForResourceOutput:
+      type: object
+      required:
+        - tags
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+    PutSolFunctionPackageContentOutput:
+      type: object
+      required:
+        - id
+        - metadata
+        - vnfProductName
+        - vnfProvider
+        - vnfdId
+        - vnfdVersion
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VnfPkgId'
+            - description: Function package ID.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/PutSolFunctionPackageContentMetadata'
+            - description: Function package metadata.
+        vnfProductName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Function product name.
+        vnfProvider:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Function provider.
+        vnfdId:
+          allOf:
+            - $ref: '#/components/schemas/VnfdId'
+            - description: Function package descriptor ID.
+        vnfdVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Function package descriptor version.
+    PutSolNetworkPackageContentOutput:
+      type: object
+      required:
+        - arn
+        - id
+        - metadata
+        - nsdId
+        - nsdName
+        - nsdVersion
+        - vnfPkgIds
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/NsdInfoArn'
+            - description: Network package ARN.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/NsdInfoId'
+            - description: Network package ID.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/PutSolNetworkPackageContentMetadata'
+            - description: Network package metadata.
+        nsdId:
+          allOf:
+            - $ref: '#/components/schemas/NsdId'
+            - description: Network service descriptor ID.
+        nsdName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network service descriptor name.
+        nsdVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network service descriptor version.
+        vnfPkgIds:
+          allOf:
+            - $ref: '#/components/schemas/VnfPkgIdList'
+            - description: Function package IDs.
+    TagResourceOutput:
+      type: object
+      properties: {}
+    TerminateSolNetworkInstanceOutput:
+      type: object
+      properties:
+        nsLcmOpOccId:
+          allOf:
+            - $ref: '#/components/schemas/NsLcmOpOccId'
+            - description: The identifier of the operation occurrence.
+    UntagResourceOutput:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '^(?!aws:).{1,128}$'
+    UpdateSolFunctionPackageOutput:
+      type: object
+      required:
+        - operationalState
+      properties:
+        operationalState:
+          allOf:
+            - $ref: '#/components/schemas/OperationalState'
+            - description: Operational state of the function package.
+    UpdateSolNetworkInstanceOutput:
+      type: object
+      properties:
+        nsLcmOpOccId:
+          allOf:
+            - $ref: '#/components/schemas/NsLcmOpOccId'
+            - description: The identifier of the network instance operation occurrence.
+    Document:
+      type: object
+      properties: {}
+    VnfInstanceId:
+      type: string
+      pattern: '^fi-[a-f0-9]{17}$'
+    UpdateSolNetworkPackageOutput:
+      type: object
+      required:
+        - nsdOperationalState
+      properties:
+        nsdOperationalState:
+          allOf:
+            - $ref: '#/components/schemas/NsdOperationalState'
+            - description: Operational state of the network service descriptor in the network package.
+    ValidateSolFunctionPackageContentOutput:
+      type: object
+      required:
+        - id
+        - metadata
+        - vnfProductName
+        - vnfProvider
+        - vnfdId
+        - vnfdVersion
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VnfPkgId'
+            - description: Function package ID.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/ValidateSolFunctionPackageContentMetadata'
+            - description: Function package metadata.
+        vnfProductName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network function product name.
+        vnfProvider:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network function provider.
+        vnfdId:
+          allOf:
+            - $ref: '#/components/schemas/VnfdId'
+            - description: Function package descriptor ID.
+        vnfdVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Function package descriptor version.
+    ValidateSolNetworkPackageContentOutput:
+      type: object
+      required:
+        - arn
+        - id
+        - metadata
+        - nsdId
+        - nsdName
+        - nsdVersion
+        - vnfPkgIds
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/NsdInfoArn'
+            - description: Network package ARN.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/NsdInfoId'
+            - description: Network package ID.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/ValidateSolNetworkPackageContentMetadata'
+            - description: Network package metadata.
+        nsdId:
+          allOf:
+            - $ref: '#/components/schemas/NsdId'
+            - description: Network service descriptor ID.
+        nsdName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network service descriptor name.
+        nsdVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Network service descriptor version.
+        vnfPkgIds:
+          allOf:
+            - $ref: '#/components/schemas/VnfPkgIdList'
+            - description: Function package IDs.
+    Blob:
+      type: string
+    Boolean:
+      type: boolean
+    NsLcmOpOccId:
+      type: string
+      pattern: '^no-[a-f0-9]{17}$'
+    CancelSolNetworkOperationInput:
+      type: object
+      title: CancelSolNetworkOperationInput
+      properties: {}
+    TagMap:
+      type: object
+      minProperties: 0
+      maxProperties: 200
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    CreateSolFunctionPackageInput:
+      type: object
+      title: CreateSolFunctionPackageInput
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+    VnfPkgArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-b|aws-us-gov):tnb:([a-z]{2}(-(gov|isob|iso))?-(east|west|north|south|central){1,2}-[0-9]):\d{12}:(function-package/fp-[a-f0-9]{17})$'
+    VnfPkgId:
+      type: string
+      pattern: '^fp-[a-f0-9]{17}$'
+    OnboardingState:
+      type: string
+      enum:
+        - CREATED
+        - ONBOARDED
+        - ERROR
+    OperationalState:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    UsageState:
+      type: string
+      enum:
+        - IN_USE
+        - NOT_IN_USE
+    CreateSolNetworkInstanceInputNsDescriptionString:
+      type: string
+      minLength: 1
+      maxLength: 124
+    CreateSolNetworkInstanceInputNsNameString:
+      type: string
+      minLength: 1
+      maxLength: 80
+    NsdInfoId:
+      type: string
+      pattern: '^np-[a-f0-9]{17}$'
+    CreateSolNetworkInstanceInput:
+      type: object
+      required:
+        - nsName
+        - nsdInfoId
+      title: CreateSolNetworkInstanceInput
+      properties:
+        nsDescription:
+          allOf:
+            - $ref: '#/components/schemas/CreateSolNetworkInstanceInputNsDescriptionString'
+            - description: Network instance description.
+        nsName:
+          allOf:
+            - $ref: '#/components/schemas/CreateSolNetworkInstanceInputNsNameString'
+            - description: Network instance name.
+        nsdInfoId:
+          allOf:
+            - $ref: '#/components/schemas/NsdInfoId'
+            - description: ID for network service descriptor.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+    NsInstanceArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-b|aws-us-gov):tnb:([a-z]{2}(-(gov|isob|iso))?-(east|west|north|south|central){1,2}-[0-9]):\d{12}:(network-instance/ni-[a-f0-9]{17})$'
+    NsInstanceId:
+      type: string
+      pattern: '^ni-[a-f0-9]{17}$'
+    String:
+      type: string
+    CreateSolNetworkPackageInput:
+      type: object
+      title: CreateSolNetworkPackageInput
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+    NsdInfoArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-b|aws-us-gov):tnb:([a-z]{2}(-(gov|isob|iso))?-(east|west|north|south|central){1,2}-[0-9]):\d{12}:(network-package/np-[a-f0-9]{17})$'
+    NsdOnboardingState:
+      type: string
+      enum:
+        - CREATED
+        - ONBOARDED
+        - ERROR
+    NsdOperationalState:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    NsdUsageState:
+      type: string
+      enum:
+        - IN_USE
+        - NOT_IN_USE
+    DeleteSolFunctionPackageInput:
+      type: object
+      title: DeleteSolFunctionPackageInput
+      properties: {}
+    DeleteSolNetworkInstanceInput:
+      type: object
+      title: DeleteSolNetworkInstanceInput
+      properties: {}
+    DeleteSolNetworkPackageInput:
+      type: object
+      title: DeleteSolNetworkPackageInput
+      properties: {}
+    DescriptorContentType:
+      type: string
+      enum:
+        - text/plain
+    ErrorCause:
+      type: string
+      minLength: 1
+      maxLength: 200
+    ErrorDetails:
+      type: string
+      minLength: 0
+      maxLength: 10240
+    ErrorInfo:
+      type: object
+      properties:
+        cause:
+          allOf:
+            - $ref: '#/components/schemas/ErrorCause'
+            - description: Error cause.
+        details:
+          allOf:
+            - $ref: '#/components/schemas/ErrorDetails'
+            - description: Error details.
+      description: Provides error information.
+    OverrideList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ToscaOverride'
+    FunctionArtifactMeta:
+      type: object
+      properties:
+        overrides:
+          allOf:
+            - $ref: '#/components/schemas/OverrideList'
+            - description: Lists of function package overrides.
+      description: <p>Metadata for function package artifacts.</p> <p>Artifacts are the contents of the package descriptor file and the state of the package.</p>
+    GetSolFunctionInstanceInput:
+      type: object
+      title: GetSolFunctionInstanceInput
+      properties: {}
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    GetSolFunctionInstanceMetadata:
+      type: object
+      required:
+        - createdAt
+        - lastModified
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was created.
+        lastModified:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was last modified.
+      description: <p>The metadata of a network function instance.</p> <p>A network function instance is a function in a function package .</p>
+    VnfInstanceArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-b|aws-us-gov):tnb:([a-z]{2}(-(gov|isob|iso))?-(east|west|north|south|central){1,2}-[0-9]):\d{12}:(function-instance/fi-[a-f0-9]{17})$'
+    GetSolVnfInfo:
+      type: object
+      properties:
+        vnfState:
+          allOf:
+            - $ref: '#/components/schemas/VnfOperationalState'
+            - description: State of the network function instance.
+        vnfcResourceInfo:
+          allOf:
+            - $ref: '#/components/schemas/GetSolVnfcResourceInfoList'
+            - description: Compute info used by the network function instance.
+      description: <p>Information about the network function.</p> <p>A network function instance is a function in a function package .</p>
+    VnfInstantiationState:
+      type: string
+      enum:
+        - INSTANTIATED
+        - NOT_INSTANTIATED
+    VnfdId:
+      type: string
+      pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+    PackageContentType:
+      type: string
+      enum:
+        - application/zip
+    GetSolFunctionPackageContentInput:
+      type: object
+      title: GetSolFunctionPackageContentInput
+      properties: {}
+    GetSolFunctionPackageDescriptorInput:
+      type: object
+      title: GetSolFunctionPackageDescriptorInput
+      properties: {}
+    GetSolFunctionPackageInput:
+      type: object
+      title: GetSolFunctionPackageInput
+      properties: {}
+    GetSolFunctionPackageMetadata:
+      type: object
+      required:
+        - createdAt
+        - lastModified
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was created.
+        lastModified:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was last modified.
+        vnfd:
+          allOf:
+            - $ref: '#/components/schemas/FunctionArtifactMeta'
+            - description: Metadata related to the function package descriptor of the function package.
+      description: <p>Metadata related to the function package.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>
+    VnfOperationalState:
+      type: string
+      enum:
+        - STARTED
+        - STOPPED
+    GetSolInstantiatedVnfInfo:
+      type: object
+      properties:
+        vnfState:
+          allOf:
+            - $ref: '#/components/schemas/VnfOperationalState'
+            - description: State of the network function.
+      description: '<p>Information about a network function.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>'
+    GetSolNetworkInstanceInput:
+      type: object
+      title: GetSolNetworkInstanceInput
+      properties: {}
+    GetSolNetworkInstanceMetadata:
+      type: object
+      required:
+        - createdAt
+        - lastModified
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was created.
+        lastModified:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was last modified.
+      description: '<p>The metadata of a network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>'
+    LcmOperationInfo:
+      type: object
+      required:
+        - nsLcmOpOccId
+      properties:
+        nsLcmOpOccId:
+          allOf:
+            - $ref: '#/components/schemas/NsLcmOpOccId'
+            - description: The identifier of the latest network lifecycle management operation occurrence.
+      description: '<p>Lifecycle management operation details on the network instance.</p> <p>Lifecycle management operations are deploy, update, or delete operations.</p>'
+    NsState:
+      type: string
+      enum:
+        - INSTANTIATED
+        - NOT_INSTANTIATED
+        - IMPAIRED
+        - STOPPED
+        - DELETED
+        - INSTANTIATE_IN_PROGRESS
+        - UPDATE_IN_PROGRESS
+        - TERMINATE_IN_PROGRESS
+    NsdId:
+      type: string
+      pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+    GetSolNetworkOperationInput:
+      type: object
+      title: GetSolNetworkOperationInput
+      properties: {}
+    GetSolNetworkOperationMetadata:
+      type: object
+      required:
+        - createdAt
+        - lastModified
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was created.
+        lastModified:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was last modified.
+      description: '<p>Metadata related to a network operation occurence.</p> <p>A network operation is any operation that is done to your network, such as network instance instantiation or termination.</p>'
+    NsLcmOpOccArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-b|aws-us-gov):tnb:([a-z]{2}(-(gov|isob|iso))?-(east|west|north|south|central){1,2}-[0-9]):\d{12}:(network-operation/no-[a-f0-9]{17})$'
+    ProblemDetails:
+      type: object
+      required:
+        - detail
+      properties:
+        detail:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A human-readable explanation specific to this occurrence of the problem.
+        title:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A human-readable title of the problem type.
+      description: Details related to problems with AWS TNB resources.
+    LcmOperationType:
+      type: string
+      enum:
+        - INSTANTIATE
+        - UPDATE
+        - TERMINATE
+    NsLcmOperationState:
+      type: string
+      enum:
+        - PROCESSING
+        - COMPLETED
+        - FAILED
+        - CANCELLING
+        - CANCELLED
+    GetSolNetworkOperationTasksList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GetSolNetworkOperationTaskDetails'
+    StringMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    TaskStatus:
+      type: string
+      enum:
+        - SCHEDULED
+        - STARTED
+        - IN_PROGRESS
+        - COMPLETED
+        - ERROR
+        - SKIPPED
+        - CANCELLED
+    GetSolNetworkOperationTaskDetails:
+      type: object
+      properties:
+        taskContext:
+          allOf:
+            - $ref: '#/components/schemas/StringMap'
+            - description: Context for the network operation task.
+        taskEndTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: Task end time.
+        taskErrorDetails:
+          allOf:
+            - $ref: '#/components/schemas/ErrorInfo'
+            - description: Task error details.
+        taskName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Task name.
+        taskStartTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: Task start time.
+        taskStatus:
+          allOf:
+            - $ref: '#/components/schemas/TaskStatus'
+            - description: Task status.
+      description: '<p>Gets the details of a network operation.</p> <p>A network operation is any operation that is done to your network, such as network instance instantiation or termination.</p>'
+    GetSolNetworkPackageContentInput:
+      type: object
+      title: GetSolNetworkPackageContentInput
+      properties: {}
+    GetSolNetworkPackageDescriptorInput:
+      type: object
+      title: GetSolNetworkPackageDescriptorInput
+      properties: {}
+    GetSolNetworkPackageInput:
+      type: object
+      title: GetSolNetworkPackageInput
+      properties: {}
+    NetworkArtifactMeta:
+      type: object
+      properties:
+        overrides:
+          allOf:
+            - $ref: '#/components/schemas/OverrideList'
+            - description: Lists network package overrides.
+      description: <p>Metadata for network package artifacts.</p> <p>Artifacts are the contents of the package descriptor file and the state of the package.</p>
+    GetSolNetworkPackageMetadata:
+      type: object
+      required:
+        - createdAt
+        - lastModified
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was created.
+        lastModified:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was last modified.
+        nsd:
+          allOf:
+            - $ref: '#/components/schemas/NetworkArtifactMeta'
+            - description: Metadata related to the onboarded network service descriptor in the network package.
+      description: <p>Metadata associated with a network package.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>
+    VnfPkgIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VnfPkgId'
+    GetSolVnfcResourceInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GetSolVnfcResourceInfo'
+    GetSolVnfcResourceInfoMetadata:
+      type: object
+      properties:
+        cluster:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Information about the cluster.
+        helmChart:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Information about the helm chart.
+        nodeGroup:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Information about the node group.
+      description: '<p>The metadata of a network function.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>'
+    GetSolVnfcResourceInfo:
+      type: object
+      properties:
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/GetSolVnfcResourceInfoMetadata'
+            - description: The metadata of the network function compute.
+      description: '<p>Details of resource associated with a network function.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>'
+    InstantiateSolNetworkInstanceInput:
+      type: object
+      title: InstantiateSolNetworkInstanceInput
+      properties:
+        additionalParamsForNs:
+          allOf:
+            - $ref: '#/components/schemas/Document'
+            - description: Provides values for the configurable properties.
+    ListSolFunctionInstanceMetadata:
+      type: object
+      required:
+        - createdAt
+        - lastModified
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: When the network function instance was created.
+        lastModified:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: When the network function instance was last modified.
+      description: <p>Lists network function instance metadata.</p> <p>A network function instance is a function in a function package .</p>
+    ListSolFunctionInstanceInfo:
+      type: object
+      required:
+        - arn
+        - id
+        - instantiationState
+        - metadata
+        - nsInstanceId
+        - vnfPkgId
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/VnfInstanceArn'
+            - description: Network function instance ARN.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VnfInstanceId'
+            - description: Network function instance ID.
+        instantiatedVnfInfo:
+          $ref: '#/components/schemas/GetSolInstantiatedVnfInfo'
+        instantiationState:
+          allOf:
+            - $ref: '#/components/schemas/VnfInstantiationState'
+            - description: Network function instance instantiation state.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/ListSolFunctionInstanceMetadata'
+            - description: Network function instance metadata.
+        nsInstanceId:
+          allOf:
+            - $ref: '#/components/schemas/NsInstanceId'
+            - description: Network instance ID.
+        vnfPkgId:
+          allOf:
+            - $ref: '#/components/schemas/VnfPkgId'
+            - description: Function package ID.
+        vnfPkgName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Function package name.
+      description: <p>Lists information about a network function instance.</p> <p>A network function instance is a function in a function package .</p>
+    ListSolFunctionInstanceResources:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListSolFunctionInstanceInfo'
+    ListSolFunctionInstancesInputMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    PaginationToken:
+      type: string
+    ListSolFunctionInstancesInput:
+      type: object
+      title: ListSolFunctionInstancesInput
+      properties: {}
+    ListSolFunctionPackageMetadata:
+      type: object
+      required:
+        - createdAt
+        - lastModified
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was created.
+        lastModified:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was last modified.
+      description: <p>Details for the function package metadata.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>
+    ListSolFunctionPackageInfo:
+      type: object
+      required:
+        - arn
+        - id
+        - onboardingState
+        - operationalState
+        - usageState
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/VnfPkgArn'
+            - description: Function package ARN.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VnfPkgId'
+            - description: ID of the function package.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/ListSolFunctionPackageMetadata'
+            - description: The metadata of the function package.
+        onboardingState:
+          allOf:
+            - $ref: '#/components/schemas/OnboardingState'
+            - description: Onboarding state of the function package.
+        operationalState:
+          allOf:
+            - $ref: '#/components/schemas/OperationalState'
+            - description: Operational state of the function package.
+        usageState:
+          allOf:
+            - $ref: '#/components/schemas/UsageState'
+            - description: Usage state of the function package.
+        vnfProductName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The product name for the network function.
+        vnfProvider:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Provider of the function package and the function package descriptor.
+        vnfdId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Identifies the function package and the function package descriptor.
+        vnfdVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Identifies the version of the function package descriptor.
+      description: <p>Information about a function package.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>
+    ListSolFunctionPackageResources:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListSolFunctionPackageInfo'
+    ListSolFunctionPackagesInputMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListSolFunctionPackagesInput:
+      type: object
+      title: ListSolFunctionPackagesInput
+      properties: {}
+    ListSolNetworkInstanceMetadata:
+      type: object
+      required:
+        - createdAt
+        - lastModified
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was created.
+        lastModified:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was last modified.
+      description: '<p>Metadata details for a network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>'
+    ListSolNetworkInstanceInfo:
+      type: object
+      required:
+        - arn
+        - id
+        - metadata
+        - nsInstanceDescription
+        - nsInstanceName
+        - nsState
+        - nsdId
+        - nsdInfoId
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/NsInstanceArn'
+            - description: Network instance ARN.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/NsInstanceId'
+            - description: ID of the network instance.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/ListSolNetworkInstanceMetadata'
+            - description: The metadata of the network instance.
+        nsInstanceDescription:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Human-readable description of the network instance.
+        nsInstanceName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Human-readable name of the network instance.
+        nsState:
+          allOf:
+            - $ref: '#/components/schemas/NsState'
+            - description: The state of the network instance.
+        nsdId:
+          allOf:
+            - $ref: '#/components/schemas/NsdId'
+            - description: ID of the network service descriptor in the network package.
+        nsdInfoId:
+          allOf:
+            - $ref: '#/components/schemas/NsdInfoId'
+            - description: ID of the network service descriptor in the network package.
+      description: '<p>Info about the specific network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p>'
+    ListSolNetworkInstanceResources:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListSolNetworkInstanceInfo'
+    ListSolNetworkInstancesInputMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListSolNetworkInstancesInput:
+      type: object
+      title: ListSolNetworkInstancesInput
+      properties: {}
+    ListSolNetworkOperationsMetadata:
+      type: object
+      required:
+        - createdAt
+        - lastModified
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was created.
+        lastModified:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was last modified.
+      description: '<p>Metadata related to a network operation.</p> <p>A network operation is any operation that is done to your network, such as network instance instantiation or termination.</p>'
+    ListSolNetworkOperationsInfo:
+      type: object
+      required:
+        - arn
+        - id
+        - lcmOperationType
+        - nsInstanceId
+        - operationState
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/NsLcmOpOccArn'
+            - description: Network operation ARN.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/ProblemDetails'
+            - description: Error related to this specific network operation.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/NsLcmOpOccId'
+            - description: ID of this network operation.
+        lcmOperationType:
+          allOf:
+            - $ref: '#/components/schemas/LcmOperationType'
+            - description: Type of lifecycle management network operation.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/ListSolNetworkOperationsMetadata'
+            - description: Metadata related to this network operation.
+        nsInstanceId:
+          allOf:
+            - $ref: '#/components/schemas/NsInstanceId'
+            - description: ID of the network instance related to this operation.
+        operationState:
+          allOf:
+            - $ref: '#/components/schemas/NsLcmOperationState'
+            - description: The state of the network operation.
+      description: Information parameters for a network operation.
+    ListSolNetworkOperationsInputMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListSolNetworkOperationsInput:
+      type: object
+      title: ListSolNetworkOperationsInput
+      properties: {}
+    ListSolNetworkOperationsResources:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListSolNetworkOperationsInfo'
+    ListSolNetworkPackageMetadata:
+      type: object
+      required:
+        - createdAt
+        - lastModified
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was created.
+        lastModified:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date that the resource was last modified.
+      description: <p>Metadata related to a network package.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>
+    ListSolNetworkPackageInfo:
+      type: object
+      required:
+        - arn
+        - id
+        - metadata
+        - nsdOnboardingState
+        - nsdOperationalState
+        - nsdUsageState
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/NsdInfoArn'
+            - description: Network package ARN.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/NsdInfoId'
+            - description: ID of the individual network package.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/ListSolNetworkPackageMetadata'
+            - description: The metadata of the network package.
+        nsdDesigner:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Designer of the onboarded network service descriptor in the network package.
+        nsdId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ID of the network service descriptor on which the network package is based.
+        nsdInvariantId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Identifies a network service descriptor in a version independent manner.
+        nsdName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Name of the onboarded network service descriptor in the network package.
+        nsdOnboardingState:
+          allOf:
+            - $ref: '#/components/schemas/NsdOnboardingState'
+            - description: Onboarding state of the network service descriptor in the network package.
+        nsdOperationalState:
+          allOf:
+            - $ref: '#/components/schemas/NsdOperationalState'
+            - description: Operational state of the network service descriptor in the network package.
+        nsdUsageState:
+          allOf:
+            - $ref: '#/components/schemas/NsdUsageState'
+            - description: Usage state of the network service descriptor in the network package.
+        nsdVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Version of the onboarded network service descriptor in the network package.
+        vnfPkgIds:
+          allOf:
+            - $ref: '#/components/schemas/VnfPkgIdList'
+            - description: Identifies the function package for the function package descriptor referenced by the onboarded network package.
+      description: <p>Details of a network package.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>
+    ListSolNetworkPackageResources:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListSolNetworkPackageInfo'
+    ListSolNetworkPackagesInputMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListSolNetworkPackagesInput:
+      type: object
+      title: ListSolNetworkPackagesInput
+      properties: {}
+    TNBResourceArn:
+      type: string
+      pattern: '^arn:aws:tnb:[a-z0-9-]+:[^:]*:.*$'
+    ListTagsForResourceInput:
+      type: object
+      title: ListTagsForResourceInput
+      properties: {}
+    ToscaOverride:
+      type: object
+      properties:
+        defaultValue:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Default value for the override.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Name of the TOSCA override.
+      description: Overrides of the TOSCA node.
+    PutSolFunctionPackageContentInput:
+      type: object
+      required:
+        - file
+      title: PutSolFunctionPackageContentInput
+      properties:
+        file:
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: Function package file.
+    PutSolFunctionPackageContentMetadata:
+      type: object
+      properties:
+        vnfd:
+          $ref: '#/components/schemas/FunctionArtifactMeta'
+      description: <p>Update metadata in a function package.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>
+    PutSolNetworkPackageContentInput:
+      type: object
+      required:
+        - file
+      title: PutSolNetworkPackageContentInput
+      properties:
+        file:
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: Network package file.
+    PutSolNetworkPackageContentMetadata:
+      type: object
+      properties:
+        nsd:
+          $ref: '#/components/schemas/NetworkArtifactMeta'
+      description: <p>Update metadata in a network package.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>
+    TagKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 200
+    TagResourceInput:
+      type: object
+      required:
+        - tags
+      title: TagResourceInput
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+    TerminateSolNetworkInstanceInput:
+      type: object
+      title: TerminateSolNetworkInstanceInput
+      properties: {}
+    UntagResourceInput:
+      type: object
+      title: UntagResourceInput
+      properties: {}
+    UpdateSolFunctionPackageInput:
+      type: object
+      required:
+        - operationalState
+      title: UpdateSolFunctionPackageInput
+      properties:
+        operationalState:
+          allOf:
+            - $ref: '#/components/schemas/OperationalState'
+            - description: Operational state of the function package.
+    UpdateSolNetworkModify:
+      type: object
+      required:
+        - vnfConfigurableProperties
+        - vnfInstanceId
+      properties:
+        vnfConfigurableProperties:
+          allOf:
+            - $ref: '#/components/schemas/Document'
+            - description: Provides values for the configurable properties declared in the function package descriptor.
+        vnfInstanceId:
+          allOf:
+            - $ref: '#/components/schemas/VnfInstanceId'
+            - description: <p>ID of the network function instance.</p> <p>A network function instance is a function in a function package .</p>
+      description: <p>Information parameters and/or the configurable properties for a network function.</p> <p>A network function instance is a function in a function package .</p>
+    UpdateSolNetworkType:
+      type: string
+      enum:
+        - MODIFY_VNF_INFORMATION
+    UpdateSolNetworkInstanceInput:
+      type: object
+      required:
+        - updateType
+      title: UpdateSolNetworkInstanceInput
+      properties:
+        modifyVnfInfoData:
+          allOf:
+            - $ref: '#/components/schemas/UpdateSolNetworkModify'
+            - description: Identifies the network function information parameters and/or the configurable properties of the network function to be modified.
+        updateType:
+          allOf:
+            - $ref: '#/components/schemas/UpdateSolNetworkType'
+            - description: The type of update.
+    UpdateSolNetworkPackageInput:
+      type: object
+      required:
+        - nsdOperationalState
+      title: UpdateSolNetworkPackageInput
+      properties:
+        nsdOperationalState:
+          allOf:
+            - $ref: '#/components/schemas/NsdOperationalState'
+            - description: Operational state of the network service descriptor in the network package.
+    ValidateSolFunctionPackageContentInput:
+      type: object
+      required:
+        - file
+      title: ValidateSolFunctionPackageContentInput
+      properties:
+        file:
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: Function package file.
+    ValidateSolFunctionPackageContentMetadata:
+      type: object
+      properties:
+        vnfd:
+          $ref: '#/components/schemas/FunctionArtifactMeta'
+      description: <p>Validates function package content metadata.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>
+    ValidateSolNetworkPackageContentInput:
+      type: object
+      required:
+        - file
+      title: ValidateSolNetworkPackageContentInput
+      properties:
+        file:
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: Network package file.
+    ValidateSolNetworkPackageContentMetadata:
+      type: object
+      properties:
+        nsd:
+          $ref: '#/components/schemas/NetworkArtifactMeta'
+      description: <p>Validates network package content metadata.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>
+security:
+  - hmac: []
