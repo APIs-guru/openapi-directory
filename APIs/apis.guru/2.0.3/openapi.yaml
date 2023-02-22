@@ -1,4 +1,6 @@
 openapi: 3.0.0
+servers:
+  - url: https://api.apis.guru/v2
 info:
   contact:
     email: mike.ralphson@gmail.com
@@ -191,13 +193,40 @@ components:
         - info
       type: object
     Metrics:
-      additionalProperties: true
+      additionalProperties: false
       description: List of basic metrics
       example:
+        datasets: []
+        fixedPct: 22
+        fixes: 21119
+        invalid: 598
+        issues: 28
         numAPIs: 1928
         numEndpoints: 61448
         numSpecs: 3329
+        stars: 2429
+        thisWeek:
+          added: 45
+          updated: 171
+        unofficial: 25
+        unreachable: 123
       properties:
+        datasets:
+          description: Data used for charting etc
+          items: {}
+          type: array
+        fixedPct:
+          description: Percentage of all APIs where auto fixes have been applied
+          type: integer
+        fixes:
+          description: Total number of fixes applied across all APIs
+          type: integer
+        invalid:
+          description: Number of newly invalid APIs
+          type: integer
+        issues:
+          description: Open GitHub issues on our main repo
+          type: integer
         numAPIs:
           description: Number of APIs
           minimum: 1
@@ -209,6 +238,25 @@ components:
         numSpecs:
           description: Number of API specifications including different versions of the same API
           minimum: 1
+          type: integer
+        stars:
+          description: GitHub stars for our main repo
+          type: integer
+        thisWeek:
+          description: Summary totals for the last 7 days
+          properties:
+            added:
+              description: APIs added in the last week
+              type: integer
+            updated:
+              description: APIs updated in the last week
+              type: integer
+          type: object
+        unofficial:
+          description: Number of unofficial APIs
+          type: integer
+        unreachable:
+          description: Number of unreachable (4XX,5XX status) APIs
           type: integer
       required:
         - numSpecs
