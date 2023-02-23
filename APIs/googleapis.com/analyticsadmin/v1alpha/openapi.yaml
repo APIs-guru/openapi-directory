@@ -372,7 +372,7 @@ paths:
       description: Returns a customized report of data access records. The report provides records of each time a user reads Google Analytics reporting data. Access records are retained for up to 2 years. Data Access Reports can be requested for a property. The property must be in Google Analytics 360. This method is only available to Administrators. These data access records include GA4 UI Reporting, GA4 UI Explorations, GA4 Data API, and other products like Firebase & Admob that can retrieve data from Google Analytics through a linkage. These records don't include property configuration changes like adding a stream or changing a property's time zone. For configuration change history, see [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents).
       operationId: analyticsadmin.properties.runAccessReport
       parameters:
-        - description: The Data Access Report is requested for this property. For example if "123" is your GA4 property ID, then entity should be "properties/123".
+        - description: The Data Access Report supports requesting at the property level or account level. If requested at the account level, Data Access Reports include all access for all properties under that account. To request at the property level, entity should be for example 'properties/123' if "123" is your GA4 property ID. To request at the account level, entity should be for example 'accounts/1234' if "1234" is your GA4 Account ID.
           in: path
           name: entity
           required: true
@@ -4181,7 +4181,7 @@ components:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccessOrderBy"
           type: array
         returnEntityQuota:
-          description: Toggles whether to return the current state of this Analytics Property's quota. Quota is returned in [AccessQuota](#AccessQuota).
+          description: Toggles whether to return the current state of this Analytics Property's quota. Quota is returned in [AccessQuota](#AccessQuota). For account-level requests, this field must be false.
           type: boolean
         timeZone:
           description: This request's time zone if specified. If unspecified, the property's time zone is used. The request's time zone is used to interpret the start & end dates of the report. Formatted as strings from the IANA Time Zone database (https://www.iana.org/time-zones); for example "America/New_York" or "Asia/Tokyo".
@@ -4202,7 +4202,7 @@ components:
           type: array
         quota:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccessQuota"
-          description: The quota state for this Analytics property including this request.
+          description: The quota state for this Analytics property including this request. This field doesn't work with account-level requests.
         rowCount:
           description: The total number of rows in the query result. `rowCount` is independent of the number of rows returned in the response, the `limit` request parameter, and the `offset` request parameter. For example if a query returns 175 rows and includes `limit` of 50 in the API request, the response will contain `rowCount` of 175 but only 50 rows. To learn more about this pagination parameter, see [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
           format: int32

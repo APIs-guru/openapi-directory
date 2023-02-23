@@ -331,6 +331,8 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/HrisJobs"
     x-apideck-resource-id: jobs
+    x-internal: true
+    x-sdk-exclude: true
   - description: ""
     name: Time Off Requests
     x-apideck-model:
@@ -1684,6 +1686,8 @@ paths:
               console.error(error)
             }
       x-graphql-field-name: jobs
+      x-internal: true
+      x-sdk-exclude: true
   "/hris/jobs/employees/{employee_id}/jobs/{job_id}":
     get:
       description: A Job for employee.
@@ -1739,6 +1743,8 @@ paths:
             } catch (error) {
               console.error(error)
             }
+      x-internal: true
+      x-sdk-exclude: true
   /hris/payrolls:
     get:
       description: List Payroll

@@ -961,6 +961,9 @@ components:
     RestrictedExportConfig:
       description: Restricted export config, used to configure restricted export on linked dataset.
       properties:
+        enabled:
+          description: If true, enable restricted export.
+          type: boolean
         restrictDirectTableAccess:
           description: If true, restrict direct table access(read api/tabledata.list) on linked table.
           type: boolean

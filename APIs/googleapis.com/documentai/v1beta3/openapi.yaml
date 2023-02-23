@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -4359,7 +4360,7 @@ components:
           description: "Name of the type. It must be unique within the schema file and cannot be a 'Common Type'. Besides that we use the following naming conventions: - *use `snake_casing`* - name matching is case-sensitive - Maximum 64 characters. - Must start with a letter. - Allowed characters: ASCII letters `[a-z0-9_-]`. (For backward compatibility internal infrastructure and tooling can handle any ascii character) - The `/` is sometimes used to denote a property of a type. For example `line_item/amount`. This convention is deprecated, but will still be honored for backward compatibility."
           type: string
         properties:
-          description: Describing the nested structure, or composition of an entity.
+          description: Description the nested structure, or composition of an entity.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentSchemaEntityTypeProperty"
           type: array

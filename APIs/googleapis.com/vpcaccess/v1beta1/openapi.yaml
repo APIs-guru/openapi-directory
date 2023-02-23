@@ -1,18 +1,18 @@
 openapi: 3.0.0
 servers:
-  - url: https://workflows.googleapis.com/
+  - url: https://vpcaccess.googleapis.com/
 info:
   contact:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Manage workflow definitions. To execute workflows and manage executions, see the Workflows Executions API.
+  description: API for managing VPC access connectors.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: Workflows API
-  version: v1
+  title: Serverless VPC Access API
+  version: v1beta1
   x-apisguru-categories:
     - analytics
     - media
@@ -20,21 +20,22 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://workflows.googleapis.com/$discovery/rest?version=v1
+      url: https://vpcaccess.googleapis.com/$discovery/rest?version=v1beta1
       version: v1
   x-providerName: googleapis.com
-  x-serviceName: workflows
+  x-serviceName: vpcaccess
+  x-preferred: false
 externalDocs:
-  url: https://cloud.google.com/workflows
+  url: https://cloud.google.com/vpc/docs/configure-serverless-vpc-access
 tags:
   - name: projects
 paths:
-  "/v1/{name}":
+  "/v1beta1/{name}":
     delete:
-      description: Deletes a workflow with the specified name. This method also cancels and deletes all running executions of the workflow.
-      operationId: workflows.projects.locations.workflows.delete
+      description: Deletes a Serverless VPC Access connector. Returns NOT_FOUND if the resource does not exist.
+      operationId: vpcaccess.projects.locations.connectors.delete
       parameters:
-        - description: "Required. Name of the workflow to be deleted. Format: projects/{project}/locations/{location}/workflows/{workflow}"
+        - description: Required. Name of a Serverless VPC Access connector to delete.
           in: path
           name: name
           required: true
@@ -55,18 +56,13 @@ paths:
       tags:
         - projects
     get:
-      description: Gets details of a single workflow.
-      operationId: workflows.projects.locations.workflows.get
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: vpcaccess.projects.locations.operations.get
       parameters:
-        - description: "Required. Name of the workflow for which information should be retrieved. Format: projects/{project}/locations/{location}/workflows/{workflow}"
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
-          schema:
-            type: string
-        - description: Optional. Optional. The revision of the workflow to retrieve. If the revision_id is empty, the latest revision is retrieved. The format is "000001-a4d", where the first 6 characters define the zero-padded decimal revision number. They are followed by a hyphen and 3 hexadecimal characters. (go/wf_adr_clh_1)
-          in: query
-          name: revisionId
           schema:
             type: string
       responses:
@@ -74,7 +70,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Workflow"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -96,16 +92,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing workflow. Running this method has no impact on already running executions of the workflow. A new revision of the workflow might be created as a result of a successful update operation. In that case, the new revision is used in new workflow executions.
-      operationId: workflows.projects.locations.workflows.patch
+      description: Updates a Serverless VPC Access connector, returns an operation.
+      operationId: vpcaccess.projects.locations.connectors.patch
       parameters:
-        - description: "The resource name of the workflow. Format: projects/{project}/locations/{location}/workflows/{workflow}"
+        - description: The resource name in the format `projects/*/locations/*/connectors/*`.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: List of fields to be updated. If not present, the entire workflow will be updated.
+        - description: The fields to update on the entry group. If absent or empty, all modifiable fields are updated.
           in: query
           name: updateMask
           schema:
@@ -114,7 +110,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Workflow"
+              $ref: "#/components/schemas/Connector"
       responses:
         "200":
           content:
@@ -129,10 +125,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/locations":
+  "/v1beta1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
-      operationId: workflows.projects.locations.list
+      operationId: vpcaccess.projects.locations.list
       parameters:
         - description: The resource that owns the locations collection, if applicable.
           in: path
@@ -181,10 +177,10 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/operations":
+  "/v1beta1/{name}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
-      operationId: workflows.projects.locations.operations.list
+      operationId: vpcaccess.projects.locations.operations.list
       parameters:
         - description: The name of the operation's parent resource.
           in: path
@@ -233,33 +229,23 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/workflows":
+  "/v1beta1/{parent}/connectors":
     get:
-      description: Lists workflows in a given project and location. The default order is not specified.
-      operationId: workflows.projects.locations.workflows.list
+      description: Lists Serverless VPC Access connectors.
+      operationId: vpcaccess.projects.locations.connectors.list
       parameters:
-        - description: "Required. Project and location from which the workflows should be listed. Format: projects/{project}/locations/{location}"
+        - description: Required. The project and location from which the routes should be listed.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Filter to restrict results to specific workflows.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: Comma-separated list of fields that specify the order of the results. Default sorting order for a field is ascending. To specify descending order for a field, append a "desc" suffix. If not specified, the results are returned in an unspecified order.
-          in: query
-          name: orderBy
-          schema:
-            type: string
-        - description: Maximum number of workflows to return per call. The service might return fewer than this value even if not at the end of the collection. If a value is not specified, a default value of 500 is used. The maximum permitted value is 1000 and values greater than 1000 are coerced down to 1000.
+        - description: Maximum number of functions to return per call.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListWorkflows` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListWorkflows` must match the call that provided the page token.
+        - description: Continuation token.
           in: query
           name: pageToken
           schema:
@@ -269,7 +255,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListWorkflowsResponse"
+                $ref: "#/components/schemas/ListConnectorsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -291,25 +277,25 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new workflow. If a workflow with the specified name already exists in the specified project and location, the long running operation returns a ALREADY_EXISTS error.
-      operationId: workflows.projects.locations.workflows.create
+      description: Creates a Serverless VPC Access connector, returns an operation.
+      operationId: vpcaccess.projects.locations.connectors.create
       parameters:
-        - description: "Required. Project and location in which the workflow should be created. Format: projects/{project}/locations/{location}"
+        - description: Required. The project and location in which the configuration should be created, specified in the format `projects/*/locations/*`.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: "Required. The ID of the workflow to be created. It has to fulfill the following requirements: * Must contain only letters, numbers, underscores and hyphens. * Must start with a letter. * Must be between 1-64 characters. * Must end with a number or a letter. * Must be unique within the customer project and location."
+        - description: Required. The ID to use for this connector.
           in: query
-          name: workflowId
+          name: connectorId
           schema:
             type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Workflow"
+              $ref: "#/components/schemas/Connector"
       responses:
         "200":
           content:
@@ -400,9 +386,69 @@ components:
       schema:
         type: string
   schemas:
-    Empty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
-      properties: {}
+    Connector:
+      description: Definition of a Serverless VPC Access connector.
+      properties:
+        connectedProjects:
+          description: Output only. List of projects using the connector.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        ipCidrRange:
+          description: "The range of internal addresses that follows RFC 4632 notation. Example: `10.132.0.0/28`."
+          type: string
+        machineType:
+          description: Machine type of VM Instance underlying connector. Default is e2-micro
+          type: string
+        maxInstances:
+          description: Maximum value of instances in autoscaling group underlying the connector.
+          format: int32
+          type: integer
+        maxThroughput:
+          description: Maximum throughput of the connector in Mbps. Default is 300, max is 1000.
+          format: int32
+          type: integer
+        minInstances:
+          description: Minimum value of instances in autoscaling group underlying the connector.
+          format: int32
+          type: integer
+        minThroughput:
+          description: Minimum throughput of the connector in Mbps. Default and min is 200.
+          format: int32
+          type: integer
+        name:
+          description: The resource name in the format `projects/*/locations/*/connectors/*`.
+          type: string
+        network:
+          description: Name of a VPC network.
+          type: string
+        state:
+          description: Output only. State of the VPC access connector.
+          enum:
+            - STATE_UNSPECIFIED
+            - READY
+            - CREATING
+            - DELETING
+            - ERROR
+            - UPDATING
+          readOnly: true
+          type: string
+        subnet:
+          $ref: "#/components/schemas/Subnet"
+          description: The subnet in which to house the VPC Access Connector.
+      type: object
+    ListConnectorsResponse:
+      description: Response for listing Serverless VPC Access connectors.
+      properties:
+        connectors:
+          description: List of Serverless VPC Access connectors.
+          items:
+            $ref: "#/components/schemas/Connector"
+          type: array
+        nextPageToken:
+          description: Continuation token.
+          type: string
       type: object
     ListLocationsResponse:
       description: The response message for Locations.ListLocations.
@@ -426,23 +472,6 @@ components:
           description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
-          type: array
-      type: object
-    ListWorkflowsResponse:
-      description: Response for the ListWorkflows method.
-      properties:
-        nextPageToken:
-          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
-          type: string
-        unreachable:
-          description: Unreachable resources.
-          items:
-            type: string
-          type: array
-        workflows:
-          description: The workflows that match the request.
-          items:
-            $ref: "#/components/schemas/Workflow"
           type: array
       type: object
     Location:
@@ -492,24 +521,69 @@ components:
           type: object
       type: object
     OperationMetadata:
-      description: Represents the metadata of the long-running operation.
+      description: Metadata for google.longrunning.Operation.
       properties:
-        apiVersion:
-          description: API version used to start the operation.
-          type: string
         createTime:
-          description: The time the operation was created.
+          description: Output only. Time when the operation was created.
           format: google-datetime
+          readOnly: true
           type: string
         endTime:
-          description: The time the operation finished running.
+          description: Output only. Time when the operation completed.
           format: google-datetime
+          readOnly: true
+          type: string
+        method:
+          description: Output only. Method that initiated the operation e.g. google.cloud.vpcaccess.v1.Connectors.CreateConnector.
+          readOnly: true
           type: string
         target:
-          description: Server-defined resource path for the target of the operation.
+          description: Output only. Name of the resource that this operation is acting on e.g. projects/my-project/locations/us-central1/connectors/v1.
+          readOnly: true
           type: string
-        verb:
-          description: Name of the verb executed by the operation.
+      type: object
+    OperationMetadataV1Alpha1:
+      description: Metadata for google.longrunning.Operation.
+      properties:
+        endTime:
+          description: Output only. Time when the operation completed.
+          format: google-datetime
+          readOnly: true
+          type: string
+        insertTime:
+          description: Output only. Time when the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        method:
+          description: Output only. Method that initiated the operation e.g. google.cloud.vpcaccess.v1alpha1.Connectors.CreateConnector.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Name of the resource that this operation is acting on e.g. projects/my-project/locations/us-central1/connectors/v1.
+          readOnly: true
+          type: string
+      type: object
+    OperationMetadataV1Beta1:
+      description: Metadata for google.longrunning.Operation.
+      properties:
+        createTime:
+          description: Output only. Time when the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. Time when the operation completed.
+          format: google-datetime
+          readOnly: true
+          type: string
+        method:
+          description: Output only. Method that initiated the operation e.g. google.cloud.vpcaccess.v1beta1.Connectors.CreateConnector.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Name of the resource that this operation is acting on e.g. projects/my-project/locations/us-central1/connectors/v1.
+          readOnly: true
           type: string
       type: object
     Status:
@@ -530,51 +604,14 @@ components:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
-    Workflow:
-      description: Workflow program to be executed by Workflows.
+    Subnet:
+      description: The subnet in which to house the connector
       properties:
-        createTime:
-          description: Output only. The timestamp for when the workflow was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        description:
-          description: Description of the workflow provided by the user. Must be at most 1000 unicode characters long.
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          description: Labels associated with this workflow. Labels can contain at most 64 entries. Keys and values can be no longer than 63 characters and can only contain lowercase letters, numeric characters, underscores, and dashes. Label keys must start with a letter. International characters are allowed.
-          type: object
         name:
-          description: "The resource name of the workflow. Format: projects/{project}/locations/{location}/workflows/{workflow}"
+          description: Subnet name (relative, not fully qualified). E.g. if the full subnet selfLink is https://compute.googleapis.com/compute/v1/projects/{project}/regions/{region}/subnetworks/{subnetName} the correct input for this field would be {subnetName}
           type: string
-        revisionCreateTime:
-          description: Output only. The timestamp for the latest revision of the workflow's creation.
-          format: google-datetime
-          readOnly: true
-          type: string
-        revisionId:
-          description: 'Output only. The revision of the workflow. A new revision of a workflow is created as a result of updating the following properties of a workflow: - Service account - Workflow code to be executed The format is "000001-a4d", where the first 6 characters define the zero-padded revision ordinal number. They are followed by a hyphen and 3 hexadecimal random characters.'
-          readOnly: true
-          type: string
-        serviceAccount:
-          description: "The service account associated with the latest workflow version. This service account represents the identity of the workflow and determines what permissions the workflow has. Format: projects/{project}/serviceAccounts/{account} or {account} Using `-` as a wildcard for the `{project}` or not providing one at all will infer the project from the account. The `{account}` value can be the `email` address or the `unique_id` of the service account. If not provided, workflow will use the project's default service account. Modifying this field for an existing workflow results in a new workflow revision."
-          type: string
-        sourceContents:
-          description: Workflow code to be executed. The size limit is 128KB.
-          type: string
-        state:
-          description: Output only. State of the workflow deployment.
-          enum:
-            - STATE_UNSPECIFIED
-            - ACTIVE
-          readOnly: true
-          type: string
-        updateTime:
-          description: Output only. The timestamp for when the workflow was last updated.
-          format: google-datetime
-          readOnly: true
+        projectId:
+          description: Project in which the subnet exists. If not set, this project is assumed to be the project for which the connector create request was issued.
           type: string
       type: object
   securitySchemes:
