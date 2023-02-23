@@ -5019,6 +5019,8 @@ paths:
                   properties:
                     EnableSIPLogs:
                       $ref: '#/components/schemas/Boolean'
+                    EnableMediaMetricLogs:
+                      $ref: '#/components/schemas/Boolean'
   '/voice-connectors/{voiceConnectorId}/termination/health':
     get:
       operationId: GetVoiceConnectorTerminationHealth
@@ -7081,6 +7083,8 @@ components:
       type: object
       properties:
         EnableSIPLogs:
+          $ref: '#/components/schemas/Boolean'
+        EnableMediaMetricLogs:
           $ref: '#/components/schemas/Boolean'
     GetVoiceConnectorOriginationRequest:
       type: object

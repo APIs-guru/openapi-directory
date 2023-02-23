@@ -708,7 +708,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/Tag'
                 AutoTuneOptions:
-                  description: 'Options for configuring Auto-Tune. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for Amazon OpenSearch Service</a>.'
+                  description: 'Options for configuring Auto-Tune. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for Amazon OpenSearch Service</a> '
                   type: object
                   properties:
                     DesiredState:
@@ -718,7 +718,31 @@ paths:
                     MaintenanceSchedules:
                       allOf:
                         - $ref: '#/components/schemas/AutoTuneMaintenanceScheduleList'
-                        - description: 'A list of maintenance schedules during which Auto-Tune can deploy changes. Maintenance schedules are overwrite, not append. If your request includes no schedules, the request deletes all existing schedules. To preserve existing schedules, make a call to <code>DescribeDomainConfig</code> first and use the <code>MaintenanceSchedules</code> portion of the response as the basis for this section.'
+                        - description: 'A list of maintenance schedules during which Auto-Tune can deploy changes. Maintenance windows are deprecated and have been replaced with <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html">off-peak windows</a>.'
+                    UseOffPeakWindow:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Whether to schedule Auto-Tune optimizations that require blue/green deployments during the domain's configured daily off-peak window.
+                OffPeakWindowOptions:
+                  description: 'Options for a domain''s <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html">off-peak window</a>, during which OpenSearch Service can perform mandatory configuration changes on the domain.'
+                  type: object
+                  properties:
+                    Enabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: '<p>Whether to enable an off-peak window.</p> <p>This option is only available when modifying a domain created prior to February 13, 2023, not when creating a new domain. All domains created after this date have the off-peak window enabled by default. You can''t disable the off-peak window after it''s enabled for a domain.</p>'
+                    OffPeakWindow:
+                      allOf:
+                        - $ref: '#/components/schemas/OffPeakWindow'
+                        - description: Off-peak window settings for the domain.
+                SoftwareUpdateOptions:
+                  description: Options for configuring service software updates for a domain.
+                  type: object
+                  properties:
+                    AutoSoftwareUpdateEnabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Whether automatic service software updates are enabled for the domain.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1716,7 +1740,7 @@ paths:
                   minLength: 0
                   maxLength: 102400
                 LogPublishingOptions:
-                  description: Options to publish OpenSearch lots to Amazon CloudWatch Logs.
+                  description: Options to publish OpenSearch logs to Amazon CloudWatch Logs.
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/LogPublishingOption'
@@ -1803,7 +1827,11 @@ paths:
                     MaintenanceSchedules:
                       allOf:
                         - $ref: '#/components/schemas/AutoTuneMaintenanceScheduleList'
-                        - description: A list of maintenance schedules during which Auto-Tune can deploy changes.
+                        - description: '<p>DEPRECATED. Use <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html">off-peak window</a> instead.</p> <p>A list of maintenance schedules during which Auto-Tune can deploy changes.</p>'
+                    UseOffPeakWindow:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'Whether to use the domain''s <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html">off-peak window</a> to deploy configuration changes on the domain rather than a maintenance schedule.'
                 DryRun:
                   description: 'This flag, when set to True, specifies whether the <code>UpdateDomain</code> request should return the results of a dry run analysis without actually applying the change. A dry run determines what type of deployment the update will cause.'
                   type: boolean
@@ -1813,6 +1841,26 @@ paths:
                   enum:
                     - Basic
                     - Verbose
+                OffPeakWindowOptions:
+                  description: 'Options for a domain''s <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html">off-peak window</a>, during which OpenSearch Service can perform mandatory configuration changes on the domain.'
+                  type: object
+                  properties:
+                    Enabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: '<p>Whether to enable an off-peak window.</p> <p>This option is only available when modifying a domain created prior to February 13, 2023, not when creating a new domain. All domains created after this date have the off-peak window enabled by default. You can''t disable the off-peak window after it''s enabled for a domain.</p>'
+                    OffPeakWindow:
+                      allOf:
+                        - $ref: '#/components/schemas/OffPeakWindow'
+                        - description: Off-peak window settings for the domain.
+                SoftwareUpdateOptions:
+                  description: Options for configuring service software updates for a domain.
+                  type: object
+                  properties:
+                    AutoSoftwareUpdateEnabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Whether automatic service software updates are enabled for the domain.
   /2021-01-01/opensearch/domain-info:
     post:
       operationId: DescribeDomains
@@ -3205,6 +3253,93 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2021-01-01/opensearch/domain/{DomainName}/scheduledActions':
+    get:
+      operationId: ListScheduledActions
+      description: 'Retrieves a list of configuration changes that are scheduled for a domain. These changes can be <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html">service software updates</a> or <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types">blue/green Auto-Tune enhancements</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListScheduledActionsResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InvalidPaginationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPaginationTokenException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The name of the domain.
+          schema:
+            type: string
+            pattern: '[a-z][a-z0-9\-]+'
+            description: The name of an OpenSearch Service domain. Domain names are unique across the domains owned by an account within an Amazon Web Services Region.
+            minLength: 3
+            maxLength: 28
+        - name: maxResults
+          in: query
+          required: false
+          description: An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results.
+          schema:
+            type: integer
+            description: An optional parameter that specifies the maximum number of results to return for a given request.
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'If your initial <code>ListScheduledActions</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListScheduledActions</code> operations, which returns results in the next page.'
+          schema:
+            type: string
+            description: 'When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.'
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /2021-01-01/tags/#arn:
     get:
       operationId: ListTags
@@ -3754,6 +3889,16 @@ paths:
                   pattern: '[a-z][a-z0-9\-]+'
                   minLength: 3
                   maxLength: 28
+                ScheduleAt:
+                  description: '<p>When to start the service software update.</p> <ul> <li> <p> <code>NOW</code> - Immediately schedules the update to happen in the current hour if there''s capacity available.</p> </li> <li> <p> <code>TIMESTAMP</code> - Lets you specify a custom date and time to apply the update. If you specify this value, you must also provide a value for <code>DesiredStartTime</code>.</p> </li> <li> <p> <code>OFF_PEAK_WINDOW</code> - Marks the update to be picked up during an upcoming off-peak window. There''s no guarantee that the update will happen during the next immediate window. Depending on capacity, it might happen in subsequent days.</p> </li> </ul> <p>Default: <code>NOW</code> if you don''t specify a value for <code>DesiredStartTime</code>, and <code>TIMESTAMP</code> if you do.</p>'
+                  type: string
+                  enum:
+                    - NOW
+                    - TIMESTAMP
+                    - OFF_PEAK_WINDOW
+                DesiredStartTime:
+                  description: The Epoch timestamp when you want the service software update to start. You only need to specify this parameter if you set <code>ScheduleAt</code> to <code>TIMESTAMP</code>.
+                  type: integer
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3843,6 +3988,109 @@ paths:
                   description: 'Commit message for the updated file, which is shown as part of <code>GetPackageVersionHistoryResponse</code>.'
                   type: string
                   maxLength: 160
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2021-01-01/opensearch/domain/{DomainName}/scheduledAction/update':
+    put:
+      operationId: UpdateScheduledAction
+      description: 'Reschedules a planned domain configuration change for a later time. This change can be a scheduled <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html">service software update</a> or a <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types">blue/green Auto-Tune enhancement</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateScheduledActionResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: SlotNotAvailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlotNotAvailableException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '486':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The name of the domain to reschedule an action for.
+          schema:
+            type: string
+            pattern: '[a-z][a-z0-9\-]+'
+            description: The name of an OpenSearch Service domain. Domain names are unique across the domains owned by an account within an Amazon Web Services Region.
+            minLength: 3
+            maxLength: 28
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ActionID
+                - ActionType
+                - ScheduleAt
+              properties:
+                ActionID:
+                  description: 'The unique identifier of the action to reschedule. To retrieve this ID, send a <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html">ListScheduledActions</a> request.'
+                  type: string
+                ActionType:
+                  description: 'The type of action to reschedule. Can be one of <code>SERVICE_SOFTWARE_UPDATE</code>, <code>JVM_HEAP_SIZE_TUNING</code>, or <code>JVM_YOUNG_GEN_TUNING</code>. To retrieve this value, send a <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html">ListScheduledActions</a> request.'
+                  type: string
+                  enum:
+                    - SERVICE_SOFTWARE_UPDATE
+                    - JVM_HEAP_SIZE_TUNING
+                    - JVM_YOUNG_GEN_TUNING
+                ScheduleAt:
+                  description: '<p>When to schedule the action.</p> <ul> <li> <p> <code>NOW</code> - Immediately schedules the update to happen in the current hour if there''s capacity available.</p> </li> <li> <p> <code>TIMESTAMP</code> - Lets you specify a custom date and time to apply the update. If you specify this value, you must also provide a value for <code>DesiredStartTime</code>.</p> </li> <li> <p> <code>OFF_PEAK_WINDOW</code> - Marks the action to be picked up during an upcoming off-peak window. There''s no guarantee that the change will be implemented during the next immediate window. Depending on capacity, it might happen in subsequent days.</p> </li> </ul>'
+                  type: string
+                  enum:
+                    - NOW
+                    - TIMESTAMP
+                    - OFF_PEAK_WINDOW
+                DesiredStartTime:
+                  description: 'The time to implement the change, in Coordinated Universal Time (UTC). Only specify this parameter if you set <code>ScheduleAt</code> to <code>TIMESTAMP</code>.'
+                  type: integer
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4384,6 +4632,14 @@ components:
       items:
         $ref: '#/components/schemas/AutoTuneMaintenanceSchedule'
       maxItems: 100
+    OffPeakWindow:
+      type: object
+      properties:
+        WindowStartTime:
+          allOf:
+            - $ref: '#/components/schemas/WindowStartTime'
+            - description: 'A custom start time for the off-peak window, in Coordinated Universal Time (UTC). The window length will always be 10 hours, so you can''t specify an end time. For example, if you specify 11:00 P.M. UTC as a start time, the end time will automatically be set to 9:00 A.M.'
+      description: '<p>A custom 10-hour, low-traffic window during which OpenSearch Service can perform mandatory configuration changes on the domain. These actions can include scheduled service software updates and blue/green Auto-Tune enhancements. OpenSearch Service will schedule these actions during the window that you specify.</p> <p>If you don''t specify a window start time, it defaults to 10:00 P.M. local time.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html">Defining off-peak maintenance windows for Amazon OpenSearch Service</a>.</p>'
     InvalidTypeException: {}
     ResourceAlreadyExistsException: {}
     CreateOutboundConnectionResponse:
@@ -4788,6 +5044,17 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.'
       description: Container for the response parameters to the <code>ListPackagesForDomain</code> operation.
+    ListScheduledActionsResponse:
+      type: object
+      properties:
+        ScheduledActions:
+          allOf:
+            - $ref: '#/components/schemas/ScheduledActionsList'
+            - description: A list of actions that are scheduled for the domain.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.'
     ListTagsResponse:
       type: object
       properties:
@@ -4913,6 +5180,14 @@ components:
             - $ref: '#/components/schemas/PackageDetails'
             - description: Information about a package.
       description: Container for the response returned by the <code>UpdatePackage</code> operation.
+    UpdateScheduledActionResponse:
+      type: object
+      properties:
+        ScheduledAction:
+          allOf:
+            - $ref: '#/components/schemas/ScheduledAction'
+            - description: Information about the rescheduled action.
+    SlotNotAvailableException: {}
     UpdateVpcEndpointResponse:
       type: object
       required:
@@ -5046,6 +5321,27 @@ components:
             - $ref: '#/components/schemas/OptionStatus'
             - description: The status of the access policy for the domain.
       description: 'The configured access rules for the domain''s search endpoint, and the current status of those rules.'
+    ActionSeverity:
+      type: string
+      enum:
+        - HIGH
+        - MEDIUM
+        - LOW
+    ActionStatus:
+      type: string
+      enum:
+        - PENDING_UPDATE
+        - IN_PROGRESS
+        - FAILED
+        - COMPLETED
+        - NOT_ELIGIBLE
+        - ELIGIBLE
+    ActionType:
+      type: string
+      enum:
+        - SERVICE_SOFTWARE_UPDATE
+        - JVM_HEAP_SIZE_TUNING
+        - JVM_YOUNG_GEN_TUNING
     TagList:
       type: array
       description: A list of tags attached to a domain.
@@ -5360,7 +5656,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: A cron expression for a recurring maintenance schedule during which Auto-Tune can deploy changes.
-      description: 'The Auto-Tune maintenance schedule. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for Amazon OpenSearch Service</a>.'
+      description: '<note> <p>This object is deprecated. Use the domain''s <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html">off-peak window</a> to schedule Auto-Tune optimizations. For migration instructions, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html#off-peak-migrate">Migrating from Auto-Tune maintenance windows</a>.</p> </note> <p>The Auto-Tune maintenance schedule. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for Amazon OpenSearch Service</a>.</p>'
     AutoTuneOptions:
       type: object
       properties:
@@ -5375,7 +5671,11 @@ components:
         MaintenanceSchedules:
           allOf:
             - $ref: '#/components/schemas/AutoTuneMaintenanceScheduleList'
-            - description: A list of maintenance schedules during which Auto-Tune can deploy changes.
+            - description: '<p>DEPRECATED. Use <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html">off-peak window</a> instead.</p> <p>A list of maintenance schedules during which Auto-Tune can deploy changes.</p>'
+        UseOffPeakWindow:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Whether to use the domain''s <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html">off-peak window</a> to deploy configuration changes on the domain rather than a maintenance schedule.'
       description: 'Auto-Tune settings when updating a domain. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for Amazon OpenSearch Service</a>.'
     AutoTuneOptionsInput:
       type: object
@@ -5387,8 +5687,12 @@ components:
         MaintenanceSchedules:
           allOf:
             - $ref: '#/components/schemas/AutoTuneMaintenanceScheduleList'
-            - description: 'A list of maintenance schedules during which Auto-Tune can deploy changes. Maintenance schedules are overwrite, not append. If your request includes no schedules, the request deletes all existing schedules. To preserve existing schedules, make a call to <code>DescribeDomainConfig</code> first and use the <code>MaintenanceSchedules</code> portion of the response as the basis for this section.'
-      description: 'Options for configuring Auto-Tune. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for Amazon OpenSearch Service</a>.'
+            - description: 'A list of maintenance schedules during which Auto-Tune can deploy changes. Maintenance windows are deprecated and have been replaced with <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/off-peak.html">off-peak windows</a>.'
+        UseOffPeakWindow:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to schedule Auto-Tune optimizations that require blue/green deployments during the domain's configured daily off-peak window.
+      description: 'Options for configuring Auto-Tune. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for Amazon OpenSearch Service</a> '
     AutoTuneState:
       type: string
       enum:
@@ -5401,7 +5705,7 @@ components:
         - DISABLED_AND_ROLLBACK_COMPLETE
         - DISABLED_AND_ROLLBACK_ERROR
         - ERROR
-      description: 'The Auto-Tune state for the domain. For valid states see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html"> Auto-Tune for Amazon OpenSearch Service</a>. '
+      description: 'The Auto-Tune state for the domain. For valid states see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for Amazon OpenSearch Service</a>. '
     AutoTuneOptionsOutput:
       type: object
       properties:
@@ -5413,6 +5717,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Any errors that occurred while enabling or disabling Auto-Tune.
+        UseOffPeakWindow:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the domain's off-peak window will be used to deploy Auto-Tune changes rather than a maintenance schedule.
       description: 'The Auto-Tune settings for a domain, displayed when enabling or disabling Auto-Tune.'
     AutoTuneStatus:
       type: object
@@ -5869,6 +6177,26 @@ components:
             - $ref: '#/components/schemas/ARN'
             - description: 'The ARN for your security certificate, managed in Amazon Web Services Certificate Manager (ACM).'
       description: Options to configure a custom endpoint for an OpenSearch Service domain.
+    OffPeakWindowOptions:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Whether to enable an off-peak window.</p> <p>This option is only available when modifying a domain created prior to February 13, 2023, not when creating a new domain. All domains created after this date have the off-peak window enabled by default. You can''t disable the off-peak window after it''s enabled for a domain.</p>'
+        OffPeakWindow:
+          allOf:
+            - $ref: '#/components/schemas/OffPeakWindow'
+            - description: Off-peak window settings for the domain.
+      description: 'Options for a domain''s <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html">off-peak window</a>, during which OpenSearch Service can perform mandatory configuration changes on the domain.'
+    SoftwareUpdateOptions:
+      type: object
+      properties:
+        AutoSoftwareUpdateEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether automatic service software updates are enabled for the domain.
+      description: Options for configuring service software updates for a domain.
     CreateDomainRequest:
       type: object
       required:
@@ -5939,6 +6267,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoTuneOptionsInput'
             - description: Options for Auto-Tune.
+        OffPeakWindowOptions:
+          allOf:
+            - $ref: '#/components/schemas/OffPeakWindowOptions'
+            - description: 'Specifies a daily 10-hour time block during which OpenSearch Service can perform configuration changes on the domain, including service software updates and Auto-Tune enhancements that require a blue/green deployment. If no options are specified, the default start time of 10:00 P.M. local time (for the Region that the domain is created in) is used.'
+        SoftwareUpdateOptions:
+          allOf:
+            - $ref: '#/components/schemas/SoftwareUpdateOptions'
+            - description: Software update options for the domain.
     DomainStatus:
       type: object
       required:
@@ -6047,6 +6383,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChangeProgressDetails'
             - description: Information about a configuration change happening on the domain.
+        OffPeakWindowOptions:
+          allOf:
+            - $ref: '#/components/schemas/OffPeakWindowOptions'
+            - description: Options that specify a custom 10-hour window during which OpenSearch Service can perform configuration changes on the domain.
+        SoftwareUpdateOptions:
+          allOf:
+            - $ref: '#/components/schemas/SoftwareUpdateOptions'
+            - description: Service software update options for the domain.
       description: The current status of an OpenSearch Service domain.
     DomainInformationContainer:
       type: object
@@ -6372,7 +6716,7 @@ components:
         EBSOptions:
           allOf:
             - $ref: '#/components/schemas/EBSOptionsStatus'
-            - description: Container for EBS options configured for an OpenSearch Service domain.
+            - description: Container for EBS options configured for the domain.
         AccessPolicies:
           allOf:
             - $ref: '#/components/schemas/AccessPoliciesStatus'
@@ -6421,6 +6765,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChangeProgressDetails'
             - description: Container for information about the progress of an existing configuration change.
+        OffPeakWindowOptions:
+          allOf:
+            - $ref: '#/components/schemas/OffPeakWindowOptionsStatus'
+            - description: Container for off-peak window options for the domain.
+        SoftwareUpdateOptions:
+          allOf:
+            - $ref: '#/components/schemas/SoftwareUpdateOptionsStatus'
+            - description: Software update options for the domain.
       description: Container for the configuration of an OpenSearch Service domain.
     DescribeDomainRequest:
       type: object
@@ -6750,6 +7102,30 @@ components:
             - $ref: '#/components/schemas/OptionStatus'
             - description: The status of the endpoint options for a domain.
       description: The configured endpoint options for a domain and their current status.
+    OffPeakWindowOptionsStatus:
+      type: object
+      properties:
+        Options:
+          allOf:
+            - $ref: '#/components/schemas/OffPeakWindowOptions'
+            - description: The domain's off-peak window configuration.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: The current status of off-peak window options.
+      description: 'The status of <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html">off-peak window</a> options for a domain.'
+    SoftwareUpdateOptionsStatus:
+      type: object
+      properties:
+        Options:
+          allOf:
+            - $ref: '#/components/schemas/SoftwareUpdateOptions'
+            - description: The service software update options for a domain.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: 'The status of service software update options, including creation date and last updated date.'
+      description: The status of the service software options for a domain.
     DomainId:
       type: string
       description: Unique identifier for an OpenSearch Service domain.
@@ -7057,6 +7433,14 @@ components:
       title: ListPackagesForDomainRequest
       properties: {}
       description: Container for the request parameters to the <code>ListPackagesForDomain</code> operation.
+    ListScheduledActionsRequest:
+      type: object
+      title: ListScheduledActionsRequest
+      properties: {}
+    ScheduledActionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScheduledAction'
     ListTagsRequest:
       type: object
       title: ListTagsRequest
@@ -7105,6 +7489,21 @@ components:
       minLength: 8
       maxLength: 128
       format: password
+    WindowStartTime:
+      type: object
+      required:
+        - Hours
+        - Minutes
+      properties:
+        Hours:
+          allOf:
+            - $ref: '#/components/schemas/StartTimeHours'
+            - description: 'The start hour of the window in Coordinated Universal Time (UTC), using 24-hour time. For example, <code>17</code> refers to 5:00 P.M. UTC.'
+        Minutes:
+          allOf:
+            - $ref: '#/components/schemas/StartTimeMinutes'
+            - description: 'The start minute of the window, in UTC.'
+      description: 'The desired start time for an <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html">off-peak maintenance window</a>.'
     OptionState:
       type: string
       enum:
@@ -7349,6 +7748,62 @@ components:
             - $ref: '#/components/schemas/SAMLEntityId'
             - description: The unique entity ID of the application in the SAML identity provider.
       description: The SAML identity povider information.
+    ScheduleAt:
+      type: string
+      enum:
+        - NOW
+        - TIMESTAMP
+        - OFF_PEAK_WINDOW
+    ScheduledBy:
+      type: string
+      enum:
+        - CUSTOMER
+        - SYSTEM
+    ScheduledAction:
+      type: object
+      required:
+        - Id
+        - Type
+        - Severity
+        - ScheduledTime
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique identifier of the scheduled action.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ActionType'
+            - description: The type of action that will be taken on the domain.
+        Severity:
+          allOf:
+            - $ref: '#/components/schemas/ActionSeverity'
+            - description: The severity of the action.
+        ScheduledTime:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The time when the change is scheduled to happen.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the action to be taken.
+        ScheduledBy:
+          allOf:
+            - $ref: '#/components/schemas/ScheduledBy'
+            - description: 'Whether the action was scheduled manually (<code>CUSTOMER</code>, or by OpenSearch Service automatically (<code>SYSTEM</code>).'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ActionStatus'
+            - description: The current status of the scheduled action.
+        Mandatory:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the action is required or optional.
+        Cancellable:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether or not the scheduled action is cancellable.
+      description: 'Information about a scheduled configuration change for an OpenSearch Service domain. This actions can be a <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html">service software update</a> or a <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types">blue/green Auto-Tune enhancement</a>.'
     ScheduledAutoTuneActionType:
       type: string
       enum:
@@ -7375,7 +7830,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/DomainName'
             - description: The name of the domain that you want to update to the latest service software.
+        ScheduleAt:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleAt'
+            - description: '<p>When to start the service software update.</p> <ul> <li> <p> <code>NOW</code> - Immediately schedules the update to happen in the current hour if there''s capacity available.</p> </li> <li> <p> <code>TIMESTAMP</code> - Lets you specify a custom date and time to apply the update. If you specify this value, you must also provide a value for <code>DesiredStartTime</code>.</p> </li> <li> <p> <code>OFF_PEAK_WINDOW</code> - Marks the update to be picked up during an upcoming off-peak window. There''s no guarantee that the update will happen during the next immediate window. Depending on capacity, it might happen in subsequent days.</p> </li> </ul> <p>Default: <code>NOW</code> if you don''t specify a value for <code>DesiredStartTime</code>, and <code>TIMESTAMP</code> if you do.</p>'
+        DesiredStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The Epoch timestamp when you want the service software update to start. You only need to specify this parameter if you set <code>ScheduleAt</code> to <code>TIMESTAMP</code>.
       description: Container for the request parameters to the <code>StartServiceSoftwareUpdate</code> operation.
+    StartTimeHours:
+      type: integer
+      minimum: 0
+      maximum: 23
+    StartTimeMinutes:
+      type: integer
+      minimum: 0
+      maximum: 59
     StartTimestamp:
       type: string
       format: date-time
@@ -7464,7 +7935,7 @@ components:
         LogPublishingOptions:
           allOf:
             - $ref: '#/components/schemas/LogPublishingOptions'
-            - description: Options to publish OpenSearch lots to Amazon CloudWatch Logs.
+            - description: Options to publish OpenSearch logs to Amazon CloudWatch Logs.
         EncryptionAtRestOptions:
           allOf:
             - $ref: '#/components/schemas/EncryptionAtRestOptions'
@@ -7476,7 +7947,7 @@ components:
         NodeToNodeEncryptionOptions:
           allOf:
             - $ref: '#/components/schemas/NodeToNodeEncryptionOptions'
-            - description: Node-To-Node Encryption options for the domain.
+            - description: Node-to-node encryption options for the domain.
         AdvancedSecurityOptions:
           allOf:
             - $ref: '#/components/schemas/AdvancedSecurityOptionsInput'
@@ -7493,6 +7964,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/DryRunMode'
             - description: '<p>The type of dry run to perform.</p> <ul> <li> <p> <code>Basic</code> only returns the type of deployment (blue/green or dynamic) that the update will cause.</p> </li> <li> <p> <code>Verbose</code> runs an additional check to validate the changes you''re making. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check">Validating a domain update</a>.</p> </li> </ul>'
+        OffPeakWindowOptions:
+          allOf:
+            - $ref: '#/components/schemas/OffPeakWindowOptions'
+            - description: Off-peak window options for the domain.
+        SoftwareUpdateOptions:
+          allOf:
+            - $ref: '#/components/schemas/SoftwareUpdateOptions'
+            - description: Service software update options for the domain.
       description: Container for the request parameters to the <code>UpdateDomain</code> operation.
     UpdatePackageRequest:
       type: object
@@ -7518,6 +7997,30 @@ components:
             - $ref: '#/components/schemas/CommitMessage'
             - description: 'Commit message for the updated file, which is shown as part of <code>GetPackageVersionHistoryResponse</code>.'
       description: Container for request parameters to the <code>UpdatePackage</code> operation.
+    UpdateScheduledActionRequest:
+      type: object
+      required:
+        - ActionID
+        - ActionType
+        - ScheduleAt
+      title: UpdateScheduledActionRequest
+      properties:
+        ActionID:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The unique identifier of the action to reschedule. To retrieve this ID, send a <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html">ListScheduledActions</a> request.'
+        ActionType:
+          allOf:
+            - $ref: '#/components/schemas/ActionType'
+            - description: 'The type of action to reschedule. Can be one of <code>SERVICE_SOFTWARE_UPDATE</code>, <code>JVM_HEAP_SIZE_TUNING</code>, or <code>JVM_YOUNG_GEN_TUNING</code>. To retrieve this value, send a <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html">ListScheduledActions</a> request.'
+        ScheduleAt:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleAt'
+            - description: '<p>When to schedule the action.</p> <ul> <li> <p> <code>NOW</code> - Immediately schedules the update to happen in the current hour if there''s capacity available.</p> </li> <li> <p> <code>TIMESTAMP</code> - Lets you specify a custom date and time to apply the update. If you specify this value, you must also provide a value for <code>DesiredStartTime</code>.</p> </li> <li> <p> <code>OFF_PEAK_WINDOW</code> - Marks the action to be picked up during an upcoming off-peak window. There''s no guarantee that the change will be implemented during the next immediate window. Depending on capacity, it might happen in subsequent days.</p> </li> </ul>'
+        DesiredStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The time to implement the change, in Coordinated Universal Time (UTC). Only specify this parameter if you set <code>ScheduleAt</code> to <code>TIMESTAMP</code>.'
     UpdateVpcEndpointRequest:
       type: object
       required:

@@ -4095,12 +4095,12 @@ components:
     ObjectStorageAccessKey:
       type: string
       pattern: ^.+$
-      minLength: 8
+      minLength: 1
       maxLength: 200
     ObjectStorageSecretKey:
       type: string
       pattern: ^.+$
-      minLength: 8
+      minLength: 1
       maxLength: 200
       format: password
     ObjectStorageCertificate:
