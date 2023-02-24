@@ -1589,6 +1589,19 @@ paths:
                     $ref: '#/components/schemas/Tag'
                   minItems: 0
                   maxItems: 200
+                RedundancyPercent:
+                  description: 'The percentage of added redundant fragments. For example, if firmware file is 100 bytes and fragment size is 10 bytes, with <code>RedundancyPercent</code> set to 50(%), the final number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.'
+                  type: integer
+                  minimum: 0
+                  maximum: 100
+                FragmentSizeBytes:
+                  description: The size of each fragment in bytes. Currently only supported in fuota tasks with multicast groups.
+                  type: integer
+                  minimum: 1
+                FragmentIntervalMS:
+                  description: The interval of sending fragments in milliseconds. Currently the interval will be rounded to the nearest second. Note that this interval only controls the timing when the cloud sends the fragments down. The actual delay of receiving fragments at device side depends on the device's class and the communication delay with the cloud.
+                  type: integer
+                  minimum: 1
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3448,6 +3461,19 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 2048
+                RedundancyPercent:
+                  description: 'The percentage of added redundant fragments. For example, if firmware file is 100 bytes and fragment size is 10 bytes, with <code>RedundancyPercent</code> set to 50(%), the final number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.'
+                  type: integer
+                  minimum: 0
+                  maximum: 100
+                FragmentSizeBytes:
+                  description: The size of each fragment in bytes. Currently only supported in fuota tasks with multicast groups.
+                  type: integer
+                  minimum: 1
+                FragmentIntervalMS:
+                  description: The interval of sending fragments in milliseconds. Currently the interval will be rounded to the nearest second. Note that this interval only controls the timing when the cloud sends the fragments down. The actual delay of receiving fragments at device side depends on the device's class and the communication delay with the cloud.
+                  type: integer
+                  minimum: 1
   '/multicast-groups/{Id}':
     delete:
       operationId: DeleteMulticastGroup
@@ -5481,7 +5507,7 @@ paths:
                     AssistPosition:
                       allOf:
                         - $ref: '#/components/schemas/AssistPosition'
-                        - description: 'Optional assistance position information, specified using latitude and longitude values in degrees. The co-ordinates are inside the WGS84 reference frame.'
+                        - description: 'Optional assistance position information, specified using latitude and longitude values in degrees. The coordinates are inside the WGS84 reference frame.'
                     AssistAltitude:
                       allOf:
                         - $ref: '#/components/schemas/Coordinate'
@@ -5491,7 +5517,7 @@ paths:
                         - $ref: '#/components/schemas/Use2DSolver'
                         - description: 'Optional parameter that forces 2D solve, which modifies the positioning algorithm to a 2D solution problem. When this parameter is specified, the assistance altitude should have an accuracy of at least 10 meters.'
                 Timestamp:
-                  description: 'Optional information that specifies the time when the position information will be resolved. It uses the UNIX timestamp format. If not specified, the time at which the request was received will be used.'
+                  description: 'Optional information that specifies the time when the position information will be resolved. It uses the Unix timestamp format. If not specified, the time at which the request was received will be used.'
                   type: string
                   format: date-time
     parameters:
@@ -5911,7 +5937,7 @@ paths:
   '/resource-positions/{ResourceIdentifier}#resourceType':
     get:
       operationId: GetResourcePosition
-      description: 'Get the position information for a given wireless device or a wireless gateway resource. The postion information uses the <a href="https://gisgeography.com/wgs84-world-geodetic-system/"> World Geodetic System (WGS84)</a>.'
+      description: 'Get the position information for a given wireless device or a wireless gateway resource. The position information uses the <a href="https://gisgeography.com/wgs84-world-geodetic-system/"> World Geodetic System (WGS84)</a>.'
       responses:
         '200':
           description: Success
@@ -5953,7 +5979,7 @@ paths:
         - name: ResourceIdentifier
           in: path
           required: true
-          description: The identifier of the resource for which position information is retrieved. It can be the wireless device ID or the wireless gateway ID depending on the resource type.
+          description: 'The identifier of the resource for which position information is retrieved. It can be the wireless device ID or the wireless gateway ID, depending on the resource type.'
           schema:
             type: string
             pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
@@ -5976,7 +6002,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     patch:
       operationId: UpdateResourcePosition
-      description: 'Update the position information of a given wireless device or a wireless gateway resource. The postion coordinates are based on the <a href="https://gisgeography.com/wgs84-world-geodetic-system/"> World Geodetic System (WGS84)</a>.'
+      description: 'Update the position information of a given wireless device or a wireless gateway resource. The position coordinates are based on the <a href="https://gisgeography.com/wgs84-world-geodetic-system/"> World Geodetic System (WGS84)</a>.'
       responses:
         '204':
           description: Success
@@ -6018,7 +6044,7 @@ paths:
         - name: ResourceIdentifier
           in: path
           required: true
-          description: The identifier of the resource for which position information is updated. It can be the wireless device ID or the wireless gateway ID depending on the resource type.
+          description: 'The identifier of the resource for which position information is updated. It can be the wireless device ID or the wireless gateway ID, depending on the resource type.'
           schema:
             type: string
             pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
@@ -7913,6 +7939,12 @@ components:
           $ref: '#/components/schemas/FirmwareUpdateRole'
         CreatedAt:
           $ref: '#/components/schemas/CreatedAt'
+        RedundancyPercent:
+          $ref: '#/components/schemas/RedundancyPercent'
+        FragmentSizeBytes:
+          $ref: '#/components/schemas/FragmentSizeBytes'
+        FragmentIntervalMS:
+          $ref: '#/components/schemas/FragmentIntervalMS'
     GetLogLevelsByResourceTypesResponse:
       type: object
       properties:
@@ -9089,7 +9121,7 @@ components:
         BaseLng:
           allOf:
             - $ref: '#/components/schemas/BaseLng'
-            - description: CDMA base station longtitude in degrees.
+            - description: CDMA base station longitude in degrees.
         CdmaNmr:
           allOf:
             - $ref: '#/components/schemas/CdmaNmrList'
@@ -9430,6 +9462,19 @@ components:
       description: The firmware update role that is to be used with a FUOTA task.
       minLength: 1
       maxLength: 2048
+    RedundancyPercent:
+      type: integer
+      description: 'The percentage of added redundant fragments. For example, if firmware file is 100 bytes and fragment size is 10 bytes, with <code>RedundancyPercent</code> set to 50(%), the final number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.'
+      minimum: 0
+      maximum: 100
+    FragmentSizeBytes:
+      type: integer
+      description: The size of each fragment in bytes. Currently only supported in fuota tasks with multicast groups.
+      minimum: 1
+    FragmentIntervalMS:
+      type: integer
+      description: The interval of sending fragments in milliseconds. Currently the interval will be rounded to the nearest second. Note that this interval only controls the timing when the cloud sends the fragments down. The actual delay of receiving fragments at device side depends on the device's class and the communication delay with the cloud.
+      minimum: 1
     CreateFuotaTaskRequest:
       type: object
       required:
@@ -9451,6 +9496,12 @@ components:
           $ref: '#/components/schemas/FirmwareUpdateRole'
         Tags:
           $ref: '#/components/schemas/TagList'
+        RedundancyPercent:
+          $ref: '#/components/schemas/RedundancyPercent'
+        FragmentSizeBytes:
+          $ref: '#/components/schemas/FragmentSizeBytes'
+        FragmentIntervalMS:
+          $ref: '#/components/schemas/FragmentIntervalMS'
     FuotaTaskArn:
       type: string
       description: The arn of a FUOTA task.
@@ -10421,7 +10472,7 @@ components:
         AssistPosition:
           allOf:
             - $ref: '#/components/schemas/AssistPosition'
-            - description: 'Optional assistance position information, specified using latitude and longitude values in degrees. The co-ordinates are inside the WGS84 reference frame.'
+            - description: 'Optional assistance position information, specified using latitude and longitude values in degrees. The coordinates are inside the WGS84 reference frame.'
         AssistAltitude:
           allOf:
             - $ref: '#/components/schemas/Coordinate'
@@ -10454,7 +10505,7 @@ components:
         Timestamp:
           allOf:
             - $ref: '#/components/schemas/CreationDate'
-            - description: 'Optional information that specifies the time when the position information will be resolved. It uses the UNIX timestamp format. If not specified, the time at which the request was received will be used.'
+            - description: 'Optional information that specifies the time when the position information will be resolved. It uses the Unix timestamp format. If not specified, the time at which the request was received will be used.'
     GetPositionRequest:
       type: object
       deprecated: true
@@ -11738,6 +11789,12 @@ components:
           $ref: '#/components/schemas/FirmwareUpdateImage'
         FirmwareUpdateRole:
           $ref: '#/components/schemas/FirmwareUpdateRole'
+        RedundancyPercent:
+          $ref: '#/components/schemas/RedundancyPercent'
+        FragmentSizeBytes:
+          $ref: '#/components/schemas/FragmentSizeBytes'
+        FragmentIntervalMS:
+          $ref: '#/components/schemas/FragmentIntervalMS'
     UpdateLogLevelsByResourceTypesRequest:
       type: object
       title: UpdateLogLevelsByResourceTypesRequest
