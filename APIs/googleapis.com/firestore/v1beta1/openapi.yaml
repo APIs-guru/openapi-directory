@@ -230,7 +230,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Listens to changes.
+      description: Listens to changes. This method is only available via the gRPC API (not REST).
       operationId: firestore.projects.databases.documents.listen
       parameters:
         - description: "Required. The database name. In the format: `projects/{project_id}/databases/{database_id}`."
@@ -322,7 +322,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Streams batches of document updates and deletes, in order.
+      description: Streams batches of document updates and deletes, in order. This method is only available via the gRPC API (not REST).
       operationId: firestore.projects.databases.documents.write
       parameters:
         - description: "Required. The database name. In the format: `projects/{project_id}/databases/{database_id}`. This is only required in the first message."

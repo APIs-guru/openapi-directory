@@ -1158,7 +1158,7 @@ components:
           format: int32
           type: integer
         taskCount:
-          description: "Specifies the desired number of tasks the execution should run. Setting to 1 means that parallelism is limited to 1 and the success of that task signals the success of the execution. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/"
+          description: Specifies the desired number of tasks the execution should run. Setting to 1 means that parallelism is limited to 1 and the success of that task signals the success of the execution. Defaults to 1.
           format: int32
           type: integer
         template:
@@ -1962,14 +1962,14 @@ components:
             - EXECUTION_ENVIRONMENT_GEN2
           type: string
         maxRetries:
-          description: Number of retries allowed per Task, before marking this Task failed.
+          description: Number of retries allowed per Task, before marking this Task failed. Defaults to 3.
           format: int32
           type: integer
         serviceAccount:
           description: Email address of the IAM service account associated with the Task of a Job. The service account represents the identity of the running task, and determines what permissions the task has. If not provided, the task will use the project's default service account.
           type: string
         timeout:
-          description: Max allowed time duration the Task may be active before the system will actively try to mark it failed and kill associated containers. This applies per attempt of a task, meaning each retry can run for the full timeout.
+          description: Max allowed time duration the Task may be active before the system will actively try to mark it failed and kill associated containers. This applies per attempt of a task, meaning each retry can run for the full timeout. Defaults to 600 seconds.
           format: google-duration
           type: string
         volumes:

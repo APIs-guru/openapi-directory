@@ -1863,6 +1863,9 @@ components:
         phoneNumber:
           description: Required for enrollment. Phone number to be enrolled as MFA.
           type: string
+        playIntegrityToken:
+          description: Android only. Used to assert application identity in place of a recaptcha token (or safety net token). A Play Integrity Token can be generated via the [PlayIntegrity API] (https://developer.android.com/google/play/integrity) with applying SHA256 to the `phone_number` field as the nonce.
+          type: string
         recaptchaToken:
           description: Web only. Recaptcha solution.
           type: string

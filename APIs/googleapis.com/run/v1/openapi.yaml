@@ -2368,7 +2368,7 @@ components:
           format: int32
           type: integer
         taskCount:
-          description: Optional. Specifies the desired number of tasks the execution should run. Setting to 1 means that parallelism is limited to 1 and the success of that task signals the success of the execution.
+          description: Optional. Specifies the desired number of tasks the execution should run. Setting to 1 means that parallelism is limited to 1 and the success of that task signals the success of the execution. Defaults to 1.
           format: int32
           type: integer
         template:
@@ -3393,14 +3393,14 @@ components:
             $ref: "#/components/schemas/Container"
           type: array
         maxRetries:
-          description: Optional. Number of retries allowed per task, before marking this job failed.
+          description: Optional. Number of retries allowed per task, before marking this job failed. Defaults to 3.
           format: int32
           type: integer
         serviceAccountName:
           description: Optional. Email address of the IAM service account associated with the task of a job execution. The service account represents the identity of the running task, and determines what permissions the task has. If not provided, the task will use the project's default service account.
           type: string
         timeoutSeconds:
-          description: Optional. Duration in seconds the task may be active before the system will actively try to mark it failed and kill associated containers. This applies per attempt of a task, meaning each retry can run for the full timeout.
+          description: Optional. Duration in seconds the task may be active before the system will actively try to mark it failed and kill associated containers. This applies per attempt of a task, meaning each retry can run for the full timeout. Defaults to 600 seconds.
           format: int64
           type: string
         volumes:

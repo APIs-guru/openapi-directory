@@ -43,7 +43,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalanceControlService
-  x-timestamp: 2022-11-24T10:17:10Z
+  x-timestamp: 2023-02-20T18:23:08Z
 tags:
   - name: General
 paths:
@@ -85,7 +85,7 @@ paths:
       tags:
         - General
       x-groupName: General
-      x-methodName: startBalanceTransfer
+      x-methodName: balanceTransfer
       x-sortIndex: 0
 components:
   examples:
@@ -130,6 +130,7 @@ components:
       required:
         - value
         - currency
+      type: object
     BalanceTransferRequest:
       properties:
         amount:
@@ -166,6 +167,7 @@ components:
         - fromMerchant
         - toMerchant
         - type
+      type: object
     BalanceTransferResponse:
       properties:
         amount:
@@ -220,6 +222,7 @@ components:
         - pspReference
         - status
         - createdAt
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header

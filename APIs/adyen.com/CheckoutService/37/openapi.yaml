@@ -59,7 +59,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: CheckoutService
-  x-timestamp: 2023-02-08T17:21:12Z
+  x-timestamp: 2023-02-20T18:22:12Z
 tags:
   - name: Modifications
   - name: Orders
@@ -243,7 +243,7 @@ paths:
       tags:
         - Payments
       x-groupName: Payments
-      x-methodName: listBrandsOnCard
+      x-methodName: cardDetails
       x-sortIndex: 6
   /donations:
     post:
@@ -416,7 +416,7 @@ paths:
       tags:
         - Orders
       x-groupName: Orders
-      x-methodName: createOrder
+      x-methodName: orders
       x-sortIndex: 2
   /orders/cancel:
     post:
@@ -586,7 +586,7 @@ paths:
       tags:
         - Utility
       x-groupName: Utility
-      x-methodName: createOriginkeyValuesForDomains
+      x-methodName: originKeys
       x-sortIndex: 1
   /paymentLinks:
     post:
@@ -682,7 +682,7 @@ paths:
       tags:
         - Payment links
       x-groupName: Payment links
-      x-methodName: createPaymentLink
+      x-methodName: paymentLinks
       x-sortIndex: 1
   "/paymentLinks/{linkId}":
     get:
@@ -1024,6 +1024,7 @@ paths:
       x-sortIndex: 1
   /paymentSession:
     post:
+      deprecated: true
       description: |-
         Provides the data object that can be used to start the Checkout SDK. To set up the payment, pass its amount, currency, and other required parameters. We use this to optimise the payment flow and perform better risk assessment of the transaction.
 
@@ -1112,6 +1113,7 @@ paths:
       summary: Create a payment session
       tags:
         - Classic Checkout SDK
+      x-deprecatedInVersion: "37"
       x-groupName: Classic Checkout SDK
       x-methodName: paymentSession
       x-sortIndex: 1
@@ -1310,6 +1312,7 @@ paths:
       x-sortIndex: 4
   /payments/result:
     post:
+      deprecated: true
       description: |-
         Verifies the payment result using the payload returned from the Checkout SDK.
 
@@ -1389,6 +1392,7 @@ paths:
       summary: Verify a payment result
       tags:
         - Classic Checkout SDK
+      x-deprecatedInVersion: "37"
       x-groupName: Classic Checkout SDK
       x-methodName: verifyPaymentResult
       x-sortIndex: 2
@@ -1988,7 +1992,7 @@ components:
         brands:
           - supported: true
             type: visa
-          - supported: "true"
+          - supported: true
             type: cartebancaire
     post-cardDetails-supported-brands:
       description: Example request for getting a list of brands on a card using the first 6 digits of the card number and including the card brands you support.
@@ -2051,7 +2055,7 @@ components:
         donationAccount: CHARITY_ACCOUNT
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentMethod:
-          storedPaymentMethodId: "8415718415172200"
+          recurringDetailReference: "7219687191761347"
           type: scheme
         recurringProcessingModel: CardOnFile
         reference: YOUR_DONATION_REFERENCE
@@ -4376,6 +4380,7 @@ components:
           value: 1000
         browserInfo:
           acceptHeader: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+          javaEnabled: true
           userAgent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9) Gecko/2008052912 Firefox/3.0
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentMethod:
@@ -4511,7 +4516,7 @@ components:
           value: 1000
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentMethod:
-          cardDetails.cvc: "737"
+          cvc: "737"
           recurringDetailReference: "8416038790273850"
           type: scheme
         reference: Your order number
@@ -4617,6 +4622,7 @@ components:
       required:
         - bankAccountNumber
       title: ACH Direct Debit
+      type: object
     AdditionalData3DSecure:
       properties:
         allow3DS2:
@@ -4685,6 +4691,7 @@ components:
             * If you prefer 2.1.0 or 2.2.0 but the BIN is not enrolled, you will receive an error.
 
           type: string
+      type: object
     AdditionalDataAirline:
       properties:
         airline.agency_invoice_number:
@@ -4892,6 +4899,7 @@ components:
           type: string
       required:
         - airline.passenger_name
+      type: object
     AdditionalDataCarRental:
       properties:
         carRental.checkOutDate:
@@ -5029,6 +5037,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 1
           type: string
+      type: object
     AdditionalDataCommon:
       properties:
         RequestedTestErrorResponseCode:
@@ -5040,6 +5049,12 @@ components:
             This is a transient, retriable error since no messaging could be initiated to an issuing system (or third-party acquiring system). Therefore, the header Transient-Error: true is returned in the response. A subsequent request using the same idempotency key will be processed as if it was the first request.
             * **IOEXCEPTION_RECEIVED** – Something went wrong during transmission of the message or receiving the response.
             This is a classified as non-transient because the message could have been received by the issuing party and been acted upon. No transient error header is returned. If using idempotency, the (error) response is stored as the final result for the idempotency key. Subsequent messages with the same idempotency key not be processed beyond returning the stored response.
+          type: string
+        allowPartialAuth:
+          description: |-
+            Set to true to authorise a part of the requested amount in case the cardholder does not have enough funds on their account. 
+            If a payment was partially authorised, the response includes resultCode: PartiallyAuthorised and the authorised amount in additionalData.authorisedAmountValue.
+            To enable this functionality, contact our Support Team.
           type: string
         authorisationType:
           description: |-
@@ -5075,6 +5090,9 @@ components:
               value: NoShow
             - description: An incremental charge is carried out to process an additional payment after the original services have been rendered and the respective payment has been processed.
               value: DelayedCharge
+        manualCapture:
+          description: Set to **true** to require [manual capture](https://docs.adyen.com/online-payments/capture) for the transaction.
+          type: string
         networkTxReference:
           description: |-
             Allows you to link the transaction to the original or previous one in a subscription/card-on-file chain. This field is required for token-based transactions where Adyen does not tokenize the card.
@@ -5138,6 +5156,7 @@ components:
             * Format: alpha-numeric.
             * Fixed length: 11 or 14 characters.
           type: string
+      type: object
     AdditionalDataLevel23:
       properties:
         enhancedSchemeData.customerReference:
@@ -5279,6 +5298,7 @@ components:
 
             > Required for Level 2 and Level 3 data.
           type: string
+      type: object
     AdditionalDataLodging:
       properties:
         lodging.checkInDate:
@@ -5384,6 +5404,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 1
           type: string
+      type: object
     AdditionalDataOpenInvoice:
       properties:
         openinvoicedata.merchantData:
@@ -5458,6 +5479,7 @@ components:
         "openinvoicedataLine[itemNr].trackingUri":
           description: URI where the customer can track their shipment.
           type: string
+      type: object
     AdditionalDataOpi:
       properties:
         opi.includeTransToken:
@@ -5466,6 +5488,7 @@ components:
 
             You can store this Oracle Payment Interface token in your Oracle Opera database. For more information and required settings, see [Oracle Opera](https://docs.adyen.com/plugins/oracle-opera#opi-token-ecommerce).
           type: string
+      type: object
     AdditionalDataRatepay:
       properties:
         ratepay.installmentAmount:
@@ -5492,6 +5515,7 @@ components:
         ratepaydata.invoiceId:
           description: Identification name or number for the invoice, defined by the merchant.
           type: string
+      type: object
     AdditionalDataRetry:
       properties:
         retry.chainAttemptNumber:
@@ -5512,6 +5536,7 @@ components:
 
             > If you submit `retry.chainAttemptNumber`, `retry.orderAttemptNumber`, and `retry.skipRetry` values, we also recommend you provide the `merchantOrderReference` to facilitate linking payment attempts together.
           type: string
+      type: object
     AdditionalDataRisk:
       properties:
         "riskdata.[customFieldName]":
@@ -5580,6 +5605,7 @@ components:
         riskdata.skipRisk:
           description: If this parameter is provided with the value **true**, risk checks for the payment request are skipped and the transaction will not get a risk score.
           type: string
+      type: object
     AdditionalDataRiskStandalone:
       properties:
         PayPal.CountryCode:
@@ -5633,6 +5659,7 @@ components:
         tokenDataType:
           description: "Required for PayPal payments only. The only supported value is: **paypal**."
           type: string
+      type: object
     AdditionalDataSubMerchant:
       properties:
         subMerchant.numberOfSubSellers:
@@ -5692,6 +5719,7 @@ components:
             * Format: Numeric
             * Fixed length: 11 digits for the CPF or 14 digits for the CNPJ
           type: string
+      type: object
     AdditionalDataTemporaryServices:
       properties:
         enhancedSchemeData.customerReference:
@@ -5742,6 +5770,7 @@ components:
             Total tax amount, in minor units. For example, 2000 means USD 20.00
             * maxLength: 12
           type: string
+      type: object
     AdditionalDataWallets:
       properties:
         androidpay.token:
@@ -5762,6 +5791,7 @@ components:
         visacheckout.callId:
           description: The Visa Checkout Call ID retrieved from the SDK.
           type: string
+      type: object
     Address:
       properties:
         city:
@@ -5797,6 +5827,7 @@ components:
         - city
         - postalCode
         - country
+      type: object
     AfterpayDetails:
       additionalProperties: false
       properties:
@@ -5823,6 +5854,7 @@ components:
       required:
         - type
       title: Afterpay
+      type: object
     AmazonPayDetails:
       additionalProperties: false
       properties:
@@ -5836,6 +5868,7 @@ components:
             - amazonpay
           type: string
       title: Amazon Pay
+      type: object
     Amount:
       properties:
         currency:
@@ -5850,6 +5883,7 @@ components:
       required:
         - value
         - currency
+      type: object
     AndroidPayDetails:
       additionalProperties: false
       properties:
@@ -5860,6 +5894,7 @@ components:
             - androidpay
           type: string
       title: Android Pay
+      type: object
     ApplePayDetails:
       additionalProperties: false
       properties:
@@ -5884,6 +5919,7 @@ components:
       required:
         - applePayToken
       title: Apple Pay
+      type: object
     ApplePaySessionResponse:
       properties:
         data:
@@ -5891,6 +5927,7 @@ components:
           type: string
       required:
         - data
+      type: object
     ApplicationInfo:
       properties:
         adyenLibrary:
@@ -5911,6 +5948,7 @@ components:
         shopperInteractionDevice:
           $ref: "#/components/schemas/ShopperInteractionDevice"
           description: Shopper interaction device, such as terminal, mobile device or web browser, to initiate payment requests.
+      type: object
     Avs:
       properties:
         addressEditable:
@@ -5929,6 +5967,7 @@ components:
             - no
             - automatic
           type: string
+      type: object
     BacsDirectDebitDetails:
       additionalProperties: false
       properties:
@@ -5942,6 +5981,7 @@ components:
             - directdebit_GB
           type: string
       title: BACS Direct Debit
+      type: object
     BankAccount:
       properties:
         bankAccountNumber:
@@ -5987,6 +6027,7 @@ components:
           description: The bank account holder's tax ID.
           type: string
           x-addedInVersion: "18"
+      type: object
     BillDeskDetails:
       additionalProperties: false
       properties:
@@ -6005,6 +6046,7 @@ components:
         - type
         - issuer
       title: BillDesk
+      type: object
     BlikDetails:
       additionalProperties: false
       properties:
@@ -6020,6 +6062,7 @@ components:
             - blik
           type: string
       title: BLIK
+      type: object
     BrowserInfo:
       properties:
         acceptHeader:
@@ -6031,6 +6074,7 @@ components:
       required:
         - userAgent
         - acceptHeader
+      type: object
     Card:
       properties:
         cvc:
@@ -6090,6 +6134,7 @@ components:
       required:
         - expiryYear
         - holderName
+      type: object
     CardBrandDetails:
       properties:
         supported:
@@ -6098,6 +6143,7 @@ components:
         type:
           description: The name of the card brand.
           type: string
+      type: object
     CardDetails:
       additionalProperties: false
       properties:
@@ -6166,11 +6212,8 @@ components:
             - alliancedata
             - card
           type: string
-      required:
-        - encryptedCardNumber
-        - encryptedExpiryMonth
-        - encryptedExpiryYear
       title: Card
+      type: object
     CardDetailsRequest:
       properties:
         cardNumber:
@@ -6203,6 +6246,7 @@ components:
       required:
         - cardNumber
         - merchantAccount
+      type: object
     CardDetailsResponse:
       properties:
         brands:
@@ -6210,6 +6254,7 @@ components:
           items:
             $ref: "#/components/schemas/CardBrandDetails"
           type: array
+      type: object
     CellulantDetails:
       additionalProperties: false
       properties:
@@ -6223,6 +6268,7 @@ components:
             - cellulant
           type: string
       title: Cellulant
+      type: object
     CheckoutBalanceCheckRequest:
       properties:
         additionalAmount:
@@ -6460,9 +6506,8 @@ components:
           x-addedInVersion: "37"
       required:
         - merchantAccount
-        - reference
-        - amount
         - paymentMethod
+      type: object
     CheckoutBalanceCheckResponse:
       properties:
         additionalData:
@@ -6511,6 +6556,7 @@ components:
       required:
         - balance
         - resultCode
+      type: object
     CheckoutCancelOrderRequest:
       properties:
         merchantAccount:
@@ -6522,6 +6568,7 @@ components:
       required:
         - order
         - merchantAccount
+      type: object
     CheckoutCancelOrderResponse:
       properties:
         pspReference:
@@ -6540,6 +6587,7 @@ components:
       required:
         - pspReference
         - resultCode
+      type: object
     CheckoutCreateOrderRequest:
       properties:
         amount:
@@ -6558,6 +6606,7 @@ components:
         - merchantAccount
         - reference
         - amount
+      type: object
     CheckoutCreateOrderResponse:
       properties:
         additionalData:
@@ -6610,6 +6659,7 @@ components:
         - expiresAt
         - orderData
         - resultCode
+      type: object
     CheckoutOrder:
       properties:
         orderData:
@@ -6621,6 +6671,7 @@ components:
       required:
         - pspReference
         - orderData
+      type: object
     CheckoutOrderResponse:
       properties:
         amount:
@@ -6643,6 +6694,7 @@ components:
           description: The updated remaining amount.
       required:
         - pspReference
+      type: object
     CheckoutUtilityRequest:
       properties:
         originDomains:
@@ -6652,6 +6704,7 @@ components:
           type: array
       required:
         - originDomains
+      type: object
     CheckoutUtilityResponse:
       properties:
         originKeys:
@@ -6660,6 +6713,7 @@ components:
           description: The list of origin keys for all requested domains. For each list item, the key is the domain and the value is the origin key.
           type: object
           x-addedInVersion: "1"
+      type: object
     CommonField:
       properties:
         name:
@@ -6668,6 +6722,7 @@ components:
         version:
           description: Version of the field. For example, Version of External Platform.
           type: string
+      type: object
     Company:
       properties:
         homepage:
@@ -6688,6 +6743,7 @@ components:
         type:
           description: The company type.
           type: string
+      type: object
     Configuration:
       properties:
         avs:
@@ -6714,6 +6770,7 @@ components:
           $ref: "#/components/schemas/ShopperInput"
           description: Determines how to display the details fields.
           x-addedInVersion: "37"
+      type: object
     CreateApplePaySessionRequest:
       properties:
         displayName:
@@ -6738,6 +6795,7 @@ components:
         - domainName
         - merchantIdentifier
         - displayName
+      type: object
     CreatePaymentAmountUpdateRequest:
       properties:
         amount:
@@ -6766,6 +6824,7 @@ components:
       required:
         - merchantAccount
         - amount
+      type: object
     CreatePaymentCancelRequest:
       properties:
         merchantAccount:
@@ -6776,6 +6835,7 @@ components:
           type: string
       required:
         - merchantAccount
+      type: object
     CreatePaymentCaptureRequest:
       properties:
         amount:
@@ -6802,6 +6862,7 @@ components:
       required:
         - merchantAccount
         - amount
+      type: object
     CreatePaymentLinkRequest:
       properties:
         allowedPaymentMethods:
@@ -6817,6 +6878,7 @@ components:
           description: The payment amount and currency.
         applicationInfo:
           $ref: "#/components/schemas/ApplicationInfo"
+          deprecated: true
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
         billingAddress:
           $ref: "#/components/schemas/Address"
@@ -6918,7 +6980,7 @@ components:
           description: |-
             The language to be used in the payment page, specified by a combination of a language and country code. For example, `en-US`.
 
-            For a list of shopper locales that Pay by Link supports, refer to [Language and localization](https://docs.adyen.com/online-payments/pay-by-link#language-and-localization).
+            For a list of shopper locales that Pay by Link supports, refer to [Language and localization](https://docs.adyen.com/unified-commerce/pay-by-link/payment-links/api#language).
           type: string
         shopperName:
           $ref: "#/components/schemas/Name"
@@ -6944,6 +7006,7 @@ components:
         - amount
         - reference
         - merchantAccount
+      type: object
     CreatePaymentRefundRequest:
       properties:
         amount:
@@ -6979,6 +7042,7 @@ components:
       required:
         - merchantAccount
         - amount
+      type: object
     CreatePaymentReversalRequest:
       properties:
         merchantAccount:
@@ -6989,6 +7053,7 @@ components:
           type: string
       required:
         - merchantAccount
+      type: object
     CreateStandalonePaymentCancelRequest:
       properties:
         merchantAccount:
@@ -7003,6 +7068,7 @@ components:
       required:
         - merchantAccount
         - paymentReference
+      type: object
     DetailsRequest:
       properties:
         details:
@@ -7014,6 +7080,7 @@ components:
           type: string
       required:
         - details
+      type: object
     DokuDetails:
       additionalProperties: false
       properties:
@@ -7045,6 +7112,7 @@ components:
         - lastName
         - shopperEmail
       title: Doku
+      type: object
     DonationResponse:
       properties:
         amount:
@@ -7078,6 +7146,7 @@ components:
             - pending
             - refused
           type: string
+      type: object
     DotpayDetails:
       additionalProperties: false
       properties:
@@ -7093,6 +7162,7 @@ components:
       required:
         - issuer
       title: Dotpay
+      type: object
     DragonpayDetails:
       additionalProperties: false
       properties:
@@ -7114,6 +7184,7 @@ components:
         - type
         - issuer
       title: Dragonpay
+      type: object
     EcontextVoucherDetails:
       additionalProperties: false
       properties:
@@ -7142,6 +7213,7 @@ components:
         - shopperEmail
         - telephoneNumber
       title: Voucher
+      type: object
     ExternalPlatform:
       properties:
         integrator:
@@ -7153,6 +7225,7 @@ components:
         version:
           description: Version of the field. For example, Version of External Platform.
           type: string
+      type: object
     ForexQuote:
       properties:
         account:
@@ -7196,6 +7269,7 @@ components:
       required:
         - validTill
         - basePoints
+      type: object
     FraudCheckResult:
       properties:
         accountScore:
@@ -7213,6 +7287,7 @@ components:
         - checkId
         - name
         - accountScore
+      type: object
     FraudResult:
       properties:
         accountScore:
@@ -7226,6 +7301,7 @@ components:
           type: array
       required:
         - accountScore
+      type: object
     GenericIssuerPaymentMethodDetails:
       additionalProperties: false
       properties:
@@ -7247,6 +7323,7 @@ components:
         - type
         - issuer
       title: Stored Payment Method
+      type: object
     GiropayDetails:
       additionalProperties: false
       properties:
@@ -7260,6 +7337,7 @@ components:
             - giropay
           type: string
       title: Giropay
+      type: object
     GooglePayDetails:
       additionalProperties: false
       properties:
@@ -7283,6 +7361,7 @@ components:
       required:
         - googlePayToken
       title: Google Pay
+      type: object
     IdealDetails:
       additionalProperties: false
       properties:
@@ -7301,6 +7380,7 @@ components:
       required:
         - issuer
       title: iDEAL
+      type: object
     InputDetail:
       properties:
         configuration:
@@ -7339,12 +7419,14 @@ components:
         value:
           description: The value can be pre-filled, if available.
           type: string
+      type: object
     InstallmentOption:
       properties:
         maxValue:
           description: The maximum number of installments offered for this payment method.
           format: int32
           type: integer
+      type: object
     Installments:
       properties:
         value:
@@ -7356,6 +7438,7 @@ components:
           type: integer
       required:
         - value
+      type: object
     InstallmentsNumber:
       properties:
         maxNumberOfInstallments:
@@ -7364,6 +7447,7 @@ components:
           type: integer
       required:
         - maxNumberOfInstallments
+      type: object
     Item:
       properties:
         id:
@@ -7372,6 +7456,7 @@ components:
         name:
           description: The display name.
           type: string
+      type: object
     KlarnaDetails:
       additionalProperties: false
       properties:
@@ -7402,6 +7487,7 @@ components:
       required:
         - type
       title: Klarna
+      type: object
     LineItem:
       properties:
         amountExcludingTax:
@@ -7439,6 +7525,7 @@ components:
           description: Tax percentage, in minor units.
           format: int64
           type: integer
+      type: object
     Mandate:
       properties:
         amount:
@@ -7508,6 +7595,7 @@ components:
         - frequency
         - amount
         - endsAt
+      type: object
     MasterpassDetails:
       additionalProperties: false
       properties:
@@ -7528,6 +7616,7 @@ components:
       required:
         - masterpassTransactionId
       title: Masterpass
+      type: object
     MbwayDetails:
       additionalProperties: false
       properties:
@@ -7547,6 +7636,7 @@ components:
         - telephoneNumber
         - shopperEmail
       title: MBWay
+      type: object
     MerchantDevice:
       properties:
         os:
@@ -7558,6 +7648,7 @@ components:
         reference:
           description: Merchant device reference.
           type: string
+      type: object
     MobilePayDetails:
       additionalProperties: false
       properties:
@@ -7568,6 +7659,7 @@ components:
             - mobilepay
           type: string
       title: MobilePay
+      type: object
     MolPayDetails:
       additionalProperties: false
       properties:
@@ -7584,6 +7676,7 @@ components:
         - type
         - issuer
       title: MOLPay
+      type: object
     Name:
       properties:
         firstName:
@@ -7595,6 +7688,7 @@ components:
       required:
         - firstName
         - lastName
+      type: object
     OpenInvoiceDetails:
       additionalProperties: false
       properties:
@@ -7619,6 +7713,7 @@ components:
             - atome_pos
           type: string
       title: Open Invoice
+      type: object
     PayPalDetails:
       additionalProperties: false
       properties:
@@ -7646,6 +7741,7 @@ components:
       required:
         - type
       title: PayPal
+      type: object
     PayUUpiDetails:
       additionalProperties: false
       properties:
@@ -7667,6 +7763,7 @@ components:
       required:
         - type
       title: PayU
+      type: object
     PayWithGoogleDetails:
       additionalProperties: false
       properties:
@@ -7690,6 +7787,7 @@ components:
       required:
         - googlePayToken
       title: Google Pay
+      type: object
     PaymentAmountUpdateResource:
       properties:
         amount:
@@ -7733,6 +7831,7 @@ components:
         - reference
         - pspReference
         - paymentPspReference
+      type: object
     PaymentCancelResource:
       properties:
         merchantAccount:
@@ -7757,6 +7856,7 @@ components:
         - merchantAccount
         - paymentPspReference
         - pspReference
+      type: object
     PaymentCaptureResource:
       properties:
         amount:
@@ -7797,6 +7897,7 @@ components:
         - amount
         - pspReference
         - paymentPspReference
+      type: object
     PaymentCompletionDetails:
       properties:
         MD:
@@ -7857,6 +7958,7 @@ components:
           description: "Base64-encoded string returned by the Component after the challenge flow. It contains the following parameter: `threeDSCompInd`."
           maxLength: 100000
           type: string
+      type: object
     PaymentDetails:
       additionalProperties: false
       properties:
@@ -7957,6 +8059,7 @@ components:
             - balanceplatform
           type: string
       title: Payment Details
+      type: object
     PaymentDetailsResponse:
       properties:
         additionalData:
@@ -8051,6 +8154,7 @@ components:
         shopperLocale:
           description: The shopperLocale.
           type: string
+      type: object
     PaymentDonationRequest:
       properties:
         additionalData:
@@ -8406,6 +8510,7 @@ components:
         - returnUrl
         - paymentMethod
         - donationAccount
+      type: object
     PaymentLinkResponse:
       properties:
         allowedPaymentMethods:
@@ -8421,6 +8526,7 @@ components:
           description: The payment amount and currency.
         applicationInfo:
           $ref: "#/components/schemas/ApplicationInfo"
+          deprecated: true
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
         billingAddress:
           $ref: "#/components/schemas/Address"
@@ -8522,7 +8628,7 @@ components:
           description: |-
             The language to be used in the payment page, specified by a combination of a language and country code. For example, `en-US`.
 
-            For a list of shopper locales that Pay by Link supports, refer to [Language and localization](https://docs.adyen.com/online-payments/pay-by-link#language-and-localization).
+            For a list of shopper locales that Pay by Link supports, refer to [Language and localization](https://docs.adyen.com/unified-commerce/pay-by-link/payment-links/api#language).
           type: string
         shopperName:
           $ref: "#/components/schemas/Name"
@@ -8594,6 +8700,7 @@ components:
         - merchantAccount
         - url
         - status
+      type: object
     PaymentMethod:
       properties:
         configuration:
@@ -8624,6 +8731,7 @@ components:
         type:
           description: The unique payment method code.
           type: string
+      type: object
     PaymentMethodGroup:
       properties:
         name:
@@ -8635,6 +8743,7 @@ components:
         type:
           description: The unique code of the group.
           type: string
+      type: object
     PaymentMethodsGroup:
       properties:
         groupType:
@@ -8648,6 +8757,7 @@ components:
           items:
             type: string
           type: array
+      type: object
     PaymentMethodsRequest:
       properties:
         additionalData:
@@ -8730,6 +8840,7 @@ components:
           x-addedInVersion: "23"
       required:
         - merchantAccount
+      type: object
     PaymentMethodsResponse:
       properties:
         groups:
@@ -8747,6 +8858,7 @@ components:
           items:
             $ref: "#/components/schemas/PaymentMethod"
           type: array
+      type: object
     PaymentRefundResource:
       properties:
         amount:
@@ -8796,6 +8908,7 @@ components:
         - amount
         - pspReference
         - paymentPspReference
+      type: object
     PaymentRequest:
       properties:
         additionalData:
@@ -9141,6 +9254,7 @@ components:
         - amount
         - returnUrl
         - paymentMethod
+      type: object
     PaymentResponse:
       properties:
         additionalData:
@@ -9228,6 +9342,7 @@ components:
             - Refused
             - Success
           type: string
+      type: object
     PaymentReversalResource:
       properties:
         merchantAccount:
@@ -9252,6 +9367,7 @@ components:
         - merchantAccount
         - pspReference
         - paymentPspReference
+      type: object
     PaymentSetupRequest:
       properties:
         additionalData:
@@ -9555,6 +9671,7 @@ components:
         - amount
         - returnUrl
         - countryCode
+      type: object
     PaymentSetupResponse:
       properties:
         paymentSession:
@@ -9566,6 +9683,7 @@ components:
           items:
             $ref: "#/components/schemas/RecurringDetail"
           type: array
+      type: object
     PaymentVerificationRequest:
       properties:
         payload:
@@ -9574,6 +9692,7 @@ components:
           type: string
       required:
         - payload
+      type: object
     PaymentVerificationResponse:
       properties:
         additionalData:
@@ -9671,6 +9790,7 @@ components:
         - merchantReference
         - paymentMethod
         - shopperLocale
+      type: object
     RatepayDetails:
       additionalProperties: false
       properties:
@@ -9696,6 +9816,7 @@ components:
       required:
         - type
       title: Ratepay
+      type: object
     Recurring:
       properties:
         contract:
@@ -9721,6 +9842,7 @@ components:
             - MCTOKENSERVICE
           type: string
           x-addedInVersion: "25"
+      type: object
     RecurringDetail:
       properties:
         configuration:
@@ -9757,6 +9879,7 @@ components:
         type:
           description: The unique payment method code.
           type: string
+      type: object
     Redirect:
       properties:
         data:
@@ -9776,6 +9899,7 @@ components:
         url:
           description: The URL, to which you must redirect a shopper to complete a payment.
           type: string
+      type: object
     ResponseAdditionalData3DSecure:
       properties:
         cardHolderInfo:
@@ -9800,6 +9924,7 @@ components:
         threeds2.cardEnrolled:
           description: Indicates whether a card is enrolled for 3D Secure 2.
           type: boolean
+      type: object
     ResponseAdditionalDataBillingAddress:
       properties:
         billingAddress.city:
@@ -9829,6 +9954,7 @@ components:
         billingAddress.street:
           description: The billing address street passed in the payment request.
           type: string
+      type: object
     ResponseAdditionalDataCard:
       properties:
         cardBin:
@@ -9877,6 +10003,7 @@ components:
 
             Example: 52123423
           type: string
+      type: object
     ResponseAdditionalDataCommon:
       properties:
         acquirerAccountCode:
@@ -10223,6 +10350,7 @@ components:
 
             Example: ODgxNDc2MDg2MDExODk5MAAAAAA=
           type: string
+      type: object
     ResponseAdditionalDataInstallments:
       properties:
         installmentPaymentData.installmentType:
@@ -10269,6 +10397,7 @@ components:
             Example: 5
             > Only relevant for card payments in countries that support installments.
           type: string
+      type: object
     ResponseAdditionalDataNetworkTokens:
       properties:
         networkToken.available:
@@ -10280,11 +10409,13 @@ components:
         networkToken.tokenSummary:
           description: The last four digits of a network token.
           type: string
+      type: object
     ResponseAdditionalDataOpi:
       properties:
         opi.transToken:
           description: "Returned in the response if you included `opi.includeTransToken: true` in an ecommerce payment request. This contains an Oracle Payment Interface token that you can store in your Oracle Opera database to identify tokenized ecommerce transactions. For more information and required settings, see [Oracle Opera](https://docs.adyen.com/plugins/oracle-opera#opi-token-ecommerce)."
           type: string
+      type: object
     ResponseAdditionalDataSepa:
       properties:
         sepadirectdebit.dateOfSignature:
@@ -10307,11 +10438,13 @@ components:
 
             Example: OOFF
           type: string
+      type: object
     RiskData:
       properties:
         clientData:
           description: Contains client-side data, like the device fingerprint, cookies, and specific browser settings.
           type: string
+      type: object
     SamsungPayDetails:
       additionalProperties: false
       properties:
@@ -10335,6 +10468,7 @@ components:
       required:
         - samsungPayToken
       title: Samsung Pay
+      type: object
     SepaDirectDebitDetails:
       additionalProperties: false
       properties:
@@ -10358,6 +10492,7 @@ components:
         - iban
         - ownerName
       title: SEPA Direct Debit
+      type: object
     ServiceError:
       properties:
         errorCode:
@@ -10376,6 +10511,7 @@ components:
           description: The HTTP response status.
           format: int32
           type: integer
+      type: object
     ServiceError-2:
       properties:
         errorCode:
@@ -10386,6 +10522,7 @@ components:
           type: string
         pspReference:
           type: string
+      type: object
     ShopperInput:
       properties:
         billingAddress:
@@ -10427,6 +10564,7 @@ components:
             - hidden
             - readOnly
           type: string
+      type: object
     ShopperInteractionDevice:
       properties:
         locale:
@@ -10438,6 +10576,7 @@ components:
         osVersion:
           description: Version of the operating system on the shopper interaction device.
           type: string
+      type: object
     Split:
       properties:
         account:
@@ -10476,6 +10615,7 @@ components:
       required:
         - amount
         - type
+      type: object
     SplitAmount:
       properties:
         currency:
@@ -10492,6 +10632,7 @@ components:
           type: integer
       required:
         - value
+      type: object
     StandalonePaymentCancelResource:
       properties:
         merchantAccount:
@@ -10516,6 +10657,7 @@ components:
         - merchantAccount
         - pspReference
         - paymentReference
+      type: object
     StoredDetails:
       properties:
         bank:
@@ -10527,6 +10669,7 @@ components:
         emailAddress:
           description: The email associated with stored payment details.
           type: string
+      type: object
     StoredPaymentMethodDetails:
       additionalProperties: false
       properties:
@@ -10554,6 +10697,7 @@ components:
             - truemoney
           type: string
       title: Stored Payment Method
+      type: object
     SubInputDetail:
       properties:
         configuration:
@@ -10578,6 +10722,7 @@ components:
         value:
           description: The value can be pre-filled, if available.
           type: string
+      type: object
     ThreeDSecureData:
       properties:
         authenticationResponse:
@@ -10620,6 +10765,7 @@ components:
           contentEncoding: base64
           description: Supported for 3D Secure 1. The transaction identifier (Base64-encoded, 20 bytes in a decoded form).
           type: string
+      type: object
     UpdatePaymentLinkRequest:
       properties:
         status:
@@ -10651,6 +10797,7 @@ components:
               value: completed
       required:
         - status
+      type: object
     UpiCollectDetails:
       additionalProperties: false
       properties:
@@ -10676,6 +10823,7 @@ components:
         - type
         - billingSequenceNumber
       title: UPI Collect
+      type: object
     UpiIntentDetails:
       additionalProperties: false
       properties:
@@ -10694,6 +10842,7 @@ components:
       required:
         - type
       title: UPI Intent
+      type: object
     VippsDetails:
       additionalProperties: false
       properties:
@@ -10712,6 +10861,7 @@ components:
       required:
         - telephoneNumber
       title: Vipps
+      type: object
     VisaCheckoutDetails:
       additionalProperties: false
       properties:
@@ -10732,6 +10882,7 @@ components:
       required:
         - visaCheckoutCallId
       title: Visa Checkout
+      type: object
     WeChatPayDetails:
       additionalProperties: false
       properties:
@@ -10743,6 +10894,7 @@ components:
             - wechatpay_pos
           type: string
       title: WeChat Pay
+      type: object
     WeChatPayMiniProgramDetails:
       additionalProperties: false
       properties:
@@ -10757,6 +10909,7 @@ components:
             - wechatpayMiniProgram
           type: string
       title: WeChat Pay - Mini Program
+      type: object
     ZipDetails:
       additionalProperties: false
       properties:
@@ -10774,6 +10927,7 @@ components:
             - zip_pos
           type: string
       title: Zip
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header

@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.92.0
+  version: 9.0.0
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1990,6 +1990,8 @@ components:
           example: crm+salesforce
           readOnly: true
           type: string
+        integration_state:
+          $ref: "#/components/schemas/IntegrationState"
         logo:
           description: The logo of the connection, that will be shown in the Vault
           example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
@@ -2323,6 +2325,9 @@ components:
               - file-storage.file.created
               - file-storage.file.updated
               - file-storage.file.deleted
+              - issue-tracking.ticket.created
+              - issue-tracking.ticket.updated
+              - issue-tracking.ticket.deleted
             example: crm.company.created
             type: string
             x-apideck-enum-id: webhooks.event_type
@@ -2868,6 +2873,17 @@ components:
       type: object
       x-apideck-schema-id: GetLogsResponse
       x-graphql-type-name: LogList
+    IntegrationState:
+      description: The current state of the Integration.
+      enum:
+        - disabled
+        - needs_configuration
+        - configured
+      example: configured
+      readOnly: true
+      type: string
+      x-apideck-enum-id: integrations.state
+      x-apideck-schema-id: IntegrationState
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -3008,7 +3024,7 @@ components:
             - hris
             - ats
             - ecommerce
-            - ticketing
+            - issue-tracking
             - pos
             - file-storage
             - sms
@@ -3425,31 +3441,32 @@ components:
     UnifiedApiId:
       description: Name of Apideck Unified API
       enum:
-        - vault
-        - lead
-        - crm
         - accounting
-        - file-storage
-        - spreadsheet
+        - ats
+        - calendar
+        - crm
+        - csp
+        - customer-support
+        - ecommerce
         - email
+        - email-marketing
+        - expense-management
+        - file-storage
+        - form
+        - hris
+        - lead
+        - payroll
+        - pos
+        - procurement
+        - project-management
         - script
         - sms
+        - spreadsheet
         - team-messaging
-        - ecommerce
-        - payroll
-        - customer-support
+        - issue-tracking
         - time-registration
         - transactional-email
-        - form
-        - csp
-        - email-marketing
-        - ats
-        - hris
-        - pos
-        - project-management
-        - expense-management
-        - calendar
-        - procurement
+        - vault
       example: crm
       type: string
       x-apideck-enum-id: unified_api
