@@ -134,6 +134,7 @@ components:
             $ref: "#/components/schemas/Error"
       description: Unauthorized
   schemas:
+    Action: {}
     Client:
       description: Metadata gathered about the client
       properties:
@@ -210,6 +211,8 @@ components:
     ItemUsage:
       description: A single item usage object
       properties:
+        action:
+          $ref: "#/components/schemas/Action"
         client:
           $ref: "#/components/schemas/Client"
         item_uuid:

@@ -9,7 +9,7 @@ info:
     url: https://support.1password.com/
   description: REST API interface for 1Password Connect.
   title: 1Password Connect
-  version: 1.3.0
+  version: 1.5.7
   x-apisguru-categories:
     - security
   x-logo:
@@ -1110,6 +1110,10 @@ components:
           minimum: 0
           type: array
           uniqueItems: true
+        excludeCharacters:
+          description: List of all characters that should be excluded from generated passwords.
+          example: abc1
+          type: string
         length:
           default: 32
           description: Length of the generated value
@@ -1140,6 +1144,8 @@ components:
             - DOCUMENT
             - EMAIL_ACCOUNT
             - SOCIAL_SECURITY_NUMBER
+            - MEDICAL_RECORD
+            - SSH_KEY
             - CUSTOM
           type: string
         createdAt:
@@ -1180,6 +1186,8 @@ components:
             properties:
               href:
                 format: url
+                type: string
+              label:
                 type: string
               primary:
                 type: boolean
