@@ -11973,6 +11973,11 @@ paths:
                 QuickConnectId:
                   description: The identifier for the quick connect.
                   type: string
+                RelatedContactId:
+                  description: 'The contactId that is <a href="https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html#linked-tasks">related</a> to this contact.'
+                  type: string
+                  minLength: 1
+                  maxLength: 256
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -21207,6 +21212,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/QuickConnectId'
             - description: The identifier for the quick connect.
+        RelatedContactId:
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: 'The contactId that is <a href="https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html#linked-tasks">related</a> to this contact.'
     StopContactRecordingRequest:
       type: object
       required:

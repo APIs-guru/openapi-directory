@@ -3,7 +3,7 @@ info:
   version: '2018-10-26'
   x-release: v4
   title: AWS SecurityHub
-  description: '<p>Security Hub provides you with a comprehensive view of the security state of your Amazon Web Services environment and resources. It also provides you with the readiness status of your environment based on controls from supported security standards. Security Hub collects security data from Amazon Web Services accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html"> <i>Security HubUser Guide</i> </a>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the Amazon Web Services Region that is currently active or in the specific Amazon Web Services Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>CreateMembers</code> to add a member account to Security Hub, the association of the member account with the administrator account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code>BatchEnableStandards</code> - <code>RateLimit</code> of 1 request per second, <code>BurstLimit</code> of 1 request per second.</p> </li> <li> <p> <code>GetFindings</code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code>BatchImportFindings</code> - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> <li> <p> <code>BatchUpdateFindings</code> - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> <li> <p> <code>UpdateStandardsControl</code> - <code>RateLimit</code> of 1 request per second, <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>'
+  description: '<p>Security Hub provides you with a comprehensive view of the security state of your Amazon Web Services environment and resources. It also provides you with the readiness status of your environment based on controls from supported security standards. Security Hub collects security data from Amazon Web Services accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html">Security HubUser Guide</a>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the Amazon Web Services Region that is currently active or in the specific Amazon Web Services Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, run the same command for each Region in which you want to apply the change.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>CreateMembers</code> to add a member account to Security Hub, the association of the member account with the administrator account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code>BatchEnableStandards</code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 1 request per second.</p> </li> <li> <p> <code>GetFindings</code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code>BatchImportFindings</code> - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> <li> <p> <code>BatchUpdateFindings</code> - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> <li> <p> <code>UpdateStandardsControl</code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -455,6 +455,122 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /securityControls/batchGet:
+    post:
+      operationId: BatchGetSecurityControls
+      description: ' Provides details about a batch of security controls for the current Amazon Web Services account and Amazon Web Services Region. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetSecurityControlsResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InvalidAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccessException'
+        '483':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - SecurityControlIds
+              properties:
+                SecurityControlIds:
+                  description: ' A list of security controls (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters). The security control ID or Amazon Resource Name (ARN) is the same across standards. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/NonEmptyString'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /associations/batchGet:
+    post:
+      operationId: BatchGetStandardsControlAssociations
+      description: ' For a batch of security controls and standards, identifies whether each control is currently enabled or disabled in a standard. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetStandardsControlAssociationsResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InvalidAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccessException'
+        '483':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - StandardsControlAssociationIds
+              properties:
+                StandardsControlAssociationIds:
+                  description: ' An array with one or more objects that includes a security control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) and the Amazon Resource Name (ARN) of a standard. This field is used to query the enablement status of a control in a specified standard. The security control ID or ARN is the same across standards. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StandardsControlAssociationId'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /findings/import:
     post:
       operationId: BatchImportFindings
@@ -634,6 +750,64 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/RelatedFinding'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /associations:
+    patch:
+      operationId: BatchUpdateStandardsControlAssociations
+      description: ' For a batch of security controls and standards, this operation updates the enablement status of a control in a standard. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchUpdateStandardsControlAssociationsResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InvalidAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccessException'
+        '483':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - StandardsControlAssociationUpdates
+              properties:
+                StandardsControlAssociationUpdates:
+                  description: ' Updates the enablement status of a security control in a specified standard. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StandardsControlAssociationUpdate'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1464,7 +1638,7 @@ paths:
         - name: ActionTargetArn
           in: path
           required: true
-          description: The ARN of the custom action target to delete.
+          description: The Amazon Resource Name (ARN) of the custom action target to delete.
           schema:
             type: string
             pattern: .*\S.*
@@ -2472,6 +2646,12 @@ paths:
                 EnableDefaultStandards:
                   description: 'Whether to enable the security standards that Security Hub has designated as automatically enabled. If you do not provide a value for <code>EnableDefaultStandards</code>, it is set to <code>true</code>. To not enable the automatically enabled standards, set <code>EnableDefaultStandards</code> to <code>false</code>.'
                   type: boolean
+                ControlFindingGenerator:
+                  description: '<p>This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards.</p> <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards.</p> <p>The value for this field in a member account matches the value in the administrator account. For accounts that aren''t part of an organization, the default value of this field is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 9, 2023.</p>'
+                  type: string
+                  enum:
+                    - STANDARD_CONTROL
+                    - SECURITY_CONTROL
     patch:
       operationId: UpdateSecurityHubConfiguration
       description: Updates configuration options for Security Hub.
@@ -2523,6 +2703,12 @@ paths:
                 AutoEnableControls:
                   description: '<p>Whether to automatically enable new controls when they are added to standards that are enabled.</p> <p>By default, this is set to <code>true</code>, and new controls are enabled automatically. To not automatically enable new controls, set this to <code>false</code>. </p>'
                   type: boolean
+                ControlFindingGenerator:
+                  description: '<p>Updates whether the calling account has consolidated control findings turned on. If the value for this field is set to <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards.</p> <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards.</p> <p>For accounts that are part of an organization, this value can only be updated in the administrator account.</p>'
+                  type: string
+                  enum:
+                    - STANDARD_CONTROL
+                    - SECURITY_CONTROL
   /organization/configuration:
     get:
       operationId: DescribeOrganizationConfiguration
@@ -4812,6 +4998,136 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /securityControls/definitions:
+    get:
+      operationId: ListSecurityControlDefinitions
+      description: ' Lists all of the security controls that apply to a specified standard. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSecurityControlDefinitionsResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: InvalidAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccessException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      parameters:
+        - name: StandardsArn
+          in: query
+          required: false
+          description: ' The Amazon Resource Name (ARN) of the standard that you want to view controls for. '
+          schema:
+            type: string
+            pattern: .*\S.*
+        - name: NextToken
+          in: query
+          required: false
+          description: ' Optional pagination parameter. '
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: ' An optional parameter that limits the total results of the API response to the specified number. If this parameter isn''t provided in the request, the results include the first 25 security controls that apply to the specified standard. The results also include a <code>NextToken</code> parameter that you can use in a subsequent API call to get the next 25 controls. This repeats until all controls for the standard are returned. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /associations#SecurityControlId:
+    get:
+      operationId: ListStandardsControlAssociations
+      description: ' Specifies whether a control is currently enabled or disabled in each enabled standard in the calling account. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStandardsControlAssociationsResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InvalidAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccessException'
+        '483':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      parameters:
+        - name: SecurityControlId
+          in: query
+          required: true
+          description: ' The identifier of the control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) that you want to determine the enablement status of in each enabled standard. '
+          schema:
+            type: string
+            pattern: .*\S.*
+        - name: NextToken
+          in: query
+          required: false
+          description: ' Optional pagination parameter. '
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: ' An optional parameter that limits the total results of the API response to the specified number. If this parameter isn''t provided in the request, the results include the first 25 standard and control associations. The results also include a <code>NextToken</code> parameter that you can use in a subsequent API call to get the next 25 associations. This repeats until all associations for the specified control are returned. The number of results is limited by the number of supported Security Hub standards that you''ve enabled in the calling account. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{ResourceArn}':
     get:
       operationId: ListTagsForResource
@@ -5205,6 +5521,47 @@ components:
             - $ref: '#/components/schemas/StandardsInputParameterMap'
             - description: A key-value pair of input for the standard.
       description: The standard that you want to enable.
+    BatchGetSecurityControlsResponse:
+      type: object
+      required:
+        - SecurityControls
+      properties:
+        SecurityControls:
+          allOf:
+            - $ref: '#/components/schemas/SecurityControls'
+            - description: ' An array that returns the identifier, Amazon Resource Name (ARN), and other details about a security control. The same information is returned whether the request includes <code>SecurityControlId</code> or <code>SecurityControlArn</code>. '
+        UnprocessedIds:
+          allOf:
+            - $ref: '#/components/schemas/UnprocessedSecurityControls'
+            - description: ' A security control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) for which details cannot be returned. '
+    BatchGetStandardsControlAssociationsResponse:
+      type: object
+      required:
+        - StandardsControlAssociationDetails
+      properties:
+        StandardsControlAssociationDetails:
+          allOf:
+            - $ref: '#/components/schemas/StandardsControlAssociationDetails'
+            - description: 'Provides the enablement status of a security control in a specified standard and other details for the control in relation to the specified standard. '
+        UnprocessedAssociations:
+          allOf:
+            - $ref: '#/components/schemas/UnprocessedStandardsControlAssociations'
+            - description: ' A security control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) whose enablement status in a specified standard cannot be returned. '
+    StandardsControlAssociationId:
+      type: object
+      required:
+        - SecurityControlId
+        - StandardsArn
+      properties:
+        SecurityControlId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The unique identifier (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) of a security control across standards. '
+        StandardsArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ARN of a standard. '
+      description: ' An array with one or more objects that includes a security control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) and the Amazon Resource Name (ARN) of a standard. The security control ID or ARN is the same across standards. '
     BatchImportFindingsResponse:
       type: object
       required:
@@ -5468,6 +5825,37 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The product-generated identifier for a related finding.
       description: Details about a related finding.
+    BatchUpdateStandardsControlAssociationsResponse:
+      type: object
+      properties:
+        UnprocessedAssociationUpdates:
+          allOf:
+            - $ref: '#/components/schemas/UnprocessedStandardsControlAssociationUpdates'
+            - description: ' A security control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) whose enablement status in a specified standard couldn''t be updated. '
+    StandardsControlAssociationUpdate:
+      type: object
+      required:
+        - StandardsArn
+        - SecurityControlId
+        - AssociationStatus
+      properties:
+        StandardsArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Resource Name (ARN) of the standard in which you want to update the control's enablement status.
+        SecurityControlId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The unique identifier for the security control whose enablement status you want to update.
+        AssociationStatus:
+          allOf:
+            - $ref: '#/components/schemas/AssociationStatus'
+            - description: The desired enablement status of the control in the standard.
+        UpdatedReason:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The reason for updating the control's enablement status in the standard.
+      description: 'An array of requested updates to the enablement status of controls in specified standards. The objects in the array include a security control ID, the Amazon Resource Name (ARN) of the standard, the requested enablement status, and the reason for updating the enablement status.'
     CreateActionTargetResponse:
       type: object
       required:
@@ -5476,7 +5864,7 @@ components:
         ActionTargetArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ARN for the custom action target.
+            - description: The Amazon Resource Name (ARN) for the custom action target.
     ResourceConflictException: {}
     CreateFindingAggregatorResponse:
       type: object
@@ -5626,6 +6014,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: '<p>Whether to automatically enable new controls when they are added to standards that are enabled.</p> <p>If set to <code>true</code>, then new controls for enabled standards are enabled automatically. If set to <code>false</code>, then new controls are not enabled.</p>'
+        ControlFindingGenerator:
+          allOf:
+            - $ref: '#/components/schemas/ControlFindingGenerator'
+            - description: '<p>Specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards.</p> <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards.</p> <p>The value for this field in a member account matches the value in the administrator account. For accounts that aren''t part of an organization, the default value of this field is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 9, 2023.</p>'
     DescribeOrganizationConfigurationResponse:
       type: object
       properties:
@@ -5879,6 +6271,32 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: The pagination token to use to request the next page of results.
+    ListSecurityControlDefinitionsResponse:
+      type: object
+      required:
+        - SecurityControlDefinitions
+      properties:
+        SecurityControlDefinitions:
+          allOf:
+            - $ref: '#/components/schemas/SecurityControlDefinitions'
+            - description: ' An array of controls that apply to the specified standard. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A pagination parameter that''s included in the response only if it was included in the request. '
+    ListStandardsControlAssociationsResponse:
+      type: object
+      required:
+        - StandardsControlAssociationSummaries
+      properties:
+        StandardsControlAssociationSummaries:
+          allOf:
+            - $ref: '#/components/schemas/StandardsControlAssociationSummaries'
+            - description: ' An array that provides the enablement status and other details for each security control that applies to each enabled standard. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A pagination parameter that''s included in the response only if it was included in the request. '
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -6281,6 +6699,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AssociatedStandard'
+    AssociationStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
     AutoEnableStandards:
       type: string
       enum:
@@ -7124,7 +7547,7 @@ components:
         SnsTopicArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'An ARN that uniquely identifies the Amazon SNS topic for a backup vault’s events. '
+            - description: 'The Amazon Resource Name (ARN) that uniquely identifies the Amazon SNS topic for a backup vault''s events. '
       description: 'Provides details about the Amazon SNS event notifications for the specified backup vault. '
     AwsBackupBackupVaultDetails:
       type: object
@@ -8914,7 +9337,7 @@ components:
         OnDemandMaxPricePercentageOverLowestPrice:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: '<p> The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage above the least expensive current generation M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold.</p> <p>The parameter accepts an integer, which Amazon EC2 interprets as a percentage.</p> <p>A high value, such as <code>999999</code>, turns off price protection.</p>'
+            - description: '<p> The price protection threshold for On-Demand Instances. This is the maximum you''ll pay for an On-Demand Instance, expressed as a percentage above the least expensive current generation M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold.</p> <p>The parameter accepts an integer, which Amazon EC2 interprets as a percentage.</p> <p>A high value, such as <code>999999</code>, turns off price protection.</p>'
         RequireHibernateSupport:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -8922,7 +9345,7 @@ components:
         SpotMaxPricePercentageOverLowestPrice:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: '<p> The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage above the least expensive current generation M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. </p> <p>The parameter accepts an integer, which Amazon EC2 interprets as a percentage.</p> <p>A high value, such as <code>999999</code>, turns off price protection.</p>'
+            - description: '<p> The price protection threshold for Spot Instances. This is the maximum you''ll pay for a Spot Instance, expressed as a percentage above the least expensive current generation M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. </p> <p>The parameter accepts an integer, which Amazon EC2 interprets as a percentage.</p> <p>A high value, such as <code>999999</code>, turns off price protection.</p>'
         TotalLocalStorageGB:
           allOf:
             - $ref: '#/components/schemas/AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails'
@@ -8950,7 +9373,7 @@ components:
         HttpEndpoint:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled, and you won’t be able to access your instance metadata. '
+            - description: ' Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled, and you won''t be able to access your instance metadata. '
         HttpProtocolIpv6:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -14709,7 +15132,7 @@ components:
         ManualSnapshotRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: '<p>The number of days that manual snapshots are retained in the destination region after they are copied from a source region.</p> <p>If the value is <code>-1</code>, then the manual snapshot is retained indefinitely.</p> <p>Valid values: Either <code>-1</code> or an integer between 1 and 3,653</p>'
+            - description: '<p>The number of days that manual snapshots are retained in the destination Region after they are copied from a source Region.</p> <p>If the value is <code>-1</code>, then the manual snapshot is retained indefinitely.</p> <p>Valid values: Either <code>-1</code> or an integer between 1 and 3,653</p>'
         RetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -14718,7 +15141,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The name of the snapshot copy grant.
-      description: Information about a cross-Region snapshot copy.
+      description: You can configure Amazon Redshift to copy snapshots for a cluster to another Amazon Web Services Region. This parameter provides information about a cross-Region snapshot copy.
     AwsRedshiftClusterDeferredMaintenanceWindow:
       type: object
       properties:
@@ -15755,7 +16178,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The native severity from the finding product that generated the finding.
-      description: '<p>The severity of the finding.</p> <p>The finding provider can provide the initial severity. The finding provider can only update the severity if it has not been updated using <code>BatchUpdateFindings</code>.</p> <p>The finding must have either <code>Label</code> or <code>Normalized</code> populated. If only one of these attributes is populated, then Security Hub automatically populates the other one. If neither attribute is populated, then the finding is invalid. <code>Label</code> is the preferred attribute.</p>'
+      description: '<p>The severity of the finding.</p> <p>The finding provider can provide the initial severity. The finding provider can only update the severity if it hasn''t been updated using <code>BatchUpdateFindings</code>.</p> <p>The finding must have either <code>Label</code> or <code>Normalized</code> populated. If only one of these attributes is populated, then Security Hub automatically populates the other one. If neither attribute is populated, then the finding is invalid. <code>Label</code> is the preferred attribute.</p>'
     Remediation:
       type: object
       properties:
@@ -17316,6 +17739,46 @@ components:
           allOf:
             - $ref: '#/components/schemas/StandardsSubscriptionRequests'
             - description: The list of standards checks to enable.
+    BatchGetSecurityControlsRequest:
+      type: object
+      required:
+        - SecurityControlIds
+      title: BatchGetSecurityControlsRequest
+      properties:
+        SecurityControlIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: ' A list of security controls (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters). The security control ID or Amazon Resource Name (ARN) is the same across standards. '
+    SecurityControls:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityControl'
+    UnprocessedSecurityControls:
+      type: array
+      items:
+        $ref: '#/components/schemas/UnprocessedSecurityControl'
+    StandardsControlAssociationIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/StandardsControlAssociationId'
+    BatchGetStandardsControlAssociationsRequest:
+      type: object
+      required:
+        - StandardsControlAssociationIds
+      title: BatchGetStandardsControlAssociationsRequest
+      properties:
+        StandardsControlAssociationIds:
+          allOf:
+            - $ref: '#/components/schemas/StandardsControlAssociationIds'
+            - description: ' An array with one or more objects that includes a security control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) and the Amazon Resource Name (ARN) of a standard. This field is used to query the enablement status of a control in a specified standard. The security control ID or ARN is the same across standards. '
+    StandardsControlAssociationDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/StandardsControlAssociationDetail'
+    UnprocessedStandardsControlAssociations:
+      type: array
+      items:
+        $ref: '#/components/schemas/UnprocessedStandardsControlAssociation'
     BatchImportFindingsRequestFindingList:
       type: array
       items:
@@ -17443,6 +17906,24 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: '<p>The message associated with the error. Possible values are:</p> <ul> <li> <p> <code>Concurrent finding updates detected</code> </p> </li> <li> <p> <code>Finding Identifier is duplicated</code> </p> </li> <li> <p> <code>Finding Not Found</code> </p> </li> <li> <p> <code>Finding size exceeded 240 KB</code> </p> </li> <li> <p> <code>Internal service failure</code> </p> </li> <li> <p> <code>Invalid Input</code> </p> </li> </ul>'
       description: A finding from a <code>BatchUpdateFindings</code> request that Security Hub was unable to update.
+    StandardsControlAssociationUpdates:
+      type: array
+      items:
+        $ref: '#/components/schemas/StandardsControlAssociationUpdate'
+    BatchUpdateStandardsControlAssociationsRequest:
+      type: object
+      required:
+        - StandardsControlAssociationUpdates
+      title: BatchUpdateStandardsControlAssociationsRequest
+      properties:
+        StandardsControlAssociationUpdates:
+          allOf:
+            - $ref: '#/components/schemas/StandardsControlAssociationUpdates'
+            - description: ' Updates the enablement status of a security control in a specified standard. '
+    UnprocessedStandardsControlAssociationUpdates:
+      type: array
+      items:
+        $ref: '#/components/schemas/UnprocessedStandardsControlAssociationUpdate'
     BooleanFilter:
       type: object
       properties:
@@ -17602,6 +18083,11 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: 'When this parameter is <code>true</code>, the container is given elevated privileges on the host container instance (similar to the root user). '
       description: Container details related to a finding.
+    ControlFindingGenerator:
+      type: string
+      enum:
+        - STANDARD_CONTROL
+        - SECURITY_CONTROL
     ControlStatus:
       type: string
       enum:
@@ -17969,6 +18455,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Whether to enable the security standards that Security Hub has designated as automatically enabled. If you do not provide a value for <code>EnableDefaultStandards</code>, it is set to <code>true</code>. To not enable the automatically enabled standards, set <code>EnableDefaultStandards</code> to <code>false</code>.'
+        ControlFindingGenerator:
+          allOf:
+            - $ref: '#/components/schemas/ControlFindingGenerator'
+            - description: '<p>This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards.</p> <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards.</p> <p>The value for this field in a member account matches the value in the administrator account. For accounts that aren''t part of an organization, the default value of this field is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 9, 2023.</p>'
     FilePaths:
       type: object
       properties:
@@ -18350,6 +18840,22 @@ components:
       type: object
       title: ListOrganizationAdminAccountsRequest
       properties: {}
+    ListSecurityControlDefinitionsRequest:
+      type: object
+      title: ListSecurityControlDefinitionsRequest
+      properties: {}
+    SecurityControlDefinitions:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityControlDefinition'
+    ListStandardsControlAssociationsRequest:
+      type: object
+      title: ListStandardsControlAssociationsRequest
+      properties: {}
+    StandardsControlAssociationSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/StandardsControlAssociationSummary'
     ResourceArn:
       type: string
       pattern: '^arn:aws:securityhub:.*'
@@ -18678,6 +19184,11 @@ components:
             - $ref: '#/components/schemas/Long'
             - description: 'The record index, starting from 0, for the record that contains the data.'
       description: An occurrence of sensitive data in an Apache Avro object container or an Apache Parquet file.
+    RegionAvailabilityStatus:
+      type: string
+      enum:
+        - AVAILABLE
+        - UNAVAILABLE
     ResourceDetails:
       type: object
       properties:
@@ -19349,6 +19860,88 @@ components:
             - $ref: '#/components/schemas/NonEmptyStringList'
             - description: The list of port ranges.
       description: A list of port ranges.
+    SeverityRating:
+      type: string
+      enum:
+        - LOW
+        - MEDIUM
+        - HIGH
+        - CRITICAL
+    SecurityControl:
+      type: object
+      required:
+        - SecurityControlId
+        - SecurityControlArn
+        - Title
+        - Description
+        - RemediationUrl
+        - SeverityRating
+        - SecurityControlStatus
+      properties:
+        SecurityControlId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The unique identifier of a security control across standards. Values for this field typically consist of an Amazon Web Service name and a number, such as APIGateway.3. '
+        SecurityControlArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The Amazon Resource Name (ARN) for a security control across standards, such as <code>arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1</code>. This parameter doesn''t mention a specific standard. '
+        Title:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The title of a security control. '
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The description of a security control across standards. This typically summarizes how Security Hub evaluates the control and the conditions under which it produces a failed finding. This parameter doesn''t reference a specific standard. '
+        RemediationUrl:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' A link to Security Hub documentation that explains how to remediate a failed finding for a security control. '
+        SeverityRating:
+          allOf:
+            - $ref: '#/components/schemas/SeverityRating'
+            - description: ' The severity of a security control. For more information about how Security Hub determines control severity, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity">Assigning severity to control findings</a> in the <i>Security Hub User Guide</i>. '
+        SecurityControlStatus:
+          allOf:
+            - $ref: '#/components/schemas/ControlStatus'
+            - description: ' The status of a security control based on the compliance status of its findings. For more information about how control status is determined, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/controls-overall-status.html">Determining the overall status of a control from its findings</a> in the <i>Security Hub User Guide</i>. '
+      description: ' A security control in Security Hub describes a security best practice related to a specific resource. '
+    SecurityControlDefinition:
+      type: object
+      required:
+        - SecurityControlId
+        - Title
+        - Description
+        - RemediationUrl
+        - SeverityRating
+        - CurrentRegionAvailability
+      properties:
+        SecurityControlId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The unique identifier of a security control across standards. Values for this field typically consist of an Amazon Web Service name and a number (for example, APIGateway.3). This parameter differs from <code>SecurityControlArn</code>, which is a unique Amazon Resource Name (ARN) assigned to a control. The ARN references the security control ID (for example, arn:aws:securityhub:eu-central-1:123456789012:security-control/APIGateway.3). '
+        Title:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The title of a security control. '
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The description of a security control across standards. This typically summarizes how Security Hub evaluates the control and the conditions under which it produces a failed finding. This parameter doesn''t reference a specific standard. '
+        RemediationUrl:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' A link to Security Hub documentation that explains how to remediate a failed finding for a security control. '
+        SeverityRating:
+          allOf:
+            - $ref: '#/components/schemas/SeverityRating'
+            - description: ' The severity of a security control. For more information about how Security Hub determines control severity, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity">Assigning severity to control findings</a> in the <i>Security Hub User Guide</i>. '
+        CurrentRegionAvailability:
+          allOf:
+            - $ref: '#/components/schemas/RegionAvailabilityStatus'
+            - description: ' Specifies whether a security control is available in the current Amazon Web Services Region. '
+      description: ' Provides metadata for a security control, including its unique standard-agnostic identifier, title, description, severity, availability in Amazon Web Services Regions, and a link to remediation steps. '
     SensitiveDataDetections:
       type: object
       properties:
@@ -19385,13 +19978,6 @@ components:
             - $ref: '#/components/schemas/Long'
             - description: The total number of occurrences of sensitive data.
       description: Contains a detected instance of sensitive data that are based on built-in identifiers.
-    SeverityRating:
-      type: string
-      enum:
-        - LOW
-        - MEDIUM
-        - HIGH
-        - CRITICAL
     SoftwarePackage:
       type: object
       properties:
@@ -19529,6 +20115,104 @@ components:
             - $ref: '#/components/schemas/RelatedRequirementsList'
             - description: The list of requirements that are related to this control.
       description: Details for an individual security standard control.
+    StandardsControlArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+    StandardsControlAssociationDetail:
+      type: object
+      required:
+        - StandardsArn
+        - SecurityControlId
+        - SecurityControlArn
+        - AssociationStatus
+      properties:
+        StandardsArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The Amazon Resource Name (ARN) of a security standard. '
+        SecurityControlId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The unique identifier of a security control across standards. Values for this field typically consist of an Amazon Web Service name and a number, such as APIGateway.3. '
+        SecurityControlArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ARN of a security control across standards, such as <code>arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1</code>. This parameter doesn''t mention a specific standard. '
+        AssociationStatus:
+          allOf:
+            - $ref: '#/components/schemas/AssociationStatus'
+            - description: ' Specifies whether a control is enabled or disabled in a specified standard. '
+        RelatedRequirements:
+          allOf:
+            - $ref: '#/components/schemas/RelatedRequirementsList'
+            - description: ' The requirement that underlies a control in the compliance framework related to the standard. '
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time at which the enablement status of the control in the specified standard was last updated. '
+        UpdatedReason:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The reason for updating the enablement status of a control in a specified standard. '
+        StandardsControlTitle:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The title of a control. This field may reference a specific standard. '
+        StandardsControlDescription:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The description of a control. This typically summarizes how Security Hub evaluates the control and the conditions under which it produces a failed finding. This parameter may reference a specific standard. '
+        StandardsControlArns:
+          allOf:
+            - $ref: '#/components/schemas/StandardsControlArnList'
+            - description: ' Provides the input parameter that Security Hub uses to call the <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateStandardsControl.html">UpdateStandardsControl</a> API. This API can be used to enable or disable a control in a specified standard. '
+      description: ' Provides details about a control''s enablement status in a specified standard. '
+    StandardsControlAssociationSummary:
+      type: object
+      required:
+        - StandardsArn
+        - SecurityControlId
+        - SecurityControlArn
+        - AssociationStatus
+      properties:
+        StandardsArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The Amazon Resource Name (ARN) of a standard. '
+        SecurityControlId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' A unique standard-agnostic identifier for a control. Values for this field typically consist of an Amazon Web Service and a number, such as APIGateway.5. This field doesn''t reference a specific standard. '
+        SecurityControlArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ARN of a control, such as <code>arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1</code>. This parameter doesn''t mention a specific standard. '
+        AssociationStatus:
+          allOf:
+            - $ref: '#/components/schemas/AssociationStatus'
+            - description: ' The enablement status of a control in a specific standard. '
+        RelatedRequirements:
+          allOf:
+            - $ref: '#/components/schemas/RelatedRequirementsList'
+            - description: ' The requirement that underlies this control in the compliance framework related to the standard. '
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The last time that a control''s enablement status in a specified standard was updated. '
+        UpdatedReason:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The reason for updating the control''s enablement status in a specified standard. '
+        StandardsControlTitle:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The title of a control. '
+        StandardsControlDescription:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The description of a control. This typically summarizes how Security Hub evaluates the control and the conditions under which it produces a failed finding. The parameter may reference a specific standard. '
+      description: ' An array that provides the enablement status and other details for each control that applies to each enabled standard. '
     StandardsInputParameterMap:
       type: object
       additionalProperties:
@@ -19725,6 +20409,70 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The URL to the page or site where you can get more information about the threat intelligence indicator.
       description: Details about the threat intelligence related to a finding.
+    UnprocessedErrorCode:
+      type: string
+      enum:
+        - INVALID_INPUT
+        - ACCESS_DENIED
+        - NOT_FOUND
+        - LIMIT_EXCEEDED
+    UnprocessedSecurityControl:
+      type: object
+      required:
+        - SecurityControlId
+        - ErrorCode
+      properties:
+        SecurityControlId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) for which a response couldn''t be returned. '
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/UnprocessedErrorCode'
+            - description: ' The error code for the unprocessed security control. '
+        ErrorReason:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The reason why the security control was unprocessed. '
+      description: ' Provides details about a security control for which a response couldn''t be returned. '
+    UnprocessedStandardsControlAssociation:
+      type: object
+      required:
+        - StandardsControlAssociationId
+        - ErrorCode
+      properties:
+        StandardsControlAssociationId:
+          allOf:
+            - $ref: '#/components/schemas/StandardsControlAssociationId'
+            - description: ' An array with one or more objects that includes a security control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) and the Amazon Resource Name (ARN) of a standard. This parameter shows the specific controls for which the enablement status couldn''t be retrieved in specified standards when calling <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html">BatchUpdateStandardsControlAssociations</a>. '
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/UnprocessedErrorCode'
+            - description: 'The error code for the unprocessed standard and control association. '
+        ErrorReason:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The reason why the standard and control association was unprocessed. '
+      description: ' Provides details about which control''s enablement status couldn''t be retrieved in a specified standard when calling <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html">BatchUpdateStandardsControlAssociations</a>. This parameter also provides details about why the request was unprocessed. '
+    UnprocessedStandardsControlAssociationUpdate:
+      type: object
+      required:
+        - StandardsControlAssociationUpdate
+        - ErrorCode
+      properties:
+        StandardsControlAssociationUpdate:
+          allOf:
+            - $ref: '#/components/schemas/StandardsControlAssociationUpdate'
+            - description: 'An array of control and standard associations for which an update failed when calling <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html">BatchUpdateStandardsControlAssociations</a>. '
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/UnprocessedErrorCode'
+            - description: The error code for the unprocessed update of the control's enablement status in the specified standard.
+        ErrorReason:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The reason why a control''s enablement status in the specified standard couldn''t be updated. '
+      description: 'Provides details about which control''s enablement status could not be updated in a specified standard when calling the <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html">BatchUpdateStandardsControlAssociations</a> API. This parameter also provides details about why the request was unprocessed. '
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -19816,6 +20564,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: '<p>Whether to automatically enable new controls when they are added to standards that are enabled.</p> <p>By default, this is set to <code>true</code>, and new controls are enabled automatically. To not automatically enable new controls, set this to <code>false</code>. </p>'
+        ControlFindingGenerator:
+          allOf:
+            - $ref: '#/components/schemas/ControlFindingGenerator'
+            - description: '<p>Updates whether the calling account has consolidated control findings turned on. If the value for this field is set to <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards.</p> <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards.</p> <p>For accounts that are part of an organization, this value can only be updated in the administrator account.</p>'
     UpdateStandardsControlRequest:
       type: object
       title: UpdateStandardsControlRequest

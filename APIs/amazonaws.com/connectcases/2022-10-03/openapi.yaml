@@ -3,7 +3,7 @@ info:
   version: '2022-10-03'
   x-release: v4
   title: Amazon Connect Cases
-  description: '<p>Welcome to the Amazon Connect Cases API Reference. This guide provides information about the Amazon Connect Cases API, which you can use to create, update, get, and list Cases domains, fields, field options, layouts, templates, cases, related items, and tags.</p> <pre><code> &lt;p&gt;For more information about Amazon Connect Cases, see &lt;a href=&quot;https://docs.aws.amazon.com/connect/latest/adminguide/cases.html&quot;&gt;Amazon Connect Cases&lt;/a&gt; in the &lt;i&gt;Amazon Connect Administrator Guide&lt;/i&gt;. &lt;/p&gt; </code></pre>'
+  description: 'With Amazon Connect Cases, your agents can track and manage customer issues that require multiple interactions, follow-up tasks, and teams in your contact center. A case represents a customer issue. It records the issue, the steps and interactions taken to resolve the issue, and the outcome. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cases.html">Amazon Connect Cases</a> in the <i>Amazon Connect Administrator Guide</i>.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -280,7 +280,7 @@ paths:
   '/domains/{domainId}/cases':
     post:
       operationId: CreateCase
-      description: <p>Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.</p> <note> <p> <code>customer_id</code> is a required field when creating a case.</p> </note>
+      description: '<p>Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.</p> <note> <p>The following fields are required when creating a case:</p> <pre><code> &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;customer_id&lt;/code&gt; - You must provide the full customer profile ARN in this format: &lt;code&gt;arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;title&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; &lt;/note&gt; </code></pre>'
       responses:
         '200':
           description: Success
@@ -371,7 +371,7 @@ paths:
   /domains:
     post:
       operationId: CreateDomain
-      description: '<p>Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Amazon Connect instance can be associated with only one Cases domain.</p> <important> <p>This will not associate your connect instance to Cases domain. Instead, use the Amazon Connect <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateIntegrationAssociation.html">CreateIntegrationAssociation</a> API.</p> </important>'
+      description: '<p>Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Amazon Connect instance can be associated with only one Cases domain.</p> <important> <p>This will not associate your connect instance to Cases domain. Instead, use the Amazon Connect <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateIntegrationAssociation.html">CreateIntegrationAssociation</a> API. You need specific IAM permissions to successfully associate the Cases domain. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/required-permissions-iam-cases.html#onboard-cases-iam">Onboard to Cases</a>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -831,7 +831,7 @@ paths:
                   minItems: 0
                   maxItems: 100
                 status:
-                  description: Status of a template
+                  description: The status of the template.
                   type: string
                   enum:
                     - Active
@@ -844,6 +844,119 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}':
+    delete:
+      operationId: DeleteDomain
+      description: Deletes a domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDomainResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: GetDomain
+      description: 'Returns information about a specific domain if it exists. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDomainResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
   '/domains/{domainId}/cases/{caseId}':
     post:
       operationId: GetCase
@@ -1138,64 +1251,6 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/EventIncludedData'
                         - description: Details of what case and related item data is published through the case event stream.
-  '/domains/{domainId}':
-    post:
-      operationId: GetDomain
-      description: 'Returns information about a specific domain if it exists. '
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetDomainResponse'
-        '480':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '481':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '482':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '483':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '484':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-      parameters:
-        - name: domainId
-          in: path
-          required: true
-          description: 'The unique identifier of the Cases domain. '
-          schema:
-            type: string
-            minLength: 1
-            maxLength: 500
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/domains/{domainId}/layouts/{layoutId}':
     post:
       operationId: GetLayout
@@ -1515,7 +1570,7 @@ paths:
                   minItems: 0
                   maxItems: 100
                 status:
-                  description: Status of a template
+                  description: The status of the template.
                   type: string
                   enum:
                     - Active
@@ -2103,7 +2158,6 @@ paths:
           description: A list of status values to filter on.
           schema:
             type: array
-            description: List of filters used on the ListTemplates result set
             items:
               $ref: '#/components/schemas/TemplateStatus'
             minItems: 1
@@ -2119,7 +2173,7 @@ paths:
   '/domains/{domainId}/cases-search':
     post:
       operationId: SearchCases
-      description: Searches for cases within their associated Cases domain. Search results are returned as a paginated list of abridged case documents.
+      description: '<p>Searches for cases within their associated Cases domain. Search results are returned as a paginated list of abridged case documents.</p> <note> <p>For <code>customer_id</code> you must provide the full customer profile ARN in this format: <code> arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID</code>. </p> </note>'
       responses:
         '200':
           description: Success
@@ -2222,7 +2276,7 @@ paths:
                   minLength: 0
                   maxLength: 255
                 sorts:
-                  description: /@documentation(&quot;The templateId&quot;)
+                  description: 'A list of sorts where each sort specifies a field and their sort order to be applied to the results. '
                   type: array
                   items:
                     $ref: '#/components/schemas/Sort'
@@ -2757,6 +2811,9 @@ components:
             - $ref: '#/components/schemas/FieldId'
             - description: Unique identifier of a field.
       description: List of fields that must have a value provided to create a case.
+    DeleteDomainResponse:
+      type: object
+      properties: {}
     GetCaseResponse:
       type: object
       required:
@@ -2983,7 +3040,6 @@ components:
       enum:
         - Active
         - Inactive
-      description: Status of a template
     PutCaseEventConfigurationResponse:
       type: object
       properties: {}
@@ -3595,6 +3651,10 @@ components:
     CreatedTime:
       type: string
       format: date-time
+    DeleteDomainRequest:
+      type: object
+      title: DeleteDomainRequest
+      properties: {}
     DomainSummary:
       type: object
       required:
@@ -3900,7 +3960,6 @@ components:
       properties: {}
     TemplateStatusFilters:
       type: array
-      description: List of filters used on the ListTemplates result set
       items:
         $ref: '#/components/schemas/TemplateStatus'
       minItems: 1
@@ -3983,7 +4042,6 @@ components:
       maxLength: 255
     SearchCasesRequestSortsList:
       type: array
-      description: /@documentation(&quot;The templateId&quot;)
       items:
         $ref: '#/components/schemas/Sort'
       minItems: 0
