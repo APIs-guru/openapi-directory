@@ -3430,7 +3430,7 @@ components:
         optimizedStagingDiskType:
           allOf:
             - $ref: '#/components/schemas/ReplicationConfigurationReplicatedDiskStagingDiskType'
-            - description: 'When <code>stagingDiskType</code> is set to Auto, this field shows the current staging disk EBS volume type as it is constantly updated by the service. This is a read-only field.'
+            - description: The Staging Disk EBS volume type to be used during replication when <code>stagingDiskType</code> is set to Auto. This is a read-only field.
         stagingDiskType:
           allOf:
             - $ref: '#/components/schemas/ReplicationConfigurationReplicatedDiskStagingDiskType'
@@ -3767,6 +3767,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataReplicationInfoReplicatedDisks'
             - description: The disks that should be replicated.
+        stagingAvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/AwsAvailabilityZone'
+            - description: AWS Availability zone into which data is being replicated.
       description: Information about Data Replication
     DataReplicationInfoReplicatedDisk:
       type: object
@@ -3976,10 +3980,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobID'
             - description: The ID of the Job that created the Recovery Instance.
+        originAvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/AwsAvailabilityZone'
+            - description: AWS availability zone associated with the recovery instance.
         originEnvironment:
           allOf:
             - $ref: '#/components/schemas/OriginEnvironment'
-            - description: 'Environment (On Premises / AWS) of the instance that the recovery instance originated from. '
+            - description: Environment (On Premises / AWS) of the instance that the recovery instance originated from.
         pointInTimeSnapshotDateTime:
           allOf:
             - $ref: '#/components/schemas/ISO8601DatetimeString'
@@ -4483,6 +4491,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LifeCycleLastLaunchInitiated'
             - description: An object containing information regarding the initiation of the last launch of a Source Server.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/LaunchStatus'
+            - description: Status of Source Server's last launch.
       description: An object containing information regarding the last launch of a Source Server.
     LifeCycle:
       type: object
@@ -4646,6 +4658,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecoveryInstanceDataReplicationInfoReplicatedDisks'
             - description: The disks that should be replicated.
+        stagingAvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/AwsAvailabilityZone'
+            - description: AWS Availability zone into which data is being replicated.
       description: Information about Data Replication
     RecoveryInstanceFailback:
       type: object

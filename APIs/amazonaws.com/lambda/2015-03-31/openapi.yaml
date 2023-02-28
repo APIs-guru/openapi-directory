@@ -400,7 +400,7 @@ paths:
                   minLength: 12
                   maxLength: 34
                 FunctionUrlAuthType:
-                  description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
+                  description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
                   type: string
                   enum:
                     - NONE
@@ -914,6 +914,22 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/MaximumConcurrency'
                         - description: Limits the number of concurrent instances that the Amazon SQS event source can invoke.
+                DocumentDBEventSourceConfig:
+                  description: ' Specific configuration settings for a DocumentDB event source. '
+                  type: object
+                  properties:
+                    DatabaseName:
+                      allOf:
+                        - $ref: '#/components/schemas/DatabaseName'
+                        - description: ' The name of the database to consume within the DocumentDB cluster. '
+                    CollectionName:
+                      allOf:
+                        - $ref: '#/components/schemas/CollectionName'
+                        - description: ' The name of the collection to consume within the database. If you do not specify a collection, Lambda consumes all collections. '
+                    FullDocument:
+                      allOf:
+                        - $ref: '#/components/schemas/FullDocument'
+                        - description: ' Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1071,7 +1087,7 @@ paths:
                   minLength: 1
                   maxLength: 140
                 Runtime:
-                  description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>. Runtime is required if the deployment package is a .zip file archive. '
+                  description: '<p>The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>. Runtime is required if the deployment package is a .zip file archive.</p> <p>The following list includes deprecated runtimes. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy">Runtime deprecation policy</a>.</p>'
                   type: string
                   enum:
                     - nodejs
@@ -1187,7 +1203,7 @@ paths:
                         - $ref: '#/components/schemas/EnvironmentVariables'
                         - description: 'Environment variable key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">Using Lambda environment variables</a>.'
                 KMSKeyArn:
-                  description: 'The ARN of the Key Management Service (KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, Lambda uses a default service key.'
+                  description: 'The ARN of the Key Management Service (KMS) customer managed key that''s used to encrypt your function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption">environment variables</a>. When <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html">Lambda SnapStart</a> is activated, this key is also used to encrypt your function''s snapshot. If you don''t provide a customer managed key, Lambda uses a default service key.'
                   type: string
                   pattern: '(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()'
                 TracingConfig:
@@ -1336,7 +1352,7 @@ paths:
                 - AuthType
               properties:
                 AuthType:
-                  description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
+                  description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
                   type: string
                   enum:
                     - NONE
@@ -1546,7 +1562,7 @@ paths:
               type: object
               properties:
                 AuthType:
-                  description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
+                  description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
                   type: string
                   enum:
                     - NONE
@@ -2179,6 +2195,22 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/MaximumConcurrency'
                         - description: Limits the number of concurrent instances that the Amazon SQS event source can invoke.
+                DocumentDBEventSourceConfig:
+                  description: ' Specific configuration settings for a DocumentDB event source. '
+                  type: object
+                  properties:
+                    DatabaseName:
+                      allOf:
+                        - $ref: '#/components/schemas/DatabaseName'
+                        - description: ' The name of the database to consume within the DocumentDB cluster. '
+                    CollectionName:
+                      allOf:
+                        - $ref: '#/components/schemas/CollectionName'
+                        - description: ' The name of the collection to consume within the database. If you do not specify a collection, Lambda consumes all collections. '
+                    FullDocument:
+                      allOf:
+                        - $ref: '#/components/schemas/FullDocument'
+                        - description: ' Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. '
   '/2015-03-31/functions/{FunctionName}':
     delete:
       operationId: DeleteFunction
@@ -3442,7 +3474,7 @@ paths:
                         - $ref: '#/components/schemas/EnvironmentVariables'
                         - description: 'Environment variable key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html">Using Lambda environment variables</a>.'
                 Runtime:
-                  description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>. Runtime is required if the deployment package is a .zip file archive. '
+                  description: '<p>The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>. Runtime is required if the deployment package is a .zip file archive.</p> <p>The following list includes deprecated runtimes. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy">Runtime deprecation policy</a>.</p>'
                   type: string
                   enum:
                     - nodejs
@@ -3482,7 +3514,7 @@ paths:
                         - $ref: '#/components/schemas/ResourceArn'
                         - description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
                 KMSKeyArn:
-                  description: 'The ARN of the Key Management Service (KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, Lambda uses a default service key.'
+                  description: 'The ARN of the Key Management Service (KMS) customer managed key that''s used to encrypt your function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption">environment variables</a>. When <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html">Lambda SnapStart</a> is activated, this key is also used to encrypt your function''s snapshot. If you don''t provide a customer managed key, Lambda uses a default service key.'
                   type: string
                   pattern: '(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()'
                 TracingConfig:
@@ -3641,9 +3673,9 @@ paths:
           description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> – <code>my-function</code>.</p> </li> <li> <p> <b>Function ARN</b> – <code>arn:aws:lambda:us-west-2:123456789012:function:my-function</code>.</p> </li> <li> <p> <b>Partial ARN</b> – <code>123456789012:function:my-function</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
           schema:
             type: string
-            pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+            pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
             minLength: 1
-            maxLength: 140
+            maxLength: 170
         - name: Qualifier
           in: query
           required: false
@@ -5547,6 +5579,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ScalingConfig'
             - description: '(Amazon SQS only) The scaling configuration for the event source. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency">Configuring maximum concurrency for Amazon SQS event sources</a>.'
+        DocumentDBEventSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/DocumentDBEventSourceConfig'
+            - description: Specific configuration settings for a DocumentDB event source.
       description: 'A mapping between an Amazon Web Services resource and a Lambda function. For details, see <a>CreateEventSourceMapping</a>.'
     FilterList:
       type: array
@@ -5609,6 +5645,21 @@ components:
       type: integer
       minimum: 2
       maximum: 1000
+    DatabaseName:
+      type: string
+      pattern: '[^ /\.$\x22]*'
+      minLength: 1
+      maxLength: 63
+    CollectionName:
+      type: string
+      pattern: '(^(?!(system\x2e)))(^[_a-zA-Z0-9])([^$]*)'
+      minLength: 1
+      maxLength: 57
+    FullDocument:
+      type: string
+      enum:
+        - UpdateLookup
+        - Default
     FunctionConfiguration:
       type: object
       properties:
@@ -5675,7 +5726,7 @@ components:
         KMSKeyArn:
           allOf:
             - $ref: '#/components/schemas/KMSKeyArn'
-            - description: The KMS key that's used to encrypt the function's environment variables. This key is returned only if you've configured a customer managed key.
+            - description: 'The KMS key that''s used to encrypt the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption">environment variables</a>. When <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html">Lambda SnapStart</a> is activated, this key is also used to encrypt the function''s snapshot. This key is returned only if you''ve configured a customer managed key.'
         TracingConfig:
           allOf:
             - $ref: '#/components/schemas/TracingConfigResponse'
@@ -5860,7 +5911,7 @@ components:
         AuthType:
           allOf:
             - $ref: '#/components/schemas/FunctionUrlAuthType'
-            - description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
+            - description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
         Cors:
           allOf:
             - $ref: '#/components/schemas/Cors'
@@ -5997,7 +6048,7 @@ components:
         AuthType:
           allOf:
             - $ref: '#/components/schemas/FunctionUrlAuthType'
-            - description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
+            - description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
         Cors:
           allOf:
             - $ref: '#/components/schemas/Cors'
@@ -6110,6 +6161,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RuntimeVersionArn'
             - description: 'The ARN of the runtime the function is configured to use. If the runtime update mode is <b>Manual</b>, the ARN is returned, otherwise <code>null</code> is returned.'
+        FunctionArn:
+          allOf:
+            - $ref: '#/components/schemas/NameSpacedFunctionArn'
+            - description: The Amazon Resource Name (ARN) of your function.
     InvocationResponse:
       type: object
       properties:
@@ -6452,7 +6507,7 @@ components:
         AuthType:
           allOf:
             - $ref: '#/components/schemas/FunctionUrlAuthType'
-            - description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
+            - description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
         Cors:
           allOf:
             - $ref: '#/components/schemas/Cors'
@@ -6636,7 +6691,7 @@ components:
         FunctionUrlAuthType:
           allOf:
             - $ref: '#/components/schemas/FunctionUrlAuthType'
-            - description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
+            - description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
     AdditionalVersion:
       type: string
       pattern: '[0-9]+'
@@ -6955,6 +7010,22 @@ components:
             - $ref: '#/components/schemas/MaximumConcurrency'
             - description: Limits the number of concurrent instances that the Amazon SQS event source can invoke.
       description: '(Amazon SQS only) The scaling configuration for the event source. To remove the configuration, pass an empty value.'
+    DocumentDBEventSourceConfig:
+      type: object
+      properties:
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseName'
+            - description: ' The name of the database to consume within the DocumentDB cluster. '
+        CollectionName:
+          allOf:
+            - $ref: '#/components/schemas/CollectionName'
+            - description: ' The name of the collection to consume within the database. If you do not specify a collection, Lambda consumes all collections. '
+        FullDocument:
+          allOf:
+            - $ref: '#/components/schemas/FullDocument'
+            - description: ' Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. '
+      description: ' Specific configuration settings for a DocumentDB event source. '
     CreateEventSourceMappingRequest:
       type: object
       required:
@@ -7049,6 +7120,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ScalingConfig'
             - description: '(Amazon SQS only) The scaling configuration for the event source. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency">Configuring maximum concurrency for Amazon SQS event sources</a>.'
+        DocumentDBEventSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/DocumentDBEventSourceConfig'
+            - description: Specific configuration settings for a DocumentDB event source.
     RoleArn:
       type: string
       pattern: 'arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
@@ -7193,7 +7268,7 @@ components:
         Runtime:
           allOf:
             - $ref: '#/components/schemas/Runtime'
-            - description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>. Runtime is required if the deployment package is a .zip file archive. '
+            - description: '<p>The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>. Runtime is required if the deployment package is a .zip file archive.</p> <p>The following list includes deprecated runtimes. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy">Runtime deprecation policy</a>.</p>'
         Role:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
@@ -7241,7 +7316,7 @@ components:
         KMSKeyArn:
           allOf:
             - $ref: '#/components/schemas/KMSKeyArn'
-            - description: 'The ARN of the Key Management Service (KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, Lambda uses a default service key.'
+            - description: 'The ARN of the Key Management Service (KMS) customer managed key that''s used to encrypt your function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption">environment variables</a>. When <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html">Lambda SnapStart</a> is activated, this key is also used to encrypt your function''s snapshot. If you don''t provide a customer managed key, Lambda uses a default service key.'
         TracingConfig:
           allOf:
             - $ref: '#/components/schemas/TracingConfig'
@@ -7292,7 +7367,7 @@ components:
         AuthType:
           allOf:
             - $ref: '#/components/schemas/FunctionUrlAuthType'
-            - description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
+            - description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
         Cors:
           allOf:
             - $ref: '#/components/schemas/Cors'
@@ -7632,7 +7707,7 @@ components:
         AuthType:
           allOf:
             - $ref: '#/components/schemas/FunctionUrlAuthType'
-            - description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
+            - description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
       description: Details about a Lambda function URL.
     FunctionUrlConfigList:
       type: array
@@ -8273,6 +8348,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ScalingConfig'
             - description: '(Amazon SQS only) The scaling configuration for the event source. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency">Configuring maximum concurrency for Amazon SQS event sources</a>.'
+        DocumentDBEventSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/DocumentDBEventSourceConfig'
+            - description: Specific configuration settings for a DocumentDB event source.
     UpdateFunctionCodeRequest:
       type: object
       title: UpdateFunctionCodeRequest
@@ -8348,7 +8427,7 @@ components:
         Runtime:
           allOf:
             - $ref: '#/components/schemas/Runtime'
-            - description: 'The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>. Runtime is required if the deployment package is a .zip file archive. '
+            - description: '<p>The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>. Runtime is required if the deployment package is a .zip file archive.</p> <p>The following list includes deprecated runtimes. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy">Runtime deprecation policy</a>.</p>'
         DeadLetterConfig:
           allOf:
             - $ref: '#/components/schemas/DeadLetterConfig'
@@ -8356,7 +8435,7 @@ components:
         KMSKeyArn:
           allOf:
             - $ref: '#/components/schemas/KMSKeyArn'
-            - description: 'The ARN of the Key Management Service (KMS) key that''s used to encrypt your function''s environment variables. If it''s not provided, Lambda uses a default service key.'
+            - description: 'The ARN of the Key Management Service (KMS) customer managed key that''s used to encrypt your function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption">environment variables</a>. When <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html">Lambda SnapStart</a> is activated, this key is also used to encrypt your function''s snapshot. If you don''t provide a customer managed key, Lambda uses a default service key.'
         TracingConfig:
           allOf:
             - $ref: '#/components/schemas/TracingConfig'
@@ -8408,7 +8487,7 @@ components:
         AuthType:
           allOf:
             - $ref: '#/components/schemas/FunctionUrlAuthType'
-            - description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated IAM users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
+            - description: 'The type of authentication that your function URL uses. Set to <code>AWS_IAM</code> if you want to restrict access to authenticated users only. Set to <code>NONE</code> if you want to bypass IAM authentication to create a public endpoint. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html">Security and auth model for Lambda function URLs</a>.'
         Cors:
           allOf:
             - $ref: '#/components/schemas/Cors'

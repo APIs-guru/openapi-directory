@@ -3,7 +3,7 @@ info:
   version: '2018-11-01'
   x-release: v4
   title: Amazon Timestream Write
-  description: '<fullname>Amazon Timestream Write</fullname> <p>Amazon Timestream is a fast, scalable, fully managed time series database service that makes it easy to store and analyze trillions of time series data points per day. With Timestream, you can easily store and analyze IoT sensor data to derive insights from your IoT applications. You can analyze industrial telemetry to streamline equipment management and maintenance. You can also store and analyze log data and metrics to improve the performance and availability of your applications. Timestream is built from the ground up to effectively ingest, process, and store time series data. It organizes data to optimize query processing. It automatically scales based on the volume of data ingested and on the query volume to ensure you receive optimal performance while inserting and querying data. As your data grows over time, Timestream’s adaptive query processing engine spans across storage tiers to provide fast analysis while reducing costs.</p>'
+  description: '<fullname>Amazon Timestream Write</fullname> <p>Amazon Timestream is a fast, scalable, fully managed time-series database service that makes it easy to store and analyze trillions of time-series data points per day. With Timestream, you can easily store and analyze IoT sensor data to derive insights from your IoT applications. You can analyze industrial telemetry to streamline equipment management and maintenance. You can also store and analyze log data and metrics to improve the performance and availability of your applications. </p> <p>Timestream is built from the ground up to effectively ingest, process, and store time-series data. It organizes data to optimize query processing. It automatically scales based on the volume of data ingested and on the query volume to ensure you receive optimal performance while inserting and querying data. As your data grows over time, Timestream’s adaptive query processing engine spans across storage tiers to provide fast analysis while reducing costs.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -115,10 +115,91 @@ servers:
     description: The Timestream Write endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#X-Amz-Target=Timestream_20181101.CreateBatchLoadTask:
+    post:
+      operationId: CreateBatchLoadTask
+      description: 'Creates a new Timestream batch load task. A batch load task processes data from a CSV source in an S3 location and writes to a Timestream table. A mapping from source to target is defined in a batch load task. Errors and events are written to a report at an S3 location. For the report, if the KMS key is not specified, the batch load task will be encrypted with a Timestream managed KMS key located in your account. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed keys</a>. <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html">Service quotas apply</a>. For details, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-batch-load.html">code sample</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBatchLoadTaskResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '487':
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidEndpointException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBatchLoadTaskRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.CreateBatchLoadTask
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Timestream_20181101.CreateDatabase:
     post:
       operationId: CreateDatabase
-      description: 'Creates a new Timestream database. If the KMS key is not specified, the database will be encrypted with a Timestream managed KMS key located in your account. Refer to <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed KMS keys</a> for more info. <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html">Service quotas apply</a>. See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-db.html">code sample</a> for details. '
+      description: 'Creates a new Timestream database. If the KMS key is not specified, the database will be encrypted with a Timestream managed KMS key located in your account. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed keys</a>. <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html">Service quotas apply</a>. For details, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-db.html">code sample</a>. '
       responses:
         '200':
           description: Success
@@ -199,7 +280,7 @@ paths:
   /#X-Amz-Target=Timestream_20181101.CreateTable:
     post:
       operationId: CreateTable
-      description: 'The CreateTable operation adds a new table to an existing database in your account. In an Amazon Web Services account, table names must be at least unique within each Region if they are in the same database. You may have identical table names in the same Region if the tables are in separate databases. While creating the table, you must specify the table name, database name, and the retention properties. <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html">Service quotas apply</a>. See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-table.html">code sample</a> for details. '
+      description: 'Adds a new table to an existing database in your account. In an Amazon Web Services account, table names must be at least unique within each Region if they are in the same database. You might have identical table names in the same Region if the tables are in separate databases. While creating the table, you must specify the table name, database name, and the retention properties. <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html">Service quotas apply</a>. See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-table.html">code sample</a> for details. '
       responses:
         '200':
           description: Success
@@ -286,7 +367,7 @@ paths:
   /#X-Amz-Target=Timestream_20181101.DeleteDatabase:
     post:
       operationId: DeleteDatabase
-      description: '<p>Deletes a given Timestream database. <i>This is an irreversible operation. After a database is deleted, the time series data from its tables cannot be recovered.</i> </p> <note> <p>All tables in the database must be deleted first, or a ValidationException error will be thrown. </p> <p>Due to the nature of distributed retries, the operation can return either success or a ResourceNotFoundException. Clients should consider them equivalent.</p> </note> <p>See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.delete-db.html">code sample</a> for details.</p>'
+      description: '<p>Deletes a given Timestream database. <i>This is an irreversible operation. After a database is deleted, the time-series data from its tables cannot be recovered.</i> </p> <note> <p>All tables in the database must be deleted first, or a ValidationException error will be thrown. </p> <p>Due to the nature of distributed retries, the operation can return either success or a ResourceNotFoundException. Clients should consider them equivalent.</p> </note> <p>See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.delete-db.html">code sample</a> for details.</p>'
       responses:
         '200':
           description: Success
@@ -351,7 +432,7 @@ paths:
   /#X-Amz-Target=Timestream_20181101.DeleteTable:
     post:
       operationId: DeleteTable
-      description: '<p>Deletes a given Timestream table. This is an irreversible operation. After a Timestream database table is deleted, the time series data stored in the table cannot be recovered. </p> <note> <p>Due to the nature of distributed retries, the operation can return either success or a ResourceNotFoundException. Clients should consider them equivalent.</p> </note> <p>See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.delete-table.html">code sample</a> for details.</p>'
+      description: '<p>Deletes a given Timestream table. This is an irreversible operation. After a Timestream database table is deleted, the time-series data stored in the table cannot be recovered. </p> <note> <p>Due to the nature of distributed retries, the operation can return either success or a ResourceNotFoundException. Clients should consider them equivalent.</p> </note> <p>See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.delete-table.html">code sample</a> for details.</p>'
       responses:
         '200':
           description: Success
@@ -405,6 +486,69 @@ paths:
             type: string
             enum:
               - Timestream_20181101.DeleteTable
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Timestream_20181101.DescribeBatchLoadTask:
+    post:
+      operationId: DescribeBatchLoadTask
+      description: 'Returns information about the batch load task, including configurations, mappings, progress, and other details. <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html">Service quotas apply</a>. See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.describe-batch-load.html">code sample</a> for details.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBatchLoadTaskResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidEndpointException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeBatchLoadTaskRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.DescribeBatchLoadTask
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -485,7 +629,7 @@ paths:
   /#X-Amz-Target=Timestream_20181101.DescribeEndpoints:
     post:
       operationId: DescribeEndpoints
-      description: '<p>DescribeEndpoints returns a list of available endpoints to make Timestream API calls against. This API is available through both Write and Query.</p> <p>Because the Timestream SDKs are designed to transparently work with the service’s architecture, including the management and mapping of the service endpoints, <i>it is not recommended that you use this API unless</i>:</p> <ul> <li> <p>You are using <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/VPCEndpoints">VPC endpoints (Amazon Web Services PrivateLink) with Timestream</a> </p> </li> <li> <p>Your application uses a programming language that does not yet have SDK support</p> </li> <li> <p>You require better control over the client-side implementation</p> </li> </ul> <p>For detailed information on how and when to use and implement DescribeEndpoints, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery">The Endpoint Discovery Pattern</a>.</p>'
+      description: '<p>Returns a list of available endpoints to make Timestream API calls against. This API operation is available through both the Write and Query APIs.</p> <p>Because the Timestream SDKs are designed to transparently work with the service’s architecture, including the management and mapping of the service endpoints, <i>we don''t recommend that you use this API operation unless</i>:</p> <ul> <li> <p>You are using <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/VPCEndpoints">VPC endpoints (Amazon Web Services PrivateLink) with Timestream</a> </p> </li> <li> <p>Your application uses a programming language that does not yet have SDK support</p> </li> <li> <p>You require better control over the client-side implementation</p> </li> </ul> <p>For detailed information on how and when to use and implement DescribeEndpoints, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery">The Endpoint Discovery Pattern</a>.</p>'
       responses:
         '200':
           description: Success
@@ -602,6 +746,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Timestream_20181101.ListBatchLoadTasks:
+    post:
+      operationId: ListBatchLoadTasks
+      description: 'Provides a list of batch load tasks, along with the name, status, when the task is resumable until, and other details. See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-batch-load-tasks.html">code sample</a> for details.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBatchLoadTasksResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidEndpointException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListBatchLoadTasksRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.ListBatchLoadTasks
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Timestream_20181101.ListDatabases:
     post:
       operationId: ListDatabases
@@ -680,7 +899,7 @@ paths:
   /#X-Amz-Target=Timestream_20181101.ListTables:
     post:
       operationId: ListTables
-      description: 'A list of tables, along with the name, status and retention properties of each table. See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-table.html">code sample</a> for details. '
+      description: 'Provides a list of tables, along with the name, status, and retention properties of each table. See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-table.html">code sample</a> for details. '
       responses:
         '200':
           description: Success
@@ -761,7 +980,7 @@ paths:
   /#X-Amz-Target=Timestream_20181101.ListTagsForResource:
     post:
       operationId: ListTagsForResource
-      description: ' List all tags on a Timestream resource. '
+      description: ' Lists all tags on a Timestream resource. '
       responses:
         '200':
           description: Success
@@ -815,10 +1034,79 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Timestream_20181101.ResumeBatchLoadTask:
+    post:
+      operationId: ResumeBatchLoadTask
+      description: ' '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResumeBatchLoadTaskResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: InvalidEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidEndpointException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResumeBatchLoadTaskRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Timestream_20181101.ResumeBatchLoadTask
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Timestream_20181101.TagResource:
     post:
       operationId: TagResource
-      description: ' Associate a set of tags with a Timestream resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking. '
+      description: ' Associates a set of tags with a Timestream resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking. '
       responses:
         '200':
           description: Success
@@ -1088,7 +1376,7 @@ paths:
   /#X-Amz-Target=Timestream_20181101.WriteRecords:
     post:
       operationId: WriteRecords
-      description: '<p>The WriteRecords operation enables you to write your time series data into Timestream. You can specify a single data point or a batch of data points to be inserted into the system. Timestream offers you with a flexible schema that auto detects the column names and data types for your Timestream tables based on the dimension names and data types of the data points you specify when invoking writes into the database. Timestream support eventual consistency read semantics. This means that when you query data immediately after writing a batch of data into Timestream, the query results might not reflect the results of a recently completed write operation. The results may also include some stale data. If you repeat the query request after a short time, the results should return the latest data. <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html">Service quotas apply</a>. </p> <p>See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.write.html">code sample</a> for details.</p> <p> <b>Upserts</b> </p> <p>You can use the <code>Version</code> parameter in a <code>WriteRecords</code> request to update data points. Timestream tracks a version number with each record. <code>Version</code> defaults to <code>1</code> when not specified for the record in the request. Timestream will update an existing record’s measure value along with its <code>Version</code> upon receiving a write request with a higher <code>Version</code> number for that record. Upon receiving an update request where the measure value is the same as that of the existing record, Timestream still updates <code>Version</code>, if it is greater than the existing value of <code>Version</code>. You can update a data point as many times as desired, as long as the value of <code>Version</code> continuously increases. </p> <p> For example, suppose you write a new record without indicating <code>Version</code> in the request. Timestream will store this record, and set <code>Version</code> to <code>1</code>. Now, suppose you try to update this record with a <code>WriteRecords</code> request of the same record with a different measure value but, like before, do not provide <code>Version</code>. In this case, Timestream will reject this update with a <code>RejectedRecordsException</code> since the updated record’s version is not greater than the existing value of Version. However, if you were to resend the update request with <code>Version</code> set to <code>2</code>, Timestream would then succeed in updating the record’s value, and the <code>Version</code> would be set to <code>2</code>. Next, suppose you sent a <code>WriteRecords</code> request with this same record and an identical measure value, but with <code>Version</code> set to <code>3</code>. In this case, Timestream would only update <code>Version</code> to <code>3</code>. Any further updates would need to send a version number greater than <code>3</code>, or the update requests would receive a <code>RejectedRecordsException</code>. </p>'
+      description: '<p>Enables you to write your time-series data into Timestream. You can specify a single data point or a batch of data points to be inserted into the system. Timestream offers you a flexible schema that auto detects the column names and data types for your Timestream tables based on the dimension names and data types of the data points you specify when invoking writes into the database. </p> <p>Timestream supports eventual consistency read semantics. This means that when you query data immediately after writing a batch of data into Timestream, the query results might not reflect the results of a recently completed write operation. The results may also include some stale data. If you repeat the query request after a short time, the results should return the latest data. <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html">Service quotas apply</a>. </p> <p>See <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.write.html">code sample</a> for details.</p> <p> <b>Upserts</b> </p> <p>You can use the <code>Version</code> parameter in a <code>WriteRecords</code> request to update data points. Timestream tracks a version number with each record. <code>Version</code> defaults to <code>1</code> when it''s not specified for the record in the request. Timestream updates an existing record’s measure value along with its <code>Version</code> when it receives a write request with a higher <code>Version</code> number for that record. When it receives an update request where the measure value is the same as that of the existing record, Timestream still updates <code>Version</code>, if it is greater than the existing value of <code>Version</code>. You can update a data point as many times as desired, as long as the value of <code>Version</code> continuously increases. </p> <p> For example, suppose you write a new record without indicating <code>Version</code> in the request. Timestream stores this record, and set <code>Version</code> to <code>1</code>. Now, suppose you try to update this record with a <code>WriteRecords</code> request of the same record with a different measure value but, like before, do not provide <code>Version</code>. In this case, Timestream will reject this update with a <code>RejectedRecordsException</code> since the updated record’s version is not greater than the existing value of Version. </p> <p>However, if you were to resend the update request with <code>Version</code> set to <code>2</code>, Timestream would then succeed in updating the record’s value, and the <code>Version</code> would be set to <code>2</code>. Next, suppose you sent a <code>WriteRecords</code> request with this same record and an identical measure value, but with <code>Version</code> set to <code>3</code>. In this case, Timestream would only update <code>Version</code> to <code>3</code>. Any further updates would need to send a version number greater than <code>3</code>, or the update requests would receive a <code>RejectedRecordsException</code>. </p>'
       responses:
         '200':
           description: Success
@@ -1212,6 +1500,56 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    CreateBatchLoadTaskResponse:
+      type: object
+      required:
+        - TaskId
+      properties:
+        TaskId:
+          allOf:
+            - $ref: '#/components/schemas/BatchLoadTaskId'
+            - description: The ID of the batch load task.
+    CreateBatchLoadTaskRequest:
+      type: object
+      required:
+        - DataSourceConfiguration
+        - ReportConfiguration
+        - TargetDatabaseName
+        - TargetTableName
+      title: CreateBatchLoadTaskRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: <p/>
+        DataModelConfiguration:
+          $ref: '#/components/schemas/DataModelConfiguration'
+        DataSourceConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceConfiguration'
+            - description: Defines configuration details about the data source for a batch load task.
+        ReportConfiguration:
+          $ref: '#/components/schemas/ReportConfiguration'
+        TargetDatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceCreateAPIName'
+            - description: Target Timestream database for a batch load task.
+        TargetTableName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceCreateAPIName'
+            - description: Target Timestream table for a batch load task.
+        RecordVersion:
+          allOf:
+            - $ref: '#/components/schemas/RecordVersion'
+            - description: <p/>
+    InternalServerException: {}
+    ThrottlingException: {}
+    AccessDeniedException: {}
+    ValidationException: {}
+    ConflictException: {}
+    ResourceNotFoundException: {}
+    ServiceQuotaExceededException: {}
+    InvalidEndpointException: {}
     CreateDatabaseResponse:
       type: object
       properties:
@@ -1232,18 +1570,11 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/StringValue2048'
-            - description: 'The KMS key for the database. If the KMS key is not specified, the database will be encrypted with a Timestream managed KMS key located in your account. Refer to <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed KMS keys</a> for more info.'
+            - description: 'The KMS key for the database. If the KMS key is not specified, the database will be encrypted with a Timestream managed KMS key located in your account. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed keys</a>.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: ' A list of key-value pairs to label the table. '
-    ConflictException: {}
-    ValidationException: {}
-    AccessDeniedException: {}
-    ServiceQuotaExceededException: {}
-    ThrottlingException: {}
-    InvalidEndpointException: {}
-    InternalServerException: {}
     CreateTableResponse:
       type: object
       properties:
@@ -1269,7 +1600,7 @@ components:
         RetentionProperties:
           allOf:
             - $ref: '#/components/schemas/RetentionProperties'
-            - description: The duration for which your time series data must be stored in the memory store and the magnetic store.
+            - description: The duration for which your time-series data must be stored in the memory store and the magnetic store.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -1278,7 +1609,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/MagneticStoreWriteProperties'
             - description: Contains properties to set on the table when enabling magnetic store writes.
-    ResourceNotFoundException: {}
     DeleteDatabaseRequest:
       type: object
       required:
@@ -1304,6 +1634,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the Timestream table to be deleted.
+    DescribeBatchLoadTaskResponse:
+      type: object
+      required:
+        - BatchLoadTaskDescription
+      properties:
+        BatchLoadTaskDescription:
+          allOf:
+            - $ref: '#/components/schemas/BatchLoadTaskDescription'
+            - description: Description of the batch load task.
+    DescribeBatchLoadTaskRequest:
+      type: object
+      required:
+        - TaskId
+      title: DescribeBatchLoadTaskRequest
+      properties:
+        TaskId:
+          allOf:
+            - $ref: '#/components/schemas/BatchLoadTaskId'
+            - description: The ID of the batch load task.
     DescribeDatabaseResponse:
       type: object
       properties:
@@ -1356,6 +1705,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the Timestream table.
+    ListBatchLoadTasksResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A token to specify where to start paginating. Provide the next ListBatchLoadTasksRequest.
+        BatchLoadTasks:
+          allOf:
+            - $ref: '#/components/schemas/BatchLoadTaskList'
+            - description: A list of batch load task details.
+    ListBatchLoadTasksRequest:
+      type: object
+      title: ListBatchLoadTasksRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/PageLimit'
+            - description: 'The total number of items to return in the output. If the total number of items available is more than the value specified, a NextToken is provided in the output. To resume pagination, provide the NextToken value as argument of a subsequent API invocation.'
+        TaskStatus:
+          allOf:
+            - $ref: '#/components/schemas/BatchLoadStatus'
+            - description: Status of the batch load task.
     ListDatabasesResponse:
       type: object
       properties:
@@ -1423,6 +1799,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
             - description: ' The Timestream resource with tags to be listed. This value is an Amazon Resource Name (ARN). '
+    ResumeBatchLoadTaskResponse:
+      type: object
+      properties: {}
+    ResumeBatchLoadTaskRequest:
+      type: object
+      required:
+        - TaskId
+      title: ResumeBatchLoadTaskRequest
+      properties:
+        TaskId:
+          allOf:
+            - $ref: '#/components/schemas/BatchLoadTaskId'
+            - description: The ID of the batch load task to resume.
     TagResourceResponse:
       type: object
       properties: {}
@@ -1535,25 +1924,214 @@ components:
         CommonAttributes:
           allOf:
             - $ref: '#/components/schemas/Record'
-            - description: 'A record containing the common measure, dimension, time, and version attributes shared across all the records in the request. The measure and dimension attributes specified will be merged with the measure and dimension attributes in the records object when the data is written into Timestream. Dimensions may not overlap, or a <code>ValidationException</code> will be thrown. In other words, a record must contain dimensions with unique names. '
+            - description: 'A record that contains the common measure, dimension, time, and version attributes shared across all the records in the request. The measure and dimension attributes specified will be merged with the measure and dimension attributes in the records object when the data is written into Timestream. Dimensions may not overlap, or a <code>ValidationException</code> will be thrown. In other words, a record must contain dimensions with unique names. '
         Records:
           allOf:
             - $ref: '#/components/schemas/Records'
-            - description: 'An array of records containing the unique measure, dimension, time, and version attributes for each time series data point. '
+            - description: 'An array of records that contain the unique measure, dimension, time, and version attributes for each time-series data point. '
     RejectedRecordsException: {}
     AmazonResourceName:
       type: string
       minLength: 1
       maxLength: 1011
-    Boolean:
-      type: boolean
-    ResourceCreateAPIName:
+    BatchLoadDataFormat:
       type: string
-      pattern: '[a-zA-Z0-9_.-]+'
+      enum:
+        - CSV
+    Long:
+      type: integer
+    BatchLoadProgressReport:
+      type: object
+      properties:
+        RecordsProcessed:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: <p/>
+        RecordsIngested:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: <p/>
+        ParseFailures:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: <p/>
+        RecordIngestionFailures:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: <p/>
+        FileFailures:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: <p/>
+        BytesMetered:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: <p/>
+      description: Details about the progress of a batch load task.
+    BatchLoadStatus:
+      type: string
+      enum:
+        - CREATED
+        - IN_PROGRESS
+        - FAILED
+        - SUCCEEDED
+        - PROGRESS_STOPPED
+        - PENDING_RESUME
+    BatchLoadTaskId:
+      type: string
+      pattern: '[A-Z0-9]+'
+      minLength: 3
+      maxLength: 32
+    ResourceName:
+      type: string
+    Date:
+      type: string
+      format: date-time
+    BatchLoadTask:
+      type: object
+      properties:
+        TaskId:
+          allOf:
+            - $ref: '#/components/schemas/BatchLoadTaskId'
+            - description: The ID of the batch load task.
+        TaskStatus:
+          allOf:
+            - $ref: '#/components/schemas/BatchLoadStatus'
+            - description: Status of the batch load task.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: Database name for the database into which a batch load task loads data.
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: Table name for the table into which a batch load task loads data.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The time when the Timestream batch load task was created.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The time when the Timestream batch load task was last updated.
+        ResumableUntil:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' '
+      description: Details about a batch load task.
     StringValue2048:
       type: string
       minLength: 1
       maxLength: 2048
+    DataSourceConfiguration:
+      type: object
+      required:
+        - DataSourceS3Configuration
+        - DataFormat
+      properties:
+        DataSourceS3Configuration:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceS3Configuration'
+            - description: Configuration of an S3 location for a file which contains data to load.
+        CsvConfiguration:
+          $ref: '#/components/schemas/CsvConfiguration'
+        DataFormat:
+          allOf:
+            - $ref: '#/components/schemas/BatchLoadDataFormat'
+            - description: This is currently CSV.
+      description: Defines configuration details about the data source.
+    ReportConfiguration:
+      type: object
+      properties:
+        ReportS3Configuration:
+          allOf:
+            - $ref: '#/components/schemas/ReportS3Configuration'
+            - description: Configuration of an S3 location to write error reports and events for a batch load.
+      description: Report configuration for a batch load task. This contains details about where error reports are stored.
+    DataModelConfiguration:
+      type: object
+      properties:
+        DataModel:
+          allOf:
+            - $ref: '#/components/schemas/DataModel'
+            - description: <p/>
+        DataModelS3Configuration:
+          allOf:
+            - $ref: '#/components/schemas/DataModelS3Configuration'
+            - description: <p/>
+      description: <p/>
+    RecordVersion:
+      type: integer
+    BatchLoadTaskDescription:
+      type: object
+      properties:
+        TaskId:
+          allOf:
+            - $ref: '#/components/schemas/BatchLoadTaskId'
+            - description: The ID of the batch load task.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/StringValue2048'
+            - description: <p/>
+        DataSourceConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceConfiguration'
+            - description: Configuration details about the data source for a batch load task.
+        ProgressReport:
+          allOf:
+            - $ref: '#/components/schemas/BatchLoadProgressReport'
+            - description: <p/>
+        ReportConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ReportConfiguration'
+            - description: Report configuration for a batch load task. This contains details about where error reports are stored.
+        DataModelConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/DataModelConfiguration'
+            - description: Data model configuration for a batch load task. This contains details about where a data model for a batch load task is stored.
+        TargetDatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: <p/>
+        TargetTableName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: <p/>
+        TaskStatus:
+          allOf:
+            - $ref: '#/components/schemas/BatchLoadStatus'
+            - description: Status of the batch load task.
+        RecordVersion:
+          allOf:
+            - $ref: '#/components/schemas/RecordVersion'
+            - description: <p/>
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The time when the Timestream batch load task was created.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The time when the Timestream batch load task was last updated.
+        ResumableUntil:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' '
+      description: Details about a batch load task.
+    BatchLoadTaskList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchLoadTask'
+    Boolean:
+      type: boolean
+    ClientRequestToken:
+      type: string
+      minLength: 1
+      maxLength: 64
+      format: password
+    ResourceCreateAPIName:
+      type: string
+      pattern: '[a-zA-Z0-9_.-]+'
     TagList:
       type: array
       items:
@@ -1587,7 +2165,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Date'
             - description: ' The last time that this database was updated. '
-      description: A top level container for a table. Databases and tables are the fundamental management concepts in Amazon Timestream. All tables in a database are encrypted with the same KMS key.
+      description: A top-level container for a table. Databases and tables are the fundamental management concepts in Amazon Timestream. All tables in a database are encrypted with the same KMS key.
     RetentionProperties:
       type: object
       required:
@@ -1602,7 +2180,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/MagneticStoreRetentionPeriodInDays'
             - description: 'The duration for which data must be stored in the magnetic store. '
-      description: 'Retention properties contain the duration for which your time series data must be stored in the magnetic store and the memory store. '
+      description: 'Retention properties contain the duration for which your time-series data must be stored in the magnetic store and the memory store. '
     MagneticStoreWriteProperties:
       type: object
       required:
@@ -1652,16 +2230,138 @@ components:
           allOf:
             - $ref: '#/components/schemas/MagneticStoreWriteProperties'
             - description: Contains properties to set on the table when enabling magnetic store writes.
-      description: 'Table represents a database table in Timestream. Tables contain one or more related time series. You can modify the retention duration of the memory store and the magnetic store for a table. '
+      description: 'Represents a database table in Timestream. Tables contain one or more related time series. You can modify the retention duration of the memory store and the magnetic store for a table. '
+    StringValue1:
+      type: string
+      minLength: 1
+      maxLength: 1
+    StringValue256:
+      type: string
+      minLength: 1
+      maxLength: 256
+    CsvConfiguration:
+      type: object
+      properties:
+        ColumnSeparator:
+          allOf:
+            - $ref: '#/components/schemas/StringValue1'
+            - description: 'Column separator can be one of comma ('',''), pipe (''|), semicolon ('';''), tab(''/t''), or blank space ('' ''). '
+        EscapeChar:
+          allOf:
+            - $ref: '#/components/schemas/StringValue1'
+            - description: 'Escape character can be one of '
+        QuoteChar:
+          allOf:
+            - $ref: '#/components/schemas/StringValue1'
+            - description: Can be single quote (') or double quote (").
+        NullValue:
+          allOf:
+            - $ref: '#/components/schemas/StringValue256'
+            - description: Can be blank space (' ').
+        TrimWhiteSpace:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies to trim leading and trailing white space.
+      description: A delimited data format where the column separator can be a comma and the record separator is a newline character.
+    TimeUnit:
+      type: string
+      enum:
+        - MILLISECONDS
+        - SECONDS
+        - MICROSECONDS
+        - NANOSECONDS
+    DimensionMappings:
+      type: array
+      items:
+        $ref: '#/components/schemas/DimensionMapping'
+      minItems: 1
+    MultiMeasureMappings:
+      type: object
+      required:
+        - MultiMeasureAttributeMappings
+      properties:
+        TargetMultiMeasureName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaName'
+            - description: <p/>
+        MultiMeasureAttributeMappings:
+          allOf:
+            - $ref: '#/components/schemas/MultiMeasureAttributeMappingList'
+            - description: <p/>
+      description: <p/>
+    MixedMeasureMappingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MixedMeasureMapping'
+      minItems: 1
+    DataModel:
+      type: object
+      required:
+        - DimensionMappings
+      properties:
+        TimeColumn:
+          allOf:
+            - $ref: '#/components/schemas/StringValue256'
+            - description: Source column to be mapped to time.
+        TimeUnit:
+          allOf:
+            - $ref: '#/components/schemas/TimeUnit'
+            - description: ' The granularity of the timestamp unit. It indicates if the time value is in seconds, milliseconds, nanoseconds, or other supported values. Default is <code>MILLISECONDS</code>. '
+        DimensionMappings:
+          allOf:
+            - $ref: '#/components/schemas/DimensionMappings'
+            - description: Source to target mappings for dimensions.
+        MultiMeasureMappings:
+          allOf:
+            - $ref: '#/components/schemas/MultiMeasureMappings'
+            - description: Source to target mappings for multi-measure records.
+        MixedMeasureMappings:
+          allOf:
+            - $ref: '#/components/schemas/MixedMeasureMappingList'
+            - description: Source to target mappings for measures.
+        MeasureNameColumn:
+          allOf:
+            - $ref: '#/components/schemas/StringValue256'
+            - description: <p/>
+      description: Data model for a batch load task.
+    DataModelS3Configuration:
+      type: object
+      properties:
+        BucketName:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: <p/>
+        ObjectKey:
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectKey'
+            - description: <p/>
+      description: <p/>
+    S3BucketName:
+      type: string
+      pattern: '[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9]'
+      minLength: 3
+      maxLength: 63
+    S3ObjectKey:
+      type: string
+      pattern: '[a-zA-Z0-9|!\-_*''\(\)]([a-zA-Z0-9]|[!\-_*''\(\)\/.])+'
+      minLength: 1
+      maxLength: 1024
+    DataSourceS3Configuration:
+      type: object
+      required:
+        - BucketName
+      properties:
+        BucketName:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The bucket name of the customer S3 bucket.
+        ObjectKeyPrefix:
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectKey'
+            - description: ' '
+      description: ' '
     String:
       type: string
-    ResourceName:
-      type: string
-    Long:
-      type: integer
-    Date:
-      type: string
-      format: date-time
     DatabaseList:
       type: array
       items:
@@ -1688,7 +2388,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/SchemaName'
-            - description: '<p> Dimension represents the meta data attributes of the time series. For example, the name and availability zone of an EC2 instance or the name of the manufacturer of a wind turbine are dimensions. </p> <p>For constraints on Dimension names, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming">Naming Constraints</a>.</p>'
+            - description: '<p> Dimension represents the metadata attributes of the time series. For example, the name and Availability Zone of an EC2 instance or the name of the manufacturer of a wind turbine are dimensions. </p> <p>For constraints on dimension names, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming">Naming Constraints</a>.</p>'
         Value:
           allOf:
             - $ref: '#/components/schemas/SchemaValue'
@@ -1696,8 +2396,20 @@ components:
         DimensionValueType:
           allOf:
             - $ref: '#/components/schemas/DimensionValueType'
-            - description: The data type of the dimension for the time series data point.
-      description: 'Dimension represents the meta data attributes of the time series. For example, the name and availability zone of an EC2 instance or the name of the manufacturer of a wind turbine are dimensions. '
+            - description: The data type of the dimension for the time-series data point.
+      description: 'Represents the metadata attributes of the time series. For example, the name and Availability Zone of an EC2 instance or the name of the manufacturer of a wind turbine are dimensions. '
+    DimensionMapping:
+      type: object
+      properties:
+        SourceColumn:
+          allOf:
+            - $ref: '#/components/schemas/SchemaName'
+            - description: <p/>
+        DestinationColumn:
+          allOf:
+            - $ref: '#/components/schemas/SchemaName'
+            - description: ' '
+      description: <p/>
     Dimensions:
       type: array
       items:
@@ -1717,9 +2429,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/Long'
             - description: 'The TTL for the endpoint, in minutes.'
-      description: 'Represents an available endpoint against which to make API calls agaisnt, as well as the TTL for that endpoint.'
+      description: 'Represents an available endpoint against which to make API calls against, as well as the TTL for that endpoint.'
     Integer:
       type: integer
+    PageLimit:
+      type: integer
+      minimum: 1
+      maximum: 100
     PaginationLimit:
       type: integer
       minimum: 1
@@ -1734,20 +2450,20 @@ components:
         BucketName:
           allOf:
             - $ref: '#/components/schemas/S3BucketName'
-            - description: '&gt;Bucket name of the customer S3 bucket.'
+            - description: The bucket name of the customer S3 bucket.
         ObjectKeyPrefix:
           allOf:
             - $ref: '#/components/schemas/S3ObjectKeyPrefix'
-            - description: Object key preview for the customer S3 location.
+            - description: The object key preview for the customer S3 location.
         EncryptionOption:
           allOf:
             - $ref: '#/components/schemas/S3EncryptionOption'
-            - description: Encryption option for the customer s3 location. Options are S3 server side encryption with an S3-managed key or KMS managed key.
+            - description: The encryption option for the customer S3 location. Options are S3 server-side encryption with an S3 managed key or Amazon Web Services managed key.
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/StringValue2048'
-            - description: KMS key id for the customer s3 location when encrypting with a KMS managed key.
-      description: Configuration specifing an S3 location.
+            - description: The KMS key ID for the customer S3 location when encrypting with an Amazon Web Services managed key.
+      description: The configuration that specifies an S3 location.
     MagneticStoreRejectedDataLocation:
       type: object
       properties:
@@ -1779,16 +2495,16 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/SchemaName'
-            - description: '<p> Name of the MeasureValue. </p> <p> For constraints on MeasureValue names, refer to <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming"> Naming Constraints</a> in the Timestream developer guide.</p>'
+            - description: '<p> The name of the MeasureValue. </p> <p> For constraints on MeasureValue names, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming"> Naming Constraints</a> in the Amazon Timestream Developer Guide.</p>'
         Value:
           allOf:
             - $ref: '#/components/schemas/StringValue2048'
-            - description: ' Value for the MeasureValue. '
+            - description: ' The value for the MeasureValue. '
         Type:
           allOf:
             - $ref: '#/components/schemas/MeasureValueType'
-            - description: Contains the data type of the MeasureValue for the time series data point.
-      description: '<p> MeasureValue represents the data attribute of the time series. For example, the CPU utilization of an EC2 instance or the RPM of a wind turbine are measures. MeasureValue has both name and value. </p> <p> MeasureValue is only allowed for type <code>MULTI</code>. Using <code>MULTI</code> type, you can pass multiple data attributes associated with the same time series in a single record </p>'
+            - description: Contains the data type of the MeasureValue for the time-series data point.
+      description: '<p> Represents the data attribute of the time series. For example, the CPU utilization of an EC2 instance or the RPM of a wind turbine are measures. MeasureValue has both name and value. </p> <p> MeasureValue is only allowed for type <code>MULTI</code>. Using <code>MULTI</code> type, you can pass multiple data attributes associated with the same time series in a single record </p>'
     MeasureValues:
       type: array
       items:
@@ -1797,26 +2513,70 @@ components:
       type: integer
       minimum: 1
       maximum: 8766
-    StringValue256:
-      type: string
-      minLength: 1
-      maxLength: 256
-    TimeUnit:
+    MultiMeasureAttributeMappingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MultiMeasureAttributeMapping'
+      minItems: 1
+    MixedMeasureMapping:
+      type: object
+      required:
+        - MeasureValueType
+      properties:
+        MeasureName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaName'
+            - description: <p/>
+        SourceColumn:
+          allOf:
+            - $ref: '#/components/schemas/SchemaName'
+            - description: <p/>
+        TargetMeasureName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaName'
+            - description: <p/>
+        MeasureValueType:
+          allOf:
+            - $ref: '#/components/schemas/MeasureValueType'
+            - description: <p/>
+        MultiMeasureAttributeMappings:
+          allOf:
+            - $ref: '#/components/schemas/MultiMeasureAttributeMappingList'
+            - description: <p/>
+      description: <p/>
+    ScalarMeasureValueType:
       type: string
       enum:
-        - MILLISECONDS
-        - SECONDS
-        - MICROSECONDS
-        - NANOSECONDS
-    RecordVersion:
-      type: integer
+        - DOUBLE
+        - BIGINT
+        - BOOLEAN
+        - VARCHAR
+        - TIMESTAMP
+    MultiMeasureAttributeMapping:
+      type: object
+      required:
+        - SourceColumn
+      properties:
+        SourceColumn:
+          allOf:
+            - $ref: '#/components/schemas/SchemaName'
+            - description: <p/>
+        TargetMultiMeasureAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaName'
+            - description: <p/>
+        MeasureValueType:
+          allOf:
+            - $ref: '#/components/schemas/ScalarMeasureValueType'
+            - description: <p/>
+      description: <p/>
     Record:
       type: object
       properties:
         Dimensions:
           allOf:
             - $ref: '#/components/schemas/Dimensions'
-            - description: Contains the list of dimensions for time series data points.
+            - description: Contains the list of dimensions for time-series data points.
         MeasureName:
           allOf:
             - $ref: '#/components/schemas/SchemaName'
@@ -1824,11 +2584,11 @@ components:
         MeasureValue:
           allOf:
             - $ref: '#/components/schemas/StringValue2048'
-            - description: ' Contains the measure value for the time series data point. '
+            - description: ' Contains the measure value for the time-series data point. '
         MeasureValueType:
           allOf:
             - $ref: '#/components/schemas/MeasureValueType'
-            - description: ' Contains the data type of the measure value for the time series data point. Default type is <code>DOUBLE</code>. '
+            - description: ' Contains the data type of the measure value for the time-series data point. Default type is <code>DOUBLE</code>. '
         Time:
           allOf:
             - $ref: '#/components/schemas/StringValue256'
@@ -1836,16 +2596,16 @@ components:
         TimeUnit:
           allOf:
             - $ref: '#/components/schemas/TimeUnit'
-            - description: ' The granularity of the timestamp unit. It indicates if the time value is in seconds, milliseconds, nanoseconds or other supported values. Default is <code>MILLISECONDS</code>. '
+            - description: ' The granularity of the timestamp unit. It indicates if the time value is in seconds, milliseconds, nanoseconds, or other supported values. Default is <code>MILLISECONDS</code>. '
         Version:
           allOf:
             - $ref: '#/components/schemas/RecordVersion'
-            - description: '<p>64-bit attribute used for record updates. Write requests for duplicate data with a higher version number will update the existing measure value and version. In cases where the measure value is the same, <code>Version</code> will still be updated . Default value is <code>1</code>.</p> <note> <p> <code>Version</code> must be <code>1</code> or greater, or you will receive a <code>ValidationException</code> error.</p> </note>'
+            - description: '<p>64-bit attribute used for record updates. Write requests for duplicate data with a higher version number will update the existing measure value and version. In cases where the measure value is the same, <code>Version</code> will still be updated. Default value is <code>1</code>.</p> <note> <p> <code>Version</code> must be <code>1</code> or greater, or you will receive a <code>ValidationException</code> error.</p> </note>'
         MeasureValues:
           allOf:
             - $ref: '#/components/schemas/MeasureValues'
-            - description: '<p> Contains the list of MeasureValue for time series data points. </p> <p> This is only allowed for type <code>MULTI</code>. For scalar values, use <code>MeasureValue</code> attribute of the Record directly. </p>'
-      description: '<p>Record represents a time series data point being written into Timestream. Each record contains an array of dimensions. Dimensions represent the meta data attributes of a time series data point such as the instance name or availability zone of an EC2 instance. A record also contains the measure name which is the name of the measure being collected for example the CPU utilization of an EC2 instance. A record also contains the measure value and the value type which is the data type of the measure value. In addition, the record contains the timestamp when the measure was collected that the timestamp unit which represents the granularity of the timestamp. </p> <p> Records have a <code>Version</code> field, which is a 64-bit <code>long</code> that you can use for updating data points. Writes of a duplicate record with the same dimension, timestamp, and measure name but different measure value will only succeed if the <code>Version</code> attribute of the record in the write request is higher than that of the existing record. Timestream defaults to a <code>Version</code> of <code>1</code> for records without the <code>Version</code> field. </p>'
+            - description: '<p> Contains the list of MeasureValue for time-series data points. </p> <p> This is only allowed for type <code>MULTI</code>. For scalar values, use <code>MeasureValue</code> attribute of the record directly. </p>'
+      description: '<p>Represents a time-series data point being written into Timestream. Each record contains an array of dimensions. Dimensions represent the metadata attributes of a time-series data point, such as the instance name or Availability Zone of an EC2 instance. A record also contains the measure name, which is the name of the measure being collected (for example, the CPU utilization of an EC2 instance). Additionally, a record contains the measure value and the value type, which is the data type of the measure value. Also, the record contains the timestamp of when the measure was collected and the timestamp unit, which represents the granularity of the timestamp. </p> <p> Records have a <code>Version</code> field, which is a 64-bit <code>long</code> that you can use for updating data points. Writes of a duplicate record with the same dimension, timestamp, and measure name but different measure value will only succeed if the <code>Version</code> attribute of the record in the write request is higher than that of the existing record. Timestream defaults to a <code>Version</code> of <code>1</code> for records without the <code>Version</code> field. </p>'
     Records:
       type: array
       items:
@@ -1868,11 +2628,28 @@ components:
             - $ref: '#/components/schemas/Integer'
             - description: Count of records ingested into the magnetic store.
       description: Information on the records ingested by this request.
-    S3BucketName:
-      type: string
-      pattern: '[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9]'
-      minLength: 3
-      maxLength: 63
+    ReportS3Configuration:
+      type: object
+      required:
+        - BucketName
+      properties:
+        BucketName:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: <p/>
+        ObjectKeyPrefix:
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectKeyPrefix'
+            - description: <p/>
+        EncryptionOption:
+          allOf:
+            - $ref: '#/components/schemas/S3EncryptionOption'
+            - description: <p/>
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/StringValue2048'
+            - description: <p/>
+      description: <p/>
     S3ObjectKeyPrefix:
       type: string
       pattern: '[a-zA-Z0-9|!\-_*''\(\)]([a-zA-Z0-9]|[!\-_*''\(\)\/.])+'
@@ -1888,6 +2665,7 @@ components:
       enum:
         - ACTIVE
         - DELETING
+        - RESTORING
     TagKey:
       type: string
       minLength: 1
@@ -1910,7 +2688,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagValue'
             - description: ' The value of the tag. Tag values are case-sensitive and can be null. '
-      description: ' A tag is a label that you assign to a Timestream database and/or table. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize databases and/or tables, for example, by purpose, owner, or environment. '
+      description: ' A tag is a label that you assign to a Timestream database and/or table. Each tag consists of a key and an optional value, both of which you define. With tags, you can categorize databases and/or tables, for example, by purpose, owner, or environment. '
     TagKeyList:
       type: array
       items:
