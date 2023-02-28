@@ -3323,7 +3323,7 @@ components:
           readOnly: true
           type: string
         versionConfigs:
-          description: Required. A list of configurations for flow versions. You should include version configs for all flows that are reachable from `Start Flow` in the agent. Otherwise, an error will be returned.
+          description: A list of configurations for flow versions. You should include version configs for all flows that are reachable from `Start Flow` in the agent. Otherwise, an error will be returned.
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3EnvironmentVersionConfig"
           type: array
@@ -4562,7 +4562,7 @@ components:
           readOnly: true
           type: string
         versionConfigs:
-          description: Required. A list of configurations for flow versions. You should include version configs for all flows that are reachable from `Start Flow` in the agent. Otherwise, an error will be returned.
+          description: A list of configurations for flow versions. You should include version configs for all flows that are reachable from `Start Flow` in the agent. Otherwise, an error will be returned.
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1EnvironmentVersionConfig"
           type: array
@@ -6311,6 +6311,9 @@ components:
         timeZone:
           description: The time zone of this conversational profile from the [time zone database](https://www.iana.org/time-zones), e.g., America/New_York, Europe/Paris. Defaults to America/New_York.
           type: string
+        ttsConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2SynthesizeSpeechConfig"
+          description: Configuration for Text-to-Speech synthesization. Used by Phone Gateway to specify synthesization options. If agent defines synthesization options as well, agent settings overrides the option here.
         updateTime:
           description: Output only. Update time of the conversation profile.
           format: google-datetime

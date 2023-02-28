@@ -3380,6 +3380,7 @@ components:
           type: string
       type: object
     GoogleCloudDataplexV1EnvironmentEndpoints:
+      description: URI Endpoints to access sessions associated with the Environment.
       properties:
         notebooks:
           description: Output only. URI to serve notebook APIs
@@ -3439,6 +3440,7 @@ components:
           type: array
       type: object
     GoogleCloudDataplexV1EnvironmentSessionSpec:
+      description: Configuration for sessions created for this environment.
       properties:
         enableFastStartup:
           description: Optional. If True, this causes sessions to be pre-created and available for faster startup to enable interactive exploration use-cases. This defaults to False to avoid additional billed charges. These can only be set to True for the environment with name set to "default", and with default configuration.
@@ -3449,6 +3451,7 @@ components:
           type: string
       type: object
     GoogleCloudDataplexV1EnvironmentSessionStatus:
+      description: Status of sessions created for this environment.
       properties:
         active:
           description: Output only. Queries over sessions to mark whether the environment is currently active or not
@@ -4084,6 +4087,7 @@ components:
           readOnly: true
           type: string
         state:
+          description: Output only. State of Session
           enum:
             - STATE_UNSPECIFIED
             - ACTIVE

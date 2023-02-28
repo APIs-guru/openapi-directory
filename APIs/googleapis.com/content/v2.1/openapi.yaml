@@ -8451,7 +8451,7 @@ components:
           type: string
       type: object
     BestSellers:
-      description: Fields related to the [Best Sellers reports](https://support.google.com/merchants/answer/9488679).
+      description: Fields related to the [Best sellers reports](https://support.google.com/merchants/answer/9488679).
       properties:
         categoryId:
           description: Google product category ID to calculate the ranking for, represented in [Google's product taxonomy](https://support.google.com/merchants/answer/6324436). If a `WHERE` condition on `best_sellers.category_id` is not specified in the query, rankings for all top-level categories are returned.
@@ -12288,7 +12288,7 @@ components:
           type: string
       type: object
     PriceCompetitiveness:
-      description: Price Competitiveness fields requested by the merchant in the query. Field values are only set if the merchant queries `PriceCompetitivenessProductView`. https://support.google.com/merchants/answer/9626903
+      description: Price competitiveness fields requested by the merchant in the query. Field values are only set if the merchant queries `PriceCompetitivenessProductView`. https://support.google.com/merchants/answer/9626903
       properties:
         benchmarkPriceCurrencyCode:
           description: The price benchmark currency (ISO 4217 code).
@@ -12302,7 +12302,7 @@ components:
           type: string
       type: object
     PriceInsights:
-      description: Price Insights fields requested by the merchant in the query. Field values are only set if the merchant queries `PriceInsightsProductView`. https://support.google.com/merchants/answer/11916926
+      description: Price insights fields requested by the merchant in the query. Field values are only set if the merchant queries `PriceInsightsProductView`. https://support.google.com/merchants/answer/11916926
       properties:
         predictedClicksChangeFraction:
           description: The predicted change in clicks as a fraction after introducing the suggested price compared to current active price. For example, 0.05 is a 5% predicted increase in clicks.
@@ -13752,7 +13752,7 @@ components:
       properties:
         bestSellers:
           $ref: "#/components/schemas/BestSellers"
-          description: Best Sellers fields requested by the merchant in the query. Field values are only set if the merchant queries `BestSellersProductClusterView` or `BestSellersBrandView`.
+          description: Best sellers fields requested by the merchant in the query. Field values are only set if the merchant queries `BestSellersProductClusterView` or `BestSellersBrandView`.
         brand:
           $ref: "#/components/schemas/Brand"
           description: Brand fields requested by the merchant in the query. Field values are only set if the merchant queries `BestSellersBrandView`.
@@ -13761,10 +13761,10 @@ components:
           description: Metrics requested by the merchant in the query. Metric values are only set for metrics requested explicitly in the query.
         priceCompetitiveness:
           $ref: "#/components/schemas/PriceCompetitiveness"
-          description: Price Competitiveness fields requested by the merchant in the query. Field values are only set if the merchant queries `PriceCompetitivenessProductView`.
+          description: Price competitiveness fields requested by the merchant in the query. Field values are only set if the merchant queries `PriceCompetitivenessProductView`.
         priceInsights:
           $ref: "#/components/schemas/PriceInsights"
-          description: Price Insights fields requested by the merchant in the query. Field values are only set if the merchant queries `PriceInsightsProductView`.
+          description: Price insights fields requested by the merchant in the query. Field values are only set if the merchant queries `PriceInsightsProductView`.
         productCluster:
           $ref: "#/components/schemas/ProductCluster"
           description: Product cluster fields requested by the merchant in the query. Field values are only set if the merchant queries `BestSellersProductClusterView`.

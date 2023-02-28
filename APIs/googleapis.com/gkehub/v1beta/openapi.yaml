@@ -22,7 +22,7 @@ info:
     - format: openapi
       url: https://gkehub.googleapis.com/$discovery/rest?version=v1beta
       version: "3.0"
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: gkehub
 externalDocs:
@@ -32,10 +32,10 @@ tags:
 paths:
   "/v1beta/{name}":
     delete:
-      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: gkehub.projects.locations.operations.delete
+      description: Deletes a Scope.
+      operationId: gkehub.projects.locations.scopes.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: Required. The Scope resource name in the format `projects/*/locations/*/scopes/*`.
           in: path
           name: name
           required: true
@@ -56,7 +56,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Empty"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -66,10 +66,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: gkehub.projects.locations.operations.get
+      description: Returns the details of a Scope.
+      operationId: gkehub.projects.locations.scopes.get
       parameters:
-        - description: The name of the operation resource.
+        - description: Required. The Scope resource name in the format `projects/*/locations/*/scopes/*`.
           in: path
           name: name
           required: true
@@ -80,7 +80,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/Scope"
           description: Successful response
       security:
         - Oauth2:
@@ -102,21 +102,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing Feature.
-      operationId: gkehub.projects.locations.features.patch
+      description: Updates a scopes.
+      operationId: gkehub.projects.locations.scopes.patch
       parameters:
-        - description: Required. The Feature resource name in the format `projects/*/locations/*/features/*`.
+        - description: The resource name for the scope `projects/{project}/locations/{location}/scopes/{scope}`
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-        - description: Mask of fields to update.
+        - description: Required. The fields to be updated.
           in: query
           name: updateMask
           schema:
@@ -125,7 +120,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Feature"
+              $ref: "#/components/schemas/Scope"
       responses:
         "200":
           content:
@@ -286,6 +281,87 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1beta/{parent}/bindings":
+    get:
+      description: Lists MembershipBindings.
+      operationId: gkehub.projects.locations.memberships.bindings.list
+      parameters:
+        - description: Required. The parent Membership for which the MembershipBindings will be listed. Specified in the format `projects/*/locations/*/memberships/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. When requesting a 'page' of resources, `page_size` specifies number of resources to return. If unspecified or set to 0, all resources will be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Token returned by previous call to `ListMembershipBindings` which specifies the position in the list from where to continue listing the resources.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListMembershipBindingsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a MembershipBinding.
+      operationId: gkehub.projects.locations.memberships.bindings.create
+      parameters:
+        - description: Required. The parent (project and location) where the MembershipBinding will be created. Specified in the format `projects/*/locations/*/memberships/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the MembershipBinding.
+          in: query
+          name: membershipBindingId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MembershipBinding"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta/{parent}/features":
     get:
       description: Lists Features in a given project and location.
@@ -368,6 +444,249 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Feature"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta/{parent}/namespaces":
+    get:
+      description: Lists fleet namespaces.
+      operationId: gkehub.projects.locations.namespaces.list
+      parameters:
+        - description: Required. The parent (project and location) where the Features will be listed. Specified in the format `projects/*/locations/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. When requesting a 'page' of resources, `page_size` specifies number of resources to return. If unspecified or set to 0, all resources will be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Token returned by previous call to `ListFeatures` which specifies the position in the list from where to continue listing the resources.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListNamespacesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a fleet namespace.
+      operationId: gkehub.projects.locations.namespaces.create
+      parameters:
+        - description: Required. The parent (project and location) where the Namespace will be created. Specified in the format `projects/*/locations/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. Client chosen ID for the Namespace. `namespace_id` must be a valid RFC 1123 compliant DNS label: 1. At most 63 characters in length 2. It must consist of lower case alphanumeric characters or `-` 3. It must start and end with an alphanumeric character Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`, with a maximum length of 63 characters."
+          in: query
+          name: namespaceId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Namespace"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta/{parent}/rbacrolebindings":
+    get:
+      description: Lists RBACRoleBinding.
+      operationId: gkehub.projects.locations.namespaces.rbacrolebindings.list
+      parameters:
+        - description: Required. The parent (project and location) where the Features will be listed. Specified in the format `projects/*/locations/*/namespaces/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. When requesting a 'page' of resources, `page_size` specifies number of resources to return. If unspecified or set to 0, all resources will be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Token returned by previous call to `ListRBACRoleBindings` which specifies the position in the list from where to continue listing the resources.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListRBACRoleBindingsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a RBACRoleBinding.
+      operationId: gkehub.projects.locations.namespaces.rbacrolebindings.create
+      parameters:
+        - description: Required. The parent (project and location) where the RBACRoleBinding will be created. Specified in the format `projects/*/locations/*/namespaces/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. Client chosen ID for the RBACRoleBinding. `rbacrolebinding_id` must be a valid RFC 1123 compliant DNS label: 1. At most 63 characters in length 2. It must consist of lower case alphanumeric characters or `-` 3. It must start and end with an alphanumeric character Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`, with a maximum length of 63 characters."
+          in: query
+          name: rbacrolebindingId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RBACRoleBinding"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta/{parent}/scopes":
+    get:
+      description: Lists Scopes.
+      operationId: gkehub.projects.locations.scopes.list
+      parameters:
+        - description: Required. The parent (project and location) where the Scope will be listed. Specified in the format `projects/*/locations/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. When requesting a 'page' of resources, `page_size` specifies number of resources to return. If unspecified or set to 0, all resources will be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Token returned by previous call to `ListScopes` which specifies the position in the list from where to continue listing the resources.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListScopesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a Scope.
+      operationId: gkehub.projects.locations.scopes.create
+      parameters:
+        - description: Required. The parent (project and location) where the Scope will be created. Specified in the format `projects/*/locations/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Client chosen ID for the Scope. `scope_id` must be a ????
+          in: query
+          name: scopeId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Scope"
       responses:
         "200":
           content:
@@ -1505,6 +1824,30 @@ components:
           description: The standard List next-page token.
           type: string
       type: object
+    ListMembershipBindingsResponse:
+      description: List of MembershipBindings.
+      properties:
+        membershipBindings:
+          description: The list of membership_bindings
+          items:
+            $ref: "#/components/schemas/MembershipBinding"
+          type: array
+        nextPageToken:
+          description: A token to request the next page of resources from the `ListMembershipBindings` method. The value of an empty string means that there are no more resources to return.
+          type: string
+      type: object
+    ListNamespacesResponse:
+      description: List of fleet namespaces.
+      properties:
+        namespaces:
+          description: The list of fleet namespaces
+          items:
+            $ref: "#/components/schemas/Namespace"
+          type: array
+        nextPageToken:
+          description: A token to request the next page of resources from the `ListNamespaces` method. The value of an empty string means that there are no more resources to return.
+          type: string
+      type: object
     ListOperationsResponse:
       description: The response message for Operations.ListOperations.
       properties:
@@ -1515,6 +1858,30 @@ components:
           description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListRBACRoleBindingsResponse:
+      description: List of RBACRoleBindings.
+      properties:
+        nextPageToken:
+          description: A token to request the next page of resources from the `ListRBACRoleBindings` method. The value of an empty string means that there are no more resources to return.
+          type: string
+        rbacrolebindings:
+          description: The list of RBACRoleBindings
+          items:
+            $ref: "#/components/schemas/RBACRoleBinding"
+          type: array
+      type: object
+    ListScopesResponse:
+      description: List of Scopes.
+      properties:
+        nextPageToken:
+          description: A token to request the next page of resources from the `ListScopes` method. The value of an empty string means that there are no more resources to return.
+          type: string
+        scopes:
+          description: The list of Scopes
+          items:
+            $ref: "#/components/schemas/Scope"
           type: array
       type: object
     Location:
@@ -1538,6 +1905,56 @@ components:
           type: object
         name:
           description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
+          type: string
+      type: object
+    MembershipBinding:
+      description: MembershipBinding is a subresource of a Membership, representing what Fleet Scopes (or other, future Fleet resources) a Membership is bound to.
+      properties:
+        createTime:
+          description: Output only. When the membership binding was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. When the membership binding was deleted.
+          format: google-datetime
+          readOnly: true
+          type: string
+        fleet:
+          description: Whether the membershipbinding is Fleet-wide; true means that this Membership should be bound to all Namespaces in this entire Fleet.
+          type: boolean
+        name:
+          description: The resource name for the membershipbinding itself `projects/{project}/locations/{location}/memberships/{membership}/bindings/{membershipbinding}`
+          type: string
+        scope:
+          description: A Workspace resource name in the format `projects/*/locations/*/scopes/*`.
+          type: string
+        state:
+          $ref: "#/components/schemas/MembershipBindingLifecycleState"
+          description: Output only. State of the membership binding resource.
+          readOnly: true
+        uid:
+          description: Output only. Google-generated UUID for this resource. This is unique across all membershipbinding resources. If a membershipbinding resource is deleted and another resource with the same name is created, it gets a different uid.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. When the membership binding was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    MembershipBindingLifecycleState:
+      description: MembershipBindingLifecycleState describes the state of a Binding resource.
+      properties:
+        code:
+          description: Output only. The current state of the MembershipBinding resource.
+          enum:
+            - CODE_UNSPECIFIED
+            - CREATING
+            - READY
+            - DELETING
+            - UPDATING
+          readOnly: true
           type: string
       type: object
     MembershipFeatureSpec:
@@ -1634,6 +2051,53 @@ components:
           type: string
         configMembership:
           description: "Fully-qualified Membership name which hosts the MultiClusterIngress CRD. Example: `projects/foo-proj/locations/global/memberships/bar`"
+          type: string
+      type: object
+    Namespace:
+      description: Namespace represents a namespace across the Fleet
+      properties:
+        createTime:
+          description: Output only. When the namespace was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. When the namespace was deleted.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: The resource name for the namespace `projects/{project}/locations/{location}/namespaces/{namespace}`
+          type: string
+        scope:
+          description: Required. Scope associated with the namespace
+          type: string
+        state:
+          $ref: "#/components/schemas/NamespaceLifecycleState"
+          description: Output only. State of the namespace resource.
+          readOnly: true
+        uid:
+          description: Output only. Google-generated UUID for this resource. This is unique across all namespace resources. If a namespace resource is deleted and another resource with the same name is created, it gets a different uid.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. When the namespace was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    NamespaceLifecycleState:
+      description: NamespaceLifecycleState describes the state of a Namespace resource.
+      properties:
+        code:
+          description: Output only. The current state of the Namespace resource.
+          enum:
+            - CODE_UNSPECIFIED
+            - CREATING
+            - READY
+            - DELETING
+            - UPDATING
+          readOnly: true
           type: string
       type: object
     Operation:
@@ -1866,6 +2330,11 @@ components:
         podAntiAffinity:
           description: Pod anti-affinity enablement.
           type: boolean
+        podTolerations:
+          description: Pod tolerations of node taints.
+          items:
+            $ref: "#/components/schemas/PolicyControllerToleration"
+          type: array
         replicaCount:
           description: Pod replica count.
           format: int64
@@ -1898,6 +2367,117 @@ components:
           description: Whether the standard template library should be installed or not.
           type: boolean
       type: object
+    PolicyControllerToleration:
+      description: Toleration of a node taint.
+      properties:
+        effect:
+          description: Matches a taint effect.
+          type: string
+        key:
+          description: Matches a taint key (not necessarily unique).
+          type: string
+        operator:
+          description: Matches a taint operator.
+          type: string
+        value:
+          description: Matches a taint value.
+          type: string
+      type: object
+    RBACRoleBinding:
+      description: RBACRoleBinding represents a rbacrolebinding across the Fleet
+      properties:
+        createTime:
+          description: Output only. When the rbacrolebinding was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. When the rbacrolebinding was deleted.
+          format: google-datetime
+          readOnly: true
+          type: string
+        group:
+          description: group is the group, as seen by the kubernetes cluster.
+          type: string
+        name:
+          description: The resource name for the rbacrolebinding `projects/{project}/locations/{location}/namespaces/{namespace}/rbacrolebindings/{rbacrolebinding}`
+          type: string
+        role:
+          $ref: "#/components/schemas/Role"
+          description: Required. Role to bind to the principal
+        state:
+          $ref: "#/components/schemas/RBACRoleBindingLifecycleState"
+          description: Output only. State of the rbacrolebinding resource.
+          readOnly: true
+        uid:
+          description: Output only. Google-generated UUID for this resource. This is unique across all rbacrolebinding resources. If a rbacrolebinding resource is deleted and another resource with the same name is created, it gets a different uid.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. When the rbacrolebinding was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        user:
+          description: user is the name of the user as seen by the kubernetes cluster, example "alice" or "alice@domain.tld"
+          type: string
+      type: object
+    RBACRoleBindingLifecycleState:
+      description: RBACRoleBindingLifecycleState describes the state of a RbacRoleBinding resource.
+      properties:
+        code:
+          description: Output only. The current state of the rbacrolebinding resource.
+          enum:
+            - CODE_UNSPECIFIED
+            - CREATING
+            - READY
+            - DELETING
+            - UPDATING
+          readOnly: true
+          type: string
+      type: object
+    Role:
+      description: Role is the type for Kubernetes roles
+      properties:
+        predefinedRole:
+          description: predefined_role is the Kubernetes default role to use
+          enum:
+            - UNKNOWN
+            - ADMIN
+            - EDIT
+            - VIEW
+          type: string
+      type: object
+    Scope:
+      description: Scope represents a Scope in a Fleet.
+      properties:
+        createTime:
+          description: Output only. When the scope was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. When the scope was deleted.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: The resource name for the scope `projects/{project}/locations/{location}/scopes/{scope}`
+          type: string
+        state:
+          $ref: "#/components/schemas/ScopeLifecycleState"
+          description: Output only. State of the scope resource.
+          readOnly: true
+        uid:
+          description: Output only. Google-generated UUID for this resource. This is unique across all scope resources. If a scope resource is deleted and another resource with the same name is created, it gets a different uid.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. When the scope was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     ScopeFeatureSpec:
       description: ScopeFeatureSpec contains feature specs for a fleet scope.
       properties: {}
@@ -1909,6 +2489,20 @@ components:
           $ref: "#/components/schemas/FeatureState"
           description: Output only. The "running state" of the Feature in this Scope.
           readOnly: true
+      type: object
+    ScopeLifecycleState:
+      description: ScopeLifecycleState describes the state of a Scope resource.
+      properties:
+        code:
+          description: Output only. The current state of the scope resource.
+          enum:
+            - CODE_UNSPECIFIED
+            - CREATING
+            - READY
+            - DELETING
+            - UPDATING
+          readOnly: true
+          type: string
       type: object
     ServiceMeshControlPlaneManagement:
       description: Status of control plane management.

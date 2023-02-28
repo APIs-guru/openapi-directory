@@ -1125,6 +1125,9 @@ components:
           description: Output only. The name of the Service Directory service name. Used for Private Harpoon to resolve the ILB address. e.g. "projects/cloud-connectors-e2e-testing/locations/us-central1/namespaces/istio-system/services/istio-ingressgateway-connectors"
           readOnly: true
           type: string
+        sslConfig:
+          $ref: "#/components/schemas/SslConfig"
+          description: Optional. Ssl config of a connection
         status:
           $ref: "#/components/schemas/ConnectionStatus"
           description: Output only. Current status of the connection.
@@ -1314,6 +1317,10 @@ components:
             $ref: "#/components/schemas/RoleGrant"
           readOnly: true
           type: array
+        sslConfigTemplate:
+          $ref: "#/components/schemas/SslConfigTemplate"
+          description: Output only. Ssl configuration supported by the Connector.
+          readOnly: true
         supportedRuntimeFeatures:
           $ref: "#/components/schemas/SupportedRuntimeFeatures"
           description: Output only. Information about the runtime features supported by the Connector.
@@ -2105,6 +2112,91 @@ components:
           description: Password (passphrase) for ssh client certificate if it has one.
         username:
           description: The user account used to authenticate.
+          type: string
+      type: object
+    SslConfig:
+      description: SSL Configuration of a connection
+      properties:
+        additionalVariables:
+          description: Additional SSL related field values
+          items:
+            $ref: "#/components/schemas/ConfigVariable"
+          type: array
+        clientCertType:
+          description: Type of Client Cert (PEM/JKS/.. etc.)
+          enum:
+            - CERT_TYPE_UNSPECIFIED
+            - PEM
+          type: string
+        clientCertificate:
+          $ref: "#/components/schemas/Secret"
+          description: Client Certificate
+        clientPrivateKey:
+          $ref: "#/components/schemas/Secret"
+          description: Client Private Key
+        clientPrivateKeyPass:
+          $ref: "#/components/schemas/Secret"
+          description: Secret containing the passphrase protecting the Client Private Key
+        privateServerCertificate:
+          $ref: "#/components/schemas/Secret"
+          description: Private Server Certificate. Needs to be specified if trust model is `PRIVATE`.
+        serverCertType:
+          description: Type of Server Cert (PEM/JKS/.. etc.)
+          enum:
+            - CERT_TYPE_UNSPECIFIED
+            - PEM
+          type: string
+        trustModel:
+          description: Trust Model of the SSL connection
+          enum:
+            - PUBLIC
+            - PRIVATE
+            - INSECURE
+          type: string
+        type:
+          description: Controls the ssl type for the given connector version.
+          enum:
+            - SSL_TYPE_UNSPECIFIED
+            - TLS
+            - MTLS
+          type: string
+        useSsl:
+          description: Bool for enabling SSL
+          type: boolean
+      type: object
+    SslConfigTemplate:
+      description: Ssl config details of a connector version
+      properties:
+        additionalVariables:
+          description: Any additional fields that need to be rendered
+          items:
+            $ref: "#/components/schemas/ConfigVariableTemplate"
+          type: array
+        clientCertType:
+          description: List of supported Client Cert Types
+          items:
+            enum:
+              - CERT_TYPE_UNSPECIFIED
+              - PEM
+            type: string
+          type: array
+        isTlsMandatory:
+          description: Boolean for determining if the connector version mandates TLS.
+          type: boolean
+        serverCertType:
+          description: List of supported Server Cert Types
+          items:
+            enum:
+              - CERT_TYPE_UNSPECIFIED
+              - PEM
+            type: string
+          type: array
+        sslType:
+          description: Controls the ssl type for the given connector version
+          enum:
+            - SSL_TYPE_UNSPECIFIED
+            - TLS
+            - MTLS
           type: string
       type: object
     Status:

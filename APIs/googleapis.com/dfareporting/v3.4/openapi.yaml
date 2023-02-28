@@ -24,9 +24,9 @@ info:
     - format: openapi
       url: https://dfareporting.googleapis.com/$discovery/rest?version=v3.4
       version: "3.0"
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: dfareporting
-  x-preferred: true
 externalDocs:
   url: https://developers.google.com/doubleclick-advertisers/
 tags:
@@ -2442,6 +2442,7 @@ paths:
               - OBJECT_TARGETING_TEMPLATE
               - OBJECT_SEARCH_LIFT_STUDY
               - OBJECT_FLOODLIGHT_DV360_LINK
+              - OBJECT_ADVERTISER_CUSTOMER_LINK
             type: string
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -5772,6 +5773,14 @@ paths:
                 - UNKNOWN
                 - APPLE_APP_STORE
                 - GOOGLE_PLAY_STORE
+                - ROKU_APP_STORE
+                - AMAZON_FIRETV_APP_STORE
+                - PLAYSTATION_APP_STORE
+                - APPLE_TV_APP_STORE
+                - XBOX_APP_STORE
+                - SAMSUNG_TV_APP_STORE
+                - ANDROID_TV_APP_STORE
+                - GENERIC_CTV_APP_STORE
               type: string
             type: array
           style: form
@@ -11018,7 +11027,7 @@ components:
           $ref: "#/components/schemas/LastModifiedInfo"
           description: Information about the most recent modification of this campaign. This is a read-only field.
         name:
-          description: Name of this campaign. This is a required field and must be less than 256 characters long and unique among campaigns of the same advertiser.
+          description: Name of this campaign. This is a required field and must be less than 512 characters long and unique among campaigns of the same advertiser.
           type: string
         nielsenOcrEnabled:
           description: Whether Nielsen reports are enabled for this campaign.
@@ -11647,6 +11656,7 @@ components:
             - CREATIVE_AUTHORING_SOURCE_DBM
             - CREATIVE_AUTHORING_SOURCE_STUDIO
             - CREATIVE_AUTHORING_SOURCE_GWD
+            - CREATIVE_AUTHORING_SOURCE_ACS
           type: string
         authoringTool:
           description: "Authoring tool for HTML5 banner creatives. This is a read-only field. Applicable to the following creative types: HTML5_BANNER."
@@ -12408,6 +12418,7 @@ components:
               - CLICK_TAG_HARD_CODED
               - SVG_INVALID
               - CLICK_TAG_IN_RICH_MEDIA
+              - MISSING_ENABLER_REFERENCE
             type: string
           type: array
       type: object
@@ -14569,6 +14580,14 @@ components:
             - UNKNOWN
             - APPLE_APP_STORE
             - GOOGLE_PLAY_STORE
+            - ROKU_APP_STORE
+            - AMAZON_FIRETV_APP_STORE
+            - PLAYSTATION_APP_STORE
+            - APPLE_TV_APP_STORE
+            - XBOX_APP_STORE
+            - SAMSUNG_TV_APP_STORE
+            - ANDROID_TV_APP_STORE
+            - GENERIC_CTV_APP_STORE
           type: string
         id:
           description: ID of this mobile app.
@@ -15171,7 +15190,7 @@ components:
           $ref: "#/components/schemas/LookbackConfiguration"
           description: Lookback window settings for this placement.
         name:
-          description: Name of this placement.This is a required field and must be less than or equal to 256 characters long.
+          description: Name of this placement.This is a required field and must be less than or equal to 512 characters long.
           type: string
         paymentApproved:
           description: Whether payment was approved for this placement. This is a read-only field relevant only to publisher-paid placements.

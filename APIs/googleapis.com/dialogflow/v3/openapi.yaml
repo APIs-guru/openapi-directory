@@ -22,9 +22,9 @@ info:
     - format: openapi
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v3
       version: "3.0"
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: dialogflow
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -3146,7 +3146,7 @@ components:
           readOnly: true
           type: string
         versionConfigs:
-          description: Required. A list of configurations for flow versions. You should include version configs for all flows that are reachable from `Start Flow` in the agent. Otherwise, an error will be returned.
+          description: A list of configurations for flow versions. You should include version configs for all flows that are reachable from `Start Flow` in the agent. Otherwise, an error will be returned.
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3EnvironmentVersionConfig"
           type: array
@@ -4135,6 +4135,9 @@ components:
     GoogleCloudDialogflowCxV3MatchIntentRequest:
       description: Request of MatchIntent.
       properties:
+        persistParameterChanges:
+          description: Persist session parameter changes from `query_params`.
+          type: boolean
         queryInput:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3QueryInput"
           description: Required. The input specification.
@@ -5642,7 +5645,7 @@ components:
           readOnly: true
           type: string
         versionConfigs:
-          description: Required. A list of configurations for flow versions. You should include version configs for all flows that are reachable from `Start Flow` in the agent. Otherwise, an error will be returned.
+          description: A list of configurations for flow versions. You should include version configs for all flows that are reachable from `Start Flow` in the agent. Otherwise, an error will be returned.
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1EnvironmentVersionConfig"
           type: array

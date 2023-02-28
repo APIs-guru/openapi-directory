@@ -14,18 +14,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Service Networking API
   version: v1beta
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - format: google
       url: https://servicenetworking.googleapis.com/$discovery/rest?version=v1beta
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: servicenetworking
-  x-preferred: false
 externalDocs:
   url: https://cloud.google.com/service-infrastructure/docs/service-networking/getting-started
 tags:
@@ -1626,6 +1628,9 @@ components:
             - ADS
             - PHOTOS
             - STREET_VIEW
+          type: string
+        protoReferenceDocumentationUri:
+          description: "Optional link to proto reference documentation. Example: https://cloud.google.com/pubsub/lite/docs/reference/rpc"
           type: string
       type: object
     PythonSettings:

@@ -13,13 +13,11 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Search API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - converter:
         url: https://github.com/mermade/oas-kit
@@ -2518,7 +2516,7 @@ components:
       properties: {}
       type: object
     Annotation:
-      description: "NOTE WHEN ADDING NEW PROTO FIELDS: Be sure to add datapol annotations to new fields with potential PII, so they get scrubbed when logging protos for errors. NEXT TAG: 31"
+      description: "NOTE WHEN ADDING NEW PROTO FIELDS: Be sure to add datapol annotations to new fields with potential PII, so they get scrubbed when logging protos for errors. NEXT TAG: 29"
       properties:
         babelPlaceholderMetadata:
           $ref: "#/components/schemas/BabelPlaceholderMetadata"
@@ -2526,7 +2524,7 @@ components:
           $ref: "#/components/schemas/CardCapabilityMetadata"
           description: LINT.ThenChange(//depot/google3/java/com/google/apps/dynamite/v1/backend/action/common/SystemMessageHelper.java)
         chipRenderType:
-          description: Whether the annotation should be rendered as a preview chip. If this is missing or unspecified, fallback to should_not_render on the metadata.
+          description: Whether the annotation should be rendered as a chip. If this is missing or unspecified, fallback to should_not_render on the metadata.
           enum:
             - CHIP_RENDER_TYPE_UNSPECIFIED
             - RENDER
@@ -2551,18 +2549,9 @@ components:
           description: Metadata for 1P integrations like tasks, calendar. These are supported only through integration server as 1P integrations use the integration API (which in turn uses backend API with special permissions) to post messages. Clients should never set this. LINT.IfChange
         incomingWebhookChangedMetadata:
           $ref: "#/components/schemas/IncomingWebhookChangedMetadata"
-        inlineRenderFormat:
-          description: The inline render format of this annotation. go/drive-smart-chips-chat-v2.
-          enum:
-            - INLINE_RENDER_FORMAT_UNSPECIFIED
-            - SMART_CHIP
-          type: string
         integrationConfigUpdated:
           $ref: "#/components/schemas/IntegrationConfigUpdatedMetadata"
           description: LINT.ThenChange(//depot/google3/java/com/google/apps/dynamite/v1/backend/action/common/SystemMessageHelper.java)
-        interactionData:
-          $ref: "#/components/schemas/InteractionData"
-          description: Additional interaction data for this annotation.
         length:
           description: Length of the text_body substring beginning from start_index the Annotation corresponds to.
           format: int32
@@ -8132,13 +8121,6 @@ components:
             - EDIT
           type: string
       type: object
-    InteractionData:
-      description: "Interaction data for an annotation, which may be supplemental to the metadata oneof. For example, this will contain the fully built navigation target for smart chips. NEXT TAG: 2"
-      properties:
-        url:
-          $ref: "#/components/schemas/SafeUrlProto"
-          description: A general navigation target associated with the annotation this message is contained in. For smart chips, this will be the destination of the tap/click target and will be returned by the server. For scenarios where the chip originated from a user-provided url, this value will be provided by clients; otherwise it will be built by the corresponding metadata parts.
-      type: object
     InviteAcceptedEvent:
       properties:
         participantId:
@@ -9168,12 +9150,6 @@ components:
       type: object
     MessageInfo:
       properties:
-        authorUserType:
-          description: Message author’s user type (human/bot).
-          enum:
-            - HUMAN
-            - BOT
-          type: string
         message:
           $ref: "#/components/schemas/Message"
           description: The content of a matching message.

@@ -41,6 +41,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. If set to true, any subresource from this Membership will also be deleted. Otherwise, the request will only work if the Membership has no subresource.
+          in: query
+          name: force
+          schema:
+            type: boolean
       responses:
         "200":
           content:
