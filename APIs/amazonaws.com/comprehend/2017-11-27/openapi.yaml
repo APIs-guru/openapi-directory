@@ -601,6 +601,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.CreateDataset:
+    post:
+      operationId: CreateDataset
+      description: 'Creates a dataset to upload training or test data for a model associated with a flywheel. For more information about datasets, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html"> Flywheel overview</a> in the <i>Amazon Comprehend Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDatasetResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDatasetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.CreateDataset
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Comprehend_20171127.CreateDocumentClassifier:
     post:
       operationId: CreateDocumentClassifier
@@ -766,7 +841,7 @@ paths:
   /#X-Amz-Target=Comprehend_20171127.CreateEntityRecognizer:
     post:
       operationId: CreateEntityRecognizer
-      description: 'Creates an entity recognizer using submitted files. After your <code>CreateEntityRecognizer</code> request is submitted, you can check job status using the API. '
+      description: 'Creates an entity recognizer using submitted files. After your <code>CreateEntityRecognizer</code> request is submitted, you can check job status using the <code>DescribeEntityRecognizer</code> API. '
       responses:
         '200':
           description: Success
@@ -836,6 +911,99 @@ paths:
             type: string
             enum:
               - Comprehend_20171127.CreateEntityRecognizer
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.CreateFlywheel:
+    post:
+      operationId: CreateFlywheel
+      description: '<p>A flywheel is an AWS resource that orchestrates the ongoing training of a model for custom classification or custom entity recognition. You can create a flywheel to start with an existing trained model, or Comprehend can create and train a new model.</p> <p>When you create the flywheel, Comprehend creates a data lake in your account. The data lake holds the training data and test data for all versions of the model.</p> <p>To use a flywheel with an existing trained model, you specify the active model version. Comprehend copies the model''s training data and test data into the flywheel''s data lake.</p> <p>To use the flywheel with a new model, you need to provide a dataset for training data (and optional test data) when you create the flywheel.</p> <p>For more information about flywheels, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html"> Flywheel overview</a> in the <i>Amazon Comprehend Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFlywheelResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '485':
+          description: UnsupportedLanguageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedLanguageException'
+        '486':
+          description: KmsKeyValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsKeyValidationException'
+        '487':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '488':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+        '489':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFlywheelRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.CreateFlywheel
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1045,6 +1213,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.DeleteFlywheel:
+    post:
+      operationId: DeleteFlywheel
+      description: '<p>Deletes a flywheel. When you delete the flywheel, Amazon Comprehend does not delete the data lake or the model associated with the flywheel.</p> <p>For more information about flywheels, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html"> Flywheel overview</a> in the <i>Amazon Comprehend Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteFlywheelResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+        '484':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteFlywheelRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.DeleteFlywheel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Comprehend_20171127.DeleteResourcePolicy:
     post:
       operationId: DeleteResourcePolicy
@@ -1088,6 +1325,63 @@ paths:
             type: string
             enum:
               - Comprehend_20171127.DeleteResourcePolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.DescribeDataset:
+    post:
+      operationId: DescribeDataset
+      description: 'Returns information about the dataset that you specify. For more information about datasets, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html"> Flywheel overview</a> in the <i>Amazon Comprehend Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDatasetResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDatasetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.DescribeDataset
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1487,6 +1781,120 @@ paths:
             type: string
             enum:
               - Comprehend_20171127.DescribeEventsDetectionJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.DescribeFlywheel:
+    post:
+      operationId: DescribeFlywheel
+      description: 'Provides configuration information about the flywheel. For more information about flywheels, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html"> Flywheel overview</a> in the <i>Amazon Comprehend Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeFlywheelResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeFlywheelRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.DescribeFlywheel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.DescribeFlywheelIteration:
+    post:
+      operationId: DescribeFlywheelIteration
+      description: 'Retrieve the configuration properties of a flywheel iteration. For more information about flywheels, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html"> Flywheel overview</a> in the <i>Amazon Comprehend Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeFlywheelIterationResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeFlywheelIterationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.DescribeFlywheelIteration
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2317,6 +2725,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.ListDatasets:
+    post:
+      operationId: ListDatasets
+      description: 'List the datasets that you have configured in this region. For more information about datasets, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html"> Flywheel overview</a> in the <i>Amazon Comprehend Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDatasetsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: InvalidFilterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFilterException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDatasetsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.ListDatasets
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Comprehend_20171127.ListDocumentClassificationJobs:
     post:
       operationId: ListDocumentClassificationJobs
@@ -2920,6 +3403,150 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.ListFlywheelIterationHistory:
+    post:
+      operationId: ListFlywheelIterationHistory
+      description: 'Information about the history of a flywheel iteration. For more information about flywheels, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html"> Flywheel overview</a> in the <i>Amazon Comprehend Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFlywheelIterationHistoryResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: InvalidFilterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFilterException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFlywheelIterationHistoryRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.ListFlywheelIterationHistory
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.ListFlywheels:
+    post:
+      operationId: ListFlywheels
+      description: Gets a list of the flywheels that you have created.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFlywheelsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: InvalidFilterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFilterException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFlywheelsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.ListFlywheels
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Comprehend_20171127.ListKeyPhrasesDetectionJobs:
     post:
       operationId: ListKeyPhrasesDetectionJobs
@@ -3370,7 +3997,7 @@ paths:
   /#X-Amz-Target=Comprehend_20171127.StartDocumentClassificationJob:
     post:
       operationId: StartDocumentClassificationJob
-      description: Starts an asynchronous document classification job. Use the operation to track the progress of the job.
+      description: Starts an asynchronous document classification job. Use the <code>DescribeDocumentClassificationJob</code> operation to track the progress of the job.
       responses:
         '200':
           description: Success
@@ -3643,6 +4270,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.StartFlywheelIteration:
+    post:
+      operationId: StartFlywheelIteration
+      description: 'Start the flywheel iteration.This operation uses any new datasets to train a new model version. For more information about flywheels, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html"> Flywheel overview</a> in the <i>Amazon Comprehend Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartFlywheelIterationResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartFlywheelIterationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.StartFlywheelIteration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Comprehend_20171127.StartKeyPhrasesDetectionJob:
     post:
       operationId: StartKeyPhrasesDetectionJob
@@ -3835,7 +4525,7 @@ paths:
   /#X-Amz-Target=Comprehend_20171127.StartTargetedSentimentDetectionJob:
     post:
       operationId: StartTargetedSentimentDetectionJob
-      description: Starts an asynchronous targeted sentiment detection job for a collection of documents. Use the operation to track the status of a job.
+      description: Starts an asynchronous targeted sentiment detection job for a collection of documents. Use the <code>DescribeTargetedSentimentDetectionJob</code> operation to track the status of a job.
       responses:
         '200':
           description: Success
@@ -4630,6 +5320,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.UpdateFlywheel:
+    post:
+      operationId: UpdateFlywheel
+      description: Update the configuration information for an existing flywheel.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFlywheelResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: KmsKeyValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsKeyValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFlywheelRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.UpdateFlywheel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -4924,6 +5677,54 @@ components:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
             - description: 'The language of the input documents. Currently, English is the only valid language.'
+    CreateDatasetResponse:
+      type: object
+      properties:
+        DatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendDatasetArn'
+            - description: The ARN of the dataset.
+    CreateDatasetRequest:
+      type: object
+      required:
+        - FlywheelArn
+        - DatasetName
+        - InputDataConfig
+      title: CreateDatasetRequest
+      properties:
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel of the flywheel to receive the data.
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArnName'
+            - description: Name of the dataset.
+        DatasetType:
+          allOf:
+            - $ref: '#/components/schemas/DatasetType'
+            - description: The dataset type. You can specify that the data in a dataset is for training the model or for testing the model.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: Description of the dataset.
+        InputDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/DatasetInputDataConfig'
+            - description: Information about the input data configuration. The type of input data varies based on the format of the input and whether the data is for a classifier model or an entity recognition model.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestTokenString'
+            - description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Tags for the dataset.
+    ResourceInUseException: {}
+    TooManyTagsException: {}
+    TooManyRequestsException: {}
+    ResourceLimitExceededException: {}
+    ResourceNotFoundException: {}
     CreateDocumentClassifierResponse:
       type: object
       properties:
@@ -4951,11 +5752,11 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'Tags to be associated with the document classifier being created. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. '
+            - description: 'Tags to associate with the document classifier. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. '
         InputDataConfig:
           allOf:
             - $ref: '#/components/schemas/DocumentClassifierInputDataConfig'
@@ -4971,7 +5772,7 @@ components:
         LanguageCode:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
-            - description: 'The language of the input documents. You can specify any of the following languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.'
+            - description: The language of the input documents. You can specify any of the languages supported by Amazon Comprehend. All documents must be in the same language.
         VolumeKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
@@ -4992,10 +5793,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/Policy'
             - description: '<p>The resource-based policy to attach to your custom document classifier model. You can use this policy to allow another AWS account to import your custom model.</p> <p>Provide your policy as a JSON body that you enter as a UTF-8 encoded string without line breaks. To provide valid JSON, enclose the attribute names and values in double quotes. If the JSON body is also enclosed in double quotes, then you must escape the double quotes that are inside the policy:</p> <p> <code>"{\"attribute\": \"value\", \"attribute\": [\"value\"]}"</code> </p> <p>To avoid escaping quotes, you can use single quotes to enclose the policy and double quotes to enclose the JSON names and values:</p> <p> <code>''{"attribute": "value", "attribute": ["value"]}''</code> </p>'
-    ResourceInUseException: {}
-    TooManyTagsException: {}
-    TooManyRequestsException: {}
-    ResourceLimitExceededException: {}
     KmsKeyValidationException: {}
     CreateEndpointResponse:
       type: object
@@ -5004,11 +5801,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ComprehendEndpointArn'
             - description: The Amazon Resource Number (ARN) of the endpoint being created.
+        ModelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendModelArn'
+            - description: The Amazon Resource Number (ARN) of the model to which the endpoint is attached.
     CreateEndpointRequest:
       type: object
       required:
         - EndpointName
-        - ModelArn
         - DesiredInferenceUnits
       title: CreateEndpointRequest
       properties:
@@ -5031,12 +5831,15 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'Tags associated with the endpoint being created. A tag is a key-value pair that adds metadata to the endpoint. For example, a tag with "Sales" as the key might be added to an endpoint to indicate its use by the sales department. '
+            - description: 'Tags to associate with the endpoint. A tag is a key-value pair that adds metadata to the endpoint. For example, a tag with "Sales" as the key might be added to an endpoint to indicate its use by the sales department. '
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
-    ResourceNotFoundException: {}
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel to which the endpoint will be attached.
     CreateEntityRecognizerResponse:
       type: object
       properties:
@@ -5064,11 +5867,11 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'Tags to be associated with the entity recognizer being created. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. '
+            - description: 'Tags to associate with the entity recognizer. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. '
         InputDataConfig:
           allOf:
             - $ref: '#/components/schemas/EntityRecognizerInputDataConfig'
@@ -5092,11 +5895,66 @@ components:
         ModelKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
-            - description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+            - description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
         ModelPolicy:
           allOf:
             - $ref: '#/components/schemas/Policy'
             - description: '<p>The JSON resource-based policy to attach to your custom entity recognizer model. You can use this policy to allow another AWS account to import your custom model.</p> <p>Provide your JSON as a UTF-8 encoded string without line breaks. To provide valid JSON for your policy, enclose the attribute names and values in double quotes. If the JSON body is also enclosed in double quotes, then you must escape the double quotes that are inside the policy:</p> <p> <code>"{\"attribute\": \"value\", \"attribute\": [\"value\"]}"</code> </p> <p>To avoid escaping quotes, you can use single quotes to enclose the policy and double quotes to enclose the JSON names and values:</p> <p> <code>''{"attribute": "value", "attribute": ["value"]}''</code> </p>'
+    CreateFlywheelResponse:
+      type: object
+      properties:
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel.
+        ActiveModelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendModelArn'
+            - description: The Amazon Resource Number (ARN) of the active model version.
+    CreateFlywheelRequest:
+      type: object
+      required:
+        - FlywheelName
+        - DataAccessRoleArn
+        - DataLakeS3Uri
+      title: CreateFlywheelRequest
+      properties:
+        FlywheelName:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArnName'
+            - description: Name for the flywheel.
+        ActiveModelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendModelArn'
+            - description: 'To associate an existing model with the flywheel, specify the Amazon Resource Number (ARN) of the model version.'
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend the permissions required to access the flywheel data in the data lake.
+        TaskConfig:
+          allOf:
+            - $ref: '#/components/schemas/TaskConfig'
+            - description: Configuration about the custom classifier associated with the flywheel.
+        ModelType:
+          allOf:
+            - $ref: '#/components/schemas/ModelType'
+            - description: The model type.
+        DataLakeS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelS3Uri'
+            - description: Enter the S3 location for the data lake. You can specify a new S3 bucket or a new folder of an existing S3 bucket. The flywheel creates the data lake at this location.
+        DataSecurityConfig:
+          allOf:
+            - $ref: '#/components/schemas/DataSecurityConfig'
+            - description: Data security configurations.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestTokenString'
+            - description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to associate with this flywheel.
     DeleteDocumentClassifierResponse:
       type: object
       properties: {}
@@ -5136,6 +5994,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/EntityRecognizerArn'
             - description: The Amazon Resource Name (ARN) that identifies the entity recognizer.
+    DeleteFlywheelResponse:
+      type: object
+      properties: {}
+    DeleteFlywheelRequest:
+      type: object
+      required:
+        - FlywheelArn
+      title: DeleteFlywheelRequest
+      properties:
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel to delete.
     DeleteResourcePolicyResponse:
       type: object
       properties: {}
@@ -5153,6 +6024,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/PolicyRevisionId'
             - description: The revision ID of the policy to delete.
+    DescribeDatasetResponse:
+      type: object
+      properties:
+        DatasetProperties:
+          allOf:
+            - $ref: '#/components/schemas/DatasetProperties'
+            - description: The dataset properties.
+    DescribeDatasetRequest:
+      type: object
+      required:
+        - DatasetArn
+      title: DescribeDatasetRequest
+      properties:
+        DatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendDatasetArn'
+            - description: The ARN of the dataset.
     DescribeDocumentClassificationJobResponse:
       type: object
       properties:
@@ -5169,7 +6057,7 @@ components:
         JobId:
           allOf:
             - $ref: '#/components/schemas/JobId'
-            - description: The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+            - description: The identifier that Amazon Comprehend generated for the job. The <code>StartDocumentClassificationJob</code> operation returns this identifier in its response.
     JobNotFoundException: {}
     DescribeDocumentClassifierResponse:
       type: object
@@ -5187,7 +6075,7 @@ components:
         DocumentClassifierArn:
           allOf:
             - $ref: '#/components/schemas/DocumentClassifierArn'
-            - description: The Amazon Resource Name (ARN) that identifies the document classifier. The operation returns this identifier in its response.
+            - description: The Amazon Resource Name (ARN) that identifies the document classifier. The <code>CreateDocumentClassifier</code> operation returns this identifier in its response.
     DescribeDominantLanguageDetectionJobResponse:
       type: object
       properties:
@@ -5204,7 +6092,7 @@ components:
         JobId:
           allOf:
             - $ref: '#/components/schemas/JobId'
-            - description: The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+            - description: The identifier that Amazon Comprehend generated for the job. The <code>StartDominantLanguageDetectionJob</code> operation returns this identifier in its response.
     DescribeEndpointResponse:
       type: object
       properties:
@@ -5238,7 +6126,7 @@ components:
         JobId:
           allOf:
             - $ref: '#/components/schemas/JobId'
-            - description: The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+            - description: The identifier that Amazon Comprehend generated for the job. The <code>StartEntitiesDetectionJob</code> operation returns this identifier in its response.
     DescribeEntityRecognizerResponse:
       type: object
       properties:
@@ -5273,6 +6161,45 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier of the events detection job.
+    DescribeFlywheelResponse:
+      type: object
+      properties:
+        FlywheelProperties:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelProperties'
+            - description: The flywheel properties.
+    DescribeFlywheelRequest:
+      type: object
+      required:
+        - FlywheelArn
+      title: DescribeFlywheelRequest
+      properties:
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel.
+    DescribeFlywheelIterationResponse:
+      type: object
+      properties:
+        FlywheelIterationProperties:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelIterationProperties'
+            - description: The configuration properties of a flywheel iteration.
+    DescribeFlywheelIterationRequest:
+      type: object
+      required:
+        - FlywheelArn
+        - FlywheelIterationId
+      title: DescribeFlywheelIterationRequest
+      properties:
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: <p/>
+        FlywheelIterationId:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelIterationId'
+            - description: <p/>
     DescribeKeyPhrasesDetectionJobResponse:
       type: object
       properties:
@@ -5289,7 +6216,7 @@ components:
         JobId:
           allOf:
             - $ref: '#/components/schemas/JobId'
-            - description: The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+            - description: The identifier that Amazon Comprehend generated for the job. The <code>StartKeyPhrasesDetectionJob</code> operation returns this identifier in its response.
     DescribePiiEntitiesDetectionJobResponse:
       type: object
       properties:
@@ -5367,7 +6294,7 @@ components:
         JobId:
           allOf:
             - $ref: '#/components/schemas/JobId'
-            - description: The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+            - description: The identifier that Amazon Comprehend generated for the job. The <code>StartTargetedSentimentDetectionJob</code> operation returns this identifier in its response.
     DescribeTopicsDetectionJobResponse:
       type: object
       properties:
@@ -5595,11 +6522,43 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that allows Amazon Comprehend to use Amazon Key Management Service (KMS) to encrypt or decrypt the custom model.
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend permission to use Amazon Key Management Service (KMS) to encrypt or decrypt the custom model.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'Tags to be associated with the custom model that is created by this import. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
+            - description: 'Tags to associate with the custom model that is created by this import. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
+    ListDatasetsResponse:
+      type: object
+      properties:
+        DatasetPropertiesList:
+          allOf:
+            - $ref: '#/components/schemas/DatasetPropertiesList'
+            - description: The dataset properties list.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Identifies the next page of results to return.
+    ListDatasetsRequest:
+      type: object
+      title: ListDatasetsRequest
+      properties:
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel.
+        Filter:
+          allOf:
+            - $ref: '#/components/schemas/DatasetFilter'
+            - description: Filters the datasets to be returned in the response.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Identifies the next page of results to return.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsInteger'
+            - description: Maximum number of results to return in a response. The default is 100.
+    InvalidFilterException: {}
     ListDocumentClassificationJobsResponse:
       type: object
       properties:
@@ -5627,7 +6586,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResultsInteger'
             - description: The maximum number of results to return in each page. The default is 100.
-    InvalidFilterException: {}
     ListDocumentClassifierSummariesResponse:
       type: object
       properties:
@@ -5769,7 +6727,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The list entity recognizer summaries.
+            - description: Identifies the next page of results to return.
     ListEntityRecognizerSummariesRequest:
       type: object
       title: ListEntityRecognizerSummariesRequest
@@ -5836,6 +6794,66 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResultsInteger'
             - description: The maximum number of results to return in each page.
+    ListFlywheelIterationHistoryResponse:
+      type: object
+      properties:
+        FlywheelIterationPropertiesList:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelIterationPropertiesList'
+            - description: List of flywheel iteration properties
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Next token
+    ListFlywheelIterationHistoryRequest:
+      type: object
+      required:
+        - FlywheelArn
+      title: ListFlywheelIterationHistoryRequest
+      properties:
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The ARN of the flywheel.
+        Filter:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelIterationFilter'
+            - description: Filter the flywheel iteration history based on creation time.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Next token
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsInteger'
+            - description: Maximum number of iteration history results to return
+    ListFlywheelsResponse:
+      type: object
+      properties:
+        FlywheelSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelSummaryList'
+            - description: 'A list of flywheel properties retrieved by the service in response to the request. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Identifies the next page of results to return.
+    ListFlywheelsRequest:
+      type: object
+      title: ListFlywheelsRequest
+      properties:
+        Filter:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelFilter'
+            - description: 'Filters the flywheels that are returned. You can filter flywheels on their status, or the date and time that they were submitted. You can only set one filter at a time. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Identifies the next page of results to return.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsInteger'
+            - description: Maximum number of results to return in a response. The default is 100.
     ListKeyPhrasesDetectionJobsResponse:
       type: object
       properties:
@@ -6024,7 +7042,7 @@ components:
         JobId:
           allOf:
             - $ref: '#/components/schemas/JobId'
-            - description: 'The identifier generated for the job. To get the status of the job, use this identifier with the operation.'
+            - description: 'The identifier generated for the job. To get the status of the job, use this identifier with the <code>DescribeDocumentClassificationJob</code> operation.'
         JobArn:
           allOf:
             - $ref: '#/components/schemas/ComprehendArn'
@@ -6032,11 +7050,14 @@ components:
         JobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The status of the job:</p> <ul> <li> <p>SUBMITTED - The job has been received and queued for processing.</p> </li> <li> <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p> </li> <li> <p>COMPLETED - The job was successfully completed and the output is available.</p> </li> <li> <p>FAILED - The job did not complete. For details, use the operation.</p> </li> <li> <p>STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.</p> </li> <li> <p>STOPPED - The job was successfully stopped without completing.</p> </li> </ul>'
+            - description: '<p>The status of the job:</p> <ul> <li> <p>SUBMITTED - The job has been received and queued for processing.</p> </li> <li> <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p> </li> <li> <p>COMPLETED - The job was successfully completed and the output is available.</p> </li> <li> <p>FAILED - The job did not complete. For details, use the <code>DescribeDocumentClassificationJob</code> operation.</p> </li> <li> <p>STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.</p> </li> <li> <p>STOPPED - The job was successfully stopped without completing.</p> </li> </ul>'
+        DocumentClassifierArn:
+          allOf:
+            - $ref: '#/components/schemas/DocumentClassifierArn'
+            - description: The ARN of the custom classification model.
     StartDocumentClassificationJobRequest:
       type: object
       required:
-        - DocumentClassifierArn
         - InputDataConfig
         - OutputDataConfig
         - DataAccessRoleArn
@@ -6077,7 +7098,11 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'Tags to be associated with the document classification job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
+            - description: 'Tags to associate with the document classification job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel associated with the model to use.
     StartDominantLanguageDetectionJobResponse:
       type: object
       properties:
@@ -6132,7 +7157,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'Tags to be associated with the dominant language detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
+            - description: 'Tags to associate with the dominant language detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
     StartEntitiesDetectionJobResponse:
       type: object
       properties:
@@ -6148,6 +7173,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
             - description: '<p>The status of the job. </p> <ul> <li> <p>SUBMITTED - The job has been received and is queued for processing.</p> </li> <li> <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p> </li> <li> <p>COMPLETED - The job was successfully completed and the output is available.</p> </li> <li> <p>FAILED - The job did not complete. To get details, use the operation.</p> </li> <li> <p>STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.</p> </li> <li> <p>STOPPED - The job was successfully stopped without completing.</p> </li> </ul>'
+        EntityRecognizerArn:
+          allOf:
+            - $ref: '#/components/schemas/EntityRecognizerArn'
+            - description: The ARN of the custom entity recognition model.
     StartEntitiesDetectionJobRequest:
       type: object
       required:
@@ -6196,7 +7225,11 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'Tags to be associated with the entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
+            - description: 'Tags to associate with the entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel associated with the model to use.
     StartEventsDetectionJobResponse:
       type: object
       properties:
@@ -6253,7 +7286,32 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'Tags to be associated with the events detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
+            - description: 'Tags to associate with the events detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
+    StartFlywheelIterationResponse:
+      type: object
+      properties:
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: <p/>
+        FlywheelIterationId:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelIterationId'
+            - description: <p/>
+    StartFlywheelIterationRequest:
+      type: object
+      required:
+        - FlywheelArn
+      title: StartFlywheelIterationRequest
+      properties:
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The ARN of the flywheel.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestTokenString'
+            - description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
     StartKeyPhrasesDetectionJobResponse:
       type: object
       properties:
@@ -6313,7 +7371,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'Tags to be associated with the key phrases detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
+            - description: 'Tags to associate with the key phrases detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
     StartPiiEntitiesDetectionJobResponse:
       type: object
       properties:
@@ -6374,7 +7432,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'Tags to be associated with the PII entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
+            - description: 'Tags to associate with the PII entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
     StartSentimentDetectionJobResponse:
       type: object
       properties:
@@ -6434,14 +7492,14 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'Tags to be associated with the sentiment detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
+            - description: 'Tags to associate with the sentiment detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
     StartTargetedSentimentDetectionJobResponse:
       type: object
       properties:
         JobId:
           allOf:
             - $ref: '#/components/schemas/JobId'
-            - description: 'The identifier generated for the job. To get the status of a job, use this identifier with the operation.'
+            - description: 'The identifier generated for the job. To get the status of a job, use this identifier with the <code>DescribeTargetedSentimentDetectionJob</code> operation.'
         JobArn:
           allOf:
             - $ref: '#/components/schemas/ComprehendArn'
@@ -6449,7 +7507,7 @@ components:
         JobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The status of the job. </p> <ul> <li> <p>SUBMITTED - The job has been received and is queued for processing.</p> </li> <li> <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p> </li> <li> <p>COMPLETED - The job was successfully completed and the output is available.</p> </li> <li> <p>FAILED - The job did not complete. To get details, use the operation.</p> </li> </ul>'
+            - description: '<p>The status of the job. </p> <ul> <li> <p>SUBMITTED - The job has been received and is queued for processing.</p> </li> <li> <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p> </li> <li> <p>COMPLETED - The job was successfully completed and the output is available.</p> </li> <li> <p>FAILED - The job did not complete. To get details, use the <code>DescribeTargetedSentimentDetectionJob</code> operation.</p> </li> </ul>'
     StartTargetedSentimentDetectionJobRequest:
       type: object
       required:
@@ -6490,7 +7548,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'Tags to be associated with the targeted sentiment detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
+            - description: 'Tags to associate with the targeted sentiment detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
     StartTopicsDetectionJobResponse:
       type: object
       properties:
@@ -6549,7 +7607,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'Tags to be associated with the topics detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
+            - description: 'Tags to associate with the topics detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.'
     StopDominantLanguageDetectionJobResponse:
       type: object
       properties:
@@ -6763,7 +7821,11 @@ components:
     TooManyTagKeysException: {}
     UpdateEndpointResponse:
       type: object
-      properties: {}
+      properties:
+        DesiredModelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendModelArn'
+            - description: The Amazon Resource Number (ARN) of the new model.
     UpdateEndpointRequest:
       type: object
       required:
@@ -6786,6 +7848,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
             - description: Data access role ARN to use in case the new model is encrypted with a customer CMK.
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel
+    UpdateFlywheelResponse:
+      type: object
+      properties:
+        FlywheelProperties:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelProperties'
+            - description: The flywheel properties.
+    UpdateFlywheelRequest:
+      type: object
+      required:
+        - FlywheelArn
+      title: UpdateFlywheelRequest
+      properties:
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel to update.
+        ActiveModelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendModelArn'
+            - description: The Amazon Resource Number (ARN) of the active model version.
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend permission to access the flywheel data.
+        DataSecurityConfig:
+          allOf:
+            - $ref: '#/components/schemas/UpdateDataSecurityConfig'
+            - description: Flywheel data security configuration.
     AnyLengthString:
       type: string
     AttributeNamesListItem:
@@ -7278,12 +8373,16 @@ components:
       maxLength: 64
     ComprehendArn:
       type: string
-      pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-]{1,64}/[a-zA-Z0-9](-*[a-zA-Z0-9])*(/version/[a-zA-Z0-9](-*[a-zA-Z0-9])*)?'
+      pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-]{1,64}/[a-zA-Z0-9](-*[a-zA-Z0-9])*((/dataset/[a-zA-Z0-9](-*[a-zA-Z0-9])*)|(/version/[a-zA-Z0-9](-*[a-zA-Z0-9])*))?'
       maxLength: 256
     ComprehendArnName:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*$'
       maxLength: 63
+    ComprehendDatasetArn:
+      type: string
+      pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:flywheel/[a-zA-Z0-9](-*[a-zA-Z0-9])*/dataset/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+      maxLength: 256
     ComprehendEndpointArn:
       type: string
       pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:(document-classifier-endpoint|entity-recognizer-endpoint)/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
@@ -7292,6 +8391,10 @@ components:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*$'
       maxLength: 40
+    ComprehendFlywheelArn:
+      type: string
+      pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:flywheel/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+      maxLength: 256
     ComprehendModelArn:
       type: string
       pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:(document-classifier|entity-recognizer)/[a-zA-Z0-9](-*[a-zA-Z0-9])*(/version/[a-zA-Z0-9](-*[a-zA-Z0-9])*)?'
@@ -7300,6 +8403,39 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/EntityLabel'
+    DatasetType:
+      type: string
+      enum:
+        - TRAIN
+        - TEST
+    Description:
+      type: string
+      pattern: '^([a-zA-Z0-9_])[\\a-zA-Z0-9_@#%*+=:?./!\s-]*$'
+      maxLength: 2048
+    DatasetInputDataConfig:
+      type: object
+      properties:
+        AugmentedManifests:
+          allOf:
+            - $ref: '#/components/schemas/DatasetAugmentedManifestsList'
+            - description: 'A list of augmented manifest files that provide training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth. '
+        DataFormat:
+          allOf:
+            - $ref: '#/components/schemas/DatasetDataFormat'
+            - description: '<p> <code>COMPREHEND_CSV</code>: The data format is a two-column CSV file, where the first column contains labels and the second column contains documents.</p> <p> <code>AUGMENTED_MANIFEST</code>: The data format </p>'
+        DocumentClassifierInputDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/DatasetDocumentClassifierInputDataConfig'
+            - description: '<p>The input properties for training a document classifier model. </p> <p>For more information on how the input file is formatted, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/prep-classifier-data.html">Preparing training data</a> in the Comprehend Developer Guide. </p>'
+        EntityRecognizerInputDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/DatasetEntityRecognizerInputDataConfig'
+            - description: The input properties for training an entity recognizer model.
+      description: Specifies the format and location of the input data for the dataset.
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
     VersionName:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*$'
@@ -7309,10 +8445,6 @@ components:
       pattern: 'arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+'
       minLength: 20
       maxLength: 2048
-    TagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
     DocumentClassifierInputDataConfig:
       type: object
       properties:
@@ -7348,6 +8480,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
             - description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt the output results from an analysis job. The KmsKeyId can be one of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>KMS Key Alias: <code>"alias/ExampleAlias"</code> </p> </li> <li> <p>ARN of a KMS Key Alias: <code>"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"</code> </p> </li> </ul>'
+        FlywheelStatsS3Prefix:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The Amazon S3 prefix for the data lake location of the flywheel statistics.
       description: 'Provides output results configuration parameters for custom classifier jobs. '
     KmsKeyId:
       type: string
@@ -7419,6 +8555,242 @@ components:
       type: string
       pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:entity-recognizer/[a-zA-Z0-9](-*[a-zA-Z0-9])*(/version/[a-zA-Z0-9](-*[a-zA-Z0-9])*)?'
       maxLength: 256
+    TaskConfig:
+      type: object
+      required:
+        - LanguageCode
+      properties:
+        LanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/LanguageCode'
+            - description: Language code for the language that the model supports.
+        DocumentClassificationConfig:
+          allOf:
+            - $ref: '#/components/schemas/DocumentClassificationConfig'
+            - description: Configuration required for a classification model.
+        EntityRecognitionConfig:
+          allOf:
+            - $ref: '#/components/schemas/EntityRecognitionConfig'
+            - description: Configuration required for an entity recognition model.
+      description: Configuration about the custom classifier associated with the flywheel.
+    ModelType:
+      type: string
+      enum:
+        - DOCUMENT_CLASSIFIER
+        - ENTITY_RECOGNIZER
+    FlywheelS3Uri:
+      type: string
+      pattern: 's3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?'
+      maxLength: 512
+    DataSecurityConfig:
+      type: object
+      properties:
+        ModelKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+        VolumeKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: ID for the KMS key that Amazon Comprehend uses to encrypt the volume.
+        DataLakeKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: ID for the KMS key that Amazon Comprehend uses to encrypt the data in the data lake.
+        VpcConfig:
+          $ref: '#/components/schemas/VpcConfig'
+      description: Data security configuration.
+    DatasetAugmentedManifestsListItem:
+      type: object
+      required:
+        - AttributeNames
+        - S3Uri
+      properties:
+        AttributeNames:
+          allOf:
+            - $ref: '#/components/schemas/AttributeNamesList'
+            - description: '<p>The JSON attribute that contains the annotations for your training documents. The number of attribute names that you specify depends on whether your augmented manifest file is the output of a single labeling job or a chained labeling job.</p> <p>If your file is the output of a single labeling job, specify the LabelAttributeName key that was used when the job was created in Ground Truth.</p> <p>If your file is the output of a chained labeling job, specify the LabelAttributeName key for one or more jobs in the chain. Each LabelAttributeName key provides the annotations from an individual job.</p>'
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The Amazon S3 location of the augmented manifest file.
+        AnnotationDataS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The S3 prefix to the annotation files that are referred in the augmented manifest file.
+        SourceDocumentsS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The S3 prefix to the source files (PDFs) that are referred to in the augmented manifest file.
+        DocumentType:
+          allOf:
+            - $ref: '#/components/schemas/AugmentedManifestsDocumentTypeFormat'
+            - description: '<p>The type of augmented manifest. If you don''t specify, the default is PlainTextDocument. </p> <p> <code>PLAIN_TEXT_DOCUMENT</code> A document type that represents any unicode text that is encoded in UTF-8.</p>'
+      description: An augmented manifest file that provides training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth.
+    DatasetAugmentedManifestsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatasetAugmentedManifestsListItem'
+    DatasetDataFormat:
+      type: string
+      enum:
+        - COMPREHEND_CSV
+        - AUGMENTED_MANIFEST
+    LabelDelimiter:
+      type: string
+      pattern: '^[ ~!@#$%^*\-_+=|\\:;\t>?/]$'
+      minLength: 1
+      maxLength: 1
+    DatasetDocumentClassifierInputDataConfig:
+      type: object
+      required:
+        - S3Uri
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: '<p>The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files.</p> <p>For example, if you use the URI <code>S3://bucketName/prefix</code>, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.</p> <p>This parameter is required if you set <code>DataFormat</code> to <code>COMPREHEND_CSV</code>.</p>'
+        LabelDelimiter:
+          allOf:
+            - $ref: '#/components/schemas/LabelDelimiter'
+            - description: 'Indicates the delimiter used to separate each label for training a multi-label classifier. The default delimiter between labels is a pipe (|). You can use a different character as a delimiter (if it''s an allowed character) by specifying it under Delimiter for labels. If the training documents use a delimiter other than the default or the delimiter you specify, the labels on that line will be combined to make a single unique label, such as LABELLABELLABEL.'
+      description: '<p>Describes the dataset input data configuration for a document classifier model.</p> <p>For more information on how the input file is formatted, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/prep-classifier-data.html">Preparing training data</a> in the Comprehend Developer Guide. </p>'
+    DatasetEntityRecognizerAnnotations:
+      type: object
+      required:
+        - S3Uri
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: ' Specifies the Amazon S3 location where the training documents for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.'
+      description: Describes the annotations associated with a entity recognizer.
+    InputFormat:
+      type: string
+      enum:
+        - ONE_DOC_PER_FILE
+        - ONE_DOC_PER_LINE
+    DatasetEntityRecognizerDocuments:
+      type: object
+      required:
+        - S3Uri
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: ' Specifies the Amazon S3 location where the documents for the dataset are located. '
+        InputFormat:
+          allOf:
+            - $ref: '#/components/schemas/InputFormat'
+            - description: ' Specifies how the text in an input file should be processed. This is optional, and the default is ONE_DOC_PER_LINE. ONE_DOC_PER_FILE - Each file is considered a separate document. Use this option when you are processing large documents, such as newspaper articles or scientific papers. ONE_DOC_PER_LINE - Each line in a file is considered a separate document. Use this option when you are processing many short documents, such as text messages.'
+      description: Describes the documents submitted with a dataset for an entity recognizer model.
+    DatasetEntityRecognizerEntityList:
+      type: object
+      required:
+        - S3Uri
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: Specifies the Amazon S3 location where the entity list is located.
+      description: '<p>Describes the dataset entity list for an entity recognizer model.</p> <p>For more information on how the input file is formatted, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/prep-training-data-cer.html">Preparing training data</a> in the Comprehend Developer Guide. </p>'
+    DatasetEntityRecognizerInputDataConfig:
+      type: object
+      required:
+        - Documents
+      properties:
+        Annotations:
+          allOf:
+            - $ref: '#/components/schemas/DatasetEntityRecognizerAnnotations'
+            - description: The S3 location of the annotation documents for your custom entity recognizer.
+        Documents:
+          allOf:
+            - $ref: '#/components/schemas/DatasetEntityRecognizerDocuments'
+            - description: The format and location of the training documents for your custom entity recognizer.
+        EntityList:
+          allOf:
+            - $ref: '#/components/schemas/DatasetEntityRecognizerEntityList'
+            - description: The S3 location of the entity list for your custom entity recognizer.
+      description: Specifies the format and location of the input data. You must provide either the <code>Annotations</code> parameter or the <code>EntityList</code> parameter.
+    DatasetStatus:
+      type: string
+      enum:
+        - CREATING
+        - COMPLETED
+        - FAILED
+    Timestamp:
+      type: string
+      format: date-time
+    DatasetFilter:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/DatasetStatus'
+            - description: Filter the datasets based on the dataset status.
+        DatasetType:
+          allOf:
+            - $ref: '#/components/schemas/DatasetType'
+            - description: Filter the datasets based on the dataset type.
+        CreationTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Filter the datasets to include datasets created after the specified time.
+        CreationTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Filter the datasets to include datasets created before the specified time.
+      description: Filter the datasets based on creation time or dataset status.
+    NumberOfDocuments:
+      type: integer
+    DatasetProperties:
+      type: object
+      properties:
+        DatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendDatasetArn'
+            - description: The ARN of the dataset.
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendArnName'
+            - description: The name of the dataset.
+        DatasetType:
+          allOf:
+            - $ref: '#/components/schemas/DatasetType'
+            - description: The dataset type (training data or test data).
+        DatasetS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The S3 URI where the dataset is stored.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: Description of the dataset.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/DatasetStatus'
+            - description: 'The dataset status. While the system creates the dataset, the status is <code>CREATING</code>. When the dataset is ready to use, the status changes to <code>COMPLETED</code>. '
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/AnyLengthString'
+            - description: A description of the status of the dataset.
+        NumberOfDocuments:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfDocuments'
+            - description: The number of documents in the dataset.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Creation time of the dataset.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Time when the data from the dataset becomes available in the data lake.
+      description: Properties associated with the dataset.
+    DatasetPropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatasetProperties'
     PolicyRevisionId:
       type: string
       pattern: '[0-9A-Fa-f]+'
@@ -7474,7 +8846,7 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
         VolumeKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
@@ -7483,6 +8855,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
             - description: ' Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your document classification job. For more information, see <a href="https://docs.aws.amazon.com/vppc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel
       description: Provides information about a document classification job.
     DocumentClassifierProperties:
       type: object
@@ -7534,7 +8910,7 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
         VolumeKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
@@ -7559,6 +8935,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentClassifierArn'
             - description: The Amazon Resource Name (ARN) of the source model. This model was imported from a different AWS account to create the document classifier model in your AWS account.
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel
       description: Provides information about a document classifier.
     DominantLanguageDetectionJobProperties:
       type: object
@@ -7602,7 +8982,7 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
         VolumeKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
@@ -7654,11 +9034,15 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
         DesiredDataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
             - description: Data access role ARN to use in case the new model is encrypted with a customer KMS key.
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel
       description: 'Specifies information about the specified endpoint. For information about endpoints, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html">Managing endpoints</a>.'
     EntitiesDetectionJobProperties:
       type: object
@@ -7710,7 +9094,7 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
         VolumeKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
@@ -7766,7 +9150,7 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: ' The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.'
+            - description: ' The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.'
         VolumeKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
@@ -7778,7 +9162,7 @@ components:
         ModelKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
-            - description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats: </p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+            - description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
         VersionName:
           allOf:
             - $ref: '#/components/schemas/VersionName'
@@ -7787,6 +9171,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/EntityRecognizerArn'
             - description: The Amazon Resource Name (ARN) of the source model. This model was imported from a different AWS account to create the entity recognizer model in your AWS account.
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel
+        OutputDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/EntityRecognizerOutputDataConfig'
+            - description: Output data configuration.
       description: Describes information about an entity recognizer.
     EventsDetectionJobProperties:
       type: object
@@ -7834,12 +9226,114 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) of the AWS Identify and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
         TargetEventTypes:
           allOf:
             - $ref: '#/components/schemas/TargetEventTypes'
             - description: The types of events that are detected by the job.
       description: Provides information about an events detection job.
+    FlywheelIterationId:
+      type: string
+      pattern: '[0-9]{8}T[0-9]{6}Z'
+      maxLength: 63
+    FlywheelIterationProperties:
+      type: object
+      properties:
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: <p/>
+        FlywheelIterationId:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelIterationId'
+            - description: <p/>
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation start time of the flywheel iteration.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The completion time of this flywheel iteration.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelIterationStatus'
+            - description: The status of the flywheel iteration.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/AnyLengthString'
+            - description: A description of the status of the flywheel iteration.
+        EvaluatedModelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendModelArn'
+            - description: The ARN of the evaluated model associated with this flywheel iteration.
+        EvaluatedModelMetrics:
+          $ref: '#/components/schemas/FlywheelModelEvaluationMetrics'
+        TrainedModelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendModelArn'
+            - description: The ARN of the trained model associated with this flywheel iteration.
+        TrainedModelMetrics:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelModelEvaluationMetrics'
+            - description: The metrics associated with the trained model.
+        EvaluationManifestS3Prefix:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: <p/>
+      description: The configuration properties of a flywheel iteration.
+    FlywheelProperties:
+      type: object
+      properties:
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel.
+        ActiveModelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendModelArn'
+            - description: The Amazon Resource Number (ARN) of the active model version.
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend permission to access the flywheel data.
+        TaskConfig:
+          allOf:
+            - $ref: '#/components/schemas/TaskConfig'
+            - description: Configuration about the custom classifier associated with the flywheel.
+        DataLakeS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: 'Amazon S3 URI of the data lake location. '
+        DataSecurityConfig:
+          allOf:
+            - $ref: '#/components/schemas/DataSecurityConfig'
+            - description: Data security configuration.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelStatus'
+            - description: The status of the flywheel.
+        ModelType:
+          allOf:
+            - $ref: '#/components/schemas/ModelType'
+            - description: Model type of the flywheel's model.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/AnyLengthString'
+            - description: A description of the status of the flywheel.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Creation time of the flywheel.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Last modified time for the flywheel.
+        LatestFlywheelIteration:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelIterationId'
+            - description: The most recent flywheel iteration.
+      description: The flywheel properties.
     KeyPhrasesDetectionJobProperties:
       type: object
       properties:
@@ -7886,7 +9380,7 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
         VolumeKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
@@ -7946,15 +9440,12 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
         Mode:
           allOf:
             - $ref: '#/components/schemas/PiiEntitiesDetectionMode'
             - description: Specifies whether the output provides the locations (offsets) of PII entities or a file in which PII entities are redacted.
       description: Provides information about a PII entities detection job.
-    Timestamp:
-      type: string
-      format: date-time
     SentimentDetectionJobProperties:
       type: object
       properties:
@@ -8001,7 +9492,7 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
         VolumeKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
@@ -8053,11 +9544,11 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
         VolumeKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
-            - description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the targeted sentiment detection job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+            - description: '<p>ID for the KMS key that Amazon Comprehend uses to encrypt the data on the storage volume attached to the ML compute instance(s) that process the targeted sentiment detection job. The VolumeKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
         VpcConfig:
           $ref: '#/components/schemas/VpcConfig'
       description: Provides information about a targeted sentiment detection job.
@@ -8107,7 +9598,7 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your job data. '
+            - description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your job data. '
         VolumeKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
@@ -8145,6 +9636,25 @@ components:
             - $ref: '#/components/schemas/Integer'
             - description: 'Page number in the input document. This field is present in the response only if your request includes the <code>Byte</code> parameter. '
       description: Specifies the class that categorizes the document being analyzed
+    LabelsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LabelListItem'
+      maxItems: 1000
+    DocumentClassificationConfig:
+      type: object
+      required:
+        - Mode
+      properties:
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/DocumentClassifierMode'
+            - description: Classification mode indicates whether the documents are <code>MULTI_CLASS</code> or <code>MULTI_LABEL</code>.
+        Labels:
+          allOf:
+            - $ref: '#/components/schemas/LabelsList'
+            - description: One or more labels to associate with the custom classifier.
+      description: Configuration required for a custom classification model.
     JobName:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
@@ -8253,12 +9763,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'Filters the list of classifiers based on the time that the classifier was submitted for processing. Returns only classifiers submitted after the specified time. Classifiers are returned in descending order, newest to oldest.'
-      description: 'Provides information for filtering a list of document classifiers. You can only specify one filtering parameter in a request. For more information, see the operation.'
-    LabelDelimiter:
-      type: string
-      pattern: '^[ ~!@#$%^*\-_+=|\\:;\t>?/]$'
-      minLength: 1
-      maxLength: 1
+      description: 'Provides information for filtering a list of document classifiers. You can only specify one filtering parameter in a request. For more information, see the <code>ListDocumentClassifiers</code> operation.'
     DocumentClassifierPropertiesList:
       type: array
       items:
@@ -8543,6 +10048,20 @@ components:
             - $ref: '#/components/schemas/Float'
             - description: The level of confidence that Amazon Comprehend has in the accuracy of the detection.
       description: Specifies one of the label or labels that categorize the personally identifiable information (PII) entity being analyzed.
+    EntityTypesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntityTypesListItem'
+    EntityRecognitionConfig:
+      type: object
+      required:
+        - EntityTypes
+      properties:
+        EntityTypes:
+          allOf:
+            - $ref: '#/components/schemas/EntityTypesList'
+            - description: Up to 25 entity types that the model is trained to recognize.
+      description: Configuration required for an entity recognition model.
     EntityRecognizerAnnotations:
       type: object
       required:
@@ -8566,11 +10085,6 @@ components:
       enum:
         - COMPREHEND_CSV
         - AUGMENTED_MANIFEST
-    InputFormat:
-      type: string
-      enum:
-        - ONE_DOC_PER_FILE
-        - ONE_DOC_PER_LINE
     EntityRecognizerDocuments:
       type: object
       required:
@@ -8598,7 +10112,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3Uri'
             - description: Specifies the Amazon S3 location where the entity list is located. The URI must be in the same region as the API endpoint that you are calling.
-      description: Describes the entity recognizer submitted with an entity recognizer.
+      description: Describes the entity list submitted with an entity recognizer.
     EntityRecognizerEvaluationMetrics:
       type: object
       properties:
@@ -8634,11 +10148,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'Filters the list of entities based on the time that the list was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in ascending order, oldest to newest.'
-      description: 'Provides information for filtering a list of entity recognizers. You can only specify one filtering parameter in a request. For more information, see the operation./&gt;'
-    EntityTypesList:
-      type: array
-      items:
-        $ref: '#/components/schemas/EntityTypesListItem'
+      description: 'Provides information for filtering a list of entity recognizers. You can only specify one filtering parameter in a request. For more information, see the <code>ListEntityRecognizers</code> operation./&gt;'
     EntityRecognizerMetadataEntityTypesList:
       type: array
       items:
@@ -8695,6 +10205,14 @@ components:
             - $ref: '#/components/schemas/Double'
             - description: 'A measure of how accurate the recognizer results are for a specific entity type in the test data. It is derived from the <code>Precision</code> and <code>Recall</code> values. The <code>F1Score</code> is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. '
       description: 'Detailed information about the accuracy of an entity recognizer for a specific entity type. '
+    EntityRecognizerOutputDataConfig:
+      type: object
+      properties:
+        FlywheelStatsS3Prefix:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The Amazon S3 prefix for the data lake location of the flywheel statistics.
+      description: Output data configuration.
     EntityRecognizerPropertiesList:
       type: array
       items:
@@ -8811,6 +10329,119 @@ components:
             - $ref: '#/components/schemas/Integer'
             - description: Number of characters extracted from each page.
       description: Array of the number of characters extracted from each page.
+    FlywheelStatus:
+      type: string
+      enum:
+        - CREATING
+        - ACTIVE
+        - UPDATING
+        - DELETING
+        - FAILED
+    FlywheelFilter:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelStatus'
+            - description: Filter the flywheels based on the flywheel status.
+        CreationTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Filter the flywheels to include flywheels created after the specified time.
+        CreationTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Filter the flywheels to include flywheels created before the specified time.
+      description: Filter the flywheels based on creation time or flywheel status.
+    FlywheelIterationFilter:
+      type: object
+      properties:
+        CreationTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Filter the flywheel iterations to include iterations created after the specified time.
+        CreationTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Filter the flywheel iterations to include iterations created before the specified time.
+      description: Filter the flywheel iterations based on creation time.
+    FlywheelIterationStatus:
+      type: string
+      enum:
+        - TRAINING
+        - EVALUATING
+        - COMPLETED
+        - FAILED
+        - STOP_REQUESTED
+        - STOPPED
+    FlywheelModelEvaluationMetrics:
+      type: object
+      properties:
+        AverageF1Score:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The average F1 score from the evaluation metrics.
+        AveragePrecision:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: Average precision metric for the model.
+        AverageRecall:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: Average recall metric for the model.
+        AverageAccuracy:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: Average accuracy metric for the model.
+      description: The evaluation metrics associated with the evaluated model.
+    FlywheelIterationPropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FlywheelIterationProperties'
+    FlywheelSummary:
+      type: object
+      properties:
+        FlywheelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendFlywheelArn'
+            - description: The Amazon Resource Number (ARN) of the flywheel
+        ActiveModelArn:
+          allOf:
+            - $ref: '#/components/schemas/ComprehendModelArn'
+            - description: ARN of the active model version for the flywheel.
+        DataLakeS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: 'Amazon S3 URI of the data lake location. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelStatus'
+            - description: The status of the flywheel.
+        ModelType:
+          allOf:
+            - $ref: '#/components/schemas/ModelType'
+            - description: Model type of the flywheel's model.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/AnyLengthString'
+            - description: A description of the status of the flywheel.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Creation time of the flywheel.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Last modified time for the flywheel.
+        LatestFlywheelIteration:
+          allOf:
+            - $ref: '#/components/schemas/FlywheelIterationId'
+            - description: The most recent flywheel iteration.
+      description: Flywheel summary information.
+    FlywheelSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FlywheelSummary'
     Polygon:
       type: array
       items:
@@ -8859,6 +10490,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/KeyPhrasesDetectionJobProperties'
+    LabelListItem:
+      type: string
+      pattern: '^\P{C}*$'
+      maxLength: 5000
     MaxResultsInteger:
       type: integer
       minimum: 1
@@ -9042,7 +10677,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
-      description: 'Provides information for filtering a list of dominant language detection jobs. For more information, see the operation.'
+      description: 'Provides information for filtering a list of dominant language detection jobs. For more information, see the <code>ListTargetedSentimentDetectionJobs</code> operation.'
     TargetedSentimentDetectionJobPropertiesList:
       type: array
       items:
@@ -9251,5 +10886,19 @@ components:
         - QUANTITY
         - ATTRIBUTE
         - OTHER
+    UpdateDataSecurityConfig:
+      type: object
+      properties:
+        ModelKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
+        VolumeKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: ID for the KMS key that Amazon Comprehend uses to encrypt the volume.
+        VpcConfig:
+          $ref: '#/components/schemas/VpcConfig'
+      description: Data security configuration.
 security:
   - hmac: []

@@ -1668,6 +1668,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.CreateGUISessionAccessDetails:
+    post:
+      operationId: CreateGUISessionAccessDetails
+      description: <p>Creates two URLs that are used to access a virtual computer’s graphical user interface (GUI) session. The primary URL initiates a web-based NICE DCV session to the virtual computer's application. The secondary URL initiates a web-based NICE DCV session to the virtual computer's operating session. </p> <p>Use <code>StartGUISession</code> to open the session.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGUISessionAccessDetailsResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGUISessionAccessDetailsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.CreateGUISessionAccessDetails
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Lightsail_20161128.CreateInstanceSnapshot:
     post:
       operationId: CreateInstanceSnapshot
@@ -5653,6 +5716,69 @@ paths:
             type: string
             enum:
               - Lightsail_20161128.GetContainerServices
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.GetCostEstimate:
+    post:
+      operationId: GetCostEstimate
+      description: Retrieves information about the cost estimate for a specified resource. A cost estimate will not generate for a resource that has been deleted.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCostEstimateResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCostEstimateRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.GetCostEstimate
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -9933,6 +10059,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.StartGUISession:
+    post:
+      operationId: StartGUISession
+      description: 'Initiates a graphical user interface (GUI) session that’s used to access a virtual computer’s operating system and application. The session will be active for 1 hour. Use this action to resume the session after it expires. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartGUISessionResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartGUISessionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.StartGUISession
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Lightsail_20161128.StartInstance:
     post:
       operationId: StartInstance
@@ -10075,6 +10264,69 @@ paths:
             type: string
             enum:
               - Lightsail_20161128.StartRelationalDatabase
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.StopGUISession:
+    post:
+      operationId: StopGUISession
+      description: Terminates a web-based NICE DCV session that’s used to access a virtual computer’s operating system or application. The session will close and any unsaved data will be lost.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopGUISessionResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopGUISessionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.StopGUISession
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -11354,6 +11606,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: 'The disk path to expose to the instance (e.g., <code>/dev/xvdf</code>).'
+        autoMounting:
+          allOf:
+            - $ref: '#/components/schemas/boolean'
+            - description: <p>A Boolean value used to determine the automatic mounting of a storage volume to a virtual computer. The default value is <code>False</code>.</p> <important> <p>This value only applies to Lightsail for Research resources.</p> </important>
     AttachInstancesToLoadBalancerResult:
       type: object
       properties:
@@ -11897,6 +12153,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/DomainEntry'
             - description: An array of key-value pairs containing information about the domain entry request.
+    CreateGUISessionAccessDetailsResult:
+      type: object
+      properties:
+        resourceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The resource name.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: The status of the operation.
+        percentageComplete:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: The percentage of completion for the operation.
+        failureReason:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The reason the operation failed.
+        sessions:
+          allOf:
+            - $ref: '#/components/schemas/Sessions'
+            - description: Returns information about the specified NICE DCV GUI session.
+    CreateGUISessionAccessDetailsRequest:
+      type: object
+      required:
+        - resourceName
+      title: CreateGUISessionAccessDetailsRequest
+      properties:
+        resourceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The resource name.
     CreateInstanceSnapshotResult:
       type: object
       properties:
@@ -12948,6 +13237,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/string'
             - description: '<p>The token to advance to the next page of results from your request.</p> <p>To get a page token, perform an initial <code>GetBlueprints</code> request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.</p>'
+        appCategory:
+          allOf:
+            - $ref: '#/components/schemas/AppCategory'
+            - description: <p>Returns a list of blueprints that are specific to Lightsail for Research.</p> <important> <p>You must use this parameter to view Lightsail for Research blueprints.</p> </important>
     GetBucketAccessKeysResult:
       type: object
       properties:
@@ -13085,6 +13378,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/string'
             - description: '<p>The token to advance to the next page of results from your request.</p> <p>To get a page token, perform an initial <code>GetBundles</code> request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.</p>'
+        appCategory:
+          allOf:
+            - $ref: '#/components/schemas/AppCategory'
+            - description: <p>Returns a list of bundles that are specific to Lightsail for Research.</p> <important> <p>You must use this parameter to view Lightsail for Research bundles.</p> </important>
     GetCertificatesResult:
       type: object
       properties:
@@ -13301,6 +13598,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/ContainerServiceName'
             - description: '<p>The name of the container service for which to return information.</p> <p>When omitted, the response includes all of your container services in the Amazon Web Services Region where the request is made.</p>'
+    GetCostEstimateResult:
+      type: object
+      properties:
+        resourcesBudgetEstimate:
+          allOf:
+            - $ref: '#/components/schemas/ResourcesBudgetEstimate'
+            - description: Returns the estimate's forecasted cost or usage.
+    GetCostEstimateRequest:
+      type: object
+      required:
+        - resourceName
+        - startTime
+        - endTime
+      title: GetCostEstimateRequest
+      properties:
+        resourceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The resource name.
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: '<p>The cost estimate start time.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, specify <code>1538424000</code> as the start time.</p> </li> </ul> <p>You can convert a human-friendly time to Unix time format using a converter like <a href="https://www.epochconverter.com/">Epoch converter</a>.</p>'
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: '<p>The cost estimate end time.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use an end time of October 1, 2018, at 9 PM UTC, specify <code>1538427600</code> as the end time.</p> </li> </ul> <p>You can convert a human-friendly time to Unix time format using a converter like <a href="https://www.epochconverter.com/">Epoch converter</a>.</p>'
     GetDiskResult:
       type: object
       properties:
@@ -14623,6 +14947,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceBucketAccess'
             - description: '<p>The access setting.</p> <p>The following access settings are available:</p> <ul> <li> <p> <code>allow</code> - Allows access to the bucket and its objects.</p> </li> <li> <p> <code>deny</code> - Denies access to the bucket and its objects. Use this setting to remove access for a resource previously set to <code>allow</code>.</p> </li> </ul>'
+    StartGUISessionResult:
+      type: object
+      properties:
+        operations:
+          allOf:
+            - $ref: '#/components/schemas/OperationList'
+            - description: The available API operations.
+    StartGUISessionRequest:
+      type: object
+      required:
+        - resourceName
+      title: StartGUISessionRequest
+      properties:
+        resourceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The resource name.
     StartInstanceResult:
       type: object
       properties:
@@ -14657,6 +14998,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of your database to start.
+    StopGUISessionResult:
+      type: object
+      properties:
+        operations:
+          allOf:
+            - $ref: '#/components/schemas/OperationList'
+            - description: The available API operations.
+    StopGUISessionRequest:
+      type: object
+      required:
+        - resourceName
+      title: StopGUISessionRequest
+      properties:
+        resourceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The resource name.
     StopInstanceResult:
       type: object
       properties:
@@ -15252,6 +15610,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/TimeOfDay'
             - description: '<p>The next daily time an automatic snapshot will be created.</p> <p>The time shown is in <code>HH:00</code> format, and in Coordinated Universal Time (UTC).</p> <p>The snapshot is automatically created between the time shown and up to 45 minutes after.</p>'
+        threshold:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: <p>The trigger threshold of the action.</p> <important> <p>This add-on only applies to Lightsail for Research resources.</p> </important>
+        duration:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: <p>The amount of idle time in minutes after which your virtual computer will automatically stop.</p> <important> <p>This add-on only applies to Lightsail for Research resources.</p> </important>
       description: Describes an add-on that is enabled for an Amazon Lightsail resource.
     AddOnList:
       type: array
@@ -15261,6 +15627,7 @@ components:
       type: string
       enum:
         - AutoSnapshot
+        - StopInstanceOnIdle
     AutoSnapshotAddOnRequest:
       type: object
       properties:
@@ -15269,6 +15636,18 @@ components:
             - $ref: '#/components/schemas/TimeOfDay'
             - description: '<p>The daily time when an automatic snapshot will be created.</p> <p>Constraints:</p> <ul> <li> <p>Must be in <code>HH:00</code> format, and in an hourly increment.</p> </li> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>The snapshot will be automatically created between the time specified and up to 45 minutes after.</p> </li> </ul>'
       description: '<p>Describes a request to enable or modify the automatic snapshot add-on for an Amazon Lightsail instance or disk.</p> <p>When you modify the automatic snapshot time for a resource, it is typically effective immediately except under the following conditions:</p> <ul> <li> <p>If an automatic snapshot has been created for the current day, and you change the snapshot time to a later time of day, then the new snapshot time will be effective the following day. This ensures that two snapshots are not created for the current day.</p> </li> <li> <p>If an automatic snapshot has not yet been created for the current day, and you change the snapshot time to an earlier time of day, then the new snapshot time will be effective the following day and a snapshot is automatically created at the previously set time for the current day. This ensures that a snapshot is created for the current day.</p> </li> <li> <p>If an automatic snapshot has not yet been created for the current day, and you change the snapshot time to a time that is within 30 minutes from your current time, then the new snapshot time will be effective the following day and a snapshot is automatically created at the previously set time for the current day. This ensures that a snapshot is created for the current day, because 30 minutes is required between your current time and the new snapshot time that you specify.</p> </li> <li> <p>If an automatic snapshot is scheduled to be created within 30 minutes from your current time and you change the snapshot time, then the new snapshot time will be effective the following day and a snapshot is automatically created at the previously set time for the current day. This ensures that a snapshot is created for the current day, because 30 minutes is required between your current time and the new snapshot time that you specify.</p> </li> </ul>'
+    StopInstanceOnIdleRequest:
+      type: object
+      properties:
+        threshold:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The value to compare with the duration.
+        duration:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The amount of idle time in minutes after which your virtual computer will automatically stop.
+      description: <p>Describes a request to create or edit the <code>StopInstanceOnIdle</code> add-on.</p> <important> <p>This add-on only applies to Lightsail for Research resources.</p> </important>
     AddOnRequest:
       type: object
       required:
@@ -15282,6 +15661,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoSnapshotAddOnRequest'
             - description: An object that represents additional parameters when enabling or modifying the automatic snapshot add-on.
+        stopInstanceOnIdleRequest:
+          allOf:
+            - $ref: '#/components/schemas/StopInstanceOnIdleRequest'
+            - description: <p>An object that represents additional parameters when enabling or modifying the <code>StopInstanceOnIdle</code> add-on.</p> <important> <p>This object only applies to Lightsail for Research resources.</p> </important>
       description: '<p>Describes a request to enable, modify, or disable an add-on for an Amazon Lightsail resource.</p> <note> <p>An additional cost may be associated with enabling add-ons. For more information, see the <a href="https://aws.amazon.com/lightsail/pricing/">Lightsail pricing page</a>.</p> </note>'
     AddOnRequestList:
       type: array
@@ -15536,6 +15919,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Operation'
+    AppCategory:
+      type: string
+      enum:
+        - LfR
+    AppCategoryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppCategory'
     Operation:
       type: object
       properties:
@@ -15616,6 +16007,13 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/DiskMapList'
+    AutoMountStatus:
+      type: string
+      enum:
+        - Failed
+        - Pending
+        - Mounted
+        - NotMounted
     AutoSnapshotDate:
       type: string
       pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
@@ -15734,6 +16132,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstancePlatform'
             - description: The operating system platform (either Linux/Unix-based or Windows Server-based) of the blueprint.
+        appCategory:
+          allOf:
+            - $ref: '#/components/schemas/AppCategory'
+            - description: <p>Virtual computer blueprints that are supported by Lightsail for Research.</p> <important> <p>This parameter only applies to Lightsail for Research resources.</p> </important>
       description: Describes a blueprint (a virtual private server image).
     BlueprintList:
       type: array
@@ -15951,6 +16353,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstancePlatformList'
             - description: The operating system platform (Linux/Unix-based or Windows Server-based) that the bundle supports. You can only launch a <code>WINDOWS</code> bundle on a blueprint that supports the <code>WINDOWS</code> platform. <code>LINUX_UNIX</code> blueprints require a <code>LINUX_UNIX</code> bundle.
+        supportedAppCategories:
+          allOf:
+            - $ref: '#/components/schemas/AppCategoryList'
+            - description: <p>Virtual computer blueprints that are supported by a Lightsail for Research bundle.</p> <important> <p>This parameter only applies to Lightsail for Research resources.</p> </important>
       description: 'Describes a bundle, which is a set of specs describing your virtual private server (or <i>instance</i>).'
     BundleList:
       type: array
@@ -16865,6 +17271,26 @@ components:
         - ap-northeast-1
         - ap-northeast-2
         - eu-north-1
+    EstimatesByTime:
+      type: array
+      items:
+        $ref: '#/components/schemas/EstimateByTime'
+    CostEstimate:
+      type: object
+      properties:
+        usageType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The types of usage that are included in the estimate, such as costs, usage, or data transfer.'
+        resultsByTime:
+          allOf:
+            - $ref: '#/components/schemas/EstimatesByTime'
+            - description: The cost estimate result that's associated with a time period.
+      description: Describes the estimated cost for resources in your Lightsail for Research account.
+    CostEstimates:
+      type: array
+      items:
+        $ref: '#/components/schemas/CostEstimate'
     InstanceEntryList:
       type: array
       items:
@@ -17015,6 +17441,23 @@ components:
             - deprecated: true
               description: '<p>(Deprecated) The options for the domain entry.</p> <note> <p>In releases prior to November 29, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>'
       description: Describes a domain recordset entry.
+    Status:
+      type: string
+      enum:
+        - startExpired
+        - notStarted
+        - started
+        - starting
+        - stopped
+        - stopping
+        - settingUpInstance
+        - failedInstanceCreation
+        - failedStartingGUISession
+        - failedStoppingGUISession
+    Sessions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Session'
     KeyPair:
       type: object
       properties:
@@ -17062,6 +17505,10 @@ components:
     SensitiveString:
       type: string
       format: password
+    Currency:
+      type: string
+      enum:
+        - USD
     DiskState:
       type: string
       enum:
@@ -17143,6 +17590,10 @@ components:
             - $ref: '#/components/schemas/integer'
             - deprecated: true
               description: '<p>(Deprecated) The number of GB in use by the disk.</p> <note> <p>In releases prior to November 14, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>'
+        autoMountStatus:
+          allOf:
+            - $ref: '#/components/schemas/AutoMountStatus'
+            - description: <p>The status of automatically mounting a storage disk to a virtual computer.</p> <important> <p>This parameter only applies to Lightsail for Research resources.</p> </important>
       description: Describes a block storage disk.
     DiskInfo:
       type: object
@@ -17430,6 +17881,50 @@ components:
             - $ref: '#/components/schemas/CertificateDomainValidationStatus'
             - description: The validation status of the record.
       description: Describes the domain name system (DNS) records that you must add to the DNS of your registered domain to validate ownership for an Amazon Lightsail SSL/TLS certificate.
+    PricingUnit:
+      type: string
+      enum:
+        - GB
+        - Hrs
+        - GB-Mo
+        - Bundles
+        - Queries
+    TimePeriod:
+      type: object
+      properties:
+        start:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: 'The beginning of the time period. The start date is inclusive. For example, if <code>start</code> is <code>2017-01-01</code>, Lightsail for Research retrieves cost and usage data starting at <code>2017-01-01</code> up to the end date. The start date must be equal to or no later than the current date to avoid a validation error.'
+        end:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: 'The end of the time period. The end date is exclusive. For example, if <code>end</code> is <code>2017-05-01</code>, Lightsail for Research retrieves cost and usage data from the start date up to, but not including, <code>2017-05-01</code>.'
+      description: 'Sets the start date and end date for retrieving a cost estimate. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>.'
+    EstimateByTime:
+      type: object
+      properties:
+        usageCost:
+          allOf:
+            - $ref: '#/components/schemas/double'
+            - description: The amount of cost or usage that's measured for the cost estimate.
+        pricingUnit:
+          allOf:
+            - $ref: '#/components/schemas/PricingUnit'
+            - description: The unit of measurement that's used for the cost estimate.
+        unit:
+          allOf:
+            - $ref: '#/components/schemas/double'
+            - description: 'The number of pricing units used to calculate the total number of hours. For example, 1 unit equals 1 hour.'
+        currency:
+          allOf:
+            - $ref: '#/components/schemas/Currency'
+            - description: The currency of the estimate in USD.
+        timePeriod:
+          allOf:
+            - $ref: '#/components/schemas/TimePeriod'
+            - description: 'The period of time, in days, that an estimate covers. The period has a start date and an end date. The start date must come before the end date.'
+      description: 'An estimate that''s associated with a time period. '
     ExportSnapshotRecordSourceInfo:
       type: object
       properties:
@@ -17537,6 +18032,10 @@ components:
         $ref: '#/components/schemas/MetricDatapoint'
     IncludeCertificateDetails:
       type: boolean
+    ResourcesBudgetEstimate:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceBudgetEstimate'
     timestamp:
       type: string
       format: date-time
@@ -18971,6 +19470,8 @@ components:
         - UpdateBucket
         - SetResourceAccessForBucket
         - UpdateInstanceMetadataOptions
+        - StartGUISession
+        - StopGUISession
     OperationStatus:
       type: string
       enum:
@@ -19236,6 +19737,50 @@ components:
       enum:
         - allow
         - deny
+    ResourceBudgetEstimate:
+      type: object
+      properties:
+        resourceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The resource name.
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: The type of resource the budget will track.
+        costEstimates:
+          allOf:
+            - $ref: '#/components/schemas/CostEstimates'
+            - description: The cost estimate for the specified budget.
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: The estimate start time.
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: The estimate end time.
+      description: Describes the estimated cost or usage that a budget tracks.
+    SensitiveNonEmptyString:
+      type: string
+      pattern: .*\S.*
+      format: password
+    Session:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The session name.
+        url:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: The session URL.
+        isPrimary:
+          allOf:
+            - $ref: '#/components/schemas/boolean'
+            - description: 'When true, this Boolean value indicates the primary session for the specified resource.'
+      description: 'Describes a web-based, remote graphical user interface (GUI), NICE DCV session. The session is used to access a virtual computer’s operating system or application.'
     TagKey:
       type: string
     TagValue:

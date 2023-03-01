@@ -774,7 +774,7 @@ paths:
                   minimum: 1
                   maximum: 100000
                 maxDuration:
-                  description: A max duration for the group.
+                  description: A maximum run time for the group in minutes.
                   type: integer
                   minimum: 1
                   maximum: 100000
@@ -790,7 +790,7 @@ paths:
                   minLength: 1
                   maxLength: 128
                 requestId:
-                  description: A request ID for the group.
+                  description: 'To ensure that requests don''t run multiple times, specify a unique ID for each request.'
                   type: string
                   pattern: '^[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+$'
                   minLength: 1
@@ -1210,13 +1210,13 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/WorkflowParameter'
                 requestId:
-                  description: A request ID for the workflow.
+                  description: 'To ensure that requests don''t run multiple times, specify a unique ID for each request.'
                   type: string
                   pattern: '^[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+$'
                   minLength: 1
                   maxLength: 128
                 storageCapacity:
-                  description: A storage capacity for the workflow.
+                  description: A storage capacity for the workflow in gigabytes.
                   type: integer
                   minimum: 0
                   maximum: 100000
@@ -1326,6 +1326,7 @@ paths:
             type: string
             enum:
               - PRIVATE
+              - SERVICE
             minLength: 1
             maxLength: 64
   '/annotationStore/{name}':
@@ -2078,7 +2079,7 @@ paths:
                   minimum: 1
                   maximum: 100000
                 maxDuration:
-                  description: The maximum amount of time to run.
+                  description: A maximum run time for the group in minutes.
                   type: integer
                   minimum: 1
                   maximum: 100000
@@ -2553,6 +2554,7 @@ paths:
             type: string
             enum:
               - PRIVATE
+              - SERVICE
             minLength: 1
             maxLength: 64
     post:
@@ -4604,7 +4606,7 @@ paths:
                   minimum: 0
                   maximum: 100000
                 requestId:
-                  description: A request ID for the run.
+                  description: 'To ensure that requests don''t run multiple times, specify a unique ID for each request.'
                   type: string
                   pattern: '^[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+$'
                   minLength: 1
@@ -4628,7 +4630,7 @@ paths:
                   minLength: 1
                   maxLength: 18
                 storageCapacity:
-                  description: A storage capacity for the run.
+                  description: A storage capacity for the run in gigabytes.
                   type: integer
                   minimum: 0
                   maximum: 100000
@@ -4648,6 +4650,7 @@ paths:
                   type: string
                   enum:
                     - PRIVATE
+                    - SERVICE
                   minLength: 1
                   maxLength: 64
   /sequencestores:
@@ -5164,7 +5167,6 @@ paths:
                   items:
                     $ref: '#/components/schemas/AnnotationImportItemSource'
                   minItems: 1
-                  maxItems: 1
                 roleArn:
                   description: A service role for the job.
                   type: string
@@ -5185,7 +5187,7 @@ paths:
   '/sequencestore/{sequenceStoreId}/activationjob':
     post:
       operationId: StartReadSetActivationJob
-      description: Starts a read set activation job.
+      description: 'Activates an archived read set. To reduce storage charges, Amazon Omics archives unused read sets after 30 days.'
       responses:
         '200':
           description: Success
@@ -5261,7 +5263,7 @@ paths:
                   minLength: 1
                   maxLength: 127
                 sources:
-                  description: The job's sources.
+                  description: The job's source files.
                   type: array
                   items:
                     $ref: '#/components/schemas/StartReadSetActivationJobSourceItem'
@@ -5278,7 +5280,7 @@ paths:
   '/sequencestore/{sequenceStoreId}/exportjob':
     post:
       operationId: StartReadSetExportJob
-      description: Starts a read set export job.
+      description: Exports a read set to Amazon S3.
       responses:
         '200':
           description: Success
@@ -5366,7 +5368,7 @@ paths:
                   minLength: 20
                   maxLength: 2048
                 sources:
-                  description: Sources for the job.
+                  description: The job's source files.
                   type: array
                   items:
                     $ref: '#/components/schemas/ExportReadSet'
@@ -5466,7 +5468,7 @@ paths:
                   minLength: 20
                   maxLength: 2048
                 sources:
-                  description: Source files to import.
+                  description: The job's source files.
                   type: array
                   items:
                     $ref: '#/components/schemas/StartReadSetImportJobSourceItem'
@@ -5566,7 +5568,7 @@ paths:
                   minLength: 20
                   maxLength: 2048
                 sources:
-                  description: Sources for the job.
+                  description: The job's source files.
                   type: array
                   items:
                     $ref: '#/components/schemas/StartReferenceImportJobSourceItem'
@@ -5651,7 +5653,6 @@ paths:
                   items:
                     $ref: '#/components/schemas/VariantImportItemSource'
                   minItems: 1
-                  maxItems: 1
                 roleArn:
                   description: A service role for the job.
                   type: string
@@ -5857,7 +5858,7 @@ components:
         reference:
           allOf:
             - $ref: '#/components/schemas/ReferenceItem'
-            - description: The store's genome reference.
+            - description: The store's genome reference. Required for all stores except TSV format with generic annotations.
         status:
           allOf:
             - $ref: '#/components/schemas/StoreStatus'
@@ -6231,7 +6232,7 @@ components:
         sources:
           allOf:
             - $ref: '#/components/schemas/ActivateReadSetSourceList'
-            - description: The job's sources.
+            - description: The job's source files.
         status:
           allOf:
             - $ref: '#/components/schemas/ReadSetActivationJobStatus'
@@ -6314,7 +6315,7 @@ components:
         sources:
           allOf:
             - $ref: '#/components/schemas/ImportReadSetSourceList'
-            - description: The job's sources.
+            - description: The job's source files.
         status:
           allOf:
             - $ref: '#/components/schemas/ReadSetImportJobStatus'
@@ -6425,7 +6426,7 @@ components:
         sources:
           allOf:
             - $ref: '#/components/schemas/ImportReferenceSourceList'
-            - description: The job's sources.
+            - description: The job's source files.
         status:
           allOf:
             - $ref: '#/components/schemas/ReferenceImportJobStatus'
@@ -6597,7 +6598,7 @@ components:
         storageCapacity:
           allOf:
             - $ref: '#/components/schemas/GetRunResponseStorageCapacityInteger'
-            - description: The run's storage capacity.
+            - description: The run's storage capacity in gigabytes.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -6638,7 +6639,7 @@ components:
         maxDuration:
           allOf:
             - $ref: '#/components/schemas/GetRunGroupResponseMaxDurationInteger'
-            - description: The group's maximum run duration.
+            - description: The group's maximum run time in minutes.
         maxRuns:
           allOf:
             - $ref: '#/components/schemas/GetRunGroupResponseMaxRunsInteger'
@@ -6669,7 +6670,7 @@ components:
         memory:
           allOf:
             - $ref: '#/components/schemas/GetRunTaskResponseMemoryInteger'
-            - description: The task's memory setting.
+            - description: The task's memory use in gigabytes.
         name:
           allOf:
             - $ref: '#/components/schemas/TaskName'
@@ -6896,7 +6897,7 @@ components:
         storageCapacity:
           allOf:
             - $ref: '#/components/schemas/GetWorkflowResponseStorageCapacityInteger'
-            - description: The workflow's storage capacity.
+            - description: The workflow's storage capacity in gigabytes.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -6930,6 +6931,7 @@ components:
         - CANCELLED
         - COMPLETED
         - FAILED
+        - COMPLETED_WITH_FAILURES
     String:
       type: string
     ResourceIdentifier:
@@ -7698,7 +7700,6 @@ components:
       items:
         $ref: '#/components/schemas/AnnotationImportItemSource'
       minItems: 1
-      maxItems: 1
     CompletionTime:
       type: string
       format: date-time
@@ -8057,7 +8058,7 @@ components:
         maxDuration:
           allOf:
             - $ref: '#/components/schemas/CreateRunGroupRequestMaxDurationInteger'
-            - description: A max duration for the group.
+            - description: A maximum run time for the group in minutes.
         maxRuns:
           allOf:
             - $ref: '#/components/schemas/CreateRunGroupRequestMaxRunsInteger'
@@ -8069,7 +8070,7 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/RunGroupRequestId'
-            - description: A request ID for the group.
+            - description: 'To ensure that requests don''t run multiple times, specify a unique ID for each request.'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -8228,11 +8229,11 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/WorkflowRequestId'
-            - description: A request ID for the workflow.
+            - description: 'To ensure that requests don''t run multiple times, specify a unique ID for each request.'
         storageCapacity:
           allOf:
             - $ref: '#/components/schemas/CreateWorkflowRequestStorageCapacityInteger'
-            - description: A storage capacity for the workflow.
+            - description: A storage capacity for the workflow in gigabytes.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -8255,6 +8256,7 @@ components:
         - UPDATING
         - DELETED
         - FAILED
+        - INACTIVE
       minLength: 1
       maxLength: 64
     PrimitiveBoolean:
@@ -8746,6 +8748,7 @@ components:
       type: string
       enum:
         - PRIVATE
+        - SERVICE
       minLength: 1
       maxLength: 64
     TaskId:
@@ -8801,7 +8804,6 @@ components:
       items:
         $ref: '#/components/schemas/VariantImportItemDetail'
       minItems: 1
-      maxItems: 1
     GetVariantStoreRequest:
       type: object
       title: GetVariantStoreRequest
@@ -9702,7 +9704,7 @@ components:
         maxDuration:
           allOf:
             - $ref: '#/components/schemas/RunGroupListItemMaxDurationInteger'
-            - description: The group's maximum duration setting.
+            - description: The group's maximum duration setting in minutes.
         maxRuns:
           allOf:
             - $ref: '#/components/schemas/RunGroupListItemMaxRunsInteger'
@@ -9806,6 +9808,9 @@ components:
       maxProperties: 1
       additionalProperties:
         $ref: '#/components/schemas/SchemaValueType'
+    SchemaItemKeyString:
+      type: string
+      pattern: '^[a-z0-9_]{1,255}$'
     SequenceStoreDetail:
       type: object
       required:
@@ -9885,7 +9890,7 @@ components:
         sources:
           allOf:
             - $ref: '#/components/schemas/StartReadSetActivationJobRequestSourcesList'
-            - description: The job's sources.
+            - description: The job's source files.
     StartReadSetExportJobRequestSourcesList:
       type: array
       items:
@@ -9915,7 +9920,7 @@ components:
         sources:
           allOf:
             - $ref: '#/components/schemas/StartReadSetExportJobRequestSourcesList'
-            - description: Sources for the job.
+            - description: The job's source files.
     StartReadSetImportJobRequestSourcesList:
       type: array
       items:
@@ -9940,7 +9945,7 @@ components:
         sources:
           allOf:
             - $ref: '#/components/schemas/StartReadSetImportJobRequestSourcesList'
-            - description: Source files to import.
+            - description: The job's source files.
     StartReferenceImportJobRequestSourcesList:
       type: array
       items:
@@ -9965,7 +9970,7 @@ components:
         sources:
           allOf:
             - $ref: '#/components/schemas/StartReferenceImportJobRequestSourcesList'
-            - description: Sources for the job.
+            - description: The job's source files.
     StartRunRequestPriorityInteger:
       type: integer
       minimum: 0
@@ -10004,7 +10009,7 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/RunRequestId'
-            - description: A request ID for the run.
+            - description: 'To ensure that requests don''t run multiple times, specify a unique ID for each request.'
         roleArn:
           allOf:
             - $ref: '#/components/schemas/RunRoleArn'
@@ -10020,7 +10025,7 @@ components:
         storageCapacity:
           allOf:
             - $ref: '#/components/schemas/StartRunRequestStorageCapacityInteger'
-            - description: A storage capacity for the run.
+            - description: A storage capacity for the run in gigabytes.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -10038,7 +10043,6 @@ components:
       items:
         $ref: '#/components/schemas/VariantImportItemSource'
       minItems: 1
-      maxItems: 1
     StartVariantImportRequest:
       type: object
       required:
@@ -10099,7 +10103,7 @@ components:
         memory:
           allOf:
             - $ref: '#/components/schemas/TaskListItemMemoryInteger'
-            - description: The task's memory.
+            - description: The task's memory use in gigabyes.
         name:
           allOf:
             - $ref: '#/components/schemas/TaskName'
@@ -10168,7 +10172,7 @@ components:
         maxDuration:
           allOf:
             - $ref: '#/components/schemas/UpdateRunGroupRequestMaxDurationInteger'
-            - description: The maximum amount of time to run.
+            - description: A maximum run time for the group in minutes.
         maxRuns:
           allOf:
             - $ref: '#/components/schemas/UpdateRunGroupRequestMaxRunsInteger'
@@ -10211,6 +10215,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3Uri'
             - description: The source file's location in Amazon S3.
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/JobStatusMsg'
+            - description: ' A message that provides additional context about a job '
       description: Details about an imported variant item.
     VariantImportJobItem:
       type: object
