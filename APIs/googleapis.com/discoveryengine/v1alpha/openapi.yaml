@@ -35,7 +35,7 @@ paths:
       description: Deletes a Document.
       operationId: discoveryengine.projects.locations.dataStores.branches.documents.delete
       parameters:
-        - description: Required. Full resource name of Document, such as `projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}`. If the caller does not have permission to delete the Document, regardless of whether or not it exists, a PERMISSION_DENIED error is returned. If the Document to delete does not exist, a NOT_FOUND error is returned.
+        - description: Required. Full resource name of Document, such as `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}`. If the caller does not have permission to delete the Document, regardless of whether or not it exists, a PERMISSION_DENIED error is returned. If the Document to delete does not exist, a NOT_FOUND error is returned.
           in: path
           name: name
           required: true
@@ -95,7 +95,7 @@ paths:
       description: Updates a Document.
       operationId: discoveryengine.projects.locations.dataStores.branches.documents.patch
       parameters:
-        - description: "Immutable. The full resource name of the document. Format: `projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document_id}`. This field must be a UTF-8 encoded string with a length limit of 1024 characters."
+        - description: "Immutable. The full resource name of the document. Format: `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document_id}`. This field must be a UTF-8 encoded string with a length limit of 1024 characters."
           in: path
           name: name
           required: true
@@ -182,7 +182,7 @@ paths:
       description: Gets a list of Documents.
       operationId: discoveryengine.projects.locations.dataStores.branches.documents.list
       parameters:
-        - description: Required. The parent branch resource name, such as `projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}`. Use `default_branch` as the branch ID, to list documents under the default branch. If the caller does not have permission to list Documentss under this branch, regardless of whether or not this branch exists, a PERMISSION_DENIED error is returned.
+        - description: Required. The parent branch resource name, such as `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`. Use `default_branch` as the branch ID, to list documents under the default branch. If the caller does not have permission to list Documentss under this branch, regardless of whether or not this branch exists, a PERMISSION_DENIED error is returned.
           in: path
           name: parent
           required: true
@@ -228,7 +228,7 @@ paths:
       description: Creates a Document.
       operationId: discoveryengine.projects.locations.dataStores.branches.documents.create
       parameters:
-        - description: Required. The parent resource name, such as `projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}`.
+        - description: Required. The parent resource name, such as `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
           in: path
           name: parent
           required: true
@@ -275,7 +275,7 @@ paths:
       description: "Bulk import of multiple Documents. Request processing may be synchronous. Non-existing items will be created. Note: It is possible for a subset of the Documents to be successfully updated."
       operationId: discoveryengine.projects.locations.dataStores.branches.documents.import
       parameters:
-        - description: Required. The parent branch resource name, such as `projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}`. Requires create/update permission.
+        - description: Required. The parent branch resource name, such as `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`. Requires create/update permission.
           in: path
           name: parent
           required: true
@@ -305,7 +305,7 @@ paths:
       description: Writes a single user event from the browser. This uses a GET request to due to browser restriction of POST-ing to a 3rd party domain. This method is used only by the Discovery Engine API JavaScript pixel and Google Tag Manager. Users should not call this method directly.
       operationId: discoveryengine.projects.locations.dataStores.userEvents.collect
       parameters:
-        - description: Required. The parent DataStore resource name, such as `projects/{project}/locations/{location}/dataStores/{data_store}`.
+        - description: Required. The parent DataStore resource name, such as `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
           in: path
           name: parent
           required: true
@@ -369,7 +369,7 @@ paths:
       description: Bulk import of User events. Request processing might be synchronous. Events that already exist are skipped. Use this method for backfilling historical user events. Operation.response is of type ImportResponse. Note that it is possible for a subset of the items to be successfully inserted. Operation.metadata is of type ImportMetadata.
       operationId: discoveryengine.projects.locations.dataStores.userEvents.import
       parameters:
-        - description: Required. Parent DataStore resource name, of the form `projects/{project}/locations/{location}/dataStores/{data_store}`
+        - description: Required. Parent DataStore resource name, of the form `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
           in: path
           name: parent
           required: true
@@ -411,7 +411,7 @@ paths:
       description: Writes a single user event.
       operationId: discoveryengine.projects.locations.dataStores.userEvents.write
       parameters:
-        - description: Required. The parent DataStore resource name, such as `projects/{project}/locations/{location}/dataStores/{data_store}`.
+        - description: Required. The parent DataStore resource name, such as `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
           in: path
           name: parent
           required: true
@@ -453,7 +453,7 @@ paths:
       description: Makes a recommendation, which requires a contextual user event.
       operationId: discoveryengine.projects.locations.dataStores.servingConfigs.recommend
       parameters:
-        - description: "Required. Full resource name of the format: projects/*/locations/global/dataStores/*/servingConfigs/* Before you can request recommendations from your model, you must create at least one serving config for it."
+        - description: "Required. Full resource name of the format: projects/*/locations/global/collections/*/dataStores/*/servingConfigs/* Before you can request recommendations from your model, you must create at least one serving config for it."
           in: path
           name: servingConfig
           required: true
@@ -594,16 +594,6 @@ components:
         message:
           description: A message describing the error.
           type: string
-        requestPayload:
-          additionalProperties:
-            description: Properties of the object.
-          description: 'The API request payload, represented as a protocol buffer. Most API request types are supported. For example: "type.googleapis.com/google.cloud.discoveryengine.v1alpha.DocumentService.CreateDocumentRequest" "type.googleapis.com/google.cloud.discoveryengine.v1alpha.UserEventService.WriteUserEventRequest"'
-          type: object
-        responsePayload:
-          additionalProperties:
-            description: Properties of the object.
-          description: 'The API response payload, represented as a protocol buffer. This is used to log some "soft errors", where the response is valid but we consider there are some quality issues like unjoined events. The following API responses are supported and no PII is included: "google.cloud.discoveryengine.v1alpha.RecommendationService.Recommend" "google.cloud.discoveryengine.v1alpha.UserEventService.WriteUserEvent" "google.cloud.discoveryengine.v1alpha.UserEventService.CollectUserEvent"'
-          type: object
         serviceContext:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineLoggingServiceContext"
           description: The service context in which this error has occurred.
@@ -620,7 +610,7 @@ components:
           type: integer
       type: object
     GoogleCloudDiscoveryengineLoggingImportErrorContext:
-      description: 'The error payload that is populated on LRO import APIs. Including: "google.cloud.discoveryengine.v1alpha.DocumentService.ImportDocuments" "google.cloud.discoveryengine.v1alpha.UserEventService.ImportUserEvents"'
+      description: "The error payload that is populated on LRO import APIs, including the following: * `google.cloud.discoveryengine.v1alpha.DocumentService.ImportDocuments` * `google.cloud.discoveryengine.v1alpha.UserEventService.ImportUserEvents`"
       properties:
         document:
           description: The detailed content which caused the error on importing a document.
@@ -642,14 +632,14 @@ components:
       description: Describes a running service that sends errors.
       properties:
         service:
-          description: An identifier of the service. For example, "discoveryengine.googleapis.com".
+          description: An identifier of the service—for example, `discoveryengine.googleapis.com`.
           type: string
       type: object
     GoogleCloudDiscoveryengineLoggingSourceLocation:
       description: Indicates a location in the source code of the service for which errors are reported.
       properties:
         functionName:
-          description: Human-readable name of a function or method. For example, " google.cloud.discoveryengine.v1alpha.RecommendationService.Recommend".
+          description: Human-readable name of a function or method—for example, `google.cloud.discoveryengine.v1alpha.RecommendationService.Recommend`.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaBigQuerySource:
@@ -710,7 +700,7 @@ components:
           description: The JSON string representation of the document. It should conform to the registered schema or an INVALID_ARGUMENT error is thrown.
           type: string
         name:
-          description: "Immutable. The full resource name of the document. Format: `projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document_id}`. This field must be a UTF-8 encoded string with a length limit of 1024 characters."
+          description: "Immutable. The full resource name of the document. Format: `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document_id}`. This field must be a UTF-8 encoded string with a length limit of 1024 characters."
           type: string
         parentDocumentId:
           description: The identifier of the parent document. Currently supports at most two level document hierarchy. Id should conform to [RFC-1034](https://tools.ietf.org/html/rfc1034) standard with a length limit of 63 characters.
@@ -731,7 +721,7 @@ components:
           description: Required. The Document resource ID.
           type: string
         name:
-          description: "Required. The Document resource full name, of the form: projects/{project\\_id}/locations/{location}/dataStores/{data\\_store\\_id}/branches/{branch\\_id}/documents/{document\\_id}"
+          description: "Required. The Document resource full name, of the form: projects/{project\\_id}/locations/{location}/collections/{collection\\_id}/dataStores/{data\\_store\\_id}/branches/{branch\\_id}/documents/{document\\_id}"
           type: string
         promotionIds:
           description: The promotion IDs associated with this Document. Currently, this field is restricted to at most one ID.

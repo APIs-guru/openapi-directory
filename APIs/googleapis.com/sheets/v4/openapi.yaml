@@ -2125,7 +2125,7 @@ components:
           description: The format the user entered for the cell. When writing, the new format will be merged with the existing format.
         userEnteredValue:
           $ref: "#/components/schemas/ExtendedValue"
-          description: "The value the user entered in the cell. e.g, `1234`, `'Hello'`, or `=NOW()` Note: Dates, Times and DateTimes are represented as doubles in serial number format."
+          description: "The value the user entered in the cell. e.g., `1234`, `'Hello'`, or `=NOW()` Note: Dates, Times and DateTimes are represented as doubles in serial number format."
       type: object
     CellFormat:
       description: The format of a cell.
