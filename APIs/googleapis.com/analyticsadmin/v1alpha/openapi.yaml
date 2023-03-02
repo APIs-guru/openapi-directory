@@ -3312,8 +3312,8 @@ components:
         displayName:
           description: Required. User-provided display name for the connected site tag. Must be less than 256 characters.
           type: string
-        measurementId:
-          description: "Required. Measurement ID to forward events to. Also known as “G-ID” (For example: G-12345)."
+        tagId:
+          description: 'Required. "Tag ID to forward events to. Also known as the Measurement ID, or the "G-ID" (For example: G-12345).'
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaConversionEvent:
@@ -3566,11 +3566,11 @@ components:
     GoogleAnalyticsAdminV1alphaDeleteConnectedSiteTagRequest:
       description: Request message for DeleteConnectedSiteTag RPC.
       properties:
-        measurementId:
-          description: 'The measurement ID of the tag to remove from the Universal Analytics property. Also known as "G-ID". Example: "G-12345"'
-          type: string
         property:
           description: "The Universal Analytics property to delete connected site tags for. This API does not support GA4 properties. Format: properties/{universalAnalyticsPropertyId} Example: properties/1234"
+          type: string
+        tagId:
+          description: 'Tag ID to forward events to. Also known as the Measurement ID, or the "G-ID" (For example: G-12345).'
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaDeleteUserLinkRequest:

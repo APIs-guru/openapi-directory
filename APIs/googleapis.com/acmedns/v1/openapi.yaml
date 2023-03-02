@@ -34,7 +34,7 @@ paths:
       description: Gets the ACME challenge set for a given domain name. Domain names must be provided in Punycode.
       operationId: acmedns.acmeChallengeSets.get
       parameters:
-        - description: Required. SLD + TLD domain name to list challenges. This MAY be Unicode or Punycode.
+        - description: Required. SLD + TLD domain name to list challenges. For example, this would be "google.com" for any FQDN under "google.com". That includes challenges for "subdomain.google.com". This MAY be Unicode or Punycode.
           in: path
           name: rootDomain
           required: true
@@ -78,7 +78,7 @@ paths:
       description: Rotate the ACME challenges for a given domain name. By default, removes any challenges that are older than 30 days. Domain names must be provided in Punycode.
       operationId: acmedns.acmeChallengeSets.rotateChallenges
       parameters:
-        - description: Required. SLD + TLD domain name to update records for. This MAY be Unicode or Punycode.
+        - description: Required. SLD + TLD domain name to update records for. For example, this would be "google.com" for any FQDN under "google.com". That includes challenges for "subdomain.google.com". This MAY be Unicode or Punycode.
           in: path
           name: rootDomain
           required: true

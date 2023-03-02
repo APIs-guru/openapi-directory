@@ -2615,7 +2615,8 @@ components:
             Specific type of the event. Read-only. Possible values are:  
             - "default" - A regular event or not further specified. 
             - "outOfOffice" - An out-of-office event. 
-            - "focusTime" - A focus-time event.
+            - "focusTime" - A focus-time event. 
+            - "workingLocation" - A working location event.
           type: string
         extendedProperties:
           description: Extended properties of the event.
@@ -2809,6 +2810,9 @@ components:
             - "private" - The event is private and only event attendees may view event details. 
             - "confidential" - The event is private. This value is provided for compatibility reasons.
           type: string
+        workingLocationProperties:
+          $ref: "#/components/schemas/EventWorkingLocationProperties"
+          description: Working Location event data. Read-only.
       type: object
     EventAttachment:
       properties:
@@ -2907,6 +2911,37 @@ components:
             Required when adding a reminder.
           format: int32
           type: integer
+      type: object
+    EventWorkingLocationProperties:
+      properties:
+        customLocation:
+          description: If present, specifies that the user is working from a custom location.
+          properties:
+            label:
+              description: An optional extra label for additional information.
+              type: string
+          type: object
+        homeOffice:
+          description: If present, specifies that the user is working at home.
+        officeLocation:
+          description: If present, specifies that the user is working from an office.
+          properties:
+            buildingId:
+              description: An optional building identifier. This should reference a building ID in the organization's Resources database.
+              type: string
+            deskId:
+              description: An optional arbitrary desk identifier.
+              type: string
+            floorId:
+              description: An optional arbitrary floor identifier.
+              type: string
+            floorSectionId:
+              description: An optional arbitrary floor section identifier.
+              type: string
+            label:
+              description: An optional extra label for additional information.
+              type: string
+          type: object
       type: object
     Events:
       properties:

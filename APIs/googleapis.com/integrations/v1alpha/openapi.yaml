@@ -3183,7 +3183,6 @@ components:
             - HIDDEN
             - CLOUD_SYSTEMS
             - CUSTOM_TASK_TEMPLATE
-            - TASK_RECOMMENDATIONS
           type: string
         codeSearchLink:
           description: The Code Search link to the Task Java file.
@@ -3957,15 +3956,6 @@ components:
         disableStrictTypeValidation:
           description: If this config contains a TypedTask, allow validation to succeed if an input is read from the output of another TypedTask whose output type is declared as a superclass of the requested input type. For instance, if the previous task declares an output of type Message, any task with this flag enabled will pass validation when attempting to read any proto Message type from the resultant Event parameter.
           type: boolean
-        errorCatcherConfigId:
-          description: Optional Error catcher config id of the error catch flow which will be executed when execution error happens in the task
-          type: string
-        externalTaskType:
-          enum:
-            - EXTERNAL_TASK_TYPE_UNSPECIFIED
-            - NORMAL_TASK
-            - ERROR_TASK
-          type: string
         failurePolicy:
           $ref: "#/components/schemas/EnterpriseCrmEventbusProtoFailurePolicy"
           description: Optional. Determines the number of times the task will be retried on failure and with what retry strategy. This is applicable for asynchronous calls to Eventbus alone (Post To Queue, Schedule etc.).
@@ -4081,7 +4071,7 @@ components:
           description: UI configuration for this task Also associated with the METADATA mask.
       type: object
     EnterpriseCrmFrontendsEventbusProtoTriggerConfig:
-      description: "Configuration detail of a trigger. Next available id: 18"
+      description: "Configuration detail of a trigger. Next available id: 17"
       properties:
         alertConfig:
           description: An alert threshold configuration for the [trigger + client + workflow] tuple. If these values are not specified in the trigger config, default values will be populated by the system. Note that there must be exactly one alert threshold configured per [client + trigger + workflow] when published.
@@ -4098,9 +4088,6 @@ components:
           items:
             type: string
           type: array
-        errorCatcherConfigId:
-          description: Optional Error catcher config id of the error catch flow which will be executed when execution error happens in the task
-          type: string
         label:
           description: The user created label for a particular trigger.
           type: string
@@ -4469,9 +4456,6 @@ components:
           description: Output only. The name of the Service Directory service name. Used for Private Harpoon to resolve the ILB address. e.g. "projects/cloud-connectors-e2e-testing/locations/us-central1/namespaces/istio-system/services/istio-ingressgateway-connectors"
           readOnly: true
           type: string
-        sslConfig:
-          $ref: "#/components/schemas/GoogleCloudConnectorsV1SslConfig"
-          description: Optional. Ssl config of a connection
         status:
           $ref: "#/components/schemas/GoogleCloudConnectorsV1ConnectionStatus"
           description: Output only. Current status of the connection.
@@ -4501,7 +4485,6 @@ components:
             - DELETING
             - UPDATING
             - ERROR
-            - AUTHORIZATION_REQUIRED
           type: string
         status:
           description: Status provides detailed information for the state.
@@ -4560,56 +4543,6 @@ components:
         secretVersion:
           description: "The resource name of the secret version in the format, format as: `projects/*/secrets/*/versions/*`."
           type: string
-      type: object
-    GoogleCloudConnectorsV1SslConfig:
-      description: SSL Configuration of a connection
-      properties:
-        additionalVariables:
-          description: Additional SSL related field values
-          items:
-            $ref: "#/components/schemas/GoogleCloudConnectorsV1ConfigVariable"
-          type: array
-        clientCertType:
-          description: Type of Client Cert (PEM/JKS/.. etc.)
-          enum:
-            - CERT_TYPE_UNSPECIFIED
-            - PEM
-          type: string
-        clientCertificate:
-          $ref: "#/components/schemas/GoogleCloudConnectorsV1Secret"
-          description: Client Certificate
-        clientPrivateKey:
-          $ref: "#/components/schemas/GoogleCloudConnectorsV1Secret"
-          description: Client Private Key
-        clientPrivateKeyPass:
-          $ref: "#/components/schemas/GoogleCloudConnectorsV1Secret"
-          description: Secret containing the passphrase protecting the Client Private Key
-        privateServerCertificate:
-          $ref: "#/components/schemas/GoogleCloudConnectorsV1Secret"
-          description: Private Server Certificate. Needs to be specified if trust model is `PRIVATE`.
-        serverCertType:
-          description: Type of Server Cert (PEM/JKS/.. etc.)
-          enum:
-            - CERT_TYPE_UNSPECIFIED
-            - PEM
-          type: string
-        trustModel:
-          description: Trust Model of the SSL connection
-          enum:
-            - PUBLIC
-            - PRIVATE
-            - INSECURE
-          type: string
-        type:
-          description: Controls the ssl type for the given connector version.
-          enum:
-            - SSL_TYPE_UNSPECIFIED
-            - TLS
-            - MTLS
-          type: string
-        useSsl:
-          description: Bool for enabling SSL
-          type: boolean
       type: object
     GoogleCloudIntegrationsV1alphaAccessToken:
       description: The access token represents the authorization of a specific application to access specific parts of a user’s data.
@@ -4932,27 +4865,6 @@ components:
           description: All regions where Connector Platform is provisioned.
           items:
             type: string
-          type: array
-      type: object
-    GoogleCloudIntegrationsV1alphaErrorCatcherConfig:
-      description: Configuration detail of a error catch task
-      properties:
-        description:
-          description: Optional. User-provided description intended to give more business context about the error catcher config.
-          type: string
-        errorCatchId:
-          description: Required. An error catcher id is string representation for the error catcher config. Within a workflow, error_catch_id uniquely identifies an error catcher config among all error catcher configs for the workflow
-          type: string
-        errorCatcherNumber:
-          description: Required. A number to uniquely identify each error catcher config within the workflow on UI.
-          type: string
-        label:
-          description: Optional. The user created label for a particular error catcher. Optional.
-          type: string
-        startErrorTasks:
-          description: Required. The set of start tasks that are to be executed for the error catch flow
-          items:
-            $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaNextTask"
           type: array
       type: object
     GoogleCloudIntegrationsV1alphaEventParameter:
@@ -5326,11 +5238,6 @@ components:
         description:
           description: Optional. The templateversion description. Permitted format is alphanumeric with underscores and no spaces.
           type: string
-        errorCatcherConfigs:
-          description: Optional. Error Catch Task configuration for the IntegrationTemplateVersion. It's optional.
-          items:
-            $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaErrorCatcherConfig"
-          type: array
         lastModifierEmail:
           description: Optional. The last modifier's email address. Generated based on the End User Credentials/LOAS role of the user making the call.
           type: string
@@ -5397,11 +5304,6 @@ components:
         description:
           description: Optional. The integration description.
           type: string
-        errorCatcherConfigs:
-          description: Optional. Error Catch Task configuration for the integration. It's optional.
-          items:
-            $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaErrorCatcherConfig"
-          type: array
         integrationParameters:
           description: Optional. Parameters that are expected to be passed to the integration when an event is triggered. This consists of all the parameters that are expected in the integration execution. This gives the user the ability to provide default values, add information like PII and also provide data types of each parameter.
           items:
@@ -6181,16 +6083,6 @@ components:
         displayName:
           description: Optional. User-provided label that is attached to this TaskConfig in the UI.
           type: string
-        errorCatcherConfigId:
-          description: Optional. Optional Error catcher config id of the error catch flow which will be executed when execution error happens in the task
-          type: string
-        externalTaskType:
-          description: Optional. External task type of the task
-          enum:
-            - EXTERNAL_TASK_TYPE_UNSPECIFIED
-            - NORMAL_TASK
-            - ERROR_TASK
-          type: string
         failurePolicy:
           $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaFailurePolicy"
           description: Optional. Determines the number of times the task will be retried on failure and with what retry strategy. This is applicable for asynchronous calls to Eventbus alone (Post To Queue, Schedule etc.).
@@ -6286,9 +6178,6 @@ components:
           description: Optional. Cloud Scheduler Trigger related metadata
         description:
           description: Optional. User-provided description intended to give additional business context about the task.
-          type: string
-        errorCatcherConfigId:
-          description: Optional. Optional Error catcher config id of the error catch flow which will be executed when execution error happens in the task
           type: string
         label:
           description: Optional. The user created label for a particular trigger.
