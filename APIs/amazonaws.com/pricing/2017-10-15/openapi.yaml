@@ -265,6 +265,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSPriceListService.GetPriceListFileUrl:
+    post:
+      operationId: GetPriceListFileUrl
+      description: '<p> <i> <b>This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">Amazon Web Services Service Terms</a> (Section 1.10).</b> </i> </p> <p>This returns the URL that you can retrieve your Price List file from. This URL is based on the <code>PriceListArn</code> and <code>FileFormat</code> that you retrieve from the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html"> <code>ListPriceLists</code> </a> response. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPriceListFileUrlResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPriceListFileUrlRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSPriceListService.GetPriceListFileUrl
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSPriceListService.GetProducts:
     post:
       operationId: GetProducts
@@ -332,6 +389,87 @@ paths:
             type: string
             enum:
               - AWSPriceListService.GetProducts
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSPriceListService.ListPriceLists:
+    post:
+      operationId: ListPriceLists
+      description: '<p> <i> <b>This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">Amazon Web Services Service Terms</a> (Section 1.10).</b> </i> </p> <p>This returns a list of Price List references that the requester if authorized to view, given a <code>ServiceCode</code>, <code>CurrencyCode</code>, and an <code>EffectiveDate</code>. Use without a <code>RegionCode</code> filter to list Price List references from all available Amazon Web Services Regions. Use with a <code>RegionCode</code> filter to get the Price List reference that''s specific to a specific Amazon Web Services Region. You can use the <code>PriceListArn</code> from the response to get your preferred Price List files through the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetPriceListFileUrl.html"> <code>GetPriceListFileUrl</code> </a> API.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPriceListsResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '484':
+          description: ExpiredNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredNextTokenException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPriceListsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSPriceListService.ListPriceLists
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -482,6 +620,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoxedInteger'
             - description: The maximum number of results to return in response.
+    GetPriceListFileUrlResponse:
+      type: object
+      properties:
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The URL to download your Price List file from. '
+    GetPriceListFileUrlRequest:
+      type: object
+      required:
+        - PriceListArn
+        - FileFormat
+      title: GetPriceListFileUrlRequest
+      properties:
+        PriceListArn:
+          allOf:
+            - $ref: '#/components/schemas/PriceListArn'
+            - description: 'The unique identifier that maps to where your Price List files are located. <code>PriceListArn</code> can be obtained from the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html"> <code>ListPriceLists</code> </a> response. '
+        FileFormat:
+          allOf:
+            - $ref: '#/components/schemas/FileFormat'
+            - description: 'The format that you want to retrieve your Price List files in. The <code>FileFormat</code> can be obtained from the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html"> <code>ListPriceLists</code> </a> response. '
+    AccessDeniedException: {}
     GetProductsResponse:
       type: object
       properties:
@@ -523,6 +684,49 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoxedInteger'
             - description: The maximum number of results to return in the response.
+    ListPriceListsResponse:
+      type: object
+      properties:
+        PriceLists:
+          allOf:
+            - $ref: '#/components/schemas/PriceLists'
+            - description: 'The type of price list references that match your request. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The pagination token that indicates the next set of results to retrieve. '
+    ListPriceListsRequest:
+      type: object
+      required:
+        - ServiceCode
+        - EffectiveDate
+        - CurrencyCode
+      title: ListPriceListsRequest
+      properties:
+        ServiceCode:
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: '<p>The service code or the Savings Plan service code for the attributes that you want to retrieve. For example, to get the list of applicable Amazon EC2 price lists, use <code>AmazonEC2</code>. For a full list of service codes containing On-Demand and Reserved Instance (RI) pricing, use the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_DescribeServices.html#awscostmanagement-pricing_DescribeServices-request-FormatVersion"> <code>DescribeServices</code> </a> API.</p> <p>To retrieve the Compute Savings Plan price lists, use <code>ComputeSavingsPlans</code>. To retrieve Machine Learning Savings Plans price lists, use <code>MachineLearningSavingsPlans</code>. </p>'
+        EffectiveDate:
+          allOf:
+            - $ref: '#/components/schemas/EffectiveDate'
+            - description: 'The date that the Price List file prices are effective from. '
+        RegionCode:
+          allOf:
+            - $ref: '#/components/schemas/RegionCode'
+            - description: 'This is used to filter the Price List by Amazon Web Services Region. For example, to get the price list only for the <code>US East (N. Virginia)</code> Region, use <code>us-east-1</code>. If nothing is specified, you retrieve price lists for all applicable Regions. The available <code>RegionCode</code> list can be retrieved from <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetAttributeValues.html"> <code>GetAttributeValues</code> </a> API.'
+        CurrencyCode:
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
+            - description: 'The three alphabetical character ISO-4217 currency code that the Price List files are denominated in. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The pagination token that indicates the next set of results that you want to retrieve. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in the response. '
     String:
       type: string
     AttributeNameList:
@@ -545,10 +749,24 @@ components:
       type: integer
       minimum: 1
       maximum: 100
+    CurrencyCode:
+      type: string
+      pattern: '^[A-Z]{3}$'
     ServiceList:
       type: array
       items:
         $ref: '#/components/schemas/Service'
+    EffectiveDate:
+      type: string
+      format: date-time
+    FileFormat:
+      type: string
+      minLength: 1
+      maxLength: 255
+    FileFormats:
+      type: array
+      items:
+        $ref: '#/components/schemas/FileFormat'
     FilterType:
       type: string
       enum:
@@ -571,16 +789,57 @@ components:
         Value:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The service code or attribute value that you want to filter by. If you are filtering by service code this is the actual service code, such as <code>AmazonEC2</code>. If you are filtering by attribute name, this is the attribute value that you want the returned products to match, such as a <code>Provisioned IOPS</code> volume.'
+            - description: 'The service code or attribute value that you want to filter by. If you''re filtering by service code this is the actual service code, such as <code>AmazonEC2</code>. If you''re filtering by attribute name, this is the attribute value that you want the returned products to match, such as a <code>Provisioned IOPS</code> volume.'
       description: The constraints that you want all returned products to match.
     Filters:
       type: array
       items:
         $ref: '#/components/schemas/Filter'
+    PriceListArn:
+      type: string
+      pattern: '^arn:.+:pricing::.*:price-list/.{1,255}/.{1,32}/[A-Z]{3}/[0-9]{14}/[^/]*$'
+      minLength: 18
+      maxLength: 2048
     PriceListJsonItems:
       type: array
       items:
         $ref: '#/components/schemas/PriceListJsonItem'
+    ServiceCode:
+      type: string
+      minLength: 1
+      maxLength: 32
+    RegionCode:
+      type: string
+      minLength: 1
+      maxLength: 255
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    PriceLists:
+      type: array
+      items:
+        $ref: '#/components/schemas/PriceList'
+    PriceList:
+      type: object
+      properties:
+        PriceListArn:
+          allOf:
+            - $ref: '#/components/schemas/PriceListArn'
+            - description: 'The unique identifier that maps to where your Price List files are located. <code>PriceListArn</code> can be obtained from the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html"> <code>ListPriceList</code> </a> response. '
+        RegionCode:
+          allOf:
+            - $ref: '#/components/schemas/RegionCode'
+            - description: 'This is used to filter the Price List by Amazon Web Services Region. For example, to get the price list only for the <code>US East (N. Virginia)</code> Region, use <code>us-east-1</code>. If nothing is specified, you retrieve price lists for all applicable Regions. The available <code>RegionCode</code> list can be retrieved from <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetAttributeValues.html"> <code>GetAttributeValues</code> </a> API. '
+        CurrencyCode:
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
+            - description: 'The three alphabetical character ISO-4217 currency code the Price List files are denominated in. '
+        FileFormats:
+          allOf:
+            - $ref: '#/components/schemas/FileFormats'
+            - description: 'The format you want to retrieve your Price List files. The <code>FileFormat</code> can be obtained from the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html"> <code>ListPriceList</code> </a> response. '
+      description: '<p> <i> <b>This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">Amazon Web Services Service Terms</a> (Section 1.10).</b> </i> </p> <p>This is the type of price list references that match your request. </p>'
     PriceListJsonItem:
       type: string
     Service:

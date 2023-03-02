@@ -155,6 +155,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       parameters: []
       requestBody:
         required: true
@@ -228,6 +234,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       parameters:
         - name: endpointId
           in: query
@@ -286,6 +298,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       parameters:
         - name: nextToken
           in: query
@@ -300,6 +318,79 @@ paths:
           in: query
           required: false
           description: The maximum number of endpoints that will be returned in the response.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /S3Outposts/ListOutpostsWithS3:
+    get:
+      operationId: ListOutpostsWithS3
+      description: 'Lists the Outposts with S3 on Outposts capacity for your Amazon Web Services account. Includes S3 on Outposts that you have access to as the Outposts owner, or as a shared user from Resource Access Manager (RAM). '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOutpostsWithS3Result'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: 'When you can get additional results from the <code>ListOutpostsWithS3</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command to the <code>NextToken</code> parameter to continue listing additional Outposts.'
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9\+\:\/\=\?\#-_]+$'
+            minLength: 1
+            maxLength: 1024
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of Outposts to return. The limit is 100.
           schema:
             type: integer
             minimum: 0
@@ -359,6 +450,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       parameters:
         - name: nextToken
           in: query
@@ -468,6 +565,7 @@ components:
     AccessDeniedException: {}
     ResourceNotFoundException: {}
     ConflictException: {}
+    ThrottlingException: {}
     ListEndpointsResult:
       type: object
       properties:
@@ -479,6 +577,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'If the number of endpoints associated with the specified Outpost exceeds <code>MaxResults</code>, you can include this value in subsequent calls to this operation to retrieve more results.'
+    ListOutpostsWithS3Result:
+      type: object
+      properties:
+        Outposts:
+          allOf:
+            - $ref: '#/components/schemas/Outposts'
+            - description: '<p>Returns the list of Outposts that have the following characteristics:</p> <ul> <li> <p>outposts that have S3 provisioned</p> </li> <li> <p>outposts that are <code>Active</code> (not pending any provisioning nor decommissioned)</p> </li> <li> <p>outposts to which the the calling Amazon Web Services account has access</p> </li> </ul>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'Returns a token that you can use to call <code>ListOutpostsWithS3</code> again and receive additional results, if there are any.'
     ListSharedEndpointsResult:
       type: object
       properties:
@@ -490,6 +599,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'If the number of endpoints associated with the specified Outpost exceeds <code>MaxResults</code>, you can include this value in subsequent calls to this operation to retrieve more results.'
+    AwsAccountId:
+      type: string
+      pattern: '^\d{12}$'
+    CapacityInBytes:
+      type: integer
     CidrBlock:
       type: string
     OutpostId:
@@ -627,6 +741,14 @@ components:
       type: object
       title: ListEndpointsRequest
       properties: {}
+    ListOutpostsWithS3Request:
+      type: object
+      title: ListOutpostsWithS3Request
+      properties: {}
+    Outposts:
+      type: array
+      items:
+        $ref: '#/components/schemas/Outpost'
     ListSharedEndpointsRequest:
       type: object
       title: ListSharedEndpointsRequest
@@ -641,5 +763,28 @@ components:
             - $ref: '#/components/schemas/NetworkInterfaceId'
             - description: The ID for the network interface.
       description: The container for the network interface.
+    OutpostArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):outposts:[a-z\-0-9]*:[0-9]{12}:outpost/(op-[a-f0-9]{17}|ec2)$'
+    Outpost:
+      type: object
+      properties:
+        OutpostArn:
+          allOf:
+            - $ref: '#/components/schemas/OutpostArn'
+            - description: Specifies the unique Amazon Resource Name (ARN) for the outpost.
+        OutpostId:
+          allOf:
+            - $ref: '#/components/schemas/OutpostId'
+            - description: Specifies the unique identifier for the outpost.
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/AwsAccountId'
+            - description: Returns the Amazon Web Services account ID of the outpost owner. Useful for comparing owned versus shared outposts.
+        CapacityInBytes:
+          allOf:
+            - $ref: '#/components/schemas/CapacityInBytes'
+            - description: The Amazon S3 capacity of the outpost in bytes.
+      description: Contains the details for the Outpost object.
 security:
   - hmac: []
