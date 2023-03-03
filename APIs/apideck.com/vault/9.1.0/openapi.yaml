@@ -1441,7 +1441,8 @@ paths:
                   show_logs: true,
                   show_suggestions: false,
                   show_sidebar: true,
-                  auto_redirect: false
+                  auto_redirect: false,
+                  hide_guides: false
                 },
                 theme: {
                   favicon: 'https://res.cloudinary.com/apideck/icons/intercom',
@@ -3266,6 +3267,11 @@ components:
               default: false
               description: Automatically redirect to redirect uri after the connection has been configured as callable. Defaults to `false`.
               title: Auto-redirect
+              type: boolean
+            hide_guides:
+              default: false
+              description: Hide Apideck connection guides in [Vault](/apis/vault/reference#section/Get-Started). Defaults to `false`.
+              title: Hide guides
               type: boolean
             hide_resource_settings:
               default: false

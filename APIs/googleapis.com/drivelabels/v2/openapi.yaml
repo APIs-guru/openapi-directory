@@ -29,6 +29,8 @@ externalDocs:
   url: https://developers.google.com/drive/labels
 tags:
   - name: labels
+  - name: limits
+  - name: users
 paths:
   /v2/labels:
     get:
@@ -100,12 +102,100 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}":
-    get:
-      description: "Get a label by its resource name. Resource name may be any of: * `labels/{id}` - See `labels/{id}@latest` * `labels/{id}@latest` - Gets the latest revision of the label. * `labels/{id}@published` - Gets the current published revision of the label. * `labels/{id}@{revision_id}` - Gets the label at the specified revision ID."
-      operationId: drivelabels.labels.get
+    post:
+      description: Creates a new Label.
+      operationId: drivelabels.labels.create
       parameters:
-        - description: "Required. Label resource name. May be any of: * `labels/{id}` (equivalent to labels/{id}@latest) * `labels/{id}@latest` * `labels/{id}@published` * `labels/{id}@{revision_id}`"
+        - description: The BCP-47 language code to use for evaluating localized Field labels in response. When not specified, values in the default configured language will be used.
+          in: query
+          name: languageCode
+          schema:
+            type: string
+        - description: Set to `true` in order to use the user's admin privileges. The server will verify the user is an admin before allowing access.
+          in: query
+          name: useAdminAccess
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAppsDriveLabelsV2Label"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAppsDriveLabelsV2Label"
+          description: Successful response
+      tags:
+        - labels
+  /v2/limits/label:
+    get:
+      description: Get the constraints on the structure of a Label; such as, the maximum number of Fields allowed and maximum length of the label title.
+      operationId: drivelabels.limits.getLabel
+      parameters:
+        - description: 'Required. Label revision resource name Must be: "limits/label"'
+          in: query
+          name: name
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LabelLimits"
+          description: Successful response
+      tags:
+        - limits
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{name}":
+    delete:
+      description: Deletes a Label's permission. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing.
+      operationId: drivelabels.labels.revisions.permissions.delete
+      parameters:
+        - description: Required. Label Permission resource name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Set to `true` in order to use the user's admin credentials. The server will verify the user is an admin for the Label before allowing access.
+          in: query
+          name: useAdminAccess
+          schema:
+            type: boolean
+        - description: The revision_id of the label that the write request will be applied to. If this is not the latest revision of the label, the request will not be processed and will return a 400 Bad Request error.
+          in: query
+          name: writeControl.requiredRevisionId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleProtobufEmpty"
+          description: Successful response
+      tags:
+        - labels
+    get:
+      description: Gets the user capabilities.
+      operationId: drivelabels.users.getCapabilities
+      parameters:
+        - description: Required. The resource name of the user. Only "users/me/capabilities" is supported.
           in: path
           name: name
           required: true
@@ -134,7 +224,234 @@ paths:
           content:
             application/json:
               schema:
+                $ref: "#/components/schemas/GoogleAppsDriveLabelsV2UserCapabilities"
+          description: Successful response
+      tags:
+        - users
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{name}:delta":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Updates a single Label by applying a set of update requests resulting in a new draft revision. The batch update is all-or-nothing: If any of the update requests are invalid, no changes are applied. The resulting draft revision must be published before the changes may be used with Drive Items."
+      operationId: drivelabels.labels.delta
+      parameters:
+        - description: Required. The resource name of the Label to update.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelResponse"
+          description: Successful response
+      tags:
+        - labels
+  "/v2/{name}:disable":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Disable a published Label. Disabling a Label will result in a new disabled published revision based on the current published revision. If there is a draft revision, a new disabled draft revision will be created based on the latest draft revision. Older draft revisions will be deleted. Once disabled, a label may be deleted with `DeleteLabel`.
+      operationId: drivelabels.labels.disable
+      parameters:
+        - description: Required. Label resource name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DisableLabelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2Label"
+          description: Successful response
+      tags:
+        - labels
+  "/v2/{name}:enable":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enable a disabled Label and restore it to its published state. This will result in a new published revision based on the current disabled published revision. If there is an existing disabled draft revision, a new revision will be created based on that draft and will be enabled.
+      operationId: drivelabels.labels.enable
+      parameters:
+        - description: Required. Label resource name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAppsDriveLabelsV2EnableLabelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAppsDriveLabelsV2Label"
+          description: Successful response
+      tags:
+        - labels
+  "/v2/{name}:publish":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Publish all draft changes to the Label. Once published, the Label may not return to its draft state. See `google.apps.drive.labels.v2.Lifecycle` for more information. Publishing a Label will result in a new published revision. All previous draft revisions will be deleted. Previous published revisions will be kept but are subject to automated deletion as needed. Once published, some changes are no longer permitted. Generally, any change that would invalidate or cause new restrictions on existing metadata related to the Label will be rejected. For example, the following changes to a Label will be rejected after the Label is published: * The label cannot be directly deleted. It must be disabled first, then deleted. * Field.FieldType cannot be changed. * Changes to Field validation options cannot reject something that was previously accepted. * Reducing the max entries."
+      operationId: drivelabels.labels.publish
+      parameters:
+        - description: Required. Label resource name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAppsDriveLabelsV2PublishLabelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAppsDriveLabelsV2Label"
+          description: Successful response
+      tags:
+        - labels
+  "/v2/{name}:updateLabelCopyMode":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Updates a Label's `CopyMode`. Changes to this policy are not revisioned, do not require publishing, and take effect immediately.
+      operationId: drivelabels.labels.updateLabelCopyMode
+      parameters:
+        - description: Required. The resource name of the Label to update.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAppsDriveLabelsV2UpdateLabelCopyModeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAppsDriveLabelsV2Label"
+          description: Successful response
+      tags:
+        - labels
+  "/v2/{parent}/locks":
+    get:
+      description: Lists the LabelLocks on a Label.
+      operationId: drivelabels.labels.revisions.locks.list
+      parameters:
+        - description: "Required. Label on which Locks are applied. Format: labels/{label}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Maximum number of Locks to return per page. Default: 100. Max: 200."
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The token of the page to return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAppsDriveLabelsV2ListLabelLocksResponse"
           description: Successful response
       tags:
         - labels
@@ -150,6 +467,185 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v2/{parent}/permissions":
+    get:
+      description: Lists a Label's permissions.
+      operationId: drivelabels.labels.revisions.permissions.list
+      parameters:
+        - description: "Required. The parent Label resource name on which Label Permission are listed. Format: labels/{label}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Maximum number of permissions to return per page. Default: 50. Max: 200."
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The token of the page to return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Set to `true` in order to use the user's admin credentials. The server will verify the user is an admin for the Label before allowing access.
+          in: query
+          name: useAdminAccess
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAppsDriveLabelsV2ListLabelPermissionsResponse"
+          description: Successful response
+      tags:
+        - labels
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates a Label's permissions. If a permission for the indicated principal doesn't exist, a new Label Permission is created, otherwise the existing permission is updated. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing.
+      operationId: drivelabels.labels.revisions.updatePermissions
+      parameters:
+        - description: Required. The parent Label resource name.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Set to `true` in order to use the user's admin credentials. The server will verify the user is an admin for the Label before allowing access.
+          in: query
+          name: useAdminAccess
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LabelPermission"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LabelPermission"
+          description: Successful response
+      tags:
+        - labels
+    post:
+      description: Updates a Label's permissions. If a permission for the indicated principal doesn't exist, a new Label Permission is created, otherwise the existing permission is updated. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing.
+      operationId: drivelabels.labels.revisions.permissions.create
+      parameters:
+        - description: "Required. The parent Label resource name on the Label Permission is created. Format: labels/{label}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Set to `true` in order to use the user's admin credentials. The server will verify the user is an admin for the Label before allowing access.
+          in: query
+          name: useAdminAccess
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LabelPermission"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LabelPermission"
+          description: Successful response
+      tags:
+        - labels
+  "/v2/{parent}/permissions:batchDelete":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deletes Label permissions. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing.
+      operationId: drivelabels.labels.revisions.permissions.batchDelete
+      parameters:
+        - description: "Required. The parent Label resource name shared by all permissions being deleted. Format: labels/{label} If this is set, the parent field in the UpdateLabelPermissionRequest messages must either be empty or match this field."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAppsDriveLabelsV2BatchDeleteLabelPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleProtobufEmpty"
+          description: Successful response
+      tags:
+        - labels
+  "/v2/{parent}/permissions:batchUpdate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Updates Label permissions. If a permission for the indicated principal doesn't exist, a new Label Permission is created, otherwise the existing permission is updated. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing.
+      operationId: drivelabels.labels.revisions.permissions.batchUpdate
+      parameters:
+        - description: "Required. The parent Label resource name shared by all permissions being updated. Format: labels/{label} If this is set, the parent field in the UpdateLabelPermissionRequest messages must either be empty or match this field."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAppsDriveLabelsV2BatchUpdateLabelPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAppsDriveLabelsV2BatchUpdateLabelPermissionsResponse"
+          description: Successful response
+      tags:
+        - labels
 components:
   parameters:
     _.xgafv:
@@ -252,6 +748,430 @@ components:
           description: Override the default global priority of this badge. When set to 0, the default priority heuristic is used.
           format: int64
           type: string
+      type: object
+    GoogleAppsDriveLabelsV2BatchDeleteLabelPermissionsRequest:
+      description: Deletes one of more Label Permissions.
+      properties:
+        requests:
+          description: Required. The request message specifying the resources to update.
+          items:
+            $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeleteLabelPermissionRequest"
+          type: array
+        useAdminAccess:
+          description: Set to `true` in order to use the user's admin credentials. The server will verify the user is an admin for the Label before allowing access. If this is set, the use_admin_access field in the DeleteLabelPermissionRequest messages must either be empty or match this field.
+          type: boolean
+      type: object
+    GoogleAppsDriveLabelsV2BatchUpdateLabelPermissionsRequest:
+      description: Updates one or more Label Permissions.
+      properties:
+        requests:
+          description: Required. The request message specifying the resources to update.
+          items:
+            $ref: "#/components/schemas/GoogleAppsDriveLabelsV2UpdateLabelPermissionRequest"
+          type: array
+        useAdminAccess:
+          description: Set to `true` in order to use the user's admin credentials. The server will verify the user is an admin for the Label before allowing access. If this is set, the use_admin_access field in the UpdateLabelPermissionRequest messages must either be empty or match this field.
+          type: boolean
+      type: object
+    GoogleAppsDriveLabelsV2BatchUpdateLabelPermissionsResponse:
+      description: Response for updating one or more Label Permissions.
+      properties:
+        permissions:
+          description: Required. Permissions updated.
+          items:
+            $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LabelPermission"
+          type: array
+      type: object
+    GoogleAppsDriveLabelsV2DateLimits:
+      description: Limits for date Field type.
+      properties:
+        maxValue:
+          $ref: "#/components/schemas/GoogleTypeDate"
+          description: Maximum value for the date Field type.
+        minValue:
+          $ref: "#/components/schemas/GoogleTypeDate"
+          description: Minimum value for the date Field type.
+      type: object
+    GoogleAppsDriveLabelsV2DeleteLabelPermissionRequest:
+      description: Deletes a Label Permission. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing.
+      properties:
+        name:
+          description: Required. Label Permission resource name.
+          type: string
+        useAdminAccess:
+          description: Set to `true` in order to use the user's admin credentials. The server will verify the user is an admin for the Label before allowing access.
+          type: boolean
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelRequest:
+      description: The set of requests for updating aspects of a Label. If any request is not valid, no requests will be applied.
+      properties:
+        languageCode:
+          description: The BCP-47 language code to use for evaluating localized Field labels when `include_label_in_response` is `true`.
+          type: string
+        requests:
+          description: A list of updates to apply to the Label. Requests will be applied in the order they are specified.
+          items:
+            $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestRequest"
+          type: array
+        useAdminAccess:
+          description: Set to `true` in order to use the user's admin credentials. The server will verify the user is an admin for the Label before allowing access.
+          type: boolean
+        view:
+          description: When specified, only certain fields belonging to the indicated view will be returned.
+          enum:
+            - LABEL_VIEW_BASIC
+            - LABEL_VIEW_FULL
+          type: string
+        writeControl:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2WriteControl"
+          description: Provides control over how write requests are executed.
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestCreateFieldRequest:
+      description: Request to create a Field within a Label.
+      properties:
+        field:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2Field"
+          description: Required. Field to create.
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestCreateSelectionChoiceRequest:
+      description: Request to create a Selection Choice.
+      properties:
+        choice:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2FieldSelectionOptionsChoice"
+          description: Required. The Choice to create.
+        fieldId:
+          description: Required. The Selection Field in which a Choice will be created.
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestDeleteFieldRequest:
+      description: Request to delete the Field.
+      properties:
+        id:
+          description: Required. ID of the Field to delete.
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestDeleteSelectionChoiceRequest:
+      description: Request to delete a Choice.
+      properties:
+        fieldId:
+          description: Required. The Selection Field from which a Choice will be deleted.
+          type: string
+        id:
+          description: Required. Choice to delete.
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestDisableFieldRequest:
+      description: Request to disable the Field.
+      properties:
+        disabledPolicy:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LifecycleDisabledPolicy"
+          description: Required. Field Disabled Policy.
+        id:
+          description: Required. Key of the Field to disable.
+          type: string
+        updateMask:
+          description: The fields that should be updated. At least one field must be specified. The root `disabled_policy` is implied and should not be specified. A single `*` can be used as short-hand for updating every field.
+          format: google-fieldmask
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestDisableSelectionChoiceRequest:
+      description: Request to disable a Choice.
+      properties:
+        disabledPolicy:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LifecycleDisabledPolicy"
+          description: Required. The disabled policy to update.
+        fieldId:
+          description: Required. The Selection Field in which a Choice will be disabled.
+          type: string
+        id:
+          description: Required. Choice to disable.
+          type: string
+        updateMask:
+          description: The fields that should be updated. At least one field must be specified. The root `disabled_policy` is implied and should not be specified. A single `*` can be used as short-hand for updating every field.
+          format: google-fieldmask
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestEnableFieldRequest:
+      description: Request to enable the Field.
+      properties:
+        id:
+          description: Required. ID of the Field to enable.
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestEnableSelectionChoiceRequest:
+      description: Request to enable a Choice.
+      properties:
+        fieldId:
+          description: Required. The Selection Field in which a Choice will be enabled.
+          type: string
+        id:
+          description: Required. Choice to enable.
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestRequest:
+      description: A single kind of update to apply to a Label.
+      properties:
+        createField:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestCreateFieldRequest"
+          description: Creates a new Field.
+        createSelectionChoice:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestCreateSelectionChoiceRequest"
+          description: Creates Choice within a Selection field.
+        deleteField:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestDeleteFieldRequest"
+          description: Deletes a Field from the label.
+        deleteSelectionChoice:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestDeleteSelectionChoiceRequest"
+          description: Delete a Choice within a Selection Field.
+        disableField:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestDisableFieldRequest"
+          description: Disables the Field.
+        disableSelectionChoice:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestDisableSelectionChoiceRequest"
+          description: Disable a Choice within a Selection Field.
+        enableField:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestEnableFieldRequest"
+          description: Enables the Field.
+        enableSelectionChoice:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestEnableSelectionChoiceRequest"
+          description: Enable a Choice within a Selection Field.
+        updateField:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestUpdateFieldPropertiesRequest"
+          description: Updates basic properties of a Field.
+        updateFieldType:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestUpdateFieldTypeRequest"
+          description: Update Field type and/or type options.
+        updateLabel:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestUpdateLabelPropertiesRequest"
+          description: Updates the Label properties.
+        updateSelectionChoiceProperties:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestUpdateSelectionChoicePropertiesRequest"
+          description: Update a Choice properties within a Selection Field.
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestUpdateFieldPropertiesRequest:
+      description: Request to update Field properties.
+      properties:
+        id:
+          description: Required. The Field to update.
+          type: string
+        properties:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2FieldProperties"
+          description: Required. Basic Field properties.
+        updateMask:
+          description: The fields that should be updated. At least one field must be specified. The root `properties` is implied and should not be specified. A single `*` can be used as short-hand for updating every field.
+          format: google-fieldmask
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestUpdateFieldTypeRequest:
+      description: Request to change the type of a Field.
+      properties:
+        dateOptions:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2FieldDateOptions"
+          description: Update field to Date.
+        id:
+          description: Required. The Field to update.
+          type: string
+        integerOptions:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2FieldIntegerOptions"
+          description: Update field to Integer.
+        longTextOptions:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2FieldLongTextOptions"
+          description: Update field to Long Text.
+        selectionOptions:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2FieldSelectionOptions"
+          description: Update field to Selection.
+        textOptions:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2FieldTextOptions"
+          description: Update field to Text.
+        updateMask:
+          description: The fields that should be updated. At least one field must be specified. The root of `type_options` is implied and should not be specified. A single `*` can be used as short-hand for updating every field.
+          format: google-fieldmask
+          type: string
+        userOptions:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2FieldUserOptions"
+          description: Update field to User.
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestUpdateLabelPropertiesRequest:
+      description: Updates basic properties of a Label.
+      properties:
+        properties:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LabelProperties"
+          description: Required. Label properties to update.
+        updateMask:
+          description: The fields that should be updated. At least one field must be specified. The root `label_properties` is implied and should not be specified. A single `*` can be used as short-hand for updating every field.
+          format: google-fieldmask
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestUpdateSelectionChoicePropertiesRequest:
+      description: Request to update a Choice properties.
+      properties:
+        fieldId:
+          description: Required. The Selection Field to update.
+          type: string
+        id:
+          description: Required. The Choice to update.
+          type: string
+        properties:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceProperties"
+          description: Required. The Choice properties to update.
+        updateMask:
+          description: The fields that should be updated. At least one field must be specified. The root `properties` is implied and should not be specified. A single `*` can be used as short-hand for updating every field.
+          format: google-fieldmask
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelResponse:
+      description: Response for Label update.
+      properties:
+        responses:
+          description: The reply of the updates. This maps 1:1 with the updates, although responses to some requests may be empty.
+          items:
+            $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseResponse"
+          type: array
+        updatedLabel:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2Label"
+          description: The label after updates were applied. This is only set if [BatchUpdateLabelResponse2.include_label_in_response] is `true` and there were no errors.
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseCreateFieldResponse:
+      description: Response following Field create.
+      properties:
+        id:
+          description: The field of the created field. When left blank in a create request, a key will be autogenerated and can be identified here.
+          type: string
+        priority:
+          description: The priority of the created field. The priority may change from what was specified to assure contiguous priorities between fields (1-n).
+          format: int32
+          type: integer
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseCreateSelectionChoiceResponse:
+      description: Response following Selection Choice create.
+      properties:
+        fieldId:
+          description: The server-generated id of the field.
+          type: string
+        id:
+          description: The server-generated ID of the created choice within the Field
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseDeleteFieldResponse:
+      description: Response following Field delete.
+      properties: {}
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseDeleteSelectionChoiceResponse:
+      description: Response following Choice delete.
+      properties: {}
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseDisableFieldResponse:
+      description: Response following Field disable.
+      properties: {}
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseDisableSelectionChoiceResponse:
+      description: Response following Choice disable.
+      properties: {}
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseEnableFieldResponse:
+      description: Response following Field enable.
+      properties: {}
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseEnableSelectionChoiceResponse:
+      description: Response following Choice enable.
+      properties: {}
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseResponse:
+      description: A single response from an update.
+      properties:
+        createField:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseCreateFieldResponse"
+          description: Creates a new Field.
+        createSelectionChoice:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseCreateSelectionChoiceResponse"
+          description: Creates a new selection list option to add to a Selection Field.
+        deleteField:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseDeleteFieldResponse"
+          description: Deletes a Field from the label.
+        deleteSelectionChoice:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseDeleteSelectionChoiceResponse"
+          description: Deletes a Choice from a Selection Field.
+        disableField:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseDisableFieldResponse"
+          description: Disables Field.
+        disableSelectionChoice:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseDisableSelectionChoiceResponse"
+          description: Disables a Choice within a Selection Field.
+        enableField:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseEnableFieldResponse"
+          description: Enables Field.
+        enableSelectionChoice:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseEnableSelectionChoiceResponse"
+          description: Enables a Choice within a Selection Field.
+        updateField:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseUpdateFieldPropertiesResponse"
+          description: Updates basic properties of a Field.
+        updateFieldType:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseUpdateFieldTypeResponse"
+          description: Update Field type and/or type options.
+        updateLabel:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseUpdateLabelPropertiesResponse"
+          description: Updated basic properties of a Label.
+        updateSelectionChoiceProperties:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseUpdateSelectionChoicePropertiesResponse"
+          description: Updates a Choice within a Selection Field.
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseUpdateFieldPropertiesResponse:
+      description: Response following update to Field properties.
+      properties:
+        priority:
+          description: The priority of the updated field. The priority may change from what was specified to assure contiguous priorities between fields (1-n).
+          format: int32
+          type: integer
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseUpdateFieldTypeResponse:
+      description: Response following update to Field type.
+      properties: {}
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseUpdateLabelPropertiesResponse:
+      description: Response following update to Label properties.
+      properties: {}
+      type: object
+    GoogleAppsDriveLabelsV2DeltaUpdateLabelResponseUpdateSelectionChoicePropertiesResponse:
+      description: Response following update to Selection Choice properties.
+      properties:
+        priority:
+          description: The priority of the updated choice. The priority may change from what was specified to assure contiguous priorities between choices (1-n).
+          format: int32
+          type: integer
+      type: object
+    GoogleAppsDriveLabelsV2DisableLabelRequest:
+      description: Request to deprecate a published Label.
+      properties:
+        disabledPolicy:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LifecycleDisabledPolicy"
+          description: Disabled policy to use.
+        languageCode:
+          description: The BCP-47 language code to use for evaluating localized field labels. When not specified, values in the default configured language will be used.
+          type: string
+        updateMask:
+          description: The fields that should be updated. At least one field must be specified. The root `disabled_policy` is implied and should not be specified. A single `*` can be used as short-hand for updating every field.
+          format: google-fieldmask
+          type: string
+        useAdminAccess:
+          description: Set to `true` in order to use the user's admin credentials. The server will verify the user is an admin for the Label before allowing access.
+          type: boolean
+        writeControl:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2WriteControl"
+          description: Provides control over how write requests are executed. Defaults to unset, which means last write wins.
+      type: object
+    GoogleAppsDriveLabelsV2EnableLabelRequest:
+      description: Request to enable a label.
+      properties:
+        languageCode:
+          description: The BCP-47 language code to use for evaluating localized field labels. When not specified, values in the default configured language will be used.
+          type: string
+        useAdminAccess:
+          description: Set to `true` in order to use the user's admin credentials. The server will verify the user is an admin for the Label before allowing access.
+          type: boolean
+        writeControl:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2WriteControl"
+          description: Provides control over how write requests are executed. Defaults to unset, which means last write wins.
       type: object
     GoogleAppsDriveLabelsV2Field:
       description: Defines a field that has a display name, data type, and other configuration options. This field defines the kind of metadata that may be set on a Drive item.
@@ -400,12 +1320,60 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleAppsDriveLabelsV2FieldLimits:
+      description: Field constants governing the structure of a Field; such as, the maximum title length, minimum and maximum field values or length, etc.
+      properties:
+        dateLimits:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2DateLimits"
+          description: Date Field limits.
+        integerLimits:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2IntegerLimits"
+          description: Integer Field limits.
+        longTextLimits:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LongTextLimits"
+          description: Long text Field limits.
+        maxDescriptionLength:
+          description: Limits for Field description, also called help text.
+          format: int32
+          type: integer
+        maxDisplayNameLength:
+          description: Limits for Field title.
+          format: int32
+          type: integer
+        maxIdLength:
+          description: Max length for the id.
+          format: int32
+          type: integer
+        selectionLimits:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2SelectionLimits"
+          description: Selection Field limits.
+        textLimits:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2TextLimits"
+          description: The relevant limits for the specified Field.Type. Text Field limits.
+        userLimits:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2UserLimits"
+          description: User Field limits.
+      type: object
     GoogleAppsDriveLabelsV2FieldListOptions:
       description: Options for a multi-valued variant of an associated field type.
       properties:
         maxEntries:
           description: Maximum number of entries permitted.
           format: int32
+          type: integer
+      type: object
+    GoogleAppsDriveLabelsV2FieldLongTextOptions:
+      description: Options the Long Text field type.
+      properties:
+        maxLength:
+          description: Output only. The maximum valid length of values for the text field.
+          format: int32
+          readOnly: true
+          type: integer
+        minLength:
+          description: Output only. The minimum valid length of values for the text field.
+          format: int32
+          readOnly: true
           type: integer
       type: object
     GoogleAppsDriveLabelsV2FieldProperties:
@@ -604,6 +1572,18 @@ components:
           $ref: "#/components/schemas/GoogleAppsDriveLabelsV2FieldListOptions"
           description: When specified, indicates that this field supports a list of values. Once the field is published, this cannot be changed.
       type: object
+    GoogleAppsDriveLabelsV2IntegerLimits:
+      description: Limits for integer Field type.
+      properties:
+        maxValue:
+          description: Maximum value for an integer Field type.
+          format: int64
+          type: string
+        minValue:
+          description: Minimum value for an integer Field type.
+          format: int64
+          type: string
+      type: object
     GoogleAppsDriveLabelsV2Label:
       description: A label defines a taxonomy that can be applied to Drive items in order to organize and search across items. Labels can be simple strings, or can contain fields that describe additional metadata that can be further used to organize and search Drive items.
       properties:
@@ -740,6 +1720,111 @@ components:
           description: This label should be shown in the apply menu when applying values to a Drive item.
           type: boolean
       type: object
+    GoogleAppsDriveLabelsV2LabelLimits:
+      description: Label constraints governing the structure of a Label; such as, the maximum number of Fields allowed and maximum length of the label title.
+      properties:
+        fieldLimits:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2FieldLimits"
+          description: The limits for Fields.
+        maxDeletedFields:
+          description: The maximum number of published Fields that can be deleted.
+          format: int32
+          type: integer
+        maxDescriptionLength:
+          description: The maximum number of characters allowed for the description.
+          format: int32
+          type: integer
+        maxDraftRevisions:
+          description: The maximum number of draft revisions that will be kept before deleting old drafts.
+          format: int32
+          type: integer
+        maxFields:
+          description: The maximum number of Fields allowed within the label.
+          format: int32
+          type: integer
+        maxTitleLength:
+          description: The maximum number of characters allowed for the title.
+          format: int32
+          type: integer
+        name:
+          description: Resource name.
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2LabelLock:
+      description: A Lock that can be applied to a Label, Field, or Choice.
+      properties:
+        capabilities:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LabelLockCapabilities"
+          description: Output only. The user's capabilities on this LabelLock.
+          readOnly: true
+        choiceId:
+          description: The ID of the Selection Field Choice that should be locked. If present, `field_id` must also be present.
+          type: string
+        createTime:
+          description: Output only. The time this LabelLock was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        creator:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2UserInfo"
+          description: Output only. The user whose credentials were used to create the LabelLock. This will not be present if no user was responsible for creating the LabelLock.
+          readOnly: true
+        deleteTime:
+          description: Output only. A timestamp indicating when this LabelLock was scheduled for deletion. This will be present only if this LabelLock is in the DELETING state.
+          format: google-datetime
+          readOnly: true
+          type: string
+        fieldId:
+          description: The ID of the Field that should be locked. Empty if the whole Label should be locked.
+          type: string
+        name:
+          description: Output only. Resource name of this LabelLock.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. This LabelLock's state.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - DELETING
+          readOnly: true
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2LabelLockCapabilities:
+      description: A description of a user's capabilities on a LabelLock.
+      properties:
+        canViewPolicy:
+          description: True if the user is authorized to view the policy.
+          type: boolean
+      type: object
+    GoogleAppsDriveLabelsV2LabelPermission:
+      description: The permission that applies to a principal (user, group, audience) on a label.
+      properties:
+        audience:
+          description: Audience to grant a role to. The magic value of `audiences/default` may be used to apply the role to the default audience in the context of the organization that owns the Label.
+          type: string
+        email:
+          description: Specifies the email address for a user or group pricinpal. Not populated for audience principals. User and Group permissions may only be inserted using email address. On update requests, if email address is specified, no principal should be specified.
+          type: string
+        group:
+          description: Group resource name.
+          type: string
+        name:
+          description: Resource name of this permission.
+          type: string
+        person:
+          description: Person resource name.
+          type: string
+        role:
+          description: The role the principal should have.
+          enum:
+            - LABEL_ROLE_UNSPECIFIED
+            - READER
+            - APPLIER
+            - ORGANIZER
+            - EDITOR
+          type: string
+      type: object
     GoogleAppsDriveLabelsV2LabelProperties:
       description: Basic properties of the label.
       properties:
@@ -797,6 +1882,30 @@ components:
           description: Whether to show this disabled object in the apply menu on Drive items. * When `true`, the object is generally shown in the UI as disabled and is unselectable. * When `false`, the object is generally hidden in the UI.
           type: boolean
       type: object
+    GoogleAppsDriveLabelsV2ListLabelLocksResponse:
+      description: The response to a ListLabelLocksRequest.
+      properties:
+        labelLocks:
+          description: LabelLocks.
+          items:
+            $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LabelLock"
+          type: array
+        nextPageToken:
+          description: The token of the next page in the response.
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2ListLabelPermissionsResponse:
+      description: Response for listing the permissions on a Label.
+      properties:
+        labelPermissions:
+          description: Label permissions.
+          items:
+            $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LabelPermission"
+          type: array
+        nextPageToken:
+          description: The token of the next page in the response.
+          type: string
+      type: object
     GoogleAppsDriveLabelsV2ListLabelsResponse:
       description: Response for listing Labels.
       properties:
@@ -809,6 +1918,14 @@ components:
           description: The token of the next page in the response.
           type: string
       type: object
+    GoogleAppsDriveLabelsV2ListLimits:
+      description: Limits for list-variant of a Field type.
+      properties:
+        maxEntries:
+          description: Maximum number of values allowed for the Field type.
+          format: int32
+          type: integer
+      type: object
     GoogleAppsDriveLabelsV2LockStatus:
       description: Contains information about whether a label component should be considered locked.
       properties:
@@ -817,12 +1934,151 @@ components:
           readOnly: true
           type: boolean
       type: object
+    GoogleAppsDriveLabelsV2LongTextLimits:
+      description: Limits for long text Field type.
+      properties:
+        maxLength:
+          description: Maximum length allowed for a long text Field type.
+          format: int32
+          type: integer
+        minLength:
+          description: Minimum length allowed for a long text Field type.
+          format: int32
+          type: integer
+      type: object
+    GoogleAppsDriveLabelsV2PublishLabelRequest:
+      description: Request to publish a label.
+      properties:
+        languageCode:
+          description: The BCP-47 language code to use for evaluating localized field labels. When not specified, values in the default configured language will be used.
+          type: string
+        useAdminAccess:
+          description: Set to `true` in order to use the user's admin credentials. The server will verify the user is an admin for the Label before allowing access.
+          type: boolean
+        writeControl:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2WriteControl"
+          description: Provides control over how write requests are executed. Defaults to unset, which means last write wins.
+      type: object
+    GoogleAppsDriveLabelsV2SelectionLimits:
+      description: Limits for selection Field type.
+      properties:
+        listLimits:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2ListLimits"
+          description: Limits for list-variant of a Field type.
+        maxChoices:
+          description: The max number of choices.
+          format: int32
+          type: integer
+        maxDeletedChoices:
+          description: Maximum number of deleted choices.
+          format: int32
+          type: integer
+        maxDisplayNameLength:
+          description: Maximum length for display name.
+          format: int32
+          type: integer
+        maxIdLength:
+          description: Maximum ID length for a selection options.
+          format: int32
+          type: integer
+      type: object
+    GoogleAppsDriveLabelsV2TextLimits:
+      description: Limits for text Field type.
+      properties:
+        maxLength:
+          description: Maximum length allowed for a text Field type.
+          format: int32
+          type: integer
+        minLength:
+          description: Minimum length allowed for a text Field type.
+          format: int32
+          type: integer
+      type: object
+    GoogleAppsDriveLabelsV2UpdateLabelCopyModeRequest:
+      description: Request to update the `CopyMode` of the given Label. Changes to this policy are not revisioned, do not require publishing, and take effect immediately. \
+      properties:
+        copyMode:
+          description: Required. Indicates how the applied Label, and Field values should be copied when a Drive item is copied.
+          enum:
+            - COPY_MODE_UNSPECIFIED
+            - DO_NOT_COPY
+            - ALWAYS_COPY
+            - COPY_APPLIABLE
+          type: string
+        languageCode:
+          description: The BCP-47 language code to use for evaluating localized field labels. When not specified, values in the default configured language will be used.
+          type: string
+        useAdminAccess:
+          description: Set to `true` in order to use the user's admin credentials. The server will verify the user is an admin for the Label before allowing access.
+          type: boolean
+        view:
+          description: When specified, only certain fields belonging to the indicated view will be returned.
+          enum:
+            - LABEL_VIEW_BASIC
+            - LABEL_VIEW_FULL
+          type: string
+      type: object
+    GoogleAppsDriveLabelsV2UpdateLabelPermissionRequest:
+      description: Updates a Label Permission. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing.
+      properties:
+        labelPermission:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2LabelPermission"
+          description: Required. The permission to create or update on the Label.
+        parent:
+          description: Required. The parent Label resource name.
+          type: string
+        useAdminAccess:
+          description: Set to `true` in order to use the user's admin credentials. The server will verify the user is an admin for the Label before allowing access.
+          type: boolean
+      type: object
+    GoogleAppsDriveLabelsV2UserCapabilities:
+      description: The capabilities of a user.
+      properties:
+        canAccessLabelManager:
+          description: Output only. Whether the user is allowed access to the label manager.
+          readOnly: true
+          type: boolean
+        canAdministrateLabels:
+          description: Output only. Whether the user is an administrator for the shared labels feature.
+          readOnly: true
+          type: boolean
+        canCreateAdminLabels:
+          description: Output only. Whether the user is allowed to create new admin labels.
+          readOnly: true
+          type: boolean
+        canCreateSharedLabels:
+          description: Output only. Whether the user is allowed to create new shared labels.
+          readOnly: true
+          type: boolean
+        name:
+          description: Output only. Resource name for the user capabilities.
+          readOnly: true
+          type: string
+      type: object
     GoogleAppsDriveLabelsV2UserInfo:
       description: Information about a user.
       properties:
         person:
           description: The identifier for this user that can be used with the People API to get more information. For example, people/12345678.
           type: string
+      type: object
+    GoogleAppsDriveLabelsV2UserLimits:
+      description: Limits for Field.Type.USER.
+      properties:
+        listLimits:
+          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2ListLimits"
+          description: Limits for list-variant of a Field type.
+      type: object
+    GoogleAppsDriveLabelsV2WriteControl:
+      description: Provides control over how write requests are executed. When not specified, the last write wins.
+      properties:
+        requiredRevisionId:
+          description: The revision_id of the label that the write request will be applied to. If this is not the latest revision of the label, the request will not be processed and will return a 400 Bad Request error.
+          type: string
+      type: object
+    GoogleProtobufEmpty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
       type: object
     GoogleTypeColor:
       description: "Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to/from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page doesn't carry information about the absolute color space that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most 1e-5. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ..."

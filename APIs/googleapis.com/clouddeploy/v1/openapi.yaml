@@ -1107,6 +1107,22 @@ components:
       description: The response object for `AbandonRelease`.
       properties: {}
       type: object
+    AdvanceChildRolloutJob:
+      description: An advanceChildRollout Job.
+      properties: {}
+      type: object
+    AdvanceChildRolloutJobRun:
+      description: AdvanceChildRolloutJobRun contains information specific to a advanceChildRollout `JobRun`.
+      properties:
+        rollout:
+          description: Output only. Name of the `ChildRollout`. Format is projects/{project}/ locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/{release}/rollouts/a-z{0,62}.
+          readOnly: true
+          type: string
+        rolloutPhaseId:
+          description: Output only. the ID of the ChildRollout's Phase.
+          readOnly: true
+          type: string
+      type: object
     AnthosCluster:
       description: Information specifying an Anthos Cluster.
       properties:
@@ -1183,6 +1199,22 @@ components:
       description: The request message for Operations.CancelOperation.
       properties: {}
       type: object
+    ChildRolloutJobs:
+      description: ChildRollouts job composition
+      properties:
+        advanceRolloutJobs:
+          description: Output only. List of AdvanceChildRolloutJobs
+          items:
+            $ref: "#/components/schemas/Job"
+          readOnly: true
+          type: array
+        createRolloutJobs:
+          description: Output only. List of CreateChildRolloutJobs
+          items:
+            $ref: "#/components/schemas/Job"
+          readOnly: true
+          type: array
+      type: object
     CloudRunLocation:
       description: Information specifying where to deploy a Cloud Run Service.
       properties:
@@ -1222,6 +1254,22 @@ components:
           items:
             $ref: "#/components/schemas/SkaffoldVersion"
           type: array
+      type: object
+    CreateChildRolloutJob:
+      description: A createChildRollout Job.
+      properties: {}
+      type: object
+    CreateChildRolloutJobRun:
+      description: CreateChildRolloutJobRun contains information specific to a createChildRollout `JobRun`.
+      properties:
+        rollout:
+          description: Output only. Name of the `ChildRollout`. Format is projects/{project}/ locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/{release}/rollouts/a-z{0,62}.
+          readOnly: true
+          type: string
+        rolloutPhaseId:
+          description: Output only. The ID of the childRollout Phase initiated by this JobRun.
+          readOnly: true
+          type: string
       type: object
     Date:
       description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp"
@@ -1429,6 +1477,14 @@ components:
     Job:
       description: Job represents an operation for a `Rollout`.
       properties:
+        advanceChildRolloutJob:
+          $ref: "#/components/schemas/AdvanceChildRolloutJob"
+          description: Output only. An advanceChildRollout Job.
+          readOnly: true
+        createChildRolloutJob:
+          $ref: "#/components/schemas/CreateChildRolloutJob"
+          description: Output only. A createChildRollout Job.
+          readOnly: true
         deployJob:
           $ref: "#/components/schemas/DeployJob"
           description: Output only. A deploy Job.
@@ -1461,6 +1517,14 @@ components:
     JobRun:
       description: A `JobRun` resource in the Google Cloud Deploy API. A `JobRun` contains information of a single `Rollout` job evaluation.
       properties:
+        advanceChildRolloutJobRun:
+          $ref: "#/components/schemas/AdvanceChildRolloutJobRun"
+          description: Output only. Information specific to an advanceChildRollout `JobRun`
+          readOnly: true
+        createChildRolloutJobRun:
+          $ref: "#/components/schemas/CreateChildRolloutJobRun"
+          description: Output only. Information specific to a createChildRollout `JobRun`.
+          readOnly: true
         createTime:
           description: Output only. Time at which the `JobRun` was created.
           format: google-datetime
@@ -1682,6 +1746,15 @@ components:
           description: Output only. The name of the Cloud Run Service that is associated with a `Rollout`.
           readOnly: true
       type: object
+    MultiTarget:
+      description: Information specifying a multiTarget.
+      properties:
+        targetIds:
+          description: Required. The target_ids of this multiTarget.
+          items:
+            type: string
+          type: array
+      type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
       properties:
@@ -1742,6 +1815,10 @@ components:
     Phase:
       description: Phase represents a collection of jobs that are logically grouped together for a `Rollout`.
       properties:
+        childRolloutJobs:
+          $ref: "#/components/schemas/ChildRolloutJobs"
+          description: Output only. ChildRollout job composition.
+          readOnly: true
         deploymentJobs:
           $ref: "#/components/schemas/DeploymentJobs"
           description: Output only. Deployment job composition.
@@ -1995,6 +2072,10 @@ components:
         approveTime:
           description: Output only. Time at which the `Rollout` was approved.
           format: google-datetime
+          readOnly: true
+          type: string
+        controllerRollout:
+          description: Output only. Name of the `ControllerRollout`. Format is projects/{project}/ locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/{release}/rollouts/a-z{0,62}.
           readOnly: true
           type: string
         createTime:
@@ -2252,6 +2333,9 @@ components:
             type: string
           description: "Optional. Labels are attributes that can be set and used by both the user and by Google Cloud Deploy. Labels must meet the following constraints: * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. * All characters must use UTF-8 encoding, and international characters are allowed. * Keys must start with a lowercase letter or international character. * Each resource is limited to a maximum of 64 labels. Both keys and values are additionally constrained to be <= 128 bytes."
           type: object
+        multiTarget:
+          $ref: "#/components/schemas/MultiTarget"
+          description: Information specifying a multiTarget.
         name:
           description: Optional. Name of the `Target`. Format is projects/{project}/locations/{location}/targets/a-z{0,62}.
           type: string

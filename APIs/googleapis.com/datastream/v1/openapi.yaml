@@ -1777,11 +1777,11 @@ components:
           $ref: "#/components/schemas/OracleRdbms"
           description: Oracle objects to include in the stream.
         maxConcurrentBackfillTasks:
-          description: Maximum number of concurrent backfill tasks. The number should be non negative. If not set (or set to 0), the system's default value will be used.
+          description: Maximum number of concurrent backfill tasks. The number should be non-negative. If not set (or set to 0), the system's default value is used.
           format: int32
           type: integer
         maxConcurrentCdcTasks:
-          description: Maximum number of concurrent CDC tasks. The number should be non negative. If not set (or set to 0), the system's default value will be used.
+          description: Maximum number of concurrent CDC tasks. The number should be non-negative. If not set (or set to 0), the system's default value is used.
           format: int32
           type: integer
         streamLargeObjects:

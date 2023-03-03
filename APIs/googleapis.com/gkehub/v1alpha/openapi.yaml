@@ -3129,7 +3129,7 @@ components:
           description: group is the group, as seen by the kubernetes cluster.
           type: string
         name:
-          description: The resource name for the rbacrolebinding `projects/{project}/locations/{location}/namespaces/{namespace}/rbacrolebindings/{rbacrolebinding}`
+          description: The resource name for the rbacrolebinding `projects/{project}/locations/{location}/namespaces/{namespace}/rbacrolebindings/{rbacrolebinding}` or `projects/{project}/locations/{location}/memberships/{membership}/rbacrolebindings/{rbacrolebinding}`
           type: string
         role:
           $ref: "#/components/schemas/Role"
@@ -3198,6 +3198,7 @@ components:
             - ADMIN
             - EDIT
             - VIEW
+            - ANTHOS_SUPPORT
           type: string
       type: object
     Scope:
