@@ -4,7 +4,7 @@ servers:
 info:
   description: APIs for sampling from and fine-tuning language models
   title: OpenAI API
-  version: 1.1.0
+  version: 1.2.0
   x-apisguru-categories:
     - machine_learning
   x-logo:
@@ -121,6 +121,203 @@ paths:
                 "text": "Puppy B is sad. "
               }
             ]
+          }
+  /audio/transcriptions:
+    post:
+      operationId: createTranscription
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/CreateTranscriptionRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateTranscriptionResponse"
+          description: OK
+      summary: Transcribes audio into the input language.
+      tags:
+        - OpenAI
+      x-oaiMeta:
+        beta: true
+        examples:
+          curl: |
+            curl https://api.openai.com/v1/audio/transcriptions \
+              -X POST \
+              -H 'Authorization: Bearer TOKEN' \
+              -H 'Content-Type: multipart/form-data' \
+              -F file=@/path/to/file/audio.mp3 \
+              -F model=whisper-1
+          node: |
+            const { Configuration, OpenAIApi } = require("openai");
+            const configuration = new Configuration({
+              apiKey: process.env.OPENAI_API_KEY,
+            });
+            const openai = new OpenAIApi(configuration);
+            const resp = await openai.createTranscription(
+              fs.createReadStream("audio.mp3"),
+              "whisper-1"
+            );
+          python: |
+            import os
+            import openai
+            openai.api_key = os.getenv("OPENAI_API_KEY")
+            audio_file = open("audio.mp3", "rb")
+            transcript = openai.Audio.transcribe("whisper-1", audio_file)
+        group: audio
+        name: Create transcription
+        parameters: |
+          {
+            "file": "audio.mp3",
+            "model": "whisper-1"
+          }
+        path: create
+        response: |
+          {
+            "text": "Imagine the wildest idea that you've ever had, and you're curious about how it might scale to something that's a 100, a 1,000 times bigger. This is a place where you can get to do that."
+          }
+  /audio/translations:
+    post:
+      operationId: createTranslation
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/CreateTranslationRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateTranslationResponse"
+          description: OK
+      summary: Translates audio into into English.
+      tags:
+        - OpenAI
+      x-oaiMeta:
+        beta: true
+        examples:
+          curl: |
+            curl https://api.openai.com/v1/audio/translations \
+                -X POST \
+                -H 'Authorization: Bearer TOKEN' \
+                -H 'Content-Type: multipart/form-data' \
+                -F file=@/path/to/file/german.m4a \
+                -F model=whisper-1
+          node: |
+            const { Configuration, OpenAIApi } = require("openai");
+            const configuration = new Configuration({
+              apiKey: process.env.OPENAI_API_KEY,
+            });
+            const openai = new OpenAIApi(configuration);
+            const resp = await openai.createTranslation(
+              fs.createReadStream("audio.mp3"),
+              "whisper-1"
+            );
+          python: |
+            import os
+            import openai
+            openai.api_key = os.getenv("OPENAI_API_KEY")
+            audio_file = open("german.m4a", "rb")
+            transcript = openai.Audio.translate("whisper-1", audio_file)
+        group: audio
+        name: Create translation
+        parameters: |
+          {
+            "file": "german.m4a",
+            "model": "whisper-1"
+          }
+        path: create
+        response: |
+          {
+            "text": "Hello, my name is Wolfgang and I come from Germany. Where are you heading today?"
+          }
+  /chat/completions:
+    post:
+      operationId: createChatCompletion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateChatCompletionRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateChatCompletionResponse"
+          description: OK
+      summary: Creates a completion for the chat message
+      tags:
+        - OpenAI
+      x-oaiMeta:
+        beta: true
+        examples:
+          curl: |
+            curl https://api.openai.com/v1/chat/completions \
+              -H 'Content-Type: application/json' \
+              -H 'Authorization: Bearer YOUR_API_KEY' \
+              -d '{
+              "model": "gpt-3.5-turbo",
+              "messages": [{"role": "user", "content": "Hello!"}]
+            }'
+          node.js: |
+            const { Configuration, OpenAIApi } = require("openai");
+
+            const configuration = new Configuration({
+              apiKey: process.env.OPENAI_API_KEY,
+            });
+            const openai = new OpenAIApi(configuration);
+
+            const completion = await openai.createChatCompletion({
+              model: "gpt-3.5-turbo",
+              messages: [{role: "user", content: "Hello world"}],
+            });
+            console.log(completion.data.choices[0].message);
+          python: |
+            import os
+            import openai
+            openai.api_key = os.getenv("OPENAI_API_KEY")
+
+            completion = openai.ChatCompletion.create(
+              model="gpt-3.5-turbo",
+              messages=[
+                {"role": "user", "content": "Hello!"}
+              ]
+            )
+
+            print(completion.choices[0].message)
+        group: chat
+        name: Create chat completion
+        parameters: |
+          {
+            "model": "gpt-3.5-turbo",
+            "messages": [{"role": "user", "content": "Hello!"}]
+          }
+        path: create
+        response: |
+          {
+            "id": "chatcmpl-123",
+            "object": "chat.completion",
+            "created": 1677652288,
+            "choices": [{
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "\n\nHello there, how may I assist you today?",
+              },
+              "finish_reason": "stop"
+            }],
+            "usage": {
+              "prompt_tokens": 9,
+              "completion_tokens": 12,
+              "total_tokens": 21
+            }
           }
   /classifications:
     post:
@@ -344,7 +541,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/CreateEditResponse"
           description: OK
-      summary: Creates a new edit for the provided input, instruction, and parameters
+      summary: Creates a new edit for the provided input, instruction, and parameters.
       tags:
         - OpenAI
       x-oaiMeta:
@@ -466,7 +663,7 @@ paths:
                 "embedding": [
                   0.0023064255,
                   -0.009327292,
-                  .... (1056 floats total for ada)
+                  .... (1536 floats total for ada-002)
                   -0.0028842222,
                 ],
                 "index": 0
@@ -942,7 +1139,6 @@ paths:
       tags:
         - OpenAI
       x-oaiMeta:
-        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/fine-tunes \
@@ -1008,7 +1204,6 @@ paths:
       tags:
         - OpenAI
       x-oaiMeta:
-        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/fine-tunes \
@@ -1098,7 +1293,6 @@ paths:
       tags:
         - OpenAI
       x-oaiMeta:
-        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/fine-tunes/ft-AF1WoRqd3aJAHsqc9NY7iL8F \
@@ -1212,7 +1406,6 @@ paths:
       tags:
         - OpenAI
       x-oaiMeta:
-        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/fine-tunes/ft-AF1WoRqd3aJAHsqc9NY7iL8F/cancel \
@@ -1297,7 +1490,6 @@ paths:
       tags:
         - OpenAI
       x-oaiMeta:
-        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/fine-tunes/ft-AF1WoRqd3aJAHsqc9NY7iL8F/events \
@@ -1373,6 +1565,7 @@ paths:
       tags:
         - OpenAI
       x-oaiMeta:
+        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/images/edits \
@@ -1441,6 +1634,7 @@ paths:
       tags:
         - OpenAI
       x-oaiMeta:
+        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/images/generations \
@@ -1512,6 +1706,7 @@ paths:
       tags:
         - OpenAI
       x-oaiMeta:
+        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/images/variations \
@@ -1633,7 +1828,6 @@ paths:
       tags:
         - OpenAI
       x-oaiMeta:
-        beta: true
         examples:
           curl: |
             curl https://api.openai.com/v1/models/curie:ft-acmeco-2021-03-03-21-44-20 \
@@ -1788,6 +1982,41 @@ paths:
           }
 components:
   schemas:
+    ChatCompletionRequestMessage:
+      properties:
+        content:
+          description: The contents of the message
+          type: string
+        name:
+          description: The name of the user in a multi-user chat
+          type: string
+        role:
+          description: The role of the author of this message.
+          enum:
+            - system
+            - user
+            - assistant
+          type: string
+      required:
+        - role
+        - content
+      type: object
+    ChatCompletionResponseMessage:
+      properties:
+        content:
+          description: The contents of the message
+          type: string
+        role:
+          description: The role of the author of this message.
+          enum:
+            - system
+            - user
+            - assistant
+          type: string
+      required:
+        - role
+        - content
+      type: object
     CreateAnswerRequest:
       additionalProperties: false
       properties:
@@ -1900,7 +2129,7 @@ components:
               type: array
         temperature:
           default: 0
-          description: What [sampling temperature](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277) to use. Higher values mean the model will take more risks and value 0 (argmax sampling) works better for scenarios with a well-defined answer.
+          description: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
           nullable: true
           type: number
         user:
@@ -1934,6 +2163,146 @@ components:
                 type: string
             type: object
           type: array
+      type: object
+    CreateChatCompletionRequest:
+      properties:
+        frequency_penalty:
+          default: 0
+          description: |
+            Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+
+            [See more information about frequency and presence penalties.](/docs/api-reference/parameter-details)
+          maximum: 2
+          minimum: -2
+          nullable: true
+          type: number
+        logit_bias:
+          default: null
+          description: |
+            Modify the likelihood of specified tokens appearing in the completion.
+
+            Accepts a json object that maps tokens (specified by their token ID in the tokenizer) to an associated bias value from -100 to 100. Mathematically, the bias is added to the logits generated by the model prior to sampling. The exact effect will vary per model, but values between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100 should result in a ban or exclusive selection of the relevant token.
+          nullable: true
+          type: object
+          x-oaiTypeLabel: map
+        max_tokens:
+          default: inf
+          description: |
+            The maximum number of tokens allowed for the generated answer. By default, the number of tokens the model can return will be (4096 - prompt tokens).
+          type: integer
+        messages:
+          description: The messages to generate chat completions for, in the [chat format](/docs/guides/chat/introduction).
+          items:
+            $ref: "#/components/schemas/ChatCompletionRequestMessage"
+          minItems: 1
+          type: array
+        model:
+          description: ID of the model to use. Currently, only `gpt-3.5-turbo` and `gpt-3.5-turbo-0301` are supported.
+          type: string
+        n:
+          default: 1
+          description: How many chat completion choices to generate for each input message.
+          example: 1
+          maximum: 128
+          minimum: 1
+          nullable: true
+          type: integer
+        presence_penalty:
+          default: 0
+          description: |
+            Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+
+            [See more information about frequency and presence penalties.](/docs/api-reference/parameter-details)
+          maximum: 2
+          minimum: -2
+          nullable: true
+          type: number
+        stop:
+          default: null
+          description: |
+            Up to 4 sequences where the API will stop generating further tokens.
+          oneOf:
+            - nullable: true
+              type: string
+            - items:
+                type: string
+              maxItems: 4
+              minItems: 1
+              type: array
+        stream:
+          default: false
+          description: |
+            If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format) as they become available, with the stream terminated by a `data: [DONE]` message.
+          nullable: true
+          type: boolean
+        temperature:
+          default: 1
+          description: |
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+
+            We generally recommend altering this or `top_p` but not both.
+          example: 1
+          maximum: 2
+          minimum: 0
+          nullable: true
+          type: number
+        top_p:
+          default: 1
+          description: |
+            An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or `temperature` but not both.
+          example: 1
+          maximum: 1
+          minimum: 0
+          nullable: true
+          type: number
+        user:
+          $ref: "#/components/schemas/CreateCompletionRequest/properties/user"
+      required:
+        - model
+        - messages
+      type: object
+    CreateChatCompletionResponse:
+      properties:
+        choices:
+          items:
+            properties:
+              finish_reason:
+                type: string
+              index:
+                type: integer
+              message:
+                $ref: "#/components/schemas/ChatCompletionResponseMessage"
+            type: object
+          type: array
+        created:
+          type: integer
+        id:
+          type: string
+        model:
+          type: string
+        object:
+          type: string
+        usage:
+          properties:
+            completion_tokens:
+              type: integer
+            prompt_tokens:
+              type: integer
+            total_tokens:
+              type: integer
+          required:
+            - prompt_tokens
+            - completion_tokens
+            - total_tokens
+          type: object
+      required:
+        - id
+        - object
+        - created
+        - model
+        - choices
       type: object
     CreateClassificationRequest:
       additionalProperties: false
@@ -2004,7 +2373,7 @@ components:
           $ref: "#/components/schemas/CreateAnswerRequest/properties/search_model"
         temperature:
           default: 0
-          description: What sampling `temperature` to use. Higher values mean the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer.
+          description: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
           example: 0
           maximum: 2
           minimum: 0
@@ -2185,7 +2554,7 @@ components:
         temperature:
           default: 1
           description: |
-            What [sampling temperature](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277) to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer.
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
 
             We generally recommend altering this or `top_p` but not both.
           example: 1
@@ -2286,7 +2655,8 @@ components:
           example: Fix the spelling mistakes.
           type: string
         model:
-          $ref: "#/components/schemas/CreateCompletionRequest/properties/model"
+          description: ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001` model with this endpoint.
+          type: string
         n:
           default: 1
           description: How many edits to generate for the input and instruction.
@@ -2298,7 +2668,7 @@ components:
         temperature:
           default: 1
           description: |
-            What [sampling temperature](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277) to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer.
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
 
             We generally recommend altering this or `top_p` but not both.
           example: 1
@@ -2356,10 +2726,6 @@ components:
           type: array
         created:
           type: integer
-        id:
-          type: string
-        model:
-          type: string
         object:
           type: string
         usage:
@@ -2376,10 +2742,8 @@ components:
             - total_tokens
           type: object
       required:
-        - id
         - object
         - created
-        - model
         - choices
         - usage
       type: object
@@ -2563,7 +2927,7 @@ components:
             The name of the base model to fine-tune. You can select one of "ada",
             "babbage", "curie", "davinci", or a fine-tuned model created after 2022-04-21.
             To learn more about these models, see the
-            [Models](https://beta.openai.com/docs/models) documentation.
+            [Models](https://platform.openai.com/docs/models) documentation.
           nullable: true
           type: string
         n_epochs:
@@ -2875,6 +3239,84 @@ components:
         object:
           type: string
       type: object
+    CreateTranscriptionRequest:
+      additionalProperties: false
+      properties:
+        file:
+          description: |
+            The audio file to transcribe, in one of these formats: mp3, mp4, mpeg, mpga, m4a, wav, or webm.
+          format: binary
+          type: string
+        language:
+          description: |
+            The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy and latency.
+          type: string
+        model:
+          description: |
+            ID of the model to use. Only `whisper-1` is currently available.
+          type: string
+        prompt:
+          description: |
+            An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
+          type: string
+        response_format:
+          default: json
+          description: |
+            The format of the transcript output, in one of these options: json, text, srt, verbose_json, or vtt.
+          type: string
+        temperature:
+          default: 0
+          description: |
+            The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the temperature until certain thresholds are hit.
+          type: number
+      required:
+        - file
+        - model
+      type: object
+    CreateTranscriptionResponse:
+      properties:
+        text:
+          type: string
+      required:
+        - text
+      type: object
+    CreateTranslationRequest:
+      additionalProperties: false
+      properties:
+        file:
+          description: |
+            The audio file to translate, in one of these formats: mp3, mp4, mpeg, mpga, m4a, wav, or webm.
+          format: binary
+          type: string
+        model:
+          description: |
+            ID of the model to use. Only `whisper-1` is currently available.
+          type: string
+        prompt:
+          description: |
+            An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should be in English.
+          type: string
+        response_format:
+          default: json
+          description: |
+            The format of the transcript output, in one of these options: json, text, srt, verbose_json, or vtt.
+          type: string
+        temperature:
+          default: 0
+          description: |
+            The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the temperature until certain thresholds are hit.
+          type: number
+      required:
+        - file
+        - model
+      type: object
+    CreateTranslationResponse:
+      properties:
+        text:
+          type: string
+      required:
+        - text
+      type: object
     DeleteFileResponse:
       properties:
         deleted:
@@ -3115,6 +3557,10 @@ x-oaiMeta:
       id: completions
       title: Completions
     - description: |
+        Given a chat conversation, the model will return a chat completion response.
+      id: chat
+      title: Chat
+    - description: |
         Given a prompt and an instruction, the model will return an edited version of the prompt.
       id: edits
       title: Edits
@@ -3130,6 +3576,12 @@ x-oaiMeta:
         Related guide: [Embeddings](/docs/guides/embeddings)
       id: embeddings
       title: Embeddings
+    - description: |
+        Learn how to turn audio into text.
+
+        Related guide: [Speech to text](/docs/guides/speech-to-text)
+      id: audio
+      title: Audio
     - description: |
         Files are used to upload documents that can be used with features like [Fine-tuning](/docs/api-reference/fine-tunes).
       id: files

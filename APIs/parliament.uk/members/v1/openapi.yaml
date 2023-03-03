@@ -874,7 +874,7 @@ paths:
         "200":
           description: Success
         "204":
-          description: Success
+          description: No Content
         "400":
           description: Bad Request
         "404":
@@ -922,6 +922,11 @@ paths:
           schema:
             format: int32
             type: integer
+        - description: Registered interests of Member by House specified
+          in: query
+          name: house
+          schema:
+            $ref: "#/components/schemas/House"
       responses:
         "200":
           content:
@@ -1015,6 +1020,8 @@ paths:
       responses:
         "200":
           description: Success
+        "204":
+          description: No Content
         "400":
           description: Bad Request
         "404":
@@ -2123,6 +2130,8 @@ components:
     HouseMembershipStatus:
       additionalProperties: false
       properties:
+        status:
+          $ref: "#/components/schemas/MemberStatus"
         statusDescription:
           nullable: true
           type: string
@@ -2479,6 +2488,14 @@ components:
           format: date-time
           type: string
       type: object
+    MemberStatus:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+      format: int32
+      type: integer
     MembersInterests:
       additionalProperties: false
       properties:
@@ -2716,16 +2733,27 @@ components:
     RegisteredInterest:
       additionalProperties: false
       properties:
+        childInterests:
+          items:
+            $ref: "#/components/schemas/RegisteredInterest"
+          nullable: true
+          type: array
         createdWhen:
           format: date-time
+          nullable: true
           type: string
         deletedWhen:
           format: date-time
           nullable: true
           type: string
+        id:
+          format: int32
+          type: integer
         interest:
           nullable: true
           type: string
+        isCorrection:
+          type: boolean
         lastAmendedWhen:
           format: date-time
           nullable: true
@@ -2734,6 +2762,9 @@ components:
     RegisteredInterestCategory:
       additionalProperties: false
       properties:
+        id:
+          format: int32
+          type: integer
         interests:
           items:
             $ref: "#/components/schemas/RegisteredInterest"
@@ -2980,3 +3011,5 @@ components:
           format: int32
           type: integer
       type: object
+contact:
+  url: https://www.parliament.uk/

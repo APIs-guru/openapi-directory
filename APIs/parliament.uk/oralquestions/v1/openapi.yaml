@@ -842,6 +842,13 @@ components:
       type: object
     PagingInfo:
       properties:
+        GlobalStatusCounts:
+          items:
+            $ref: "#/components/schemas/StatusCount"
+          type: array
+        GlobalTotal:
+          format: int32
+          type: integer
         Skip:
           format: int32
           type: integer
@@ -1274,3 +1281,5 @@ components:
           format: int32
           type: integer
       type: object
+contact:
+  url: https://www.parliament.uk/
