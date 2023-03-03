@@ -1798,7 +1798,7 @@ paths:
   /#X-Amz-Target=SageMaker.CreateMonitoringSchedule:
     post:
       operationId: CreateMonitoringSchedule
-      description: Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to monitor the data captured for an Amazon SageMaker Endoint.
+      description: Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to monitor the data captured for an Amazon SageMaker Endpoint.
       responses:
         '200':
           description: Success
@@ -6589,7 +6589,7 @@ paths:
   /#X-Amz-Target=SageMaker.GetSearchSuggestions:
     post:
       operationId: GetSearchSuggestions
-      description: 'An auto-complete API for the search functionality in the Amazon SageMaker console. It returns suggestions of possible matches for the property name to use in <code>Search</code> queries. Provides suggestions for <code>HyperParameters</code>, <code>Tags</code>, and <code>Metrics</code>.'
+      description: 'An auto-complete API for the search functionality in the SageMaker console. It returns suggestions of possible matches for the property name to use in <code>Search</code> queries. Provides suggestions for <code>HyperParameters</code>, <code>Tags</code>, and <code>Metrics</code>.'
       responses:
         '200':
           description: Success
@@ -10167,7 +10167,7 @@ paths:
   /#X-Amz-Target=SageMaker.Search:
     post:
       operationId: Search
-      description: '<p>Finds Amazon SageMaker resources that match a search query. Matching resources are returned as a list of <code>SearchRecord</code> objects in the response. You can sort the search results by any resource property in a ascending or descending order.</p> <p>You can query against the following value types: numeric, text, Boolean, and timestamp.</p>'
+      description: '<p>Finds SageMaker resources that match a search query. Matching resources are returned as a list of <code>SearchRecord</code> objects in the response. You can sort the search results by any resource property in a ascending or descending order.</p> <p>You can query against the following value types: numeric, text, Boolean, and timestamp.</p> <note> <p>The Search API may provide access to otherwise restricted data. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html">Amazon SageMaker API Permissions: Actions, Permissions, and Resources Reference</a> for more information.</p> </note>'
       responses:
         '200':
           description: Success
@@ -13994,7 +13994,7 @@ components:
         SamplePayloadUrl:
           allOf:
             - $ref: '#/components/schemas/S3Uri'
-            - description: The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).
+            - description: 'The Amazon Simple Storage Service (Amazon S3) path where the sample payload is stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). This archive can hold multiple files that are all equally used in the load test. Each file in the archive must satisfy the size constraints of the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_RequestSyntax">InvokeEndpoint</a> call.'
         AdditionalInferenceSpecifications:
           allOf:
             - $ref: '#/components/schemas/AdditionalInferenceSpecifications'
@@ -19383,7 +19383,7 @@ components:
         Resource:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: The name of the Amazon SageMaker resource to search for.
+            - description: The name of the SageMaker resource to search for.
         SuggestionQuery:
           allOf:
             - $ref: '#/components/schemas/SuggestionQuery'
@@ -23045,7 +23045,7 @@ components:
         Resource:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: The name of the Amazon SageMaker resource to search for.
+            - description: The name of the SageMaker resource to search for.
         SearchExpression:
           allOf:
             - $ref: '#/components/schemas/SearchExpression'
@@ -24333,7 +24333,7 @@ components:
         Parameters:
           allOf:
             - $ref: '#/components/schemas/TrialComponentParameters'
-            - description: Replaces all of the component's hyperparameters with the specified hyperparameters.
+            - description: Replaces all of the component's hyperparameters with the specified hyperparameters or add new hyperparameters. Existing hyperparameters are replaced if the trial component is updated with an identical hyperparameter key.
         ParametersToRemove:
           allOf:
             - $ref: '#/components/schemas/ListTrialComponentKey256'
@@ -24341,7 +24341,7 @@ components:
         InputArtifacts:
           allOf:
             - $ref: '#/components/schemas/TrialComponentArtifacts'
-            - description: Replaces all of the component's input artifacts with the specified artifacts.
+            - description: Replaces all of the component's input artifacts with the specified artifacts or adds new input artifacts. Existing input artifacts are replaced if the trial component is updated with an identical input artifact key.
         InputArtifactsToRemove:
           allOf:
             - $ref: '#/components/schemas/ListTrialComponentKey256'
@@ -24349,7 +24349,7 @@ components:
         OutputArtifacts:
           allOf:
             - $ref: '#/components/schemas/TrialComponentArtifacts'
-            - description: Replaces all of the component's output artifacts with the specified artifacts.
+            - description: Replaces all of the component's output artifacts with the specified artifacts or adds new output artifacts. Existing output artifacts are replaced if the trial component is updated with an identical output artifact key.
         OutputArtifactsToRemove:
           allOf:
             - $ref: '#/components/schemas/ListTrialComponentKey256'
@@ -33275,7 +33275,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/FilterValue'
             - description: 'A value used with <code>Name</code> and <code>Operator</code> to determine which resources satisfy the filter''s condition. For numerical properties, <code>Value</code> must be an integer or floating-point decimal. For timestamp properties, <code>Value</code> must be an ISO 8601 date-time string of the following format: <code>YYYY-mm-dd''T''HH:MM:SS</code>.'
-      description: '<p>A conditional statement for a search expression that includes a resource property, a Boolean operator, and a value. Resources that match the statement are returned in the results from the <a>Search</a> API.</p> <p>If you specify a <code>Value</code>, but not an <code>Operator</code>, Amazon SageMaker uses the equals operator.</p> <p>In search, there are several property types:</p> <dl> <dt>Metrics</dt> <dd> <p>To define a metric filter, enter a value using the form <code>"Metrics.&lt;name&gt;"</code>, where <code>&lt;name&gt;</code> is a metric name. For example, the following filter searches for training jobs with an <code>"accuracy"</code> metric greater than <code>"0.9"</code>:</p> <p> <code>{</code> </p> <p> <code>"Name": "Metrics.accuracy",</code> </p> <p> <code>"Operator": "GreaterThan",</code> </p> <p> <code>"Value": "0.9"</code> </p> <p> <code>}</code> </p> </dd> <dt>HyperParameters</dt> <dd> <p>To define a hyperparameter filter, enter a value with the form <code>"HyperParameters.&lt;name&gt;"</code>. Decimal hyperparameter values are treated as a decimal in a comparison if the specified <code>Value</code> is also a decimal value. If the specified <code>Value</code> is an integer, the decimal hyperparameter values are treated as integers. For example, the following filter is satisfied by training jobs with a <code>"learning_rate"</code> hyperparameter that is less than <code>"0.5"</code>:</p> <p> <code> {</code> </p> <p> <code> "Name": "HyperParameters.learning_rate",</code> </p> <p> <code> "Operator": "LessThan",</code> </p> <p> <code> "Value": "0.5"</code> </p> <p> <code> }</code> </p> </dd> <dt>Tags</dt> <dd> <p>To define a tag filter, enter a value with the form <code>Tags.&lt;key&gt;</code>.</p> </dd> </dl>'
+      description: '<p>A conditional statement for a search expression that includes a resource property, a Boolean operator, and a value. Resources that match the statement are returned in the results from the <a>Search</a> API.</p> <p>If you specify a <code>Value</code>, but not an <code>Operator</code>, SageMaker uses the equals operator.</p> <p>In search, there are several property types:</p> <dl> <dt>Metrics</dt> <dd> <p>To define a metric filter, enter a value using the form <code>"Metrics.&lt;name&gt;"</code>, where <code>&lt;name&gt;</code> is a metric name. For example, the following filter searches for training jobs with an <code>"accuracy"</code> metric greater than <code>"0.9"</code>:</p> <p> <code>{</code> </p> <p> <code>"Name": "Metrics.accuracy",</code> </p> <p> <code>"Operator": "GreaterThan",</code> </p> <p> <code>"Value": "0.9"</code> </p> <p> <code>}</code> </p> </dd> <dt>HyperParameters</dt> <dd> <p>To define a hyperparameter filter, enter a value with the form <code>"HyperParameters.&lt;name&gt;"</code>. Decimal hyperparameter values are treated as a decimal in a comparison if the specified <code>Value</code> is also a decimal value. If the specified <code>Value</code> is an integer, the decimal hyperparameter values are treated as integers. For example, the following filter is satisfied by training jobs with a <code>"learning_rate"</code> hyperparameter that is less than <code>"0.5"</code>:</p> <p> <code> {</code> </p> <p> <code> "Name": "HyperParameters.learning_rate",</code> </p> <p> <code> "Operator": "LessThan",</code> </p> <p> <code> "Value": "0.5"</code> </p> <p> <code> }</code> </p> </dd> <dt>Tags</dt> <dd> <p>To define a tag filter, enter a value with the form <code>Tags.&lt;key&gt;</code>.</p> </dd> </dl>'
     FilterList:
       type: array
       items:
@@ -34011,7 +34011,7 @@ components:
         MaxRuntimeInSeconds:
           allOf:
             - $ref: '#/components/schemas/HyperParameterTuningMaxRuntimeInSeconds'
-            - description: The maximum time in seconds that a training job launched by a hyperparameter tuning job can run.
+            - description: The maximum time in seconds that a hyperparameter tuning job can run.
       description: Specifies the maximum number of training jobs and parallel training jobs that a hyperparameter tuning job can launch.
     TrainingJobEarlyStoppingType:
       type: string
@@ -34551,6 +34551,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecommendationFailureReason'
             - description: The reason why a benchmark failed.
+        EndpointMetrics:
+          $ref: '#/components/schemas/InferenceMetrics'
       description: The details for a specific benchmark from an Inference Recommender job.
     InferenceRecommendationsJobStep:
       type: object
@@ -34575,7 +34577,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecommendationJobInferenceBenchmark'
             - description: The details for a specific benchmark.
-      description: 'A returned array object for the <code>Steps</code> response field in the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InferenceRecommendationsJobStep.html">ListInferenceRecommendationsJobSteps</a> API command.'
+      description: 'A returned array object for the <code>Steps</code> response field in the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListInferenceRecommendationsJobSteps.html">ListInferenceRecommendationsJobSteps</a> API command.'
     InferenceRecommendationsJobSteps:
       type: array
       items:
@@ -38346,7 +38348,7 @@ components:
         PropertyName:
           allOf:
             - $ref: '#/components/schemas/ResourcePropertyName'
-            - description: A suggested property name based on what you entered in the search textbox in the Amazon SageMaker console.
+            - description: A suggested property name based on what you entered in the search textbox in the SageMaker console.
       description: A property name returned from a <code>GetSearchSuggestions</code> call that specifies a value in the <code>PropertyNameQuery</code> field.
     ProvisionedProductStatusMessage:
       type: string

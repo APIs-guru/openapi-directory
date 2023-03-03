@@ -431,7 +431,7 @@ paths:
             maxLength: 64
     put:
       operationId: UpdatePipe
-      description: '<p>Update an existing pipe. When you call <code>UpdatePipe</code>, only the fields that are included in the request are changed, the rest are unchanged. The exception to this is if you modify any Amazon Web Services-service specific fields in the <code>SourceParameters</code>, <code>EnrichmentParameters</code>, or <code>TargetParameters</code> objects. The fields in these objects are updated atomically as one and override existing values. This is by design and means that if you don''t specify an optional field in one of these Parameters objects, that field will be set to its system-default value after the update.</p> <pre><code> &lt;p&gt;For more information about pipes, see &lt;a href=&quot;https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html&quot;&gt; Amazon EventBridge Pipes&lt;/a&gt; in the Amazon EventBridge User Guide.&lt;/p&gt; </code></pre>'
+      description: '<p>Update an existing pipe. When you call <code>UpdatePipe</code>, only the fields that are included in the request are changed, the rest are unchanged. The exception to this is if you modify any Amazon Web Services-service specific fields in the <code>SourceParameters</code>, <code>EnrichmentParameters</code>, or <code>TargetParameters</code> objects. The fields in these objects are updated atomically as one and override existing values. This is by design and means that if you don''t specify an optional field in one of these Parameters objects, that field will be set to its system-default value after the update.</p> <p>For more information about pipes, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html"> Amazon EventBridge Pipes</a> in the Amazon EventBridge User Guide.</p>'
       responses:
         '200':
           description: Success
@@ -1132,7 +1132,7 @@ components:
       properties:
         BatchSize:
           allOf:
-            - $ref: '#/components/schemas/LimitMax1000'
+            - $ref: '#/components/schemas/LimitMax10000'
             - description: The maximum number of records to include in each batch.
         DeadLetterConfig:
           allOf:
@@ -1791,7 +1791,7 @@ components:
       properties:
         BatchSize:
           allOf:
-            - $ref: '#/components/schemas/LimitMax1000'
+            - $ref: '#/components/schemas/LimitMax10000'
             - description: The maximum number of records to include in each batch.
         DeadLetterConfig:
           allOf:
@@ -1927,7 +1927,7 @@ components:
       maxLength: 1600
     ArnOrJsonPath:
       type: string
-      pattern: '^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.*)|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)$'
+      pattern: '^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.*)|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)$'
       minLength: 1
       maxLength: 1600
     ArnOrUrl:
@@ -2553,7 +2553,7 @@ components:
       format: password
     EventBridgeEndpointId:
       type: string
-      pattern: '^[A-Za-z0-9\-]+[\.][A-Za-z0-9\-]+|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)$'
+      pattern: '^[A-Za-z0-9\-]+[\.][A-Za-z0-9\-]+$'
       minLength: 1
       maxLength: 50
       format: password
@@ -2565,7 +2565,7 @@ components:
       maxItems: 10
     EventBridgeEventSource:
       type: string
-      pattern: '(?=[/\.\-_A-Za-z0-9]+)((?!aws\.).*)|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)'
+      pattern: '(?=[/\.\-_A-Za-z0-9]+)((?!aws\.).*)|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)'
       minLength: 1
       maxLength: 256
       format: password
@@ -2590,12 +2590,12 @@ components:
       maxItems: 5
     HeaderKey:
       type: string
-      pattern: '^[!#$%&''*+-.^_`|~0-9a-zA-Z]+|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)$'
+      pattern: '^[!#$%&''*+-.^_`|~0-9a-zA-Z]+|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)$'
       minLength: 0
       maxLength: 512
     HeaderValue:
       type: string
-      pattern: '^[ \t]*[\x20-\x7E]+([ \t]+[\x20-\x7E]+)*[ \t]*|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)$'
+      pattern: '^[ \t]*[\x20-\x7E]+([ \t]+[\x20-\x7E]+)*[ \t]*|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)$'
       minLength: 0
       maxLength: 512
       format: password
@@ -2605,7 +2605,7 @@ components:
         $ref: '#/components/schemas/HeaderValue'
     JsonPath:
       type: string
-      pattern: '^\$(\.[\w_-]+(\[(\d+|\*)\])*)*$'
+      pattern: '^\$(\.[\w/_-]+(\[(\d+|\*)\])*)*$'
       minLength: 1
       maxLength: 256
     KafkaBootstrapServers:
@@ -2645,10 +2645,6 @@ components:
       type: integer
       minimum: 1
       maximum: 100
-    LimitMax1000:
-      type: integer
-      minimum: 1
-      maximum: 1000
     LimitMax10000:
       type: integer
       minimum: 1
@@ -2683,7 +2679,7 @@ components:
       maxLength: 256
     SecretManagerArn:
       type: string
-      pattern: '^(^arn:aws([a-z]|\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)$'
+      pattern: '^(^arn:aws([a-z]|\-)*:secretsmanager:[a-z0-9-.]+:.*)$'
       description: // Optional SecretManager ARN which stores the database credentials
       minLength: 1
       maxLength: 1600
@@ -2754,7 +2750,7 @@ components:
         - AUTOMATIC_BISECT
     PathParameter:
       type: string
-      pattern: '^(?!\s*$).+|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)$'
+      pattern: '^(?!\s*$).+|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)$'
       format: password
     PathParameterList:
       type: array
@@ -2885,7 +2881,7 @@ components:
         - FIRE_AND_FORGET
     SecretManagerArnOrJsonPath:
       type: string
-      pattern: '^(^arn:aws([a-z]|\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)$'
+      pattern: '^(^arn:aws([a-z]|\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)$'
       description: '// For targets, can either specify an ARN or a jsonpath pointing to the ARN.'
       minLength: 1
       maxLength: 1600
@@ -2954,18 +2950,18 @@ components:
         - binpack
     QueryStringKey:
       type: string
-      pattern: '^[^\x00-\x1F\x7F]+|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)$'
+      pattern: '^[^\x00-\x1F\x7F]+|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)$'
       minLength: 0
       maxLength: 512
     QueryStringValue:
       type: string
-      pattern: '^[^\x00-\x09\x0B\x0C\x0E-\x1F\x7F]+|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)$'
+      pattern: '^[^\x00-\x09\x0B\x0C\x0E-\x1F\x7F]+|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)$'
       minLength: 0
       maxLength: 512
       format: password
     SageMakerPipelineParameterName:
       type: string
-      pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)$'
+      pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)$'
       minLength: 1
       maxLength: 256
       format: password
@@ -2991,7 +2987,7 @@ components:
       description: Name/Value pair of a parameter to start execution of a SageMaker Model Building Pipeline.
     SecurityGroup:
       type: string
-      pattern: '^sg-[0-9a-zA-Z]*|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)$'
+      pattern: '^sg-[0-9a-zA-Z]*|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)$'
       minLength: 1
       maxLength: 1024
       format: password
@@ -3031,7 +3027,7 @@ components:
       properties: {}
     Subnet:
       type: string
-      pattern: '^subnet-[0-9a-z]*|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)$'
+      pattern: '^subnet-[0-9a-z]*|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)$'
       minLength: 1
       maxLength: 1024
       format: password

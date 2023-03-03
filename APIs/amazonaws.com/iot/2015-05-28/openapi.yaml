@@ -2264,7 +2264,7 @@ paths:
   /certificates:
     post:
       operationId: CreateCertificateFromCsr
-      description: '<p>Creates an X.509 certificate using the specified certificate signing request.</p> <p> <b>Note:</b> The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256, NIST P-384, or NIST P-512 curves. For supported certificates, consult <a href="https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms"> Certificate signing algorithms supported by IoT</a>.</p> <p> <b>Note:</b> Reusing the same certificate signing request (CSR) results in a distinct certificate.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CreateCertificateFromCsr</a> action.</p> <p>You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs.</p> <p>Assuming a set of CSRs are located inside of the directory my-csr-directory:</p> <p>On Linux and OS X, the command is:</p> <p>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR.</p> <p>The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process:</p> <p>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p>On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:</p> <p>&gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}</p> <p>On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:</p> <p>&gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"</p>'
+      description: '<p>Creates an X.509 certificate using the specified certificate signing request. </p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CreateCertificateFromCsr</a> action. </p> <note> <p>The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-25 or NIST P-384 curves. For supported certificates, consult <a href="https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms"> Certificate signing algorithms supported by IoT</a>. </p> </note> <note> <p>Reusing the same certificate signing request (CSR) results in a distinct certificate.</p> </note> <p>You can create multiple certificates in a batch by creating a directory, copying multiple <code>.csr</code> files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. In the following commands, we assume that a set of CSRs are located inside of the directory my-csr-directory:</p> <p>On Linux and OS X, the command is: </p> <p> <code>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</code> </p> <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the <code>aws iot create-certificate-from-csr</code> Amazon Web Services CLI command to create a certificate for the corresponding CSR. </p> <p>You can also run the <code>aws iot create-certificate-from-csr</code> part of the command in parallel to speed up the certificate creation process:</p> <p> <code>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} </code> </p> <p>On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:</p> <p> <code>&gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} </code> </p> <p>On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:</p> <p> <code>&gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path" </code> </p>'
       responses:
         '200':
           description: Success
@@ -3584,7 +3584,7 @@ paths:
                   minLength: 1
                   maxLength: 128
                 unit:
-                  description: 'Used to support unit transformation such as milliseconds to seconds. The unit must be supported by <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html">CW metric</a>. Default to null.'
+                  description: 'Used to support unit transformation such as milliseconds to seconds. The unit must be supported by <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html">CW metric</a>. Default to null.'
                   type: string
                   enum:
                     - Seconds
@@ -4066,15 +4066,19 @@ paths:
                     startTime:
                       allOf:
                         - $ref: '#/components/schemas/StringDateTime'
-                        - description: The time a job will begin rollout of the job document to all devices in the target group for a job. The <code>startTime</code> can be scheduled up to a year in advance and must be scheduled a minimum of thirty minutes from the current time.
+                        - description: 'The time a job will begin rollout of the job document to all devices in the target group for a job. The <code>startTime</code> can be scheduled up to a year in advance and must be scheduled a minimum of thirty minutes from the current time. The date and time format for the <code>startTime</code> is YYYY-MM-DD for the date and HH:MM for the time.'
                     endTime:
                       allOf:
                         - $ref: '#/components/schemas/StringDateTime'
-                        - description: 'The time a job will stop rollout of the job document to all devices in the target group for a job. The <code>endTime</code> must take place no later than two years from the current time and be scheduled a minimum of thirty minutes from the current time. The minimum duration between <code>startTime</code> and <code>endTime</code> is thirty minutes. The maximum duration between <code>startTime</code> and <code>endTime</code> is two years. '
+                        - description: 'The time a job will stop rollout of the job document to all devices in the target group for a job. The <code>endTime</code> must take place no later than two years from the current time and be scheduled a minimum of thirty minutes from the current time. The minimum duration between <code>startTime</code> and <code>endTime</code> is thirty minutes. The maximum duration between <code>startTime</code> and <code>endTime</code> is two years. The date and time format for the <code>endTime</code> is YYYY-MM-DD for the date and HH:MM for the time.'
                     endBehavior:
                       allOf:
                         - $ref: '#/components/schemas/JobEndBehavior'
                         - description: 'Specifies the end behavior for all job executions after a job reaches the selected <code>endTime</code>. If <code>endTime</code> is not selected when creating the job, then <code>endBehavior</code> does not apply.'
+                    maintenanceWindows:
+                      allOf:
+                        - $ref: '#/components/schemas/MaintenanceWindows'
+                        - description: An optional configuration within the <code>SchedulingConfig</code> to setup a recurring maintenance window with a predetermined start time and duration for the rollout of a job document to all devices in a target group for a job.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4435,6 +4439,11 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/RetryCriteriaList'
                         - description: The list of criteria that determines how many retries are allowed for each failure type for a job.
+                maintenanceWindows:
+                  description: Allows you to configure an optional maintenance window for the rollout of a job document to all devices in the target group for a job.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MaintenanceWindow'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -18036,6 +18045,10 @@ components:
         - STOP_ROLLOUT
         - CANCEL
         - FORCE_CANCEL
+    MaintenanceWindows:
+      type: array
+      items:
+        $ref: '#/components/schemas/MaintenanceWindow'
     CreateJobTemplateResponse:
       type: object
       properties:
@@ -18047,6 +18060,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobTemplateId'
             - description: The unique identifier of the job template.
+    MaintenanceWindow:
+      type: object
+      required:
+        - startTime
+        - durationInMinutes
+      properties:
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/CronExpression'
+            - description: Displays the start time of the next maintenance window.
+        durationInMinutes:
+          allOf:
+            - $ref: '#/components/schemas/DurationInMinutes'
+            - description: Displays the duration of the next maintenance window.
+      description: An optional configuration within the <code>SchedulingConfig</code> to setup a recurring maintenance window with a predetermined start time and duration for the rollout of a job document to all devices in a target group for a job.
     ConflictException: {}
     CreateKeysAndCertificateResponse:
       type: object
@@ -19080,7 +19108,7 @@ components:
         unit:
           allOf:
             - $ref: '#/components/schemas/FleetMetricUnit'
-            - description: 'Used to support unit transformation such as milliseconds to seconds. The unit must be supported by <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html">CW metric</a>.'
+            - description: 'Used to support unit transformation such as milliseconds to seconds. The unit must be supported by <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html">CW metric</a>.'
         version:
           allOf:
             - $ref: '#/components/schemas/Version'
@@ -19161,6 +19189,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobExecutionsRetryConfig'
             - description: The configuration that determines how many retries are allowed for each failure type for a job.
+        maintenanceWindows:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceWindows'
+            - description: Allows you to configure an optional maintenance window for the rollout of a job document to all devices in the target group for a job.
     DescribeManagedJobTemplateResponse:
       type: object
       properties:
@@ -23716,7 +23748,7 @@ components:
         unit:
           allOf:
             - $ref: '#/components/schemas/FleetMetricUnit'
-            - description: 'Used to support unit transformation such as milliseconds to seconds. The unit must be supported by <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html">CW metric</a>. Default to null.'
+            - description: 'Used to support unit transformation such as milliseconds to seconds. The unit must be supported by <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html">CW metric</a>. Default to null.'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -23792,15 +23824,19 @@ components:
         startTime:
           allOf:
             - $ref: '#/components/schemas/StringDateTime'
-            - description: The time a job will begin rollout of the job document to all devices in the target group for a job. The <code>startTime</code> can be scheduled up to a year in advance and must be scheduled a minimum of thirty minutes from the current time.
+            - description: 'The time a job will begin rollout of the job document to all devices in the target group for a job. The <code>startTime</code> can be scheduled up to a year in advance and must be scheduled a minimum of thirty minutes from the current time. The date and time format for the <code>startTime</code> is YYYY-MM-DD for the date and HH:MM for the time.'
         endTime:
           allOf:
             - $ref: '#/components/schemas/StringDateTime'
-            - description: 'The time a job will stop rollout of the job document to all devices in the target group for a job. The <code>endTime</code> must take place no later than two years from the current time and be scheduled a minimum of thirty minutes from the current time. The minimum duration between <code>startTime</code> and <code>endTime</code> is thirty minutes. The maximum duration between <code>startTime</code> and <code>endTime</code> is two years. '
+            - description: 'The time a job will stop rollout of the job document to all devices in the target group for a job. The <code>endTime</code> must take place no later than two years from the current time and be scheduled a minimum of thirty minutes from the current time. The minimum duration between <code>startTime</code> and <code>endTime</code> is thirty minutes. The maximum duration between <code>startTime</code> and <code>endTime</code> is two years. The date and time format for the <code>endTime</code> is YYYY-MM-DD for the date and HH:MM for the time.'
         endBehavior:
           allOf:
             - $ref: '#/components/schemas/JobEndBehavior'
             - description: 'Specifies the end behavior for all job executions after a job reaches the selected <code>endTime</code>. If <code>endTime</code> is not selected when creating the job, then <code>endBehavior</code> does not apply.'
+        maintenanceWindows:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceWindows'
+            - description: An optional configuration within the <code>SchedulingConfig</code> to setup a recurring maintenance window with a predetermined start time and duration for the rollout of a job document to all devices in a target group for a job.
       description: 'Specifies the date and time that a job will begin the rollout of the job document to all devices in the target group. Additionally, you can specify the end behavior for each job execution when it reaches the scheduled end time.'
     CreateJobRequest:
       type: object
@@ -23911,6 +23947,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobExecutionsRetryConfig'
             - description: Allows you to create the criteria to retry a job.
+        maintenanceWindows:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceWindows'
+            - description: Allows you to configure an optional maintenance window for the rollout of a job document to all devices in the target group for a job.
     CreateKeysAndCertificateRequest:
       type: object
       title: CreateKeysAndCertificateRequest
@@ -24520,6 +24560,10 @@ components:
     CreatedAtDate:
       type: string
       format: date-time
+    CronExpression:
+      type: string
+      minLength: 1
+      maxLength: 256
     HashAlgorithm:
       type: string
     SignatureAlgorithm:
@@ -25085,6 +25129,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SchedulingConfig'
             - description: The configuration that allows you to schedule a job for a future date and time in addition to specifying the end behavior for each job execution.
+        scheduledJobRollouts:
+          allOf:
+            - $ref: '#/components/schemas/ScheduledJobRolloutList'
+            - description: Displays the next seven maintenance window occurrences and their start times.
       description: The <code>Job</code> object contains details about a job.
     DescribeJobTemplateRequest:
       type: object
@@ -25543,6 +25591,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DomainConfigurationSummary'
+    DurationInMinutes:
+      type: integer
+      minimum: 30
+      maximum: 1430
     TableName:
       type: string
     DynamoOperation:
@@ -26316,6 +26368,10 @@ components:
             - $ref: '#/components/schemas/TimedOutThings'
             - description: The number of things whose job execution status is <code>TIMED_OUT</code>.
       description: The job process details.
+    ScheduledJobRolloutList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScheduledJobRollout'
     JobExecutionStatus:
       type: string
       enum:
@@ -27672,6 +27728,14 @@ components:
             - $ref: '#/components/schemas/DayOfWeek'
             - description: The day of the week on which the scheduled audit is run (if the <code>frequency</code> is "WEEKLY" or "BIWEEKLY").
       description: Information about the scheduled audit.
+    ScheduledJobRollout:
+      type: object
+      properties:
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/StringDateTime'
+            - description: Displays the start times of the next seven maintenance window occurrences.
+      description: Displays the next seven maintenance window occurrences and their start times.
     SearchIndexRequest:
       type: object
       required:

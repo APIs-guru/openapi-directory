@@ -1184,6 +1184,7 @@ paths:
                   enum:
                     - ApplicationDiscoveryService
                     - MPA
+                    - Import
                 groupId:
                   description: 'Groups the resources in the import file together with a unique name. This ID can be as filter in <code>ListApplicationComponents</code> and <code>ListServers</code>. '
                   type: array
@@ -2620,6 +2621,7 @@ components:
       enum:
         - ApplicationDiscoveryService
         - MPA
+        - Import
     Heterogeneous:
       type: object
       required:
@@ -2837,6 +2839,7 @@ components:
       type: string
       enum:
         - ExternalId
+        - ExternalSourceType
     GroupIds:
       type: array
       items:
