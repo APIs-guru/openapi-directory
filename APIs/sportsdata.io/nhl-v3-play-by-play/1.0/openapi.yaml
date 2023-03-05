@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/v3/nhl/pbp
+  - url: https://azure-api.sportsdata.io/v3/nhl/pbp
 info:
   contact:
     x-twitter: nfldata
@@ -39,7 +37,7 @@ paths:
               - XML
               - JSON
             type: string
-        - description: The GameID of an MLB game.  GameIDs can be found in the Games API.  Valid entries are <code>14620</code> or <code>16905</code>
+        - description: The GameID of an NHL game.  GameIDs can be found in the Games API.  Valid entries are <code>14620</code> or <code>16905</code>
           in: path
           name: gameid
           required: true
@@ -121,6 +119,9 @@ components:
         DateTime:
           nullable: true
           type: string
+        DateTimeUTC:
+          nullable: true
+          type: string
         Day:
           nullable: true
           type: string
@@ -191,6 +192,8 @@ components:
         SeasonType:
           nullable: false
           type: integer
+        SeriesInfo:
+          $ref: "#/components/schemas/Series"
         StadiumID:
           nullable: true
           type: integer
@@ -401,6 +404,20 @@ components:
         TimeRemainingSeconds:
           nullable: true
           type: integer
+    Series:
+      properties:
+        AwayTeamWins:
+          nullable: false
+          type: integer
+        GameNumber:
+          nullable: false
+          type: integer
+        HomeTeamWins:
+          nullable: false
+          type: integer
+        MaxLength:
+          nullable: false
+          type: integer
   securitySchemes:
     apiKeyHeader:
       in: header
@@ -408,5 +425,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

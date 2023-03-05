@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/v3/nfl/pbp
+  - url: https://azure-api.sportsdata.io/v3/nfl/pbp
 info:
   contact:
     x-twitter: nfldata
@@ -498,6 +496,9 @@ components:
           type: string
     Score:
       properties:
+        Attendance:
+          nullable: false
+          type: integer
         AwayRotationNumber:
           nullable: true
           type: integer
@@ -528,6 +529,9 @@ components:
         AwayTeamMoneyLine:
           nullable: true
           type: integer
+        AwayTimeouts:
+          nullable: true
+          type: integer
         Canceled:
           nullable: true
           type: boolean
@@ -541,6 +545,9 @@ components:
           nullable: true
           type: string
         DateTime:
+          nullable: true
+          type: string
+        DateTimeUTC:
           nullable: true
           type: string
         Day:
@@ -634,6 +641,9 @@ components:
           nullable: true
           type: integer
         HomeTeamMoneyLine:
+          nullable: true
+          type: integer
+        HomeTimeouts:
           nullable: true
           type: integer
         IsInProgress:
@@ -805,5 +815,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

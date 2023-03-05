@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/v3/nhl/scores
+  - url: https://azure-api.sportsdata.io/v3/nhl/scores
 info:
   contact:
     x-twitter: nfldata
@@ -454,6 +452,48 @@ paths:
                 type: array
           description: ""
       summary: Team Game Stats by Date
+  "/{format}/TeamGameStatsBySeason/{season}/{teamid}/{numberofgames}":
+    get:
+      operationId: TeamGameLogsBySeason
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: Season to get games from. Example <code>2019POST</code>, <code>2020</code>
+          in: path
+          name: season
+          required: true
+          schema:
+            type: string
+        - description: Unique ID of team.  Example <code> 8 </code>
+          in: path
+          name: teamid
+          required: true
+          schema:
+            type: string
+        - description: How many games to return. Example <code>all</code>, <code>10</code>, <code>25</code>
+          in: path
+          name: numberofgames
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TeamGame"
+                type: array
+          description: ""
+      summary: Team Game Logs By Season
   "/{format}/TeamSeasonStats/{season}":
     get:
       operationId: TeamSeasonStats
@@ -540,6 +580,9 @@ components:
         DateTime:
           nullable: true
           type: string
+        DateTimeUTC:
+          nullable: true
+          type: string
         Day:
           nullable: true
           type: string
@@ -610,6 +653,8 @@ components:
         SeasonType:
           nullable: false
           type: integer
+        SeriesInfo:
+          $ref: "#/components/schemas/Series"
         StadiumID:
           nullable: true
           type: integer
@@ -752,8 +797,6 @@ components:
         OpponentPosition:
           nullable: true
           type: string
-        OpponentStat:
-          $ref: "#/components/schemas/OpponentSeason"
         OvertimeLosses:
           nullable: true
           type: integer
@@ -1082,6 +1125,20 @@ components:
           nullable: true
           type: string
         StartYear:
+          nullable: false
+          type: integer
+    Series:
+      properties:
+        AwayTeamWins:
+          nullable: false
+          type: integer
+        GameNumber:
+          nullable: false
+          type: integer
+        HomeTeamWins:
+          nullable: false
+          type: integer
+        MaxLength:
           nullable: false
           type: integer
     Stadium:
@@ -1565,5 +1622,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

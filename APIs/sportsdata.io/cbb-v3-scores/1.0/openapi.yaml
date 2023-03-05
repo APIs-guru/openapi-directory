@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/v3/cbb/scores
+  - url: https://azure-api.sportsdata.io/v3/cbb/scores
 info:
   contact:
     x-twitter: nfldata
@@ -132,6 +130,31 @@ paths:
                 type: array
           description: ""
       summary: Games by Date
+  "/{format}/InjuredPlayers":
+    get:
+      description: This endpoint provides all currently injured college basketball players, along with injury details.
+      operationId: InjuredPlayers
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Player"
+                type: array
+          description: ""
+      summary: Injured Players
   "/{format}/LeagueHierarchy":
     get:
       operationId: LeagueHierarchy
@@ -298,6 +321,49 @@ paths:
                 type: array
           description: ""
       summary: Team Game Stats by Date
+  "/{format}/TeamGameStatsBySeason/{season}/{teamid}/{numberofgames}":
+    get:
+      description: Game by game log of total team statistics.
+      operationId: TeamGameLogsBySeason
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: Season to get games from. Example <code>2019POST</code>, <code>2020</code>
+          in: path
+          name: season
+          required: true
+          schema:
+            type: string
+        - description: Unique ID of team.  Example <code> 1 </code>
+          in: path
+          name: teamid
+          required: true
+          schema:
+            type: string
+        - description: How many games to return. Example <code>all</code>, <code>10</code>, <code>25</code>
+          in: path
+          name: numberofgames
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TeamGame"
+                type: array
+          description: ""
+      summary: Team Game Logs By Season
   "/{format}/TeamSchedule/{season}/{team}":
     get:
       operationId: TeamSchedule
@@ -434,6 +500,9 @@ components:
           type: array
     Game:
       properties:
+        Attendance:
+          nullable: true
+          type: integer
         AwayPointSpreadPayout:
           nullable: true
           type: integer
@@ -471,6 +540,9 @@ components:
           nullable: true
           type: string
         DateTime:
+          nullable: true
+          type: string
+        DateTimeUTC:
           nullable: true
           type: string
         Day:
@@ -625,6 +697,18 @@ components:
           nullable: true
           type: integer
         HighSchool:
+          nullable: true
+          type: string
+        InjuryBodyPart:
+          nullable: true
+          type: string
+        InjuryNotes:
+          nullable: true
+          type: string
+        InjuryStartDate:
+          nullable: true
+          type: string
+        InjuryStatus:
           nullable: true
           type: string
         Jersey:
@@ -1144,5 +1228,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

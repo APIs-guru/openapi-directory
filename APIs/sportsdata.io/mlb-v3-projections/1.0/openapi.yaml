@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/v3/mlb/projections
+  - url: https://azure-api.sportsdata.io/v3/mlb/projections
 info:
   contact:
     x-twitter: nfldata
@@ -25,6 +23,31 @@ security:
   - apiKeyQuery: []
 tags: []
 paths:
+  "/{format}/DepthCharts":
+    get:
+      description: Returns Depth Charts for all active MLB teams.
+      operationId: DepthCharts
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TeamDepthChart"
+                type: array
+          description: ""
+      summary: Depth Charts
   "/{format}/DfsSlatesByDate/{date}":
     get:
       operationId: DfsSlatesByDate
@@ -57,9 +80,34 @@ paths:
                 type: array
           description: ""
       summary: DFS Slates by Date
+  "/{format}/InjuredPlayers":
+    get:
+      description: This endpoint provides all currently injured MLB players, along with injury details.
+      operationId: InjuredPlayers
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Player"
+                type: array
+          description: ""
+      summary: Injured Players
   "/{format}/PlayerGameProjectionStatsByDate/{date}":
     get:
-      operationId: ProjectedPlayerGameStatsByDateWInjuriesLineupsDfsSalaries
+      operationId: ProjectedPlayerGameStatsByDateWInjuriesDfsSalaries
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -88,10 +136,10 @@ paths:
                   $ref: "#/components/schemas/PlayerGameProjection"
                 type: array
           description: ""
-      summary: Projected Player Game Stats by Date (w/ Injuries, Lineups, DFS Salaries)
+      summary: Projected Player Game Stats by Date (w/ Injuries, DFS Salaries)
   "/{format}/PlayerGameProjectionStatsByPlayer/{date}/{playerid}":
     get:
-      operationId: ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries
+      operationId: ProjectedPlayerGameStatsByPlayerWInjuriesDfsSalaries
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
@@ -128,7 +176,7 @@ paths:
                   $ref: "#/components/schemas/PlayerGameProjection"
                 type: array
           description: ""
-      summary: Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)
+      summary: Projected Player Game Stats by Player (w/ Injuries, DFS Salaries)
   "/{format}/PlayerSeasonProjectionStats/{season}":
     get:
       operationId: ProjectedPlayerSeasonStatsWithAdp
@@ -161,8 +209,66 @@ paths:
                 type: array
           description: ""
       summary: Projected Player Season Stats (with ADP)
+  "/{format}/StartingLineupsByDate/{date}":
+    get:
+      operationId: StartingLineupsByDate
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: |-
+            The date of the slates.
+            <br>Examples: <code>2017-JUL-31</code>, <code>2017-SEP-01</code>.
+          in: path
+          name: date
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/StartingLineups"
+                type: array
+          description: ""
+      summary: Starting Lineups by Date
 components:
   schemas:
+    DepthChart:
+      properties:
+        DepthChartID:
+          nullable: false
+          type: integer
+        DepthOrder:
+          nullable: true
+          type: integer
+        Name:
+          nullable: true
+          type: string
+        PlayerID:
+          nullable: true
+          type: integer
+        Position:
+          nullable: true
+          type: string
+        PositionCategory:
+          nullable: true
+          type: string
+        TeamID:
+          nullable: false
+          type: integer
+        Updated:
+          nullable: true
+          type: string
     DfsSlate:
       properties:
         DfsSlateGames:
@@ -338,6 +444,9 @@ components:
         DateTime:
           nullable: true
           type: string
+        DateTimeUTC:
+          nullable: true
+          type: string
         Day:
           nullable: true
           type: string
@@ -486,6 +595,8 @@ components:
         SeasonType:
           nullable: false
           type: integer
+        SeriesInfo:
+          $ref: "#/components/schemas/Series"
         StadiumID:
           nullable: true
           type: integer
@@ -523,6 +634,190 @@ components:
           type: integer
         InningNumber:
           nullable: false
+          type: integer
+    Lineup:
+      properties:
+        BattingOrder:
+          nullable: true
+          type: integer
+        Confirmed:
+          nullable: true
+          type: boolean
+        FirstName:
+          nullable: true
+          type: string
+        LastName:
+          nullable: true
+          type: string
+        PlayerID:
+          nullable: false
+          type: integer
+        Position:
+          nullable: true
+          type: string
+        Starting:
+          nullable: true
+          type: boolean
+        Team:
+          nullable: true
+          type: string
+        TeamID:
+          nullable: false
+          type: integer
+    Player:
+      properties:
+        BatHand:
+          nullable: true
+          type: string
+        BirthCity:
+          nullable: true
+          type: string
+        BirthCountry:
+          nullable: true
+          type: string
+        BirthDate:
+          nullable: true
+          type: string
+        BirthState:
+          nullable: true
+          type: string
+        College:
+          nullable: true
+          type: string
+        DraftKingsName:
+          nullable: true
+          type: string
+        DraftKingsPlayerID:
+          nullable: true
+          type: integer
+        Experience:
+          nullable: true
+          type: string
+        FanDuelName:
+          nullable: true
+          type: string
+        FanDuelPlayerID:
+          nullable: true
+          type: integer
+        FantasyAlarmPlayerID:
+          nullable: true
+          type: integer
+        FantasyDraftName:
+          nullable: true
+          type: string
+        FantasyDraftPlayerID:
+          nullable: true
+          type: integer
+        FirstName:
+          nullable: true
+          type: string
+        GlobalTeamID:
+          nullable: true
+          type: integer
+        Height:
+          nullable: true
+          type: integer
+        HighSchool:
+          nullable: true
+          type: string
+        InjuryBodyPart:
+          nullable: true
+          type: string
+        InjuryNotes:
+          nullable: true
+          type: string
+        InjuryStartDate:
+          nullable: true
+          type: string
+        InjuryStatus:
+          nullable: true
+          type: string
+        Jersey:
+          nullable: true
+          type: integer
+        LastName:
+          nullable: true
+          type: string
+        MLBAMID:
+          nullable: true
+          type: integer
+        PhotoUrl:
+          nullable: true
+          type: string
+        PlayerID:
+          nullable: false
+          type: integer
+        Position:
+          nullable: true
+          type: string
+        PositionCategory:
+          nullable: true
+          type: string
+        ProDebut:
+          nullable: true
+          type: string
+        RotoWirePlayerID:
+          nullable: true
+          type: integer
+        RotoworldPlayerID:
+          nullable: true
+          type: integer
+        Salary:
+          nullable: true
+          type: integer
+        SportRadarPlayerID:
+          nullable: true
+          type: string
+        SportsDataID:
+          nullable: true
+          type: string
+        SportsDirectPlayerID:
+          nullable: true
+          type: integer
+        StatsPlayerID:
+          nullable: true
+          type: integer
+        Status:
+          nullable: true
+          type: string
+        Team:
+          nullable: true
+          type: string
+        TeamID:
+          nullable: true
+          type: integer
+        ThrowHand:
+          nullable: true
+          type: string
+        UpcomingGameID:
+          nullable: true
+          type: integer
+        UsaTodayHeadshotNoBackgroundUpdated:
+          nullable: true
+          type: string
+        UsaTodayHeadshotNoBackgroundUrl:
+          nullable: true
+          type: string
+        UsaTodayHeadshotUpdated:
+          nullable: true
+          type: string
+        UsaTodayHeadshotUrl:
+          nullable: true
+          type: string
+        UsaTodayPlayerID:
+          nullable: true
+          type: integer
+        Weight:
+          nullable: true
+          type: integer
+        XmlTeamPlayerID:
+          nullable: true
+          type: integer
+        YahooName:
+          nullable: true
+          type: string
+        YahooPlayerID:
+          nullable: true
           type: integer
     PlayerGameProjection:
       properties:
@@ -589,6 +884,9 @@ components:
         FantasyPoints:
           nullable: true
           type: number
+        FantasyPointsBatting:
+          nullable: true
+          type: number
         FantasyPointsDraftKings:
           nullable: true
           type: number
@@ -596,6 +894,9 @@ components:
           nullable: true
           type: number
         FantasyPointsFantasyDraft:
+          nullable: true
+          type: number
+        FantasyPointsPitching:
           nullable: true
           type: number
         FantasyPointsYahoo:
@@ -981,6 +1282,9 @@ components:
         FantasyPoints:
           nullable: true
           type: number
+        FantasyPointsBatting:
+          nullable: true
+          type: number
         FantasyPointsDraftKings:
           nullable: true
           type: number
@@ -988,6 +1292,9 @@ components:
           nullable: true
           type: number
         FantasyPointsFantasyDraft:
+          nullable: true
+          type: number
+        FantasyPointsPitching:
           nullable: true
           type: number
         FantasyPointsYahoo:
@@ -1284,6 +1591,73 @@ components:
         Wins:
           nullable: true
           type: number
+    Series:
+      properties:
+        AwayTeamWins:
+          nullable: false
+          type: integer
+        GameNumber:
+          nullable: false
+          type: integer
+        HomeTeamWins:
+          nullable: false
+          type: integer
+        MaxLength:
+          nullable: false
+          type: integer
+    StartingLineups:
+      properties:
+        AwayBattingLineup:
+          items:
+            $ref: "#/components/schemas/Lineup"
+          type: array
+        AwayStartingPitcher:
+          $ref: "#/components/schemas/Lineup"
+        AwayTeam:
+          nullable: true
+          type: string
+        AwayTeamID:
+          nullable: true
+          type: integer
+        DateTime:
+          nullable: true
+          type: string
+        Day:
+          nullable: true
+          type: string
+        GameID:
+          nullable: false
+          type: integer
+        HomeBattingLineup:
+          items:
+            $ref: "#/components/schemas/Lineup"
+          type: array
+        HomeStartingPitcher:
+          $ref: "#/components/schemas/Lineup"
+        HomeTeam:
+          nullable: true
+          type: string
+        HomeTeamID:
+          nullable: true
+          type: integer
+        Season:
+          nullable: false
+          type: integer
+        SeasonType:
+          nullable: false
+          type: integer
+        Status:
+          nullable: true
+          type: string
+    TeamDepthChart:
+      properties:
+        DepthCharts:
+          items:
+            $ref: "#/components/schemas/DepthChart"
+          type: array
+        TeamID:
+          nullable: false
+          type: integer
   securitySchemes:
     apiKeyHeader:
       in: header
@@ -1291,5 +1665,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

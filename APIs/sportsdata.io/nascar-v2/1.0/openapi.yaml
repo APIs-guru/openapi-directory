@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/nascar/v2
+  - url: https://azure-api.sportsdata.io/nascar/v2
 info:
   contact:
     x-twitter: nfldata
@@ -265,6 +263,9 @@ components:
         Created:
           nullable: true
           type: string
+        CurrentPosition:
+          nullable: true
+          type: number
         DateTime:
           nullable: true
           type: string
@@ -351,6 +352,9 @@ components:
         Created:
           nullable: true
           type: string
+        CurrentPosition:
+          nullable: true
+          type: number
         DateTime:
           nullable: true
           type: string
@@ -431,6 +435,9 @@ components:
           type: number
     Race:
       properties:
+        ActualLaps:
+          nullable: true
+          type: integer
         Broadcast:
           nullable: true
           type: string
@@ -467,6 +474,9 @@ components:
         RescheduledDay:
           nullable: true
           type: string
+        ScheduledLaps:
+          nullable: true
+          type: integer
         Season:
           nullable: false
           type: integer
@@ -508,5 +518,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

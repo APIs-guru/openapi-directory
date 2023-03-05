@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/v3/mlb/stats
+  - url: https://azure-api.sportsdata.io/v3/mlb/stats
 info:
   contact:
     x-twitter: nfldata
@@ -977,6 +975,48 @@ paths:
                 type: array
           description: ""
       summary: Team Game Stats by Date
+  "/{format}/TeamGameStatsBySeason/{season}/{teamid}/{numberofgames}":
+    get:
+      description: Game by game log of total team statistics.
+      operationId: TeamGameLogsBySeason
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            enum:
+              - JSON
+              - XML
+            type: string
+        - description: Season to get games from. Example <code>2019POST</code>, <code>2020</code>
+          in: path
+          name: season
+          required: true
+          schema:
+            type: string
+        - description: Unique ID of team.  Example <code> 12 </code>
+          in: path
+          name: teamid
+          required: true
+          schema:
+            type: string
+        - description: How many games to return. Example <code>all</code>, <code>10</code>, <code>25</code>
+          in: path
+          name: numberofgames
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TeamGame"
+                type: array
+          description: ""
+      summary: Team Game Logs By Season
   "/{format}/TeamHittersVsPitcher/{gameid}/{team}":
     get:
       operationId: TeamHittingVsStartingPitcher
@@ -1264,6 +1304,9 @@ components:
         DateTime:
           nullable: true
           type: string
+        DateTimeUTC:
+          nullable: true
+          type: string
         Day:
           nullable: true
           type: string
@@ -1412,6 +1455,8 @@ components:
         SeasonType:
           nullable: false
           type: integer
+        SeriesInfo:
+          $ref: "#/components/schemas/Series"
         StadiumID:
           nullable: true
           type: integer
@@ -1726,6 +1771,9 @@ components:
         FantasyPoints:
           nullable: true
           type: number
+        FantasyPointsBatting:
+          nullable: true
+          type: number
         FantasyPointsDraftKings:
           nullable: true
           type: number
@@ -1733,6 +1781,9 @@ components:
           nullable: true
           type: number
         FantasyPointsFantasyDraft:
+          nullable: true
+          type: number
+        FantasyPointsPitching:
           nullable: true
           type: number
         FantasyPointsYahoo:
@@ -2118,6 +2169,9 @@ components:
         FantasyPoints:
           nullable: true
           type: number
+        FantasyPointsBatting:
+          nullable: true
+          type: number
         FantasyPointsDraftKings:
           nullable: true
           type: number
@@ -2125,6 +2179,9 @@ components:
           nullable: true
           type: number
         FantasyPointsFantasyDraft:
+          nullable: true
+          type: number
+        FantasyPointsPitching:
           nullable: true
           type: number
         FantasyPointsYahoo:
@@ -2438,6 +2495,20 @@ components:
         SeasonType:
           nullable: true
           type: string
+    Series:
+      properties:
+        AwayTeamWins:
+          nullable: false
+          type: integer
+        GameNumber:
+          nullable: false
+          type: integer
+        HomeTeamWins:
+          nullable: false
+          type: integer
+        MaxLength:
+          nullable: false
+          type: integer
     Stadium:
       properties:
         Active:
@@ -2692,6 +2763,9 @@ components:
         FantasyPoints:
           nullable: true
           type: number
+        FantasyPointsBatting:
+          nullable: true
+          type: number
         FantasyPointsDraftKings:
           nullable: true
           type: number
@@ -2699,6 +2773,9 @@ components:
           nullable: true
           type: number
         FantasyPointsFantasyDraft:
+          nullable: true
+          type: number
+        FantasyPointsPitching:
           nullable: true
           type: number
         FantasyPointsYahoo:
@@ -3039,6 +3116,9 @@ components:
         FantasyPoints:
           nullable: true
           type: number
+        FantasyPointsBatting:
+          nullable: true
+          type: number
         FantasyPointsDraftKings:
           nullable: true
           type: number
@@ -3046,6 +3126,9 @@ components:
           nullable: true
           type: number
         FantasyPointsFantasyDraft:
+          nullable: true
+          type: number
+        FantasyPointsPitching:
           nullable: true
           type: number
         FantasyPointsYahoo:
@@ -3337,5 +3420,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/v3/mlb/pbp
+  - url: https://azure-api.sportsdata.io/v3/mlb/pbp
 info:
   contact:
     x-twitter: nfldata
@@ -157,6 +155,9 @@ components:
         DateTime:
           nullable: true
           type: string
+        DateTimeUTC:
+          nullable: true
+          type: string
         Day:
           nullable: true
           type: string
@@ -305,6 +306,8 @@ components:
         SeasonType:
           nullable: false
           type: integer
+        SeriesInfo:
+          $ref: "#/components/schemas/Series"
         StadiumID:
           nullable: true
           type: integer
@@ -506,6 +509,20 @@ components:
           items:
             $ref: "#/components/schemas/Play"
           type: array
+    Series:
+      properties:
+        AwayTeamWins:
+          nullable: false
+          type: integer
+        GameNumber:
+          nullable: false
+          type: integer
+        HomeTeamWins:
+          nullable: false
+          type: integer
+        MaxLength:
+          nullable: false
+          type: integer
   securitySchemes:
     apiKeyHeader:
       in: header
@@ -513,5 +530,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

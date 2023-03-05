@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/v3/nfl/scores
+  - url: https://azure-api.sportsdata.io/v3/nfl/scores
 info:
   contact:
     x-twitter: nfldata
@@ -113,7 +111,7 @@ paths:
       summary: Bye Weeks
   "/{format}/CurrentSeason":
     get:
-      description: Year of the current NFL season. This value changes on July 1st. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
+      description: Year of the current NFL season. This value changes at the start of the new NFL league year. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
       operationId: SeasonCurrent
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -159,6 +157,30 @@ paths:
                 type: integer
           description: ""
       summary: Week Current
+  "/{format}/DepthCharts":
+    get:
+      description: Depth charts for all NFL teams split by offensive, defensive, and special teams position groupings.
+      operationId: DepthCharts
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            enum:
+              - XML
+              - JSON
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TeamDepthChart"
+                type: array
+          description: ""
+      summary: Depth Charts
   "/{format}/FreeAgents":
     get:
       operationId: PlayerDetailsByFreeAgents
@@ -291,7 +313,7 @@ paths:
       summary: Season Last Completed
   "/{format}/LastCompletedWeek":
     get:
-      description: Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
+      description: Number of the last completed week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
       operationId: WeekLastCompleted
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -881,6 +903,49 @@ paths:
                 type: array
           description: ""
       summary: Team Game Stats
+  "/{format}/TeamGameStatsBySeason/{season}/{teamid}/{numberofgames}":
+    get:
+      description: Game by game log of total team statistics.
+      operationId: TeamGameLogsBySeason
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: "Season to get games from. Example <code>2019POST</code>, <code>2020</code>        "
+          in: path
+          name: season
+          required: true
+          schema:
+            type: string
+        - description: Unique ID of team.  Example <code> 8 </code>
+          in: path
+          name: teamid
+          required: true
+          schema:
+            type: string
+        - description: How many games to return. Example <code>all</code>, <code>10</code>, <code>25</code>
+          in: path
+          name: numberofgames
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TeamGame"
+                type: array
+          description: ""
+      summary: Team Game Logs By Season
   "/{format}/TeamSeasonStats/{season}":
     get:
       operationId: TeamSeasonStats
@@ -1043,7 +1108,7 @@ paths:
       summary: Season Upcoming
   "/{format}/UpcomingWeek":
     get:
-      description: Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
+      description: Number of the upcoming week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
       operationId: WeekUpcoming
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1078,6 +1143,32 @@ components:
         Week:
           nullable: false
           type: integer
+    DepthChart:
+      properties:
+        DepthChartID:
+          nullable: false
+          type: integer
+        DepthOrder:
+          nullable: true
+          type: integer
+        Name:
+          nullable: true
+          type: string
+        PlayerID:
+          nullable: true
+          type: integer
+        Position:
+          nullable: true
+          type: string
+        PositionCategory:
+          nullable: true
+          type: string
+        TeamID:
+          nullable: false
+          type: integer
+        Updated:
+          nullable: true
+          type: string
     Game:
       properties:
         AwayAssistedTackles:
@@ -2413,6 +2504,9 @@ components:
         Number:
           nullable: false
           type: integer
+        OffensiveFumbleRecoveryTouchdowns:
+          nullable: true
+          type: integer
         OffensiveSnapsPlayed:
           nullable: true
           type: integer
@@ -2758,6 +2852,9 @@ components:
           type: integer
     Score:
       properties:
+        Attendance:
+          nullable: false
+          type: integer
         AwayRotationNumber:
           nullable: true
           type: integer
@@ -2788,6 +2885,9 @@ components:
         AwayTeamMoneyLine:
           nullable: true
           type: integer
+        AwayTimeouts:
+          nullable: true
+          type: integer
         Canceled:
           nullable: true
           type: boolean
@@ -2801,6 +2901,9 @@ components:
           nullable: true
           type: string
         DateTime:
+          nullable: true
+          type: string
+        DateTimeUTC:
           nullable: true
           type: string
         Day:
@@ -2894,6 +2997,9 @@ components:
           nullable: true
           type: integer
         HomeTeamMoneyLine:
+          nullable: true
+          type: integer
+        HomeTimeouts:
           nullable: true
           type: integer
         IsInProgress:
@@ -3249,6 +3355,23 @@ components:
           type: string
         YahooPlayerID:
           nullable: true
+          type: integer
+    TeamDepthChart:
+      properties:
+        Defense:
+          items:
+            $ref: "#/components/schemas/DepthChart"
+          type: array
+        Offense:
+          items:
+            $ref: "#/components/schemas/DepthChart"
+          type: array
+        SpecialTeams:
+          items:
+            $ref: "#/components/schemas/DepthChart"
+          type: array
+        TeamID:
+          nullable: false
           type: integer
     TeamGame:
       properties:
@@ -4802,5 +4925,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

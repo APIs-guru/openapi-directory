@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/v3/soccer/stats
+  - url: https://azure-api.sportsdata.io/v3/soccer/stats
 info:
   contact:
     x-twitter: nfldata
@@ -1653,6 +1651,9 @@ components:
         EndDate:
           nullable: true
           type: string
+        Jersey:
+          nullable: true
+          type: integer
         MembershipId:
           nullable: false
           type: integer
@@ -2004,6 +2005,9 @@ components:
         SuspensionReason:
           nullable: true
           type: string
+        Tackles:
+          nullable: true
+          type: number
         TacklesWon:
           nullable: true
           type: number
@@ -2177,6 +2181,9 @@ components:
         StatId:
           nullable: false
           type: integer
+        Tackles:
+          nullable: true
+          type: number
         TacklesWon:
           nullable: true
           type: number
@@ -2252,9 +2259,17 @@ components:
         EndDate:
           nullable: true
           type: string
+        Games:
+          items:
+            $ref: "#/components/schemas/Game"
+          type: array
         Name:
           nullable: true
           type: string
+        PlayerSeasons:
+          items:
+            $ref: "#/components/schemas/PlayerSeason"
+          type: array
         RoundId:
           nullable: false
           type: integer
@@ -2267,9 +2282,17 @@ components:
         SeasonType:
           nullable: false
           type: integer
+        Standings:
+          items:
+            $ref: "#/components/schemas/Standing"
+          type: array
         StartDate:
           nullable: true
           type: string
+        TeamSeasons:
+          items:
+            $ref: "#/components/schemas/TeamSeason"
+          type: array
         Type:
           nullable: true
           type: string
@@ -2715,6 +2738,9 @@ components:
         StatId:
           nullable: false
           type: integer
+        Tackles:
+          nullable: true
+          type: number
         TacklesWon:
           nullable: true
           type: number
@@ -2870,6 +2896,9 @@ components:
         StatId:
           nullable: false
           type: integer
+        Tackles:
+          nullable: true
+          type: number
         TacklesWon:
           nullable: true
           type: number
@@ -2945,5 +2974,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

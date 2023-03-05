@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/v3/soccer/projections
+  - url: https://azure-api.sportsdata.io/v3/soccer/projections
 info:
   contact:
     x-twitter: nfldata
@@ -55,6 +53,37 @@ paths:
                 type: array
           description: ""
       summary: Dfs Slates By Date
+  "/{format}/InjuredPlayers/{competition}":
+    get:
+      description: This endpoint provides all currently injured soccer players by competition, along with injury details.
+      operationId: InjuredPlayersByCompetition
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: xml
+            enum:
+              - xml
+              - json
+            type: string
+        - description: "An indication of a soccer competition/league. This value can be the CompetitionId or the Competition Key. Possible values include: <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>, etc."
+          in: path
+          name: competition
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Player"
+                type: array
+          description: ""
+      summary: Injured Players By Competition
   "/{format}/PlayerGameProjectionStatsByCompetition/{competition}/{date}":
     get:
       operationId: ProjectedPlayerGameStatsByCompetitionWDfsSalaries
@@ -474,6 +503,95 @@ components:
         Winner:
           nullable: true
           type: string
+    Player:
+      properties:
+        BirthCity:
+          nullable: true
+          type: string
+        BirthCountry:
+          nullable: true
+          type: string
+        BirthDate:
+          nullable: true
+          type: string
+        CommonName:
+          nullable: true
+          type: string
+        DraftKingsPosition:
+          nullable: true
+          type: string
+        FirstName:
+          nullable: true
+          type: string
+        Foot:
+          nullable: true
+          type: string
+        Gender:
+          nullable: true
+          type: string
+        Height:
+          nullable: true
+          type: integer
+        InjuryBodyPart:
+          nullable: true
+          type: string
+        InjuryNotes:
+          nullable: true
+          type: string
+        InjuryStartDate:
+          nullable: true
+          type: string
+        InjuryStatus:
+          nullable: true
+          type: string
+        Jersey:
+          nullable: true
+          type: integer
+        LastName:
+          nullable: true
+          type: string
+        Nationality:
+          nullable: true
+          type: string
+        PhotoUrl:
+          nullable: true
+          type: string
+        PlayerId:
+          nullable: false
+          type: integer
+        Position:
+          nullable: true
+          type: string
+        PositionCategory:
+          nullable: true
+          type: string
+        RotoWirePlayerID:
+          nullable: true
+          type: integer
+        ShortName:
+          nullable: true
+          type: string
+        Updated:
+          nullable: true
+          type: string
+        UsaTodayHeadshotNoBackgroundUpdated:
+          nullable: true
+          type: string
+        UsaTodayHeadshotNoBackgroundUrl:
+          nullable: true
+          type: string
+        UsaTodayHeadshotUpdated:
+          nullable: true
+          type: string
+        UsaTodayHeadshotUrl:
+          nullable: true
+          type: string
+        UsaTodayPlayerID:
+          nullable: true
+          type: integer
+        Weight:
+          nullable: true
+          type: integer
     PlayerGameProjection:
       properties:
         Assists:
@@ -686,6 +804,9 @@ components:
         SuspensionReason:
           nullable: true
           type: string
+        Tackles:
+          nullable: true
+          type: number
         TacklesWon:
           nullable: true
           type: number
@@ -746,5 +867,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/golf/v2
+  - url: https://azure-api.sportsdata.io/golf/v2
 info:
   contact:
     x-twitter: nfldata
@@ -743,6 +741,9 @@ components:
           type: boolean
     PlayerRound:
       properties:
+        BackNineStart:
+          nullable: true
+          type: boolean
         Birdies:
           nullable: true
           type: integer
@@ -1258,5 +1259,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

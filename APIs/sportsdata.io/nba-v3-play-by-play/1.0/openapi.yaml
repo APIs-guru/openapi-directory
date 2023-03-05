@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/v3/nba/pbp
+  - url: https://azure-api.sportsdata.io/v3/nba/pbp
 info:
   contact:
     x-twitter: nfldata
@@ -97,6 +95,9 @@ components:
   schemas:
     Game:
       properties:
+        AlternateID:
+          nullable: true
+          type: integer
         Attendance:
           nullable: true
           type: integer
@@ -118,7 +119,13 @@ components:
         Channel:
           nullable: true
           type: string
+        CrewChiefID:
+          nullable: true
+          type: integer
         DateTime:
+          nullable: true
+          type: string
+        DateTimeUTC:
           nullable: true
           type: string
         Day:
@@ -185,12 +192,17 @@ components:
           items:
             $ref: "#/components/schemas/Quarter"
           type: array
+        RefereeID:
+          nullable: true
+          type: integer
         Season:
           nullable: false
           type: integer
         SeasonType:
           nullable: false
           type: integer
+        SeriesInfo:
+          $ref: "#/components/schemas/Series"
         StadiumID:
           nullable: true
           type: integer
@@ -201,6 +213,9 @@ components:
           nullable: true
           type: integer
         TimeRemainingSeconds:
+          nullable: true
+          type: integer
+        UmpireID:
           nullable: true
           type: integer
         UnderPayout:
@@ -351,6 +366,20 @@ components:
         QuarterID:
           nullable: false
           type: integer
+    Series:
+      properties:
+        AwayTeamWins:
+          nullable: false
+          type: integer
+        GameNumber:
+          nullable: false
+          type: integer
+        HomeTeamWins:
+          nullable: false
+          type: integer
+        MaxLength:
+          nullable: false
+          type: integer
   securitySchemes:
     apiKeyHeader:
       in: header
@@ -358,5 +387,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

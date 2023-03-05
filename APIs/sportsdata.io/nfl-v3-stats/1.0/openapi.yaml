@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/v3/nfl/stats
+  - url: https://azure-api.sportsdata.io/v3/nfl/stats
 info:
   contact:
     x-twitter: nfldata
@@ -432,7 +430,7 @@ paths:
       summary: Bye Weeks
   "/{format}/CurrentSeason":
     get:
-      description: Year of the current NFL season. This value changes on July 1st. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
+      description: Year of the current NFL season. This value changes at the start of the new NFL league year. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
       operationId: SeasonCurrent
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -2581,6 +2579,48 @@ paths:
                 type: array
           description: ""
       summary: Team Game Stats
+  "/{format}/TeamGameStatsBySeason/{season}/{teamid}/{numberofgames}":
+    get:
+      description: Game by game log of total team statistics.
+      operationId: TeamGameLogsBySeason
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            enum:
+              - JSON
+              - XML
+            type: string
+        - description: Season to get games from. Example <code>2019POST</code>, <code>2020</code>
+          in: path
+          name: season
+          required: true
+          schema:
+            type: string
+        - description: Unique ID of team.  Example <code> 8 </code>
+          in: path
+          name: teamid
+          required: true
+          schema:
+            type: string
+        - description: How many games to return. Example <code>all</code>, <code>10</code>, <code>25</code>
+          in: path
+          name: numberofgames
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TeamGame"
+                type: array
+          description: ""
+      summary: Team Game Logs By Season
   "/{format}/TeamSeasonStats/{season}":
     get:
       operationId: TeamSeasonStats
@@ -5452,6 +5492,9 @@ components:
         ShortName:
           nullable: true
           type: string
+        SnapCountsConfirmed:
+          nullable: true
+          type: boolean
         SoloTackles:
           nullable: false
           type: number
@@ -5956,6 +5999,9 @@ components:
         ShortName:
           nullable: true
           type: string
+        SnapCountsConfirmed:
+          nullable: true
+          type: boolean
         SoloTackles:
           nullable: false
           type: number
@@ -6658,6 +6704,9 @@ components:
         Number:
           nullable: false
           type: integer
+        OffensiveFumbleRecoveryTouchdowns:
+          nullable: true
+          type: integer
         OffensiveSnapsPlayed:
           nullable: true
           type: integer
@@ -7080,6 +7129,9 @@ components:
           type: string
         Number:
           nullable: false
+          type: integer
+        OffensiveFumbleRecoveryTouchdowns:
+          nullable: true
           type: integer
         OffensiveSnapsPlayed:
           nullable: true
@@ -7504,6 +7556,9 @@ components:
         Number:
           nullable: false
           type: integer
+        OffensiveFumbleRecoveryTouchdowns:
+          nullable: true
+          type: integer
         OffensiveSnapsPlayed:
           nullable: true
           type: integer
@@ -7858,6 +7913,9 @@ components:
           type: integer
     Score:
       properties:
+        Attendance:
+          nullable: false
+          type: integer
         AwayRotationNumber:
           nullable: true
           type: integer
@@ -7888,6 +7946,9 @@ components:
         AwayTeamMoneyLine:
           nullable: true
           type: integer
+        AwayTimeouts:
+          nullable: true
+          type: integer
         Canceled:
           nullable: true
           type: boolean
@@ -7901,6 +7962,9 @@ components:
           nullable: true
           type: string
         DateTime:
+          nullable: true
+          type: string
+        DateTimeUTC:
           nullable: true
           type: string
         Day:
@@ -7994,6 +8058,9 @@ components:
           nullable: true
           type: integer
         HomeTeamMoneyLine:
+          nullable: true
+          type: integer
+        HomeTimeouts:
           nullable: true
           type: integer
         IsInProgress:
@@ -9952,5 +10019,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

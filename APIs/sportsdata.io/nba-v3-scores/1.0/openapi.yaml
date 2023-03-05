@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/v3/nba/scores
+  - url: https://azure-api.sportsdata.io/v3/nba/scores
 info:
   contact:
     x-twitter: nfldata
@@ -94,6 +92,31 @@ paths:
                 $ref: "#/components/schemas/Season"
           description: ""
       summary: Current Season
+  "/{format}/DepthCharts":
+    get:
+      description: Returns the full list of NBA Referees.
+      operationId: DepthCharts
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TeamDepthChart"
+                type: array
+          description: ""
+      summary: Depth Charts
   "/{format}/FreeAgents":
     get:
       operationId: PlayerDetailsByFreeAgent
@@ -320,6 +343,62 @@ paths:
                 type: array
           description: ""
       summary: Player Details by Active
+  "/{format}/Players/{team}":
+    get:
+      description: This endpoint provides active player details by team.
+      operationId: PlayersByTeam
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: "The abbreviation of the requested team.<br>Examples: <code>PHI</code>, <code>BKN</code>."
+          in: path
+          name: team
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Player"
+                type: array
+          description: ""
+      summary: Players by Team
+  "/{format}/Referees":
+    get:
+      description: Returns the full list of NBA Referees.
+      operationId: Referees
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Referee"
+                type: array
+          description: ""
+      summary: Referees
   "/{format}/Stadiums":
     get:
       operationId: Stadiums
@@ -408,6 +487,49 @@ paths:
                 type: array
           description: ""
       summary: Team Game Stats by Date
+  "/{format}/TeamGameStatsBySeason/{season}/{teamid}/{numberofgames}":
+    get:
+      description: Game by game log of total team statistics.
+      operationId: TeamGameLogsBySeason
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: Season to get games from. Example <code>2019POST</code>, <code>2020</code>
+          in: path
+          name: season
+          required: true
+          schema:
+            type: string
+        - description: Unique ID of team.  Example <code> 8 </code>
+          in: path
+          name: teamid
+          required: true
+          schema:
+            type: string
+        - description: How many games to return. Example <code>all</code>, <code>10</code>, <code>25</code>
+          in: path
+          name: numberofgames
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TeamGame"
+                type: array
+          description: ""
+      summary: Team Game Logs By Season
   "/{format}/TeamSeasonStats/{season}":
     get:
       operationId: TeamSeasonStats
@@ -466,8 +588,37 @@ paths:
       summary: Teams (Active)
 components:
   schemas:
+    DepthChart:
+      properties:
+        DepthChartID:
+          nullable: false
+          type: integer
+        DepthOrder:
+          nullable: true
+          type: integer
+        Name:
+          nullable: true
+          type: string
+        PlayerID:
+          nullable: true
+          type: integer
+        Position:
+          nullable: true
+          type: string
+        PositionCategory:
+          nullable: true
+          type: string
+        TeamID:
+          nullable: false
+          type: integer
+        Updated:
+          nullable: true
+          type: string
     Game:
       properties:
+        AlternateID:
+          nullable: true
+          type: integer
         Attendance:
           nullable: true
           type: integer
@@ -489,7 +640,13 @@ components:
         Channel:
           nullable: true
           type: string
+        CrewChiefID:
+          nullable: true
+          type: integer
         DateTime:
+          nullable: true
+          type: string
+        DateTimeUTC:
           nullable: true
           type: string
         Day:
@@ -556,12 +713,17 @@ components:
           items:
             $ref: "#/components/schemas/Quarter"
           type: array
+        RefereeID:
+          nullable: true
+          type: integer
         Season:
           nullable: false
           type: integer
         SeasonType:
           nullable: false
           type: integer
+        SeriesInfo:
+          $ref: "#/components/schemas/Series"
         StadiumID:
           nullable: true
           type: integer
@@ -572,6 +734,9 @@ components:
           nullable: true
           type: integer
         TimeRemainingSeconds:
+          nullable: true
+          type: integer
+        UmpireID:
           nullable: true
           type: integer
         UnderPayout:
@@ -728,8 +893,6 @@ components:
         OpponentPosition:
           nullable: true
           type: string
-        OpponentStat:
-          $ref: "#/components/schemas/OpponentSeason"
         PersonalFouls:
           nullable: true
           type: number
@@ -986,6 +1149,26 @@ components:
         QuarterID:
           nullable: false
           type: integer
+    Referee:
+      properties:
+        College:
+          nullable: true
+          type: string
+        Experience:
+          nullable: true
+          type: integer
+        Name:
+          nullable: true
+          type: string
+        Number:
+          nullable: true
+          type: integer
+        Position:
+          nullable: true
+          type: string
+        RefereeID:
+          nullable: false
+          type: integer
     Season:
       properties:
         ApiSeason:
@@ -1010,6 +1193,20 @@ components:
           nullable: true
           type: string
         StartYear:
+          nullable: false
+          type: integer
+    Series:
+      properties:
+        AwayTeamWins:
+          nullable: false
+          type: integer
+        GameNumber:
+          nullable: false
+          type: integer
+        HomeTeamWins:
+          nullable: false
+          type: integer
+        MaxLength:
           nullable: false
           type: integer
     Stadium:
@@ -1189,6 +1386,15 @@ components:
         WikipediaWordMarkUrl:
           nullable: true
           type: string
+    TeamDepthChart:
+      properties:
+        DepthCharts:
+          items:
+            $ref: "#/components/schemas/DepthChart"
+          type: array
+        TeamID:
+          nullable: false
+          type: integer
     TeamGame:
       properties:
         Assists:
@@ -1580,5 +1786,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey

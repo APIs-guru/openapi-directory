@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: http://api.sportsdata.io
-  - url: https://api.sportsdata.io
-  - url: http://azure-api.sportsdata.io
-  - url: https://azure-api.sportsdata.io
+  - url: http://azure-api.sportsdata.io/v3/soccer/scores
+  - url: https://azure-api.sportsdata.io/v3/soccer/scores
 info:
   contact:
     x-twitter: nfldata
@@ -977,6 +975,9 @@ components:
         EndDate:
           nullable: true
           type: string
+        Jersey:
+          nullable: true
+          type: integer
         MembershipId:
           nullable: false
           type: integer
@@ -1090,6 +1091,176 @@ components:
         Weight:
           nullable: true
           type: integer
+    PlayerSeason:
+      properties:
+        Assists:
+          nullable: true
+          type: number
+        BlockedShots:
+          nullable: true
+          type: number
+        CornersWon:
+          nullable: true
+          type: number
+        Crosses:
+          nullable: true
+          type: number
+        DefenderCleanSheets:
+          nullable: true
+          type: number
+        FantasyPoints:
+          nullable: true
+          type: number
+        FantasyPointsDraftKings:
+          nullable: true
+          type: number
+        FantasyPointsFanDuel:
+          nullable: true
+          type: number
+        FantasyPointsMondogoal:
+          nullable: true
+          type: number
+        FantasyPointsYahoo:
+          nullable: true
+          type: number
+        Fouled:
+          nullable: true
+          type: number
+        Fouls:
+          nullable: true
+          type: number
+        Games:
+          nullable: true
+          type: integer
+        GlobalTeamId:
+          nullable: true
+          type: integer
+        GoalkeeperCleanSheets:
+          nullable: true
+          type: number
+        GoalkeeperGoalsAgainst:
+          nullable: true
+          type: number
+        GoalkeeperSaves:
+          nullable: true
+          type: number
+        GoalkeeperSingleGoalAgainst:
+          nullable: true
+          type: number
+        GoalkeeperWins:
+          nullable: true
+          type: number
+        Goals:
+          nullable: true
+          type: number
+        Interceptions:
+          nullable: true
+          type: number
+        LastManTackle:
+          nullable: true
+          type: number
+        Minutes:
+          nullable: true
+          type: number
+        Name:
+          nullable: true
+          type: string
+        Offsides:
+          nullable: true
+          type: number
+        OpponentScore:
+          nullable: true
+          type: number
+        OwnGoals:
+          nullable: true
+          type: number
+        Passes:
+          nullable: true
+          type: number
+        PassesCompleted:
+          nullable: true
+          type: number
+        PenaltiesConceded:
+          nullable: true
+          type: number
+        PenaltiesWon:
+          nullable: true
+          type: number
+        PenaltyKickGoals:
+          nullable: true
+          type: number
+        PenaltyKickMisses:
+          nullable: true
+          type: number
+        PenaltyKickSaves:
+          nullable: true
+          type: number
+        PlayerId:
+          nullable: true
+          type: integer
+        Position:
+          nullable: true
+          type: string
+        PositionCategory:
+          nullable: true
+          type: string
+        RedCards:
+          nullable: true
+          type: number
+        RoundId:
+          nullable: true
+          type: integer
+        Score:
+          nullable: true
+          type: number
+        Season:
+          nullable: false
+          type: integer
+        SeasonType:
+          nullable: false
+          type: integer
+        ShortName:
+          nullable: true
+          type: string
+        Shots:
+          nullable: true
+          type: number
+        ShotsOnGoal:
+          nullable: true
+          type: number
+        Started:
+          nullable: true
+          type: integer
+        StatId:
+          nullable: false
+          type: integer
+        Tackles:
+          nullable: true
+          type: number
+        TacklesWon:
+          nullable: true
+          type: number
+        Team:
+          nullable: true
+          type: string
+        TeamId:
+          nullable: true
+          type: integer
+        Touches:
+          nullable: true
+          type: number
+        Updated:
+          nullable: true
+          type: string
+        UpdatedUtc:
+          nullable: true
+          type: string
+        YellowCards:
+          nullable: true
+          type: number
+        YellowRedCards:
+          nullable: true
+          type: number
     PlayoffAggregateScore:
       properties:
         Created:
@@ -1124,9 +1295,17 @@ components:
         EndDate:
           nullable: true
           type: string
+        Games:
+          items:
+            $ref: "#/components/schemas/Game"
+          type: array
         Name:
           nullable: true
           type: string
+        PlayerSeasons:
+          items:
+            $ref: "#/components/schemas/PlayerSeason"
+          type: array
         RoundId:
           nullable: false
           type: integer
@@ -1139,9 +1318,17 @@ components:
         SeasonType:
           nullable: false
           type: integer
+        Standings:
+          items:
+            $ref: "#/components/schemas/Standing"
+          type: array
         StartDate:
           nullable: true
           type: string
+        TeamSeasons:
+          items:
+            $ref: "#/components/schemas/TeamSeason"
+          type: array
         Type:
           nullable: true
           type: string
@@ -1587,6 +1774,9 @@ components:
         StatId:
           nullable: false
           type: integer
+        Tackles:
+          nullable: true
+          type: number
         TacklesWon:
           nullable: true
           type: number
@@ -1742,6 +1932,9 @@ components:
         StatId:
           nullable: false
           type: integer
+        Tackles:
+          nullable: true
+          type: number
         TacklesWon:
           nullable: true
           type: number
@@ -1817,5 +2010,5 @@ components:
       type: apiKey
     apiKeyQuery:
       in: query
-      name: subscription-key
+      name: key
       type: apiKey
