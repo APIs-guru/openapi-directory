@@ -5639,7 +5639,7 @@ components:
             - $ref: '#/components/schemas/AvailSettings'
             - xml:
                 name: availSettings
-              description: Ad avail settings.
+              description: 'Controls how SCTE-35 messages create cues. Splice Insert mode treats all segmentation signals traditionally. With Time Signal APOS mode only Time Signal Placement Opportunity and Break messages create segment breaks. With ESAM mode, signals are forwarded to an ESAM server for possible update.'
       description: Avail Configuration
     BlackoutSlate:
       type: object
@@ -9276,7 +9276,7 @@ components:
             - xml:
                 name: webDeliveryAllowedFlag
               description: 'When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0 will no longer trigger blackouts or Ad Avail slates'
-      description: Scte35 Splice Insert
+      description: 'Typical configuration that applies breaks on splice inserts in addition to time signal placement opportunities, breaks, and advertisements.'
     Scte35TimeSignalApos:
       type: object
       properties:
@@ -9298,7 +9298,7 @@ components:
             - xml:
                 name: webDeliveryAllowedFlag
               description: 'When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0 will no longer trigger blackouts or Ad Avail slates'
-      description: Scte35 Time Signal Apos
+      description: Atypical configuration that applies segment breaks only on SCTE-35 time signal placement opportunities and breaks.
     BatchDeleteRequest:
       type: object
       title: BatchDeleteRequest
@@ -10132,7 +10132,7 @@ components:
             - xml:
                 name: selectorSettings
               description: Caption selector settings.
-      description: Output groups for this Live Event. Output groups contain information about where streams should be distributed.
+      description: Caption Selector
     DvbSubSourceSettings:
       type: object
       properties:
@@ -13586,7 +13586,7 @@ components:
             - $ref: '#/components/schemas/__integerMin0'
             - xml:
                 name: numRetries
-              description: Number of retry attempts that will be made before the Live Event is put into an error state.
+              description: 'Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with "s3" or "mediastore". For other URIs, the value is always 3.'
         RestartDelay:
           allOf:
             - $ref: '#/components/schemas/__integerMin0Max15'
@@ -13626,7 +13626,7 @@ components:
             - $ref: '#/components/schemas/__integerMin0'
             - xml:
                 name: numRetries
-              description: Number of retry attempts that will be made before the Live Event is put into an error state.
+              description: 'Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with "s3" or "mediastore". For other URIs, the value is always 3.'
         RestartDelay:
           allOf:
             - $ref: '#/components/schemas/__integerMin0Max15'
@@ -13667,7 +13667,7 @@ components:
             - $ref: '#/components/schemas/__integerMin0'
             - xml:
                 name: numRetries
-              description: Number of retry attempts that will be made before the Live Event is put into an error state.
+              description: 'Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with "s3" or "mediastore". For other URIs, the value is always 3.'
         RestartDelay:
           allOf:
             - $ref: '#/components/schemas/__integerMin0Max15'
@@ -13711,7 +13711,7 @@ components:
             - $ref: '#/components/schemas/__integerMin0'
             - xml:
                 name: numRetries
-              description: Number of retry attempts that will be made before the Live Event is put into an error state.
+              description: 'Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with "s3" or "mediastore". For other URIs, the value is always 3.'
         RestartDelay:
           allOf:
             - $ref: '#/components/schemas/__integerMin0Max15'
@@ -16089,6 +16089,20 @@ components:
       type: number
       description: Placeholder documentation for __doubleMin1Max65535
       format: double
+    NielsenWatermarkTimezones:
+      type: string
+      enum:
+        - AMERICA_PUERTO_RICO
+        - US_ALASKA
+        - US_ARIZONA
+        - US_CENTRAL
+        - US_EASTERN
+        - US_HAWAII
+        - US_MOUNTAIN
+        - US_PACIFIC
+        - US_SAMOA
+        - UTC
+      description: Nielsen Watermark Timezones
     NielsenNaesIiNw:
       type: object
       required:
@@ -16107,6 +16121,14 @@ components:
             - xml:
                 name: sid
               description: Enter the Nielsen Source ID (SID) to include in the watermark
+        Timezone:
+          allOf:
+            - $ref: '#/components/schemas/NielsenWatermarkTimezones'
+            - xml:
+                name: timezone
+              description: |-
+                Choose the timezone for the time stamps in the watermark. If not provided,
+                the timestamps will be in Coordinated Universal Time (UTC)
       description: Nielsen Naes Ii Nw
     NielsenWatermarksDistributionTypes:
       type: string
