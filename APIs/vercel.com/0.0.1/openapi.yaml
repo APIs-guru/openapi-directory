@@ -1996,8 +1996,8 @@ paths:
         content:
           application/json:
             schema:
+              additionalProperties: false
               properties:
-                additionalProperties: false
                 mxPriority:
                   description: The MX priority value of the DNS record
                   type:
