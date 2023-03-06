@@ -9482,9 +9482,6 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
-      x-apideck-strict-any-of:
-        - required:
-            - ""
       x-apideck-strict-required:
         - line_items
       x-apideck-weights:
@@ -9492,7 +9489,7 @@ components:
         created_by: edge-case
         currency: medium
         currency_rate: low
-        id: high
+        id: critical
         journal_symbol: edge-case
         line_items: medium
         memo: low
@@ -9549,9 +9546,6 @@ components:
         - type
       type: object
       x-apideck-schema-id: JournalEntryLineItem
-      x-apideck-strict-any-of:
-        - required:
-            - ""
       x-apideck-strict-required:
         - ledger_account
         - total_amount

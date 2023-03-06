@@ -835,6 +835,9 @@ components:
         displayName:
           description: "Required. The user-assigned display name of the Workload. When present it must be between 4 to 30 characters. Allowed characters are: lowercase and uppercase letters, numbers, hyphen, and spaces. Example: My Workload"
           type: string
+        ekmProvisioningResponse:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadEkmProvisioningResponse"
+          description: Optional. Represents the Ekm Provisioning State of the given workload.
         enableSovereignControls:
           description: Optional. Indicates the sovereignty status of the given workload. Currently meant to be used by Europe/Canada customers.
           type: boolean
@@ -913,6 +916,31 @@ components:
           description: Count of active Violations which haven't been acknowledged.
           format: int32
           type: integer
+      type: object
+    GoogleCloudAssuredworkloadsV1beta1WorkloadEkmProvisioningResponse:
+      description: External key management systems(EKM) Provisioning response
+      properties:
+        ekmProvisioningErrorDomain:
+          description: Indicates Ekm provisioning error if any.
+          enum:
+            - EKM_PROVISIONING_ERROR_DOMAIN_UNSPECIFIED
+            - UNSPECIFIED_ERROR
+            - GOOGLE_SERVER_ERROR
+            - EXTERNAL_USER_ERROR
+            - EXTERNAL_PARTNER_ERROR
+            - TIMEOUT_ERROR
+          type: string
+        ekmProvisioningErrorMessage:
+          description: Detailed error message if Ekm provisioning fails
+          type: string
+        ekmProvisioningState:
+          description: Indicates Ekm enrollment Provisioning of a given workload.
+          enum:
+            - EKM_PROVISIONING_STATE_UNSPECIFIED
+            - EKM_PROVISIONING_STATE_PENDING
+            - EKM_PROVISIONING_STATE_FAILED
+            - EKM_PROVISIONING_STATE_COMPLETED
+          type: string
       type: object
     GoogleCloudAssuredworkloadsV1beta1WorkloadFedrampHighSettings:
       description: Settings specific to resources needed for FedRAMP High.

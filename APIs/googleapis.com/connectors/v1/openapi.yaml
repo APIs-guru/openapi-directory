@@ -1037,6 +1037,9 @@ components:
           items:
             $ref: "#/components/schemas/EnumOption"
           type: array
+        isAdvanced:
+          description: Indicates if current template is part of advanced settings
+          type: boolean
         key:
           description: Key of the config variable.
           type: string

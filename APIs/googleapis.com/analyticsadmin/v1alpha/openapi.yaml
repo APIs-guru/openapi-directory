@@ -239,36 +239,6 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  /v1alpha/properties:deleteConnectedSiteTag:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: "Deletes a connected site tag for a Universal Analytics property. Note: this has no effect on GA4 properties."
-      operationId: analyticsadmin.properties.deleteConnectedSiteTag
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaDeleteConnectedSiteTagRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleProtobufEmpty"
-          description: Successful response
-      tags:
-        - properties
   /v1alpha/properties:fetchAutomatedGa4ConfigurationOptOut:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -306,36 +276,6 @@ paths:
             - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/analytics.readonly
-      tags:
-        - properties
-  /v1alpha/properties:listConnectedSiteTags:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: "Lists the connected site tags for a Universal Analytics property. Note: this has no effect on GA4 property."
-      operationId: analyticsadmin.properties.listConnectedSiteTags
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListConnectedSiteTagsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListConnectedSiteTagsResponse"
-          description: Successful response
       tags:
         - properties
   /v1alpha/properties:setAutomatedGa4ConfigurationOptOut:
@@ -825,7 +765,7 @@ paths:
       description: Deletes information about multiple users' links to an account or property.
       operationId: analyticsadmin.properties.accessBindings.batchDelete
       parameters:
-        - description: "Required. The account or property that owns the access bindings. The parent field in the DeleteAccessBindingRequest messages must either be empty or match this field. Formats: - accounts/{account} - properties/{property}"
+        - description: "Required. The account or property that owns the access bindings. The parent of all provided values for the 'names' field in DeleteAccessBindingRequest messages must match this field. Formats: - accounts/{account} - properties/{property}"
           in: path
           name: parent
           required: true
@@ -917,7 +857,7 @@ paths:
       description: Updates information about multiple access bindings to an account or property.
       operationId: analyticsadmin.properties.accessBindings.batchUpdate
       parameters:
-        - description: "Required. The account or property that owns the access bindings. The parent field in the UpdateAccessBindingRequest messages must either be empty or match this field. Formats: - accounts/{account} - properties/{property}"
+        - description: "Required. The account or property that owns the access bindings. The parent of all provided AccessBinding in UpdateAccessBindingRequest messages must match this field. Formats: - accounts/{account} - properties/{property}"
           in: path
           name: parent
           required: true
@@ -3306,16 +3246,6 @@ components:
           description: Email address of the Google account that made the change. This will be a valid email address if the actor field is set to USER, and empty otherwise. Google accounts that have been deleted will cause an error.
           type: string
       type: object
-    GoogleAnalyticsAdminV1alphaConnectedSiteTag:
-      description: Configuration for a specific Connected Site Tag.
-      properties:
-        displayName:
-          description: Required. User-provided display name for the connected site tag. Must be less than 256 characters.
-          type: string
-        tagId:
-          description: 'Required. "Tag ID to forward events to. Also known as the Measurement ID, or the "G-ID" (For example: G-12345).'
-          type: string
-      type: object
     GoogleAnalyticsAdminV1alphaConversionEvent:
       description: A conversion event in a Google Analytics property.
       properties:
@@ -3561,16 +3491,6 @@ components:
       properties:
         name:
           description: "Required. Formats: - accounts/{account}/accessBindings/{accessBinding} - properties/{property}/accessBindings/{accessBinding}"
-          type: string
-      type: object
-    GoogleAnalyticsAdminV1alphaDeleteConnectedSiteTagRequest:
-      description: Request message for DeleteConnectedSiteTag RPC.
-      properties:
-        property:
-          description: "The Universal Analytics property to delete connected site tags for. This API does not support GA4 properties. Format: properties/{universalAnalyticsPropertyId} Example: properties/1234"
-          type: string
-        tagId:
-          description: 'Tag ID to forward events to. Also known as the Measurement ID, or the "G-ID" (For example: G-12345).'
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaDeleteUserLinkRequest:
@@ -3910,32 +3830,6 @@ components:
           description: List of BigQueryLinks.
           items:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaBigQueryLink"
-          type: array
-        nextPageToken:
-          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
-          type: string
-      type: object
-    GoogleAnalyticsAdminV1alphaListConnectedSiteTagsRequest:
-      description: Request message for ListConnectedSiteTags RPC.
-      properties:
-        pageSize:
-          description: The maximum number of resources to return. The service may return fewer than this value, even if there are additional pages. If unspecified, at most 50 resources will be returned. The maximum value is 200; (higher values will be coerced to the maximum)
-          format: int32
-          type: integer
-        pageToken:
-          description: A page token, received from a previous `ListConnectedSiteTags` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListConnectedSiteTags` must match the call that provided the page token.
-          type: string
-        property:
-          description: "The Universal Analytics property to fetch connected site tags for. This does not work on GA4 properties. Format: `properties/1234`"
-          type: string
-      type: object
-    GoogleAnalyticsAdminV1alphaListConnectedSiteTagsResponse:
-      description: Response message for ListConnectedSiteTags RPC.
-      properties:
-        connectedSiteTags:
-          description: The site tags for the Universal Analytics property
-          items:
-            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaConnectedSiteTag"
           type: array
         nextPageToken:
           description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.

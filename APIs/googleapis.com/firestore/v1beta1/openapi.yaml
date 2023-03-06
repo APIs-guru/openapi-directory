@@ -230,7 +230,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Listens to changes. This method is only available via the gRPC API (not REST).
+      description: Listens to changes. This method is only available via gRPC or WebChannel (not REST).
       operationId: firestore.projects.databases.documents.listen
       parameters:
         - description: "Required. The database name. In the format: `projects/{project_id}/databases/{database_id}`."
@@ -322,7 +322,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Streams batches of document updates and deletes, in order. This method is only available via the gRPC API (not REST).
+      description: Streams batches of document updates and deletes, in order. This method is only available via gRPC or WebChannel (not REST).
       operationId: firestore.projects.databases.documents.write
       parameters:
         - description: "Required. The database name. In the format: `projects/{project_id}/databases/{database_id}`. This is only required in the first message."
@@ -1253,6 +1253,7 @@ components:
           enum:
             - OPERATOR_UNSPECIFIED
             - AND
+            - OR
           type: string
       type: object
     Count:
@@ -1913,7 +1914,7 @@ components:
       description: The response for Firestore.RunAggregationQuery.
       properties:
         readTime:
-          description: The time at which the aggregate value is valid for.
+          description: The time at which the aggregate result was computed. This is always monotonically increasing; in this case, the previous AggregationResult in the result stream are guaranteed not to have changed between their `read_time` and this one. If the query returns no results, a response with `read_time` and no `result` will be sent, and this represents the time at which the query was run.
           format: google-datetime
           type: string
         result:
@@ -2020,7 +2021,7 @@ components:
           type: array
         select:
           $ref: "#/components/schemas/Projection"
-          description: The projection to return.
+          description: Optional sub-set of the fields to return. This acts as a DocumentMask over the documents returned from a query. When not set, assumes that the caller wants all fields returned.
         startAt:
           $ref: "#/components/schemas/Cursor"
           description: "A potential prefix of a position in the result set to start the query at. The ordering of the result set is based on the `ORDER BY` clause of the original query. ``` SELECT * FROM k WHERE a = 1 AND b > 2 ORDER BY b ASC, __name__ ASC; ``` This query's results are ordered by `(b ASC, __name__ ASC)`. Cursors can reference either the full ordering or a prefix of the location, though it cannot reference more fields than what are in the provided `ORDER BY`. Continuing off the example above, attaching the following start cursors will have varying impact: - `START BEFORE (2, /k/123)`: start the query right before `a = 1 AND b > 2 AND __name__ > /k/123`. - `START AFTER (10)`: start the query right after `a = 1 AND b > 10`. Unlike `OFFSET` which requires scanning over the first N results to skip, a start cursor allows the query to begin at a logical position. This position is not required to match an actual result, it will scan forward from this position to find the next document. Requires: * The number of values cannot be greater than the number of fields specified in the `ORDER BY` clause."

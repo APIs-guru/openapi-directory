@@ -714,7 +714,7 @@ components:
       description: Container runnable.
       properties:
         blockExternalNetwork:
-          description: If set to true, external network access to and from container will be blocked. The container will use the default internal network 'goog-internal'.
+          description: If set to true, external network access to and from container will be blocked, containers that are with block_external_network as true can still communicate with each other, network cannot be specified in the `container.options` field.
           type: boolean
         commands:
           description: Overrides the `CMD` specified in the container. If there is an ENTRYPOINT (either in the container image or with the entrypoint field below) then commands are appended as arguments to the ENTRYPOINT.
@@ -743,13 +743,13 @@ components:
           type: array
       type: object
     Disk:
-      description: A new persistent disk or a local ssd. A VM can only have one local SSD setting but multiple local SSD partitions. https://cloud.google.com/compute/docs/disks#pdspecs. https://cloud.google.com/compute/docs/disks#localssds.
+      description: A new persistent disk or a local ssd. A VM can only have one local SSD setting but multiple local SSD partitions. See https://cloud.google.com/compute/docs/disks#pdspecs and https://cloud.google.com/compute/docs/disks#localssds.
       properties:
         diskInterface:
           description: Local SSDs are available through both "SCSI" and "NVMe" interfaces. If not indicated, "NVMe" will be the default one for local ssds. We only support "SCSI" for persistent disks now.
           type: string
         image:
-          description: 'Name of a public or custom image used as the data source. For example, the following are all valid URLs: (1) Specify the image by its family name: projects/{project}/global/images/family/{image_family} (2) Specify the image version: projects/{project}/global/images/{image_version} You can also use Batch customized image in short names. The following image values are supported for a boot disk: "batch-debian": use Batch Debian images. "batch-centos": use Batch CentOS images. "batch-cos": use Batch Container-Optimized images.'
+          description: 'Name of a public or custom image used as the data source. For example, the following are all valid URLs: * Specify the image by its family name: projects/{project}/global/images/family/{image_family} * Specify the image version: projects/{project}/global/images/{image_version} You can also use Batch customized image in short names. The following image values are supported for a boot disk: * "batch-debian": use Batch Debian images. * "batch-centos": use Batch CentOS images. * "batch-cos": use Batch Container-Optimized images.'
           type: string
         sizeGb:
           description: Disk size in GB. For persistent disk, this field is ignored if `data_source` is `image` or `snapshot`. For local SSD, size_gb should be a multiple of 375GB, otherwise, the final size will be the next greater multiple of 375 GB. For boot disk, Batch will calculate the boot disk size based on source image and task requirements if you do not speicify the size. If both this field and the boot_disk_mib field in task spec's compute_resource are defined, Batch will only honor this field.
@@ -800,7 +800,7 @@ components:
           type: array
         bootDisk:
           $ref: "#/components/schemas/Disk"
-          description: Book disk to be created and attached to each VM by this InstancePolicy. Boot disk will be deleted when the VM is deleted.
+          description: Boot disk to be created and attached to each VM by this InstancePolicy. Boot disk will be deleted when the VM is deleted.
         disks:
           description: Non-boot disks to be attached for each VM created by this InstancePolicy. New disks will be deleted when the VM is deleted.
           items:
@@ -810,7 +810,7 @@ components:
           description: The Compute Engine machine type.
           type: string
         minCpuPlatform:
-          description: The minimum CPU platform. See `https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform`. Not yet implemented.
+          description: The minimum CPU platform. See https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform. Not yet implemented.
           type: string
         provisioningModel:
           description: The provisioning model.
@@ -1118,13 +1118,13 @@ components:
       description: A network interface.
       properties:
         network:
-          description: "The URL of an existing network resource. You can specify the network as a full or partial URL. For example, the following are all valid URLs: https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network} projects/{project}/global/networks/{network} global/networks/{network}"
+          description: "The URL of an existing network resource. You can specify the network as a full or partial URL. For example, the following are all valid URLs: * https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network} * projects/{project}/global/networks/{network} * global/networks/{network}"
           type: string
         noExternalIpAddress:
           description: Default is false (with an external IP address). Required if no external public IP address is attached to the VM. If no external public IP address, additional configuration is required to allow the VM to access Google Services. See https://cloud.google.com/vpc/docs/configure-private-google-access and https://cloud.google.com/nat/docs/gce-example#create-nat for more information.
           type: boolean
         subnetwork:
-          description: "The URL of an existing subnetwork resource in the network. You can specify the subnetwork as a full or partial URL. For example, the following are all valid URLs: https://www.googleapis.com/compute/v1/projects/{project}/regions/{region}/subnetworks/{subnetwork} projects/{project}/regions/{region}/subnetworks/{subnetwork} regions/{region}/subnetworks/{subnetwork}"
+          description: "The URL of an existing subnetwork resource in the network. You can specify the subnetwork as a full or partial URL. For example, the following are all valid URLs: * https://www.googleapis.com/compute/v1/projects/{project}/regions/{region}/subnetworks/{subnetwork} * projects/{project}/regions/{region}/subnetworks/{subnetwork} * regions/{region}/subnetworks/{subnetwork}"
           type: string
       type: object
     NetworkPolicy:
@@ -1355,7 +1355,7 @@ components:
           description: When true, Batch will populate a file with a list of all VMs assigned to the TaskGroup and set the BATCH_HOSTS_FILE environment variable to the path of that file. Defaults to false.
           type: boolean
         taskCount:
-          description: Number of Tasks in the TaskGroup. default is 1
+          description: Number of Tasks in the TaskGroup. Default is 1.
           format: int64
           type: string
         taskCountPerNode:

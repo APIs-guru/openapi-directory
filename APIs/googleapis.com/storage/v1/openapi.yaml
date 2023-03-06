@@ -1409,6 +1409,11 @@ paths:
           name: includeTrailingDelimiter
           schema:
             type: boolean
+        - description: Filter results to objects and prefixes that match this glob pattern.
+          in: query
+          name: matchGlob
+          schema:
+            type: string
         - description: Maximum number of items plus prefixes to return in a single page of responses. As duplicate prefixes are omitted, fewer total results may be returned than requested. The service will use this parameter or 1,000 items, whichever is smaller.
           in: query
           name: maxResults

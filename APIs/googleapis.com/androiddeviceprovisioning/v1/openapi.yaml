@@ -948,7 +948,7 @@ components:
             - SECTION_TYPE_ZERO_TOUCH
           type: string
         simlockProfileId:
-          description: Optional. Must and can only be set when DeviceProvisioningSectionType is SECTION_TYPE_SIM_LOCK. The unique identifier of the SimLock profile (go/simlock/profiles).
+          description: Optional. Must and can only be set when DeviceProvisioningSectionType is SECTION_TYPE_SIM_LOCK. The unique identifier of the SimLock profile.
           format: int64
           type: string
       type: object
@@ -1494,6 +1494,10 @@ components:
             - SECTION_TYPE_UNSPECIFIED
             - SECTION_TYPE_SIM_LOCK
             - SECTION_TYPE_ZERO_TOUCH
+          type: string
+        simlockProfileId:
+          description: Optional. Must and can only be set when DeviceProvisioningSectionType is SECTION_TYPE_SIM_LOCK. The unique identifier of the SimLock profile.
+          format: int64
           type: string
       type: object
     PartnerUnclaim:

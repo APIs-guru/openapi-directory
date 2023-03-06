@@ -45,7 +45,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-02-21T15:24:49Z
+  x-timestamp: 2023-03-06T17:25:20Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -512,8 +512,8 @@ paths:
           content:
             application/json:
               examples:
-                uploadDocument:
-                  $ref: "#/components/examples/patch-documents-id-uploadDocument-200"
+                updateDocument:
+                  $ref: "#/components/examples/patch-documents-id-updateDocument-200"
               schema:
                 $ref: "#/components/schemas/Document"
           description: OK - the request has succeeded.
@@ -1544,7 +1544,7 @@ components:
         capability: issueBankAccount
         id: SE322KH223222F5GV2SQ924F6
         industryCode: "4531"
-        legalEntityId: LE322JV223222F5GV2LKZ8DFZ
+        legalEntityId: YOUR_LEGAL_ENTITY
         sourceOfFunds:
           adyenProcessedFunds: false
           description: Funds from my flower shop business
@@ -1557,12 +1557,12 @@ components:
       summary: Details of a document
       value:
         attachments:
-          - content: JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBv+f/ub0j6JPRX+E3EmC...==
+          - content: JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBv+f/ub0j6JPRX+E3EmC==
         description: Registration doc for Example Company
         fileName: Registration doc for Example Company
         id: SE322JV223222F5GV2N9L8GDK
         owner:
-          id: LE322KH223222D5GG4C9J83RN
+          id: YOUR_LEGAL_ENTITY
           type: legalEntity
         type: registrationDocument
     get-legalEntities-id-businessLines-success-200:
@@ -1573,7 +1573,7 @@ components:
           - capability: issueBankAccount
             id: SE322JV223222F5GVGMLNB83F
             industryCode: "55"
-            legalEntityId: LE322KH223222F5GVGMLF3WBL
+            legalEntityId: YOUR_LEGAL_ENTITY
             sourceOfFunds:
               adyenProcessedFunds: false
               description: Funds from my flower shop business
@@ -1584,7 +1584,7 @@ components:
           - capability: receivePayments
             id: SE322JV223222F5GVGPNRB9GJ
             industryCode: 339E
-            legalEntityId: LE322KH223222F5GVGMLF3WBL
+            legalEntityId: YOUR_LEGAL_ENTITY
             salesChannels:
               - eCommerce
               - ecomMoto
@@ -1616,7 +1616,7 @@ components:
             allowed: false
             requested: true
             verificationStatus: pending
-        id: LE322JV223222D5GG42KN6869
+        id: YOUR_LEGAL_ENTITY
         individual:
           birthData:
             dateOfBirth: 1990-06-21
@@ -1636,8 +1636,8 @@ components:
       summary: Terms of Service information for a legal entity
       value:
         data:
-          - acceptedBy: LE00000000000000000000002
-            acceptedFor: LE00000000000000000000001
+          - acceptedBy: YOUR_LEGAL_ENTITY_2
+            acceptedFor: YOUR_LEGAL_ENTITY_1
             createdAt: 2022-12-05T13:36:58.212253Z
             id: TOSA000AB00000000B2AAAB2BA0AA0
             type: adyenIssuing
@@ -1703,7 +1703,7 @@ components:
           currencyCode: EUR
           iban: NL62ABNA0000000123
         id: SE322JV223222F5GNXSR89TMW
-        legalEntityId: LE322JV223222D5G2SPGL59KT
+        legalEntityId: YOUR_LEGAL_ENTITY
         type: bankAccount
     patch-businessLines-id-updateBusinessLine:
       description: Example request for updating the industry code of a business line
@@ -1719,7 +1719,7 @@ components:
         capability: issueBankAccount
         id: SE322JV223222F5GVGMLNB83F
         industryCode: "55"
-        legalEntityId: LE322KH223222F5GVGMLF3WBL
+        legalEntityId: YOUR_LEGAL_ENTITY
         sourceOfFunds:
           adyenProcessedFunds: false
           description: Funds from my flower shop business
@@ -1733,17 +1733,17 @@ components:
       value:
         description: Proof of industry doc for Example Company
         type: proofOfIndustry
-    patch-documents-id-uploadDocument-200:
+    patch-documents-id-updateDocument-200:
       description: Example response when a document is updated
       summary: Document updated
       value:
         attachments:
-          - content: JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBv+f/ub0j6JPRX+E3EmC...==
+          - content: JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBv+f/ub0j6JPRX+E3EmC==
         description: Proof of industry for Example Company
         fileName: Proof of industry for Example Company
         id: SE322JV223222F5GV2N9L8GDK
         owner:
-          id: LE322KH223222D5GG4C9J83RN
+          id: YOUR_LEGAL_ENTITY
           type: legalEntity
         type: proofOfIndustry
     patch-legalEntities-id-changeLegalEntityType:
@@ -1755,7 +1755,7 @@ components:
       description: Example response when changing the legal entity type
       summary: Legal entity type changed
       value:
-        id: LE322JV223222J5HD8HZS2C8B
+        id: YOUR_LEGAL_ENTITY
         individual:
           name:
             firstName: Explorer
@@ -1769,20 +1769,20 @@ components:
       value:
         entityAssociations:
           - jobTitle: CEO
-            legalEntityId: LE322KH223222F5GV2SL953Z3
+            legalEntityId: YOUR_LEGAL_ENTITY_2
             type: uboThroughControl
     patch-legalEntities-id-updateLegalEntityOrganization-200:
       description: Example response for adding an entity association to an organization
       summary: Entity associations added
       value:
         entityAssociations:
-          - associatorId: LE322KH223222F5GVGNMJ3XC5
+          - associatorId: YOUR_LEGAL_ENTITY_1
             entityType: individual
             jobTitle: CEO
-            legalEntityId: LE322KH223222F5GV2SL953Z3
+            legalEntityId: YOUR_LEGAL_ENTITY_2
             name: Simone Hopper
             type: uboThroughControl
-        id: LE322KH223222F5GVGNMJ3XC5
+        id: YOUR_LEGAL_ENTITY_1
         organization:
           description: FinTech
           doingBusinessAs: Adyen BV
@@ -1803,7 +1803,7 @@ components:
             marketIdentifier: ADYN
             stockNumber: NL012345ABC4
             tickerSymbol: ADYN.M
-          taxExempt: "false"
+          taxExempt: false
           type: listedPublicCompany
         type: organization
     patch-legalEntities-id-updateLegalEntitySoleProp:
@@ -1811,18 +1811,18 @@ components:
       summary: Add entity associations to a sole proprietorship
       value:
         entityAssociations:
-          - legalEntityId: LE00000000000000000000002
+          - legalEntityId: YOUR_LEGAL_ENTITY_2
             type: soleProprietorship
     patch-legalEntities-id-updateLegalEntitySoleProp-200:
       description: Example response for adding an entity association to a sole proprietorship
       summary: Entity association added to a sole proprietorship
       value:
         entityAssociations:
-          - associatorId: LE00000000000000000000001
+          - associatorId: YOUR_LEGAL_ENTITY_1
             entityType: soleProprietorship
-            legalEntityId: LE00000000000000000000002
+            legalEntityId: YOUR_LEGAL_ENTITY_2
             type: soleProprietorship
-        id: LE00000000000000000000001
+        id: YOUR_LEGAL_ENTITY_1
         individual:
           birthData:
             dateOfBirth: 1990-06-21
@@ -1842,7 +1842,7 @@ components:
       value:
         capability: issueBankAccount
         industryCode: "4531"
-        legalEntityId: LE322JV223222D5FZ9N74BSGM
+        legalEntityId: YOUR_LEGAL_ENTITY
         sourceOfFunds:
           adyenProcessedFunds: false
           description: Funds from my flower shop business
@@ -1856,7 +1856,7 @@ components:
         capability: issueBankAccount
         id: SE322JV223222F5GVGMLNB83F
         industryCode: "4531"
-        legalEntityId: LE322JV223222D5FZ9N74BSGM
+        legalEntityId: YOUR_LEGAL_ENTITY
         sourceOfFunds:
           adyenProcessedFunds: false
           description: Funds from my flower shop business
@@ -1869,10 +1869,10 @@ components:
       summary: Upload a document
       value:
         attachments:
-          - content: JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBv+f/ub0j6JPRX+E3EmC...==
+          - content: JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBv+f/ub0j6JPRX+E3EmC==
         description: Registration doc for Example Company
         owner:
-          id: LE322KH223222D5GG4C9J83RN
+          id: YOUR_LEGAL_ENTITY
           type: legalEntity
         type: registrationDocument
     post-documents-uploadDocument-200:
@@ -1880,12 +1880,12 @@ components:
       summary: Document uploaded
       value:
         attachments:
-          - content: JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBv+f/ub0j6JPRX+E3EmC...==
+          - content: JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBv+f/ub0j6JPRX+E3EmC==
         description: Registration doc for Example Company
         fileName: Registration doc for Example Company
         id: SE322JV223222F5GV2N9L8GDK
         owner:
-          id: LE322KH223222D5GG4C9J83RN
+          id: YOUR_LEGAL_ENTITY
           type: legalEntity
         type: registrationDocument
     post-legalEntities-createLegalEntityIndividualNL:
@@ -1909,7 +1909,7 @@ components:
       description: Example response for creating a legal entity for an individual residing in the Netherlands
       summary: Individual legal entity created
       value:
-        id: LE322JV223222D5GG42KN6869
+        id: YOUR_LEGAL_ENTITY
         individual:
           birthData:
             dateOfBirth: 1990-06-21
@@ -1949,7 +1949,7 @@ components:
       description: Example response for creating a legal entity for an individual residing in the US
       summary: Individual legal entity created
       value:
-        id: LE322JV223222D5GGMHPC2FPL
+        id: YOUR_LEGAL_ENTITY
         individual:
           birthData:
             dateOfBirth: 1990-06-21
@@ -1974,7 +1974,7 @@ components:
       value:
         entityAssociations:
           - jobTitle: CEO
-            legalEntityId: LE322JV223222D5GG42KN6869
+            legalEntityId: YOUR_LEGAL_ENTITY_1
             type: signatory
         organization:
           doingBusinessAs: API Company Trading
@@ -1992,7 +1992,14 @@ components:
       description: Example response for creating a legal entity for an organization operating in the Netherlands
       summary: Organization legal entity created
       value:
-        id: LE322JV223222D5FZ9N74BSGM
+        entityAssociations:
+          - associatorId: YOUR_LEGAL_ENTITY_2
+            entityType: individual
+            jobTitle: CEO
+            legalEntityId: YOUR_LEGAL_ENTITY_1
+            name: Simone Hopper
+            type: signatory
+        id: YOUR_LEGAL_ENTITY_2
         organization:
           doingBusinessAs: API Company Trading
           email: organization@example.com
@@ -2003,7 +2010,6 @@ components:
             postalCode: 1011DJ
             street: Simon Carmiggeltstraat 6 - 50
           registrationNumber: "34179503"
-          taxExempt: false
           type: privateCompany
         type: organization
     post-legalEntities-createLegalEntityOrganizationUS:
@@ -2026,7 +2032,7 @@ components:
       description: Example response for creating a legal entity for an organization operating in the US
       summary: Organization legal entity created
       value:
-        id: LE322JV223222D5FZ9N74BSGM
+        id: YOUR_LEGAL_ENTITY
         organization:
           legalName: Explorer Company based in US
           registeredAddress:
@@ -2057,7 +2063,7 @@ components:
       description: Example response for creating a legal entity for a sole proprietor operating in the Netherlands
       summary: Sole proprietor legal enity created
       value:
-        id: LE32272223222D5CGBR254SKT
+        id: YOUR_LEGAL_ENTITY
         soleProprietorship:
           countryOfGoverningLaw: NL
           name: Shelly Seller Sole Trader
@@ -2086,7 +2092,7 @@ components:
       description: Example response for creating a legal entity for a sole proprietor operating in the US
       summary: Sole proprietor legal enity created
       value:
-        id: LE32272223222D5CGBR254SKT
+        id: YOUR_LEGAL_ENTITY
         soleProprietorship:
           countryOfGoverningLaw: US
           name: Shelly Eller Sole Trader
@@ -2119,8 +2125,8 @@ components:
       description: Example response for getting a Terms of Service document
       summary: Terms of Service document returned
       value:
-        document: termsOfServiceDocumentResponse
-        id: LE00000000000000000000001
+        document: JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBv+f/ub0j6JPRX+E3EmC==
+        id: YOUR_LEGAL_ENTITY
         language: en
         termsOfServiceDocumentId: abc123
         type: adyenIssuing
@@ -2132,7 +2138,7 @@ components:
           countryCode: NL
           currencyCode: EUR
           iban: NL62ABNA0000000123
-        legalEntityId: LE322KH223222D5GG4C9J83RN
+        legalEntityId: YOUR_LEGAL_ENTITY
         type: bankAccount
     post-transferInstruments-createTransferInstrumentEUR-200:
       description: Example response for adding a bank account as a transfer instrument of a legal entity
@@ -2143,7 +2149,7 @@ components:
           currencyCode: EUR
           iban: NL62ABNA0000000123
         id: SE576BH223222F5GJVKHH6BDT
-        legalEntityId: LE322KH223222D5GG4C9J83RN
+        legalEntityId: YOUR_LEGAL_ENTITY
         type: bankAccount
     post-transferInstruments-createTransferInstrumentUSD:
       description: Example request for creating a transfer instrument for USD
@@ -2155,7 +2161,7 @@ components:
           branchCode: "121202211"
           countryCode: US
           currencyCode: USD
-        legalEntityId: LE322JV223222D5GGMHPC2FPL
+        legalEntityId: YOUR_LEGAL_ENTITY
         type: bankAccount
     post-transferInstruments-createTransferInstrumentUSD-200:
       description: Example response for adding a bank account as a transfer instrument of a legal entity
@@ -2168,7 +2174,7 @@ components:
           countryCode: US
           currencyCode: USD
         id: SE322JV223222F5GJVKHH8DTC
-        legalEntityId: LE322JV223222D5GGMHPC2FPL
+        legalEntityId: YOUR_LEGAL_ENTITY
         type: bankAccount
   schemas:
     AcceptTermsOfServiceRequest:
@@ -2330,6 +2336,14 @@ components:
         iban:
           description: The international bank account number as defined in the [ISO-13616](https://www.iso.org/standard/81090.html) standard.
           type: string
+        realLastFour:
+          description: When the account number is a virtual account number, the last four digits of the real account number.
+          readOnly: true
+          type: string
+        virtualAccountNumber:
+          description: Indicates if the account number is a virtual account number.
+          readOnly: true
+          type: boolean
       required:
         - currencyCode
       type: object
@@ -2358,13 +2372,7 @@ components:
           description: |-
             A list of channels where goods or services are sold.
 
-            Possible values:
-
-            - For point of sale: **pos** and **posMoto**
-
-            - For ecommerce: **eCommerce** and **ecomMoto**
-
-            - For Pay by Link: **payByLink**
+            Possible values: **pos**, **posMoto**, **eCommerce**, **ecomMoto**, **payByLink**.
 
             Required only in combination with the `capability` to **receivePayments** or **receiveFromPlatformPayments**.
           items:
@@ -2402,13 +2410,7 @@ components:
           description: |-
             A list of channels where goods or services are sold.
 
-            Possible values:
-
-            - For point of sale: **pos** and **posMoto**
-
-            - For ecommerce: **eCommerce** and **ecomMoto**
-
-            - For Pay by Link: **payByLink**
+            Possible values: **pos**, **posMoto**, **eCommerce**, **ecomMoto**, **payByLink**.
 
             Required only in combination with the `capability` to **receivePayments** or **receiveFromPlatformPayments**.
           items:
@@ -2445,13 +2447,7 @@ components:
           description: |-
             A list of channels where goods or services are sold.
 
-            Possible values:
-
-            - For point of sale: **pos** and **posMoto**
-
-            - For ecommerce: **eCommerce** and **ecomMoto**
-
-            - For Pay by Link: **payByLink**
+            Possible values: **pos**, **posMoto**, **eCommerce**, **ecomMoto**, **payByLink**.
 
             Required only in combination with the `capability` to **receivePayments** or **receiveFromPlatformPayments**.
           items:
@@ -2909,11 +2905,11 @@ components:
           description: The individual's job title if the `type` is **uboThroughControl** or **signatory**.
           type: string
         legalEntityId:
-          description: The unique identifier of the associated [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id).
+          description: The unique identifier of the associated [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id).
           type: string
         name:
           description: |-
-            The name of the associated [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id).
+            The name of the associated [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id).
 
             - For **individual**, `name.firstName` and `name.lastName`.
             - For **organization**, `legalName`.
@@ -2931,6 +2927,7 @@ components:
             - soleProprietorship
             - uboThroughControl
             - uboThroughOwnership
+            - ultimateParentCompany
           type: string
       required:
         - legalEntityId
@@ -3268,7 +3265,7 @@ components:
     OwnerEntity:
       properties:
         id:
-          description: Unique identifier of the resource that owns the document. For `type` **legalEntity**, this value is the unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id). For `type` **bankAccount**, this value is the unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
+          description: Unique identifier of the resource that owns the document. For `type` **legalEntity**, this value is the unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id). For `type` **bankAccount**, this value is the unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id).
           type: string
         type:
           description: |-
@@ -3521,7 +3518,7 @@ components:
           readOnly: true
           type: string
         legalEntityId:
-          description: The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) that owns the transfer instrument.
+          description: The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id) that owns the transfer instrument.
           type: string
         type:
           description: |-
@@ -3544,7 +3541,7 @@ components:
           $ref: "#/components/schemas/BankAccountInfo"
           description: Contains information about the legal entity's bank account.
         legalEntityId:
-          description: The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) that owns the transfer instrument.
+          description: The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id) that owns the transfer instrument.
           type: string
         type:
           description: |-

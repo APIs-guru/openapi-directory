@@ -1446,6 +1446,7 @@ paths:
                 },
                 theme: {
                   favicon: 'https://res.cloudinary.com/apideck/icons/intercom',
+                  logo: 'https://res.cloudinary.com/apideck/icons/intercom',
                   primary_color: '#286efa',
                   sidepanel_background_color: '#286efa',
                   sidepanel_text_color: '#FFFFFF',
@@ -3323,6 +3324,11 @@ components:
               description: The URL to the favicon to use for Vault.
               example: https://res.cloudinary.com/apideck/icons/intercom
               title: Favicon
+              type: string
+            logo:
+              description: The URL to the logo to use for Vault.
+              example: https://res.cloudinary.com/apideck/icons/intercom
+              title: Logo
               type: string
             primary_color:
               description: The primary color to use for Vault.

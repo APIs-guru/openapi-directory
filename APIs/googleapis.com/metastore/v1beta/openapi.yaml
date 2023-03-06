@@ -1890,6 +1890,24 @@ components:
             - METADATA_ONLY
           type: string
       type: object
+    ScalingConfig:
+      description: Represents the scaling configuration of a metastore service.
+      properties:
+        instanceSize:
+          description: An enum of readable instance sizes, with each instance size mapping to a float value (e.g. InstanceSize.EXTRA_SMALL = scaling_factor(0.1))
+          enum:
+            - INSTANCE_SIZE_UNSPECIFIED
+            - EXTRA_SMALL
+            - SMALL
+            - MEDIUM
+            - LARGE
+            - EXTRA_LARGE
+          type: string
+        scalingFactor:
+          description: Scaling factor, increments of 0.1 for values less than 1.0, and increments of 1.0 for values greater than 1.0.
+          format: float
+          type: number
+      type: object
     Secret:
       description: A securely stored value.
       properties:
@@ -1961,6 +1979,9 @@ components:
             - CANARY
             - STABLE
           type: string
+        scalingConfig:
+          $ref: "#/components/schemas/ScalingConfig"
+          description: Scaling configuration of the metastore service.
         state:
           description: Output only. The current state of the metastore service.
           enum:
