@@ -1,7 +1,7 @@
 openapi: 3.0.0
 servers:
   - description: Sakari Production
-    url: https://api.sakari.io/v1
+    url: https://api.sakari.io
 info:
   contact:
     email: support@sakari.io
@@ -126,7 +126,78 @@ tags:
   - description: Webhooks allow your own system to be automatically notified upon certin events, such as a new message received from one of your contacts or a status change notification for your messages
     name: webhooks
 paths:
-  "/accounts/{accountId}/campaigns":
+  /oauth2/token:
+    post:
+      operationId: auth.token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TokenRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenResponse"
+          description: successful operation
+      summary: Get token for accessing APIs
+      tags:
+        - authentication
+      x-code-samples:
+        - lang: CURL
+          source: |
+            curl -X POST \
+              https://api.sakari.io/oauth2/token \
+              -H 'Content-Type: application/json' \
+              -d '{
+              "grant_type": "client_credentials",
+              "client_id": "12345678-1234-1234-1234-123456789012",
+              "client_secret": "87654321-4321-4321-4321-098765432121"
+            }'
+        - lang: JavaScript
+          source: |
+            var settings = {
+              "async": true,
+              "crossDomain": true,
+              "url": "https://api.sakari.io/oauth2/token",
+              "method": "POST",
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "processData": false,
+              "data": "{\n\t\"grant_type\": \"client_credentials\",\n\t\"client_id\": \"12345678-1234-1234-1234-123456789012\",\n\t\"client_secret\": \"87654321-4321-4321-4321-098765432121\"\n}"
+            }
+
+            $.ajax(settings).done(function (response) {
+              console.log(response);
+            });
+        - lang: PHP
+          source: |
+            <?php
+
+              $request = new HttpRequest();
+              $request->setUrl('https://api.sakari.io/oauth2/token');
+              $request->setMethod(HTTP_METH_POST);
+              
+              $request->setHeaders(array(
+                'Content-Type' => 'application/json'
+              ));
+              
+              $request->setBody('{
+                "grant_type": "client_credentials",
+                "client_id": "12345678-1234-1234-123456789012",
+                "client_secret": "87654321-4321-4321-898765432121"
+              }');
+              
+              try {
+                $response = $request->send();
+              
+                echo $response->getBody();
+              } catch (HttpException $ex) {
+                echo $ex;
+              }
+  "/v1/accounts/{accountId}/campaigns":
     get:
       operationId: campaigns.fetchAll
       parameters:
@@ -169,7 +240,7 @@ paths:
             var request = require("request");
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}' } };
 
             request(options, function (error, response, body) {
@@ -183,14 +254,14 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns');
               $request->setMethod(HTTP_METH_GET);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}'
               ));
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
@@ -236,10 +307,10 @@ paths:
             var request = require("request");
             var options = { method: 'POST',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}',
                  'Content-Type': 'application/json' },
-              body:
+              body: 
                { name: 'Marketing Campaign',
                  trigger: { code: 'M' },
                  template: 'Hi {{{contact.firstName}}}',
@@ -257,12 +328,12 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns');
               $request->setMethod(HTTP_METH_POST);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}',
                 'Content-Type' => 'application/json'
               ));
-
+              
               $request->setBody('{
                 "name": "Marketing Campaign",
                 "trigger": {
@@ -271,15 +342,15 @@ paths:
                 "template":"Hi {{{contact.firstName}}}",
                 "reporting":{"when":"NoReport"}
               }');
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
               }
-  "/accounts/{accountId}/campaigns/{campaignId}":
+  "/v1/accounts/{accountId}/campaigns/{campaignId}":
     delete:
       operationId: campaigns.remove
       parameters:
@@ -316,7 +387,7 @@ paths:
             var request = require("request");
             var options = { method: 'DELETE',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}}',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}' } };
 
             request(options, function (error, response, body) {
@@ -330,14 +401,14 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}}');
               $request->setMethod(HTTP_METH_DELETE);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}'
               ));
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
@@ -375,7 +446,7 @@ paths:
             var request = require("request");
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}}',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}' } };
 
             request(options, function (error, response, body) {
@@ -389,14 +460,14 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}}');
               $request->setMethod(HTTP_METH_GET);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}'
               ));
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
@@ -443,10 +514,10 @@ paths:
             var request = require("request");
             var options = { method: 'POST',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}}',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}',
                  'Content-Type': 'application/json' },
-              body:
+              body: 
                { name: 'Marketing Campaign',
                  trigger: { code: 'M' },
                  template: 'Hi {{{contact.firstName}}}',
@@ -464,12 +535,12 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/campaigns/{{CAMPAIGN_ID}}');
               $request->setMethod(HTTP_METH_POST);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}',
                 'Content-Type' => 'application/json'
               ));
-
+              
               $request->setBody('{
                 "name": "Marketing Campaign",
                 "trigger": {
@@ -478,15 +549,15 @@ paths:
                 "template":"Hi {{{contact.firstName}}}",
                 "reporting":{"when":"NoReport"}
               }');
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
               }
-  "/accounts/{accountId}/contacts":
+  "/v1/accounts/{accountId}/contacts":
     get:
       operationId: contacts.fetchAll
       parameters:
@@ -533,7 +604,7 @@ paths:
             var request = require("request");
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}' } };
 
             request(options, function (error, response, body) {
@@ -547,14 +618,14 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts');
               $request->setMethod(HTTP_METH_GET);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}'
               ));
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
@@ -619,7 +690,7 @@ paths:
               headers: {
                  Authorization: 'Bearer {{TOKEN}}',
                  'Content-Type': 'application/json' },
-              body:
+              body: 
                { firstName: 'Chris',
                  lastName: 'Thomson',
                  mobile: { number: '+1234567890', country: 'US' } },
@@ -636,11 +707,11 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts');
               $request->setMethod(HTTP_METH_POST);
-
+              
               $request->setHeaders(array(
                 'Content-Type' => 'application/json'
               ));
-
+              
               $request->setBody('{
                 "firstName": "Chris",
                 "lastName": "Thomson",
@@ -649,15 +720,15 @@ paths:
                   "country": "US"
                 }
               }');
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
               }
-  "/accounts/{accountId}/contacts/{contactId}":
+  "/v1/accounts/{accountId}/contacts/{contactId}":
     delete:
       operationId: contacts.remove
       parameters:
@@ -696,7 +767,7 @@ paths:
             var request = require("request");
             var options = { method: 'DELETE',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}}',
-              headers:
+              headers: 
                { 'Authorization': 'Bearer {{TOKEN}}',
                  'Content-Type': 'application/json' } };
 
@@ -711,12 +782,12 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}}');
               $request->setMethod(HTTP_METH_DELETE);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}',
                 'Content-Type' => 'application/json'
               ));
-
+              
               $request->setBody('{
                 "firstName": "Chris",
                 "lastName": "Thomson",
@@ -725,10 +796,10 @@ paths:
                   "country": "US"
                 }
               }');
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
@@ -766,7 +837,7 @@ paths:
             var request = require("request");
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}}',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}' } };
 
             request(options, function (error, response, body) {
@@ -780,14 +851,14 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}}');
               $request->setMethod(HTTP_METH_GET);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}'
               ));
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
@@ -834,10 +905,10 @@ paths:
             var request = require("request");
             var options = { method: 'PUT',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}}',
-              headers:
+              headers: 
                { 'Authorization': 'Bearer {{TOKEN}}',
                  'Content-Type': 'application/json' },
-              body:
+              body: 
                { firstName: 'Bob',
                  lastName: 'Thomson',
                  mobile: { number: '+1234567890', country: 'US' } },
@@ -854,12 +925,12 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/contacts/{{CONTACT_ID}}');
               $request->setMethod(HTTP_METH_PUT);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}',
                 'Content-Type' => 'application/json'
               ));
-
+              
               $request->setBody('{
                 "firstName": "Bob",
                 "lastName": "Thomson",
@@ -868,15 +939,15 @@ paths:
                   "country": "US"
                 }
               }');
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
               }
-  "/accounts/{accountId}/conversations":
+  "/v1/accounts/{accountId}/conversations":
     get:
       operationId: conversations.fetchAll
       parameters:
@@ -918,7 +989,7 @@ paths:
             var request = require("request");
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}' } };
 
             request(options, function (error, response, body) {
@@ -932,19 +1003,19 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations');
               $request->setMethod(HTTP_METH_GET);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}'
               ));
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
               }
-  "/accounts/{accountId}/conversations/{conversationId}":
+  "/v1/accounts/{accountId}/conversations/{conversationId}":
     get:
       operationId: conversations.fetch
       parameters:
@@ -978,7 +1049,7 @@ paths:
             var request = require("request");
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations/{{CONVERSATION_ID}}',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}' } };
 
             request(options, function (error, response, body) {
@@ -992,19 +1063,19 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations/{{CONVERSATION_ID}}');
               $request->setMethod(HTTP_METH_GET);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}'
               ));
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
               }
-  "/accounts/{accountId}/conversations/{conversationId}/close":
+  "/v1/accounts/{accountId}/conversations/{conversationId}/close":
     put:
       operationId: conversations.close
       parameters:
@@ -1038,7 +1109,7 @@ paths:
             var request = require("request");
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations/{{CONVERSATION_ID}}/close',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}' } };
 
             request(options, function (error, response, body) {
@@ -1052,26 +1123,26 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/conversations/{{CONVERSATION_ID}}/close');
               $request->setMethod(HTTP_METH_PUT);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}',
                 'Content-Type' => 'application/json'
               ));
-
+              
               $request->setBody('{
                 "name": "Test Template",
                 "template": "Hi {{ firstName }}, Welcome to Sakari!",
                 "type": "SMS"
               }');
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
               }
-  "/accounts/{accountId}/messages":
+  "/v1/accounts/{accountId}/messages":
     get:
       operationId: messages.fetchAll
       parameters:
@@ -1119,14 +1190,14 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/messages');
               $request->setMethod(HTTP_METH_GET);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}'
               ));
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
@@ -1174,11 +1245,11 @@ paths:
             var request = require("request");
             var options = { method: 'POST',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/messages',
-              headers:
+              headers: 
                { 'Authorization': 'Bearer {{TOKEN}}',
                  Accept: 'application/json',
                  'Content-Type': 'application/json' },
-              body:
+              body: 
                { contacts: [ { mobile: { number: '+1234567890', country: 'US' } } ],
                  template: 'Congratulations! You just sent your first message' },
               json: true };
@@ -1194,13 +1265,13 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/messages');
               $request->setMethod(HTTP_METH_POST);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}',
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json'
               ));
-
+              
               $request->setBody('{
                 "contacts": [{
                   "mobile": {
@@ -1210,15 +1281,15 @@ paths:
                 }],
                 "template": "Congratulations! You just sent your first message"
               } ');
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
               }
-  "/accounts/{accountId}/messages/{messageId}":
+  "/v1/accounts/{accountId}/messages/{messageId}":
     get:
       description: Returns a single messag
       operationId: messages.fetch
@@ -1253,7 +1324,7 @@ paths:
             var request = require("request");
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/messages/{{MESSAGE_ID}}',
-              headers:
+              headers: 
                { 'Authorization': 'Bearer {{TOKEN}}' } };
 
             request(options, function (error, response, body) {
@@ -1267,19 +1338,19 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/messages/{{MESSAGE_ID}}');
               $request->setMethod(HTTP_METH_GET);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}'
               ));
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
               }
-  "/accounts/{accountId}/templates":
+  "/v1/accounts/{accountId}/templates":
     get:
       operationId: templates.fetchAll
       parameters:
@@ -1322,7 +1393,7 @@ paths:
             var request = require("request");
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates',
-              headers:
+              headers: 
                { 'Authorization': 'Bearer {{TOKEN}}' } };
 
             request(options, function (error, response, body) {
@@ -1336,14 +1407,14 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates');
               $request->setMethod(HTTP_METH_GET);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}'
               ));
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
@@ -1386,9 +1457,9 @@ paths:
             var request = require("request");
             var options = { method: 'POST',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates',
-              headers:
+              headers: 
                { 'Content-Type': 'application/json' },
-              body:
+              body: 
                { name: 'Test Template',
                  template: 'Hi {{ firstName }}, Welcome to Sakari!',
                  type: 'SMS' },
@@ -1405,26 +1476,26 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates');
               $request->setMethod(HTTP_METH_POST);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}',
                 'Content-Type' => 'application/json'
               ));
-
+              
               $request->setBody('{
                 "name": "Test Template",
                 "template": "Hi {{ firstName }}, Welcome to Sakari!",
                 "type": "SMS"
               }');
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
               }
-  "/accounts/{accountId}/templates/{templateId}":
+  "/v1/accounts/{accountId}/templates/{templateId}":
     delete:
       operationId: templates.remove
       parameters:
@@ -1462,7 +1533,7 @@ paths:
 
             var options = { method: 'DELETE',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}}',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}' } };
 
             request(options, function (error, response, body) {
@@ -1476,14 +1547,14 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}}');
               $request->setMethod(HTTP_METH_DELETE);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}'
               ));
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
@@ -1521,7 +1592,7 @@ paths:
             var request = require("request");
             var options = { method: 'GET',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}}',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}' } };
 
             request(options, function (error, response, body) {
@@ -1535,14 +1606,14 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}}');
               $request->setMethod(HTTP_METH_GET);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}'
               ));
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
@@ -1587,10 +1658,10 @@ paths:
 
             var options = { method: 'PUT',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}}',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}',
                  'Content-Type': 'application/json' },
-              body:
+              body: 
                { name: 'Test Template',
                  template: 'Hi {{ firstName }}, Welcome to Sakari!',
                  type: 'SMS' },
@@ -1607,26 +1678,26 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/templates/{{TEMPLATE_ID}}');
               $request->setMethod(HTTP_METH_PUT);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}',
                 'Content-Type' => 'application/json'
               ));
-
+              
               $request->setBody('{
                 "name": "Test Template",
                 "template": "Hi {{ firstName }}, Welcome to Sakari!",
                 "type": "SMS"
               }');
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
               }
-  "/accounts/{accountId}/webhooks":
+  "/v1/accounts/{accountId}/webhooks":
     get:
       description: When messages are acknowledge by carriers, a notification is sent to the specified URL
       operationId: webhooks.fetchAll
@@ -1675,18 +1746,18 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/webhooks');
               $request->setMethod(HTTP_METH_GET);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}'
               ));
-
+              
               $request->setBody('{
                 "url": "https://requestbin.io"
               }');
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
@@ -1703,6 +1774,18 @@ paths:
               properties:
                 eventTypes:
                   items:
+                    enum:
+                      - contact-created
+                      - contact-updated
+                      - contact-removed
+                      - message-received
+                      - message-sent
+                      - message-status
+                      - conversation-started
+                      - contact-opt-out
+                      - contact-opt-in
+                      - list-opt-out
+                      - list-opt-in
                     type: string
                   type: array
                 url:
@@ -1741,7 +1824,7 @@ paths:
             var request = require("request");
             var options = { method: 'POST',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/webhooks',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}',
                  'Content-Type': 'application/json' },
               body: { url: 'https://requestbin.io', eventTypes: [ 'message-received' ] },
@@ -1758,25 +1841,25 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/webhooks');
               $request->setMethod(HTTP_METH_POST);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}',
                 'Content-Type' => 'application/json'
               ));
-
+              
               $request->setBody('{
                 "url": "https://requestbin.io",
                 "eventTypes": ["message-received"]
               }');
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
               }
-  "/accounts/{accountId}/webhooks/{url}":
+  "/v1/accounts/{accountId}/webhooks/{url}":
     delete:
       callbacks:
         event:
@@ -1820,7 +1903,7 @@ paths:
             var request = require("request");
             var options = { method: 'DELETE',
               url: 'https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/webhooks/{{URL_ENCODED CALLBACK_URL}}',
-              headers:
+              headers: 
                { Authorization: 'Bearer {{TOKEN}}' };
 
             request(options, function (error, response, body) {
@@ -1834,90 +1917,19 @@ paths:
               $request = new HttpRequest();
               $request->setUrl('https://api.sakari.io/v1/accounts/{{ACCOUNT_ID}}/webhooks/{{URL_ENCODED CALLBACK_URL}}');
               $request->setMethod(HTTP_METH_DELETE);
-
+              
               $request->setHeaders(array(
                 'Authorization' => 'Bearer {{TOKEN}}'
               ));
-
+              
               try {
                 $response = $request->send();
-
+              
                 echo $response->getBody();
               } catch (HttpException $ex) {
                 echo $ex;
               }
-  /oauth2/token:
-    post:
-      operationId: auth.token
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TokenRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TokenResponse"
-          description: successful operation
-      summary: Get token for accessing APIs
-      tags:
-        - authentication
-      x-code-samples:
-        - lang: CURL
-          source: |
-            curl -X POST \
-              https://api.sakari.io/oauth2/token \
-              -H 'Content-Type: application/json' \
-              -d '{
-              "grant_type": "client_credentials",
-              "client_id": "12345678-1234-1234-1234-123456789012",
-              "client_secret": "87654321-4321-4321-4321-098765432121"
-            }'
-        - lang: JavaScript
-          source: |
-            var settings = {
-              "async": true,
-              "crossDomain": true,
-              "url": "https://api.sakari.io/oauth2/token",
-              "method": "POST",
-              "headers": {
-                "Content-Type": "application/json"
-              },
-              "processData": false,
-              "data": "{\n\t\"grant_type\": \"client_credentials\",\n\t\"client_id\": \"12345678-1234-1234-1234-123456789012\",\n\t\"client_secret\": \"87654321-4321-4321-4321-098765432121\"\n}"
-            }
-
-            $.ajax(settings).done(function (response) {
-              console.log(response);
-            });
-        - lang: PHP
-          source: |
-            <?php
-
-              $request = new HttpRequest();
-              $request->setUrl('https://api.sakari.io/oauth2/token');
-              $request->setMethod(HTTP_METH_POST);
-
-              $request->setHeaders(array(
-                'Content-Type' => 'application/json'
-              ));
-
-              $request->setBody('{
-                "grant_type": "client_credentials",
-                "client_id": "12345678-1234-1234-123456789012",
-                "client_secret": "87654321-4321-4321-898765432121"
-              }');
-
-              try {
-                $response = $request->send();
-
-                echo $response->getBody();
-              } catch (HttpException $ex) {
-                echo $ex;
-              }
-  /tools/sharefile:
+  /v1/tools/sharefile:
     post:
       operationId: tools.shareFile
       requestBody:
@@ -2154,7 +2166,7 @@ components:
           properties:
             code:
               description: |
-                Campaign type specifies how it sources contacts and what event triggers its execution Sort order
+                Campaign type specifies how it sources contacts and what event triggers its execution  Sort order
                   * `M` - Manual
                   * `S` - Scheduled
                   * `FU` - File Upload
@@ -2489,6 +2501,14 @@ components:
                 type: string
             type: object
           type: array
+        phoneNumberFilter:
+          properties:
+            group:
+              properties:
+                id:
+                  type: string
+              type: object
+          type: object
         template:
           type: string
         type:
@@ -2504,13 +2524,19 @@ components:
             estimatedPrice:
               format: double
               type: number
+            invalid:
+              items:
+                $ref: "#/components/schemas/Contact"
+              type: array
             jobId:
               type: string
             messages:
               items:
                 $ref: "#/components/schemas/Message"
               type: array
-            queued:
+            requested:
+              type: integer
+            valid:
               type: integer
           type: object
       type: object

@@ -198,10 +198,38 @@ paths:
       summary: Create a blocked number
       tags:
         - Blocked Numbers
+  /credit/transfer:
+    post:
+      description: |
+        Before you can use the transfer credits endpoint, the _credit-transfer facility_ must be activated for your account.  You can request activation from `support@bulksms.com`. 
+
+        The recipient must be an enabled account that uses the same currency as your account.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransferEntry"
+        description: |
+          Contains details of the transfer request.
+        required: true
+      responses:
+        "200":
+          description: An empty body when the credits were transferred OK.
+        "400":
+          description: When the request fails validation checks.
+        "403":
+          description: When there are not enough credits in your account or the credit transfer facility is not activated.
+      security:
+        - basicAuth: []
+      summary: Transfer credits to another account
+      tags:
+        - Credits
   /messages:
     get:
       description: |
-        Retrieve the messages you have sent or received.
+        Retrieve the messages you have sent or received.  
+
+        Scheduled messages are available for retrieval only after the delivery date.
 
         All the parameters are optional.  If a value is not supplied for `filter`, the messages are not filtered.
 
@@ -229,7 +257,7 @@ paths:
         | id            | Integer  | Positive integer  | Use the `id` field with `<` (or with `>`) to fetch messages that are older (or newer) than those that are already fetched. <br/>`filter=id<123456` |
         | type          | String  | SENT, RECEIVED  | SENT are Mobile Terminating (MT) SMSs; RECEIVED are Mobile Originating (MO) SMSs.<br/>`filter=type%3DSENT` |
         | submission.id | String  |  | `filter=submission.id%3D1-00000000000522347562` |
-        | status.type   | String  | ACCEPTED, SCHEDULED, SENT, DELIVERED, FAILED  | See the message `status.type` field for more information. <br/>`filter=status.type%3DDELIVERED` |
+        | status.type   | String  | ACCEPTED, SENT, DELIVERED, FAILED  | See the message `status.type` field for more information. <br/>`filter=status.type%3DDELIVERED` |
         | status.id| String  |  | See the message `status.id` field for more information. `filter=status.id%3DFAILED.EXPIRED`|
         | submission.date | String | Formatted Date | A fully specified date (e.g. 2017-01-01T10:00:00+01:00).  Use this field with `<=`, `<`, `>` or `>=` to limit the values. <br/>`filter=submission.date%3E%3D2017-01-01T10%3A00%3A00%2B01%3A00` |
         | userSuppliedId  | String | | Use a string value you specified in the `userSuppliedId` property when you sent the message. Only `SENT` messages will be retrieved. <br/>`filter=userSuppliedId%3Dacc009876` |
@@ -816,13 +844,15 @@ paths:
   /rmm/pre-sign-attachment:
     post:
       description: |
-        You can send any URL as part of your SMS text.  When the recipient taps on the URL, the file to which the URL points will be downloaded and opened on the mobile device.  This handy feature is supported by most modern mobile devices.
+        When composing an SMS, you can add SMS attachments by adding a URL to your text. When the recipient clicks on the URL, the attached file will be downloaded and opened on their mobile device.  
 
-        The best way to send an attachment is to store the file on a web server you own and use that URL in the SMS text.  Your customer will then see a URL that she will recognise as belonging to you.  This is the most flexible and the simplest solution.
+        The best way to do this is to store the file on a web server you own and use that URL in the SMS text. This URL will be easily recognisable to your message recipient and ties your message back to your brand or company. 
 
-        However, if it is not possible to use your web server, you can use BulkSMS storage to keep the files that you want to attach to your SMS message.  Please note that these files will be deleted after 30 days.   
+        If that’s not possible, you can use BulkSMS storage to keep the files that you want to attach to your SMS. These files will be deleted after 30 days as per our fair use policy.  
 
-        The process to use the BulkSMS storage requires you to take three steps:
+        We recommend you keep this file size below 20 MB, as larger files may be deleted without warning. 
+
+        To use the BulkSMS storage, follow these three steps:
 
         **Step 1**: Use your BulkSMS credentials (or your API Token) to request a pre-signed URL.  This is what this `pre-sign-attachment` method is for.  It returns a PreSignInfo object that you will use in the other two steps.
 
@@ -987,6 +1017,7 @@ paths:
         You can register multiple webhooks, and each one will be called.  (Note: you can also use our [Web App](https://www.bulksms.com/account/#!/advanced-settings/webhooks) to manage your webhooks interactively.)  
         If you want to be notified of `SENT` messages and `RECEIVED` messages you need to create two webhooks.
 
+
         ### Implementing your webhook
 
         Code samples of Webhook implementations:
@@ -994,7 +1025,7 @@ paths:
 
         When you implement your webhook, there are a few rules to be aware of:
         - Your webhook must process `POST` requests that contains an array of messages in the post body.  This input given to your webhook has the same structure as the output produced when you call [Retrieve Messages](#tag/Message%2Fpaths%2F~1messages%2Fget).
-        - When you register or update your webhook, the URL will be tested by invoking it with an empty array (`[]`).
+        - When you register or update your webhook, the URL will be tested by invoking it with an empty array (`[]`). 
         - It is possible for your webhook to receive multiple updates for the same message and status. It happens from time to time that the mobile network duplicates status updates.
         - The order by which the webhook is invoked can be unexpected.  For example, if sender A replies before sender B, your webhook might get the reply from B first.
         - The webhook is expected to comply with good practices with regard to the status code it responds with.
@@ -1005,7 +1036,19 @@ paths:
         - It is good idea to add a secret to your URL in order to make it more secure. Here is an example:
         `https://www.example.com/hook.php?secret=pass763265word`
         - You can use a non-standard port if necessary, for example: `https://www.example.com:8321/hook.php?secret=pass763265word`
+        - Your webhook can be called from a dynamic range of IP addresses, and you should be prepared to accept that the source IP can change in the future, without notice. This practice has become common with cloud-hosted solutions. If this is an insurmountable problem for your organisation, please contact support.
 
+        ### Testing and troubleshooting        
+
+        Use `curl` to test your webhook.  The command below is a template that shows how the BulkSMS system invokes your code. It must return `200` for your URL before you can register it as a webhook. 
+
+        ```
+        curl -i -X POST 'YOUR_URL_HERE' --header 'Content-Type: application/json' --header 'User-Agent: BulkSMS Invoker' --data-raw '[]'
+        ```
+
+        When a `200` is returned for an empty array, modify the template to post multiple messages by adding JSON between the square brackets ('[]').
+
+        After your webhook is successfully registered, you can send a message to `1111111` for an end-to-end test.  The delivery to this test number will fail, but your webhook will be invoked (and there are no charges).  
 
         ### The retry process
 
@@ -1017,7 +1060,7 @@ paths:
         ### Problem reports via email
 
         Your are strongly advised to provide an email address when you register your webhook.
-        An notice will be sent to this email address to keep you in the loop whenever there are problems with your webhook.
+        A notice will be sent to this email address to keep you in the loop whenever there are problems with your webhook.
         In order to prevent your inbox from being flooded, the system sends a notice about an observed error no more than once in a 24 hour period.
 
         The following emails can be expected
@@ -1627,6 +1670,41 @@ components:
       required:
         - to
         - body
+      type: object
+    TransferEntry:
+      properties:
+        commentOnFrom:
+          description: |
+            An optional note that will be shown on the credit history of your account.
+            The maximum length of the comment is 100.
+          example: Tranfer to Bobby
+          type: string
+        commentOnTo:
+          description: |
+            An optional note that will be shown on the credit history of the recipient's account.
+            The maximum length of the comment is 100.
+          example: Tranfer from Danny
+          type: string
+        credits:
+          description: |
+            The amount of credits to transfer.
+          example: 2345
+          type: number
+        toUserId:
+          description: |
+            The numeric user ID of the account that will receive the credits.
+            The ID must match the username.
+          example: 2345
+          type: number
+        toUsername:
+          description: |
+            The username of the account that will receive the credits.
+          example: roboto
+          type: string
+      required:
+        - toUsername
+        - toUserId
+        - credits
       type: object
     Webhook:
       properties:

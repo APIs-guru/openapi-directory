@@ -1097,6 +1097,28 @@ paths:
       tags:
         - SubUser
   /api/User:
+    delete:
+      deprecated: false
+      operationId: User_Delete
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Object"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Object"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Object"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Object"
+          description: OK
+      summary: Triggers user account deletion.
+      tags:
+        - User
     get:
       deprecated: false
       description: Gets the informations for the user.
@@ -1497,13 +1519,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/VirtualTariffsOfFolder"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/VirtualTariffsOfFolder"
             text/json:
-              schema:
-                $ref: "#/components/schemas/VirtualTariffsOfFolder"
-            text/xml:
               schema:
                 $ref: "#/components/schemas/VirtualTariffsOfFolder"
           description: OK
@@ -1601,6 +1617,35 @@ paths:
       summary: Gets all Virtual Tariffs for a property (folder)
       tags:
         - VirtualTariffsForProperty
+  "/api/VirtualTariffsStatusForProperty/{id}":
+    get:
+      deprecated: false
+      operationId: VirtualTariffsStatusForProperty_Get
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+          description: OK
+      summary: Gets the calculation status for a virtual tariff property
+      tags:
+        - VirtualTariffsStatusForProperty
   /api/folder/assign:
     post:
       deprecated: false
@@ -1862,6 +1907,37 @@ paths:
           description: OK
       tags:
         - OAuth
+  /api/pico:
+    get:
+      deprecated: false
+      operationId: Pico_Get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Device"
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Device"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Device"
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Device"
+                type: array
+          description: OK
+      summary: Gets all pico charging stations for this user
+      tags:
+        - Pico
   "/api/pico/charging/{id}":
     get:
       deprecated: false
@@ -2060,6 +2136,36 @@ paths:
         \            Returns the settings of a pico charging station."
       tags:
         - PicoSettings
+  "/api/pico/tryenablecablelock/{id}":
+    post:
+      deprecated: false
+      operationId: PicoEnableFixCableLock_Post
+      parameters:
+        - description: The ID of the pico
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Object"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Object"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Object"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Object"
+          description: OK
+      summary: Try to fix lock the cable of a pico. The pico must be online and a cable (without car) needs to be connected. Otherwise this will fail.
+      tags:
+        - PicoEnableFixCableLock
 components:
   schemas:
     AccessTokenToPut:
@@ -2254,6 +2360,8 @@ components:
             - ReadyCarConnected
             - StartedWaitForCar
             - Charging
+            - Installation
+            - Authorize
             - Offline
           type: string
         CounterReading:
@@ -2987,8 +3095,83 @@ components:
           description: The power of the active charging (in kW)
           format: double
           type: number
+        ConnectionMode:
+          description: The mode how this station is connected to the cloud
+          enum:
+            - NetworkToCloudConnectionMode_NoConnection
+            - NetworkToCloudConnectionMode_DirectWiFiConnection
+            - NetworkToCloudConnectionMode_GPRSConnection
+            - NetworkToCloudConnectionMode_NBIotConnection
+            - NetworkToCloudConnectionMode_LteCatM1Connection
+            - NetworkToCloudConnectionMode_MeshWiFiConnection
+            - NetworkToCloudConnectionMode_MeshMobileConnection
+          type: string
         Duration:
           description: The duration of this charging in seconds
+          format: int32
+          type: integer
+        LastWarningOrError:
+          description: The last warning or error of the station. This message is only shown if the warning or error happend in the last 5 minutes.
+          enum:
+            - MeterDataloggerEvent
+            - MeterRestart
+            - PowerDown
+            - MissingPhaseL1
+            - MissingPhaseL2
+            - MissingPhaseL3
+            - TamperDetectionCover
+            - MagneticFieldDetection
+            - ClockAdjusted
+            - Overvoltage
+            - Undervoltage
+            - OvervoltageL1
+            - OvervoltageL2
+            - OvervoltageL3
+            - ChargingTransaction
+            - PicoErrorControllerPanic
+            - PicoErrorMidServicePanic
+            - PicoWarningRcdTriggered
+            - PicoWarningCableLockError
+            - PicoWarningDiodeFailure
+            - PicoWarningOverload
+            - PicoWarningHighTemperature
+          type: string
+        LastWarningOrErrorMessage:
+          description: The message of the last warning or error of the station.
+          type: string
+        LastWarningOrErrorTime:
+          description: The time when the LastWarningOrError happend
+          format: date-time
+          type: string
+        LoadSheddingState:
+          description: Max. dynamic current (e.g. set over API or Modbus TCP) of this station or the loadmanagement group of the station if the station is in a group. in A
+          enum:
+            - MaxCurrent
+            - HalfCurrent
+            - MinCurrent
+            - NoCurrent
+          type: string
+        LoadmanagementGroupName:
+          description: The name of the loadmanagement group. Or string.empty if the station is not in a group
+          type: string
+        MaxAllowedChargingCurrent:
+          description: Max allowed charging current in A
+          format: int32
+          type: integer
+        MaxDynamicCurrent:
+          description: Max. dynamic current (e.g. set over API or Modbus TCP) of this station or the loadmanagement group of the station if the station is in a group. in A
+          format: int32
+          type: integer
+        MaxLoadmanagementGroupCurrent:
+          description: Max. current of the loadmanagement group of this station (if there is any) in A
+          format: int32
+          type: integer
+        MaxStationCurrent:
+          description: Max. current of the station in A
+          format: int32
+          type: integer
+        MinStationCurrent:
+          description: Min. current of the station in A
           format: int32
           type: integer
         State:
@@ -2999,6 +3182,8 @@ components:
             - ReadyCarConnected
             - StartedWaitForCar
             - Charging
+            - Installation
+            - Authorize
             - Offline
           readOnly: true
           type: string
@@ -3050,6 +3235,9 @@ components:
             - None
             - Backend
           type: string
+        CarIdDetection:
+          description: Flag if the car id detection is enabled
+          type: boolean
         DisplayBrightness:
           description: The Brightness of the LCD Matrix display. 0 = minimum, 255 = maximum
           format: byte
@@ -3057,9 +3245,9 @@ components:
         DnsName:
           description: The DNS name of the pico's internal ip
           type: string
-        IdleImageData:
-          description: The base 64 string for the "no car connected" image
-          type: string
+        FixCableLockEnable:
+          description: Enable the fix lock of the charging cable
+          type: boolean
         IdleImageUrl:
           description: The url of the idle image
           type: string
@@ -3082,6 +3270,9 @@ components:
           type: boolean
         Name:
           description: The name of the station
+          type: string
+        SerialNumber:
+          description: The Serial number of the station
           type: string
       type: object
     RegisterRealtimeApiData:
@@ -3289,27 +3480,22 @@ components:
           type: array
       type: object
     VirtualTariff:
-      description: Container class for the virtual tariffs
       properties:
         Factor:
           description: Says how many of the active power is used in this tariff. This is calculated from the last meter values.
           format: double
           type: number
         Id:
-          description: The ID of the virtual tariff
           type: string
         Name:
-          description: The name of this tariff
           type: string
         Type:
-          description: The Type of the tariff
           enum:
             - Battery
             - Solar
             - Normal
           type: string
         Unit:
-          description: The Unit of this value
           type: string
         Value:
           description: The Counter Value of this tariff
@@ -3342,22 +3528,23 @@ components:
           type: string
       type: object
     VirtualTariffsOfFolder:
-      description: Container class for a Virtual Tariff
       properties:
         Date:
           description: The DateTime (UTC) of this virtual tarfifs
           format: date-time
+          readOnly: true
           type: string
         FolderId:
-          description: The ID of the Folder
+          readOnly: true
           type: string
         Name:
           description: The name of this folder
+          readOnly: true
           type: string
         VirtualTariffs:
-          description: The Name of the Virtual Tariff
           items:
             $ref: "#/components/schemas/VirtualTariff"
+          readOnly: true
           type: array
       type: object
   securitySchemes:

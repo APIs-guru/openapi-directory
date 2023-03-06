@@ -353,7 +353,7 @@ paths:
                     type: array
                   request_url:
                     description: The URL of current page of results.
-                    example: https://api.digitalnz.org/v3/records.json?api_key=********&per_page=10&facets_per_page=100&facets=category&text=Wainuiomata
+                    example: https://api.digitalnz.org/v3/records.json?per_page=10&facets_per_page=100&facets=category&text=Wainuiomata
                     type: string
                     xml:
                       name: request-url
@@ -372,7 +372,7 @@ paths:
       summary: Run queries against DigitalNZ metadata search service.
       tags:
         - API calls
-  "/records/{record_id}.json":
+  "/records/{record_id}.{format}":
     get:
       description: |
         If you know its `record_id` you can use this endpoint to view all metadata associated with that specific record.
@@ -384,17 +384,7 @@ paths:
           required: true
           schema:
             type: integer
-        - description: |
-            Note - There is a small difference with some field names in the response between JSON and XML.  
-            When a field name has more than one word, JSON format will separate the words with an underscore, eg. "content_partner", whereas XML uses a hyphenated naming convention, eg. "content-partner".
-          in: query
-          name: format
-          required: true
-          schema:
-            enum:
-              - json
-              - xml
-            type: string
+        - $ref: "#/components/parameters/format"
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/fields"
       responses:
@@ -421,13 +411,110 @@ paths:
       summary: View metadata associated with a single record.
       tags:
         - API calls
+  "/records/{record_id}/more_like_this.{format}":
+    get:
+      description: |
+        This feature returns a set of search results that are similar (ie have similar metadata) to a specific record.
+      parameters:
+        - description: Every record has a unique, persistent *record_id*.
+          example: 35806021
+          in: path
+          name: record_id
+          required: true
+          schema:
+            type: integer
+        - $ref: "#/components/parameters/format"
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/fields"
+        - description: |
+            Comma-separated list of fields used to evaluate relatedness. Available fields to compare are *title* and *subject*, eg *&mlt_fields=title,subject* or *&mlt_fields=title*.
+          explode: false
+          in: query
+          name: mlt_fields
+          schema:
+            type: string
+        - description: |
+            More Like This (MLT) queries can be filtered in the same ways as regular searches, using the same syntax outined in the GET /records call above. This enables things like scoping the related records to only return Images eg *&and[category]=Images*, or to only show related records from a specific content partner eg *&and[content_partner]=Puke+Ariki*.
+          explode: false
+          in: query
+          name: filtering
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  page:
+                    description: Current page.
+                    example: 1
+                    type: integer
+                  per_page:
+                    description: Requested amount of records shown per page of results.
+                    example: 5
+                    type: integer
+                    xml:
+                      name: per-page
+                  records:
+                    items:
+                      $ref: "#/components/schemas/record"
+                    type: array
+                  request_url:
+                    description: The URL of current page of results.
+                    example: https://api.digitalnz.org/records/35806021/more_like_this.json?mlt_fields=title,description&page=1&fields=title,description,subject,display_collection,category&and[category]=Images
+                    type: string
+                    xml:
+                      name: request-url
+                  result_count:
+                    description: Total number of matching search results.
+                    example: 1907
+                    type: integer
+                    xml:
+                      name: result-count
+                type: object
+          description: ok
+        "403":
+          $ref: "#/components/responses/KeyError"
+        "404":
+          content:
+            application/json:
+              schema:
+                example:
+                  errors: Record with ID *record_id* was not found
+                type: object
+            application/xml:
+              example: <hash><errors>Record with ID *record_id* was not found</errors></hash>
+              schema:
+                type: object
+          description: Resource not found
+      summary: |
+        The "More Like This" call returns similar records to the specified ID.
+      tags:
+        - API calls
 components:
   parameters:
     api_key:
-      description: To access the API you will need your own DigitalNZ account and [API key](https://digitalnz.org/api_keys/edit).
-      in: query
-      name: api_key
-      required: true
+      description: |
+        The DigitalNZ API no longer requires a key to access public content. However, if you plan on using the API regularly, expect to be a high volume consumer or are planning on creating an application, we encourage you to use an API key so that we can:
+        - provide targeted help and support
+        - increase your query throughput (by negotiation)
+        - notify you directly of changes to the API
+        - gather usage metrics to help improve the service  
+
+        API requests that do not pass a valid API key/token are treated as unauthenticated. A maximum rate limit applies across all unauthenticated requests. This rate limit is in place to protect the service from overuse, resulting in unsustainable costs, or potential attack.
+
+        **Getting an API key**  
+        [Create a DigitalNZ account](https://digitalnz.org/sign_up), log in and select "[my API key](https://digitalnz.org/api_keys/edit)" from your username drop-down menu (on the right hand side)'. The key is a long string of jumbled letters and numbers (hash) that is unique to you. You are required to keep the key secret. (Refer to the [Developer API Terms of Use](https://digitalnz.org/about/terms-of-use/developer-api-terms-of-use) for more information).
+
+        **Using an API key**  
+        When you make a call to the API you'll need to pass the key in a custom HTTP header: ‘Authentication-Token’.
+        For example, a query using the ‘curl’ command might look like the following (where ‘{YOUR_API_KEY}’ is replaced with a valid API key):
+
+        `curl -H "Authentication-Token:{YOUR_API_KEY}" http://api.digitalnz.org/v3/records.json?text=kiwi`
+      in: header
+      name: Authentication-Token
+      required: false
       schema:
         type: string
     fields:
@@ -475,7 +562,7 @@ components:
           example: <hash><errors>Invalid API Key</errors></hash>
           schema:
             type: object
-      description: API Key is missing or invalid.
+      description: API Key (Authentication-Token) is invalid.
   schemas:
     record:
       description: |

@@ -194,13 +194,207 @@ tags:
     name: Tracking
   - description: ""
     name: Users
+  - description: ""
+    name: Accounting
 paths:
+  /accounting:
+    get:
+      description: Retrieves accounting activity during the queried timespan.
+      operationId: get-accounting
+      parameters:
+        - description: Orders invoice date. Date-time in ISO 8601 format for selecting orders after, or at, the specified time
+          in: query
+          name: fromDate
+          required: true
+          schema:
+            type: string
+        - description: Orders invoice date. Date-time in ISO 8601 format for selecting orders before, or at, the specified time
+          in: query
+          name: toDate
+          required: true
+          schema:
+            type: string
+        - description: A multiplier of the number of items (limit parameter) to skip before returning results
+          in: query
+          name: page
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+        - description: The numbers of items to return
+          in: query
+          name: limit
+          schema:
+            default: 80
+            maximum: 200
+            minimum: 1
+            type: integer
+        - description: A CSV of warehouse id, '123' or '1,2,3'
+          explode: false
+          in: query
+          name: warehouseIds
+          schema:
+            items:
+              type: integer
+            type: array
+          style: form
+        - description: A CSV of FDC order id, '123' or '1,2,3'
+          in: query
+          name: orderIds
+          schema:
+            items:
+              type: integer
+            type: array
+        - description: Adds additional information to the response, uses a CSV format for multiple values.
+          example: items
+          in: query
+          name: hydrate
+          required: true
+          schema:
+            items:
+              enum:
+                - items
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      properties:
+                        fees:
+                          properties:
+                            box:
+                              description: ""
+                              format: float
+                              type: number
+                            envelope:
+                              description: ""
+                              format: float
+                              type: number
+                            fulfillment:
+                              description: ""
+                              format: float
+                              type: number
+                            insert:
+                              description: ""
+                              format: float
+                              type: number
+                            kitting:
+                              description: ""
+                              format: float
+                              type: number
+                            picking:
+                              description: ""
+                              format: float
+                              type: number
+                            postage:
+                              description: ""
+                              format: float
+                              type: number
+                            print:
+                              description: ""
+                              format: float
+                              type: number
+                            total:
+                              description: ""
+                              format: float
+                              type: number
+                          type: object
+                        itemCount:
+                          description: Total number of items accounted for
+                          type: integer
+                        items:
+                          items:
+                            properties:
+                              id:
+                                minimum: 1
+                                type: integer
+                              name:
+                                type: string
+                              quantity:
+                                minimum: 1
+                                type: integer
+                              wmsItemId:
+                                type: string
+                            type: object
+                          type: array
+                        merchant:
+                          properties:
+                            id:
+                              description: ""
+                              type: integer
+                            name:
+                              description: Name of the merchant
+                              type: string
+                          type: object
+                        order:
+                          properties:
+                            id:
+                              description: FDC order id
+                              type: integer
+                            invoiceDate:
+                              description: Date of the order when it was recorded by accounting.
+                              format: date
+                              type: string
+                            merchantOrderId:
+                              description: Merchant order id
+                              type: integer
+                            recordedDate:
+                              description: Date of the order when it was initially received.
+                              format: date
+                              type: string
+                          type: object
+                        warehouse:
+                          properties:
+                            id:
+                              description: ""
+                              type: integer
+                            shortName:
+                              description: Name of the merchant
+                              type: string
+                          type: object
+                      title: Accounting.v2
+                      type: object
+                    type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          count:
+                            description: Count of records returned in response, this will be equal to or less then the limit parameter
+                            type: integer
+                          currentPage:
+                            description: Current page of the response, this will match the page parameter
+                            type: integer
+                          total:
+                            description: Total number of records available to request
+                            type: integer
+                          totalPages:
+                            description: Total number of pages available to request
+                            type: integer
+                        title: Pagination.v2
+                        type: object
+                    type: object
+                title: AccountingArray.v2
+                type: object
+          description: Accounting
+      security:
+        - fdcAuth:
+            - oms
+      summary: List Order Accounting
+      tags:
+        - Accounting
   /inventory:
     get:
       description: Retrieve inventory for one or more items. This API requires elevated permissions, please speak to your success manager.
       operationId: get-inventory
       parameters:
-        - description: A multiplier of the number of items (limit paramater) to skip before returning results
+        - description: A multiplier of the number of items (limit parameter) to skip before returning results
           in: query
           name: page
           schema:
@@ -219,6 +413,15 @@ paths:
           explode: false
           in: query
           name: merchantIds
+          schema:
+            items:
+              type: integer
+            type: array
+          style: form
+        - description: A CSV of warehouse id, '123' or '1,2,3'
+          explode: false
+          in: query
+          name: warehouseIds
           schema:
             items:
               type: integer
@@ -276,10 +479,10 @@ paths:
                       pagination:
                         properties:
                           count:
-                            description: Count of records returned in response, this will be equal to or less then the limit paramater
+                            description: Count of records returned in response, this will be equal to or less then the limit parameter
                             type: integer
                           currentPage:
-                            description: Current page of the response, this will match the page paramater
+                            description: Current page of the response, this will match the page parameter
                             type: integer
                           total:
                             description: Total number of records available to request
@@ -960,6 +1163,26 @@ paths:
                 title: ErrorStandardWithContext.v2
                 type: object
           description: Conflict
+        "422":
+          content:
+            application/json:
+              examples:
+                validation-failure:
+                  value:
+                    context:
+                      id: 123
+                    message: Validation Failure
+              schema:
+                properties:
+                  context:
+                    items:
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: ErrorStandardWithContext.v2
+                type: object
+          description: Validation Failure
       security:
         - fdcAuth:
             - oms
@@ -1149,7 +1372,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: A multiplier of the number of items (limit paramater) to skip before returning results
+        - description: A multiplier of the number of items (limit parameter) to skip before returning results
           in: query
           name: page
           schema:
@@ -1280,10 +1503,10 @@ paths:
                       pagination:
                         properties:
                           count:
-                            description: Count of records returned in response, this will be equal to or less then the limit paramater
+                            description: Count of records returned in response, this will be equal to or less then the limit parameter
                             type: integer
                           currentPage:
-                            description: Current page of the response, this will match the page paramater
+                            description: Current page of the response, this will match the page parameter
                             type: integer
                           total:
                             description: Total number of records available to request
@@ -1779,7 +2002,7 @@ components:
         type: array
       style: form
     pageParam:
-      description: A multiplier of the number of items (limit paramater) to skip before returning results
+      description: A multiplier of the number of items (limit parameter) to skip before returning results
       in: query
       name: page
       schema:
@@ -1832,6 +2055,7 @@ x-tagGroups:
       - Orders
       - Returns
       - Partners
+      - Accounting
   - name: Items
     tags:
       - Inventory

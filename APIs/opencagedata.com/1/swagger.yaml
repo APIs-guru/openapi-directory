@@ -57,9 +57,13 @@ paths:
           name: key
           required: true
           type: string
-        - description: when true we attempt to abbreviate the formatted field in the response.
+        - description: when true we attempt to abbreviate the formatted field of results.
           in: query
           name: abbrv
+          type: boolean
+        - description: when true we include only address details in the formatted field of results.
+          in: query
+          name: address_only
           type: boolean
         - description: if true the request is included in the response.
           in: query

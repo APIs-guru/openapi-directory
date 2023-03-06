@@ -54,7 +54,7 @@ produces:
 securityDefinitions:
   apiToken:
     description: |-
-      API token can be acquired from https://ci.appveyor.com/api-token
+      API token can be acquired from https://ci.appveyor.com/api-keys
       This value must be passed to the server in the `Authorization` header as `"Bearer <token>"`.  Since [bearer token authentication support is not explicitly supported in OpenAPI 2.0](https://github.com/OAI/OpenAPI-Specification/issues/583), client code will vary.  Clients created with [swagger-codegen](https://github.com/swagger-api/swagger-codegen) should set `apiKeyPrefix` to `"Bearer"` and set `apiKey` to the token.  Other clients may need to set `apiKey` to the string `"Bearer <token>"`.
       Note that this should be [fixed in OpenAPI 3.0](https://github.com/OAI/OpenAPI-Specification/pull/807)), whenever that becomes available and supported.
       #### User-Level API Keys
@@ -66,7 +66,11 @@ security:
   - apiToken: []
 parameters:
   accountName:
-    description: AppVeyor account name (`accountName` property of `UserAccount`)
+    description: |-
+      AppVeyor account name on which to operate.
+      Accounts for which a user has access are listed on the [Security page of
+      the user profile](https://ci.appveyor.com/security) (when logged in).
+      The user account is also the `accountName` property of `UserAccount`.
     in: path
     minLength: 1
     name: accountName
@@ -242,6 +246,13 @@ parameters:
     name: userId
     required: true
     type: integer
+  userInvitationId:
+    description: User Invitation ID
+    in: path
+    minLength: 1
+    name: userInvitationId
+    required: true
+    type: string
 responses:
   Error:
     description: Error
@@ -353,7 +364,10 @@ paths:
         - application/octet-stream
       responses:
         "200":
-          description: Success
+          description: |-
+            Success.
+            Note:  Response content is plain text sent with Content-Type
+            application/octet-stream.
           schema:
             type: file
         default:
@@ -488,24 +502,6 @@ paths:
         default:
           $ref: "#/responses/Error"
       summary: Get collaborators
-      tags:
-        - Collaborator
-    post:
-      externalDocs:
-        url: https://www.appveyor.com/docs/api/team/#add-collaborator
-      operationId: addCollaborator
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/CollaboratorAddition"
-      responses:
-        "204":
-          description: Success
-        default:
-          $ref: "#/responses/Error"
-      summary: Add collaborator
       tags:
         - Collaborator
     put:
@@ -650,7 +646,7 @@ paths:
       tags:
         - Deployment
   /deployments/stop:
-    delete:
+    put:
       externalDocs:
         url: https://www.appveyor.com/docs/api/environments-deployments/#cancel-deployment
       operationId: cancelDeployment
@@ -2121,6 +2117,96 @@ paths:
         - Role
     parameters:
       - $ref: "#/parameters/roleId"
+  /user/join-account:
+    put:
+      operationId: joinAccount
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/JoinAccountRequest"
+      responses:
+        "200":
+          description: Success
+          examples:
+            application/json:
+              accounts:
+                - accountId: 2
+                  allowCustomBuildEnvironment: false
+                  blocked: false
+                  created: 2016-12-30T05:00:43.038419+00:00
+                  featureFlags: distv2
+                  gitHubPlan: false
+                  isCollaborator: true
+                  isEnterprisePlan: false
+                  isOwner: false
+                  manualPayments: false
+                  name: NuGet
+                  permissions: []
+                  planId: free
+                  planStart: 2016-09-09T23:01:29.941128+00:00
+                  planStatus: active
+                  roleId: 5
+                  roleName: User
+                  unpaid: false
+                  unverified: false
+                  updated: 2017-01-01T21:21:10.1292694+00:00
+                - accountId: 2
+                  allowCustomBuildEnvironment: false
+                  blocked: false
+                  created: 2016-09-09T23:01:29.941128+00:00
+                  featureFlags: distv2
+                  gitHubPlan: false
+                  isCollaborator: false
+                  isEnterprisePlan: false
+                  isOwner: true
+                  manualPayments: false
+                  name: nuget
+                  permissions:
+                    - ManageProjects
+                    - UpdateProjectSettings
+                    - RunProjectBuild
+                    - ManageEnvironments
+                    - UpdateEnvironmentSettings
+                    - DeployToEnvironment
+                    - ConfigureBuildEnvironment
+                    - UpdateAccountDetails
+                    - UpdateBillingDetails
+                    - ManageApplicationAuthorizations
+                    - AddUser
+                    - UpdateUserDetails
+                    - DeleteUser
+                    - AddRole
+                    - UpdateRoleDetails
+                    - DeleteRole
+                  planId: free
+                  planStart: 2016-09-09T23:01:29.941128+00:00
+                  planStatus: active
+                  roleId: 4
+                  roleName: Administrator
+                  unpaid: false
+                  unverified: false
+                  updated: 2016-09-21T00:08:35.0728561+00:00
+              setupRequired: false
+              twoFactorAuthRequired: false
+              user:
+                created: 2016-09-09T23:01:29.941128+00:00
+                email: nuget@appveyor.com
+                fullName: NuGet
+                gitHubUsername: nuget
+                gravatarHash: 142e1aa89b96190de9f4ce6569ebb421
+                pageSize: 10
+                twoFactorAuthEnabled: false
+                updated: 2017-01-03T02:06:50.0238036+00:00
+                userId: 2019
+          schema:
+            $ref: "#/definitions/SessionModel"
+        default:
+          $ref: "#/responses/Error"
+      summary: Join Account
+      tags:
+        - User
   /users:
     get:
       externalDocs:
@@ -2154,24 +2240,6 @@ paths:
       summary: Get users
       tags:
         - User
-    post:
-      externalDocs:
-        url: https://www.appveyor.com/docs/api/team/#add-user
-      operationId: addUser
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/UserAddition"
-      responses:
-        "204":
-          description: Success
-        default:
-          $ref: "#/responses/Error"
-      summary: Add user
-      tags:
-        - User
     put:
       externalDocs:
         url: https://www.appveyor.com/docs/api/team/#update-user
@@ -2190,6 +2258,59 @@ paths:
       summary: Update user
       tags:
         - User
+  /users/invitations:
+    get:
+      operationId: getUserInvitations
+      responses:
+        "200":
+          description: Success
+          examples:
+            application/json:
+              - accountId: 2
+                accountName: FeodorFitsner
+                created: 2019-03-20T16:22:50.2504181+00:00
+                email: nuget@appveyor.com
+                roleId: 5
+                roleName: User
+                userInvitationId: 6i9w9rcp5us7lxnbdo63
+          schema:
+            items:
+              $ref: "#/definitions/UserInvitationModel"
+            type: array
+        default:
+          $ref: "#/responses/Error"
+      summary: Get user invitations
+      tags:
+        - User
+    post:
+      operationId: inviteUser
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/InviteUserRequest"
+      responses:
+        "204":
+          description: Success
+        default:
+          $ref: "#/responses/Error"
+      summary: Invite user
+      tags:
+        - User
+  "/users/invitations/{userInvitationId}":
+    delete:
+      operationId: cancelUserInvitation
+      responses:
+        "204":
+          description: Success
+        default:
+          $ref: "#/responses/Error"
+      summary: Cancel user invitation
+      tags:
+        - User
+    parameters:
+      - $ref: "#/parameters/userInvitationId"
   "/users/{userId}":
     delete:
       externalDocs:
@@ -2257,6 +2378,7 @@ definitions:
   AceAccessRight:
     properties:
       allowed:
+        description: true to allow, false to deny, undefined to inherit
         type: boolean
       name:
         $ref: "#/definitions/AccessRightName"
@@ -2537,24 +2659,6 @@ definitions:
       - WMF 5
       - Windows Server 2019
     type: string
-  CollaboratorAddition:
-    description: |
-      Technically `roleId` has default value 0 and is not required, but
-      since role 0 never exists it would always cause a 404 response.
-    example:
-      email: john@smith.com
-      roleId: 3040
-    properties:
-      email:
-        format: email
-        type: string
-      roleId:
-        minimum: 0
-        type: integer
-    required:
-      - email
-      - roleId
-    type: object
   CollaboratorUpdate:
     description: |
       Technically `userId` and `roleId` have default value 0 and are not
@@ -2612,15 +2716,7 @@ definitions:
           accountId:
             type: integer
           projectsMode:
-            description: |-
-              0 is "Any project can be deployed to the environment"
-              1 is "Only selected projects can be deployed to the environment"
-              2 is "All except selected projects can be deployed to the environment"
-            enum:
-              - 0
-              - 1
-              - 2
-            type: integer
+            $ref: "#/definitions/DeploymentProjectSelectionMode"
           securityDescriptor:
             $ref: "#/definitions/SecurityDescriptor"
           tags:
@@ -2798,6 +2894,21 @@ definitions:
       - all
       - none
     type: string
+  DeploymentProjectSelectionMode:
+    description: Project selection mode for deployment environments.
+    enum:
+      - 0
+      - 1
+      - 2
+    type: integer
+    x-enum-descriptions:
+      - Any project can be deployed to the environment.
+      - Only selected projects can be deployed to the environment.
+      - All projects except the selected projects can be deployed to the environment.
+    x-enum-varnames:
+      - Any
+      - Only Selected
+      - All Except Selected
   DeploymentProvider:
     properties:
       onBranch:
@@ -2907,6 +3018,10 @@ definitions:
     required:
       - message
     type: object
+  FeatureFlags:
+    enum:
+      - distv2
+    type: string
   GroupName:
     enum:
       - Account
@@ -2947,6 +3062,18 @@ definitions:
       - GET
       - POST
     type: string
+  InviteUserRequest:
+    properties:
+      email:
+        format: email
+        type: string
+      roleId:
+        minimum: 0
+        type: integer
+    required:
+      - email
+      - roleId
+    type: object
   Job:
     allOf:
       - $ref: "#/definitions/Timestamped"
@@ -2964,6 +3091,14 @@ definitions:
           status:
             $ref: "#/definitions/Status"
         type: object
+  JoinAccountRequest:
+    properties:
+      invitationId:
+        minLength: 1
+        type: string
+    required:
+      - invitationId
+    type: object
   MSBuildVerbosity:
     enum:
       - quiet
@@ -3221,6 +3356,14 @@ definitions:
     required:
       - name
     type: object
+  PlanName:
+    enum:
+      - free
+    type: string
+  PlanStatus:
+    enum:
+      - active
+    type: string
   PlatformName:
     enum:
       - ARM
@@ -4025,6 +4168,11 @@ definitions:
       - pwsh
       - sh
     type: string
+    x-enum-descriptions:
+      - Command Prompt/Batch Script/cmd.exe
+      - PowerShell
+      - PowerShell Core
+      - POSIX shell
   SecurityDescriptor:
     properties:
       accessRightDefinitions:
@@ -4036,6 +4184,112 @@ definitions:
           $ref: "#/definitions/RoleAce"
         type: array
     type: object
+  SessionModel:
+    properties:
+      accounts:
+        items:
+          $ref: "#/definitions/SessionUserAccountModel"
+        type: array
+      setupRequired:
+        type: boolean
+      twoFactorAuthRequired:
+        type: boolean
+      user:
+        $ref: "#/definitions/SessionUserModel"
+    type: object
+  SessionUserAccountModel:
+    allOf:
+      - $ref: "#/definitions/Timestamped"
+      - properties:
+          accountId:
+            minimum: 0
+            readOnly: true
+            type: integer
+          allowCustomBuildEnvironment:
+            type: boolean
+          blocked:
+            type: boolean
+          featureFlags:
+            $ref: "#/definitions/FeatureFlags"
+          gitHubPlan:
+            type: boolean
+          gitHubPlanOrg:
+            type: string
+          isCollaborator:
+            readOnly: true
+            type: boolean
+          isEnterprisePlan:
+            type: boolean
+          isOwner:
+            readOnly: true
+            type: boolean
+          manualPayments:
+            type: boolean
+          name:
+            readOnly: true
+            type: string
+          permissions:
+            items:
+              $ref: "#/definitions/PermissionName"
+            type: array
+          planEnd:
+            format: date-time
+            readOnly: true
+            type: string
+          planId:
+            $ref: "#/definitions/PlanName"
+          planStart:
+            format: date-time
+            readOnly: true
+            type: string
+          planStatus:
+            $ref: "#/definitions/PlanStatus"
+          roleId:
+            minimum: 0
+            type: integer
+          roleName:
+            readOnly: true
+            type: string
+          timeZoneId:
+            type: string
+          unpaid:
+            type: boolean
+          unverified:
+            type: boolean
+        type: object
+  SessionUserModel:
+    allOf:
+      - $ref: "#/definitions/Timestamped"
+      - properties:
+          bitBucketUsername:
+            type: string
+          email:
+            format: email
+            type: string
+          fullName:
+            type: string
+          gitHubUsername:
+            type: string
+          gitLabUserId:
+            type: string
+          gravatarHash:
+            type: string
+          pageSize:
+            minimum: 0
+            readOnly: true
+            type: integer
+          twoFactorAuthEnabled:
+            type: boolean
+          userId:
+            minimum: 0
+            readOnly: true
+            type: integer
+          vsoUsername:
+            type: string
+        required:
+          - userId
+          - email
+        type: object
   Status:
     enum:
       - cancelled
@@ -4198,38 +4452,35 @@ definitions:
       - successfulDeploymentNotification
       - failedDeploymentNotification
     type: object
-  UserAddition:
-    example:
-      confirmPassword: password
-      email: john@smith.com
-      fullName: John Smith
-      generatePassword: false
-      password: password
-      roleId: 4
+  UserInvitationModel:
     properties:
-      confirmPassword:
-        format: password
-        minLength: 1
+      accountId:
+        readOnly: true
+        type: integer
+      accountName:
+        readOnly: true
+        type: string
+      created:
+        format: date-time
+        readOnly: true
         type: string
       email:
         format: email
         type: string
-      fullName:
-        type: string
-      generatePassword:
-        type: boolean
-      password:
-        format: password
-        minLength: 1
-        type: string
       roleId:
-        description: |
-          Technically `roleId` has default value 0 and is not required, but
-          since role 0 never exists it would always cause a 404 response.
         minimum: 0
         type: integer
+      roleName:
+        readOnly: true
+        type: string
+      userInvitationId:
+        minLength: 1
+        readOnly: true
+        type: string
     required:
-      - fullName
+      - userInvitationId
       - email
       - roleId
+      - accountId
+      - created
     type: object

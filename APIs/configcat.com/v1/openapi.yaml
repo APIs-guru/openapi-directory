@@ -122,6 +122,10 @@ tags:
 
       <a href="https://configcat.com/docs/main-concepts/#environment" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Environments.
     name: Environments
+  - description: |-
+      With these endpoints you can manage your Segments.
+      Segments allow you to group your users based on any of their properties. Define user segments and add them to multiple feature flags.
+    name: Segments
   - description: With these endpoints you can manage your SDK Keys.
     name: SDK Keys
   - description: With these endpoints you can manage Tags. Tags are stored under a Product. You can  and add a Tag to a Feature Flag or Setting using the [Update Flag](#operation/update-setting) endpoint.
@@ -130,7 +134,66 @@ tags:
     name: Audit logs
   - description: Information about the current user.
     name: Me
+  - description: |-
+      With this endpoint you can upload Feature Flag and Setting usage references that will be shown on the ConfigCat Dashboard.
+
+      <a href="https://configcat.com/docs/advanced/code-references/overview/" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Code References.
+    name: Code References
 paths:
+  /v1/code-references:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CodeReferenceRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CodeReferenceRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CodeReferenceRequest"
+        required: true
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      tags:
+        - Code References
+  /v1/code-references/delete-reports:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/DeleteRepositoryReportsRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeleteRepositoryReportsRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/DeleteRepositoryReportsRequest"
+        required: true
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      tags:
+        - Code References
   "/v1/configs/{configId}":
     delete:
       description: This endpoint removes a Config identified by the `configId` parameter.
@@ -421,13 +484,13 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: "#/components/schemas/CreateSettingModel"
+              $ref: "#/components/schemas/CreateSettingInitialValues"
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateSettingModel"
+              $ref: "#/components/schemas/CreateSettingInitialValues"
           text/json:
             schema:
-              $ref: "#/components/schemas/CreateSettingModel"
+              $ref: "#/components/schemas/CreateSettingInitialValues"
         required: true
       responses:
         "201":
@@ -775,6 +838,11 @@ paths:
         	"value": true
         }
         ```
+
+        The `rolloutRules` property describes two types of rules:
+
+        - **Targeting rules**: When you want to add or update a targenting rule, the `comparator`, `comparisonAttribute`, and `comparisonValue` members are required.
+        - **Segment rules**: When you want to add add or update a segment rule, the `segmentId` which identifies the desired segment and the `segmentComparator` members are required.
       operationId: update-setting-value
       parameters:
         - description: The identifier of the Environment.
@@ -795,7 +863,6 @@ paths:
           in: query
           name: reason
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -814,6 +881,14 @@ paths:
                     value:
                       percentage: 70
                       value: false
+              add segment rules:
+                description: This example adds a segment to the evaluation rules.
+                value:
+                  - op: add
+                    path: /rolloutRules/-
+                    value:
+                      segmentComparator: isIn
+                      segmentId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               add targeting rules:
                 description: This example adds two items to the targeting evaluation rules.
                 value:
@@ -831,6 +906,15 @@ paths:
                       comparisonAttribute: Identifier
                       comparisonValue: "@blacklist.com"
                       value: false
+              modify targeting rule:
+                description: This example modifies the first targeting rule's comparison value and the second's value.
+                value:
+                  - op: replace
+                    path: /rolloutRules/0/comparisonValue
+                    value: "@example2.com"
+                  - op: replace
+                    path: /rolloutRules/1/value
+                    value: true
               reorder targeting rules:
                 description: This example swaps the first and the second targeting evaluation rule.
                 value:
@@ -844,9 +928,7 @@ paths:
                     path: /value
                     value: true
             schema:
-              items:
-                $ref: "#/components/schemas/Operation"
-              type: array
+              $ref: "#/components/schemas/JsonPatch"
           application/json:
             examples:
               add percentage rules:
@@ -862,6 +944,14 @@ paths:
                     value:
                       percentage: 70
                       value: false
+              add segment rules:
+                description: This example adds a segment to the evaluation rules.
+                value:
+                  - op: add
+                    path: /rolloutRules/-
+                    value:
+                      segmentComparator: isIn
+                      segmentId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               add targeting rules:
                 description: This example adds two items to the targeting evaluation rules.
                 value:
@@ -879,6 +969,15 @@ paths:
                       comparisonAttribute: Identifier
                       comparisonValue: "@blacklist.com"
                       value: false
+              modify targeting rule:
+                description: This example modifies the first targeting rule's comparison value and the second's value.
+                value:
+                  - op: replace
+                    path: /rolloutRules/0/comparisonValue
+                    value: "@example2.com"
+                  - op: replace
+                    path: /rolloutRules/1/value
+                    value: true
               reorder targeting rules:
                 description: This example swaps the first and the second targeting evaluation rule.
                 value:
@@ -892,57 +991,7 @@ paths:
                     path: /value
                     value: true
             schema:
-              items:
-                $ref: "#/components/schemas/Operation"
-              type: array
-          application/json-patch+json:
-            examples:
-              add percentage rules:
-                description: This example adds two items to the percentage evaluation rules.
-                value:
-                  - op: add
-                    path: /rolloutPercentageItems/-
-                    value:
-                      percentage: 30
-                      value: true
-                  - op: add
-                    path: /rolloutPercentageItems/-
-                    value:
-                      percentage: 70
-                      value: false
-              add targeting rules:
-                description: This example adds two items to the targeting evaluation rules.
-                value:
-                  - op: add
-                    path: /rolloutRules/-
-                    value:
-                      comparator: contains
-                      comparisonAttribute: Identifier
-                      comparisonValue: "@example.com"
-                      value: true
-                  - op: add
-                    path: /rolloutRules/-
-                    value:
-                      comparator: isOneOf
-                      comparisonAttribute: Identifier
-                      comparisonValue: "@blacklist.com"
-                      value: false
-              reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
-                value:
-                  - from: /rolloutRules/0
-                    op: move
-                    path: /rolloutRules/1
-              turn on a feature flag:
-                description: This example turns on a feature flag.
-                value:
-                  - op: replace
-                    path: /value
-                    value: true
-            schema:
-              items:
-                $ref: "#/components/schemas/Operation"
-              type: array
+              $ref: "#/components/schemas/JsonPatch"
           text/json:
             examples:
               add percentage rules:
@@ -958,6 +1007,14 @@ paths:
                     value:
                       percentage: 70
                       value: false
+              add segment rules:
+                description: This example adds a segment to the evaluation rules.
+                value:
+                  - op: add
+                    path: /rolloutRules/-
+                    value:
+                      segmentComparator: isIn
+                      segmentId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               add targeting rules:
                 description: This example adds two items to the targeting evaluation rules.
                 value:
@@ -975,6 +1032,15 @@ paths:
                       comparisonAttribute: Identifier
                       comparisonValue: "@blacklist.com"
                       value: false
+              modify targeting rule:
+                description: This example modifies the first targeting rule's comparison value and the second's value.
+                value:
+                  - op: replace
+                    path: /rolloutRules/0/comparisonValue
+                    value: "@example2.com"
+                  - op: replace
+                    path: /rolloutRules/1/value
+                    value: true
               reorder targeting rules:
                 description: This example swaps the first and the second targeting evaluation rule.
                 value:
@@ -988,9 +1054,7 @@ paths:
                     path: /value
                     value: true
             schema:
-              items:
-                $ref: "#/components/schemas/Operation"
-              type: array
+              $ref: "#/components/schemas/JsonPatch"
         required: true
       responses:
         "200":
@@ -1056,6 +1120,11 @@ paths:
         	"value": true
         }
         ```
+
+        The `rolloutRules` property describes two types of rules:
+
+        - **Targeting rules**: When you want to add or update a targenting rule, the `comparator`, `comparisonAttribute`, and `comparisonValue` members are required.
+        - **Segment rules**: When you want to add add or update a segment rule, the `segmentId` which identifies the desired segment and the `segmentComparator` members are required.
       operationId: replace-setting-value
       parameters:
         - description: The identifier of the Environment.
@@ -1076,7 +1145,6 @@ paths:
           in: query
           name: reason
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -1191,6 +1259,83 @@ paths:
       summary: Get Integration link
       tags:
         - Integration links
+  /v1/jira/Connect:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ConnectRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConnectRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ConnectRequest"
+      responses:
+        "200":
+          description: Success
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      tags:
+        - Integration links
+  "/v1/jira/environments/{environmentId}/settings/{settingId}/integrationLinks/{key}":
+    post:
+      operationId: jira-add-or-update-integration-link
+      parameters:
+        - description: The identifier of the Environment.
+          in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The id of the Setting.
+          in: path
+          name: settingId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: The key of the integration link.
+          in: path
+          name: key
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AddOrUpdateJiraIntegrationLinkModel"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddOrUpdateJiraIntegrationLinkModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AddOrUpdateJiraIntegrationLinkModel"
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/IntegrationLinkModel"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IntegrationLinkModel"
+          description: When everything is ok, the integration link data returned.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      tags:
+        - Integration links
   /v1/me:
     get:
       description: ""
@@ -1256,21 +1401,18 @@ paths:
           name: productId
           schema:
             format: uuid
-            nullable: true
             type: string
         - description: The identifier of the Config.
           in: query
           name: configId
           schema:
             format: uuid
-            nullable: true
             type: string
         - description: The identifier of the Environment.
           in: query
           name: environmentId
           schema:
             format: uuid
-            nullable: true
             type: string
         - description: Filter Audit logs by Audit log type.
           in: query
@@ -1284,14 +1426,12 @@ paths:
           name: fromUtcDateTime
           schema:
             format: date-time
-            nullable: true
             type: string
         - description: Filter Audit logs by ending UTC date.
           in: query
           name: toUtcDateTime
           schema:
             format: date-time
-            nullable: true
             type: string
       responses:
         "200":
@@ -1391,6 +1531,52 @@ paths:
       summary: Delete Member from Organization
       tags:
         - Members
+    post:
+      description: |-
+        This endpoint adds a Member identified by the `userId` to one or more Permission Groups. 
+        This endpoint can also be used to move a Member between Permission Groups within a Product.
+        Only a single Permission Group can be set per Product.
+      operationId: add-member-to-group
+      parameters:
+        - description: The identifier of the Organization.
+          in: path
+          name: organizationId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The identifier of the Member.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AddUserToGroupRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddUserToGroupRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AddUserToGroupRequest"
+        required: true
+      responses:
+        "200":
+          description: When the addition was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Update Member Permissions
+      tags:
+        - Members
   "/v1/organizations/{organizationId}/products":
     post:
       description: |-
@@ -1482,7 +1668,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: "#/components/schemas/PermissionGroupModel"
+                $ref: "#/components/schemas/PermissionGroupModel-haljson"
             application/json:
               schema:
                 $ref: "#/components/schemas/PermissionGroupModel"
@@ -1526,7 +1712,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: "#/components/schemas/PermissionGroupModel"
+                $ref: "#/components/schemas/PermissionGroupModel-haljson"
             application/json:
               schema:
                 $ref: "#/components/schemas/PermissionGroupModel"
@@ -1690,14 +1876,12 @@ paths:
           name: configId
           schema:
             format: uuid
-            nullable: true
             type: string
         - description: The identifier of the Environment.
           in: query
           name: environmentId
           schema:
             format: uuid
-            nullable: true
             type: string
         - description: Filter Audit logs by Audit log type.
           in: query
@@ -1711,14 +1895,12 @@ paths:
           name: fromUtcDateTime
           schema:
             format: date-time
-            nullable: true
             type: string
         - description: Filter Audit logs by ending UTC date.
           in: query
           name: toUtcDateTime
           schema:
             format: date-time
-            nullable: true
             type: string
       responses:
         "200":
@@ -2046,7 +2228,7 @@ paths:
             application/hal+json:
               schema:
                 items:
-                  $ref: "#/components/schemas/PermissionGroupModel"
+                  $ref: "#/components/schemas/PermissionGroupModel-haljson"
                 type: array
             application/json:
               schema:
@@ -2095,7 +2277,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: "#/components/schemas/PermissionGroupModel"
+                $ref: "#/components/schemas/PermissionGroupModel-haljson"
             application/json:
               schema:
                 $ref: "#/components/schemas/PermissionGroupModel"
@@ -2111,6 +2293,91 @@ paths:
       summary: Create Permission Group
       tags:
         - Permission Groups
+  "/v1/products/{productId}/segments":
+    get:
+      description: |-
+        This endpoint returns the list of the Segments that belongs to the given Product identified by the
+        `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+      operationId: get-segments
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SegmentListModel-haljson"
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SegmentListModel"
+                type: array
+          description: ""
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: List Segments
+      tags:
+        - Segments
+    post:
+      description: |-
+        This endpoint creates a new Segment in a specified Product 
+        identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+      operationId: create-segment
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateSegmentModel"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSegmentModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateSegmentModel"
+        required: true
+      responses:
+        "201":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/SegmentModel-haljson"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SegmentModel"
+          description: When the creation was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Create Segment
+      tags:
+        - Segments
   "/v1/products/{productId}/tags":
     get:
       description: |-
@@ -2192,6 +2459,110 @@ paths:
       summary: Create Tag
       tags:
         - Tags
+  "/v1/segments/{segmentId}":
+    delete:
+      description: This endpoint removes a Segment identified by the `segmentId` parameter.
+      operationId: delete-segment
+      parameters:
+        - description: The identifier of the Segment.
+          in: path
+          name: segmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: When the delete was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Delete Segment
+      tags:
+        - Segments
+    get:
+      description: |-
+        This endpoint returns the metadata of a Segment
+        identified by the `segmentId`.
+      operationId: get-segment
+      parameters:
+        - description: The identifier of the Segment.
+          in: path
+          name: segmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/SegmentModel-haljson"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SegmentModel"
+          description: When everything is ok, the config data returned.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Get Segment
+      tags:
+        - Segments
+    put:
+      description: This endpoint updates a Segment identified by the `segmentId` parameter.
+      operationId: update-segment
+      parameters:
+        - description: The identifier of the Segment.
+          in: path
+          name: segmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateSegmentModel"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSegmentModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSegmentModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/SegmentModel-haljson"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SegmentModel"
+          description: ""
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Update Segment
+      tags:
+        - Segments
   "/v1/settings/{settingId}":
     delete:
       description: |-
@@ -2333,24 +2704,13 @@ paths:
         content:
           application/*+json:
             schema:
-              items:
-                $ref: "#/components/schemas/Operation"
-              type: array
+              $ref: "#/components/schemas/JsonPatch"
           application/json:
             schema:
-              items:
-                $ref: "#/components/schemas/Operation"
-              type: array
-          application/json-patch+json:
-            schema:
-              items:
-                $ref: "#/components/schemas/Operation"
-              type: array
+              $ref: "#/components/schemas/JsonPatch"
           text/json:
             schema:
-              items:
-                $ref: "#/components/schemas/Operation"
-              type: array
+              $ref: "#/components/schemas/JsonPatch"
         required: true
       responses:
         "200":
@@ -2398,7 +2758,6 @@ paths:
         - description: The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
           in: header
           name: X-CONFIGCAT-SDKKEY
-          required: true
           schema:
             type: string
       responses:
@@ -2491,12 +2850,10 @@ paths:
           in: query
           name: reason
           schema:
-            nullable: true
             type: string
         - description: The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
           in: header
           name: X-CONFIGCAT-SDKKEY
-          required: true
           schema:
             type: string
       requestBody:
@@ -2516,6 +2873,14 @@ paths:
                     value:
                       percentage: 70
                       value: false
+              add segment rules:
+                description: This example adds a segment to the evaluation rules.
+                value:
+                  - op: add
+                    path: /rolloutRules/-
+                    value:
+                      segmentComparator: isIn
+                      segmentId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               add targeting rules:
                 description: This example adds two items to the targeting evaluation rules.
                 value:
@@ -2533,6 +2898,15 @@ paths:
                       comparisonAttribute: Identifier
                       comparisonValue: "@blacklist.com"
                       value: false
+              modify targeting rule:
+                description: This example modifies the first targeting rule's comparison value and the second's value.
+                value:
+                  - op: replace
+                    path: /rolloutRules/0/comparisonValue
+                    value: "@example2.com"
+                  - op: replace
+                    path: /rolloutRules/1/value
+                    value: true
               reorder targeting rules:
                 description: This example swaps the first and the second targeting evaluation rule.
                 value:
@@ -2546,9 +2920,7 @@ paths:
                     path: /value
                     value: true
             schema:
-              items:
-                $ref: "#/components/schemas/Operation"
-              type: array
+              $ref: "#/components/schemas/JsonPatch"
           application/json:
             examples:
               add percentage rules:
@@ -2564,6 +2936,14 @@ paths:
                     value:
                       percentage: 70
                       value: false
+              add segment rules:
+                description: This example adds a segment to the evaluation rules.
+                value:
+                  - op: add
+                    path: /rolloutRules/-
+                    value:
+                      segmentComparator: isIn
+                      segmentId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               add targeting rules:
                 description: This example adds two items to the targeting evaluation rules.
                 value:
@@ -2581,6 +2961,15 @@ paths:
                       comparisonAttribute: Identifier
                       comparisonValue: "@blacklist.com"
                       value: false
+              modify targeting rule:
+                description: This example modifies the first targeting rule's comparison value and the second's value.
+                value:
+                  - op: replace
+                    path: /rolloutRules/0/comparisonValue
+                    value: "@example2.com"
+                  - op: replace
+                    path: /rolloutRules/1/value
+                    value: true
               reorder targeting rules:
                 description: This example swaps the first and the second targeting evaluation rule.
                 value:
@@ -2594,57 +2983,7 @@ paths:
                     path: /value
                     value: true
             schema:
-              items:
-                $ref: "#/components/schemas/Operation"
-              type: array
-          application/json-patch+json:
-            examples:
-              add percentage rules:
-                description: This example adds two items to the percentage evaluation rules.
-                value:
-                  - op: add
-                    path: /rolloutPercentageItems/-
-                    value:
-                      percentage: 30
-                      value: true
-                  - op: add
-                    path: /rolloutPercentageItems/-
-                    value:
-                      percentage: 70
-                      value: false
-              add targeting rules:
-                description: This example adds two items to the targeting evaluation rules.
-                value:
-                  - op: add
-                    path: /rolloutRules/-
-                    value:
-                      comparator: contains
-                      comparisonAttribute: Identifier
-                      comparisonValue: "@example.com"
-                      value: true
-                  - op: add
-                    path: /rolloutRules/-
-                    value:
-                      comparator: isOneOf
-                      comparisonAttribute: Identifier
-                      comparisonValue: "@blacklist.com"
-                      value: false
-              reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
-                value:
-                  - from: /rolloutRules/0
-                    op: move
-                    path: /rolloutRules/1
-              turn on a feature flag:
-                description: This example turns on a feature flag.
-                value:
-                  - op: replace
-                    path: /value
-                    value: true
-            schema:
-              items:
-                $ref: "#/components/schemas/Operation"
-              type: array
+              $ref: "#/components/schemas/JsonPatch"
           text/json:
             examples:
               add percentage rules:
@@ -2660,6 +2999,14 @@ paths:
                     value:
                       percentage: 70
                       value: false
+              add segment rules:
+                description: This example adds a segment to the evaluation rules.
+                value:
+                  - op: add
+                    path: /rolloutRules/-
+                    value:
+                      segmentComparator: isIn
+                      segmentId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               add targeting rules:
                 description: This example adds two items to the targeting evaluation rules.
                 value:
@@ -2677,6 +3024,15 @@ paths:
                       comparisonAttribute: Identifier
                       comparisonValue: "@blacklist.com"
                       value: false
+              modify targeting rule:
+                description: This example modifies the first targeting rule's comparison value and the second's value.
+                value:
+                  - op: replace
+                    path: /rolloutRules/0/comparisonValue
+                    value: "@example2.com"
+                  - op: replace
+                    path: /rolloutRules/1/value
+                    value: true
               reorder targeting rules:
                 description: This example swaps the first and the second targeting evaluation rule.
                 value:
@@ -2690,9 +3046,7 @@ paths:
                     path: /value
                     value: true
             schema:
-              items:
-                $ref: "#/components/schemas/Operation"
-              type: array
+              $ref: "#/components/schemas/JsonPatch"
         required: true
       responses:
         "200":
@@ -2771,12 +3125,10 @@ paths:
           in: query
           name: reason
           schema:
-            nullable: true
             type: string
         - description: The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
           in: header
           name: X-CONFIGCAT-SDKKEY
-          required: true
           schema:
             type: string
       requestBody:
@@ -3017,6 +3369,42 @@ components:
           nullable: true
           type: string
       type: object
+    AddOrUpdateJiraIntegrationLinkModel:
+      additionalProperties: false
+      properties:
+        clientKey:
+          maxLength: 255
+          minLength: 0
+          type: string
+        description:
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        jiraJwtToken:
+          maxLength: 15000
+          minLength: 0
+          type: string
+        url:
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+      required:
+        - clientKey
+        - jiraJwtToken
+      type: object
+    AddUserToGroupRequest:
+      additionalProperties: false
+      properties:
+        permissionGroupIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+      required:
+        - permissionGroupIds
+      type: object
     AuditLogItemModel:
       additionalProperties: false
       properties:
@@ -3032,6 +3420,8 @@ components:
         auditLogType:
           nullable: true
           type: string
+        auditLogTypeEnum:
+          $ref: "#/components/schemas/AuditLogType"
         details:
           nullable: true
           type: string
@@ -3054,6 +3444,7 @@ components:
         - productChanged
         - productOwnershipTransferred
         - productDeleted
+        - productsReordered
         - teamMemberInvited
         - teamMemberInvitationRevoked
         - teamMemberJoined
@@ -3066,12 +3457,15 @@ components:
         - configCreated
         - configChanged
         - configDeleted
+        - configsReordered
         - environmentCreated
         - environmentChanged
         - environmentDeleted
+        - environmentsReordered
         - settingCreated
         - settingChanged
         - settingDeleted
+        - settingsReordered
         - settingValueChanged
         - webHookCreated
         - webHookChanged
@@ -3093,9 +3487,7 @@ components:
         - organizationRemoved
         - organizationChanged
         - organizationSubscriptionTypeChanged
-        - organizationAdminAdded
         - organizationAdminChanged
-        - organizationAdminRemoved
         - organizationAdminLeft
         - organizationAdminDisabled2FA
         - tagAdded
@@ -3112,19 +3504,85 @@ components:
         - domainSamlDeleted
         - autoProvisioningConfigurationChanged
         - organizationMemberJoined
-        - organizationMemberProductAccessRequested
-        - organizationMemberAccessRequestDeclined
-        - organizationMemberAccessRequestAccepted
+        - organizationMemberProductJoinRequested
+        - organizationMemberProductJoinRequestRejected
+        - organizationMemberProductJoinRequestApproved
+        - codeReferencesUploaded
+        - codeReferenceDeleted
+        - codeReferenceStaleBranchDeleted
+        - segmentCreated
+        - segmentChanged
+        - segmentDeleted
+        - webhookSigningKeyDeleted
+        - webhookSigningKeyCreated
       type: string
+    CodeReferenceRequest:
+      additionalProperties: false
+      properties:
+        activeBranches:
+          description: The currently active branches of the repository. Each previously uploaded report that belongs to a non-reported active branch is being deleted.
+          items:
+            type: string
+          nullable: true
+          type: array
+        branch:
+          description: The source control branch on where the scan was performed. (Source of the branch selector on the ConfigCat Dashboard)
+          maxLength: 255
+          minLength: 0
+          type: string
+        commitHash:
+          description: The related commit's hash. (Appears on the ConfigCat Dashboard)
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+        commitUrl:
+          description: The related commit's URL. (Appears on the ConfigCat Dashboard)
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        configId:
+          description: The Config's identifier the scanning was performed against.
+          format: uuid
+          type: string
+        flagReferences:
+          description: The actual code reference collection.
+          items:
+            $ref: "#/components/schemas/FlagReference"
+          nullable: true
+          type: array
+        repository:
+          description: The source control repository that contains the scanned code. (Source of the repository selector on the ConfigCat Dashboard)
+          maxLength: 255
+          minLength: 0
+          type: string
+        uploader:
+          description: The scanning tool's name. (Appears on the ConfigCat Dashboard)
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+      required:
+        - branch
+        - configId
+        - repository
+      type: object
     ConfigModel:
       additionalProperties: false
       properties:
         configId:
           format: uuid
           type: string
+        description:
+          nullable: true
+          type: string
         name:
           nullable: true
           type: string
+        order:
+          format: int32
+          type: integer
         product:
           $ref: "#/components/schemas/ProductModel"
       type: object
@@ -3163,17 +3621,27 @@ components:
                       type: string
                     permission-groups:
                       type: string
+                    segments:
+                      type: string
                     self:
                       type: string
                     tags:
                       type: string
                   type: object
+                description:
+                  nullable: true
+                  type: string
                 name:
                   nullable: true
                   type: string
+                order:
+                  format: int32
+                  type: integer
                 productId:
                   format: uuid
                   type: string
+                reasonRequired:
+                  type: boolean
               type: object
           type: object
         _links:
@@ -3186,9 +3654,15 @@ components:
         configId:
           format: uuid
           type: string
+        description:
+          nullable: true
+          type: string
         name:
           nullable: true
           type: string
+        order:
+          format: int32
+          type: integer
       type: object
     ConfigSettingValueModel:
       additionalProperties: false
@@ -3228,10 +3702,8 @@ components:
           nullable: true
           type: string
         value:
-          additionalProperties: false
           description: The value to serve. It must respect the setting type.
           nullable: true
-          type: object
       type: object
     ConfigSettingValuesModel:
       additionalProperties: false
@@ -3248,9 +3720,29 @@ components:
           nullable: true
           type: array
       type: object
+    ConnectRequest:
+      additionalProperties: false
+      properties:
+        clientKey:
+          maxLength: 255
+          minLength: 0
+          type: string
+        jiraJwtToken:
+          maxLength: 15000
+          minLength: 0
+          type: string
+      required:
+        - clientKey
+        - jiraJwtToken
+      type: object
     CreateConfigRequest:
       additionalProperties: false
       properties:
+        description:
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
         name:
           maxLength: 255
           minLength: 0
@@ -3261,12 +3753,45 @@ components:
     CreateEnvironmentModel:
       additionalProperties: false
       properties:
+        color:
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+        description:
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
         name:
           maxLength: 255
           minLength: 0
           type: string
       required:
         - name
+      type: object
+    CreateOrUpdateEnvironmentAccessModel:
+      additionalProperties: false
+      properties:
+        color:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+        environmentAccessType:
+          $ref: "#/components/schemas/EnvironmentAccessType"
+        environmentId:
+          format: uuid
+          type: string
+        name:
+          nullable: true
+          type: string
+        order:
+          format: int32
+          type: integer
+        reasonRequired:
+          type: boolean
       type: object
     CreatePermissionGroupRequest:
       additionalProperties: false
@@ -3277,6 +3802,8 @@ components:
           type: boolean
         canCreateOrUpdateEnvironment:
           type: boolean
+        canCreateOrUpdateSegments:
+          type: boolean
         canCreateOrUpdateSetting:
           type: boolean
         canCreateOrUpdateTag:
@@ -3284,6 +3811,8 @@ components:
         canDeleteConfig:
           type: boolean
         canDeleteEnvironment:
+          type: boolean
+        canDeleteSegments:
           type: boolean
         canDeleteSetting:
           type: boolean
@@ -3311,7 +3840,7 @@ components:
           type: boolean
         environmentAccesses:
           items:
-            $ref: "#/components/schemas/EnvironmentAccessModel"
+            $ref: "#/components/schemas/CreateOrUpdateEnvironmentAccessModel"
           nullable: true
           type: array
         name:
@@ -3326,6 +3855,11 @@ components:
     CreateProductRequest:
       additionalProperties: false
       properties:
+        description:
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
         name:
           maxLength: 1000
           minLength: 0
@@ -3333,7 +3867,35 @@ components:
       required:
         - name
       type: object
-    CreateSettingModel:
+    CreateSegmentModel:
+      additionalProperties: false
+      properties:
+        comparator:
+          $ref: "#/components/schemas/RolloutRuleComparator"
+        comparisonAttribute:
+          maxLength: 1000
+          minLength: 0
+          type: string
+        comparisonValue:
+          maxLength: 65535
+          minLength: 0
+          type: string
+        description:
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+      required:
+        - comparator
+        - comparisonAttribute
+        - comparisonValue
+        - name
+      type: object
+    CreateSettingInitialValues:
       additionalProperties: false
       properties:
         hint:
@@ -3342,6 +3904,12 @@ components:
           minLength: 0
           nullable: true
           type: string
+        initialValues:
+          description: Optional, initial values of the feature flag or setting in the given Environments.
+          items:
+            $ref: "#/components/schemas/InitialValue"
+          nullable: true
+          type: array
         key:
           description: The key of the setting.
           maxLength: 255
@@ -3388,9 +3956,42 @@ components:
         hasRemainingIntegrationLink:
           type: boolean
       type: object
+    DeleteRepositoryReportsRequest:
+      additionalProperties: false
+      properties:
+        branch:
+          description: If it's set, only this branch's reports belonging to the given repository will be deleted.
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+        configId:
+          description: The Config's identifier from where the reports should be deleted.
+          format: uuid
+          type: string
+        repository:
+          description: The source control repository which's reports should be deleted.
+          maxLength: 255
+          minLength: 0
+          type: string
+        settingId:
+          description: If it's set, only this setting's reports belonging to the given repository will be deleted.
+          format: int32
+          nullable: true
+          type: integer
+      required:
+        - configId
+        - repository
+      type: object
     EnvironmentAccessModel:
       additionalProperties: false
       properties:
+        color:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
         environmentAccessType:
           $ref: "#/components/schemas/EnvironmentAccessType"
         environmentId:
@@ -3399,6 +4000,11 @@ components:
         name:
           nullable: true
           type: string
+        order:
+          format: int32
+          type: integer
+        reasonRequired:
+          type: boolean
       type: object
     EnvironmentAccessType:
       enum:
@@ -3409,14 +4015,25 @@ components:
     EnvironmentModel:
       additionalProperties: false
       properties:
+        color:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
         environmentId:
           format: uuid
           type: string
         name:
           nullable: true
           type: string
+        order:
+          format: int32
+          type: integer
         product:
           $ref: "#/components/schemas/ProductModel"
+        reasonRequired:
+          type: boolean
       type: object
     EnvironmentModel-haljson:
       properties:
@@ -3453,17 +4070,27 @@ components:
                       type: string
                     permission-groups:
                       type: string
+                    segments:
+                      type: string
                     self:
                       type: string
                     tags:
                       type: string
                   type: object
+                description:
+                  nullable: true
+                  type: string
                 name:
                   nullable: true
                   type: string
+                order:
+                  format: int32
+                  type: integer
                 productId:
                   format: uuid
                   type: string
+                reasonRequired:
+                  type: boolean
               type: object
           type: object
         _links:
@@ -3471,12 +4098,50 @@ components:
             self:
               type: string
           type: object
+        color:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
         environmentId:
           format: uuid
           type: string
         name:
           nullable: true
           type: string
+        order:
+          format: int32
+          type: integer
+        reasonRequired:
+          type: boolean
+      type: object
+    FlagReference:
+      additionalProperties: false
+      properties:
+        references:
+          description: The actual references to the given Feature Flag or Setting.
+          items:
+            $ref: "#/components/schemas/ReferenceLines"
+          type: array
+        settingId:
+          description: The identifier of the Feature Flag or Setting the code reference belongs to.
+          format: int32
+          type: integer
+      required:
+        - references
+        - settingId
+      type: object
+    InitialValue:
+      additionalProperties: false
+      properties:
+        environmentId:
+          description: The ID of the Environment where the initial value should be set.
+          format: uuid
+          type: string
+        value:
+          description: The initial value in the given Environment. It must respect the setting type.
+          nullable: true
       type: object
     IntegrationLinkDetail:
       additionalProperties: false
@@ -3527,6 +4192,7 @@ components:
       enum:
         - trello
         - jira
+        - monday
       type: string
     InviteMembersRequest:
       additionalProperties: false
@@ -3542,6 +4208,56 @@ components:
         - emails
         - permissionGroupId
       type: object
+    JsonNode:
+      additionalProperties: false
+      properties:
+        options:
+          $ref: "#/components/schemas/JsonNodeOptions"
+        parent:
+          $ref: "#/components/schemas/JsonNode"
+        root:
+          $ref: "#/components/schemas/JsonNode"
+      type: object
+    JsonNodeOptions:
+      additionalProperties: false
+      properties:
+        propertyNameCaseInsensitive:
+          type: boolean
+      type: object
+    JsonPatch:
+      additionalProperties: false
+      properties:
+        operations:
+          items:
+            $ref: "#/components/schemas/PatchOperation"
+          nullable: true
+          type: array
+      type: object
+    JsonPointer:
+      additionalProperties: false
+      properties:
+        isUriEncoded:
+          readOnly: true
+          type: boolean
+        kind:
+          $ref: "#/components/schemas/JsonPointerKind"
+        segments:
+          items:
+            $ref: "#/components/schemas/PointerSegment"
+          nullable: true
+          readOnly: true
+          type: array
+        source:
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    JsonPointerKind:
+      enum:
+        - unspecified
+        - plain
+        - uriEncoded
+      type: string
     MeModel:
       additionalProperties: false
       properties:
@@ -3573,23 +4289,16 @@ components:
           nullable: true
           type: string
       type: object
-    Operation:
-      additionalProperties: false
-      properties:
-        from:
-          nullable: true
-          type: string
-        op:
-          nullable: true
-          type: string
-        path:
-          nullable: true
-          type: string
-        value:
-          additionalProperties: false
-          nullable: true
-          type: object
-      type: object
+    OperationType:
+      enum:
+        - unknown
+        - add
+        - remove
+        - replace
+        - move
+        - copy
+        - test
+      type: string
     OrganizationModel:
       additionalProperties: false
       properties:
@@ -3616,57 +4325,183 @@ components:
           format: uuid
           type: string
       type: object
+    PatchOperation:
+      additionalProperties: false
+      properties:
+        from:
+          $ref: "#/components/schemas/JsonPointer"
+        op:
+          $ref: "#/components/schemas/OperationType"
+        path:
+          $ref: "#/components/schemas/JsonPointer"
+        value:
+          $ref: "#/components/schemas/JsonNode"
+      type: object
     PermissionGroupModel:
       additionalProperties: false
       properties:
         accessType:
           $ref: "#/components/schemas/AccessType"
         canCreateOrUpdateConfig:
-          readOnly: true
           type: boolean
         canCreateOrUpdateEnvironment:
-          readOnly: true
+          type: boolean
+        canCreateOrUpdateSegments:
           type: boolean
         canCreateOrUpdateSetting:
-          readOnly: true
           type: boolean
         canCreateOrUpdateTag:
-          readOnly: true
           type: boolean
         canDeleteConfig:
-          readOnly: true
           type: boolean
         canDeleteEnvironment:
-          readOnly: true
+          type: boolean
+        canDeleteSegments:
           type: boolean
         canDeleteSetting:
-          readOnly: true
           type: boolean
         canDeleteTag:
-          readOnly: true
           type: boolean
         canManageIntegrations:
-          readOnly: true
           type: boolean
         canManageMembers:
           type: boolean
         canManageProductPreferences:
-          readOnly: true
           type: boolean
         canManageWebhook:
-          readOnly: true
           type: boolean
         canRotateSdkKey:
-          readOnly: true
           type: boolean
         canTagSetting:
-          readOnly: true
           type: boolean
         canUseExportImport:
-          readOnly: true
+          type: boolean
+        canViewProductAuditLog:
+          type: boolean
+        canViewProductStatistics:
           type: boolean
         canViewSdkKey:
-          readOnly: true
+          type: boolean
+        environmentAccesses:
+          items:
+            $ref: "#/components/schemas/EnvironmentAccessModel"
+          nullable: true
+          type: array
+        name:
+          nullable: true
+          type: string
+        newEnvironmentAccessType:
+          $ref: "#/components/schemas/EnvironmentAccessType"
+        permissionGroupId:
+          format: int64
+          type: integer
+        product:
+          $ref: "#/components/schemas/ProductModel"
+      type: object
+    PermissionGroupModel-haljson:
+      properties:
+        _embedded:
+          properties:
+            product:
+              properties:
+                _embedded:
+                  properties:
+                    organization:
+                      properties:
+                        _links:
+                          properties:
+                            members:
+                              type: string
+                            products:
+                              type: string
+                          type: object
+                        name:
+                          nullable: true
+                          type: string
+                        organizationId:
+                          format: uuid
+                          type: string
+                      type: object
+                  type: object
+                _links:
+                  properties:
+                    configs:
+                      type: string
+                    environments:
+                      type: string
+                    members:
+                      type: string
+                    permission-groups:
+                      type: string
+                    segments:
+                      type: string
+                    self:
+                      type: string
+                    tags:
+                      type: string
+                  type: object
+                description:
+                  nullable: true
+                  type: string
+                name:
+                  nullable: true
+                  type: string
+                order:
+                  format: int32
+                  type: integer
+                productId:
+                  format: uuid
+                  type: string
+                reasonRequired:
+                  type: boolean
+              type: object
+          type: object
+        _links:
+          properties:
+            self:
+              type: string
+          type: object
+        accessType:
+          $ref: "#/components/schemas/AccessType"
+        canCreateOrUpdateConfig:
+          type: boolean
+        canCreateOrUpdateEnvironment:
+          type: boolean
+        canCreateOrUpdateSegments:
+          type: boolean
+        canCreateOrUpdateSetting:
+          type: boolean
+        canCreateOrUpdateTag:
+          type: boolean
+        canDeleteConfig:
+          type: boolean
+        canDeleteEnvironment:
+          type: boolean
+        canDeleteSegments:
+          type: boolean
+        canDeleteSetting:
+          type: boolean
+        canDeleteTag:
+          type: boolean
+        canManageIntegrations:
+          type: boolean
+        canManageMembers:
+          type: boolean
+        canManageProductPreferences:
+          type: boolean
+        canManageWebhook:
+          type: boolean
+        canRotateSdkKey:
+          type: boolean
+        canTagSetting:
+          type: boolean
+        canUseExportImport:
+          type: boolean
+        canViewProductAuditLog:
+          type: boolean
+        canViewProductStatistics:
+          type: boolean
+        canViewSdkKey:
           type: boolean
         environmentAccesses:
           items:
@@ -3682,17 +4517,37 @@ components:
           format: int64
           type: integer
       type: object
+    PointerSegment:
+      additionalProperties: false
+      properties:
+        source:
+          nullable: true
+          readOnly: true
+          type: string
+        value:
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
     ProductModel:
       additionalProperties: false
       properties:
+        description:
+          nullable: true
+          type: string
         name:
           nullable: true
           type: string
+        order:
+          format: int32
+          type: integer
         organization:
           $ref: "#/components/schemas/OrganizationModel"
         productId:
           format: uuid
           type: string
+        reasonRequired:
+          type: boolean
       type: object
     ProductModel-haljson:
       properties:
@@ -3725,17 +4580,75 @@ components:
               type: string
             permission-groups:
               type: string
+            segments:
+              type: string
             self:
               type: string
             tags:
               type: string
           type: object
+        description:
+          nullable: true
+          type: string
         name:
           nullable: true
           type: string
+        order:
+          format: int32
+          type: integer
         productId:
           format: uuid
           type: string
+        reasonRequired:
+          type: boolean
+      type: object
+    ReferenceLine:
+      additionalProperties: false
+      properties:
+        lineNumber:
+          description: The line number of the reference line.
+          format: int32
+          type: integer
+        lineText:
+          description: The content of the reference line.
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+      required:
+        - lineNumber
+      type: object
+    ReferenceLines:
+      additionalProperties: false
+      properties:
+        file:
+          description: The file's name in where the code reference has been found. (Appears on the ConfigCat Dashboard)
+          maxLength: 255
+          minLength: 0
+          type: string
+        fileUrl:
+          description: The file's url. (Used to point to the file on the repository's website)
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        postLines:
+          description: The lines after the actual reference line.
+          items:
+            $ref: "#/components/schemas/ReferenceLine"
+          nullable: true
+          type: array
+        preLines:
+          description: The lines before the actual reference line.
+          items:
+            $ref: "#/components/schemas/ReferenceLine"
+          nullable: true
+          type: array
+        referenceLine:
+          $ref: "#/components/schemas/ReferenceLine"
+      required:
+        - file
+        - referenceLine
       type: object
     RolloutPercentageItemModel:
       additionalProperties: false
@@ -3745,10 +4658,8 @@ components:
           format: int64
           type: integer
         value:
-          additionalProperties: false
           description: The value to serve when the user falls in the percentage rule. It must respect the setting type.
           nullable: true
-          type: object
       required:
         - percentage
       type: object
@@ -3782,20 +4693,24 @@ components:
           description: The user attribute to compare.
           maxLength: 1000
           minLength: 0
+          nullable: true
           type: string
         comparisonValue:
           description: The value to compare against.
           maxLength: 65535
           minLength: 0
+          nullable: true
+          type: string
+        segmentComparator:
+          $ref: "#/components/schemas/SegmentComparator"
+        segmentId:
+          description: The segment to compare against.
+          format: uuid
+          nullable: true
           type: string
         value:
-          additionalProperties: false
           description: The value to serve when the comparison matches. It must respect the setting type.
           nullable: true
-          type: object
-      required:
-        - comparisonAttribute
-        - comparisonValue
       type: object
     SdkKeysModel:
       additionalProperties: false
@@ -3807,49 +4722,310 @@ components:
           nullable: true
           type: string
       type: object
+    SegmentComparator:
+      enum:
+        - isIn
+        - isNotIn
+      type: string
+    SegmentListModel:
+      additionalProperties: false
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        creatorEmail:
+          nullable: true
+          type: string
+        creatorFullName:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+        lastUpdaterEmail:
+          nullable: true
+          type: string
+        lastUpdaterFullName:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        product:
+          $ref: "#/components/schemas/ProductModel"
+        segmentId:
+          format: uuid
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        usage:
+          format: int32
+          type: integer
+      type: object
+    SegmentListModel-haljson:
+      properties:
+        _embedded:
+          properties:
+            product:
+              properties:
+                _embedded:
+                  properties:
+                    organization:
+                      properties:
+                        _links:
+                          properties:
+                            members:
+                              type: string
+                            products:
+                              type: string
+                          type: object
+                        name:
+                          nullable: true
+                          type: string
+                        organizationId:
+                          format: uuid
+                          type: string
+                      type: object
+                  type: object
+                _links:
+                  properties:
+                    configs:
+                      type: string
+                    environments:
+                      type: string
+                    members:
+                      type: string
+                    permission-groups:
+                      type: string
+                    segments:
+                      type: string
+                    self:
+                      type: string
+                    tags:
+                      type: string
+                  type: object
+                description:
+                  nullable: true
+                  type: string
+                name:
+                  nullable: true
+                  type: string
+                order:
+                  format: int32
+                  type: integer
+                productId:
+                  format: uuid
+                  type: string
+                reasonRequired:
+                  type: boolean
+              type: object
+          type: object
+        _links:
+          properties:
+            self:
+              type: string
+          type: object
+        createdAt:
+          format: date-time
+          type: string
+        creatorEmail:
+          nullable: true
+          type: string
+        creatorFullName:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+        lastUpdaterEmail:
+          nullable: true
+          type: string
+        lastUpdaterFullName:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        segmentId:
+          format: uuid
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        usage:
+          format: int32
+          type: integer
+      type: object
+    SegmentModel:
+      additionalProperties: false
+      properties:
+        comparator:
+          $ref: "#/components/schemas/RolloutRuleComparator"
+        comparisonAttribute:
+          nullable: true
+          type: string
+        comparisonValue:
+          nullable: true
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        creatorEmail:
+          nullable: true
+          type: string
+        creatorFullName:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+        lastUpdaterEmail:
+          nullable: true
+          type: string
+        lastUpdaterFullName:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        product:
+          $ref: "#/components/schemas/ProductModel"
+        segmentId:
+          format: uuid
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    SegmentModel-haljson:
+      properties:
+        _embedded:
+          properties:
+            product:
+              properties:
+                _embedded:
+                  properties:
+                    organization:
+                      properties:
+                        _links:
+                          properties:
+                            members:
+                              type: string
+                            products:
+                              type: string
+                          type: object
+                        name:
+                          nullable: true
+                          type: string
+                        organizationId:
+                          format: uuid
+                          type: string
+                      type: object
+                  type: object
+                _links:
+                  properties:
+                    configs:
+                      type: string
+                    environments:
+                      type: string
+                    members:
+                      type: string
+                    permission-groups:
+                      type: string
+                    segments:
+                      type: string
+                    self:
+                      type: string
+                    tags:
+                      type: string
+                  type: object
+                description:
+                  nullable: true
+                  type: string
+                name:
+                  nullable: true
+                  type: string
+                order:
+                  format: int32
+                  type: integer
+                productId:
+                  format: uuid
+                  type: string
+                reasonRequired:
+                  type: boolean
+              type: object
+          type: object
+        _links:
+          properties:
+            self:
+              type: string
+          type: object
+        comparator:
+          $ref: "#/components/schemas/RolloutRuleComparator"
+        comparisonAttribute:
+          nullable: true
+          type: string
+        comparisonValue:
+          nullable: true
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        creatorEmail:
+          nullable: true
+          type: string
+        creatorFullName:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+        lastUpdaterEmail:
+          nullable: true
+          type: string
+        lastUpdaterFullName:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        segmentId:
+          format: uuid
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
     SettingDataModel:
       additionalProperties: false
       properties:
         createdAt:
           format: date-time
           nullable: true
-          readOnly: true
           type: string
         creatorEmail:
           nullable: true
-          readOnly: true
           type: string
         creatorFullName:
-          nullable: true
-          readOnly: true
-          type: string
-        expirationWarningAt:
-          format: date-time
           nullable: true
           type: string
         hint:
           nullable: true
-          readOnly: true
           type: string
         isWatching:
           type: boolean
         key:
           nullable: true
-          readOnly: true
           type: string
         name:
           nullable: true
-          readOnly: true
           type: string
-        ownerEmail:
-          nullable: true
-          type: string
-        ownerFullName:
-          nullable: true
-          type: string
+        order:
+          format: int32
+          type: integer
         settingId:
           format: int32
-          readOnly: true
           type: integer
         settingType:
           $ref: "#/components/schemas/SettingType"
@@ -3859,40 +5035,24 @@ components:
       properties:
         configId:
           format: uuid
-          readOnly: true
           type: string
         configName:
           nullable: true
-          readOnly: true
-          type: string
-        expirationWarningAt:
-          format: date-time
-          nullable: true
-          readOnly: true
           type: string
         hint:
           nullable: true
-          readOnly: true
           type: string
         key:
           nullable: true
-          readOnly: true
           type: string
         name:
           nullable: true
-          readOnly: true
           type: string
-        ownerUserEmail:
-          nullable: true
-          readOnly: true
-          type: string
-        ownerUserFullName:
-          nullable: true
-          readOnly: true
-          type: string
+        order:
+          format: int32
+          type: integer
         settingId:
           format: int32
-          readOnly: true
           type: integer
         settingType:
           $ref: "#/components/schemas/SettingType"
@@ -3942,17 +5102,27 @@ components:
                                 type: string
                               permission-groups:
                                 type: string
+                              segments:
+                                type: string
                               self:
                                 type: string
                               tags:
                                 type: string
                             type: object
+                          description:
+                            nullable: true
+                            type: string
                           name:
                             nullable: true
                             type: string
+                          order:
+                            format: int32
+                            type: integer
                           productId:
                             format: uuid
                             type: string
+                          reasonRequired:
+                            type: boolean
                         type: object
                     type: object
                   _links:
@@ -3979,40 +5149,24 @@ components:
           type: object
         configId:
           format: uuid
-          readOnly: true
           type: string
         configName:
           nullable: true
-          readOnly: true
-          type: string
-        expirationWarningAt:
-          format: date-time
-          nullable: true
-          readOnly: true
           type: string
         hint:
           nullable: true
-          readOnly: true
           type: string
         key:
           nullable: true
-          readOnly: true
           type: string
         name:
           nullable: true
-          readOnly: true
           type: string
-        ownerUserEmail:
-          nullable: true
-          readOnly: true
-          type: string
-        ownerUserFullName:
-          nullable: true
-          readOnly: true
-          type: string
+        order:
+          format: int32
+          type: integer
         settingId:
           format: int32
-          readOnly: true
           type: integer
         settingType:
           $ref: "#/components/schemas/SettingType"
@@ -4084,10 +5238,8 @@ components:
           nullable: true
           type: string
         value:
-          additionalProperties: false
           description: The value to serve. It must respect the setting type.
           nullable: true
-          type: object
       type: object
     SettingValueModel-haljson:
       properties:
@@ -4128,17 +5280,27 @@ components:
                               type: string
                             permission-groups:
                               type: string
+                            segments:
+                              type: string
                             self:
                               type: string
                             tags:
                               type: string
                           type: object
+                        description:
+                          nullable: true
+                          type: string
                         name:
                           nullable: true
                           type: string
+                        order:
+                          format: int32
+                          type: integer
                         productId:
                           format: uuid
                           type: string
+                        reasonRequired:
+                          type: boolean
                       type: object
                   type: object
                 _links:
@@ -4151,9 +5313,15 @@ components:
                 configId:
                   format: uuid
                   type: string
+                description:
+                  nullable: true
+                  type: string
                 name:
                   nullable: true
                   type: string
+                order:
+                  format: int32
+                  type: integer
               type: object
             environment:
               properties:
@@ -4190,17 +5358,27 @@ components:
                               type: string
                             permission-groups:
                               type: string
+                            segments:
+                              type: string
                             self:
                               type: string
                             tags:
                               type: string
                           type: object
+                        description:
+                          nullable: true
+                          type: string
                         name:
                           nullable: true
                           type: string
+                        order:
+                          format: int32
+                          type: integer
                         productId:
                           format: uuid
                           type: string
+                        reasonRequired:
+                          type: boolean
                       type: object
                   type: object
                 _links:
@@ -4208,12 +5386,23 @@ components:
                     self:
                       type: string
                   type: object
+                color:
+                  nullable: true
+                  type: string
+                description:
+                  nullable: true
+                  type: string
                 environmentId:
                   format: uuid
                   type: string
                 name:
                   nullable: true
                   type: string
+                order:
+                  format: int32
+                  type: integer
+                reasonRequired:
+                  type: boolean
               type: object
             integrationLinks:
               items:
@@ -4238,43 +5427,29 @@ components:
                 createdAt:
                   format: date-time
                   nullable: true
-                  readOnly: true
                   type: string
                 creatorEmail:
                   nullable: true
-                  readOnly: true
                   type: string
                 creatorFullName:
-                  nullable: true
-                  readOnly: true
-                  type: string
-                expirationWarningAt:
-                  format: date-time
                   nullable: true
                   type: string
                 hint:
                   nullable: true
-                  readOnly: true
                   type: string
                 isWatching:
                   type: boolean
                 key:
                   nullable: true
-                  readOnly: true
                   type: string
                 name:
                   nullable: true
-                  readOnly: true
                   type: string
-                ownerEmail:
-                  nullable: true
-                  type: string
-                ownerFullName:
-                  nullable: true
-                  type: string
+                order:
+                  format: int32
+                  type: integer
                 settingId:
                   format: int32
-                  readOnly: true
                   type: integer
                 settingType:
                   $ref: "#/components/schemas/SettingType"
@@ -4328,10 +5503,8 @@ components:
           nullable: true
           type: string
         value:
-          additionalProperties: false
           description: The value to serve. It must respect the setting type.
           nullable: true
-          type: object
       type: object
     TagModel:
       additionalProperties: false
@@ -4383,17 +5556,27 @@ components:
                       type: string
                     permission-groups:
                       type: string
+                    segments:
+                      type: string
                     self:
                       type: string
                     tags:
                       type: string
                   type: object
+                description:
+                  nullable: true
+                  type: string
                 name:
                   nullable: true
                   type: string
+                order:
+                  format: int32
+                  type: integer
                 productId:
                   format: uuid
                   type: string
+                reasonRequired:
+                  type: boolean
               type: object
           type: object
         _links:
@@ -4414,6 +5597,11 @@ components:
     UpdateConfigRequest:
       additionalProperties: false
       properties:
+        description:
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
         name:
           maxLength: 255
           minLength: 0
@@ -4423,6 +5611,16 @@ components:
     UpdateEnvironmentModel:
       additionalProperties: false
       properties:
+        color:
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+        description:
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
         name:
           maxLength: 255
           minLength: 0
@@ -4440,6 +5638,9 @@ components:
         canCreateOrUpdateEnvironment:
           nullable: true
           type: boolean
+        canCreateOrUpdateSegments:
+          nullable: true
+          type: boolean
         canCreateOrUpdateSetting:
           nullable: true
           type: boolean
@@ -4450,6 +5651,9 @@ components:
           nullable: true
           type: boolean
         canDeleteEnvironment:
+          nullable: true
+          type: boolean
+        canDeleteSegments:
           nullable: true
           type: boolean
         canDeleteSetting:
@@ -4490,7 +5694,7 @@ components:
           type: boolean
         environmentAccesses:
           items:
-            $ref: "#/components/schemas/EnvironmentAccessModel"
+            $ref: "#/components/schemas/CreateOrUpdateEnvironmentAccessModel"
           nullable: true
           type: array
         name:
@@ -4504,8 +5708,39 @@ components:
     UpdateProductRequest:
       additionalProperties: false
       properties:
+        description:
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
         name:
           maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+      type: object
+    UpdateSegmentModel:
+      additionalProperties: false
+      properties:
+        comparator:
+          $ref: "#/components/schemas/RolloutRuleComparator"
+        comparisonAttribute:
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        comparisonValue:
+          maxLength: 65535
+          minLength: 0
+          nullable: true
+          type: string
+        description:
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        name:
+          maxLength: 255
           minLength: 0
           nullable: true
           type: string
@@ -4526,10 +5761,8 @@ components:
           nullable: true
           type: array
         value:
-          additionalProperties: false
           description: The value to serve. It must respect the setting type.
           nullable: true
-          type: object
       type: object
     UpdateTagModel:
       additionalProperties: false
@@ -4580,7 +5813,9 @@ x-tagGroups:
       - Products
       - Configs
       - Environments
+      - Segments
       - SDK Keys
+      - Code References
   - name: Membership
     tags:
       - Organizations

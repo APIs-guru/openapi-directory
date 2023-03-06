@@ -3300,7 +3300,7 @@ paths:
         - carts/mine/payment-information
   /V1/carts/mine/payment-methods:
     get:
-      description: Lists available payment methods for a specified shopping cart. This call returns an array of objects, but detailed information about each object’s attributes might not be included.  See http://devdocs.magento.com/codelinks/attributes.html#PaymentMethodManagementInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Lists available payment methods for a specified shopping cart. This call returns an array of objects, but detailed information about each object’s attributes might not be included.  See https://devdocs.magento.com/codelinks/attributes.html#PaymentMethodManagementInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: quotePaymentMethodManagementV1GetListGet
       responses:
         "200":
@@ -3657,7 +3657,7 @@ paths:
         - carts/mine/totals-information
   /V1/carts/search:
     get:
-      description: Enables administrative users to list carts that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included.  See http://devdocs.magento.com/codelinks/attributes.html#CartRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Enables administrative users to list carts that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included.  See https://devdocs.magento.com/codelinks/attributes.html#CartRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: quoteCartRepositoryV1GetListGet
       parameters:
         - description: Field
@@ -4692,7 +4692,7 @@ paths:
         - carts/{cartId}/order
   "/V1/carts/{cartId}/payment-methods":
     get:
-      description: Lists available payment methods for a specified shopping cart. This call returns an array of objects, but detailed information about each object’s attributes might not be included.  See http://devdocs.magento.com/codelinks/attributes.html#PaymentMethodManagementInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Lists available payment methods for a specified shopping cart. This call returns an array of objects, but detailed information about each object’s attributes might not be included.  See https://devdocs.magento.com/codelinks/attributes.html#PaymentMethodManagementInterface to determine which call to use to get detailed information about all attributes for an object.
       parameters:
         - description: The cart ID.
           in: path
@@ -8489,7 +8489,7 @@ paths:
         - coupons/generate
   /V1/coupons/search:
     get:
-      description: Retrieve a coupon using the specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#CouponRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Retrieve a coupon using the specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See https://devdocs.magento.com/codelinks/attributes.html#CouponRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: salesRuleCouponRepositoryV1GetListGet
       parameters:
         - description: Field
@@ -9113,7 +9113,7 @@ paths:
         - creditmemo/{id}/emails
   /V1/creditmemos:
     get:
-      description: Lists credit memos that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#CreditmemoRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Lists credit memos that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See https://devdocs.magento.com/codelinks/attributes.html#CreditmemoRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: salesCreditmemoRepositoryV1GetListGet
       parameters:
         - description: Field
@@ -9415,7 +9415,7 @@ paths:
         - customerGroups/default/{storeId}
   /V1/customerGroups/search:
     get:
-      description: Retrieve customer groups. The list of groups can be filtered to exclude the NOT_LOGGED_IN group using the first parameter and/or it can be filtered by tax class. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#GroupRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Retrieve customer groups. The list of groups can be filtered to exclude the NOT_LOGGED_IN group using the first parameter and/or it can be filtered by tax class. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See https://devdocs.magento.com/codelinks/attributes.html#GroupRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: customerGroupRepositoryV1GetListGet
       parameters:
         - description: Field
@@ -10464,7 +10464,7 @@ paths:
         - customers/resetPassword
   /V1/customers/search:
     get:
-      description: Retrieve customers which match a specified criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#CustomerRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Retrieve customers which match a specified criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See https://devdocs.magento.com/codelinks/attributes.html#CustomerRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: customerCustomerRepositoryV1GetListGet
       parameters:
         - description: Field
@@ -11349,7 +11349,7 @@ paths:
         - eav/attribute-sets
   /V1/eav/attribute-sets/list:
     get:
-      description: Retrieve list of Attribute Sets This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#AttributeSetRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Retrieve list of Attribute Sets This call returns an array of objects, but detailed information about each object’s attributes might not be included. See https://devdocs.magento.com/codelinks/attributes.html#AttributeSetRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: eavAttributeSetRepositoryV1GetListGet
       parameters:
         - description: Field
@@ -13021,7 +13021,7 @@ paths:
         - guest-carts/{cartId}/payment-information
   "/V1/guest-carts/{cartId}/payment-methods":
     get:
-      description: List available payment methods for a specified shopping cart. This call returns an array of objects, but detailed information about each object’s attributes might not be included.  See http://devdocs.magento.com/codelinks/attributes.html#GuestPaymentMethodManagementInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: List available payment methods for a specified shopping cart. This call returns an array of objects, but detailed information about each object’s attributes might not be included.  See https://devdocs.magento.com/codelinks/attributes.html#GuestPaymentMethodManagementInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: quoteGuestPaymentMethodManagementV1GetListGet
       parameters:
         - description: The cart ID.
@@ -13678,7 +13678,7 @@ paths:
         - invoice/{invoiceId}/refund
   /V1/invoices:
     get:
-      description: Lists invoices that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#InvoiceRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Lists invoices that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See https://devdocs.magento.com/codelinks/attributes.html#InvoiceRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: salesInvoiceRepositoryV1GetListGet
       parameters:
         - description: Field
@@ -15523,7 +15523,7 @@ paths:
         - order/{orderId}/ship
   /V1/orders:
     get:
-      description: Lists orders that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#OrderRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Lists orders that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See https://devdocs.magento.com/codelinks/attributes.html#OrderRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: salesOrderRepositoryV1GetListGet
       parameters:
         - description: Field
@@ -15668,7 +15668,7 @@ paths:
         - orders/create
   /V1/orders/items:
     get:
-      description: Lists order items that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#OrderItemRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Lists order items that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See https://devdocs.magento.com/codelinks/attributes.html#OrderItemRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: salesOrderItemRepositoryV1GetListGet
       parameters:
         - description: Field
@@ -20934,7 +20934,7 @@ paths:
         - salesRules
   /V1/salesRules/search:
     get:
-      description: Retrieve sales rules that match te specified criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#RuleRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Retrieve sales rules that match te specified criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See https://devdocs.magento.com/codelinks/attributes.html#RuleRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: salesRuleRuleRepositoryV1GetListGet
       parameters:
         - description: Field
@@ -22413,7 +22413,7 @@ paths:
         - shipment/{id}/label
   /V1/shipments:
     get:
-      description: Lists shipments that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#ShipmentRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Lists shipments that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See https://devdocs.magento.com/codelinks/attributes.html#ShipmentRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: salesShipmentRepositoryV1GetListGet
       parameters:
         - description: Field
@@ -22873,7 +22873,7 @@ paths:
         - taxClasses
   /V1/taxClasses/search:
     get:
-      description: Retrieve tax classes which match a specific criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#TaxClassRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Retrieve tax classes which match a specific criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See https://devdocs.magento.com/codelinks/attributes.html#TaxClassRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: taxTaxClassRepositoryV1GetListGet
       parameters:
         - description: Field
@@ -23226,7 +23226,7 @@ paths:
         - taxRates
   /V1/taxRates/search:
     get:
-      description: Search TaxRates This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#TaxRateRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Search TaxRates This call returns an array of objects, but detailed information about each object’s attributes might not be included. See https://devdocs.magento.com/codelinks/attributes.html#TaxRateRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: taxTaxRateRepositoryV1GetListGet
       parameters:
         - description: Field
@@ -23523,7 +23523,7 @@ paths:
         - taxRules
   /V1/taxRules/search:
     get:
-      description: Search TaxRules This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#TaxRuleRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Search TaxRules This call returns an array of objects, but detailed information about each object’s attributes might not be included. See https://devdocs.magento.com/codelinks/attributes.html#TaxRuleRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: taxTaxRuleRepositoryV1GetListGet
       parameters:
         - description: Field
@@ -24044,7 +24044,7 @@ paths:
         - temando/rma/{rmaId}/shipments
   /V1/transactions:
     get:
-      description: Lists transactions that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See http://devdocs.magento.com/codelinks/attributes.html#TransactionRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
+      description: Lists transactions that match specified search criteria. This call returns an array of objects, but detailed information about each object’s attributes might not be included. See https://devdocs.magento.com/codelinks/attributes.html#TransactionRepositoryInterface to determine which call to use to get detailed information about all attributes for an object.
       operationId: salesTransactionRepositoryV1GetListGet
       parameters:
         - description: Field

@@ -8088,6 +8088,8 @@ paths:
                   type: object
                 type: array
           description: ""
+      security:
+        - Authorization: []
       summary: Retrieve email statistics by country and state/province.
       tags:
         - Stats
@@ -9124,7 +9126,7 @@ paths:
         ](https://sendgrid.com/docs/ui/sending-email/how-to-send-an-email-with-dynamic-transactional-templates/)
         * [Using Handlebars](https://sendgrid.com/docs/for-developers/sending-email/using-handlebars/) 
 
-        ## Mail body compression
+        ## Mail Body Compression
 
         Mail body compression is available to some high volume accounts. Talk to your CSM if you are interested in this functionality. Mail body compression works by setting up a JSON payload as defined on this page, then compressing it with gzip (the gzip file can be no more than 30mb).
 
@@ -9135,6 +9137,28 @@ paths:
         2. Send the gzip as a data-binary.  
            a. `--data-binary '@data.json.gz'
         `
+
+        ## Multiple Reply-To Emails
+
+        Using `reply_to_list` allows senders to include more than one recipient email address to receive reply and/or bounce messages from the recipient of the email.
+
+        ### Usage Considerations
+
+        * `reply_to` is mutually exclusive with `reply_to_list`. If both are used, then the API call will be rejected. 
+        * The `reply_to_list` object, when used, must at least have an email parameter and may also contain a name parameter.
+        * Each email address in the `reply_to_list` should be unique.
+        * There is a limit of 1000 `reply_to_list` emails per mail/send request.
+        * In SMTP calls, we will omit any invalid emails.
+
+        ### Possible 400 Error Messages
+
+        * `reply_to` is mutually exclusive with `reply_to_list`.
+        * The `reply_to_list` object, when used, must at least have an email parameter and may also contain a name parameter.
+        * Each email address in the `reply_to_list` should be unique.
+        * There is a limit of X `reply_to` emails per mail/send request.
+        * The `reply_to_list` email does not contain a valid address.
+        * The `reply_to_list` email exceeds the maximum total length of X characters.
+        * The `reply_to_list` email parameter is required.
       operationId: POST_mail-send
       requestBody:
         content:
@@ -9392,6 +9416,23 @@ paths:
                   uniqueItems: false
                 reply_to:
                   $ref: "#/components/schemas/reply_to_email_object"
+                reply_to_list:
+                  description: An array of recipients who will receive replies and/or bounces. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name. You can either choose to use “reply_to” field or “reply_to_list” but not both.
+                  items:
+                    properties:
+                      email:
+                        description: The email address where any replies or bounces will be returned.
+                        format: email
+                        type: string
+                      name:
+                        description: A name or title associated with the `reply_to_list` email address.
+                        type: string
+                    required:
+                      - email
+                    type: object
+                  maxItems: 1000
+                  type: array
+                  uniqueItems: true
                 send_at:
                   description: A unix timestamp allowing you to specify when you want your email to be delivered. This may be overridden by the `send_at` parameter set at the personalizations level. Delivery cannot be scheduled more than 72 hours in advance. If you have the flexibility, it's better to schedule mail for off-peak times. Most emails are scheduled and sent at the top of the hour or half hour. Scheduling email to avoid peak times — for example, scheduling at 10:53 — can result in lower deferral rates due to the reduced traffic during off-peak times.
                   type: integer
@@ -10736,6 +10777,8 @@ paths:
         You must set either `ids` or `delete_all_contacts`.
 
         Deletion jobs are processed asynchronously.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       operationId: DELETE_mc-contacts
       parameters:
         - description: Must be set to `"true"` to delete all contacts.
@@ -10799,6 +10842,8 @@ paths:
         The full contact count is also returned.
 
         Please note that pagination of the contacts has been deprecated.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       operationId: GET_mc-contats
       responses:
         "200":
@@ -10857,6 +10902,8 @@ paths:
         If the contact already exists in the system, any entries submitted via this endpoint will update the existing contact. The contact to update will be determined only by the `email` field and any fields omitted from the request will remain as they were. A contact's ID cannot be used to update the contact.
 
         The email field will be changed to all lower-case. If a contact is added with an email that exists but contains capital letters, the existing contact with the all lower-case email will be updated.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       operationId: PUT_mc-contacts
       requestBody:
         content:
@@ -10922,6 +10969,8 @@ paths:
         This can be more efficient endpoint to get contacts than making a series of individual `GET` requests to the "Get a Contact by ID" endpoint.
 
         You can supply up to 100 IDs. Pass them into the `ids` field in your request body as an array or one or more strings.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       operationId: POST_marketing-contacts-batch
       requestBody:
         content:
@@ -10970,7 +11019,11 @@ paths:
         - Contacts
   /marketing/contacts/count:
     get:
-      description: "**This endpoint returns the total number of contacts you have stored.**"
+      description: |-
+        **This endpoint returns the total number of contacts you have stored.**
+
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       operationId: GET_mc-contacts-count
       responses:
         "200":
@@ -11024,6 +11077,8 @@ paths:
         Each object's `export_type` field will tell you which kind of export it is and its `status` field will indicate what stage of processing it has reached. Exports which are `ready` will be accompanied by a `urls` field which lists the URLs of the export's downloadable files — there will be more than one if you specified a maximum file size in your initial export request.
 
         Use this endpoint if you have exports in flight but do not know their IDs, which are required for the "Export Contacts Status" endpoint.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       operationId: GET_marketing-contacts-exports
       responses:
         "200":
@@ -11148,6 +11203,8 @@ paths:
         The lists will be provided in either JSON or CSV files. To specify which of these you would required, set the request body `file_type` field to `json` or `csv`.
 
         You can also specify a maximum file size (in MB). If the export file is larger than this, it will be split into multiple files.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       operationId: POST_mc-contacts-exports
       requestBody:
         content:
@@ -11229,6 +11286,8 @@ paths:
         To use this call, you will need the `id` from the "Export Contacts" call.
 
         If you would like to download a list, take the `id` that is returned from the "Export Contacts" endpoint and make an API request here to get the `urls`. Once you have the list of URLs, make a `GET` request on each URL to download your CSV file(s).
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       operationId: GET_mc-contacts-exports-id
       responses:
         "200":
@@ -11287,6 +11346,7 @@ paths:
         `curl --upload-file "file/path.csv" "URL_GIVEN" -H 'HEADER_GIVEN'`
 
         If you'd like to monitor the status of your import job, use the `job_id` and the "Import Contacts Status" endpoint.
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       operationId: PUT_mc-contacts-imports
       requestBody:
         content:
@@ -11388,7 +11448,7 @@ paths:
       description: |-
         **This endpoint can be used to check the status of a contact import job**. 
 
-        Use the `job_id` from the "Improt Contacts," "Add or Update a Contact," or "Delete Contacts" endpoints as the `id` in the path parameter.
+        Use the `job_id` from the "Import Contacts," "Add or Update a Contact," or "Delete Contacts" endpoints as the `id` in the path parameter.
 
         If there is an error with your `PUT` request, download the `errors_url` file and open it to view more details.
 
@@ -11397,6 +11457,8 @@ paths:
         Pending means not started. Completed means finished without any errors. Errored means finished with some errors. Failed means finshed with all errors, or the job was entirely unprocessable: for example, if you attempt to import file format we do not support.
 
         The `results` object will have fields depending on the job type.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       operationId: GET_marketing-contacts-imports-id
       responses:
         "200":
@@ -11447,6 +11509,7 @@ paths:
         If the query takes longer than 20 seconds, a `408 Request Timeout` status will be returned.
 
         Formatting the `created_at` and `updated_at` values as Unix timestamps is deprecated. Instead they are returned as ISO format as string.
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       operationId: POST_mc-contacts-search
       requestBody:
         content:
@@ -11541,6 +11604,8 @@ paths:
         This endpoint returns a `404` status code when no contacts are found for the provided email address(es).
 
         A `400` status code is returned if any searched addresses are invalid.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       operationId: POST_marketing-contacts-search-emails
       requestBody:
         content:
@@ -11680,6 +11745,8 @@ paths:
         **This endpoint returns the full details and all fields for the specified contact**.
 
         The "Get Contacts by Emails" endpoint can be used to get the ID of a contact.
+
+        Twilio SendGrid recommends exporting your contacts regularly as a backup to avoid issues or lost data.
       operationId: GET_mc-contacts-id
       responses:
         "200":
@@ -12542,7 +12609,7 @@ paths:
   /marketing/segments/2.0:
     get:
       description: |-
-        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
+        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
 
         The query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.
 
@@ -12595,7 +12662,7 @@ paths:
         - Segmenting Contacts V2 - Beta
     post:
       description: |-
-        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
+        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
 
         Segment `name` has to be unique. A user can not create a new segment with an existing segment name.
       operationId: POST_segments
@@ -12631,7 +12698,7 @@ paths:
         - Segmenting Contacts V2 - Beta
   "/marketing/segments/2.0/{segment_id}":
     delete:
-      description: "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**"
+      description: "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**"
       operationId: DELETE_segments-segment_id
       responses:
         "202":
@@ -12656,7 +12723,7 @@ paths:
       tags:
         - Segmenting Contacts V2 - Beta
     get:
-      description: "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**"
+      description: "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**"
       operationId: GET_segments-segment_id
       parameters:
         - description: Defaults to `true`. Set to `false` to exclude the contacts_sample in the response.
@@ -12696,7 +12763,7 @@ paths:
           type: string
     patch:
       description: |-
-        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
+        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form]({https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
 
         Segment `name` has to be unique. A user can not create a new segment with an existing segment name.
       operationId: PATCH_segments-segment_id
@@ -22525,7 +22592,7 @@ paths:
       description: |-
         **This endpoint allows you to disassociate a specific authenticated domain from a subuser.**
 
-        Authenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.
+        Authenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate an authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The parent may then associate the authenticated domain via the subuser management tools.
       operationId: DELETE_whitelabel-domains-subuser
       parameters:
         - description: Username for the subuser to find associated authenticated domain.
@@ -22549,7 +22616,7 @@ paths:
       description: |-
         **This endpoint allows you to retrieve all of the authenticated domains that have been assigned to a specific subuser.**
 
-        Authenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.
+        Authenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate an authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The parent may then associate the authenticated domain via the subuser management tools.
       operationId: GET_whitelabel-domains-subuser
       parameters:
         - description: Username for the subuser to find associated authenticated domain.
@@ -22782,7 +22849,7 @@ paths:
       description: |-
         **This endpoint allows you to associate a specific authenticated domain with a subuser.**
 
-        Authenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.
+        Authenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate an authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The parent may then associate the authenticated domain via the subuser management tools.
       operationId: POST_whitelabel-domains-domain_id-subuser
       requestBody:
         content:
@@ -22841,7 +22908,7 @@ paths:
           description: ""
       security:
         - Authorization: []
-      summary: Associate a authenticated domain with a given user.
+      summary: Associate an authenticated domain with a given user.
       tags:
         - Domain Authentication
   "/whitelabel/domains/{id}/ips":

@@ -820,6 +820,8 @@ paths:
           description: This episode is now voted for
         "404":
           description: This episode does not exist
+        "422":
+          description: Invalid vote
       summary: Vote for an episode
       tags:
         - voted episodes
@@ -891,6 +893,8 @@ paths:
           description: This show is now voted for
         "404":
           description: This show does not exist
+        "422":
+          description: Invalid vote
       summary: Vote for a show
       tags:
         - voted shows

@@ -1,10 +1,10 @@
 swagger: "2.0"
 schemes:
-  - https
-host: weber-gesamtausgabe.de
-basePath: /api/v1
+  - http
+host: localhost:8080
+basePath: /exist/apps/WeGA-WebApp/api/v1
 info:
-  description: The OpenAPI documentation for the RESTful interface of the Carl-Maria-von-Weber-Gesamtausgabe. <br/> (No registration, authentication, or API key is required) <br/> For feedback or requests about this API please contact stadler@weber-gesamtausgabe.de or start the discussion at https://github.com/Edirom/WeGA-WebApp
+  description: ⚠️<b>DEPRECATION WARNING</b>⚠️<br/>This version of the WeGA API specification is outdated and superseded by [version 1.1.0](https://weber-gesamtausgabe.de/api/v1/openapi.json).  <br/> <br/> For feedback or requests about this API please contact stadler@weber-gesamtausgabe.de or start the discussion at https://github.com/Edirom/WeGA-WebApp
   title: WeGA API
   version: 1.0.0
   x-apisguru-categories:
@@ -83,6 +83,11 @@ parameters:
     minimum: 1
     name: offset
     type: integer
+  qParam:
+    description: The query string
+    in: query
+    name: q
+    type: string
   toDateParam:
     description: The latest date
     format: date
@@ -92,6 +97,8 @@ parameters:
 tags:
   - description: Access to the documents of the WeGA digital edition
     name: Documents
+  - description: Access to search functions of the WeGA digital edition
+    name: Search
   - description: Access to encoding features
     name: Code Samples
   - description: Access to application settings
@@ -438,6 +445,35 @@ paths:
       summary: Returns facets
       tags:
         - Facets
+  /search/entity:
+    get:
+      description: |
+        This endpoint returns the search results for an entity's name or title.
+      parameters:
+        - $ref: "#/parameters/docTypeParam"
+        - $ref: "#/parameters/qParam"
+        - $ref: "#/parameters/offsetParam"
+        - $ref: "#/parameters/limitParam"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: An array of documents
+          headers:
+            totalrecordcount:
+              description: The total size of the result set
+              type: integer
+          schema:
+            items:
+              $ref: "#/definitions/Document"
+            type: array
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
+      summary: Search for a WeGA entity
+      tags:
+        - Search
 definitions:
   CodeSample:
     properties:

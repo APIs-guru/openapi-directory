@@ -2116,6 +2116,12 @@ components:
           description: In hours, time to delay revoking existing certificate after issuance of new certificate. If revokeExistingCertOnIssuance is enabled, this value will be ignored
           maximum: 168
           type: integer
+        forceDomainRevetting:
+          description: Optional field. Domain verification will be required for each domain listed here. Specify a value of * to indicate that all domains associated with the request should have their domain information reverified.
+          items:
+            type: string
+          type: array
+          uniqueItems: true
         rootType:
           default: GODADDY_SHA_1
           description: Root Type. Depending on certificate expiration date, SHA_1 not be allowed. Will default to SHA_2 if expiration date exceeds sha1 allowed date

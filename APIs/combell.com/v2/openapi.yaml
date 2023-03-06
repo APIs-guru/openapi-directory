@@ -130,7 +130,7 @@ info:
 
     ## IP whitelisting
 
-    Access is by default restricted for all IP addresses. You need to explicitly whitelist an IP in your controlpanel.
+    Access is by default restricted for all IP addresses. You need to explicitly whitelist an IP or an IP range in your controlpanel.
 
     # Versioning
 
@@ -374,11 +374,11 @@ paths:
             description: Filters records matching the type. Most other filters only apply when this filter is specified.
             nullable: true
             type: string
-        - description: Filters records matching the record name. This filter only applies to lookups of A, CNAME, TXT, ALIAS and TLSA records.
+        - description: Filters records matching the record name. This filter only applies to lookups of A, CNAME, TXT, CAA, ALIAS and TLSA records.
           in: query
           name: record_name
           schema:
-            description: Filters records matching the record name. This filter only applies to lookups of A, CNAME, TXT, ALIAS and TLSA records.
+            description: Filters records matching the record name. This filter only applies to lookups of A, CNAME, TXT, CAA, ALIAS and TLSA records.
             nullable: true
             type: string
         - description: Filters records for the service. This filter only applies to lookups of SRV records.
@@ -566,7 +566,7 @@ paths:
         - DNS records
   /domains:
     get:
-      operationId: Domains
+      operationId: GetDomains
       parameters:
         - description: The number of items to skip in the resultset.
           in: query
@@ -610,6 +610,7 @@ paths:
   /domains/registrations:
     post:
       description: Registers an available domain.<br />Domain names with extension '.ca' are only available for registrants with country code 'CA'.
+      operationId: Register
       requestBody:
         content:
           application/json:
@@ -622,8 +623,25 @@ paths:
       summary: Register a domain
       tags:
         - Domains
+  /domains/transfers:
+    post:
+      description: Transfers a domain with a transfer authorization code.<br />Domain names with extension '.ca' are only available for registrants with country code 'CA'.
+      operationId: Transfer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransferDomain"
+        description: ""
+      responses:
+        "202":
+          description: Success
+      summary: Transfer a domain
+      tags:
+        - Domains
   "/domains/{domainName}":
     get:
+      operationId: GetDomain
       parameters:
         - description: The domain name
           in: query
@@ -651,6 +669,7 @@ paths:
   "/domains/{domainName}/nameservers":
     put:
       description: ""
+      operationId: EditNameServers
       parameters:
         - description: The domain name
           in: query
@@ -3067,7 +3086,7 @@ components:
         csr:
           description: "The certificate signing request data.<br />\r
 
-            The certificate signing request subject should contain following attributes:<br /><table><tr><th>Name</th><th>Code</th><th>Format</th></tr><tr><td>CommonName</td><td>CN</td><td>Valid domain name, for example site.be, alias.site.be or *.site.be</td></tr><tr><td>Country</td><td>C</td><td>ISO 3166-1 alpha-2 country code</td></tr><tr><td>State</td><td>ST</td><td></td></tr><tr><td>Locality</td><td>L</td><td></td></tr><tr><td>Organization</td><td>O</td><td></td></tr><tr><td>OrganizationUnit</td><td>OU</td><td></td></tr><tr><td>EmailAddress</td><td>E</td><td>Valid email address</td></tr></table>\r
+            The certificate signing request subject should contain following attributes:<br /><table><tr><th>Name</th><th>Code</th><th>Format</th></tr><tr><td>CommonName</td><td>CN</td><td>Valid domain name, for example site.be, alias.site.be or *.site.be</td></tr><tr><td>Country</td><td>C</td><td>ISO 3166-1 alpha-2 country code</td></tr><tr><td>State</td><td>ST</td><td></td></tr><tr><td>Locality</td><td>L</td><td></td></tr><tr><td>Organization</td><td>O</td><td></td></tr><tr><td>EmailAddress</td><td>E</td><td>Valid email address</td></tr></table>\r
 
             The certificate signing request should also contain all the additional aliases and domains (SAN's) for the certificate."
           type: string
@@ -3080,7 +3099,9 @@ components:
         content:
           description: "Variable data depending on the record type.\r
 
-            <ul><li>A: the IPv4 address.</li><li>CNAME: canonical name of an alias.</li><li>MX: fully qualified domain name of a mail host.</li><li>SRV: does not apply. Data for the SRV records can be found in specific properties.</li><li>TXT: free form text data.</li><li>ALIAS: canonical name of an alias.</li><li>TLSA: format should match specific values for usage, selector, matching type and data: \"{usage} {selector} {matching_type} {data}\"\r
+            <ul><li>A: the IPv4 address.</li><li>CNAME: canonical name of an alias.</li><li>MX: fully qualified domain name of a mail host.</li><li>SRV: does not apply. Data for the SRV records can be found in specific properties.</li><li>TXT: free form text data.</li><li>CAA: format should match specific values for flag, tag and ca: \"{flag} {tag} {ca}\".\r
+
+            \        <ul><li>The flag. The values 128 (critical) or 0 (non-critical) are expected, with 0 as the default.</li><li>The tag. A tag specifies which actions an authorized CA can take in terms of issuing SSL/TLS certificates.<br /><ul><li>The value \"issue\": explicitly authorizes a single certificate authority to issue a certificate (any type) for the hostname.</li><li>The value \"issuewild\": explicitly authorizes a single certificate authority to issue a wildcard certificate (and only wildcard) for the hostname.</li><li>The value \"iodef\": specifies a URL to which a certificate authority may report policy violations.</li></ul></li><li>The ca. This is the domain of the CA (Certification Authority) that has the authority to issue certificates for the domain in question. If the value is a semicolon (;), it means that no CA has the authority to issue a certificate for that domain.</li></ul></li><li>ALIAS: canonical name of an alias.</li><li>TLSA: format should match specific values for usage, selector, matching type and data: \"{usage} {selector} {matching_type} {data}\"\r
 
             \        <ul><li>The usage. The first field after the TLSA text in the DNS RR, specifies how to verify the certificate.<br /><ul><li>A value of 0 is for what is commonly called CA constraint (and PKIX-TA). The certificate provided when establishing TLS must be issued by the listed root-CA or one of its intermediate CAs, with a valid certification path to a root-CA already trusted by the application doing the verification.</li><li>A value of 1 is for what is commonly called Service certificate constraint (and PKIX-EE). The certificate used must match the TLSA record exactly, and it must also pass PKIX certification path validation to a trusted root-CA.</li><li>A value of 2 is for what is commonly called Trust Anchor Assertion (and DANE-TA). The certificate used has a valid certification path pointing back to the certificate mention in this record, but there is no need for it to pass the PKIX certification path validation to a trusted root-CA.</li><li>A value of 3 is for what is commonly called Domain issued certificate (and DANE-EE). The services uses a self-signed certificate. It is not signed by anyone else, and is exactly this record.</li></ul></li><li>The selector. When connecting to the service and a certificate is received, the selector field specifies which parts of it should be checked.<br /><ul><li>A value of 0 means to select the entire certificate for matching.</li><li>A value of 1 means to select just the public key for certificate matching. Matching the public key is often sufficient, as this is likely to be unique.</li></ul></li><li>The matching type.<br /><ul><li>A type of 0 means the entire information selected is present in the certificate association data.</li><li>A type of 1 means to do a SHA-256 hash of the selected data.</li><li>A type of 2 means to do a SHA-512 hash of the selected data.</li></ul></li><li>The actual data to be matched given the settings of the other fields. This is a long text string of hexadecimal data.</li></ul></li></ul>"
           type: string
@@ -3119,7 +3140,7 @@ components:
 
             An empty record or '@' is equal to the domain name.<br />\r
 
-            Applies to A, MX, CNAME, TXT, ALIAS and TLSA records.<br />\r
+            Applies to A, MX, CNAME, TXT, CAA, ALIAS and TLSA records.<br />\r
 
             When type is TLSA the recommended value format is port number, protocol and host: _25._tcp.<br />\r
 
@@ -3145,7 +3166,7 @@ components:
           format: int32
           type: integer
         type:
-          description: The type of the record (A, MX, CNAME, SRV, TXT, ALIAS and TLSA).
+          description: The type of the record (A, MX, CNAME, SRV, TXT, CAA, ALIAS and TLSA).
           type: string
         weight:
           default: 0
@@ -3950,6 +3971,25 @@ components:
         - dns
         - ip
       type: string
+    TransferDomain:
+      additionalProperties: false
+      properties:
+        auth_code:
+          description: Authorization code which allows the transfer to execute.
+          type: string
+        domain_name:
+          description: "The domain name to transfer.<br />\r
+
+            Only pass the domain part and the tld.<br /><i>For abc.com, abc is the domain part, com is the tld.</i>"
+          type: string
+        name_servers:
+          description: List of name servers. When empty, the transfer will be done on default name servers.
+          items:
+            type: string
+          type: array
+        registrant:
+          $ref: "#/components/schemas/RegistrantInput"
+      type: object
     UpdateAliasRequest:
       additionalProperties: false
       properties:

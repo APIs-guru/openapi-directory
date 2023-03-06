@@ -939,7 +939,7 @@ paths:
           required: true
           type: string
         - default: L
-          description: Source (input) data source [system code](http://vocabularies.bridgedb.org/#systemCode)
+          description: Source (input) data source [system code](https://bridgedb.github.io/pages/system-codes.html)
           enum:
             - En
             - Cs
@@ -996,7 +996,7 @@ paths:
     get:
       description: Returns a list of xrefs that map to a given identifier, data source, and organism.
       parameters:
-        - description: (Optional) Restrict results by data source [system code](http://vocabularies.bridgedb.org/#systemCode)
+        - description: (Optional) Restrict results by data source [system code](https://bridgedb.github.io/pages/system-codes.html)
           enum:
             - En
             - Cs
@@ -1106,7 +1106,7 @@ paths:
           required: true
           type: string
         - default: L
-          description: Source (input) data source [system code](http://vocabularies.bridgedb.org/#systemCode)
+          description: Source (input) data source [system code](https://bridgedb.github.io/pages/system-codes.html)
           enum:
             - En
             - Cs
@@ -1163,7 +1163,7 @@ paths:
     post:
       description: Returns a list of xrefs, per identifier, that maps to a given list of identifiers an data source given an organism.
       parameters:
-        - description: (Optional) Restrict results by data source [system code](http://vocabularies.bridgedb.org/#systemCode)
+        - description: (Optional) Restrict results by data source [system code](https://bridgedb.github.io/pages/system-codes.html)
           enum:
             - En
             - Cs
@@ -1293,7 +1293,7 @@ paths:
     post:
       description: Returns a list of xrefs, that maps to a given list of identifiers to a given data source and organism.
       parameters:
-        - description: (Optional) Restrict results by data source [system code](http://vocabularies.bridgedb.org/#systemCode)
+        - description: (Optional) Restrict results by data source [system code](https://bridgedb.github.io/pages/system-codes.html)
           enum:
             - En
             - Cs

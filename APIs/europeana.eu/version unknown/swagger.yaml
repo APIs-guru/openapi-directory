@@ -71,6 +71,11 @@ paths:
       deprecated: false
       operationId: searchRecords
       parameters:
+        - description: boost
+          in: query
+          name: boost
+          required: false
+          type: string
         - description: callback
           in: query
           name: callback
@@ -112,6 +117,11 @@ paths:
           name: landingpage
           required: false
           type: boolean
+        - description: lang
+          in: query
+          name: lang
+          required: false
+          type: string
         - description: media
           in: query
           name: media
@@ -121,6 +131,16 @@ paths:
           description: profile
           in: query
           name: profile
+          required: false
+          type: string
+        - description: q.source
+          in: query
+          name: q.source
+          required: false
+          type: string
+        - description: q.target
+          in: query
+          name: q.target
           required: false
           type: string
         - collectionFormat: multi
@@ -298,7 +318,12 @@ paths:
           name: collectionId
           required: true
           type: string
-        - default: full
+        - description: lang
+          in: query
+          name: lang
+          required: false
+          type: string
+        - default: standard
           description: profile
           in: query
           name: profile
@@ -345,6 +370,17 @@ paths:
           name: collectionId
           required: true
           type: string
+        - description: lang
+          in: query
+          name: lang
+          required: false
+          type: string
+        - default: standard
+          description: profile
+          in: query
+          name: profile
+          required: false
+          type: string
         - description: recordId
           in: path
           name: recordId
@@ -381,6 +417,17 @@ paths:
           in: path
           name: collectionId
           required: true
+          type: string
+        - description: lang
+          in: query
+          name: lang
+          required: false
+          type: string
+        - default: standard
+          description: profile
+          in: query
+          name: profile
+          required: false
           type: string
         - description: recordId
           in: path
@@ -423,6 +470,17 @@ paths:
           name: collectionId
           required: true
           type: string
+        - description: lang
+          in: query
+          name: lang
+          required: false
+          type: string
+        - default: standard
+          description: profile
+          in: query
+          name: profile
+          required: false
+          type: string
         - description: recordId
           in: path
           name: recordId
@@ -459,6 +517,17 @@ paths:
           in: path
           name: collectionId
           required: true
+          type: string
+        - description: lang
+          in: query
+          name: lang
+          required: false
+          type: string
+        - default: standard
+          description: profile
+          in: query
+          name: profile
+          required: false
           type: string
         - description: recordId
           in: path
@@ -584,6 +653,8 @@ definitions:
     type: object
   SearchRequest:
     properties:
+      boost:
+        type: string
       callback:
         type: string
       colourPalette:

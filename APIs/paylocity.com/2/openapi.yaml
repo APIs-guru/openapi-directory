@@ -547,9 +547,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: "#/components/schemas/employeeIdResponse"
-                type: array
+                $ref: "#/components/schemas/employeeIdResponse"
           description: Successfully added
         "400":
           content:
@@ -667,9 +665,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: "#/components/schemas/employee"
-                type: array
+                $ref: "#/components/schemas/employee"
           description: Successfully Retrieved
         "401":
           description: Unauthorized
@@ -1551,7 +1547,7 @@ paths:
             type: boolean
         - description: Retrieve pay statement details related to specific deduction, earning or tax types. Common values include 401k, Memo, Reg, OT, Cash Tips, FED and SITW.
           in: query
-          name: dettypes
+          name: codegroup
           required: false
           schema:
             type: string
@@ -1641,7 +1637,7 @@ paths:
             type: boolean
         - description: Retrieve pay statement details related to specific deduction, earning or tax types. Common values include 401k, Memo, Reg, OT, Cash Tips, FED and SITW.
           in: query
-          name: dettypes
+          name: codegroup
           required: false
           schema:
             type: string
@@ -1725,7 +1721,7 @@ paths:
             type: boolean
         - description: Retrieve pay statement details related to specific deduction, earning or tax types. Common values include 401k, Memo, Reg, OT, Cash Tips, FED and SITW.
           in: query
-          name: dettypes
+          name: codegroup
           required: false
           schema:
             type: string
@@ -1815,7 +1811,7 @@ paths:
             type: boolean
         - description: Retrieve pay statement details related to specific deduction, earning or tax types. Common values include 401k, Memo, Reg, OT, Cash Tips, FED and SITW.
           in: query
-          name: dettypes
+          name: codegroup
           required: false
           schema:
             type: string
@@ -1911,6 +1907,114 @@ paths:
       summary: Add/update primary state tax
       tags:
         - Primary State Tax
+  "/v2/companies/{companyId}/employees/{employeeId}/sensitivedata":
+    get:
+      description: Gets employee sensitive data information directly from Web Pay.
+      operationId: Get sensitive data
+      parameters:
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+        - description: Employee Id
+          in: path
+          name: employeeId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/sensitiveData"
+                type: array
+          description: Successfully Retrieved
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/error"
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "429":
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/error"
+                type: array
+          description: Internal Server Error
+      security:
+        - paylocity_auth:
+            - WebLinkAPI
+      summary: Get sensitive data
+      tags:
+        - Sensitive Data
+    put:
+      description: Sends new or updated employee sensitive data information directly to Web Pay.
+      operationId: Add or update Sensitive Data
+      parameters:
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+        - description: Employee Id
+          in: path
+          name: employeeId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/sensitiveData"
+        description: Sensitive Data Model
+        required: true
+      responses:
+        "200":
+          description: Successfully added or updated
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/error"
+                type: array
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "429":
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/error"
+                type: array
+          description: Internal Server Error
+      security:
+        - paylocity_auth:
+            - WebLinkAPI
+      summary: Add/update sensitive data
+      tags:
+        - Sensitive Data
   "/v2/companies/{companyId}/openapi":
     get:
       description: The company-specific Open API endpoint allows the client to GET an Open API document for the Paylocity API that is customized with company-specific resource schemas. These customized resource schemas define certain properties as enumerations of pre-defined values that correspond to the company's setup with Web Pay. The customized schemas also indicate which properties are required by the company within Web Pay.<br  />To learn more about Open API, click [here](https://www.openapis.org/)
@@ -2636,6 +2740,10 @@ components:
           format: paylocity-date
           nullable: true
           type: string
+        coEmpCode:
+          description: "Unique idenifier for SSO.<br  />Max length: 20"
+          nullable: true
+          type: string
         companyFEIN:
           description: "Company FEIN as defined in Web Pay, applicable with GET requests only.<br  /> Max length: 20"
           nullable: true
@@ -2985,7 +3093,7 @@ components:
             type: object
           type: array
         employeeId:
-          description: "Leave blank to have Web Pay automatically assign the next available employee ID.<br  />Max length: 10"
+          description: "Leave blank to have Web Pay automatically assign the next available employee ID.<br  />Max length: 9"
           nullable: true
           type: string
         ethnicity:
@@ -3069,11 +3177,11 @@ components:
               nullable: true
               type: string
             mobilePhone:
-              description: "Mobile phone number.<br  /> Max length: 12"
+              description: "Mobile phone number.<br  /> Max length: 20"
               nullable: true
               type: string
             phone:
-              description: "Phone number.<br  /> Max length: 12"
+              description: "Phone number.<br  /> Max length: 20"
               nullable: true
               type: string
             postalCode:
@@ -3239,11 +3347,11 @@ components:
           description: Add or update hourly or salary pay rate, effective date, and pay frequency.
           properties:
             annualSalary:
-              description: Employee annual salary.<br />Decimal (12,2)
+              description: Employee annual salary.<br />Decimal (12,6)
               nullable: true
               type: number
             baseRate:
-              description: Employee base rate, used for Hourly employees. <br  />Decimal (12,2)
+              description: Employee base rate, used for Hourly employees. <br  />Decimal (12,6)
               nullable: true
               type: number
             beginCheckDate:
@@ -3289,7 +3397,7 @@ components:
               nullable: true
               type: string
             salary:
-              description: Employee gross salary per pay period used with payType Salary.<br  />Decimal (12,2)
+              description: Employee gross salary per pay period used with payType Salary.<br  />Decimal (12,6)
               nullable: true
               type: number
           type: object
@@ -3390,6 +3498,15 @@ components:
               type: boolean
             reHireDate:
               description: Rehire date if employee is rehired.  Updates to re-hire date are not allowed and will be ignored. Common formats are *MM-DD-CCYY, CCYY-MM-DD*.
+              format: paylocity-date
+              nullable: true
+              type: string
+            statusType:
+              description: The Status Type associated with the Employee Status code. Each Employee Status  code for a company is assigned to one of the Status Type values of  A (Active), L (Leave of Absence), T (Terminated).
+              nullable: true
+              type: string
+            terminationDate:
+              description: Employee termination date. Common formats include *MM-DD-CCYY*, *CCYY-MM-DD*.
               format: paylocity-date
               nullable: true
               type: string
@@ -3530,7 +3647,7 @@ components:
               nullable: true
               type: string
             mobilePhone:
-              description: "Mobile phone number.<br  /> Max length: 12"
+              description: "Mobile phone number.<br  /> Max length: 20"
               nullable: true
               type: string
             pager:
@@ -3538,7 +3655,7 @@ components:
               nullable: true
               type: string
             phone:
-              description: "Phone number.<br  /> Max length: 12"
+              description: "Phone number.<br  /> Max length: 20"
               nullable: true
               type: string
             phoneExtension:
@@ -3880,6 +3997,97 @@ components:
         year:
           description: .<br />
           type: integer
+      type: object
+    sensitiveData:
+      additionalProperties: false
+      description: The sensitive data model
+      properties:
+        disability:
+          additionalProperties: false
+          description: Add or update disability data.
+          properties:
+            disability:
+              description: "Description of employee's disability or accommodation.<br  />Max length: 50"
+              nullable: true
+              type: string
+            disabilityClassifications:
+              description: Add or update employee's disability classifications
+              items:
+                description: The disabilty classifications model
+                properties:
+                  classification:
+                    description: Indicates the type of disability. This field is only allowed if hasDisability is set to 1=Yes. Values include:<br  /><br  />Auditory<br  />Cognitive, learning, and neurological<br  />Physical<br  />Speech<br  />Vision<br  />Prefer not to say<br  /><br  />Valid values can be obtained from Company Codes endpoint, codeResource = disabilityClassification
+                    nullable: true
+                    type: string
+                type: object
+              type: array
+            hasDisability:
+              description: Indicates if the employee has a disability. Values include:<br  /><br  />0 = No<br  />1 = Yes<br  />2 = Prefer not to say
+              nullable: true
+              type: string
+          type: object
+        ethnicity:
+          additionalProperties: false
+          description: Add or update ethnicity data.
+          properties:
+            ethnicRacialIdentities:
+              description: Add or update Ethnic Racial Identity
+              items:
+                description: The ethnic racial identity model
+                properties:
+                  description:
+                    description: "Employee's preferred or chosen ethnicity or race.<br  />Max length: 40."
+                    nullable: true
+                    type: string
+                type: object
+              type: array
+            ethnicity:
+              description: Employee's legal ethnicity or race.<br  />A = Asian<br  />B = Black<br  />H = Hispanic<br  />I = American Indian<br  />N = Native Hawaiian or Pacific Islander<br  />T = Two or More Races<br  />W = White<br  /><br  />Valid values can be obtained from Company Codes endpoint, codeResource = ethnicity
+              nullable: true
+              type: string
+          type: object
+        gender:
+          additionalProperties: false
+          description: Add or update gender data.
+          properties:
+            displayPronouns:
+              description: Specifies whether employee's preferred pronouns will be displayed to co-workers in Community, Directory, etc. Values include:<br  /><br  />0 = No<br  />1 = Yes
+              nullable: true
+              type: boolean
+            genderIdentityDescription:
+              description: "Employee's preferred or chosen gender identification.<br  />Max length: 40"
+              nullable: true
+              type: string
+            identifyAsLegalGender:
+              description: Employee's self-identification of legal gender. Numerical values include:<br  /><br  />0 = No<br  />1 = Yes<br  />2 = Prefer not to say
+              nullable: true
+              type: string
+            legalGender:
+              description: Employee's legal gender. Values include:<br  /><br  />M = Male<br  />F = Female<br  /><br  />Valid values can be obtained from Company Codes endpoint, codeResource = legalGender
+              nullable: true
+              type: string
+            pronouns:
+              description: Employee's preferred or chosen pronouns. Values include:<br  /><br  />He / Him / His<br  />She / Her / Hers<br  />They / Them / Theirs<br  />Prefer not to say<br  /><br  />Valid values can be obtained from Company Codes endpoint, codeResource = preferredPronouns
+              nullable: true
+              type: string
+            sexualOrientation:
+              description: Employee's self-identification of sexual orientation. Values may include values below. Additionally, any custom value may be provided.<br  /><br  />Asexual<br  />Gay / Lesbian<br  />Heterosexual / Straight<br  />Pansexual<br  />Queer<br  />Bisexual<br  />Prefer not to say
+              nullable: true
+              type: string
+          type: object
+        veteran:
+          additionalProperties: false
+          description: Add or update veteran data.
+          properties:
+            isVeteran:
+              description: Indicates if the employee is a veteran.  Values include:<br  /><br  />0 = No<br  />1 = Yes<br  />2 = Prefer not to say
+              nullable: true
+              type: string
+            veteran:
+              description: "Employee's Veteran Notes<br  />Max length: 50"
+              nullable: true
+              type: string
+          type: object
       type: object
     stagedEmployee:
       additionalProperties: false
@@ -4517,7 +4725,7 @@ components:
                 nullable: true
                 type: string
               salary:
-                description: Employee gross salary per pay period used with payType Salary.<br  />Decimal (12,2)
+                description: Employee gross salary per pay period used with payType Salary.<br  />Decimal (12,6)
                 nullable: true
                 type: number
             type: object

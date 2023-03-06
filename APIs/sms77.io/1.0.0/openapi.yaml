@@ -446,6 +446,235 @@ paths:
           description: OK
       tags:
         - lookup
+  /lookup/cnam:
+    post:
+      operationId: LookupCnam
+      parameters:
+        - description: The phone number to look up.
+          explode: false
+          in: query
+          name: number
+          required: true
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    schema:
+                      properties:
+                        code:
+                          description: The API status code
+                          enum:
+                            - 100
+                          type: number
+                        name:
+                          description: The country for given phone number
+                          type: string
+                        number:
+                          description: The phone number that was looked up
+                          type: string
+                        success:
+                          description: Whether the request was successful or not
+                          enum:
+                            - true
+                            - false
+                          type: string
+                      type: object
+          description: OK
+      tags:
+        - lookup
+  /lookup/format:
+    post:
+      operationId: LookupFormat
+      parameters:
+        - description: The phone number to look up.
+          explode: false
+          in: query
+          name: number
+          required: true
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    schema:
+                      properties:
+                        carrier:
+                          description: Network operator to whom the call number was originally assigned.
+                          type: string
+                        country_code:
+                          description: Country code of the queried number – international without leading “00”.
+                          type: string
+                        country_iso:
+                          description: Country code of the phone number in the format ISO 3166-1 alpha-2 (two letters).
+                          type: string
+                        country_name:
+                          description: The full name of the country of the queried phone number in English.
+                          type: string
+                        international:
+                          description: International E.164 format of the queried phone number.
+                          type: string
+                        international_formatted:
+                          description: The international number.
+                          type: string
+                        national:
+                          description: National format of the queried phone number.
+                          type: string
+                        network_type:
+                          description: The type of network for the requested number.
+                          type: string
+                        success:
+                          description: Whether the request was successful or not.
+                          type: boolean
+                      type: object
+          description: OK
+      tags:
+        - lookup
+  /lookup/hlr:
+    post:
+      operationId: LookupHlr
+      parameters:
+        - description: The phone number to look up.
+          explode: false
+          in: query
+          name: number
+          required: true
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    schema:
+                      properties:
+                        country_code:
+                          description: The area code of the number belonging country. This value is numeric.
+                          type: string
+                        country_code_iso3:
+                          type: string
+                        country_name:
+                          description: The full english name if the number belonging country.
+                          type: string
+                        country_prefix:
+                          type: string
+                        current_carrier:
+                          schema:
+                            $ref: "#/components/schemas/Carrier"
+                        gsm_code:
+                          type: string
+                        gsm_message:
+                          type: string
+                        international_format_number:
+                          type: string
+                        international_formatted:
+                          description: The number formatted accordingly to the E.164 standard in a human readable format.
+                          type: string
+                        lookup_outcome:
+                          type: string
+                        lookup_outcome_message:
+                          type: string
+                        national_format_number:
+                          type: string
+                        original_carrier:
+                          schema:
+                            $ref: "#/components/schemas/Carrier"
+                        ported:
+                          enum:
+                            - unknown
+                            - ported
+                            - not_ported
+                            - assumed_not_ported
+                            - assumed_ported
+                          type: string
+                        reachable:
+                          enum:
+                            - unknown
+                            - reachable
+                            - undeliverable
+                            - absent
+                            - bad_number
+                            - blacklisted
+                          type: string
+                        roaming:
+                          schema:
+                            $ref: "#/components/schemas/Roaming"
+                        status:
+                          type: boolean
+                        status_message:
+                          type: string
+                        valid_number:
+                          type: string
+                      type: object
+          description: OK
+      tags:
+        - lookup
+  /lookup/mnp:
+    post:
+      operationId: LookupMnp
+      parameters:
+        - description: The phone number to look up.
+          explode: false
+          in: query
+          name: number
+          required: true
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: Determines whether the response shall be returned in JSON format.
+          in: query
+          name: json
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    schema:
+                      properties:
+                        code:
+                          enum:
+                            - 100
+                            - 202
+                            - 500
+                            - 600
+                          type: number
+                        mnp:
+                          schema:
+                            $ref: "#/components/schemas/Mnp"
+                        price:
+                          type: float
+                        success:
+                          description: Determines if the request was successful.,
+                          type: boolean
+                      type: object
+          description: OK
+      tags:
+        - lookup
   /pricing:
     get:
       operationId: Pricing
@@ -872,6 +1101,23 @@ components:
             - unknown
             - voicemail
             - voip
+          type: string
+      type: object
+    Mnp:
+      properties:
+        country:
+          type: string
+        international_formatted:
+          type: string
+        isPorted:
+          type: boolean
+        mccmnc:
+          type: string
+        national_format:
+          type: string
+        network:
+          type: string
+        number:
           type: string
       type: object
     Roaming:

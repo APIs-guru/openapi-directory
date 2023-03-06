@@ -25,19 +25,21 @@ tags:
   - name: eventticketobject
   - name: flightclass
   - name: flightobject
+  - name: genericclass
+  - name: genericobject
   - name: giftcardclass
   - name: giftcardobject
   - name: issuer
   - name: jwt
   - name: loyaltyclass
   - name: loyaltyobject
+  - name: media
   - name: offerclass
   - name: offerobject
   - name: permissions
   - name: smarttap
   - name: transitclass
   - name: transitobject
-  - name: valuablesclasses
   - name: walletobjects
 paths:
   /walletobjects/v1/eventTicketClass:
@@ -902,6 +904,332 @@ paths:
             - https://www.googleapis.com/auth/wallet_object.issuer
       tags:
         - flightobject
+  /walletobjects/v1/genericClass:
+    get:
+      description: Returns a list of all generic classes for a given issuer ID.
+      operationId: walletobjects.genericclass.list
+      parameters:
+        - description: The ID of the issuer authorized to list classes.
+          in: query
+          name: issuerId
+          schema:
+            type: string
+        - description: Identifies the max number of results returned by a list. All results are returned if `maxResults` isn't defined.
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+        - description: Used to get the next set of results if `maxResults` is specified, but more than `maxResults` classes are available in a list. For example, if you have a list of 200 classes and you call list with `maxResults` set to 20, list will return the first 20 classes and a token. Call list again with `maxResults` set to 20 and the token to get the next 20 classes.
+          in: query
+          name: token
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericClassListResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - genericclass
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Inserts a generic class with the given ID and properties.
+      operationId: walletobjects.genericclass.insert
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenericClass"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericClass"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - genericclass
+  "/walletobjects/v1/genericClass/{resourceId}":
+    get:
+      description: Returns the generic class with the given class ID.
+      operationId: walletobjects.genericclass.get
+      parameters:
+        - description: The unique identifier for a class. This ID must be unique across all classes from an issuer. This value needs to follow the format `issuerID.identifier` where `issuerID` is issued by Google and `identifier` is chosen by you. The unique identifier can only include alphanumeric characters, `.`, `_`, or `-`.
+          in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericClass"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - genericclass
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates the generic class referenced by the given class ID. This method supports patch semantics.
+      operationId: walletobjects.genericclass.patch
+      parameters:
+        - description: The unique identifier for a class. This ID must be unique across all classes from an issuer. This value needs to follow the format `issuerID.identifier` where `issuerID` is issued by Google and `identifier` is chosen by you. The unique identifier can only include alphanumeric characters, `.`, `_`, or `-`.
+          in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenericClass"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericClass"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - genericclass
+    put:
+      description: Updates the Generic class referenced by the given class ID.
+      operationId: walletobjects.genericclass.update
+      parameters:
+        - description: The unique identifier for a class. This ID must be unique across all classes from an issuer. This value needs to follow the format `issuerID.identifier` where `issuerID` is issued by Google and `identifier` is chosen by you. The unique identifier can only include alphanumeric characters, `.`, `_`, or `-`.
+          in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenericClass"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericClass"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - genericclass
+  /walletobjects/v1/genericObject:
+    get:
+      description: Returns a list of all generic objects for a given issuer ID.
+      operationId: walletobjects.genericobject.list
+      parameters:
+        - description: The ID of the class whose objects will be listed.
+          in: query
+          name: classId
+          schema:
+            type: string
+        - description: Identifies the max number of results returned by a list. All results are returned if `maxResults` isn't defined.
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+        - description: Used to get the next set of results if `maxResults` is specified, but more than `maxResults` objects are available in a list. For example, if you have a list of 200 objects and you call list with `maxResults` set to 20, list will return the first 20 objects and a token. Call list again with `maxResults` set to 20 and the token to get the next 20 objects.
+          in: query
+          name: token
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericObjectListResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - genericobject
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Inserts a generic object with the given ID and properties.
+      operationId: walletobjects.genericobject.insert
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenericObject"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericObject"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - genericobject
+  "/walletobjects/v1/genericObject/{resourceId}":
+    get:
+      description: Returns the generic object with the given object ID.
+      operationId: walletobjects.genericobject.get
+      parameters:
+        - description: The unique identifier for an object. This ID must be unique across all objects from an issuer. This value needs to follow the format `issuerID.identifier` where `issuerID` is issued by Google and `identifier` is chosen by you. The unique identifier can only include alphanumeric characters, `.`, `_`, or `-`.
+          in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericObject"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - genericobject
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates the generic object referenced by the given object ID. This method supports patch semantics.
+      operationId: walletobjects.genericobject.patch
+      parameters:
+        - description: The unique identifier for an object. This ID must be unique across all objects from an issuer. This value needs to follow the format `issuerID.identifier` where `issuerID` is issued by Google and `identifier` is chosen by you. The unique identifier can only include alphanumeric characters, `.`, `_`, or `-`.
+          in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenericObject"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericObject"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - genericobject
+    put:
+      description: Updates the generic object referenced by the given object ID.
+      operationId: walletobjects.genericobject.update
+      parameters:
+        - description: The unique identifier for an object. This ID must be unique across all objects from an issuer. This value needs to follow the format `issuerID.identifier` where `issuerID` is issued by Google and `identifier` is chosen by you. The unique identifier can only include alphanumeric characters, `.`, `_`, or `-`.
+          in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenericObject"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericObject"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - genericobject
   /walletobjects/v1/giftCardClass:
     get:
       description: Returns a list of all gift card classes for a given issuer ID.
@@ -1369,7 +1697,7 @@ paths:
       description: Returns the issuer with the given issuer ID.
       operationId: walletobjects.issuer.get
       parameters:
-        - description: The unique identifier for an issuer. This ID must be unique across all issuers. It should only be provided if merchant_id is absent.
+        - description: The unique identifier for an issuer.
           in: path
           name: resourceId
           required: true
@@ -1405,7 +1733,7 @@ paths:
       description: Updates the issuer referenced by the given issuer ID. This method supports patch semantics.
       operationId: walletobjects.issuer.patch
       parameters:
-        - description: The unique identifier for an issuer. This ID must be unique across all issuers. It should only be provided if merchant_id is absent.
+        - description: The unique identifier for an issuer.
           in: path
           name: resourceId
           required: true
@@ -1434,7 +1762,7 @@ paths:
       description: Updates the issuer referenced by the given issuer ID.
       operationId: walletobjects.issuer.update
       parameters:
-        - description: The unique identifier for an issuer. This ID must be unique across all issuers. It should only be provided if merchant_id is absent.
+        - description: The unique identifier for an issuer.
           in: path
           name: resourceId
           required: true
@@ -2422,6 +2750,83 @@ paths:
             - https://www.googleapis.com/auth/wallet_object.issuer
       tags:
         - permissions
+  /walletobjects/v1/privateContent/uploadPrivateData:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Upload private data (text or URI) and returns an Id to be used in its place.
+      operationId: walletobjects.walletobjects.v1.privateContent.uploadPrivateData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UploadPrivateDataRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadPrivateDataResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - walletobjects
+  "/walletobjects/v1/privateContent/{issuerId}/uploadPrivateImage":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Uploads a private image and returns an Id to be used in its place.
+      operationId: walletobjects.media.upload
+      parameters:
+        - description: The ID of the issuer sending the image.
+          in: path
+          name: issuerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              $ref: "#/components/schemas/UploadPrivateImageRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadPrivateImageResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - media
   /walletobjects/v1/smartTap:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2867,105 +3272,6 @@ paths:
             - https://www.googleapis.com/auth/wallet_object.issuer
       tags:
         - transitobject
-  /walletobjects/v1/valuablesclasses:
-    get:
-      description: Returns a list of all valuables classes for a given issuer ID.
-      operationId: walletobjects.valuablesclasses.list
-      parameters:
-        - description: The ID of the issuer authorized to list classes.
-          in: query
-          name: issuerId
-          schema:
-            type: string
-        - description: Identifies the max number of results returned by a list. All results are returned if max_results isn't defined.
-          in: query
-          name: maxResults
-          schema:
-            type: integer
-        - description: Specify the type(s) of ValuablesClass that needs to be listed. If none is specified, all the ValuablesClasses would be returned.
-          explode: true
-          in: query
-          name: requestedType
-          schema:
-            items:
-              enum:
-                - VALUABLE_TYPE_UNSPECIFIED
-                - VALUABLE_TYPE_GIFT_CARD
-                - VALUABLE_TYPE_LOYALTY
-                - VALUABLE_TYPE_OFFER
-                - VALUABLE_TYPE_EVENT_TICKET
-                - VALUABLE_TYPE_FLIGHT
-                - VALUABLE_TYPE_TRANSIT
-              type: string
-            type: array
-          style: form
-        - description: Used to get the next set of results if max_results is specified, but more than max_results classes are available in a list. For example, if you have a list of 200 classes and you call list with max_results set to 20, list will return the first 20 classes and a next_token. Call list again with max_results set to 20 and the token set to next_token to get the next 20 classes.
-          in: query
-          name: token
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListValuablesClassesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/wallet_object.issuer
-          Oauth2c:
-            - https://www.googleapis.com/auth/wallet_object.issuer
-      tags:
-        - valuablesclasses
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  /walletobjects/v1/valuablesclassescount:
-    get:
-      description: Returns a total number of valuables classes grouped by type for a given issuer ID.
-      operationId: walletobjects.walletobjects.v1.getValuablesclassescount
-      parameters:
-        - description: The ID of the issuer authorized to list classes.
-          in: query
-          name: issuerId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ValuablesClassesCount"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/wallet_object.issuer
-          Oauth2c:
-            - https://www.googleapis.com/auth/wallet_object.issuer
-      tags:
-        - walletobjects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -3042,6 +3348,28 @@ components:
       schema:
         type: string
   schemas:
+    ActivationOptions:
+      description: ActivationOptions for the class
+      properties:
+        activationUrl:
+          description: HTTPS URL that supports REST semantics. Would be used for requesting activation from partners for given valuable, triggered by the users.
+          type: string
+        allowReactivation:
+          description: Flag to allow users to make activation call from different device. This allows client to render the activation button enabled even if the activationStatus is ACTIVATED but the requested device is different than the current device.
+          type: boolean
+      type: object
+    ActivationStatus:
+      description: The activation status of the object. This field includes activation status if valuable supports activation.
+      properties:
+        state:
+          enum:
+            - UNKNOWN_STATE
+            - NOT_ACTIVATED
+            - not_activated
+            - ACTIVATED
+            - activated
+          type: string
+      type: object
     AddMessageRequest:
       description: Resource used when the AddMessage endpoints are called.
       properties:
@@ -3167,6 +3495,28 @@ components:
           $ref: "#/components/schemas/FieldSelector"
           description: A reference to an existing text-based or image field to display.
       type: object
+    Blobstore2Info:
+      description: Information to read/write to blobstore2.
+      properties:
+        blobGeneration:
+          description: The blob generation id.
+          format: int64
+          type: string
+        blobId:
+          description: The blob id, e.g., /blobstore/prod/playground/scotty
+          type: string
+        downloadReadHandle:
+          description: Read handle passed from Bigstore -> Scotty for a GCS download. This is a signed, serialized blobstore2.ReadHandle proto which must never be set outside of Bigstore, and is not applicable to non-GCS media downloads.
+          format: byte
+          type: string
+        readToken:
+          description: The blob read token. Needed to read blobs that have not been replicated. Might not be available until the final call.
+          type: string
+        uploadMetadataContainer:
+          description: Metadata passed from Blobstore -> Scotty for a new GCS upload. This is a signed, serialized blobstore2.BlobMetadataContainer proto which must never be consumed outside of Bigstore, and is not applicable to non-GCS media uploads.
+          format: byte
+          type: string
+      type: object
     BoardingAndSeatingInfo:
       properties:
         boardingDoor:
@@ -3236,7 +3586,7 @@ components:
     CallbackOptions:
       properties:
         updateRequestUrl:
-          description: URL for the merchant endpoint that would be called to request updates. The URL should be hosted on HTTPS and robots.txt should allow the URL path to be accessible by UserAgent:Google-Valuables. Please contact Google support before using this field.
+          description: URL for the merchant endpoint that would be called to request updates. The URL should be hosted on HTTPS and robots.txt should allow the URL path to be accessible by UserAgent:Google-Valuables. Deprecated.
           type: string
         url:
           description: The HTTPS url configured by the merchant. The URL should be hosted on HTTPS and robots.txt should allow the URL path to be accessible by UserAgent:Google-Valuables.
@@ -3316,6 +3666,75 @@ components:
           $ref: "#/components/schemas/ListTemplateOverride"
           description: Override for the passes list view.
       type: object
+    CompositeMedia:
+      description: A sequence of media data references representing composite data. Introduced to support Bigstore composite objects. For details, visit http://go/bigstore-composites.
+      properties:
+        blobRef:
+          description: Blobstore v1 reference, set if reference_type is BLOBSTORE_REF This should be the byte representation of a blobstore.BlobRef. Since Blobstore is deprecating v1, use blobstore2_info instead. For now, any v2 blob will also be represented in this field as v1 BlobRef.
+          format: byte
+          type: string
+        blobstore2Info:
+          $ref: "#/components/schemas/Blobstore2Info"
+          description: Blobstore v2 info, set if reference_type is BLOBSTORE_REF and it refers to a v2 blob.
+        cosmoBinaryReference:
+          description: A binary data reference for a media download. Serves as a technology-agnostic binary reference in some Google infrastructure. This value is a serialized storage_cosmo.BinaryReference proto. Storing it as bytes is a hack to get around the fact that the cosmo proto (as well as others it includes) doesn't support JavaScript. This prevents us from including the actual type of this field.
+          format: byte
+          type: string
+        crc32cHash:
+          description: crc32.c hash for the payload.
+          format: uint32
+          type: integer
+        inline:
+          description: Media data, set if reference_type is INLINE
+          format: byte
+          type: string
+        length:
+          description: Size of the data, in bytes
+          format: int64
+          type: string
+        md5Hash:
+          description: MD5 hash for the payload.
+          format: byte
+          type: string
+        objectId:
+          $ref: "#/components/schemas/ObjectId"
+          description: Reference to a TI Blob, set if reference_type is BIGSTORE_REF.
+        path:
+          description: Path to the data, set if reference_type is PATH
+          type: string
+        referenceType:
+          description: Describes what the field reference contains.
+          enum:
+            - PATH
+            - BLOB_REF
+            - INLINE
+            - BIGSTORE_REF
+            - COSMO_BINARY_REFERENCE
+          type: string
+        sha1Hash:
+          description: SHA-1 hash for the payload.
+          format: byte
+          type: string
+      type: object
+    ContentTypeInfo:
+      description: Detailed Content-Type information from Scotty. The Content-Type of the media will typically be filled in by the header or Scotty's best_guess, but this extended information provides the backend with more information so that it can make a better decision if needed. This is only used on media upload requests from Scotty.
+      properties:
+        bestGuess:
+          description: Scotty's best guess of what the content type of the file is.
+          type: string
+        fromBytes:
+          description: The content type of the file derived by looking at specific bytes (i.e. "magic bytes") of the actual file.
+          type: string
+        fromFileName:
+          description: The content type of the file derived from the file extension of the original file name used by the client.
+          type: string
+        fromHeader:
+          description: The content type of the file as specified in the request headers, multipart headers, or RUPIO start request.
+          type: string
+        fromUrlPath:
+          description: The content type of the file derived from the file extension of the URL path. The URL path is assumed to represent a file name (which is typically only true for agents that are providing a REST API).
+          type: string
+      type: object
     DateTime:
       properties:
         date:
@@ -3335,6 +3754,75 @@ components:
           items:
             $ref: "#/components/schemas/DetailsItemInfo"
           type: array
+      type: object
+    DeviceContext:
+      description: Device context associated with the object.
+      properties:
+        deviceToken:
+          description: If set, redemption information will only be returned to the given device upon activation of the object. This should not be used as a stable identifier to trace a user's device. It can change across different passes for the same device or even across different activations for the same device. When setting this, callers must also set has_linked_device on the object being activated.
+          type: string
+      type: object
+    DiffChecksumsResponse:
+      description: Backend response for a Diff get checksums response. For details on the Scotty Diff protocol, visit http://go/scotty-diff-protocol.
+      properties:
+        checksumsLocation:
+          $ref: "#/components/schemas/CompositeMedia"
+          description: Exactly one of these fields must be populated. If checksums_location is filled, the server will return the corresponding contents to the user. If object_location is filled, the server will calculate the checksums based on the content there and return that to the user. For details on the format of the checksums, see http://go/scotty-diff-protocol.
+        chunkSizeBytes:
+          description: The chunk size of checksums. Must be a multiple of 256KB.
+          format: int64
+          type: string
+        objectLocation:
+          $ref: "#/components/schemas/CompositeMedia"
+          description: If set, calculate the checksums based on the contents and return them to the caller.
+        objectSizeBytes:
+          description: The total size of the server object.
+          format: int64
+          type: string
+        objectVersion:
+          description: The object version of the object the checksums are being returned for.
+          type: string
+      type: object
+    DiffDownloadResponse:
+      description: Backend response for a Diff download response. For details on the Scotty Diff protocol, visit http://go/scotty-diff-protocol.
+      properties:
+        objectLocation:
+          $ref: "#/components/schemas/CompositeMedia"
+          description: The original object location.
+      type: object
+    DiffUploadRequest:
+      description: A Diff upload request. For details on the Scotty Diff protocol, visit http://go/scotty-diff-protocol.
+      properties:
+        checksumsInfo:
+          $ref: "#/components/schemas/CompositeMedia"
+          description: The location of the checksums for the new object. Agents must clone the object located here, as the upload server will delete the contents once a response is received. For details on the format of the checksums, see http://go/scotty-diff-protocol.
+        objectInfo:
+          $ref: "#/components/schemas/CompositeMedia"
+          description: The location of the new object. Agents must clone the object located here, as the upload server will delete the contents once a response is received.
+        objectVersion:
+          description: The object version of the object that is the base version the incoming diff script will be applied to. This field will always be filled in.
+          type: string
+      type: object
+    DiffUploadResponse:
+      description: Backend response for a Diff upload request. For details on the Scotty Diff protocol, visit http://go/scotty-diff-protocol.
+      properties:
+        objectVersion:
+          description: The object version of the object at the server. Must be included in the end notification response. The version in the end notification response must correspond to the new version of the object that is now stored at the server, after the upload.
+          type: string
+        originalObject:
+          $ref: "#/components/schemas/CompositeMedia"
+          description: The location of the original file for a diff upload request. Must be filled in if responding to an upload start notification.
+      type: object
+    DiffVersionResponse:
+      description: Backend response for a Diff get version response. For details on the Scotty Diff protocol, visit http://go/scotty-diff-protocol.
+      properties:
+        objectSizeBytes:
+          description: The total size of the server object.
+          format: int64
+          type: string
+        objectVersion:
+          description: The version of the object stored at the server.
+          type: string
       type: object
     DiscoverableProgram:
       description: Information about how a class may be discovered and instantiated from within the Android Pay app. This is done by searching for a loyalty or gift card program and scanning or manually entering.
@@ -3389,6 +3877,16 @@ components:
         signupWebsite:
           $ref: "#/components/schemas/Uri"
           description: The URL to direct the user to for the merchant's signup site.
+      type: object
+    DownloadParameters:
+      description: Parameters specific to media downloads.
+      properties:
+        allowGzipCompression:
+          description: A boolean to be returned in the response to Scotty. Allows/disallows gzip encoding of the payload content when the server thinks it's advantageous (hence, does not guarantee compression) which allows Scotty to GZip the response to the client.
+          type: boolean
+        ignoreRange:
+          description: Determining whether or not Apiary should skip the inclusion of any Content-Range header on its response to Scotty.
+          type: boolean
       type: object
     EventDateTime:
       properties:
@@ -3490,7 +3988,7 @@ components:
           $ref: "#/components/schemas/EventDateTime"
           description: The date & time information of the event.
         enableSmartTap:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: Identifies whether this class supports Smart Tap. The `redemptionIssuers` and object level `smartTapRedemptionLevel` fields must also be set up correctly in order for a pass to support Smart Tap.
           type: boolean
         eventId:
           description: The ID of the event. This ID should be unique for every event in an account. It is used to group tickets together if the user has saved multiple tickets for the same event. It can be at most 64 characters. If provided, the grouping will be stable. Be wary of unintentional collision to avoid grouping tickets that should not be grouped. If you use only one class per event, you can simply set this to the `classId` (with or without the issuer ID portion). If not provided, the platform will attempt to use other data to group tickets (potentially unstable).
@@ -3545,6 +4043,7 @@ components:
           $ref: "#/components/schemas/LocalizedString"
           description: Translated strings for the issuer_name. Recommended maximum length is 20 characters to ensure full string is displayed on smaller screens.
         locations:
+          description: "Note: This field is currently not supported to trigger geo notifications."
           items:
             $ref: "#/components/schemas/LatLongPoint"
           type: array
@@ -3568,7 +4067,7 @@ components:
             - oneUserOneDevice
           type: string
         redemptionIssuers:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: Identifies which redemption issuers can redeem the pass over Smart Tap. Redemption issuers are identified by their issuer ID. Redemption issuers must have at least one Smart Tap key configured. The `enableSmartTap` and object level `smartTapRedemptionLevel` fields must also be set up correctly in order for a pass to support Smart Tap.
           items:
             format: int64
             type: string
@@ -3627,6 +4126,13 @@ components:
           description: Deprecated
           format: int64
           type: string
+        viewUnlockRequirement:
+          description: View Unlock Requirement options for the event ticket.
+          enum:
+            - VIEW_UNLOCK_REQUIREMENT_UNSPECIFIED
+            - UNLOCK_NOT_REQUIRED
+            - UNLOCK_REQUIRED_TO_VIEW
+          type: string
         wordMark:
           $ref: "#/components/schemas/Image"
           description: Deprecated.
@@ -3670,7 +4176,7 @@ components:
           description: The face value of the ticket, matching what would be printed on a physical version of the ticket.
         groupingInfo:
           $ref: "#/components/schemas/GroupingInfo"
-          description: Grouping info for event tickets.
+          description: Information that controls how passes are grouped together.
         hasLinkedDevice:
           description: Whether this object is currently linked to a single device. This field is set by the platform when a user saves the object, linking it to their device. Intended for use by select partners. Contact support for additional information.
           type: boolean
@@ -3706,7 +4212,7 @@ components:
           $ref: "#/components/schemas/LinksModuleData"
           description: Links module data. If links module data is also defined on the class, both will be displayed.
         locations:
-          description: The list of locations where the object can be used. The platform uses this information to trigger geolocated notifications to users. Note that locations in the object override locations in the class which override locations in the Google Places ID.
+          description: "Note: This field is currently not supported to trigger geo notifications."
           items:
             $ref: "#/components/schemas/LatLongPoint"
           type: array
@@ -3715,14 +4221,20 @@ components:
           items:
             $ref: "#/components/schemas/Message"
           type: array
+        passConstraints:
+          $ref: "#/components/schemas/PassConstraints"
+          description: Pass constraints for the object.
         reservationInfo:
           $ref: "#/components/schemas/EventReservationInfo"
           description: Reservation details for this ticket. This is expected to be shared amongst all tickets that were purchased in the same order.
+        rotatingBarcode:
+          $ref: "#/components/schemas/RotatingBarcode"
+          description: The rotating barcode type and value.
         seatInfo:
           $ref: "#/components/schemas/EventSeat"
           description: Seating details for this ticket.
         smartTapRedemptionValue:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: The value that will be transmitted to a Smart Tap certified terminal over NFC for this object. The class level fields `enableSmartTap` and `redemptionIssuers` must also be set up correctly in order for the pass to support Smart Tap. Only ASCII characters are supported.
           type: string
         state:
           description: Required. The state of the object. This field is used to determine how an object is displayed in the app. For example, an `inactive` object is moved to the "Expired passes" section.
@@ -3788,7 +4300,15 @@ components:
           $ref: "#/components/schemas/LocalizedString"
           description: The name of the venue, such as "AT&T Park". This is required.
       type: object
+    ExpiryNotification:
+      description: Indicates that the issuer would like GooglePay to send expiry notifications 2 days prior to the card expiration.
+      properties:
+        enableNotification:
+          description: Indicates if the object needs to have expiry notification enabled.
+          type: boolean
+      type: object
     FieldReference:
+      description: Reference definition to use with field overrides.
       properties:
         dateFormat:
           description: Only valid if the `fieldPath` references a date field. Chooses how the date field will be formatted and displayed in the UI.
@@ -3804,12 +4324,15 @@ components:
             - dateTimeYear
             - DATE_YEAR
             - dateYear
+            - YEAR_MONTH
+            - YEAR_MONTH_DAY
           type: string
         fieldPath:
           description: Path to the field being referenced, prefixed with "object" or "class" and separated with dots. For example, it may be the string "object.purchaseDetails.purchasePrice".
           type: string
       type: object
     FieldSelector:
+      description: Custom field selector to use with field overrides.
       properties:
         fields:
           description: If more than one reference is supplied, then the first one that references a non-empty field will be displayed.
@@ -3875,7 +4398,7 @@ components:
           $ref: "#/components/schemas/AirportInfo"
           description: Required. Destination airport.
         enableSmartTap:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: Identifies whether this class supports Smart Tap. The `redemptionIssuers` and object level `smartTapRedemptionLevel` fields must also be set up correctly in order for a pass to support Smart Tap.
           type: boolean
         flightHeader:
           $ref: "#/components/schemas/FlightHeader"
@@ -3951,6 +4474,7 @@ components:
           $ref: "#/components/schemas/LocalizedString"
           description: Translated strings for the issuer_name. Recommended maximum length is 20 characters to ensure full string is displayed on smaller screens.
         locations:
+          description: "Note: This field is currently not supported to trigger geo notifications."
           items:
             $ref: "#/components/schemas/LatLongPoint"
           type: array
@@ -3974,7 +4498,7 @@ components:
           $ref: "#/components/schemas/AirportInfo"
           description: Required. Origin airport.
         redemptionIssuers:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: Identifies which redemption issuers can redeem the pass over Smart Tap. Redemption issuers are identified by their issuer ID. Redemption issuers must have at least one Smart Tap key configured. The `enableSmartTap` and object level `smartTapRedemptionLevel` fields must also be set up correctly in order for a pass to support Smart Tap.
           items:
             format: int64
             type: string
@@ -3995,6 +4519,9 @@ components:
             - DRAFT
             - draft
           type: string
+        securityAnimation:
+          $ref: "#/components/schemas/SecurityAnimation"
+          description: Optional information about the security animation. If this is set a security animation will be rendered on pass details.
         textModulesData:
           description: Text module data. If text module data is also defined on the class, both will be displayed. The maximum number of these fields displayed is 10 from the object and 10 from the class.
           items:
@@ -4003,6 +4530,13 @@ components:
         version:
           description: Deprecated
           format: int64
+          type: string
+        viewUnlockRequirement:
+          description: View Unlock Requirement options for the boarding pass.
+          enum:
+            - VIEW_UNLOCK_REQUIREMENT_UNSPECIFIED
+            - UNLOCK_NOT_REQUIRED
+            - UNLOCK_REQUIRED_TO_VIEW
           type: string
         wordMark:
           $ref: "#/components/schemas/Image"
@@ -4032,6 +4566,9 @@ components:
           description: Information about airline carrier. This is a required property of `flightHeader`.
         flightNumber:
           description: 'The flight number without IATA carrier code. This field should contain only digits. This is a required property of `flightHeader`. eg: "123"'
+          type: string
+        flightNumberDisplayOverride:
+          description: 'Override value to use for flight number. The default value used for display purposes is carrier + flight_number. If a different value needs to be shown to passengers, use this field to override the default behavior. eg: "XX1234 / YY576"'
           type: string
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string `"walletobjects#flightHeader"`.'
@@ -4063,6 +4600,9 @@ components:
         disableExpirationNotification:
           description: Indicates if notifications should explicitly be suppressed. If this field is set to true, regardless of the `messages` field, expiration notifications to the user will be suppressed. By default, this field is set to false. Currently, this can only be set for Flights.
           type: boolean
+        groupingInfo:
+          $ref: "#/components/schemas/GroupingInfo"
+          description: Information that controls how passes are grouped together.
         hasLinkedDevice:
           description: Whether this object is currently linked to a single device. This field is set by the platform when a user saves the object, linking it to their device. Intended for use by select partners. Contact support for additional information.
           type: boolean
@@ -4093,7 +4633,7 @@ components:
           $ref: "#/components/schemas/LinksModuleData"
           description: Links module data. If links module data is also defined on the class, both will be displayed.
         locations:
-          description: The list of locations where the object can be used. The platform uses this information to trigger geolocated notifications to users. Note that locations in the object override locations in the class which override locations in the Google Places ID.
+          description: "Note: This field is currently not supported to trigger geo notifications."
           items:
             $ref: "#/components/schemas/LatLongPoint"
           type: array
@@ -4102,17 +4642,23 @@ components:
           items:
             $ref: "#/components/schemas/Message"
           type: array
+        passConstraints:
+          $ref: "#/components/schemas/PassConstraints"
+          description: Pass constraints for the object.
         passengerName:
           description: 'Required. Passenger name as it would appear on the boarding pass. eg: "Dave M Gahan" or "Gahan/Dave" or "GAHAN/DAVEM"'
           type: string
         reservationInfo:
           $ref: "#/components/schemas/ReservationInfo"
           description: Required. Information about flight reservation.
+        rotatingBarcode:
+          $ref: "#/components/schemas/RotatingBarcode"
+          description: The rotating barcode type and value.
         securityProgramLogo:
           $ref: "#/components/schemas/Image"
           description: An image for the security program that applies to the passenger.
         smartTapRedemptionValue:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: The value that will be transmitted to a Smart Tap certified terminal over NFC for this object. The class level fields `enableSmartTap` and `redemptionIssuers` must also be set up correctly in order for the pass to support Smart Tap. Only ASCII characters are supported.
           type: string
         state:
           description: Required. The state of the object. This field is used to determine how an object is displayed in the app. For example, an `inactive` object is moved to the "Expired passes" section.
@@ -4169,6 +4715,172 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string `"walletobjects#frequentFlyerInfo"`.'
           type: string
       type: object
+    GenericClass:
+      description: Generic Class
+      properties:
+        callbackOptions:
+          $ref: "#/components/schemas/CallbackOptions"
+          description: Callback options to be used to call the issuer back for every save/delete of an object for this class by the end-user. All objects of this class are eligible for the callback.
+        classTemplateInfo:
+          $ref: "#/components/schemas/ClassTemplateInfo"
+          description: Template information about how the class should be displayed. If unset, Google will fallback to a default set of fields to display.
+        enableSmartTap:
+          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          type: boolean
+        id:
+          description: Required. The unique identifier for the class. This ID must be unique across all from an issuer. This value needs to follow the format `issuerID.identifier` where `issuerID` is issued by Google and `identifier` is chosen by you. The unique identifier can only include alphanumeric characters, `.`, `_`, or `-`.
+          type: string
+        imageModulesData:
+          description: Image module data. If `imageModulesData` is also defined on the object, both will be displayed. Only one of the image from class and one from object level will be rendered when both set.
+          items:
+            $ref: "#/components/schemas/ImageModuleData"
+          type: array
+        linksModuleData:
+          $ref: "#/components/schemas/LinksModuleData"
+          description: Links module data. If `linksModuleData` is also defined on the object, both will be displayed. The maximum number of these fields displayed is 10 from class and 10 from object.
+        multipleDevicesAndHoldersAllowedStatus:
+          description: Identifies whether multiple users and devices will save the same object referencing this class.
+          enum:
+            - STATUS_UNSPECIFIED
+            - MULTIPLE_HOLDERS
+            - multipleHolders
+            - ONE_USER_ALL_DEVICES
+            - oneUserAllDevices
+            - ONE_USER_ONE_DEVICE
+            - oneUserOneDevice
+          type: string
+        redemptionIssuers:
+          description: Identifies which redemption issuers can redeem the pass over Smart Tap. Redemption issuers are identified by their issuer ID. Redemption issuers must have at least one Smart Tap key configured. The `enableSmartTap` and object level `smartTapRedemptionLevel` fields must also be set up correctly in order for a pass to support Smart Tap.
+          items:
+            format: int64
+            type: string
+          type: array
+        securityAnimation:
+          $ref: "#/components/schemas/SecurityAnimation"
+          description: Optional information about the security animation. If this is set a security animation will be rendered on pass details.
+        textModulesData:
+          description: Text module data. If `textModulesData` is also defined on the object, both will be displayed. The maximum number of these fields displayed is 10 from class and 10 from object.
+          items:
+            $ref: "#/components/schemas/TextModuleData"
+          type: array
+        viewUnlockRequirement:
+          description: View Unlock Requirement options for the generic pass.
+          enum:
+            - VIEW_UNLOCK_REQUIREMENT_UNSPECIFIED
+            - UNLOCK_NOT_REQUIRED
+            - UNLOCK_REQUIRED_TO_VIEW
+          type: string
+      type: object
+    GenericClassListResponse:
+      description: List response which contains the list of all generic classes for a given issuer ID.
+      properties:
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+          description: Pagination of the response.
+        resources:
+          description: Resources corresponding to the list request.
+          items:
+            $ref: "#/components/schemas/GenericClass"
+          type: array
+      type: object
+    GenericObject:
+      description: "Generic Object Next ID: 119"
+      properties:
+        appLinkData:
+          $ref: "#/components/schemas/AppLinkData"
+          description: Information about the partner app link. The maximum number of these fields displayed is 10.
+        barcode:
+          $ref: "#/components/schemas/Barcode"
+          description: The barcode type and value. If pass does not have a barcode, we can allow the issuer to set Barcode.alternate_text and display just that.
+        cardTitle:
+          $ref: "#/components/schemas/LocalizedString"
+          description: Required. The header of the pass. This is usually the Business name such as "XXX Gym", "AAA Insurance". This field is required and appears in the header row at the very top of the pass.
+        classId:
+          description: Required. The class associated with this object. The class must be of the same type as this object, must already exist, and must be approved. Class IDs should follow the format `issuerID.identifier` where `issuerID` is issued by Google and `identifier` is chosen by you.
+          type: string
+        genericType:
+          description: Specify which `GenericType` the card belongs to. Deprecated.
+          enum:
+            - GENERIC_TYPE_UNSPECIFIED
+          type: string
+        groupingInfo:
+          $ref: "#/components/schemas/GroupingInfo"
+          description: Information that controls how passes are grouped together.
+        hasUsers:
+          description: Indicates if the object has users. This field is set by the platform.
+          type: boolean
+        header:
+          $ref: "#/components/schemas/LocalizedString"
+          description: Required. The title of the pass, such as "50% off coupon" or "Library card" or "Voucher". This field is required and appears in the title row of the pass detail view.
+        heroImage:
+          $ref: "#/components/schemas/Image"
+          description: Banner image displayed on the front of the card if present. The image will be displayed at 100% width.
+        hexBackgroundColor:
+          description: The background color for the card. If not set, the dominant color of the hero image is used, and if no hero image is set, the dominant color of the logo is used and if logo is not set, a color would be chosen by Google.
+          type: string
+        id:
+          description: Required. The unique identifier for an object. This ID must be unique across all objects from an issuer. This value needs to follow the format `issuerID.identifier` where `issuerID` is issued by Google and `identifier` is chosen by you. The unique identifier can only include alphanumeric characters, `.`, `_`, or `-`.
+          type: string
+        imageModulesData:
+          description: Image module data. Only one of the image from class and one from object level will be rendered when both set.
+          items:
+            $ref: "#/components/schemas/ImageModuleData"
+          type: array
+        linksModuleData:
+          $ref: "#/components/schemas/LinksModuleData"
+          description: Links module data. If `linksModuleData` is also defined on the class, both will be displayed. The maximum number of these fields displayed is 10 from class and 10 from object.
+        logo:
+          $ref: "#/components/schemas/Image"
+          description: The logo image of the pass. This image is displayed in the card detail view in upper left, and also on the list/thumbnail view. If the logo is not present, the first letter of `cardTitle` would be shown as logo.
+        notifications:
+          $ref: "#/components/schemas/Notifications"
+          description: The notification settings that are enabled for this object.
+        passConstraints:
+          $ref: "#/components/schemas/PassConstraints"
+          description: Pass constraints for the object.
+        rotatingBarcode:
+          $ref: "#/components/schemas/RotatingBarcode"
+          description: The rotating barcode settings/details.
+        smartTapRedemptionValue:
+          description: The value that will be transmitted to a Smart Tap certified terminal over NFC for this object. The class level fields `enableSmartTap` and `redemptionIssuers` must also be set up correctly in order for the pass to support Smart Tap. Only ASCII characters are supported.
+          type: string
+        state:
+          description: The state of the object. This field is used to determine how an object is displayed in the app. For example, an `inactive` object is moved to the "Expired passes" section. If this is not provided, the object would be considered `ACTIVE`.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - active
+            - COMPLETED
+            - completed
+            - EXPIRED
+            - expired
+            - INACTIVE
+            - inactive
+          type: string
+        subheader:
+          $ref: "#/components/schemas/LocalizedString"
+          description: The title label of the pass, such as location where this pass can be used. Appears right above the title in the title row in the pass detail view.
+        textModulesData:
+          description: Text module data. If `textModulesData` is also defined on the class, both will be displayed. The maximum number of these fields displayed is 10 from class and 10 from object.
+          items:
+            $ref: "#/components/schemas/TextModuleData"
+          type: array
+        validTimeInterval:
+          $ref: "#/components/schemas/TimeInterval"
+          description: The time period this object will be considered valid or usable. When the time period is passed, the object will be considered expired, which will affect the rendering on user's devices.
+      type: object
+    GenericObjectListResponse:
+      description: List response which contains the list of all generic objects for a given issuer ID.
+      properties:
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+          description: Pagination of the response.
+        resources:
+          description: Resources corresponding to the list request.
+          items:
+            $ref: "#/components/schemas/GenericObject"
+          type: array
+      type: object
     GiftCardClass:
       properties:
         allowBarcodeRedemption:
@@ -4190,7 +4902,7 @@ components:
           description: Country code used to display the card's country (when the user is not in that country), as well as to display localized content when content is not available in the user's locale.
           type: string
         enableSmartTap:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: Identifies whether this class supports Smart Tap. The `redemptionIssuers` and object level `smartTapRedemptionLevel` fields must also be set up correctly in order for a pass to support Smart Tap.
           type: boolean
         eventNumberLabel:
           description: 'The label to display for event number, such as "Target Event #".'
@@ -4240,7 +4952,7 @@ components:
           $ref: "#/components/schemas/LocalizedString"
           description: Translated strings for the pin_label.
         locations:
-          description: The list of locations where the object can be used. The platform uses this information to trigger geolocated notifications to users. Note that locations in the object override locations in the class which override locations in the Google Places ID.
+          description: "Note: This field is currently not supported to trigger geo notifications."
           items:
             $ref: "#/components/schemas/LatLongPoint"
           type: array
@@ -4270,7 +4982,7 @@ components:
           $ref: "#/components/schemas/Image"
           description: The logo of the gift card program or company. This logo is displayed in both the details and list views of the app.
         redemptionIssuers:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: Identifies which redemption issuers can redeem the pass over Smart Tap. Redemption issuers are identified by their issuer ID. Redemption issuers must have at least one Smart Tap key configured. The `enableSmartTap` and object level `smartTapRedemptionLevel` fields must also be set up correctly in order for a pass to support Smart Tap.
           items:
             format: int64
             type: string
@@ -4291,6 +5003,9 @@ components:
             - DRAFT
             - draft
           type: string
+        securityAnimation:
+          $ref: "#/components/schemas/SecurityAnimation"
+          description: Optional information about the security animation. If this is set a security animation will be rendered on pass details.
         textModulesData:
           description: Text module data. If text module data is also defined on the class, both will be displayed. The maximum number of these fields displayed is 10 from the object and 10 from the class.
           items:
@@ -4299,6 +5014,13 @@ components:
         version:
           description: Deprecated
           format: int64
+          type: string
+        viewUnlockRequirement:
+          description: View Unlock Requirement options for the gift card.
+          enum:
+            - VIEW_UNLOCK_REQUIREMENT_UNSPECIFIED
+            - UNLOCK_NOT_REQUIRED
+            - UNLOCK_REQUIRED_TO_VIEW
           type: string
         wordMark:
           $ref: "#/components/schemas/Image"
@@ -4350,6 +5072,9 @@ components:
         eventNumber:
           description: The card's event number, an optional field used by some gift cards.
           type: string
+        groupingInfo:
+          $ref: "#/components/schemas/GroupingInfo"
+          description: Information that controls how passes are grouped together.
         hasLinkedDevice:
           description: Whether this object is currently linked to a single device. This field is set by the platform when a user saves the object, linking it to their device. Intended for use by select partners. Contact support for additional information.
           type: boolean
@@ -4377,7 +5102,7 @@ components:
           $ref: "#/components/schemas/LinksModuleData"
           description: Links module data. If links module data is also defined on the class, both will be displayed.
         locations:
-          description: The list of locations where the object can be used. The platform uses this information to trigger geolocated notifications to users. Note that locations in the object override locations in the class which override locations in the Google Places ID.
+          description: "Note: This field is currently not supported to trigger geo notifications."
           items:
             $ref: "#/components/schemas/LatLongPoint"
           type: array
@@ -4386,11 +5111,17 @@ components:
           items:
             $ref: "#/components/schemas/Message"
           type: array
+        passConstraints:
+          $ref: "#/components/schemas/PassConstraints"
+          description: Pass constraints for the object.
         pin:
           description: The card's PIN.
           type: string
+        rotatingBarcode:
+          $ref: "#/components/schemas/RotatingBarcode"
+          description: The rotating barcode type and value.
         smartTapRedemptionValue:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: The value that will be transmitted to a Smart Tap certified terminal over NFC for this object. The class level fields `enableSmartTap` and `redemptionIssuers` must also be set up correctly in order for the pass to support Smart Tap. Only ASCII characters are supported.
           type: string
         state:
           description: Required. The state of the object. This field is used to determine how an object is displayed in the app. For example, an `inactive` object is moved to the "Expired passes" section.
@@ -4436,16 +5167,21 @@ components:
           type: array
       type: object
     GroupingInfo:
-      description: "NEXT_ID: 2"
       properties:
+        groupingId:
+          description: Optional grouping ID for grouping the passes with the same ID visually together. Grouping with different types of passes is allowed.
+          type: string
         sortIndex:
-          description: Optional index for sorting the passes when they are grouped with other passes. Passes with lower sort index are shown before passes with higher sort index. If unspecified, the value is assumed to be INT_MAX. For two passes with same sort index, the sorting behavior is undefined.
+          description: Optional index for sorting the passes when they are grouped with other passes. Passes with lower sort index are shown before passes with higher sort index. If unspecified, the value is assumed to be INT_MAX. For two passes with the same sort index, the sorting behavior is undefined.
           format: int32
           type: integer
       type: object
     Image:
-      description: Wrapping type for Google hosted images.
+      description: "Wrapping type for Google hosted images. Next ID: 7"
       properties:
+        contentDescription:
+          $ref: "#/components/schemas/LocalizedString"
+          description: Description of the image used for accessibility.
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string `"walletobjects#image"`.'
           type: string
@@ -4620,18 +5356,6 @@ components:
           $ref: "#/components/schemas/FieldSelector"
           description: 'A reference to the field to be displayed in the third row. This option is only displayed if there are not multiple user objects in a group. If there is a group, the third row will always display the number of objects in the group. Eg: "3 passes"'
       type: object
-    ListValuablesClassesResponse:
-      description: Response containing the list of all valuable classes for an issuer (optionally for given type(s)).
-      properties:
-        pagination:
-          $ref: "#/components/schemas/Pagination"
-          description: Pagination of the response.
-        valuablesClasses:
-          description: Resources corresponding to the list request.
-          items:
-            $ref: "#/components/schemas/ValuablesClass"
-          type: array
-      type: object
     LocalizedString:
       properties:
         defaultValue:
@@ -4670,7 +5394,7 @@ components:
           $ref: "#/components/schemas/DiscoverableProgram"
           description: Information about how the class may be discovered and instantiated from within the Google Pay app.
         enableSmartTap:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: Identifies whether this class supports Smart Tap. The `redemptionIssuers` and one of object level `smartTapRedemptionLevel`, barcode.value`, or `accountId` fields must also be set up correctly in order for a pass to support Smart Tap.
           type: boolean
         heroImage:
           $ref: "#/components/schemas/Image"
@@ -4726,7 +5450,7 @@ components:
           $ref: "#/components/schemas/LocalizedString"
           description: Translated strings for the secondary_rewards_tier_label.
         locations:
-          description: The list of locations where the object can be used. The platform uses this information to trigger geolocated notifications to users. Note that locations in the object override locations in the class which override locations in the Google Places ID.
+          description: "Note: This field is currently not supported to trigger geo notifications."
           items:
             $ref: "#/components/schemas/LatLongPoint"
           type: array
@@ -4753,7 +5477,7 @@ components:
           description: Required. The program name, such as "Adam's Apparel". The app may display an ellipsis after the first 20 characters to ensure full string is displayed on smaller screens.
           type: string
         redemptionIssuers:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: Identifies which redemption issuers can redeem the pass over Smart Tap. Redemption issuers are identified by their issuer ID. Redemption issuers must have at least one Smart Tap key configured. The `enableSmartTap` and one of object level `smartTapRedemptionValue`, barcode.value`, or `accountId` fields must also be set up correctly in order for a pass to support Smart Tap.
           items:
             format: int64
             type: string
@@ -4786,6 +5510,9 @@ components:
         secondaryRewardsTierLabel:
           description: The secondary rewards tier label, such as "Rewards Tier."
           type: string
+        securityAnimation:
+          $ref: "#/components/schemas/SecurityAnimation"
+          description: Optional information about the security animation. If this is set a security animation will be rendered on pass details.
         textModulesData:
           description: Text module data. If text module data is also defined on the class, both will be displayed. The maximum number of these fields displayed is 10 from the object and 10 from the class.
           items:
@@ -4794,6 +5521,13 @@ components:
         version:
           description: Deprecated
           format: int64
+          type: string
+        viewUnlockRequirement:
+          description: View Unlock Requirement options for the loyalty card.
+          enum:
+            - VIEW_UNLOCK_REQUIREMENT_UNSPECIFIED
+            - UNLOCK_NOT_REQUIRED
+            - UNLOCK_REQUIRED_TO_VIEW
           type: string
         wordMark:
           $ref: "#/components/schemas/Image"
@@ -4839,6 +5573,9 @@ components:
         disableExpirationNotification:
           description: Indicates if notifications should explicitly be suppressed. If this field is set to true, regardless of the `messages` field, expiration notifications to the user will be suppressed. By default, this field is set to false. Currently, this can only be set for offers.
           type: boolean
+        groupingInfo:
+          $ref: "#/components/schemas/GroupingInfo"
+          description: Information that controls how passes are grouped together.
         hasLinkedDevice:
           description: Whether this object is currently linked to a single device. This field is set by the platform when a user saves the object, linking it to their device. Intended for use by select partners. Contact support for additional information.
           type: boolean
@@ -4871,7 +5608,7 @@ components:
           $ref: "#/components/schemas/LinksModuleData"
           description: Links module data. If links module data is also defined on the class, both will be displayed.
         locations:
-          description: The list of locations where the object can be used. The platform uses this information to trigger geolocated notifications to users. Note that locations in the object override locations in the class which override locations in the Google Places ID.
+          description: "Note: This field is currently not supported to trigger geo notifications."
           items:
             $ref: "#/components/schemas/LatLongPoint"
           type: array
@@ -4883,11 +5620,17 @@ components:
           items:
             $ref: "#/components/schemas/Message"
           type: array
+        passConstraints:
+          $ref: "#/components/schemas/PassConstraints"
+          description: Pass constraints for the object.
+        rotatingBarcode:
+          $ref: "#/components/schemas/RotatingBarcode"
+          description: The rotating barcode type and value.
         secondaryLoyaltyPoints:
           $ref: "#/components/schemas/LoyaltyPoints"
           description: The secondary loyalty reward points label, balance, and type. Shown in addition to the primary loyalty points.
         smartTapRedemptionValue:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: The value that will be transmitted to a Smart Tap certified terminal over NFC for this object. The class level fields `enableSmartTap` and `redemptionIssuers` must also be set up correctly in order for the pass to support Smart Tap. Only ASCII characters are supported. If this value is not set but the class level fields `enableSmartTap` and `redemptionIssuers` are set up correctly, the `barcode.value` or the `accountId` fields are used as fallback if present.
           type: string
         state:
           description: Required. The state of the object. This field is used to determine how an object is displayed in the app. For example, an `inactive` object is moved to the "Expired passes" section.
@@ -4961,6 +5704,164 @@ components:
           description: The string form of a balance. Only one of these subtypes (string, int, double, money) should be populated.
           type: string
       type: object
+    Media:
+      description: A reference to data stored on the filesystem, on GFS or in blobstore.
+      properties:
+        algorithm:
+          description: Deprecated, use one of explicit hash type fields instead. Algorithm used for calculating the hash. As of 2011/01/21, "MD5" is the only possible value for this field. New values may be added at any time.
+          type: string
+        bigstoreObjectRef:
+          description: Use object_id instead.
+          format: byte
+          type: string
+        blobRef:
+          description: Blobstore v1 reference, set if reference_type is BLOBSTORE_REF This should be the byte representation of a blobstore.BlobRef. Since Blobstore is deprecating v1, use blobstore2_info instead. For now, any v2 blob will also be represented in this field as v1 BlobRef.
+          format: byte
+          type: string
+        blobstore2Info:
+          $ref: "#/components/schemas/Blobstore2Info"
+          description: Blobstore v2 info, set if reference_type is BLOBSTORE_REF and it refers to a v2 blob.
+        compositeMedia:
+          description: "A composite media composed of one or more media objects, set if reference_type is COMPOSITE_MEDIA. The media length field must be set to the sum of the lengths of all composite media objects. Note: All composite media must have length specified."
+          items:
+            $ref: "#/components/schemas/CompositeMedia"
+          type: array
+        contentType:
+          description: MIME type of the data
+          type: string
+        contentTypeInfo:
+          $ref: "#/components/schemas/ContentTypeInfo"
+          description: Extended content type information provided for Scotty uploads.
+        cosmoBinaryReference:
+          description: A binary data reference for a media download. Serves as a technology-agnostic binary reference in some Google infrastructure. This value is a serialized storage_cosmo.BinaryReference proto. Storing it as bytes is a hack to get around the fact that the cosmo proto (as well as others it includes) doesn't support JavaScript. This prevents us from including the actual type of this field.
+          format: byte
+          type: string
+        crc32cHash:
+          description: "For Scotty Uploads: Scotty-provided hashes for uploads For Scotty Downloads: (WARNING: DO NOT USE WITHOUT PERMISSION FROM THE SCOTTY TEAM.) A Hash provided by the agent to be used to verify the data being downloaded. Currently only supported for inline payloads. Further, only crc32c_hash is currently supported."
+          format: uint32
+          type: integer
+        diffChecksumsResponse:
+          $ref: "#/components/schemas/DiffChecksumsResponse"
+          description: Set if reference_type is DIFF_CHECKSUMS_RESPONSE.
+        diffDownloadResponse:
+          $ref: "#/components/schemas/DiffDownloadResponse"
+          description: Set if reference_type is DIFF_DOWNLOAD_RESPONSE.
+        diffUploadRequest:
+          $ref: "#/components/schemas/DiffUploadRequest"
+          description: Set if reference_type is DIFF_UPLOAD_REQUEST.
+        diffUploadResponse:
+          $ref: "#/components/schemas/DiffUploadResponse"
+          description: Set if reference_type is DIFF_UPLOAD_RESPONSE.
+        diffVersionResponse:
+          $ref: "#/components/schemas/DiffVersionResponse"
+          description: Set if reference_type is DIFF_VERSION_RESPONSE.
+        downloadParameters:
+          $ref: "#/components/schemas/DownloadParameters"
+          description: Parameters for a media download.
+        filename:
+          description: Original file name
+          type: string
+        hash:
+          description: "Deprecated, use one of explicit hash type fields instead. These two hash related fields will only be populated on Scotty based media uploads and will contain the content of the hash group in the NotificationRequest: http://cs/#google3/uploader/service/proto/upload_listener.proto&q=class:Hash Hex encoded hash value of the uploaded media."
+          type: string
+        hashVerified:
+          description: For Scotty uploads only. If a user sends a hash code and the backend has requested that Scotty verify the upload against the client hash, Scotty will perform the check on behalf of the backend and will reject it if the hashes don't match. This is set to true if Scotty performed this verification.
+          type: boolean
+        inline:
+          description: Media data, set if reference_type is INLINE
+          format: byte
+          type: string
+        isPotentialRetry:
+          description: "|is_potential_retry| is set false only when Scotty is certain that it has not sent the request before. When a client resumes an upload, this field must be set true in agent calls, because Scotty cannot be certain that it has never sent the request before due to potential failure in the session state persistence."
+          type: boolean
+        length:
+          description: Size of the data, in bytes
+          format: int64
+          type: string
+        md5Hash:
+          description: Scotty-provided MD5 hash for an upload.
+          format: byte
+          type: string
+        mediaId:
+          description: Media id to forward to the operation GetMedia. Can be set if reference_type is GET_MEDIA.
+          format: byte
+          type: string
+        objectId:
+          $ref: "#/components/schemas/ObjectId"
+          description: Reference to a TI Blob, set if reference_type is BIGSTORE_REF.
+        path:
+          description: Path to the data, set if reference_type is PATH
+          type: string
+        referenceType:
+          description: Describes what the field reference contains.
+          enum:
+            - PATH
+            - BLOB_REF
+            - INLINE
+            - GET_MEDIA
+            - COMPOSITE_MEDIA
+            - BIGSTORE_REF
+            - DIFF_VERSION_RESPONSE
+            - DIFF_CHECKSUMS_RESPONSE
+            - DIFF_DOWNLOAD_RESPONSE
+            - DIFF_UPLOAD_REQUEST
+            - DIFF_UPLOAD_RESPONSE
+            - COSMO_BINARY_REFERENCE
+            - ARBITRARY_BYTES
+          type: string
+        sha1Hash:
+          description: Scotty-provided SHA1 hash for an upload.
+          format: byte
+          type: string
+        sha256Hash:
+          description: Scotty-provided SHA256 hash for an upload.
+          format: byte
+          type: string
+        timestamp:
+          description: Time at which the media data was last updated, in milliseconds since UNIX epoch
+          format: uint64
+          type: string
+        token:
+          description: A unique fingerprint/version id for the media data
+          type: string
+      type: object
+    MediaRequestInfo:
+      description: Extra information added to operations that support Scotty media requests.
+      properties:
+        currentBytes:
+          description: The number of current bytes uploaded or downloaded.
+          format: int64
+          type: string
+        customData:
+          description: Data to be copied to backend requests. Custom data is returned to Scotty in the agent_state field, which Scotty will then provide in subsequent upload notifications.
+          type: string
+        diffObjectVersion:
+          description: Set if the http request info is diff encoded. The value of this field is the version number of the base revision. This is corresponding to Apiary's mediaDiffObjectVersion (//depot/google3/java/com/google/api/server/media/variable/DiffObjectVersionVariable.java). See go/esf-scotty-diff-upload for more information.
+          type: string
+        finalStatus:
+          description: The existence of the final_status field indicates that this is the last call to the agent for this request_id. http://google3/uploader/agent/scotty_agent.proto?l=737&rcl=347601929
+          format: int32
+          type: integer
+        notificationType:
+          description: The type of notification received from Scotty.
+          enum:
+            - START
+            - PROGRESS
+            - END
+            - RESPONSE_SENT
+            - ERROR
+          type: string
+        requestId:
+          description: The Scotty request ID.
+          type: string
+        totalBytes:
+          description: The total size of the file.
+          format: int64
+          type: string
+        totalBytesIsEstimated:
+          description: Whether the total bytes field contains an estimated data.
+          type: boolean
+      type: object
     Message:
       description: A message that will be displayed with a Valuable
       properties:
@@ -5027,6 +5928,30 @@ components:
           format: int64
           type: string
       type: object
+    Notifications:
+      description: Indicates if the object needs to have notification enabled. We support only one of ExpiryNotification/UpcomingNotification. `expiryNotification` takes precedence over `upcomingNotification`. In other words if `expiryNotification` is set, we ignore the `upcomingNotification` field.
+      properties:
+        expiryNotification:
+          $ref: "#/components/schemas/ExpiryNotification"
+          description: A notification would be triggered at a specific time before the card expires.
+        upcomingNotification:
+          $ref: "#/components/schemas/UpcomingNotification"
+          description: A notification would be triggered at a specific time before the card becomes usable.
+      type: object
+    ObjectId:
+      description: This is a copy of the tech.blob.ObjectId proto, which could not be used directly here due to transitive closure issues with JavaScript support; see http://b/8801763.
+      properties:
+        bucketName:
+          description: The name of the bucket to which this object belongs.
+          type: string
+        generation:
+          description: Generation of the object. Generations are monotonically increasing across writes, allowing them to be be compared to determine which generation is newer. If this is omitted in a request, then you are requesting the live object. See http://go/bigstore-versions
+          format: int64
+          type: string
+        objectName:
+          description: The name of the object.
+          type: string
+      type: object
     OfferClass:
       properties:
         allowMultipleUsersPerObject:
@@ -5045,7 +5970,7 @@ components:
           description: The details of the offer.
           type: string
         enableSmartTap:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: Identifies whether this class supports Smart Tap. The `redemptionIssuers` and object level `smartTapRedemptionLevel` fields must also be set up correctly in order for a pass to support Smart Tap.
           type: boolean
         finePrint:
           description: The fine print or terms of the offer, such as "20% off any t-shirt at Adam's Apparel."
@@ -5101,7 +6026,7 @@ components:
           $ref: "#/components/schemas/LocalizedString"
           description: Translated strings for the title. Recommended maximum length is 60 characters to ensure full string is displayed on smaller screens.
         locations:
-          description: The list of locations where the object can be used. The platform uses this information to trigger geolocated notifications to users. Note that locations in the object override locations in the class which override locations in the Google Places ID.
+          description: "Note: This field is currently not supported to trigger geo notifications."
           items:
             $ref: "#/components/schemas/LatLongPoint"
           type: array
@@ -5138,7 +6063,7 @@ components:
             - temporaryPriceReduction
           type: string
         redemptionIssuers:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: Identifies which redemption issuers can redeem the pass over Smart Tap. Redemption issuers are identified by their issuer ID. Redemption issuers must have at least one Smart Tap key configured. The `enableSmartTap` and object level `smartTapRedemptionLevel` fields must also be set up correctly in order for a pass to support Smart Tap.
           items:
             format: int64
             type: string
@@ -5159,6 +6084,9 @@ components:
             - DRAFT
             - draft
           type: string
+        securityAnimation:
+          $ref: "#/components/schemas/SecurityAnimation"
+          description: Optional information about the security animation. If this is set a security animation will be rendered on pass details.
         shortTitle:
           description: A shortened version of the title of the offer, such as "20% off," shown to users as a quick reference to the offer contents. Recommended maximum length is 20 characters.
           type: string
@@ -5176,6 +6104,13 @@ components:
         version:
           description: Deprecated
           format: int64
+          type: string
+        viewUnlockRequirement:
+          description: View Unlock Requirement options for the offer.
+          enum:
+            - VIEW_UNLOCK_REQUIREMENT_UNSPECIFIED
+            - UNLOCK_NOT_REQUIRED
+            - UNLOCK_REQUIRED_TO_VIEW
           type: string
         wordMark:
           $ref: "#/components/schemas/Image"
@@ -5215,6 +6150,9 @@ components:
         disableExpirationNotification:
           description: Indicates if notifications should explicitly be suppressed. If this field is set to true, regardless of the `messages` field, expiration notifications to the user will be suppressed. By default, this field is set to false. Currently, this can only be set for offers.
           type: boolean
+        groupingInfo:
+          $ref: "#/components/schemas/GroupingInfo"
+          description: Information that controls how passes are grouped together.
         hasLinkedDevice:
           description: Whether this object is currently linked to a single device. This field is set by the platform when a user saves the object, linking it to their device. Intended for use by select partners. Contact support for additional information.
           type: boolean
@@ -5242,7 +6180,7 @@ components:
           $ref: "#/components/schemas/LinksModuleData"
           description: Links module data. If links module data is also defined on the class, both will be displayed.
         locations:
-          description: The list of locations where the object can be used. The platform uses this information to trigger geolocated notifications to users. Note that locations in the object override locations in the class which override locations in the Google Places ID.
+          description: "Note: This field is currently not supported to trigger geo notifications."
           items:
             $ref: "#/components/schemas/LatLongPoint"
           type: array
@@ -5251,8 +6189,14 @@ components:
           items:
             $ref: "#/components/schemas/Message"
           type: array
+        passConstraints:
+          $ref: "#/components/schemas/PassConstraints"
+          description: Pass constraints for the object.
+        rotatingBarcode:
+          $ref: "#/components/schemas/RotatingBarcode"
+          description: The rotating barcode type and value.
         smartTapRedemptionValue:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: The value that will be transmitted to a Smart Tap certified terminal over NFC for this object. The class level fields `enableSmartTap` and `redemptionIssuers` must also be set up correctly in order for the pass to support Smart Tap. Only ASCII characters are supported.
           type: string
         state:
           description: Required. The state of the object. This field is used to determine how an object is displayed in the app. For example, an `inactive` object is moved to the "Expired passes" section.
@@ -5310,6 +6254,17 @@ components:
           format: int32
           type: integer
       type: object
+    PassConstraints:
+      description: Container for any constraints that may be placed on passes.
+      properties:
+        screenshotEligibility:
+          description: The screenshot eligibility for the pass.
+          enum:
+            - SCREENSHOT_ELIGIBILITY_UNSPECIFIED
+            - ELIGIBLE
+            - INELIGIBLE
+          type: string
+      type: object
     Permission:
       properties:
         emailAddress:
@@ -5338,6 +6293,26 @@ components:
           items:
             $ref: "#/components/schemas/Permission"
           type: array
+      type: object
+    PrivateText:
+      description: Private data for TextModule. This data will be rendered as a TextModule for a pass.
+      properties:
+        body:
+          $ref: "#/components/schemas/LocalizedString"
+          description: Translated strings for the body.
+        header:
+          $ref: "#/components/schemas/LocalizedString"
+          description: Translated strings for the header.
+      type: object
+    PrivateUri:
+      description: Private data for LinkModule. This data will be rendered as the LinkModule for a pass.
+      properties:
+        description:
+          $ref: "#/components/schemas/LocalizedString"
+          description: The URI's title appearing in the app as text and its translated strings. Recommended maximum is 20 characters to ensure the full string is displayed on smaller screens.
+        uri:
+          description: The location of a web page, image, or other resource. URIs in the `LinksModuleData` can have different prefixes indicating the type of URI (a link to a web page, a link to a map, a telephone number, or an email address).
+          type: string
       type: object
     PurchaseDetails:
       properties:
@@ -5428,10 +6403,93 @@ components:
         comments:
           type: string
       type: object
+    RotatingBarcode:
+      properties:
+        alternateText:
+          description: An optional text that will override the default text that shows under the barcode. This field is intended for a human readable equivalent of the barcode value, used when the barcode cannot be scanned.
+          type: string
+        renderEncoding:
+          description: The render encoding for the barcode. When specified, barcode is rendered in the given encoding. Otherwise best known encoding is chosen by Google.
+          enum:
+            - RENDER_ENCODING_UNSPECIFIED
+            - UTF_8
+          type: string
+        showCodeText:
+          $ref: "#/components/schemas/LocalizedString"
+          description: Optional text that will be shown when the barcode is hidden behind a click action. This happens in cases where a pass has Smart Tap enabled. If not specified, a default is chosen by Google.
+        totpDetails:
+          $ref: "#/components/schemas/RotatingBarcodeTotpDetails"
+          description: Details used to evaluate the {totp_value_n} substitutions.
+        type:
+          description: The type of this barcode.
+          enum:
+            - BARCODE_TYPE_UNSPECIFIED
+            - AZTEC
+            - aztec
+            - CODE_39
+            - code39
+            - CODE_128
+            - code128
+            - CODABAR
+            - codabar
+            - DATA_MATRIX
+            - dataMatrix
+            - EAN_8
+            - ean8
+            - EAN_13
+            - ean13
+            - EAN13
+            - ITF_14
+            - itf14
+            - PDF_417
+            - pdf417
+            - PDF417
+            - QR_CODE
+            - qrCode
+            - qrcode
+            - UPC_A
+            - upcA
+            - TEXT_ONLY
+            - textOnly
+          type: string
+        valuePattern:
+          description: "String encoded barcode value. This string supports the following substitutions: * {totp_value_n}: Replaced with the TOTP value (see TotpDetails.parameters). * {totp_timestamp_millis}: Replaced with the timestamp (millis since epoch) at which the barcode was generated. * {totp_timestamp_seconds}: Replaced with the timestamp (seconds since epoch) at which the barcode was generated."
+          type: string
+      type: object
+    RotatingBarcodeTotpDetails:
+      description: Configuration for the time-based OTP substitutions. See https://tools.ietf.org/html/rfc6238
+      properties:
+        algorithm:
+          description: The TOTP algorithm used to generate the OTP.
+          enum:
+            - TOTP_ALGORITHM_UNSPECIFIED
+            - TOTP_SHA1
+          type: string
+        parameters:
+          description: The TOTP parameters for each of the {totp_value_*} substitutions. The TotpParameters at index n is used for the {totp_value_n} substitution.
+          items:
+            $ref: "#/components/schemas/RotatingBarcodeTotpDetailsTotpParameters"
+          type: array
+        periodMillis:
+          description: The time interval used for the TOTP value generation, in milliseconds.
+          format: int64
+          type: string
+      type: object
+    RotatingBarcodeTotpDetailsTotpParameters:
+      description: Configuration for the key and value length. See https://www.rfc-editor.org/rfc/rfc4226#section-5.3
+      properties:
+        key:
+          description: The secret key used for the TOTP value generation, encoded as a Base16 string.
+          type: string
+        valueLength:
+          description: The length of the TOTP value in decimal digits.
+          format: int32
+          type: integer
+      type: object
     SecurityAnimation:
       properties:
         animationType:
-          description: Type for animation, FOIL_SHIMMER will be used if not provided.
+          description: Type of animation.
           enum:
             - ANIMATION_UNSPECIFIED
             - FOIL_SHIMMER
@@ -5625,6 +6683,9 @@ components:
       type: object
     TransitClass:
       properties:
+        activationOptions:
+          $ref: "#/components/schemas/ActivationOptions"
+          description: Activation options for an activatable ticket.
         allowMultipleUsersPerObject:
           description: Deprecated. Use `multipleDevicesAndHoldersAllowedStatus` instead.
           type: boolean
@@ -5698,7 +6759,7 @@ components:
           description: Controls the display of the single-leg itinerary for this class. By default, an itinerary will only display for multi-leg trips.
           type: boolean
         enableSmartTap:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: Identifies whether this class supports Smart Tap. The `redemptionIssuers` and object level `smartTapRedemptionLevel` fields must also be set up correctly in order for a pass to support Smart Tap.
           type: boolean
         heroImage:
           $ref: "#/components/schemas/Image"
@@ -5733,6 +6794,7 @@ components:
           $ref: "#/components/schemas/LocalizedString"
           description: Translated strings for the issuer_name. Recommended maximum length is 20 characters to ensure full string is displayed on smaller screens.
         locations:
+          description: "Note: This field is currently not supported to trigger geo notifications."
           items:
             $ref: "#/components/schemas/LatLongPoint"
           type: array
@@ -5756,7 +6818,7 @@ components:
             - oneUserOneDevice
           type: string
         redemptionIssuers:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: Identifies which redemption issuers can redeem the pass over Smart Tap. Redemption issuers are identified by their issuer ID. Redemption issuers must have at least one Smart Tap key configured. The `enableSmartTap` and object level `smartTapRedemptionLevel` fields must also be set up correctly in order for a pass to support Smart Tap.
           items:
             format: int64
             type: string
@@ -5777,6 +6839,9 @@ components:
             - DRAFT
             - draft
           type: string
+        securityAnimation:
+          $ref: "#/components/schemas/SecurityAnimation"
+          description: Optional information about the security animation. If this is set a security animation will be rendered on pass details.
         textModulesData:
           description: Text module data. If text module data is also defined on the class, both will be displayed. The maximum number of these fields displayed is 10 from the object and 10 from the class.
           items:
@@ -5804,6 +6869,13 @@ components:
           description: Deprecated
           format: int64
           type: string
+        viewUnlockRequirement:
+          description: View Unlock Requirement options for the transit ticket.
+          enum:
+            - VIEW_UNLOCK_REQUIREMENT_UNSPECIFIED
+            - UNLOCK_NOT_REQUIRED
+            - UNLOCK_REQUIRED_TO_VIEW
+          type: string
         watermark:
           $ref: "#/components/schemas/Image"
           description: Watermark image to display on the user's device.
@@ -5830,6 +6902,9 @@ components:
       type: object
     TransitObject:
       properties:
+        activationStatus:
+          $ref: "#/components/schemas/ActivationStatus"
+          description: The activation status for the object. Required if the class has `activationOptions` set.
         appLinkData:
           $ref: "#/components/schemas/AppLinkData"
           description: Optional information about the partner app link.
@@ -5859,9 +6934,15 @@ components:
         customTicketStatus:
           $ref: "#/components/schemas/LocalizedString"
           description: A custom status to use for the ticket status value when `ticketStatus` does not provide the right option. Both `ticketStatus` and `customTicketStatus` may not be set.
+        deviceContext:
+          $ref: "#/components/schemas/DeviceContext"
+          description: Device context associated with the object.
         disableExpirationNotification:
           description: Indicates if notifications should explicitly be suppressed. If this field is set to true, regardless of the `messages` field, expiration notifications to the user will be suppressed. By default, this field is set to false. Currently, this can only be set for offers.
           type: boolean
+        groupingInfo:
+          $ref: "#/components/schemas/GroupingInfo"
+          description: Information that controls how passes are grouped together.
         hasLinkedDevice:
           description: Whether this object is currently linked to a single device. This field is set by the platform when a user saves the object, linking it to their device. Intended for use by select partners. Contact support for additional information.
           type: boolean
@@ -5889,7 +6970,7 @@ components:
           $ref: "#/components/schemas/LinksModuleData"
           description: Links module data. If links module data is also defined on the class, both will be displayed.
         locations:
-          description: The list of locations where the object can be used. The platform uses this information to trigger geolocated notifications to users. Note that locations in the object override locations in the class which override locations in the Google Places ID.
+          description: "Note: This field is currently not supported to trigger geo notifications."
           items:
             $ref: "#/components/schemas/LatLongPoint"
           type: array
@@ -5898,6 +6979,9 @@ components:
           items:
             $ref: "#/components/schemas/Message"
           type: array
+        passConstraints:
+          $ref: "#/components/schemas/PassConstraints"
+          description: Pass constraints for the object.
         passengerNames:
           description: The name(s) of the passengers the ticket is assigned to. The above `passengerType` field is meant to give Google context on this field.
           type: string
@@ -5913,8 +6997,11 @@ components:
         purchaseDetails:
           $ref: "#/components/schemas/PurchaseDetails"
           description: Purchase details for this ticket.
+        rotatingBarcode:
+          $ref: "#/components/schemas/RotatingBarcode"
+          description: The rotating barcode type and value.
         smartTapRedemptionValue:
-          description: Available only to Smart Tap enabled partners. Contact support for additional guidance.
+          description: The value that will be transmitted to a Smart Tap certified terminal over NFC for this object. The class level fields `enableSmartTap` and `redemptionIssuers` must also be set up correctly in order for the pass to support Smart Tap. Only ASCII characters are supported.
           type: string
         state:
           description: Required. The state of the object. This field is used to determine how an object is displayed in the app. For example, an `inactive` object is moved to the "Expired passes" section.
@@ -5963,7 +7050,7 @@ components:
           description: This id is used to group tickets together if the user has saved multiple tickets for the same trip.
           type: string
         tripType:
-          description: Required. The type of trip this transit object represents. Used to determine which symbol to use between the origin and destination.
+          description: Required. The type of trip this transit object represents. Used to determine the pass title and/or which symbol to use between the origin and destination.
           enum:
             - TRIP_TYPE_UNSPECIFIED
             - ROUND_TRIP
@@ -6008,6 +7095,53 @@ components:
           description: The UTF-8 encoded translated string.
           type: string
       type: object
+    UpcomingNotification:
+      description: Indicates that the issuer would like GooglePay send an upcoming card validity notification 1 day before card becomes valid/usable.
+      properties:
+        enableNotification:
+          description: Indicates if the object needs to have upcoming notification enabled.
+          type: boolean
+      type: object
+    UploadPrivateDataRequest:
+      description: Request for sending user private Text or URI by the Issuer.
+      properties:
+        issuerId:
+          description: The ID of the issuer sending the data.
+          format: int64
+          type: string
+        text:
+          $ref: "#/components/schemas/PrivateText"
+          description: Private text data of the user.
+        uri:
+          $ref: "#/components/schemas/PrivateUri"
+          description: Private URIs of the user.
+      type: object
+    UploadPrivateDataResponse:
+      description: Response for uploading user private data (text or URIs)
+      properties:
+        privateContentId:
+          description: A 64-bit content id for the private data that was uploaded by the Issuer.
+          format: int64
+          type: string
+      type: object
+    UploadPrivateImageRequest:
+      description: Request to upload user's private images by Issuers to be used in passes.
+      properties:
+        blob:
+          $ref: "#/components/schemas/Media"
+          description: A reference to the image payload that was uploaded by Scotty.
+        mediaRequestInfo:
+          $ref: "#/components/schemas/MediaRequestInfo"
+          description: Extra information about the uploaded media.
+      type: object
+    UploadPrivateImageResponse:
+      description: Response for uploading the private image
+      properties:
+        privateContentId:
+          description: A 64-bit content id for the image that was uploaded by the Issuer.
+          format: int64
+          type: string
+      type: object
     Uri:
       properties:
         description:
@@ -6024,60 +7158,6 @@ components:
           description: Translated strings for the description. Recommended maximum is 20 characters to ensure full string is displayed on smaller screens.
         uri:
           description: The location of a web page, image, or other resource. URIs in the `LinksModuleData` module can have different prefixes indicating the type of URI (a link to a web page, a link to a map, a telephone number, or an email address). URIs must have a scheme.
-          type: string
-      type: object
-    ValuablesClass:
-      description: Contains a single type of ValuablesClass.
-      properties:
-        eventTicketClass:
-          $ref: "#/components/schemas/EventTicketClass"
-          description: Event Ticket class as per https://developers.google.com/pay/passes/rest/v1/eventticketclass#resource:-eventticketclass
-        flightClass:
-          $ref: "#/components/schemas/FlightClass"
-          description: Flight class as per https://developers.google.com/pay/passes/rest/v1/flightclass#resource:-flightclass
-        giftCardClass:
-          $ref: "#/components/schemas/GiftCardClass"
-          description: Gift card class as per https://developers.google.com/pay/passes/rest/v1/giftcardclass#resource:-giftcardclass
-        loyaltyClass:
-          $ref: "#/components/schemas/LoyaltyClass"
-          description: Loyalty class as per https://developers.google.com/pay/passes/rest/v1/loyaltyclass#resource:-loyaltyclass
-        offerClass:
-          $ref: "#/components/schemas/OfferClass"
-          description: Offer class as per https://developers.google.com/pay/passes/rest/v1/offerclass#resource:-offerclass
-        transitClass:
-          $ref: "#/components/schemas/TransitClass"
-          description: Transit Class as per https://developers.google.com/pay/passes/rest/v1/transitclass#resource:-transitclass
-      type: object
-    ValuablesClassesCount:
-      description: Contains the count of ValuablesClasses belonging to an issuer grouped by their Type.
-      properties:
-        totalSize:
-          description: The total number of valuable classes present for the issuer_id.
-          format: int64
-          type: string
-        typeCount:
-          description: The number of ValuablesClasses in each type for the issuer_id.
-          items:
-            $ref: "#/components/schemas/ValuablesClassesCountTypeCount"
-          type: array
-      type: object
-    ValuablesClassesCountTypeCount:
-      description: The type of valuable and the number of ValuablesClasses in that type.
-      properties:
-        count:
-          description: The total number of ValuablesClasses belonging to that type.
-          format: int64
-          type: string
-        valuableType:
-          description: The type of valuable.
-          enum:
-            - VALUABLE_TYPE_UNSPECIFIED
-            - VALUABLE_TYPE_GIFT_CARD
-            - VALUABLE_TYPE_LOYALTY
-            - VALUABLE_TYPE_OFFER
-            - VALUABLE_TYPE_EVENT_TICKET
-            - VALUABLE_TYPE_FLIGHT
-            - VALUABLE_TYPE_TRANSIT
           type: string
       type: object
   securitySchemes:

@@ -27,7 +27,7 @@ paths:
   /device/detect:
     post:
       description: Use device service banners and mac address captured by your network port scanner, vulnerability assessment or asset discovery tools to detect device maker, model and firmware information
-      operationId: detect_device_detect_post
+      operationId: detect_device
       requestBody:
         content:
           application/json:
@@ -54,7 +54,7 @@ paths:
         - device
   "/firmware/{firmware_hash}/accounts":
     get:
-      operationId: firmware_accounts_firmware__firmware_hash__accounts_get
+      operationId: get_accounts
       parameters:
         - description: SHA2 hash of device firmware
           in: path
@@ -88,7 +88,7 @@ paths:
         - firmware
   "/firmware/{firmware_hash}/config-issues":
     get:
-      operationId: firmware_config_issues_firmware__firmware_hash__config_issues_get
+      operationId: get_config_issues
       parameters:
         - description: SHA2 hash of device firmware
           in: path
@@ -122,7 +122,7 @@ paths:
         - firmware
   "/firmware/{firmware_hash}/expired-certs":
     get:
-      operationId: firmware_expired_certs_firmware__firmware_hash__expired_certs_get
+      operationId: get_expired_certs
       parameters:
         - description: SHA2 hash of device firmware
           in: path
@@ -156,7 +156,7 @@ paths:
         - firmware
   "/firmware/{firmware_hash}/private-keys":
     get:
-      operationId: firmware_private_keys_firmware__firmware_hash__private_keys_get
+      operationId: get_private_keys
       parameters:
         - description: SHA2 hash of device firmware
           in: path
@@ -190,7 +190,7 @@ paths:
         - firmware
   "/firmware/{firmware_hash}/risk":
     get:
-      operationId: firmware_risk_firmware__firmware_hash__risk_get
+      operationId: get_risk
       parameters:
         - description: SHA2 hash of device firmware
           in: path
@@ -221,7 +221,7 @@ paths:
         - firmware
   "/firmware/{firmware_hash}/weak-certs":
     get:
-      operationId: firmware_weak_certs_firmware__firmware_hash__weak_certs_get
+      operationId: get_weak_certs
       parameters:
         - description: SHA2 hash of device firmware
           in: path
@@ -255,7 +255,7 @@ paths:
         - firmware
   "/firmware/{firmware_hash}/weak-keys":
     get:
-      operationId: firmware_weak_keys_firmware__firmware_hash__weak_keys_get
+      operationId: get_weak_keys
       parameters:
         - description: SHA2 hash of device firmware
           in: path
@@ -297,14 +297,17 @@ components:
         issues:
           items:
             type: string
+          nullable: true
           title: List of detected issues
           type: array
         service_name:
+          nullable: true
           title: Affected network service name
           type: string
         suggestions:
           items:
             type: string
+          nullable: true
           title: List of suggestions to fix the issues
           type: array
       title: ConfigIssue
@@ -312,9 +315,11 @@ components:
     CryptoKey:
       properties:
         algorithm:
+          nullable: true
           title: Crypto algorithm name of the key
           type: string
         bits:
+          nullable: true
           title: Key length in bits
           type: integer
         file_hash:
@@ -324,6 +329,7 @@ components:
           title: Crypto key file name
           type: string
         pem_type:
+          nullable: true
           title: Key type, e.g., RSAPrivateKey, ECPublicKey, etc
           type: string
       title: CryptoKey
@@ -331,24 +337,30 @@ components:
     DefaultAccount:
       properties:
         gid:
+          nullable: true
           title: Group id of the account
           type: integer
         hash_algorithm:
+          nullable: true
           title: "Hash algorithm, '0': DES, '1': '5': SHA2, '2a': Blowfish"
           type: string
         home_dir:
+          nullable: true
           title: Path to the home folder of the account
           type: string
         name:
           title: OS account name
           type: string
         pwd_hash:
+          nullable: true
           title: Password hash of the account
           type: string
         shell:
+          nullable: true
           title: Path to the shell binary of the account
           type: string
         uid:
+          nullable: true
           title: "*nix user id of the account"
           type: integer
       title: DefaultAccount
@@ -408,29 +420,37 @@ components:
         cve_list:
           items:
             $ref: "#/components/schemas/Vulnerability"
+          nullable: true
           title: List of CVEs for the specified firmware version
           type: array
         device_type:
+          nullable: true
           title: Device type,e.g., IP camera, etc
           type: string
         firmware_info:
           allOf:
             - $ref: "#/components/schemas/FirmwareInfo"
+          nullable: true
           title: Device firmware infromation, release date, download Url, etc
         firmware_version:
+          nullable: true
           title: Device firmware version
           type: string
         is_discontinued:
+          nullable: true
           title: Device discontinued/retired indicator
           type: boolean
         latest_firmware_info:
           allOf:
             - $ref: "#/components/schemas/FirmwareInfo"
+          nullable: true
           title: Latest firmware infromation of the device
         manufacturer:
+          nullable: true
           title: Device manufacturer name
           type: string
         model_name:
+          nullable: true
           title: Device model name
           type: string
       title: DeviceInfo
@@ -446,17 +466,22 @@ components:
         public_key:
           allOf:
             - $ref: "#/components/schemas/PublicKey"
+          nullable: true
           title: Public key infromation of the certificate
         subject_name:
+          nullable: true
           title: Certificate subject name
           type: string
         thumb_print:
+          nullable: true
           title: Certificate fingerprint
           type: string
         valid_from:
+          nullable: true
           title: Certificate validity start date
           type: string
         valid_to:
+          nullable: true
           title: Certificate expiry date
           type: string
       title: ExpiredCert
@@ -464,18 +489,23 @@ components:
     FirmwareInfo:
       properties:
         download_url:
+          nullable: true
           title: Download url of the firmware file on vendor's site
           type: string
         name:
+          nullable: true
           title: Title of the firmware file published by the device vendor
           type: string
         release_date:
+          nullable: true
           title: Release date of the firmware file
           type: string
         sha2:
+          nullable: true
           title: Firmware file SHA2 hash
           type: string
         version:
+          nullable: true
           title: Published firmware file version
           type: string
       title: FirmwareInfo
@@ -508,6 +538,7 @@ components:
           title: Crypto algorithm name
           type: string
         bits:
+          nullable: true
           title: key length in bits
           type: integer
       title: PublicKey
@@ -587,18 +618,23 @@ components:
           title: Certificate file name
           type: string
         sign_algorithm:
+          nullable: true
           title: Ceritifcate signing algorithm name, e.g., sha1
           type: string
         subject_name:
+          nullable: true
           title: Certificate subject name
           type: string
         thumb_print:
+          nullable: true
           title: Certificate fingerprint
           type: string
         valid_from:
+          nullable: true
           title: Certificate validity start date
           type: string
         valid_to:
+          nullable: true
           title: Certificate expiry date
           type: string
       title: WeakCert

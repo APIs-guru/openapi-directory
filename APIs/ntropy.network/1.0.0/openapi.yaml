@@ -9,7 +9,7 @@ info:
     Contact Support:
      Name: API Support
      Email: api@ntropy.network
-  title: Ntropy Transaction API
+  title: Ntropy Transaction API v1
   version: 1.0.0
   x-apisguru-categories:
     - financial
@@ -30,7 +30,7 @@ paths:
   "/classifier/business/batch/{id}":
     get:
       description: Get a batch of business transaction classification results.
-      operationId: getABatchOfBusinessTransactionClassificationResults.
+      operationId: getABatchOfBusinessTransactionClassificationResults
       responses:
         "200":
           content:
@@ -66,9 +66,27 @@ paths:
                     example: 68497089
                     type: number
                   results:
+                    example:
+                      - labels:
+                          - Cloud computing
+                          - Infrastructure
+                        logo: https://logo.clearbit.com/aws.amazon.com
+                        merchant: Amazon Web Services
+                        transaction_id: xbx8YP14g565Xketw3tFmn4yp49x3tbj9mD8DB4fM8DDY6x
+                        website: https://aws.amazon.com/
+                      - labels:
+                          - Cloud computing
+                          - Infrastructure
+                        logo: https://logo.clearbit.com/aws.amazon.com
+                        merchant: Amazon Web Services
+                        transaction_id: xbx8YP14g565Xketw3tFmn4yp49x3tbj9mD8DB4fM8DDY6x
+                        website: https://aws.amazon.com/
                     items:
                       properties:
                         labels:
+                          example:
+                            - Cloud computing
+                            - Infrastructure
                           items:
                             example: Cloud computing
                             type: string
@@ -125,7 +143,7 @@ paths:
   "/classifier/consumer/batch/{id}":
     get:
       description: Get a batch of consumer transaction classification results.
-      operationId: getABatchOfConsumerTransactionClassificationResults.
+      operationId: getABatchOfConsumerTransactionClassificationResults
       responses:
         "200":
           content:
@@ -189,6 +207,49 @@ paths:
                     example: -62518197
                     type: number
                   results:
+                    example:
+                      - contact:
+                          email: hUkvsYKUamGpI@rWdfbzlEMyCxWD.ep
+                          phone: exercitation esse sed nisi
+                        labels:
+                          - eu quis pr
+                          - eu
+                        location:
+                          address: pariatur esse officia cupidatat
+                          city: fugiat tempor reprehenderit
+                          country: ad ea ut id
+                          lat: -68164400.35857312
+                          lon: 85118979.13578662
+                          postal_code: minim est
+                        logo: laborum fugiat
+                        merchant: do enim ullamco irure
+                        person: non
+                        rating:
+                          reviews: 49181631
+                          value: -18636660.679956168
+                        transaction_id: proident occaecat
+                        website: ""
+                      - contact:
+                          email: B2b9F6BqZI@dnlLjJGCVnHqEgVFyDwSWrcCVtCuR.wsx
+                          phone: incididunt reprehenderit do cupidatat
+                        labels:
+                          - non cupidatat et esse
+                          - nisi reprehenderit est conse
+                        location:
+                          address: irure magna
+                          city: deserunt ut in
+                          country: dolore Excepteur aliqua do
+                          lat: -53232704.415080525
+                          lon: 24234387.569050018
+                          postal_code: officia dolore dolor
+                        logo: est
+                        merchant: laboris culpa Excepteur consequat consectetur
+                        person: fugiat
+                        rating:
+                          reviews: 97241118
+                          value: -51476788.074969985
+                        transaction_id: labore Ut
+                        website: cillum laborum c
                     items:
                       properties:
                         contact:
@@ -201,6 +262,9 @@ paths:
                               type: string
                           type: object
                         labels:
+                          example:
+                            - eu quis pr
+                            - eu
                           items:
                             example: eu quis pr
                             type: string

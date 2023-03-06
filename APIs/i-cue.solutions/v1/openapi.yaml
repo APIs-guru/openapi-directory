@@ -14,7 +14,7 @@ info:
 paths:
   /administration/entity:
     get:
-      description: This is a iCUE only endpoint or Enterprise feature.
+      description: This is an iCUE only endpoint or Enterprise feature.
       parameters:
         - description: User Authentication Token
           in: header
@@ -27,24 +27,24 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: "#/components/schemas/Entity"
+                  $ref: "#/components/schemas/EntityResponse"
                 type: array
             text/json:
               schema:
                 items:
-                  $ref: "#/components/schemas/Entity"
+                  $ref: "#/components/schemas/EntityResponse"
                 type: array
             text/plain:
               schema:
                 items:
-                  $ref: "#/components/schemas/Entity"
+                  $ref: "#/components/schemas/EntityResponse"
                 type: array
           description: Success
       summary: Get all organizations
       tags:
         - Administration
     post:
-      description: This is a iCUE only endpoint or Enterprise feature.
+      description: This is an iCUE only endpoint or Enterprise feature.
       parameters:
         - description: User Authentication Token
           in: header
@@ -82,7 +82,7 @@ paths:
       tags:
         - Administration
     put:
-      description: This is a iCUE only endpoint or Enterprise feature.
+      description: This is an iCUE only endpoint or Enterprise feature.
       parameters:
         - description: User Authentication Token
           in: header
@@ -108,7 +108,7 @@ paths:
         - Administration
   "/administration/entity/{id}":
     delete:
-      description: This is a iCUE only endpoint or Enterprise feature.
+      description: This is an iCUE only endpoint or Enterprise feature.
       parameters:
         - in: path
           name: id
@@ -127,9 +127,54 @@ paths:
       summary: Delete organization
       tags:
         - Administration
-  /administration/planning-level:
-    delete:
-      description: Delete planning level. This is an Enterprise feature.
+  /administration/file-to-json:
+    post:
+      description: Transform data file to JSON format
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              File:
+                style: form
+              Periodicity:
+                style: form
+            schema:
+              properties:
+                File:
+                  format: binary
+                  type: string
+                Periodicity:
+                  format: int32
+                  type: integer
+              required:
+                - File
+                - Periodicity
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JsonForecastResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/JsonForecastResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/JsonForecastResponse"
+          description: Success
+      summary: Transform data file to JSON format
+      tags:
+        - Administration
+  /administration/model:
+    get:
+      description: Returns models that are common for all Organizations
       parameters:
         - description: User Authentication Token
           in: header
@@ -138,8 +183,137 @@ paths:
             type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MethodDto"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MethodDto"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MethodDto"
+                type: array
           description: Success
-      summary: Delete planning level
+      summary: Get all common Models
+      tags:
+        - Administration
+    post:
+      description: Register new forecasting model for all organziations
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NewModelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewModelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NewModelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MethodDto"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MethodDto"
+          description: Success
+      summary: Register new forecasting model
+      tags:
+        - Administration
+  "/administration/model/{entityId}":
+    get:
+      description: Returns models registered for Organization
+      parameters:
+        - in: path
+          name: entityId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MethodDto"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MethodDto"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MethodDto"
+                type: array
+          description: Success
+      summary: Get Models for Organization
+      tags:
+        - Administration
+    post:
+      description: Register new forecasting model for single organziation
+      parameters:
+        - in: path
+          name: entityId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NewModelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewModelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NewModelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MethodDto"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MethodDto"
+          description: Success
+      summary: Register new forecasting model
       tags:
         - Administration
   /administration/planning-level/lock:
@@ -157,10 +331,22 @@ paths:
       summary: Lock planning level
       tags:
         - Administration
-  /administration/planning-levels:
-    get:
-      description: Get all planning levels.
+  "/administration/planning-level/{entityId}/{id}":
+    delete:
+      description: Delete planning level. This is an Enterprise feature.
       parameters:
+        - in: path
+          name: entityId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
         - description: User Authentication Token
           in: header
           name: Token
@@ -168,29 +354,13 @@ paths:
             type: string
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: "#/components/schemas/PlanningLevelInfoResponse"
-                type: array
-            text/json:
-              schema:
-                items:
-                  $ref: "#/components/schemas/PlanningLevelInfoResponse"
-                type: array
-            text/plain:
-              schema:
-                items:
-                  $ref: "#/components/schemas/PlanningLevelInfoResponse"
-                type: array
           description: Success
-      summary: Get all planning levels
+      summary: Delete planning level
       tags:
         - Administration
   /administration/token:
     post:
-      description: This is a iCUE only endpoint.
+      description: This is an iCUE only endpoint.
       parameters:
         - description: User Authentication Token
           in: header
@@ -392,7 +562,7 @@ paths:
         - Insight-Driven Planning (Forecast & Optimization)
   /forecast/AI:
     post:
-      description: Forecast utilizing Facebookm Prophet, UBER Orbit, amongst other advanced machine learning models. Please be mindful of enhanced execution times (~2s per timeseries).
+      description: Forecast AI is utilizing advanced machine learning models. Please be mindful of enhanced execution times (~1-2s per timeseries).
       parameters:
         - description: User Authentication Token
           in: header
@@ -415,20 +585,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ForecastResponse"
+                $ref: "#/components/schemas/JobResponse"
             text/json:
               schema:
-                $ref: "#/components/schemas/ForecastResponse"
+                $ref: "#/components/schemas/JobResponse"
             text/plain:
               schema:
-                $ref: "#/components/schemas/ForecastResponse"
+                $ref: "#/components/schemas/JobResponse"
           description: Success
       summary: Forecast utilizing advanced machine learning models
       tags:
         - Insight-Driven Planning (Forecast & Optimization)
   /forecast/AI/history-and-forecast:
     post:
-      description: History and forecast utilizing Facebookm Prophet, UBER Orbit, amongst other advanced machine learning models. Please be mindful of enhanced execution times (~2s per timeseries).
+      description: History and forecast utilizing advanced machine learning models. Please be mindful of enhanced execution times (~1-2s per timeseries).
       parameters:
         - description: User Authentication Token
           in: header
@@ -451,13 +621,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HistoryAndForecastResponse"
+                $ref: "#/components/schemas/JobResponse"
             text/json:
               schema:
-                $ref: "#/components/schemas/HistoryAndForecastResponse"
+                $ref: "#/components/schemas/JobResponse"
             text/plain:
               schema:
-                $ref: "#/components/schemas/HistoryAndForecastResponse"
+                $ref: "#/components/schemas/JobResponse"
           description: Success
       summary: History and forecast utilizing advanced machine learning models
       tags:
@@ -535,13 +705,23 @@ paths:
               type: object
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
           description: Success
       summary: Forecast from file
       tags:
         - Insight-Driven Planning (Forecast & Optimization)
   /forecast/forecast-bottom-up:
     post:
-      description: Calculate forecast bny timeseries and sum results up to establish forecast for top level timeseries.
+      description: Calculate forecast by timeseries and sum results up to establish forecast for top level timeseries.
       parameters:
         - description: User Authentication Token
           in: header
@@ -675,7 +855,7 @@ paths:
         - Insight-Driven Planning (Forecast & Optimization)
   /forecast/optimal-parameter:
     post:
-      description: Use the optimal parameter sets created by iCUE to set the method parameters of the internal planning system.
+      description: Use the optimal parameter sets created by iCUE to set the method parameters of your internal planning system.
       parameters:
         - description: User Authentication Token
           in: header
@@ -747,7 +927,7 @@ paths:
         - Insight-Driven Planning (Forecast & Optimization)
   "/forecast/result/{jobId}":
     get:
-      description: Get result for long running forecast job
+      description: Get result for forecast job
       parameters:
         - in: path
           name: jobId
@@ -768,7 +948,7 @@ paths:
         - Insight-Driven Planning (Forecast & Optimization)
   "/forecast/status/{jobId}":
     get:
-      description: Get status for long running forecast job
+      description: Get status for forecast job
       parameters:
         - in: path
           name: jobId
@@ -1230,6 +1410,35 @@ paths:
       summary: ABC Analysis
       tags:
         - Portfolio Performance Management
+  /portfolio/file-to-portfolio:
+    post:
+      description: Calculate and retrieve results of ABC (pareto analysis) and xyz (Coefficient of variation) per timeseries and planning level. This analysis is a powerful means to estbalish a proper planning cadence, best accuracy messures and optimal hyperparameters for the organization. It provides a balanced and actionable overview of the entire product portfolio.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              File:
+                style: form
+            schema:
+              properties:
+                File:
+                  format: binary
+                  type: string
+              required:
+                - File
+              type: object
+      responses:
+        "200":
+          description: Success
+      summary: ABCxyz Analysis
+      tags:
+        - Portfolio Performance Management
   /portfolio/forecast-performance-rewind:
     post:
       description: Planning level rewind to calculate and measure performance potential (internal versus iCUE).
@@ -1529,6 +1738,7 @@ components:
           enum:
             - icueMLP
             - icueMLO
+            - icueMLN
           example: icueMLP | icueMLO
           type: string
         params:
@@ -1543,7 +1753,7 @@ components:
         - planningLevelId
         - startDate
       type: object
-    Entity:
+    EntityResponse:
       additionalProperties: false
       properties:
         address:
@@ -1658,24 +1868,6 @@ components:
           nullable: true
           type: array
         method:
-          enum:
-            - AutoBestPick
-            - BoxJenkinsParameterized
-            - BoxJenkins
-            - CrostonParameterized
-            - Croston
-            - DoubleExponentialSmoothingParameterized
-            - DoubleExponentialSmoothing
-            - HoltWintersParameterized
-            - HoltWinters
-            - SingleExponentialSmoothingParameterized
-            - SingleExponentialSmoothing
-            - iCUE1Parameterized
-            - iCUE1
-            - iCUEgamma
-            - SimpleMovingAverage
-            - External
-            - iCUEbeta
           example: iCUE1
           type: string
         params:
@@ -1794,6 +1986,29 @@ components:
           nullable: true
           type: number
       type: object
+    JobResponse:
+      additionalProperties: false
+      properties:
+        jobId:
+          format: int32
+          type: integer
+      type: object
+    JsonForecastResponse:
+      additionalProperties: false
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/PlanningLevelDataDto"
+          nullable: true
+          type: array
+        planningLevelId:
+          nullable: true
+          type: string
+        startDate:
+          example: 1/16/2016
+          nullable: true
+          type: string
+      type: object
     LifecycleManyToOneRequest:
       additionalProperties: false
       properties:
@@ -1827,6 +2042,22 @@ components:
       required:
         - planningLevelId
       type: object
+    MethodDto:
+      additionalProperties: false
+      properties:
+        key:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        queue:
+          nullable: true
+          type: string
+        replyQueue:
+          nullable: true
+          type: string
+      type: object
     NewEntityRequest:
       additionalProperties: false
       properties:
@@ -1834,6 +2065,16 @@ components:
           nullable: true
           type: string
         email:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+      type: object
+    NewModelRequest:
+      additionalProperties: false
+      properties:
+        key:
           nullable: true
           type: string
         name:
@@ -1943,39 +2184,11 @@ components:
           format: double
           type: number
       type: object
-    PlanningLevelHyperparameterResponse:
-      additionalProperties: false
-      properties:
-        discardData:
-          nullable: true
-          type: boolean
-        errorType:
-          enum:
-            - MeanAbsolutePercentageError
-            - MeanSquaredError
-            - MeanAbsoluteError
-            - MedianAbsoluteDeviation
-            - None
-          type: string
-        holdOutPeriod:
-          format: int32
-          nullable: true
-          type: integer
-        noFcst:
-          format: int32
-          nullable: true
-          type: integer
-        periodicity:
-          format: int32
-          nullable: true
-          type: integer
-      type: object
     PlanningLevelInfoRequest:
       additionalProperties: false
       properties:
         discardData:
           example: false
-          nullable: true
           type: boolean
         errorType:
           enum:
@@ -1985,86 +2198,34 @@ components:
             - MedianAbsoluteDeviation
             - None
           example: MeanAbsolutePercentageError
-          nullable: true
           type: string
         holdOutPeriod:
           example: 4
           format: int32
-          nullable: true
           type: integer
         noFcst:
           example: 18
           format: int32
-          nullable: true
           type: integer
         outlierDetection:
           example: true
-          nullable: true
           type: boolean
         periodicity:
           example: 12
           format: int32
-          nullable: true
           type: integer
-      type: object
-    PlanningLevelInfoResponse:
-      additionalProperties: false
-      properties:
-        action:
-          nullable: true
-          type: string
-        dateCreated:
-          format: date-time
-          type: string
-        externalId:
-          nullable: true
-          type: string
-        filename:
-          nullable: true
-          type: string
-        hyperparameters:
-          $ref: "#/components/schemas/PlanningLevelHyperparameterResponse"
-        id:
-          format: int32
-          type: integer
-        method:
-          nullable: true
-          type: string
-        noTimeseries:
-          format: int32
-          nullable: true
-          type: integer
-        status:
-          enum:
-            - Unproccessed
-            - Running
-            - Complete
-            - Failed
-          nullable: true
-          type: string
+      required:
+        - discardData
+        - errorType
+        - holdOutPeriod
+        - noFcst
+        - outlierDetection
+        - periodicity
       type: object
     PlanningLevelReRunRequest:
       additionalProperties: false
       properties:
         method:
-          enum:
-            - AutoBestPick
-            - BoxJenkinsParameterized
-            - BoxJenkins
-            - CrostonParameterized
-            - Croston
-            - DoubleExponentialSmoothingParameterized
-            - DoubleExponentialSmoothing
-            - HoltWintersParameterized
-            - HoltWinters
-            - SingleExponentialSmoothingParameterized
-            - SingleExponentialSmoothing
-            - iCUE1Parameterized
-            - iCUE1
-            - iCUEgamma
-            - SimpleMovingAverage
-            - External
-            - iCUEbeta
           example: iCUE1
           type: string
         params:
@@ -2085,24 +2246,6 @@ components:
           nullable: true
           type: array
         method:
-          enum:
-            - AutoBestPick
-            - BoxJenkinsParameterized
-            - BoxJenkins
-            - CrostonParameterized
-            - Croston
-            - DoubleExponentialSmoothingParameterized
-            - DoubleExponentialSmoothing
-            - HoltWintersParameterized
-            - HoltWinters
-            - SingleExponentialSmoothingParameterized
-            - SingleExponentialSmoothing
-            - iCUE1Parameterized
-            - iCUE1
-            - iCUEgamma
-            - SimpleMovingAverage
-            - External
-            - iCUEbeta
           example: iCUE1
           type: string
         override:

@@ -22,143 +22,9 @@ externalDocs:
 security:
   - {}
 tags:
-  - name: account
   - name: word
-  - name: wordList
-  - name: wordLists
   - name: words
 paths:
-  /account.json/apiTokenStatus:
-    get:
-      operationId: getApiTokenStatus
-      parameters:
-        - description: Wordnik authentication token
-          in: header
-          name: api_key
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ApiTokenStatus"
-          description: No response was specified
-      summary: Returns usage statistics for the API account.
-      tags:
-        - account
-  "/account.json/authenticate/{username}":
-    get:
-      operationId: authenticate
-      parameters:
-        - description: A confirmed Wordnik username
-          in: path
-          name: username
-          required: true
-          schema:
-            type: string
-        - description: The user's password
-          in: query
-          name: password
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/AuthenticationToken"
-          description: No response was specified
-      summary: Authenticates a User
-      tags:
-        - account
-    post:
-      operationId: authenticatePost
-      parameters:
-        - description: A confirmed Wordnik username
-          in: path
-          name: username
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-        description: The user's password
-        required: true
-      responses:
-        "200":
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/AuthenticationToken"
-          description: No response was specified
-      summary: Authenticates a user
-      tags:
-        - account
-  /account.json/user:
-    get:
-      description: Requires a valid auth_token to be set.
-      operationId: getLoggedInUser
-      parameters:
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
-          in: header
-          name: auth_token
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/User"
-          description: No response was specified
-      summary: Returns the logged-in User
-      tags:
-        - account
-  /account.json/wordLists:
-    get:
-      operationId: getWordListsForLoggedInUser
-      parameters:
-        - description: auth_token of logged-in user
-          in: header
-          name: auth_token
-          required: true
-          schema:
-            type: string
-        - description: Results to skip
-          in: query
-          name: skip
-          required: false
-          schema:
-            default: 0
-            format: int32
-            type: integer
-        - description: Maximum number of results to return
-          in: query
-          name: limit
-          required: false
-          schema:
-            default: 50
-            format: int32
-            type: integer
-      responses:
-        "200":
-          content:
-            "*/*":
-              schema:
-                items:
-                  $ref: "#/components/schemas/WordList"
-                type: array
-          description: No response was specified
-      summary: Fetches WordList objects for the logged-in user.
-      tags:
-        - account
   "/word.json/{word}/audio":
     get:
       description: The metadata includes a time-expiring fileUrl which allows reading the audio file directly from the API.  Currently only audio pronunciations from the American Heritage Dictionary in mp3 format are supported.
@@ -170,7 +36,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Use the canonical form of the word
+        - description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
@@ -259,7 +125,7 @@ paths:
           schema:
             default: "false"
             type: string
-        - description: "Source dictionary to return definitions from.  If 'all' is received, results are returned from all sources. If multiple values are received (e.g. 'century,wiktionary'), results are returned from the first specified dictionary that has definitions. If left blank, results are returned from the first dictionary that has definitions. By default, dictionaries are searched in this order: ahd, wiktionary, webster, century, wordnet"
+        - description: "Source dictionary to return definitions from.  If 'all' is received, results are returned from all sources. If multiple values are received (e.g. 'century,wiktionary'), results are returned from the first specified dictionary that has definitions. If left blank, results are returned from the first dictionary that has definitions. By default, dictionaries are searched in this order: ahd-5, wiktionary, webster, century, wordnet"
           explode: false
           in: query
           name: sourceDictionaries
@@ -267,10 +133,8 @@ paths:
           schema:
             enum:
               - all
-              - ahd
+              - ahd-5
               - century
-              - cmu
-              - macmillan
               - wiktionary
               - webster
               - wordnet
@@ -464,13 +328,13 @@ paths:
               - "false"
               - "true"
             type: string
-        - description: "Get from a single dictionary. Valid options: ahd, century, wiktionary, webster, and wordnet."
+        - description: "Get from a single dictionary. Valid options: ahd-5, century, wiktionary, webster, and wordnet."
           in: query
           name: sourceDictionary
           required: false
           schema:
             enum:
-              - ahd
+              - ahd-5
               - century
               - wiktionary
               - webster
@@ -570,7 +434,7 @@ paths:
           required: false
           schema:
             enum:
-              - ahd
+              - ahd-5
               - century
               - cmu
               - macmillan
@@ -584,7 +448,7 @@ paths:
           required: false
           schema:
             enum:
-              - ahd
+              - ahd-5
               - arpabet
               - gcide-diacritical
               - IPA
@@ -653,7 +517,7 @@ paths:
               - verb-stem
               - has_topic
             type: string
-        - description: Restrict to the supplied relatinship types
+        - description: Restrict to the supplied relationship types
           in: query
           name: limitPerRelationshipType
           required: false
@@ -724,238 +588,6 @@ paths:
       summary: Returns a top example for a word
       tags:
         - word
-  "/wordList.json/{permalink}":
-    delete:
-      operationId: deleteWordList
-      parameters:
-        - description: ID of WordList to delete
-          in: path
-          name: permalink
-          required: true
-          schema:
-            type: string
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
-          in: header
-          name: auth_token
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            "*/*":
-              schema: {}
-          description: No response was specified
-      summary: Deletes an existing WordList
-      tags:
-        - wordList
-    get:
-      operationId: getWordListByPermalink
-      parameters:
-        - description: permalink of WordList to fetch
-          in: path
-          name: permalink
-          required: true
-          schema:
-            type: string
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
-          in: header
-          name: auth_token
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/WordList"
-          description: No response was specified
-      summary: Fetches a WordList by ID
-      tags:
-        - wordList
-    put:
-      operationId: updateWordList
-      parameters:
-        - description: permalink of WordList to update
-          in: path
-          name: permalink
-          required: true
-          schema:
-            type: string
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
-          in: header
-          name: auth_token
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/WordList"
-        description: Updated WordList
-      responses:
-        "200":
-          content:
-            "*/*":
-              schema: {}
-          description: No response was specified
-      summary: Updates an existing WordList
-      tags:
-        - wordList
-  "/wordList.json/{permalink}/deleteWords":
-    post:
-      operationId: deleteWordsFromWordList
-      parameters:
-        - description: permalink of WordList to use
-          in: path
-          name: permalink
-          required: true
-          schema:
-            type: string
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
-          in: header
-          name: auth_token
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              items:
-                $ref: "#/components/schemas/StringValue"
-              type: array
-        description: Words to remove from WordList
-      responses:
-        "200":
-          content:
-            "*/*":
-              schema: {}
-          description: No response was specified
-      summary: Removes words from a WordList
-      tags:
-        - wordList
-  "/wordList.json/{permalink}/words":
-    get:
-      operationId: getWordListWords
-      parameters:
-        - description: ID of WordList to use
-          in: path
-          name: permalink
-          required: true
-          schema:
-            type: string
-        - description: Field to sort by
-          in: query
-          name: sortBy
-          required: false
-          schema:
-            default: createDate
-            enum:
-              - createDate
-              - alpha
-            type: string
-        - description: Direction to sort
-          in: query
-          name: sortOrder
-          required: false
-          schema:
-            default: desc
-            type: string
-        - description: Results to skip
-          in: query
-          name: skip
-          required: false
-          schema:
-            default: 0
-            format: int32
-            type: integer
-        - description: Maximum number of results to return
-          in: query
-          name: limit
-          required: false
-          schema:
-            default: 100
-            format: int32
-            type: integer
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
-          in: header
-          name: auth_token
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            "*/*":
-              schema:
-                items:
-                  $ref: "#/components/schemas/WordListWord"
-                type: array
-          description: No response was specified
-      summary: Fetches words in a WordList
-      tags:
-        - wordList
-    post:
-      operationId: addWordsToWordList
-      parameters:
-        - description: permalink of WordList to user
-          in: path
-          name: permalink
-          required: true
-          schema:
-            type: string
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
-          in: header
-          name: auth_token
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              items:
-                $ref: "#/components/schemas/StringValue"
-              type: array
-        description: Array of words to add to WordList
-      responses:
-        "200":
-          content:
-            "*/*":
-              schema: {}
-          description: No response was specified
-      summary: Adds words to a WordList
-      tags:
-        - wordList
-  /wordLists.json:
-    post:
-      operationId: createWordList
-      parameters:
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
-          in: header
-          name: auth_token
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/WordList"
-        description: WordList to create
-      responses:
-        "200":
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/WordList"
-          description: No response was specified
-      summary: Creates a WordList.
-      tags:
-        - wordLists
   /words.json/randomWord:
     get:
       operationId: getRandomWord
@@ -1168,7 +800,7 @@ paths:
           required: false
           schema:
             enum:
-              - ahd
+              - ahd-5
               - century
               - cmu
               - macmillan
@@ -1182,7 +814,7 @@ paths:
           required: false
           schema:
             enum:
-              - ahd
+              - ahd-5
               - century
               - cmu
               - macmillan

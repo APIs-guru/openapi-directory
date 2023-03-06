@@ -139,43 +139,142 @@ paths:
               schema:
                 description: An Edge Config
                 properties:
-                  createdAt:
-                    type:
-                      - number
-                      - "null"
-                  creator:
+                  blocking:
+                    type: boolean
+                  completedAt:
+                    type: number
+                  conclusion:
+                    enum:
+                      - canceled
+                      - failed
+                      - neutral
+                      - succeeded
+                      - skipped
+                      - stale
                     type: string
-                  domain:
+                  createdAt:
+                    type: number
+                  deploymentId:
+                    type: string
+                  detailsUrl:
+                    type: string
+                  externalId:
                     type: string
                   id:
+                    type: string
+                  integrationId:
                     type: string
                   itemCount:
                     type: number
                   name:
                     type: string
-                  recordType:
-                    enum:
-                      - A
-                      - AAAA
-                      - ALIAS
-                      - CAA
-                      - CNAME
-                      - MX
-                      - SRV
-                      - TXT
-                      - NS
+                  output:
+                    properties:
+                      metrics:
+                        properties:
+                          CLS:
+                            properties:
+                              previousValue:
+                                type: number
+                              source:
+                                enum:
+                                  - web-vitals
+                                type: string
+                              value:
+                                type:
+                                  - number
+                                  - "null"
+                            required:
+                              - value
+                              - source
+                            type: object
+                          FCP:
+                            properties:
+                              previousValue:
+                                type: number
+                              source:
+                                enum:
+                                  - web-vitals
+                                type: string
+                              value:
+                                type:
+                                  - number
+                                  - "null"
+                            required:
+                              - value
+                              - source
+                            type: object
+                          LCP:
+                            properties:
+                              previousValue:
+                                type: number
+                              source:
+                                enum:
+                                  - web-vitals
+                                type: string
+                              value:
+                                type:
+                                  - number
+                                  - "null"
+                            required:
+                              - value
+                              - source
+                            type: object
+                          TBT:
+                            properties:
+                              previousValue:
+                                type: number
+                              source:
+                                enum:
+                                  - web-vitals
+                                type: string
+                              value:
+                                type:
+                                  - number
+                                  - "null"
+                            required:
+                              - value
+                              - source
+                            type: object
+                          virtualExperienceScore:
+                            properties:
+                              previousValue:
+                                type: number
+                              source:
+                                enum:
+                                  - web-vitals
+                                type: string
+                              value:
+                                type:
+                                  - number
+                                  - "null"
+                            required:
+                              - value
+                              - source
+                            type: object
+                        required:
+                          - FCP
+                          - LCP
+                          - CLS
+                          - TBT
+                        type: object
+                    type: object
+                  path:
                     type: string
+                  rerequestable:
+                    type: boolean
                   sizeInBytes:
                     type: number
-                  ttl:
+                  startedAt:
                     type: number
-                  type:
+                  status:
                     enum:
-                      - record
-                      - record-sys
+                      - registered
+                      - running
+                      - completed
                     type: string
-                  value:
-                    type: string
+                  updatedAt:
+                    type: number
                 required:
                   - sizeInBytes
                   - itemCount
@@ -334,43 +433,142 @@ paths:
               schema:
                 description: An Edge Config
                 properties:
-                  createdAt:
-                    type:
-                      - number
-                      - "null"
-                  creator:
+                  blocking:
+                    type: boolean
+                  completedAt:
+                    type: number
+                  conclusion:
+                    enum:
+                      - canceled
+                      - failed
+                      - neutral
+                      - succeeded
+                      - skipped
+                      - stale
                     type: string
-                  domain:
+                  createdAt:
+                    type: number
+                  deploymentId:
+                    type: string
+                  detailsUrl:
+                    type: string
+                  externalId:
                     type: string
                   id:
+                    type: string
+                  integrationId:
                     type: string
                   itemCount:
                     type: number
                   name:
                     type: string
-                  recordType:
-                    enum:
-                      - A
-                      - AAAA
-                      - ALIAS
-                      - CAA
-                      - CNAME
-                      - MX
-                      - SRV
-                      - TXT
-                      - NS
+                  output:
+                    properties:
+                      metrics:
+                        properties:
+                          CLS:
+                            properties:
+                              previousValue:
+                                type: number
+                              source:
+                                enum:
+                                  - web-vitals
+                                type: string
+                              value:
+                                type:
+                                  - number
+                                  - "null"
+                            required:
+                              - value
+                              - source
+                            type: object
+                          FCP:
+                            properties:
+                              previousValue:
+                                type: number
+                              source:
+                                enum:
+                                  - web-vitals
+                                type: string
+                              value:
+                                type:
+                                  - number
+                                  - "null"
+                            required:
+                              - value
+                              - source
+                            type: object
+                          LCP:
+                            properties:
+                              previousValue:
+                                type: number
+                              source:
+                                enum:
+                                  - web-vitals
+                                type: string
+                              value:
+                                type:
+                                  - number
+                                  - "null"
+                            required:
+                              - value
+                              - source
+                            type: object
+                          TBT:
+                            properties:
+                              previousValue:
+                                type: number
+                              source:
+                                enum:
+                                  - web-vitals
+                                type: string
+                              value:
+                                type:
+                                  - number
+                                  - "null"
+                            required:
+                              - value
+                              - source
+                            type: object
+                          virtualExperienceScore:
+                            properties:
+                              previousValue:
+                                type: number
+                              source:
+                                enum:
+                                  - web-vitals
+                                type: string
+                              value:
+                                type:
+                                  - number
+                                  - "null"
+                            required:
+                              - value
+                              - source
+                            type: object
+                        required:
+                          - FCP
+                          - LCP
+                          - CLS
+                          - TBT
+                        type: object
+                    type: object
+                  path:
                     type: string
+                  rerequestable:
+                    type: boolean
                   sizeInBytes:
                     type: number
-                  ttl:
+                  startedAt:
                     type: number
-                  type:
+                  status:
                     enum:
-                      - record
-                      - record-sys
+                      - registered
+                      - running
+                      - completed
                     type: string
-                  value:
-                    type: string
+                  updatedAt:
+                    type: number
                 required:
                   - sizeInBytes
                   - itemCount
@@ -1798,8 +1996,8 @@ paths:
         content:
           application/json:
             schema:
-              additionalProperties: false
               properties:
+                additionalProperties: false
                 mxPriority:
                   description: The MX priority value of the DNS record
                   type:
@@ -3145,7 +3343,7 @@ paths:
                   headers:
                     additionalProperties:
                       type: string
-                    description: Construct a type with a set of properties K of type T
+                    description: The key/value pairs that will be sent as headers to the log-drain
                     examples:
                       - foo: bar
                     type: object
@@ -3535,6 +3733,8 @@ paths:
             The slug is already in use
         "403":
           description: You do not have permission to access this resource.
+        "404":
+          description: ""
       security:
         - bearerToken: []
       summary: Create a Team
@@ -5338,6 +5538,7 @@ paths:
                     type: array
                 required:
                   - created
+                  - failed
                 type: object
           description: ""
         "400":
@@ -6092,6 +6293,11 @@ paths:
                     type:
                       - string
                       - "null"
+                  isInConcurrentBuildsQueue:
+                    description: Is the deployment currently queued waiting for a Concurrent Build Slot to be available
+                    examples:
+                      - false
+                    type: boolean
                   lambdas:
                     items:
                       properties:
@@ -6437,6 +6643,7 @@ paths:
                   - createdIn
                   - env
                   - inspectorUrl
+                  - isInConcurrentBuildsQueue
                   - meta
                   - name
                   - ownerId
@@ -7459,6 +7666,10 @@ paths:
                             type: number
                           middlewarePath:
                             type: string
+                          middlewareRawSrc:
+                            items:
+                              type: string
+                            type: array
                           missing:
                             description: An array of requirements that are needed to match
                             items:
@@ -8039,6 +8250,11 @@ paths:
                     type:
                       - string
                       - "null"
+                  isInConcurrentBuildsQueue:
+                    description: Is the deployment currently queued waiting for a Concurrent Build Slot to be available
+                    examples:
+                      - false
+                    type: boolean
                   lambdas:
                     items:
                       properties:
@@ -8384,6 +8600,7 @@ paths:
                   - createdIn
                   - env
                   - inspectorUrl
+                  - isInConcurrentBuildsQueue
                   - meta
                   - name
                   - ownerId
@@ -8946,6 +9163,11 @@ paths:
                         type:
                           - string
                           - "null"
+                      isInConcurrentBuildsQueue:
+                        description: Is the deployment currently queued waiting for a Concurrent Build Slot to be available
+                        examples:
+                          - false
+                        type: boolean
                       lambdas:
                         items:
                           properties:
@@ -9291,6 +9513,7 @@ paths:
                       - createdIn
                       - env
                       - inspectorUrl
+                      - isInConcurrentBuildsQueue
                       - meta
                       - name
                       - ownerId
@@ -12091,7 +12314,6 @@ paths:
                       - 2qDDuGFTWXBLDNnqZfWPDp1A
                     type: string
                   value:
-                    description: "Raw data is stored in instances of the Buffer class. A Buffer is similar to an array of integers but corresponds to a raw memory allocation outside the V8 heap.  A Buffer cannot be resized. Valid string encodings: 'ascii'|'utf8'|'utf16le'|'ucs2'(alias of 'utf16le')|'base64'|'base64url'|'binary'(deprecated)|'hex'"
                     properties:
                       data:
                         items:
@@ -12175,6 +12397,8 @@ paths:
           description: One of the provided values in the request query is invalid.
         "403":
           description: You do not have permission to access this resource.
+        "404":
+          description: ""
       security:
         - bearerToken: []
       summary: List all teams
@@ -15197,6 +15421,82 @@ paths:
       summary: Get cert by id
       tags:
         - certs
+  /v8/artifacts:
+    post:
+      description: Query information about an array of artifacts.
+      operationId: artifactQuery
+      parameters:
+        - description: The Team identifier or slug to perform the request on behalf of.
+          in: query
+          name: teamId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                hashes:
+                  description: artifact hashes
+                  items:
+                    type: string
+                  type: array
+              required:
+                - hashes
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  oneOf:
+                    - properties:
+                        size:
+                          type: number
+                        tag:
+                          type: string
+                        taskDurationMs:
+                          type: number
+                      required:
+                        - size
+                        - taskDurationMs
+                      type: object
+                    - properties:
+                        message:
+                          type: string
+                        name:
+                          type: string
+                        stack:
+                          type: string
+                      required:
+                        - name
+                        - message
+                      type: object
+                  type: "null"
+                type: object
+          description: ""
+        "400":
+          description: One of the provided values in the request body is invalid.
+        "401":
+          description: |-
+            Invalid token
+            The request is missing an authentication token
+        "402":
+          description: |-
+            The account was soft-blocked for an unhandled reason.
+            The account is missing a payment so payment method must be updated
+        "403":
+          description: |-
+            The customer has reached their spend cap limit and has been paused. An owner can disable the cap or raise the limit in settings.
+            The Remote Caching usage limit has been reached for this account for this billing cycle.
+            Remote Caching has been disabled for this team or user. An owner can enable it in the billing settings.
+            You do not have permission to access this resource.
+      security:
+        - bearerToken: []
+      summary: Query information about an artifact
+      tags:
+        - artifacts
   /v8/artifacts/events:
     post:
       description: Records an artifacts cache usage event. The body of this request is an array of cache usage events. The supported event types are `HIT` and `MISS`. The source is either `LOCAL` the cache event was on the users filesystem cache or `REMOTE` if the cache event is for a remote cache. When the event is a `HIT` the request also accepts a number `duration` which is the time taken to generate the artifact in the cache.
@@ -15626,6 +15926,12 @@ paths:
           name: edgeConfigTokenId
           schema:
             description: Filter results by connected Edge Config Token ID
+            type: string
+        - description: Filter results by linked Connect configuration ID
+          in: query
+          name: connectConfigurationId
+          schema:
+            description: Filter results by linked Connect configuration ID
             type: string
         - description: The Team identifier or slug to perform the request on behalf of.
           in: query
@@ -16181,6 +16487,10 @@ paths:
                             - "null"
                         permissions:
                           properties:
+                            Monitoring:
+                              items:
+                                $ref: "#/components/schemas/ACLAction"
+                              type: array
                             aliasGlobal:
                               items:
                                 $ref: "#/components/schemas/ACLAction"
@@ -16206,6 +16516,10 @@ paths:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
                             auditLog:
+                              items:
+                                $ref: "#/components/schemas/ACLAction"
+                              type: array
+                            awsBillingIntegration:
                               items:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
@@ -16513,6 +16827,10 @@ paths:
                               items:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
+                            redis:
+                              items:
+                                $ref: "#/components/schemas/ACLAction"
+                              type: array
                             remoteCaching:
                               items:
                                 $ref: "#/components/schemas/ACLAction"
@@ -16542,10 +16860,6 @@ paths:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
                             spendCapState:
-                              items:
-                                $ref: "#/components/schemas/ACLAction"
-                              type: array
-                            store:
                               items:
                                 $ref: "#/components/schemas/ACLAction"
                               type: array
@@ -17416,6 +17730,10 @@ paths:
                       - "null"
                   permissions:
                     properties:
+                      Monitoring:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
                       aliasGlobal:
                         items:
                           $ref: "#/components/schemas/ACLAction"
@@ -17441,6 +17759,10 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       auditLog:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
+                      awsBillingIntegration:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -17748,6 +18070,10 @@ paths:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
+                      redis:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
                       remoteCaching:
                         items:
                           $ref: "#/components/schemas/ACLAction"
@@ -17777,10 +18103,6 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       spendCapState:
-                        items:
-                          $ref: "#/components/schemas/ACLAction"
-                        type: array
-                      store:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -18530,6 +18852,10 @@ paths:
                       - "null"
                   permissions:
                     properties:
+                      Monitoring:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
                       aliasGlobal:
                         items:
                           $ref: "#/components/schemas/ACLAction"
@@ -18555,6 +18881,10 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       auditLog:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
+                      awsBillingIntegration:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -18862,6 +19192,10 @@ paths:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
+                      redis:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
                       remoteCaching:
                         items:
                           $ref: "#/components/schemas/ACLAction"
@@ -18891,10 +19225,6 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       spendCapState:
-                        items:
-                          $ref: "#/components/schemas/ACLAction"
-                        type: array
-                      store:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -19773,6 +20103,10 @@ paths:
                       - "null"
                   permissions:
                     properties:
+                      Monitoring:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
                       aliasGlobal:
                         items:
                           $ref: "#/components/schemas/ACLAction"
@@ -19798,6 +20132,10 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       auditLog:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
+                      awsBillingIntegration:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -20105,6 +20443,10 @@ paths:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
+                      redis:
+                        items:
+                          $ref: "#/components/schemas/ACLAction"
+                        type: array
                       remoteCaching:
                         items:
                           $ref: "#/components/schemas/ACLAction"
@@ -20134,10 +20476,6 @@ paths:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
                       spendCapState:
-                        items:
-                          $ref: "#/components/schemas/ACLAction"
-                        type: array
-                      store:
                         items:
                           $ref: "#/components/schemas/ACLAction"
                         type: array
@@ -21943,6 +22281,10 @@ components:
                   properties:
                     createdAt:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     frequency:
                       properties:
                         interval:
@@ -21963,6 +22305,8 @@ components:
                       type: object
                     hidden:
                       type: boolean
+                    maxQuantity:
+                      type: number
                     name:
                       type: string
                     price:
@@ -21978,6 +22322,10 @@ components:
                   properties:
                     batch:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     hidden:
                       type: boolean
                     name:
@@ -21996,6 +22344,10 @@ components:
                   properties:
                     batch:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     hidden:
                       type: boolean
                     name:
@@ -22014,6 +22366,10 @@ components:
                   properties:
                     batch:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     hidden:
                       type: boolean
                     name:
@@ -22032,6 +22388,10 @@ components:
                   properties:
                     batch:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     hidden:
                       type: boolean
                     name:
@@ -22051,6 +22411,10 @@ components:
                   properties:
                     createdAt:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     frequency:
                       properties:
                         interval:
@@ -22071,6 +22435,8 @@ components:
                       type: object
                     hidden:
                       type: boolean
+                    maxQuantity:
+                      type: number
                     name:
                       type: string
                     price:
@@ -22087,6 +22453,10 @@ components:
                   properties:
                     createdAt:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     frequency:
                       properties:
                         interval:
@@ -22107,6 +22477,8 @@ components:
                       type: object
                     hidden:
                       type: boolean
+                    maxQuantity:
+                      type: number
                     name:
                       type: string
                     price:
@@ -22122,6 +22494,10 @@ components:
                   properties:
                     batch:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     hidden:
                       type: boolean
                     name:
@@ -22140,6 +22516,10 @@ components:
                   properties:
                     batch:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     hidden:
                       type: boolean
                     name:
@@ -22159,6 +22539,10 @@ components:
                   properties:
                     createdAt:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     frequency:
                       properties:
                         interval:
@@ -22179,6 +22563,8 @@ components:
                       type: object
                     hidden:
                       type: boolean
+                    maxQuantity:
+                      type: number
                     name:
                       type: string
                     price:
@@ -22190,11 +22576,15 @@ components:
                     - quantity
                     - hidden
                   type: object
-                passwordProtection:
+                monitoring:
                   description: "Will be used to create an invoice item. The price must be in cents: 2000 for $20."
                   properties:
                     createdAt:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     frequency:
                       properties:
                         interval:
@@ -22215,6 +22605,72 @@ components:
                       type: object
                     hidden:
                       type: boolean
+                    maxQuantity:
+                      type: number
+                    name:
+                      type: string
+                    price:
+                      type: number
+                    quantity:
+                      type: number
+                  required:
+                    - price
+                    - quantity
+                    - hidden
+                  type: object
+                monitoringMetric:
+                  properties:
+                    batch:
+                      type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
+                    hidden:
+                      type: boolean
+                    name:
+                      type: string
+                    price:
+                      type: number
+                    threshold:
+                      type: number
+                  required:
+                    - price
+                    - batch
+                    - threshold
+                    - hidden
+                  type: object
+                passwordProtection:
+                  description: "Will be used to create an invoice item. The price must be in cents: 2000 for $20."
+                  properties:
+                    createdAt:
+                      type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
+                    frequency:
+                      properties:
+                        interval:
+                          enum:
+                            - month
+                          type: string
+                        intervalCount:
+                          enum:
+                            - 1
+                            - 3
+                            - 2
+                            - 6
+                            - 12
+                          type: number
+                      required:
+                        - interval
+                        - intervalCount
+                      type: object
+                    hidden:
+                      type: boolean
+                    maxQuantity:
+                      type: number
                     name:
                       type: string
                     price:
@@ -22231,6 +22687,10 @@ components:
                   properties:
                     createdAt:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     frequency:
                       properties:
                         interval:
@@ -22251,6 +22711,8 @@ components:
                       type: object
                     hidden:
                       type: boolean
+                    maxQuantity:
+                      type: number
                     name:
                       type: string
                     price:
@@ -22267,6 +22729,10 @@ components:
                   properties:
                     createdAt:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     frequency:
                       properties:
                         interval:
@@ -22287,6 +22753,8 @@ components:
                       type: object
                     hidden:
                       type: boolean
+                    maxQuantity:
+                      type: number
                     name:
                       type: string
                     price:
@@ -22303,6 +22771,10 @@ components:
                   properties:
                     createdAt:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     frequency:
                       properties:
                         interval:
@@ -22323,6 +22795,8 @@ components:
                       type: object
                     hidden:
                       type: boolean
+                    maxQuantity:
+                      type: number
                     name:
                       type: string
                     price:
@@ -22338,6 +22812,10 @@ components:
                   properties:
                     batch:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     hidden:
                       type: boolean
                     name:
@@ -22356,6 +22834,10 @@ components:
                   properties:
                     batch:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     hidden:
                       type: boolean
                     name:
@@ -22375,6 +22857,10 @@ components:
                   properties:
                     createdAt:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     frequency:
                       properties:
                         interval:
@@ -22395,6 +22881,8 @@ components:
                       type: object
                     hidden:
                       type: boolean
+                    maxQuantity:
+                      type: number
                     name:
                       type: string
                     price:
@@ -22411,6 +22899,10 @@ components:
                   properties:
                     createdAt:
                       type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
                     frequency:
                       properties:
                         interval:
@@ -22431,6 +22923,8 @@ components:
                       type: object
                     hidden:
                       type: boolean
+                    maxQuantity:
+                      type: number
                     name:
                       type: string
                     price:
@@ -22440,6 +22934,28 @@ components:
                   required:
                     - price
                     - quantity
+                    - hidden
+                  type: object
+                webAnalyticsDataPoint:
+                  properties:
+                    batch:
+                      type: number
+                    disabledAt:
+                      type:
+                        - number
+                        - "null"
+                    hidden:
+                      type: boolean
+                    name:
+                      type: string
+                    price:
+                      type: number
+                    threshold:
+                      type: number
+                  required:
+                    - price
+                    - batch
+                    - threshold
                     - hidden
                   type: object
               type:

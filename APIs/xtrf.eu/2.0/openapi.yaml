@@ -1,6 +1,5 @@
 openapi: 3.0.1
 servers:
-  - url: https://xtrf.eu/wp-content/uploads/2021/03/XTRFlogo-default.png
   - url: https://presentation.s.xtrf.eu/home-api
 info:
   description: |-
@@ -20,6 +19,12 @@ info:
       version: "3.0"
   x-providerName: xtrf.eu
 security:
+  - X-AUTH-ACCESS-TOKEN: []
+  - X-AUTH-ACCESS-TOKEN: []
+  - X-AUTH-ACCESS-TOKEN: []
+  - X-AUTH-ACCESS-TOKEN: []
+  - X-AUTH-ACCESS-TOKEN: []
+  - X-AUTH-ACCESS-TOKEN: []
   - X-AUTH-ACCESS-TOKEN: []
   - X-AUTH-ACCESS-TOKEN: []
   - X-AUTH-ACCESS-TOKEN: []

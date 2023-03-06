@@ -22,7 +22,7 @@ info:
     * Link to some other Open Source work you have already done (if you have done so)
 
     ## Getting Started
-    To get started using the API you first need an API token. Sign in into the [Hetzner Cloud Console](https://console.hetzner.cloud/) choose a Project, go to `Access` → `Tokens`, and create a new token. Make sure to copy the token because it won’t be shown to you again. A token is bound to a Project, to interact with the API of another Project you have to create a new token inside the Project. Let’s say your new token is `jEheVytlAoFl7F8MqUQ7jAo2hOXASztX`.
+    To get started using the API you first need an API token. Sign in into the [Hetzner Cloud Console](https://console.hetzner.cloud/) choose a Project, go to `Security` → `API Tokens`, and generate a new token. Make sure to copy the token because it won’t be shown to you again. A token is bound to a Project, to interact with the API of another Project you have to create a new token inside the Project. Let’s say your new token is `jEheVytlAoFl7F8MqUQ7jAo2hOXASztX`.
 
     You’re now ready to do your first request against the API. To get a list of all Servers in your Project, issue the example request on the right side using [curl](https://curl.haxx.se/).
 
@@ -54,7 +54,7 @@ info:
     ## Authentication
     All requests to the Hetzner Cloud API must be authenticated via a API token. Include your secret API token in every request you send to the API with the `Authorization` HTTP header.
 
-    To create a new API token for your Project, switch into the [Hetzner Cloud Console](https://console.hetzner.cloud/) choose a Project, go to `Access` → `Security`, and create a new token.
+    To create a new API token for your Project, switch into the [Hetzner Cloud Console](https://console.hetzner.cloud/) choose a Project, go to `Security` → `API Tokens`, and generate a new token.
 
     **Example Authorization header**
     ```html
@@ -109,6 +109,7 @@ info:
     | `conflict`                | The resource has changed during the request, please retry                        |
     | `unsupported_error`       | The corresponding resource does not support the Action                           |
     | `token_readonly`          | The token is only allowed to perform GET requests                                |
+    | `unavailable`             | A service or product is currently not available                                  |
 
     **invalid_input**
     ```json
@@ -163,7 +164,7 @@ info:
     ```
 
     ## Labels
-    Labels are `key/value` pairs that can be attached to Servers, Floating IPs, Volumes, SSH keys and Images.
+    Labels are `key/value` pairs that can be attached to all resources.
 
     Valid label keys have two segments: an optional prefix and name, separated by a slash (`/`). The name segment is required and must be a string of 63 characters or less, beginning and ending with an alphanumeric character (`[a-z0-9A-Z]`) with dashes (`-`), underscores (`_`), dots (`.`), and alphanumerics between. The prefix is optional. If specified, the prefix must be a DNS subdomain: a series of DNS labels separated by dots (`.`), not longer than 253 characters in total, followed by a slash (`/`).
 
@@ -257,12 +258,27 @@ info:
     ## Server Metadata
     Your Server can discover metadata about itself by doing a HTTP request to specific URLs. The following data is available:
 
-    | Data             | Format | Contents                                                     |
-    |------------------|--------|--------------------------------------------------------------|
-    | hostname         | text   | Name of the Server as set in the api                         |
-    | instance-id      | number | ID of the server                                             |
-    | public-ipv4      | text   | Primary public IPv4 address                                  |
-    | private-networks | yaml   | Details about the private networks the Server is attached to |
+    | Data              | Format | Contents                                                     |
+    |-------------------|--------|--------------------------------------------------------------|
+    | hostname          | text   | Name of the Server as set in the api                         |
+    | instance-id       | number | ID of the server                                             |
+    | public-ipv4       | text   | Primary public IPv4 address                                  |
+    | private-networks  | yaml   | Details about the private networks the Server is attached to |
+    | availability-zone | text   | Name of the availability zone that Server runs in            |
+    | region            | text   | Network zone, e.g. eu-central                                |
+
+    **Example: Summary**
+    ```bash
+    $ curl http://169.254.169.254/hetzner/v1/metadata
+    ```
+
+    ```yaml
+    availability-zone: hel1-dc2
+    hostname: my-server
+    instance-id: 42
+    public-ipv4: 1.2.3.4
+    region: eu-central
+    ```
 
     **Example: Hostname**
     ```bash
@@ -308,6 +324,18 @@ info:
       gateway: 192.168.0.1
     ```
 
+    **Example: Availability Zone**
+    ```bash
+    $ curl http://169.254.169.254/hetzner/v1/metadata/availability-zone
+    hel1-dc2
+    ```
+
+    **Example: Region**
+    ```bash
+    $ curl http://169.254.169.254/hetzner/v1/metadata/region
+    eu-central
+    ```
+
     ## Sorting
     Some responses which return multiple items support sorting. If they do support sorting the documentation states which fields can be used for sorting. You specify sorting with the `sort` query string parameter. You can sort by multiple fields. You can set the sort direction by appending `:asc` or `:desc` to the field name. By default, ascending sorting is used.
 
@@ -318,9 +346,6 @@ info:
     https://api.hetzner.cloud/v1/actions?sort=status:desc
     https://api.hetzner.cloud/v1/actions?sort=status:asc&sort=command:desc
     ```
-
-    ## Changelog
-    You can find our changelog on our [Developer Hub](https://developers.hetzner.com/cloud/changelog/?id=backend).
   title: Hetzner Cloud API
   version: 1.0.0
   x-apisguru-categories:
@@ -339,11 +364,11 @@ tags:
     name: Certificates
   - name: Certificate Actions
   - description: |
-      Each Datacenter represents a physical entity where virtual machines are hosted. Note that Datacenters are **not** guaranteed to be entirely independent failure domains.
+      Each Datacenter represents a *virtual* Datacenter which is made up of possible many physical Datacenters where Servers are hosted.
 
-      Datacenters in the same Location are connected by very low latency links.
+      Datacenter names are composed from their Location and virtual Datacenter number, for example `fsn1-dc14` means virtual Datacenter `14` in Location `fsn1`.
 
-      Datacenter names are made up of their Location and Datacenter number, for example `fsn1-dc8` means Datacenter `8` in Location `fsn1`.
+      Right now there is only one Datacenter for each Location. The Datacenter numbers for `fsn`, `nbg` and `hel` are arbitrarily set to `14`, `3` and `2` for historic reasons and do not represent real physical Hetzner datacenters.
     name: Datacenters
   - description: |
       Firewalls can limit the network access to or from your resources.
@@ -401,6 +426,20 @@ tags:
   - description: Datacenters are organized by Locations. Datacenters in the same Location are connected with very low latency links.
     name: Locations
   - description: |
+      Primary IPs help you to create more flexible networking setups. You can assign at most one Primary IP of type `ipv4` and one of type `ipv6` per Server. This Server then uses these IPs.
+
+      You can only unassign a Primary IP from a Server when it's powered off. This Primary IP can then be assigned to a different powered off Server, or you can keep it around for later use.
+
+      Primary IPs are bound to a specific Datacenter. You can not assign a Primary IP from one Datacenter to a Server in a different Datacenter. If you need this capability use Floating IPs instead.
+
+      If your Server's operating system supports cloud-init there is no further configuration needed to make Primary IPs work.
+
+      Primary IPs of type `ipv4` use a single IPv4 address as their `ip` property. Primary IPs of type `ipv6` use a /64 network such as `fc00::/64` as their `ip` property. Any IP address within that network can be used on your host.
+
+      Primary IPs are billed on an hourly basis.
+    name: Primary IPs
+  - name: Primary IP Actions
+  - description: |
       Networks is a private networks feature. These Networks are optional and they coexist with the public network that every Server has by default.
 
       They allow Servers to talk to each other over a dedicated network interface using private IP addresses not available publicly.
@@ -426,7 +465,12 @@ tags:
       Subnets of type `vswitch` must set a `vswitch_id` which is the ID of the existing vSwitch in Hetzner Robot that should be coupled.
 
       ### Network Zones
-      Network Zones are groups of Locations which have special high-speed network connections between them. The [Location object](https://docs.hetzner.cloud/#locations-get-a-location) contains the `network_zone` property each Location belongs to. Currently only one Network zone exists and is called `eu-central`. It spans the `nbg1`, `fsn1` and `hel1` Locations.
+      Network Zones are groups of Locations which have special high-speed network connections between them. The [Location object](https://docs.hetzner.cloud/#locations-get-a-location) contains the `network_zone` property each Location belongs to. Currently these network zones exist:
+
+      |Network Zone|Contains Locations|
+      |------------|------------------|
+      |eu-central  | nbg1, fsn1, hel1 |
+      |us-east     | ash              |
 
       ### IP address management
       When a cloud Server is attached to a network without the user specifying an IP it automatically gets an IP address assigned from a subnet of type `server` in the same network zone. If you specify the optional `ip` parameter when attaching then we will try to assign that IP. Keep in mind that the Server’s location must be covered by the Subnet’s Network Zone if you specify an IP, or that at least one Subnet with the zone covering Server’s location must exist.
@@ -2624,10 +2668,11 @@ paths:
 
         #### Call specific error codes
 
-        | Code                        | Description                                             |
-        |-----------------------------|---------------------------------------------------------|
-        | `server_already_added`      | Server added more than one time to resource             |
-        | `incompatible_network_type` | The Network type is incompatible for the given resource |
+        | Code                          | Description                                                   |
+        |------------------------------ |-------------------------------------------------------------- |
+        | `server_already_added`        | Server added more than one time to resource                   |
+        | `incompatible_network_type`   | The Network type is incompatible for the given resource       |
+        | `firewall_resource_not_found` | The resource the Firewall should be attached to was not found |
       requestBody:
         content:
           application/json:
@@ -3007,9 +3052,9 @@ paths:
 
         #### Call specific error codes
 
-        | Code              | Description                               |
-        |-------------------|-------------------------------------------|
-        | `resource_in_use` | Firewall must not be in use to be deleted |
+        | Code                 | Description                               |
+        |--------------------- |-------------------------------------------|
+        | `resource_in_use`    | Firewall must not be in use to be deleted |
       parameters:
         - description: ID of the resource
           in: path
@@ -3553,10 +3598,11 @@ paths:
 
         #### Call specific error codes
 
-        | Code                        | Description                                             |
-        |-----------------------------|---------------------------------------------------------|
-        | `firewall_already_applied`  | Firewall was already applied on resource                |
-        | `incompatible_network_type` | The Network type is incompatible for the given resource |
+        | Code                          | Description                                                   |
+        |-------------------------------|---------------------------------------------------------------|
+        | `firewall_already_applied`    | Firewall was already applied on resource                      |
+        | `incompatible_network_type`   | The Network type is incompatible for the given resource       |
+        | `firewall_resource_not_found` | The resource the Firewall should be attached to was not found |
       parameters:
         - description: ID of the Firewall
           in: path
@@ -3768,9 +3814,11 @@ paths:
 
         #### Call specific error codes
 
-        | Code                       | Description                                    |
-        |----------------------------|------------------------------------------------|
-        | `firewall_already_removed` | Firewall was already removed from the resource |
+        | Code                                  | Description                                                            |
+        |---------------------------------------|------------------------------------------------------------------------|
+        | `firewall_already_removed`            | Firewall was already removed from the resource                         |
+        | `firewall_resource_not_found`         | The resource the Firewall should be attached to was not found          |
+        | `firewall_managed_by_label_selector`  | Firewall was applied via label selector and cannot be removed manually |
       parameters:
         - description: ID of the Firewall
           in: path
@@ -3979,6 +4027,13 @@ paths:
         Sets the rules of a Firewall.
 
         All existing rules will be overwritten. Pass an empty `rules` array to remove all rules.
+        The maximum amount of rules that can be defined is 50.
+
+        #### Call specific error codes
+
+        | Code                          | Description                                                   |
+        |-------------------------------|---------------------------------------------------------------|
+        | `firewall_resource_not_found` | The resource the Firewall should be attached to was not found |
       parameters:
         - description: ID of the Firewall
           in: path
@@ -4054,6 +4109,7 @@ paths:
                       - protocol
                     title: Rule
                     type: object
+                  maxItems: 50
                   type: array
               required:
                 - rules
@@ -5378,6 +5434,12 @@ paths:
         content:
           application/json:
             schema:
+              description: |
+                #### Call specific error codes
+
+                | Code                          | Description                                                   |
+                |------------------------------ |-------------------------------------------------------------- |
+                | `floating_ip_assigned`        | The floating IP is already assigned                           |
               properties:
                 server:
                   description: ID of the Server the Floating IP shall be assigned to
@@ -6061,11 +6123,6 @@ paths:
                           example: null
                           nullable: true
                           type: integer
-                        build_id:
-                          description: Build ID of the Image
-                          example: c313fe40383af26094a5a92026054320ab55abc7
-                          nullable: true
-                          type: string
                         created:
                           description: Point in time when the Resource was created (in ISO-8601 format)
                           example: 2016-01-30T23:55:00+00:00
@@ -6276,11 +6333,6 @@ paths:
                         example: null
                         nullable: true
                         type: integer
-                      build_id:
-                        description: Build ID of the Image
-                        example: c313fe40383af26094a5a92026054320ab55abc7
-                        nullable: true
-                        type: string
                       created:
                         description: Point in time when the Resource was created (in ISO-8601 format)
                         example: 2016-01-30T23:55:00+00:00
@@ -6477,11 +6529,6 @@ paths:
                         example: null
                         nullable: true
                         type: integer
-                      build_id:
-                        description: Build ID of the Image
-                        example: c313fe40383af26094a5a92026054320ab55abc7
-                        nullable: true
-                        type: string
                       created:
                         description: Point in time when the Resource was created (in ISO-8601 format)
                         example: 2016-01-30T23:55:00+00:00
@@ -7724,7 +7771,7 @@ paths:
                                         nullable: true
                                         type: string
                                       path:
-                                        description: HTTP path to use for health checks
+                                        description: HTTP path to use for health checks. May not contain literal spaces, use percent-encoding instead.
                                         example: /
                                         type: string
                                       response:
@@ -7804,9 +7851,7 @@ paths:
                                     description: Use sticky sessions. Only available if protocol is "http" or "https". Default `false`
                                     example: true
                                     type: boolean
-                                required:
-                                  - cookie_name
-                                  - cookie_lifetime
+                                title: LoadBalancerServiceHTTP
                                 type: object
                               listen_port:
                                 description: Port the Load Balancer listens on
@@ -7845,6 +7890,10 @@ paths:
                                       example: 443
                                       type: integer
                                     status:
+                                      enum:
+                                        - healthy
+                                        - unhealthy
+                                        - unknown
                                       example: healthy
                                       type: string
                                   type: object
@@ -7891,6 +7940,10 @@ paths:
                                             example: 443
                                             type: integer
                                           status:
+                                            enum:
+                                              - healthy
+                                              - unhealthy
+                                              - unknown
                                             example: healthy
                                             type: string
                                         type: object
@@ -8081,7 +8134,7 @@ paths:
                                 nullable: true
                                 type: string
                               path:
-                                description: HTTP path to use for health checks
+                                description: HTTP path to use for health checks. May not contain literal spaces, use percent-encoding instead.
                                 example: /
                                 type: string
                               response:
@@ -8161,9 +8214,7 @@ paths:
                             description: Use sticky sessions. Only available if protocol is "http" or "https". Default `false`
                             example: true
                             type: boolean
-                        required:
-                          - cookie_name
-                          - cookie_lifetime
+                        title: LoadBalancerServiceHTTP
                         type: object
                       listen_port:
                         description: Port the Load Balancer listens on
@@ -8202,6 +8253,10 @@ paths:
                               example: 443
                               type: integer
                             status:
+                              enum:
+                                - healthy
+                                - unhealthy
+                                - unknown
                               example: healthy
                               type: string
                           type: object
@@ -8248,6 +8303,10 @@ paths:
                                     example: 443
                                     type: integer
                                   status:
+                                    enum:
+                                      - healthy
+                                      - unhealthy
+                                      - unknown
                                     example: healthy
                                     type: string
                                 type: object
@@ -8734,7 +8793,7 @@ paths:
                                       nullable: true
                                       type: string
                                     path:
-                                      description: HTTP path to use for health checks
+                                      description: HTTP path to use for health checks. May not contain literal spaces, use percent-encoding instead.
                                       example: /
                                       type: string
                                     response:
@@ -8814,9 +8873,7 @@ paths:
                                   description: Use sticky sessions. Only available if protocol is "http" or "https". Default `false`
                                   example: true
                                   type: boolean
-                              required:
-                                - cookie_name
-                                - cookie_lifetime
+                              title: LoadBalancerServiceHTTP
                               type: object
                             listen_port:
                               description: Port the Load Balancer listens on
@@ -8855,6 +8912,10 @@ paths:
                                     example: 443
                                     type: integer
                                   status:
+                                    enum:
+                                      - healthy
+                                      - unhealthy
+                                      - unknown
                                     example: healthy
                                     type: string
                                 type: object
@@ -8901,6 +8962,10 @@ paths:
                                           example: 443
                                           type: integer
                                         status:
+                                          enum:
+                                            - healthy
+                                            - unhealthy
+                                            - unknown
                                           example: healthy
                                           type: string
                                       type: object
@@ -9253,7 +9318,7 @@ paths:
                                       nullable: true
                                       type: string
                                     path:
-                                      description: HTTP path to use for health checks
+                                      description: HTTP path to use for health checks. May not contain literal spaces, use percent-encoding instead.
                                       example: /
                                       type: string
                                     response:
@@ -9333,9 +9398,7 @@ paths:
                                   description: Use sticky sessions. Only available if protocol is "http" or "https". Default `false`
                                   example: true
                                   type: boolean
-                              required:
-                                - cookie_name
-                                - cookie_lifetime
+                              title: LoadBalancerServiceHTTP
                               type: object
                             listen_port:
                               description: Port the Load Balancer listens on
@@ -9374,6 +9437,10 @@ paths:
                                     example: 443
                                     type: integer
                                   status:
+                                    enum:
+                                      - healthy
+                                      - unhealthy
+                                      - unknown
                                     example: healthy
                                     type: string
                                 type: object
@@ -9420,6 +9487,10 @@ paths:
                                           example: 443
                                           type: integer
                                         status:
+                                          enum:
+                                            - healthy
+                                            - unhealthy
+                                            - unknown
                                           example: healthy
                                           type: string
                                       type: object
@@ -9870,7 +9941,7 @@ paths:
                                       nullable: true
                                       type: string
                                     path:
-                                      description: HTTP path to use for health checks
+                                      description: HTTP path to use for health checks. May not contain literal spaces, use percent-encoding instead.
                                       example: /
                                       type: string
                                     response:
@@ -9950,9 +10021,7 @@ paths:
                                   description: Use sticky sessions. Only available if protocol is "http" or "https". Default `false`
                                   example: true
                                   type: boolean
-                              required:
-                                - cookie_name
-                                - cookie_lifetime
+                              title: LoadBalancerServiceHTTP
                               type: object
                             listen_port:
                               description: Port the Load Balancer listens on
@@ -9991,6 +10060,10 @@ paths:
                                     example: 443
                                     type: integer
                                   status:
+                                    enum:
+                                      - healthy
+                                      - unhealthy
+                                      - unknown
                                     example: healthy
                                     type: string
                                 type: object
@@ -10037,6 +10110,10 @@ paths:
                                           example: 443
                                           type: integer
                                         status:
+                                          enum:
+                                            - healthy
+                                            - unhealthy
+                                            - unknown
                                           example: healthy
                                           type: string
                                       type: object
@@ -10331,7 +10408,7 @@ paths:
                           nullable: true
                           type: string
                         path:
-                          description: HTTP path to use for health checks
+                          description: HTTP path to use for health checks. May not contain literal spaces, use percent-encoding instead.
                           example: /
                           type: string
                         response:
@@ -10411,9 +10488,7 @@ paths:
                       description: Use sticky sessions. Only available if protocol is "http" or "https". Default `false`
                       example: true
                       type: boolean
-                  required:
-                    - cookie_name
-                    - cookie_lifetime
+                  title: LoadBalancerServiceHTTP
                   type: object
                 listen_port:
                   description: Port the Load Balancer listens on
@@ -12053,7 +12128,7 @@ paths:
                           nullable: true
                           type: string
                         path:
-                          description: HTTP path to use for health checks
+                          description: HTTP path to use for health checks. May not contain literal spaces, use percent-encoding instead.
                           example: /
                           type: string
                         response:
@@ -12133,9 +12208,7 @@ paths:
                       description: Use sticky sessions. Only available if protocol is "http" or "https". Default `false`
                       example: true
                       type: boolean
-                  required:
-                    - cookie_name
-                    - cookie_lifetime
+                  title: LoadBalancerServiceHTTP
                   type: object
                 listen_port:
                   description: Port the Load Balancer listens on
@@ -12771,7 +12844,7 @@ paths:
                                 example: 10.0.1.0/24
                                 type: string
                               network_zone:
-                                description: Name of Network zone. Currently eu-central is the only available zone.
+                                description: Name of Network zone. The Location object contains the `network_zone` property each Location belongs to.
                                 example: eu-central
                                 type: string
                               type:
@@ -12860,7 +12933,7 @@ paths:
                         example: 10.0.1.0/24
                         type: string
                       network_zone:
-                        description: Name of Network zone. Currently eu-central is the only available zone.
+                        description: Name of Network zone. The Location object contains the `network_zone` property each Location belongs to.
                         example: eu-central
                         type: string
                       type:
@@ -12961,7 +13034,7 @@ paths:
                               example: 10.0.1.0/24
                               type: string
                             network_zone:
-                              description: Name of Network zone. Currently eu-central is the only available zone.
+                              description: Name of Network zone. The Location object contains the `network_zone` property each Location belongs to.
                               example: eu-central
                               type: string
                             type:
@@ -13102,7 +13175,7 @@ paths:
                               example: 10.0.1.0/24
                               type: string
                             network_zone:
-                              description: Name of Network zone. Currently eu-central is the only available zone.
+                              description: Name of Network zone. The Location object contains the `network_zone` property each Location belongs to.
                               example: eu-central
                               type: string
                             type:
@@ -13269,7 +13342,7 @@ paths:
                               example: 10.0.1.0/24
                               type: string
                             network_zone:
-                              description: Name of Network zone. Currently eu-central is the only available zone.
+                              description: Name of Network zone. The Location object contains the `network_zone` property each Location belongs to.
                               example: eu-central
                               type: string
                             type:
@@ -13651,7 +13724,7 @@ paths:
                   example: 10.0.1.0/24
                   type: string
                 network_zone:
-                  description: Name of Network zone. Currently eu-central is the only available zone.
+                  description: Name of Network zone. The Location object contains the `network_zone` property each Location belongs to.
                   example: eu-central
                   type: string
                 type:
@@ -15087,6 +15160,66 @@ paths:
                             - prices
                           type: object
                         type: array
+                      primary_ips:
+                        description: Costs of Primary IPs types per Location
+                        items:
+                          properties:
+                            prices:
+                              description: Primary IP type costs per Location
+                              items:
+                                properties:
+                                  location:
+                                    description: Name of the Location the price is for
+                                    example: fsn1
+                                    type: string
+                                  price_hourly:
+                                    description: Hourly costs for a Primary IP type in this Location
+                                    properties:
+                                      gross:
+                                        description: Price with VAT added
+                                        example: "1.1900000000000000"
+                                        type: string
+                                      net:
+                                        description: Price without VAT
+                                        example: "1.0000000000"
+                                        type: string
+                                    required:
+                                      - net
+                                      - gross
+                                    type: object
+                                  price_monthly:
+                                    description: Monthly costs for a Primary IP type in this Location
+                                    properties:
+                                      gross:
+                                        description: Price with VAT added
+                                        example: "1.1900000000000000"
+                                        type: string
+                                      net:
+                                        description: Price without VAT
+                                        example: "1.0000000000"
+                                        type: string
+                                    required:
+                                      - net
+                                      - gross
+                                    type: object
+                                required:
+                                  - location
+                                  - price_hourly
+                                  - price_monthly
+                                type: object
+                              type: array
+                            type:
+                              description: The type of the Primary IP
+                              enum:
+                                - ipv4
+                                - ipv6
+                              example: ipv4
+                              type: string
+                          required:
+                            - type
+                            - prices
+                          type: object
+                        type: array
                       server_backup:
                         description: Will increase base Server costs by specific percentage
                         properties:
@@ -15214,6 +15347,7 @@ paths:
                       - volume
                       - server_types
                       - load_balancer_types
+                      - primary_ips
                     type: object
                 required:
                   - pricing
@@ -15222,6 +15356,1694 @@ paths:
       summary: Get all prices
       tags:
         - Pricing
+  /primary_ips:
+    get:
+      description: Returns all Primary IP objects.
+      parameters:
+        - description: Can be used to filter resources by their name. The response will only contain the resources matching the specified name
+          in: query
+          name: name
+          required: false
+          schema:
+            type: string
+        - description: Can be used to filter resources by labels. The response will only contain resources matching the label selector.
+          in: query
+          name: label_selector
+          required: false
+          schema:
+            type: string
+        - description: Can be used to filter resources by their ip. The response will only contain the resources matching the specified ip.
+          example: 127.0.0.1
+          in: query
+          name: ip
+          required: false
+          schema:
+            type: string
+        - description: Can be used multiple times. Choices id id:asc id:desc created created:asc created:desc
+          in: query
+          name: sort
+          required: false
+          schema:
+            enum:
+              - id
+              - id:asc
+              - id:desc
+              - created
+              - created:asc
+              - created:desc
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
+                  primary_ips:
+                    items:
+                      properties:
+                        assignee_id:
+                          description: ID of the resource the Primary IP is assigned to, null if it is not assigned at all
+                          example: 17
+                          nullable: true
+                          type: integer
+                        assignee_type:
+                          description: Resource type the Primary IP can be assigned to
+                          enum:
+                            - server
+                          type: string
+                        auto_delete:
+                          description: Delete this Primary IP when the resource it is assigned to is deleted
+                          example: true
+                          type: boolean
+                        blocked:
+                          description: Whether the IP is blocked
+                          example: false
+                          type: boolean
+                        created:
+                          description: Point in time when the Resource was created (in ISO-8601 format)
+                          example: 2016-01-30T23:55:00+00:00
+                          type: string
+                        datacenter:
+                          description: Datacenter this Primary IP is located at
+                          properties:
+                            description:
+                              description: Description of the Datacenter
+                              example: Falkenstein DC Park 8
+                              type: string
+                            id:
+                              description: ID of the Resource
+                              example: 42
+                              type: integer
+                            location:
+                              properties:
+                                city:
+                                  description: City the Location is closest to
+                                  example: Falkenstein
+                                  type: string
+                                country:
+                                  description: ISO 3166-1 alpha-2 code of the country the Location resides in
+                                  example: DE
+                                  type: string
+                                description:
+                                  description: Description of the Location
+                                  example: Falkenstein DC Park 1
+                                  type: string
+                                id:
+                                  description: ID of the Location
+                                  example: 1
+                                  type: number
+                                latitude:
+                                  description: Latitude of the city closest to the Location
+                                  example: 50.47612
+                                  type: number
+                                longitude:
+                                  description: Longitude of the city closest to the Location
+                                  example: 12.370071
+                                  type: number
+                                name:
+                                  description: Unique identifier of the Location
+                                  example: fsn1
+                                  type: string
+                                network_zone:
+                                  description: Name of network zone this Location resides in
+                                  example: eu-central
+                                  type: string
+                              required:
+                                - id
+                                - name
+                                - description
+                                - country
+                                - city
+                                - latitude
+                                - longitude
+                                - network_zone
+                              type: object
+                            name:
+                              description: Unique identifier of the Datacenter
+                              example: fsn1-dc8
+                              type: string
+                            server_types:
+                              description: The Server types the Datacenter can handle
+                              properties:
+                                available:
+                                  description: IDs of Server types that are supported and for which the Datacenter has enough resources left
+                                  example:
+                                    - 1
+                                    - 2
+                                    - 3
+                                  items:
+                                    type: number
+                                  type: array
+                                available_for_migration:
+                                  description: IDs of Server types that are supported and for which the Datacenter has enough resources left
+                                  example:
+                                    - 1
+                                    - 2
+                                    - 3
+                                  items:
+                                    type: number
+                                  type: array
+                                supported:
+                                  description: IDs of Server types that are supported in the Datacenter
+                                  example:
+                                    - 1
+                                    - 2
+                                    - 3
+                                  items:
+                                    type: number
+                                  type: array
+                              required:
+                                - supported
+                                - available
+                                - available_for_migration
+                              type: object
+                          required:
+                            - id
+                            - name
+                            - description
+                            - location
+                            - server_types
+                          type: object
+                        dns_ptr:
+                          description: Array of reverse DNS entries
+                          items:
+                            properties:
+                              dns_ptr:
+                                description: DNS pointer for the specific IP address
+                                example: server.example.com
+                                type: string
+                              ip:
+                                description: Single IPv4 or IPv6 address
+                                example: 131.232.99.1
+                                type: string
+                            required:
+                              - ip
+                              - dns_ptr
+                            type: object
+                          type: array
+                        id:
+                          description: ID of the Resource
+                          example: 42
+                          type: integer
+                        ip:
+                          description: IP address
+                          example: 131.232.99.1
+                          type: string
+                        labels:
+                          additionalProperties:
+                            type: string
+                          description: User-defined labels (key-value pairs)
+                          type: object
+                        name:
+                          description: Name of the Resource. Must be unique per Project.
+                          example: my-resource
+                          type: string
+                        protection:
+                          description: Protection configuration for the Resource
+                          properties:
+                            delete:
+                              description: If true, prevents the Resource from being deleted
+                              example: false
+                              type: boolean
+                          required:
+                            - delete
+                          type: object
+                        type:
+                          description: Type of the Primary IP
+                          enum:
+                            - ipv4
+                            - ipv6
+                          type: string
+                      required:
+                        - id
+                        - name
+                        - labels
+                        - created
+                        - blocked
+                        - datacenter
+                        - ip
+                        - dns_ptr
+                        - protection
+                        - type
+                        - auto_delete
+                        - assignee_type
+                        - assignee_id
+                      title: PrimaryIP
+                      type: object
+                    type: array
+                required:
+                  - primary_ips
+                title: PrimaryIPsResponse
+                type: object
+          description: The `primary_ips` key contains an array of Primary IP objects
+      summary: Get all Primary IPs
+      tags:
+        - Primary IPs
+    post:
+      description: |
+        Creates a new Primary IP, optionally assigned to a Server.
+
+        If you want to create a Primary IP that is not assigned to a Server, you need to provide the `datacenter` key instead of `assignee_id`. This can be either the ID or the name of the Datacenter this Primary IP shall be created in.
+
+        Note that a Primary IP can only be assigned to a Server in the same Datacenter later on.
+
+        #### Call specific error codes
+
+        | Code                          | Description                                                   |
+        |------------------------------ |-------------------------------------------------------------- |
+        | `server_not_stopped`          | The specified server is running, but needs to be powered off  |
+        | `server_has_ipv4`             | The server already has an ipv4 address                        |
+        | `server_has_ipv6`             | The server already has an ipv6 address                        |
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                assignee_id:
+                  description: ID of the resource the Primary IP should be assigned to. Omitted if it should not be assigned.
+                  example: 17
+                  type: integer
+                assignee_type:
+                  description: Resource type the Primary IP can be assigned to
+                  enum:
+                    - server
+                  example: server
+                  type: string
+                auto_delete:
+                  description: Delete the Primary IP when the Server it is assigned to is deleted. If omitted defaults to `false`.
+                  example: false
+                  type: boolean
+                datacenter:
+                  description: ID or name of Datacenter the Primary IP will be bound to. Needs to be omitted if `assignee_id` is passed.
+                  example: fsn1-dc8
+                  type: string
+                labels:
+                  description: User-defined labels (key-value pairs)
+                  example:
+                    labelkey: value
+                  type: object
+                name:
+                  example: my-ip
+                  type: string
+                type:
+                  description: Primary IP type
+                  enum:
+                    - ipv4
+                    - ipv6
+                  type: string
+              required:
+                - name
+                - type
+                - assignee_type
+              title: CreatePrimaryIPRequest
+              type: object
+        description: The `type` argument is required while `datacenter` and `assignee_id` are mutually exclusive.
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                action:
+                  command: create_primary_ip
+                  error:
+                    code: action_failed
+                    message: Action failed
+                  finished: null
+                  id: 13
+                  progress: 0
+                  resources:
+                    - id: 17
+                      type: server
+                  started: 2016-01-30T23:50:00+00:00
+                  status: running
+                primary_ip:
+                  assignee_id: 17
+                  assignee_type: server
+                  auto_delete: true
+                  blocked: false
+                  created: 2016-01-30T23:50:00+00:00
+                  datacenter:
+                    description: Falkenstein DC Park 8
+                    id: 42
+                    location:
+                      city: Falkenstein
+                      country: DE
+                      description: Falkenstein DC Park 1
+                      id: 1
+                      latitude: 50.47612
+                      longitude: 12.370071
+                      name: fsn1
+                      network_zone: eu-central
+                    name: fsn1-dc8
+                    server_types:
+                      available:
+                        - 1
+                        - 2
+                        - 3
+                      available_for_migration:
+                        - 1
+                        - 2
+                        - 3
+                      supported:
+                        - 1
+                        - 2
+                        - 3
+                  dns_ptr:
+                    - dns_ptr: server.example.com
+                      ip: 2001:db8::1
+                  id: 42
+                  ip: 131.232.99.1
+                  labels:
+                    labelkey: value
+                  name: my-ip
+                  protection:
+                    delete: false
+                  type: ipv4
+              schema:
+                properties:
+                  action:
+                    properties:
+                      command:
+                        description: Command executed in the Action
+                        example: start_server
+                        type: string
+                      error:
+                        description: Error message for the Action if error occurred, otherwise null
+                        nullable: true
+                        properties:
+                          code:
+                            description: Fixed machine readable code
+                            example: action_failed
+                            type: string
+                          message:
+                            description: Humanized error message
+                            example: Action failed
+                            type: string
+                        required:
+                          - code
+                          - message
+                        type: object
+                      finished:
+                        description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                        example: 2016-01-30T23:55:00+00:00
+                        nullable: true
+                        type: string
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      progress:
+                        description: Progress of Action in percent
+                        example: 100
+                        type: number
+                      resources:
+                        description: Resources the Action relates to
+                        items:
+                          properties:
+                            id:
+                              description: ID of the Resource
+                              example: 42
+                              type: integer
+                            type:
+                              description: Type of resource referenced
+                              example: server
+                              type: string
+                          required:
+                            - id
+                            - type
+                          type: object
+                        type: array
+                      started:
+                        description: Point in time when the Action was started (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      status:
+                        description: Status of the Action
+                        enum:
+                          - success
+                          - running
+                          - error
+                        type: string
+                    required:
+                      - id
+                      - command
+                      - status
+                      - progress
+                      - started
+                      - finished
+                      - resources
+                      - error
+                    title: Action
+                    type: object
+                  primary_ip:
+                    properties:
+                      assignee_id:
+                        description: ID of the resource the Primary IP is assigned to, null if it is not assigned at all
+                        example: 17
+                        nullable: true
+                        type: integer
+                      assignee_type:
+                        description: Resource type the Primary IP can be assigned to
+                        enum:
+                          - server
+                        type: string
+                      auto_delete:
+                        description: Delete this Primary IP when the resource it is assigned to is deleted
+                        example: true
+                        type: boolean
+                      blocked:
+                        description: Whether the IP is blocked
+                        example: false
+                        type: boolean
+                      created:
+                        description: Point in time when the Resource was created (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      datacenter:
+                        description: Datacenter this Primary IP is located at
+                        properties:
+                          description:
+                            description: Description of the Datacenter
+                            example: Falkenstein DC Park 8
+                            type: string
+                          id:
+                            description: ID of the Resource
+                            example: 42
+                            type: integer
+                          location:
+                            properties:
+                              city:
+                                description: City the Location is closest to
+                                example: Falkenstein
+                                type: string
+                              country:
+                                description: ISO 3166-1 alpha-2 code of the country the Location resides in
+                                example: DE
+                                type: string
+                              description:
+                                description: Description of the Location
+                                example: Falkenstein DC Park 1
+                                type: string
+                              id:
+                                description: ID of the Location
+                                example: 1
+                                type: number
+                              latitude:
+                                description: Latitude of the city closest to the Location
+                                example: 50.47612
+                                type: number
+                              longitude:
+                                description: Longitude of the city closest to the Location
+                                example: 12.370071
+                                type: number
+                              name:
+                                description: Unique identifier of the Location
+                                example: fsn1
+                                type: string
+                              network_zone:
+                                description: Name of network zone this Location resides in
+                                example: eu-central
+                                type: string
+                            required:
+                              - id
+                              - name
+                              - description
+                              - country
+                              - city
+                              - latitude
+                              - longitude
+                              - network_zone
+                            type: object
+                          name:
+                            description: Unique identifier of the Datacenter
+                            example: fsn1-dc8
+                            type: string
+                          server_types:
+                            description: The Server types the Datacenter can handle
+                            properties:
+                              available:
+                                description: IDs of Server types that are supported and for which the Datacenter has enough resources left
+                                example:
+                                  - 1
+                                  - 2
+                                  - 3
+                                items:
+                                  type: number
+                                type: array
+                              available_for_migration:
+                                description: IDs of Server types that are supported and for which the Datacenter has enough resources left
+                                example:
+                                  - 1
+                                  - 2
+                                  - 3
+                                items:
+                                  type: number
+                                type: array
+                              supported:
+                                description: IDs of Server types that are supported in the Datacenter
+                                example:
+                                  - 1
+                                  - 2
+                                  - 3
+                                items:
+                                  type: number
+                                type: array
+                            required:
+                              - supported
+                              - available
+                              - available_for_migration
+                            type: object
+                        required:
+                          - id
+                          - name
+                          - description
+                          - location
+                          - server_types
+                        type: object
+                      dns_ptr:
+                        description: Array of reverse DNS entries
+                        items:
+                          properties:
+                            dns_ptr:
+                              description: DNS pointer for the specific IP address
+                              example: server.example.com
+                              type: string
+                            ip:
+                              description: Single IPv4 or IPv6 address
+                              example: 131.232.99.1
+                              type: string
+                          required:
+                            - ip
+                            - dns_ptr
+                          type: object
+                        type: array
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      ip:
+                        description: IP address
+                        example: 131.232.99.1
+                        type: string
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: User-defined labels (key-value pairs)
+                        type: object
+                      name:
+                        description: Name of the Resource. Must be unique per Project.
+                        example: my-resource
+                        type: string
+                      protection:
+                        description: Protection configuration for the Resource
+                        properties:
+                          delete:
+                            description: If true, prevents the Resource from being deleted
+                            example: false
+                            type: boolean
+                        required:
+                          - delete
+                        type: object
+                      type:
+                        description: Type of the Primary IP
+                        enum:
+                          - ipv4
+                          - ipv6
+                        type: string
+                    required:
+                      - id
+                      - name
+                      - labels
+                      - created
+                      - blocked
+                      - datacenter
+                      - ip
+                      - dns_ptr
+                      - protection
+                      - type
+                      - auto_delete
+                      - assignee_type
+                      - assignee_id
+                    title: PrimaryIP
+                    type: object
+                required:
+                  - primary_ip
+                title: CreatePrimaryIPResponse
+                type: object
+          description: The `primary_ip` key contains the Primary IP that was just created
+      summary: Create a Primary IP
+      tags:
+        - Primary IPs
+  "/primary_ips/{id}":
+    delete:
+      description: |
+        Deletes a Primary IP.
+
+        The Primary IP may be assigned to a Server. In this case it is unassigned automatically. The Server must be powered off (status `off`) in order for this operation to succeed.
+      parameters:
+        - description: ID of the resource
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Primary IP deleted
+      summary: Delete a Primary IP
+      tags:
+        - Primary IPs
+    get:
+      description: Returns a specific Primary IP object.
+      parameters:
+        - description: ID of the resource
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  primary_ip:
+                    properties:
+                      assignee_id:
+                        description: ID of the resource the Primary IP is assigned to, null if it is not assigned at all
+                        example: 17
+                        nullable: true
+                        type: integer
+                      assignee_type:
+                        description: Resource type the Primary IP can be assigned to
+                        enum:
+                          - server
+                        type: string
+                      auto_delete:
+                        description: Delete this Primary IP when the resource it is assigned to is deleted
+                        example: true
+                        type: boolean
+                      blocked:
+                        description: Whether the IP is blocked
+                        example: false
+                        type: boolean
+                      created:
+                        description: Point in time when the Resource was created (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      datacenter:
+                        description: Datacenter this Primary IP is located at
+                        properties:
+                          description:
+                            description: Description of the Datacenter
+                            example: Falkenstein DC Park 8
+                            type: string
+                          id:
+                            description: ID of the Resource
+                            example: 42
+                            type: integer
+                          location:
+                            properties:
+                              city:
+                                description: City the Location is closest to
+                                example: Falkenstein
+                                type: string
+                              country:
+                                description: ISO 3166-1 alpha-2 code of the country the Location resides in
+                                example: DE
+                                type: string
+                              description:
+                                description: Description of the Location
+                                example: Falkenstein DC Park 1
+                                type: string
+                              id:
+                                description: ID of the Location
+                                example: 1
+                                type: number
+                              latitude:
+                                description: Latitude of the city closest to the Location
+                                example: 50.47612
+                                type: number
+                              longitude:
+                                description: Longitude of the city closest to the Location
+                                example: 12.370071
+                                type: number
+                              name:
+                                description: Unique identifier of the Location
+                                example: fsn1
+                                type: string
+                              network_zone:
+                                description: Name of network zone this Location resides in
+                                example: eu-central
+                                type: string
+                            required:
+                              - id
+                              - name
+                              - description
+                              - country
+                              - city
+                              - latitude
+                              - longitude
+                              - network_zone
+                            type: object
+                          name:
+                            description: Unique identifier of the Datacenter
+                            example: fsn1-dc8
+                            type: string
+                          server_types:
+                            description: The Server types the Datacenter can handle
+                            properties:
+                              available:
+                                description: IDs of Server types that are supported and for which the Datacenter has enough resources left
+                                example:
+                                  - 1
+                                  - 2
+                                  - 3
+                                items:
+                                  type: number
+                                type: array
+                              available_for_migration:
+                                description: IDs of Server types that are supported and for which the Datacenter has enough resources left
+                                example:
+                                  - 1
+                                  - 2
+                                  - 3
+                                items:
+                                  type: number
+                                type: array
+                              supported:
+                                description: IDs of Server types that are supported in the Datacenter
+                                example:
+                                  - 1
+                                  - 2
+                                  - 3
+                                items:
+                                  type: number
+                                type: array
+                            required:
+                              - supported
+                              - available
+                              - available_for_migration
+                            type: object
+                        required:
+                          - id
+                          - name
+                          - description
+                          - location
+                          - server_types
+                        type: object
+                      dns_ptr:
+                        description: Array of reverse DNS entries
+                        items:
+                          properties:
+                            dns_ptr:
+                              description: DNS pointer for the specific IP address
+                              example: server.example.com
+                              type: string
+                            ip:
+                              description: Single IPv4 or IPv6 address
+                              example: 131.232.99.1
+                              type: string
+                          required:
+                            - ip
+                            - dns_ptr
+                          type: object
+                        type: array
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      ip:
+                        description: IP address
+                        example: 131.232.99.1
+                        type: string
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: User-defined labels (key-value pairs)
+                        type: object
+                      name:
+                        description: Name of the Resource. Must be unique per Project.
+                        example: my-resource
+                        type: string
+                      protection:
+                        description: Protection configuration for the Resource
+                        properties:
+                          delete:
+                            description: If true, prevents the Resource from being deleted
+                            example: false
+                            type: boolean
+                        required:
+                          - delete
+                        type: object
+                      type:
+                        description: Type of the Primary IP
+                        enum:
+                          - ipv4
+                          - ipv6
+                        type: string
+                    required:
+                      - id
+                      - name
+                      - labels
+                      - created
+                      - blocked
+                      - datacenter
+                      - ip
+                      - dns_ptr
+                      - protection
+                      - type
+                      - auto_delete
+                      - assignee_type
+                      - assignee_id
+                    title: PrimaryIP
+                    type: object
+                required:
+                  - primary_ip
+                title: PrimaryIPResponse
+                type: object
+          description: The `primary_ip` key contains a Primary IP object
+      summary: Get a Primary IP
+      tags:
+        - Primary IPs
+    put:
+      description: |
+        Updates the Primary IP.
+
+        Note that when updating labels, the Primary IP's current set of labels will be replaced with the labels provided in the request body. So, for example, if you want to add a new label, you have to provide all existing labels plus the new label in the request body.
+
+        If the Primary IP object changes during the request, the response will be a “conflict” error.
+      parameters:
+        - description: ID of the resource
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                auto_delete:
+                  description: Delete this Primary IP when the resource it is assigned to is deleted
+                  example: true
+                  type: boolean
+                labels:
+                  description: User-defined labels (key-value pairs)
+                  example:
+                    labelkey: value
+                  type: object
+                name:
+                  description: New unique name to set
+                  example: my-ip
+                  type: string
+              title: UpdatePrimaryIPRequest
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  primary_ip:
+                    properties:
+                      assignee_id:
+                        description: ID of the resource the Primary IP is assigned to, null if it is not assigned at all
+                        example: 17
+                        nullable: true
+                        type: integer
+                      assignee_type:
+                        description: Resource type the Primary IP can be assigned to
+                        enum:
+                          - server
+                        type: string
+                      auto_delete:
+                        description: Delete this Primary IP when the resource it is assigned to is deleted
+                        example: true
+                        type: boolean
+                      blocked:
+                        description: Whether the IP is blocked
+                        example: false
+                        type: boolean
+                      created:
+                        description: Point in time when the Resource was created (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      datacenter:
+                        description: Datacenter this Primary IP is located at
+                        properties:
+                          description:
+                            description: Description of the Datacenter
+                            example: Falkenstein DC Park 8
+                            type: string
+                          id:
+                            description: ID of the Resource
+                            example: 42
+                            type: integer
+                          location:
+                            properties:
+                              city:
+                                description: City the Location is closest to
+                                example: Falkenstein
+                                type: string
+                              country:
+                                description: ISO 3166-1 alpha-2 code of the country the Location resides in
+                                example: DE
+                                type: string
+                              description:
+                                description: Description of the Location
+                                example: Falkenstein DC Park 1
+                                type: string
+                              id:
+                                description: ID of the Location
+                                example: 1
+                                type: number
+                              latitude:
+                                description: Latitude of the city closest to the Location
+                                example: 50.47612
+                                type: number
+                              longitude:
+                                description: Longitude of the city closest to the Location
+                                example: 12.370071
+                                type: number
+                              name:
+                                description: Unique identifier of the Location
+                                example: fsn1
+                                type: string
+                              network_zone:
+                                description: Name of network zone this Location resides in
+                                example: eu-central
+                                type: string
+                            required:
+                              - id
+                              - name
+                              - description
+                              - country
+                              - city
+                              - latitude
+                              - longitude
+                              - network_zone
+                            type: object
+                          name:
+                            description: Unique identifier of the Datacenter
+                            example: fsn1-dc8
+                            type: string
+                          server_types:
+                            description: The Server types the Datacenter can handle
+                            properties:
+                              available:
+                                description: IDs of Server types that are supported and for which the Datacenter has enough resources left
+                                example:
+                                  - 1
+                                  - 2
+                                  - 3
+                                items:
+                                  type: number
+                                type: array
+                              available_for_migration:
+                                description: IDs of Server types that are supported and for which the Datacenter has enough resources left
+                                example:
+                                  - 1
+                                  - 2
+                                  - 3
+                                items:
+                                  type: number
+                                type: array
+                              supported:
+                                description: IDs of Server types that are supported in the Datacenter
+                                example:
+                                  - 1
+                                  - 2
+                                  - 3
+                                items:
+                                  type: number
+                                type: array
+                            required:
+                              - supported
+                              - available
+                              - available_for_migration
+                            type: object
+                        required:
+                          - id
+                          - name
+                          - description
+                          - location
+                          - server_types
+                        type: object
+                      dns_ptr:
+                        description: Array of reverse DNS entries
+                        items:
+                          properties:
+                            dns_ptr:
+                              description: DNS pointer for the specific IP address
+                              example: server.example.com
+                              type: string
+                            ip:
+                              description: Single IPv4 or IPv6 address
+                              example: 131.232.99.1
+                              type: string
+                          required:
+                            - ip
+                            - dns_ptr
+                          type: object
+                        type: array
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      ip:
+                        description: IP address
+                        example: 131.232.99.1
+                        type: string
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: User-defined labels (key-value pairs)
+                        type: object
+                      name:
+                        description: Name of the Resource. Must be unique per Project.
+                        example: my-resource
+                        type: string
+                      protection:
+                        description: Protection configuration for the Resource
+                        properties:
+                          delete:
+                            description: If true, prevents the Resource from being deleted
+                            example: false
+                            type: boolean
+                        required:
+                          - delete
+                        type: object
+                      type:
+                        description: Type of the Primary IP
+                        enum:
+                          - ipv4
+                          - ipv6
+                        type: string
+                    required:
+                      - id
+                      - name
+                      - labels
+                      - created
+                      - blocked
+                      - datacenter
+                      - ip
+                      - dns_ptr
+                      - protection
+                      - type
+                      - auto_delete
+                      - assignee_type
+                      - assignee_id
+                    title: PrimaryIP
+                    type: object
+                required:
+                  - primary_ip
+                title: PrimaryIPResponse
+                type: object
+          description: The `primary_ip` key contains the Primary IP that was just updated
+      summary: Update a Primary IP
+      tags:
+        - Primary IPs
+  "/primary_ips/{id}/actions/assign":
+    post:
+      description: |
+        Assigns a Primary IP to a Server.
+
+        A Server can only have one Primary IP of type `ipv4` and one of type `ipv6` assigned. If you need more IPs use Floating IPs.
+
+        The Server must be powered off (status `off`) in order for this operation to succeed.
+
+        #### Call specific error codes
+
+        | Code                          | Description                                                   |
+        |------------------------------ |-------------------------------------------------------------- |
+        | `server_not_stopped`          | The server is running, but needs to be powered off            |
+        | `primary_ip_already_assigned` | Primary ip is already assigned to a different server          |
+        | `server_has_ipv4`             | The server already has an ipv4 address                        |
+        | `server_has_ipv6`             | The server already has an ipv6 address                        |
+      parameters:
+        - description: ID of the Primary IP
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                assignee_id:
+                  description: ID of a resource of type `assignee_type`
+                  example: 4711
+                  type: integer
+                assignee_type:
+                  description: Type of resource assigning the Primary IP to
+                  enum:
+                    - server
+                  example: server
+                  type: string
+              required:
+                - assignee_type
+                - assignee_id
+              title: AssignPrimaryIPRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                action:
+                  command: assign_primary_ip
+                  error:
+                    code: action_failed
+                    message: Action failed
+                  finished: null
+                  id: 13
+                  progress: 0
+                  resources:
+                    - id: 42
+                      type: server
+                    - id: 4711
+                      type: primary_ip
+                  started: 2016-01-30T23:50:00+00:00
+                  status: running
+              schema:
+                properties:
+                  action:
+                    properties:
+                      command:
+                        description: Command executed in the Action
+                        example: start_server
+                        type: string
+                      error:
+                        description: Error message for the Action if error occurred, otherwise null
+                        nullable: true
+                        properties:
+                          code:
+                            description: Fixed machine readable code
+                            example: action_failed
+                            type: string
+                          message:
+                            description: Humanized error message
+                            example: Action failed
+                            type: string
+                        required:
+                          - code
+                          - message
+                        type: object
+                      finished:
+                        description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                        example: 2016-01-30T23:55:00+00:00
+                        nullable: true
+                        type: string
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      progress:
+                        description: Progress of Action in percent
+                        example: 100
+                        type: number
+                      resources:
+                        description: Resources the Action relates to
+                        items:
+                          properties:
+                            id:
+                              description: ID of the Resource
+                              example: 42
+                              type: integer
+                            type:
+                              description: Type of resource referenced
+                              example: server
+                              type: string
+                          required:
+                            - id
+                            - type
+                          type: object
+                        type: array
+                      started:
+                        description: Point in time when the Action was started (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      status:
+                        description: Status of the Action
+                        enum:
+                          - success
+                          - running
+                          - error
+                        type: string
+                    required:
+                      - id
+                      - command
+                      - status
+                      - progress
+                      - started
+                      - finished
+                      - resources
+                      - error
+                    title: Action
+                    type: object
+                required:
+                  - action
+                title: ActionResponse
+                type: object
+          description: The `action` key in the reply contains an Action object with this structure
+      summary: Assign a Primary IP to a resource
+      tags:
+        - Primary IP Actions
+  "/primary_ips/{id}/actions/change_dns_ptr":
+    post:
+      description: Changes the hostname that will appear when getting the hostname belonging to this Primary IP.
+      parameters:
+        - description: ID of the Primary IP
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                dns_ptr:
+                  description: Hostname to set as a reverse DNS PTR entry, will reset to original default value if `null`
+                  example: server02.example.com
+                  nullable: true
+                  type: string
+                ip:
+                  description: IP address for which to set the reverse DNS entry
+                  example: 1.2.3.4
+                  type: string
+              required:
+                - ip
+                - dns_ptr
+              title: ChangeDNSPTRRequest
+              type: object
+        description: |
+          Select the IP address for which to change the DNS entry by passing `ip`. For a Primary IP of type `ipv4` this must exactly match the IP address of the Primary IP. For a Primary IP of type `ipv6` this must be a single IP within the IPv6 /64 range that belongs to this Primary IP.
+
+          The target hostname is set by passing `dns_ptr`.
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                action:
+                  command: change_dns_ptr
+                  error:
+                    code: action_failed
+                    message: Action failed
+                  finished: 2016-01-30T23:56:00+00:00
+                  id: 13
+                  progress: 100
+                  resources:
+                    - id: 4711
+                      type: primary_ip
+                  started: 2016-01-30T23:55:00+00:00
+                  status: success
+              schema:
+                properties:
+                  action:
+                    properties:
+                      command:
+                        description: Command executed in the Action
+                        example: start_server
+                        type: string
+                      error:
+                        description: Error message for the Action if error occurred, otherwise null
+                        nullable: true
+                        properties:
+                          code:
+                            description: Fixed machine readable code
+                            example: action_failed
+                            type: string
+                          message:
+                            description: Humanized error message
+                            example: Action failed
+                            type: string
+                        required:
+                          - code
+                          - message
+                        type: object
+                      finished:
+                        description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                        example: 2016-01-30T23:55:00+00:00
+                        nullable: true
+                        type: string
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      progress:
+                        description: Progress of Action in percent
+                        example: 100
+                        type: number
+                      resources:
+                        description: Resources the Action relates to
+                        items:
+                          properties:
+                            id:
+                              description: ID of the Resource
+                              example: 42
+                              type: integer
+                            type:
+                              description: Type of resource referenced
+                              example: server
+                              type: string
+                          required:
+                            - id
+                            - type
+                          type: object
+                        type: array
+                      started:
+                        description: Point in time when the Action was started (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      status:
+                        description: Status of the Action
+                        enum:
+                          - success
+                          - running
+                          - error
+                        type: string
+                    required:
+                      - id
+                      - command
+                      - status
+                      - progress
+                      - started
+                      - finished
+                      - resources
+                      - error
+                    title: Action
+                    type: object
+                required:
+                  - action
+                title: ActionResponse
+                type: object
+          description: The `action` key contains the `change_dns_ptr` Action
+      summary: Change reverse DNS entry for a Primary IP
+      tags:
+        - Primary IP Actions
+  "/primary_ips/{id}/actions/change_protection":
+    post:
+      description: |
+        Changes the protection configuration of a Primary IP.
+
+        A Primary IP can only be delete protected if its `auto_delete` property is set to `false`.
+      parameters:
+        - description: ID of the Primary IP
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                delete:
+                  description: If true, prevents the Primary IP from being deleted
+                  example: true
+                  type: boolean
+              title: ChangeProtectionRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                action:
+                  command: change_protection
+                  error:
+                    code: action_failed
+                    message: Action failed
+                  finished: 2016-01-30T23:56:00+00:00
+                  id: 13
+                  progress: 100
+                  resources:
+                    - id: 4711
+                      type: primary_ip
+                  started: 2016-01-30T23:55:00+00:00
+                  status: success
+              schema:
+                properties:
+                  action:
+                    properties:
+                      command:
+                        description: Command executed in the Action
+                        example: start_server
+                        type: string
+                      error:
+                        description: Error message for the Action if error occurred, otherwise null
+                        nullable: true
+                        properties:
+                          code:
+                            description: Fixed machine readable code
+                            example: action_failed
+                            type: string
+                          message:
+                            description: Humanized error message
+                            example: Action failed
+                            type: string
+                        required:
+                          - code
+                          - message
+                        type: object
+                      finished:
+                        description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                        example: 2016-01-30T23:55:00+00:00
+                        nullable: true
+                        type: string
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      progress:
+                        description: Progress of Action in percent
+                        example: 100
+                        type: number
+                      resources:
+                        description: Resources the Action relates to
+                        items:
+                          properties:
+                            id:
+                              description: ID of the Resource
+                              example: 42
+                              type: integer
+                            type:
+                              description: Type of resource referenced
+                              example: server
+                              type: string
+                          required:
+                            - id
+                            - type
+                          type: object
+                        type: array
+                      started:
+                        description: Point in time when the Action was started (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      status:
+                        description: Status of the Action
+                        enum:
+                          - success
+                          - running
+                          - error
+                        type: string
+                    required:
+                      - id
+                      - command
+                      - status
+                      - progress
+                      - started
+                      - finished
+                      - resources
+                      - error
+                    title: Action
+                    type: object
+                required:
+                  - action
+                title: ActionResponse
+                type: object
+          description: The `action` key contains the `change_protection` Action
+      summary: Change Primary IP Protection
+      tags:
+        - Primary IP Actions
+  "/primary_ips/{id}/actions/unassign":
+    post:
+      description: |
+        Unassigns a Primary IP from a Server.
+
+        The Server must be powered off (status `off`) in order for this operation to succeed.
+
+        Note that only Servers that have at least one network interface (public or private) attached can be powered on.
+
+        #### Call specific error codes
+
+        | Code                              | Description                                                   |
+        |---------------------------------- |-------------------------------------------------------------- |
+        | `server_not_stopped`              | The server is running, but needs to be powered off            |
+        | `server_is_load_balancer_target`  | The server ipv4 address is a loadbalancer target              |
+      parameters:
+        - description: ID of the Primary IP
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                action:
+                  command: unassign_primary_ip
+                  error:
+                    code: action_failed
+                    message: Action failed
+                  finished: null
+                  id: 13
+                  progress: 0
+                  resources:
+                    - id: 42
+                      type: server
+                    - id: 4711
+                      type: primary_ip
+                  started: 2016-01-30T23:50:00+00:00
+                  status: running
+              schema:
+                properties:
+                  action:
+                    properties:
+                      command:
+                        description: Command executed in the Action
+                        example: start_server
+                        type: string
+                      error:
+                        description: Error message for the Action if error occurred, otherwise null
+                        nullable: true
+                        properties:
+                          code:
+                            description: Fixed machine readable code
+                            example: action_failed
+                            type: string
+                          message:
+                            description: Humanized error message
+                            example: Action failed
+                            type: string
+                        required:
+                          - code
+                          - message
+                        type: object
+                      finished:
+                        description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                        example: 2016-01-30T23:55:00+00:00
+                        nullable: true
+                        type: string
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      progress:
+                        description: Progress of Action in percent
+                        example: 100
+                        type: number
+                      resources:
+                        description: Resources the Action relates to
+                        items:
+                          properties:
+                            id:
+                              description: ID of the Resource
+                              example: 42
+                              type: integer
+                            type:
+                              description: Type of resource referenced
+                              example: server
+                              type: string
+                          required:
+                            - id
+                            - type
+                          type: object
+                        type: array
+                      started:
+                        description: Point in time when the Action was started (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      status:
+                        description: Status of the Action
+                        enum:
+                          - success
+                          - running
+                          - error
+                        type: string
+                    required:
+                      - id
+                      - command
+                      - status
+                      - progress
+                      - started
+                      - finished
+                      - resources
+                      - error
+                    title: Action
+                    type: object
+                required:
+                  - action
+                title: ActionResponse
+                type: object
+          description: The `action` key in the reply contains an Action object with this structure
+      summary: Unassign a Primary IP from a resource
+      tags:
+        - Primary IP Actions
   /server_types:
     get:
       description: Gets all Server type objects.
@@ -15688,11 +17510,6 @@ paths:
                               example: null
                               nullable: true
                               type: integer
-                            build_id:
-                              description: Build ID of the Image
-                              example: c313fe40383af26094a5a92026054320ab55abc7
-                              nullable: true
-                              type: string
                             created:
                               description: Point in time when the Resource was created (in ISO-8601 format)
                               example: 2016-01-30T23:55:00+00:00
@@ -15873,7 +17690,7 @@ paths:
                           example: false
                           type: boolean
                         name:
-                          description: Name of the Resource. Must be unique per Project.
+                          description: Name of the Server (must be unique per Project and a valid hostname as per RFC 1123)
                           example: my-resource
                           type: string
                         outgoing_traffic:
@@ -15991,6 +17808,7 @@ paths:
                               type: array
                             ipv4:
                               description: IP address (v4) and its reverse DNS entry of this Server
+                              nullable: true
                               properties:
                                 blocked:
                                   description: If the IP is blocked by our anti abuse dept
@@ -16000,6 +17818,10 @@ paths:
                                   description: Reverse DNS PTR entry for the IPv4 addresses of this Server
                                   example: server01.example.com
                                   type: string
+                                id:
+                                  description: ID of the Resource
+                                  example: 42
+                                  type: integer
                                 ip:
                                   description: IP address (v4) of this Server
                                   example: 1.2.3.4
@@ -16011,6 +17833,7 @@ paths:
                               type: object
                             ipv6:
                               description: IPv6 network assigned to this Server and its reverse DNS entry
+                              nullable: true
                               properties:
                                 blocked:
                                   description: If the IP is blocked by our anti abuse dept
@@ -16034,8 +17857,12 @@ paths:
                                     type: object
                                   nullable: true
                                   type: array
+                                id:
+                                  description: ID of the Resource
+                                  example: 42
+                                  type: integer
                                 ip:
-                                  description: IP address (v4) of this Server
+                                  description: IP address (v6) of this Server
                                   example: 2001:db8::/64
                                   type: string
                               required:
@@ -16251,6 +18078,28 @@ paths:
                   items:
                     type: integer
                   type: array
+                placement_group:
+                  description: ID of the Placement Group the server should be in
+                  example: 1
+                  type: integer
+                public_net:
+                  description: Public Network options
+                  properties:
+                    enable_ipv4:
+                      description: Attach an IPv4 on the public NIC. If false, no IPv4 address will be attached. Defaults to true.
+                      type: boolean
+                    enable_ipv6:
+                      description: Attach an IPv6 on the public NIC. If false, no IPv6 address will be attached. Defaults to true.
+                      type: boolean
+                    ipv4:
+                      description: ID of the ipv4 Primary IP to use. If omitted and enable_ipv4 is true, a new ipv4 Primary IP will automatically be created.
+                      nullable: true
+                      type: integer
+                    ipv6:
+                      description: ID of the ipv6 Primary IP to use. If omitted and enable_ipv6 is true, a new ipv6 Primary IP will automatically be created.
+                      nullable: true
+                      type: integer
+                  type: object
                 server_type:
                   description: ID or name of the Server type this Server should be created with
                   example: cx11
@@ -16293,7 +18142,7 @@ paths:
 
           For `image` you can either use the ID as listed in `/images` or its name.
 
-          If you want to create the Server in a Location, you must set `location` to the ID or name as listed in `/locations`. This is the recommended way. You can be even more specific by setting `datacenter` to the ID or name as listed in `/datacenters`. However directly specifying the Datacenter is discouraged since supply availability in Datacenters varies greatly and Datacenters may be out of stock for extended periods of time or not serve certain Server types at all.
+          If you want to create the Server in a Location, you must set `location` to the ID or name as listed in `/locations`. This is the recommended way. You can be even more specific by setting `datacenter` to the ID or name as listed in `/datacenters`. However we only recommend this if you want to assign a specific Primary IP to the Server which is located in the specified Datacenter.
 
           Some properties like `start_after_create` or `automount` will trigger Actions after the Server is created. Those Actions are listed in the `next_actions` field in the response.
 
@@ -16303,9 +18152,12 @@ paths:
 
           #### Call specific error codes
 
-          | Code                          | Description                              |
-          |-------------------------------|------------------------------------------|
-          | `placement_error`             | An error during the placement occurred   |
+          | Code                             | Description                                                |
+          |----------------------------------|------------------------------------------------------------|
+          | `placement_error`                | An error during the placement occurred                     |
+          | `primary_ip_assigned`            | The specified Primary IP is already assigned to a server   |
+          | `primary_ip_datacenter_mismatch` | The specified Primary IP is in a different datacenter      |
+          | `primary_ip_version_mismatch`    | The specified Primary IP has the wrong IP Version          |
       responses:
         "201":
           content:
@@ -16731,11 +18583,6 @@ paths:
                             example: null
                             nullable: true
                             type: integer
-                          build_id:
-                            description: Build ID of the Image
-                            example: c313fe40383af26094a5a92026054320ab55abc7
-                            nullable: true
-                            type: string
                           created:
                             description: Point in time when the Resource was created (in ISO-8601 format)
                             example: 2016-01-30T23:55:00+00:00
@@ -16916,7 +18763,7 @@ paths:
                         example: false
                         type: boolean
                       name:
-                        description: Name of the Resource. Must be unique per Project.
+                        description: Name of the Server (must be unique per Project and a valid hostname as per RFC 1123)
                         example: my-resource
                         type: string
                       outgoing_traffic:
@@ -17034,6 +18881,7 @@ paths:
                             type: array
                           ipv4:
                             description: IP address (v4) and its reverse DNS entry of this Server
+                            nullable: true
                             properties:
                               blocked:
                                 description: If the IP is blocked by our anti abuse dept
@@ -17043,6 +18891,10 @@ paths:
                                 description: Reverse DNS PTR entry for the IPv4 addresses of this Server
                                 example: server01.example.com
                                 type: string
+                              id:
+                                description: ID of the Resource
+                                example: 42
+                                type: integer
                               ip:
                                 description: IP address (v4) of this Server
                                 example: 1.2.3.4
@@ -17054,6 +18906,7 @@ paths:
                             type: object
                           ipv6:
                             description: IPv6 network assigned to this Server and its reverse DNS entry
+                            nullable: true
                             properties:
                               blocked:
                                 description: If the IP is blocked by our anti abuse dept
@@ -17077,8 +18930,12 @@ paths:
                                   type: object
                                 nullable: true
                                 type: array
+                              id:
+                                description: ID of the Resource
+                                example: 42
+                                type: integer
                               ip:
-                                description: IP address (v4) of this Server
+                                description: IP address (v6) of this Server
                                 example: 2001:db8::/64
                                 type: string
                             required:
@@ -17478,11 +19335,6 @@ paths:
                             example: null
                             nullable: true
                             type: integer
-                          build_id:
-                            description: Build ID of the Image
-                            example: c313fe40383af26094a5a92026054320ab55abc7
-                            nullable: true
-                            type: string
                           created:
                             description: Point in time when the Resource was created (in ISO-8601 format)
                             example: 2016-01-30T23:55:00+00:00
@@ -17663,7 +19515,7 @@ paths:
                         example: false
                         type: boolean
                       name:
-                        description: Name of the Resource. Must be unique per Project.
+                        description: Name of the Server (must be unique per Project and a valid hostname as per RFC 1123)
                         example: my-resource
                         type: string
                       outgoing_traffic:
@@ -17781,6 +19633,7 @@ paths:
                             type: array
                           ipv4:
                             description: IP address (v4) and its reverse DNS entry of this Server
+                            nullable: true
                             properties:
                               blocked:
                                 description: If the IP is blocked by our anti abuse dept
@@ -17790,6 +19643,10 @@ paths:
                                 description: Reverse DNS PTR entry for the IPv4 addresses of this Server
                                 example: server01.example.com
                                 type: string
+                              id:
+                                description: ID of the Resource
+                                example: 42
+                                type: integer
                               ip:
                                 description: IP address (v4) of this Server
                                 example: 1.2.3.4
@@ -17801,6 +19658,7 @@ paths:
                             type: object
                           ipv6:
                             description: IPv6 network assigned to this Server and its reverse DNS entry
+                            nullable: true
                             properties:
                               blocked:
                                 description: If the IP is blocked by our anti abuse dept
@@ -17824,8 +19682,12 @@ paths:
                                   type: object
                                 nullable: true
                                 type: array
+                              id:
+                                description: ID of the Resource
+                                example: 42
+                                type: integer
                               ip:
-                                description: IP address (v4) of this Server
+                                description: IP address (v6) of this Server
                                 example: 2001:db8::/64
                                 type: string
                             required:
@@ -18143,11 +20005,6 @@ paths:
                             example: null
                             nullable: true
                             type: integer
-                          build_id:
-                            description: Build ID of the Image
-                            example: c313fe40383af26094a5a92026054320ab55abc7
-                            nullable: true
-                            type: string
                           created:
                             description: Point in time when the Resource was created (in ISO-8601 format)
                             example: 2016-01-30T23:55:00+00:00
@@ -18328,7 +20185,7 @@ paths:
                         example: false
                         type: boolean
                       name:
-                        description: Name of the Resource. Must be unique per Project.
+                        description: Name of the Server (must be unique per Project and a valid hostname as per RFC 1123)
                         example: my-resource
                         type: string
                       outgoing_traffic:
@@ -18446,6 +20303,7 @@ paths:
                             type: array
                           ipv4:
                             description: IP address (v4) and its reverse DNS entry of this Server
+                            nullable: true
                             properties:
                               blocked:
                                 description: If the IP is blocked by our anti abuse dept
@@ -18455,6 +20313,10 @@ paths:
                                 description: Reverse DNS PTR entry for the IPv4 addresses of this Server
                                 example: server01.example.com
                                 type: string
+                              id:
+                                description: ID of the Resource
+                                example: 42
+                                type: integer
                               ip:
                                 description: IP address (v4) of this Server
                                 example: 1.2.3.4
@@ -18466,6 +20328,7 @@ paths:
                             type: object
                           ipv6:
                             description: IPv6 network assigned to this Server and its reverse DNS entry
+                            nullable: true
                             properties:
                               blocked:
                                 description: If the IP is blocked by our anti abuse dept
@@ -18489,8 +20352,12 @@ paths:
                                   type: object
                                 nullable: true
                                 type: array
+                              id:
+                                description: ID of the Resource
+                                example: 42
+                                type: integer
                               ip:
-                                description: IP address (v4) of this Server
+                                description: IP address (v6) of this Server
                                 example: 2001:db8::/64
                                 type: string
                             required:
@@ -19960,11 +21827,6 @@ paths:
                         example: null
                         nullable: true
                         type: integer
-                      build_id:
-                        description: Build ID of the Image
-                        example: c313fe40383af26094a5a92026054320ab55abc7
-                        nullable: true
-                        type: string
                       created:
                         description: Point in time when the Resource was created (in ISO-8601 format)
                         example: 2016-01-30T23:55:00+00:00
@@ -20703,7 +22565,7 @@ paths:
             schema:
               properties:
                 ssh_keys:
-                  description: "Array of SSH key IDs which should be injected into the rescue system. Only available for types: `linux64` and `linux32`."
+                  description: Array of SSH key IDs which should be injected into the rescue system.
                   example:
                     - 2323
                   items:
@@ -20714,7 +22576,6 @@ paths:
                   enum:
                     - linux64
                     - linux32
-                    - freebsd64
                   type: string
               type: object
       responses:
@@ -21644,7 +23505,7 @@ paths:
   "/servers/{id}/actions/reset_password":
     post:
       description: |
-        Resets the root password. Only works for Linux systems that are running the qemu guest agent. Server must be powered on (state `on`) in order for this operation to succeed.
+        Resets the root password. Only works for Linux systems that are running the qemu guest agent. Server must be powered on (status `running`) in order for this operation to succeed.
 
         This will generate a new password for this Server and return it.
 

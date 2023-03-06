@@ -208,6 +208,26 @@ paths:
       tags:
         - identity
   /v2/user:
+    delete:
+      description: Use with caution as some steps are irreverisble. Initiates the user account deletion process, including removal of all user PII and account access.
+      operationId: deleteUser
+      parameters:
+        - $ref: "#/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/responses/IdentitySuccess"
+        "401":
+          $ref: "#/responses/401WithDocument"
+        "500":
+          $ref: "#/responses/500WithDocument"
+        "503":
+          $ref: "#/responses/503WithDocument"
+      security:
+        - oauth2:
+            - identity.write
+      summary: Delete the user's account
+      tags:
+        - identity
     get:
       description: After a successful login, the client should send a `GET` call approximately once an hour to refresh the user data.
       operationId: getUser

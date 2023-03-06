@@ -23,7 +23,7 @@ info:
       url: https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/openapi.yaml
       version: "3.0"
   x-providerName: bbci.co.uk
-  x-release: 1.0.0-531
+  x-release: 1.0.0-844
   x-schema-id: https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json
   x-unofficialSpec: true
 externalDocs:
@@ -1110,6 +1110,10 @@ components:
                 type: boolean
               id:
                 type: string
+              interactions:
+                items:
+                  $ref: "#/components/schemas/interaction"
+                type: array
               kind:
                 enum:
                   - legal
@@ -1502,6 +1506,10 @@ components:
                     type: boolean
                   id:
                     type: string
+                  interactions:
+                    items:
+                      $ref: "#/components/schemas/interaction"
+                    type: array
                   kind:
                     enum:
                       - legal
@@ -1744,6 +1752,58 @@ components:
         - type
       type: object
     ibl: {}
+    interaction:
+      additionalProperties: false
+      properties:
+        interaction_points:
+          additionalProperties: false
+          properties:
+            show_from:
+              type: number
+            skip_to:
+              type: number
+          required:
+            - show_from
+            - skip_to
+          type: object
+        subtype:
+          anyOf:
+            - type: string
+            - enum:
+                - intro
+                - recap
+                - this-episode-preview
+                - next-episode-teaser
+        title:
+          additionalProperties: false
+          properties:
+            long:
+              anyOf:
+                - type: string
+                - enum:
+                    - Skip intro
+                    - Skip recap
+                    - Skip preview
+            short:
+              anyOf:
+                - type: string
+                - enum:
+                    - Skip
+          required:
+            - short
+            - long
+          type: object
+        type:
+          anyOf:
+            - type: string
+            - enum:
+                - skip
+      required:
+        - title
+        - type
+        - subtype
+        - interaction_points
+      type: object
     master_brand:
       additionalProperties: false
       properties:
@@ -2170,6 +2230,10 @@ components:
           type: boolean
         id:
           type: string
+        interactions:
+          items:
+            $ref: "#/components/schemas/interaction"
+          type: array
         kind:
           enum:
             - legal

@@ -1773,6 +1773,13 @@ paths:
           schema:
             format: int32
             type: integer
+        - description: Optional. If provided, filters by BundleNumber.
+          in: query
+          name: BundleNumber
+          required: false
+          schema:
+            format: int32
+            type: integer
       responses:
         "200":
           content:
@@ -2533,6 +2540,25 @@ paths:
         - description: Names of Attributes to include when retrieving this definition. This should be a comma-separated list. If not provided, Attributes are not included. If '*', all Attributes are included.
           in: query
           name: includeAttributes
+          required: false
+          schema:
+            type: string
+        - description: Optional. Filter by Name. Supports beginning and ending wildcard (*).
+          in: query
+          name: name
+          required: false
+          schema:
+            type: string
+        - description: Optional. Filter by TypeID.
+          in: query
+          name: typeID
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: Optional. Filter by PackageTypeID.
+          in: query
+          name: packageTypeID
           required: false
           schema:
             type: string
@@ -3872,6 +3898,59 @@ paths:
                 $ref: "#/components/schemas/API.Models.ApiError"
           description: API Error Response
       summary: No Documentation Found.
+      tags:
+        - ContentSubmissions
+  "/api/v2/ContentSubmissions/{contentSubmissionID}/Status":
+    get:
+      deprecated: false
+      description: No Documentation Found.
+      operationId: ContentSubmissions_GetContentSubmissionStatus
+      parameters:
+        - description: The ID of the ContentSubmission to get.
+          in: path
+          name: contentSubmissionID
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: True to include all status details if JobRun. Defaults to false
+          in: query
+          name: includeActivityRunDetails
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BuildSystem.Shared.Interfaces.IJobRun"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/BuildSystem.Shared.Interfaces.IJobRun"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/BuildSystem.Shared.Interfaces.IJobRun"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/BuildSystem.Shared.Interfaces.IJobRun"
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+          description: API Error Response
+      summary: Get the status of a ContentSubmission
       tags:
         - ContentSubmissions
   /api/v2/DealerByCountry:
@@ -6020,6 +6099,25 @@ paths:
           schema:
             format: int32
             type: integer
+        - description: Optional. If provided, filters by PackageTypeID.
+          in: query
+          name: PackageTypeID
+          required: false
+          schema:
+            type: string
+        - description: Optional. If provided, filters by Version.
+          in: query
+          name: Version
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: Optional. If provided, filters by Released.
+          in: query
+          name: Released
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -7419,6 +7517,18 @@ paths:
         - description: Optional. Finds a role with the given name.
           in: query
           name: name
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: permissionID
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: Optional. Filters roles by whether they contain the provided permission.
+          in: query
+          name: permissionName
           required: false
           schema:
             type: string
@@ -9277,6 +9387,12 @@ paths:
           schema:
             format: int32
             type: integer
+        - description: Optional. Filter by Active
+          in: query
+          name: Active
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -10097,6 +10213,12 @@ paths:
           in: query
           name: Preview
           required: true
+          schema:
+            type: boolean
+        - description: Force return inventories. Defaults to false.
+          in: query
+          name: RunAllInventories
+          required: false
           schema:
             type: boolean
       responses:
@@ -14716,171 +14838,430 @@ components:
       required:
         - StepImplementationID
       type: object
+    BuildSystem.Shared.Interfaces.IActivityRun:
+      description: IActivityRun
+      properties:
+        ActivityRunID:
+          description: ActivityRunID
+          format: int32
+          readOnly: true
+          type: integer
+        EndDate:
+          description: EndDate
+          format: date-time
+          readOnly: true
+          type: string
+        JobActivityID:
+          description: JobActivityID
+          format: int32
+          readOnly: true
+          type: integer
+        JobRunID:
+          description: JobRunID
+          format: int32
+          readOnly: true
+          type: integer
+        Parameters:
+          description: Parameters
+          items:
+            $ref: "#/components/schemas/BuildSystem.Shared.Interfaces.IParameterValue"
+          type: array
+        StartDate:
+          description: StartDate
+          format: date-time
+          readOnly: true
+          type: string
+        Status:
+          $ref: "#/components/schemas/BuildSystem.Shared.Interfaces.IActivityRunStatus"
+        Steps:
+          description: Steps
+          items:
+            $ref: "#/components/schemas/BuildSystem.Shared.Interfaces.IActivityStep"
+          readOnly: true
+          type: array
+      type: object
+    BuildSystem.Shared.Interfaces.IActivityRunStatus:
+      description: "Declares members of objects that communicate the progress of an \r
+
+        \            asynchronous activity run."
+      properties:
+        CurrentStep:
+          description: Gets or sets the number of the step the activity is currently running.
+          format: int32
+          type: integer
+        Status:
+          description: Gets or sets the status of the activity run.
+          enum:
+            - Ready
+            - InProgress
+            - Succeeded
+            - Cancelled
+            - Failed
+          type: string
+        StepProgress:
+          description: Gets or sets a measurement of the current progress of the current step.
+          format: int32
+          type: integer
+        StepStatus:
+          description: "Gets or sets a description of the current status of the currently \r
+
+            \            running step."
+          type: string
+      type: object
+    BuildSystem.Shared.Interfaces.IActivityStep:
+      description: IActivityStep
+      properties:
+        ActivityID:
+          description: ActivityID
+          format: int32
+          type: integer
+        ActivityStepID:
+          description: ActivityStepID
+          format: int32
+          readOnly: true
+          type: integer
+        ImplementationID:
+          description: Implementation ID
+          readOnly: true
+          type: string
+        ParameterMappings:
+          description: ParameterMappings
+          items:
+            $ref: "#/components/schemas/BuildSystem.Shared.Interfaces.IParameterMapping"
+          type: array
+        RunOrder:
+          description: run order
+          format: int32
+          type: integer
+        StepID:
+          description: step id
+          format: int32
+          type: integer
+        StepName:
+          description: steo name
+          readOnly: true
+          type: string
+        UseConfig:
+          description: UseConfig
+          type: string
+      type: object
+    BuildSystem.Shared.Interfaces.IJobRun:
+      description: interface of JobRun
+      properties:
+        ActivityRuns:
+          description: ActivityRuns
+          items:
+            $ref: "#/components/schemas/BuildSystem.Shared.Interfaces.IActivityRun"
+          type: array
+        EndDate:
+          description: end date
+          format: date-time
+          type: string
+        JobID:
+          description: job id
+          format: int32
+          type: integer
+        JobRunID:
+          description: JobRunID
+          format: int32
+          readOnly: true
+          type: integer
+        Parameters:
+          description: Parameters
+          items:
+            $ref: "#/components/schemas/BuildSystem.Shared.Interfaces.IParameterValue"
+          readOnly: true
+          type: array
+        StartDate:
+          description: Start Date
+          format: date-time
+          type: string
+        Status:
+          description: status
+          enum:
+            - Ready
+            - InProgress
+            - Succeeded
+            - Cancelled
+            - Failed
+          type: string
+      type: object
+    BuildSystem.Shared.Interfaces.IParameterMapping:
+      description: IParameterMapping
+      properties:
+        Name:
+          description: name
+          type: string
+        Source:
+          description: Source
+          type: string
+        SourceType:
+          description: SourceType
+          enum:
+            - Constant
+            - Variable
+          type: string
+      type: object
+    BuildSystem.Shared.Interfaces.IParameterValue:
+      description: Declares members that must be implemented by parameter value objects.
+      properties:
+        Direction:
+          description: "Gets or sets a value indicating whether the parameter value is an \r
+
+            \            input to the build part or an output from the build part."
+          enum:
+            - Input
+            - Output
+          type: string
+        Name:
+          description: Gets or sets the name of the parameter.
+          type: string
+        Value:
+          description: Gets or sets the value of the parameter.
+          type: string
+      type: object
     ContentSubmission.Shared.BusinessEntities.ContentDefinition:
+      description: The definition of the content for submission
       properties:
         Attributes:
+          description: Attributes of this ContentDefinition
           items:
             $ref: "#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute"
           type: array
         ContentDefinitionID:
+          description: The ID of this content definition.
           format: int32
           type: integer
         Description:
+          description: The description used on the package type in the AGCO Update System
           type: string
         Name:
+          description: The name of this content. Name must be valid for Attribute on PackageType.
           type: string
         PackageTypeID:
+          description: Read Only. The ID of the package type used for this content.
           type: string
         TypeID:
+          description: The type of content.
           format: int32
           type: integer
       required:
         - Description
       type: object
     ContentSubmission.Shared.BusinessEntities.ContentDefinitionAttribute:
+      description: An attribute of a definition of the content for submission
       properties:
         ContentDefinitionID:
+          description: The ID of the content definition to which this attribute belongs.
           format: int32
           type: integer
         ID:
+          description: The ID of this attribute.
           format: int32
           type: integer
         Name:
+          description: The name of this Attribute.
           pattern: "[a-zA-Z0-9]+"
           type: string
         Value:
+          description: The value of this Attribute
           type: string
       required:
         - Name
       type: object
     ContentSubmission.Shared.BusinessEntities.ContentReleaseVersion:
+      description: ContentReleaseVersion class
       properties:
         ContentDefinitionID:
+          description: ContentDefinitionID
           format: int32
           type: integer
         ContentReleaseID:
+          description: ContentReleaseID
           format: int32
           type: integer
         Deleted:
+          description: deleted flag
           type: boolean
         PublisherUserID:
+          description: PublisherUser ID
           format: int32
           type: integer
         ReleaseID:
+          description: rele4ase Id
           format: int32
           type: integer
         TestReportUrl:
+          description: The URL at which test reports for this content can be found
           type: string
         UpdatedDate:
+          description: Updated Date
           format: date-time
           type: string
         Version:
+          description: version
           format: int32
           type: integer
       type: object
     ContentSubmission.Shared.BusinessEntities.ContentSubmission:
+      description: A content submission
       properties:
         Attributes:
+          description: Attributes of this ContentSubmission
           items:
             $ref: "#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute"
           type: array
+        BuildID:
+          description: ReadOnly. The ID of the Azure DevOps Build which will build the content package.
+          format: int32
+          type: integer
         ContentDefinitionID:
+          description: The ID of the Content Definition.
           format: int32
           type: integer
         ContentSubmissionID:
+          description: The ID of this Content Submission.
           format: int32
           type: integer
         Definition:
           $ref: "#/components/schemas/ContentSubmission.Shared.BusinessEntities.ContentDefinition"
         JobRunID:
+          description: ReadOnly. The ID of the JobRun which will build the content package.
           format: int32
           type: integer
         PackageID:
+          description: The ID of package generated by this content submission.
           type: string
         ReleaseNotes:
+          description: Release Notes for this ContentSubmission
           type: string
         Repository:
+          description: The SVN repository used as the source of this content submission
           type: string
         Revision:
+          description: The SVN revision used as the source of this content submission.
           format: int32
           type: integer
         SubmissionDate:
+          description: Read Only. The UTC date and time the content submission was made.
           format: date-time
           type: string
         UserID:
+          description: Read Only. The ID of the user who submitted the content
           format: int32
           type: integer
         Version:
+          description: "Optional.  The version number assigned to this Content Submission and the resulting Package.\r
+
+            \            If not provided, version shall be 1 if it is the first content submission for the \r
+
+            \            ContentDefinitionID otherwise it shall be the highest content submission version for the\r
+
+            \            specified ContentDefinitionID incremented by 1."
           format: int32
           type: integer
       type: object
     ContentSubmission.Shared.BusinessEntities.ContentSubmissionAttribute:
+      description: The definition of the content for submission
       properties:
         ContentSubmissionID:
+          description: The ID of the content submission to which this attribute belongs.
           format: int32
           type: integer
         ID:
+          description: The ID of this attribute.
           format: int32
           type: integer
         Name:
+          description: The name of this Attribute.
           pattern: "[a-zA-Z0-9]+"
           type: string
         Value:
+          description: The value of this Attribute
           type: string
       required:
         - Name
       type: object
     ContentSubmission.Shared.BusinessEntities.ContentSubmissionType:
+      description: A type of content available for submission
       properties:
         AttributeTemplate:
+          description: "A template for the Attribute from which to read the version of the package installed. The following placeholders are valid: {ContentDefinitionType}, {ContentDefinitionID}, {ContentDefinitionName}"
           type: string
+        BuildDefinitionID:
+          description: The ID of the Azure DevOps Build Definition for which to create a Build. Either 'BuildDefinitionID' or 'JobID' is required.
+          format: int32
+          type: integer
         CategoryTemplate:
+          description: "A template for the category from which to read the version of the package installed. The following placeholders are valid: {ContentDefinitionType}, {ContentDefinitionID}, {ContentDefinitionName}"
           type: string
         Description:
+          description: A description for the Content Submission Type
           type: string
         Enabled:
+          description: Indicates whether this submission type is available to be used
           type: boolean
         ID:
+          description: The ID of the Content Submission Type
           format: int32
           type: integer
         InventoryPackageID:
+          description: The ID of the Inventory Package from which to read the version of the package installed.
           type: string
         JobID:
+          description: The ID of the JobDefinition for which to initiate a Job. A value of '0' will cause a submission to fail. Either 'BuildDefinitionID' or 'JobID' is required.
           format: int32
           type: integer
         Name:
+          description: The Name of the Content Submission Type
           type: string
         ReleaseNotesDescription:
+          description: A description of how release notes for this Content Submission Type are used
           type: string
       required:
         - Name
         - Description
       type: object
     ContentSubmission.Shared.BusinessEntities.Release:
+      description: Release class
       properties:
         BuildDate:
+          description: Build Date
           format: date-time
           type: string
+        BundleIDs:
+          description: IDs of AUC Bundles associated with this Release.
+          items:
+            type: string
+          type: array
         ReleaseDate:
+          description: Release Date
           format: date-time
           type: string
         ReleaseID:
+          description: Release ID
           format: int32
           type: integer
         ReleaseNumber:
+          description: Release Number
           type: string
         Visible:
+          description: Visible
           type: boolean
       type: object
     ContentSubmission.Shared.BusinessEntities.UserContentDefinition:
+      description: Relationship indicating that a User can manage submissions for the Content
       properties:
         ContentDefinitionID:
+          description: The ID of the ContentDefinition.
           format: int32
           type: integer
         UserContentDefinitionID:
+          description: Read Only. The ID of the User to ContentDefinition relationship.
           format: int32
           type: integer
         UserID:
+          description: The ID of the user.
           format: int32
           type: integer
       type: object

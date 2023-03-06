@@ -1,7 +1,6 @@
 openapi: 3.0.1
 servers:
   - url: https://online.visualstudio.com
-  - url: https://online.visualstudio.com
 info:
   description: Public APIs for managing VS Codespaces
   title: VSOnline
@@ -25,29 +24,66 @@ paths:
             schema:
               items:
                 $ref: "#/components/schemas/TelemetryData"
-              nullable: true
               type: array
           application/json:
             schema:
               items:
                 $ref: "#/components/schemas/TelemetryData"
-              nullable: true
               type: array
           application/json-patch+json:
             schema:
               items:
                 $ref: "#/components/schemas/TelemetryData"
-              nullable: true
               type: array
           text/json:
             schema:
               items:
                 $ref: "#/components/schemas/TelemetryData"
-              nullable: true
               type: array
       responses:
         "204":
-          description: Success
+          description: No Content
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+      tags:
+        - AgentTelemetry
+  /api/v1/AgentTelemetry/standalone:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              items:
+                $ref: "#/components/schemas/TelemetryData"
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: "#/components/schemas/TelemetryData"
+              type: array
+          application/json-patch+json:
+            schema:
+              items:
+                $ref: "#/components/schemas/TelemetryData"
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: "#/components/schemas/TelemetryData"
+              type: array
+      responses:
+        "204":
+          description: No Content
         "401":
           content:
             application/json:
@@ -69,7 +105,6 @@ paths:
           name: family
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -104,12 +139,10 @@ paths:
         - in: query
           name: name
           schema:
-            nullable: true
             type: string
         - in: query
           name: planId
           schema:
-            nullable: true
             type: string
         - in: query
           name: deleted
@@ -181,7 +214,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/CloudEnvironmentResult"
-          description: Success
+          description: Created
         "307":
           content:
             application/json:
@@ -267,7 +300,7 @@ paths:
             type: string
       responses:
         "204":
-          description: Success
+          description: No Content
         "401":
           content:
             application/json:
@@ -322,6 +355,11 @@ paths:
         - in: query
           name: pfConnect
           schema:
+            type: boolean
+        - in: query
+          name: deleted
+          schema:
+            default: false
             type: boolean
       responses:
         "200":
@@ -380,7 +418,6 @@ paths:
           name: environmentId
           required: true
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -485,7 +522,6 @@ paths:
           name: environmentId
           required: true
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -774,7 +810,6 @@ paths:
           name: environmentId
           required: true
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -866,7 +901,6 @@ paths:
           name: environmentId
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -907,8 +941,8 @@ paths:
           description: Not Found
       tags:
         - Environments
-  "/api/v1/Environments/{environmentId}/logs":
-    get:
+  "/api/v1/Environments/{environmentId}/notify":
+    post:
       parameters:
         - in: path
           name: environmentId
@@ -916,6 +950,20 @@ paths:
           schema:
             format: uuid
             type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NotificationDataBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NotificationDataBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/NotificationDataBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NotificationDataBody"
       responses:
         "200":
           content:
@@ -929,8 +977,30 @@ paths:
               schema:
                 type: string
           description: Success
-        "204":
-          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
         "404":
           content:
             application/json:
@@ -952,13 +1022,14 @@ paths:
           name: environmentId
           required: true
           schema:
-            nullable: true
             type: string
         - in: path
           name: port
           required: true
           schema:
             format: int32
+            maximum: 65535
+            minimum: 1
             type: integer
       responses:
         "200":
@@ -1019,13 +1090,14 @@ paths:
           name: environmentId
           required: true
           schema:
-            nullable: true
             type: string
         - in: path
           name: port
           required: true
           schema:
             format: int32
+            maximum: 65535
+            minimum: 1
             type: integer
       requestBody:
         content:
@@ -1101,11 +1173,23 @@ paths:
           name: environmentId
           required: true
           schema:
-            nullable: true
+            format: uuid
             type: string
       responses:
-        "204":
+        "200":
           description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
         "401":
           content:
             application/json:
@@ -1130,7 +1214,69 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Forbidden
-        "404":
+      tags:
+        - Environments
+  "/api/v1/Environments/{environmentId}/secrets":
+    put:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserSecretsRequestBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserSecretsRequestBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserSecretsRequestBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserSecretsRequestBody"
+      responses:
+        "204":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: No Content
+        "307":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Redirect
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Bad Request
+        "401":
           content:
             application/json:
               schema:
@@ -1141,7 +1287,31 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
-          description: Not Found
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Forbidden
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Server Error
       tags:
         - Environments
   "/api/v1/Environments/{environmentId}/shutdown":
@@ -1313,7 +1483,6 @@ paths:
           name: environmentId
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -1354,6 +1523,50 @@ paths:
           description: Not Found
       tags:
         - Environments
+  /api/v1/GenevaActions/Billing/resend:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ReplayBillRequestBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReplayBillRequestBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/ReplayBillRequestBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ReplayBillRequestBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BillSummary"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/BillSummary"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/BillSummary"
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Billing
   "/api/v1/GenevaActions/Billing/{environmentId}":
     get:
       parameters:
@@ -1366,12 +1579,10 @@ paths:
         - in: query
           name: startTime
           schema:
-            nullable: true
             type: string
         - in: query
           name: endTime
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -1537,6 +1748,35 @@ paths:
       tags:
         - Configuration
   "/api/v1/GenevaActions/Configuration/{target}/{key}":
+    delete:
+      parameters:
+        - in: path
+          name: target
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: key
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Configuration
     get:
       parameters:
         - in: path
@@ -1588,11 +1828,10 @@ paths:
         - in: query
           name: deletionType
           schema:
-            nullable: true
             type: string
       responses:
         "204":
-          description: Success
+          description: No Content
         "404":
           content:
             application/json:
@@ -1677,6 +1916,46 @@ paths:
           description: Not Found
       tags:
         - Environments
+  "/api/v1/GenevaActions/Environments/{environmentId}/archived_storage_sas/{targetBlob}":
+    get:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: targetBlob
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            text/plain:
+              schema:
+                type: string
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
   "/api/v1/GenevaActions/Environments/{environmentId}/shutdown":
     put:
       parameters:
@@ -1713,6 +1992,266 @@ paths:
           description: Not Found
       tags:
         - Environments
+  "/api/v1/GenevaActions/Environments/{environmentId}/upload/running/vm/logs":
+    post:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VmLogsUploadInfo"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/VmLogsUploadInfo"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/VmLogsUploadInfo"
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
+  /api/v1/GenevaActions/Pools/change-resource-deletion-setting:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ChangeResourceDeletionRequestBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChangeResourceDeletionRequestBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/ChangeResourceDeletionRequestBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ChangeResourceDeletionRequestBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SystemConfigurationResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SystemConfigurationResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SystemConfigurationResponse"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+      tags:
+        - Pools
+  "/api/v1/GenevaActions/Pools/{poolCode}/rotate-pool":
+    post:
+      parameters:
+        - in: path
+          name: poolCode
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "503":
+          description: Server Error
+      tags:
+        - Pools
+  "/api/v1/GenevaActions/Pools/{target}":
+    post:
+      parameters:
+        - in: path
+          name: target
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PoolConfigRequestBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PoolConfigRequestBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PoolConfigRequestBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PoolConfigRequestBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SystemConfigurationResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SystemConfigurationResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SystemConfigurationResponse"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+      tags:
+        - Pools
+  /api/v1/GenevaActions/Prebuilds/pools/createorupdatesettings:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PoolSettingsBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PoolSettingsBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PoolSettingsBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PoolSettingsBody"
+        required: true
+      responses:
+        "201":
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Prebuilds
+  /api/v1/GenevaActions/Prebuilds/pools/delete:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PoolSettingsBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PoolSettingsBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PoolSettingsBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PoolSettingsBody"
+        required: true
+      responses:
+        "201":
+          description: Created
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Prebuilds
   /api/v1/GenevaActions/Privacy/refresh-profile-telemetry-properties:
     post:
       requestBody:
@@ -1757,6 +2296,134 @@ paths:
           description: Bad Request
       tags:
         - Privacy
+  "/api/v1/GenevaActions/Resources/{resourceId}/under-investigation":
+    post:
+      parameters:
+        - in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnderInvestigationResponseBody"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UnderInvestigationResponseBody"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UnderInvestigationResponseBody"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+      tags:
+        - Resources
+  /api/v1/GenevaActions/VnetPoolDefinitions:
+    delete:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PoolDefinitionInput"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PoolDefinitionInput"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PoolDefinitionInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PoolDefinitionInput"
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "503":
+          description: Server Error
+      tags:
+        - VnetPoolDefinitions
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PoolDefinitionInput"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PoolDefinitionInput"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PoolDefinitionInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PoolDefinitionInput"
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "503":
+          description: Server Error
+      tags:
+        - VnetPoolDefinitions
   /api/v1/HeartBeat:
     post:
       requestBody:
@@ -1775,7 +2442,7 @@ paths:
               $ref: "#/components/schemas/HeartBeatBody"
       responses:
         "204":
-          description: Success
+          description: No Content
         "422":
           content:
             application/json:
@@ -1814,12 +2481,10 @@ paths:
           name: location
           required: true
           schema:
-            nullable: true
             type: string
         - in: query
           name: planId
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -1872,101 +2537,6 @@ paths:
           description: Not Found
       tags:
         - Locations
-  /api/v1/Plans:
-    get:
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: "#/components/schemas/PlanResult"
-                type: array
-            text/json:
-              schema:
-                items:
-                  $ref: "#/components/schemas/PlanResult"
-                type: array
-            text/plain:
-              schema:
-                items:
-                  $ref: "#/components/schemas/PlanResult"
-                type: array
-          description: Success
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            text/plain:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-          description: Unauthorized
-      tags:
-        - Plans
-  "/api/v1/Plans/{subscriptionId}/{resourceGroupName}/{resourceName}":
-    get:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroupName
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PlanResult"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/PlanResult"
-            text/plain:
-              schema:
-                $ref: "#/components/schemas/PlanResult"
-          description: Success
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            text/plain:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-          description: Unauthorized
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            text/plain:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-          description: Not Found
-      tags:
-        - Plans
   "/api/v1/Prebuilds/pools/{poolId}/instances":
     post:
       parameters:
@@ -1974,7 +2544,6 @@ paths:
           name: poolId
           required: true
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -1992,7 +2561,7 @@ paths:
               $ref: "#/components/schemas/CreateEnvironmentPoolResourceBody"
       responses:
         "201":
-          description: Success
+          description: Created
         "401":
           content:
             application/json:
@@ -2025,7 +2594,6 @@ paths:
           name: poolId
           required: true
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -2043,7 +2611,7 @@ paths:
               $ref: "#/components/schemas/CreateEnvironmentPoolResourceBody"
       responses:
         "201":
-          description: Success
+          description: Created
         "401":
           content:
             application/json:
@@ -2070,46 +2638,119 @@ paths:
           description: Not Found
       tags:
         - Prebuilds
-  /api/v1/Prebuilds/templates:
-    post:
-      requestBody:
-        content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/CreateCloudEnvironmentBody"
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateCloudEnvironmentBody"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/CreateCloudEnvironmentBody"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/CreateCloudEnvironmentBody"
+  "/api/v1/Prebuilds/template/{environmentId}":
+    get:
+      operationId: GetTemplateInfoRoute
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
       responses:
-        "201":
+        "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CloudEnvironmentResult"
+                $ref: "#/components/schemas/PrebuildTemplateInfoResult"
             text/json:
               schema:
-                $ref: "#/components/schemas/CloudEnvironmentResult"
+                $ref: "#/components/schemas/PrebuildTemplateInfoResult"
             text/plain:
               schema:
-                $ref: "#/components/schemas/CloudEnvironmentResult"
+                $ref: "#/components/schemas/PrebuildTemplateInfoResult"
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Prebuilds
+  "/api/v1/Prebuilds/templates/repo/{repoId}/branch/{branchName}/hash/{prebuildHash}/location/{location}/skus":
+    get:
+      operationId: GetPrebuildReadinessRoute
+      parameters:
+        - in: path
+          name: repoId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: branchName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: prebuildHash
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: location
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: storageType
+          schema:
+            $ref: "#/components/schemas/StorageType"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrebuildReadinessResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PrebuildReadinessResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PrebuildReadinessResult"
           description: Success
         "400":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MessageCodes"
+                type: string
             text/json:
               schema:
-                $ref: "#/components/schemas/MessageCodes"
+                type: string
             text/plain:
               schema:
-                $ref: "#/components/schemas/MessageCodes"
+                type: string
           description: Bad Request
         "401":
           content:
@@ -2123,6 +2764,30 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
       tags:
         - Prebuilds
   /api/v1/Sas:
@@ -2190,7 +2855,6 @@ paths:
         - in: query
           name: planId
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -2254,7 +2918,6 @@ paths:
         - in: query
           name: planId
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -2315,7 +2978,6 @@ paths:
         - in: query
           name: planId
           schema:
-            nullable: true
             type: string
         - in: query
           name: scope
@@ -2329,7 +2991,7 @@ paths:
             type: string
       responses:
         "204":
-          description: Success
+          description: No Content
         "401":
           content:
             application/json:
@@ -2361,7 +3023,6 @@ paths:
         - in: query
           name: planId
           schema:
-            nullable: true
             type: string
         - in: path
           name: secretId
@@ -2422,868 +3083,6 @@ paths:
           description: Forbidden
       tags:
         - Secrets
-  "/api/v1/Subscriptions/{subscriptionId}/providers/{providerNamespace}/{resourceType}/SubscriptionLifeCycleNotification":
-    put:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-      requestBody:
-        content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/RPSubscriptionNotification"
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RPSubscriptionNotification"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/RPSubscriptionNotification"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/RPSubscriptionNotification"
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/providers/{providerNamespace}/{resourceType}/resourceReadBegin":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-      requestBody:
-        content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceList"
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceList"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceList"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceList"
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/resourceReadBegin":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-      requestBody:
-        content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceList"
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceList"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceList"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceList"
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}":
-    put:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: header
-          name: headers
-          schema:
-            $ref: "#/components/schemas/PlanResourceHeaders"
-      requestBody:
-        content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/PlanResource"
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PlanResource"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/PlanResource"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/PlanResource"
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/deleteAllCodespaces":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: query
-          name: expiration
-          schema:
-            format: date-time
-            nullable: true
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/deleteAllEnvironments":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: query
-          name: expiration
-          schema:
-            format: date-time
-            nullable: true
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/deleteDelegates":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/readAllCodespaces":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: query
-          name: expiration
-          schema:
-            format: date-time
-            nullable: true
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/readAllEnvironments":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: query
-          name: expiration
-          schema:
-            format: date-time
-            nullable: true
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/readDelegates":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourceCreationCompleted":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourceCreationValidate":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-      requestBody:
-        content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/PlanResource"
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PlanResource"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/PlanResource"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/PlanResource"
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourceDeletionValidate":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourcePatchCompleted":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: header
-          name: headers
-          schema:
-            $ref: "#/components/schemas/PlanResourceHeaders"
-      requestBody:
-        content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceUpdateBody"
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceUpdateBody"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceUpdateBody"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceUpdateBody"
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourcePatchValidate":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-      requestBody:
-        content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceUpdateBody"
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceUpdateBody"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceUpdateBody"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/PlanResourceUpdateBody"
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourceReadBegin":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-      requestBody:
-        content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/PlanResource"
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PlanResource"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/PlanResource"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/PlanResource"
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/writeCodespaces":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: query
-          name: expiration
-          schema:
-            format: date-time
-            nullable: true
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/writeDelegates":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-      requestBody:
-        content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
-          application/json:
-            schema:
-              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
-  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/writeEnvironments":
-    post:
-      parameters:
-        - in: path
-          name: subscriptionId
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceGroup
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: providerNamespace
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceType
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: path
-          name: resourceName
-          required: true
-          schema:
-            nullable: true
-            type: string
-        - in: query
-          name: expiration
-          schema:
-            format: date-time
-            nullable: true
-            type: string
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Subscriptions
   "/api/v1/Tenant/{tenantId}":
     delete:
       parameters:
@@ -3442,13 +3241,472 @@ paths:
           description: Server Error
       tags:
         - Tenant
+  "/api/v1/Tokens/plans/{planName}/deleteAllCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: planName
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-subscription-id
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Tokens
+  "/api/v1/Tokens/plans/{planName}/readAllCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: planName
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-subscription-id
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Tokens
+  "/api/v1/Tokens/plans/{planName}/writeCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: planName
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-subscription-id
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Tokens
+  "/api/v1/Tokens/plans/{planName}/writeDelegates":
+    post:
+      parameters:
+        - in: path
+          name: planName
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-subscription-id
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Tokens
+  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}":
+    put:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: headers
+          schema:
+            $ref: "#/components/schemas/PlanResourceHeaders"
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Tokens
+  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}/deleteAllCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Tokens
+  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}/deleteAllEnvironments":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Tokens
+  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}/readAllCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Tokens
+  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}/readAllEnvironments":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Tokens
+  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}/writeCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Tokens
+  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}/writeDelegates":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Tokens
+  "/api/v1/Tokens/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/plans/{resourceName}/writeEnvironments":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Tokens
+  "/api/v1/Tunnel/{environmentId}/portInfo":
+    get:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: query
+          name: portNumber
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TunnelPortInfoResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/TunnelPortInfoResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/TunnelPortInfoResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Tunnel
   /api/v1/UserSubscriptions:
     delete:
       parameters:
         - in: query
           name: email
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -3460,7 +3718,6 @@ paths:
         - in: query
           name: email
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -3472,11 +3729,9 @@ paths:
       parameters:
         - in: query
           name: skuName
-          required: true
           schema:
             items:
               type: string
-            minItems: 1
             type: array
       responses:
         "200":
@@ -3511,6 +3766,1635 @@ paths:
           description: Bad Request
       tags:
         - Pools
+  "/api/v1/subscriptions/{subscriptionId}/providers/GitHub.Network/{resourceType}/SubscriptionLifeCycleNotification":
+    put:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - NetworkSettings
+  "/api/v1/subscriptions/{subscriptionId}/providers/GitHub.Network/{resourceType}/resourceReadBegin":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResourceList"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResourceList"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResourceList"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResourceList"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - NetworkSettings
+  "/api/v1/subscriptions/{subscriptionId}/providers/Microsoft.Codespaces/plans/SubscriptionLifeCycleNotification":
+    put:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/providers/Microsoft.Codespaces/plans/resourceReadBegin":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/providers/Microsoft.VSOnline/plans/SubscriptionLifeCycleNotification":
+    put:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/providers/Microsoft.VSOnline/plans/resourceReadBegin":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/GitHub.Network/{resourceType}/resourceReadBegin":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResourceList"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResourceList"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResourceList"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResourceList"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - NetworkSettings
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/GitHub.Network/{resourceType}/{resourceName}":
+    delete:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - NetworkSettings
+    patch:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - NetworkSettings
+    put:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - NetworkSettings
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/GitHub.Network/{resourceType}/{resourceName}/resourceCreationCompleted":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - NetworkSettings
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/GitHub.Network/{resourceType}/{resourceName}/resourceCreationValidate":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - NetworkSettings
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/GitHub.Network/{resourceType}/{resourceName}/resourceDeletionCompleted":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - NetworkSettings
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/GitHub.Network/{resourceType}/{resourceName}/resourceDeletionValidate":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - NetworkSettings
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/GitHub.Network/{resourceType}/{resourceName}/resourcePatchCompleted":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - NetworkSettings
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/GitHub.Network/{resourceType}/{resourceName}/resourcePatchValidate":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - NetworkSettings
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/GitHub.Network/{resourceType}/{resourceName}/resourceReadBegin":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NetworkSettingsResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - NetworkSettings
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/resourceReadBegin":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}":
+    put:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: headers
+          schema:
+            $ref: "#/components/schemas/PlanResourceHeaders"
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/deleteAllCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/deleteAllEnvironments":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/readAllCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/readAllEnvironments":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/readDelegates":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/resourceCreationCompleted":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/resourceCreationValidate":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/resourceDeletionValidate":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/resourcePatchCompleted":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: headers
+          schema:
+            $ref: "#/components/schemas/PlanResourceHeaders"
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/resourcePatchValidate":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/resourceReadBegin":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/writeCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/writeDelegates":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/writeEnvironments":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/resourceReadBegin":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}":
+    put:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: headers
+          schema:
+            $ref: "#/components/schemas/PlanResourceHeaders"
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/deleteAllCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/deleteAllEnvironments":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/readAllCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/readAllEnvironments":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/readDelegates":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/resourceCreationCompleted":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/resourceCreationValidate":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/resourceDeletionValidate":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/resourcePatchCompleted":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: headers
+          schema:
+            $ref: "#/components/schemas/PlanResourceHeaders"
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/resourcePatchValidate":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/resourceReadBegin":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/writeCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/writeDelegates":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/writeEnvironments":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/{resourceGroup}/providers/Microsoft.Codespaces/plans/{resourceName}/deleteDelegates":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
+  "/api/v1/subscriptions/{subscriptionId}/{resourceGroup}/providers/Microsoft.VSOnline/plans/{resourceName}/deleteDelegates":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Plans
   "/api/v1/tenant/{tenantId}/Pool/{poolName}":
     delete:
       parameters:
@@ -3524,7 +5408,6 @@ paths:
           name: poolName
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -3583,7 +5466,6 @@ paths:
           name: poolName
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -3652,7 +5534,6 @@ paths:
           name: poolName
           required: true
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -3735,7 +5616,6 @@ paths:
           name: poolName
           required: true
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -3775,7 +5655,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/PoolResult"
-          description: Success
+          description: Accepted
         "400":
           content:
             application/json:
@@ -3819,7 +5699,6 @@ paths:
           name: poolGroupName
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -3878,7 +5757,6 @@ paths:
           name: poolGroupName
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -3947,7 +5825,6 @@ paths:
           name: poolGroupName
           required: true
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -4020,7 +5897,6 @@ paths:
           name: poolGroupName
           required: true
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -4082,7 +5958,6 @@ paths:
           name: poolName
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -4158,13 +6033,11 @@ paths:
           name: poolName
           required: true
           schema:
-            nullable: true
             type: string
         - in: path
           name: vmName
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -4223,13 +6096,11 @@ paths:
           name: poolName
           required: true
           schema:
-            nullable: true
             type: string
         - in: path
           name: vmName
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -4298,13 +6169,11 @@ paths:
           name: poolName
           required: true
           schema:
-            nullable: true
             type: string
         - in: path
           name: vmName
           required: true
           schema:
-            nullable: true
             type: string
       requestBody:
         content:
@@ -4344,7 +6213,7 @@ paths:
             text/plain:
               schema:
                 $ref: "#/components/schemas/VMResult"
-          description: Success
+          description: Accepted
         "400":
           content:
             application/json:
@@ -4388,13 +6257,11 @@ paths:
           name: poolName
           required: true
           schema:
-            nullable: true
             type: string
         - in: path
           name: vmName
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -4454,13 +6321,11 @@ paths:
           name: poolName
           required: true
           schema:
-            nullable: true
             type: string
         - in: path
           name: vmName
           required: true
           schema:
-            nullable: true
             type: string
       responses:
         "200":
@@ -4507,6 +6372,430 @@ paths:
           description: Server Error
       tags:
         - Vm
+  /api/v2/prebuilds/delete:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/DeletePrebuildTemplatesBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeletePrebuildTemplatesBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/DeletePrebuildTemplatesBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/DeletePrebuildTemplatesBody"
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Server Error
+      tags:
+        - PrebuildsV
+  "/api/v2/prebuilds/repository/{repoId}/branch/{branchName}":
+    delete:
+      parameters:
+        - in: path
+          name: repoId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - in: path
+          name: branchName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Server Error
+      tags:
+        - PrebuildsV
+  /api/v2/prebuilds/templates:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreatePrebuildTemplateBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePrebuildTemplateBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/CreatePrebuildTemplateBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreatePrebuildTemplateBody"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateTemplateResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CreateTemplateResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CreateTemplateResult"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+      tags:
+        - PrebuildsV
+  "/api/v2/prebuilds/templates/skus/repo/{repoId}/branch/{branchName}/hash/{prebuildHash}/location/{location}/devcontainerpath/{devContainerPath}":
+    get:
+      operationId: GetPrebuildReadinessSkusRoute
+      parameters:
+        - in: path
+          name: repoId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: branchName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: prebuildHash
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: location
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: devContainerPath
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: storageType
+          schema:
+            $ref: "#/components/schemas/StorageType"
+        - in: query
+          name: fastPathEnabled
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrebuildReadinessResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PrebuildReadinessResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PrebuildReadinessResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            text/plain:
+              schema:
+                type: string
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - PrebuildsV
+  /api/v2/prebuilds/templates/updatemaxversions:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdatePrebuildTemplateVersionsBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePrebuildTemplateVersionsBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/UpdatePrebuildTemplateVersionsBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePrebuildTemplateVersionsBody"
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Server Error
+      tags:
+        - PrebuildsV
+  "/api/v2/prebuilds/templates/{templateId}/updatestatus":
+    post:
+      parameters:
+        - in: path
+          name: templateId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdatePrebuildTemplateBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePrebuildTemplateBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/UpdatePrebuildTemplateBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePrebuildTemplateBody"
+      responses:
+        "200":
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - PrebuildsV
   /health:
     get:
       responses:
@@ -4516,6 +6805,100 @@ paths:
           description: Server Error
       tags:
         - Health
+  /internal/Netmon/correlation:
+    get:
+      parameters:
+        - in: query
+          name: macAddress
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: byte
+                type: string
+            text/json:
+              schema:
+                format: byte
+                type: string
+            text/plain:
+              schema:
+                format: byte
+                type: string
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Netmon
+  /tunnelauth:
+    get:
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: string
+        - in: query
+          name: cluster
+          schema:
+            type: string
+        - in: query
+          name: name
+          schema:
+            type: string
+        - in: query
+          name: port
+          schema:
+            format: int32
+            type: integer
+        - in: query
+          name: pb
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Authentication
+    post:
+      parameters:
+        - in: query
+          name: op
+          schema:
+            type: string
+        - in: query
+          name: id
+          schema:
+            type: string
+        - in: query
+          name: cluster
+          schema:
+            type: string
+        - in: query
+          name: name
+          schema:
+            type: string
+        - in: query
+          name: port
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Authentication
   /warmup:
     get:
       responses:
@@ -4530,8 +6913,10 @@ components:
     AddForwardedPortSettings:
       additionalProperties: false
       properties:
-        isPublic:
-          type: boolean
+        privacy:
+          $ref: "#/components/schemas/PrivacyEnum"
+        tunnelType:
+          $ref: "#/components/schemas/TunnelType"
       type: object
     AgentResponse:
       additionalProperties: false
@@ -4591,6 +6976,7 @@ components:
         - 1506 (WestCentralUs)
         - 1507 (WestUs)
         - 1508 (WestUs2)
+        - 1509 (WestUs3)
         - 1601 (CentralUsEuap)
         - 1602 (EastUs2Euap)
         - 1701 (SwitzerlandNorth)
@@ -4613,8 +6999,8 @@ components:
         id:
           nullable: true
           type: string
-        isFinalBill:
-          type: boolean
+        location:
+          $ref: "#/components/schemas/AzureLocation"
         partitionKey:
           nullable: true
           type: string
@@ -4626,12 +7012,11 @@ components:
           type: string
         plan:
           $ref: "#/components/schemas/VsoPlanInfo"
-        planIsDeleted:
-          type: boolean
         usage:
           additionalProperties:
             format: double
             type: number
+          deprecated: true
           nullable: true
           type: object
         usageDetail:
@@ -4640,6 +7025,24 @@ components:
           nullable: true
           type: array
       type: object
+    BillableOwnerBody:
+      additionalProperties: false
+      properties:
+        id:
+          nullable: true
+          type: string
+        login:
+          nullable: true
+          type: string
+        type:
+          $ref: "#/components/schemas/BillableOwnerType"
+      type: object
+    BillableOwnerType:
+      enum:
+        - 0 (User)
+        - 1 (Organization)
+      format: int32
+      type: integer
     BillingProperties:
       additionalProperties: false
       properties:
@@ -4659,6 +7062,24 @@ components:
           nullable: true
           type: string
       type: object
+    ChangeResourceDeletionRequestBody:
+      additionalProperties: false
+      properties:
+        comment:
+          nullable: true
+          type: string
+        enabled:
+          type: boolean
+        poolCode:
+          nullable: true
+          type: string
+        poolType:
+          nullable: true
+          type: string
+        region:
+          nullable: true
+          type: string
+      type: object
     ClaimVMBody:
       additionalProperties: false
       properties:
@@ -4666,6 +7087,28 @@ components:
           $ref: "#/components/schemas/UserIdentity"
       required:
         - user
+      type: object
+    ClientUsageData:
+      additionalProperties: false
+      properties:
+        activeMinutes:
+          format: int32
+          type: integer
+        lastActivity:
+          format: date-time
+          type: string
+      type: object
+    ClientUsageSession:
+      additionalProperties: false
+      properties:
+        sessionId:
+          nullable: true
+          type: string
+        usageData:
+          additionalProperties:
+            $ref: "#/components/schemas/ClientUsageData"
+          nullable: true
+          type: object
       type: object
     CloudEnvironmentFolderBody:
       additionalProperties: false
@@ -4688,6 +7131,10 @@ components:
         autoShutdownDelayMinutes:
           format: int32
           type: integer
+        billableOwnerType:
+          $ref: "#/components/schemas/BillableOwnerType"
+        clientUsage:
+          $ref: "#/components/schemas/ClientUsageSession"
         connection:
           $ref: "#/components/schemas/ConnectionInfoBody"
         container:
@@ -4695,14 +7142,21 @@ components:
         containerImage:
           nullable: true
           type: string
+        createFromPrebuild:
+          type: boolean
         created:
           format: date-time
           type: string
+        displayStorageUtilizationInKb:
+          type: boolean
         exportedBlobUrl:
           nullable: true
           type: string
+        failoverDetails:
+          $ref: "#/components/schemas/FailoverDetails"
         features:
           additionalProperties:
+            nullable: true
             type: string
           nullable: true
           type: object
@@ -4724,6 +7178,9 @@ components:
         location:
           nullable: true
           type: string
+        organizationId:
+          nullable: true
+          type: string
         ownerId:
           nullable: true
           type: string
@@ -4735,11 +7192,18 @@ components:
           type: string
         portForwardingConnection:
           $ref: "#/components/schemas/ConnectionInfoBody"
+        prebuildType:
+          nullable: true
+          type: string
         recentFolders:
           items:
             type: string
           nullable: true
           type: array
+        resourceTier:
+          $ref: "#/components/schemas/ConsumerType"
+        runtimeConstraints:
+          $ref: "#/components/schemas/RuntimeConstraintsBody"
         seed:
           $ref: "#/components/schemas/SeedInfoBody"
         skuDisplayName:
@@ -4751,8 +7215,15 @@ components:
         state:
           nullable: true
           type: string
+        storageUtilizationInKb:
+          format: int64
+          nullable: true
+          type: integer
         subscriptionData:
           $ref: "#/components/schemas/SubscriptionData"
+        templateStatus:
+          nullable: true
+          type: string
         type:
           nullable: true
           type: string
@@ -4833,6 +7304,31 @@ components:
         sessionToken:
           nullable: true
           type: string
+        tunnelProperties:
+          $ref: "#/components/schemas/TunnelProperties"
+      type: object
+    ConsumerType:
+      enum:
+        - 0 (None)
+        - 1 (System)
+        - 2 (Trusted)
+        - 4 (Neutral)
+        - 8 (Untrusted)
+        - 9 (Test)
+      format: int32
+      type: integer
+    ContainerInfo:
+      additionalProperties: false
+      properties:
+        id:
+          nullable: true
+          type: string
+        imageName:
+          nullable: true
+          type: string
+        schemaVersion:
+          nullable: true
+          type: string
       type: object
     ContainerInfoBody:
       additionalProperties: false
@@ -4847,9 +7343,14 @@ components:
     CreateCloudEnvironmentBody:
       additionalProperties: false
       properties:
+        analyticsTrackingId:
+          nullable: true
+          type: string
         autoShutdownDelayMinutes:
           format: int32
           type: integer
+        billableOwner:
+          $ref: "#/components/schemas/BillableOwnerBody"
         connection:
           $ref: "#/components/schemas/ConnectionInfoBody"
         containerImage:
@@ -4860,14 +7361,27 @@ components:
         devContainerJson:
           nullable: true
           type: string
+        devContainerPath:
+          nullable: true
+          type: string
         experimentalFeatures:
           $ref: "#/components/schemas/ExperimentalFeaturesBody"
         features:
           additionalProperties:
+            nullable: true
             type: string
           nullable: true
           type: object
         friendlyName:
+          type: string
+        gitHubApiUrl:
+          nullable: true
+          type: string
+        gitHubAppUrl:
+          nullable: true
+          type: string
+        gitHubPfsAuthEndpoint:
+          nullable: true
           type: string
         githubEnvironmentEndpoint:
           nullable: true
@@ -4883,6 +7397,8 @@ components:
           deprecated: true
           nullable: true
           type: string
+        netmonCorrelationData:
+          $ref: "#/components/schemas/NetmonCorrelationDataBody"
         personalization:
           $ref: "#/components/schemas/PersonalizationInfoBody"
         planId:
@@ -4892,6 +7408,8 @@ components:
           deprecated: true
           nullable: true
           type: string
+        runtimeConstraints:
+          $ref: "#/components/schemas/RuntimeConstraintsBody"
         secrets:
           items:
             $ref: "#/components/schemas/SecretDataBody"
@@ -4902,7 +7420,15 @@ components:
         skuName:
           nullable: true
           type: string
+        testAccount:
+          type: boolean
         type:
+          type: string
+        userTier:
+          nullable: true
+          type: string
+        workingDirectory:
+          nullable: true
           type: string
       required:
         - friendlyName
@@ -4970,6 +7496,50 @@ components:
         - displayName
         - region
       type: object
+    CreatePrebuildTemplateBody:
+      additionalProperties: false
+      properties:
+        devContainerPath:
+          nullable: true
+          type: string
+        experimentalFeatures:
+          $ref: "#/components/schemas/ExperimentalFeaturesBody"
+        features:
+          additionalProperties:
+            nullable: true
+            type: string
+          nullable: true
+          type: object
+        friendlyName:
+          type: string
+        planId:
+          nullable: true
+          type: string
+        seed:
+          $ref: "#/components/schemas/SeedInfoBody"
+        storageType:
+          $ref: "#/components/schemas/StorageType"
+        templateInfo:
+          $ref: "#/components/schemas/PrebuildTemplateInfo"
+      required:
+        - friendlyName
+      type: object
+    CreateTemplateResult:
+      additionalProperties: false
+      properties:
+        properties:
+          additionalProperties:
+            nullable: true
+            type: string
+          nullable: true
+          type: object
+        sasUrl:
+          nullable: true
+          type: string
+        templateId:
+          nullable: true
+          type: string
+      type: object
     DelegateIdentity:
       additionalProperties: false
       properties:
@@ -4982,6 +7552,24 @@ components:
         username:
           nullable: true
           type: string
+      type: object
+    DeletePrebuildTemplatesBody:
+      additionalProperties: false
+      properties:
+        branchName:
+          type: string
+        devContainerPath:
+          nullable: true
+          type: string
+        prebuildConfigurationId:
+          format: int64
+          type: integer
+        repoId:
+          format: int64
+          type: integer
+      required:
+        - branchName
+        - repoId
       type: object
     DomainUserCredentials:
       additionalProperties: false
@@ -5066,12 +7654,6 @@ components:
           $ref: "#/components/schemas/ResourceUsageDetail"
         sku:
           $ref: "#/components/schemas/Sku"
-        usage:
-          additionalProperties:
-            format: double
-            type: number
-          nullable: true
-          type: object
       type: object
     ExperimentalFeaturesBody:
       additionalProperties: false
@@ -5080,8 +7662,20 @@ components:
           type: boolean
         queueResourceAllocation:
           type: boolean
+        usePrebuildFastPathIfAvailable:
+          type: boolean
         usePrebuiltImages:
           type: boolean
+        useStorageV2:
+          type: boolean
+      type: object
+    FailoverDetails:
+      additionalProperties: false
+      properties:
+        failoverEnabled:
+          type: boolean
+        failoverRegion:
+          $ref: "#/components/schemas/AzureLocation"
       type: object
     GitConfigOptionsBody:
       additionalProperties: false
@@ -5111,6 +7705,8 @@ components:
         hasUncommittedChanges:
           type: boolean
         hasUnpushedChanges:
+          type: boolean
+        noGitRepo:
           type: boolean
       type: object
     HeartBeatBody:
@@ -5168,6 +7764,12 @@ components:
           type: string
         identity:
           $ref: "#/components/schemas/DelegateIdentity"
+        portNumbers:
+          items:
+            format: int32
+            type: integer
+          nullable: true
+          type: array
         scope:
           nullable: true
           type: string
@@ -5175,12 +7777,6 @@ components:
     LocationInfoResult:
       additionalProperties: false
       properties:
-        defaultAutoSuspendDelayMinutes:
-          items:
-            format: int32
-            type: integer
-          nullable: true
-          type: array
         skus:
           items:
             $ref: "#/components/schemas/SkuInfoResult"
@@ -5199,6 +7795,7 @@ components:
           $ref: "#/components/schemas/AzureLocation"
         hostnames:
           additionalProperties:
+            nullable: true
             type: string
           nullable: true
           type: object
@@ -5240,8 +7837,106 @@ components:
         - 32 (ExportRunningEnvironmentError)
         - 34 (EnvironmentCreationIsNotAllowed)
         - 35 (GitHubProxyError)
+        - 36 (PrebuildTemplateDeletionIsNotAllowed)
+        - 37 (TierCapacityIsUnavailable)
       format: int32
       type: integer
+    NetmonCorrelationDataBody:
+      additionalProperties: false
+      properties:
+        billableOwnerCreatedAt:
+          nullable: true
+          type: string
+        billableOwnerDatabaseId:
+          nullable: true
+          type: string
+        billableOwnerGlobalRelayId:
+          nullable: true
+          type: string
+        billableOwnerPlan:
+          nullable: true
+          type: string
+        ownerCreatedAt:
+          nullable: true
+          type: string
+        ownerDatabaseId:
+          nullable: true
+          type: string
+        ownerGlobalRelayId:
+          nullable: true
+          type: string
+        ownerPlan:
+          nullable: true
+          type: string
+        repositoryCreatedAt:
+          nullable: true
+          type: string
+        repositoryDatabaseId:
+          nullable: true
+          type: string
+        repositoryGlobalRelayId:
+          nullable: true
+          type: string
+        repositoryPrivate:
+          type: boolean
+      type: object
+    NetworkSettingsResource:
+      additionalProperties: false
+      properties:
+        id:
+          nullable: true
+          type: string
+        location:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        properties:
+          $ref: "#/components/schemas/NetworkSettingsResourceProperties"
+        provisioningState:
+          nullable: true
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+        type:
+          nullable: true
+          type: string
+      type: object
+    NetworkSettingsResourceList:
+      additionalProperties: false
+      properties:
+        value:
+          items:
+            $ref: "#/components/schemas/NetworkSettingsResource"
+          nullable: true
+          type: array
+      type: object
+    NetworkSettingsResourceProperties:
+      additionalProperties: false
+      properties:
+        subnetId:
+          nullable: true
+          type: string
+      type: object
+    NotificationDataBody:
+      additionalProperties: false
+      properties:
+        details:
+          nullable: true
+          type: string
+        displayMode:
+          nullable: true
+          type: string
+        message:
+          nullable: true
+          type: string
+        modal:
+          type: boolean
+      type: object
     PersonalizationInfoBody:
       additionalProperties: false
       properties:
@@ -5351,10 +8046,6 @@ components:
     PlanResourceProperties:
       additionalProperties: false
       properties:
-        defaultAutoSuspendDelayMinutes:
-          format: int32
-          nullable: true
-          type: integer
         defaultCodespaceSku:
           nullable: true
           type: string
@@ -5377,23 +8068,74 @@ components:
         properties:
           $ref: "#/components/schemas/PlanResourceProperties"
       type: object
-    PlanResult:
+    Pool:
       additionalProperties: false
       properties:
-        id:
+        poolType:
+          $ref: "#/components/schemas/PrebuildMode"
+        skuName:
           nullable: true
           type: string
+        targetCount:
+          format: int64
+          type: integer
+      type: object
+    PoolConfigRequestBody:
+      additionalProperties: false
+      properties:
+        comment:
+          nullable: true
+          type: string
+        maxTargetCount:
+          nullable: true
+          type: string
+        minTargetCount:
+          nullable: true
+          type: string
+        poolCode:
+          nullable: true
+          type: string
+        poolType:
+          nullable: true
+          type: string
+        region:
+          nullable: true
+          type: string
+        targetCount:
+          nullable: true
+          type: string
+      type: object
+    PoolDefinitionInput:
+      additionalProperties: false
+      properties:
+        dimensions:
+          additionalProperties:
+            nullable: true
+            type: string
+          type: object
+        isEnabled:
+          type: boolean
         location:
           $ref: "#/components/schemas/AzureLocation"
-        name:
+        logicalSkus:
+          items:
+            type: string
           nullable: true
-          type: string
-        resourceGroup:
-          nullable: true
-          type: string
-        subscription:
-          nullable: true
-          type: string
+          type: array
+        subtype:
+          $ref: "#/components/schemas/ResourceSubtype"
+        targetCount:
+          format: int32
+          type: integer
+        type:
+          $ref: "#/components/schemas/ResourceType"
+      required:
+        - dimensions
+        - isEnabled
+        - location
+        - subtype
+        - targetCount
+        - type
       type: object
     PoolGroupResult:
       additionalProperties: false
@@ -5434,6 +8176,26 @@ components:
         - poolGroupName
         - vmSpecs
       type: object
+    PoolSettingsBody:
+      additionalProperties: false
+      properties:
+        branchName:
+          nullable: true
+          type: string
+        devContainerPath:
+          nullable: true
+          type: string
+        pools:
+          items:
+            $ref: "#/components/schemas/Pool"
+          nullable: true
+          type: array
+        repoId:
+          nullable: true
+          type: string
+        storageType:
+          $ref: "#/components/schemas/StorageType"
+      type: object
     PoolStatusResponseBody:
       additionalProperties: false
       properties:
@@ -5453,6 +8215,9 @@ components:
         readyUnassignedLatestVersionCount:
           format: int32
           type: integer
+        readyUnassignedNotLatestVersionAndIdleCount:
+          format: int32
+          type: integer
         readyUnassignedNotLatestVersionCount:
           format: int32
           type: integer
@@ -5470,6 +8235,107 @@ components:
           nullable: true
           type: string
       type: object
+    PrebuildMode:
+      enum:
+        - 0 (None)
+        - 1 (Blob)
+        - 2 (CodespacePool)
+        - 3 (StoragePool)
+        - 4 (CodespaceAndStoragePool)
+      format: int32
+      type: integer
+    PrebuildReadinessResult:
+      additionalProperties: false
+      properties:
+        branchName:
+          nullable: true
+          type: string
+        devContainerPath:
+          nullable: true
+          type: string
+        location:
+          $ref: "#/components/schemas/AzureLocation"
+        poolSkus:
+          items:
+            type: string
+          nullable: true
+          type: array
+        prebuildHash:
+          nullable: true
+          type: string
+        repoId:
+          nullable: true
+          type: string
+        supportedSkus:
+          items:
+            type: string
+          nullable: true
+          type: array
+        templateSkus:
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    PrebuildTemplateInfo:
+      additionalProperties: false
+      properties:
+        container:
+          $ref: "#/components/schemas/ContainerInfo"
+        prebuildConfigurationId:
+          nullable: true
+          type: string
+        templateSizeInGB:
+          format: double
+          type: number
+        totalTimeSavingsInSeconds:
+          nullable: true
+          type: string
+        workFlowRunId:
+          nullable: true
+          type: string
+      type: object
+    PrebuildTemplateInfoResult:
+      additionalProperties: false
+      properties:
+        branchName:
+          nullable: true
+          type: string
+        commitId:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        isPrebuild:
+          nullable: true
+          type: boolean
+        lastUsedTime:
+          format: date-time
+          nullable: true
+          type: string
+        logicalSkus:
+          items:
+            type: string
+          nullable: true
+          type: array
+        prebuildHash:
+          nullable: true
+          type: string
+        repoId:
+          format: int64
+          type: integer
+        templateStatus:
+          nullable: true
+          type: string
+      type: object
+    PrivacyEnum:
+      enum:
+        - 0 (Private)
+        - 1 (Public)
+        - 2 (Org)
+      format: int32
+      type: integer
     ProblemDetails:
       additionalProperties: {}
       properties:
@@ -5589,6 +8455,16 @@ components:
           nullable: true
           type: array
       type: object
+    ReplayBillRequestBody:
+      additionalProperties: false
+      properties:
+        endTime:
+          format: date-time
+          type: string
+        startTime:
+          format: date-time
+          type: string
+      type: object
     RepositoryInfoBody:
       additionalProperties: false
       properties:
@@ -5598,7 +8474,16 @@ components:
         commitId:
           nullable: true
           type: string
+        createType:
+          nullable: true
+          type: string
+        diskUsage:
+          nullable: true
+          type: string
         name:
+          nullable: true
+          type: string
+        owner:
           nullable: true
           type: string
         prebuildHash:
@@ -5611,6 +8496,36 @@ components:
           nullable: true
           type: string
       type: object
+    ResourceSubtype:
+      enum:
+        - 0 (Default)
+        - 2 (ShrunkBlob)
+        - 3 (FullBlob)
+        - 4 (UserParametersBlob)
+        - 5 (PrebuildHash)
+        - 6 (VnetInjected)
+      format: int32
+      type: integer
+    ResourceType:
+      enum:
+        - 1 (ComputeVM)
+        - 2 (StorageFileShare)
+        - 3 (StorageArchive)
+        - 4 (KeyVault)
+        - 5 (OSDisk)
+        - 6 (NetworkInterface)
+        - 7 (InputQueue)
+        - 8 (Snapshot)
+        - 9 (PoolQueue)
+        - 10 (VirtualNetwork)
+        - 11 (NetworkSecurityGroup)
+        - 12 (LiveShareWorkspace)
+        - 13 (BasisTunnel)
+        - 14 (StorageBlockBlob)
+        - 15 (DataDisk)
+        - 16 (PortForwardingWorkspace)
+      format: int32
+      type: integer
     ResourceUsageDetail:
       additionalProperties: false
       properties:
@@ -5622,6 +8537,20 @@ components:
         storage:
           items:
             $ref: "#/components/schemas/StorageUsageDetail"
+          nullable: true
+          type: array
+      type: object
+    RuntimeConstraintsBody:
+      additionalProperties: false
+      properties:
+        allowedPortPrivacySettings:
+          items:
+            $ref: "#/components/schemas/PrivacyEnum"
+          nullable: true
+          type: array
+        imageAllowList:
+          items:
+            type: string
           nullable: true
           type: array
       type: object
@@ -5748,6 +8677,9 @@ components:
     SeedInfoBody:
       additionalProperties: false
       properties:
+        cloneUrl:
+          nullable: true
+          type: string
         gitConfig:
           $ref: "#/components/schemas/GitConfigOptionsBody"
         recurseClone:
@@ -5786,11 +8718,20 @@ components:
           nullable: true
           type: string
       type: object
+    StorageType:
+      enum:
+        - 0 (V1)
+        - 1 (V2)
+      format: int32
+      type: integer
     StorageUsageDetail:
       additionalProperties: false
       properties:
         size:
           format: int32
+          type: integer
+        sizeInKB:
+          format: int64
           type: integer
         sku:
           nullable: true
@@ -5804,11 +8745,9 @@ components:
       properties:
         key:
           nullable: true
-          readOnly: true
           type: string
         value:
           nullable: true
-          readOnly: true
           type: string
       type: object
     SubscriptionAccountOwner:
@@ -5870,6 +8809,7 @@ components:
           type: string
         optionalValues:
           additionalProperties:
+            nullable: true
             type: string
           nullable: true
           type: object
@@ -5884,6 +8824,62 @@ components:
           format: uuid
           type: string
       type: object
+    TunnelPortInfoResult:
+      additionalProperties: false
+      properties:
+        portVisibility:
+          nullable: true
+          type: string
+        tunnelToken:
+          nullable: true
+          type: string
+      type: object
+    TunnelProperties:
+      additionalProperties: false
+      properties:
+        clusterId:
+          nullable: true
+          type: string
+        connectAccessToken:
+          nullable: true
+          type: string
+        domain:
+          nullable: true
+          type: string
+        managePortsAccessToken:
+          nullable: true
+          type: string
+        serviceUri:
+          nullable: true
+          type: string
+        tunnelId:
+          nullable: true
+          type: string
+        tunnelName:
+          nullable: true
+          type: string
+      type: object
+    TunnelType:
+      enum:
+        - 0 (Basis)
+        - 1 (Liveshare)
+      format: int32
+      type: integer
+    UnderInvestigationResponseBody:
+      additionalProperties: false
+      properties:
+        investigationStarted:
+          format: date-time
+          nullable: true
+          type: string
+        resourceId:
+          nullable: true
+          type: string
+        underInvestigation:
+          type: boolean
+        updated:
+          type: boolean
+      type: object
     UnfilteredCloudEnvironmentResult:
       additionalProperties: false
       properties:
@@ -5896,6 +8892,10 @@ components:
         autoShutdownDelayMinutes:
           format: int32
           type: integer
+        billableOwnerType:
+          $ref: "#/components/schemas/BillableOwnerType"
+        clientUsage:
+          $ref: "#/components/schemas/ClientUsageSession"
         connection:
           $ref: "#/components/schemas/ConnectionInfoBody"
         container:
@@ -5903,14 +8903,21 @@ components:
         containerImage:
           nullable: true
           type: string
+        createFromPrebuild:
+          type: boolean
         created:
           format: date-time
           type: string
+        displayStorageUtilizationInKb:
+          type: boolean
         exportedBlobUrl:
           nullable: true
           type: string
+        failoverDetails:
+          $ref: "#/components/schemas/FailoverDetails"
         features:
           additionalProperties:
+            nullable: true
             type: string
           nullable: true
           type: object
@@ -5932,6 +8939,9 @@ components:
         location:
           nullable: true
           type: string
+        organizationId:
+          nullable: true
+          type: string
         ownerId:
           nullable: true
           type: string
@@ -5943,11 +8953,18 @@ components:
           type: string
         portForwardingConnection:
           $ref: "#/components/schemas/ConnectionInfoBody"
+        prebuildType:
+          nullable: true
+          type: string
         recentFolders:
           items:
             type: string
           nullable: true
           type: array
+        resourceTier:
+          $ref: "#/components/schemas/ConsumerType"
+        runtimeConstraints:
+          $ref: "#/components/schemas/RuntimeConstraintsBody"
         seed:
           $ref: "#/components/schemas/SeedInfoBody"
         skuDisplayName:
@@ -5959,8 +8976,15 @@ components:
         state:
           nullable: true
           type: string
+        storageUtilizationInKb:
+          format: int64
+          nullable: true
+          type: integer
         subscriptionData:
           $ref: "#/components/schemas/SubscriptionData"
+        templateStatus:
+          nullable: true
+          type: string
         type:
           nullable: true
           type: string
@@ -5975,6 +8999,8 @@ components:
           format: int32
           nullable: true
           type: integer
+        failoverDetails:
+          $ref: "#/components/schemas/FailoverDetails"
         friendlyName:
           nullable: true
           type: string
@@ -6001,6 +9027,33 @@ components:
       required:
         - displayName
       type: object
+    UpdatePrebuildTemplateBody:
+      additionalProperties: false
+      properties:
+        isSuccess:
+          type: boolean
+      required:
+        - isSuccess
+      type: object
+    UpdatePrebuildTemplateVersionsBody:
+      additionalProperties: false
+      properties:
+        branchName:
+          type: string
+        devContainerPath:
+          nullable: true
+          type: string
+        maxPrebuildTemplateVersions:
+          format: int32
+          type: integer
+        repoId:
+          format: int64
+          type: integer
+      required:
+        - branchName
+        - maxPrebuildTemplateVersions
+        - repoId
+      type: object
     UpdateSystemConfigurationBody:
       additionalProperties: false
       properties:
@@ -6013,6 +9066,15 @@ components:
         value:
           nullable: true
           type: string
+      type: object
+    UpdateUserSecretsRequestBody:
+      additionalProperties: false
+      properties:
+        secrets:
+          items:
+            $ref: "#/components/schemas/SecretDataBody"
+          nullable: true
+          type: array
       type: object
     UserIdentity:
       additionalProperties: false
@@ -6079,6 +9141,25 @@ components:
         - 3 (Deleted)
       format: int32
       type: integer
+    VmLogsUploadInfo:
+      additionalProperties: false
+      properties:
+        containerName:
+          nullable: true
+          type: string
+        message:
+          nullable: true
+          type: string
+        pathInContainer:
+          nullable: true
+          type: string
+        storageUri:
+          nullable: true
+          type: string
+        vmResourceId:
+          nullable: true
+          type: string
+      type: object
     VnetProperties:
       additionalProperties: false
       properties:

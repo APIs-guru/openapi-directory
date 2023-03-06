@@ -163,7 +163,7 @@ paths:
       description: This endpoint provides a list of recent audio items associated with the aggregation along with metadata about the aggregation.
       operationId: getAggRecommendations
       parameters:
-        - description: ID of an aggregation such as a program or podcast
+        - description: ID of an aggregation such as a program or podcast. If the specified ID is a program that publishes rundowns, the latest rundown will be returned.
           format: int64
           in: path
           name: aggId
@@ -171,7 +171,7 @@ paths:
           type: integer
         - $ref: "#/parameters/Authorization"
         - default: 0
-          description: The result to start with. Allows paging through the episodes of a podcast or program, with the default, `startNum=0`, being the most recent episode
+          description: The result to start with. Allows paging through the episodes of a podcast or program, with the default, `startNum=0`, being the most recent episode. Ignored for programs that publish a rundown.
           format: int32
           in: query
           name: startNum
@@ -918,9 +918,6 @@ definitions:
           - playable
           - newscast
         type: string
-      orgServiceId:
-        description: The unique identifier for the organization service
-        type: string
       title:
         description: The title of this category
         type: string
@@ -930,7 +927,6 @@ definitions:
         type: string
     required:
       - type
-      - orgServiceId
       - title
   CategoryLinks:
     properties:
@@ -1151,9 +1147,6 @@ definitions:
       home:
         description: Flag indicating if the current view is in the user's home network
         type: boolean
-      orgServiceId:
-        description: The unique identifier for the organization service
-        type: string
       type:
         default: organization
         description: The type of list returned; will always be `organization`
@@ -1162,7 +1155,6 @@ definitions:
         type: string
     required:
       - type
-      - orgServiceId
       - brand
   OrganizationOverviewDocument:
     allOf:

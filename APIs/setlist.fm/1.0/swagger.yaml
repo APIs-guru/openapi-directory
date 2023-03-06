@@ -827,7 +827,10 @@ paths:
         - /1.0/setlist/{setlistId}
   "/1.0/user/{userId}":
     get:
-      description: Get a user by userId.
+      description: |-
+        Get a user by userId. (deprecated)
+
+        Note: This endpoint always returns a result, even if the user doesn't exist
       operationId: resource__1.0_user__userId__getUser_GET
       parameters:
         - description: the user's userId
@@ -1801,22 +1804,22 @@ definitions:
       website: ...
     properties:
       about:
-        description: ""
+        description: never set (deprecated)
         type: string
       flickr:
-        description: ""
+        description: never set (deprecated)
         type: string
       fullname:
-        description: ""
+        description: never set (deprecated)
         type: string
       lastFm:
-        description: ""
+        description: never set (deprecated)
         type: string
       mySpace:
-        description: ""
+        description: never set (deprecated)
         type: string
       twitter:
-        description: ""
+        description: never set (deprecated)
         type: string
       url:
         description: ""
@@ -1825,7 +1828,7 @@ definitions:
         description: ""
         type: string
       website:
-        description: ""
+        description: never set (deprecated)
         type: string
     title: user
     type: object
@@ -2343,36 +2346,36 @@ definitions:
     allOf:
       - properties:
           about:
-            description: ""
+            description: never set (deprecated)
             type: string
             xml:
               namespace: ""
           flickr:
-            description: ""
+            description: never set (deprecated)
             type: string
             xml:
               attribute: true
               namespace: ""
           fullname:
-            description: ""
+            description: never set (deprecated)
             type: string
             xml:
               attribute: true
               namespace: ""
           lastFm:
-            description: ""
+            description: never set (deprecated)
             type: string
             xml:
               attribute: true
               namespace: ""
           mySpace:
-            description: ""
+            description: never set (deprecated)
             type: string
             xml:
               attribute: true
               namespace: ""
           twitter:
-            description: ""
+            description: never set (deprecated)
             type: string
             xml:
               attribute: true
@@ -2389,7 +2392,7 @@ definitions:
               attribute: true
               namespace: ""
           website:
-            description: ""
+            description: never set (deprecated)
             type: string
             xml:
               attribute: true

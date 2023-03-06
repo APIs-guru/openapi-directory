@@ -209,6 +209,29 @@ paths:
       summary: Compile
       tags:
         - Compile API
+  /v1/config:
+    get:
+      description: |-
+        This API endpoint responds with active configuration (result response)
+
+        ---
+        **Note**
+        The `credentials` field in the `services` configuration and
+
+        The `private_key` and `key` fields in the `keys` configuration will be omitted from the API response
+
+        ---
+      operationId: getConfig
+      parameters:
+        - $ref: "#/components/parameters/prettyParameter"
+      responses:
+        "200":
+          $ref: "#/components/responses/successSingleResult"
+        "500":
+          $ref: "#/components/responses/serverErrorResponse"
+      summary: Get configurations
+      tags:
+        - Config API
   "/v1/data/{path}":
     delete:
       description: This API endpoint deletes an existing document from the server
@@ -311,6 +334,13 @@ paths:
       operationId: putDocument
       parameters:
         - $ref: "#/components/parameters/ifNoneMatchParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/dataSchema"
+        description: The JSON document to write to the specified path.
+        required: true
       responses:
         "204":
           description: Success
@@ -690,6 +720,12 @@ components:
           schema:
             $ref: "#/components/schemas/200Result"
       description: Success
+    successSingleResult:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/200SingleResult"
+      description: Success
     successZipResponse:
       content:
         application/gzip:
@@ -1064,6 +1100,95 @@ components:
                 type: string
           type: array
       type: object
+    200SingleResult:
+      properties:
+        result:
+          properties:
+            bundles:
+              description: Bundles
+              properties:
+                authz:
+                  description: Auth
+                  properties:
+                    service:
+                      description: Service
+                      example: acmecorp
+                      minLength: 1
+                      type: string
+                  type: object
+              type: object
+            decision_logs:
+              description: Logs
+              properties:
+                service:
+                  description: Service
+                  example: acmecorp
+                  minLength: 1
+                  type: string
+              type: object
+            default_authorization_decision:
+              example: /system/authz/allow
+              type: string
+            default_decision:
+              example: /system/main
+              type: string
+            keys:
+              description: Keys
+              properties:
+                global-key:
+                  description: Global Key
+                  properties:
+                    scope:
+                      description: Scope
+                      example: read
+                      minLength: 1
+                      type: string
+                  type: object
+              type: object
+            labels:
+              description: Labels
+              properties:
+                id:
+                  description: Label ID
+                  example: test-id
+                  minLength: 1
+                  type: string
+                version:
+                  description: Version
+                  example: 0.27.0
+                  minLength: 1
+                  type: string
+              type: object
+            services:
+              description: The types of services
+              properties:
+                acmecorp:
+                  properties:
+                    url:
+                      example: https://example.com/control-plane-api/v1
+                      type: string
+                  type: object
+              type: object
+            status:
+              description: Status
+              properties:
+                service:
+                  description: Service
+                  example: acmecorp
+                  minLength: 1
+                  type: string
+              type: object
+          type: object
+      type: object
+    dataSchema:
+      example: |-
+        {
+          "users": {
+            "user-id-1": {
+              "isAdmin": true
+            }
+          }
+        }
     inputSchema:
       additionalProperties: {}
       example: |-
@@ -1110,7 +1235,6 @@ components:
               - add
               - remove
               - replace
-              - remove
               - move
               - copy
               - test

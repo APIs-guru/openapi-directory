@@ -11,7 +11,7 @@ info:
   license:
     name: Commercial License
     url: https://nfusionsolutions.com/nfusion-solutions-metals-gold-price-feed-quote/
-  title: nFusion Solutions Market Data API v1
+  title: nFusion Solutions Market Data API
   version: "1"
   x-apisguru-categories:
     - financial
@@ -22,8 +22,10 @@ info:
       url: https://api.nfusionsolutions.biz/swagger/1/swagger.json
       version: "3.0"
   x-providerName: nfusionsolutions.biz
+security:
+  - token: []
 paths:
-  "/api/v{version}/Currencies/history":
+  /api/v1/Currencies/history:
     get:
       description: "Historical OHLC data for the specified period and interval size\r
 
@@ -32,13 +34,8 @@ paths:
         The combination of the interval parameter and start and end dates can result in results\r
 
         being truncated to conform to result size limits. See comments on interval parameter for details on valid interval values."
+      operationId: Currencies_History_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: "comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD"
           in: query
           name: pairs
@@ -89,12 +86,9 @@ paths:
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -111,48 +105,26 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get historical prices for requested currency pairs
       tags:
         - Currencies
-  "/api/v{version}/Currencies/history/supported":
+  /api/v1/Currencies/history/supported:
     get:
       description: "Only the currency pairs in the direction noted can be used with the history endpoint.\r
 
         For example: USD/CAD is not the same as CAD/USD"
+      operationId: Currencies_SupportedCurrencies_History_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -169,36 +141,17 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get list of currency pairs supported by the history endpoint
       tags:
         - Currencies
-  "/api/v{version}/Currencies/rate":
+  /api/v1/Currencies/rate:
     get:
       description: Current Mid Rate
+      operationId: Currencies_Rate_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: "comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD"
           in: query
           name: pairs
@@ -209,12 +162,9 @@ paths:
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -231,48 +181,26 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get latest mid rate for requested currency pairs
       tags:
         - Currencies
-  "/api/v{version}/Currencies/rate/supported":
+  /api/v1/Currencies/rate/supported:
     get:
       description: "Any of the currencies in this list can be paired with any other currency in this list when supplied to the Rate endpoint.\r
 
         For example: USD/CAD,CAD/USD,USD/EUR,EUR/CAD"
+      operationId: Currencies_SupportedCurrencies_Rate_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -289,36 +217,17 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get list of currencies supported by the rate endpoint
       tags:
         - Currencies
-  "/api/v{version}/Currencies/summary":
+  /api/v1/Currencies/summary:
     get:
       description: Current and daily summary information combined into a single quote
+      operationId: Currencies_Summary_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: "comma separated list of currency pairs. For example: USD/CAD,USD/EUR,USD/AUD"
           in: query
           name: pairs
@@ -329,12 +238,9 @@ paths:
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -351,48 +257,26 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get latest Summary for requested currency pairs
       tags:
         - Currencies
-  "/api/v{version}/Currencies/summary/supported":
+  /api/v1/Currencies/summary/supported:
     get:
       description: "Only the currency pairs in the direction noted can be used with the Summary endpoint.\r
 
         For example: USD/CAD is not the same as CAD/USD"
+      operationId: Currencies_SupportedCurrencies_Summary_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -409,27 +293,13 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get list of currency pairs supported by the Summary endpoint
       tags:
         - Currencies
-  "/api/v{version}/Metals/benchmark/history":
+  /api/v1/Metals/benchmark/history:
     get:
       description: "Historical OHLC data for the specified period and interval size\r
 
@@ -442,13 +312,8 @@ paths:
         \r
 
         The historicalfx flag is used to determine whether to apply today's fx rates to a historical period, or to apply the historical rates from that same time frame."
+      operationId: Metals_BenchmarkHistory_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: comma separated list of metals
           in: query
           name: metals
@@ -525,17 +390,23 @@ paths:
           in: query
           name: unitofmeasure
           schema:
-            $ref: "#/components/schemas/UnitOfMeasure"
+            enum:
+              - mg
+              - g
+              - kg
+              - gr
+              - oz
+              - toz
+              - ct
+              - dwt
+            type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -552,36 +423,17 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get historical benchmark prices for requested metals
       tags:
         - Metals
-  "/api/v{version}/Metals/benchmark/summary":
+  /api/v1/Metals/benchmark/summary:
     get:
       description: Benchmark price information
+      operationId: Metals_BenchmarkSummary_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: comma separated list of metals
           in: query
           name: metals
@@ -613,17 +465,23 @@ paths:
           in: query
           name: unitofmeasure
           schema:
-            $ref: "#/components/schemas/UnitOfMeasure"
+            enum:
+              - mg
+              - g
+              - kg
+              - gr
+              - oz
+              - toz
+              - ct
+              - dwt
+            type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -640,46 +498,24 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get latest Benchmark prices for requested metals
       tags:
         - Metals
-  "/api/v{version}/Metals/benchmark/supported":
+  /api/v1/Metals/benchmark/supported:
     get:
       description: ""
+      operationId: Metals_BenchmarkSupportedMetals_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -696,27 +532,13 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get list of symbols supported by the benchmark endpoints
       tags:
         - Metals
-  "/api/v{version}/Metals/spot/history":
+  /api/v1/Metals/spot/history:
     get:
       description: "Historical OHLC data for the specified period and interval size\r
 
@@ -729,13 +551,8 @@ paths:
         \r
 
         The historicalfx flag is used to determine whether to apply today's fx rates to a historical period, or to apply the historical rates from that same time frame."
+      operationId: Metals_SpotHistory_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: comma separated list of metals
           in: query
           name: metals
@@ -812,17 +629,23 @@ paths:
           in: query
           name: unitofmeasure
           schema:
-            $ref: "#/components/schemas/UnitOfMeasure"
+            enum:
+              - mg
+              - g
+              - kg
+              - gr
+              - oz
+              - toz
+              - ct
+              - dwt
+            type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -839,36 +662,17 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get historical Spot prices for requested metals
       tags:
         - Metals
-  "/api/v{version}/Metals/spot/performance":
+  /api/v1/Metals/spot/performance:
     get:
       description: Historical Performance information
+      operationId: Metals_SpotHistoricalPerformance_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: comma separated list of metals
           in: query
           name: metals
@@ -900,17 +704,23 @@ paths:
           in: query
           name: unitofmeasure
           schema:
-            $ref: "#/components/schemas/UnitOfMeasure"
+            enum:
+              - mg
+              - g
+              - kg
+              - gr
+              - oz
+              - toz
+              - ct
+              - dwt
+            type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -927,36 +737,17 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get Historical Performance for requested metals
       tags:
         - Metals
-  "/api/v{version}/Metals/spot/performance/annual":
+  /api/v1/Metals/spot/performance/annual:
     get:
       description: Annual Historical Performance information
+      operationId: Metals_SpotAnnualHistoricalPerformance_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: comma separated list of metals
           in: query
           name: metals
@@ -988,24 +779,30 @@ paths:
           in: query
           name: unitofmeasure
           schema:
-            $ref: "#/components/schemas/UnitOfMeasure"
+            enum:
+              - mg
+              - g
+              - kg
+              - gr
+              - oz
+              - toz
+              - ct
+              - dwt
+            type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
+            enum:
+              - json
+              - xml
+            type: string
         - description: Number of years of history to return. Defaults to 10.
           in: query
           name: years
           schema:
             format: int32
             type: integer
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
-            type: string
       responses:
         "200":
           content:
@@ -1021,27 +818,13 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get Historical Annual Performance for requested metals
       tags:
         - Metals
-  "/api/v{version}/Metals/spot/ratio/history":
+  /api/v1/Metals/spot/ratio/history:
     get:
       description: "Historical data for the specified period and interval size\r
 
@@ -1050,13 +833,8 @@ paths:
         The combination of the interval parameter and start and end dates can result in results\r
 
         being truncated to conform to result size limits. See comments on interval parameter for details on valid interval values."
+      operationId: Metals_SpotRatioHistory_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: comma separated list of metals
           in: query
           name: pairs
@@ -1107,12 +885,9 @@ paths:
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -1129,36 +904,17 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get historical Spot Ratio prices for requested metals
       tags:
         - Metals
-  "/api/v{version}/Metals/spot/ratio/summary":
+  /api/v1/Metals/spot/ratio/summary:
     get:
       description: Ratios between prices of two metals
+      operationId: Metals_SpotRatioSummary_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: "comma separated list of metal pairs. For example: gold/silver,gold/platinum,silver/palladium"
           in: query
           name: pairs
@@ -1169,12 +925,9 @@ paths:
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -1191,36 +944,17 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get latest Spot Summary for requested metal ratios
       tags:
         - Metals
-  "/api/v{version}/Metals/spot/summary":
+  /api/v1/Metals/spot/summary:
     get:
       description: Current and daily summary information combined into a single quote
+      operationId: Metals_SpotSummary_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: comma separated list of metals
           in: query
           name: metals
@@ -1252,17 +986,23 @@ paths:
           in: query
           name: unitofmeasure
           schema:
-            $ref: "#/components/schemas/UnitOfMeasure"
+            enum:
+              - mg
+              - g
+              - kg
+              - gr
+              - oz
+              - toz
+              - ct
+              - dwt
+            type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -1279,46 +1019,24 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get latest Spot Summary for requested metals
       tags:
         - Metals
-  "/api/v{version}/Metals/spot/supported":
+  /api/v1/Metals/spot/supported:
     get:
       description: ""
+      operationId: Metals_SpotSupportedMetals_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -1335,46 +1053,24 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get list of symbols supported by the spot endpoints
       tags:
         - Metals
-  "/api/v{version}/Metals/supported/currency":
+  /api/v1/Metals/supported/currency:
     get:
       description: ""
+      operationId: Metals_SupportedCurrencies_Metals_GET
       parameters:
-        - description: auth token
-          in: query
-          name: token
-          required: true
-          schema:
-            type: string
         - description: to override content negotiation specify a value of json or xml
           in: query
           name: format
           schema:
-            $ref: "#/components/schemas/ResponseFormat"
-        - description: The requested API version
-          in: path
-          name: version
-          required: true
-          schema:
+            enum:
+              - json
+              - xml
             type: string
       responses:
         "200":
@@ -1391,22 +1087,8 @@ paths:
                 type: array
           description: Success
         "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Bad Request
         "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: Unauthorized
       summary: Get list of currencies supported by metals endpoints for currency conversion
       tags:
@@ -1485,26 +1167,6 @@ components:
         success:
           type: boolean
       type: object
-    ProblemDetails:
-      additionalProperties: {}
-      properties:
-        detail:
-          nullable: true
-          type: string
-        instance:
-          nullable: true
-          type: string
-        status:
-          format: int32
-          nullable: true
-          type: integer
-        title:
-          nullable: true
-          type: string
-        type:
-          nullable: true
-          type: string
-      type: object
     Rate:
       additionalProperties: false
       properties:
@@ -1540,11 +1202,6 @@ components:
         success:
           type: boolean
       type: object
-    ResponseFormat:
-      enum:
-        - json
-        - xml
-      type: string
     Summary:
       additionalProperties: false
       properties:
@@ -1638,14 +1295,9 @@ components:
         success:
           type: boolean
       type: object
-    UnitOfMeasure:
-      enum:
-        - mg
-        - g
-        - kg
-        - gr
-        - oz
-        - toz
-        - ct
-        - dwt
-      type: string
+  securitySchemes:
+    token:
+      description: authorization token
+      in: query
+      name: token
+      type: apiKey

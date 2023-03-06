@@ -192,6 +192,216 @@ paths:
       summary: Account Details
       tags:
         - Account
+  /api/Bill:
+    get:
+      consumes: []
+      description: 'TransactionStatusCode values are: "Draft", "Verified", "Late", "Paid", "Partial", "Void"'
+      operationId: Bill_Get
+      parameters:
+        - format: date-time
+          in: query
+          name: UpdatedAfter
+          required: false
+          type: string
+        - description: Number of items per page (max 1000)
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - in: query
+          name: Sort
+          required: false
+          type: string
+        - format: int32
+          in: query
+          name: CompanyIDFK
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/BillList"
+        "401":
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read_financials
+      summary: Gets list of Bills
+      tags:
+        - Bill
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: Bill_Post
+      parameters:
+        - description: ""
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: "#/definitions/NewBill"
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/Bill"
+      security:
+        - oauth2:
+            - write_financials
+      summary: Create a new draft Bill
+      tags:
+        - Bill
+  "/api/Bill/{id}":
+    get:
+      consumes: []
+      operationId: Bill_GetByID
+      parameters:
+        - description: Bill Transaction ID number
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+        - oauth2:
+            - read_financials
+      summary: Gets a Bill by Bill ID
+      tags:
+        - Bill
+  /api/BillPayment:
+    get:
+      consumes: []
+      operationId: BillPayment_Get
+      parameters:
+        - format: date-time
+          in: query
+          name: UpdatedAfter
+          required: false
+          type: string
+        - description: Number of items per page (max 1000)
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/BillPaymentList"
+        "401":
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read_financials
+      summary: Gets list of Bill Payments
+      tags:
+        - BillPayment
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: BillPayment_Post
+      parameters:
+        - description: ""
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: "#/definitions/NewBillPayment"
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/BillPayment"
+      security:
+        - oauth2:
+            - write_financials
+      summary: Create new Bill Payment and optionally assign payment allocations to Bills
+      tags:
+        - BillPayment
+  "/api/BillPayment/{id}":
+    get:
+      consumes: []
+      operationId: BillPayment_GetByID
+      parameters:
+        - description: Invoice Transaction ID Number
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/BillPayment"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+      security:
+        - oauth2:
+            - read_financials
+      summary: Gets a Bill Payment by Payment Transaction ID
+      tags:
+        - BillPayment
   /api/Company:
     get:
       consumes: []
@@ -1712,6 +1922,41 @@ paths:
       tags:
         - Project
   /api/ProjectMember:
+    get:
+      consumes: []
+      description: Include at least one of ProjectID or UserID parameters.
+      operationId: ProjectMember_Get
+      parameters:
+        - description: Get Project members filtered by ProjectID
+          format: int32
+          in: query
+          name: ProjectID
+          required: false
+          type: integer
+        - description: Get Project members filtered by UserID
+          format: int32
+          in: query
+          name: UserID
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ProjectMemberList"
+        "401":
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read_projects
+      summary: Gets list of Project Members
+      tags:
+        - ProjectMember
     post:
       consumes:
         - application/json
@@ -1744,6 +1989,38 @@ paths:
       summary: Assign a user as a Member of a Project
       tags:
         - ProjectMember
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      description: Fields are only updated if their field name is in the FieldsToUpdate string collection. The Amount columns for Cost, Budget, Rates if specified should be a decimal. Financial amounts assume the currency of the parent Company. Budget units depend on the Budget method set on the Project.
+      operationId: ProjectMember_Put
+      parameters:
+        - description: ""
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: "#/definitions/UpdateProjectMember"
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ProjectMemberDetails"
+      security:
+        - oauth2:
+            - write_projects
+      summary: Update a Member of a Project
+      tags:
+        - ProjectMember
   /api/ProjectTimesheetCategory:
     get:
       consumes: []
@@ -1772,6 +2049,38 @@ paths:
         - oauth2:
             - read_timesheets
       summary: Gets list of Project Timesheet Categories
+      tags:
+        - ProjectTimesheetCategory
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      description: ""
+      operationId: ProjectTimesheetCategory_Post
+      parameters:
+        - description: ""
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: "#/definitions/AssignProjectTimesheetCategory"
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ProjectTimesheetCategoryDetails"
+      security:
+        - oauth2:
+            - write_projects
+      summary: Assign a TimeSheetCategory to a Project.
       tags:
         - ProjectTimesheetCategory
   /api/ScheduleAssignment:
@@ -2397,6 +2706,11 @@ paths:
           name: pageNumber
           required: false
           type: integer
+        - description: Defaults to false. When true, the InvoiceIDFK value will be included in the response.
+          in: query
+          name: includeInvoiceDetails
+          required: false
+          type: boolean
         - description: 'Optional sorting instruction. Currently possible values: "DateUpdated", "DateCreated", "DateUpdated desc", "DateCreated desc","EntryDate", "EntryDate desc", "StartTimeLocal","StartTimeLocal desc", "TimeSheetEntryID", "TimeSheetEntryID desc"'
           in: query
           name: Sort
@@ -2855,7 +3169,7 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: 'When you receive a webhook, you should respond with Http 200 OK Status Code, otherwise we will retry. To create a webhook, you need both the webhook_notifications scope, as well as the scope for the required entity being monitored.  Event values are: "company_created", "company_deleted", "company_updated", "contact_created", "contact_deleted", "contact_updated", "invoice_created", "invoice_sent","invoice_updated","invoice_deleted", "project_created", "project_deleted", "project_updated", "task_created", "task_updated","task_deleted", "timesheet_created", "timesheet_deleted", "timesheet_updated".  You can subscribe to any webhook, but you will only receive notifications for data appropriate to the roles of your user account. There is an optional  Secret parameter (string 255 char max). This allows for webhook authentication. If provided, the Secret will be BASE 64 encoded and passed with notications as a basic authentication http header. i.e. Authorization Basic [BASE64 of Secret]"'
+      description: 'When you receive a webhook, you should respond with Http 200 OK Status Code, otherwise we will retry. To create a webhook, you need both the webhook_notifications scope, as well as the scope for the required entity being monitored.  Event values are: "company_created", "company_deleted", "company_updated", "contact_created", "contact_deleted", "contact_updated", "invoice_created", "invoice_sent","invoice_updated","invoice_deleted", "project_created", "project_deleted", "project_updated", "task_created", "task_updated","task_deleted", "timesheet_created", "timesheet_deleted", "timesheet_updated, "bill_created", "bill_updated".  You can subscribe to any webhook, but you will only receive notifications for data appropriate to the roles of your user account. There is an optional  Secret parameter (string 255 char max). This allows for webhook authentication. If provided, the Secret will be BASE 64 encoded and passed with notications as a basic authentication http header. i.e. Authorization Basic [BASE64 of Secret]"'
       operationId: Webhook_Post
       parameters:
         - in: body
@@ -2963,6 +3277,12 @@ definitions:
         type: integer
       AllowHidingCompletedTasksOnTimesheet:
         type: boolean
+      BrandPrimaryColor:
+        description: A custom branding color for the account. Available on paid accounts.
+        type: string
+      BrandPrimaryColorLuminance:
+        description: "A determination of the luminance of the Brand Primary Color (possible values: 'Dark', 'Medium', 'Light'). This can be used to determine appropriate font colors to sit on top of the brand color."
+        type: string
       CompanyName:
         type: string
       CurrentServerTimeISO:
@@ -3008,6 +3328,291 @@ definitions:
         type: string
       isDefault:
         type: boolean
+    type: object
+  AssignProjectTimesheetCategory:
+    properties:
+      BudgetHours:
+        format: double
+        type: number
+      CostAmount:
+        format: double
+        type: number
+      ProjectIDFK:
+        format: int32
+        type: integer
+      RateAmount:
+        format: double
+        type: number
+      TimesheetCategoryIDFK:
+        format: int32
+        type: integer
+      isBillable:
+        type: boolean
+      isPayable:
+        type: boolean
+    type: object
+  AssignedToUser:
+    properties:
+      AssignedToEmail:
+        type: string
+      AssignedToFirstname:
+        type: string
+      AssignedToLastname:
+        type: string
+      AssignedToUserIDFK:
+        format: int32
+        type: integer
+    type: object
+  Bill:
+    properties:
+      AccountIDFK:
+        format: int32
+        type: integer
+      Balance:
+        format: double
+        type: number
+      BillNumber:
+        type: string
+      CompanyIDFK:
+        format: int32
+        type: integer
+      CompanyName:
+        type: string
+      CurrencyCode:
+        type: string
+      DateCreated:
+        format: date-time
+        type: string
+      DateIssued:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      DateVerified:
+        format: date-time
+        type: string
+      DueDate:
+        format: date-time
+        type: string
+      ExchangeRate:
+        format: double
+        type: number
+      Issuer:
+        $ref: "#/definitions/BillIssuerDetails"
+      LineItems:
+        items:
+          $ref: "#/definitions/BillLineItem"
+        type: array
+      Links:
+        $ref: "#/definitions/BillLinks"
+      Notes:
+        type: string
+      Recipient:
+        $ref: "#/definitions/BillRecipientDetails"
+      Subject:
+        type: string
+      SupplierPONumber:
+        type: string
+      TaxAmount:
+        format: double
+        type: number
+      TotalAmount:
+        format: double
+        type: number
+      TransactionID:
+        format: int64
+        type: integer
+      TransactionPrefix:
+        type: string
+      TransactionStatusCode:
+        type: string
+      TransactionTaxConfigCode:
+        type: string
+    type: object
+  BillIssuerDetails:
+    properties:
+      BillingAddress:
+        type: string
+      BillingAddressCity:
+        type: string
+      BillingAddressLine:
+        type: string
+      BillingAddressPostCode:
+        type: string
+      BillingAddressState:
+        type: string
+      BillingCountryCode:
+        type: string
+      CompanyIDFK:
+        format: int32
+        type: integer
+      CompanyName:
+        type: string
+    type: object
+  BillLineItem:
+    properties:
+      Amount:
+        format: double
+        type: number
+      Description:
+        type: string
+      Discount:
+        format: double
+        type: number
+      InventoryItemIDFK:
+        format: int64
+        type: integer
+      InventoryItemName:
+        type: string
+      InventoryItemSKU:
+        type: string
+      ProjectIDFK:
+        format: int32
+        type: integer
+      ProjectTitle:
+        type: string
+      Quantity:
+        format: double
+        type: number
+      TaxAmount:
+        format: double
+        type: number
+      TaxCode:
+        type: string
+      TaxIDFK:
+        format: int32
+        type: integer
+      TaxName:
+        type: string
+      TransactionLineItemID:
+        format: int64
+        type: integer
+      UnitPrice:
+        format: double
+        type: number
+    type: object
+  BillLinks:
+    properties:
+      Edit:
+        type: string
+      View:
+        type: string
+      WebView:
+        type: string
+    type: object
+  BillList:
+    properties:
+      Bills:
+        items:
+          $ref: "#/definitions/Bill"
+        type: array
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  BillPayment:
+    properties:
+      AccountIDFK:
+        format: int32
+        type: integer
+      Balance:
+        format: double
+        type: number
+      CurrencyCode:
+        type: string
+      DateCreated:
+        format: date-time
+        type: string
+      DateIssued:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      ExchangeRate:
+        format: double
+        type: number
+      Notes:
+        type: string
+      PaymentAllocations:
+        items:
+          $ref: "#/definitions/BillPaymentAllocation"
+        type: array
+      PaymentNumber:
+        type: string
+      PaymentProviderCode:
+        type: string
+      SupplierIDFK:
+        format: int32
+        type: integer
+      TotalAmount:
+        format: double
+        type: number
+      TransactionID:
+        format: int64
+        type: integer
+      TransactionPrefix:
+        type: string
+      TransactionReference:
+        type: string
+      TransactionStatusCode:
+        type: string
+    type: object
+  BillPaymentAllocation:
+    properties:
+      AllocationAmount:
+        format: double
+        type: number
+      AllocationDate:
+        format: date-time
+        type: string
+      BillTransactionIDFK:
+        format: int64
+        type: integer
+      PaymentTransactionIDFK:
+        format: int64
+        type: integer
+      TransactionAllocationID:
+        format: int64
+        type: integer
+    type: object
+  BillPaymentList:
+    properties:
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      Payments:
+        items:
+          $ref: "#/definitions/BillPayment"
+        type: array
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  BillRecipientDetails:
+    properties:
+      RecipientBillingAddressCity:
+        type: string
+      RecipientBillingAddressCountryCode:
+        type: string
+      RecipientBillingAddressLine:
+        type: string
+      RecipientBillingAddressPostCode:
+        type: string
+      RecipientBillingAddressState:
+        type: string
+      RecipientFormattedBillingAddress:
+        type: string
     type: object
   Company:
     properties:
@@ -4090,6 +4695,172 @@ definitions:
       TaxNumber:
         type: string
     type: object
+  NewBill:
+    description: New Bill to be created
+    properties:
+      BillNumber:
+        description: Pass any string. If left blank it will use the next number in the auto incrementing sequence. If an integer is passed then the largest integer will be use as the seed to auto generate the next invoice number in the sequence.
+        type: string
+      BillTemplateIDFK:
+        description: If left blank the account default invoice template will be used.
+        format: int32
+        type: integer
+      CompanyIDFK:
+        description: If left blank then you must specify Company Name.
+        format: int32
+        type: integer
+      CompanyName:
+        description: If left blank then you must specify Company ID. Specified Name will be used to match existing customer record. If not matched then it will be used to create a new customer. First Name, Last Name and Email will only be used if it is a new company. If the Company name appears multiple times we will check the email address to find a matching company. If email address doesn't identify a matching company then the invoice creation will be rejected.
+        type: string
+      CurrencyCode:
+        description: Expects ISO Standard 3 character currency code. If left blank the currency will default to account's currency in general setting. For existing companies this field will be ignored and the invoice will use the currency of the customer. For new customers if the currency is not specified then account currency will be used otherwise the specified currency will be used.
+        type: string
+      DateIssued:
+        description: If not specified it will use today's date. The date should be specified as local date.
+        format: date-time
+        type: string
+      DueDate:
+        description: It will be auto calculated based on the payment term and issue date. Due Date must be greater than or equal to Issue Date. If the Due Date is specified then Payment Terms will be set to -1 (Custom)
+        format: date-time
+        type: string
+      Email:
+        description: Specified value will be used to create a new customer contact only if a new customer is being created.
+        type: string
+      ExchangeRate:
+        description: Exchange rate is only valid for invoices in currency other than default account currency. If not specified it will get the market rate based on the Date Issued.
+        format: double
+        type: number
+      Firstname:
+        description: Specified value will be used to create a new customer contact only if a new customer is being created.
+        type: string
+      Lastname:
+        description: Specified value will be used to create a new customer contact only if a new customer is being created.
+        type: string
+      LineItems:
+        items:
+          $ref: "#/definitions/NewBillLineItem"
+        type: array
+      Notes:
+        description: Plain UTF8 text. (no HTML). Max 2000 characters
+        type: string
+      PaymentTerms:
+        description: " \"If left blank we will set it to customer default. If specified then it must match one of your existing pre configured payment term periods. Your account starts with:\r
+
+          (-1 --- Custom, 0 --- Upon Receipt, 7 --- 7 Days, 15 --- 15 Days, 30 --- 30 Days, 45 --- 45 Days, 60 --- 60 Days)"
+        format: int32
+        type: integer
+      Subject:
+        description: Plain UTF8 text. (no HTML). 255 characters max
+        type: string
+      SupplierPONumber:
+        description: Plain UTF8 text. 100 characters max
+        type: string
+      TransactionPrefix:
+        description: A prefix for the Invoice number. e.g. 'INV'. If left blank it will be set to the account default. Max length 20 characters.
+        type: string
+      TransactionTaxConfigCode:
+        description: Possible values are (EX --- Tax Exclusive, INC --- Tax Inclusive). If left empty it will use the account default.
+        type: string
+    type: object
+  NewBillLineItem:
+    description: Line item to be added to new invoice
+    properties:
+      Description:
+        description: Plain UTF8 text. (no HTML)
+        type: string
+      Discount:
+        description: Enter 10.5 to give a 10.5% discount
+        format: double
+        type: number
+      InventoryItemIDFK:
+        description: If not specified then Inventory Item Name must be specified.
+        format: int32
+        type: integer
+      InventoryItemName:
+        description: If not specified then Inventory item ID must be specified. If specified and not matched to any existing inventory items then a new inventory item will be created. Max 200 characters.
+        type: string
+      ProjectIDFK:
+        description: Optional. Project ID of an Avaza Project that belongs to this customer, so line item is attributed to that Project for reporting.
+        format: int32
+        type: integer
+      Quantity:
+        description: The quantity for the line item
+        format: double
+        type: number
+      TaxIDFK:
+        description: If specified then it must match an existing Tax ID. If not specified then Tax Name and Tax Percent must be specified.
+        format: int32
+        type: integer
+      TaxName:
+        description: Must be specified if the Tax ID is blank. If the Tax Name is specified it will be matched to an existing Tax Name or else a new Tax will be created.
+        type: string
+      TaxPercent:
+        description: The Tax Percent will only be used if a new tax is being created.
+        format: double
+        type: number
+      UnitPrice:
+        description: The unit price for the lineitem.
+        format: double
+        type: number
+    required:
+      - Quantity
+      - UnitPrice
+    type: object
+  NewBillPayment:
+    properties:
+      Amount:
+        format: double
+        type: number
+      CompanyIDFK:
+        description: Only required if no invoice allocations specified.
+        format: int32
+        type: integer
+      CurrencyCode:
+        description: Optional for specifying the Bill Payment's Currency (3 letter ISO Currency Code).
+        type: string
+      DateIssued:
+        description: Date of Payment. If not specified, assumes today.
+        format: date-time
+        type: string
+      ExchangeRate:
+        description: Optional. Only used when the Company's currency is different from the Avaza account's base currency. Specifies the exchange rate that should apply between the Company currency and base currency. If not provided we will obtain an up to date exchange rate for the Payment Issue Date.
+        format: double
+        type: number
+      Notes:
+        type: string
+      PaymentAllocations:
+        description: List of amounts within this payment that are allocated to invoices. The sum of these be less than or equal to the payment amount.
+        items:
+          $ref: "#/definitions/NewBillPaymentAllocation"
+        type: array
+      PaymentNumber:
+        description: Optional. If not specified will be automatically generated
+        type: string
+      PaymentProviderCode:
+        description: Optional for storing the payment provider who was the source of funds.
+        type: string
+      TransactionPrefix:
+        description: Optional to override the default prefix added to Payment Numbers
+        type: string
+      TransactionReference:
+        description: "Optional for storing the reference # of the payment method."
+        type: string
+    type: object
+  NewBillPaymentAllocation:
+    properties:
+      AllocationAmount:
+        description: The Amount being allocated to the bill. Expects same currency as bill currency
+        format: double
+        type: number
+      AllocationDate:
+        description: Optional. Defaults to the current time in the Avaza account's timezone. The date the allocation is applied to the bill. Can be different from the Payment Date when doing prepayments etc.
+        format: date-time
+        type: string
+      BillTransactionIDFK:
+        description: The Avaza Bill TransactionID that is having a payment amount allocated to it.
+        format: int64
+        type: integer
+    type: object
   NewCompany:
     properties:
       BillingAddress:
@@ -4634,9 +5405,11 @@ definitions:
       AccountTaskTypeIDFK:
         format: int32
         type: integer
-      AssignedToUserIDFK:
-        format: int32
-        type: integer
+      AssignedToUserIDFKs:
+        items:
+          format: int32
+          type: integer
+        type: array
       DateDue:
         format: date-time
         type: string
@@ -4946,10 +5719,18 @@ definitions:
         type: string
       Notes:
         type: string
+      ProjectCategoryIDFK:
+        format: int64
+        type: integer
+      ProjectCategoryName:
+        type: string
       ProjectCode:
         type: string
       ProjectID:
         format: int32
+        type: integer
+      ProjectOwnerUserIDFK:
+        format: int64
         type: integer
       Title:
         type: string
@@ -4974,6 +5755,9 @@ definitions:
         type: string
       Lastname:
         type: string
+      ProjectIDFK:
+        format: int32
+        type: integer
       RateAmount:
         format: double
         type: number
@@ -4998,6 +5782,13 @@ definitions:
         type: boolean
       isTimesheetApprover:
         type: boolean
+    type: object
+  ProjectMemberList:
+    properties:
+      ProjectMembers:
+        items:
+          $ref: "#/definitions/ProjectMemberDetails"
+        type: array
     type: object
   ProjectSectionDetails:
     properties:
@@ -5047,6 +5838,10 @@ definitions:
         format: int32
         type: integer
       isBillable:
+        type: boolean
+      isDisabled:
+        type: boolean
+      isPayable:
         type: boolean
     type: object
   ProjectTimesheetCategoryList:
@@ -5268,14 +6063,10 @@ definitions:
       ActualTime:
         format: double
         type: number
-      AssignedToEmail:
-        type: string
-      AssignedToFirstname:
-        type: string
-      AssignedToLastname:
-        type: string
-      AssignedToUserIDFK:
-        type: string
+      AssignedToUsers:
+        items:
+          $ref: "#/definitions/AssignedToUser"
+        type: array
       DateCompleted:
         format: date-time
         type: string
@@ -5558,11 +6349,101 @@ definitions:
         type: integer
       Timesheets:
         items:
-          $ref: "#/definitions/TimesheetDetails"
+          $ref: "#/definitions/TimesheetListDetails"
         type: array
       TotalCount:
         format: int32
         type: integer
+    type: object
+  TimesheetListDetails:
+    properties:
+      ApprovedBy:
+        type: string
+      CategoryName:
+        type: string
+      CustomMetadata:
+        type: string
+      CustomerIDFK:
+        format: int32
+        type: integer
+      CustomerName:
+        type: string
+      DateApproved:
+        format: date-time
+        type: string
+      DateCreated:
+        format: date-time
+        type: string
+      DateUpdated:
+        format: date-time
+        type: string
+      Duration:
+        format: double
+        type: number
+      Email:
+        type: string
+      EndTimeLocal:
+        format: date-time
+        type: string
+      EndTimeUTC:
+        format: date-time
+        type: string
+      EntryDate:
+        format: date-time
+        type: string
+      Firstname:
+        type: string
+      HasTimer:
+        type: boolean
+      InvoiceIDFK:
+        description: This InvoiceIDFK is only included when the api get parameter includeInvoiceDetails==true
+        format: int64
+        type: integer
+      InvoiceLineItemIDFK:
+        format: int64
+        type: integer
+      Lastname:
+        type: string
+      Notes:
+        type: string
+      ProjectCode:
+        type: string
+      ProjectIDFK:
+        format: int32
+        type: integer
+      ProjectTitle:
+        type: string
+      StartTimeLocal:
+        format: date-time
+        type: string
+      StartTimeUTC:
+        format: date-time
+        type: string
+      TaskIDFK:
+        format: int32
+        type: integer
+      TaskTitle:
+        type: string
+      TimerStartedAtUTC:
+        format: date-time
+        type: string
+      TimesheetCategoryIDFK:
+        format: int32
+        type: integer
+      TimesheetEntryApprovalStatusCode:
+        type: string
+      TimesheetEntryID:
+        format: int64
+        type: integer
+      TimesheetUserTimeZone:
+        type: string
+      UserIDFK:
+        format: int32
+        type: integer
+      isBillable:
+        type: boolean
+      isInvoiced:
+        type: boolean
     type: object
   TimesheetSummaryGroup:
     properties:
@@ -5761,6 +6642,54 @@ definitions:
       - ExpenseID
       - FieldsToUpdate
     type: object
+  UpdateProjectMember:
+    properties:
+      BudgetAmount:
+        description: A new Budget Amount. Defaults to null.
+        format: double
+        type: number
+      CostAmount:
+        description: A new Cost Amount. Defaults to null.
+        format: double
+        type: number
+      FieldsToUpdate:
+        description: A string array of field names to be updated.
+        items:
+          type: string
+        type: array
+      ProjectIDFK:
+        description: Required. The ProjectID
+        format: int32
+        type: integer
+      RateAmount:
+        description: A new Rate Amount. Defaults to null.
+        format: double
+        type: number
+      UserIDFK:
+        description: Required. The UserID
+        format: int32
+        type: integer
+      canCommentOnTasks:
+        type: boolean
+      canCreateTasks:
+        type: boolean
+      canDeleteTasks:
+        type: boolean
+      canUpdateTasks:
+        type: boolean
+      isProjectManager:
+        type: boolean
+      isTimesheetAllowed:
+        type: boolean
+      isTimesheetApprovalRequired:
+        type: boolean
+      isTimesheetApprover:
+        type: boolean
+    required:
+      - ProjectIDFK
+      - UserIDFK
+      - FieldsToUpdate
+    type: object
   UpdateProjectModel:
     properties:
       BudgetAmount:
@@ -5812,8 +6741,10 @@ definitions:
   UpdateTask:
     properties:
       AssignedToUserIDFK:
-        format: int32
-        type: integer
+        items:
+          format: int32
+          type: integer
+        type: array
       DateDue:
         format: date-time
         type: string

@@ -81,6 +81,25 @@ paths:
           required: false
           schema:
             type: integer
+        - description: |
+            The type of account for which to return records. This
+            can be used to filter Savers from spending accounts.
+          example: SAVER
+          in: query
+          name: filter[accountType]
+          required: false
+          schema:
+            $ref: "#/components/schemas/AccountTypeEnum"
+        - description: |
+            The account ownership structure for which to return
+            records. This can be used to filter 2Up accounts from Up
+            accounts.
+          example: INDIVIDUAL
+          in: query
+          name: filter[ownershipType]
+          required: false
+          schema:
+            $ref: "#/components/schemas/OwnershipTypeEnum"
       responses:
         "200":
           content:
@@ -91,7 +110,7 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:HIvThbob76kGCuol
+                Authorization: Bearer up:demo:5PnWS0GVxCU0O1Oz
               pathParameters: {}
               payload: null
               queryParameters:
@@ -104,18 +123,19 @@ paths:
                       currencyCode: AUD
                       value: "1.00"
                       valueInBaseUnits: 100
-                    createdAt: 2020-09-04T13:37:07+10:00
-                    displayName: Up Account
-                  id: e0746933-045d-4c1b-a0b2-938d3e587583
+                    createdAt: 2022-01-13T14:50:14+11:00
+                    displayName: Spending
+                    ownershipType: INDIVIDUAL
+                  id: 26d88ec4-78d0-443c-a71f-48bcbf1d7a8e
                   links:
-                    self: https://api.up.com.au/api/v1/accounts/e0746933-045d-4c1b-a0b2-938d3e587583
+                    self: https://api.up.com.au/api/v1/accounts/26d88ec4-78d0-443c-a71f-48bcbf1d7a8e
                   relationships:
                     transactions:
                       links:
-                        related: https://api.up.com.au/api/v1/accounts/e0746933-045d-4c1b-a0b2-938d3e587583/transactions
+                        related: https://api.up.com.au/api/v1/accounts/26d88ec4-78d0-443c-a71f-48bcbf1d7a8e/transactions
                   type: accounts
               links:
-                next: https://api.up.com.au/api/v1/accounts?page%5Bafter%5D=WyIyMDIwLTA5LTA0VDAzOjM3OjA3Ljg3MDU4MTAwMFoiLCJlMDc0NjkzMy0wNDVkLTRjMWItYTBiMi05MzhkM2U1ODc1ODMiXQ%3D%3D&page%5Bsize%5D=1
+                next: https://api.up.com.au/api/v1/accounts?page%5Bafter%5D=WyIyMDIyLTAxLTEzVDAzOjUwOjE0LjUzNzk0NzAwMFoiLCIyNmQ4OGVjNC03OGQwLTQ0M2MtYTcxZi00OGJjYmYxZDdhOGUiXQ%3D%3D&page%5Bsize%5D=1
                 prev: null
             type: exampleRequestResponse
       summary: List accounts
@@ -134,7 +154,7 @@ paths:
       parameters:
         - description: |
             The unique identifier for the account.
-          example: 86150b64-feaa-4186-a7e4-e84eae764602
+          example: b5544658-4bbd-4eb1-8f63-a9909e0f564b
           in: path
           name: accountId
           required: true
@@ -211,9 +231,9 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:gOJGDHqZa3HSYFZD
+                Authorization: Bearer up:demo:p5OsA0UQU85Tto4g
               pathParameters:
-                accountId: a84f4f2b-1281-4f8f-9fbd-3e00fc28af90
+                accountId: 654cd41a-6f6d-4c2f-a1dd-5ad42c5ea175
               payload: null
               queryParameters:
                 "filter[category]": good-life
@@ -227,7 +247,7 @@ paths:
                       value: "-11.95"
                       valueInBaseUnits: -1195
                     cashback: null
-                    createdAt: 2020-09-01T09:28:36+10:00
+                    createdAt: 2022-01-10T10:41:42+11:00
                     description: Spotify
                     foreignAmount: null
                     holdInfo:
@@ -236,27 +256,29 @@ paths:
                         value: "-11.95"
                         valueInBaseUnits: -1195
                       foreignAmount: null
+                    isCategorizable: true
                     message: null
                     rawText: Spotify 0123456789
                     roundUp: null
                     settledAt: null
                     status: HELD
-                  id: f86b92e8-abda-4f8d-9101-59897ff0ca1b
+                  id: d3726667-719e-4202-b889-cee39dfedb70
                   links:
-                    self: https://api.up.com.au/api/v1/transactions/f86b92e8-abda-4f8d-9101-59897ff0ca1b
+                    self: https://api.up.com.au/api/v1/transactions/d3726667-719e-4202-b889-cee39dfedb70
                   relationships:
                     account:
                       data:
-                        id: a84f4f2b-1281-4f8f-9fbd-3e00fc28af90
+                        id: 654cd41a-6f6d-4c2f-a1dd-5ad42c5ea175
                         type: accounts
                       links:
-                        related: https://api.up.com.au/api/v1/accounts/a84f4f2b-1281-4f8f-9fbd-3e00fc28af90
+                        related: https://api.up.com.au/api/v1/accounts/654cd41a-6f6d-4c2f-a1dd-5ad42c5ea175
                     category:
                       data:
                         id: tv-and-music
                         type: categories
                       links:
                         related: https://api.up.com.au/api/v1/categories/tv-and-music
+                        self: https://api.up.com.au/api/v1/transactions/d3726667-719e-4202-b889-cee39dfedb70/relationships/category
                     parentCategory:
                       data:
                         id: good-life
@@ -266,7 +288,9 @@ paths:
                     tags:
                       data: []
                       links:
-                        self: https://api.up.com.au/api/v1/transactions/f86b92e8-abda-4f8d-9101-59897ff0ca1b/relationships/tags
+                        self: https://api.up.com.au/api/v1/transactions/d3726667-719e-4202-b889-cee39dfedb70/relationships/tags
+                    transferAccount:
+                      data: null
                   type: transactions
               links:
                 next: null
@@ -282,7 +306,7 @@ paths:
       parameters:
         - description: |
             The unique identifier for the account.
-          example: 9842e43e-a1f9-4460-a252-364c86df2d3e
+          example: 92b41408-6b7b-4fca-982b-3fb1fdd77220
           in: path
           name: id
           required: true
@@ -298,9 +322,9 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:orwRnj3vlo9ZTw8c
+                Authorization: Bearer up:demo:DpnDo3VeOQrhTq13
               pathParameters:
-                id: 66938e72-9d80-4b91-99bf-281ce20b161a
+                id: c2b6547c-6189-42b8-bd63-3993761825a0
               payload: null
               queryParameters: {}
             response:
@@ -311,15 +335,16 @@ paths:
                     currencyCode: AUD
                     value: "125.36"
                     valueInBaseUnits: 12536
-                  createdAt: 2020-09-04T13:37:09+10:00
+                  createdAt: 2022-01-13T14:50:15+11:00
                   displayName: 🐷 Savings
-                id: 66938e72-9d80-4b91-99bf-281ce20b161a
+                  ownershipType: INDIVIDUAL
+                id: c2b6547c-6189-42b8-bd63-3993761825a0
                 links:
-                  self: https://api.up.com.au/api/v1/accounts/66938e72-9d80-4b91-99bf-281ce20b161a
+                  self: https://api.up.com.au/api/v1/accounts/c2b6547c-6189-42b8-bd63-3993761825a0
                 relationships:
                   transactions:
                     links:
-                      related: https://api.up.com.au/api/v1/accounts/66938e72-9d80-4b91-99bf-281ce20b161a/transactions
+                      related: https://api.up.com.au/api/v1/accounts/c2b6547c-6189-42b8-bd63-3993761825a0/transactions
                 type: accounts
             type: exampleRequestResponse
       summary: Retrieve account
@@ -351,7 +376,7 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:NbylCaQt4uXPoAdn
+                Authorization: Bearer up:demo:WPt3A6fzd8WAsLLP
               pathParameters: {}
               payload: null
               queryParameters:
@@ -419,7 +444,7 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:z1uQ6Ph1KhcWXcn1
+                Authorization: Bearer up:demo:tOnteWbP5FzK52tt
               pathParameters:
                 id: home
               payload: null
@@ -472,7 +497,7 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:mbGGi7jVeVj0qXec
+                Authorization: Bearer up:demo:Z4FAB4Tl7jVHdp3w
               pathParameters: {}
               payload: null
               queryParameters:
@@ -580,7 +605,7 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:GghWDaFwjaTZl5EE
+                Authorization: Bearer up:demo:9iP9L9BTmcPc1dTh
               pathParameters: {}
               payload: null
               queryParameters:
@@ -595,27 +620,30 @@ paths:
                       value: "-59.98"
                       valueInBaseUnits: -5998
                     cashback: null
-                    createdAt: 2020-09-03T06:35:27+10:00
+                    createdAt: 2022-01-12T07:48:33+11:00
                     description: David Taylor
                     foreignAmount: null
                     holdInfo: null
+                    isCategorizable: true
                     message: Money for the pizzas last night.
                     rawText: null
                     roundUp: null
-                    settledAt: 2020-09-03T06:35:27+10:00
+                    settledAt: 2022-01-12T07:48:33+11:00
                     status: SETTLED
-                  id: faf43161-fb81-4e23-a900-c234ac099437
+                  id: f2020933-8b6c-47a8-bb4e-fe5477d876c1
                   links:
-                    self: https://api.up.com.au/api/v1/transactions/faf43161-fb81-4e23-a900-c234ac099437
+                    self: https://api.up.com.au/api/v1/transactions/f2020933-8b6c-47a8-bb4e-fe5477d876c1
                   relationships:
                     account:
                       data:
-                        id: 091ef233-f7d5-4900-aafc-82f77555e5b2
+                        id: 3050a1f9-5157-4b71-99c5-3524c083ecfe
                         type: accounts
                       links:
-                        related: https://api.up.com.au/api/v1/accounts/091ef233-f7d5-4900-aafc-82f77555e5b2
+                        related: https://api.up.com.au/api/v1/accounts/3050a1f9-5157-4b71-99c5-3524c083ecfe
                     category:
                       data: null
+                      links:
+                        self: https://api.up.com.au/api/v1/transactions/f2020933-8b6c-47a8-bb4e-fe5477d876c1/relationships/category
                     parentCategory:
                       data: null
                     tags:
@@ -623,7 +651,9 @@ paths:
                         - id: Pizza Night
                           type: tags
                       links:
-                        self: https://api.up.com.au/api/v1/transactions/faf43161-fb81-4e23-a900-c234ac099437/relationships/tags
+                        self: https://api.up.com.au/api/v1/transactions/f2020933-8b6c-47a8-bb4e-fe5477d876c1/relationships/tags
+                    transferAccount:
+                      data: null
                   type: transactions
               links:
                 next: null
@@ -639,7 +669,7 @@ paths:
       parameters:
         - description: |
             The unique identifier for the transaction.
-          example: 8e1da97e-6490-42eb-9c18-d8fdd94cfddc
+          example: 7a9d19f9-106c-4e29-8591-52fc5d8f09c5
           in: path
           name: id
           required: true
@@ -655,9 +685,9 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:mYhaIvMQsZr4Jkio
+                Authorization: Bearer up:demo:XLk9FDAi6bniOFR9
               pathParameters:
-                id: 75d3cffa-c517-4e64-8e41-acd63156c8b0
+                id: 7c125426-98b7-4cd5-b899-95db54f5c6c1
               payload: null
               queryParameters: {}
             response:
@@ -668,7 +698,7 @@ paths:
                     value: "-107.92"
                     valueInBaseUnits: -10792
                   cashback: null
-                  createdAt: 2020-09-01T04:00:00+10:00
+                  createdAt: 2022-01-10T04:00:00+11:00
                   description: Warung Bebek Bengil
                   foreignAmount:
                     currencyCode: IDR
@@ -680,6 +710,7 @@ paths:
                       value: "-107.92"
                       valueInBaseUnits: -10792
                     foreignAmount: null
+                  isCategorizable: true
                   message: null
                   rawText: WARUNG BEBEK, UBUD INDONES
                   roundUp:
@@ -688,31 +719,80 @@ paths:
                       value: "-0.08"
                       valueInBaseUnits: -8
                     boostPortion: null
-                  settledAt: 2020-08-30T11:34:29+10:00
+                  settledAt: 2022-01-10T04:00:00+11:00
                   status: SETTLED
-                id: 75d3cffa-c517-4e64-8e41-acd63156c8b0
+                id: 7c125426-98b7-4cd5-b899-95db54f5c6c1
                 links:
-                  self: https://api.up.com.au/api/v1/transactions/75d3cffa-c517-4e64-8e41-acd63156c8b0
+                  self: https://api.up.com.au/api/v1/transactions/7c125426-98b7-4cd5-b899-95db54f5c6c1
                 relationships:
                   account:
                     data:
-                      id: 139ed96d-9697-4c4a-b221-3d0f72d656cd
+                      id: 1bf1c1b3-2ea9-48b6-9e94-1bcfcaf56b7d
                       type: accounts
                     links:
-                      related: https://api.up.com.au/api/v1/accounts/139ed96d-9697-4c4a-b221-3d0f72d656cd
+                      related: https://api.up.com.au/api/v1/accounts/1bf1c1b3-2ea9-48b6-9e94-1bcfcaf56b7d
                   category:
                     data: null
+                    links:
+                      self: https://api.up.com.au/api/v1/transactions/7c125426-98b7-4cd5-b899-95db54f5c6c1/relationships/category
                   parentCategory:
                     data: null
                   tags:
                     data: []
                     links:
-                      self: https://api.up.com.au/api/v1/transactions/75d3cffa-c517-4e64-8e41-acd63156c8b0/relationships/tags
+                      self: https://api.up.com.au/api/v1/transactions/7c125426-98b7-4cd5-b899-95db54f5c6c1/relationships/tags
+                  transferAccount:
+                    data: null
                 type: transactions
             type: exampleRequestResponse
       summary: Retrieve transaction
       tags:
         - Transactions
+  "/transactions/{transactionId}/relationships/category":
+    patch:
+      description: |
+        Updates the category associated with a transaction. Only transactions
+        for which `isCategorizable` is set to true support this operation. The
+        `id` is taken from the list exposed on `/categories` and cannot be one of
+        the top-level (parent) categories. To de-categorize a transaction, set
+        the entire `data` key to `null`. An HTTP `204` is returned on success.
+        The associated category, along with its request URL is also exposed via
+        the `category` relationship on the transaction resource returned from
+        `/transactions/{id}`.
+      parameters:
+        - description: |
+            The unique identifier for the transaction.
+          example: a572c7c3-b637-433c-a4ce-c0be5dcb0a5a
+          in: path
+          name: transactionId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTransactionCategoryRequest"
+      responses:
+        "204":
+          description: Successful Response
+          x-up:example:
+            request:
+              headers:
+                Authorization: Bearer up:demo:FGVj7lJzpYRFBcwQ
+                Content-Type: application/json
+              pathParameters:
+                transactionId: 5a010c5d-a058-465a-956b-93809e8bbf16
+              payload:
+                data:
+                  id: restaurants-and-cafes
+                  type: categories
+              queryParameters: {}
+            response: null
+            type: exampleRequestResponse
+      summary: Categorize transaction
+      tags:
+        - Categories
   "/transactions/{transactionId}/relationships/tags":
     delete:
       description: |
@@ -724,7 +804,7 @@ paths:
       parameters:
         - description: |
             The unique identifier for the transaction.
-          example: d8c190d6-be35-4d64-b2c4-e1aa0c09a0e0
+          example: c3feb4ba-829c-4482-b882-1b9bd23da82d
           in: path
           name: transactionId
           required: true
@@ -741,10 +821,10 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:cktrwA7Wmm5eSlBA
+                Authorization: Bearer up:demo:qc6D7GoPamQ09cJH
                 Content-Type: application/json
               pathParameters:
-                transactionId: 734affdd-fc33-4dec-b4d1-ce1b2a2fd883
+                transactionId: 32e050dc-ed36-462c-9cf6-68d5cb64e289
               payload:
                 data:
                   - id: Holiday
@@ -768,7 +848,7 @@ paths:
       parameters:
         - description: |
             The unique identifier for the transaction.
-          example: d024c1b8-bc6a-4785-afc6-cd332d2a2efb
+          example: acde4631-db56-49a6-aea3-4e2311ef1d6a
           in: path
           name: transactionId
           required: true
@@ -785,10 +865,10 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:arTSpKPKqafUZOyn
+                Authorization: Bearer up:demo:Sr1VvsqAqKngeTQS
                 Content-Type: application/json
               pathParameters:
-                transactionId: dd21471e-771b-4367-997a-785e326dcde3
+                transactionId: af2f319c-1edd-4386-ad15-5927f7ead3af
               payload:
                 data:
                   - id: Holiday
@@ -818,13 +898,13 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:Ei7727gXam4j0JOy
+                Authorization: Bearer up:demo:eOr0TZ0qTMpcXWJj
               pathParameters: {}
               payload: null
               queryParameters: {}
             response:
               meta:
-                id: 7c3c84c7-a02e-4218-96ba-2a6ebc64c594
+                id: 7feb7523-d65e-4b98-9eae-cd521b5005de
                 statusEmoji: ⚡️
             type: exampleRequestResponse
         "401":
@@ -874,7 +954,7 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:9E64pZGsOXbna3ZG
+                Authorization: Bearer up:demo:Id50WZYXl1n7Pb7o
               pathParameters: {}
               payload: null
               queryParameters:
@@ -882,19 +962,19 @@ paths:
             response:
               data:
                 - attributes:
-                    createdAt: 2020-09-02T13:37:37+10:00
+                    createdAt: 2022-01-11T14:50:43+11:00
                     description: Webhook number 1
                     url: http://example.com/webhook-1
-                  id: c4c9bcb9-88aa-4a52-87c8-9eaa9fef735f
+                  id: dcb32837-b686-42eb-82a9-2c173b5b3ee4
                   links:
-                    self: https://api.up.com.au/api/v1/webhooks/c4c9bcb9-88aa-4a52-87c8-9eaa9fef735f
+                    self: https://api.up.com.au/api/v1/webhooks/dcb32837-b686-42eb-82a9-2c173b5b3ee4
                   relationships:
                     logs:
                       links:
-                        related: https://api.up.com.au/api/v1/webhooks/c4c9bcb9-88aa-4a52-87c8-9eaa9fef735f/logs
+                        related: https://api.up.com.au/api/v1/webhooks/dcb32837-b686-42eb-82a9-2c173b5b3ee4/logs
                   type: webhooks
               links:
-                next: https://api.up.com.au/api/v1/webhooks?page%5Bafter%5D=WyIyMDIwLTA5LTAyVDAzOjM3OjM3LjM2MjQxMjAwMFoiLCJjNGM5YmNiOS04OGFhLTRhNTItODdjOC05ZWFhOWZlZjczNWYiXQ%3D%3D&page%5Bsize%5D=1
+                next: https://api.up.com.au/api/v1/webhooks?page%5Bafter%5D=WyIyMDIyLTAxLTExVDAzOjUwOjQzLjc1OTEyMzAwMFoiLCJkY2IzMjgzNy1iNjg2LTQyZWItODJhOS0yYzE3M2I1YjNlZTQiXQ%3D%3D&page%5Bsize%5D=1
                 prev: null
             type: exampleRequestResponse
       summary: List webhooks
@@ -1081,22 +1161,22 @@ paths:
                 payload:
                   data:
                     attributes:
-                      createdAt: 2020-09-04T13:37:38+10:00
+                      createdAt: 2022-01-13T14:50:45+11:00
                       eventType: TRANSACTION_CREATED
-                    id: 8671d400-d9e0-4d99-923c-95c031bc6739
+                    id: f23aba64-a992-46e3-a6f9-b162d58bc731
                     relationships:
                       transaction:
                         data:
-                          id: 468ec9d9-aac6-4c8a-ba85-141a39d09b91
+                          id: 52717f62-f725-4674-94a9-8470decf2c2a
                           type: transactions
                         links:
-                          related: https://api.up.com.au/api/v1/transactions/468ec9d9-aac6-4c8a-ba85-141a39d09b91
+                          related: https://api.up.com.au/api/v1/transactions/52717f62-f725-4674-94a9-8470decf2c2a
                       webhook:
                         data:
-                          id: 3c62e0a3-86e5-4dcd-a217-d7c1d096ba0e
+                          id: 8b1744c4-d65c-4d9e-9ab5-3b50512fa867
                           type: webhooks
                         links:
-                          related: https://api.up.com.au/api/v1/webhooks/3c62e0a3-86e5-4dcd-a217-d7c1d096ba0e
+                          related: https://api.up.com.au/api/v1/webhooks/8b1744c4-d65c-4d9e-9ab5-3b50512fa867
                     type: webhook-events
                 type: examplePayload
       description: |
@@ -1135,7 +1215,7 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:vJCDnqeW8lNkeBA1
+                Authorization: Bearer up:demo:Q8zq1dRpYtsGeGHE
                 Content-Type: application/json
               pathParameters: {}
               payload:
@@ -1147,17 +1227,17 @@ paths:
             response:
               data:
                 attributes:
-                  createdAt: 2020-09-04T13:37:38+10:00
+                  createdAt: 2022-01-13T14:50:44+11:00
                   description: Example webhook
-                  secretKey: UcYEuMacPkZjui0XhUzKeS0z3ETXtYgFDNJ16Gcrk7o4iSh7ZHNS2u7fOEjqtlzR
+                  secretKey: 5l2wSJIvC01gD2W2GZ6XPHN7SEg2cXUWWKf7xiVLdk0Qsmuu9NHDmNV3M5DxVDg6
                   url: http://example.com/webhook
-                id: 39b070ae-8595-437f-a3f3-f5ee482ca206
+                id: 4229772e-3558-46c9-8df1-526b7c0632bc
                 links:
-                  self: https://api.up.com.au/api/v1/webhooks/39b070ae-8595-437f-a3f3-f5ee482ca206
+                  self: https://api.up.com.au/api/v1/webhooks/4229772e-3558-46c9-8df1-526b7c0632bc
                 relationships:
                   logs:
                     links:
-                      related: https://api.up.com.au/api/v1/webhooks/39b070ae-8595-437f-a3f3-f5ee482ca206/logs
+                      related: https://api.up.com.au/api/v1/webhooks/4229772e-3558-46c9-8df1-526b7c0632bc/logs
                 type: webhooks
             type: exampleRequestResponse
       summary: Create webhook
@@ -1171,7 +1251,7 @@ paths:
       parameters:
         - description: |
             The unique identifier for the webhook.
-          example: 81f485ae-0e10-493d-95f3-a9c1dd4b6b6a
+          example: a940825b-80b6-4798-b378-c6284259b4c5
           in: path
           name: id
           required: true
@@ -1183,9 +1263,9 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:wJTpdJqQniotjF64
+                Authorization: Bearer up:demo:DSduRSY7s3nReT16
               pathParameters:
-                id: a64bdc5f-d245-4678-a1af-9894318ebcec
+                id: b2daaed4-4403-44fd-acec-9f9b8ceba5d9
               payload: null
               queryParameters: {}
             response: null
@@ -1199,7 +1279,7 @@ paths:
       parameters:
         - description: |
             The unique identifier for the webhook.
-          example: bc11e3ed-362e-43ab-b141-ef4f6251faa5
+          example: c8283a72-24b0-4fd8-9b13-fccccab371e5
           in: path
           name: id
           required: true
@@ -1215,24 +1295,24 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:qqUmYsIcKyjjLBBM
+                Authorization: Bearer up:demo:6qAFUokK7x5aUTSL
               pathParameters:
-                id: c6715e53-68d8-4315-b183-5993dea31603
+                id: 4485694d-d057-4e7f-879c-0886d2092a71
               payload: null
               queryParameters: {}
             response:
               data:
                 attributes:
-                  createdAt: 2020-09-03T13:37:39+10:00
+                  createdAt: 2022-01-12T14:50:46+11:00
                   description: Webhook number 2
                   url: http://example.com/webhook-2
-                id: c6715e53-68d8-4315-b183-5993dea31603
+                id: 4485694d-d057-4e7f-879c-0886d2092a71
                 links:
-                  self: https://api.up.com.au/api/v1/webhooks/c6715e53-68d8-4315-b183-5993dea31603
+                  self: https://api.up.com.au/api/v1/webhooks/4485694d-d057-4e7f-879c-0886d2092a71
                 relationships:
                   logs:
                     links:
-                      related: https://api.up.com.au/api/v1/webhooks/c6715e53-68d8-4315-b183-5993dea31603/logs
+                      related: https://api.up.com.au/api/v1/webhooks/4485694d-d057-4e7f-879c-0886d2092a71/logs
                 type: webhooks
             type: exampleRequestResponse
       summary: Retrieve webhook
@@ -1250,7 +1330,7 @@ paths:
       parameters:
         - description: |
             The unique identifier for the webhook.
-          example: 49733526-b90d-436a-8a75-9715a1d7cc5b
+          example: 7104f5df-4993-495f-9d29-2b4d062c03a9
           in: path
           name: webhookId
           required: true
@@ -1274,31 +1354,31 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:cDMrkDxg8msPDmVC
+                Authorization: Bearer up:demo:TONkbYAMSJJAbHbp
               pathParameters:
-                webhookId: 843f52cf-ceab-43cc-a7c6-449cf82c49e3
+                webhookId: 117454bf-46ad-4be9-be0f-cadabf14e2c9
               payload: null
               queryParameters:
                 "page[size]": 1
             response:
               data:
                 - attributes:
-                    createdAt: 2020-09-03T13:38:43+10:00
+                    createdAt: 2022-01-12T14:51:50+11:00
                     deliveryStatus: DELIVERED
                     request:
-                      body: '{"data":{"type":"webhook-events","id":"9dee0635-accd-42a0-b2b5-af5914692a17","attributes":{"eventType":"TRANSACTION_CREATED","createdAt":"2020-09-03T13:38:43+10:00"},"relationships":{"webhook":{"data":{"type":"webhooks","id":"843f52cf-ceab-43cc-a7c6-449cf82c49e3"},"links":{"related":"https://api.up.com.au/api/v1/webhooks/843f52cf-ceab-43cc-a7c6-449cf82c49e3"}},"transaction":{"data":{"type":"transactions","id":"a131f7ec-681f-4bf4-9dc9-b25ba94c02dc"},"links":{"related":"https://api.up.com.au/api/v1/transactions/a131f7ec-681f-4bf4-9dc9-b25ba94c02dc"}}}}}'
+                      body: '{"data":{"type":"webhook-events","id":"2347d5a4-78c8-47f8-b858-6a6f7ed8cd10","attributes":{"eventType":"TRANSACTION_CREATED","createdAt":"2022-01-12T14:51:50+11:00"},"relationships":{"webhook":{"data":{"type":"webhooks","id":"117454bf-46ad-4be9-be0f-cadabf14e2c9"},"links":{"related":"https://api.up.com.au/api/v1/webhooks/117454bf-46ad-4be9-be0f-cadabf14e2c9"}},"transaction":{"data":{"type":"transactions","id":"346eeb5b-43ba-4a5b-a747-667d72bef559"},"links":{"related":"https://api.up.com.au/api/v1/transactions/346eeb5b-43ba-4a5b-a747-667d72bef559"}}}}}'
                     response:
                       body: '{"ok":true}'
                       statusCode: 200
-                  id: 7dfbd731-5537-46ab-b658-7676f6024475
+                  id: 2482a02f-ebec-42a0-a09f-eb15843378d9
                   relationships:
                     webhookEvent:
                       data:
-                        id: 9dee0635-accd-42a0-b2b5-af5914692a17
+                        id: 2347d5a4-78c8-47f8-b858-6a6f7ed8cd10
                         type: webhook-events
                   type: webhook-delivery-logs
               links:
-                next: https://api.up.com.au/api/v1/webhooks/843f52cf-ceab-43cc-a7c6-449cf82c49e3/logs?page%5Bafter%5D=WyIyMDIwLTA5LTAzVDAzOjM4OjQzLjYxMzE3MTAwMFoiLCI3ZGZiZDczMS01NTM3LTQ2YWItYjY1OC03Njc2ZjYwMjQ0NzUiXQ%3D%3D&page%5Bsize%5D=1
+                next: https://api.up.com.au/api/v1/webhooks/117454bf-46ad-4be9-be0f-cadabf14e2c9/logs?page%5Bafter%5D=WyIyMDIyLTAxLTEyVDAzOjUxOjUwLjYyNTgwODAwMFoiLCIyNDgyYTAyZi1lYmVjLTQyYTAtYTA5Zi1lYjE1ODQzMzc4ZDkiXQ%3D%3D&page%5Bsize%5D=1
                 prev: null
             type: exampleRequestResponse
       summary: List webhook logs
@@ -1313,7 +1393,7 @@ paths:
       parameters:
         - description: |
             The unique identifier for the webhook.
-          example: 6ef4bb23-53f1-4a3d-aa5c-a6e9121c5da3
+          example: 830e127d-fb89-4400-92bb-f3f48289dcba
           in: path
           name: webhookId
           required: true
@@ -1329,25 +1409,25 @@ paths:
           x-up:example:
             request:
               headers:
-                Authorization: Bearer up:demo:TPZKsyrzLBxjuJjl
+                Authorization: Bearer up:demo:oLDKm4XoYRcboJD3
                 Content-Type: application/json
               pathParameters:
-                webhookId: 7a72c637-9a0d-4dfd-8f1a-dc2a75b484b7
+                webhookId: c673b0fa-caee-4d05-9fa6-9a76ee58f838
               payload: ""
               queryParameters: {}
             response:
               data:
                 attributes:
-                  createdAt: 2020-09-04T13:37:41+10:00
+                  createdAt: 2022-01-13T14:50:48+11:00
                   eventType: PING
-                id: fb177d1d-003f-4e9a-831a-62194652937d
+                id: f0adb047-e63e-41d7-bdba-263c38f14581
                 relationships:
                   webhook:
                     data:
-                      id: 7a72c637-9a0d-4dfd-8f1a-dc2a75b484b7
+                      id: c673b0fa-caee-4d05-9fa6-9a76ee58f838
                       type: webhooks
                     links:
-                      related: https://api.up.com.au/api/v1/webhooks/7a72c637-9a0d-4dfd-8f1a-dc2a75b484b7
+                      related: https://api.up.com.au/api/v1/webhooks/c673b0fa-caee-4d05-9fa6-9a76ee58f838
                 type: webhook-events
             type: exampleRequestResponse
       summary: Ping webhook
@@ -1381,9 +1461,15 @@ components:
               description: |
                 The name associated with the account in the Up application.
               type: string
+            ownershipType:
+              allOf:
+                - $ref: "#/components/schemas/OwnershipTypeEnum"
+              description: |
+                The ownership structure for this account.
           required:
             - displayName
             - accountType
+            - ownershipType
             - balance
             - createdAt
           type: object
@@ -1450,6 +1536,22 @@ components:
       required:
         - description
         - amount
+      type: object
+    CategoryInputResourceIdentifier:
+      description: |
+        Uniquely identifies a category in the API.
+      properties:
+        id:
+          description: |
+            The unique identifier of the category, as returned by the `/categories`
+            endpoint.
+          type: string
+        type:
+          description: "The type of this resource: `categories`"
+          type: string
+      required:
+        - type
+        - id
       type: object
     CategoryResource:
       description: |
@@ -1912,6 +2014,13 @@ components:
         - value
         - valueInBaseUnits
       type: object
+    OwnershipTypeEnum:
+      description: |
+        Specifies the structure under which a bank account is owned. Currently
+        returned values are `INDIVIDUAL` and `JOINT`.
+      enum:
+        - INDIVIDUAL
+        - JOINT
     PingResponse:
       description: |
         Basic ping response to verify authentication.
@@ -2051,6 +2160,11 @@ components:
                 the `HELD` status, the `amount` and `foreignAmount` of the
                 transaction while `HELD`.
               nullable: true
+            isCategorizable:
+              description: |
+                Boolean flag set to true on transactions that support the use of
+                categories.
+              type: boolean
             message:
               description: |
                 Attached message for this transaction, such as a payment message, or a
@@ -2089,6 +2203,7 @@ components:
             - rawText
             - description
             - message
+            - isCategorizable
             - holdInfo
             - roundUp
             - cashback
@@ -2161,8 +2276,13 @@ components:
                       description: |
                         The link to retrieve the related resource(s) in this relationship.
                       type: string
+                    self:
+                      description: |
+                        The link to retrieve or modify linkage between this resources and the
+                        related resource(s) in this relationship.
+                      type: string
                   required:
-                    - related
+                    - self
                   type: object
               required:
                 - data
@@ -2225,8 +2345,41 @@ components:
               required:
                 - data
               type: object
+            transferAccount:
+              description: |
+                If this transaction is a transfer between accounts, this relationship
+                will contain the account the transaction went to/came from. The
+                `amount` field can be used to determine the direction of the transfer.
+              properties:
+                data:
+                  nullable: true
+                  properties:
+                    id:
+                      description: |
+                        The unique identifier of the resource within its type.
+                      type: string
+                    type:
+                      description: "The type of this resource: `accounts`"
+                      type: string
+                  required:
+                    - type
+                    - id
+                  type: object
+                links:
+                  properties:
+                    related:
+                      description: |
+                        The link to retrieve the related resource(s) in this relationship.
+                      type: string
+                  required:
+                    - related
+                  type: object
+              required:
+                - data
+              type: object
           required:
             - account
+            - transferAccount
             - category
             - parentCategory
             - tags
@@ -2249,6 +2402,20 @@ components:
       enum:
         - HELD
         - SETTLED
+    UpdateTransactionCategoryRequest:
+      description: |
+        Request to update the category associated with a transaction.
+      properties:
+        data:
+          allOf:
+            - $ref: "#/components/schemas/CategoryInputResourceIdentifier"
+          description: |
+            The category to set on the transaction. Set this entire key to `null`
+            de-categorize a transaction.
+          nullable: true
+      required:
+        - data
+      type: object
     UpdateTransactionTagsRequest:
       description: |
         Request to add or remove tags associated with a transaction.

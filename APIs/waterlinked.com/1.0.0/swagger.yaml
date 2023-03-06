@@ -32,6 +32,8 @@ consumes:
 produces:
   - application/json
 responses:
+  BadRequest:
+    description: Bad Request
   Conflict:
     description: Conflict
   Forbidden:
@@ -451,7 +453,7 @@ paths:
         - external
   /api/v1/external/imu:
     get:
-      description: Get rotation and acceleration of vehicle Locator is mounted on which was previously set
+      description: "[DEPRECATED]Get rotation and acceleration of vehicle Locator is mounted on which was previously set"
       operationId: external#GetVehicleIMU
       produces:
         - application/vnd.wl.external.vehicle.imu+json
@@ -468,7 +470,7 @@ paths:
       tags:
         - external
     put:
-      description: Set rotation and acceleration of vehicle Locator is mounted on. This is used to improve positioning of vehicle
+      description: "[DEPRECATED]Set rotation and acceleration of vehicle Locator is mounted on. This is used to improve positioning of vehicle"
       operationId: external#SetVehicleIMU
       parameters:
         - description: Set current rotation and acceleration of vehicle
@@ -584,7 +586,7 @@ paths:
       tags:
         - imu
     post:
-      description: Start calibration
+      description: "[DEPRECATED]Start calibration"
       operationId: imu#Calibrate
       parameters:
         - description: IMU calibration action
@@ -641,6 +643,8 @@ paths:
       responses:
         "200":
           description: OK
+        "400":
+          description: Bad Request
         "408":
           description: Request Timeout
         "409":
@@ -864,7 +868,7 @@ paths:
         - status_report
   /api/v1/warnings/:
     get:
-      description: "[Deprecated] Get current list of messages"
+      description: "[DEPRECATED] Get current list of messages"
       operationId: warnings#Get
       produces:
         - application/vnd.waterlinked.operation_response+json
@@ -903,45 +907,45 @@ definitions:
   CreatePoiPayload:
     description: A list of all POI
     example:
-      depth: 0.983923109918765
-      icon: Molestias laboriosam quasi aut ex omnis reprehenderit.
-      id: 2287845429121360000
-      lat: 0.4126800396556589
-      lng: 0.09012467671506151
-      name: Accusantium ad.
-      visible: true
+      depth: 0.9848439086783396
+      icon: Ut molestias laboriosam.
+      id: 3408207428662661600
+      lat: 0.8147274904139097
+      lng: 0.06472337355304676
+      name: Reprehenderit non architecto quia.
+      visible: false
     properties:
       depth:
         description: Depth of POI
-        example: 0.983923109918765
+        example: 0.9848439086783396
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Molestias laboriosam quasi aut ex omnis reprehenderit.
+        example: Ut molestias laboriosam.
         type: string
       id:
         description: Unique POI id
-        example: 2287845429121360000
+        example: 3408207428662661600
         format: int64
         type: integer
       lat:
         description: Latitude of POI
-        example: 0.4126800396556589
+        example: 0.8147274904139097
         format: double
         type: number
       lng:
         description: Longitude of POI
-        example: 0.09012467671506151
+        example: 0.06472337355304676
         format: double
         type: number
       name:
         description: Name of POI
-        example: Accusantium ad.
+        example: Reprehenderit non architecto quia.
         type: string
       visible:
         description: Visibility of POI
-        example: true
+        example: false
         type: boolean
     required:
       - name
@@ -963,8 +967,8 @@ definitions:
       antenna_rotation:
         description: Configured rotation of antenna relative to forward arrow on topside housing. Clockwise is positive direction (degrees)
         example: 90
-        maximum: 180
-        minimum: -180
+        maximum: 360
+        minimum: 0
         type: integer
       depth:
         description: Configured depth relative to surface (meter)
@@ -1190,29 +1194,29 @@ definitions:
   ModifyReceiverConfigPayload:
     description: A receiver configuration
     example:
-      id: 3192861043049571000
-      x: 0.27252655729990977
-      y: 0.4129036062459767
-      z: 0.12624652449013432
+      id: 2339264502380679700
+      x: 0.0158212572962501
+      y: 0.08142596921667565
+      z: 0.34617068793186784
     properties:
       id:
         description: Unique receiver identifier
-        example: 3192861043049571000
+        example: 2339264502380679700
         format: int64
         type: integer
       x:
         description: Configured X position relative to master electronics (meter)
-        example: 0.27252655729990977
+        example: 0.0158212572962501
         format: double
         type: number
       y:
         description: Configured Y position relative to master electronics (meter)
-        example: 0.4129036062459767
+        example: 0.08142596921667565
         format: double
         type: number
       z:
         description: Configured Z position relative to master electronics (meter)
-        example: 0.12624652449013432
+        example: 0.34617068793186784
         format: double
         type: number
     required:
@@ -1338,17 +1342,16 @@ definitions:
   SetNorthImuPayload:
     description: IMU set north
     example:
-      action: clear
+      heading: 50
     properties:
-      action:
-        description: IMU Set north action to use
-        enum:
-          - set
-          - clear
-        example: clear
-        type: string
+      heading:
+        description: Current heading
+        example: 50
+        maximum: 360
+        minimum: 0
+        type: number
     required:
-      - action
+      - heading
     title: SetNorthImuPayload
     type: object
   SetOrientationExternalPayload:
@@ -1424,45 +1427,45 @@ definitions:
   UpdatePoiPayload:
     description: A list of all POI
     example:
-      depth: 0.983923109918765
-      icon: Molestias laboriosam quasi aut ex omnis reprehenderit.
-      id: 2287845429121360000
-      lat: 0.4126800396556589
-      lng: 0.09012467671506151
-      name: Accusantium ad.
-      visible: true
+      depth: 0.9848439086783396
+      icon: Ut molestias laboriosam.
+      id: 3408207428662661600
+      lat: 0.8147274904139097
+      lng: 0.06472337355304676
+      name: Reprehenderit non architecto quia.
+      visible: false
     properties:
       depth:
         description: Depth of POI
-        example: 0.983923109918765
+        example: 0.9848439086783396
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Molestias laboriosam quasi aut ex omnis reprehenderit.
+        example: Ut molestias laboriosam.
         type: string
       id:
         description: Unique POI id
-        example: 2287845429121360000
+        example: 3408207428662661600
         format: int64
         type: integer
       lat:
         description: Latitude of POI
-        example: 0.4126800396556589
+        example: 0.8147274904139097
         format: double
         type: number
       lng:
         description: Longitude of POI
-        example: 0.09012467671506151
+        example: 0.06472337355304676
         format: double
         type: number
       name:
         description: Name of POI
-        example: Accusantium ad.
+        example: Reprehenderit non architecto quia.
         type: string
       visible:
         description: Visibility of POI
-        example: true
+        example: false
         type: boolean
     required:
       - name
@@ -1477,7 +1480,10 @@ definitions:
     description: About information (default view)
     example:
       chipid: "0x123456789"
-      variant: R100
+      hardware_revision: 1
+      product_id: 1
+      product_name: Underwater GPS
+      variant: standard
       version: 1.0.0 (abc.def)
       version_short: 1.0.0
     properties:
@@ -1485,9 +1491,23 @@ definitions:
         description: Chip identifier
         example: "0x123456789"
         type: string
+      hardware_revision:
+        description: Hardware revision
+        example: 1
+        format: int64
+        type: integer
+      product_id:
+        description: Product ID
+        example: 1
+        format: int64
+        type: integer
+      product_name:
+        description: Product name
+        example: Underwater GPS
+        type: string
       variant:
-        description: Software release variant
-        example: R100
+        description: Product variant
+        example: standard
         type: string
       version:
         description: Detailed Web Server version string
@@ -1500,8 +1520,11 @@ definitions:
     required:
       - version
       - version_short
-      - variant
       - chipid
+      - product_name
+      - hardware_revision
+      - product_id
+      - variant
     title: "Mediatype identifier: application/vnd.waterlinked.about+json; view=default"
     type: object
   WaterlinkedAccousticPosition:
@@ -1614,8 +1637,8 @@ definitions:
       antenna_rotation:
         description: Configured rotation of antenna relative to forward arrow on topside housing. Clockwise is positive direction (degrees)
         example: 90
-        maximum: 180
-        minimum: -180
+        maximum: 360
+        minimum: 0
         type: integer
       depth:
         description: Configured depth relative to surface (meter)
@@ -1889,7 +1912,7 @@ definitions:
     description: Response from server on operations performed (default view)
     example:
       error: something went wrong
-      success: true
+      success: false
     properties:
       error:
         description: Error if it occurs
@@ -1897,7 +1920,7 @@ definitions:
         type: string
       success:
         description: Status of operation
-        example: true
+        example: false
         type: boolean
     required:
       - success
@@ -1906,45 +1929,45 @@ definitions:
   WaterlinkedPoi:
     description: A list of all POI (default view)
     example:
-      depth: 0.983923109918765
-      icon: Molestias laboriosam quasi aut ex omnis reprehenderit.
-      id: 2287845429121360000
-      lat: 0.4126800396556589
-      lng: 0.09012467671506151
-      name: Accusantium ad.
-      visible: true
+      depth: 0.9848439086783396
+      icon: Ut molestias laboriosam.
+      id: 3408207428662661600
+      lat: 0.8147274904139097
+      lng: 0.06472337355304676
+      name: Reprehenderit non architecto quia.
+      visible: false
     properties:
       depth:
         description: Depth of POI
-        example: 0.983923109918765
+        example: 0.9848439086783396
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Molestias laboriosam quasi aut ex omnis reprehenderit.
+        example: Ut molestias laboriosam.
         type: string
       id:
         description: Unique POI id
-        example: 2287845429121360000
+        example: 3408207428662661600
         format: int64
         type: integer
       lat:
         description: Latitude of POI
-        example: 0.4126800396556589
+        example: 0.8147274904139097
         format: double
         type: number
       lng:
         description: Longitude of POI
-        example: 0.09012467671506151
+        example: 0.06472337355304676
         format: double
         type: number
       name:
         description: Name of POI
-        example: Accusantium ad.
+        example: Reprehenderit non architecto quia.
         type: string
       visible:
         description: Visibility of POI
-        example: true
+        example: false
         type: boolean
     required:
       - name
@@ -1958,20 +1981,20 @@ definitions:
   WaterlinkedPoiCollection:
     description: WaterlinkedPoiCollection is the media type for an array of WaterlinkedPoi (default view)
     example:
-      - depth: 0.983923109918765
-        icon: Molestias laboriosam quasi aut ex omnis reprehenderit.
-        id: 2287845429121360000
-        lat: 0.4126800396556589
-        lng: 0.09012467671506151
-        name: Accusantium ad.
-        visible: true
-      - depth: 0.983923109918765
-        icon: Molestias laboriosam quasi aut ex omnis reprehenderit.
-        id: 2287845429121360000
-        lat: 0.4126800396556589
-        lng: 0.09012467671506151
-        name: Accusantium ad.
-        visible: true
+      - depth: 0.9848439086783396
+        icon: Ut molestias laboriosam.
+        id: 3408207428662661600
+        lat: 0.8147274904139097
+        lng: 0.06472337355304676
+        name: Reprehenderit non architecto quia.
+        visible: false
+      - depth: 0.9848439086783396
+        icon: Ut molestias laboriosam.
+        id: 3408207428662661600
+        lat: 0.8147274904139097
+        lng: 0.06472337355304676
+        name: Reprehenderit non architecto quia.
+        visible: false
     items:
       $ref: "#/definitions/WaterlinkedPoi"
     title: "Mediatype identifier: application/vnd.waterlinked.poi+json; type=collection; view=default"
@@ -1979,29 +2002,29 @@ definitions:
   WaterlinkedReceiver:
     description: A receiver configuration (default view)
     example:
-      id: 3192861043049571000
-      x: 0.27252655729990977
-      y: 0.4129036062459767
-      z: 0.12624652449013432
+      id: 2339264502380679700
+      x: 0.0158212572962501
+      y: 0.08142596921667565
+      z: 0.34617068793186784
     properties:
       id:
         description: Unique receiver identifier
-        example: 3192861043049571000
+        example: 2339264502380679700
         format: int64
         type: integer
       x:
         description: Configured X position relative to master electronics (meter)
-        example: 0.27252655729990977
+        example: 0.0158212572962501
         format: double
         type: number
       y:
         description: Configured Y position relative to master electronics (meter)
-        example: 0.4129036062459767
+        example: 0.08142596921667565
         format: double
         type: number
       z:
         description: Configured Z position relative to master electronics (meter)
-        example: 0.12624652449013432
+        example: 0.34617068793186784
         format: double
         type: number
     required:
@@ -2014,10 +2037,18 @@ definitions:
   WaterlinkedReceiverCollection:
     description: WaterlinkedReceiverCollection is the media type for an array of WaterlinkedReceiver (default view)
     example:
-      - id: 3192861043049571000
-        x: 0.27252655729990977
-        y: 0.4129036062459767
-        z: 0.12624652449013432
+      - id: 2339264502380679700
+        x: 0.0158212572962501
+        y: 0.08142596921667565
+        z: 0.34617068793186784
+      - id: 2339264502380679700
+        x: 0.0158212572962501
+        y: 0.08142596921667565
+        z: 0.34617068793186784
+      - id: 2339264502380679700
+        x: 0.0158212572962501
+        y: 0.08142596921667565
+        z: 0.34617068793186784
     items:
       $ref: "#/definitions/WaterlinkedReceiver"
     title: "Mediatype identifier: application/vnd.waterlinked.receiver+json; type=collection; view=default"
@@ -2243,27 +2274,27 @@ definitions:
     description: Current status from one specific status group (default view)
     example:
       error_ids:
-        - Dolorem ea molestias dolorum nihil sit.
-        - Dolorem ea molestias dolorum nihil sit.
-        - Dolorem ea molestias dolorum nihil sit.
-      message: Et consequatur temporibus omnis dolor saepe quam.
-      status: ok
-      status_group: Qui et et cupiditate.
-      status_group_id: Laboriosam ut non illo dolor illo facilis.
+        - Quasi itaque nemo dolorem ea molestias.
+        - Quasi itaque nemo dolorem ea molestias.
+        - Quasi itaque nemo dolorem ea molestias.
+      message: Nihil sit qui.
+      status: warning
+      status_group: Temporibus omnis dolor saepe quam.
+      status_group_id: Distinctio qui.
     properties:
       error_ids:
         description: Identifiers for warnings/errors
         example:
-          - Dolorem ea molestias dolorum nihil sit.
-          - Dolorem ea molestias dolorum nihil sit.
-          - Dolorem ea molestias dolorum nihil sit.
+          - Quasi itaque nemo dolorem ea molestias.
+          - Quasi itaque nemo dolorem ea molestias.
+          - Quasi itaque nemo dolorem ea molestias.
         items:
-          example: Dolorem ea molestias dolorum nihil sit.
+          example: Quasi itaque nemo dolorem ea molestias.
           type: string
         type: array
       message:
         description: Message
-        example: Et consequatur temporibus omnis dolor saepe quam.
+        example: Nihil sit qui.
         type: string
       status:
         description: Status
@@ -2271,15 +2302,15 @@ definitions:
           - ok
           - warning
           - error
-        example: ok
+        example: warning
         type: string
       status_group:
         description: Status group friendly name
-        example: Qui et et cupiditate.
+        example: Temporibus omnis dolor saepe quam.
         type: string
       status_group_id:
         description: Status group identifier
-        example: Laboriosam ut non illo dolor illo facilis.
+        example: Distinctio qui.
         type: string
     required:
       - status_group
@@ -2293,29 +2324,21 @@ definitions:
     description: WlStatusGroupCollection is the media type for an array of WlStatusGroup (default view)
     example:
       - error_ids:
-          - Dolorem ea molestias dolorum nihil sit.
-          - Dolorem ea molestias dolorum nihil sit.
-          - Dolorem ea molestias dolorum nihil sit.
-        message: Et consequatur temporibus omnis dolor saepe quam.
-        status: ok
-        status_group: Qui et et cupiditate.
-        status_group_id: Laboriosam ut non illo dolor illo facilis.
+          - Quasi itaque nemo dolorem ea molestias.
+          - Quasi itaque nemo dolorem ea molestias.
+          - Quasi itaque nemo dolorem ea molestias.
+        message: Nihil sit qui.
+        status: warning
+        status_group: Temporibus omnis dolor saepe quam.
+        status_group_id: Distinctio qui.
       - error_ids:
-          - Dolorem ea molestias dolorum nihil sit.
-          - Dolorem ea molestias dolorum nihil sit.
-          - Dolorem ea molestias dolorum nihil sit.
-        message: Et consequatur temporibus omnis dolor saepe quam.
-        status: ok
-        status_group: Qui et et cupiditate.
-        status_group_id: Laboriosam ut non illo dolor illo facilis.
-      - error_ids:
-          - Dolorem ea molestias dolorum nihil sit.
-          - Dolorem ea molestias dolorum nihil sit.
-          - Dolorem ea molestias dolorum nihil sit.
-        message: Et consequatur temporibus omnis dolor saepe quam.
-        status: ok
-        status_group: Qui et et cupiditate.
-        status_group_id: Laboriosam ut non illo dolor illo facilis.
+          - Quasi itaque nemo dolorem ea molestias.
+          - Quasi itaque nemo dolorem ea molestias.
+          - Quasi itaque nemo dolorem ea molestias.
+        message: Nihil sit qui.
+        status: warning
+        status_group: Temporibus omnis dolor saepe quam.
+        status_group_id: Distinctio qui.
     items:
       $ref: "#/definitions/WlStatusGroup"
     title: "Mediatype identifier: application/vnd.wl.status.group+json; type=collection; view=default"
@@ -2323,21 +2346,21 @@ definitions:
   WlWarning:
     description: Warning message (default view)
     example:
-      id: Minima facilis sed.
-      message: Distinctio praesentium saepe ipsum.
-      severity: Rem tenetur.
+      id: Cupiditate et laboriosam.
+      message: Non illo dolor illo facilis nihil nemo.
+      severity: Facilis sed animi distinctio praesentium.
     properties:
       id:
         description: Identifier
-        example: Minima facilis sed.
+        example: Cupiditate et laboriosam.
         type: string
       message:
         description: Message
-        example: Distinctio praesentium saepe ipsum.
+        example: Non illo dolor illo facilis nihil nemo.
         type: string
       severity:
         description: Severity
-        example: Rem tenetur.
+        example: Facilis sed animi distinctio praesentium.
         type: string
     required:
       - id
@@ -2348,15 +2371,12 @@ definitions:
   WlWarningCollection:
     description: WlWarningCollection is the media type for an array of WlWarning (default view)
     example:
-      - id: Minima facilis sed.
-        message: Distinctio praesentium saepe ipsum.
-        severity: Rem tenetur.
-      - id: Minima facilis sed.
-        message: Distinctio praesentium saepe ipsum.
-        severity: Rem tenetur.
-      - id: Minima facilis sed.
-        message: Distinctio praesentium saepe ipsum.
-        severity: Rem tenetur.
+      - id: Cupiditate et laboriosam.
+        message: Non illo dolor illo facilis nihil nemo.
+        severity: Facilis sed animi distinctio praesentium.
+      - id: Cupiditate et laboriosam.
+        message: Non illo dolor illo facilis nihil nemo.
+        severity: Facilis sed animi distinctio praesentium.
     items:
       $ref: "#/definitions/WlWarning"
     title: "Mediatype identifier: application/vnd.wl.warning+json; type=collection; view=default"
@@ -2374,7 +2394,7 @@ definitions:
           - v1
           - v2
         items:
-          example: Iusto facere beatae qui.
+          example: Dicta rem tenetur commodi eum.
           type: string
         type: array
     required:

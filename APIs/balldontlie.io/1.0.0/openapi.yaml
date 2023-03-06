@@ -23,7 +23,7 @@ paths:
   /api/v1/games:
     get:
       description: all games (example parameters)
-      operationId: allGames(exampleParameters)
+      operationId: allGamesExampleParameters
       parameters:
         - in: query
           name: seasons[]
@@ -54,7 +54,7 @@ paths:
   /api/v1/players:
     get:
       description: all players (search)
-      operationId: allPlayers(search)
+      operationId: allPlayersSearch
       parameters:
         - in: query
           name: search
@@ -80,7 +80,7 @@ paths:
   /api/v1/stats:
     get:
       description: all stats (example parameters)
-      operationId: allStats(exampleParameters)
+      operationId: allStatsExampleParameters
       parameters:
         - in: query
           name: season[]

@@ -54,6 +54,8 @@ tags:
     name: Session
   - description: Interactions with portals.
     name: Portal
+  - description: Interactions with file management.
+    name: Files
 paths:
   /admin/allapps:
     get:
@@ -454,6 +456,45 @@ paths:
       summary: ADMIN - Get number of systems available
       tags:
         - Admin
+  /admin/database/status:
+    get:
+      description: Returns all the names and internal and external database statuses
+      operationId: GetDatabaseStatus
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: |
+            ## Description:
+             Returns all the names and internal and external database statuses in a system
+             ### Success Structure:
+             ```json
+             {
+               [IP_ADDRESS]": {
+                 "internal_db_stats": {
+                   "name": "Postgres",
+                   "stats": {
+                     "db_type": "PostgreSQL",
+                     "info": {
+                       "Idle": 2,
+                       "InUse": 0,
+                       "MaxIdleClosed": 55380,
+                       "MaxIdleTimeClosed": 0,
+                       "MaxLifetimeClosed": 0,
+                       "MaxOpenConnections": 30,
+                       "OpenConnections": 2,
+                       "WaitCount": 0,
+                       "WaitDuration": 0
+                   },
+                   "is_connected": true
+                   }
+                  },
+                  "external_db_stats": {}
+             ```
+             |
+      summary: DATABASES - Retrieves all internal and external database statuses
+      tags:
+        - Databases
   "/admin/developers/{systemKey}":
     put:
       description: For admin, you can add/remove/change the owner of a system even if you’re not the system's owner. For Developer,you can add/remove a developer as long as you’re the owner of the system.
@@ -563,7 +604,7 @@ paths:
           type: string
         - description: Token obtained through user authentication.
           in: header
-          name: ClearBlade-UserToken
+          name: ClearBlade-DevToken
           required: true
           type: string
         - description: Tags to filter devices by. See the query model below for an example.
@@ -621,7 +662,7 @@ paths:
           type: string
         - description: Token obtained through user authentication.
           in: header
-          name: ClearBlade-UserToken
+          name: ClearBlade-DevToken
           required: true
           type: string
         - description: Query to limit scope of update, and new data values.
@@ -5424,41 +5465,6 @@ paths:
       summary: DEPLOYMENTS - Gets a deloyment for a system
       tags:
         - Deployments
-    post:
-      description: Creates one deployment for system
-      operationId: CreateDeployment2
-      parameters:
-        - description: User Token obtained through user authentication.
-          in: header
-          name: ClearBlade-UserToken
-          required: true
-          type: string
-        - description: System Key that identifies the system that holds the deployment.
-          in: path
-          name: systemKey
-          required: true
-          type: string
-        - description: Name of the deployment to create
-          in: path
-          name: deploymentName
-          required: true
-          type: string
-        - description: Information regarding deployment
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/createDeployment"
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Deployment created successfully
-        "500":
-          description: Server error.
-      summary: DEPLOYMENTS - Creates a deployment
-      tags:
-        - Deployments
     put:
       description: Updates a deployment.
       operationId: UpdateDeployment
@@ -5494,6 +5500,315 @@ paths:
       summary: DEPLOYMENT - Update deployment
       tags:
         - Deployments
+  "/api/v/4/bucket_sets/{systemKey}":
+    get:
+      description: Returns a list of metadata for buckets in system
+      operationId: GetBucketsData
+      parameters:
+        - description: Developer Token obtained through admin authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - description: System Key that identifies the system.
+          in: path
+          name: systemKey
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Returns all buckets metadata
+          schema:
+            $ref: "#/definitions/allBuckets"
+      summary: FILES  - Returns a list of metadata for buckets in system
+      tags:
+        - Files
+  "/api/v/4/bucket_sets/{systemKey}/{deploymentName}":
+    get:
+      description: Returns metadata for specified bucket
+      operationId: GetSingleBucketData
+      parameters:
+        - description: Developer Token obtained through admin authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - description: System Key that identifies the system.
+          in: path
+          name: systemKey
+          required: true
+          type: string
+        - description: Name of the deployment to retrieve
+          in: path
+          name: deploymentName
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Returns a bucket's metadata
+          schema:
+            $ref: "#/definitions/buckets"
+      summary: FILES  - Returns metadata for specified bucket
+      tags:
+        - Files
+  "/api/v/4/bucket_sets/{systemKey}/{deploymentName}/file/copy":
+    post:
+      description: Copies a file to a new location within buckets
+      operationId: CopyBucketFile
+      parameters:
+        - description: Developer Token obtained through admin authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - description: If either `from_box` or `to_box` is empty, then the corresponding path is considered a full path to the local file system. Both `from_box` and `to_box` cannot be simultaneously empty.
+          in: body
+          name: Body
+          schema:
+            $ref: "#/definitions/copyFile"
+        - description: System Key that identifies the system.
+          in: path
+          name: systemKey
+          required: true
+          type: string
+        - description: Name of the deployment to retrieve
+          in: path
+          name: deploymentName
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: File is copied. Returns empty.
+      summary: FILES  - Copies a file to a new location within buckets
+      tags:
+        - Files
+  "/api/v/4/bucket_sets/{systemKey}/{deploymentName}/file/create":
+    post:
+      description: Creates a new file in bucket
+      operationId: CreateBucketFile
+      parameters:
+        - description: Developer Token obtained through admin authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - in: body
+          name: Body
+          schema:
+            $ref: "#/definitions/createBox"
+        - description: System Key that identifies the system.
+          in: path
+          name: systemKey
+          required: true
+          type: string
+        - description: Name of the deployment to retrieve
+          in: path
+          name: deploymentName
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Returns metadata from the new box file
+          schema:
+            $ref: "#/definitions/box_data"
+      summary: FILES  - Creates a new file in a bucket
+      tags:
+        - Files
+  "/api/v/4/bucket_sets/{systemKey}/{deploymentName}/file/delete":
+    post:
+      description: Deletes a file from the bucket.
+      operationId: DeleteBucketFile
+      parameters:
+        - description: Developer Token obtained through admin authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - description: If `box` is empty, then `path` is treated as a full path in the local file system.
+          in: body
+          name: Body
+          schema:
+            $ref: "#/definitions/deleteFile"
+        - description: System Key that identifies the system.
+          in: path
+          name: systemKey
+          required: true
+          type: string
+        - description: Name of the deployment to retrieve
+          in: path
+          name: deploymentName
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: File is deleted. Returns empty.
+      summary: FILES  - Deletes a file from the bucket.
+      tags:
+        - Files
+  "/api/v/4/bucket_sets/{systemKey}/{deploymentName}/file/meta":
+    get:
+      description: |
+        ## Description:
+        Returns metadata of a specific file in a specific box. 
+        boxName defaults to "inbox"
+
+        ### Query Structure:
+        ```json
+        box={boxName}
+        path={relativePath}
+        ```   
+        ### boxName Options
+
+        * inbox
+        * outbox
+        * sandbox
+
+        If `box==""`, then all files from all three boxes (inbox, outbox, sandbox)
+        will be returned.
+
+        ### Example:
+
+        ```json
+        box=inbox
+        path=/relative/path/to/file
+        ```
+      operationId: GetBoxFilesMeta
+      parameters:
+        - description: Developer Token obtained through admin authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - description: one of inbox, outbox or sandbox, defaults to 'inbox' if empty.
+          in: query
+          name: box
+          required: false
+          type: string
+        - description: Query object used to filter the items. See query model at in the description for example.
+          in: query
+          name: path
+          required: false
+          type: string
+        - description: System Key that identifies the system.
+          in: path
+          name: systemKey
+          required: true
+          type: string
+        - description: Name of the deployment to retrieve
+          in: path
+          name: deploymentName
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Returns metadata from a box file
+          schema:
+            $ref: "#/definitions/box_data"
+      summary: FILES  - Get a file's metadata in a box
+      tags:
+        - Files
+  "/api/v/4/bucket_sets/{systemKey}/{deploymentName}/file/move":
+    post:
+      description: Moves a file to a new location within buckets.
+      operationId: MoveBucketFile
+      parameters:
+        - description: Developer Token obtained through admin authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - description: If either `from_box` or `to_box` is empty, then the corresponding path is considered a full path to the local file system. Both `from_box` and `to_box` cannot be simultaneously empty.
+          in: body
+          name: Body
+          schema:
+            $ref: "#/definitions/copyFile"
+        - description: System Key that identifies the system.
+          in: path
+          name: systemKey
+          required: true
+          type: string
+        - description: Name of the deployment to retrieve
+          in: path
+          name: deploymentName
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: File is moved. Returns empty.
+      summary: FILES  - Moves a file to a new location within buckets.
+      tags:
+        - Files
+  "/api/v/4/bucket_sets/{systemKey}/{deploymentName}/files":
+    get:
+      description: |
+        ## Description:
+        Returns metadata of files in a specific box. 
+        boxName defaults to "inbox"
+
+        ### Query Structure:
+        ```json
+        box={boxName}
+        ```   
+        ### boxName Options
+
+        * inbox
+        * outbox
+        * sandbox
+
+        If `box==""`, then all files from all three boxes (inbox, outbox, sandbox)
+        will be returned.
+
+        ### Example:
+
+        ```json
+        box=inbox
+        ```
+      operationId: GetBoxFiles
+      parameters:
+        - description: Developer Token obtained through admin authentication.
+          in: header
+          name: ClearBlade-DevToken
+          required: true
+          type: string
+        - description: Query object used to filter the items. See query model at in the description for example.
+          in: query
+          name: box
+          required: false
+          type: string
+        - description: System Key that identifies the system.
+          in: path
+          name: systemKey
+          required: true
+          type: string
+        - description: Name of the deployment to retrieve
+          in: path
+          name: deploymentName
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Returns all metadata from box files
+          schema:
+            $ref: "#/definitions/box"
+      summary: FILES  - Get all files metadata in a box
+      tags:
+        - Files
   "/api/v/4/data/{systemKey}/{collectionName}/index":
     delete:
       description: This deletes a non unique index from a column.
@@ -7609,6 +7924,10 @@ definitions:
       - name
       - systemID
       - parameters
+  allBuckets:
+    items:
+      $ref: "#/definitions/buckets"
+    type: array
   allCollections:
     properties:
       appID:
@@ -7785,6 +8104,68 @@ definitions:
         type: string
       password:
         example: cl34rbl4d3
+        type: string
+  box:
+    properties:
+      example/full/path/to/file.txt:
+        $ref: "#/definitions/box_data"
+    type: object
+  box_data:
+    properties:
+      base_name:
+        description: Base Name
+        example: sample.txt
+        type: string
+      bucket_name:
+        description: Box Name
+        example: inbox
+        type: string
+      last_modified:
+        description: Date of update
+        example: 2017-07-03T19:52:41.693Z
+        type: string
+      path_name:
+        description: Full file path
+        example: example/full/path/to/file.txt
+        type: string
+      permissions:
+        description: File permissions
+        example: -rw-r--r--
+        type: string
+      relative_name:
+        description: relative name
+        example: test/file.txt
+        type: string
+      size:
+        description: File size in bytes
+        example: 60
+        type: integer
+  buckets:
+    properties:
+      deployment_name:
+        description: Deployment Name
+        example: ExampleDeployment
+        type: string
+      edge_config:
+        description: Edge Config file
+        example:
+          - root: </root/directory>
+        type: array
+      edge_storage:
+        description: Edge storage type - local or google
+        example: local
+        type: string
+      platform_config:
+        description: Platform Config file
+        example:
+          - root: </root/directory>
+        type: array
+      platform_storage:
+        description: Platform storage type - local or google
+        example: local
+        type: string
+      system_key:
+        example: 98a6cbe60bceafcc5d8b4a33b
         type: string
   changeRoleSettings:
     description: Changes settings in individual roles
@@ -7987,10 +8368,42 @@ definitions:
       time_connected:
         example: 2019-12-13T17:53:09.5778599Z
         type: string
+  copyFile:
+    properties:
+      from_box:
+        description: Box Name where file is being copied/moved
+        example: inbox
+        type: string
+      from_path:
+        description: Relative File Path Name where file is being copied/moved
+        example: /relative/file/path
+        type: string
+      to_box:
+        description: Box Name of where file is being copied/moved to
+        example: inbox
+        type: string
+      to_path:
+        description: Relative File Path Name where file is being copied/moved to
+        example: /relative/file/path
+        type: string
   count:
     example:
       count: 1
     type: object
+  createBox:
+    properties:
+      box:
+        description: Box Name
+        example: inbox
+        type: string
+      contents:
+        description: base64 encoded file contents
+        example: IyEvYmluL2Jhc2gKbWtkaXIgU2hvd1RpbWVBZGFwdGVyCgptdiBzdGFydC5zaCBTaG93VGltZUFkYXB0ZXIKbXYgc3RvcC5zaCBTaG93VGltZUFkYXB0ZXIKbXYgc3RhdHVzLnNoIFNob3dUaW1lQWRhcHRlcgptdiBkZXBsb3kuc2ggU2hvd1RpbWVBZGFwdGVyCm12IHVuZGVwbG95LnNoIFNob3dUaW1lQWRhcHRlcgptdiBzaG93VGltZSBTaG93VGltZUFkYXB0ZXIKCmVjaG8gIlNob3dUaW1lQWRhcHRlciBEZXBsb3llZCI=
+        type: string
+      path:
+        description: Relative File Path
+        example: /relative/file/path
+        type: string
   createDatabase:
     description: Credentials for all databases can be found in the endpoint description
     properties:
@@ -8054,6 +8467,16 @@ definitions:
         example: sample_db
         type: string
     type: object
+  deleteFile:
+    properties:
+      box:
+        description: Box Name of file being deleted
+        example: inbox
+        type: string
+      path:
+        description: Relative File Path Name of file being deleted
+        example: /relative/file/path
+        type: string
   deleteuserdata:
     properties:
       user_id:
@@ -8976,6 +9399,10 @@ definitions:
         description: ttl for developer tokens in seconds. Min - 86400   (1 day), Max- 2592000 (30 days), Default - 432000 Infinite - -1
         example: "432000"
         type: string
+      token_ttl_anon:
+        description: ttl for anonymous tokens in seconds. Min - 3600   (1 hour), Max- 7776000 (90 days), Default - 432000 (5 days) Infinite - -1
+        example: "432000"
+        type: integer
       token_ttl_device:
         description: ttl for device tokens in seconds. Min - 3600   (1 hour), Max- 7776000 (90 days), Default - 432000 (5 days) Infinite - -1
         example: "432000"
@@ -9073,6 +9500,10 @@ definitions:
         description: Information about the timer
         example: My 10 second timer
         type: string
+      disabled:
+        description: Enable or disable timer
+        example: true
+        type: boolean
       frequency:
         description: Frequency (in seconds) between two consecutive invocations of a timer handler
         example: 10
@@ -9094,6 +9525,7 @@ definitions:
       - name
       - repeats
       - service_name
+      - disabled
   triggerArray:
     items:
       $ref: "#/definitions/triggerList"
@@ -9129,6 +9561,10 @@ definitions:
       def_name:
         example: Publish
         type: string
+      disabled:
+        description: Enable or disable trigger
+        example: true
+        type: boolean
       key_value_pairs:
         $ref: "#/definitions/KVPs"
       service_name:
@@ -9139,6 +9575,7 @@ definitions:
       - def_name
       - service_name
       - key_value_pairs
+      - disabled
   updateCache:
     description: the information updated in a cache
     properties:

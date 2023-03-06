@@ -6,7 +6,7 @@ info:
     email: developer@climate.com
     name: Climate FieldView Support
   description: |
-    **Last Modified**: Thu Oct 29 12:30:46 PDT 2020
+    **Last Modified**: Wed Jan  4 12:47:29 UTC 2023
 
 
     All endpoints are only accessible via HTTPS.
@@ -146,12 +146,16 @@ tags:
     name: Fields
   - description: General data upload endpoints.
     name: Uploads
+  - description: General data export endpoints.
+    name: Exports
   - description: General data retrieval endpoints.
     name: Layers
   - description: Resource Owner data endpoints.
     name: ResourceOwners
   - description: Farm organization data endpoints.
     name: FarmOrganizations
+  - description: Operation data endpoints.
+    name: Operations
 paths:
   /v4/boundaries:
     post:
@@ -227,12 +231,7 @@ paths:
       description: Retrieve a **Boundary** by ID.
       operationId: fetchBoundaryById
       parameters:
-        - in: path
-          name: boundaryId
-          required: true
-          schema:
-            format: uuid
-            type: string
+        - $ref: "#/components/parameters/BoundaryId"
       responses:
         "200":
           $ref: "#/components/responses/FetchBoundaryByIdOk"
@@ -258,6 +257,132 @@ paths:
       summary: Retrieve a Boundary by ID
       tags:
         - Boundaries
+  /v4/exports:
+    post:
+      description: |-
+        Step one in requesting a data product. The method will return an **Export** ID which the caller will use in subsequent `GET` requests.
+        The following `contentTypes` may be requested:
+          * __application/vnd.climate.acrsi.geojson__ (Beta)
+             Exports the planting activities accessible by the authenticated user and optionally filtered by resource owner
+             as a [GeoJSON Feature Collection](https://tools.ietf.org/html/rfc7946#page-12).
+
+             The export request definition must contain the following properties:
+               * plantingStartDate
+               * plantingEndDate
+               * resourceOwnerId
+
+             Requires `exports:read` and `plantingActivitySummary:read` scope.
+          
+          * __application/vnd.climate.harvest.geojson__
+             Exports the harvesting activities accessible by the authenticated user and optionally filtered by resource owner
+             as a [GeoJSON Feature Collection](https://tools.ietf.org/html/rfc7946#page-12).
+
+             The export request definition must contain the following properties:
+               * harvestStartDate
+               * harvestEndDate
+               * resourceOwnerId
+
+             Requires `exports:read` and `plantingActivitySummary:read` scope.
+      operationId: postExport
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Export"
+      responses:
+        "201":
+          $ref: "#/components/responses/PostExportOk"
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+        "503":
+          $ref: "#/components/responses/503"
+      security:
+        - api_key: []
+        - oauth2_authorization_code:
+            - exports:read
+      summary: Initiate a new export request.
+      tags:
+        - Exports
+  "/v4/exports/{exportId}/contents":
+    get:
+      description: Downloads larger than `5MiB` (`5242880 bytes`) in size must be downloaded in chunks no larger than `5MiB` (`5242880 bytes`) and no smaller than `1MiB` (`1048576 bytes`). The last chunk could be less than `1MiB` (`1048576 bytes`).
+      operationId: fetchExportContentsById
+      parameters:
+        - $ref: "#/components/parameters/Accept"
+        - $ref: "#/components/parameters/ExportId"
+        - $ref: "#/components/parameters/Range"
+      responses:
+        "204":
+          $ref: "#/components/responses/204"
+        "206":
+          $ref: "#/components/responses/FetchExportContentsByIdPartial"
+        "304":
+          $ref: "#/components/responses/304"
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "409":
+          $ref: "#/components/responses/ReportConflict"
+        "410":
+          $ref: "#/components/responses/ReportGone"
+        "416":
+          $ref: "#/components/responses/416"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+        "503":
+          $ref: "#/components/responses/503"
+      security:
+        - api_key: []
+        - oauth2_authorization_code:
+            - exports:read
+      summary: Retrieve the binary contents of a processed export request.
+      tags:
+        - Exports
+  "/v4/exports/{exportId}/status":
+    get:
+      description: Check the status of an **Export** by ID.
+      operationId: fetchExportStatusById
+      parameters:
+        - $ref: "#/components/parameters/ExportId"
+      responses:
+        "200":
+          $ref: "#/components/responses/FetchExportStatusByIdOk"
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+        "503":
+          $ref: "#/components/responses/503"
+      security:
+        - api_key: []
+        - oauth2_authorization_code:
+            - exports:read
+      summary: Retrieve the status of an Export.
+      tags:
+        - Exports
   "/v4/farmOrganizations/{farmOrganizationType}/{farmOrganizationId}":
     get:
       description: Retrieve a given **farm organization** by organization type and ID.
@@ -322,6 +447,45 @@ paths:
             - platform
             - fields:read
       summary: Retrieve list of Fields
+      tags:
+        - Fields
+  /v4/fields/all:
+    get:
+      description: |-
+        Retrieve all fields the authenticated user has access to, including fields shared with the authenticated user from other resource owners. Filter the results by field name if the `fieldName` query parameter is specified.
+        A 409 will be returned if the X-Next-Token has expired. When receiving a 409, the client should discard the X-Next-Token, discard all currently persisted fields for the user, and re-fetch fields from /fields/all.
+      operationId: fetchAllFields
+      parameters:
+        - $ref: "#/components/parameters/X-Next-Token"
+        - $ref: "#/components/parameters/X-Limit"
+        - $ref: "#/components/parameters/OptionalFieldNamePrefix"
+      responses:
+        "200":
+          $ref: "#/components/responses/FetchFieldsOk"
+        "206":
+          $ref: "#/components/responses/FetchFieldsPartial"
+        "304":
+          $ref: "#/components/responses/304"
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "409":
+          $ref: "#/components/responses/409"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+        "503":
+          $ref: "#/components/responses/503"
+      security:
+        - api_key: []
+        - oauth2_authorization_code:
+            - platform
+            - fields:read
+      summary: Retrieve list of all Fields the user has access to.
       tags:
         - Fields
   "/v4/fields/{fieldId}":
@@ -654,6 +818,36 @@ paths:
       summary: Retrieve the binary contents of a scouting observation’s attachment.
       tags:
         - Layers
+  /v4/operations/all:
+    get:
+      description: Retrieve the **operations** accessible to the authenticated user. Filter the results by resource owner if the `resourceOwnerId` query parameter is specified.
+      operationId: fetchOperations
+      parameters:
+        - $ref: "#/components/parameters/OptionalResourceOwnerIdList"
+      responses:
+        "200":
+          $ref: "#/components/responses/FetchOperationsOk"
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+        "503":
+          $ref: "#/components/responses/503"
+      security:
+        - api_key: []
+        - oauth2_authorization_code:
+            - operations:read
+      summary: Retrieve the operations accessible to a a given user.
+      tags:
+        - Operations
   "/v4/resourceOwners/{resourceOwnerId}":
     get:
       description: Retrieve a resource owner for the given `resourceOwnerId`.
@@ -774,26 +968,6 @@ paths:
 
             Requires either imagery:write or platform scope.
           </details>
-          <details><summary> __application/vnd.climate.field.geojson__</summary>
-
-            Allows for the upload of a valid geojson feature (https://tools.ietf.org/html/rfc7946#section-3.2).
-
-            The feature must contain the following entry in the properties section:
-              * fieldName
-
-            Optionally, the feature may contain the following entries in the properties properties:
-              * farmName - defaults to *default*
-              * clientName - defaults to *default*
-
-            Additionally, the type field of the geometry field must one of the following:
-              * Polygon
-              * MultiPolygon
-
-            The coordinates field of the geometry field must contain no more than 10,000 points.
-            The total area of the field may not be larger than 20,000 acres in size.
-
-            Requires either fields:write or platform scope.
-          </details>
           <details><summary> __application/vnd.climate.rx.planting.shp__</summary>
 
             Allows for the upload of a planting prescription in shapefile format.  The upload must be an archive in the zip format.  It should contain one and only one of each of the following file types:
@@ -804,6 +978,20 @@ paths:
             All files with the above suffixes must have the same prefix, ie Back40.shp, Back40.shx and Back40.dbf.
 
             Requires either rx:write or platform scope.
+          </details>
+          <details><summary> __application/vnd.climate.prescription.zones.shp__</summary>
+
+            Allows for the upload of a zones prescription in shapefile format.  The upload must be an archive in the zip format.  It should contain one and only one of each of the following file types:
+              * .shp
+              * .shx
+              * .dbf
+
+            All files with the above suffixes must have the same prefix, ie Back40.shp, Back40.shx and Back40.dbf.
+
+            The following metadata entries are required:
+              * fieldId - field identifier for prescription zones.
+            
+            Requires either rxZones:write or platform scope.
           </details>
           <details><summary> __application/vnd.climate.modus.xml__</summary>
 
@@ -847,6 +1035,42 @@ paths:
 
             Requires `imagery:write` scope.
            </details>
+           <details><summary> __application/vnd.climate.as-applied.zip__</summary>
+
+            Allows for the upload of a valid application data [supported formats](https://support.climate.com/kt#/kA02A000000DjvOSAS/en_US).
+
+            The following metadata entries are required:
+              * fileName - name of the file being uploaded.
+
+            The following metadata entries are optional:
+              * resourceOwner - the grower's account email, where dealer/partner wants to upload data. As a prerequisite the grower must share their operation with the dealer/partner.
+
+            Requires `asApplied:write` scope.
+           </details>
+           <details><summary> __application/vnd.climate.as-planted.zip__</summary>
+
+            Allows for the upload of a valid planting data [supported formats](https://support.climate.com/kt#/kA02A000000DjvOSAS/en_US).
+
+            The following metadata entries are required:
+              * fileName - name of the file being uploaded.
+
+            The following metadata entries are optional:
+              * resourceOwner - the grower's account email, where dealer/partner wants to upload data. As a prerequisite the grower must share their operation with the dealer/partner.
+
+            Requires `asPlanted:write` scope.
+           </details>
+           <details><summary> __application/vnd.climate.as-harvested.zip__</summary>
+
+            Allows for the upload of a valid harvest data [supported formats](https://support.climate.com/kt#/kA02A000000DjvOSAS/en_US).
+
+            The following metadata entries are required:
+              * fileName - name of the file being uploaded.
+
+            The following metadata entries are optional:
+              * resourceOwner - the grower's account email, where dealer/partner wants to upload data. As a prerequisite the grower must share their operation with the dealer/partner.
+
+            Requires `asHarvested:write` scope.
+           </details>
       operationId: postUpload
       parameters:
         - $ref: "#/components/parameters/X-Recipient-Email"
@@ -879,6 +1103,9 @@ paths:
             - rx:write
             - standCount:write
             - weedCount:write
+            - asApplied:write
+            - asPlanted:write
+            - asHarvested:write
       summary: Initiate a new upload
       tags:
         - Uploads
@@ -915,6 +1142,9 @@ paths:
             - fields:write
             - imagery:write
             - rx:write
+            - asApplied:write
+            - asPlanted:write
+            - asHarvested:write
       summary: Retrieve Upload statuses in batch
       tags:
         - Uploads
@@ -951,6 +1181,9 @@ paths:
             - imagery:write
             - rx:write
             - soil:write
+            - asApplied:write
+            - asPlanted:write
+            - asHarvested:write
       summary: Chunked upload of data
       tags:
         - Uploads
@@ -984,6 +1217,9 @@ paths:
             - fields:write
             - imagery:write
             - rx:write
+            - asApplied:write
+            - asPlanted:write
+            - asHarvested:write
       summary: Retrieve Upload status
       tags:
         - Uploads
@@ -1011,12 +1247,28 @@ components:
       required: true
       schema:
         type: string
+    BoundaryId:
+      description: Unique identifier of the Boundary
+      in: path
+      name: boundaryId
+      required: true
+      schema:
+        format: uuid
+        type: string
     ContentRange:
       description: Byte range `bytes start-end/total` (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16). e.g. bytes 0-5242880/10242880. Downloads larger than 5MiB (5242880 bytes) in size must be downloaded in chunks no larger than 5MiB (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last chunk could be less than 1MiB (1048576 bytes).
       in: header
       name: Content-Range
       required: true
       schema:
+        type: string
+    ExportId:
+      description: Unique identifier of an Export.
+      in: path
+      name: exportId
+      required: true
+      schema:
+        format: uuid
         type: string
     FarmOrganizationId:
       description: Unique identifier of the farm organization.
@@ -1385,6 +1637,32 @@ components:
           schema:
             $ref: "#/components/schemas/Boundary"
       description: OK
+    FetchExportContentsByIdPartial:
+      content:
+        application/octet-stream:
+          schema:
+            $ref: "#/components/schemas/ExportContents"
+      description: Partial Result
+      headers:
+        Content-Range:
+          description: Byte range `bytes start-end/total` (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16). e.g. bytes 0-5242879/10242880. Downloads larger than 5MiB (5242880 bytes) in size must be downloaded in chunks no larger than 5MiB (5242880 bytes) and no smaller than 1MiB (1048576 bytes). The last chunk could be less than 1MiB (1048576 bytes).
+          schema:
+            type: string
+        X-Http-Request-Id:
+          description: Unique identifier assigned to the request.
+          schema:
+            type: string
+    FetchExportStatusByIdOk:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ExportStatus"
+      description: OK
+      headers:
+        X-Http-Request-Id:
+          description: Unique identifier assigned to the request.
+          schema:
+            type: string
     FetchFarmOrganizationByTypeAndIdOk:
       content:
         application/json:
@@ -1495,6 +1773,16 @@ components:
           description: Unique identifier assigned to the request.
           schema:
             type: string
+    FetchOperationsOk:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Operations"
+      description: Returns the requested operations.
+      headers:
+        X-Http-Request-Id:
+          schema:
+            type: string
     FetchPlantingActivitiesOk:
       content:
         application/json:
@@ -1564,6 +1852,9 @@ components:
     FetchScoutingObservationAttachmentContentsOk:
       content:
         image/jpeg:
+          schema:
+            $ref: "#/components/schemas/ScoutingObservationAttachmentContents"
+        image/png:
           schema:
             $ref: "#/components/schemas/ScoutingObservationAttachmentContents"
       description: OK
@@ -1664,6 +1955,23 @@ components:
           schema:
             $ref: "#/components/schemas/UploadStatuses"
       description: OK
+    HealthzOk:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Empty"
+      description: 200 response
+    PostExportOk:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreatedExport"
+      description: OK
+      headers:
+        X-Http-Request-Id:
+          description: Unique identifier assigned to the request.
+          schema:
+            type: string
     PostUploadOk:
       content:
         application/json:
@@ -1772,6 +2080,9 @@ components:
       required:
         - q
         - u
+    Binary:
+      format: binary
+      type: string
     BinaryData:
       description: Binary contents
       format: binary
@@ -1837,6 +2148,15 @@ components:
           $ref: "#/components/schemas/Geometry"
       required:
         - geometry
+    CreatedExport:
+      properties:
+        id:
+          description: Unique identifier for the export.
+          format: uuid
+          type: string
+      required:
+        - id
+      type: object
     CreatedUpload:
       description: Successfully created upload request
       format: uuid
@@ -1860,6 +2180,70 @@ components:
             - code
             - message
           type: object
+      type: object
+    Export:
+      description: Client request to export data from a user.
+      properties:
+        contentType:
+          description: Content type representing data being exported (e.g. application/vnd.climate.acrsi.geojson).
+          enum:
+            - application/vnd.climate.acrsi.geojson
+            - application/vnd.climate.harvest.geojson
+          format: mime-type
+          type: string
+        definition:
+          description: Additional specifications for a client's data export request, dependent on the content type.
+          type: object
+      required:
+        - contentType
+      type: object
+    ExportContents:
+      properties:
+        body:
+          $ref: "#/components/schemas/BinaryData"
+      required:
+        - body
+    ExportStatus:
+      properties:
+        checksum:
+          description: Base64 encoded MD5 hash of the export's contents.
+          type: string
+        error:
+          description: Message indicating reason for validation failure.
+          type: string
+        size:
+          description: Size of the export's contents in bytes.
+          format: int64
+          type: integer
+        status:
+          description: |
+            Current status of the export request:
+              * `PROCESSING` - Export request has been received by Climate and is being processed.
+              * `INVALID` - Export request has failed validity check.
+              * `EXPIRED` - Export contents have expired, and are no longer available for retrieval.
+              * `COMPLETED` - The export request has been successfully processed, and its contents are available for retrieval.
+              * `NO_DATA` - The export request completed successfully but generated no data.
+          enum:
+            - PROCESSING
+            - INVALID
+            - EXPIRED
+            - COMPLETED
+            - NO_DATA
+          type: string
+        xNextToken:
+          description: |
+            Token which may be used when executing an identical export in
+            the future, but which only wants export data which was not
+            previously exported.
+            Assume a given field export request matches 12 fields today. And
+            tomorrow it matches 15 fields. By passing the xNextToken in the
+            definition section of tomorrow's field export request, only the
+            3 additional fields would be exported. Note, all other parameters
+            passed in the definition section must be identical to the original
+            request.
+          type: string
+      required:
+        - status
       type: object
     FarmOrganization:
       description: Logical representation of a farm organization with a name and type.
@@ -2005,6 +2389,39 @@ components:
       type: object
     Metadata:
       additionalProperties: true
+      type: object
+    Operation:
+      description: Logical representation of an operation with a name and resource owner.
+      example:
+        id: 00000000-0000-0000-0000-000000000000
+        name: Back Forty
+        resourceOwnerId: 00000000-0000-0000-0000-000000000000
+      properties:
+        id:
+          description: Unique identifier for the operation.
+          format: uuid
+          type: string
+        name:
+          description: Name of the operation.
+          type: string
+        resourceOwnerId:
+          description: Unique identifier of the resource owner that owns the Operation.
+          format: uuid
+          type: string
+      required:
+        - id
+        - name
+        - resourceOwnerId
+      type: object
+    Operations:
+      description: A batch of operation results.
+      properties:
+        results:
+          items:
+            $ref: "#/components/schemas/Operation"
+          type: array
+      required:
+        - results
       type: object
     Parent:
       description: A minimal set of attributes regarding the parent of a farm organization.
@@ -2284,13 +2701,23 @@ components:
         contentType:
           description: Content type representing data being uploaded (e.g. image/vnd.climate.rgb.geotiff)
           enum:
-            - application/vnd.climate.field.geojson
             - image/vnd.climate.thermal.geotiff
             - image/vnd.climate.ndvi.geotiff
+            - image/vnd.climate.rgb.geotiff
+            - image/vnd.climate.rgb-nir.geotiff
+            - image/vnd.climate.rgb-cir.geotiff
             - image/vnd.climate.waterstress.geotiff
             - image/vnd.climate.elevation.geotiff
             - image/vnd.climate.raw.geotiff
-            - image/vnd.climate.rgb.geotiff
+            - application/vnd.climate.field.geojson
+            - application/vnd.climate.rx.planting.shp
+            - application/vnd.climate.prescription.zones.shp
+            - application/vnd.climate.modus.xml
+            - application/vnd.climate.stand-count.geojson
+            - application/vnd.climate.weed-count.geojson
+            - application/vnd.climate.as-applied.zip
+            - application/vnd.climate.as-planted.zip
+            - application/vnd.climate.as-harvested.zip
           format: mime-type
           type: string
         length:
@@ -2382,12 +2809,16 @@ components:
           authorizationUrl: https://climate.com/static/app-login/
           scopes:
             asApplied:read: Required for retrieving as applied data
+            asApplied:write: Required for uploading application data
             asHarvested:read: Required for retrieving harvest data
+            asHarvested:write: Required for uploading harvest data
             asPlanted:read: Required for retrieving planting data
+            asPlanted:write: Required for uploading planting data
             avroAgronomicData:read: Required for retrieving agronomic data
             boundaries:write: "*Originally missing*"
             customerInsights:read: Required for retrieving customer insights metrics data
             diagnostics:read: Required for retrieving CNH machine diagnostic data
+            exports:read: Required for requesting or retrieving exports
             farmOrganizations:read: Required for retrieving farm organization information
             fields:read: Required for retrieving field and boundary information
             fields:write: Required for uploading field boundaries
@@ -2403,3 +2834,4 @@ components:
             weedCount:write: "*Originally missing*"
           tokenUrl: https://api.climate.com/api/oauth/token
       type: oauth2
+x-amazon-apigateway-api-key-source: AUTHORIZER

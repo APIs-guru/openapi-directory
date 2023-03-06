@@ -5,13 +5,14 @@ info:
   contact:
     x-twitter: amentumspace
   description: |
-    Our atmosphere protects us from a hostile space radiation environment comprising high energy particles of solar and intergalactic origin. Solar radiation is significant during unpredictable and short lived solar flares and coronal mass ejections (CMEs); however, galactic cosmic radiation (GCR) is omnipresent. The GCR intensity varies with latitude, longitude, and time due to effects of solar activity on the interplanetary magnetic field, as well as the Earth's magnetic field. Space radiation collides with gases in the atmosphere, leading to a complex shower of high energy radiation, the intensity and composition of which varies spatially and temporally. Excessive exposure to radiation can damage DNA and lead to long-term health effects such as an increased risk of cancer.  <br><br> Resulting radiation levels at commercial aircraft altitudes are greater than at sea level due. Aircrew are classified as radiation workers in some countries; however, planning to limit their exposure, and monitoring, is generally lacking. Both real-time measurements and predictive models of radiation in the atmosphere are important to mitigate the radiation risk crew. <br><br>
-    We host a RESTful API to models of cosmic ray induced ionising radiation in the atmosphere. The PARMA or CARI7 endpoints can be used to  calculate Effective Dose or Ambient Dose Equivalent at a point. 
+    Our atmosphere protects us from a hostile space radiation environment comprising high energy particles of solar and intergalactic origin. Solar radiation is significant during unpredictable and short lived solar flares and coronal mass ejections (CMEs); however, galactic cosmic radiation (GCR) is omnipresent. The GCR intensity varies with latitude, longitude, and time due to effects of solar activity on the interplanetary magnetic field, as well as the Earth's magnetic field. Space radiation collides with gases in the atmosphere, leading to a complex shower of high energy radiation, the intensity and composition of which varies spatially and temporally. Excessive exposure to radiation can damage DNA and lead to long-term health effects such as an increased risk of cancer.  <br><br> Resulting radiation levels at commercial aircraft altitudes are greater than at sea level. Aircrew are classified as radiation workers in some countries; however, planning to limit their exposure, and monitoring, is generally lacking. Both real-time measurements and predictive models of radiation in the atmosphere are important to mitigate the radiation risk to crew. <br><br>
+    We host a RESTful API to models of cosmic ray induced ionising radiation in the atmosphere. 
+    The CARI7 and PARMA endpoints use models developed by the US Federal Aviation Administration and the Japan Atomic Energy Agency to  calculate cosmic radiation doses at a point. 
     The Route Dose API calculates the same quantities along a great circle route between two airports using CARI7. <br><br>
     API requests must contain a key "API-Key" in the header (see code samples). Obtain a key from  <a href='https://developer.amentum.io'>here</a>. <br><br> 
     Help us improve the quality of our web APIs by completing our 2 minute survey <a href="https://www.surveymonkey.com/r/CTDTRBN">here</a>.<br><br>
     Amentum Pty Ltd is not responsible nor liable for any loss or damage of any sort incurred as a result of using the API. <br><br>
-    Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2021.
+    Copyright <a href='https://amentum.space'>Amentum Pty Ltd</a> 2022.
   title: Aviation Radiation API
   version: 1.5.0
   x-apisguru-categories:
@@ -33,7 +34,7 @@ tags:
     name: cari7
     x-displayName: CARI7 API
   - description: |
-      The Route Dose API estimates radiation doses along a flight route between two airports with known ICAO or IATA codes or coordinates as latitude/longitude. Waypoints are calculated assuming a great circle  route, a constant altitude (in kilometers) and a user-defined flight duration (in hours).  Dose rates are calculated at each waypoint using CARI-7.  The dose rate profile is integrated along the route to obtain the total dose for the flight. <br><br> Note: Dose is considered a monthly average accounting for heliocentric potential (HP) modulation only, minor geomagnetic storm and forbush decrease corrections are ignored. The calculation relies on HP data from the US Federal Aviation Administration that is released monthly. Doses can be calculated on the current date and short-range forecasting  of several weeks is supported (the exact forecast horizon depends on the release date of the FAA data).
+      The Route Dose API estimates radiation doses along a flight route between two airports with known ICAO or IATA codes or coordinates as latitude/longitude. Waypoints are calculated assuming a great circle  route, and either a constant altitude (in kilometers) and a flight duration (in hours) or lists of altitudes and cruising times to define a step climb.  Dose rates are then calculated at each waypoint using CARI-7.  The dose rate profile is integrated along the route to obtain the total dose for the flight. <br><br> Note: Dose is considered a monthly average accounting for heliocentric potential (HP) modulation only, minor geomagnetic storm and forbush decrease corrections are ignored. The calculation relies on HP data from the US Federal Aviation Administration that is released monthly. Doses can be calculated on the current date and short-range forecasting  of several weeks is supported (the exact forecast horizon depends on the release date of the FAA data).
     name: routedose
     x-displayName: Route Dose API
   - description: |
@@ -1067,7 +1068,7 @@ paths:
   /route/ambient_dose:
     get:
       description: |
-        The ambient dose equivalent, H*(10), is an operational quantity that simulates the  human body by measuring the dose equivalent at a depth of 10 mm within a tissue  equivalent sphere of 300 mm diameter. It is a measurable quantity that is  used to calibrate area monitors (radiation detectors) for mixed radiation fields.  <br> <br> Use this endpoint if you are comparing model predictions to measurements. <br> <br> Note: the airport codes or coordinates (depending on which was specified), and the date in DD/MM/YYYY format, are echoed in the json response as strings.
+        The ambient dose equivalent, H*(10), is an operational quantity that simulates the  human body by measuring the dose equivalent at a depth of 10 mm within a tissue  equivalent sphere of 300 mm diameter. It is a measurable quantity that is  used to calibrate area monitors (radiation detectors) for mixed radiation fields.  <br> <br> Use this endpoint if you are comparing model predictions to measurements. <br> <br> This API can run in two modes: <br> <br> Either specify <br> <b>altitude</b>, <b>duration</b><br> for constant altitude calculations; <br> <br> Or specify <br> <b>initial_altitude</b>, <b>cruising_altitudes</b>, <b>climb_times</b>, <b>cruising_times</b>, <b>descent_time</b>, <b>final_altitude</b><br> to calculate dose accounting for a step climb. <br> <br> Note: the airport codes or coordinates (depending on which was specified), and the date in DD/MM/YYYY format, are echoed in the json response as strings.
       operationId: app.api_icaro.endpoints.ICARO.ambient_dose
       parameters:
         - description: The ICAO code or IATA code or latitude,longitude pair (in decimal degrees) of the origin airport.
@@ -1087,16 +1088,70 @@ paths:
         - description: Altitude (in km). The minimum is 0 m, the maximum is 20 km.
           in: query
           name: altitude
-          required: true
+          required: false
           schema:
             example: 10.1
             type: number
         - description: The flight duration in hours. The minimum is 0, the maximum is 20 hrs.
           in: query
           name: duration
-          required: true
+          required: false
           schema:
             example: 5
+            type: number
+        - description: Initial altitude (in km). The minimum is 0 m, the maximum is 20 km.
+          in: query
+          name: initial_altitude
+          required: false
+          schema:
+            example: 0
+            type: number
+        - description: Cruising altitudes (in km). The minimum is 0 m, the maximum is 20 km.
+          in: query
+          name: cruising_altitudes
+          required: false
+          schema:
+            example:
+              - 10
+              - 15
+            items:
+              type: number
+            type: array
+        - description: Climb times for each cruising altitude (hours).
+          in: query
+          name: climb_times
+          required: false
+          schema:
+            example:
+              - 0.1
+              - 0.5
+            items:
+              type: number
+            type: array
+        - description: Cruising times at each cruising altitude (hours).
+          in: query
+          name: cruising_times
+          required: false
+          schema:
+            example:
+              - 1
+              - 2
+            items:
+              type: number
+            type: array
+        - description: Descent time from last cruising altitude to final altitude (hours).
+          in: query
+          name: descent_time
+          required: false
+          schema:
+            example: 0.5
+            type: number
+        - description: Final altitude (in km).
+          in: query
+          name: final_altitude
+          required: false
+          schema:
+            example: 0
             type: number
         - description: Year in YYYY.
           in: query
@@ -1155,8 +1210,20 @@ paths:
         - lang: Shell
           source: |
             curl -X GET "https://avrad.amentum.io/route/ambient_dose?origin=YSSY&destination=33.94250107,-118.4079971&altitude=10.1&duration=5&year=2019&month=5&day=21" -H "API-Key: <your_key>" -H  "accept: application/json"
-        - lang: Python
+        - label: "Python: Constant altitude"
+          lang: Python
           source: |
+            """
+            Constant altitude code sample.
+
+            In this example, we set:
+              altitude and duration
+
+            The following parameters are left unset:
+              initial_altitude, cruising_altitudes, climb_times,
+              cruising_times, descent_time and final_altitude
+            """
+
             import requests
 
             params = {
@@ -1164,6 +1231,46 @@ paths:
               "destination" : "33.94250107,-118.4079971",
               "altitude" : 10.1, # km,
               "duration" : 5, # hours
+              "year" : 2019,
+              "month" : 5,
+              "day" : 21
+            }
+            headers = {"API-Key" : "<add_your_key>"}
+            try:
+              response = requests.get("https://avrad.amentum.io/route/ambient_dose",
+                params=params, headers=headers)
+              response_json = response.json()
+              response.raise_for_status()
+            except requests.exceptions.HTTPError as e:
+              print(response_json['error'])
+            else:
+              dose = response_json['dose']['value']
+              print(f"Total Ambient Dose was {dose:.2f} uSv")
+        - label: "Python: Step climb"
+          lang: Python
+          source: |
+            """
+            Step-climb code sample.
+
+            In this example, we set:
+              initial_altitude, cruising_altitudes, climb_times,
+              cruising_times, descent_time and final_altitude
+
+            The following parameters are left unset:
+              altitude and duration
+            """
+
+            import requests
+
+            params = {
+              "origin" : "YSSY", # can be ICAO or iATA codes
+              "destination" : "33.94250107,-118.4079971",
+              "initial_altitude": 0.0,                      # km
+              "cruising_altitudes": [12.0, 15.0, 18.0],     # km
+              "climb_times": [0.5, 0.25, 0.1],              # hours
+              "cruising_times": [1.5, 1.75, 5.0],           # hours
+              "descent_time": 0.5,                          # hours
+              "final_altitude": 0.0,                        # km
               "year" : 2019,
               "month" : 5,
               "day" : 21
@@ -1209,7 +1316,7 @@ paths:
         Effective Dose is a radiation protection quantity defined by the International Commission on
          Radiological Protection (ICRP) and represents the stochastic health
          risk to the human body at low levels of radiation.
-        It accounts for the different sensitivities of organs to ionising radiation, as well as the different effectiveness of various types of radiation. <br> <br> Use this endpoint if you need to estimate radiation exposures of personnel. <br> <br> Note: the airport codes or coordinates (depending on which was specified), and the date in DD/MM/YYYY format, are echoed in the json response as strings.
+        It accounts for the different sensitivities of organs to ionising radiation, as well as the different effectiveness of various types of radiation. <br> <br> Use this endpoint if you need to estimate radiation exposures of personnel. <br> <br> This API can run in two modes: <br> <br> Either specify <br> <b>altitude</b>, <b>duration</b><br> for constant altitude calculations; <br> <br> Or specify <br> <b>initial_altitude</b>, <b>cruising_altitudes</b>, <b>climb_times</b>, <b>cruising_times</b>, <b>descent_time</b>, <b>final_altitude</b><br> to calculate dose accounting for a step climb. <br> <br> Note: the airport codes or coordinates (depending on which was specified), and the date in DD/MM/YYYY format, are echoed in the json response as strings.
       operationId: app.api_icaro.endpoints.ICARO.effective_dose
       parameters:
         - description: The ICAO code or IATA code or latitude,longitude pair (in decimal degrees) of the origin airport.
@@ -1229,16 +1336,70 @@ paths:
         - description: Altitude (in km). The minimum is 0 m, the maximum is 20 km.
           in: query
           name: altitude
-          required: true
+          required: false
           schema:
             example: 10.1
             type: number
         - description: The flight duration in hours. The minimum is 0, the maximum is 20 hrs.
           in: query
           name: duration
-          required: true
+          required: false
           schema:
             example: 5
+            type: number
+        - description: Initial altitude (in km). The minimum is 0 m, the maximum is 20 km.
+          in: query
+          name: initial_altitude
+          required: false
+          schema:
+            example: 0
+            type: number
+        - description: Cruising altitudes (in km). The minimum is 0 m, the maximum is 20 km.
+          in: query
+          name: cruising_altitudes
+          required: false
+          schema:
+            example:
+              - 10
+              - 15
+            items:
+              type: number
+            type: array
+        - description: Climb times for each cruising altitude (hours).
+          in: query
+          name: climb_times
+          required: false
+          schema:
+            example:
+              - 0.1
+              - 0.5
+            items:
+              type: number
+            type: array
+        - description: Cruising times at each cruising altitude (hours).
+          in: query
+          name: cruising_times
+          required: false
+          schema:
+            example:
+              - 1
+              - 2
+            items:
+              type: number
+            type: array
+        - description: Descent time from last cruising altitude to final altitude (hours).
+          in: query
+          name: descent_time
+          required: false
+          schema:
+            example: 0.5
+            type: number
+        - description: Final altitude (in km).
+          in: query
+          name: final_altitude
+          required: false
+          schema:
+            example: 0
             type: number
         - description: Year in YYYY.
           in: query
@@ -1297,8 +1458,20 @@ paths:
         - lang: Shell
           source: |
             curl -X GET "https://avrad.amentum.io/route/effective_dose?origin=YSSY&destination=33.94250107,-118.4079971&altitude=10.1&duration=5&year=2019&month=5&day=21" -H "API-Key: <your_key>" -H "accept: application/json"
-        - lang: Python
+        - label: "Python: Constant altitude"
+          lang: Python
           source: |
+            """
+            Constant altitude code sample.
+
+            In this example, we set:
+              altitude and duration
+
+            The following parameters are left unset:
+              initial_altitude, cruising_altitudes, climb_times,
+              cruising_times, descent_time and final_altitude
+            """
+
             import requests
 
             params = {
@@ -1310,6 +1483,47 @@ paths:
               "month" : 5,
               "day" : 21
             } 
+            headers = {"API-Key" : "<add_your_key>"}
+            try:
+              response = requests.get("https://avrad.amentum.io/route/effective_dose",
+                params=params, headers=headers)
+              response_json = response.json()
+              response.raise_for_status()
+            except requests.exceptions.HTTPError as e:
+              print(response_json['error'])
+            else:
+              # Extract the dose
+              dose = response_json['dose']['value']
+              print(f"Total Effective Dose was {dose:.2f} uSv")
+        - label: "Python: Step climb"
+          lang: Python
+          source: |
+            """
+            Step-climb code sample.
+
+            In this example, we set:
+              initial_altitude, cruising_altitudes, climb_times,
+              cruising_times, descent_time and final_altitude
+
+            The following parameters are left unset:
+              altitude and duration
+            """
+
+            import requests
+
+            params = {
+              "origin" : "YSSY", # can be ICAO or iATA codes
+              "destination" : "33.94250107,-118.4079971",
+              "initial_altitude": 0.0,                      # km
+              "cruising_altitudes": [12.0, 15.0, 18.0],     # km
+              "climb_times": [0.5, 0.25, 0.1],              # hours
+              "cruising_times": [1.5, 1.75, 5.0],           # hours
+              "descent_time": 0.5,                          # hours
+              "final_altitude": 0.0,                        # km
+              "year" : 2019,
+              "month" : 5,
+              "day" : 21
+            }
             headers = {"API-Key" : "<add_your_key>"}
             try:
               response = requests.get("https://avrad.amentum.io/route/effective_dose",

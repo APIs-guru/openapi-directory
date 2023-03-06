@@ -163,10 +163,6 @@ tags:
     x-displayName: Batches
   - name: Marketplaces - Orders - Subscriptions - Subscriptions
     x-displayName: Subscriptions
-  - name: OM Invoice - API - Settings
-    x-displayName: Settings
-  - name: OM Invoice - API - Generation
-    x-displayName: Generation
   - name: Analytics - Global
     x-displayName: Global
   - name: Analytics - Tracking
@@ -181,6 +177,10 @@ tags:
     x-displayName: Rules
   - name: Channel Catalogs - Legacy Tracking - Global
     x-displayName: Global
+  - name: OM Invoice - API - Settings
+    x-displayName: Settings
+  - name: OM Invoice - API - Generation
+    x-displayName: Generation
 paths:
   /orders/v3/batches/changeOrders:
     post:
@@ -5499,6 +5499,10 @@ paths:
                 - PublishProducts
                 - PublishOffers
                 - Unpublish
+                - PublishRelationshipsEnum
+                - PublishProductImagesEnum
+                - PublishInventoryEnum
+                - PublishPricingEnum
               format: publicationType
               type: string
             type: array
@@ -5936,6 +5940,39 @@ paths:
       tags:
         - Marketplaces - Orders - Global
       x-releaseStatus: DEPRECATED
+  /v2/user/marketplaces/orders/invoices/generate:
+    post:
+      operationId: GenerateBatchOrderInvoice
+      parameters:
+        - $ref: "#/components/parameters/userNameInQueryParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/generateBatchOrderInvoiceRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/generateBatchOrderInvoiceResponse"
+          description: The locations of the generated invoice. Might take a few seconds to be available
+        "400":
+          $ref: "#/components/responses/generateBatchOrderInvoiceErrorResponse"
+        "403":
+          $ref: "#/components/responses/orderGenerateForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/orderNotFoundResponse"
+        "409":
+          $ref: "#/components/responses/orderInvoiceConflictResponse"
+        "429":
+          $ref: "#/components/responses/orderGenerateTooManyRequestsResponse"
+        default:
+          $ref: "#/components/responses/GeneralError"
+      summary: Generate an Order Invoice batch
+      tags:
+        - OM Invoice - API - Generation
   /v2/user/marketplaces/orders/invoices/getPdfInvoice:
     post:
       operationId: GetOrderInvoicePdf
@@ -7102,6 +7139,14 @@ components:
           schema:
             $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
       description: Store or resource not found
+    generateBatchOrderInvoiceErrorResponse:
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: "#/components/schemas/generateBatchOrderInvoiceErrorResponseItem"
+            type: array
+      description: GenerateBatchOrderInvoiceErrorResponse
     importAlreadyInProgress:
       content:
         application/json:
@@ -7137,6 +7182,7 @@ components:
         The required order invoice settings have not been set
         BeezUPOrderStatus forbidden
       x-exceptions:
+        - MultipleOwnerIdsException
         - UserNotOwnerException
         - OrderInvoiceDesignSettingsNotFoundException
         - OrderInvoiceGeneralSettingsNotFoundException
@@ -7977,6 +8023,8 @@ components:
       type: integer
     accountInfo:
       properties:
+        commercialOwnerEmail:
+          $ref: "#/components/schemas/BeezUP.Common.Email"
         companyInfo:
           $ref: "#/components/schemas/companyInfo"
         email:
@@ -8596,6 +8644,9 @@ components:
       example: Shipped
       type: string
       x-lov: BeezUPOrderState
+    beezUPOrderUUID:
+      description: beezUPOrderUUID
+      type: string
     beezUPTimeZoneId:
       description: The time zone identifier based on the list of values /v2/user/lov/BeezUPTimeZone
       example: "79"
@@ -11829,10 +11880,75 @@ components:
         - doNotExportOutOfStockProducts
         - activeBeezUPTracking
       type: object
+    generateBatchOrderInvoiceErrorResponseItem:
+      properties:
+        count:
+          type: integer
+        errorType:
+          type: string
+        errors:
+          $ref: "#/components/schemas/generateBatchOrderInvoiceErrorResponseItemDetails"
+      required:
+        - errorType
+        - count
+        - errors
+      type: object
+    generateBatchOrderInvoiceErrorResponseItemDetail:
+      properties:
+        errorMessage:
+          $ref: "#/components/schemas/userErrorMessage"
+        request:
+          $ref: "#/components/schemas/generateBatchOrderInvoiceRequestItem"
+      type: object
+    generateBatchOrderInvoiceErrorResponseItemDetails:
+      items:
+        $ref: "#/components/schemas/generateBatchOrderInvoiceErrorResponseItemDetail"
+      type: array
+    generateBatchOrderInvoiceRequest:
+      items:
+        $ref: "#/components/schemas/generateBatchOrderInvoiceRequestItem"
+      type: array
+    generateBatchOrderInvoiceRequestItem:
+      properties:
+        accountId:
+          $ref: "#/components/schemas/marketplaceAccountId"
+        beezUPOrderUUID:
+          $ref: "#/components/schemas/beezUPOrderUUID"
+        invoiceSequenceNumber:
+          $ref: "#/components/schemas/invoiceSequenceNumber"
+        marketplaceTechnicalCode:
+          $ref: "#/components/schemas/marketplaceTechnicalCode"
+      required:
+        - marketplaceTechnicalCode
+        - accountId
+        - beezUPOrderUUID
+        - invoiceSequenceNumber
+      type: object
+    generateBatchOrderInvoiceResponse:
+      items:
+        $ref: "#/components/schemas/generateOrderInvoiceResponse"
+      type: array
     generateOrderInvoiceRequest:
       properties:
         invoiceSequenceNumber:
           $ref: "#/components/schemas/invoiceSequenceNumber"
+      type: object
+    generateOrderInvoiceResponse:
+      properties:
+        accountId:
+          $ref: "#/components/schemas/marketplaceAccountId"
+        beezUPOrderUUID:
+          $ref: "#/components/schemas/beezUPOrderUUID"
+        invoiceLocation:
+          $ref: "#/components/schemas/invoiceLocation"
+        invoiceSequenceNumber:
+          $ref: "#/components/schemas/invoiceSequenceNumber"
+        marketplaceTechnicalCode:
+          $ref: "#/components/schemas/marketplaceTechnicalCode"
+      required:
+        - marketplaceTechnicalCode
+        - accountId
+        - beezUPOrderUUID
       type: object
     getChannelCatalogProductInfoListRequest:
       properties:
@@ -12661,6 +12777,8 @@ components:
       required:
         - self
       type: object
+    invoiceLocation:
+      type: string
     invoiceNumber:
       description: Your invoice number
       example: B1234
@@ -14424,6 +14542,10 @@ components:
         - Global
       example: Global
       type: string
+    marketplaceAccountId:
+      description: Marketplace Account Identifier
+      example: "50"
+      type: integer
     marketplaceChannelCatalog:
       description: This object indicates you the association between a channel catalog and a marketplace. The account identifier will be automatically defined based on your marketplace merchant identfier.
       properties:
@@ -14566,6 +14688,10 @@ components:
     marketplaceOrderStatus:
       description: The marketplace order state
       example: In_progress_3
+      type: string
+    marketplaceTechnicalCode:
+      description: Marketplace Technical Code
+      example: CDISCOUNT
       type: string
     messageId:
       description: The message identifier. It's a guid.
@@ -15592,7 +15718,7 @@ components:
         beginPeriodUtcDate:
           description: |
             The begin period you want to make the search. \
-            The period MUST not be greater than 30 days.
+            The period MUST not be greater than 62 days.
             The begin period MUST be lower than the end period.
           example: 2017-03-01T13:10:01Z
           format: date-time
@@ -15602,7 +15728,7 @@ components:
         endPeriodUtcDate:
           description: |
             The end period of you search. \
-            The period MUST not be greater than 30 days. \
+            The period MUST not be greater than 62 days. \
             The end period MUST be greater than the begin period.
             The end period MUST be lower to the current date.
           example: 2017-04-01T13:10:01Z
@@ -17816,6 +17942,9 @@ components:
           example: "2"
           format: int32
           type: integer
+        isTest:
+          description: Is the store a test or a production store
+          type: boolean
         links:
           $ref: "#/components/schemas/storeLinks"
         name:
@@ -17861,6 +17990,7 @@ components:
         - links
         - offerId
         - offerName
+        - isTest
       type: object
     storeAlert:
       properties:
@@ -18792,10 +18922,6 @@ x-tagGroups:
   - name: Marketplaces - Orders - Subscriptions
     tags:
       - Marketplaces - Orders - Subscriptions - Subscriptions
-  - name: OM Invoice - API
-    tags:
-      - OM Invoice - API - Settings
-      - OM Invoice - API - Generation
   - name: Analytics
     tags:
       - Analytics - Global
@@ -18807,3 +18933,7 @@ x-tagGroups:
   - name: Channel Catalogs - Legacy Tracking
     tags:
       - Channel Catalogs - Legacy Tracking - Global
+  - name: OM Invoice - API
+    tags:
+      - OM Invoice - API - Settings
+      - OM Invoice - API - Generation

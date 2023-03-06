@@ -55,6 +55,188 @@ paths:
       tags:
         - PDF
   /combined_submissions:
+    get:
+      operationId: listCombinedSubmissions
+      parameters:
+        - description: "Default: 1"
+          example: 2
+          in: query
+          name: page
+          required: false
+          schema:
+            minimum: 1
+            type: integer
+        - description: "Default: 50"
+          example: 1
+          in: query
+          name: per_page
+          required: false
+          schema:
+            maximum: 50
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    - actions: []
+                      download_url: null
+                      error_message: null
+                      expired: false
+                      expires_at: null
+                      expires_in: null
+                      id: com_000000000000000001
+                      metadata: {}
+                      password: null
+                      pdf_hash: null
+                      processed_at: null
+                      source_pdfs: []
+                      state: pending
+                      submission_ids: []
+                    - actions: []
+                      download_url: https://example.com/combined_submissions/combined_submission.pdf
+                      error_message: null
+                      expired: false
+                      expires_at: null
+                      expires_in: null
+                      id: com_000000000000000002
+                      metadata: {}
+                      password: null
+                      pdf_hash: null
+                      processed_at: 2023-01-05T14:00:00Z
+                      source_pdfs: []
+                      state: processed
+                      submission_ids: []
+                    - actions: []
+                      download_url: null
+                      error_message: Something went wrong
+                      expired: false
+                      expires_at: null
+                      expires_in: 123
+                      id: com_000000000000000003
+                      metadata: {}
+                      password: null
+                      pdf_hash: null
+                      processed_at: null
+                      source_pdfs: []
+                      state: error
+                      submission_ids: []
+                    - actions: []
+                      download_url: null
+                      error_message: null
+                      expired: true
+                      expires_at: 2023-01-05T14:05:00Z
+                      expires_in: 345
+                      id: com_000000000000000004
+                      metadata: {}
+                      password: null
+                      pdf_hash: null
+                      processed_at: 2023-01-05T14:00:00Z
+                      source_pdfs: []
+                      state: processed
+                      submission_ids: []
+              schema:
+                items:
+                  properties:
+                    actions:
+                      items:
+                        $ref: "#/components/schemas/combined_submission_action"
+                      type: array
+                    download_url:
+                      nullable: true
+                      type: string
+                    error_message:
+                      nullable: true
+                      type: string
+                    expired:
+                      type: boolean
+                    expires_at:
+                      nullable: true
+                      type: string
+                    expires_in:
+                      nullable: true
+                      type: integer
+                    id:
+                      type: string
+                    metadata:
+                      type: object
+                    password:
+                      nullable: true
+                      type: string
+                    pdf_hash:
+                      nullable: true
+                      type: string
+                    source_pdfs:
+                      items:
+                        oneOf:
+                          - additionalProperties: false
+                            properties:
+                              id:
+                                type: string
+                              type:
+                                enum:
+                                  - submission
+                                  - combined_submission
+                                  - template
+                                  - custom_file
+                                type: string
+                            required:
+                              - type
+                              - id
+                            type: object
+                          - additionalProperties: false
+                            properties:
+                              type:
+                                enum:
+                                  - url
+                                type: string
+                              url:
+                                format: uri
+                                type: string
+                            required:
+                              - type
+                              - url
+                            type: object
+                      type: array
+                    state:
+                      enum:
+                        - pending
+                        - processed
+                        - error
+                      type: string
+                    submission_ids:
+                      items:
+                        type: string
+                      type: array
+                  required:
+                    - id
+                    - state
+                    - expired
+                    - submission_ids
+                    - source_pdfs
+                  title: combined_submission
+                  type: object
+                title: combined_submissions
+                type: array
+          description: enumerate all combined submissions
+        "401":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    error: Unauthorized
+              schema:
+                $ref: "#/components/schemas/authentication_error"
+          description: authentication failed
+      security:
+        - api_token_basic: []
+      summary: Get a list of all combined submissions
+      tags:
+        - PDF
     post:
       operationId: combineSubmissions
       requestBody:
@@ -66,6 +248,7 @@ paths:
                 metadata:
                   bar: baz
                   foo: 123
+                password: p@ssword
                 submission_ids:
                   - sub_000000000000000001
                   - sub_000000000000000002
@@ -74,6 +257,8 @@ paths:
                   type: integer
                 metadata:
                   type: object
+                password:
+                  type: string
                 submission_ids:
                   items:
                     type: string
@@ -95,12 +280,15 @@ paths:
                     combined_submission:
                       actions: []
                       download_url: null
+                      error_message: null
                       expired: false
                       expires_at: null
+                      expires_in: 300
                       id: com_000000000000000001
                       metadata:
                         bar: baz
                         foo: 123
+                      password: p@ssword
                       pdf_hash: null
                       processed_at: null
                       source_pdfs: []
@@ -120,15 +308,24 @@ paths:
                       download_url:
                         nullable: true
                         type: string
+                      error_message:
+                        nullable: true
+                        type: string
                       expired:
                         type: boolean
                       expires_at:
                         nullable: true
                         type: string
+                      expires_in:
+                        nullable: true
+                        type: integer
                       id:
                         type: string
                       metadata:
                         type: object
+                      password:
+                        nullable: true
+                        type: string
                       pdf_hash:
                         nullable: true
                         type: string
@@ -203,7 +400,7 @@ paths:
               examples:
                 response:
                   value:
-                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 37 in '{ \"submission_ids\": [\"123\", \"345\"], metadata: { \"user_id\": \"This PDF is great!\" }}"
+                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 37 in '{ \"submission_ids\": [\"123\", \"345\"], metadata: { \"user_id\": \"@#)(*%$)@(#*%@&%\" }}"
                     status: error
               schema:
                 $ref: "#/components/schemas/error"
@@ -264,12 +461,15 @@ paths:
                           s3_url: https://docspring-custom-s3-test.s3.amazonaws.com/acc_1234/2018/combined_submissions/20181005090010-com_1234.pdf
                         state: processed
                     download_url: null
+                    error_message: null
                     expired: true
                     expires_at: 2018-10-20T13:00:00Z
+                    expires_in: 300
                     id: com_000000000000000001
                     metadata:
                       qux: abc
                       user_id: 42
+                    password: p@ssword
                     pdf_hash: 12342342471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
                     processed_at: 2020-05-14T02:00:00Z
                     source_pdfs: []
@@ -286,15 +486,24 @@ paths:
                   download_url:
                     nullable: true
                     type: string
+                  error_message:
+                    nullable: true
+                    type: string
                   expired:
                     type: boolean
                   expires_at:
                     nullable: true
                     type: string
+                  expires_in:
+                    nullable: true
+                    type: integer
                   id:
                     type: string
                   metadata:
                     type: object
+                  password:
+                    nullable: true
+                    type: string
                   pdf_hash:
                     nullable: true
                     type: string
@@ -414,12 +623,15 @@ paths:
                           s3_url: https://docspring-custom-s3-test.s3.amazonaws.com/acc_1234/2018/combined_submissions/20181005090010-com_1234.pdf
                         state: processed
                     download_url: https://example.com/combined_submissions/combined_submission.pdf
+                    error_message: null
                     expired: false
                     expires_at: 2018-10-20T13:05:00Z
+                    expires_in: 300
                     id: com_000000000000000001
                     metadata:
                       qux: abc
                       user_id: 42
+                    password: p@ssword
                     pdf_hash: 12342342471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
                     processed_at: 2020-05-14T02:00:00Z
                     source_pdfs: []
@@ -436,15 +648,24 @@ paths:
                   download_url:
                     nullable: true
                     type: string
+                  error_message:
+                    nullable: true
+                    type: string
                   expired:
                     type: boolean
                   expires_at:
                     nullable: true
                     type: string
+                  expires_in:
+                    nullable: true
+                    type: integer
                   id:
                     type: string
                   metadata:
                     type: object
+                  password:
+                    nullable: true
+                    type: string
                   pdf_hash:
                     nullable: true
                     type: string
@@ -559,6 +780,8 @@ paths:
                   type: integer
                 metadata:
                   type: object
+                password:
+                  type: string
                 source_pdfs:
                   items:
                     oneOf:
@@ -618,12 +841,15 @@ paths:
                             s3_url: https://docspring-custom-s3-test.s3.amazonaws.com/acc_1234/2018/combined_submissions/20181005090010-com_1234.pdf
                           state: processed
                       download_url: null
+                      error_message: null
                       expired: false
                       expires_at: null
+                      expires_in: 300
                       id: com_000000000000000002
                       metadata:
                         bar: baz
                         foo: 123
+                      password: null
                       pdf_hash: null
                       processed_at: null
                       source_pdfs:
@@ -655,15 +881,24 @@ paths:
                       download_url:
                         nullable: true
                         type: string
+                      error_message:
+                        nullable: true
+                        type: string
                       expired:
                         type: boolean
                       expires_at:
                         nullable: true
                         type: string
+                      expires_in:
+                        nullable: true
+                        type: integer
                       id:
                         type: string
                       metadata:
                         type: object
+                      password:
+                        nullable: true
+                        type: string
                       pdf_hash:
                         nullable: true
                         type: string
@@ -738,7 +973,7 @@ paths:
               examples:
                 response:
                   value:
-                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 34 in '{ \"source_pdfs\": [\"123\", \"345\"], metadata: { \"user_id\": \"This PDF is great!\" }}"
+                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 34 in '{ \"source_pdfs\": [\"123\", \"345\"], metadata: { \"user_id\": \"@#*&%)(@*#%&(@#!\" }}"
                     status: error
               schema:
                 $ref: "#/components/schemas/error"
@@ -875,10 +1110,10 @@ paths:
                     auth_username_hash: b7c141423f7030a6a771563ee0731192ea871146653a3d0cf8f8b78ca8f9699b
                     completed_at: null
                     data:
-                      description: Great PDF, good job!
+                      last_name: Smithers
                     email: jdoe@example.com
                     fields:
-                      - description
+                      - last_name
                     id: drq_000000000000000001
                     ip_address: 1.1.1.1
                     metadata:
@@ -887,6 +1122,7 @@ paths:
                     order: 1
                     sort_order: 0
                     state: pending
+                    submission_id: sub_000000000000000001
                     user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36
                     viewed_at: null
               schema:
@@ -1011,10 +1247,10 @@ paths:
                       auth_username_hash: null
                       completed_at: null
                       data:
-                        description: Great PDF, good job!
+                        last_name: Smithers
                       email: jdoe@example.com
                       fields:
-                        - description
+                        - last_name
                       id: drq_000000000000000001
                       ip_address: 1.1.1.1
                       metadata:
@@ -1023,6 +1259,7 @@ paths:
                       order: 1
                       sort_order: 0
                       state: pending
+                      submission_id: sub_000000000000000001
                       user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36
                       viewed_at: null
                     status: success
@@ -1488,6 +1725,183 @@ paths:
       summary: Rename a folder
       tags:
         - PDF
+  /submissions:
+    get:
+      operationId: listSubmissions
+      parameters:
+        - example: sub_list_000012
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - example: 3
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: number
+        - example: 2019-01-01T09:00:00-05:00
+          in: query
+          name: created_after
+          required: false
+          schema:
+            type: string
+        - example: 2020-01-01T09:00:00-05:00
+          in: query
+          name: created_before
+          required: false
+          schema:
+            type: string
+        - example: test
+          in: query
+          name: type
+          required: false
+          schema:
+            type: string
+        - example: true
+          in: query
+          name: include_data
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    limit: 3
+                    next_cursor: sub_list_000003
+                    submissions:
+                      - actions: []
+                        batch_id: null
+                        data:
+                          first_name: John C. D. Rom Laserdisk F. Scott Fitzgerald
+                          last_name: Smith
+                          phone_number: "+11234567890"
+                        data_requests: []
+                        download_url: https://example.com/submissions/submission.pdf
+                        editable: false
+                        expired: false
+                        expires_at: 2020-10-27T13:00:00Z
+                        id: sub_list_000001
+                        json_schema_errors: []
+                        metadata:
+                          qux: abc
+                          user_id: 42
+                        password: null
+                        pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
+                        permanent_download_url: http://app.docspring.local/submissions/sub_list_000001/download
+                        processed_at: 2020-05-14T02:00:00Z
+                        referrer: null
+                        source: api
+                        state: processed
+                        template_id: tpl_000000000000000001
+                        test: true
+                        truncated_text:
+                          first_name:
+                            - F. Scott Fitzgerald
+                      - actions: []
+                        batch_id: null
+                        data:
+                          first_name: John C. D. Rom Laserdisk F. Scott Fitzgerald
+                          last_name: Smith
+                          phone_number: "+11234567890"
+                        data_requests: []
+                        download_url: https://example.com/submissions/submission.pdf
+                        editable: false
+                        expired: false
+                        expires_at: 2020-10-27T13:00:00Z
+                        id: sub_list_000002
+                        json_schema_errors: []
+                        metadata:
+                          qux: abc
+                          user_id: 42
+                        password: null
+                        pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
+                        permanent_download_url: http://app.docspring.local/submissions/sub_list_000002/download
+                        processed_at: 2020-05-14T02:00:00Z
+                        referrer: null
+                        source: api
+                        state: processed
+                        template_id: tpl_000000000000000001
+                        test: true
+                        truncated_text:
+                          first_name:
+                            - F. Scott Fitzgerald
+                      - actions: []
+                        batch_id: null
+                        data:
+                          first_name: John C. D. Rom Laserdisk F. Scott Fitzgerald
+                          last_name: Smith
+                          phone_number: "+11234567890"
+                        data_requests: []
+                        download_url: https://example.com/submissions/submission.pdf
+                        editable: false
+                        expired: false
+                        expires_at: 2020-10-27T13:00:00Z
+                        id: sub_list_000003
+                        json_schema_errors: []
+                        metadata:
+                          qux: abc
+                          user_id: 42
+                        password: null
+                        pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
+                        permanent_download_url: http://app.docspring.local/submissions/sub_list_000003/download
+                        processed_at: 2020-05-14T02:00:00Z
+                        referrer: null
+                        source: api
+                        state: processed
+                        template_id: tpl_000000000000000001
+                        test: true
+                        truncated_text:
+                          first_name:
+                            - F. Scott Fitzgerald
+              schema:
+                properties:
+                  limit:
+                    type: number
+                  next_cursor:
+                    nullable: true
+                    type: string
+                  submissions:
+                    items:
+                      $ref: "#/components/schemas/submission"
+                    type: array
+                required:
+                  - submissions
+                  - limit
+                  - next_cursor
+                title: list_submissions_response
+                type: object
+          description: listing submissions
+        "400":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    error: "Invalid submission type: 'foo'"
+                    status: error
+              schema:
+                $ref: "#/components/schemas/error"
+          description: invalid type
+        "401":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    error: Invalid API token secret
+              schema:
+                $ref: "#/components/schemas/authentication_error"
+          description: authentication failed
+      security:
+        - api_token_basic: []
+      summary: List all submissions
+      tags:
+        - PDF
   /submissions/batches:
     post:
       operationId: batchGeneratePdfs
@@ -1500,15 +1914,15 @@ paths:
                   job_id: 54321
                 submissions:
                   - data:
-                      description: This PDF is great!
-                      title: Test PDF 1
+                      first_name: Johnny
+                      last_name: Smith
                     metadata:
                       submission_number: 1
                     template_id: tpl_000000000000000001
                     test: false
                   - data:
-                      description: This PDF is also pretty good!
-                      title: Test PDF 2
+                      first_name: Jane
+                      last_name: Doe
                     metadata:
                       submission_number: 2
                     template_id: tpl_000000000000000001
@@ -1570,7 +1984,7 @@ paths:
                     submissions:
                       - status: valid_but_not_saved
                       - errors:
-                          - The root object did not contain a required property of 'title'
+                          - Your submission data did not contain a required property of 'first_name'
                         status: error
                         submission:
                           actions: []
@@ -1582,9 +1996,10 @@ paths:
                           expires_at: null
                           id: sub_000000000000000001
                           json_schema_errors:
-                            - The root object did not contain a required property of 'title'
+                            - Your submission data did not contain a required property of 'first_name'
                           metadata:
                             submission_number: 2
+                          password: null
                           pdf_hash: null
                           permanent_download_url: null
                           processed_at: null
@@ -1701,6 +2116,7 @@ paths:
                           json_schema_errors: []
                           metadata:
                             submission_number: 1
+                          password: null
                           pdf_hash: null
                           permanent_download_url: null
                           processed_at: null
@@ -1721,6 +2137,7 @@ paths:
                           json_schema_errors: []
                           metadata:
                             submission_number: 2
+                          password: null
                           pdf_hash: null
                           permanent_download_url: null
                           processed_at: null
@@ -1812,7 +2229,7 @@ paths:
               examples:
                 response:
                   value:
-                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 24 in '{ \"title\": \"Test PDF\", description: \"This PDF is great!\" }"
+                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 25 in '{ \"first_name\": \"John\", last_name: \"Smith\" }"
                     status: error
               schema:
                 $ref: "#/components/schemas/error"
@@ -1873,6 +2290,7 @@ paths:
                         id: sub_000000000000000001
                         json_schema_errors: []
                         metadata: {}
+                        password: null
                         pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
                         permanent_download_url: http://app.docspring.local/submissions/sub_000000000000000001/download
                         processed_at: null
@@ -1890,6 +2308,7 @@ paths:
                         id: sub_000000000000000002
                         json_schema_errors: []
                         metadata: {}
+                        password: null
                         pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
                         permanent_download_url: http://app.docspring.local/submissions/sub_000000000000000002/download
                         processed_at: null
@@ -2002,6 +2421,7 @@ paths:
                     metadata:
                       qux: abc
                       user_id: 42
+                    password: null
                     pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
                     permanent_download_url: null
                     processed_at: 2020-05-14T02:00:00Z
@@ -2009,8 +2429,8 @@ paths:
                     template_id: tpl_000000000000000001
                     test: true
                     truncated_text:
-                      description:
-                        - text that couldn't fit
+                      first_name:
+                        - F. Scott Fitzgerald
               schema:
                 $ref: "#/components/schemas/submission"
           description: submission was expired
@@ -2085,8 +2505,9 @@ paths:
                         state: processed
                     batch_id: null
                     data:
-                      description: This PDF is great!
-                      title: Test PDF
+                      first_name: John C. D. Rom Laserdisk F. Scott Fitzgerald
+                      last_name: Smith
+                      phone_number: "+11234567890"
                     data_requests: []
                     download_url: https://example.com/submissions/submission.pdf
                     editable: false
@@ -2097,6 +2518,7 @@ paths:
                     metadata:
                       qux: abc
                       user_id: 42
+                    password: null
                     pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
                     permanent_download_url: http://app.docspring.local/submissions/sub_000000000000000001/download
                     processed_at: 2020-05-14T02:00:00Z
@@ -2106,8 +2528,8 @@ paths:
                     template_id: tpl_000000000000000001
                     test: true
                     truncated_text:
-                      description:
-                        - text that couldn't fit
+                      first_name:
+                        - F. Scott Fitzgerald
               schema:
                 $ref: "#/components/schemas/submission"
           description: processed submission found
@@ -2353,19 +2775,26 @@ paths:
                       nullable: true
                       type: string
                   required:
-                    - id
-                    - name
-                    - description
-                    - template_type
-                    - public_web_form
-                    - public_submissions
-                    - expire_submissions
                     - allow_additional_properties
+                    - description
+                    - document_url
                     - editable_submissions
+                    - expiration_interval
+                    - expire_after
+                    - expire_submissions
+                    - id
                     - locked
-                    - webhook_url
-                    - slack_webhook_url
+                    - name
+                    - page_dimensions
+                    - parent_folder_id
+                    - path
+                    - permanent_document_url
+                    - public_submissions
+                    - public_web_form
                     - redirect_url
+                    - slack_webhook_url
+                    - template_type
+                    - webhook_url
                   title: template
                   type: object
                 title: templates
@@ -2528,7 +2957,7 @@ paths:
     get:
       operationId: getTemplate
       parameters:
-        - example: tpl_000000000000000011
+        - example: tpl_000000000000000001
           in: path
           name: template_id
           required: true
@@ -2543,28 +2972,24 @@ paths:
                   value:
                     allow_additional_properties: false
                     description: null
-                    document_filename: test-document.pdf
+                    document_filename: blank_pdf.pdf
                     document_processed: true
-                    document_state: pending
-                    document_url: /uploads/test/store/templates/test/test-document.pdf
+                    document_state: processed
+                    document_url: /uploads/test/store/acc_000000000000000001/templates/tpl_000000000000000001/document/original-0000000000.pdf
                     editable_submissions: false
                     expiration_interval: days
                     expire_after: 7
                     expire_submissions: true
-                    id: tpl_000000000000000011
+                    id: tpl_000000000000000001
                     locked: false
-                    name: Sub Template 1
-                    page_count: 3
+                    name: Template 1
+                    page_count: 1
                     page_dimensions:
                       - - 612
                         - 792
-                      - - 792
-                        - 612
-                      - - 612
-                        - 792
-                    parent_folder_id: fld_000000000000000001
-                    path: /Folder
-                    permanent_document_url: http://app.docspring.local/templates/tpl_000000000000000011/original_pdf?token=123456789abcdef
+                    parent_folder_id: null
+                    path: /
+                    permanent_document_url: http://app.docspring.local/templates/tpl_000000000000000001/original_pdf?token=123456789abcdef
                     public_submissions: false
                     public_web_form: false
                     redirect_url: null
@@ -2633,19 +3058,26 @@ paths:
                     nullable: true
                     type: string
                 required:
-                  - id
-                  - name
-                  - description
-                  - template_type
-                  - public_web_form
-                  - public_submissions
-                  - expire_submissions
                   - allow_additional_properties
+                  - description
+                  - document_url
                   - editable_submissions
+                  - expiration_interval
+                  - expire_after
+                  - expire_submissions
+                  - id
                   - locked
-                  - webhook_url
-                  - slack_webhook_url
+                  - name
+                  - page_dimensions
+                  - parent_folder_id
+                  - path
+                  - permanent_document_url
+                  - public_submissions
+                  - public_web_form
                   - redirect_url
+                  - slack_webhook_url
+                  - template_type
+                  - webhook_url
                 title: template
                 type: object
           description: template found
@@ -2672,7 +3104,7 @@ paths:
           description: template not found
       security:
         - api_token_basic: []
-      summary: Get a single template
+      summary: Check the status of an uploaded template
       tags:
         - PDF
     put:
@@ -2832,7 +3264,7 @@ paths:
                     integer: true
                     maximum: 100
                     minimum: 10
-                    name: title
+                    name: first_name
                     page: 1
                     rotation: 0
                     type: number
@@ -3010,6 +3442,8 @@ paths:
                       page:
                         minimum: 1
                         type: number
+                      placeholder:
+                        type: string
                       qrcodeColor:
                         type: string
                       qrcodeColorFieldName:
@@ -3116,12 +3550,12 @@ paths:
                 response:
                   value:
                     new_field_ids:
-                      - 3
                       - 4
                       - 5
                       - 6
-                      - 99
                       - 7
+                      - 99
+                      - 8
                     status: success
               schema:
                 properties:
@@ -3311,19 +3745,26 @@ paths:
                     nullable: true
                     type: string
                 required:
-                  - id
-                  - name
-                  - description
-                  - template_type
-                  - public_web_form
-                  - public_submissions
-                  - expire_submissions
                   - allow_additional_properties
+                  - description
+                  - document_url
                   - editable_submissions
+                  - expiration_interval
+                  - expire_after
+                  - expire_submissions
+                  - id
                   - locked
-                  - webhook_url
-                  - slack_webhook_url
+                  - name
+                  - page_dimensions
+                  - parent_folder_id
+                  - path
+                  - permanent_document_url
+                  - public_submissions
+                  - public_web_form
                   - redirect_url
+                  - slack_webhook_url
+                  - template_type
+                  - webhook_url
                 title: template
                 type: object
           description: copy template success
@@ -3462,19 +3903,26 @@ paths:
                     nullable: true
                     type: string
                 required:
-                  - id
-                  - name
-                  - description
-                  - template_type
-                  - public_web_form
-                  - public_submissions
-                  - expire_submissions
                   - allow_additional_properties
+                  - description
+                  - document_url
                   - editable_submissions
+                  - expiration_interval
+                  - expire_after
+                  - expire_submissions
+                  - id
                   - locked
-                  - webhook_url
-                  - slack_webhook_url
+                  - name
+                  - page_dimensions
+                  - parent_folder_id
+                  - path
+                  - permanent_document_url
+                  - public_submissions
+                  - public_web_form
                   - redirect_url
+                  - slack_webhook_url
+                  - template_type
+                  - webhook_url
                 title: template
                 type: object
           description: move template success
@@ -3517,15 +3965,20 @@ paths:
                     description: JSON Schema generated by DocSpring.com
                     id: https://api.docspring.com/api/v1/templates/tpl_000000000000000001/schema.json
                     properties:
-                      description:
-                        title: Description
+                      first_name:
+                        title: First Name
                         type: string
-                      title:
-                        title: Title
+                      last_name:
+                        title: Last Name
                         type: string
+                      phone_number:
+                        title: Phone Number
+                        type:
+                          - string
+                          - "null"
                     required:
-                      - description
-                      - title
+                      - first_name
+                      - last_name
                     title: Template 1
                     type: object
               schema:
@@ -3583,6 +4036,200 @@ paths:
       tags:
         - PDF
   "/templates/{template_id}/submissions":
+    get:
+      parameters:
+        - example: tpl_000000000000000002
+          in: path
+          name: template_id
+          required: true
+          schema:
+            type: string
+        - example: null
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - example: null
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: number
+        - example: null
+          in: query
+          name: created_after
+          required: false
+          schema:
+            type: string
+        - example: null
+          in: query
+          name: created_before
+          required: false
+          schema:
+            type: string
+        - example: null
+          in: query
+          name: type
+          required: false
+          schema:
+            type: string
+        - example: true
+          in: query
+          name: include_data
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    limit: 50
+                    next_cursor: sub_list_000014
+                    submissions:
+                      - actions: []
+                        batch_id: null
+                        data:
+                          first_name: John C. D. Rom Laserdisk F. Scott Fitzgerald
+                          last_name: Smith
+                          phone_number: "+11234567890"
+                        data_requests: []
+                        download_url: https://example.com/submissions/submission.pdf
+                        editable: false
+                        expired: false
+                        expires_at: 2020-10-27T13:00:00Z
+                        id: sub_list_000011
+                        json_schema_errors: []
+                        metadata:
+                          qux: abc
+                          user_id: 42
+                        password: null
+                        pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
+                        permanent_download_url: http://app.docspring.local/submissions/sub_list_000011/download
+                        processed_at: 2020-05-14T02:00:00Z
+                        referrer: null
+                        source: api
+                        state: processed
+                        template_id: tpl_000000000000000002
+                        test: false
+                        truncated_text:
+                          first_name:
+                            - F. Scott Fitzgerald
+                      - actions: []
+                        batch_id: null
+                        data:
+                          first_name: John C. D. Rom Laserdisk F. Scott Fitzgerald
+                          last_name: Smith
+                          phone_number: "+11234567890"
+                        data_requests: []
+                        download_url: https://example.com/submissions/submission.pdf
+                        editable: false
+                        expired: false
+                        expires_at: 2020-10-27T13:00:00Z
+                        id: sub_list_000012
+                        json_schema_errors: []
+                        metadata:
+                          qux: abc
+                          user_id: 42
+                        password: null
+                        pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
+                        permanent_download_url: http://app.docspring.local/submissions/sub_list_000012/download
+                        processed_at: 2020-05-14T02:00:00Z
+                        referrer: null
+                        source: api
+                        state: processed
+                        template_id: tpl_000000000000000002
+                        test: false
+                        truncated_text:
+                          first_name:
+                            - F. Scott Fitzgerald
+                      - actions: []
+                        batch_id: null
+                        data:
+                          first_name: John C. D. Rom Laserdisk F. Scott Fitzgerald
+                          last_name: Smith
+                          phone_number: "+11234567890"
+                        data_requests: []
+                        download_url: https://example.com/submissions/submission.pdf
+                        editable: false
+                        expired: false
+                        expires_at: 2020-10-27T13:00:00Z
+                        id: sub_list_000013
+                        json_schema_errors: []
+                        metadata:
+                          qux: abc
+                          user_id: 42
+                        password: null
+                        pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
+                        permanent_download_url: http://app.docspring.local/submissions/sub_list_000013/download
+                        processed_at: 2020-05-14T02:00:00Z
+                        referrer: null
+                        source: api
+                        state: processed
+                        template_id: tpl_000000000000000002
+                        test: false
+                        truncated_text:
+                          first_name:
+                            - F. Scott Fitzgerald
+                      - actions: []
+                        batch_id: null
+                        data:
+                          first_name: John C. D. Rom Laserdisk F. Scott Fitzgerald
+                          last_name: Smith
+                          phone_number: "+11234567890"
+                        data_requests: []
+                        download_url: https://example.com/submissions/submission.pdf
+                        editable: false
+                        expired: false
+                        expires_at: 2020-10-27T13:00:00Z
+                        id: sub_list_000014
+                        json_schema_errors: []
+                        metadata:
+                          qux: abc
+                          user_id: 42
+                        password: null
+                        pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
+                        permanent_download_url: http://app.docspring.local/submissions/sub_list_000014/download
+                        processed_at: 2020-05-14T02:00:00Z
+                        referrer: null
+                        source: api
+                        state: processed
+                        template_id: tpl_000000000000000002
+                        test: false
+                        truncated_text:
+                          first_name:
+                            - F. Scott Fitzgerald
+              schema:
+                properties:
+                  limit:
+                    type: number
+                  next_cursor:
+                    nullable: true
+                    type: string
+                  submissions:
+                    items:
+                      $ref: "#/components/schemas/submission"
+                    type: array
+                required:
+                  - submissions
+                  - limit
+                  - next_cursor
+                title: list_submissions_response
+                type: object
+          description: listing submissions
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: invalid template id
+      security:
+        - api_token_basic: []
+      summary: List all submissions for a given template
+      tags:
+        - PDF
     post:
       operationId: generatePDF
       parameters:
@@ -3598,8 +4245,10 @@ paths:
             schema:
               example:
                 data:
-                  description: This PDF is great!
-                  title: Test PDF
+                  first_name: John
+                  last_name: Smith
+                  phone_number: "+11234567890"
+                expires_in: 300
                 metadata:
                   bar: baz
                   foo: 123
@@ -3669,12 +4318,16 @@ paths:
                     title: create_submission_data_request_data
                     type: object
                   type: array
+                expires_in:
+                  type: integer
                 field_overrides:
                   type: object
                 html:
                   type: string
                 metadata:
                   type: object
+                password:
+                  type: string
                 test:
                   type: boolean
               required:
@@ -3703,6 +4356,7 @@ paths:
                       metadata:
                         bar: baz
                         foo: 123
+                      password: null
                       pdf_hash: null
                       permanent_download_url: null
                       processed_at: null
@@ -3728,6 +4382,9 @@ paths:
                   - submission
                 title: create_submission_response
                 type: object
+                x-password:
+                  type: string
+                  x-nullable: true
           description: submission created
         "400":
           content:
@@ -3735,7 +4392,7 @@ paths:
               examples:
                 response:
                   value:
-                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 24 in '{ \"title\": \"Test PDF\", description: \"This PDF is great!\" }"
+                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 25 in '{ \"first_name\": \"John\", last_name: \"Smith\" }"
                     status: error
               schema:
                 $ref: "#/components/schemas/error"
@@ -3758,7 +4415,7 @@ paths:
                 response:
                   value:
                     errors:
-                      - The root object did not contain a required property of 'description'
+                      - Your submission data did not contain a required property of 'last_name'
                     status: error
                     submission:
                       actions: []
@@ -3770,10 +4427,11 @@ paths:
                       expires_at: null
                       id: sub_000000000000000001
                       json_schema_errors:
-                        - The root object did not contain a required property of 'description'
+                        - Your submission data did not contain a required property of 'last_name'
                       metadata:
                         bar: baz
                         foo: 123
+                      password: null
                       pdf_hash: null
                       permanent_download_url: null
                       processed_at: null
@@ -3805,13 +4463,13 @@ paths:
             schema:
               example:
                 - data:
-                    description: This PDF is great!
-                    title: Test PDF 1
+                    first_name: Johnny
+                    last_name: Smith
                   metadata:
                     submission_number: 1
                 - data:
-                    description: This PDF is also pretty good!
-                    title: Test PDF 2
+                    first_name: Jane
+                    last_name: Doe
                   metadata:
                     submission_number: 2
               items:
@@ -3914,6 +4572,7 @@ paths:
                         json_schema_errors: []
                         metadata:
                           submission_number: 1
+                        password: null
                         pdf_hash: null
                         permanent_download_url: null
                         processed_at: null
@@ -3934,6 +4593,7 @@ paths:
                         json_schema_errors: []
                         metadata:
                           submission_number: 2
+                        password: null
                         pdf_hash: null
                         permanent_download_url: null
                         processed_at: null
@@ -3968,7 +4628,7 @@ paths:
               examples:
                 response:
                   value:
-                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 24 in '{ \"title\": \"Test PDF\", description: \"This PDF is great!\" }"
+                    error: "There was a problem with the JSON you submitted: unexpected character at line 1, column 25 in '{ \"first_name\": \"John\", last_name: \"Smith\" }"
                     status: error
               schema:
                 $ref: "#/components/schemas/error"
@@ -3990,7 +4650,7 @@ paths:
                 response:
                   value:
                     - errors:
-                        - The root object did not contain a required property of 'description'
+                        - Your submission data did not contain a required property of 'last_name'
                       status: error
                       submission:
                         actions: []
@@ -4002,9 +4662,10 @@ paths:
                         expires_at: null
                         id: sub_000000000000000001
                         json_schema_errors:
-                          - The root object did not contain a required property of 'description'
+                          - Your submission data did not contain a required property of 'last_name'
                         metadata:
                           submission_number: 1
+                        password: null
                         pdf_hash: null
                         permanent_download_url: null
                         processed_at: null
@@ -4013,7 +4674,7 @@ paths:
                         test: false
                         truncated_text: {}
                     - errors:
-                        - The root object did not contain a required property of 'title'
+                        - Your submission data did not contain a required property of 'first_name'
                       status: error
                       submission:
                         actions: []
@@ -4025,9 +4686,10 @@ paths:
                         expires_at: null
                         id: sub_000000000000000002
                         json_schema_errors:
-                          - The root object did not contain a required property of 'title'
+                          - Your submission data did not contain a required property of 'first_name'
                         metadata:
                           submission_number: 2
+                        password: null
                         pdf_hash: null
                         permanent_download_url: null
                         processed_at: null
@@ -4043,6 +4705,314 @@ paths:
       security:
         - api_token_basic: []
       summary: Generates multiple PDFs
+      tags:
+        - PDF
+  "/templates/{template_id}?full=true":
+    get:
+      operationId: getFullTemplate
+      parameters:
+        - example: tpl_000000000000000001
+          in: path
+          name: template_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    allow_additional_properties: false
+                    defaults:
+                      characterSpacing: 0
+                      checkColor: "444444"
+                      color: "444444"
+                      dateFormat: "%m/%d/%Y"
+                      dateTimeFormat: "%m/%d/%Y %H:%M:%S"
+                      fontSize: 11
+                      opacity: 1
+                      shapeBorderColor: 4A90E2
+                      typeface: Helvetica
+                    demo: false
+                    description: null
+                    document_filename: blank_pdf.pdf
+                    document_md5: 1c32d785398e3a7eaab0e9b876903cc6
+                    document_parse_error: false
+                    document_processed: true
+                    document_state: processed
+                    document_url: /uploads/test/store/acc_000000000000000001/templates/tpl_000000000000000001/document/original-0000000000.pdf
+                    editable_submissions: false
+                    embed_domains: null
+                    encrypt_pdfs: false
+                    encrypt_pdfs_password: null
+                    expiration_interval: days
+                    expire_after: 7
+                    expire_submissions: true
+                    field_order:
+                      - - 1
+                        - 2
+                        - 3
+                    fields:
+                      "1":
+                        displayType: text
+                        height: 80
+                        name: first_name
+                        width: 200
+                        x: 0
+                        y: 0
+                      "2":
+                        displayType: text
+                        height: 80
+                        name: last_name
+                        width: 200
+                        x: 0
+                        y: 100
+                      "3":
+                        displayType: text
+                        height: 80
+                        name: phone_number
+                        width: 200
+                        x: 0
+                        y: 200
+                    first_template: false
+                    footer_html: null
+                    header_html: null
+                    html: null
+                    html_engine_options:
+                      format: Letter
+                      landscape: false
+                      marginBottom: 1in
+                      marginLeft: 1in
+                      marginRight: 1in
+                      marginTop: 1in
+                      scale: 1
+                    id: tpl_000000000000000001
+                    locked: false
+                    name: Template 1
+                    page_count: 1
+                    page_dimensions:
+                      - - 612
+                        - 792
+                    parent_folder_id: null
+                    path: /
+                    permanent_document_url: http://app.docspring.local/templates/tpl_000000000000000001/original_pdf?token=123456789abcdef
+                    public_submissions: false
+                    public_web_form: false
+                    redirect_url: null
+                    scss: null
+                    shared_field_data:
+                      first_name:
+                        fieldCount: 1
+                        name: first_name
+                        required: true
+                        type: string
+                      last_name:
+                        fieldCount: 1
+                        name: last_name
+                        required: true
+                        type: string
+                      phone_number:
+                        fieldCount: 1
+                        name: phone_number
+                        required: false
+                        type: string
+                    slack_webhook_url: null
+                    template_type: pdf
+                    webhook_url: null
+              schema:
+                properties:
+                  allow_additional_properties:
+                    type: boolean
+                  defaults:
+                    properties:
+                      color:
+                        nullable: true
+                        type: string
+                      fontSize:
+                        type: number
+                      typeface:
+                        type: string
+                    required:
+                      - color
+                      - fontSize
+                      - typeface
+                    type: object
+                  demo:
+                    type: boolean
+                  description:
+                    nullable: true
+                    type: string
+                  document_filename:
+                    nullable: true
+                    type: string
+                  document_md5:
+                    nullable: true
+                    type: string
+                  document_parse_error:
+                    type: boolean
+                  document_processed:
+                    type: boolean
+                  document_state:
+                    type: string
+                  document_url:
+                    nullable: true
+                    type: string
+                  editable_submissions:
+                    type: boolean
+                  embed_domains:
+                    items:
+                      type: string
+                    nullable: true
+                    type: array
+                  encrypt_pdfs:
+                    type: boolean
+                  encrypt_pdfs_password:
+                    nullable: true
+                    type: string
+                  expiration_interval:
+                    enum:
+                      - minutes
+                      - hours
+                      - days
+                    type: string
+                  expire_after:
+                    type: number
+                  expire_submissions:
+                    type: boolean
+                  field_order:
+                    items:
+                      items:
+                        type: number
+                      type: array
+                    type: array
+                  fields:
+                    type: object
+                  first_template:
+                    type: boolean
+                  footer_html:
+                    nullable: true
+                    type: string
+                  header_html:
+                    nullable: true
+                    type: string
+                  html:
+                    nullable: true
+                    type: string
+                  id:
+                    type: string
+                  locked:
+                    type: boolean
+                  name:
+                    nullable: true
+                    type: string
+                  page_count:
+                    type: number
+                  page_dimensions:
+                    items:
+                      items:
+                        type: number
+                      maxItems: 2
+                      minItems: 2
+                      type: array
+                    nullable: true
+                    type: array
+                  parent_folder_id:
+                    nullable: true
+                    type: string
+                  path:
+                    type: string
+                  permanent_document_url:
+                    nullable: true
+                    type: string
+                  public_submissions:
+                    type: boolean
+                  public_web_form:
+                    type: boolean
+                  redirect_url:
+                    nullable: true
+                    type: string
+                  scss:
+                    nullable: true
+                    type: string
+                  shared_field_data:
+                    type: object
+                  slack_webhook_url:
+                    nullable: true
+                    type: string
+                  template_type:
+                    type: string
+                  webhook_url:
+                    nullable: true
+                    type: string
+                required:
+                  - allow_additional_properties
+                  - defaults
+                  - demo
+                  - description
+                  - document_filename
+                  - document_md5
+                  - document_parse_error
+                  - document_processed
+                  - document_state
+                  - document_url
+                  - editable_submissions
+                  - embed_domains
+                  - encrypt_pdfs
+                  - encrypt_pdfs_password
+                  - expiration_interval
+                  - expire_after
+                  - expire_submissions
+                  - field_order
+                  - fields
+                  - first_template
+                  - footer_html
+                  - header_html
+                  - html
+                  - id
+                  - locked
+                  - name
+                  - page_count
+                  - page_dimensions
+                  - parent_folder_id
+                  - path
+                  - permanent_document_url
+                  - public_submissions
+                  - public_web_form
+                  - redirect_url
+                  - scss
+                  - shared_field_data
+                  - slack_webhook_url
+                  - template_type
+                  - webhook_url
+                title: full_template
+                type: object
+          description: template found
+        "401":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    error: Unauthorized
+              schema:
+                $ref: "#/components/schemas/authentication_error"
+          description: authentication failed
+        "404":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    error: Template not found.
+                    status: error
+              schema:
+                $ref: "#/components/schemas/error"
+          description: template not found
+      security:
+        - api_token_basic: []
+      summary: Fetch the full template attributes
       tags:
         - PDF
   /templates?desc=cached_upload:
@@ -4783,6 +5753,8 @@ components:
           enum:
             - pending
             - completed
+          type: string
+        submission_id:
           type: string
         user_agent:
           nullable: true

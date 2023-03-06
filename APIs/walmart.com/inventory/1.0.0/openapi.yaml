@@ -21,31 +21,36 @@ info:
   x-providerName: walmart.com
   x-serviceName: inventory
 security:
-  - basicScheme: []
+  - {}
 paths:
   /v3/feeds:
     post:
-      description: Updates inventory for items in bulk. Refer to the throttling limits before uploading the Feed files.
+      description: |-
+        Updates inventory for items in bulk. 
+        Seller Can either use feed type "inventory" or "MP_INVENTORY" 
+        * Inventory spec 1.4 feed type: inventory 
+        * Inventory spec 1.5 feed type: MP_INVENTORY 
+
+        Please Note: Multi Node Inventory Update Feed (feedType=MP_INVENTORY) only supports JSON Request and Responses. Refer to "MultiNode_Bulk_Inventory_Update_Request.json" for the corresponding request sample 
+         
+        Refer to the <a href="https://developer.walmart.com/doc/us/us-mp/us-mp-inventory/">guide section</a> for more detailed guide around each of the feed types 
+
+         Refer to the throttling limits before uploading the Feed Files.
       operationId: updateBulkInventory
       parameters:
-        - description: Includes details of each entity in the feed. Do not set this parameter to true.
+        - description: The feed Type
           in: query
           name: feedType
           required: true
           schema:
-            default: inventory
+            enum:
+              - inventory
+              - MP_INVENTORY
             type: string
-        - description: The shipNode for which the inventory is to be updated.
+        - description: The shipNode for which the inventory is to be updated. Not required in case of Multi Node Inventory Update Feed (feedType=MP_INVENTORY)
           in: query
           name: shipNode
           required: false
-          schema:
-            type: string
-        - description: Basic authorization header. Base 64 encodes the Client ID and Client Secret retrieved in step two of the integration steps.
-          example: Basic YzcyOTFjNmItNzI5MC00....
-          in: header
-          name: Authorization
-          required: true
           schema:
             type: string
         - description: The access token retrieved in the Token API call
@@ -58,7 +63,7 @@ paths:
         - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
           in: header
           name: WM_CONSUMER.CHANNEL.TYPE
-          required: true
+          required: false
           schema:
             type: string
         - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
@@ -79,6 +84,33 @@ paths:
         content:
           multipart/form-data:
             examples:
+              MultiNode_Bulk_Inventory_Update_Request:
+                value:
+                  inventory:
+                    - shipNodes:
+                        - quantity:
+                            amount: 100
+                            unit: EACH
+                          shipNode: "10000003527"
+                      sku: "190086893939"
+                    - shipNodes:
+                        - quantity:
+                            amount: 21
+                            unit: EACH
+                          shipNode: "10000003527"
+                      sku: 685387364107_SS4_01
+                    - shipNodes:
+                        - quantity:
+                            amount: 13
+                            unit: EACH
+                          shipNode: "10000003527"
+                        - quantity:
+                            amount: 12
+                            unit: EACH
+                          shipNode: "1000000352"
+                      sku: 5700521553133_toolsnonwfs_2
+                  inventoryHeader:
+                    version: "1.5"
               json1:
                 value:
                   Inventory:
@@ -116,11 +148,12 @@ paths:
             schema:
               properties:
                 file:
+                  description: Feed file to upload
                   format: binary
                   type: string
+              required:
+                - file
               type: object
-        description: Feed file to upload
-        required: true
       responses:
         "200":
           content:
@@ -130,8 +163,10 @@ paths:
               schema:
                 properties:
                   additionalAttributes:
+                    nullable: true
                     type: object
                   errors:
+                    nullable: true
                     type: object
                   feedId:
                     description: A unique ID, returned from the Bulk Upload API, used for tracking the feed file
@@ -146,8 +181,10 @@ paths:
               schema:
                 properties:
                   additionalAttributes:
+                    nullable: true
                     type: object
                   errors:
+                    nullable: true
                     type: object
                   feedId:
                     description: A unique ID, returned from the Bulk Upload API, used for tracking the feed file
@@ -194,13 +231,6 @@ paths:
           schema:
             default: "0"
             type: string
-        - description: Basic authorization header. Base 64 encodes the Client ID and Client Secret retrieved in step two of the integration steps.
-          example: Basic YzcyOTFjNmItNzI5MC00....
-          in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
         - description: The access token retrieved in the Token API call
           example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
           in: header
@@ -211,7 +241,7 @@ paths:
         - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
           in: header
           name: WM_CONSUMER.CHANNEL.TYPE
-          required: true
+          required: false
           schema:
             type: string
         - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
@@ -232,31 +262,6 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                headers:
-                  limit: 10
-                  offset: 0
-                  totalCount: 20
-                payload:
-                  inventory:
-                    - shipNodes:
-                        - availToSellQty: 37
-                          modifiedDate: 2020-04-13T06:00:32.393Z
-                          onHandQty: 1
-                          shipNodeType: WFSFulfilled
-                      sku: "12345"
-                    - shipNodes:
-                        - availToSellQty: 37
-                          modifiedDate: 2020-04-13T06:00:32.393Z
-                          onHandQty: 37
-                          shipNodeType: WFSFulfilled
-                      sku: "12345"
-                    - shipNodes:
-                        - availToSellQty: 26
-                          modifiedDate: 2020-04-13T06:00:32.393Z
-                          onHandQty: 26
-                          shipNodeType: WFSFulfilled
-                      sku: "12347"
               schema:
                 properties:
                   headers:
@@ -311,7 +316,7 @@ paths:
         - Inventory
   /v3/inventories:
     get:
-      description: This API will retrieve the inventory count for all of a seller's items across all ship nodes by item to ship node mapping. Inventory can be zero or non-zero.
+      description: This API will retrieve the inventory count for all of a seller's items across all ship nodes by item to ship node mapping. Inventory can be zero or non-zero. Please note that NextCursor value changes and it needs to be passed on from the previous call to next call.
       operationId: getMultiNodeInventoryForAllSkuAndAllShipNodes
       parameters:
         - description: The number of items returned. Cannot be more than 50.
@@ -327,13 +332,6 @@ paths:
           required: false
           schema:
             type: string
-        - description: Basic authorization header. Base 64 encodes the Client ID and Client Secret retrieved in step two of the integration steps.
-          example: Basic YzcyOTFjNmItNzI5MC00....
-          in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
         - description: The access token retrieved in the Token API call
           example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
           in: header
@@ -344,7 +342,7 @@ paths:
         - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
           in: header
           name: WM_CONSUMER.CHANNEL.TYPE
-          required: true
+          required: false
           schema:
             type: string
         - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
@@ -370,15 +368,40 @@ paths:
                   inventories:
                     - nodes:
                         - availToSellQty:
+                            amount: 93
+                            unit: EACH
+                          inputQty:
+                            amount: 93
+                            unit: EACH
+                          reservedQty:
+                            amount: 0
+                            unit: EACH
+                          shipNode: "361451354333223041"
+                        - availToSellQty:
+                            amount: 433
+                            unit: EACH
+                          inputQty:
+                            amount: 436
+                            unit: EACH
+                          reservedQty:
                             amount: 3
+                            unit: EACH
+                          shipNode: "100009"
+                      sku: AI-IGH4-5509
+                    - nodes:
+                        - availToSellQty:
+                            amount: 0
                             unit: EACH
                           inputQty:
                             amount: 5
                             unit: EACH
+                          reservedQty:
+                            amount: 5
+                            unit: EACH
                           shipNode: "100009"
-                      sku: AI-IGH4-5509
+                      sku: "06397309545443"
                 meta:
-                  nextCursor: 37b56ddb-a949-4d9f-91e2-a6d56dda3c47
+                  nextCursor: NTVmZjIxOWEtZjRkMy00MGIwLThkOGYtYzFkNzI1NGZlYmQxIDEw
                   totalCount: 123
               schema:
                 properties:
@@ -391,9 +414,10 @@ paths:
                               items:
                                 properties:
                                   availToSellQty:
+                                    description: Quantity of an item that is available to be allocated to orders
                                     properties:
                                       amount:
-                                        description: The number available in the inventory
+                                        description: Inventory Count
                                         type: number
                                       unit:
                                         description: "The unit of measurement. Example: 'EACH'"
@@ -405,9 +429,25 @@ paths:
                                       - unit
                                     type: object
                                   inputQty:
+                                    description: Quantity of an item that is input by the seller
                                     properties:
                                       amount:
-                                        description: The number available in the inventory
+                                        description: Inventory Count
+                                        type: number
+                                      unit:
+                                        description: "The unit of measurement. Example: 'EACH'"
+                                        enum:
+                                          - EACH
+                                        type: string
+                                    required:
+                                      - amount
+                                      - unit
+                                    type: object
+                                  reservedQty:
+                                    description: Quantity that has been ordered by the customers but not yet shipped
+                                    properties:
+                                      amount:
+                                        description: Inventory Count
                                         type: number
                                       unit:
                                         description: "The unit of measurement. Example: 'EACH'"
@@ -462,13 +502,6 @@ paths:
           required: false
           schema:
             type: string
-        - description: Basic authorization header. Base 64 encodes the Client ID and Client Secret retrieved in step two of the integration steps.
-          example: Basic YzcyOTFjNmItNzI5MC00....
-          in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
         - description: The access token retrieved in the Token API call
           example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
           in: header
@@ -479,7 +512,7 @@ paths:
         - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
           in: header
           name: WM_CONSUMER.CHANNEL.TYPE
-          required: true
+          required: false
           schema:
             type: string
         - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
@@ -508,6 +541,9 @@ paths:
                     inputQty:
                       amount: 5
                       unit: EACH
+                    reservedQty:
+                      amount: 2
+                      unit: EACH
                     shipNode: "100009"
                 sku: AR-CTIX-0092
               schema:
@@ -516,9 +552,10 @@ paths:
                     items:
                       properties:
                         availToSellQty:
+                          description: Quantity of an item that is available to be allocated to orders
                           properties:
                             amount:
-                              description: The number available in the inventory
+                              description: Inventory Count
                               type: number
                             unit:
                               description: "The unit of measurement. Example: 'EACH'"
@@ -531,7 +568,6 @@ paths:
                           type: object
                         errors:
                           items:
-                            description: Node Update Error description.
                             properties:
                               category:
                                 enum:
@@ -582,9 +618,25 @@ paths:
                               name: Error
                           type: array
                         inputQty:
+                          description: Quantity of an item that is input by the seller
                           properties:
                             amount:
-                              description: The number available in the inventory
+                              description: Inventory Count
+                              type: number
+                            unit:
+                              description: "The unit of measurement. Example: 'EACH'"
+                              enum:
+                                - EACH
+                              type: string
+                          required:
+                            - amount
+                            - unit
+                          type: object
+                        reservedQty:
+                          description: Quantity that has been ordered by the customers but not yet shipped
+                          properties:
+                            amount:
+                              description: Inventory Count
                               type: number
                             unit:
                               description: "The unit of measurement. Example: 'EACH'"
@@ -618,13 +670,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: Basic authorization header. Base 64 encodes the Client ID and Client Secret retrieved in step two of the integration steps.
-          example: Basic YzcyOTFjNmItNzI5MC00....
-          in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
         - description: The access token retrieved in the Token API call
           example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
           in: header
@@ -635,7 +680,7 @@ paths:
         - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
           in: header
           name: WM_CONSUMER.CHANNEL.TYPE
-          required: true
+          required: false
           schema:
             type: string
         - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
@@ -674,9 +719,10 @@ paths:
                       items:
                         properties:
                           inputQty:
+                            description: Quantity that has been ordered by the customers but not yet shipped
                             properties:
                               amount:
-                                description: The number available in the inventory
+                                description: Inventory Count
                                 type: number
                               unit:
                                 description: "The unit of measurement. Example: 'EACH'"
@@ -722,7 +768,6 @@ paths:
                         errors:
                           description: Node Update Error description.
                           items:
-                            description: Node Update Error description.
                             properties:
                               category:
                                 enum:
@@ -805,13 +850,6 @@ paths:
           required: false
           schema:
             type: string
-        - description: Basic authorization header. Base 64 encodes the Client ID and Client Secret retrieved in step two of the integration steps.
-          example: Basic YzcyOTFjNmItNzI5MC00....
-          in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
         - description: The access token retrieved in the Token API call
           example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
           in: header
@@ -822,7 +860,7 @@ paths:
         - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
           in: header
           name: WM_CONSUMER.CHANNEL.TYPE
-          required: true
+          required: false
           schema:
             type: string
         - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
@@ -851,9 +889,10 @@ paths:
               schema:
                 properties:
                   quantity:
+                    description: Quantity that has been ordered by the customers but not yet shipped
                     properties:
                       amount:
-                        description: The number available in the inventory
+                        description: Inventory Count
                         type: number
                       unit:
                         description: "The unit of measurement. Example: 'EACH'"
@@ -886,9 +925,10 @@ paths:
               schema:
                 properties:
                   quantity:
+                    description: Quantity that has been ordered by the customers but not yet shipped
                     properties:
                       amount:
-                        description: The number available in the inventory
+                        description: Inventory Count
                         type: number
                       unit:
                         description: "The unit of measurement. Example: 'EACH'"
@@ -928,13 +968,6 @@ paths:
           required: false
           schema:
             type: string
-        - description: Basic authorization header. Base 64 encodes the Client ID and Client Secret retrieved in step two of the integration steps.
-          example: Basic YzcyOTFjNmItNzI5MC00....
-          in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
         - description: The access token retrieved in the Token API call
           example: eyJraWQiOiIzZjVhYTFmNS1hYWE5LTQzM.....
           in: header
@@ -945,7 +978,7 @@ paths:
         - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
           in: header
           name: WM_CONSUMER.CHANNEL.TYPE
-          required: true
+          required: false
           schema:
             type: string
         - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
@@ -973,9 +1006,10 @@ paths:
             schema:
               properties:
                 quantity:
+                  description: Quantity that has been ordered by the customers but not yet shipped
                   properties:
                     amount:
-                      description: The number available in the inventory
+                      description: Inventory Count
                       type: number
                     unit:
                       description: "The unit of measurement. Example: 'EACH'"
@@ -1008,9 +1042,10 @@ paths:
             schema:
               properties:
                 quantity:
+                  description: Quantity that has been ordered by the customers but not yet shipped
                   properties:
                     amount:
-                      description: The number available in the inventory
+                      description: Inventory Count
                       type: number
                     unit:
                       description: "The unit of measurement. Example: 'EACH'"
@@ -1044,9 +1079,10 @@ paths:
               schema:
                 properties:
                   quantity:
+                    description: Quantity that has been ordered by the customers but not yet shipped
                     properties:
                       amount:
-                        description: The number available in the inventory
+                        description: Inventory Count
                         type: number
                       unit:
                         description: "The unit of measurement. Example: 'EACH'"
@@ -1079,9 +1115,10 @@ paths:
               schema:
                 properties:
                   quantity:
+                    description: Quantity that has been ordered by the customers but not yet shipped
                     properties:
                       amount:
-                        description: The number available in the inventory
+                        description: Inventory Count
                         type: number
                       unit:
                         description: "The unit of measurement. Example: 'EACH'"
@@ -1135,7 +1172,7 @@ components:
       description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
       in: header
       name: WM_CONSUMER.CHANNEL.TYPE
-      required: true
+      required: false
       schema:
         type: string
     content-type:
@@ -1163,6 +1200,21 @@ components:
       schema:
         type: string
   schemas:
+    AvailToSellQty:
+      description: Quantity of an item that is available to be allocated to orders
+      properties:
+        amount:
+          description: Inventory Count
+          type: number
+        unit:
+          description: "The unit of measurement. Example: 'EACH'"
+          enum:
+            - EACH
+          type: string
+      required:
+        - amount
+        - unit
+      type: object
     Cause:
       properties:
         code:
@@ -1185,9 +1237,10 @@ components:
                 items:
                   properties:
                     availToSellQty:
+                      description: Quantity of an item that is available to be allocated to orders
                       properties:
                         amount:
-                          description: The number available in the inventory
+                          description: Inventory Count
                           type: number
                         unit:
                           description: "The unit of measurement. Example: 'EACH'"
@@ -1199,9 +1252,25 @@ components:
                         - unit
                       type: object
                     inputQty:
+                      description: Quantity of an item that is input by the seller
                       properties:
                         amount:
-                          description: The number available in the inventory
+                          description: Inventory Count
+                          type: number
+                        unit:
+                          description: "The unit of measurement. Example: 'EACH'"
+                          enum:
+                            - EACH
+                          type: string
+                      required:
+                        - amount
+                        - unit
+                      type: object
+                    reservedQty:
+                      description: Quantity that has been ordered by the customers but not yet shipped
+                      properties:
+                        amount:
+                          description: Inventory Count
                           type: number
                         unit:
                           description: "The unit of measurement. Example: 'EACH'"
@@ -1224,7 +1293,6 @@ components:
           type: array
       type: object
     Error:
-      description: Node Update Error description.
       properties:
         category:
           enum:
@@ -1276,8 +1344,10 @@ components:
     FeedId:
       properties:
         additionalAttributes:
+          nullable: true
           type: object
         errors:
+          nullable: true
           type: object
         feedId:
           description: A unique ID, returned from the Bulk Upload API, used for tracking the feed file
@@ -1289,9 +1359,10 @@ components:
           items:
             properties:
               availToSellQty:
+                description: Quantity of an item that is available to be allocated to orders
                 properties:
                   amount:
-                    description: The number available in the inventory
+                    description: Inventory Count
                     type: number
                   unit:
                     description: "The unit of measurement. Example: 'EACH'"
@@ -1303,9 +1374,25 @@ components:
                   - unit
                 type: object
               inputQty:
+                description: Quantity of an item that is input by the seller
                 properties:
                   amount:
-                    description: The number available in the inventory
+                    description: Inventory Count
+                    type: number
+                  unit:
+                    description: "The unit of measurement. Example: 'EACH'"
+                    enum:
+                      - EACH
+                    type: string
+                required:
+                  - amount
+                  - unit
+                type: object
+              reservedQty:
+                description: Quantity that has been ordered by the customers but not yet shipped
+                properties:
+                  amount:
+                    description: Inventory Count
                     type: number
                   unit:
                     description: "The unit of measurement. Example: 'EACH'"
@@ -1328,9 +1415,10 @@ components:
     GetAllInventoriesNodeDTO:
       properties:
         availToSellQty:
+          description: Quantity of an item that is available to be allocated to orders
           properties:
             amount:
-              description: The number available in the inventory
+              description: Inventory Count
               type: number
             unit:
               description: "The unit of measurement. Example: 'EACH'"
@@ -1342,9 +1430,25 @@ components:
             - unit
           type: object
         inputQty:
+          description: Quantity of an item that is input by the seller
           properties:
             amount:
-              description: The number available in the inventory
+              description: Inventory Count
+              type: number
+            unit:
+              description: "The unit of measurement. Example: 'EACH'"
+              enum:
+                - EACH
+              type: string
+          required:
+            - amount
+            - unit
+          type: object
+        reservedQty:
+          description: Quantity that has been ordered by the customers but not yet shipped
+          properties:
+            amount:
+              description: Inventory Count
               type: number
             unit:
               description: "The unit of measurement. Example: 'EACH'"
@@ -1374,15 +1478,31 @@ components:
           format: int32
           type: integer
       type: object
+    InputQty:
+      description: Quantity of an item that is input by the seller
+      properties:
+        amount:
+          description: Inventory Count
+          type: number
+        unit:
+          description: "The unit of measurement. Example: 'EACH'"
+          enum:
+            - EACH
+          type: string
+      required:
+        - amount
+        - unit
+      type: object
     InventoriesDTO:
       properties:
         nodes:
           items:
             properties:
               availToSellQty:
+                description: Quantity of an item that is available to be allocated to orders
                 properties:
                   amount:
-                    description: The number available in the inventory
+                    description: Inventory Count
                     type: number
                   unit:
                     description: "The unit of measurement. Example: 'EACH'"
@@ -1395,7 +1515,6 @@ components:
                 type: object
               errors:
                 items:
-                  description: Node Update Error description.
                   properties:
                     category:
                       enum:
@@ -1446,9 +1565,25 @@ components:
                     name: Error
                 type: array
               inputQty:
+                description: Quantity of an item that is input by the seller
                 properties:
                   amount:
-                    description: The number available in the inventory
+                    description: Inventory Count
+                    type: number
+                  unit:
+                    description: "The unit of measurement. Example: 'EACH'"
+                    enum:
+                      - EACH
+                    type: string
+                required:
+                  - amount
+                  - unit
+                type: object
+              reservedQty:
+                description: Quantity that has been ordered by the customers but not yet shipped
+                properties:
+                  amount:
+                    description: Inventory Count
                     type: number
                   unit:
                     description: "The unit of measurement. Example: 'EACH'"
@@ -1471,9 +1606,10 @@ components:
     Inventory:
       properties:
         quantity:
+          description: Quantity that has been ordered by the customers but not yet shipped
           properties:
             amount:
-              description: The number available in the inventory
+              description: Inventory Count
               type: number
             unit:
               description: "The unit of measurement. Example: 'EACH'"
@@ -1540,9 +1676,10 @@ components:
                     items:
                       properties:
                         availToSellQty:
+                          description: Quantity of an item that is available to be allocated to orders
                           properties:
                             amount:
-                              description: The number available in the inventory
+                              description: Inventory Count
                               type: number
                             unit:
                               description: "The unit of measurement. Example: 'EACH'"
@@ -1554,9 +1691,25 @@ components:
                             - unit
                           type: object
                         inputQty:
+                          description: Quantity of an item that is input by the seller
                           properties:
                             amount:
-                              description: The number available in the inventory
+                              description: Inventory Count
+                              type: number
+                            unit:
+                              description: "The unit of measurement. Example: 'EACH'"
+                              enum:
+                                - EACH
+                              type: string
+                          required:
+                            - amount
+                            - unit
+                          type: object
+                        reservedQty:
+                          description: Quantity that has been ordered by the customers but not yet shipped
+                          properties:
+                            amount:
+                              description: Inventory Count
                               type: number
                             unit:
                               description: "The unit of measurement. Example: 'EACH'"
@@ -1598,9 +1751,10 @@ components:
               items:
                 properties:
                   inputQty:
+                    description: Quantity that has been ordered by the customers but not yet shipped
                     properties:
                       amount:
-                        description: The number available in the inventory
+                        description: Inventory Count
                         type: number
                       unit:
                         description: "The unit of measurement. Example: 'EACH'"
@@ -1633,7 +1787,6 @@ components:
               errors:
                 description: Node Update Error description.
                 items:
-                  description: Node Update Error description.
                   properties:
                     category:
                       enum:
@@ -1698,9 +1851,10 @@ components:
     NodeDTO:
       properties:
         availToSellQty:
+          description: Quantity of an item that is available to be allocated to orders
           properties:
             amount:
-              description: The number available in the inventory
+              description: Inventory Count
               type: number
             unit:
               description: "The unit of measurement. Example: 'EACH'"
@@ -1713,7 +1867,6 @@ components:
           type: object
         errors:
           items:
-            description: Node Update Error description.
             properties:
               category:
                 enum:
@@ -1764,9 +1917,25 @@ components:
               name: Error
           type: array
         inputQty:
+          description: Quantity of an item that is input by the seller
           properties:
             amount:
-              description: The number available in the inventory
+              description: Inventory Count
+              type: number
+            unit:
+              description: "The unit of measurement. Example: 'EACH'"
+              enum:
+                - EACH
+              type: string
+          required:
+            - amount
+            - unit
+          type: object
+        reservedQty:
+          description: Quantity that has been ordered by the customers but not yet shipped
+          properties:
+            amount:
+              description: Inventory Count
               type: number
             unit:
               description: "The unit of measurement. Example: 'EACH'"
@@ -1811,6 +1980,21 @@ components:
             type: object
           type: array
       type: object
+    ReservedQty:
+      description: Quantity that has been ordered by the customers but not yet shipped
+      properties:
+        amount:
+          description: Inventory Count
+          type: number
+        unit:
+          description: "The unit of measurement. Example: 'EACH'"
+          enum:
+            - EACH
+          type: string
+      required:
+        - amount
+        - unit
+      type: object
     ShipNodes:
       properties:
         availToSellQty:
@@ -1829,9 +2013,10 @@ components:
           type: string
       type: object
     SupplyQuantity:
+      description: Quantity that has been ordered by the customers but not yet shipped
       properties:
         amount:
-          description: The number available in the inventory
+          description: Inventory Count
           type: number
         unit:
           description: "The unit of measurement. Example: 'EACH'"
@@ -1848,9 +2033,10 @@ components:
           items:
             properties:
               inputQty:
+                description: Quantity that has been ordered by the customers but not yet shipped
                 properties:
                   amount:
-                    description: The number available in the inventory
+                    description: Inventory Count
                     type: number
                   unit:
                     description: "The unit of measurement. Example: 'EACH'"
@@ -1875,9 +2061,10 @@ components:
     UpdateInventoriesRequestNodeDTO:
       properties:
         inputQty:
+          description: Quantity that has been ordered by the customers but not yet shipped
           properties:
             amount:
-              description: The number available in the inventory
+              description: Inventory Count
               type: number
             unit:
               description: "The unit of measurement. Example: 'EACH'"
@@ -1900,7 +2087,6 @@ components:
         errors:
           description: Node Update Error description.
           items:
-            description: Node Update Error description.
             properties:
               category:
                 enum:
@@ -2005,8 +2191,3 @@ components:
               type: array
           type: object
       type: object
-  securitySchemes:
-    basicScheme:
-      description: ""
-      scheme: basic
-      type: http

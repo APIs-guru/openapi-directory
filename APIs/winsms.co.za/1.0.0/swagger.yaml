@@ -842,7 +842,7 @@ paths:
                         |TOOLONG | The <a href="https://en.wikipedia.org/wiki/GSM_03.38#GSM_7-bit_default_alphabet_and_extension_table_of_3GPP_TS_23.038_/_GSM_03.38" target="_blank">GSM 7-bit encoded</a> message length exceeded 918 characters |
                         |BADDEST | An invalid mobile number was supplied, or the recipient has been blacklisted from receiving messages |
                         |OPTEDOUT | The recipient has opted out from receiving any further messages from the user |
-                        |WASPADNC | The number is on the <a href="https://dnc.org.za/about" target="_blank">WASPA Do Not Contact List</a> and your WinSMS account is not set to bypass the WASPA DNC list |
+                        |WASPADNC | The number is on the WASPA Do Not Contact List (DNC).<br>If you are sending transactional messages then you can bypass the DNC list. <a href="https://zasupport.winsms.co.za/portal/en/kb/articles/marketing-vs-transactional-sms/" target="_blank">Read this article</a> for instructions. |
                         | &nbsp; | &nbsp; |
                         <p>&nbsp;</p>
                       example: BADDEST
@@ -1173,7 +1173,7 @@ paths:
                                 |TOOLONG | The <a href="https://en.wikipedia.org/wiki/GSM_03.38#GSM_7-bit_default_alphabet_and_extension_table_of_3GPP_TS_23.038_/_GSM_03.38" target="_blank">GSM 7-bit encoded</a> message length exceeded 918 characters |
                                 |BADDEST | An invalid mobile number was supplied, or the recipient has been blacklisted from receiving messages |
                                 |OPTEDOUT | The recipient has opted out from receiving any further messages from the user |
-                                |WASPADNC | The number is on the <a href="https://dnc.org.za/about" target="_blank">WASPA Do Not Contact List</a> and your WinSMS account is not set to bypass the WASPA DNC list |
+                                |WASPADNC | The number is on the WASPA Do Not Contact List (DNC).<br>If you are sending transactional messages then you can bypass the DNC list. <a href="https://zasupport.winsms.co.za/portal/en/kb/articles/marketing-vs-transactional-sms/" target="_blank">Read this article</a> for instructions. |
                                 | &nbsp; | &nbsp; |
                             example: BADDEST
                             type: string

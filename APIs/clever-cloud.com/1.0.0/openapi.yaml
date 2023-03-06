@@ -5295,6 +5295,50 @@ paths:
         required: true
         schema:
           type: string
+  /v2/providers/addon-matomo/resources:
+    post:
+      operationId: createMatomo
+      requestBody:
+        content:
+          "*/*":
+            schema:
+              $ref: "#/components/schemas/ProvisionRequest"
+      responses:
+        default:
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Function1RequestContextFutureRouteResult"
+          description: default response
+      summary: Create Matomo addon
+      tags:
+        - all
+      x-function: createMatomo
+      x-service: addon
+  "/v2/providers/addon-matomo/resources/{matomoId}":
+    delete:
+      operationId: deleteMatomo
+      parameters:
+        - description: Automatically added
+          in: path
+          name: matomoId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/deleteMatomo"
+      responses:
+        default:
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Function1RequestContextFutureRouteResult"
+          description: default response
+      summary: Delete Matomo addon
+      tags:
+        - all
+      x-function: deleteMatomo
+      x-service: addon
   "/v3/logs/{appId}":
     get:
       description: Fetch the logs for a given application
@@ -5405,6 +5449,803 @@ paths:
       tags:
         - all
         - logs
+  "/v4/addon-providers/addon-matomo/addons/{matomoId}":
+    get:
+      operationId: getMatomo
+      parameters:
+        - description: Automatically added
+          in: path
+          name: matomoId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/deleteMatomo"
+      responses:
+        default:
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Function1RequestContextFutureRouteResult"
+          description: default response
+      summary: Get Matomo addon
+      tags:
+        - all
+        - addons
+      x-function: getMatomo
+      x-service: addon
+  /v4/addon-providers/addon-matomo/token/validate:
+    get:
+      operationId: getMatomoKTokenValidation
+      parameters:
+        - description: Environment variable injected on the app with 'KEYCLOAK_TOKEN' name
+          in: query
+          name: keycloakToken
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/deleteMatomo"
+      responses:
+        default:
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Function1RequestContextFutureRouteResult"
+          description: default response
+      summary: Validate a keycloak token
+      tags:
+        - all
+      x-function: getMatomoVHosts
+      x-service: addon
+  "/v4/addon-providers/config-provider/addons/{configurationProviderId}":
+    get:
+      operationId: getConfigProvider
+      parameters:
+        - description: Automatically added
+          in: path
+          name: configurationProviderId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/deleteMatomo"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AddonConfigProviderView"
+          description: requested config provider object
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      security:
+        - {}
+      summary: Get Addon provider configuration
+      tags:
+        - all
+        - addons
+      x-function: getConfigProvider
+      x-service: addon
+  "/v4/addon-providers/config-provider/addons/{configurationProviderId}/env":
+    get:
+      operationId: getConfigProviderEnv
+      parameters:
+        - description: Automatically added
+          in: path
+          name: configurationProviderId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/deleteMatomo"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/EnvVar"
+                type: array
+          description: config provider environment variables
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      security:
+        - {}
+      summary: Get provider's addon environment
+      tags:
+        - all
+        - addons
+      x-function: getConfigProviderEnv
+      x-service: addon
+    put:
+      operationId: updateConfigProviderEnv
+      parameters:
+        - description: Automatically added
+          in: path
+          name: configurationProviderId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: "#/components/schemas/WannabeEnvVar"
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/EnvVar"
+                type: array
+          description: updated config providers environment variables
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      security:
+        - {}
+      summary: Update provider's addon environment
+      tags:
+        - all
+        - addons
+      x-function: updateConfigProviderEnv
+      x-service: addon
+  "/v4/networkgroups/organisations/{ownerId}/networkgroups":
+    get:
+      description: Lists Network Groups from an owner.
+      operationId: listNetworkGroups
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/listNetworkGroups"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/NetworkGroup"
+                type: array
+          description: Success
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      security:
+        - {}
+      summary: List Network Groups
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: listNetworkGroups
+      x-service: networkGroup
+    post:
+      description: Creates a Network Group.
+      operationId: createNetworkGroup
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WannabeNetworkGroup"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NetworkGroup"
+          description: Success
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "409":
+          content:
+            text/plain; charset=UTF-8:
+              examples:
+                NetworkGroupLabelAlreadyTaken:
+                  $ref: "#/components/examples/NetworkGroupLabelAlreadyTaken"
+              schema:
+                type: string
+          description: Conflict
+      security:
+        - {}
+      summary: Create Network Group
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: createNetworkGroup
+      x-service: networkGroup
+  "/v4/networkgroups/organisations/{ownerId}/networkgroups/{networkGroupId}":
+    delete:
+      description: Deletes a Network Group.
+      operationId: deleteNetworkGroup
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: networkGroupId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/listNetworkGroups"
+      responses:
+        "204":
+          description: Success
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NetworkGroupNotFound"
+      security:
+        - {}
+      summary: Delete Network Group
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: deleteNetworkGroup
+      x-service: networkGroup
+    get:
+      description: Gets details of a Network Group.
+      operationId: getNetworkGroup
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: networkGroupId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/listNetworkGroups"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NetworkGroup"
+          description: Success
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NetworkGroupNotFound"
+      security:
+        - {}
+      summary: Get Network Group
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: getNetworkGroup
+      x-service: networkGroup
+  "/v4/networkgroups/organisations/{ownerId}/networkgroups/{networkGroupId}/external-peers":
+    post:
+      description: Adds an external peer to a Network Group.
+      operationId: createNetworkGroupExternalPeer
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: networkGroupId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WannabeExternalPeer"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Peer"
+          description: Success
+        "400":
+          content:
+            text/plain; charset=UTF-8:
+              schema:
+                type: string
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NetworkGroupNotFound"
+      security:
+        - {}
+      summary: Add external peer
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: createNetworkGroupExternalPeer
+      x-service: networkGroup
+  "/v4/networkgroups/organisations/{ownerId}/networkgroups/{networkGroupId}/external-peers/{peerId}":
+    delete:
+      description: Removes an external peer from a Network Group.
+      operationId: deleteNetworkGroupExternalPeer
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: networkGroupId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: peerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/listNetworkGroups"
+      responses:
+        "204":
+          description: Success
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      security:
+        - {}
+      summary: Remove external peer
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: deleteNetworkGroupExternalPeer
+      x-service: networkGroup
+  "/v4/networkgroups/organisations/{ownerId}/networkgroups/{networkGroupId}/members":
+    get:
+      description: Lists members in a Network Group.
+      operationId: listNetworkGroupMembers
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: networkGroupId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/listNetworkGroups"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/schema1"
+                type: array
+          description: Success
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NetworkGroupNotFound"
+      security:
+        - {}
+      summary: List members
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: listNetworkGroupMembers
+      x-service: networkGroup
+    post:
+      description: Adds a member to a Network Group.
+      operationId: createNetworkGroupMember
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: networkGroupId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/schema2"
+      responses:
+        "202":
+          $ref: "#/components/responses/Accepted"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NetworkGroupNotFound"
+      security:
+        - {}
+      summary: Add member
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: createNetworkGroupMember
+      x-service: networkGroup
+  "/v4/networkgroups/organisations/{ownerId}/networkgroups/{networkGroupId}/members/{memberId}":
+    delete:
+      description: Removes a member from a Network Group.
+      operationId: deleteNetworkGroupMember
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: networkGroupId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: memberId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/listNetworkGroups"
+      responses:
+        "204":
+          description: Success
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      security:
+        - {}
+      summary: Remove member
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: deleteNetworkGroupMember
+      x-service: networkGroup
+    get:
+      description: Gets details of a Network Group member.
+      operationId: getNetworkGroupMember
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: networkGroupId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: memberId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/listNetworkGroups"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/schema1"
+          description: Success
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/MemberNotFound"
+      security:
+        - {}
+      summary: Get member
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: getNetworkGroupMember
+      x-service: networkGroup
+  "/v4/networkgroups/organisations/{ownerId}/networkgroups/{networkGroupId}/peers":
+    get:
+      description: Lists peers in a Network Group.
+      operationId: listNetworkGroupPeers
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: networkGroupId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/listNetworkGroups"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Peer"
+                type: array
+          description: Success
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NetworkGroupNotFound"
+      security:
+        - {}
+      summary: List peers
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: listNetworkGroupPeers
+      x-service: networkGroup
+  "/v4/networkgroups/organisations/{ownerId}/networkgroups/{networkGroupId}/peers/{peerId}":
+    delete:
+      description: Removes a peer from a Network Group.
+      operationId: deleteNetworkGroupPeer
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: networkGroupId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: peerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/listNetworkGroups"
+      responses:
+        "204":
+          description: Success
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+      security:
+        - {}
+      summary: Remove peer
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: deleteNetworkGroupPeer
+      x-service: networkGroup
+    get:
+      description: Gets details of a Network Group peer.
+      operationId: getNetworkGroupPeer
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: networkGroupId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: peerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/listNetworkGroups"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Peer"
+          description: Success
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/PeerNotFound"
+      security:
+        - {}
+      summary: Get peer
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: getNetworkGroupPeer
+      x-service: networkGroup
+  "/v4/networkgroups/organisations/{ownerId}/networkgroups/{networkGroupId}/peers/{peerId}/wireguard/configuration":
+    get:
+      description: Gets the current WireGuard® tunnel configuration file for a Network Group peer.
+      operationId: getNetworkGroupWireGuardConfiguration
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: networkGroupId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: peerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/listNetworkGroups"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WireGuardConfiguration"
+          description: Success
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/PeerNotFound"
+      security:
+        - {}
+      summary: Get WireGuard® configuration
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: getNetworkGroupWireGuardConfiguration
+      x-service: networkGroup
+  "/v4/networkgroups/organisations/{ownerId}/networkgroups/{networkGroupId}/peers/{peerId}/wireguard/configuration/stream":
+    get:
+      description: Gets the current WireGuard® tunnel configuration file for a Network Group peer as a Server Sent Event.
+      operationId: getNetworkGroupWireGuardConfigurationStream
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: networkGroupId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: peerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/listNetworkGroups"
+      responses:
+        "200":
+          content:
+            text/event-stream:
+              schema:
+                $ref: "#/components/schemas/WireGuardConfiguration"
+          description: Success
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/PeerNotFound"
+      security:
+        - {}
+      summary: Get WireGuard® configuration
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: getNetworkGroupWireGuardConfigurationStream
+      x-service: networkGroup
+  "/v4/networkgroups/organisations/{ownerId}/networkgroups/{networkGroupId}/stream":
+    get:
+      description: Retrieves the current Network Group details as a Server Sent Event.
+      operationId: getNetworkGroupStream
+      parameters:
+        - description: Automatically added
+          in: path
+          name: ownerId
+          required: true
+          schema:
+            type: string
+        - description: Automatically added
+          in: path
+          name: networkGroupId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/listNetworkGroups"
+      responses:
+        "200":
+          content:
+            text/event-stream:
+              schema:
+                $ref: "#/components/schemas/NetworkGroup"
+          description: Success
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NetworkGroupNotFound"
+      security:
+        - {}
+      summary: Network Group SSE
+      tags:
+        - all
+        - organisations
+        - networkgroups
+      x-function: getNetworkGroupStream
+      x-service: networkGroup
   /vendor//addons:
     post:
       responses:
@@ -5520,6 +6361,8 @@ paths:
         - all
         - vendor
 components:
+  examples:
+    NetworkGroupLabelAlreadyTaken: {}
   requestBodies:
     Body:
       content:
@@ -5587,6 +6430,29 @@ components:
           schema:
             $ref: "#/components/schemas/WannabeUser"
       required: true
+    deleteMatomo:
+      content:
+        "*/*":
+          schema:
+            type: string
+    listNetworkGroups:
+      content:
+        "*/*":
+          schema:
+            $ref: "#/components/schemas/OVDHttpRequestContext"
+  responses:
+    Accepted:
+      description: ""
+    BadRequest:
+      description: ""
+    MemberNotFound:
+      description: ""
+    NetworkGroupNotFound:
+      description: ""
+    PeerNotFound:
+      description: ""
+    Unauthorized:
+      description: ""
   schemas:
     Addon:
       description: An addon
@@ -5624,6 +6490,7 @@ components:
         - realId
         - region
       type: object
+    AddonConfigProviderView: {}
     AddonMigration:
       example: |-
         {
@@ -6076,6 +6943,7 @@ components:
         - env
         - provider_id
       type: object
+    EnvVar: {}
     Error:
       example: '{"id":6200,"type":"error","message":"You do not belong to this organisation so you cannot access it"}'
       properties:
@@ -6136,6 +7004,7 @@ components:
         - name
         - price
       type: object
+    Function1RequestContextFutureRouteResult: {}
     Instance:
       properties:
         buildFlavor:
@@ -6239,30 +7108,9 @@ components:
     Map:
       type: object
     Member:
-      properties:
-        job:
-          type: string
-        member:
-          properties:
-            avatar:
-              type: string
-            email:
-              type: string
-            id:
-              type: string
-            name:
-              type: string
-          required:
-            - email
-            - id
-          type: object
-        role:
-          type: string
-      required:
-        - job
-        - member
-        - role
-      type: object
+      $ref: "#/components/schemas/schema1"
+    NetworkGroup: {}
+    OVDHttpRequestContext: {}
     Organisation:
       properties:
         VAT:
@@ -6332,6 +7180,7 @@ components:
         - name
         - title
       type: object
+    Peer: {}
     Plan:
       properties:
         features:
@@ -6429,6 +7278,7 @@ components:
         - twitterName
         - website
       type: object
+    ProvisionRequest: {}
     Rights:
       properties:
         description:
@@ -7032,6 +7882,8 @@ components:
         - name
         - value
       type: object
+    WannabeEnvVar: {}
+    WannabeExternalPeer: {}
     WannabeFeature:
       properties:
         name:
@@ -7044,17 +7896,8 @@ components:
         - type
       type: object
     WannabeMember:
-      properties:
-        email:
-          type: string
-        job:
-          type: string
-        role:
-          type: string
-      required:
-        - email
-        - role
-      type: object
+      $ref: "#/components/schemas/schema2"
+    WannabeNetworkGroup: {}
     WannabeOauthApp:
       properties:
         name:
@@ -7153,6 +7996,7 @@ components:
         - password
         - terms
       type: object
+    WireGuardConfiguration: {}
     Zone:
       properties:
         correspondingRegion:
@@ -7166,4 +8010,41 @@ components:
         - correspondingRegion
         - internal
         - name
+      type: object
+    schema1:
+      properties:
+        job:
+          type: string
+        member:
+          properties:
+            avatar:
+              type: string
+            email:
+              type: string
+            id:
+              type: string
+            name:
+              type: string
+          required:
+            - email
+            - id
+          type: object
+        role:
+          type: string
+      required:
+        - job
+        - member
+        - role
+      type: object
+    schema2:
+      properties:
+        email:
+          type: string
+        job:
+          type: string
+        role:
+          type: string
+      required:
+        - email
+        - role
       type: object

@@ -243,6 +243,12 @@ info:
     signature = Base64.strict_encode64(OpenSSL::HMAC.digest('sha256', WEBHOOK_SECRET, payload_body))
     ActiveSupport::SecurityUtils.secure_compare(signature, request.env['HTTP_X_APPSTORE_SIGNATURE'])
     ```
+
+    ### 発信元IPアドレスについて
+
+    発信元IPアドレスは固定ではありません。そのためIPアドレスが固定されていることを前提としてアプリケーションを開発しないでください。
+
+    インストールフックおよびアンインストールフックのリクエストの発信元を検証する場合は上記の署名検証を行なってください。
   termsOfService: https://api.shop-pro.jp/developers/tos
   title: カラーミーショップアプリストア API
   version: 1.0.0
@@ -417,7 +423,7 @@ paths:
                 usage_charge:
                   properties:
                     description:
-                      description: 従量課金の発生理由。使用可能文字は ASCII, JIS X 0208, JIS X 0201, JIS X 0212に限る。
+                      description: 従量課金の発生理由。使用可能文字は ASCII, JIS X 0208, JIS X 0201, JIS X 0212に限ります。（[デベロッパー](https://developer.shop-pro.jp) ページに掲載される各アプリの「従量課金」一覧で登録内容を確認できます。カラーミーショップ側がこのパラメータを参照して課金の内容を確認することがあります。）
                       example: 2019/4 メール送信分
                       maxLength: 50
                       type: string

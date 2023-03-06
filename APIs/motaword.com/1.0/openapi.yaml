@@ -29,7 +29,7 @@ paths:
   /:
     get:
       description: |
-        The root endpoint will provide you a JSON Swagger definition.
+        The root endpoint will provide you with an OpenAPI definition of MotaWord API.
       operationId: getEndpoints
       responses:
         "200":
@@ -37,7 +37,7 @@ paths:
             application/json:
               schema:
                 type: object
-          description: JSON representation of our Swagger API definition.
+          description: YAML representation of our OpenAPI definition.
         default:
           content:
             application/json:
@@ -52,7 +52,7 @@ paths:
     x-internal: true
   /async/download:
     get:
-      description: Download async request files
+      description: Download the result of an async operation that you have requested in other endpoints.
       operationId: downloadAsync
       parameters:
         - description: Async operation key
@@ -75,7 +75,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Download async request files
+      summary: Download result of an async operation
       tags:
         - Async
       x-cli-cmd-group: async
@@ -139,6 +139,7 @@ paths:
                 $ref: "#/components/schemas/OperationStatus"
           description: Operation status
       summary: Clear cache by key
+    x-internal: true
   /commissions:
     get:
       operationId: getCommissions
@@ -187,8 +188,19 @@ paths:
     x-internal: true
   /continuous_projects:
     get:
-      description: Get a list of continuous projects
+      description: View a list of continuous projects under your account. Continuous projects are those that are constantly updated, such as a CI/CD project, software project, website translation and such.
       operationId: getContinuousProjects
+      parameters:
+        - description: Type of continuous project.
+          in: query
+          name: type
+          required: false
+          schema:
+            default: active
+            enum:
+              - active
+            nullable: true
+            type: string
       responses:
         "200":
           content:
@@ -196,14 +208,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/ContinuousProjectsList"
           description: Newly created continuous project
-      summary: Get a list of continuous projects
+      summary: View continuous projects
       tags:
         - ContinuousProject
       x-cli-aliases:
         - list
       x-cli-cmd-group: continuous-projects
     post:
-      description: Create a new continuous project
+      description: Create a new continuous project for your software, website, CI/CD translation needs.
       operationId: createContinuousProject
       requestBody:
         content:
@@ -217,7 +229,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ContinuousProject"
           description: Newly created continuous project
-      summary: Create a new continuous project
+      summary: Create a continuous project
       tags:
         - ContinuousProject
       x-cli-aliases:
@@ -225,7 +237,7 @@ paths:
       x-cli-cmd-group: continuous-projects
   "/continuous_projects/{id}":
     delete:
-      description: Delete single continuous project
+      description: Delete an existing continuous project. Your project will be cancelled, and you will still be charged for the amount of translations we have done for you so far.
       operationId: deleteContinuousProject
       parameters:
         - description: Continuous project ID
@@ -248,14 +260,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Delete single continuous project
+      summary: Delete a continuous project
       tags:
         - ContinuousProject
       x-cli-aliases:
         - delete
       x-cli-cmd-group: continuous-projects
     get:
-      description: Get single continuous project
+      description: View the details of a continuous project.
       operationId: getContinuousProject
       parameters:
         - description: Continuous Project ID
@@ -278,14 +290,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Get single continuous project
+      summary: View a continuous project
       tags:
         - ContinuousProject
       x-cli-aliases:
         - get
       x-cli-cmd-group: continuous-projects
     post:
-      description: Update continuous project
+      description: Update the details and settings of continuous project.
       operationId: updateContinuousProject
       parameters:
         - description: Continuous project ID
@@ -313,7 +325,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Update continuous project
+      summary: Update a continuous project
       tags:
         - ContinuousProject
       x-cli-cmd-group: continuous-projects
@@ -370,9 +382,505 @@ paths:
         - ContinuousProject
       x-cli-cmd-group: continuous-projects
     x-internal: true
+  "/continuous_projects/{id}/complete":
+    post:
+      description: Complete continuous project
+      operationId: complete
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Operation status
+      summary: Complete continuous project
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    x-internal: true
+  "/continuous_projects/{id}/documents/quote":
+    post:
+      description: Get a new quote for provided documents in continuous project
+      operationId: getQuoteForDocuments
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetQuotesForDocumentsBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectList"
+          description: Newly created project
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: FileTooLarge FileTooSmall FileWasAlreadyUploaded
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: UnsupportedDocumentFormat UnsupportedStyleGuideFormat UnsupportedGlossaryFormat
+        "406":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: UnsupportedLanguage TooManyGlossaries ProjectAlreadyHasGlossary
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectInsertFailed
+      summary: Get quote for documents
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    x-internal: true
+  "/continuous_projects/{id}/documents/{documentId}/complete":
+    post:
+      description: Complete a continuous project document. Per your project settings, a continuous project document can be target language-specific or project-wide for all target languages of the project.
+      operationId: completeContinuousDocument
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Document ID
+          in: path
+          name: documentId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Operation status
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound FileNotFound DocumentNotFound
+      summary: Complete a continuous project document
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    x-internal: true
+  "/continuous_projects/{id}/documents/{documentId}/quote":
+    post:
+      description: Get a new quote for provided document in continuous project. Per your project settings, a continuous project document can be target language-specific or project-wide for all target languages of the project.
+      operationId: getQuoteForDocument
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Document ID
+          in: path
+          name: documentId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectList"
+          description: Newly created project
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: FileTooLarge FileTooSmall FileWasAlreadyUploaded
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: UnsupportedDocumentFormat UnsupportedStyleGuideFormat UnsupportedGlossaryFormat
+        "406":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: UnsupportedLanguage TooManyGlossaries ProjectAlreadyHasGlossary
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectInsertFailed
+      summary: Get a quote for a continuous project document
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    x-internal: true
+  "/continuous_projects/{id}/languages/quote":
+    post:
+      description: Get a new quote for provided target languages in continuous project
+      operationId: getQuoteForLanguages
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetQuotesForLanguagesBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectList"
+          description: Newly created project
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: FileTooLarge FileTooSmall FileWasAlreadyUploaded
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: UnsupportedDocumentFormat UnsupportedStyleGuideFormat UnsupportedGlossaryFormat
+        "406":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: UnsupportedLanguage TooManyGlossaries ProjectAlreadyHasGlossary
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectInsertFailed
+      summary: Get quote for languages
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    x-internal: true
+  "/continuous_projects/{id}/languages/{targetLanguage}/complete":
+    post:
+      description: Complete continuous project language
+      operationId: completeLanguage
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Target language that you want to complete
+          in: path
+          name: targetLanguage
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Operation status
+      summary: Complete continuous project language
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    x-internal: true
+  "/continuous_projects/{id}/languages/{targetLanguage}/quote":
+    post:
+      description: Get a new quote for provided target language in continuous project
+      operationId: getQuoteForLanguage
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Target language that you want to complete
+          in: path
+          name: targetLanguage
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectList"
+          description: Newly created project(s)
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: FileTooLarge FileTooSmall FileWasAlreadyUploaded
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: UnsupportedDocumentFormat UnsupportedStyleGuideFormat UnsupportedGlossaryFormat
+        "406":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: UnsupportedLanguage TooManyGlossaries ProjectAlreadyHasGlossary
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectInsertFailed
+      summary: Get quote for language
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    x-internal: true
+  "/continuous_projects/{id}/subscription":
+    delete:
+      description: Delete subscription for continuous project
+      operationId: deleteSubscription
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+          description: Delete continuous project subscription
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: MissingParameter
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Delete subscription for continuous project
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    get:
+      description: Get subscription for continuous project
+      operationId: getSubscription
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+          description: Get continuous project subscription
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: MissingParameter
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Get subscription for continuous project
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    post:
+      description: Create subscription for continuous project
+      operationId: createSubscription
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Subscription"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+          description: Newly created continuous project subscription
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: MissingParameter
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Create subscription for continuous project
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    put:
+      description: Update subscription for continuous project
+      operationId: updateSubscription
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Subscription"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+          description: Updated continuous project subscription
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: MissingParameter
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Update subscription for continuous project
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+  "/continuous_projects/{id}/subscription/payment":
+    put:
+      description: Update subscription payment method for continuous project
+      operationId: updateSubscriptionPaymentMethod
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Subscription"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+          description: Updated continuous project subscription
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: MissingParameter
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Update subscription payment method for continuous project
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
   "/continuous_projects/{id}/translate/{targetLanguage}":
     post:
-      description: Instantly translate your content with your existing TM and MT resources.
+      description: Instantly translate your content with your existing TM and MT resources. This is the primary endpoint to translate your files and content on the fly, especially in CI/CD environments. This is a complex endpoint that is configured in your Active or Continuous Project dashboards. For instance, you can configure whether to use your TM, or translate missing strings via MT and then post-edit those new translations. There are various scenarios you can establish via a set of configurations.
       operationId: translate
       parameters:
         - description: Continuous project ID
@@ -392,40 +900,472 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                contents:
-                  description: Simple list of strings to be translated. You can also choose to upload files instead of strings.
-                  items:
-                    type: string
-                  type: array
-                documents:
-                  description: You can add as many files as you want in documents parameter.
-                  items:
-                    $ref: "#/components/schemas/FileAsData"
-                  type: array
-                meta:
-                  description: Free-form meta data to attach to your instant translation request. This can be used in statistics and analytical dashboards.
-                  type: object
-              type: object
+              $ref: "#/components/schemas/InstantTranslationRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                properties:
-                  results:
-                    oneOf:
-                      - $ref: "#/components/schemas/InstantContentsTranslationResult"
-                      - $ref: "#/components/schemas/InstantFilesTranslationResult"
-                type: object
+                $ref: "#/components/schemas/InstantTranslationResult"
           description: Instant translation result. It may return a list of translated strings, or a list of translated files.
-      summary: Instantly translate your content with your existing TM and MT resources.
+      summary: Instantly translate your content
       tags:
         - ContinuousProject
       x-cli-cmd-group: continuous-projects
+  "/continuous_projects/{projectId}/documents":
+    get:
+      description: View the documents under this continuous project
+      operationId: getContinuousProjectDocuments
+      parameters:
+        - description: Continuous Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - in: query
+          name: filterByLanguage
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContinuousProjectDocumentList"
+          description: A list of continuous project document models
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+                "/continuous_projects/{id}/translate/{targetLanguage}": null
+          description: ProjectNotFound
+      summary: View continuous documents
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    post:
+      description: Add a new document to your continuous project. If the name already exists, it will update the existing document. In most scenarios, this operation will also trigger auto-translation of your document, via MT and/or TM.
+      operationId: addDocument
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddOrUpdateDocumentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContinuousProjectDocument"
+          description: The newly added continuous project document object.
+      summary: Add a new document to your continuous project
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+  "/continuous_projects/{projectId}/documents/progress":
+    post:
+      description: Get continuous project document progress for multiple IDs
+      operationId: postContinuousProjectDocumentProgress
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContinuousProjectDocumentProgressBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Progress"
+          description: Progress information
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Get continuous project document progress for multiple IDs
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+  "/continuous_projects/{projectId}/documents/strings":
+    post:
+      operationId: postContinuousProjectFileStrings
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContinuousProjectDocumentStringsBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringList"
+          description: Response for strings and their translations
+      summary: Get a list of strings and its translations in the project.
+      tags:
+        - Strings
+      x-cli-cmd-group: strings
+  "/continuous_projects/{projectId}/documents/{documentId}":
+    get:
+      description: View the details of a source document in continuous translation project.
+      operationId: getContinuousProjectDocument
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Document ID/Name
+          in: path
+          name: documentId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContinuousProjectDocument"
+          description: Progress information
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: View a continuous document
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    post:
+      description: Update source document in your continuous project. In most scenarios, this operation will also trigger auto-translation of your document, via MT and/or TM.
+      operationId: updateDocument
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Continuous project document ID
+          in: path
+          name: documentId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddOrUpdateDocumentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContinuousProjectDocument"
+          description: The updated continuous project document object.
+      summary: Update the document
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+  "/continuous_projects/{projectId}/documents/{documentId}/progress":
+    get:
+      description: Monitor the translation progress of a document in a continuous project in real-time.
+      operationId: getContinuousProjectDocumentProgress
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Document ID/Name
+          in: path
+          name: documentId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - in: query
+          name: filterByLanguage
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Progress"
+          description: Progress information
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Monitor progress of a continuous document
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+  "/continuous_projects/{projectId}/documents/{documentId}/strings":
+    get:
+      description: View the strings from a document and their translations in your continuous translation project, for all target languages. If you need the translated version of your source document/file, then you need to use package and download endpoints.
+      operationId: getContinuousProjectFileStrings
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Document ID/Name
+          in: path
+          name: documentId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringList"
+          description: Response for strings and their translations
+      summary: View strings their translations in a continuous document
+      tags:
+        - Strings
+      x-cli-cmd-group: strings
+  "/continuous_projects/{projectId}/invoices":
+    get:
+      description: Get real-time access to a continuous project's invoices.
+      operationId: getContinuousProjectInvoices
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContinuousProjectInvoices"
+          description: Invoices List
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Invoices of a continuous project
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+  "/continuous_projects/{projectId}/progress":
+    get:
+      description: Monitor the translation progress of an ongoing continuous project in real-time.
+      operationId: getContinuousProjectProgress
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - in: query
+          name: filterByLanguage
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContinuousProjectProgress"
+          description: Progress information
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Monitor progress and status of a continous project
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+  "/continuous_projects/{projectId}/strings":
+    get:
+      description: View the strings and their translations in your continuous translation project, for all target languages. If you need the translated version of your source document/file, then you need to use package and download endpoints.
+      operationId: getContinuousProjectStrings
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StringList"
+          description: Response for strings and their translations
+      summary: View strings and translations in continuous project
+      tags:
+        - Strings
+      x-cli-cmd-group: strings
+  "/continuous_projects/{projectId}/strings/cached":
+    delete:
+      description: Clear/delete continuous project translation cache.
+      operationId: clearTranslationCache
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Locale
+          in: query
+          name: locale
+          required: false
+          schema:
+            type: string
+        - description: Continuous Project File ID
+          in: query
+          name: file_id
+          required: false
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Operation response
+      summary: Clear translation cache
+      tags:
+        - Strings
+      x-cli-cmd-group: strings
+    get:
+      description: MotaWord caches your account intensively (and in a smart way) in real-time translation environments. This endpoint will return the currently cached strings and translations in your continuous translation project.
+      operationId: getTranslationCache
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Flatten cache results and ignore document keys
+          in: query
+          name: flatten
+          required: false
+          schema:
+            default: 1
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContinuousProjectCache"
+          description: Response for strings and their translations
+      summary: View cached strings translations in continuous project
+      tags:
+        - Strings
+      x-cli-cmd-group: strings
+  "/continuous_projects/{projectId}/strings/recache-tms":
+    post:
+      description: Recache translations for the continuous project.
+      operationId: recacheTranslations
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Locale
+          in: query
+          name: locale
+          required: false
+          schema:
+            type: string
+        - description: Continuous Project File ID
+          in: query
+          name: file_id
+          required: false
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Operation response
+      summary: Recache translations
+      tags:
+        - Strings
+      x-cli-cmd-group: strings
   "/continuous_projects/{projectId}/widgets":
     get:
-      description: Get widgets for this Active project
+      description: View a list of widgets in your Active project to be used in your website. Most website-specific configuration is provided via widgets.
       operationId: getActiveWidgets
       parameters:
         - description: Continuous Project ID
@@ -448,14 +1388,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Get widgets for this Active project
+      summary: View Active widgets
       tags:
         - ContinuousProject
       x-cli-aliases:
         - widgets
       x-cli-cmd-group: continuous-projects
     post:
-      description: Create a new Active widget. This does not create a new Active project, just a separate widget.
+      description: Create a new widget for your Active project to be used in your website. Most website-specific configuration is provided via widgets. This does not create a new Active project, just a separate widget.
       operationId: createActiveWidget
       parameters:
         - description: Continuous project ID
@@ -483,7 +1423,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound | ActiveWidgetNotFound | UnauthorizedUser
-      summary: Create a new Active widget. This does not create a new Active project, just a separate widget.
+      summary: Create a new Active widget
       tags:
         - ContinuousProject
       x-cli-cmd-group: continuous-projects
@@ -524,7 +1464,7 @@ paths:
         - ContinuousProject
       x-cli-cmd-group: continuous-projects
     get:
-      description: Get a single widget for this Active project
+      description: View the details of an Active widget to be used in your website. Most website-specific configuration is provided via widgets.
       operationId: getActiveWidget
       parameters:
         - description: Continuous Project ID
@@ -554,7 +1494,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound | ActiveWidgetNotFound
-      summary: Get a single widget for this Active project
+      summary: View an Active widget
       tags:
         - ContinuousProject
       x-cli-aliases:
@@ -602,7 +1542,7 @@ paths:
       x-cli-cmd-group: continuous-projects
   "/continuous_projects/{projectId}/widgets/{widgetId}/reset-token":
     post:
-      description: Resets the access token of the Active widget.
+      description: Reset the public token used with your Active widget. This token is used when communicating from your environment to MotaWord systems for translation, analytics and meta.
       operationId: resetActiveWidgetToken
       parameters:
         - description: Continuous Project ID
@@ -632,13 +1572,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound | ActiveWidgetNotFound | UnauthorizedUser
-      summary: Resets the access token of the Active widget.
+      summary: Reset Active widget token
       tags:
         - ContinuousProject
       x-cli-cmd-group: continuous-projects
   /corporate:
     get:
-      description: Get details of my corporate account
+      description: View the details of the corporate account that your user account belongs to.
       operationId: getCorporate
       responses:
         "200":
@@ -647,13 +1587,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/CorporateAccount"
           description: Corporate account details
-      summary: Get details of my corporate account
+      summary: View your corporate account
       tags:
         - Corporate
       x-cli-cmd-group: corporates
   /corporate/permissions:
     get:
-      description: Get a list of available permissions for this corporate account. They are used when assigning permissions to corporate users.
+      description: View a list of available permissions for your corporate account. They are used when assigning permissions to your corporate users.
       operationId: getAvailableCorporatePermissions
       responses:
         "200":
@@ -662,13 +1602,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/PermissionList"
           description: List of permission strings
-      summary: Get a list of available permissions for this corporate account. They are used when assigning permissions to corporate users.
+      summary: View available permissions
       tags:
         - Corporate
       x-cli-cmd-group: corporates
   /corporate/user-groups:
     get:
-      description: Get a list of user groups for my corporate account
+      description: View a list of user groups under my corporate account. User groups are a part of our RBAC implementation and can be used to configure complex permission scenarios.
       operationId: getCorporateUserGroups
       responses:
         "200":
@@ -677,7 +1617,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/UserGroupList"
           description: User group list
-      summary: Get a list of user groups for my corporate account
+      summary: View user groups
       tags:
         - Corporate
       x-cli-cmd-group: corporates
@@ -703,7 +1643,7 @@ paths:
       x-cli-cmd-group: corporates
   /corporate/users:
     get:
-      description: Get a list of users for my corporate account
+      description: View a list of users under your corporate account. This endpoint will only return information if your user account is permitted to view corporate account users, configured by your administrator.
       operationId: getCorporateUsers
       responses:
         "200":
@@ -712,12 +1652,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/UserList"
           description: User list
-      summary: Get a list of users for my corporate account
+      summary: View users
       tags:
         - Corporate
       x-cli-cmd-group: corporates
     post:
-      description: Create or update a corporate user
+      description: Create or update a user under your corporate account. This endpoint requires permissions for corporate user management, configured by your administrator.
       operationId: saveCorporateUser
       requestBody:
         content:
@@ -732,7 +1672,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/User"
           description: Created or updated user
-      summary: Create or update a corporate user
+      summary: Create or update a user
+      tags:
+        - Corporate
+      x-cli-cmd-group: corporates
+  /corporates/all:
+    get:
+      description: Get a list of corporate accounts
+      operationId: getCorporatesList
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CorporateAccount"
+                type: array
+          description: Corporate account list
+      summary: Get a list of corporate accounts
       tags:
         - Corporate
       x-cli-cmd-group: corporates
@@ -862,6 +1819,7 @@ paths:
     x-internal: true
   /delete-account:
     delete:
+      description: Delete your MotaWord account. Be careful; once deleted, you will not have access to MotaWord via API or your dashboards.
       operationId: deleteAccount
       responses:
         "200":
@@ -876,13 +1834,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Delete requester account
+      summary: Delete your account
       tags:
         - User
       x-cli-cmd-group: users
   /documents:
     get:
-      description: Get a list of your documents
+      description: View a list of files and documents that you have translations for. This endpoint lets you view your MotaWord account as a multilingual translated file repository, without needing to go through your projects to interact with files in them.
       operationId: getDocuments
       parameters:
         - description: When true, this will return the most 4 recent active documents.
@@ -953,7 +1911,7 @@ paths:
           schema:
             $ref: "#/components/schemas/ListOrderType"
             default: desc
-        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
+        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
           in: query
           name: with[]
           required: false
@@ -971,7 +1929,74 @@ paths:
               schema:
                 $ref: "#/components/schemas/DocumentList"
           description: Document list
-      summary: Get a list of your documents
+      summary: View your documents
+      tags:
+        - Document
+      x-cli-cmd-group: documents
+  /documents/subjects:
+    get:
+      description: Get a list of subjects of projects
+      operationId: getAllDocumentSubjects
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/DocumentSubjects"
+                type: array
+          description: List of subjects of all projects.
+      summary: Get a list of subjects of projects
+      tags:
+        - Document
+      x-cli-cmd-group: documents
+  "/documents/{documentId}":
+    get:
+      description: View a single document from your MotaWord account with its translation info.
+      operationId: getDocument
+      parameters:
+        - description: Document ID or filename
+          in: path
+          name: documentId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContinuousProjectDocument"
+          description: Document
+      summary: View a single document
+      tags:
+        - Document
+      x-cli-cmd-group: documents
+  "/documents/{documentId}/progress":
+    get:
+      description: View the translation or proofreading progress of a document in your account. You can also track the progress of a document under the project that it was ordered with.
+      operationId: getDocumentProgress
+      parameters:
+        - description: Document ID
+          in: path
+          name: documentId
+          required: true
+          schema:
+            type: number
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Progress"
+          description: Progress information
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: DocumentNotFound
+      summary: View a document translation progress
       tags:
         - Document
       x-cli-cmd-group: documents
@@ -1019,7 +2044,7 @@ paths:
             default: 1
             format: int64
             type: integer
-        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
+        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
           in: query
           name: with[]
           required: false
@@ -1124,6 +2149,7 @@ paths:
     x-internal: true
   /earnings:
     get:
+      description: View your vendor earnings from your translation activites. Includes real-time earnings from ongoing projects, and fixed earnings from completed projects, as well as total earnings and string edits.
       operationId: getEarnings
       responses:
         "200":
@@ -1138,7 +2164,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Returns your vendor earnings. Includes real-time earnings from ongoing projects, and fixed earnings from completed projects. Also includes total earnings and string edits.
+      summary: View your vendor earnings
       tags:
         - User
       x-cli-cmd-group: users
@@ -1157,12 +2183,13 @@ paths:
                 type: object
           description: A list of supported formats
       security: []
-      summary: Get a list of supported formats
+      summary: List of supported file formats
       tags:
         - Static
       x-cli-cmd-group: static
   /freeze-account:
     post:
+      description: Freeze your account temporarily, especially to stop receiving project notifications.
       operationId: freezeAccount
       responses:
         "200":
@@ -1179,13 +2206,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Freeze requester account for project notifications
+      summary: Freeze account
       tags:
         - User
       x-cli-cmd-group: users
   /glossary:
     get:
-      description: Download your corporate account's global glossary. This endpoint is available only for corporate account customers.
+      description: Download your corporate account's global glossary. This endpoint is available only for corporate account customers. This glossary will be automatically attached to each new project under your account.
       operationId: downloadGlobalGlossary
       responses:
         "200":
@@ -1200,26 +2227,21 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: GlossaryNotFound
-      summary: Download the global glossary.
+      summary: Download account glossary.
       tags:
         - Glossary
       x-cli-cmd-group: glossaries
     post:
-      description: Update your corporate account's global glossary. This endpoint is available only for corporate account customers.
+      description: Update your corporate account's global glossary. This endpoint is available only for corporate account customers. This glossary will be automatically attached to each new project under your account.
       operationId: updateGlobalGlossary
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountGlossaryUploadRequest"
           multipart/form-data:
             schema:
-              properties:
-                glossary:
-                  description: |
-                    Glossary file. Currently supported formats: .xlsx, .tbx
-                  format: binary
-                  type: string
-              required:
-                - glossary
-              type: object
+              $ref: "#/components/schemas/AccountGlossaryUploadRequest"
       responses:
         "200":
           content:
@@ -1239,10 +2261,30 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UnsupportedGlossaryFormat
-      summary: Create or update the global glossary.
+      summary: Create or update the account glossary
       tags:
         - Glossary
       x-cli-cmd-group: glossaries
+  /integrations/token:
+    get:
+      description: Generate a new access token for MotaWord's integrations service
+      operationId: getIntegrationsToken
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IntegrationsToken"
+          description: Token
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: IntegrationsNotEnabled
+      summary: Generate a new access token for MotaWord's integrations service
+      tags:
+        - Integrations
   /invitation/vendors:
     post:
       description: Get vendor list for compiled invitation needs
@@ -1276,6 +2318,7 @@ paths:
       summary: Get vendor list for compiled invitation needs
       tags:
         - Invitation
+    x-internal: true
   /languages:
     get:
       description: Get a list of supported languages
@@ -1290,7 +2333,7 @@ paths:
                 type: array
           description: A list of supported languages
       security: []
-      summary: Get a list of supported languages
+      summary: List of supported languages
       tags:
         - Static
       x-cli-cmd-group: static
@@ -1344,6 +2387,7 @@ paths:
     x-internal: true
   /me:
     get:
+      description: Get your user information, including client, corporate account and vendor account information.
       operationId: getMe
       responses:
         "200":
@@ -1358,7 +2402,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Get your user information, including client or vendor specific info.
+      summary: View your account info
       tags:
         - User
       x-cli-cmd-group: users
@@ -1388,12 +2432,45 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Update your user information.
+      summary: Update your account info
       tags:
         - User
       x-cli-cmd-group: users
+  /ml/delivery-prediction:
+    post:
+      description: Get a delivery prediction for a project
+      operationId: getDeliveryPrediction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeliveryPredictionPayload"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeliveryPredictionResponse"
+          description: Prediction and its probability
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: MissingParameter
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Get a delivery prediction for a project
+      tags:
+        - MachineLearning
+    x-internal: true
   /notifications/subscribe:
     post:
+      description: Subscribe to push notifications to receive project and platform notifications.
       operationId: subscribeNotification
       requestBody:
         content:
@@ -1419,9 +2496,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
+      summary: Subscribe to push notifications
       tags:
         - User
       x-cli-cmd-group: users
+    x-internal: true
   /notifications/unsubscribe:
     post:
       operationId: unsubscribeNotification
@@ -1452,6 +2531,34 @@ paths:
       tags:
         - User
       x-cli-cmd-group: users
+    x-internal: true
+  /pam/chat:
+    post:
+      description: Sends a message to the channel.
+      operationId: postMessage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PamMessage"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Successful operation
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Missing Parameter
+      summary: Sends a message to chat
+      tags:
+        - Pam
+      x-cli-cmd-group: pam
+    x-internal: true
   "/pam/profiles/client/{clientId}":
     get:
       description: Get the Pam  profile of a client for this client ID
@@ -1482,8 +2589,39 @@ paths:
         - Pam
       x-cli-cmd-group: pam
     x-internal: true
+  "/pam/projects/{projectId}/completion-report":
+    get:
+      description: Get completion report data of a project
+      operationId: getProjectCompletionReportForPam
+      parameters:
+        - description: Quote ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectCompletionReport"
+          description: Project Completion Report
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Get completion report data of a project
+      tags:
+        - Pam
+      x-cli-cmd-group: pam
+    x-internal: true
   /password:
     post:
+      description: Password should contain at least one uppercase, lowercase character and one number
       operationId: updatePassword
       requestBody:
         content:
@@ -1503,12 +2641,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Update user password. Password should contain at least one uppercase, lowercase character and one number
+      summary: Update your account password
       tags:
         - User
       x-cli-cmd-group: users
   /payment:
     get:
+      description: Returns billing and saved credit card information for user, and their corporate account if present & allowed.
       operationId: getPaymentInfo
       responses:
         "200":
@@ -1523,11 +2662,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound UnauthorizedUser
-      summary: Get your payment Info
+      summary: View your payment and billing info
       tags:
         - User
       x-cli-cmd-group: users
     post:
+      description: Update your billing and saved credit card information
       operationId: updatePaymentInfo
       requestBody:
         content:
@@ -1552,7 +2692,8 @@ paths:
         - User
       x-cli-cmd-group: users
   /payment/reset-corporate-payment-code:
-    get:
+    post:
+      description: Reset your corporate account's payment code to bypass credit card payment. This will invalidate your current payment code and your users should be aware of this change while ordering translations.
       operationId: resetCorporatePaymentCode
       responses:
         "200":
@@ -1567,12 +2708,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound UnauthorizedUser MissingCorporateAccount
-      summary: Reset corporate credit card payment code.
+      summary: Reset payment code
       tags:
         - Payment
       x-cli-cmd-group: payment
   /payment/toggle-corporate-auto-charge:
-    get:
+    post:
+      description: Toggle (enable/disable) automatic charges on the credit card on file.
       operationId: toggleCorporateAutoCharge
       responses:
         "200":
@@ -1587,7 +2729,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound UnauthorizedUser MissingCorporateAccount
-      summary: Toggle corporate auto charge option.
+      summary: Manage automatic charges on your credit card
       tags:
         - Payment
       x-cli-cmd-group: payment
@@ -1615,7 +2757,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: MissingCreditCard
-      summary: Get credit card by cardId
+      summary: View saved credit card
       tags:
         - Payment
       x-cli-cmd-group: payment
@@ -1643,12 +2785,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound MissingCorporateAccount MissingParameter MissingCreditCard UnauthorizedUser
-      summary: Delete credit card.
+      summary: Delete credit card
       tags:
         - Payment
       x-cli-cmd-group: payment
   "/payment/{cardId}/reset-payment-code":
     post:
+      description: Reset the payment code used to bypass credit card payment. This will invalidate your current payment code and your users should be aware of this change while ordering translations.
       operationId: resetCardPaymentCode
       parameters:
         - description: Credit Card ID
@@ -1671,12 +2814,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound MissingCorporateAccount MissingParameter MissingCreditCard UnauthorizedUser
-      summary: Reset credit card payment code.
+      summary: Reset credit card payment code
       tags:
         - Payment
       x-cli-cmd-group: payment
   /permissions:
     get:
+      description: View a list of permissions that your user account is authorized for, configured either by default, or by your account administator.
       operationId: getPermissions
       responses:
         "200":
@@ -1685,25 +2829,22 @@ paths:
               schema:
                 $ref: "#/components/schemas/PermissionList"
           description: List of permission strings
-      summary: Returns a list of permissions that this user is authorized for.
+      summary: View your permissions
       tags:
         - User
       x-cli-cmd-group: users
   /profile-picture:
     post:
+      description: Upload a profile picture on your account. This is used where your profile is mentioned throughout the platform. Your picture is not used publicly.
       operationId: uploadProfilePicture
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProfilePictureUpload"
           multipart/form-data:
             schema:
-              properties:
-                profile_picture:
-                  description: Profile picture file contents. Accepted extensions are png, jpg.
-                  format: binary
-                  type: string
-              required:
-                - profile_picture
-              type: object
+              $ref: "#/components/schemas/ProfilePictureUpload"
       responses:
         "200":
           content:
@@ -1723,12 +2864,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
+      summary: Upload profile picture
       tags:
         - User
       x-cli-cmd-group: users
   /projects:
     get:
-      description: Get a list of your projects
+      description: View the translation projects ordered in your account. If you have the related permission (configured by your account administrator), you can view the projects of your colleagues under the same company account.
       operationId: getProjects
       parameters:
         - in: query
@@ -1795,6 +2937,17 @@ paths:
           schema:
             $ref: "#/components/schemas/ListOrderType"
             default: desc
+        - description: Include detailed information. Possible values 'client', 'vendor'
+          in: query
+          name: with[]
+          required: false
+          schema:
+            items:
+              enum:
+                - client
+                - vendor
+              type: string
+            type: array
       responses:
         "200":
           content:
@@ -1802,48 +2955,21 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProjectList"
           description: Project list
-      summary: Get a list of your projects
+      summary: View your translation projects
       tags:
         - Project
       x-cli-cmd-group: projects
     post:
-      description: Create a new project
+      description: Create a new translation project. Projects are not launched (you are not charged) until you `/launch` the created project.
       operationId: createProject
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewProject"
           multipart/form-data:
             schema:
-              properties:
-                callback_url:
-                  description: Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
-                  type: string
-                coupon_code:
-                  description: Coupon code to redeem
-                  type: string
-                custom:
-                  description: Optional. This is a consistent custom data parameter that will be given to you in the response across every request of this project model. Values should be provided like this, custom[my_key] = my_value.
-                  items:
-                    type: string
-                  type: array
-                "documents[]":
-                  description: Optional. You can add as many files as you want in documents[] parameter. Or you add your documents later in separate calls.
-                  format: binary
-                  type: string
-                "glossaries[]":
-                  description: Optional. Only one glossary is supported at the moment.
-                  format: binary
-                  type: string
-                source_language:
-                  type: string
-                "styleguides[]":
-                  description: Optional. You can add as many files as you want in styleguides[] parameter. Or you add your style guides later in separate calls.
-                  format: binary
-                  type: string
-                "target_languages[]":
-                  items:
-                    type: string
-                  type: array
-              type: object
+              $ref: "#/components/schemas/NewProject"
       responses:
         "200":
           content:
@@ -1875,7 +3001,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectInsertFailed
-      summary: Get a new quote
+      summary: Create a new project
       tags:
         - Project
       x-cli-cmd-group: projects
@@ -1896,14 +3022,7 @@ paths:
           content:
             application/json:
               schema:
-                properties:
-                  internal-id:
-                    format: int64
-                    type: integer
-                  public-id:
-                    format: int64
-                    type: integer
-                type: object
+                $ref: "#/components/schemas/ProjectId"
           description: QuoteId
         "404":
           content:
@@ -1918,7 +3037,7 @@ paths:
     x-internal: true
   /projects/vendor:
     get:
-      description: Get a list of your vendor projects
+      description: Get a list of projects that are available to you to work on as a vendor. This is not a list of projects that you ordered as a customer.
       operationId: getVendorProjects
       parameters:
         - description: Return only projects that this user has already joined
@@ -1960,13 +3079,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: VendorNotFound - this is not a vendor user account
-      summary: Get a list of your vendor projects
+      summary: List projects as a vendor
       tags:
         - Project
       x-cli-cmd-group: projects
   "/projects/{id}":
     delete:
-      description: Delete(cancel) a project.
+      description: If you haven't launched your translation project yet, we will delete it. If MotaWord already started working on your project, we will cancel the project and refund the volume that we haven't worked on yet.
       operationId: deleteProject
       parameters:
         - description: Project ID
@@ -1989,12 +3108,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Delete a project
+      summary: Delete your translation project
       tags:
         - Project
       x-cli-cmd-group: projects
     get:
-      description: Get single project
+      description: View the details of a translation project in your account.
       operationId: getProject
       parameters:
         - description: Project ID
@@ -2029,12 +3148,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Get single project
+      summary: View a translation project
       tags:
         - Project
       x-cli-cmd-group: projects
     put:
-      description: Update project language pairs
       operationId: updateProject
       parameters:
         - description: Project ID
@@ -2046,27 +3164,12 @@ paths:
             type: integer
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectUpdate"
           multipart/form-data:
             schema:
-              properties:
-                callback_url:
-                  description: Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
-                  type: string
-                coupon_code:
-                  description: Coupon code to redeem
-                  type: string
-                custom:
-                  description: Optional. This is a consistent custom data parameter that will be given to you in the response across every request of this project model. Values should be provided like this, custom[my_key] = my_value. If you previously provided one, it will be replaced.
-                  items:
-                    type: string
-                  type: array
-                source_language:
-                  type: string
-                "target_languages[]":
-                  items:
-                    type: string
-                  type: array
-              type: object
+              $ref: "#/components/schemas/ProjectUpdate"
       responses:
         "200":
           content:
@@ -2086,10 +3189,44 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UnsupportedLanguage
-      summary: Update project language pairs
+      summary: Update project info and settings
       tags:
         - Project
       x-cli-cmd-group: projects
+  "/projects/{id}/assign-cm":
+    post:
+      operationId: assignCM
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CM"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Operation started successfully
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Assign a CM to the project
+      tags:
+        - Project
+      x-cli-cmd-group: projects
+    x-internal: true
   "/projects/{id}/callback/{actionType}":
     get:
       description: Trigger a call to your callback URL related to this project.
@@ -2132,6 +3269,7 @@ paths:
     x-internal: true
   "/projects/{id}/cancel":
     post:
+      description: If you haven't launched your translation project yet, we will delete it. If MotaWord already started working on your project, we will cancel the project and refund the volume that we haven't worked on yet.
       operationId: cancelProject
       parameters:
         - description: Project ID
@@ -2143,13 +3281,9 @@ paths:
             type: integer
       requestBody:
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                reason:
-                  description: Cancellation reason
-                  type: string
-              type: object
+              $ref: "#/components/schemas/CancelProjectRequest"
       responses:
         "200":
           content:
@@ -2169,6 +3303,7 @@ paths:
       x-cli-cmd-group: projects
   "/projects/{id}/deliver":
     post:
+      description: Deliver project to the owner of the project. You can also download your translations in `/package` and `/download` endpoints.
       operationId: deliverProject
       parameters:
         - description: Project ID
@@ -2197,7 +3332,7 @@ paths:
       x-cli-cmd-group: projects
   "/projects/{id}/download":
     get:
-      description: Download the latest translation package. You must have given a /package call beforehand and wait until the packaging status is 'completed'.
+      description: Download the latest translation package. You must have requested a `/package` call beforehand and wait until the packaging status is 'completed'.
       operationId: download
       parameters:
         - description: Project ID
@@ -2227,13 +3362,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: TranslationPackageNotFound
-      summary: Download the latest translation package.
+      summary: Download your translated project
       tags:
         - Project
       x-cli-cmd-group: projects
   "/projects/{id}/download/{language}":
     get:
-      description: Download only the translation package of this language. You must have given a /package call beforehand and wait until the packaging status is 'completed'.
+      description: Download the latest translation package for your target language. You must have requested a `/package` call beforehand and wait until the packaging status is 'completed'.
       operationId: downloadLanguage
       parameters:
         - description: Project ID
@@ -2269,13 +3404,42 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: TranslationPackageNotFound
-      summary: Download the latest translation package.
+      summary: Download your translated project language
+      tags:
+        - Project
+      x-cli-cmd-group: projects
+  "/projects/{id}/email-quote":
+    post:
+      description: Send a quote email
+      operationId: sendQuoteEmail
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Email sent successfully
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Send a quote email
       tags:
         - Project
       x-cli-cmd-group: projects
   "/projects/{id}/invoice":
     get:
-      description: Get invoice details
+      description: View your invoice details for your translation project.
       operationId: getInvoice
       parameters:
         - description: Project ID
@@ -2298,13 +3462,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound or InvoiceNotFound
-      summary: Get invoice details
+      summary: View project invoice
       tags:
         - Project
       x-cli-cmd-group: projects
   "/projects/{id}/invoice.html":
     get:
-      description: Download invoice as html by project id.
+      description: Download your project invoice as HTML. This is useful when you want to show your users the invoice in a webpage.
       operationId: downloadHtmlInvoice
       parameters:
         - description: Project ID
@@ -2327,13 +3491,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound or InvoiceNotFound
-      summary: Download invoice as hmtl
+      summary: Download project invoice (HTML)
       tags:
         - Project
       x-cli-cmd-group: projects
   "/projects/{id}/invoice.pdf":
     get:
-      description: Download invoice as pdf by project id.
+      description: Download your project invoice as PDF. Your invoice may be in "unpaid" status, in which case youn can see the payment instructions in the PDF file.
       operationId: downloadPdfInvoice
       parameters:
         - description: Project ID
@@ -2357,12 +3521,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound or InvoiceNotFound
-      summary: Download invoice as pdf
+      summary: Download project invoice (PDF)
       tags:
         - Project
       x-cli-cmd-group: projects
   "/projects/{id}/launch":
     post:
+      description: Launch your translation project so MotaWord can actually start working on your translation.
       operationId: launchProject
       parameters:
         - description: Project ID
@@ -2374,35 +3539,9 @@ paths:
             type: integer
       requestBody:
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                bin:
-                  description: Last 4 digits of the credit card you are using one-time. This parameter is only required when stripe_token is provided.
-                  type: string
-                budget_code:
-                  description: Optional with corporate accounts. Not available for others.
-                  type: string
-                card_id:
-                  description: Optional. `client`, `app`, `corporate_card` methods require a credit card ID. `credit` method requires Stripe token and bin.
-                  format: int64
-                  type: integer
-                payment_code:
-                  description: Optional. `corporate` payment method requires this.s
-                  type: string
-                payment_method:
-                  description: Optional. Determines which method to use for payment. `client`, `app`, `corporate_card` methods require a credit card ID. `credit` method requires Stripe token and bin. `corporate` method follows corporate account policy automatically, either follows invoicing flow or automatically charges corporate's primary card.
-                  enum:
-                    - corporate
-                    - client
-                    - app
-                    - credit
-                    - corporate_card
-                  type: string
-                stripe_token:
-                  description: This is required if you are using a one-time credit card. This is the token generted from frontend via Stripe SDK. If you are using a one-time card with `stripe_token`, you must also provide `bin`, last 4 digits of the card.
-                  type: string
-              type: object
+              $ref: "#/components/schemas/ProjectPayment"
       responses:
         "200":
           content:
@@ -2434,7 +3573,7 @@ paths:
       x-cli-cmd-group: projects
   "/projects/{id}/package":
     post:
-      description: Package the translation project, make it ready to be downloaded.
+      description: Package the translations in your project, prepare translated documents and make it ready to be downloaded. Once packaged, you can download your translated project.
       operationId: package
       parameters:
         - description: Project ID
@@ -2471,13 +3610,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: TranslationPackageNotFound
-      summary: Package the translation of all languages to be downloaded.
+      summary: Package your translated project
       tags:
         - Project
       x-cli-cmd-group: projects
   "/projects/{id}/package/check":
     get:
-      description: This request will tell you the current progress of the translation packaging. You will use the 'key' provided by the /package call.
+      description: Track the packaging status of your translations, by using the `key` from packaging request. Once packaging is completed, you can download your translations via `/download` endpoints.
       operationId: trackPackage
       parameters:
         - description: Project ID
@@ -2511,13 +3650,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: PackagingStatusMissing
-      summary: Track the status of translation packaging.
+      summary: Track translation packaging status
       tags:
         - Project
       x-cli-cmd-group: projects
   "/projects/{id}/package/{language}":
     post:
-      description: Package the translation project, make it ready to be downloaded.
+      description: Package the translations in your project for a specific target language, prepare translated documents and make it ready to be downloaded. Once packaged, you can download your translated project in this target language.
       operationId: packageLanguage
       parameters:
         - description: Project ID
@@ -2563,13 +3702,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: TranslationPackageNotFound
-      summary: Package the translation of a specific target language to be downloaded.
+      summary: Package your translated project language
       tags:
         - Project
       x-cli-cmd-group: projects
   "/projects/{id}/progress":
     get:
-      description: Get the progress of an already launched project.
+      description: Monitor the translation progress of an already launched project in real-time.
       operationId: getProgress
       parameters:
         - description: Project ID
@@ -2604,7 +3743,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Get project progress
+      summary: View progress of a project
       tags:
         - Project
       x-cli-cmd-group: projects
@@ -2642,6 +3781,7 @@ paths:
       tags:
         - Project
       x-cli-cmd-group: projects
+    x-internal: true
   "/projects/{id}/reports":
     post:
       operationId: submitProjectReports
@@ -2655,16 +3795,9 @@ paths:
             type: integer
       requestBody:
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                activity_type:
-                  description: Activity Type
-                  type: string
-                message:
-                  description: Report Message
-                  type: string
-              type: object
+              $ref: "#/components/schemas/ReportContent"
       responses:
         "200":
           content:
@@ -2684,7 +3817,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Submit reports for a project
+      summary: Submit feedback report for a project
       tags:
         - Project
       x-cli-cmd-group: projects
@@ -2738,18 +3871,12 @@ paths:
             type: integer
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewSalesActivity"
           multipart/form-data:
             schema:
-              properties:
-                subject:
-                  type: string
-                timestamp:
-                  format: int64
-                  type: integer
-                type:
-                  description: Activity Type
-                  type: string
-              type: object
+              $ref: "#/components/schemas/NewSalesActivity"
       responses:
         "200":
           content:
@@ -2798,7 +3925,7 @@ paths:
         - Project Webhooks
       x-cli-cmd-group: webhooks
     get:
-      description: Get project information (includes callback_url for webhook). Currently projects can have only 1 webhook registered.
+      description: This endpoint returns Project entity which contains `callback_url` field for webhook URL. Currently projects can have only 1 webhook registered.
       operationId: getProjectWebhooks
       parameters:
         - description: Project ID
@@ -2821,7 +3948,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Get project information (includes callback_url for webhook)
+      summary: View project webhooks
       tags:
         - Project Webhooks
       x-cli-cmd-group: webhooks
@@ -2840,11 +3967,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                callback_url:
-                  description: Webhook URL. We will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
-                  type: string
-              type: object
+              $ref: "#/components/schemas/Webhook"
       responses:
         "200":
           content:
@@ -2858,7 +3981,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Update project webhook URL
+      summary: Update project webhook
       tags:
         - Project Webhooks
       x-cli-cmd-group: webhooks
@@ -2877,11 +4000,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                callback_url:
-                  description: Webhook URL. We will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
-                  type: string
-              type: object
+              $ref: "#/components/schemas/Webhook"
       responses:
         "200":
           content:
@@ -2895,13 +4014,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Update project webhook URL
+      summary: Update project webhook
       tags:
         - Project Webhooks
       x-cli-cmd-group: webhooks
   "/projects/{projectId}/activities":
     get:
-      description: Get a list of realtime activities on the project, such as translation suggestion and translation approval.
+      description: Get a list of real-time activities in the project, such as translation suggestion and translation approval.
       operationId: getActivities
       parameters:
         - description: Project ID
@@ -2936,13 +4055,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Get a list of realtime activities.
+      summary: Monitor project activities
       tags:
         - Activity
       x-cli-cmd-group: activities
   "/projects/{projectId}/activities/{activityId}":
     get:
-      description: Get a single realtime activity.
+      description: View the details of an activity in the project.
       operationId: getActivity
       parameters:
         - description: Project ID
@@ -2972,12 +4091,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectActivityNotFound
-      summary: Get a single realtime activity.
+      summary: View an activity
       tags:
         - Activity
       x-cli-cmd-group: activities
     post:
-      description: Submit a comment to an activity.
+      description: Submit a comment to an activity in the project, such as translation or editing.
       operationId: submitComment
       parameters:
         - description: Project ID
@@ -2996,15 +4115,12 @@ paths:
             type: integer
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Comment"
           multipart/form-data:
             schema:
-              properties:
-                comment:
-                  description: Comment text.
-                  type: string
-              required:
-                - comment
-              type: object
+              $ref: "#/components/schemas/Comment"
       responses:
         "200":
           content:
@@ -3018,13 +4134,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectActivityNotFound
-      summary: Submit a comment to an activity.
+      summary: Submit comment to an activity
       tags:
         - Activity
       x-cli-cmd-group: activities
   "/projects/{projectId}/activities/{activityId}/comments":
     get:
-      description: Get a list of comments belonging to this activity.
+      description: View a list of comments added to this activity.
       operationId: getActivityComments
       parameters:
         - description: Project ID
@@ -3054,13 +4170,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectActivityNotFound
-      summary: Get a list of comments belonging to this activity.
+      summary: View activity comments
       tags:
         - Activity
       x-cli-cmd-group: activities
   "/projects/{projectId}/comments":
     get:
-      description: Get a list of activity comments throughout the whole project.
+      description: View a list of activity comments in the project.
       operationId: getComments
       parameters:
         - description: Project ID
@@ -3095,13 +4211,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Get a list of activity comments throughout the whole project.
+      summary: View all project comments
       tags:
         - Activity
       x-cli-cmd-group: activities
   "/projects/{projectId}/documents":
     get:
-      description: Get a list of documents
+      description: Get a list of source files you uploaded to be translated in your project.
       operationId: getProjectDocuments
       parameters:
         - description: Project ID
@@ -3111,7 +4227,7 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
+        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
           in: query
           name: with[]
           required: false
@@ -3135,7 +4251,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Get a list of documents
+      summary: View project source documents
       tags:
         - Project Document
       x-cli-cmd-group: project-documents
@@ -3152,24 +4268,12 @@ paths:
             type: integer
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentUpdates"
           multipart/form-data:
             schema:
-              properties:
-                "documents[]":
-                  description: You can add as many files as you want in documents[] parameter.
-                  items:
-                    format: binary
-                    type: string
-                  type: array
-                "schemes[]":
-                  description: JSON string. If your documents have a scheme, as in cases of CSV files, use the same array index keys for `schemes` parameter to specify their schemes. See `Document Schemes` title in the API documentation.
-                  type: string
-                "source-links[]":
-                  description: When provided, we will download the files from these URLs, in addition to files provded in `documents` parameter and then save as source documents
-                  items:
-                    $ref: "#/components/schemas/LinkedSourceDocument"
-                  type: array
-              type: object
+              $ref: "#/components/schemas/DocumentUpdates"
       responses:
         "200":
           content:
@@ -3254,7 +4358,7 @@ paths:
         - Project Document
       x-cli-cmd-group: project-documents
     get:
-      description: Get single document
+      description: View the details of a source file you uploaded to be translated in your project.
       operationId: getProjectDocument
       parameters:
         - description: Project ID
@@ -3271,7 +4375,7 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
+        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
           in: query
           name: with[]
           required: false
@@ -3295,7 +4399,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: DocumentNotFound
-      summary: Get single document
+      summary: View a project source document
       tags:
         - Project Document
       x-cli-cmd-group: project-documents
@@ -3319,19 +4423,12 @@ paths:
             type: integer
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentUploadRequest"
           multipart/form-data:
             schema:
-              properties:
-                documents:
-                  description: Single file data. The name is plural to provide a consistent naming convention.
-                  format: binary
-                  type: string
-                schemes:
-                  description: JSON string. If your documents have a scheme, as in cases of CSV files, use the same array index keys for `schemes` parameter to specify their schemes. See `Document Schemes` title in the API documentation.
-                  type: string
-                source-link:
-                  $ref: "#/components/schemas/LinkedSourceDocument"
-              type: object
+              $ref: "#/components/schemas/DocumentUploadRequest"
       responses:
         "200":
           content:
@@ -3375,7 +4472,7 @@ paths:
       x-cli-cmd-group: project-documents
   "/projects/{projectId}/documents/{documentId}/download":
     get:
-      description: Download a document
+      description: Download an actual source file you uploaded to be translated in your project.
       operationId: downloadProjectDocument
       parameters:
         - description: Project ID
@@ -3405,12 +4502,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: DocumentNotFound
-      summary: Download a document
+      summary: Download a project source document
       tags:
         - Project Document
       x-cli-cmd-group: project-documents
   "/projects/{projectId}/documents/{documentId}/translations":
     get:
+      description: View the strings and their translations in your translation project for the specified source document. The list of translations is live if your project is not completed yet. If you need the translated version of your source document/file, then you need to use package and download endpoints.
       operationId: getDocumentTranslations
       parameters:
         - description: Project ID
@@ -3434,12 +4532,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/StringList"
           description: Response for strings and their translations
-      summary: Get a list of strings and its translations in the document.
+      summary: View strings and translations of a document
       tags:
-        - Translations
+        - Strings
       x-cli-cmd-group: translations
   "/projects/{projectId}/documents/{documentId}/translations/download/{language}":
     get:
+      description: Download translated document in the given target language.
       operationId: downloadTranslatedDocumentForLanguage
       parameters:
         - description: Project ID
@@ -3483,12 +4582,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: DocumentNotFound
-      summary: Download single translated file
+      summary: Download translated document
       tags:
         - Project Document
       x-cli-cmd-group: project-documents
   "/projects/{projectId}/documents/{documentId}/translations/{language}":
     get:
+      description: View the strings and their translations in the given target language for the specified source document. The list of translations is live if your project is not completed yet. If you need the translated version of your source document/file, then you need to use package and download endpoints.
       operationId: getDocumentTranslationsForLanguage
       parameters:
         - description: Project ID
@@ -3518,13 +4618,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/StringList"
           description: Response for strings and their translations
-      summary: Get a list of strings and its translations in the document for this target language of the project.
+      summary: View strings and translations of a document for target language
       tags:
-        - Translations
+        - Strings
       x-cli-cmd-group: translations
   "/projects/{projectId}/glossaries":
     get:
-      description: Get a list of glossaries
+      description: View a list of glossaries previously uploaded to the project.
       operationId: getGlossaries
       parameters:
         - description: Project ID
@@ -3547,12 +4647,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Get a list of glossaries
+      summary: View glossaries
       tags:
         - Glossary
       x-cli-cmd-group: glossaries
     post:
-      description: Upload a new glossary
+      description: Upload a new glossary file to your project to be used during translation. Glossaries can be CSV or TBX files.
       operationId: createGlossary
       parameters:
         - description: Project ID
@@ -3564,16 +4664,12 @@ paths:
             type: integer
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlossaryUploadRequest"
           multipart/form-data:
             schema:
-              properties:
-                glossaries:
-                  description: You can only add one glossary, even though the name suggests multiple glossaries. This may be updated in the future to support multiple glossaries.
-                  format: binary
-                  type: string
-              required:
-                - glossaries
-              type: object
+              $ref: "#/components/schemas/GlossaryUploadRequest"
       responses:
         "200":
           content:
@@ -3611,13 +4707,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectAlreadyStarted
-      summary: Upload a new glossary
+      summary: Upload a glossary file
       tags:
         - Glossary
       x-cli-cmd-group: glossaries
   "/projects/{projectId}/glossaries/{glossaryId}":
     delete:
-      description: Delete the glossary
+      description: Delete the existing glossary from the project.
       operationId: deleteGlossary
       parameters:
         - description: Project ID
@@ -3653,12 +4749,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectAlreadyStarted
-      summary: Delete the glossary
+      summary: Delete a glossary
       tags:
         - Glossary
       x-cli-cmd-group: glossaries
     get:
-      description: Get single glossary
+      description: View the details of a glossary file uploaded to a project.
       operationId: getGlossary
       parameters:
         - description: Project ID
@@ -3688,12 +4784,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: GlossaryNotFound
-      summary: Get single glossary
+      summary: View a glossary
       tags:
         - Glossary
       x-cli-cmd-group: glossaries
     put:
-      description: Update the glossary. File name and contents will replaced with the new one.
+      description: Update the existing glossary file in the project. Public users are allowed to have only 1 glossary per project and file name and contents will replaced with the new glossary file that you are uploading via this endpoint.
       operationId: updateGlossary
       parameters:
         - description: Project ID
@@ -3712,16 +4808,12 @@ paths:
             type: integer
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlossaryUploadRequest"
           multipart/form-data:
             schema:
-              properties:
-                glossaries:
-                  description: Single file data. The name is plural to provide a consistent naming convention.
-                  format: binary
-                  type: string
-              required:
-                - glossaries
-              type: object
+              $ref: "#/components/schemas/GlossaryUploadRequest"
       responses:
         "200":
           content:
@@ -3753,13 +4845,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectAlreadyStarted
-      summary: Update the glossary.
+      summary: Update a glossary
       tags:
         - Glossary
       x-cli-cmd-group: glossaries
   "/projects/{projectId}/glossaries/{glossaryId}/download":
     get:
-      description: Download a glossary
+      description: Download a previously uploaded glossary file.
       operationId: downloadGlossary
       parameters:
         - description: Project ID
@@ -3795,6 +4887,7 @@ paths:
       x-cli-cmd-group: glossaries
   "/projects/{projectId}/strings":
     get:
+      description: View the strings and their translations in your translation project, for all target languages. The list of translations is live if your project is not completed yet. If you need the translated version of your source document/file, then you need to use package and download endpoints.
       operationId: getProjectStrings
       parameters:
         - description: Project ID
@@ -3811,12 +4904,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/StringList"
           description: Response for strings and their translations
-      summary: Get a list of strings and its translations in the project.
+      summary: View project strings and translations
       tags:
         - Strings
       x-cli-cmd-group: strings
   "/projects/{projectId}/strings/package":
     post:
+      description: Package and download project translation memory in TMX format
       operationId: packageProjectTranslationMemory
       parameters:
         - description: Project ID
@@ -3851,12 +4945,13 @@ paths:
                 format: binary
                 type: string
           description: Response in TMX or async request
-      summary: Get the translation memory of a project in TMX format
+      summary: Download project translation memory
       tags:
         - Strings
       x-cli-cmd-group: strings
   "/projects/{projectId}/strings/package/status":
     get:
+      description: Check translation memory packaging status for async packaging requests, using the key returned from strings/package call.
       operationId: packageProjectTranslationMemoryStatus
       parameters:
         - description: Project ID
@@ -3879,12 +4974,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/AsyncOperationStatus"
           description: Async operation status. Use the key to query status of this operation.
-      summary: If package call was async, check the status of the request
+      summary: Check translation memory packaging status
       tags:
         - Strings
       x-cli-cmd-group: strings
   "/projects/{projectId}/strings/{languageCode}/package":
     post:
+      description: Package and download project translation memory in TMX format for a specific target language.
       operationId: packageProjectTranslationMemoryForLanguage
       parameters:
         - description: Project ID
@@ -3925,12 +5021,13 @@ paths:
                 format: binary
                 type: string
           description: Response in TMX or async request
-      summary: Get the translation memory of a project in TMX format
+      summary: Download language-specific project translation memory
       tags:
         - Strings
       x-cli-cmd-group: strings
   "/projects/{projectId}/strings/{languageCode}/package/status":
     get:
+      description: Check translation memory packaging status for async packaging requests, using the key returned from strings/package call.
       operationId: packageProjectTranslationMemoryForLanguageStatus
       parameters:
         - description: Project ID
@@ -3959,12 +5056,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/AsyncOperationStatus"
           description: Async operation status. Use the key to query status of this operation.
-      summary: If package call was async, check the status of the request
+      summary: Check language-specific translation memory packaging status
       tags:
         - Strings
       x-cli-cmd-group: strings
   "/projects/{projectId}/strings/{language}":
     get:
+      description: View the strings and their translations in your translation project for the specified target language. The list of translations is live if your project is not completed yet. If you need the translated version of your source document/file, then you need to use package and download endpoints.
       operationId: getProjectStringsForLanguage
       parameters:
         - description: Project ID
@@ -3987,13 +5085,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/StringList"
           description: Response for strings and their translations
-      summary: Get a list of strings and its translations in the project for this target language in the project.
+      summary: View strings and translations for target language
       tags:
         - Strings
       x-cli-cmd-group: strings
   "/projects/{projectId}/styleguides":
     get:
-      description: Get a list of style guides
+      description: View a list of style guides in your project.
       operationId: getStyleGuides
       parameters:
         - description: Project ID
@@ -4003,7 +5101,7 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
+        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
           in: query
           name: with[]
           required: false
@@ -4026,7 +5124,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: Get a list of style guides
+      summary: View style guides
       tags:
         - Style Guide
       x-cli-cmd-group: styleguides
@@ -4043,16 +5141,12 @@ paths:
             type: integer
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StyleGuideUploadRequest"
           multipart/form-data:
             schema:
-              properties:
-                "styleguides[]":
-                  description: You can add as many files as you want in styleguides[] parameter.
-                  format: binary
-                  type: string
-              required:
-                - styleguides[]
-              type: object
+              $ref: "#/components/schemas/StyleGuideUploadRequest"
       responses:
         "200":
           content:
@@ -4090,7 +5184,7 @@ paths:
       x-cli-cmd-group: styleguides
   "/projects/{projectId}/styleguides/{styleGuideId}":
     delete:
-      description: Delete the style guide
+      description: Delete the existing style guide from the project.
       operationId: deleteStyleGuide
       parameters:
         - description: Project ID
@@ -4126,12 +5220,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectAlreadyStarted
-      summary: Delete the style guide
+      summary: Delete a style guide
       tags:
         - Style Guide
       x-cli-cmd-group: styleguides
     get:
-      description: Get single style guide
+      description: View the details of a style guide uploaded to a project
       operationId: getStyleGuide
       parameters:
         - description: Project ID
@@ -4148,7 +5242,7 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
+        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
           in: query
           name: with[]
           required: false
@@ -4171,12 +5265,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: StyleGuideNotFound
-      summary: Get single style guide
+      summary: View a style guide
       tags:
         - Style Guide
       x-cli-cmd-group: styleguides
     put:
-      description: Update the style guide. File name and contents will replaced with the new one.
+      description: Update the existing style guide in the project. Public users are allowed to have only 1 style guide per project and file name and contents will replaced with the new style guide that you are uploading via this endpoint.
       operationId: updateStyleGuide
       parameters:
         - description: Project ID
@@ -4195,16 +5289,12 @@ paths:
             type: integer
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StyleGuideUploadRequest"
           multipart/form-data:
             schema:
-              properties:
-                styleguides:
-                  description: Single file data. The name is plural to provide a consistent naming convention.
-                  format: binary
-                  type: string
-              required:
-                - styleguides
-              type: object
+              $ref: "#/components/schemas/StyleGuideUploadRequest"
       responses:
         "200":
           content:
@@ -4236,13 +5326,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: ProjectAlreadyStarted
-      summary: Update the style guide.
+      summary: Update a style guide
       tags:
         - Style Guide
       x-cli-cmd-group: styleguides
   "/projects/{projectId}/styleguides/{styleGuideId}/download":
     get:
-      description: Download a style guide
+      description: Download a previously uploaded style guide file.
       operationId: downloadStyleGuide
       parameters:
         - description: Project ID
@@ -4297,8 +5387,9 @@ paths:
           description: Response for strings and their translations
       summary: Deprecated. Use /projects/{projectId}/strings instead.
       tags:
-        - Translations
+        - Strings
       x-cli-cmd-group: translations
+    x-internal: true
   "/projects/{projectId}/translations/{language}":
     get:
       deprecated: true
@@ -4326,8 +5417,9 @@ paths:
           description: Response for strings and their translations
       summary: Deprecated. use /projects/{projectId}/strings/{language} instead.
       tags:
-        - Translations
+        - Strings
       x-cli-cmd-group: translations
+    x-internal: true
   "/projects/{projectId}/vendors":
     get:
       description: Get a list of vendors.
@@ -4364,8 +5456,35 @@ paths:
         - Project
       x-cli-cmd-group: projects
     x-internal: true
+  /reports/filter:
+    post:
+      operationId: getFilterContents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilterDates"
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FilterContents"
+          description: Filter contents
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: UserNotFound
+      summary: Returns available options for selected timeframe.
+      tags:
+        - Report
+      x-cli-cmd-group: reports
   /reports/language-pairs:
     post:
+      description: View translation reports for each language pair with translations under your account. You can view company-wide language pairs if you have the user permission.
       operationId: getLanguagePairsReport
       requestBody:
         content:
@@ -4386,12 +5505,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Returns a report of language pairs.
+      summary: Language pairs report
       tags:
         - Report
       x-cli-cmd-group: reports
   /reports/projects:
     post:
+      description: View projects under your account, with advanced filtering. You can view company-wide projects if you have the user permission.
       operationId: getProjectsReport
       requestBody:
         content:
@@ -4412,12 +5532,38 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Returns a report of corporate account users.
+      summary: Projects report
       tags:
         - Report
       x-cli-cmd-group: reports
+  /reports/qa:
+    post:
+      description: Generate a QA report for given filter
+      operationId: generateQAReport
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QaFilter"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QaWarnings"
+          description: List of QA entries
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: MissingParameter
+      summary: Generate a QA report for given filter
+      tags:
+        - Report
   /reports/users:
     post:
+      description: View translation reports for each user under your company account. You need the permission to view users in your company.
       operationId: getUsersReport
       requestBody:
         content:
@@ -4438,7 +5584,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Returns a report of corporate account users.
+      summary: Company users report
       tags:
         - Report
       x-cli-cmd-group: reports
@@ -4468,9 +5614,10 @@ paths:
     x-internal: true
   /responsivity:
     get:
+      description: View your statistical analysis of responsiveness to our translation projects, invitations, notifications and such.
       operationId: getResponsivity
       parameters:
-        - description: Period for calcualtion.
+        - description: Time period to calculate your responsiveness
           in: query
           name: period
           schema:
@@ -4498,12 +5645,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Returns your vendor responsivity stats
+      summary: View your vendor responsiveness
       tags:
         - User
       x-cli-cmd-group: users
   /search:
     get:
+      description: Search through everything in your account, from projects to documents, from source strings to translations...
       operationId: searchEverywhere
       parameters:
         - description: Search query term
@@ -4545,7 +5693,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/SearchEverywhereResult"
           description: Search result for multiple entities and paging
-      summary: Search everywhere! Including projects, documents, translations...
+      summary: Search everything in your account
       tags:
         - Search
       x-cli-cmd-group: search
@@ -4588,6 +5736,7 @@ paths:
     x-internal: true
   /stats:
     get:
+      description: View your client and vendor statistics.
       operationId: getStats
       responses:
         "200":
@@ -4595,14 +5744,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Stats"
-          description: User stats for client and vendors
+          description: Client and vendor statistics for your account
         "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Returns your client and vendor statistics. This used to be called "summary" (\@deprecated).
+      summary: View your account statistics
       tags:
         - User
       x-cli-cmd-group: users
@@ -4661,14 +5810,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PopularLanguagePairs"
-          description: User's most ordered language pairs
+          description: Your most ordered language pairs
         "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Returns the language pairs that you have ordered most.
+      summary: View your popular language pairs
       tags:
         - Stats
       x-cli-cmd-group: stats
@@ -4681,14 +5830,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ClientProjectStats"
-          description: User stats for client and vendors
+          description: Project statistics for your account
         "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Returns your project statistics.
+      summary: View your project statistics
       tags:
         - Stats
       x-cli-cmd-group: stats
@@ -4701,19 +5850,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ClientStringStats"
-          description: User stats for client and vendors
+          description: Translation statistics for your account
         "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Returns your string statistics.
+      summary: View your translation statistics
       tags:
         - Stats
       x-cli-cmd-group: stats
   /strings:
     get:
+      description: Get a list of all strings and their translations under your account, from all projects. This is your MotaWord translation memory. If you have the related permission, this endpoint will also return strings from your company account.
       operationId: getStrings
       parameters:
         - description: Source Language Code
@@ -4737,28 +5887,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/ClientStrings"
           description: List of strings in JSON
-      summary: Get a list of client/corporate strings (20 per page)
+      summary: View account strings (translation memory)
       tags:
         - Strings
       x-cli-cmd-group: strings
     post:
+      deprecated: true
+      description: Deprecated, use instant translation mechanism for continuous projects.
       operationId: postStrings
       requestBody:
         content:
           application/json:
             schema:
-              properties:
-                contents:
-                  items:
-                    type: string
-                  type: array
-                source_language:
-                  type: string
-                target_languages:
-                  items:
-                    type: string
-                  type: array
-              type: object
+              $ref: "#/components/schemas/DeprecatedStringTranslationContent"
       responses:
         "200":
           content:
@@ -4770,8 +5911,9 @@ paths:
       tags:
         - Strings
       x-cli-cmd-group: strings
+      x-internal: true
     put:
-      description: Update a translation by adding a new translation memory unit item
+      description: Update the translation of a string from your account strings/translation memory.
       operationId: updateTranslationMemoryUnit
       requestBody:
         content:
@@ -4780,18 +5922,35 @@ paths:
               $ref: "#/components/schemas/TranslationMemoryUnit"
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
           description: Translation updated by adding new translation memory unit
         "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Corporate id, source language, target language, source string or target string is not provided
         "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Source language or target language is not found
         "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Something went wrong and translation unit is not updated
-      summary: Update translation
+      summary: Update string translation
       tags:
         - Strings
   "/strings/{languageCode}/package":
     post:
+      description: Package and download account translation memory in TMX format. If you have the related permission, this will also download your company translation memory.
       operationId: packageUserTranslationMemory
       parameters:
         - description: Source Language Code
@@ -4825,12 +5984,13 @@ paths:
                 format: binary
                 type: string
           description: Response in TMX or async request
-      summary: Get the translation memory of a client or corporate in TMX format
+      summary: Download account translation memory
       tags:
         - Strings
       x-cli-cmd-group: strings
   "/strings/{languageCode}/package/status":
     get:
+      description: Check translation memory packaging status for async packaging requests, using the key returned from strings/package call.
       operationId: packageUserTranslationMemoryForLanguageStatus
       parameters:
         - description: Language Code
@@ -4852,13 +6012,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/AsyncOperationStatus"
           description: Async operation status. Use the key to query status of this operation.
-      summary: If package call was async, check the status of the request
+      summary: Check account translation memory packaging status
       tags:
         - Strings
       x-cli-cmd-group: strings
   /styleguide:
     get:
-      description: Download your corporate account's global style guide. This endpoint is available only for corporate account customers.
+      description: Download your account's global style guide. This endpoint is available only for corporate account customers. This style guide will be automatically attached to each new project under your account.
       operationId: downloadGlobalStyleGuide
       responses:
         "200":
@@ -4873,26 +6033,21 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: StyleGuideNotFound
-      summary: Download the global style guide.
+      summary: Download account style guide
       tags:
         - Style Guide
       x-cli-cmd-group: styleguides
     post:
-      description: Update your corporate account's global style guide. This endpoint is available only for corporate account customers.
+      description: Update your corporate account's global style guide. This endpoint is available only for corporate account customers. This style guide will be automatically attached to each new project under your account.
       operationId: updateGlobalStyleGuide
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountStyleGuideUploadRequest"
           multipart/form-data:
             schema:
-              properties:
-                styleguide:
-                  description: |
-                    Style guide file. Currently supported formats: .pdf, .docx, .txt
-                  format: binary
-                  type: string
-              required:
-                - styleguide
-              type: object
+              $ref: "#/components/schemas/AccountStyleGuideUploadRequest"
       responses:
         "200":
           content:
@@ -4912,58 +6067,115 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UnsupportedStyleGuideFormat
-      summary: Create or update the global style guide.
+      summary: Create or update the account style guide
       tags:
         - Style Guide
       x-cli-cmd-group: styleguides
-  /swagger:
+  "/surveys/{scope}/{type}":
     get:
-      description: Get Swagger JSON
-      operationId: getSwaggerJson
+      description: Get survey questions in given scope and type
+      operationId: getQuestions
+      parameters:
+        - description: Scope
+          in: path
+          name: scope
+          required: true
+          schema:
+            type: string
+        - description: Type
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: Project ID
+          in: query
+          name: attach_answers_for_project
+          required: false
+          schema:
+            format: int64
+            type: integer
       responses:
         "200":
           content:
             application/json:
               schema:
-                type: object
-          description: Swagger JSON
-      summary: Get Swagger JSON
+                $ref: "#/components/schemas/SurveyQuestions"
+          description: Survey Questions
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: SurveyQuestionsNotFound
+      summary: Get survey questions in given scope and type
+      tags:
+        - Surveys
+    post:
+      description: Post survey answers for scope and type
+      operationId: submitAnswers
+      parameters:
+        - description: Scope
+          in: path
+          name: scope
+          required: true
+          schema:
+            type: string
+        - description: Type
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SurveyAnswers"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Survey Answers
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: FailedToSubmitSurveyAnswers
+      summary: Post survey answers for scope and type
+      tags:
+        - Surveys
+  /swagger:
+    get:
+      description: Get Swagger YAML
+      operationId: getSwaggerYaml
+      responses:
+        "200":
+          content:
+            text/yaml:
+              schema:
+                type: string
+          description: Swagger YAML
+      summary: OpenAPI YAML representation of our API
       tags:
         - Static
       x-cli-cmd-group: static
   /token:
     post:
       description: |
-        MotaWord API is using OAuth2 procedures when authenticating or authorizing your API call. Currently, we only allow Client Credential type flow.
+        MotaWord API is using OAuth2 procedures when authenticating or authorizing your API call.
       operationId: getAccessToken
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TokenRequest"
           multipart/form-data:
             schema:
-              properties:
-                grant_type:
-                  description: OAuth2 grant type. Supports 'client_credentials', 'password' or 'refresh_token', 'user_id' available.
-                  type: string
-                password:
-                  description: MW Account password (to be used in password grant type)
-                  type: string
-                refresh_token:
-                  description: Refresh token value for refresh token flow.
-                  type: string
-                scope:
-                  description: Authorization scope. Use 'privileged' for private endpoints.
-                  type: string
-                user_id:
-                  description: Value for user_id grant type flow.
-                  format: int64
-                  type: integer
-                username:
-                  description: MW Account email (to be used in password grant type)
-                  type: string
-              required:
-                - grant_type
-                - scope
-              type: object
+              $ref: "#/components/schemas/TokenRequest"
       responses:
         "200":
           content:
@@ -4979,12 +6191,13 @@ paths:
           description: Authentication error - for vendor auth, it will also fail if their account is not approved yet. In that case, the error response will include "account_status" key.
       security:
         - basicAuth: []
-      summary: Retrieve an access token to interact with the API.
+      summary: Retrieve an access token
       tags:
         - Auth
       x-cli-cmd-group: auth
   /unfreeze-account:
     post:
+      description: Reactive your account to start receiving notifications.
       operationId: unfreezeAccount
       responses:
         "200":
@@ -5001,12 +6214,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: Unfreeze requester account for project notifications
+      summary: Defreeze your account
       tags:
         - User
       x-cli-cmd-group: users
   /user-groups:
     get:
+      description: View the user groups that your user account belongs to. This is typically configured by your account administator's dashboard.
       operationId: getUserGroups
       responses:
         "200":
@@ -5015,7 +6229,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/UserGroupList"
           description: List of user groups
-      summary: Returns a list of user groups that this user belongs to.
+      summary: View your user groups
       tags:
         - User
       x-cli-cmd-group: users
@@ -5052,6 +6266,11 @@ paths:
           required: false
           schema:
             type: string
+        - in: query
+          name: email
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -5060,6 +6279,33 @@ paths:
                 $ref: "#/components/schemas/UserList"
           description: User list
       summary: Get a list of platform users
+      tags:
+        - User
+      x-cli-cmd-group: users
+    post:
+      description: Create a new platform user
+      operationId: createUser
+      parameters:
+        - description: Send a welcome email to the user
+          in: query
+          name: notify
+          required: false
+          schema:
+            default: 1
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: Created user
+      summary: Create a new user
       tags:
         - User
       x-cli-cmd-group: users
@@ -5096,6 +6342,52 @@ paths:
         - Vendor
       x-cli-cmd-group: vendors
     x-internal: true
+  /users/filter:
+    post:
+      description: Get a list of vendors available for the criteria given
+      operationId: getFilteredVendors
+      parameters:
+        - description: The page number
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+        - description: The number of items per page
+          in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+        - description: The field to order the results by
+          in: query
+          name: order_by
+          required: false
+          schema:
+            type: string
+        - description: The order to sort the results by (ascending or descending)
+          in: query
+          name: order
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilterVendorRequest"
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserList"
+          description: Successful response User List
+      summary: Filter vendors based on provided parameters
+      tags:
+        - User
+      x-cli-cmd-group: users
   /users/send-password-reminder:
     post:
       operationId: sendPasswordReminder
@@ -5122,6 +6414,23 @@ paths:
         - User
       x-cli-cmd-group: users
     x-internal: true
+  /users/tags:
+    get:
+      description: Returns all vendor tags for vendors filter
+      operationId: getAllVendorTags
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/VendorTag"
+                type: array
+          description: Successful response tag list
+      summary: Returns all vendor tags for vendors filter
+      tags:
+        - User
+      x-cli-cmd-group: users
   "/{userId}":
     get:
       operationId: getUser
@@ -5552,6 +6861,7 @@ paths:
     x-internal: true
   "/{userId}/payment":
     get:
+      description: Returns billing and saved credit card information for user, and their corporate account if present & allowed.
       operationId: getUserPaymentInfo
       parameters:
         - description: User ID
@@ -5574,11 +6884,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: UserNotFound UnauthorizedUser
-      summary: Get user payment Info
+      summary: View user's payment and billing info
       tags:
         - User
       x-cli-cmd-group: users
     post:
+      description: Update user's billing and saved credit card information
       operationId: updateUserPaymentInfo
       parameters:
         - description: User ID
@@ -5647,16 +6958,12 @@ paths:
             type: integer
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProfilePictureUpload"
           multipart/form-data:
             schema:
-              properties:
-                profile_picture:
-                  description: Profile picture file contents. Accepted extensions are png, jpg.
-                  format: binary
-                  type: string
-              required:
-                - profile_picture
-              type: object
+              $ref: "#/components/schemas/ProfilePictureUpload"
       responses:
         "200":
           content:
@@ -5988,11 +7295,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                reason:
-                  description: Suspension reason for vendor
-                  type: string
-              type: object
+              $ref: "#/components/schemas/SuspendUserRequest"
       responses:
         "200":
           content:
@@ -6066,14 +7369,78 @@ paths:
       tags:
         - User
       x-cli-cmd-group: users
+    post:
+      operationId: updateUserGroup
+      parameters:
+        - description: User ID
+          in: path
+          name: userId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActiveWidget"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserGroupList"
+          description: List of user groups
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: InvalidParameter
+      security:
+        - mwoAuth:
+            - privileged
+      tags:
+        - User
+      x-cli-cmd-group: users
     x-internal: true
 components:
   schemas:
+    AccountGlossaryUploadRequest:
+      properties:
+        glossary:
+          description: "Glossary file. Currently supported formats: .xlsx, .tbx"
+          format: binary
+          type: string
+      required:
+        - glossary
+      type: object
+    AccountStyleGuideUploadRequest:
+      properties:
+        styleguide:
+          description: "Style guide file. Currently supported formats: .pdf, .docx, .txt"
+          format: binary
+          type: string
+      required:
+        - styleguide
+      type: object
     ActiveWidget:
       properties:
+        allow_hash_in_url:
+          description: When true, hash params are included in filenames. When false, params are ignored.
+          type: boolean
+        allow_query_in_url:
+          description: When true, query params are included in filenames. When false, params are ignored.
+          type: boolean
+        auto_detect_source_language:
+          description: When true, we will ignore the source language of your project and try to automatically detect the source language of the given content. This is especially useful in environments with unpredictable source contents, such as a chat environment.
+          type: boolean
         created_at:
           description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
           format: date-time
+          type: string
+        elements:
+          description: Continuous project exclusive elements and rules
           type: string
         follow_user:
           description: Specify whether we should follow the user around in your website and automatically translate pages.
@@ -6084,14 +7451,45 @@ components:
         id:
           format: int64
           type: integer
+        language_mappings:
+          description: Continuous project language mappings
+          type: string
+        live:
+          description: Whether ActiveJS should be considered live in an embedded site. Use `false` if you are still testing Active. Go to your Active dashboard and follow links to your website to actually test Active.
+          type: boolean
         modify_links:
           description: We can automatically localize the same-domain URLs in your page. The way we localize the URL depends on urlMode configuration. We can either add/update the locale query parameter, or add/update the path of the URL.
           type: boolean
         name:
           type: string
+        optimize_per_page:
+          description: When true, Active ecosystem will optimize the script and data flows per page, rather than per project. This decreases the bandwidth usage per script, but makes translation publishing more complex and script serving per-page.
+          type: boolean
+        pages:
+          description: Continuous project page rules
+          type: string
+        path_regex:
+          description: Custom regex for path-type URL mode.
+          type: string
         position:
           description: Options are "bottom-left", "bottom-right", "in-place"
           type: string
+        query_name:
+          default: locale
+          description: Query parameter name to be used with query-type URL mode. Default is 'locale'.
+          type: string
+        reboot_on_url_change:
+          description: When true, Active ecosystem reboots itself when url changes.
+          type: boolean
+        restricted_domains:
+          description: JSON string for a list of domains that this widget's API interactions are limited to.
+          type: string
+        sections:
+          description: Continuous project section rules
+          type: string
+        test_mode:
+          description: Is the Active Widget in test mode? This changes a couple behaviors in the widget to make it easier for you to test and develop your Active integration.
+          type: boolean
         theme:
           description: \"light\", \"dark\" OR custom JSON.
           type: string
@@ -6110,6 +7508,9 @@ components:
         use_dummy_translations:
           description: When enabled, we will translate your website with dummy content, rather than actually using MT/TM.
           type: boolean
+        variables:
+          description: Continuous project variable definitions
+          type: string
       type: object
     ActiveWidgetList:
       properties:
@@ -6165,6 +7566,11 @@ components:
           type: array
         meta:
           $ref: "#/components/schemas/PagingMeta"
+      type: object
+    AddOrUpdateDocumentRequest:
+      properties:
+        document:
+          $ref: "#/components/schemas/FileAsData"
       type: object
     Address:
       properties:
@@ -6316,6 +7722,12 @@ components:
         meta:
           $ref: "#/components/schemas/PagingMeta"
       type: object
+    CM:
+      properties:
+        user_id:
+          format: int64
+          type: integer
+      type: object
     CallbackResult:
       properties:
         data:
@@ -6327,6 +7739,12 @@ components:
           $ref: "#/components/schemas/ProjectStatus"
         url:
           description: The URL that received the callback.
+          type: string
+      type: object
+    CancelProjectRequest:
+      properties:
+        reason:
+          description: Cancellation reason
           type: string
       type: object
     ClientProfile:
@@ -6536,6 +7954,8 @@ components:
           type: integer
         links:
           $ref: "#/components/schemas/CommentLinks"
+      required:
+        - comment
       type: object
     CommentLinks:
       allOf:
@@ -6613,9 +8033,18 @@ components:
           type: integer
         is_enabled:
           type: boolean
+        last_activity_at:
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          format: date-time
+          type: string
+        links:
+          $ref: "#/components/schemas/ContinuousProjectLinks"
         mt_enabled:
           description: Immediately apply MT on translation requests if they are missing from TM.
           type: boolean
+        mt_engine:
+          description: One of "MOTAWORD", "GOOGLE", "AMAZON", "MS". Default is "MOTAWORD".
+          type: string
         name:
           type: string
         postedit_enabled:
@@ -6623,6 +8052,11 @@ components:
           type: boolean
         source_language:
           type: string
+        status:
+          description: One of "a => ACTIVE", "i => INACTIVE", "d => DELETED", "c => SCHEDULED CANCELLATION", "p => SCHEDULED CHANGE"
+          type: string
+        subscription:
+          $ref: "#/components/schemas/Subscription"
         target_languages:
           items:
             type: string
@@ -6630,6 +8064,88 @@ components:
         type:
           description: Continuous project type. We currently have only 2 types, NULL and "active".
           type: string
+        word_count:
+          format: int64
+          type: integer
+      type: object
+    ContinuousProjectCache:
+      description: Continuous project cache for translations per target language.
+      properties:
+        meta:
+          $ref: "#/components/schemas/PagingMeta"
+        translations:
+          additionalProperties:
+            $ref: "#/components/schemas/ContinuousProjectLanguageCache"
+          type: object
+      type: object
+    ContinuousProjectCachedStrings:
+      additionalProperties:
+        type: string
+      description: source > target map of strings for translations
+      type: object
+    ContinuousProjectCosts:
+      properties:
+        mt:
+          $ref: "#/components/schemas/Monetary"
+        post_edit:
+          $ref: "#/components/schemas/Monetary"
+        saved:
+          $ref: "#/components/schemas/Monetary"
+        total:
+          $ref: "#/components/schemas/Monetary"
+      type: object
+    ContinuousProjectDocument:
+      properties:
+        billed_word_count:
+          format: int64
+          type: integer
+        id:
+          type: string
+        links:
+          $ref: "#/components/schemas/DocumentLinks"
+        name:
+          type: string
+        post_edit_enabled:
+          type: boolean
+        project_id:
+          type: string
+        source_language:
+          type: string
+        target_languages:
+          items:
+            type: string
+          type: array
+        word_count:
+          format: int64
+          type: integer
+      type: object
+    ContinuousProjectDocumentList:
+      properties:
+        documents:
+          items:
+            $ref: "#/components/schemas/ContinuousProjectDocument"
+          type: array
+        meta:
+          $ref: "#/components/schemas/PagingMeta"
+      type: object
+    ContinuousProjectDocumentProgressBody:
+      properties:
+        documentName:
+          type: string
+        filterByLanguage:
+          type: string
+      type: object
+    ContinuousProjectDocumentStringsBody:
+      properties:
+        documentName:
+          type: string
+      type: object
+    ContinuousProjectInvoices:
+      properties:
+        invoices:
+          items:
+            $ref: "#/components/schemas/Invoice"
+          type: array
       type: object
     ContinuousProjectLanguage:
       properties:
@@ -6637,6 +8153,35 @@ components:
           type: string
         is_enabled:
           type: boolean
+      type: object
+    ContinuousProjectLanguageCache:
+      description: TM, MT and Nonparsed cache list for translations
+      properties:
+        mt:
+          $ref: "#/components/schemas/ContinuousProjectCachedStrings"
+        nonparsed:
+          $ref: "#/components/schemas/ContinuousProjectCachedStrings"
+        tm:
+          $ref: "#/components/schemas/ContinuousProjectCachedStrings"
+      type: object
+    ContinuousProjectLinks:
+      allOf:
+        - $ref: "#/components/schemas/LinksMeta"
+        - properties:
+            editors:
+              additionalProperties:
+                $ref: "#/components/schemas/Href"
+                description: MotaWord editor link for this file, in this language code.
+              type: object
+          type: object
+    ContinuousProjectProgress:
+      properties:
+        costs:
+          $ref: "#/components/schemas/ContinuousProjectCosts"
+        progress:
+          $ref: "#/components/schemas/Progress"
+        word_counts:
+          $ref: "#/components/schemas/ContinuousProjectWordCounts"
       type: object
     ContinuousProjectUpdateContent:
       properties:
@@ -6656,6 +8201,18 @@ components:
           type: string
         postedit_enabled:
           type: boolean
+      type: object
+    ContinuousProjectWordCounts:
+      properties:
+        mt:
+          format: int64
+          type: integer
+        post_edit:
+          format: int64
+          type: integer
+        total:
+          format: int64
+          type: integer
       type: object
     ContinuousProjectsList:
       properties:
@@ -6693,8 +8250,47 @@ components:
         id:
           format: int64
           type: integer
+        is_default:
+          type: boolean
         payment_code:
           type: string
+      type: object
+    DeliveryPredictionInLanguage:
+      properties:
+        language:
+          type: string
+        late:
+          description: true for late, false for on-time delivery
+          type: boolean
+        probability:
+          format: float
+          type: number
+      type: object
+    DeliveryPredictionPayload:
+      properties:
+        projectId:
+          format: int64
+          type: integer
+      type: object
+    DeliveryPredictionResponse:
+      properties:
+        result:
+          items:
+            $ref: "#/components/schemas/DeliveryPredictionInLanguage"
+          type: array
+      type: object
+    DeprecatedStringTranslationContent:
+      properties:
+        contents:
+          items:
+            type: string
+          type: array
+        source_language:
+          type: string
+        target_languages:
+          items:
+            type: string
+          type: array
       type: object
     Document:
       properties:
@@ -6709,7 +8305,9 @@ components:
         links:
           $ref: "#/components/schemas/DocumentLinks"
         manual_files:
-          $ref: "#/components/schemas/ManualFiles"
+          items:
+            $ref: "#/components/schemas/ManualFile"
+          type: array
         name:
           type: string
         project_id:
@@ -6770,8 +8368,14 @@ components:
             preview-pdf-viewer:
               $ref: "#/components/schemas/Href"
               description: This is another version of preview-pdf, this time pointing to a preview viewer page on front application. This page requires authentication and comes with its own PDF viewer.
+            progress:
+              $ref: "#/components/schemas/Href"
+              description: Progress endpoint URL for this file
             project:
               $ref: "#/components/schemas/Href"
+            strings:
+              $ref: "#/components/schemas/Href"
+              description: Strings endpoint URL for this file
             thumbnail:
               $ref: "#/components/schemas/Href"
               description: Thumbnail preview URL of the document. If doc has a page structure, this is probably only the first page.
@@ -6785,6 +8389,39 @@ components:
         meta:
           $ref: "#/components/schemas/PagingMeta"
       type: object
+    DocumentSubjects:
+      properties:
+        name:
+          type: string
+      type: object
+    DocumentUpdates:
+      properties:
+        "documents[]":
+          description: You can add as many files as you want in documents[] parameter.
+          items:
+            format: binary
+            type: string
+          type: array
+        "schemes[]":
+          description: JSON string. If your documents have a scheme, as in cases of CSV files, use the same array index keys for `schemes` parameter to specify their schemes. See `Document Schemes` title in the API documentation.
+          type: string
+        "source-links[]":
+          description: When provided, we will download the files from these URLs, in addition to files provded in `documents` parameter and then save as source documents
+          items:
+            $ref: "#/components/schemas/LinkedSourceDocument"
+          type: array
+      type: object
+    DocumentUploadRequest:
+      properties:
+        documents:
+          description: Single file data. The name is plural to provide a consistent naming convention.
+          format: binary
+          type: string
+        schemes:
+          description: JSON string. If your documents have a scheme, as in cases of CSV files, use the same array index keys for `schemes` parameter to specify their schemes. See `Document Schemes` title in the API documentation.
+          type: string
+        source-link:
+          $ref: "#/components/schemas/LinkedSourceDocument"
     Earning:
       properties:
         amount:
@@ -6868,6 +8505,8 @@ components:
         fileId:
           format: int64
           type: integer
+        guid:
+          type: string
         projectId:
           format: int64
           type: integer
@@ -6881,6 +8520,217 @@ components:
           items:
             type: string
           type: array
+      type: object
+    FilterContents:
+      properties:
+        budget_codes:
+          items:
+            type: string
+          type: array
+        categories:
+          items:
+            type: string
+          type: array
+        clients:
+          items:
+            $ref: "#/components/schemas/SimpleModel"
+          type: array
+        documents:
+          items:
+            $ref: "#/components/schemas/SimpleModel"
+          type: array
+        projects:
+          items:
+            $ref: "#/components/schemas/SimpleModel"
+          type: array
+        severities:
+          items:
+            type: string
+          type: array
+        source_languages:
+          items:
+            type: string
+          type: array
+        subjects:
+          items:
+            type: string
+          type: array
+        target_languages:
+          items:
+            type: string
+          type: array
+        vendors:
+          items:
+            $ref: "#/components/schemas/SimpleModel"
+          type: array
+      type: object
+    FilterDates:
+      properties:
+        date_from:
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          format: date-time
+          type: string
+        date_to:
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          format: date-time
+          type: string
+      type: object
+    FilterVendorRequest:
+      properties:
+        clients:
+          items:
+            type: integer
+          type: array
+        communication_channel:
+          items:
+            type: string
+          type: array
+        corporate_ids_for_auth:
+          items:
+            type: integer
+          type: array
+        corporates:
+          items:
+            type: integer
+          type: array
+        country:
+          items:
+            type: string
+          type: array
+        created_at:
+          type: string
+        current_services:
+          items:
+            type: string
+          type: array
+        daily_proofreading_capacity:
+          type: integer
+        daily_translation_capacity:
+          type: integer
+        destination_languages:
+          items:
+            type: integer
+          type: array
+        dtp_software:
+          items:
+            type: string
+          type: array
+        email_address:
+          type: string
+        experience:
+          items:
+            type: string
+          type: array
+        first_name:
+          type: string
+        id:
+          items:
+            type: integer
+          type: array
+        is_certified_translator:
+          type: boolean
+        is_sworn_translator:
+          type: boolean
+        language_pairs:
+          items:
+            items:
+              type: integer
+            type: array
+          type: array
+        last_name:
+          type: string
+        last_online:
+          type: string
+        last_worked:
+          type: string
+        memoq:
+          type: integer
+        memsource:
+          type: integer
+        min_tqs:
+          type: number
+        omegat:
+          type: integer
+        project_count:
+          type: integer
+        proofreader_experience:
+          type: integer
+        provides_creative_writing_service:
+          type: boolean
+        provides_postedit_service:
+          type: boolean
+        quote_file_subjects:
+          items:
+            type: string
+          type: array
+        reference:
+          type: string
+        sdl_trados:
+          type: integer
+        search:
+          type: string
+        skype_id:
+          type: string
+        smartcat:
+          type: integer
+        smartling:
+          type: integer
+        source_languages:
+          items:
+            type: integer
+          type: array
+        specialization:
+          items:
+            type: string
+          type: array
+        status:
+          items:
+            type: string
+          type: array
+        subtitle_edit:
+          type: integer
+        subtitle_workshop:
+          type: integer
+        translator_association:
+          type: string
+        transsuite_2000:
+          type: integer
+        user_working_timezone:
+          items:
+            type: string
+          type: array
+        vendor_profile_lsp:
+          type: string
+        vendor_tags:
+          items:
+            type: string
+          type: array
+        vendor_type:
+          items:
+            type: string
+          type: array
+        vendor_working_timezone:
+          items:
+            type: string
+          type: array
+        word_count:
+          type: integer
+        wordbee:
+          type: integer
+        wordfast:
+          type: integer
+        work_type:
+          type: string
+        work_with:
+          type: string
+        working_as:
+          items:
+            type: string
+          type: array
+        xbench:
+          type: integer
+        xtm:
+          type: integer
       type: object
     Formats:
       properties:
@@ -6910,6 +8760,21 @@ components:
               type: array
           type: object
       type: object
+    GetQuotesForDocumentsBody:
+      properties:
+        files:
+          items:
+            format: int64
+            type: integer
+          type: array
+      type: object
+    GetQuotesForLanguagesBody:
+      properties:
+        languages:
+          items:
+            type: string
+          type: array
+      type: object
     Glossary:
       properties:
         id:
@@ -6933,6 +8798,15 @@ components:
         meta:
           $ref: "#/components/schemas/PagingMeta"
       type: object
+    GlossaryUploadRequest:
+      properties:
+        glossaries:
+          description: You can only add one glossary, even though the name suggests multiple glossaries. This may be updated in the future to support multiple glossaries.
+          format: binary
+          type: string
+      required:
+        - glossaries
+      type: object
     Href:
       properties:
         href:
@@ -6955,19 +8829,120 @@ components:
           description: a map of source file name > base64-encoded translated file.
           type: object
       type: object
+    InstantTranslationFilter:
+      properties:
+        skipMt:
+          items:
+            type: string
+          type: array
+        skipPostEdit:
+          items:
+            type: string
+          type: array
+      type: object
+    InstantTranslationRequest:
+      properties:
+        contents:
+          description: Simple list of strings to be translated. You can also choose to upload files instead of strings.
+          items:
+            type: string
+          type: array
+        documents:
+          description: You can add as many files as you want in documents parameter.
+          items:
+            $ref: "#/components/schemas/FileAsData"
+          type: array
+        filters:
+          $ref: "#/components/schemas/InstantTranslationFilter"
+        meta:
+          description: Free-form meta data to attach to your instant translation request. This can be used in statistics and analytical dashboards.
+          type: object
+      type: object
     InstantTranslationResult:
       oneOf:
         - $ref: "#/components/schemas/InstantContentsTranslationResult"
         - $ref: "#/components/schemas/InstantFilesTranslationResult"
+    IntegrationsToken:
+      properties:
+        token:
+          type: string
+    InvitedVendor:
+      properties:
+        action:
+          description: Action to be taken
+          type: string
+        email_open_rate:
+          description: Email opening rate of the vendor
+          type: number
+        is_entered:
+          description: Did the vendor enter the given project
+          type: boolean
+        is_get_paid:
+          description: Is vendor get ever paid?
+          type: boolean
+        is_worked:
+          description: Did the vendor work on the given project
+          type: boolean
+        is_worked_in_any_project:
+          description: Vendors working status in any project
+          type: boolean
+        last_project_date:
+          description: Last project date
+          format: date
+          type: string
+        project_status_when_interacted:
+          description: Project translation percentage when interacted with the vendor
+          type: number
+        registration_date:
+          description: Registration date
+          format: date
+          type: string
+        responsiveness:
+          description: Responsiveness of the vendor
+          type: number
+        user_id:
+          description: Id in the Users
+          format: int64
+          type: number
+        vendor_id:
+          description: Id in the Vendors
+          format: int64
+          type: number
+        vendor_name:
+          description: The name of the vendor
+          type: string
+        vendor_type:
+          description: Type of the vendor in the given project namely translator or proofreader
+          type: string
+      type: object
+    InvitedVendorsByLanguage:
+      properties:
+        invited_vendors:
+          description: Invited vendors for this target language
+          items:
+            $ref: "#/components/schemas/InvitedVendor"
+          type: array
+        target_language:
+          description: Target Language that the vendors invited for
+          type: string
+      type: object
     Invoice:
       properties:
         amount:
           description: Monetary amount
           format: float
           type: number
+        base_amount:
+          description: Monetary amount
+          format: float
+          type: number
+        base_currency:
+          default: usd
+          type: string
         billing:
           $ref: "#/components/schemas/BillingAddress"
         currency:
+          default: usd
           type: string
         id:
           format: int64
@@ -7124,10 +9099,6 @@ components:
           format: int64
           type: integer
       type: object
-    ManualFiles:
-      items:
-        $ref: "#/components/schemas/ManualFile"
-      type: array
     Monetary:
       properties:
         amount:
@@ -7135,6 +9106,49 @@ components:
           type: number
         currency:
           default: usd
+          type: string
+      type: object
+    NewProject:
+      properties:
+        callback_url:
+          description: Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
+          type: string
+        coupon_code:
+          description: Coupon code to redeem
+          type: string
+        custom:
+          description: Optional. This is a consistent custom data parameter that will be given to you in the response across every request of this project model. Values should be provided like this, custom[my_key] = my_value.
+          items:
+            type: string
+          type: array
+        "documents[]":
+          description: Optional. You can add as many files as you want in documents[] parameter. Or you add your documents later in separate calls.
+          format: binary
+          type: string
+        "glossaries[]":
+          description: Optional. Only one glossary is supported at the moment.
+          format: binary
+          type: string
+        source_language:
+          type: string
+        "styleguides[]":
+          description: Optional. You can add as many files as you want in styleguides[] parameter. Or you add your style guides later in separate calls.
+          format: binary
+          type: string
+        "target_languages[]":
+          items:
+            type: string
+          type: array
+      type: object
+    NewSalesActivity:
+      properties:
+        subject:
+          type: string
+        timestamp:
+          format: int64
+          type: integer
+        type:
+          description: Activity Type
           type: string
       type: object
     NotificationSubscription:
@@ -7205,6 +9219,9 @@ components:
       properties:
         paging:
           properties:
+            count:
+              format: int64
+              type: integer
             links:
               $ref: "#/components/schemas/PagingLinksMeta"
             page:
@@ -7220,6 +9237,28 @@ components:
               type: integer
           type: object
       type: object
+    PamMessage:
+      properties:
+        message:
+          description: the message to be sent
+          type: string
+        recipients:
+          description: name of the recipients in the channel
+          items:
+            type: string
+          type: array
+        slots:
+          description: contexts for next message
+          items:
+            type: string
+          type: array
+        thread_id:
+          description: id of the thread
+          type: string
+        thread_key:
+          description: the key for thread_id default is project
+          type: string
+      type: object
     PasswordUpdateContent:
       properties:
         password:
@@ -7232,6 +9271,10 @@ components:
           $ref: "#/components/schemas/BillingAddress"
         card:
           $ref: "#/components/schemas/CreditCard"
+        cards:
+          items:
+            $ref: "#/components/schemas/CreditCard"
+          type: array
         corporate:
           properties:
             allow_api_invoicing:
@@ -7270,6 +9313,84 @@ components:
             $ref: "#/components/schemas/LanguagePair"
           type: array
       type: object
+    ProfilePictureUpload:
+      properties:
+        profile_picture:
+          description: Profile picture file contents. Accepted extensions are png, jpg.
+          format: binary
+          type: string
+      required:
+        - profile_picture
+      type: object
+    ProfileSurvey:
+      properties:
+        current_services:
+          type: string
+        daily_proofreading_capacity:
+          type: string
+        daily_translation_capacity:
+          type: string
+        dtp_software:
+          type: string
+        experience:
+          type: string
+        is_certified_translator:
+          type: string
+        is_sworn_translator:
+          type: string
+        memoq:
+          type: string
+        memsource:
+          type: string
+        omegat:
+          type: string
+        proofreader_experience:
+          type: string
+        provides_creative_writing_service:
+          type: string
+        provides_postedit_service:
+          type: string
+        reference:
+          type: string
+        sdl_trados:
+          type: string
+        skype_id:
+          type: string
+        smartcat:
+          type: string
+        smartling:
+          type: string
+        software:
+          type: string
+        specialization:
+          type: string
+        subtitle_edit:
+          type: string
+        subtitle_workshop:
+          type: string
+        translator_association:
+          type: string
+        transsuite_2000:
+          type: string
+        vendor_profile_lsp:
+          type: string
+        wordbee:
+          type: string
+        wordfast:
+          type: string
+        work_type:
+          type: string
+        work_with:
+          type: string
+        working_as:
+          type: string
+        working_timezone:
+          type: string
+        xbench:
+          type: string
+        xtm:
+          type: string
+      type: object
     Progress:
       allOf:
         - properties:
@@ -7301,6 +9422,9 @@ components:
         translation:
           format: float
           type: number
+        word_count:
+          format: int64
+          type: integer
       type: object
     Project:
       properties:
@@ -7308,14 +9432,23 @@ components:
           additionalProperties:
             $ref: "#/components/schemas/LanguageScore"
           type: object
+          x-internal: true
         budget_code:
           type: string
         callback_url:
           description: Callback URL to notify when project status changed.
           type: string
+        can_pam_manage:
+          type: boolean
+          x-internal: true
         client:
           $ref: "#/components/schemas/User"
           description: User entity for Client. This is only given when project is requested with detailed=true
+        cm_id:
+          description: Assigned admin's id
+          format: int64
+          type: integer
+          x-internal: true
         completed_on:
           description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
           format: date-time
@@ -7343,22 +9476,39 @@ components:
           type: integer
         is_api_project:
           type: boolean
+          x-internal: true
         is_certified:
           type: boolean
         is_continuous:
           type: boolean
         is_manual:
           type: boolean
+          x-internal: true
         links:
           $ref: "#/components/schemas/ProjectLinks"
         pairs:
-          $ref: "#/components/schemas/VendorProjectPairs"
           description: Currently authed vendor's available working language pairs in this project. Includes rates per language pair. Includes complex pair logic such as bilingualism, project reverse pair enforcement etc.
+          items:
+            $ref: "#/components/schemas/VendorProjectPair"
+          type: array
+          x-internal: true
+        pivoted_projects:
+          description: Quote IDs of pivots
+          items:
+            format: int64
+            type: integer
+          type: array
         price:
           properties:
             amount:
               format: float
               type: number
+            base_amount:
+              format: float
+              type: number
+            base_currency:
+              default: usd
+              type: string
             currency:
               default: usd
               type: string
@@ -7372,6 +9522,12 @@ components:
             amount:
               format: float
               type: number
+            base_amount:
+              format: float
+              type: number
+            base_currency:
+              default: usd
+              type: string
             currency:
               default: usd
               type: string
@@ -7382,11 +9538,13 @@ components:
           type: object
         role:
           $ref: "#/components/schemas/VendorProjectRole"
+          x-internal: true
         should_send_client_survey:
           type: boolean
+          x-internal: true
         source:
           $ref: "#/components/schemas/ProjectSource"
-          descriptipon: The source platform where this project was first created. Current options are "api", "web".
+          description: The source platform where this project was first created. Current options are "api", "web".
         source_language:
           type: string
         status:
@@ -7402,6 +9560,7 @@ components:
         tms_name:
           description: TMS project name for this MW project. Requires privileged scope.
           type: string
+          x-internal: true
         valid_until:
           description: Unix epoch time. Available only if status is `pending`.
           format: int64
@@ -7409,7 +9568,54 @@ components:
         vendor_word_count:
           format: int64
           type: integer
+          x-internal: true
         word_count:
+          format: int64
+          type: integer
+        word_count_analysis:
+          properties:
+            base:
+              format: int64
+              type: number
+            duplicate:
+              format: int64
+              type: number
+            exclusion:
+              format: int64
+              type: number
+            final:
+              format: int64
+              type: number
+            tm:
+              format: int64
+              type: number
+          type: object
+      type: object
+    ProjectCompletionReport:
+      properties:
+        admin_user_id:
+          description: Assigned admin's user id
+          format: int64
+          type: number
+        completion_report_data:
+          items:
+            $ref: "#/components/schemas/InvitedVendorsByLanguage"
+          type: array
+        id:
+          description: internal id of the project
+          format: int64
+          type: number
+        quote_id:
+          description: quote id of the project
+          format: int64
+          type: number
+      type: object
+    ProjectId:
+      properties:
+        internal-id:
+          format: int64
+          type: integer
+        public-id:
           format: int64
           type: integer
       type: object
@@ -7453,6 +9659,36 @@ components:
             $ref: "#/components/schemas/Project"
           type: array
       type: object
+    ProjectPayment:
+      properties:
+        bin:
+          description: Last 4 digits of the credit card you are using one-time. This parameter is only required when stripe_token is provided.
+          type: string
+          x-internal: true
+        budget_code:
+          description: Optional with corporate accounts. Not available for others.
+          type: string
+        card_id:
+          description: Optional. `client`, `app`, `corporate_card` methods require a credit card ID. `credit` method requires Stripe token and bin.
+          format: int64
+          type: integer
+        payment_code:
+          description: Optional. `corporate` payment method requires this.s
+          type: string
+        payment_method:
+          description: Optional. Determines which method to use for payment. `client`, `app`, `corporate_card` methods require a credit card ID. `credit` method requires Stripe token and bin. `corporate` method follows corporate account policy automatically, either follows invoicing flow or automatically charges corporate's primary card.
+          enum:
+            - corporate
+            - client
+            - app
+            - credit
+            - corporate_card
+          type: string
+        stripe_token:
+          description: This is required if you are using a one-time credit card. This is the token generted from frontend via Stripe SDK. If you are using a one-time card with `stripe_token`, you must also provide `bin`, last 4 digits of the card.
+          type: string
+          x-internal: true
+      type: object
     ProjectSource:
       enum:
         - api
@@ -7483,6 +9719,26 @@ components:
           format: int64
           type: integer
       type: object
+    ProjectUpdate:
+      properties:
+        callback_url:
+          description: Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
+          type: string
+        coupon_code:
+          description: Coupon code to redeem
+          type: string
+        custom:
+          description: Optional. This is a consistent custom data parameter that will be given to you in the response across every request of this project model. Values should be provided like this, custom[my_key] = my_value. If you previously provided one, it will be replaced.
+          items:
+            type: string
+          type: array
+        source_language:
+          type: string
+        "target_languages[]":
+          items:
+            type: string
+          type: array
+      type: object
     ProofreaderWithLanguage:
       properties:
         full_name:
@@ -7499,11 +9755,123 @@ components:
           description: link to the vendor that can be only used in motaword admin application
           type: string
       type: object
+    QaEntry:
+      properties:
+        category:
+          type: string
+        comment:
+          type: string
+        docId:
+          type: string
+        editorLink:
+          type: string
+        end:
+          format: int64
+          type: integer
+        inSource:
+          type: boolean
+        isCurrent:
+          type: boolean
+        module:
+          type: string
+        projectId:
+          $ref: "#/components/schemas/SimpleModel"
+        severity:
+          type: string
+        source:
+          type: string
+        sourceLanguage:
+          $ref: "#/components/schemas/SimpleModel"
+        start:
+          format: int64
+          type: integer
+        state:
+          type: string
+        targetLanguage:
+          $ref: "#/components/schemas/SimpleModel"
+        translation:
+          type: string
+        uniqueKey:
+          type: string
+        vendor:
+          $ref: "#/components/schemas/SimpleModel"
+      type: object
+    QaFilter:
+      properties:
+        budget_codes:
+          items:
+            type: string
+          type: array
+        categories:
+          items:
+            type: string
+          type: array
+        clients:
+          items:
+            format: int64
+            type: number
+          type: array
+        date_from:
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          format: date-time
+          type: string
+        date_to:
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          format: date-time
+          type: string
+        documents:
+          items:
+            format: int64
+            type: number
+          type: array
+        projects:
+          items:
+            format: int64
+            type: number
+          type: array
+        severities:
+          items:
+            type: string
+          type: array
+        source_languages:
+          items:
+            type: string
+          type: array
+        subjects:
+          items:
+            type: string
+          type: array
+        target_languages:
+          items:
+            type: string
+          type: array
+        vendors:
+          items:
+            format: int64
+            type: number
+          type: array
+      type: object
+    QaWarnings:
+      properties:
+        report:
+          items:
+            $ref: "#/components/schemas/QaEntry"
+          type: array
+      type: object
     RegeneratePreviewResponse:
       properties:
         link:
           $ref: "#/components/schemas/Href"
         source:
+          type: string
+      type: object
+    ReportContent:
+      properties:
+        activity_type:
+          description: Activity Type
+          type: string
+        message:
+          description: Report Message
           type: string
       type: object
     ReportFilter:
@@ -7614,6 +9982,14 @@ components:
                 $ref: "#/components/schemas/StringInSearch"
               type: array
           type: object
+      type: object
+    SimpleModel:
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
       type: object
     SingleString:
       properties:
@@ -7738,6 +10114,119 @@ components:
             $ref: "#/components/schemas/StyleGuide"
           type: array
       type: object
+    StyleGuideUploadRequest:
+      properties:
+        styleguides:
+          description: You can only add one style guide, even though the name suggests multiple style guides. This may be updated in the future to support multiple style guides.
+          format: binary
+          type: string
+      required:
+        - styleguides
+      type: object
+    Subscription:
+      properties:
+        downgrade:
+          description: Stripe downgradable plan
+          items:
+            type: string
+          type: array
+        payment_method:
+          description: Stripe subscription plan payment card internal id
+          type: integer
+        period_end:
+          description: Stripe plan period end
+          format: date-time
+          type: string
+        plan_id:
+          description: Stripe subscription plan id
+          type: string
+        plan_name:
+          description: Stripe subscription plan name
+          type: string
+        price:
+          description: Stripe plan price
+          type: string
+        products:
+          items: {}
+          type: array
+        schedule_name:
+          description: Stripe Scheduled plan period end
+          type: string
+        schedule_start:
+          description: Stripe Scheduled start date
+          format: date-time
+          type: string
+        subscription_id:
+          description: Stripe subscription id for this project
+          type: string
+        upgrade:
+          description: Stripe upgradable plan
+          items:
+            type: string
+          type: array
+        withTrial:
+          description: Stripe plan trial
+          format: boolean
+      type: object
+    SurveyAnswer:
+      properties:
+        answer:
+          type: string
+        project_id:
+          format: int64
+          type: integer
+        question_answer_id:
+          format: int64
+          type: integer
+        question_id:
+          format: int64
+          type: integer
+        user_id:
+          format: int64
+          type: integer
+      type: object
+    SurveyAnswers:
+      properties:
+        answers:
+          items:
+            $ref: "#/components/schemas/SurveyAnswer"
+          type: array
+      type: object
+    SurveyQuestion:
+      properties:
+        answers:
+          items:
+            $ref: "#/components/schemas/SimpleModel"
+          type: array
+        question:
+          properties:
+            enabled:
+              type: boolean
+            format:
+              type: string
+            id:
+              format: int64
+              type: integer
+            question:
+              type: string
+            text:
+              type: string
+          type: object
+        question_answers:
+          items:
+            $ref: "#/components/schemas/SimpleModel"
+          type: array
+      type: object
+    SurveyQuestions:
+      items:
+        $ref: "#/components/schemas/SurveyQuestion"
+      type: array
+    SuspendUserRequest:
+      properties:
+        reason:
+          description: Suspension reason for vendor
+          type: string
+      type: object
     Tag:
       type: string
     Token:
@@ -7773,6 +10262,34 @@ components:
                 - course
               type: string
           type: object
+    TokenRequest:
+      properties:
+        grant_type:
+          description: OAuth2 grant type. Supports 'client_credentials', 'password', 'refresh_token' or 'user_id'.
+          type: string
+          x-public-description: OAuth2 grant type. We publicly support 'client_credentials' or 'refresh_token' grant types, while other strategies are also possible but not allowed regularly.
+        password:
+          description: MW Account password (to be used in password grant type)
+          type: string
+          x-internal: true
+        refresh_token:
+          description: Refresh token value for refresh token flow.
+          type: string
+        scope:
+          description: Authorization scope. Use 'privileged' for private endpoints.
+          type: string
+        user_id:
+          description: Value for user_id grant type flow.
+          format: int64
+          type: integer
+          x-internal: true
+        username:
+          description: MW Account email (to be used in password grant type)
+          type: string
+          x-internal: true
+      required:
+        - grant_type
+        - scope
     TranslationMemoryUnit:
       properties:
         sourceLanguage:
@@ -7825,9 +10342,11 @@ components:
       properties:
         billing:
           $ref: "#/components/schemas/BillingAddress"
+          x-internal: true
         birthday:
           format: date
           type: string
+          x-internal: true
         can_work_manual_files:
           deprecated: true
           description: \@deprecated. use `vendor` key
@@ -7836,12 +10355,14 @@ components:
           deprecated: true
           description: \@deprecated. use mailing or billing key.
           type: string
+          x-internal: true
         client:
           properties:
             corporate:
               properties:
                 email:
                   type: string
+                  x-internal: true
                 id:
                   format: int64
                   type: integer
@@ -7849,6 +10370,9 @@ components:
                   type: string
                 name:
                   type: string
+                phone_number:
+                  type: string
+                  x-internal: true
               type: object
             nps:
               format: float
@@ -7866,6 +10390,7 @@ components:
           deprecated: true
           description: \@deprecated. use mailing or billing key.
           type: string
+          x-internal: true
         created_at:
           description: Unix epoch time
           format: int64
@@ -7874,6 +10399,7 @@ components:
           type: boolean
         email:
           type: string
+          x-internal: true
         first_name:
           type: string
         has_pwd:
@@ -7891,8 +10417,10 @@ components:
           type: boolean
         is_prospect:
           type: boolean
+          x-internal: true
         is_sales_person:
           type: boolean
+          x-internal: true
         is_vendor:
           type: boolean
         language_pairs:
@@ -7914,6 +10442,7 @@ components:
           type: string
         mailing:
           $ref: "#/components/schemas/Address"
+          x-internal: true
         name:
           type: string
         native_language:
@@ -7925,28 +10454,34 @@ components:
           description: \@deprecated. use /stats endpoint for the current nps value.
           format: float
           type: number
+          x-internal: true
         phone_number:
           type: string
+          x-internal: true
         profile_picture_path:
           type: string
         social_media:
           $ref: "#/components/schemas/SocialMedia"
+          x-internal: true
         state:
           deprecated: true
           description: \@deprecated. use mailing or billing key.
           type: string
+          x-internal: true
         status:
           type: string
         street:
           deprecated: true
           description: \@deprecated. use mailing or billing key.
           type: string
+          x-internal: true
         timezone:
           type: string
         tms_user_name:
           deprecated: true
           description: \@deprecated. use `vendor` key
           type: string
+          x-internal: true
         user_groups:
           items:
             $ref: "#/components/schemas/UserGroup"
@@ -7955,6 +10490,9 @@ components:
           properties:
             can_work_manual_files:
               type: boolean
+            email_open_rate:
+              format: float
+              type: number
             is_frozen:
               type: boolean
             is_proofreader:
@@ -7966,21 +10504,35 @@ components:
             native_language:
               description: Native language of user
               type: string
+            pam_tqs:
+              format: float
+              type: number
             paypal_email:
               type: string
+              x-internal: true
+            profile_survey:
+              $ref: "#/components/schemas/ProfileSurvey"
+              description: Vendor Profile Survey answers
+              type: object
             require_1099:
               type: boolean
+              x-internal: true
             tags:
               items:
                 $ref: "#/components/schemas/Tag"
               type: array
+              x-internal: true
             tms_user_name:
+              type: string
+              x-internal: true
+            vendor_type:
               type: string
           type: object
         zip_code:
           deprecated: true
           description: \@deprecated. use mailing or billing key. new key name is "zip".
           type: string
+          x-internal: true
       type: object
     UserGroup:
       properties:
@@ -8010,6 +10562,9 @@ components:
       allOf:
         - $ref: "#/components/schemas/LinksMeta"
         - properties:
+            login_as:
+              $ref: "#/components/schemas/Href"
+              description: Exculusive users only
             projects:
               $ref: "#/components/schemas/Href"
               description: client users only
@@ -8081,6 +10636,8 @@ components:
         report:
           items:
             properties:
+              currency:
+                type: string
               spending:
                 format: float
                 type: number
@@ -8129,15 +10686,12 @@ components:
           format: float
           type: number
       type: object
-    VendorProjectPairs:
-      items:
-        $ref: "#/components/schemas/VendorProjectPair"
-      type: array
     VendorProjectRole:
       description: Currently authed vendor's role in this project. If vendor has already joined, this contains the role they joined the project with. If not joined yet, this is the role that they can join the project with.
       enum:
         - translator
         - proofreader
+        - both
       type: string
     VendorProjectStats:
       properties:
@@ -8163,6 +10717,13 @@ components:
         words:
           $ref: "#/components/schemas/VendorWordStats"
       type: object
+    VendorTag:
+      properties:
+        color:
+          type: string
+        name:
+          type: string
+      type: object
     VendorWithNeeds:
       properties:
         matchedNeeds:
@@ -8183,6 +10744,12 @@ components:
           description: total number of words that this user has translated so far.
           format: int64
           type: integer
+      type: object
+    Webhook:
+      properties:
+        callback_url:
+          description: Webhook URL. We will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
+          type: string
       type: object
   securitySchemes:
     basicAuth:

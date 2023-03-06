@@ -15,6 +15,8 @@ info:
       version: "3.0"
   x-providerName: apigee.net
   x-serviceName: marketcheck-cars
+security:
+  - authorizeEndpoint: []
 paths:
   /car/dealer/inventory/active:
     get:
@@ -39,6 +41,7 @@ paths:
         - $ref: "#/components/parameters/car_car_type"
         - $ref: "#/components/parameters/carfax_1_owner"
         - $ref: "#/components/parameters/carfax_clean_title"
+        - $ref: "#/components/parameters/year_range"
         - $ref: "#/components/parameters/year"
         - $ref: "#/components/parameters/make"
         - $ref: "#/components/parameters/model"
@@ -100,6 +103,7 @@ paths:
         - $ref: "#/components/parameters/fuel_type"
         - $ref: "#/components/parameters/dealer_type"
         - $ref: "#/components/parameters/photo_links"
+        - $ref: "#/components/parameters/photo_links_cached"
         - $ref: "#/components/parameters/stock_no"
         - $ref: "#/components/parameters/last_seen_range"
         - $ref: "#/components/parameters/first_seen_range"
@@ -110,6 +114,13 @@ paths:
         - $ref: "#/components/parameters/first_seen_at_source_days"
         - $ref: "#/components/parameters/first_seen_at_mc_days"
         - $ref: "#/components/parameters/include_relevant_links"
+        - $ref: "#/components/parameters/inventory_count_range"
+        - $ref: "#/components/parameters/in_transit"
+        - $ref: "#/components/parameters/seating_capacity"
+        - $ref: "#/components/parameters/engine_size_range"
+        - $ref: "#/components/parameters/powertrain_type"
+        - $ref: "#/components/parameters/min_photo_links"
+        - $ref: "#/components/parameters/min_photo_links_cached"
       responses:
         "200":
           content:
@@ -158,6 +169,73 @@ paths:
       tags:
         - Recall Search
     x-swagger-router-controller: history
+  /client/configure/get:
+    get:
+      description: get client filters
+      operationId: get
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - description: To filter listing on Country in which they are listed
+          in: query
+          name: country
+          required: true
+          schema:
+            enum:
+              - US
+              - CA
+              - UK
+            type: string
+      responses:
+        "200":
+          content:
+            text/csv:
+              examples:
+                response:
+                  value: |-
+                    rule_type,field,value,factor
+                    exclude,source,arnoldclark.com,
+          description: Successfully get client filters
+      summary: get client filters
+      tags:
+        - client filters
+    x-swagger-router-controller: client_filters
+  /client/configure/set:
+    post:
+      description: set client filters
+      operationId: set
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - description: To filter listing on Country in which they are listed
+          in: query
+          name: country
+          required: true
+          schema:
+            enum:
+              - US
+              - CA
+              - UK
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                csvfile:
+                  description: csv file with filters
+                  format: binary
+                  type: string
+                  x-mimetype: text/csv
+              required:
+                - csvfile
+              type: object
+        required: true
+      responses:
+        "200":
+          description: Successfully set client filters
+      summary: set client filters
+      tags:
+        - client filters
+    x-swagger-router-controller: client_filters
   "/crm_check/car/{vin}":
     get:
       description: Check whether particular vin has had a listing after stipulated date or not
@@ -190,6 +268,42 @@ paths:
       tags:
         - CRM Cleanse API
       x-swagger-router-controller: history
+  "/dealer/car/uk/{id}":
+    get:
+      description: Get a particular dealer's information by its id
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - description: Dealer id to get all the dealer info attributes
+          in: path
+          name: id
+          required: true
+          schema:
+            format: string
+            type: string
+        - description: boolean param to include site providers name in response
+          in: query
+          name: provider
+          required: false
+          schema:
+            default: false
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dealer"
+          description: Dealer for the given id
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Dealer by id
+      tags:
+        - Dealer API
+      x-swagger-router-controller: search
   "/dealer/car/{id}":
     get:
       description: Get a particular dealer's information by its id
@@ -381,6 +495,77 @@ paths:
       tags:
         - Dealer API
     x-swagger-router-controller: search
+  /dealers/car/uk:
+    get:
+      description: The dealers API returns a list of dealers around a given point and radius.
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/latitude"
+        - $ref: "#/components/parameters/longitude"
+        - $ref: "#/components/parameters/radius"
+        - $ref: "#/components/parameters/rows"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/non_default_country"
+        - $ref: "#/components/parameters/dealer_type"
+        - $ref: "#/components/parameters/city"
+        - description: To filter listing on county in which they are listed
+          in: query
+          name: county
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: state
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - $ref: "#/components/parameters/listing_count_range"
+        - $ref: "#/components/parameters/inventory_url"
+        - description: To filter listing on postal code around which they are listed
+          in: query
+          name: postal_code
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: zip
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - $ref: "#/components/parameters/sort_by"
+        - $ref: "#/components/parameters/sort_order"
+        - description: boolean param to include site providers name in response
+          in: query
+          name: provider
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - $ref: "#/components/parameters/facets"
+        - $ref: "#/components/parameters/range_facets"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DealersResponse"
+          description: List of dealers for the search
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Find car dealers around
+      tags:
+        - Dealer API
+    x-swagger-router-controller: search
   /dealers/heavy-equipment:
     get:
       description: The dealers API returns a list of dealers around a given point and radius.
@@ -540,13 +725,58 @@ paths:
       tags:
         - VIN Decoder API
       x-swagger-router-controller: vin_decoder
+  "/decode/car/neovin/{vin}/specs":
+    get:
+      description: Get the basic information on specifications for a car identified by a valid VIN from NeoVIN decoder
+      operationId: decodeViaNeoVIN
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/inpath_full_vin"
+        - description: Boolean variable to indicate wheather to include generic data as well in response
+          in: query
+          name: include_generic
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: Decode VIN on the fly instead of cached response
+          in: query
+          name: force_decode
+          required: false
+          schema:
+            default: false
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeoVIN"
+          description: Basic sepcifications details about the car
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: NeoVIN Decoder
+      tags:
+        - VIN Decoder API
+      x-swagger-router-controller: vin_decoder
   "/decode/car/{vin}/specs":
     get:
       description: Get the basic information on specifications for a car identified by a valid VIN
       operationId: decode
       parameters:
         - $ref: "#/components/parameters/api_key"
-        - $ref: "#/components/parameters/inpath_full_vin"
+        - description: The VIN to identify the car. Must be a valid 17 char VIN
+          in: path
+          name: vin
+          required: true
+          schema:
+            format: string
+            minLength: 17
+            type: string
       responses:
         "200":
           content:
@@ -564,6 +794,45 @@ paths:
       tags:
         - VIN Decoder API
       x-swagger-router-controller: vin_decoder
+  "/history/car/uk/{vrm}":
+    get:
+      description: The history API returns online listing history for a car identified by its VRM. History listings are sorted in the descending order of the listing date / last seen date
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/inpath_vrm"
+        - description: Page number to fetch the results for the given criteria. Default is 1.
+          in: query
+          name: page
+          required: false
+          schema:
+            format: number
+            type: number
+        - description: Flag to indicate whether to include duplicate historical records as well in the response
+          in: query
+          name: include_duplicates
+          required: false
+          schema:
+            type: boolean
+        - $ref: "#/components/parameters/sort_order"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/HistoricalListing"
+                type: array
+          description: Online listing history for the given vrm
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Get a cars online listing history
+      tags:
+        - Cars History API
+    x-swagger-router-controller: history
   "/history/car/{vin}":
     get:
       description: The history API returns online listing history for a car identified by its VIN. History listings are sorted in the descending order of the listing date / last seen date
@@ -591,6 +860,7 @@ paths:
           required: false
           schema:
             type: boolean
+        - $ref: "#/components/parameters/sort_order"
       responses:
         "200":
           content:
@@ -766,6 +1036,77 @@ paths:
         - Car Search
     x-swagger-router-controller: search
   "/listing/car/fsbo/{id}/media":
+    get:
+      description: Get listing media (photo, photos) by id
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/append_api_key"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListingMedia"
+          description: ListingMedia for the given listing id
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Listing media by id
+      tags:
+        - Car Search
+    x-swagger-router-controller: search
+  "/listing/car/uk/{id}":
+    get:
+      description: Get a particular dealer listing by its id
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/append_api_key"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Listing"
+          description: Listing for the given id
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Listing by id
+      tags:
+        - Car Search
+    x-swagger-router-controller: search
+  "/listing/car/uk/{id}/extra":
+    get:
+      description: Get listing options, features, seller comments
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListingExtraAttributes"
+          description: ListingAttributes for the given listing id
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Long text Listings attributes for Listing with the given id
+      tags:
+        - Car Search
+    x-swagger-router-controller: search
+  "/listing/car/uk/{id}/media":
     get:
       description: Get listing media (photo, photos) by id
       parameters:
@@ -1000,6 +1341,75 @@ paths:
       tags:
         - Motorcycle Search
     x-swagger-router-controller: search
+  "/listing/rv/uk/{id}":
+    get:
+      description: Get a particular RV listing by its id
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RVListing"
+          description: RV listing for the given id
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: RV listing by id
+      tags:
+        - RV Search
+    x-swagger-router-controller: search
+  "/listing/rv/uk/{id}/extra":
+    get:
+      description: Get RV listing options, features, seller comments
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListingExtraAttributes"
+          description: RV ListingAttributes for the given listing id
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Long text RV Listings attributes for Listing with the given id
+      tags:
+        - RV Search
+    x-swagger-router-controller: search
+  "/listing/rv/uk/{id}/media":
+    get:
+      description: Get listing media (photo, photos) by id
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListingMedia"
+          description: Listing Media for the given listing id
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Listing media by id
+      tags:
+        - RV Search
+    x-swagger-router-controller: search
   "/listing/rv/{id}":
     get:
       description: Get a particular RV listing by its id
@@ -1161,6 +1571,7 @@ paths:
         - $ref: "#/components/parameters/dom_180_range"
         - $ref: "#/components/parameters/fuel_type"
         - $ref: "#/components/parameters/dealer_type"
+        - $ref: "#/components/parameters/engine_size_range"
       responses:
         "200":
           content:
@@ -1237,6 +1648,366 @@ paths:
       tags:
         - Cars Market API
       x-swagger-router-controller: market
+  /predict/car/price:
+    get:
+      description: Predict car price based on it's specifications
+      operationId: predictCarPrice
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - description: Predict price for a VIN
+          in: query
+          name: vin
+          schema:
+            type: string
+        - description: Car condition
+          in: query
+          name: car_type
+          required: true
+          schema:
+            enum:
+              - used
+              - new
+            type: string
+        - description: Car manufacturing year
+          in: query
+          name: year
+          schema:
+            type: integer
+        - description: Car's make
+          in: query
+          name: make
+          schema:
+            type: string
+        - description: Car's model
+          in: query
+          name: model
+          schema:
+            type: string
+        - description: Car's trim
+          in: query
+          name: trim
+          schema:
+            type: string
+        - description: Boolean to indicate car is certified or not
+          in: query
+          name: is_certified
+          required: false
+          schema:
+            type: boolean
+        - description: Boolean to indicate car is carfax one owner or not
+          in: query
+          name: carfax_1_owner
+          required: false
+          schema:
+            type: boolean
+        - description: Boolean to indicate car has clean title or not
+          in: query
+          name: carfax_clean_title
+          required: false
+          schema:
+            type: boolean
+        - description: Base exterior color of the car
+          in: query
+          name: base_exterior_color
+          required: false
+          schema:
+            type: string
+        - description: Base interior color of the car
+          in: query
+          name: base_interior_color
+          required: false
+          schema:
+            type: string
+        - description: Transmission on the car
+          in: query
+          name: transmission
+          schema:
+            enum:
+              - Manual
+              - Automatic
+            type: string
+        - description: Drivetrain on the car
+          in: query
+          name: drivetrain
+          schema:
+            enum:
+              - 4WD
+              - AWD
+              - FWD
+              - RWD
+            type: string
+        - description: Engine Size of the car
+          in: query
+          name: engine_size
+          required: false
+          schema:
+            type: number
+        - description: Engine Block of the car
+          in: query
+          name: engine_block
+          required: false
+          schema:
+            enum:
+              - I
+              - V
+              - H
+            type: string
+        - description: Number of cylinders in the vehicle
+          in: query
+          name: cylinders
+          schema:
+            type: integer
+        - description: Number of doors in the vehicle
+          in: query
+          name: doors
+          schema:
+            type: integer
+        - description: Highway mileage
+          in: query
+          name: highway_mpg
+          schema:
+            type: integer
+        - description: City mileage of the car
+          in: query
+          name: city_mpg
+          schema:
+            type: integer
+        - description: Latitude component of the location
+          in: query
+          name: latitude
+          schema:
+            type: number
+        - description: Longitude component of the location
+          in: query
+          name: longitude
+          schema:
+            type: number
+        - description: miles vehicle has driven in total
+          in: query
+          name: miles
+          schema:
+            type: integer
+        - description: Location zip
+          in: query
+          name: zip
+          schema:
+            type: string
+        - description: Country for which car price will be predicted
+          in: query
+          name: country
+          schema:
+            default: us
+            enum:
+              - us
+              - ca
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PricePrediction"
+          description: Predicted price of the car along with it's specifications
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Predict car price based on it's specifications
+      tags:
+        - Cars Market API
+    x-swagger-router-controller: market
+  /predict/car/uk/fmv:
+    get:
+      description: Predict fare value of car for UK based on YMMT & miles
+      operationId: fareValue
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - description: Predict price for a VRM
+          in: query
+          name: vrm
+          schema:
+            type: string
+        - description: Car manufacturing year
+          in: query
+          name: year
+          schema:
+            type: integer
+        - description: Car's make
+          in: query
+          name: make
+          schema:
+            type: string
+        - description: Car's model
+          in: query
+          name: model
+          schema:
+            type: string
+        - description: Car's variant
+          in: query
+          name: variant
+          schema:
+            type: string
+        - description: miles vehicle has driven in total
+          in: query
+          name: miles
+          schema:
+            type: integer
+        - description: Postal code of the car
+          in: query
+          name: postal_code
+          schema:
+            type: string
+        - description: Radius around postal code
+          in: query
+          name: radius
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FareValue"
+          description: Predict fare value of car for UK based on YMMT & miles
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Predict fare value of car for UK based on YMMT & miles
+      tags:
+        - Cars Market API
+    x-swagger-router-controller: market
+  /predict/car/uk/price:
+    get:
+      description: Predict car price for UK based on it's specifications
+      operationId: predictUkCarPrice
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - description: Predict price for a VRM
+          in: query
+          name: vrm
+          schema:
+            type: string
+        - description: Car manufacturing year
+          in: query
+          name: year
+          schema:
+            type: integer
+        - description: Car's make
+          in: query
+          name: make
+          schema:
+            type: string
+        - description: Car's model
+          in: query
+          name: model
+          schema:
+            type: string
+        - description: Car's trim
+          in: query
+          name: trim
+          schema:
+            type: string
+        - description: Base exterior color of the car
+          in: query
+          name: base_exterior_color
+          required: false
+          schema:
+            type: string
+        - description: Transmission on the car
+          in: query
+          name: transmission
+          schema:
+            enum:
+              - Manual
+              - Automatic
+            type: string
+        - description: Drivetrain on the car
+          in: query
+          name: drivetrain
+          schema:
+            type: string
+        - description: Engine Size of the car
+          in: query
+          name: engine_size
+          required: false
+          schema:
+            format: double
+            type: number
+        - description: Number of cylinders in the vehicle
+          in: query
+          name: cylinders
+          schema:
+            type: integer
+        - description: Number of doors in the vehicle
+          in: query
+          name: doors
+          schema:
+            type: integer
+        - description: Fuel type of the car
+          in: query
+          name: fuel_type
+          schema:
+            type: string
+        - description: Highway mileage
+          in: query
+          name: highway_mpg
+          schema:
+            format: double
+            type: number
+        - description: City mileage of the car
+          in: query
+          name: city_mpg
+          schema:
+            format: double
+            type: number
+        - description: Combiined mileage of the car
+          in: query
+          name: combined_mpg
+          schema:
+            format: double
+            type: number
+        - description: Latitude component of the location
+          in: query
+          name: latitude
+          schema:
+            type: number
+        - description: Longitude component of the location
+          in: query
+          name: longitude
+          schema:
+            type: number
+        - description: miles vehicle has driven in total
+          in: query
+          name: miles
+          schema:
+            type: integer
+        - description: Location zip
+          in: query
+          name: zip
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PricePrediction"
+          description: Predicted price of the car along with it's specifications
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Predict car price for UK based on it's specifications
+      tags:
+        - Cars Market API
+    x-swagger-router-controller: market
   /sales/car:
     get:
       description: Get a sales count for city, state or national level by make, model, year, trim or taxonomy vin
@@ -1354,7 +2125,6 @@ paths:
         8. Search cars for a given City / State combination 
         9. Get Facets to build the search drill downs 
         10. Get Market averages for price/miles/dom for your search
-      operationId: search
       parameters:
         - $ref: "#/components/parameters/api_key"
         - $ref: "#/components/parameters/append_api_key"
@@ -1375,6 +2145,7 @@ paths:
         - $ref: "#/components/parameters/car_car_type"
         - $ref: "#/components/parameters/carfax_1_owner"
         - $ref: "#/components/parameters/carfax_clean_title"
+        - $ref: "#/components/parameters/year_range"
         - $ref: "#/components/parameters/year"
         - $ref: "#/components/parameters/make"
         - $ref: "#/components/parameters/model"
@@ -1422,6 +2193,7 @@ paths:
         - $ref: "#/components/parameters/car_nodedup"
         - $ref: "#/components/parameters/car_dedup"
         - $ref: "#/components/parameters/owned"
+        - $ref: "#/components/parameters/car_source"
         - $ref: "#/components/parameters/state"
         - $ref: "#/components/parameters/city"
         - $ref: "#/components/parameters/trim_o"
@@ -1432,6 +2204,7 @@ paths:
         - $ref: "#/components/parameters/fuel_type"
         - $ref: "#/components/parameters/dealer_type"
         - $ref: "#/components/parameters/photo_links"
+        - $ref: "#/components/parameters/photo_links_cached"
         - $ref: "#/components/parameters/stock_no"
         - $ref: "#/components/parameters/last_seen_range"
         - $ref: "#/components/parameters/first_seen_range"
@@ -1442,6 +2215,20 @@ paths:
         - $ref: "#/components/parameters/first_seen_at_source_days"
         - $ref: "#/components/parameters/first_seen_at_mc_days"
         - $ref: "#/components/parameters/include_relevant_links"
+        - $ref: "#/components/parameters/inventory_count_range"
+        - $ref: "#/components/parameters/car_dealer_id"
+        - $ref: "#/components/parameters/exclude_dealer_ids"
+        - $ref: "#/components/parameters/exclude_sources"
+        - $ref: "#/components/parameters/in_transit"
+        - $ref: "#/components/parameters/seating_capacity"
+        - $ref: "#/components/parameters/powertrain_type"
+        - $ref: "#/components/parameters/price_change"
+        - $ref: "#/components/parameters/price_change_range"
+        - $ref: "#/components/parameters/active_inventory_date_range"
+        - $ref: "#/components/parameters/engine_size_range"
+        - $ref: "#/components/parameters/high_value_features"
+        - $ref: "#/components/parameters/min_photo_links"
+        - $ref: "#/components/parameters/min_photo_links_cached"
       responses:
         "200":
           content:
@@ -1538,6 +2325,7 @@ paths:
         - $ref: "#/components/parameters/fuel_type"
         - $ref: "#/components/parameters/dealer_type"
         - $ref: "#/components/parameters/photo_links"
+        - $ref: "#/components/parameters/photo_links_cached"
         - $ref: "#/components/parameters/stock_no"
         - $ref: "#/components/parameters/last_seen_range"
         - $ref: "#/components/parameters/first_seen_range"
@@ -1635,6 +2423,7 @@ paths:
         - $ref: "#/components/parameters/car_car_type"
         - $ref: "#/components/parameters/carfax_1_owner"
         - $ref: "#/components/parameters/carfax_clean_title"
+        - $ref: "#/components/parameters/year_range"
         - $ref: "#/components/parameters/year"
         - $ref: "#/components/parameters/make"
         - $ref: "#/components/parameters/model"
@@ -1684,6 +2473,8 @@ paths:
         - $ref: "#/components/parameters/owned"
         - $ref: "#/components/parameters/state"
         - $ref: "#/components/parameters/city"
+        - $ref: "#/components/parameters/car_source"
+        - $ref: "#/components/parameters/car_dealer_id"
         - $ref: "#/components/parameters/trim_o"
         - $ref: "#/components/parameters/trim_r"
         - $ref: "#/components/parameters/dom_active_range"
@@ -1692,6 +2483,7 @@ paths:
         - $ref: "#/components/parameters/fuel_type"
         - $ref: "#/components/parameters/dealer_type"
         - $ref: "#/components/parameters/photo_links"
+        - $ref: "#/components/parameters/photo_links_cached"
         - $ref: "#/components/parameters/stock_no"
         - $ref: "#/components/parameters/last_seen_range"
         - $ref: "#/components/parameters/first_seen_range"
@@ -1702,6 +2494,31 @@ paths:
         - $ref: "#/components/parameters/first_seen_at_source_days"
         - $ref: "#/components/parameters/first_seen_at_mc_days"
         - $ref: "#/components/parameters/include_relevant_links"
+        - $ref: "#/components/parameters/inventory_count_range"
+        - $ref: "#/components/parameters/exclude_dealer_ids"
+        - $ref: "#/components/parameters/exclude_sources"
+        - $ref: "#/components/parameters/in_transit"
+        - description: To filter on title type
+          in: query
+          name: title_type
+          required: false
+          schema:
+            enum:
+              - clean
+              - salvage
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: false
+            operator: in
+            targetAlias: title_type_ss
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - $ref: "#/components/parameters/seating_capacity"
+        - $ref: "#/components/parameters/engine_size_range"
+        - $ref: "#/components/parameters/min_photo_links"
+        - $ref: "#/components/parameters/min_photo_links_cached"
       responses:
         "200":
           content:
@@ -1775,6 +2592,8 @@ paths:
         - $ref: "#/components/parameters/engine_block"
         - $ref: "#/components/parameters/state"
         - $ref: "#/components/parameters/city"
+        - $ref: "#/components/parameters/car_source"
+        - $ref: "#/components/parameters/car_dealer_id"
         - $ref: "#/components/parameters/country"
         - $ref: "#/components/parameters/car_type"
         - description: Flag to indicate whether to include non vin listing terms in results or not. Default is false to avoid un-normalised terms from non vin listings out of results
@@ -1819,6 +2638,28 @@ paths:
               - index
               - count
             type: string
+        - description: seller type for autocomplete
+          in: query
+          name: seller_type
+          required: false
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: seller_type
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - $ref: "#/components/parameters/radius"
+        - $ref: "#/components/parameters/zip"
+        - $ref: "#/components/parameters/inventory_count_range"
+        - $ref: "#/components/parameters/exclude_dealer_ids"
+        - $ref: "#/components/parameters/exclude_sources"
+        - $ref: "#/components/parameters/in_transit"
+        - $ref: "#/components/parameters/facet_min_count"
       responses:
         "200":
           content:
@@ -1871,6 +2712,7 @@ paths:
         - $ref: "#/components/parameters/car_car_type"
         - $ref: "#/components/parameters/carfax_1_owner"
         - $ref: "#/components/parameters/carfax_clean_title"
+        - $ref: "#/components/parameters/year_range"
         - $ref: "#/components/parameters/year"
         - $ref: "#/components/parameters/make"
         - $ref: "#/components/parameters/model"
@@ -1920,6 +2762,8 @@ paths:
         - $ref: "#/components/parameters/owned"
         - $ref: "#/components/parameters/state"
         - $ref: "#/components/parameters/city"
+        - $ref: "#/components/parameters/car_source"
+        - $ref: "#/components/parameters/car_dealer_id"
         - $ref: "#/components/parameters/trim_o"
         - $ref: "#/components/parameters/trim_r"
         - $ref: "#/components/parameters/dom_active_range"
@@ -1928,6 +2772,7 @@ paths:
         - $ref: "#/components/parameters/fuel_type"
         - $ref: "#/components/parameters/dealer_type"
         - $ref: "#/components/parameters/photo_links"
+        - $ref: "#/components/parameters/photo_links_cached"
         - $ref: "#/components/parameters/stock_no"
         - $ref: "#/components/parameters/last_seen_range"
         - $ref: "#/components/parameters/first_seen_range"
@@ -1938,6 +2783,15 @@ paths:
         - $ref: "#/components/parameters/first_seen_at_source_days"
         - $ref: "#/components/parameters/first_seen_at_mc_days"
         - $ref: "#/components/parameters/include_relevant_links"
+        - $ref: "#/components/parameters/inventory_count_range"
+        - $ref: "#/components/parameters/exclude_dealer_ids"
+        - $ref: "#/components/parameters/exclude_sources"
+        - $ref: "#/components/parameters/exclude_dealer_listings"
+        - $ref: "#/components/parameters/in_transit"
+        - $ref: "#/components/parameters/seating_capacity"
+        - $ref: "#/components/parameters/engine_size_range"
+        - $ref: "#/components/parameters/min_photo_links"
+        - $ref: "#/components/parameters/min_photo_links_cached"
       responses:
         "200":
           content:
@@ -1970,6 +2824,7 @@ paths:
         8. Search cars for a given City / State combination 
         9. Get Facets to build the search drill downs 
         10. Get Market averages for price/miles/dom for your search
+      operationId: oemSearch
       parameters:
         - $ref: "#/components/parameters/api_key"
         - description: The type of the incentive
@@ -2363,6 +3218,7 @@ paths:
         - $ref: "#/components/parameters/car_car_type"
         - $ref: "#/components/parameters/carfax_1_owner"
         - $ref: "#/components/parameters/carfax_clean_title"
+        - $ref: "#/components/parameters/year_range"
         - $ref: "#/components/parameters/year"
         - $ref: "#/components/parameters/make"
         - $ref: "#/components/parameters/model"
@@ -2430,6 +3286,7 @@ paths:
         - $ref: "#/components/parameters/fuel_type"
         - $ref: "#/components/parameters/dealer_type"
         - $ref: "#/components/parameters/photo_links"
+        - $ref: "#/components/parameters/photo_links_cached"
         - $ref: "#/components/parameters/stock_no"
         - description: sold parameter to fetch only sold listings
           in: query
@@ -2439,6 +3296,13 @@ paths:
             type: boolean
         - $ref: "#/components/parameters/include_relevant_links"
         - $ref: "#/components/parameters/expired"
+        - $ref: "#/components/parameters/exclude_dealer_ids"
+        - $ref: "#/components/parameters/exclude_sources"
+        - $ref: "#/components/parameters/in_transit"
+        - $ref: "#/components/parameters/seating_capacity"
+        - $ref: "#/components/parameters/active_inventory_date_range"
+        - $ref: "#/components/parameters/engine_size_range"
+        - $ref: "#/components/parameters/price_change_range"
       responses:
         "200":
           content:
@@ -2453,6 +3317,307 @@ paths:
                 $ref: "#/components/schemas/Error"
           description: Error
       summary: Gets Recent car listings for the given search criteria
+      tags:
+        - Car Search
+    x-swagger-router-controller: search
+  /search/car/uk/active:
+    get:
+      description: Search cars for sale in UK
+      operationId: search
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/latitude"
+        - $ref: "#/components/parameters/longitude"
+        - $ref: "#/components/parameters/radius"
+        - $ref: "#/components/parameters/postal_code"
+        - $ref: "#/components/parameters/zip"
+        - $ref: "#/components/parameters/car_type"
+        - $ref: "#/components/parameters/year"
+        - $ref: "#/components/parameters/year_range"
+        - $ref: "#/components/parameters/make"
+        - $ref: "#/components/parameters/model"
+        - $ref: "#/components/parameters/variant"
+        - $ref: "#/components/parameters/trim"
+        - $ref: "#/components/parameters/vin"
+        - $ref: "#/components/parameters/body_type"
+        - $ref: "#/components/parameters/ymmt"
+        - $ref: "#/components/parameters/transmission"
+        - $ref: "#/components/parameters/doors"
+        - $ref: "#/components/parameters/drivetrain"
+        - $ref: "#/components/parameters/exterior_color"
+        - $ref: "#/components/parameters/interior_color"
+        - $ref: "#/components/parameters/engine"
+        - $ref: "#/components/parameters/miles_range"
+        - $ref: "#/components/parameters/price_range"
+        - $ref: "#/components/parameters/msrp_range"
+        - $ref: "#/components/parameters/sort_by"
+        - $ref: "#/components/parameters/sort_order"
+        - $ref: "#/components/parameters/rows"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/msa_code"
+        - $ref: "#/components/parameters/facets"
+        - $ref: "#/components/parameters/range_facets"
+        - $ref: "#/components/parameters/facet_sort"
+        - $ref: "#/components/parameters/stats"
+        - $ref: "#/components/parameters/car_uk_country"
+        - $ref: "#/components/parameters/car_plot"
+        - $ref: "#/components/parameters/car_nodedup"
+        - $ref: "#/components/parameters/car_dedup"
+        - $ref: "#/components/parameters/county"
+        - $ref: "#/components/parameters/state"
+        - $ref: "#/components/parameters/city"
+        - $ref: "#/components/parameters/fuel_type"
+        - $ref: "#/components/parameters/stock_no"
+        - $ref: "#/components/parameters/dom_range"
+        - $ref: "#/components/parameters/dom_active_range"
+        - $ref: "#/components/parameters/dom_180_range"
+        - $ref: "#/components/parameters/last_seen_range"
+        - $ref: "#/components/parameters/first_seen_range"
+        - $ref: "#/components/parameters/first_seen_at_source_range"
+        - $ref: "#/components/parameters/first_seen_at_mc_range"
+        - $ref: "#/components/parameters/last_seen_days"
+        - $ref: "#/components/parameters/first_seen_days"
+        - $ref: "#/components/parameters/first_seen_at_source_days"
+        - $ref: "#/components/parameters/first_seen_at_mc_days"
+        - description: CO2 emissions
+          in: query
+          name: co2_emissions
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: co2_emissions
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - $ref: "#/components/parameters/insurance_group"
+        - description: Vehicle Registration Mark
+          in: query
+          name: vehicle_registration_mark
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: vehicle_registration_mark
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - description: Vehicle registration date range to be given in the format [YYYYMMDD] - min-max e.g. 20190523-20190623
+          in: query
+          name: vehicle_registration_date_range
+          required: false
+          schema:
+            format: string
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: false
+            operator: between
+            separator: "-"
+            targetAlias: vehicle_registration_date_range
+            transformConstraints:
+              - transformer: parseDate
+                type: date
+        - $ref: "#/components/parameters/num_owners"
+        - $ref: "#/components/parameters/inventory_count_range"
+        - $ref: "#/components/parameters/car_source"
+        - $ref: "#/components/parameters/car_dealer_id"
+        - $ref: "#/components/parameters/exclude_sources"
+        - $ref: "#/components/parameters/exclude_dealer_ids"
+        - $ref: "#/components/parameters/in_transit"
+        - $ref: "#/components/parameters/include_non_vin_listings"
+        - $ref: "#/components/parameters/cylinders"
+        - $ref: "#/components/parameters/photo_links"
+        - $ref: "#/components/parameters/photo_links_cached"
+        - $ref: "#/components/parameters/base_exterior_color"
+        - $ref: "#/components/parameters/base_interior_color"
+        - $ref: "#/components/parameters/write_off_category"
+        - $ref: "#/components/parameters/exclude_write_off_category"
+        - $ref: "#/components/parameters/fca_status"
+        - $ref: "#/components/parameters/seating_capacity"
+        - $ref: "#/components/parameters/vrm"
+        - $ref: "#/components/parameters/powertrain_type"
+        - $ref: "#/components/parameters/client_filters"
+        - $ref: "#/components/parameters/boost"
+        - $ref: "#/components/parameters/car_location_seller_name"
+        - $ref: "#/components/parameters/car_location_street"
+        - $ref: "#/components/parameters/car_location_city"
+        - $ref: "#/components/parameters/car_location_county"
+        - $ref: "#/components/parameters/car_location_zip"
+        - $ref: "#/components/parameters/car_location_latitude"
+        - $ref: "#/components/parameters/car_location_longitude"
+        - $ref: "#/components/parameters/price_change"
+        - $ref: "#/components/parameters/price_change_range"
+        - $ref: "#/components/parameters/active_inventory_date_range"
+        - $ref: "#/components/parameters/engine_size"
+        - $ref: "#/components/parameters/engine_size_range"
+        - $ref: "#/components/parameters/uvc_id"
+        - $ref: "#/components/parameters/uk_highway_mpg_range"
+        - $ref: "#/components/parameters/uk_city_mpg_range"
+        - $ref: "#/components/parameters/uk_combined_mpg_range"
+        - $ref: "#/components/parameters/owned"
+        - $ref: "#/components/parameters/min_photo_links"
+        - $ref: "#/components/parameters/min_photo_links_cached"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UKSearchResponse"
+          description: List of all cars listings matching the search & filter criteria
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Gets active car listings in UK for the given search criteria
+      tags:
+        - Car Search
+    x-swagger-router-controller: search
+  /search/car/uk/recents:
+    get:
+      description: This API produces a list of recently active (past 90 days) cars from the market for the given search criteria
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/append_api_key"
+        - $ref: "#/components/parameters/latitude"
+        - $ref: "#/components/parameters/longitude"
+        - description: Radius around the search location (Unit - Miles)
+          in: query
+          name: radius
+          schema:
+            format: int32
+            maximum: 100
+            minimum: 0
+            type: integer
+        - $ref: "#/components/parameters/zip"
+        - $ref: "#/components/parameters/car_include_lease"
+        - $ref: "#/components/parameters/car_include_finance"
+        - $ref: "#/components/parameters/lease_term"
+        - $ref: "#/components/parameters/lease_down_payment"
+        - $ref: "#/components/parameters/lease_emp"
+        - $ref: "#/components/parameters/finance_loan_term"
+        - $ref: "#/components/parameters/finance_loan_apr"
+        - $ref: "#/components/parameters/finance_emp"
+        - $ref: "#/components/parameters/finance_down_payment"
+        - $ref: "#/components/parameters/finance_down_payment_per"
+        - $ref: "#/components/parameters/car_car_type"
+        - $ref: "#/components/parameters/carfax_1_owner"
+        - $ref: "#/components/parameters/carfax_clean_title"
+        - $ref: "#/components/parameters/year_range"
+        - $ref: "#/components/parameters/year"
+        - $ref: "#/components/parameters/make"
+        - $ref: "#/components/parameters/model"
+        - $ref: "#/components/parameters/trim"
+        - $ref: "#/components/parameters/dealer_id"
+        - $ref: "#/components/parameters/vin"
+        - $ref: "#/components/parameters/source"
+        - $ref: "#/components/parameters/body_type"
+        - $ref: "#/components/parameters/body_subtype"
+        - $ref: "#/components/parameters/vehicle_type"
+        - $ref: "#/components/parameters/car_vins"
+        - $ref: "#/components/parameters/car_taxonomy_vins"
+        - $ref: "#/components/parameters/ymmt"
+        - $ref: "#/components/parameters/match"
+        - $ref: "#/components/parameters/cylinders"
+        - $ref: "#/components/parameters/transmission"
+        - $ref: "#/components/parameters/doors"
+        - $ref: "#/components/parameters/drivetrain"
+        - $ref: "#/components/parameters/exterior_color"
+        - $ref: "#/components/parameters/interior_color"
+        - $ref: "#/components/parameters/base_exterior_color"
+        - $ref: "#/components/parameters/base_interior_color"
+        - $ref: "#/components/parameters/engine"
+        - $ref: "#/components/parameters/engine_size"
+        - $ref: "#/components/parameters/engine_aspiration"
+        - $ref: "#/components/parameters/engine_block"
+        - $ref: "#/components/parameters/uk_highway_mpg_range"
+        - $ref: "#/components/parameters/uk_city_mpg_range"
+        - $ref: "#/components/parameters/uk_combined_mpg_range"
+        - $ref: "#/components/parameters/miles_range"
+        - $ref: "#/components/parameters/price_range"
+        - $ref: "#/components/parameters/msrp_range"
+        - $ref: "#/components/parameters/dom_range"
+        - $ref: "#/components/parameters/last_seen_range"
+        - $ref: "#/components/parameters/first_seen_range"
+        - $ref: "#/components/parameters/first_seen_at_source_range"
+        - $ref: "#/components/parameters/first_seen_at_mc_range"
+        - $ref: "#/components/parameters/last_seen_days"
+        - $ref: "#/components/parameters/first_seen_days"
+        - $ref: "#/components/parameters/first_seen_at_source_days"
+        - $ref: "#/components/parameters/first_seen_at_mc_days"
+        - $ref: "#/components/parameters/sort_by"
+        - $ref: "#/components/parameters/sort_order"
+        - $ref: "#/components/parameters/rows"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/include_non_vin_listings"
+        - $ref: "#/components/parameters/facets"
+        - $ref: "#/components/parameters/range_facets"
+        - $ref: "#/components/parameters/facet_sort"
+        - $ref: "#/components/parameters/stats"
+        - $ref: "#/components/parameters/car_uk_country"
+        - $ref: "#/components/parameters/car_plot"
+        - $ref: "#/components/parameters/car_nodedup"
+        - $ref: "#/components/parameters/car_dedup"
+        - $ref: "#/components/parameters/owned"
+        - $ref: "#/components/parameters/state"
+        - $ref: "#/components/parameters/city"
+        - $ref: "#/components/parameters/msa_code"
+        - $ref: "#/components/parameters/dealer_name"
+        - $ref: "#/components/parameters/dealership_group_name"
+        - $ref: "#/components/parameters/trim_o"
+        - $ref: "#/components/parameters/trim_r"
+        - $ref: "#/components/parameters/dom_active_range"
+        - $ref: "#/components/parameters/dom_180_range"
+        - $ref: "#/components/parameters/exclude_certified"
+        - $ref: "#/components/parameters/fuel_type"
+        - $ref: "#/components/parameters/dealer_type"
+        - $ref: "#/components/parameters/photo_links"
+        - $ref: "#/components/parameters/photo_links_cached"
+        - $ref: "#/components/parameters/stock_no"
+        - description: sold parameter to fetch only sold listings
+          in: query
+          name: sold
+          required: false
+          schema:
+            type: boolean
+        - $ref: "#/components/parameters/include_relevant_links"
+        - $ref: "#/components/parameters/expired"
+        - $ref: "#/components/parameters/exclude_dealer_ids"
+        - $ref: "#/components/parameters/exclude_sources"
+        - $ref: "#/components/parameters/in_transit"
+        - $ref: "#/components/parameters/seating_capacity"
+        - $ref: "#/components/parameters/insurance_group"
+        - $ref: "#/components/parameters/vrm"
+        - $ref: "#/components/parameters/num_owners"
+        - $ref: "#/components/parameters/variant"
+        - $ref: "#/components/parameters/postal_code"
+        - $ref: "#/components/parameters/write_off_category"
+        - $ref: "#/components/parameters/fca_status"
+        - $ref: "#/components/parameters/active_inventory_date_range"
+        - $ref: "#/components/parameters/engine_size_range"
+        - $ref: "#/components/parameters/price_change_range"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UKSearchResponse"
+          description: List of all cars listings matching the search & filter criteria
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Gets Recent UK car listings for the given search criteria
       tags:
         - Car Search
     x-swagger-router-controller: search
@@ -2647,6 +3812,24 @@ paths:
               - index
               - count
             type: string
+        - description: seller type for autocomplete
+          in: query
+          name: seller_type
+          required: false
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: seller_type
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - $ref: "#/components/parameters/radius"
+        - $ref: "#/components/parameters/zip"
+        - $ref: "#/components/parameters/facet_min_count"
       responses:
         "200":
           content:
@@ -2823,6 +4006,24 @@ paths:
               - index
               - count
             type: string
+        - description: seller type for autocomplete
+          in: query
+          name: seller_type
+          required: false
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: seller_type
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - $ref: "#/components/parameters/radius"
+        - $ref: "#/components/parameters/zip"
+        - $ref: "#/components/parameters/facet_min_count"
       responses:
         "200":
           content:
@@ -2859,6 +4060,7 @@ paths:
         - $ref: "#/components/parameters/price_range"
         - $ref: "#/components/parameters/miles_range"
         - $ref: "#/components/parameters/msrp_range"
+        - $ref: "#/components/parameters/year_range"
         - $ref: "#/components/parameters/search_text"
         - $ref: "#/components/parameters/latitude"
         - $ref: "#/components/parameters/longitude"
@@ -2909,6 +4111,63 @@ paths:
         - $ref: "#/components/parameters/first_seen_range"
         - $ref: "#/components/parameters/last_seen_days"
         - $ref: "#/components/parameters/first_seen_days"
+        - description: Filter RV listings on slideouts
+          in: query
+          name: slideouts
+          required: false
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: slideouts
+            transformConstraints:
+              - transformer: parseInt
+                type: integer
+        - description: length range to filter listings with the length in the range given. Range to be given in the format - min-max e.g. 50-200
+          in: query
+          name: length_range
+          required: false
+          schema:
+            format: string
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: false
+            operator: between
+            separator: "-"
+            targetAlias: length_fs
+            transformConstraints:
+              - defaultMax: 200
+                defaultMin: 1
+                transformer: parseInt
+                type: integer
+        - description: Filter RV listings on length
+          in: query
+          name: length
+          required: false
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: length
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - $ref: "#/components/parameters/base_exterior_color"
+        - $ref: "#/components/parameters/base_interior_color"
+        - $ref: "#/components/parameters/seating_capacity"
+        - $ref: "#/components/parameters/fresh_water_capacity"
+        - $ref: "#/components/parameters/sleeps"
+        - $ref: "#/components/parameters/cylinders"
+        - $ref: "#/components/parameters/number_of_awnings"
+        - $ref: "#/components/parameters/doors"
+        - $ref: "#/components/parameters/gvwr"
       responses:
         "200":
           content:
@@ -2995,6 +4254,24 @@ paths:
               - index
               - count
             type: string
+        - description: seller type for autocomplete
+          in: query
+          name: seller_type
+          required: false
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: seller_type
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - $ref: "#/components/parameters/radius"
+        - $ref: "#/components/parameters/zip"
+        - $ref: "#/components/parameters/facet_min_count"
       responses:
         "200":
           content:
@@ -3012,6 +4289,265 @@ paths:
       tags:
         - RV Search
       x-swagger-router-controller: search
+  /search/rv/uk/active:
+    get:
+      description: |-
+        This endpoint provides search on RV inventory. This API produces a list of currently active RV from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
+         The search API facilitates the following use cases - 
+        1. Search RV around a given geo-point within a given radius 
+        2. Search RV for a specific year / make / model or combination of these 
+        3. Search RV matching multiple year, make, model combinatins in the same search request
+        4. Filter results by most RV specification attributes
+        5. Filter RV within a given price / miles range
+        6. Specify a sort order for the results on price / miles / listed date 
+        7. Search RV for a given City / State combination 
+        8. Get Facets to build the search drill downs 
+        9. Get Market averages for price/miles for your search
+      parameters:
+        - $ref: "#/components/parameters/api_key"
+        - $ref: "#/components/parameters/price_range"
+        - $ref: "#/components/parameters/miles_range"
+        - $ref: "#/components/parameters/msrp_range"
+        - $ref: "#/components/parameters/year_range"
+        - $ref: "#/components/parameters/search_text"
+        - $ref: "#/components/parameters/latitude"
+        - $ref: "#/components/parameters/longitude"
+        - $ref: "#/components/parameters/radius"
+        - $ref: "#/components/parameters/year"
+        - $ref: "#/components/parameters/make"
+        - $ref: "#/components/parameters/model"
+        - $ref: "#/components/parameters/vin"
+        - $ref: "#/components/parameters/source"
+        - $ref: "#/components/parameters/dealer_name"
+        - $ref: "#/components/parameters/dealer_id"
+        - $ref: "#/components/parameters/exterior_color"
+        - $ref: "#/components/parameters/interior_color"
+        - $ref: "#/components/parameters/engine_size"
+        - $ref: "#/components/parameters/fuel_type"
+        - description: Filter RV listings on category
+          in: query
+          name: category
+          required: false
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: category_ss
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - $ref: "#/components/parameters/state"
+        - $ref: "#/components/parameters/city"
+        - $ref: "#/components/parameters/county"
+        - description: To filter listing on postal code around which they are listed
+          in: query
+          name: postal_code
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: zip
+            transformConstraints:
+              - regex: \s
+                replace: ""
+                transformer: regexReplace
+              - transformer: caseTransformer
+                type: string
+        - $ref: "#/components/parameters/zip"
+        - $ref: "#/components/parameters/sort_by"
+        - $ref: "#/components/parameters/sort_order"
+        - $ref: "#/components/parameters/rows"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/facets"
+        - $ref: "#/components/parameters/range_facets"
+        - $ref: "#/components/parameters/facet_sort"
+        - $ref: "#/components/parameters/stats"
+        - $ref: "#/components/parameters/last_seen_range"
+        - $ref: "#/components/parameters/first_seen_range"
+        - $ref: "#/components/parameters/last_seen_days"
+        - $ref: "#/components/parameters/first_seen_days"
+        - $ref: "#/components/parameters/base_exterior_color"
+        - $ref: "#/components/parameters/base_interior_color"
+        - $ref: "#/components/parameters/seating_capacity"
+        - $ref: "#/components/parameters/cylinders"
+        - $ref: "#/components/parameters/doors"
+        - description: To filter rv on mtplm
+          in: query
+          name: mtplm
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: mtplm_ss
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - description: To filter rv on their sub-category
+          in: query
+          name: sub_category
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: subcategory_ss
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - description: To filter rv on their availability_status
+          in: query
+          name: availability_status
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: availability_status_ss
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - description: To filter rv on their berths
+          in: query
+          name: berths
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: berth_is
+            transformConstraints:
+              - transformer: parseInt
+                type: integer
+        - $ref: "#/components/parameters/inventory_type"
+        - description: width range to filter listings on width in the range given. Range to be given in the format - min-max e.g. 4-8
+          in: query
+          name: width_range
+          required: false
+          schema:
+            format: string
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: false
+            operator: between
+            separator: "-"
+            targetAlias: width_fs
+            transformConstraints:
+              - defaultMax: 100
+                defaultMin: 1
+                transformer: parseFloat
+                type: integer
+        - description: width range to filter listings on exterior_length in the range given. Range to be given in the format - min-max e.g. 4-8
+          in: query
+          name: exterior_length_range
+          required: false
+          schema:
+            format: string
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: false
+            operator: between
+            separator: "-"
+            targetAlias: exterior_length_fs
+            transformConstraints:
+              - defaultMax: 1000000
+                defaultMin: 1
+                transformer: parseFloat
+                type: integer
+        - description: width range to filter listings on interior_length in the range given. Range to be given in the format - min-max e.g. 4-8
+          in: query
+          name: interior_length_range
+          required: false
+          schema:
+            format: string
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: false
+            operator: between
+            separator: "-"
+            targetAlias: interior_length_fs
+            transformConstraints:
+              - defaultMax: 1000000
+                defaultMin: 1
+                transformer: parseFloat
+                type: integer
+        - description: To filter rv on their drive_type
+          in: query
+          name: drive_type
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: drive_type_ss
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - description: To filter rv on their steering
+          in: query
+          name: steering
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: steering_ss
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - description: To filter rv on their chassis
+          in: query
+          name: chassis
+          schema:
+            type: string
+          x-field-config:
+            isConfigurable: true
+            isMultiValued: true
+            operator: in
+            separator: ","
+            targetAlias: chassis_ss
+            transformConstraints:
+              - transformer: caseTransformer
+                type: string
+        - $ref: "#/components/parameters/transmission"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UKRVSearchResponse"
+          description: List of all RV listings matching the search & filter criteria
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error
+      summary: Gets active RV listings for the given search criteria
+      tags:
+        - RV Search
+    x-swagger-router-controller: search
   /specs/car/auto-complete:
     get:
       description: Auto-complete the inputs of your end users, not from active set but from taxonomy (decoder database)
@@ -3064,6 +4600,7 @@ paths:
           schema:
             default: true
             type: boolean
+        - $ref: "#/components/parameters/facet_min_count"
       responses:
         "200":
           content:
@@ -3213,6 +4750,22 @@ paths:
       x-swagger-router-controller: market
 components:
   parameters:
+    active_inventory_date_range:
+      description: date range to filter listings that were active within given date range. Range to be given in the format [YYYYMMDD] - min-max e.g. 20190523-20190623
+      in: query
+      name: active_inventory_date_range
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        transformConstraints:
+          - transformer: parseDate
+            type: date
     api_key:
       description: The API Authentication Key. Mandatory with all API calls.
       in: query
@@ -3290,6 +4843,17 @@ components:
         transformConstraints:
           - transformer: caseTransformer
             type: string
+    boost:
+      description: Flag to sort listings based on client filter score in solr
+      in: query
+      name: boost
+      required: false
+      schema:
+        default: true
+        enum:
+          - true
+          - false
+        type: boolean
     car_car_type:
       description: Car type. Allowed values are - new / used / certified
       in: query
@@ -3315,6 +4879,24 @@ components:
           - all
           - ALL
         type: string
+    car_dealer_id:
+      description: Dealer id to filter the listings.
+      in: query
+      name: dealer_id
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: seed_id
+        transformConstraints:
+          - transformer: parseInt
+            type: integer
+        widgetExclusive: true
     car_dedup:
       description: If dedup is set to true then will give results with is_searchable irrespecive of dealer_id or source
       in: query
@@ -3336,6 +4918,102 @@ components:
       required: false
       schema:
         type: boolean
+    car_location_city:
+      description: Filter cars on city
+      in: query
+      name: car_location_city
+      required: false
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: car_city_ss
+        transformConstraints:
+          - transformer: caseTransformer
+            type: string
+    car_location_county:
+      description: Filter cars on county
+      in: query
+      name: car_location_county
+      required: false
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: car_county_ss
+        transformConstraints:
+          - transformer: caseTransformer
+            type: string
+    car_location_latitude:
+      description: Latitude component of car location
+      in: query
+      name: car_location_latitude
+      schema:
+        format: double
+        type: number
+    car_location_longitude:
+      description: Longitude component of car location
+      in: query
+      name: car_location_longitude
+      schema:
+        format: double
+        type: number
+    car_location_seller_name:
+      description: Filter cars on seller name
+      in: query
+      name: car_location_seller_name
+      required: false
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: car_dealership_name_ss
+        transformConstraints:
+          - transformer: caseTransformer
+            type: string
+    car_location_street:
+      description: Filter cars on street name
+      in: query
+      name: car_location_street
+      required: false
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: car_street_ss
+        transformConstraints:
+          - transformer: caseTransformer
+            type: string
+    car_location_zip:
+      description: To filter listing on car ZIP around which they are listed
+      in: query
+      name: car_location_zip
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: car_zip_ss
+        transformConstraints:
+          - regex: \s
+            replace: ""
+            transformer: regexReplace
+          - transformer: caseTransformer
+            type: string
     car_nodedup:
       description: If nodedup is set to true then API will give results without is_searchable i.e multiple listings for single vin
       in: query
@@ -3359,6 +5037,22 @@ components:
         default: dealer
         format: string
         type: string
+    car_source:
+      description: To filter listing on their source only for widget requests
+      in: query
+      name: source
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: source
+        transformConstraints:
+          - transformer: urlTransformer
+            type: string
+        widgetExclusive: true
     car_taxonomy_vins:
       description: Comma separated list of 10 letters excert from the 17 letter VIN. The 10 letters to be picked up from the 17 letter VIN are - first 8 letters and the 10th and 11th letter. E.g. For a VIN - 1FTFW1EF3EKE57182 the taxonomy vin would be - 1FTFW1EFEK  A taxonomy VIN identified a build of a car and could be used to filter our cars of a particular build. This is an alternative to the vin or ymmt parameters to the search API.
       in: query
@@ -3384,6 +5078,19 @@ components:
         transformConstraints:
           - transformer: caseTransformer
             type: string
+    car_uk_country:
+      description: To filter listing on Country in which they are listed
+      in: query
+      name: country
+      schema:
+        default: uk
+        enum:
+          - uk
+          - england
+          - scotland
+          - northan ireland
+          - wales
+        type: string
     car_vins:
       description: Comma separated list of 17 digit vins to search the matching cars for. Only 10 VINs allowed per request. If the request contains more than 10 VINs the first 10 VINs will be considered. Could be used as a More Like This or Similar Vehicles search for the given VINs. Ths vins parameter is an alternative to taxonomy_vins or ymmt parameters available with the search API. vins and taxonomy_vins parameters could be used to filter our cars with the exact build represented by the vins or taxonomy_vins whereas ymmt is a top level filter that does not filter cars by the build attributes like doors, drivetrain, cylinders, body type, body subtype, vehicle type etc
       in: query
@@ -3445,6 +5152,17 @@ components:
             defaultMin: 0
             transformer: parseInt
             type: integer
+    client_filters:
+      description: Flag to add explicit filters set on client level in solr
+      in: query
+      name: client_filters
+      required: false
+      schema:
+        default: true
+        enum:
+          - true
+          - false
+        type: boolean
     color:
       description: Color of the vehicle
       in: query
@@ -3481,6 +5199,21 @@ components:
         transformConstraints:
           - maxLength: 2
             transformer: caseTransformer
+            type: string
+    county:
+      description: To filter listing on county in which they are listed
+      in: query
+      name: county
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: county
+        transformConstraints:
+          - transformer: caseTransformer
             type: string
     cylinders:
       description: To filter listing on their cylinders
@@ -3719,6 +5452,25 @@ components:
         transformConstraints:
           - transformer: caseTransformer
             type: string
+    engine_size_range:
+      description: Engine size range to filter listings with engine size in the given range. Range to be given in the format - min-max e.g. 1.0-2
+      in: query
+      name: engine_size_range
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: engine_size_ss
+        transformConstraints:
+          - defaultMax: 100
+            defaultMin: 0
+            transformer: parseFloat
+            type: integer
     exclude_certified:
       description: Boolean param to exclude certified cars from search results
       in: query
@@ -3726,6 +5478,70 @@ components:
       required: false
       schema:
         type: boolean
+    exclude_dealer_ids:
+      description: A list of dealer ids to exclude from result
+      in: query
+      name: exclude_dealer_ids
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        targetAlias: seed_id
+        transformConstraints:
+          - transformer: parseInt
+            type: integer
+    exclude_dealer_listings:
+      description: A list of fsbo listings to exclude from result
+      in: query
+      name: exclude_dealer_listings
+      required: false
+      schema:
+        type: boolean
+      x-field-config:
+        isConfigurable: true
+        operator: equals
+        targetAlias: exclude_dealer_listings_is
+        transformConstraints:
+          - transformer: boolToFlag
+            type: string
+    exclude_sources:
+      description: A list of sources to exclude from result
+      in: query
+      name: exclude_sources
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        targetAlias: source
+        transformConstraints:
+          - transformer: urlTransformer
+            type: string
+    exclude_write_off_category:
+      description: To exclude write off category
+      in: query
+      name: exclude_write_off_category
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: -write_off_category_ss
+        transformConstraints:
+          - transformer: caseTransformer
+            type: string
+        widgetExclusive: true
     expired:
       description: Boolean falg to either fetch only the expired listings or active ones
       in: query
@@ -3760,6 +5576,15 @@ components:
         transformConstraints:
           - transformer: caseTransformer
             type: string
+    facet_min_count:
+      description: Provide minimum count value for facets
+      in: query
+      name: facet_min_count
+      required: false
+      schema:
+        default: 1
+        format: number
+        type: number
     facet_sort:
       description: Control sort order of facets with this parameter with default sort being on count, Other available sort is alphabetical sort, which can be obtained by using index as value for this param
       in: query
@@ -3778,6 +5603,24 @@ components:
       required: false
       schema:
         type: string
+    fca_status:
+      description: To filter on fca status
+      in: query
+      name: fca_status
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: fca_status_ss
+        transformConstraints:
+          - transformer: caseTransformer
+            type: string
+        widgetExclusive: true
     finance_down_payment:
       description: Search listings with exact down payment in finance offers, or inside a range with min and max seperated by a dash like finance_down_payment=30-60
       in: query
@@ -3968,6 +5811,23 @@ components:
         transformConstraints:
           - transformer: parseDate
             type: date
+    fresh_water_capacity:
+      description: To filter on fresh water capacity of vehicle
+      in: query
+      name: fresh_water_capacity
+      required: false
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        separator: "-"
+        targetAlias: fresh_water_capacity_fs
+        transformConstraints:
+          - defaultMax: 100000
+            defaultMin: 0
+            transformer: parseInt
+            type: integer
     fuel_type:
       description: To filter listing on their fuel type
       in: query
@@ -3982,6 +5842,40 @@ components:
         targetAlias: fuel_type
         transformConstraints:
           - transformer: caseTransformer
+            type: string
+    gvwr:
+      description: To filter on the maximum total weight of your vehicle
+      in: query
+      name: gvwr
+      required: false
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        separator: "-"
+        targetAlias: gvwr_fs
+        transformConstraints:
+          - defaultMax: 1000000
+            defaultMin: 100
+            transformer: parseInt
+            type: integer
+    high_value_features:
+      description: To filter listings on their high_value_features. Results will be intersection of provided HVFs
+      in: query
+      name: high_value_features
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: multi-in
+        separator: ","
+        targetAlias: high_value_features_mv
+        transformConstraints:
+          - caseSelector: 2
+            isSolrMultivalued: true
+            transformer: caseTransformer
             type: string
     highway_mpg_range:
       description: Highway mileage range to filter listings with the mileage in the range given. Range to be given in the format - min-max e.g. 1000-5000
@@ -4010,6 +5904,24 @@ components:
       schema:
         format: string
         type: string
+    in_transit:
+      description: A boolean to filter in transit vehicles
+      in: query
+      name: in_transit
+      required: false
+      schema:
+        enum:
+          - "true"
+          - "false"
+        type: string
+      x-field-config:
+        isConfigurable: false
+        isMultiValued: false
+        operator: equals
+        targetAlias: in_transit_ss
+        transformConstraints:
+          - transformer: boolToFlag
+            type: string
     include_non_vin_listings:
       description: To include non vin listings. Default is false
       in: query
@@ -4035,6 +5947,29 @@ components:
         format: string
         minLength: 10
         type: string
+    inpath_vrm:
+      description: The VRM to identify the car.
+      in: path
+      name: vrm
+      required: true
+      schema:
+        format: string
+        type: string
+    insurance_group:
+      description: Insurance Group
+      in: query
+      name: insurance_group
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: insurance_group
+        transformConstraints:
+          - transformer: caseTransformer
+            type: string
     interior_color:
       description: Interior color to match. Valid filter values are those that our Search facets API returns for unique interior colors. You can pass in multiple interior color values comma separated
       in: query
@@ -4051,6 +5986,25 @@ components:
         transformConstraints:
           - transformer: caseTransformer
             type: string
+    inventory_count_range:
+      description: Inventory count range to filter listings with count of total listings in dealers inventory. Range to be given in the format - min-max e.g. 10-50
+      in: query
+      name: inventory_count_range
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: inventory_count_is
+        transformConstraints:
+          - defaultMax: 100000
+            defaultMin: 0
+            transformer: parseInt
+            type: integer
     inventory_type:
       description: To filter listing on their condition. Either used or new
       in: query
@@ -4245,6 +6199,44 @@ components:
             defaultMin: 1000
             transformer: parseInt
             type: integer
+    min_photo_links:
+      description: Filter listings based by number of photo links within given range
+      in: query
+      name: min_photo_links
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: photo_links_count_is
+        transformConstraints:
+          - defaultMax: 1000
+            defaultMin: 0
+            transformer: parseFloat
+            type: integer
+    min_photo_links_cached:
+      description: Filter listings based by number of cached photo links within given range
+      in: query
+      name: min_photo_links_cached
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: cached_photo_links_count_is
+        transformConstraints:
+          - defaultMax: 1000
+            defaultMin: 0
+            transformer: parseFloat
+            type: integer
     mm:
       description: Make-Model concatenated string. To help passing the results of auto-complete API on mm field, use this parameter and pass in the selected value as is
       in: query
@@ -4348,6 +6340,11 @@ components:
           - CA
           - us
           - ca
+          - uk
+          - england
+          - scotland
+          - northan ireland
+          - wales
         type: string
       x-field-config:
         isConfigurable: true
@@ -4356,8 +6353,43 @@ components:
         separator: ","
         targetAlias: country
         transformConstraints:
-          - maxLength: 2
-            transformer: caseTransformer
+          - transformer: caseTransformer
+            type: string
+    num_owners:
+      description: Number of owners. Range to be given in the format - min-max e.g. 1000-5000
+      in: query
+      name: num_owners
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: num_owners
+        transformConstraints:
+          - defaultMax: 5
+            defaultMin: 1
+            transformer: parseInt
+            type: integer
+    number_of_awnings:
+      description: To filter on number_of_awnings
+      in: query
+      name: number_of_awnings
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: number_of_awnings_ss
+        transformConstraints:
+          - transformer: caseTransformer
             type: string
     owned:
       description: Used in combination with dealer_id or source, when true returns the listings actually owned by dealer himself
@@ -4373,6 +6405,77 @@ components:
       required: false
       schema:
         type: boolean
+    photo_links_cached:
+      description: A boolean indicating whether to include only those listings that have photo_links_cached in search results, And discard those that don't have them
+      in: query
+      name: photo_links_cached
+      required: false
+      schema:
+        type: boolean
+    postal_code:
+      description: To filter listing on postal code around which they are listed
+      in: query
+      name: postal_code
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: postal_code
+        transformConstraints:
+          - regex: \s
+            replace: ""
+            transformer: regexReplace
+          - transformer: caseTransformer
+            type: string
+    powertrain_type:
+      description: To filter on powertrain_type
+      in: query
+      name: powertrain_type
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: powertrain_type_ss
+        transformConstraints:
+          - transformer: caseTransformer
+            type: string
+    price_change:
+      description: Query to filter listings based on their positive and negative price change
+      in: query
+      name: price_change
+      required: false
+      schema:
+        enum:
+          - positive
+          - negative
+        type: string
+    price_change_range:
+      description: Price change range to filter listings with price change within given price_change_range. Range to be given in the format - min-max e.g. 10-500
+      in: query
+      name: price_change_range
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "|"
+        targetAlias: price_change_fs
+        transformConstraints:
+          - defaultMax: 100000000
+            defaultMin: -100000000
+            transformer: parseInt
+            type: integer
     price_range:
       description: Price range to filter listings with the price in the range given. Range to be given in the format - min-max e.g. 1000-5000
       in: query
@@ -4469,6 +6572,42 @@ components:
         isMultiValued: false
         operator: equals
         targetAlias: long_text_copy_field
+    seating_capacity:
+      description: To filter on vehicle seating capacity
+      in: query
+      name: seating_capacity
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: std_seating_capacity_ss
+        transformConstraints:
+          - transformer: parseInt
+            type: integer
+    sleeps:
+      description: To filter data based on sleeps
+      in: query
+      name: sleeps
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: sleeps_is
+        transformConstraints:
+          - defaultMax: 300
+            defaultMin: 0
+            transformer: parseInt
+            type: integer
     sort_by:
       description: Sort by field. Default sort field is distance from the given point
       in: query
@@ -4615,6 +6754,95 @@ components:
         transformConstraints:
           - transformer: caseTransformer
             type: string
+    uk_city_mpg_range:
+      description: City mileage range for UK to filter listings with the mileage in the range given. Range to be given in the format - min-max e.g. 1000-5000
+      in: query
+      name: city_mpg_range
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: city_mpg
+        transformConstraints:
+          - defaultMax: 1000
+            defaultMin: 0
+            transformer: parseFloat
+            type: integer
+    uk_combined_mpg_range:
+      description: Combined mileage range for UK to filter listings with the mileage in the range given. Range to be given in the format - min-max e.g. 1000-5000
+      in: query
+      name: combined_mpg_range
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: combined_mpg
+        transformConstraints:
+          - defaultMax: 1000
+            defaultMin: 0
+            transformer: parseFloat
+            type: integer
+    uk_highway_mpg_range:
+      description: Highway mileage range for UK to filter listings with the mileage in the range given. Range to be given in the format - min-max e.g. 1000-5000
+      in: query
+      name: highway_mpg_range
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: highway_mpg
+        transformConstraints:
+          - defaultMax: 1000
+            defaultMin: 0
+            transformer: parseFloat
+            type: integer
+    uvc_id:
+      description: To filter on uvc id
+      in: query
+      name: uvc_id
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: uvc_id_ss
+        transformConstraints:
+          - transformer: caseTransformer
+            type: string
+    variant:
+      description: To filter listing on their variant
+      in: query
+      name: variant
+      schema:
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: variant
+        transformConstraints:
+          - transformer: caseTransformer
+            type: string
     vehicle_type:
       description: To filter listing on their vehicle type
       in: query
@@ -4646,6 +6874,41 @@ components:
           - maxLength: 17
             transformer: caseTransformer
             type: string
+    vrm:
+      description: To filter on vrm
+      in: query
+      name: vrm
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: vehicle_registration_mark_ss
+        transformConstraints:
+          - transformer: caseTransformer
+            type: string
+    write_off_category:
+      description: write off category
+      in: query
+      name: write_off_category
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: true
+        operator: in
+        separator: ","
+        targetAlias: write_off_category_ss
+        transformConstraints:
+          - transformer: caseTransformer
+            type: string
+        widgetExclusive: true
     year:
       description: To filter listing on their year
       in: query
@@ -4662,6 +6925,25 @@ components:
         transformConstraints:
           - max: 2121
             min: 1800
+            transformer: parseInt
+            type: integer
+    year_range:
+      description: Year range to filter listings with the year in the range given. Range to be given in the format - min-max e.g. 2019-2021
+      in: query
+      name: year_range
+      required: false
+      schema:
+        format: string
+        type: string
+      x-field-config:
+        isConfigurable: true
+        isMultiValued: false
+        operator: between
+        separator: "-"
+        targetAlias: year
+        transformConstraints:
+          - defaultMax: 2100
+            defaultMin: 1900
             transformer: parseInt
             type: integer
     ymm:
@@ -4699,6 +6981,9 @@ components:
         separator: ","
         targetAlias: zip
         transformConstraints:
+          - regex: \s
+            replace: ""
+            transformer: regexReplace
           - transformer: caseTransformer
             type: string
   requestBodies:
@@ -4734,6 +7019,12 @@ components:
     BaseListing:
       description: Minimal set of attributes describing a listing
       properties:
+        base_ext_color:
+          description: Base exterior color of the car
+          type: string
+        base_int_color:
+          description: Base interior color of the car
+          type: string
         build:
           $ref: "#/components/schemas/Build"
         carfax_1_owner:
@@ -4780,6 +7071,9 @@ components:
         id:
           description: Unique identifier representing a specific listing from the Marketcheck database
           type: string
+        in_transit:
+          description: in_transit of the listing
+          type: boolean
         interior_color:
           description: Interior color of the car
           type: string
@@ -4789,6 +7083,9 @@ components:
         is_certified:
           description: Certified car
           type: integer
+        is_translated:
+          description: is_translated of the listing
+          type: boolean
         last_seen_at:
           description: Listing last seen at (most recent) timestamp
           type: integer
@@ -4814,6 +7111,10 @@ components:
         price:
           description: Asking price for the car
           type: integer
+        price_change_percent:
+          description: Percentage difference between the cars's current price and ref_price i.e. last reported price
+          format: double
+          type: number
         ref_miles:
           description: Last Odometer reading / reported miles usage for the car. If the asking miles value is not or is available then the last_miles could perhaps be used. last_miles is the miles for the car listed on the source website as of last_miles_dt date
           type: string
@@ -4841,6 +7142,9 @@ components:
           type: string
         stock_no:
           description: Stock number of car in dealers inventory
+          type: string
+        title_type:
+          description: title_type of the listing
           type: string
         vdp_url:
           description: Vehicle Details Page url of the specific car
@@ -4892,6 +7196,9 @@ components:
         city_miles:
           description: City miles of the car
           type: string
+        city_mpg:
+          description: City Mileage in MPG
+          type: integer
         cylinders:
           description: No of cylinders of the car
           type: integer
@@ -4923,6 +7230,9 @@ components:
         highway_miles:
           description: Highway miles of the car
           type: string
+        highway_mpg:
+          description: Highway Mileage in MPG
+          type: integer
         made_in:
           description: Made in of the car
           type: string
@@ -4943,6 +7253,9 @@ components:
           type: string
         overall_width:
           description: Overall width of the car
+          type: string
+        powertrain_type:
+          description: powertrain_type of the car
           type: string
         short_trim:
           description: Short trim of the car
@@ -4989,6 +7302,30 @@ components:
           items:
             $ref: "#/components/schemas/Listing"
           type: object
+      type: object
+    CarLocation:
+      properties:
+        city:
+          description: City of the car
+          type: string
+        county:
+          description: County of the car
+          type: string
+        latitude:
+          description: Latitude component of car location
+          type: string
+        longitude:
+          description: Longitude component of car location
+          type: string
+        seller_name:
+          description: Seller name of the car
+          type: string
+        street:
+          description: Street address of the car
+          type: string
+        zip:
+          description: Zip/Postal code of the car
+          type: string
       type: object
     CarRankCriteria:
       description: Ranking query request
@@ -5275,6 +7612,17 @@ components:
         price:
           $ref: "#/components/schemas/StatsItem"
       type: object
+    ClientFiltersRequest:
+      description: A client filters request
+      properties:
+        list:
+          items:
+            description: List of string values for given field
+            type: string
+          type: array
+      required:
+        - list
+      type: object
     ComparisonPoint:
       properties:
         dealer_indicator:
@@ -5396,6 +7744,12 @@ components:
         data_source:
           description: Datasource of the dealer
           type: string
+        dealer_type:
+          description: Type of dealer (franchise/independent)
+          type: string
+        dealership_group_name:
+          description: Dealership group name of dealer
+          type: string
         distance:
           description: Distance of dealer from given location
           format: double
@@ -5409,6 +7763,9 @@ components:
         latitude:
           description: Latutide for the dealer location
           type: string
+        listing_count:
+          description: Listing count of the dealer
+          type: integer
         location_ll:
           description: location_ll for the dealer location
           type: string
@@ -5590,6 +7947,27 @@ components:
           description: Facet item
           type: string
       type: object
+    FareValue:
+      description: Fare value of a car
+      example:
+        avg_days_to_sold_local: 32
+        avg_days_to_sold_national: 42
+        fmv_local: 13854
+        fmv_national: 13915
+      properties:
+        avg_days_to_sold_local:
+          description: Average days to sold of car around given postal code & radius
+          type: integer
+        avg_days_to_sold_national:
+          description: Average days to sold of car for all available listings
+          type: integer
+        fmv_local:
+          description: Fare value calculated for all available listing around given postal code & radius
+          type: integer
+        fmv_national:
+          description: Fare value calculated for all available listing
+          type: integer
+      type: object
     FuelEfficiency:
       properties:
         annual_miles:
@@ -5607,6 +7985,16 @@ components:
         monthly_fuel_expense:
           description: Monthly fuel expense
           type: number
+      type: object
+    GetClientFiltersResponse:
+      description: A client filters response
+      properties:
+        list:
+          description: Description of operation
+          type: string
+        status:
+          description: status code of operation
+          type: integer
       type: object
     HeavyEquipmentsBaseListing:
       description: Base heavy equipment listing
@@ -6063,6 +8451,12 @@ components:
     Listing:
       description: Represents a full list of attributes available with Marketcheck for a car
       properties:
+        base_ext_color:
+          description: Base exterior color of the car
+          type: string
+        base_int_color:
+          description: Base interior color of the car
+          type: string
         build:
           $ref: "#/components/schemas/Build"
         carfax_1_owner:
@@ -6150,6 +8544,10 @@ components:
         price:
           description: Asking price for the car
           type: integer
+        price_change_percent:
+          description: Percentage difference between the cars's current price and ref_price i.e. last reported price
+          format: double
+          type: number
         rank:
           description: Relative rank of the listing determined by ranking service
           type: integer
@@ -6186,6 +8584,9 @@ components:
           type: string
         vdp_url:
           description: Vehicle Details Page url of the specific car
+          type: string
+        vehicle_registration_mark:
+          description: " Vehicle Registration Mark of the car"
           type: string
         vin:
           description: VIN for the car
@@ -6372,6 +8773,11 @@ components:
       properties:
         photo_links:
           description: A list of photo urls for the car
+          items:
+            type: string
+          type: array
+        photo_links_cached:
+          description: A list of cached photo urls for the car
           items:
             type: string
           type: array
@@ -6743,6 +9149,156 @@ components:
         price:
           $ref: "#/components/schemas/StatsItem"
       type: object
+    NeoVIN:
+      description: Describes the NeoVIN specification
+      properties:
+        available_options_details:
+          description: Listing of all options and packages with detailed equipment identified that could have been installed on the vehicle
+          type: object
+        body_subtype:
+          description: Body subtype (cab) of the vehicle
+          type: string
+        body_type:
+          description: Body type of the vehicle
+          type: string
+        city_mpg:
+          description: City miles per gallon
+          format: double
+          type: number
+        combined_msrp:
+          description: Calculated combination of base MSRP with the delivery charges and the installed options MSRP
+          format: double
+          type: number
+        created_at:
+          description: vin first decoded at timestamp
+          type: integer
+        created_at_date:
+          description: vin first decoded at date
+          type: string
+        decode_version:
+          description: This will represent if previous vin decode values are updated
+          type: integer
+        delivery_charges:
+          description: Manufacturer defined delivery charges
+          format: double
+          type: number
+        doors:
+          description: Number of doors on the vehicle
+          type: integer
+        drivetrain:
+          description: Identified drivetrain of the vehicle
+          type: string
+        engine:
+          description: Base identification of the number of cylinders and configuration of the installed engine on the vehicle
+          type: string
+        exterior_color:
+          description: The manufacturer defined option code and name for the exterior color of the vehicle
+          type: object
+        features:
+          description: Normalized feature set of equipment identified that have been identified as installed on the vehicle, including whether that item was standard to the version of the vehicle or was added as an installed option
+          type: object
+        fuel_type:
+          description: Identified Fuel type of the vehicle
+          type: string
+        height:
+          description: Overall height of the vehicle (in)
+          format: double
+          type: number
+        highway_mpg:
+          description: Highway miles per gallon
+          format: double
+          type: number
+        installed_equipment:
+          description: Detailed equipment identified as installed on the vehicle, including whether that item was standard to the version of the vehicle or was added as an installed option
+          type: object
+        installed_options_details:
+          description: Listing of all options and packages with detailed equipment identified that have been identified as installed on the vehicle
+          type: object
+        installed_options_msrp:
+          description: Calculated combination of the MSRP for the installed options and packages
+          format: double
+          type: number
+        interior_color:
+          description: The manufacturer defined option code and name for the interior color of the vehicle
+          type: object
+        length:
+          description: Overall length of the vehicle (in)
+          format: double
+          type: number
+        listing_confidence:
+          description: Identification of primary source data used for trim and installed colors and options
+          type: string
+        make:
+          description: Make of the vehicle
+          type: string
+        manufacturer_code:
+          description: Manufacturer code of the vehicle
+          type: string
+        model:
+          description: Model of the vehicle
+          type: string
+        msrp:
+          description: Base MSRP as defined for the defined version of that vehicle with no options installed
+          format: double
+          type: number
+        options_packages:
+          description: Option and package codes installed on the vehicle
+          type: string
+        package_code:
+          description: Extracted manufacturer package code related to selection of the vehicle version (where available / applicable)
+          type: string
+        package_description:
+          description: Extracted manufacturer package code description (where available / applicable)
+          type: string
+        seating_capacity:
+          description: Identified seating capacity of the vehicle
+          format: double
+          type: number
+        squish_vin:
+          description: Vin prefix identification used in the decoding of the vehicle
+          type: string
+        transmission:
+          description: Identified installed Transmission of the vehicle
+          type: string
+        transmission_confidence:
+          description: Identification of confidence related to the selection of the installed transmission
+          type: string
+        transmission_description:
+          description: The description of the installed transmission
+          type: string
+        trim:
+          description: Trim of the vehicle
+          type: string
+        trim_confidence:
+          description: Identification of confidence related to the selection of the trim
+          type: string
+        updated_at:
+          description: vin last decoded at timestamp
+          type: integer
+        updated_at_date:
+          description: vin last decoded at date
+          type: string
+        version:
+          description: Version Name of the vehicle
+          type: string
+        version_confidence:
+          description: Identification of confidence related to the selection of the vehicle version
+          type: string
+        vin:
+          description: 17 char long VIN of the vehicle
+          type: string
+        weight:
+          description: Gross vehicle weight (lbs)
+          format: double
+          type: number
+        width:
+          description: Overall width of the vehicle (in)
+          format: double
+          type: number
+        year:
+          description: Model Year of the vehicle
+          type: integer
+      type: object
     NestDealer:
       properties:
         city:
@@ -6751,8 +9307,14 @@ components:
         country:
           description: country of the dealer
           type: string
+        county:
+          description: county of the dealer
+          type: string
         dealer_type:
           description: Type of dealer (franchise/independent)
+          type: string
+        dealership_group_name:
+          description: dealership_group_name of dealer
           type: string
         id:
           description: The unique id associated with the dealer in the Marketcheck database
@@ -6762,6 +9324,9 @@ components:
           type: string
         longitude:
           description: Longitude for the dealer location
+          type: string
+        msa_code:
+          description: msa_code of the dealer
           type: string
         name:
           description: Name of the dealer
@@ -6846,6 +9411,141 @@ components:
         thumbs:
           description: Thumbs up/down depending upon left and right analysis numbers
           type: string
+      type: object
+    PredictedSpecs:
+      description: Specs of predicted vehicle
+      example:
+        base_exterior_color: Black
+        base_interior_color: Brown
+        carfax_1_owner: false
+        carfax_clean_title: false
+        city_mpg: 18
+        cylinders: 6
+        doors: 4
+        drivetrain: 4WD
+        engine_block: V
+        engine_size: 2.7
+        highway_mpg: 23
+        is_certified: false
+        latitude: 44.71164
+        longitude: -92.851607
+        make: ford
+        miles: 28741
+        model: f-150
+        transmission: Automatic
+        trim: xlt
+        year: 2018
+      properties:
+        base_exterior_color:
+          description: Base exterior color of vehicle
+          type: string
+        base_interior_color:
+          description: base interior color of vehicle
+          type: string
+        carfax_1_owner:
+          description: Indicates whether car has had only one owner or not
+          type: boolean
+        carfax_clean_title:
+          description: Indicates whether car has clean ownership records
+          type: boolean
+        city_mpg:
+          description: City mileage
+          format: double
+          type: number
+        cylinders:
+          description: Number of cylinders
+          type: integer
+        doors:
+          description: Number of doors
+          type: integer
+        drivetrain:
+          description: Drivetrain of the vehicle
+          type: string
+        engine_block:
+          description: Engine block of the vehicle
+          type: string
+        engine_size:
+          description: Engine size
+          format: double
+          type: number
+        highway_mpg:
+          description: Highway mileage
+          format: double
+          type: number
+        is_certified:
+          description: Certified vehicle
+          type: boolean
+        latitude:
+          description: Latutide for the vehicle location
+          format: double
+          type: number
+        longitude:
+          description: Longitude for the vehicle location
+          format: double
+          type: number
+        make:
+          description: make
+          type: string
+        miles:
+          description: Miles
+          type: integer
+        model:
+          description: model
+          type: string
+        transmission:
+          description: transmission
+          type: string
+        trim:
+          description: trim
+          type: string
+        year:
+          description: year
+          type: integer
+      type: object
+    PricePrediction:
+      description: Predicted price of a car
+      example:
+        predicted_price: 37998
+        price_range:
+          lower_bound: 32913
+          upper_bound: 44358
+        specs:
+          base_exterior_color: Black
+          base_interior_color: Brown
+          carfax_1_owner: false
+          carfax_clean_title: false
+          city_mpg: 18
+          cylinders: 6
+          doors: 4
+          drivetrain: 4WD
+          engine_block: V
+          engine_size: 2.7
+          highway_mpg: 23
+          is_certified: false
+          latitude: 44.71164
+          longitude: -92.851607
+          make: ford
+          miles: 28741
+          model: f-150
+          transmission: Automatic
+          trim: xlt
+          year: 2018
+      properties:
+        predicted_price:
+          description: Actual predicted price of a car
+          type: integer
+        price_range:
+          description: Price range around the predicted price, estimating the error in predicted price
+          properties:
+            lower_bound:
+              description: Lower bound
+              type: integer
+            upper_bound:
+              description: Upper bound
+              type: integer
+          type: object
+        specs:
+          $ref: "#/components/schemas/PredictedSpecs"
       type: object
     RVBaseListing:
       description: Base RV listing
@@ -7303,9 +10003,7 @@ components:
       description: Search query response
       properties:
         facets:
-          items:
-            $ref: "#/components/schemas/CarSearchFacets"
-          type: object
+          $ref: "#/components/schemas/CarSearchFacets"
         listings:
           items:
             $ref: "#/components/schemas/BaseListing"
@@ -7314,13 +10012,19 @@ components:
           description: The number of listings found
           type: integer
         range_facets:
-          items:
-            $ref: "#/components/schemas/CarSearchRangeFacets"
-          type: object
+          $ref: "#/components/schemas/CarSearchRangeFacets"
         stats:
-          items:
-            $ref: "#/components/schemas/CarSearchStats"
-          type: object
+          $ref: "#/components/schemas/CarSearchStats"
+      type: object
+    SetClientFiltersResponse:
+      description: A client filters response
+      properties:
+        message:
+          description: Description of operation
+          type: string
+        status:
+          description: status code of operation
+          type: integer
       type: object
     SpecsAutoCompleteResponse:
       description: Specs auto complete query response
@@ -7379,6 +10083,672 @@ components:
           description: Units
           type: number
       type: object
+    UKBaseListing:
+      description: Minimal set of attributes describing a listing
+      properties:
+        base_ext_color:
+          description: Base exterior color of the car
+          type: string
+        base_int_color:
+          description: Base interior color of the car
+          type: string
+        build:
+          $ref: "#/components/schemas/Build"
+        car_location:
+          $ref: "#/components/schemas/CarLocation"
+        carfax_1_owner:
+          description: Flag to indicate whether listing is carfax_1_owner
+          type: boolean
+        carfax_clean_title:
+          description: Flag to indicate whether listing is carfax_clean_title
+          type: boolean
+        co2_emissions:
+          description: CO2 emissions by car
+          type: string
+        data_source:
+          description: Data source of the listing
+          type: string
+        dealer:
+          $ref: "#/components/schemas/NestDealer"
+        dist:
+          description: Distance of the car's location from the specified user lcoation
+          format: double
+          type: number
+        dom:
+          description: Days on Market value for the car based on current and historical listings found in the Marketcheck database for this car
+          type: integer
+        dom_180:
+          description: Days on Market value for the car based on current and last 6 month listings found in the Marketcheck database for this car
+          type: integer
+        dom_active:
+          description: Days on Market value for the car based on current and last 30 days listings found in the Marketcheck database for this car
+          type: integer
+        exterior_color:
+          description: Exterior color of the car
+          type: string
+        financing_options:
+          description: Array of all finance offers for this listing
+          items:
+            $ref: "#/components/schemas/ListingFinance"
+          type: array
+        first_seen_at:
+          description: Listing first seen at first scraped timestamp
+          type: integer
+        first_seen_at_date:
+          description: Listing first seen at first scraped date
+          type: string
+        heading:
+          description: Listing title as displayed on the source website
+          type: string
+        id:
+          description: Unique identifier representing a specific listing from the Marketcheck database
+          type: string
+        in_transit:
+          description: in_transit of the listing
+          type: boolean
+        insurance_group:
+          description: Insurance Group of car
+          type: string
+        interior_color:
+          description: Interior color of the car
+          type: string
+        inventory_type:
+          description: Inventory type of car
+          type: string
+        is_certified:
+          description: Certified car
+          type: integer
+        is_translated:
+          description: is_translated of the listing
+          type: boolean
+        last_seen_at:
+          description: Listing last seen at (most recent) timestamp
+          type: integer
+        last_seen_at_date:
+          description: Listing last seen at (most recent) date
+          type: string
+        leasing_options:
+          description: Array of all finance offers for this listing
+          items:
+            $ref: "#/components/schemas/ListingLease"
+          type: array
+        media:
+          $ref: "#/components/schemas/ListingNestMedia"
+        miles:
+          description: Odometer reading / reported miles usage for the car
+          type: integer
+        model_code:
+          description: model_code of the listing
+          type: string
+        msrp:
+          description: MSRP for the car
+          type: integer
+        num_owners:
+          description: Number of owners
+          type: string
+        price:
+          description: Asking price for the car
+          type: integer
+        price_change_percent:
+          description: Percentage difference between the cars's current price and ref_price i.e. last reported price
+          format: double
+          type: number
+        ref_miles:
+          description: Last Odometer reading / reported miles usage for the car. If the asking miles value is not or is available then the last_miles could perhaps be used. last_miles is the miles for the car listed on the source website as of last_miles_dt date
+          type: string
+        ref_miles_dt:
+          description: The date at which the last miles was reported online. This is earlier to last_seen_date
+          type: integer
+        ref_price:
+          description: Last reported price for the car. If the asking price value is not or is available then the last_price could perhaps be used. last_price is the price for the car listed on the source website as of last_price_dt date
+          type: string
+        ref_price_dt:
+          description: The date at which the last price was reported online. This is earlier to last_seen_date
+          type: integer
+        scraped_at:
+          description: Listing last seen at date timestamp
+          format: integer
+          type: number
+        scraped_at_date:
+          description: Listing last seen at date
+          type: string
+        seller_type:
+          description: Seller type for the car
+          type: string
+        source:
+          description: Source domain of the listing
+          type: string
+        stock_no:
+          description: Stock number of car in dealers inventory
+          type: string
+        title_type:
+          description: title_type of the listing
+          type: string
+        uvc_id:
+          description: UVC ID of the car
+          type: string
+        vdp_url:
+          description: Vehicle Details Page url of the specific car
+          type: string
+        vehicle_registration_mark:
+          description: " Vehicle Registration Mark of the car"
+          type: string
+      type: object
+    UKCarSearchFacets:
+      properties:
+        base_exterior_color:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        base_interior_color:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        body_subtype:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        body_type:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        car_location_city:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        car_location_county:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        car_location_seller_name:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        car_location_street:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        car_location_zip:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        car_type:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        carfax_1_owner:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        carfax_clean_title:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        city:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        co2_emissions:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        cylinders:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        data_source:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        dealer_id:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        dealer_type:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        dealership_group_name:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        doors:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        drivetrain:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        engine:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        engine_aspiration:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        engine_block:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        engine_size:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        exterior_color:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        fca_status:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        fuel_type:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        in_transit:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        insurance_group:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        interior_color:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        make:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        mas_code:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        model:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        num_owners:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        powertrain_type:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        seating_capacity:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        seller_name:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        seller_type:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        source:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        state:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        transmission:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        trim:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        vehicle_registration_mark:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        vehicle_type:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        vrm:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        year:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+      type: object
+    UKRVBaseListing:
+      description: Base RV listing
+      properties:
+        availability_status:
+          description: availability_status of the listing
+          type: string
+        build:
+          $ref: "#/components/schemas/UKRVBuild"
+        currency_indicator:
+          description: currency_indicator of the listing
+          type: string
+        dealer:
+          $ref: "#/components/schemas/NestDealer"
+        dist:
+          description: Distance of the RV's location from the specified user lcoation
+          format: double
+          type: number
+        exterior_color:
+          description: Exterior color of the RV
+          type: string
+        first_seen_at:
+          description: Listing first seen at first scraped timestamp
+          type: integer
+        first_seen_at_date:
+          description: Listing first seen at first scraped date
+          type: string
+        heading:
+          description: Listing title as displayed on the source website
+          type: string
+        id:
+          description: Unique identifier representing a specific listing from the Marketcheck database
+          type: string
+        interior_color:
+          description: Interior color of the RV
+          type: string
+        inventory_type:
+          description: Inventory type of RV
+          type: string
+        last_seen_at:
+          description: Listing last seen at (most recent) timestamp
+          type: integer
+        last_seen_at_date:
+          description: Listing last seen at (most recent) date
+          type: string
+        media:
+          $ref: "#/components/schemas/ListingNestMedia"
+        miles:
+          description: Odometer reading / reported miles usage for the RV
+          type: integer
+        miles_indicator:
+          description: miles_indicator of the listing
+          type: string
+        mot_expires:
+          description: mot_expires of the listing
+          type: string
+        motorhome_build:
+          description: motorhome_build of the listing
+          type: string
+        msrp:
+          description: MSRP for the RV
+          type: integer
+        origin:
+          description: origin of the listing
+          type: string
+        price:
+          description: Asking price for the RV
+          type: integer
+        scraped_at:
+          description: Listing last seen at date timestamp
+          format: integer
+          type: number
+        scraped_at_date:
+          description: Listing last seen at date
+          type: string
+        seller_type:
+          description: Seller type for the RV
+          type: string
+        source:
+          description: Source domain of the listing
+          type: string
+        stock_no:
+          description: Stock number of RV in dealers inventory
+          type: string
+        vdp_url:
+          description: Details Page url of the specific RV
+          type: string
+        vin:
+          description: VIN for the RV
+          type: string
+      type: object
+    UKRVBuild:
+      description: Describes the RV specification
+      properties:
+        area:
+          description: Area of the RV
+          type: string
+        berths:
+          description: berths of RV
+          type: string
+        category:
+          description: category of the RV
+          type: string
+        chassis:
+          description: chassis of RV
+          type: string
+        drive_type:
+          description: drive_type of RV
+          type: string
+        drivetrain:
+          description: Drivetrain of the RV
+          type: string
+        engine:
+          description: Engine of the RV
+          type: string
+        engine_size:
+          description: engine_size of RV
+          type: string
+        exterior_length:
+          description: exterior_length of RV
+          type: string
+        floorplan:
+          description: floorplan of RV
+          type: string
+        floorplan_layout:
+          description: floorplan_layout of RV
+          type: string
+        fuel_type:
+          description: Fuel type of the RV
+          type: string
+        gvwr:
+          description: Gross Vehicle Weight Ratio of RV
+          type: string
+        interior_length:
+          description: interior_length of RV
+          type: string
+        inventory_type:
+          description: Inventory type of the RV
+          type: string
+        make:
+          description: RV Make
+          type: string
+        model:
+          description: RV model
+          type: string
+        mtplm:
+          description: mtplm of RV
+          type: string
+        slideouts:
+          description: Slideouts of the RV
+          type: string
+        steering:
+          description: steering of RV
+          type: string
+        sub_category:
+          description: sub_category of the RV
+          type: string
+        transmission:
+          description: Transmission of the RV
+          type: string
+        width:
+          description: width of RV
+          type: string
+        year:
+          description: Year of the RV
+          type: integer
+      type: object
+    UKRVSearchFacets:
+      properties:
+        berths:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        category:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        chassis:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        city:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        dealer_id:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        drive_type:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        drivetrain:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        engine:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        exterior_color:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        fuel_type:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        interior_color:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        inventory_type:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        make:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        model:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        postal_code:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        seller_name:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        source:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        state:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        steering:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        sub_category:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        transmission:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        year:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+        zip:
+          items:
+            $ref: "#/components/schemas/FacetItem"
+          type: array
+      type: object
+    UKRVSearchRangeFacets:
+      properties:
+        exterior_length:
+          items:
+            $ref: "#/components/schemas/RangeFacetItem"
+          type: object
+        interior_length:
+          items:
+            $ref: "#/components/schemas/RangeFacetItem"
+          type: object
+        miles:
+          items:
+            $ref: "#/components/schemas/RangeFacetItem"
+          type: object
+        price:
+          items:
+            $ref: "#/components/schemas/RangeFacetItem"
+          type: object
+        width:
+          items:
+            $ref: "#/components/schemas/RangeFacetItem"
+          type: object
+      type: object
+    UKRVSearchResponse:
+      description: RV search query response
+      properties:
+        facets:
+          items:
+            $ref: "#/components/schemas/UKRVSearchFacets"
+          type: object
+        listings:
+          items:
+            $ref: "#/components/schemas/UKRVBaseListing"
+          type: array
+        num_found:
+          description: The number of listings found
+          type: integer
+        range_facets:
+          items:
+            $ref: "#/components/schemas/UKRVSearchRangeFacets"
+          type: object
+        stats:
+          items:
+            $ref: "#/components/schemas/MotorcycleSearchStats"
+          type: object
+      type: object
+    UKSearchResponse:
+      description: Search query response
+      properties:
+        facets:
+          $ref: "#/components/schemas/UKCarSearchFacets"
+        listings:
+          items:
+            $ref: "#/components/schemas/UKBaseListing"
+          type: array
+        num_found:
+          description: The number of listings found
+          type: integer
+        range_facets:
+          $ref: "#/components/schemas/CarSearchRangeFacets"
+        stats:
+          $ref: "#/components/schemas/CarSearchStats"
+      type: object
     VinReport:
       properties:
         icon:
@@ -7388,3 +10758,7 @@ components:
           description: Some descriptional text
           type: string
       type: object
+  securitySchemes:
+    authorizeEndpoint:
+      scheme: basic
+      type: http

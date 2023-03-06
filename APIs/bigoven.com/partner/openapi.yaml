@@ -51,7 +51,7 @@ info:
     \r
 
     For more information on usage of this API, including features, pricing, rate limits, terms and conditions, please visit the [BigOven API website](https://api2.bigoven.com)."
-  title: 500,000+ Recipe and Grocery List API (v2)
+  title: 1,000,000+ Recipe and Grocery List API (v2)
   version: partner
   x-apiClientRegistration:
     url: http://api2.bigoven.com/web/console
@@ -65,25 +65,6 @@ info:
 externalDocs:
   url: http://api2.bigoven.com/web/documentation
 paths:
-  "/article/{uniqueKeyword}":
-    get:
-      deprecated: false
-      operationId: Article_Get
-      parameters:
-        - description: The article unique keyword
-          in: path
-          name: uniqueKeyword
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Article successfully returned
-        "404":
-          description: Article not found
-      summary: Get a food article
-      tags:
-        - Article
   "/collection/{id}":
     get:
       deprecated: false

@@ -4,31 +4,8 @@ servers:
     url: https://products.izettle.com
     variables: {}
 info:
-  contact:
-    email: product-library-team-iz@izettle.com
-    name: Product Library Team
-  description: |-
-    A product library is a representation of all the items that can be
-    displayed, put in a shopping cart and sold to a customer. Items may be
-    either producs or discounts.
-
-    A product is a synthetic construct, wrapping one or more variants (which is
-    the actual item being sold) Variants expresses different variations of
-    properties such as for example price, size or color. A discount will reduce
-    the total amount charged in a shopping cart. It can be used per item line,
-    or on the whole cart. It may reduce the affected amount by a percentage, or
-    by a fixed amount.
-
-    Together, the above types of entities makes up a complete library. The
-    library can be fetched as a whole through the library endpoint, where each
-    consecutive change applied to the library is available. Once the full
-    library is retrieved, only later events needs to be fetched to keep the
-    client up to date with the server
-
-    All path patterns "/organizations/{organizationUuid}/" can be replaced
-    with "/organizations/self/" for convenience as all endpoints are for
-    authorized users.
-  title: Zettle Product Library API
+  description: The Product Library API is used for managing merchant's product information and product images.
+  title: Product Library API
   version: 1.0.0
   x-apisguru-categories:
     - ecommerce
@@ -40,8 +17,6 @@ info:
       version: "3.0"
   x-providerName: izettle.com
   x-serviceName: products
-externalDocs:
-  url: https://github.com/iZettle/api-documentation
 paths:
   "/organizations/{organizationUuid}/categories/v2":
     get:
@@ -61,10 +36,9 @@ paths:
                 $ref: "#/components/schemas/CategoryResponse"
           description: List of all categories
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - READ:PRODUCT
-      summary: Retrieves all categories
+      summary: Retrieve all categories
       tags:
         - categories
     post:
@@ -80,18 +54,80 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CategoryRequest"
+              $ref: "#/components/schemas/CreateCategoriesRequest"
         required: true
       responses:
         "201":
           description: Category created
+        "400":
+          description: Category already exists
         "404":
           description: Organization not found
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - WRITE:PRODUCT
-      summary: Creates a new category
+      summary: Create a new category
+      tags:
+        - categories
+  "/organizations/{organizationUuid}/categories/v2/{categoryUuid}":
+    delete:
+      operationId: deleteCategory
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: categoryUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: Category deleted
+        "404":
+          description: Organization not found
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Delete a category
+      tags:
+        - categories
+    patch:
+      operationId: renameCategory
+      parameters:
+        - in: path
+          name: organizationUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - in: path
+          name: categoryUuid
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RenameCategoryRequest"
+        required: true
+      responses:
+        "204":
+          description: Category renamed
+        "400":
+          description: Category already exists
+        "404":
+          description: Organization not found
+      security:
+        - ZettleOauth:
+            - WRITE:PRODUCT
+      summary: Rename a category
       tags:
         - categories
   "/organizations/{organizationUuid}/discounts":
@@ -114,10 +150,9 @@ paths:
                 type: array
           description: List of all discounts
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - READ:PRODUCT
-      summary: Retrieves all discounts
+      summary: Retrieve all discounts
       tags:
         - discounts
     post:
@@ -156,10 +191,9 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Invalid request body
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - WRITE:PRODUCT
-      summary: Creates a discount
+      summary: Create a discount
       tags:
         - discounts
   "/organizations/{organizationUuid}/discounts/{discountUuid}":
@@ -184,10 +218,9 @@ paths:
         "404":
           description: Organization or Discount not found
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - WRITE:PRODUCT
-      summary: "Deletes a single discount "
+      summary: "Delete a single discount "
       tags:
         - discounts
     get:
@@ -228,10 +261,9 @@ paths:
         "404":
           description: Organization or Discount not found
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - READ:PRODUCT
-      summary: Retrieves a single discount
+      summary: Retrieve a single discount
       tags:
         - discounts
     put:
@@ -283,10 +315,9 @@ paths:
         "412":
           description: "Precondition failed: ETag did not match the expected value"
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - WRITE:PRODUCT
-      summary: Updates a single discount
+      summary: Update a single discount
       tags:
         - discounts
   "/organizations/{organizationUuid}/images":
@@ -308,10 +339,9 @@ paths:
                 $ref: "#/components/schemas/LibraryImagesResponse"
           description: List of all image urls
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - READ:PRODUCT
-      summary: Retrieves all library item images
+      summary: Retrieve all library item images
       tags:
         - images
   "/organizations/{organizationUuid}/import/status":
@@ -334,10 +364,9 @@ paths:
         "404":
           description: Organization or import not found
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - READ:PRODUCT
-      summary: Gets status for latest import
+      summary: Get status for latest import
       tags:
         - import
   "/organizations/{organizationUuid}/import/status/{importUuid}":
@@ -366,10 +395,9 @@ paths:
         "404":
           description: Organization or import not found
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - READ:PRODUCT
-      summary: Gets status for an import
+      summary: Get status for an import
       tags:
         - import
   "/organizations/{organizationUuid}/import/v2":
@@ -402,10 +430,9 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Invalid request body
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - WRITE:PRODUCT
-      summary: Bulk import library items
+      summary: Import library items
       tags:
         - import
   "/organizations/{organizationUuid}/library":
@@ -472,8 +499,7 @@ paths:
       security:
         - ZettleOauth:
             - READ:PRODUCT
-        - ZettleApiKey: []
-      summary: Retrieves the entire library
+      summary: Retrieve the entire library
       tags:
         - library
   "/organizations/{organizationUuid}/products":
@@ -499,10 +525,9 @@ paths:
         "204":
           description: Products deleted
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - WRITE:PRODUCT
-      summary: Deletes a list of products
+      summary: Delete a list of products
       tags:
         - products
     get:
@@ -524,10 +549,9 @@ paths:
                 type: array
           description: A list of products
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - READ:PRODUCT
-      summary: Retrieves all products visible in POS
+      summary: Retrieve all products visible in POS
       tags:
         - products
     post:
@@ -569,10 +593,9 @@ paths:
                 type: string
               style: simple
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - WRITE:PRODUCT
-      summary: Creates a new product
+      summary: Create a new product
       tags:
         - products
   "/organizations/{organizationUuid}/products/online/slug":
@@ -602,8 +625,7 @@ paths:
       security:
         - ZettleOauth:
             - READ:PRODUCT
-        - ZettleApiKey: []
-      summary: Creates a product identifier
+      summary: Create a product identifier
       tags:
         - products/online
   "/organizations/{organizationUuid}/products/options":
@@ -626,10 +648,9 @@ paths:
                 type: array
           description: List of Options
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - READ:PRODUCT
-      summary: Retrieves an aggregate of active Options in the library
+      summary: Retrieve an aggregate of active Options in the library
       tags:
         - products
   "/organizations/{organizationUuid}/products/v2":
@@ -657,10 +678,9 @@ paths:
                 type: array
           description: A list of products
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - READ:PRODUCT
-      summary: Retrieves all products visible in POS – v2
+      summary: Retrieve all products visible in POS – v2
       tags:
         - products
   "/organizations/{organizationUuid}/products/v2/count":
@@ -683,10 +703,9 @@ paths:
                 type: array
           description: Count of existing products
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - READ:PRODUCT
-      summary: Retrieves the count of existing products
+      summary: Retrieve the count of existing products
       tags:
         - products
   "/organizations/{organizationUuid}/products/v2/{productUuid}":
@@ -714,7 +733,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProductUpdateRequest"
+              $ref: "#/components/schemas/FullProductUpdateRequest"
         required: true
       responses:
         "204":
@@ -739,10 +758,9 @@ paths:
         "412":
           description: "Precondition failed: ETag did not match the expected value"
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - WRITE:PRODUCT
-      summary: Updates a single product
+      summary: Update a single product
       tags:
         - products
   "/organizations/{organizationUuid}/products/{productUuid}":
@@ -767,10 +785,9 @@ paths:
         "404":
           description: Organization or Product not found
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - WRITE:PRODUCT
-      summary: Deletes a single product
+      summary: Delete a single product
       tags:
         - products
     get:
@@ -813,10 +830,9 @@ paths:
         "404":
           description: Organization or Product not found
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - READ:PRODUCT
-      summary: Retrieves a single product
+      summary: Retrieve a single product
       tags:
         - products
   /v1/taxes:
@@ -834,10 +850,9 @@ paths:
         "403":
           description: Not a sales tax user
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - READ:PRODUCT
-      summary: Gets all tax rates available
+      summary: Get all available tax rates
       tags:
         - taxes
     post:
@@ -864,10 +879,9 @@ paths:
         "403":
           description: Not a sales tax user
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - WRITE:PRODUCT
-      summary: Creates new tax rates
+      summary: Create new tax rates
       tags:
         - taxes
   /v1/taxes/count:
@@ -883,10 +897,9 @@ paths:
         "403":
           description: Not a sales tax user
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - READ:PRODUCT
-      summary: Gets all tax rates and a count of products associated with each
+      summary: Get all tax rates and a count of products associated with each
       tags:
         - taxes
   /v1/taxes/settings:
@@ -904,8 +917,7 @@ paths:
       security:
         - ZettleOauth:
             - READ:PRODUCT
-        - ZettleApiKey: []
-      summary: "Gets the organization tax settings "
+      summary: "Get the organization tax settings "
       tags:
         - taxes
     put:
@@ -932,10 +944,9 @@ paths:
         "403":
           description: Not a sales tax user
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - WRITE:PRODUCT
-      summary: Updates the organization tax settings
+      summary: Update the organization tax settings
       tags:
         - taxes
   "/v1/taxes/{taxRateUuid}":
@@ -956,10 +967,9 @@ paths:
         "404":
           description: Tax rate not found
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - WRITE:PRODUCT
-      summary: Deletes a single tax rate
+      summary: Delete a single tax rate
       tags:
         - taxes
     get:
@@ -983,10 +993,9 @@ paths:
         "404":
           description: Tax rate not found
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - READ:PRODUCT
-      summary: Gets a single tax rate
+      summary: Get a single tax rate
       tags:
         - taxes
     put:
@@ -1022,10 +1031,9 @@ paths:
         "404":
           description: Tax rate not found
       security:
-        - ZettleApiKey: []
         - ZettleOauth:
             - WRITE:PRODUCT
-      summary: Updates a single tax rate
+      summary: Update a single tax rate
       tags:
         - taxes
 components:
@@ -1042,6 +1050,8 @@ components:
     CategoryDTO:
       properties:
         name:
+          maxLength: 100
+          minLength: 0
           type: string
         uuid:
           format: uuid
@@ -1049,15 +1059,6 @@ components:
       required:
         - name
         - uuid
-      type: object
-    CategoryRequest:
-      properties:
-        categories:
-          items:
-            $ref: "#/components/schemas/CategoryDTO"
-          type: array
-      required:
-        - categories
       type: object
     CategoryResponse:
       properties:
@@ -1098,6 +1099,15 @@ components:
           type: string
         value:
           type: string
+      type: object
+    CreateCategoriesRequest:
+      properties:
+        categories:
+          items:
+            $ref: "#/components/schemas/CategoryDTO"
+          type: array
+      required:
+        - categories
       type: object
     CreateSlugRequest:
       properties:
@@ -1725,62 +1735,15 @@ components:
         - uuid
         - variants
       type: object
-    ProductUpdateRequest:
+    RenameCategoryRequest:
       properties:
-        categories:
-          items:
-            type: string
-          maxItems: 1
-          minItems: 0
-          type: array
-          uniqueItems: true
-        category:
-          $ref: "#/components/schemas/CategoryDTO"
-        description:
-          type: string
-        externalReference:
-          type: string
-        imageLookupKeys:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        metadata:
-          $ref: "#/components/schemas/MetadataDTO"
         name:
+          maxLength: 100
+          minLength: 1
+          pattern: \S|\S.*\S
           type: string
-        presentation:
-          $ref: "#/components/schemas/PresentationDTO"
-        taxCode:
-          type: string
-        taxExempt:
-          type: boolean
-        taxRates:
-          items:
-            format: uuid
-            type: string
-          type: array
-          uniqueItems: true
-        unitName:
-          type: string
-        uuid:
-          format: uuid
-          type: string
-        variantUuids:
-          items:
-            format: uuid
-            type: string
-          maxItems: 2147483647
-          minItems: 1
-          type: array
-        vatPercentage:
-          maximum: 100
-          minimum: 0
-          type: number
       required:
         - name
-        - uuid
-        - variantUuids
       type: object
     SearchEngineOptimization:
       properties:
@@ -1951,6 +1914,7 @@ components:
           format: uuid
           type: string
         vatPercentage:
+          deprecated: true
           maximum: 100
           minimum: 0
           type: number
@@ -2036,22 +2000,13 @@ components:
         - weight
       type: object
   securitySchemes:
-    ZettleApiKey:
-      description: "For more information about authorization API visit: https://github.com/iZettle/api-documentation"
-      in: header
-      name: Authorization
-      type: apiKey
     ZettleOauth:
-      description: "For more information about authorization API visit: https://github.com/iZettle/api-documentation"
+      description: "For more information about authorization API visit: https://developer.zettle.com/docs/api/oauth/overview"
       flows:
-        implicit:
-          authorizationUrl: https://oauth.izettle.com/authorize
+        authorizationCode:
+          authorizationUrl: https://oauth.zettle.com/authorize
           scopes:
             READ:PRODUCT: Access to read product library data
             WRITE:PRODUCT: Access to write product library data
-        password:
-          scopes:
-            READ:PRODUCT: Access to read product library data
-            WRITE:PRODUCT: Access to write product library data
-          tokenUrl: https://oauth.izettle.com/token
+          tokenUrl: https://oauth.zettle.com/token
       type: oauth2

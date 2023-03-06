@@ -8,9 +8,8 @@ servers:
     url: https://delivery.apps.gov.bc.ca/pub/geomark
 info:
   contact:
-    email: IDDDBCLS@Victoria1.gov.bc.ca
-    name: DataBC
-    url: http://data.gov.bc.ca/
+    name: Contact DataBC
+    url: https://dpdd.atlassian.net/servicedesk/customer/portal/1/group/7/
   description: |-
     The Geomark Web Service allows you to create and share geographic areas of interest over the web in a variety of formats and coordinate systems. This service is especially helpful when you need to share an area of interest with people who require that the data be in a different format, or they use different mapping software. 
 
@@ -71,6 +70,7 @@ paths:
               - shpz
               - geojson
               - gml
+              - gpkg
               - wkt
             type: string
         - description: Select this option to allow overlapping geometries
@@ -144,10 +144,25 @@ paths:
             default: 8
             type: integer
       responses:
+        "200":
+          description: If the geomark was created via a web service call.
+        "302":
+          description: |-
+            If the geomark was created and a redirectUrl was specified then the response will redirect to the redirectUrl with the query string parameters geomarkId and geomarkUrl of the created geomark.
+
+            Additional reasons for this status code can be found in the [Geomark Web Service Developer Guide](https://apps.gov.bc.ca/pub/geomark/docs/rest-api/)
         "400":
-          description: Couldn't create geomark.
+          description: |-
+            **Couldn't create Geomark.**
+
+            Possible reasons:
+
+            * No Polygon, Multi-Polygon, or folder(set) of Polygons provided.
+            * A point or line was provided without a buffer width.
+
+            Additional reasons for this status code can be found in the [Geomark Web Service Developer Guide](https://apps.gov.bc.ca/pub/geomark/docs/rest-api/)
         "500":
-          description: Internal Server Error.
+          description: "**Internal Server Error**"
       summary: Create a new geomark by copying the geometries from one or more existing geomarks from the current server.
       tags:
         - create
@@ -213,6 +228,7 @@ paths:
                     - shpz
                     - geojson
                     - gml
+                    - gpkg
                     - wkt
                   type: string
                 multiple:
@@ -236,6 +252,7 @@ paths:
                     - shpz
                     - geojson
                     - gml
+                    - gpkg
                     - wkt
                   type: string
                 srid:
@@ -253,12 +270,25 @@ paths:
                   type: integer
               type: object
       responses:
+        "200":
+          description: If the geomark was created via a web service call.
         "302":
-          description: If the geomark was created and a redirectUrl was specified then the response will redirect to the redirectUrl with the query string parameters geomarkId and geomarkUrl of the created geomark. If the geomark was created and a redirectUrl was NOT specified then the response will redirect to the geomark info resource of the created geomark. If resultFormat was specified then the redirect will be to the geomark info resource for that file format. If the resultFormat was 'json' and a callback was specified the the callback query string parameter will be added to the URL. If there was an error creating the geomark and a failureRedirectUrl was specified then the response will be redirected to the failureRedirectUrl with a <fieldName>_Error query string parameter with the error message. Otherwise one of the 400 status codes below will be returned.
+          description: |-
+            If the geomark was created and a redirectUrl was specified then the response will redirect to the redirectUrl with the query string parameters geomarkId and geomarkUrl of the created geomark.
+
+            Additional reasons for this status code can be found in the [Geomark Web Service Developer Guide](https://apps.gov.bc.ca/pub/geomark/docs/rest-api/)
         "400":
-          description: Couldn't create geomark.
+          description: |-
+            **Couldn't create Geomark.**
+
+            Possible reasons:
+
+            * No Polygon, Multi-Polygon, or folder(set) of Polygons provided.
+            * A point or line was provided without a buffer width.
+
+            Additional reasons for this status code can be found in the [Geomark Web Service Developer Guide](https://apps.gov.bc.ca/pub/geomark/docs/rest-api/)
         "500":
-          description: Internal Server Error.
+          description: "**Internal Server Error**"
       summary: Create a new geomark
       tags:
         - create
@@ -288,6 +318,7 @@ paths:
               - shpz
               - geojson
               - gml
+              - gpkg
               - wkt
             type: string
         - description: The srid of the coordinate system the geometry should be converted to.
@@ -308,13 +339,14 @@ paths:
             type: integer
       responses:
         "200":
-          description: The geomark will be returned in the body of the HTTP response encoded in the requested file format.
-        "400":
-          description: Coordinate system with srid = <srid> is not supported.
+          description: The geomark will be returned in the body of the HTTP response encoded in the requested [file format](https://apps.gov.bc.ca/pub/geomark/docs/fileFormats.html).
         "404":
-          description: The geomark <geomarkId> could not be found.
+          description: |-
+            **The geomark <geomarkId> could not be found.**
+
+            Check for extra characters on the end of the URL. The geomark may have expired and been deleted.
         "500":
-          description: Internal Server Error.
+          description: "**Internal Server Error**"
       summary: Get information about a particular geomark
       tags:
         - info
@@ -344,6 +376,7 @@ paths:
               - shpz
               - geojson
               - gml
+              - gpkg
               - wkt
             type: string
         - description: The srid of the coordinate system the geometry should be converted to.
@@ -364,13 +397,19 @@ paths:
             type: integer
       responses:
         "200":
-          description: The geomark will be returned in the body of the HTTP response encoded in the requested file format.
+          description: The geomark will be returned in the body of the HTTP response encoded in the requested [file format](https://apps.gov.bc.ca/pub/geomark/docs/fileFormats.html).
         "400":
-          description: Coordinate system with srid = <srid> is not supported.
+          description: |-
+            **Coordinate system with srid = <srid> is not supported.**
+
+            Check the list of supported [coordinate systems](https://apps.gov.bc.ca/pub/geomark/docs/coordinateSystems.html).
         "404":
-          description: The geomark <geomarkId> could not be found.
+          description: |-
+            **The geomark <geomarkId> could not be found.**
+
+            Check for extra characters on the end of the URL. The geomark may have expired and been deleted.
         "500":
-          description: Internal Server Error.
+          description: "**Internal Server Error**"
       summary: Gets the bounding box of the geomark
       tags:
         - boundingBox
@@ -400,6 +439,7 @@ paths:
               - shpz
               - geojson
               - gml
+              - gpkg
               - wkt
             type: string
         - description: The srid of the coordinate system the geometry should be converted to.
@@ -420,13 +460,19 @@ paths:
             type: integer
       responses:
         "200":
-          description: The geomark will be returned in the body of the HTTP response encoded in the requested file format.
+          description: The geomark will be returned in the body of the HTTP response encoded in the requested [file format](https://apps.gov.bc.ca/pub/geomark/docs/fileFormats.html).
         "400":
-          description: Coordinate system with srid = <srid> is not supported.
+          description: |-
+            **Coordinate system with srid = <srid> is not supported.**
+
+            Check the list of supported [coordinate systems](https://apps.gov.bc.ca/pub/geomark/docs/coordinateSystems.html).
         "404":
-          description: The geomark <geomarkId> could not be found.
+          description: |-
+            **The geomark <geomarkId> could not be found.**
+
+            Check for extra characters on the end of the URL. The geomark may have expired and been deleted.
         "500":
-          description: Internal Server Error.
+          description: "**Internal Server Error**"
       summary: Get the feature and attribution of the geomark
       tags:
         - feature
@@ -456,6 +502,7 @@ paths:
               - shpz
               - geojson
               - gml
+              - gpkg
               - wkt
             type: string
         - description: The srid of the coordinate system the geometry should be converted to.
@@ -476,13 +523,19 @@ paths:
             type: integer
       responses:
         "200":
-          description: The geomark will be returned in the body of the HTTP response encoded in the requested file format.
+          description: The geomark will be returned in the body of the HTTP response encoded in the requested [file format](https://apps.gov.bc.ca/pub/geomark/docs/fileFormats.html).
         "400":
-          description: Coordinate system with srid = <srid> is not supported.
+          description: |-
+            **Coordinate system with srid = <srid> is not supported.**
+
+            Check the list of supported [coordinate systems](https://apps.gov.bc.ca/pub/geomark/docs/coordinateSystems.html).
         "404":
-          description: The geomark <geomarkId> could not be found.
+          description: |-
+            **The geomark <geomarkId> could not be found.**
+
+            Check for extra characters on the end of the URL. The geomark may have expired and been deleted.
         "500":
-          description: Internal Server Error.
+          description: "**Internal Server Error**"
       summary: Get the individual geometries within a multi-part geometry
       tags:
         - parts
@@ -512,6 +565,7 @@ paths:
               - shpz
               - geojson
               - gml
+              - gpkg
               - wkt
             type: string
         - description: The srid of the coordinate system the geometry should be converted to.
@@ -532,13 +586,19 @@ paths:
             type: integer
       responses:
         "200":
-          description: The geomark will be returned in the body of the HTTP response encoded in the requested file format.
+          description: The geomark will be returned in the body of the HTTP response encoded in the requested [file format](https://apps.gov.bc.ca/pub/geomark/docs/fileFormats.html).
         "400":
-          description: Coordinate system with srid = <srid> is not supported.
+          description: |-
+            **Coordinate system with srid = <srid> is not supported.**
+
+            Check the list of supported [coordinate systems](https://apps.gov.bc.ca/pub/geomark/docs/coordinateSystems.html).
         "404":
-          description: The geomark <geomarkId> could not be found.
+          description: |-
+            **The geomark <geomarkId> could not be found.**
+
+            Check for extra characters on the end of the URL. The geomark may have expired and been deleted.
         "500":
-          description: Internal Server Error.
+          description: "**Internal Server Error**"
       summary: Gets a single spatial point representative of the geomark.
       tags:
         - point

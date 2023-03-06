@@ -9,7 +9,7 @@ info:
   description: |
     The Cisco Meraki Dashboard API is a modern REST API based on the OpenAPI specification.
 
-    > Date: 27 February, 2023
+    > Date: 05 March, 2023
     >
     > [Recent Updates](https://meraki.io/whats-new/)
 
@@ -58,7 +58,6 @@ tags:
   - name: Link aggregations
   - name: MG LAN settings
   - name: MG port forwarding rules
-  - name: MG subnet pool settings
   - name: MR L3 firewall
   - name: MV Sense
   - name: MX 1:1 NAT rules
@@ -2925,91 +2924,6 @@ paths:
       summary: Update the cellular firewall rules of an MX network
       tags:
         - MX cellular firewall
-  "/networks/{networkId}/cellularGateway/settings/subnetPool":
-    get:
-      description: Return the subnet pool and mask configured for MGs in the network.
-      operationId: getNetworkCellularGatewaySettingsSubnetPool
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    cidr: 192.168.0.0/16
-                    deploymentMode: routed
-                    mask: 24
-                    subnets:
-                      - applianceIp: 192.168.0.1
-                        name: my first MG
-                        serial: AAAA-AAAA-AAAA
-                        subnet: 192.168.0.0/24
-                      - applianceIp: 192.168.0.33
-                        name: my second MG
-                        serial: BBBB-BBBB-BBBB
-                        subnet: 192.168.0.32/24
-              schema:
-                type: object
-          description: Successful operation
-      summary: Return the subnet pool and mask configured for MGs in the network.
-      tags:
-        - MG subnet pool settings
-    put:
-      description: Update the subnet pool and mask configuration for MGs in the network.
-      operationId: updateNetworkCellularGatewaySettingsSubnetPool
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              example:
-                cidr: 192.168.0.0/16
-                deploymentMode: routed
-                mask: 24
-              properties:
-                cidr:
-                  description: CIDR of the pool of subnets. Each MG in this network will automatically pick a subnet from this pool.
-                  type: string
-                mask:
-                  description: Mask used for the subnet of all MGs in  this network.
-                  type: integer
-              type: object
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    cidr: 192.168.0.0/16
-                    deploymentMode: routed
-                    mask: 24
-                    subnets:
-                      - applianceIp: 192.168.0.1
-                        name: my first MG
-                        serial: AAAA-AAAA-AAAA
-                        subnet: 192.168.0.0/24
-                      - applianceIp: 192.168.0.33
-                        name: my second MG
-                        serial: BBBB-BBBB-BBBB
-                        subnet: 192.168.0.32/24
-              schema:
-                type: object
-          description: Successful operation
-      summary: Update the subnet pool and mask configuration for MGs in the network.
-      tags:
-        - MG subnet pool settings
   "/networks/{networkId}/clients":
     get:
       description: List the clients that have used this network in the timespan
@@ -5381,36 +5295,6 @@ paths:
       summary: Return the uplink information for a device.
       tags:
         - Devices
-  "/networks/{networkId}/devices/{serial}/wireless/radioSettings":
-    get:
-      description: Return the radio settings of a device
-      operationId: getNetworkDeviceWirelessRadioSettings
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: serial
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    rfProfileId: "1234"
-                    serial: Q234-ABCD-5678
-              schema:
-                type: object
-          description: Successful operation
-      summary: Return the radio settings of a device
-      tags:
-        - Radio settings
   "/networks/{networkId}/devices/{serial}/wireless/status":
     get:
       description: Return the SSID statuses of an access point
@@ -10830,204 +10714,6 @@ paths:
                 type: object
           description: Successful operation
       summary: Update switch network settings
-      tags:
-        - Switch settings
-  "/networks/{networkId}/switch/settings/dhcpServerPolicy":
-    get:
-      description: Return the DHCP server policy
-      operationId: getNetworkSwitchSettingsDhcpServerPolicy
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    alerts:
-                      email:
-                        enabled: false
-                    allowedServers:
-                      - 00:50:56:00:00:01
-                      - 00:50:56:00:00:02
-                    arpInspection:
-                      enabled: false
-                      unsupportedModels:
-                        - MS120-8
-                        - MS125-24
-                    blockedServers:
-                      - 00:50:56:00:00:03
-                      - 00:50:56:00:00:04
-                    defaultPolicy: block
-              schema:
-                type: object
-          description: Successful operation
-      summary: Return the DHCP server policy
-      tags:
-        - Switch settings
-    put:
-      description: Update the DHCP server policy
-      operationId: updateNetworkSwitchSettingsDhcpServerPolicy
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              example:
-                alerts:
-                  email:
-                    enabled: false
-                allowedServers:
-                  - 00:50:56:00:00:01
-                  - 00:50:56:00:00:02
-                arpInspection:
-                  enabled: false
-                  unsupportedModels:
-                    - MS120-8
-                    - MS125-24
-                blockedServers:
-                  - 00:50:56:00:00:03
-                  - 00:50:56:00:00:04
-                defaultPolicy: block
-              properties:
-                allowedServers:
-                  description: List the MAC addresses of DHCP servers to permit on the network. Applicable only if defaultPolicy is set to block. An empty array will clear the entries.
-                  items:
-                    type: string
-                  type: array
-                blockedServers:
-                  description: List the MAC addresses of DHCP servers to block on the network. Applicable only if defaultPolicy is set to allow. An empty array will clear the entries.
-                  items:
-                    type: string
-                  type: array
-                defaultPolicy:
-                  description: "'allow' or 'block' new DHCP servers. Default value is 'allow'."
-                  enum:
-                    - allow
-                    - block
-                  type: string
-              type: object
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    alerts:
-                      email:
-                        enabled: false
-                    allowedServers:
-                      - 00:50:56:00:00:01
-                      - 00:50:56:00:00:02
-                    arpInspection:
-                      enabled: false
-                      unsupportedModels:
-                        - MS120-8
-                        - MS125-24
-                    blockedServers:
-                      - 00:50:56:00:00:03
-                      - 00:50:56:00:00:04
-                    defaultPolicy: block
-              schema:
-                type: object
-          description: Successful operation
-      summary: Update the DHCP server policy
-      tags:
-        - Switch settings
-  "/networks/{networkId}/switch/settings/dscpToCosMappings":
-    get:
-      description: Return the DSCP to CoS mappings
-      operationId: getNetworkSwitchSettingsDscpToCosMappings
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    mappings:
-                      - cos: 1
-                        dscp: 1
-                        title: Video
-              schema:
-                type: object
-          description: Successful operation
-      summary: Return the DSCP to CoS mappings
-      tags:
-        - Switch settings
-    put:
-      description: Update the DSCP to CoS mappings
-      operationId: updateNetworkSwitchSettingsDscpToCosMappings
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              example:
-                mappings:
-                  - cos: 1
-                    dscp: 1
-                    title: Video
-              properties:
-                mappings:
-                  description: An array of DSCP to CoS mappings. An empty array will reset the mappings to default.
-                  items:
-                    properties:
-                      cos:
-                        description: The actual layer-2 CoS queue the DSCP value is mapped to. These are not bits set on outgoing frames. Value can be in the range of 0 to 5 inclusive.
-                        type: integer
-                      dscp:
-                        description: The Differentiated Services Code Point (DSCP) tag in the IP header that will be mapped to a particular Class-of-Service (CoS) queue. Value can be in the range of 0 to 63 inclusive.
-                        type: integer
-                      title:
-                        description: Label for the mapping (optional).
-                        type: string
-                    required:
-                      - dscp
-                      - cos
-                    type: object
-                  type: array
-              required:
-                - mappings
-              type: object
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    mappings:
-                      - cos: 1
-                        dscp: 1
-                        title: Video
-              schema:
-                type: object
-          description: Successful operation
-      summary: Update the DSCP to CoS mappings
       tags:
         - Switch settings
   "/networks/{networkId}/switch/settings/mtu":
@@ -16759,10 +16445,6 @@ x-batchable-actions:
     operation: update
     resource: /devices/{serial}/cellularGateway/settings/portForwardingRules
     summary: Updates the port forwarding rules for a single MG.
-  - group: Cellular gateway subnet pool
-    operation: update
-    resource: /networks/{networkId}/cellularGateway/settings/subnetPool
-    summary: Update the subnet pool and mask configuration for MGs in the network.
   - group: Device
     operation: claim
     resource: /networks/{networkId}/devices
@@ -16775,14 +16457,6 @@ x-batchable-actions:
     operation: update
     resource: /networks/{networkId}/devices/{serial}
     summary: Update the attributes of a device
-  - group: Dhcp server policy
-    operation: update
-    resource: /networks/{networkId}/switch/settings/dhcpServerPolicy
-    summary: Update the DHCP server policy
-  - group: Dscp cos mapping
-    operation: update
-    resource: /networks/{networkId}/switch/settings/dscpToCosMappings
-    summary: Update the DSCP to CoS mappings
   - group: Floor plan
     operation: destroy
     resource: /networks/{networkId}/floorPlans/{floorPlanId}

@@ -7,8 +7,8 @@ basePath: /v2.0
 info:
   contact:
     x-twitter: weatherbitio
-  description: This is the documentation for the Weatherbit Weather API.  The base URL for the API is [http://api.weatherbit.io/v2.0/](http://api.weatherbit.io/v2.0/) or [https://api.weatherbit.io/v2.0/](http://api.weatherbit.io/v2.0/). Below is the Swagger UI documentation for the API. All API requests require the `key` parameter.        An Example for a 5 day forecast for London, UK would be `http://api.weatherbit.io/v2.0/forecast/3hourly?city=London`&`country=UK`. See our [Weather API description page](https://www.weatherbit.io/api) for additional documentation.
-  title: Weatherbit.io - Swagger UI Weather API documentation
+  description: This an interactive version of the documentation for the Weatherbit API.  The base URL for the API is [http://api.weatherbit.io/v2.0/](http://api.weatherbit.io/v2.0/) or [https://api.weatherbit.io/v2.0/](http://api.weatherbit.io/v2.0/). Below is the Swagger UI documentation for the API. All API requests require the `key` parameter.        An Example for a 48 hour forecast for London, UK would be `http://api.weatherbit.io/v2.0/forecast/hourly?lat=51.5072`&`lon=-0.1276`. See our [Weather API description page](https://www.weatherbit.io/api) for the full documentation.
+  title: Weatherbit - Interactive Swagger UI Documentation
   version: 2.0.0
   x-apisguru-categories:
     - location
@@ -64,9 +64,9 @@ paths:
         - Alerts
   "/bulk/files/{file}":
     get:
-      description: "**(Advanceed/Enterprise plans only)** Downloads bulk data files - OPTIONS: ( current.json.gz - Current observations for cities > 1000 population). Units are Metric (Celcius, m/s, etc)."
+      description: "Downloads bulk data files - OPTIONS: ( current.csv.gz, forecast_hourly.csv.gz, forecast_daily.csv.gz). Units are Metric (Celcius, m/s, etc)."
       parameters:
-        - description: Filename (ie. current.json.gz)
+        - description: Filename (ie. current.csv.gz)
           format: string
           in: path
           name: file
@@ -652,6 +652,89 @@ paths:
       summary: Returns a Current Observation - Given a lat/lon.
       tags:
         - Current Weather Data
+  "/current?points={points}":
+    get:
+      description: Returns a group of Current Observations - Given a list of points (lat1, lon1), (lat2, lon2), (latN, lonN), ...
+      parameters:
+        - description: "Comma separated list of points. Example: (35.5, -75.5),(45, 65),(45.12, -130.5)"
+          format: string
+          in: path
+          name: points
+          required: true
+          type: string
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
+          enum:
+            - S
+            - I
+          format: string
+          in: query
+          name: units
+          required: false
+          type: string
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
+          enum:
+            - ar
+            - az
+            - be
+            - bg
+            - bs
+            - ca
+            - cs
+            - de
+            - fi
+            - fr
+            - el
+            - es
+            - et
+            - hr
+            - hu
+            - id
+            - it
+            - is
+            - kw
+            - nb
+            - nl
+            - pl
+            - pt
+            - ro
+            - ru
+            - sk
+            - sl
+            - sr
+            - sv
+            - tr
+            - uk
+            - zh
+            - zh-tw
+          format: string
+          in: query
+          name: lang
+          required: false
+          type: string
+        - description: "Wraps return in jsonp callback. Example: callback=func"
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        "200":
+          description: An Observation Group object.
+          schema:
+            $ref: "#/definitions/CurrentObsGroup"
+        default:
+          description: No Data.
+          schema:
+            $ref: "#/definitions/Error"
+      summary: Returns a group of observations given a list of points in the format (lat1, lon1), (lat2, lon2), (latN, lonN), ...
+      tags:
+        - Current Weather Data
   "/current?postal_code={postal_code}":
     get:
       description: "Returns current weather observation - Given a Postal Code. "
@@ -931,390 +1014,6 @@ paths:
       summary: Returns a group of observations given a list of stations
       tags:
         - Current Weather Data
-  "/forecast/3hourly?city={city}&country={country}":
-    get:
-      description: |
-        Returns a 3-hourly forecast, where each point represents a three hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC.
-      parameters:
-        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
-          format: string
-          in: path
-          name: city
-          required: true
-          type: string
-        - description: Full name of state.
-          format: string
-          in: query
-          name: state
-          required: false
-          type: string
-        - description: Country Code (2 letter).
-          format: string
-          in: path
-          name: country
-          required: true
-          type: string
-        - description: Number of days to return. Default 5.
-          format: integer
-          in: query
-          name: days
-          required: false
-          type: number
-        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
-          enum:
-            - S
-            - I
-          format: string
-          in: query
-          name: units
-          required: false
-          type: string
-        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
-          enum:
-            - ar
-            - az
-            - be
-            - bg
-            - bs
-            - ca
-            - cs
-            - de
-            - fi
-            - fr
-            - el
-            - es
-            - et
-            - hr
-            - hu
-            - id
-            - it
-            - is
-            - kw
-            - nb
-            - nl
-            - pl
-            - pt
-            - ro
-            - ru
-            - sk
-            - sl
-            - sr
-            - sv
-            - tr
-            - uk
-            - zh
-            - zh-tw
-          format: string
-          in: query
-          name: lang
-          required: false
-          type: string
-        - description: Wraps return in jsonp callback. Example - callback=func
-          format: string
-          in: query
-          name: callback
-          required: false
-          type: string
-        - description: Your registered API key.
-          format: string
-          in: query
-          name: key
-          required: true
-          type: string
-      responses:
-        "200":
-          description: A forecast object.
-          schema:
-            $ref: "#/definitions/ForecastHourly"
-        default:
-          description: No Data.
-          schema:
-            $ref: "#/definitions/Error"
-      summary: Returns a 3-hourly forecast - Given City and/or State, Country.
-      tags:
-        - 5 day / 3 hour Forecast
-  "/forecast/3hourly?city_id={city_id}":
-    get:
-      description: |
-        Returns a 3-hourly forecast, where each point represents a three hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC.
-      parameters:
-        - description: "City ID. Example: 4487042"
-          format: integer
-          in: path
-          name: city_id
-          required: true
-          type: integer
-        - description: Number of days to return. Default 5.
-          format: integer
-          in: query
-          name: days
-          required: false
-          type: number
-        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
-          enum:
-            - S
-            - I
-          format: string
-          in: query
-          name: units
-          required: false
-          type: string
-        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
-          enum:
-            - ar
-            - az
-            - be
-            - bg
-            - bs
-            - ca
-            - cs
-            - de
-            - fi
-            - fr
-            - el
-            - es
-            - et
-            - hr
-            - hu
-            - id
-            - it
-            - is
-            - kw
-            - nb
-            - nl
-            - pl
-            - pt
-            - ro
-            - ru
-            - sk
-            - sl
-            - sr
-            - sv
-            - tr
-            - uk
-            - zh
-            - zh-tw
-          format: string
-          in: query
-          name: lang
-          required: false
-          type: string
-        - description: "Wraps return in jsonp callback. Example: callback=func"
-          format: string
-          in: query
-          name: callback
-          required: false
-          type: string
-        - description: Your registered API key.
-          format: string
-          in: query
-          name: key
-          required: true
-          type: string
-      responses:
-        "200":
-          description: A forecast object.
-          schema:
-            $ref: "#/definitions/ForecastHourly"
-        default:
-          description: No Data.
-          schema:
-            $ref: "#/definitions/Error"
-      summary: Returns a 3-hourly forecast - Given a City ID.
-      tags:
-        - 5 day / 3 hour Forecast
-  "/forecast/3hourly?lat={lat}&lon={lon}":
-    get:
-      description: |
-        Returns a 3-hourly forecast, where each point represents a three hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC.
-      parameters:
-        - description: Latitude component of location.
-          format: double
-          in: path
-          name: lat
-          required: true
-          type: number
-        - description: Longitude component of location.
-          format: double
-          in: path
-          name: lon
-          required: true
-          type: number
-        - description: Number of days to return. Default 5.
-          format: integer
-          in: query
-          name: days
-          required: false
-          type: number
-        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
-          enum:
-            - S
-            - I
-          format: string
-          in: query
-          name: units
-          required: false
-          type: string
-        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
-          enum:
-            - ar
-            - az
-            - be
-            - bg
-            - bs
-            - ca
-            - cs
-            - de
-            - fi
-            - fr
-            - el
-            - es
-            - et
-            - hr
-            - hu
-            - id
-            - it
-            - is
-            - kw
-            - nb
-            - nl
-            - pl
-            - pt
-            - ro
-            - ru
-            - sk
-            - sl
-            - sr
-            - sv
-            - tr
-            - uk
-            - zh
-            - zh-tw
-          format: string
-          in: query
-          name: lang
-          required: false
-          type: string
-        - description: Wraps return in jsonp callback. Example - callback=func
-          format: string
-          in: query
-          name: callback
-          required: false
-          type: string
-        - description: Your registered API key.
-          format: string
-          in: query
-          name: key
-          required: true
-          type: string
-      responses:
-        "200":
-          description: A forecast object.
-          schema:
-            $ref: "#/definitions/ForecastHourly"
-        default:
-          description: No Data.
-          schema:
-            $ref: "#/definitions/Error"
-      summary: Returns a 3-hourly forecast - Given a lat/lon.
-      tags:
-        - 5 day / 3 hour Forecast
-  "/forecast/3hourly?postal_code={postal_code}":
-    get:
-      description: |
-        Returns a 3-hourly forecast, where each point represents a three hour period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC.
-      parameters:
-        - description: "Postal Code. Example: 28546"
-          format: integer
-          in: path
-          name: postal_code
-          required: true
-          type: integer
-        - description: Country Code (2 letter).
-          format: string
-          in: query
-          name: country
-          required: false
-          type: string
-        - description: Number of days to return. Default 5.
-          format: integer
-          in: query
-          name: days
-          required: false
-          type: number
-        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
-          enum:
-            - S
-            - I
-          format: string
-          in: query
-          name: units
-          required: false
-          type: string
-        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
-          enum:
-            - ar
-            - az
-            - be
-            - bg
-            - bs
-            - ca
-            - cs
-            - de
-            - fi
-            - fr
-            - el
-            - es
-            - et
-            - hr
-            - hu
-            - id
-            - it
-            - is
-            - kw
-            - nb
-            - nl
-            - pl
-            - pt
-            - ro
-            - ru
-            - sk
-            - sl
-            - sr
-            - sv
-            - tr
-            - uk
-            - zh
-            - zh-tw
-          format: string
-          in: query
-          name: lang
-          required: false
-          type: string
-        - description: "Wraps return in jsonp callback. Example: callback=func"
-          format: string
-          in: query
-          name: callback
-          required: false
-          type: string
-        - description: Your registered API key.
-          format: string
-          in: query
-          name: key
-          required: true
-          type: string
-      responses:
-        "200":
-          description: A forecast object.
-          schema:
-            $ref: "#/definitions/ForecastHourly"
-        default:
-          description: No Data.
-          schema:
-            $ref: "#/definitions/Error"
-      summary: Returns a 3-hourly forecast - Given a Postal Code.
-      tags:
-        - 5 day / 3 hour Forecast
   "/forecast/airquality?city={city}&country={country}":
     get:
       description: Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.
@@ -1947,7 +1646,6 @@ paths:
       summary: "Returns Energy Forecast API response  - Given a single lat/lon. "
       tags:
         - Forecast Degree Day API
-        - Forecast Solar Irradiance API
   "/forecast/hourly?city={city}&country={country}":
     get:
       description: |2
@@ -2047,9 +1745,9 @@ paths:
           description: No Data.
           schema:
             $ref: "#/definitions/Error"
-      summary: Returns an 120 hour (hourly forecast) - Given City and/or State, Country.
+      summary: Returns an hourly forecast - Given City and/or State, Country.
       tags:
-        - 120 hour / hourly Forecast
+        - 240 hour / hourly Forecast
   "/forecast/hourly?city_id={city_id}":
     get:
       description: |2
@@ -2137,9 +1835,9 @@ paths:
           description: No Data.
           schema:
             $ref: "#/definitions/Error"
-      summary: Returns a 120 hour (hourly) forecast - Given a City ID.
+      summary: Returns an hourly forecast - Given a City ID.
       tags:
-        - 120 hour / hourly Forecast
+        - 240 hour / hourly Forecast
   "/forecast/hourly?lat={lat}&lon={lon}":
     get:
       description: |
@@ -2233,9 +1931,9 @@ paths:
           description: No Data.
           schema:
             $ref: "#/definitions/Error"
-      summary: Returns 120 hour (hourly) forecast - Given a lat/lon.
+      summary: Returns an hourly forecast - Given a lat/lon.
       tags:
-        - 120 hour / hourly Forecast
+        - 240 hour / hourly Forecast
   "/forecast/hourly?postal_code={postal_code}":
     get:
       description: |2
@@ -2329,9 +2027,9 @@ paths:
           description: No Data.
           schema:
             $ref: "#/definitions/Error"
-      summary: Returns a 120 hour (hourly) forecast - Given a Postal Code.
+      summary: Returns an hourly forecast - Given a Postal Code.
       tags:
-        - 120 hour / hourly Forecast
+        - 240 hour / hourly Forecast
   "/history/airquality?city={city}&country={country}":
     get:
       description: Returns historical air quality conditions.
@@ -2494,7 +2192,7 @@ paths:
         - Historical Air Quality
   "/history/daily?city={city}&country={country}":
     get:
-      description: Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 year per request)**
       parameters:
         - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
@@ -2601,7 +2299,7 @@ paths:
         - Daily Historical Weather Data
   "/history/daily?city_id={city_id}":
     get:
-      description: Returns Historical Observations - Given a City ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a City ID. **(LIMIT 1 year per request)**
       parameters:
         - description: "City ID. Example: 4487042"
           format: string
@@ -2696,7 +2394,7 @@ paths:
         - Daily Historical Weather Data
   "/history/daily?lat={lat}&lon={lon}":
     get:
-      description: Returns Historical Observations - Given a lat, and lon. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a lat, and lon. **(LIMIT 1 year per request)**
       parameters:
         - description: Latitude component of location.
           format: double
@@ -2797,7 +2495,7 @@ paths:
         - Daily Historical Weather Data
   "/history/daily?postal_code={postal_code}":
     get:
-      description: Returns Historical Observations - Given a Postal Code. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a Postal Code. **(LIMIT 1 year per request)**
       parameters:
         - description: "Postal Code. Example: 28546"
           format: string
@@ -2898,7 +2596,7 @@ paths:
         - Daily Historical Weather Data
   "/history/daily?station={station}":
     get:
-      description: Returns Historical Observations - Given a station ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a station ID. **(LIMIT 1 year per request)**
       parameters:
         - description: Station ID.
           format: string
@@ -2991,87 +2689,6 @@ paths:
       summary: Returns Historical Observations - Given a station ID.
       tags:
         - Daily Historical Weather Data
-  "/history/energy/bbox?lat1={lat1}&lon1={lon1}&lat2={lat2}&lon2={lon2}":
-    get:
-      description: "Returns aggregate energy specific historical weather fields, over a specified time period. Supply a bounding box ex: lat1=40&lon1=-78&lat2=38&lon2=-80. This API will return UP TO 150 stations, aggregated by the specified time period start_date to end_date. "
-      parameters:
-        - description: Latitude of upper left corner.
-          format: double
-          in: path
-          name: lat1
-          required: true
-          type: number
-        - description: Longitude of upper left corner.
-          format: double
-          in: path
-          name: lon1
-          required: true
-          type: number
-        - description: Latitude of lower right corner.
-          format: double
-          in: path
-          name: lat2
-          required: true
-          type: number
-        - description: Longitude of lower right corner.
-          format: double
-          in: path
-          name: lon2
-          required: true
-          type: number
-        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
-          format: string
-          in: query
-          name: start_date
-          required: true
-          type: string
-        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
-          format: string
-          in: query
-          name: end_date
-          required: true
-          type: string
-        - description: "Temperature threshold to use to calculate degree days (default 18 C) "
-          format: double
-          in: query
-          name: threshold
-          required: false
-          type: number
-        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
-          enum:
-            - S
-            - I
-          format: string
-          in: query
-          name: units
-          required: false
-          type: string
-        - description: "Wraps return in jsonp callback. Example: callback=func"
-          format: string
-          in: query
-          name: callback
-          required: false
-          type: string
-        - description: Your registered API key.
-          format: string
-          in: query
-          name: key
-          required: true
-          type: string
-      responses:
-        "200":
-          description: An Energy Data Object.
-          schema:
-            $ref: "#/definitions/EnergyObsGroup"
-        default:
-          description: No Data.
-          schema:
-            $ref: "#/definitions/Error"
-      summary: "Returns multiple locations given a bounding box. "
-      tags:
-        - Historical Degree Day API
-        - Historical Solar Irradiance API
-        - Historical Weather Energy API
   "/history/energy?lat={lat}&lon={lon}":
     get:
       description: Returns aggregate energy specific historical weather fields, over a specified time period.
@@ -3149,11 +2766,9 @@ paths:
       summary: "Returns Energy API response  - Given a single lat/lon. "
       tags:
         - Historical Degree Day API
-        - Historical Solar Irradiance API
-        - Historical Weather Energy API
   "/history/hourly?city={city}&country={country}":
     get:
-      description: Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 31 days per request)**
       parameters:
         - description: City search. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
@@ -3269,7 +2884,7 @@ paths:
         - Hourly Historical Weather Data
   "/history/hourly?city_id={city_id}":
     get:
-      description: Returns Historical Observations - Given a City ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a City ID. **(LIMIT 31 days per request)**
       parameters:
         - description: "City ID. Example: 4487042"
           format: string
@@ -3373,7 +2988,7 @@ paths:
         - Hourly Historical Weather Data
   "/history/hourly?lat={lat}&lon={lon}":
     get:
-      description: Returns Historical Observations - Given a lat, and lon. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a lat, and lon. **(LIMIT 31 days per request)**
       parameters:
         - description: Latitude component of location.
           format: double
@@ -3483,7 +3098,7 @@ paths:
         - Hourly Historical Weather Data
   "/history/hourly?postal_code={postal_code}":
     get:
-      description: Returns Historical Observations - Given a Postal Code. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a Postal Code. **(LIMIT 31 days per request)**
       parameters:
         - description: "Postal Code. Example: 28546"
           format: string
@@ -3593,7 +3208,7 @@ paths:
         - Hourly Historical Weather Data
   "/history/hourly?station={station}":
     get:
-      description: Returns Historical Observations - Given a station ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a station ID. **(LIMIT 31 days per request)**
       parameters:
         - description: Station ID.
           format: string
@@ -3695,6 +3310,550 @@ paths:
       summary: Returns Historical Observations - Given a station ID.
       tags:
         - Hourly Historical Weather Data
+  "/history/subhourly?city={city}&country={country}":
+    get:
+      description: Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.
+      parameters:
+        - description: City search. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
+          format: string
+          in: path
+          name: city
+          required: true
+          type: string
+        - description: Full name of state.
+          format: string
+          in: query
+          name: state
+          required: false
+          type: string
+        - description: Country Code (2 letter).
+          format: string
+          in: path
+          name: country
+          required: true
+          type: string
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
+          format: string
+          in: query
+          name: start_date
+          required: true
+          type: string
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
+          format: string
+          in: query
+          name: end_date
+          required: true
+          type: string
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
+          enum:
+            - S
+            - I
+          format: string
+          in: query
+          name: units
+          required: false
+          type: string
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
+          enum:
+            - ar
+            - az
+            - be
+            - bg
+            - bs
+            - ca
+            - cs
+            - de
+            - fi
+            - fr
+            - el
+            - es
+            - et
+            - hr
+            - hu
+            - id
+            - it
+            - is
+            - kw
+            - nb
+            - nl
+            - pl
+            - pt
+            - ro
+            - ru
+            - sk
+            - sl
+            - sr
+            - sv
+            - tr
+            - uk
+            - zh
+            - zh-tw
+          format: string
+          in: query
+          name: lang
+          required: false
+          type: string
+        - description: Assume utc (default) or local time for start_date, end_date
+          enum:
+            - local
+            - utc
+          format: string
+          in: query
+          name: tz
+          required: false
+          type: string
+        - description: "Wraps return in jsonp callback. Example: callback=func"
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        "200":
+          description: An Historical Data Object.
+          schema:
+            $ref: "#/definitions/History"
+        default:
+          description: No Data.
+          schema:
+            $ref: "#/definitions/Error"
+      summary: Returns Historical Observations - Given City and/or State, Country.
+      tags:
+        - Sub-Hourly Historical Weather Data
+  "/history/subhourly?city_id={city_id}":
+    get:
+      description: Returns Historical Observations - Given a City ID.
+      parameters:
+        - description: "City ID. Example: 4487042"
+          format: string
+          in: path
+          name: city_id
+          required: true
+          type: string
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)
+          format: string
+          in: query
+          name: start_date
+          required: true
+          type: string
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH)
+          format: string
+          in: query
+          name: end_date
+          required: true
+          type: string
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
+          enum:
+            - S
+            - I
+          format: string
+          in: query
+          name: units
+          required: false
+          type: string
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
+          enum:
+            - ar
+            - az
+            - be
+            - bg
+            - bs
+            - ca
+            - cs
+            - de
+            - fi
+            - fr
+            - el
+            - es
+            - et
+            - hr
+            - hu
+            - id
+            - it
+            - is
+            - kw
+            - nb
+            - nl
+            - pl
+            - pt
+            - ro
+            - ru
+            - sk
+            - sl
+            - sr
+            - sv
+            - tr
+            - uk
+            - zh
+            - zh-tw
+          format: string
+          in: query
+          name: lang
+          required: false
+          type: string
+        - description: Assume utc (default) or local time for start_date, end_date
+          enum:
+            - local
+            - utc
+          format: string
+          in: query
+          name: tz
+          required: false
+          type: string
+        - description: "Wraps return in jsonp callback. Example: callback=func"
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        "200":
+          description: An Historical Data Object.
+          schema:
+            $ref: "#/definitions/HistorySubhourly"
+        default:
+          description: No Data.
+          schema:
+            $ref: "#/definitions/Error"
+      summary: Returns Historical Observations - Given a City ID
+      tags:
+        - Sub-Hourly Historical Weather Data
+  "/history/subhourly?lat={lat}&lon={lon}":
+    get:
+      description: Returns Historical Observations - Given a lat, and lon.
+      parameters:
+        - description: Latitude component of location.
+          format: double
+          in: path
+          name: lat
+          required: true
+          type: number
+        - description: Longitude component of location.
+          format: double
+          in: path
+          name: lon
+          required: true
+          type: number
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
+          format: string
+          in: query
+          name: start_date
+          required: true
+          type: string
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
+          format: string
+          in: query
+          name: end_date
+          required: true
+          type: string
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
+          enum:
+            - S
+            - I
+          format: string
+          in: query
+          name: units
+          required: false
+          type: string
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
+          enum:
+            - ar
+            - az
+            - be
+            - bg
+            - bs
+            - ca
+            - cs
+            - de
+            - fi
+            - fr
+            - el
+            - es
+            - et
+            - hr
+            - hu
+            - id
+            - it
+            - is
+            - kw
+            - nb
+            - nl
+            - pl
+            - pt
+            - ro
+            - ru
+            - sk
+            - sl
+            - sr
+            - sv
+            - tr
+            - uk
+            - zh
+            - zh-tw
+          format: string
+          in: query
+          name: lang
+          required: false
+          type: string
+        - description: Assume utc (default) or local time for start_date, end_date
+          enum:
+            - local
+            - utc
+          format: string
+          in: query
+          name: tz
+          required: false
+          type: string
+        - description: "Wraps return in jsonp callback. Example: callback=func"
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        "200":
+          description: An Historical Data Object.
+          schema:
+            $ref: "#/definitions/HistorySubhourly"
+        default:
+          description: No Data.
+          schema:
+            $ref: "#/definitions/Error"
+      summary: Returns Historical Observations - Given a lat/lon.
+      tags:
+        - Sub-Hourly Historical Weather Data
+  "/history/subhourly?postal_code={postal_code}":
+    get:
+      description: Returns Historical Observations - Given a Postal Code.
+      parameters:
+        - description: "Postal Code. Example: 28546"
+          format: string
+          in: path
+          name: postal_code
+          required: true
+          type: string
+        - description: Country Code (2 letter).
+          format: string
+          in: query
+          name: country
+          required: false
+          type: string
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH)
+          format: string
+          in: query
+          name: start_date
+          required: true
+          type: string
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH)
+          format: string
+          in: query
+          name: end_date
+          required: true
+          type: string
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
+          enum:
+            - S
+            - I
+          format: string
+          in: query
+          name: units
+          required: false
+          type: string
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
+          enum:
+            - ar
+            - az
+            - be
+            - bg
+            - bs
+            - ca
+            - cs
+            - de
+            - fi
+            - fr
+            - el
+            - es
+            - et
+            - hr
+            - hu
+            - id
+            - it
+            - is
+            - kw
+            - nb
+            - nl
+            - pl
+            - pt
+            - ro
+            - ru
+            - sk
+            - sl
+            - sr
+            - sv
+            - tr
+            - uk
+            - zh
+            - zh-tw
+          format: string
+          in: query
+          name: lang
+          required: false
+          type: string
+        - description: Assume utc (default) or local time for start_date, end_date
+          enum:
+            - local
+            - utc
+          format: string
+          in: query
+          name: tz
+          required: false
+          type: string
+        - description: "Wraps return in jsonp callback. Example: callback=func"
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        "200":
+          description: An Historical Data Object.
+          schema:
+            $ref: "#/definitions/HistorySubhourly"
+        default:
+          description: No Data.
+          schema:
+            $ref: "#/definitions/Error"
+      summary: Returns Historical Observations - Given a Postal Code
+      tags:
+        - Sub-Hourly Historical Weather Data
+  "/history/subhourly?station={station}":
+    get:
+      description: Returns Historical Observations - Given a station ID.
+      parameters:
+        - description: Station ID.
+          format: string
+          in: path
+          name: station
+          required: true
+          type: string
+        - description: Start Date (YYYY-MM-DD or YYYY-MM-DD:HH).
+          format: string
+          in: query
+          name: start_date
+          required: true
+          type: string
+        - description: End Date (YYYY-MM-DD or YYYY-MM-DD:HH).
+          format: string
+          in: query
+          name: end_date
+          required: true
+          type: string
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
+          enum:
+            - S
+            - I
+          format: string
+          in: query
+          name: units
+          required: false
+          type: string
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
+          enum:
+            - ar
+            - az
+            - be
+            - bg
+            - bs
+            - ca
+            - cs
+            - de
+            - fi
+            - fr
+            - el
+            - es
+            - et
+            - hr
+            - hu
+            - id
+            - it
+            - is
+            - kw
+            - nb
+            - nl
+            - pl
+            - pt
+            - ro
+            - ru
+            - sk
+            - sl
+            - sr
+            - sv
+            - tr
+            - uk
+            - zh
+            - zh-tw
+          format: string
+          in: query
+          name: lang
+          required: false
+          type: string
+        - description: Assume utc (default) or local time for start_date, end_date
+          enum:
+            - local
+            - utc
+          format: string
+          in: query
+          name: tz
+          required: false
+          type: string
+        - description: "Wraps return in jsonp callback. Example: callback=func"
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        "200":
+          description: An Historical Data Object.
+          schema:
+            $ref: "#/definitions/HistorySubhourly"
+        default:
+          description: No Data.
+          schema:
+            $ref: "#/definitions/Error"
+      summary: Returns Historical Observations - Given a station ID.
+      tags:
+        - Sub-Hourly Historical Weather Data
 definitions:
   AQCurrent:
     properties:
@@ -3874,6 +4033,10 @@ definitions:
         description: Global horizontal irradiance (W/m^2)
         example: 450.4
         type: number
+      gust:
+        description: Wind gust speed - Default (m/s)
+        example: 9
+        type: number
       hour_angle:
         description: Current solar hour angle (Degrees)
         example: 45
@@ -3917,6 +4080,12 @@ definitions:
         description: Estimated solar radiation (W/m^2)
         example: 300.4
         type: number
+      sources:
+        description: List of data sources used in response
+        items:
+          example: rtma
+          type: string
+        type: array
       state_code:
         description: State abbreviation
         example: NC
@@ -4042,12 +4211,18 @@ definitions:
         description: Total snowfall in period - Default (mm)
         example: 10
         type: number
+      sources:
+        description: List of data sources used in response
+        items:
+          example: 12345-89083
+          type: string
+        type: array
       state_code:
         description: State abbreviation
         example: NC
         type: string
       station_id:
-        description: Source Station ID
+        description: Nearest Station ID [DEPRECATED]
         example: 12345-999999
         type: string
       sun_hours:
@@ -4078,7 +4253,7 @@ definitions:
         description: Average wind direction (Degrees)
         example: 125
         type: integer
-      wind_speed:
+      wind_spd:
         description: Average wind speed - Default (m/s)
         example: 5.85
         type: number
@@ -4199,7 +4374,7 @@ definitions:
         description: Average wind direction (Degrees)
         example: 125
         type: integer
-      wind_speed:
+      wind_spd:
         description: Average wind speed - Default (m/s)
         example: 5.85
         type: number
@@ -4443,10 +4618,6 @@ definitions:
         description: Accumulated snowfall since last forecast point - Default (mm)
         example: 10.45
         type: number
-      snow6h:
-        description: 6 hour accumulated snowfall. Default (mm)
-        example: 140.87
-        type: number
       snow_depth:
         description: Snow depth - Default (mm)
         example: 45
@@ -4506,6 +4677,10 @@ definitions:
         description: Wind direction
         example: 105
         type: integer
+      wind_gust_spd:
+        description: Wind Gust Speed - Default (m/s)
+        example: 16.85
+        type: number
       wind_spd:
         description: Wind Speed - Default (m/s)
         example: 13.85
@@ -4632,7 +4807,7 @@ definitions:
         example: "-122.33"
         type: string
       sources:
-        description: Weather stations used in response
+        description: List of data sources used in response
         items:
           example: 12345-89083
           type: string
@@ -4669,7 +4844,7 @@ definitions:
         example: "-122.33"
         type: string
       sources:
-        description: Weather stations used in response
+        description: List of data sources used in response
         items:
           example: 12345-89083
           type: string
@@ -4749,6 +4924,10 @@ definitions:
         description: Average pressure (mb)
         example: 885.1
         type: number
+      revision_status:
+        description: Data revision status (interim or final)
+        example: final
+        type: string
       rh:
         description: Average relative humidity as a percentage (%)
         example: 85
@@ -4800,6 +4979,18 @@ definitions:
     type: object
   HistoryObj:
     properties:
+      app_temp:
+        description: Apparent Temperature or Wind Chill/Heat Index (Default Celcius)
+        example: -1.5
+        type: number
+      azimuth:
+        description: Azimuth angle (Degrees)
+        example: 50.5
+        type: number
+      clouds:
+        description: Cloud Cover 0-100 (%)
+        example: 50
+        type: integer
       datetime:
         description: Date in format "YYYY-MM-DD:HH". All datetime is in (UTC)
         example: 2019-03-04:17
@@ -4840,6 +5031,10 @@ definitions:
         description: Pressure (mb)
         example: 845
         type: number
+      revision_status:
+        description: Data revision status (interim or final)
+        example: final
+        type: string
       rh:
         description: Relative Humidity as a percentage (%)
         example: 85
@@ -4851,10 +5046,6 @@ definitions:
       snow:
         description: Snowfall - Default (mm)
         example: 30
-        type: number
-      snow6h:
-        description: Snowfall in last 6 hours - Default (mm)
-        example: 60
         type: number
       solar_rad:
         description: Estimated solar radiation (W/m^2)
@@ -4880,6 +5071,10 @@ definitions:
         description: UV Index (1-11+)
         example: 4
         type: number
+      vis:
+        description: Visibility (KM)
+        example: 10
+        type: number
       weather:
         properties:
           code:
@@ -4899,6 +5094,165 @@ definitions:
         description: Wind direction (Degrees)
         example: 325
         type: integer
+      wind_gust_spd:
+        description: Wind Gust Speed - Default (m/s)
+        example: 16.85
+        type: number
+      wind_spd:
+        description: Wind Speed (Default m/s)
+        example: 14.7
+        type: number
+    type: object
+  HistorySubhourly:
+    properties:
+      city_name:
+        description: City name (Closest)
+        example: Seattle
+        type: string
+      country_code:
+        description: Country abbreviation
+        example: US
+        type: string
+      data:
+        items:
+          $ref: "#/definitions/HistoryObj"
+        type: array
+      lat:
+        description: Latitude
+        example: "47.61"
+        type: string
+      lon:
+        description: Longitude
+        example: "-122.33"
+        type: string
+      sources:
+        description: List of data sources used in response
+        items:
+          example: 12345-89083
+          type: string
+        type: array
+      state_code:
+        description: State abbreviation
+        example: WA
+        type: string
+      timezone:
+        description: Local IANA time zone
+        example: America/New_York
+        type: string
+    type: object
+  HistorySubhourlyObj:
+    properties:
+      app_temp:
+        description: Apparent Temperature or Wind Chill/Heat Index (Default Celcius)
+        example: -1.5
+        type: number
+      azimuth:
+        description: Solar azimuth angle (Degrees)
+        example: 40.5
+        type: number
+      clouds:
+        description: Cloud Cover 0-100 (%)
+        example: 50
+        type: integer
+      dewpt:
+        description: Dew point (Default Celcius)
+        example: -1.5
+        type: integer
+      dhi:
+        description: Diffuse normal solar irradiance (W/m^2)
+        example: 200
+        type: number
+      dni:
+        description: Direct normal solar irradiance (W/m^2)
+        example: 400
+        type: number
+      elev_angle:
+        description: Solar elevation angle (Degrees)
+        example: 27.5
+        type: number
+      ghi:
+        description: Global horizontal solar irradiance (W/m^2)
+        example: 1500
+        type: number
+      pod:
+        description: Part of the day (d = day, n = night)
+        example: n
+        type: string
+      precip_rate:
+        description: Liquid equivalent precipitation rate - Default (mm/hr)
+        example: 3
+        type: number
+      pres:
+        description: Pressure (mb)
+        example: 845
+        type: number
+      revision_status:
+        description: Data revision status (interim or final)
+        example: final
+        type: string
+      rh:
+        description: Relative Humidity as a percentage (%)
+        example: 85
+        type: integer
+      slp:
+        description: Sea level pressure (mb)
+        example: 1020.1
+        type: number
+      snow_rate:
+        description: Snowfall Rate - Default (mm/hr)
+        example: 30
+        type: number
+      solar_rad:
+        description: Estimated solar radiation (W/m^2)
+        example: 300
+        type: number
+      temp:
+        description: Temperature (Default Celcius)
+        example: -1.2
+        type: number
+      timestamp_local:
+        description: Timestamp in local time
+        example: 2019-03-04T12:15:00
+        type: string
+      timestamp_utc:
+        description: Timestamp UTC
+        example: 2019-03-04T17:15:00
+        type: string
+      ts:
+        description: Unix Timestamp
+        example: "1551718800"
+        type: number
+      uv:
+        description: UV Index (1-11+)
+        example: 4
+        type: number
+      vis:
+        description: Visibility (KM)
+        example: 10
+        type: number
+      weather:
+        properties:
+          code:
+            description: Weather Condition code
+            example: "601"
+            type: string
+          description:
+            description: Weather Condition description
+            example: Light Snow
+            type: string
+          icon:
+            description: Icon code for forecast image display
+            example: s01n
+            type: string
+        type: object
+      wind_dir:
+        description: Wind direction (Degrees)
+        example: 325
+        type: integer
+      wind_gust_spd:
+        description: Wind Gust Speed - Default (m/s)
+        example: 16.85
+        type: number
       wind_spd:
         description: Wind Speed (Default m/s)
         example: 14.7

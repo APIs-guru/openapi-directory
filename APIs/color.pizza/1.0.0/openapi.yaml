@@ -204,12 +204,52 @@ paths:
 components:
   schemas:
     color:
-      $ref: "#/components/schemas/colorBase"
       properties:
         distance:
           type: number
+        hex:
+          type: string
+        hsl:
+          properties:
+            h:
+              type: number
+            l:
+              type: number
+            s:
+              type: number
+          type: object
+        lab:
+          properties:
+            a:
+              type: number
+            b:
+              type: number
+            l:
+              type: number
+          type: object
+        luminance:
+          type: number
+        luminanceWCAG:
+          type: number
+        name:
+          type: string
         requestedHex:
           type: string
+        rgb:
+          properties:
+            b:
+              type: integer
+            g:
+              type: integer
+            r:
+              type: integer
+          type: object
+        svg:
+          type: string
+        svgNamed:
+          type: string
+        swatchImg:
+          type: object
       type: object
     colorBase:
       properties:

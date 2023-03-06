@@ -1756,6 +1756,59 @@ paths:
       summary: Create an invoice category
       tags:
         - Invoice
+  /api/invoice/pdf:
+    get:
+      operationId: InvoiceApi_Pdf
+      parameters:
+        - description: ""
+          in: query
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: query
+          name: signedVersion
+          required: false
+          schema:
+            type: boolean
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceUriApiModel"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/InvoiceUriApiModel"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/InvoiceUriApiModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceUriApiModel"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/InvoiceUriApiModel"
+          description: OK
+      summary: Return the PDF for the invoice
+      tags:
+        - Invoice
   /api/invoice/sendtoaccountant:
     post:
       operationId: InvoiceApi_SendToAccountant
@@ -3655,6 +3708,7 @@ components:
             - EstimationRejected
             - EstimationUpdated
             - EstimationDownloadedAsPdf
+            - InvoiceDigitallySigned
           type: string
         UserId:
           format: int32
@@ -4026,6 +4080,7 @@ components:
             - EstimationRejected
             - EstimationUpdated
             - EstimationDownloadedAsPdf
+            - InvoiceDigitallySigned
           type: string
       type: object
     EstimationAttachmentApiModel:
@@ -4586,6 +4641,8 @@ components:
         InvoiceCategoryId:
           format: int32
           type: integer
+        IsDigitallySigned:
+          type: boolean
         IssuedOn:
           format: date-time
           type: string
@@ -4707,6 +4764,7 @@ components:
             - EstimationRejected
             - EstimationUpdated
             - EstimationDownloadedAsPdf
+            - InvoiceDigitallySigned
           type: string
       type: object
     InvoiceAttachment:

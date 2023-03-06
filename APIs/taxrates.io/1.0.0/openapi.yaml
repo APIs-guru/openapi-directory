@@ -287,6 +287,15 @@ paths:
                     example: <string>
                     type: string
                   taxes:
+                    example:
+                      - Country: <string>
+                        Type: <string>
+                        data_name: <string>
+                        data_value: <string>
+                      - Country: <string>
+                        Type: <string>
+                        data_name: <string>
+                        data_value: <string>
                     items:
                       properties:
                         Country:
@@ -461,12 +470,42 @@ paths:
                           data_name: <string>
                           data_value: <string>
               schema:
+                example:
+                  - country_name: <string>
+                    taxes:
+                      - Country: <string>
+                        Type: <string>
+                        data_name: <string>
+                        data_value: <string>
+                      - Country: <string>
+                        Type: <string>
+                        data_name: <string>
+                        data_value: <string>
+                  - country_name: <string>
+                    taxes:
+                      - Country: <string>
+                        Type: <string>
+                        data_name: <string>
+                        data_value: <string>
+                      - Country: <string>
+                        Type: <string>
+                        data_name: <string>
+                        data_value: <string>
                 items:
                   properties:
                     country_name:
                       example: <string>
                       type: string
                     taxes:
+                      example:
+                        - Country: <string>
+                          Type: <string>
+                          data_name: <string>
+                          data_value: <string>
+                        - Country: <string>
+                          Type: <string>
+                          data_name: <string>
+                          data_value: <string>
                       items:
                         properties:
                           Country:
@@ -649,6 +688,33 @@ paths:
                       state: <string>
                       zip: <string>
               schema:
+                example:
+                  - id: <integer>
+                    name: <string>
+                    rates:
+                      - data_name: <string>
+                        data_value: <string>
+                        product_code: <string>
+                        type: <string>
+                      - data_name: <string>
+                        data_value: <string>
+                        product_code: <string>
+                        type: <string>
+                    state: <string>
+                    zip: <string>
+                  - id: <integer>
+                    name: <string>
+                    rates:
+                      - data_name: <string>
+                        data_value: <string>
+                        product_code: <string>
+                        type: <string>
+                      - data_name: <string>
+                        data_value: <string>
+                        product_code: <string>
+                        type: <string>
+                    state: <string>
+                    zip: <string>
                 items:
                   properties:
                     id:
@@ -658,6 +724,15 @@ paths:
                       example: <string>
                       type: string
                     rates:
+                      example:
+                        - data_name: <string>
+                          data_value: <string>
+                          product_code: <string>
+                          type: <string>
+                        - data_name: <string>
+                          data_value: <string>
+                          product_code: <string>
+                          type: <string>
                       items:
                         properties:
                           data_name:

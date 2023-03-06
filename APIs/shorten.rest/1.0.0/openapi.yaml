@@ -309,6 +309,29 @@ paths:
       summary: Get clicks
       tags:
         - Click
+  /clicks/pg:
+    post:
+      description: Retrieve the raw click statistics for your account. Clicks are retrieved by creation date in descending order.
+      operationId: GetStatistics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClicksFilterModel"
+        description: Filter
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClickModelPg"
+          description: returns Array of Click models, also returns lastId
+      security:
+        - ApiKeyAuth: []
+      summary: Get clicks statistics
+      tags:
+        - Statistics
 components:
   schemas:
     AliasModel:
@@ -365,6 +388,57 @@ components:
           type: string
         userAgent:
           type: string
+      type: object
+    ClickModelPg:
+      properties:
+        accountId:
+          type: string
+        alias:
+          type: string
+        aliasId:
+          type: string
+        browser:
+          type: string
+        country:
+          type: string
+        createdAt:
+          format: int64
+          type: integer
+        destination:
+          type: string
+        domain:
+          type: string
+        id:
+          type: integer
+        os:
+          type: string
+        referrer:
+          type: string
+        userAgent:
+          type: string
+      type: object
+    ClicksFilterModel:
+      properties:
+        aliasId:
+          description: Alias Id
+          example: aBcDe012
+          type: string
+        dateFrom:
+          description: date From
+          example: 2001-05-02
+          type: string
+        dateTo:
+          description: date To
+          example: 2001-05-02
+          type: string
+        domain:
+          description: Domain name
+          example: short.fyi
+          type: string
+        lastId:
+          description: last Id
+          example: 100
+          type: integer
       type: object
     CreateAliasModel:
       properties:

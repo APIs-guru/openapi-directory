@@ -2,7 +2,6 @@ openapi: 3.0.2
 servers:
   - description: DFlight API
     url: https://dflight-api.ljaero.com/
-  - url: https://i0.wp.com/ljaero.com/wp-content/uploads/2022/11/dflight-logo.png
 info:
   description: |-
     [DFlight API](https://ljaero.com/solutions/dflight/) supplies the up-to-date information needed for compliance with UAV preflight assessment requirements. Separate endpoints are available for each of the following information categories:
@@ -27,7 +26,8 @@ info:
     - format: openapi
       url: https://dflight-api.ljaero.com/openapi.json
       version: "3.0"
-  x-providerName: wp.com
+  x-providerName: ljaero.com
+  x-serviceName: dflight
 tags:
   - description: |-
       #### Information is available for the following types of airspace:

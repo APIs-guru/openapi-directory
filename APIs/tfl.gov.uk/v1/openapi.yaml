@@ -475,6 +475,12 @@ paths:
           required: false
           schema:
             type: boolean
+        - description: A boolean to make Journey Planner calculate journeys in one temporal direction only. In other words, only calculate journeys after the 'depart' time, or before the 'arrive' time. By default, the Journey Planner engine (EFA) calculates journeys in both temporal directions.
+          in: query
+          name: calcOneDirection
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -3459,7 +3465,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: A comma-separated list of line ids e.g. tfl-rail, london-overground, thameslink
+        - description: A comma-separated list of line ids e.g. elizabeth, london-overground, thameslink
           explode: true
           in: query
           name: lineIds
@@ -3492,7 +3498,7 @@ paths:
                   $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.ArrivalDeparture"
                 type: array
           description: OK
-      summary: Gets the list of arrival and departure predictions for the given stop point id (overground, tfl rail and thameslink only)
+      summary: Gets the list of arrival and departure predictions for the given stop point id (overground, Elizabeth line and thameslink only)
       tags:
         - StopPoint
   "/StopPoint/{id}/Arrivals":
@@ -4083,66 +4089,6 @@ paths:
       summary: Gets the TravelTime overlay.
       tags:
         - TravelTime
-  /Vehicle/EmissionSurcharge:
-    get:
-      deprecated: false
-      operationId: Vehicle_GetEmissionsSurchargeCompliance
-      parameters:
-        - description: The Vehicle Registration Mark
-          in: query
-          name: vrm
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.VehicleMatch"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.VehicleMatch"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.VehicleMatch"
-            text/xml:
-              schema:
-                $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.VehicleMatch"
-          description: OK
-      summary: Gets the Emissions Surcharge compliance for the Vehicle
-      tags:
-        - Vehicle
-  /Vehicle/UlezCompliance:
-    get:
-      deprecated: false
-      operationId: Vehicle_GetUlezCompliance
-      parameters:
-        - description: The Vehicle Registration Mark
-          in: query
-          name: vrm
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.VehicleMatch"
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.VehicleMatch"
-            text/json:
-              schema:
-                $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.VehicleMatch"
-            text/xml:
-              schema:
-                $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.VehicleMatch"
-          description: OK
-      summary: Gets the Ulez Surcharge compliance for the Vehicle
-      tags:
-        - Vehicle
   "/Vehicle/{ids}/Arrivals":
     get:
       deprecated: false
@@ -4434,6 +4380,66 @@ components:
         timing:
           $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.PredictionTiming"
       type: object
+    Tfl.Api.Presentation.Entities.ArrivalDepartureWithLine:
+      description: DTO to capture the prediction details
+      properties:
+        cause:
+          description: Reason for cancellation or delay
+          type: string
+        departureStatus:
+          description: Status of departure
+          enum:
+            - OnTime
+            - Delayed
+            - Cancelled
+            - NotStoppingAtStation
+          type: string
+        destinationName:
+          description: Name of the destination
+          type: string
+        destinationNaptanId:
+          description: Naptan Identifier for the prediction's destination
+          type: string
+        estimatedTimeOfArrival:
+          description: Estimated time of arrival
+          format: date-time
+          type: string
+        estimatedTimeOfDeparture:
+          description: Estimated time of arrival
+          format: date-time
+          type: string
+        lineId:
+          description: Train operating company name
+          type: string
+        lineName:
+          description: Train operating company code
+          type: string
+        minutesAndSecondsToArrival:
+          description: Estimated time of arrival
+          type: string
+        minutesAndSecondsToDeparture:
+          description: Estimated time of arrival
+          type: string
+        naptanId:
+          description: Identifier for the prediction
+          type: string
+        platformName:
+          description: Platform name (for bus, this is the stop letter)
+          type: string
+        scheduledTimeOfArrival:
+          description: Estimated time of arrival
+          format: date-time
+          type: string
+        scheduledTimeOfDeparture:
+          description: Estimated time of arrival
+          format: date-time
+          type: string
+        stationName:
+          description: Station name
+          type: string
+        timing:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.PredictionTiming"
+      type: object
     Tfl.Api.Presentation.Entities.Bay:
       properties:
         bayCount:
@@ -4455,6 +4461,10 @@ components:
           description: Total bike counts
           format: int32
           type: integer
+        eBikesCount:
+          description: Total ebikes count
+          format: int32
+          type: integer
         emptyDocks:
           description: Empty docks
           format: int32
@@ -4465,6 +4475,10 @@ components:
         name:
           description: Name / Common name of the bike point
           type: string
+        standardBikesCount:
+          description: Total standard bikes count
+          format: int32
+          type: integer
         totalDocks:
           description: Total docks available
           format: int32
@@ -4601,6 +4615,51 @@ components:
         type:
           type: string
       type: object
+    Tfl.Api.Presentation.Entities.DisruptedRoute:
+      description: keep old RouteSection name so as not to break contract
+      properties:
+        destinationName:
+          description: The name of the Destination StopPoint
+          type: string
+        direction:
+          description: Inbound or Outbound
+          type: string
+        id:
+          description: The Id of the route
+          type: string
+        isEntireRouteSection:
+          description: Whether this represents the entire route section
+          type: boolean
+        lineId:
+          description: The Id of the Line
+          type: string
+        lineString:
+          description: The co-ordinates of the route's path as a geoJSON lineString
+          type: string
+        name:
+          description: Name such as "72"
+          type: string
+        originationName:
+          description: The name of the Origin StopPoint
+          type: string
+        routeCode:
+          description: The route code
+          type: string
+        routeSectionNaptanEntrySequence:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.RouteSectionNaptanEntrySequence"
+          type: array
+        validFrom:
+          description: The DateTime that the Service containing this Route is valid from.
+          format: date-time
+          type: string
+        validTo:
+          description: The DateTime that the Service containing this Route is valid until.
+          format: date-time
+          type: string
+        via:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.RouteSectionNaptanEntrySequence"
+      type: object
     Tfl.Api.Presentation.Entities.Disruption:
       description: Represents a disruption to a route within the transport network.
       properties:
@@ -4610,7 +4669,7 @@ components:
         affectedRoutes:
           description: Gets or sets the routes affected by this disruption
           items:
-            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.RouteSection"
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.DisruptedRoute"
           type: array
         affectedStops:
           description: Gets or sets the stops affected by this disruption
@@ -4971,7 +5030,11 @@ components:
           type: string
         id:
           type: string
+        motType:
+          type: string
         name:
+          type: string
+        network:
           type: string
         routeType:
           enum:
@@ -5245,6 +5308,10 @@ components:
           type: boolean
         instruction:
           $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Instruction"
+        interChangeDuration:
+          type: string
+        interChangePosition:
+          type: string
         isDisrupted:
           readOnly: true
           type: boolean
@@ -5264,6 +5331,12 @@ components:
           items:
             $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.RouteOption"
           type: array
+        scheduledArrivalTime:
+          format: date-time
+          type: string
+        scheduledDepartureTime:
+          format: date-time
+          type: string
         speed:
           type: string
       type: object
@@ -5307,6 +5380,9 @@ components:
       type: object
     Tfl.Api.Presentation.Entities.JourneyPlanner.RouteOption:
       properties:
+        direction:
+          description: The direction of the route, i.e. outbound or inbound.
+          type: string
         directions:
           items:
             type: string
@@ -5601,6 +5677,10 @@ components:
         isTflService:
           type: boolean
         modeName:
+          type: string
+        motType:
+          type: string
+        network:
           type: string
       type: object
     Tfl.Api.Presentation.Entities.NetworkStatus:
@@ -6150,45 +6230,6 @@ components:
             $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.RouteSearchMatch"
           type: array
       type: object
-    Tfl.Api.Presentation.Entities.RouteSection:
-      properties:
-        destinationName:
-          description: The name of the Destination StopPoint
-          type: string
-        direction:
-          description: Inbound or Outbound
-          type: string
-        id:
-          description: The Id of the route
-          type: string
-        lineId:
-          description: The Id of the Line
-          type: string
-        lineString:
-          description: The co-ordinates of the route's path as a geoJSON lineString
-          type: string
-        name:
-          description: Name such as "72"
-          type: string
-        originationName:
-          description: The name of the Origin StopPoint
-          type: string
-        routeCode:
-          description: The route code
-          type: string
-        routeSectionNaptanEntrySequence:
-          items:
-            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.RouteSectionNaptanEntrySequence"
-          type: array
-        validFrom:
-          description: The DateTime that the Service containing this Route is valid from.
-          format: date-time
-          type: string
-        validTo:
-          description: The DateTime that the Service containing this Route is valid until.
-          format: date-time
-          type: string
-      type: object
     Tfl.Api.Presentation.Entities.RouteSectionNaptanEntrySequence:
       properties:
         ordinal:
@@ -6349,6 +6390,8 @@ components:
           type: string
         indicator:
           description: The indicator of the stop point e.g. "Stop K"
+          type: string
+        individualStopId:
           type: string
         lat:
           description: WGS84 latitude of the location.
@@ -6671,27 +6714,6 @@ components:
         toDate:
           description: Gets or sets the end date.
           format: date-time
-          type: string
-      type: object
-    Tfl.Api.Presentation.Entities.VehicleMatch:
-      description: ""
-      properties:
-        colour:
-          type: string
-        compliance:
-          enum:
-            - NotAvailable
-            - NotCompliant
-            - Compliant
-            - Exempt
-          type: string
-        make:
-          type: string
-        model:
-          type: string
-        type:
-          type: string
-        vrm:
           type: string
       type: object
   securitySchemes:

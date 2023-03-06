@@ -6,7 +6,7 @@ basePath: /v2
 info:
   contact:
     x-twitter: languagetoolorg
-  description: "Check texts for style and grammar issues with LanguageTool. Please consider the following default limitations:<ul><li>your daily request limit depending on <a href='https://languagetool.org/editor/settings/api'>your plan</a> <li>maximum number of requests per minute: 20 (free) / 80 (Premium) <li>maximum number of characters per minute: 75,000 (free) / 300,000 (Premium) <li>maximum number of characters per request: 20,000 (free) / 60,000 (Premium) <li>for the free version, also consider the <a href='https://dev.languagetool.org/public-http-api'>limitations documented here</a> <li><b>Note:</b> any parameters or outputs not part of this documentation are internal and must not be relied on</ul> Need more generous limits? Just <a href='https://languagetool.org/proofreading-api'>contact us</a>."
+  description: "Check texts for style and grammar issues with <a href='https://languagetool.org'>LanguageTool</a>. Please consider the following default limitations:<ul><li>your daily request limit depending on <a href='https://languagetool.org/editor/settings/access-tokens'>your plan</a> <li>maximum number of requests per minute: 20 (free) / 80 (Premium) <li>maximum number of characters per minute: 75,000 (free) / 300,000 (Premium) <li>maximum number of characters per request: 20,000 (free) / 60,000 (Premium) <li>for the free version, also consider the <a href='https://dev.languagetool.org/public-http-api'>limitations documented here</a> <li><b>Note:</b> any parameters or outputs not part of this documentation are internal and must not be relied on</ul> Need more generous limits? Just <a href='https://languagetool.org/proofreading-api'>contact us</a>."
   title: LanguageTool API
   version: 1.1.2
   x-apisguru-categories:
@@ -50,7 +50,7 @@ paths:
           in: formData
           name: username
           type: string
-        - description: "Set to get Premium API access: <a target='_blank' href='https://languagetool.org/editor/settings/api'>your API key</a>"
+        - description: "Set to get Premium API access: <a target='_blank' href='https://languagetool.org/editor/settings/access-tokens'>your API key</a>"
           format: password
           in: formData
           name: apiKey
@@ -283,7 +283,7 @@ paths:
           name: username
           required: true
           type: string
-        - description: Your API key.
+        - description: <a target='_blank' href='https://languagetool.org/editor/settings/access-tokens'>Your API key</a>
           format: password
           in: query
           name: apiKey
@@ -306,7 +306,7 @@ paths:
       summary: List words in dictionaries
   /words/add:
     post:
-      description: Add a word to one of the user's personal dictionaries. Please note that this feature is considered to be used for personal dictionaries which typically contain not more than a few hundred items per user. Adding more can have adverse effects on performance for every single text check. If this becomes an issue for you, contact us. Experimental user dictionary caching can be enabled by us on a per-account basis.
+      description: Add a word to one of the user's personal dictionaries. Please note that this feature is considered to be used for personal dictionaries which must not contain more than 500 words. If this is an issue for you, please contact us.
       parameters:
         - description: The word to be added. Must not be a phrase, i.e. cannot contain white space. The word is added to a global dictionary that applies to all languages.
           in: formData
@@ -318,7 +318,7 @@ paths:
           name: username
           required: true
           type: string
-        - description: Your API key.
+        - description: <a target='_blank' href='https://languagetool.org/editor/settings/access-tokens'>Your API key</a>
           format: password
           in: formData
           name: apiKey
@@ -351,7 +351,7 @@ paths:
           name: username
           required: true
           type: string
-        - description: Your API key.
+        - description: <a target='_blank' href='https://languagetool.org/editor/settings/access-tokens'>Your API key</a>
           format: password
           in: formData
           name: apiKey

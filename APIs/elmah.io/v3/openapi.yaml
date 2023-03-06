@@ -19,6 +19,7 @@ security:
 paths:
   /v3/deployments:
     get:
+      description: "Required permission: `deployments_read`"
       operationId: Deployments_GetAll
       responses:
         "200":
@@ -49,6 +50,7 @@ paths:
       tags:
         - Deployments
     post:
+      description: "Required permission: `deployments_write`"
       operationId: Deployments_Create
       requestBody:
         content:
@@ -93,7 +95,7 @@ paths:
         - Deployments
   "/v3/deployments/{id}":
     delete:
-      description: This endpoint doesn't clear the version number of messages already annotated with this deployment version.
+      description: "This endpoint doesn't clear the version number of messages already annotated with this deployment version.<br/><br/>Required permission: `deployments_delete`"
       operationId: Deployments_Delete
       parameters:
         - description: The ID of the deployment to delete.
@@ -119,6 +121,7 @@ paths:
       tags:
         - Deployments
     get:
+      description: "Required permission: `deployments_read`"
       operationId: Deployments_Get
       parameters:
         - description: The ID of the deployment to fetch.
@@ -153,6 +156,7 @@ paths:
         - Deployments
   "/v3/heartbeats/{logId}/{id}":
     post:
+      description: "Required permission: `heartbeats_write`"
       operationId: Heartbeats_Create
       parameters:
         - description: The ID of the heartbeat check.
@@ -200,6 +204,7 @@ paths:
         - Heartbeats
   /v3/logs:
     get:
+      description: "Required permission: `logs_read`"
       operationId: Logs_GetAll
       responses:
         "200":
@@ -230,6 +235,7 @@ paths:
       tags:
         - Logs
     post:
+      description: "Required permission: `logs_write`"
       operationId: Logs_Create
       requestBody:
         content:
@@ -272,6 +278,7 @@ paths:
         - Logs
   "/v3/logs/{id}":
     get:
+      description: "Required permission: `logs_read`"
       operationId: Logs_Get
       parameters:
         - description: The ID of the log to fetch.
@@ -304,8 +311,50 @@ paths:
       summary: Fetch a log by its ID.
       tags:
         - Logs
+  "/v3/logs/{id}/_diagnose":
+    get:
+      description: "Required permission: `messages_write`"
+      operationId: Logs_Diagnose
+      parameters:
+        - description: The ID of the log to diagnose.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/plain:
+              schema:
+                items:
+                  type: string
+                type: array
+          description: Log was diagnosed.
+        "401":
+          description: API key not valid or no access to resource.
+        "402":
+          description: Tried to call the logs API but the trial expired.
+        "404":
+          description: Log not found.
+        "429":
+          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+      summary: Help diagnose logging problems.
+      tags:
+        - Logs
   "/v3/logs/{id}/_disable":
     post:
+      description: "Required permission: `logs_write`"
       operationId: Logs_Disable
       parameters:
         - description: The ID of the log to disable.
@@ -330,6 +379,7 @@ paths:
         - Logs
   "/v3/logs/{id}/_enable":
     post:
+      description: "Required permission: `logs_write`"
       operationId: Logs_Enable
       parameters:
         - description: The ID of the log to enable.
@@ -354,6 +404,7 @@ paths:
         - Logs
   "/v3/messages/{logId}":
     delete:
+      description: "Required permission: `messages_delete`"
       operationId: Messages_DeleteAll
       parameters:
         - description: The ID of the log containing the message.
@@ -363,20 +414,7 @@ paths:
           schema:
             type: string
       requestBody:
-        content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/Search"
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Search"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/Search"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/Search"
-        description: A search object containing query, time filters etc.
+        $ref: "#/components/requestBodies/Search"
       responses:
         "200":
           description: Messages where deleted.
@@ -394,6 +432,7 @@ paths:
       tags:
         - Messages
     get:
+      description: "Required permission: `messages_read`"
       operationId: Messages_GetAll
       parameters:
         - description: The ID of the log containing the messages.
@@ -464,6 +503,7 @@ paths:
       tags:
         - Messages
     post:
+      description: "Required permission: `messages_write`"
       operationId: Messages_Create
       parameters:
         - description: The ID of the log which should contain the new message.
@@ -521,7 +561,7 @@ paths:
         "404":
           description: Log not found.
         "413":
-          description: Message too large. Messages must not exceed 256 kb.
+          description: Message too large. Messages must not exceed 256 kb. As additional information, some fields are trimmed down when processed on the backend.
         "429":
           description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
       summary: Create a new message.
@@ -529,6 +569,7 @@ paths:
         - Messages
   "/v3/messages/{logId}/_bulk":
     post:
+      description: "Required permission: `messages_write`"
       operationId: Messages_CreateBulk
       parameters:
         - description: The ID of the log which should contain the new messages.
@@ -592,8 +633,38 @@ paths:
       summary: Create one or more new messages.
       tags:
         - Messages
+  "/v3/messages/{logId}/_fix":
+    post:
+      description: "Required permission: `messages_write`"
+      operationId: Messages_FixAll
+      parameters:
+        - description: The ID of the log containing the messages.
+          in: path
+          name: logId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/Search"
+      responses:
+        "200":
+          description: Messages where marked as fixed.
+        "400":
+          description: Something wrong with the query parameters.
+        "401":
+          description: API key not valid or no access to resource.
+        "402":
+          description: Tried to call the logs API but the trial expired.
+        "404":
+          description: Log not found.
+        "429":
+          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+      summary: Mark a list of messages as fixed by logid and query.
+      tags:
+        - Messages
   "/v3/messages/{logId}/{id}":
     delete:
+      description: "Required permission: `messages_delete`"
       operationId: Messages_Delete
       parameters:
         - description: The ID of the message to delete.
@@ -625,6 +696,7 @@ paths:
       tags:
         - Messages
     get:
+      description: "Required permission: `messages_read`"
       operationId: Messages_Get
       parameters:
         - description: The ID of the message to fetch.
@@ -667,6 +739,7 @@ paths:
         - Messages
   "/v3/messages/{logId}/{id}/_fix":
     post:
+      description: "Required permission: `messages_write`"
       operationId: Messages_Fix
       parameters:
         - description: The ID of the message to fix.
@@ -705,6 +778,7 @@ paths:
         - Messages
   "/v3/messages/{logId}/{id}/_hide":
     post:
+      description: "Required permission: `messages_write`"
       operationId: Messages_Hide
       parameters:
         - description: The ID of the message to hide.
@@ -737,6 +811,7 @@ paths:
         - Messages
   "/v3/sourcemaps/{logId}":
     post:
+      description: "Required permission: `sourcemaps_write`"
       operationId: SourceMaps_CreateOrUpdate
       parameters:
         - description: The ID of the log which should contain the minified JavaScript and source map.
@@ -759,9 +834,10 @@ paths:
 
                     elmah.io uses this path to lookup any lines in a JS stack trace that will need de-minification."
                   format: uri
+                  maxLength: 2048
                   type: string
                 SourceMap:
-                  description: The source source map file. Only files with an extension of .map and content type of application/json will be accepted.
+                  description: The source map file. Only files with an extension of .map and content type of application/json will be accepted.
                   format: binary
                   type: string
               required:
@@ -788,6 +864,7 @@ paths:
         - SourceMaps
   /v3/uptimechecks:
     get:
+      description: "Required permission: `uptimechecks_read`"
       operationId: UptimeChecks_GetAll
       responses:
         "200":
@@ -818,6 +895,22 @@ paths:
       tags:
         - UptimeChecks
 components:
+  requestBodies:
+    Search:
+      content:
+        application/*+json:
+          schema:
+            $ref: "#/components/schemas/Search"
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Search"
+        application/json-patch+json:
+          schema:
+            $ref: "#/components/schemas/Search"
+        text/json:
+          schema:
+            $ref: "#/components/schemas/Search"
+      description: A search object containing query, time filters etc.
   schemas:
     Breadcrumb:
       description: A breadcrumb represent a step preceding a log message.
@@ -859,6 +952,7 @@ components:
           type: string
         description:
           description: Optional description of this deployment. Can be markdown or clear text.
+          maxLength: 8192
           type: string
         logId:
           description: "As default, deployments are attached all logs of the organization. If you want a deployment to\r
@@ -868,18 +962,21 @@ components:
         userEmail:
           description: "The email of the person responsible for creating this deployment. This can be the email taken from\r
 
-            your deployment server (like VSTS or Octopus)."
+            your deployment server (like Azure DevOps or Octopus)."
           format: email
+          maxLength: 320
           type: string
         userName:
           description: "The name of the person responsible for creating this deployment. This can be the name taken from\r
 
-            your deployment server (like VSTS or Octopus)."
+            your deployment server (like Azure DevOps or Octopus)."
+          maxLength: 256
           type: string
         version:
           description: "The version number of this deployment. The value of version can be a SemVer compliant string or any other\r
 
             syntax that you are using as your version numbering scheme."
+          maxLength: 256
           type: string
       required:
         - version
@@ -897,12 +994,15 @@ components:
           description: "Optional string to identify which application logged this message. You can use this if you have multiple applications and services logging to the same log.\r
 
             If not set, the application name \"Heartbeats\" will be set on all log messages generated from this heartbeat."
+          maxLength: 256
           type: string
         reason:
           description: If result is "Degraded" or "Unhealthy" you can use this property to specify why.
+          maxLength: 8192
           type: string
         result:
           description: The result of this heartbeat. Can be "Healthy, "Degraded", or "Unhealthy". Defaults to "Healthy"
+          maxLength: 9
           type: string
         took:
           description: "Optional long for specifying how many milliseconds it took to execute the task resulting in this heartbeat. This can be used to get a better overview\r
@@ -914,12 +1014,14 @@ components:
           description: "Optional string to identify which version of your application logged this message. If not specified, any errors, warnings, or information messages will get\r
 
             the newest version number created through deployment tracking as with normal log messages."
+          maxLength: 256
           type: string
       type: object
     CreateLog:
       properties:
         name:
           description: Name of the new log.
+          maxLength: 256
           type: string
       required:
         - name
@@ -941,6 +1043,11 @@ components:
           items:
             $ref: "#/components/schemas/Breadcrumb"
           type: array
+        category:
+          description: "The log message category. Category can be a string of choice but typically contain a logging category set by a logging framework like NLog or Serilog.\r
+
+            When logging through a logging framework, this field will be provided by the framework and not something that needs to be set manually."
+          type: string
         code:
           description: "Code can be used to include source code related to the log message. The code will typically span from a few lines before the line causing the log message\r
 
@@ -1119,6 +1226,9 @@ components:
           items:
             $ref: "#/components/schemas/Breadcrumb"
           type: array
+        category:
+          description: The log message category. Category can be a string of choice but typically contain a logging category set by a logging framework like NLog or Serilog.
+          type: string
         code:
           description: "Code can be used to include source code related to the log message. The code will typically span from a few lines before the line causing the log message\r
 
@@ -1225,6 +1335,9 @@ components:
           items:
             $ref: "#/components/schemas/Breadcrumb"
           type: array
+        category:
+          description: The log message category. Category can be a string of choice but typically contain a logging category set by a logging framework like NLog or Serilog.
+          type: string
         code:
           description: "Code can be used to include source code related to the log message. The code will typically span from a few lines before the line causing the log message\r
 

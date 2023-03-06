@@ -6,7 +6,7 @@ info:
   contact:
     email: api@pocketsmith.com
     name: API Support
-  description: The public PocketSmith API
+  description: The PocketSmith API
   title: PocketSmith
   version: "2.0"
   x-apisguru-categories:
@@ -85,9 +85,29 @@ paths:
                   description: A new currency code for the account.
                   example: NZD
                   type: string
+                is_net_worth:
+                  description: Whether the account is a net worth account.
+                  example: false
+                  type: boolean
                 title:
                   description: A new title for the account.
                   example: Savings
+                  type: string
+                type:
+                  description: The type of the account.
+                  enum:
+                    - bank
+                    - credits
+                    - cash
+                    - loans
+                    - mortgage
+                    - stocks
+                    - vehicle
+                    - property
+                    - insurance
+                    - other_asset
+                    - other_liability
+                  example: bank
                   type: string
               type: object
       responses:
@@ -117,28 +137,35 @@ paths:
           required: true
           schema:
             type: integer
-        - description: Return only transactions on or after this date. Required if end_date is provided. If not provided, defaults to the furtherest date allowed by the user's subscription.
+        - description: Limit to transactions on or after this date. Required if end_date is provided. If not provided, defaults to the furtherest date allowed by the user's subscription.
           example: 2016-11-01
           in: query
           name: start_date
           required: false
           schema:
             type: string
-        - description: Return transactions that fall on or before this date. Required if start_date is provided. If not provided, defaults to today's date.
+        - description: Limit to transactions on or before this date. Required if start_date is provided. If not provided, defaults to today's date.
           example: 2016-11-30
           in: query
           name: end_date
           required: false
           schema:
             type: string
-        - description: If set, will return only uncategorised results.
+        - description: Limit to transactions updated since an ISO 8601 timestamp.
+          example: 2020-10-14T09:20:33+13:00
+          in: query
+          name: updated_since
+          required: false
+          schema:
+            type: string
+        - description: Limit to uncategorised transactions.
           example: 1
           in: query
-          name: only_uncategorised
+          name: uncategorised
           required: false
           schema:
             type: integer
-        - description: Only return transactions of this type.
+        - description: Limit to transactions of this type.
           example: debit
           in: query
           name: type
@@ -148,7 +175,14 @@ paths:
               - debit
               - credit
             type: string
-        - description: Return transactions matching a keyword search string. The provided string is matched against the transaction amount, account name, payee, category title, note, labels, and the date in yyyy-mm-dd format.
+        - description: Limit to transactions that need to be reviewed.
+          example: 1
+          in: query
+          name: needs_review
+          required: false
+          schema:
+            type: integer
+        - description: Limit to transactions matching a keyword search string. The provided string is matched against the transaction amount, account name, payee, category title, note, labels, and the date in ISO 8601 format.
           example: Paypal
           in: query
           name: search
@@ -256,6 +290,8 @@ paths:
           $ref: "#/components/responses/403"
         "404":
           $ref: "#/components/responses/404"
+        "422":
+          $ref: "#/components/responses/422"
       summary: Update attachment
       tags:
         - Attachments
@@ -305,7 +341,7 @@ paths:
       tags:
         - Categories
     put:
-      description: Updates the title, colour or parent of the category.
+      description: Updates a category by its ID.
       parameters:
         - description: The unique identifier of the category.
           example: 42
@@ -323,10 +359,31 @@ paths:
                   description: A new CSS-style hex colour for the category.
                   example: "#e0e7ff"
                   type: string
+                is_bill:
+                  description: Set the category as a bill category.
+                  example: true
+                  type: boolean
+                is_transfer:
+                  description: Set the category as a transfer category.
+                  example: false
+                  type: boolean
                 parent_id:
                   description: The unique identifier of a parent category for the category, making this category a child of that category.
                   example: 42
                   type: integer
+                refund_behaviour:
+                  description: Set the refund behaviour of the category.
+                  enum:
+                    - debits_are_deductions
+                    - credits_are_refunds
+                    - null
+                  example: credits_are_refunds
+                  nullable: true
+                  type: string
+                roll_up:
+                  description: Set the category to be rolled up into its parent category.
+                  example: false
+                  type: boolean
                 title:
                   description: A new title for the category.
                   example: Food
@@ -396,6 +453,243 @@ paths:
       summary: Create category rule in category
       tags:
         - Category Rules
+  "/categories/{id}/transactions":
+    get:
+      description: Lists transactions belonging to one or more categories by their IDs.
+      parameters:
+        - description: A comma-separated list of category IDs.
+          example: 42,43
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: Limit to transactions on or after this date. Required if end_date is provided. If not provided, defaults to the furtherest date allowed by the user's subscription.
+          example: 2016-11-01
+          in: query
+          name: start_date
+          required: false
+          schema:
+            type: string
+        - description: Limit to transactions on or before this date. Required if start_date is provided. If not provided, defaults to today's date.
+          example: 2016-11-30
+          in: query
+          name: end_date
+          required: false
+          schema:
+            type: string
+        - description: Limit to transactions updated since an ISO 8601 timestamp.
+          example: 2020-10-14T09:20:33+13:00
+          in: query
+          name: updated_since
+          required: false
+          schema:
+            type: string
+        - description: Limit to uncategorised transactions.
+          example: 1
+          in: query
+          name: uncategorised
+          required: false
+          schema:
+            type: integer
+        - description: Limit to transactions of this type.
+          example: debit
+          in: query
+          name: type
+          required: false
+          schema:
+            enum:
+              - debit
+              - credit
+            type: string
+        - description: Limit to transactions that need to be reviewed.
+          example: 1
+          in: query
+          name: needs_review
+          required: false
+          schema:
+            type: integer
+        - description: Limit to transactions matching a keyword search string. The provided string is matched against the transaction amount, account name, payee, category title, note, labels, and the date in ISO 8601 format.
+          example: Paypal
+          in: query
+          name: search
+          required: false
+          schema:
+            type: string
+        - description: Choose a particular page of the results.
+          example: 3
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Transaction"
+                type: array
+          description: Success
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+      summary: List transactions in categories
+      tags:
+        - Transactions
+  /currencies:
+    get:
+      description: Lists currencies supported by PocketSmith.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Currency"
+                type: array
+          description: Success
+      summary: List currencies
+      tags:
+        - Currencies
+  "/currencies/{id}":
+    get:
+      description: Gets a particular currency by its ID.
+      parameters:
+        - description: The unique identifier of the currency.
+          example: nzd
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Currency"
+          description: Success
+        "404":
+          $ref: "#/components/responses/404"
+      summary: Get currency
+      tags:
+        - Currencies
+  "/events/{id}":
+    delete:
+      description: Deletes an event by its ID.
+      parameters:
+        - $ref: "#/components/parameters/eventId"
+        - description: Whether the delete applies only to this event, to all events within the series from this event or to all events within the series.
+          in: query
+          name: behaviour
+          required: true
+          schema:
+            enum:
+              - one
+              - forward
+              - all
+            type: string
+      responses:
+        "204":
+          description: Success
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "409":
+          $ref: "#/components/responses/409"
+      summary: Delete event
+      tags:
+        - Events
+    get:
+      description: Gets a particular event by its ID.
+      parameters:
+        - $ref: "#/components/parameters/eventId"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+          description: Success
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+      summary: Get event
+      tags:
+        - Events
+    put:
+      description: Updates an event by its ID.
+      parameters:
+        - $ref: "#/components/parameters/eventId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                amount:
+                  description: The amount of the event. A positive amount is a credit, and a negative amount is a debit.
+                  example: 11.5
+                  type: number
+                behaviour:
+                  description: Whether the update applies only to this event, to all events within the series from this event or to all events within the series.
+                  enum:
+                    - one
+                    - forward
+                    - all
+                  example: all
+                  type: string
+                note:
+                  description: A note for the event.
+                  example: Need more beer.
+                  type: string
+                repeat_interval:
+                  description: The repeat interval of the event.
+                  example: 1
+                  type: integer
+                repeat_type:
+                  description: The repeat type of the event.
+                  enum:
+                    - once
+                    - daily
+                    - weekly
+                    - fortnightly
+                    - monthly
+                    - yearly
+                    - each weekday
+                  example: weekly
+                  type: string
+              required:
+                - behaviour
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+          description: Success
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "409":
+          $ref: "#/components/responses/409"
+        "422":
+          $ref: "#/components/responses/422"
+      summary: Update event
+      tags:
+        - Events
   "/institutions/{id}":
     delete:
       description: Deletes an institution and all data within. Alternatively, another institution can be provided to merge the data into to avoid losing it.
@@ -405,6 +699,13 @@ paths:
           in: path
           name: id
           required: true
+          schema:
+            type: integer
+        - description: The unique identifier of the institution to merge into.
+          example: 44
+          in: query
+          name: merge_into_institution_id
+          required: false
           schema:
             type: integer
       responses:
@@ -520,9 +821,127 @@ paths:
               schema:
                 $ref: "#/components/schemas/User"
           description: Success
+        "403":
+          $ref: "#/components/responses/403"
       summary: Get the authorised user
       tags:
         - Users
+  "/scenarios/{id}/events":
+    get:
+      description: Lists events belonging to a scenario by their ID.
+      parameters:
+        - $ref: "#/components/parameters/scenarioId"
+        - description: Return the events from and including this date.
+          example: 2020-10-01
+          in: query
+          name: start_date
+          required: true
+          schema:
+            type: string
+        - description: Return the events until and including this date.
+          example: 2020-10-30
+          in: query
+          name: end_date
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Event"
+                type: array
+          description: Success
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+      summary: List events in scenario.
+      tags:
+        - Events
+    post:
+      description: Creates an event in a scenario by its ID.
+      parameters:
+        - $ref: "#/components/parameters/scenarioId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                amount:
+                  description: The amount of the event. A positive amount is a credit, and a negative amount is a debit.
+                  example: 11.5
+                  type: number
+                category_id:
+                  description: The unique identifier of the category for the event.
+                  example: 42
+                  type: integer
+                date:
+                  description: The starting date of the event.
+                  example: 2020-10-27
+                  type: string
+                note:
+                  description: A note for the event.
+                  example: New beers for sampling over the weekends.
+                  type: string
+                repeat_interval:
+                  default: 1
+                  description: The repeat interval of the event.
+                  example: 1
+                  type: integer
+                repeat_type:
+                  description: The repeat type of the event.
+                  enum:
+                    - once
+                    - daily
+                    - weekly
+                    - fortnightly
+                    - monthly
+                    - yearly
+                    - each weekday
+                  example: weekly
+                  type: string
+              required:
+                - category_id
+                - date
+                - amount
+                - repeat_type
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+          description: Success
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "409":
+          $ref: "#/components/responses/409"
+        "422":
+          $ref: "#/components/responses/422"
+      summary: Create event in scenario
+      tags:
+        - Events
+  /time_zones:
+    get:
+      description: Lists time zones.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TimeZone"
+                type: array
+          description: Success
+      summary: List time zones
+      tags:
+        - Time Zones
   "/transaction_accounts/{id}":
     get:
       description: Gets a transaction account by its ID.
@@ -549,7 +968,7 @@ paths:
       tags:
         - Transaction Accounts
     put:
-      description: Change which institution the transaction account belongs to.
+      description: Updates the transaction account by its ID.
       parameters:
         - description: The unique identifier of the transaction account.
           example: 42
@@ -567,6 +986,14 @@ paths:
                   description: The unique identifier of a new institution for the transaction account.
                   example: 42
                   type: integer
+                starting_balance:
+                  description: The starting balance amount of the transaction account.
+                  example: 3547.45
+                  type: number
+                starting_balance_date:
+                  description: The starting balance date of the transaction account.
+                  example: 2015-03-15
+                  type: string
               type: object
       responses:
         "200":
@@ -579,6 +1006,8 @@ paths:
           $ref: "#/components/responses/403"
         "404":
           $ref: "#/components/responses/404"
+        "422":
+          $ref: "#/components/responses/422"
       summary: Update transaction account
       tags:
         - Transaction Accounts
@@ -593,28 +1022,35 @@ paths:
           required: true
           schema:
             type: integer
-        - description: Return only transactions on or after this date. Required if `end_date` is provided. If not provided, defaults to the furtherest date allowed by the user's subscription.
+        - description: Limit to transactions on or after this date. Required if end_date is provided. If not provided, defaults to the furtherest date allowed by the user's subscription.
           example: 2016-11-01
           in: query
           name: start_date
           required: false
           schema:
             type: string
-        - description: Return transactions that fall on or before this date. Required if `start_date` is provided. If not provided, defaults to today's date.
+        - description: Limit to transactions on or before this date. Required if start_date is provided. If not provided, defaults to today's date.
           example: 2016-11-30
           in: query
           name: end_date
           required: false
           schema:
             type: string
-        - description: If set, will return only uncategorised results.
+        - description: Limit to transactions updated since an ISO 8601 timestamp.
+          example: 2020-10-14T09:20:33+13:00
+          in: query
+          name: updated_since
+          required: false
+          schema:
+            type: string
+        - description: Limit to uncategorised transactions.
           example: 1
           in: query
-          name: only_uncategorised
+          name: uncategorised
           required: false
           schema:
             type: integer
-        - description: Only return transactions of this type.
+        - description: Limit to transactions of this type.
           example: debit
           in: query
           name: type
@@ -624,7 +1060,14 @@ paths:
               - debit
               - credit
             type: string
-        - description: Return transactions matching a keyword search string. The provided string is matched against the transaction amount, account name, payee, category title, note, labels, and the date in yyyy-mm-dd format.
+        - description: Limit to transactions that need to be reviewed.
+          example: 1
+          in: query
+          name: needs_review
+          required: false
+          schema:
+            type: integer
+        - description: Limit to transactions matching a keyword search string. The provided string is matched against the transaction amount, account name, payee, category title, note, labels, and the date in ISO 8601 format.
           example: Paypal
           in: query
           name: search
@@ -697,6 +1140,10 @@ paths:
                 memo:
                   description: A memo for the transaction.
                   type: string
+                needs_review:
+                  description: Whether the transaction needs to be reviewed or not.
+                  example: false
+                  type: boolean
                 note:
                   description: A note for the transaction.
                   example: I really enjoyed the loaded corn chips
@@ -727,6 +1174,26 @@ paths:
       tags:
         - Transactions
   "/transactions/{id}":
+    delete:
+      description: Deletes a transaction and all its data by ID.
+      parameters:
+        - description: The unique identifier of the transaction.
+          example: 42
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Success
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+      summary: Delete transaction
+      tags:
+        - Transactions
     get:
       description: Gets a transaction by its ID.
       parameters:
@@ -754,14 +1221,6 @@ paths:
     put:
       description: Updates a transaction by its ID.
       parameters:
-        - description: A new set of labels for the transaction.
-          example: foo,bar,baz
-          in: query
-          name: labels
-          required: false
-          schema:
-            description: A new comma-separated set of labels for the transaction.
-            type: string
         - description: The unique identifier of the transaction.
           example: 42
           in: path
@@ -794,10 +1253,18 @@ paths:
                   description: Whether the transaction is a transfer or not.
                   example: false
                   type: boolean
+                labels:
+                  description: A new comma-separated set of labels for the transaction.
+                  example: foo,bar,baz
+                  type: string
                 memo:
                   description: A new memo for the transaction.
                   example: Rent
                   type: string
+                needs_review:
+                  description: Whether the transaction needs to be reviewed or not.
+                  example: false
+                  type: boolean
                 note:
                   description: A new note for the transaction.
                   type: string
@@ -880,8 +1347,6 @@ paths:
           $ref: "#/components/responses/403"
         "404":
           $ref: "#/components/responses/404"
-        "422":
-          $ref: "#/components/responses/422"
       summary: Assigns attachment to transaction
       tags:
         - Attachments
@@ -931,6 +1396,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/User"
           description: Success
+        "403":
+          $ref: "#/components/responses/403"
         "404":
           $ref: "#/components/responses/404"
       summary: Get user
@@ -1055,11 +1522,13 @@ paths:
                   enum:
                     - bank
                     - credits
+                    - cash
                     - loans
                     - mortgage
                     - stocks
                     - vehicle
                     - property
+                    - insurance
                     - other_asset
                     - other_liability
                   example: bank
@@ -1081,6 +1550,8 @@ paths:
           $ref: "#/components/responses/403"
         "404":
           $ref: "#/components/responses/404"
+        "422":
+          $ref: "#/components/responses/422"
       summary: Create an account in user
       tags:
         - Accounts
@@ -1286,6 +1757,12 @@ paths:
                   $ref: "#/components/schemas/BudgetAnalysisPackage"
                 type: array
           description: Success
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
       summary: Get budget summary for user
       tags:
         - Budgeting
@@ -1335,10 +1812,31 @@ paths:
                   description: A CSS-style hex colour for the category.
                   example: "#e0e7ff"
                   type: string
+                is_bill:
+                  description: Set the category as a bill category.
+                  example: true
+                  type: boolean
+                is_transfer:
+                  description: Set the category as a transfer category.
+                  example: false
+                  type: boolean
                 parent_id:
                   description: The unique identifier of a category to be the parent of this category.
                   example: 42
                   type: integer
+                refund_behaviour:
+                  description: Set the refund behaviour of the category.
+                  enum:
+                    - debits_are_deductions
+                    - credits_are_refunds
+                    - null
+                  example: credits_are_refunds
+                  nullable: true
+                  type: string
+                roll_up:
+                  description: Set the category to be rolled up into its parent category.
+                  example: false
+                  type: boolean
                 title:
                   description: A title for the category.
                   example: Food
@@ -1389,6 +1887,62 @@ paths:
       summary: List category rules in user
       tags:
         - Category Rules
+  "/users/{id}/events":
+    get:
+      description: Lists events belonging to a user by their ID.
+      parameters:
+        - $ref: "#/components/parameters/userId"
+        - description: Return the events from and including this date.
+          example: 2020-10-01
+          in: query
+          name: start_date
+          required: true
+          schema:
+            type: string
+        - description: Return the events until and including this date.
+          example: 2020-10-30
+          in: query
+          name: end_date
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Event"
+                type: array
+          description: Success
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+      summary: List events in user.
+      tags:
+        - Events
+  "/users/{id}/forecast_cache":
+    delete:
+      description: Delete the user's cached forecast by recalculating the forecast.
+      parameters:
+        - description: The unique identifier of the user.
+          example: 42
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Success
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+      summary: Delete forecast cache for user
+      tags:
+        - Budgeting
   "/users/{id}/institutions":
     get:
       description: Lists all the institutions belonging to the user.
@@ -1459,6 +2013,53 @@ paths:
       summary: Create institution in user
       tags:
         - Institutions
+  "/users/{id}/labels":
+    get:
+      description: Lists labels belonging to a user by their ID.
+      parameters:
+        - $ref: "#/components/parameters/userId"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                - craftbeer
+                - bargains
+                - gaming
+                - Trip to Auckland
+              schema:
+                items:
+                  type: string
+                type: array
+          description: Success
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+      summary: List labels in user
+      tags:
+        - Labels
+  "/users/{id}/saved_searches":
+    get:
+      description: Lists saved searches belonging to a user by their ID.
+      parameters:
+        - $ref: "#/components/parameters/userId"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SavedSearch"
+                type: array
+          description: Success
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+      summary: List saved searches in user
+      tags:
+        - Saved Searches
   "/users/{id}/transaction_accounts":
     get:
       description: List all transaction accounts belonging to a user.
@@ -1497,28 +2098,35 @@ paths:
           required: true
           schema:
             type: integer
-        - description: Return only transactions on or after this date. Required if end_date is provided. If not provided, defaults to the furtherest date allowed by the user's subscription.
+        - description: Limit to transactions on or after this date. Required if end_date is provided. If not provided, defaults to the furtherest date allowed by the user's subscription.
           example: 2016-11-01
           in: query
           name: start_date
           required: false
           schema:
             type: string
-        - description: Return transactions that fall on or before this date. Required if start_date is provided. If not provided, defaults to today's date.
+        - description: Limit to transactions on or before this date. Required if start_date is provided. If not provided, defaults to today's date.
           example: 2016-11-30
           in: query
           name: end_date
           required: false
           schema:
             type: string
-        - description: If set, will return only uncategorised results.
+        - description: Limit to transactions updated since an ISO 8601 timestamp.
+          example: 2020-10-14T09:20:33+13:00
+          in: query
+          name: updated_since
+          required: false
+          schema:
+            type: string
+        - description: Limit to uncategorised transactions.
           example: 1
           in: query
-          name: only_uncategorised
+          name: uncategorised
           required: false
           schema:
             type: integer
-        - description: Only return transactions of this type.
+        - description: Limit to transactions of this type.
           example: debit
           in: query
           name: type
@@ -1528,7 +2136,14 @@ paths:
               - debit
               - credit
             type: string
-        - description: Return transactions matching a keyword search string. The provided string is matched against the transaction amount, account name, payee, category title, note, labels, and the date in yyyy-mm-dd format.
+        - description: Limit to transactions that need to be reviewed.
+          example: 1
+          in: query
+          name: needs_review
+          required: false
+          schema:
+            type: integer
+        - description: Limit to transactions matching a keyword search string. The provided string is matched against the transaction amount, account name, payee, category title, note, labels, and the date in ISO 8601 format.
           example: Paypal
           in: query
           name: search
@@ -1627,10 +2242,43 @@ paths:
                   $ref: "#/components/schemas/BudgetAnalysisPackage"
                 type: array
           description: Success
+        "400":
+          $ref: "#/components/responses/400"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "422":
+          $ref: "#/components/responses/422"
       summary: Get trend analysis for user
       tags:
         - Budgeting
 components:
+  parameters:
+    eventId:
+      description: The unique identifier of the event.
+      example: 42-1601942400
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+    scenarioId:
+      description: The unique identifier of the scenario.
+      example: 42
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+    userId:
+      description: The unique identifier of the user.
+      example: 42
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
   responses:
     "400":
       content:
@@ -1650,6 +2298,12 @@ components:
           schema:
             $ref: "#/components/schemas/Error"
       description: Not Found
+    "409":
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+      description: Conflict
     "422":
       content:
         application/json:
@@ -1729,6 +2383,7 @@ components:
             - vehicle
             - property
             - insurance
+            - other_asset
             - other_liability
           example: bank
           type: string
@@ -1746,33 +2401,33 @@ components:
         content_type_meta:
           properties:
             description:
-              description: The content type description of the attachment
+              description: The content type description of the attachment.
               example: PNG image
               type: string
             extension:
-              description: The extension type of the attachment
+              description: The extension type of the attachment.
               example: png
               type: string
             title:
-              description: The content type title of the attachment
+              description: The content type title of the attachment.
               example: PNG
               type: string
           type: object
         created_at:
-          description: When the attachment was created
+          description: When the attachment was created.
           example: 2015-08-16T02:17:02Z
-          format: ISO 8601 datetime format
+          format: ISO 8601 timestamp
           type: string
         file_name:
-          description: The file name of the attachment
+          description: The file name of the attachment.
           example: taxi.png
           type: string
         id:
           description: The unique identifier of the attachment
-          example: 1438154
+          example: 42
           type: integer
         original_url:
-          description: The url of the attachment
+          description: The url of the attachment.
           example: https://image.com/image.png
           type: string
         title:
@@ -1780,22 +2435,22 @@ components:
           example: Invoice for taxi
           type: string
         type:
-          description: The type of attachment
+          description: The type of attachment.
           example: image
           type: string
         updated_at:
-          description: When the attachment was last updated
+          description: When the attachment was last updated.
           example: 2015-08-16T02:17:02Z
-          format: ISO 8601 datetime format
+          format: ISO 8601 timestamp
           type: string
         variants:
           properties:
             large_url:
-              description: The url of the large version of the attachment
+              description: The url of the large version of the attachment.
               example: https://image.com/image.png
               type: string
             thumb_url:
-              description: The url of the thumb version of the attachment
+              description: The url of the thumb version of the attachment.
               example: https://image.com/image.png
               type: string
           type: object
@@ -1810,6 +2465,10 @@ components:
           description: The average budgeted amount across all periods.
           example: -60
           type: number
+        currency_code:
+          description: The currency of the budget analysis.
+          example: nzd
+          type: string
         end_date:
           description: The end date of the budget analysis.
           example: 2016-11-30
@@ -1868,12 +2527,16 @@ components:
         created_at:
           description: When the category was created.
           example: 2015-08-16T02:17:02Z
-          format: ISO 8601 datetime format
+          format: ISO 8601 timestamp
           type: string
         id:
           description: The unique identifier of the category.
           example: 1438154
           type: integer
+        is_bill:
+          description: Whether the category is a bill category. A bill category is when budgeted amounts are normally spent at once, instead of spread across a budgeting period. This category will be included in the bill reminder email when set to true.
+          example: true
+          type: boolean
         is_transfer:
           description: Whether this category has been marked as a transfer category.
           example: false
@@ -1882,6 +2545,19 @@ components:
           description: The unique identifier of the parent category of this category, or null if this category has no parent (i.e. is a top-level category)
           example: 42
           type: integer
+        refund_behaviour:
+          description: How the category's refunds or deductions should be reported on.
+          enum:
+            - debits_are_deductions
+            - credits_are_refunds
+            - null
+          example: credits_are_refunds
+          nullable: true
+          type: string
+        roll_up:
+          description: Whether the category's budget is rolled up into its parent category, if a parent category is present.
+          example: false
+          type: boolean
         title:
           description: The title of the category.
           example: Beer
@@ -1889,7 +2565,7 @@ components:
         updated_at:
           description: When the category was last updated.
           example: 2015-08-16T02:17:02Z
-          format: ISO 8601 datetime format
+          format: ISO 8601 timestamp
           type: string
       type: object
     CategoryRule:
@@ -1899,7 +2575,7 @@ components:
         created_at:
           description: When the category rule was created.
           example: 2019-07-09T10:06:02Z
-          format: ISO 8601 datetime format
+          format: ISO 8601 timestamp
           type: string
         id:
           description: The unique identifier of the category rule.
@@ -1912,7 +2588,39 @@ components:
         updated_at:
           description: When the category rule was last updated.
           example: 2019-07-09T10:06:02Z
-          format: ISO 8601 datetime format
+          format: ISO 8601 timestamp
+          type: string
+      type: object
+    Currency:
+      properties:
+        id:
+          description: The ISO 4217 or unofficial currency code.
+          example: nzd
+          type: string
+        minor_unit:
+          description: The number of digits after the minor unit separator.
+          example: 2
+          type: integer
+        name:
+          description: The name of the currency.
+          example: New Zealand Dollar
+          type: string
+        separators:
+          $ref: "#/components/schemas/CurrencySeparators"
+        symbol:
+          description: The symbol of the currency.
+          example: $
+          type: string
+      type: object
+    CurrencySeparators:
+      properties:
+        major:
+          description: The separator used in the major unit.
+          example: ","
+          type: string
+        minor:
+          description: The seperator used for the minor unit.
+          example: .
           type: string
       type: object
     Error:
@@ -1920,6 +2628,69 @@ components:
         error:
           description: A message describing the error that occurred.
           example: A message describing the error that occurred.
+          type: string
+      type: object
+    Event:
+      properties:
+        amount:
+          description: The amount of the event.
+          example: 250.5
+          type: number
+        amount_in_base_currency:
+          description: The amount of the event in the user's base currency.
+          example: 375.75
+          type: number
+        category:
+          $ref: "#/components/schemas/Category"
+        colour:
+          description: The CSS hex-style colour of the event.
+          example: "#F63737"
+          type: string
+        currency_code:
+          description: The currency code of the event.
+          example: nzd
+          type: string
+        date:
+          description: The date of the event.
+          example: 2020-10-27
+          type: string
+        id:
+          description: The unique identifier of the event.
+          example: 42-1601942400
+          type: string
+        infinite_series:
+          description: Whether the event repeats and does not have an end date.
+          example: true
+          type: boolean
+        note:
+          description: The note of the event.
+          example: Buy more beer every Friday from the local brewery.
+          type: string
+        repeat_interval:
+          description: The repeat interval of how often the event takes place.
+          example: 1
+          type: integer
+        repeat_type:
+          description: The repeat type of the event.
+          enum:
+            - once
+            - daily
+            - weekly
+            - fortnightly
+            - monthly
+            - yearly
+            - each weekday
+          example: weekly
+          type: string
+        scenario:
+          $ref: "#/components/schemas/Scenario"
+        series_id:
+          description: The unique identifier of the series that the event belongs to.
+          example: 42
+          type: integer
+        series_start_id:
+          description: The unique identifier of the series followed by the series's start date.
+          example: 42-1593993600
           type: string
       type: object
     Institution:
@@ -1951,6 +2722,10 @@ components:
           description: The sum of all actuals (transactions) in the period.
           example: -42.3
           type: number
+        currency_code:
+          description: The currency of the period.
+          example: nzd
+          type: string
         current:
           description: Whether this period is current, such that the current date (in the user's time zone) falls within the date range.
           example: true
@@ -1975,7 +2750,7 @@ components:
           description: The percentage of the budget that has been used in the period.
           example: 70.5
           type: number
-        refund_amound:
+        refund_amount:
           description: This attribute tracks the amount that has been refunded or deducted to the actual amount. When a category is set to "always expense", any credit transactions are treated as refunds and when set to "always income", any debit transactions are treated as deductions.
           example: 5.6
           type: number
@@ -1991,6 +2766,27 @@ components:
           description: How much there is left in the budget for the period.
           example: 17.7
           type: number
+      type: object
+    SavedSearch:
+      properties:
+        created_at:
+          description: When the saved search was created.
+          example: 2015-08-16T02:17:02Z
+          format: ISO 8601 timestamp
+          type: string
+        id:
+          description: The unique identifier of the saved search.
+          example: 42
+          type: integer
+        title:
+          description: The title of the saved search.
+          example: Craft beer
+          type: string
+        updated_at:
+          description: When the saved search was last updated.
+          example: 2015-08-16T02:17:02Z
+          format: ISO 8601 timestamp
+          type: string
       type: object
     Scenario:
       properties:
@@ -2079,10 +2875,41 @@ components:
           example: 2015-04-21T22:42:22Z
           type: string
       type: object
+    TimeZone:
+      properties:
+        abbreviation:
+          description: The abbreviation of the time zone.
+          example: NZDT
+          type: string
+        formatted_name:
+          description: The formatted name of the time zone.
+          example: (GMT+13:00) Auckland
+          type: string
+        formatted_offset:
+          description: The formatted offset of the time zone.
+          example: +13:00
+          type: string
+        identifier:
+          description: The tz database name of the time zone.
+          example: Pacific/Auckland
+          type: string
+        name:
+          description: The name of the time zone.
+          example: Auckland
+          type: string
+        utc_offset:
+          description: The time zone's UTC offset in seconds.
+          example: 46800
+          type: integer
+      type: object
     Transaction:
       properties:
         amount:
           example: 34.6
+          type: number
+        amount_in_base_currency:
+          description: The amount of the transaction in the user's base currency.
+          example: 51.9
           type: number
         category:
           $ref: "#/components/schemas/Category"
@@ -2093,6 +2920,10 @@ components:
           description: The closing balance of the account at the transaction.
           example: 4312.32
           type: number
+        created_at:
+          description: When the transaction was created.
+          example: 2018-02-27T22:42:22Z
+          type: string
         date:
           description: The date the transaction took place.
           example: 2018-02-27
@@ -2102,7 +2933,7 @@ components:
           example: 42
           type: integer
         is_transfer:
-          description: Whether the transaction was a transfer.
+          description: Whether the transaction is a transfer.
           example: false
           type: boolean
         labels:
@@ -2116,6 +2947,10 @@ components:
         memo:
           example: An example memo
           type: string
+        needs_review:
+          description: Whether the transaction needs to be reviewed.
+          example: true
+          type: boolean
         note:
           example: I spent way too much on cheese here
           type: string
@@ -2141,6 +2976,10 @@ components:
             - debit
             - credit
           example: credit
+          type: string
+        updated_at:
+          description: When the transaction was last updated.
+          example: 2018-02-27T22:42:22Z
           type: string
         upload_source:
           description: Where the transaction came from.
@@ -2207,6 +3046,7 @@ components:
             - vehicle
             - property
             - insurance
+            - other_asset
             - other_liability
           example: bank
           type: string
@@ -2220,6 +3060,14 @@ components:
           description: Whether the user wants to see all accounts in their base currency instead of the native account currency.
           example: false
           type: boolean
+        available_accounts:
+          description: The user's total number of available accounts.
+          example: 3
+          type: integer
+        available_budgets:
+          description: The user's total number of available budgets.
+          example: 3
+          type: integer
         avatar_url:
           description: The URL to the user's avatar.
           example: https://image.com/image.png
@@ -2240,10 +3088,38 @@ components:
           description: The user's email address.
           example: user69@sample.com
           type: string
+        forecast_defer_recalculate:
+          description: Whether the user's forecast recalculation should be deferred.
+          example: false
+          type: boolean
+        forecast_end_date:
+          description: The date that the user's forecast ends.
+          example: 2015-07-15
+          type: string
+        forecast_last_accessed_at:
+          description: When the user's forecast was last accessed.
+          example: 2015-07-02T22:14:49Z
+          type: string
+        forecast_last_updated_at:
+          description: When the user's forecast was last updated.
+          example: 2015-07-02T22:14:49Z
+          type: string
+        forecast_needs_recalculate:
+          description: Whether the user's forecast needs to be recalculated.
+          example: true
+          type: boolean
+        forecast_start_date:
+          description: The date that the user's forecast starts.
+          example: 2015-07-01
+          type: string
         id:
           description: The unique identifier of the user.
           example: 42
           type: integer
+        is_reviewing_transactions:
+          description: Whether the user wants to review new transactions, transfer transactions or categorisation.
+          example: true
+          type: boolean
         last_activity_at:
           description: When the user last interacted with PocketSmith, via any application or the API.
           example: 2015-07-02T22:14:49Z
@@ -2295,6 +3171,8 @@ components:
             attachments.write: Ability to create, update and delete attachments
             categories.read: Access to view categories
             categories.write: Ability to edit and delete categories
+            events.read: Access to view events
+            events.write: Ability to create, update and delete events
             transactions.read: Access to list and view accounts and transactions
             transactions.write: Access to create, update and delete transactions
             user.read: Access the user's details and preferences

@@ -18,18 +18,21 @@ paths:
   /v3/affiliates/search/images:
     get:
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
-        - in: query
+        - description: Search images using a search phrase.
+          in: query
           name: phrase
           schema:
+            description: Search images using a search phrase.
             nullable: true
             type: string
-        - in: query
+        - description: Filter based on graphical style of the image.
+          in: query
           name: style
           schema:
             $ref: "#/components/schemas/AffiliateSearchStyle"
@@ -40,16 +43,17 @@ paths:
               schema:
                 $ref: "#/components/schemas/AffiliateImageSearchResponse"
           description: Success
+      summary: ""
       tags:
         - AffiliateSearch
   /v3/affiliates/search/videos:
     get:
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - in: query
           name: phrase
@@ -68,11 +72,11 @@ paths:
   /v3/artists/images:
     get:
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: Name of artist for desired images
           in: query
@@ -121,11 +125,11 @@ paths:
   /v3/artists/videos:
     get:
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: Name of artist for desired images
           in: query
@@ -176,11 +180,21 @@ paths:
       description: |
         # Asset Changes
 
-        Get notifications about new, updated or deleted assets.
+        Get notifications about new, updated or deleted assets for a specific channel.
 
         ##  Quickstart
 
         You'll need an API key and an access token to use this resource. 
+
+        Maximum batch size is 2200.
+
+        Change-sets must be confirmed before a new batch of notifications can be retrieved from this endpoint. Use the DELETE asset-changes/change-sets/{change-set-id} endpoint to confirm reciept of these notifications.
+
+        Values returned for asset_type include Image, Film, and null. Values returned for asset_lifecycle include New, Update, and Delete.
+
+        Delete notifications may be provided for asset ids that have not previously been received as New or Update notifications. Delete notifications may return null for the asset_type.
+
+        If there are no notifications in the channel an empty response body will be returned.
 
         Notifications older than 60 days will be removed from partner channels.
       parameters:
@@ -191,11 +205,11 @@ paths:
             description: Specifies the id of the channel for the asset data. Valid channel ids can be found in the results of the Get Partner Channel query.
             format: int32
             type: integer
-        - description: Specifies the number of assets to return. The default is 10; maximum is 500.
+        - description: Specifies the number of assets to return. The default is 2200; maximum is 2200.
           in: query
           name: batch_size
           schema:
-            description: Specifies the number of assets to return. The default is 10; maximum is 500.
+            description: Specifies the number of assets to return. The default is 2200; maximum is 2200.
             format: int32
             nullable: true
             type: integer
@@ -226,11 +240,13 @@ paths:
       description: |
         # Delete Asset Changes
 
-        Confirm asset changes acknowledges receipt of asset changes (from the PUT asset changes endpoint).
+        Confirm asset changes acknowledges receipt of asset changes (from the PUT asset-changes endpoint).
 
         ##  Quickstart
 
         You'll need an API key and an access token to use this resource.
+
+        Use the change_set_id from the PUT asset-changes/change-sets endpoint to confirm receipt of notifications.
       parameters:
         - description: Specify the change-set-id associated with a transaction resource whose receipt you want to confirm.
           in: path
@@ -284,11 +300,11 @@ paths:
   "/v3/asset-licensing/{assetId}":
     post:
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: Getty Images assetId - examples 520621493, 112301284
           in: path
@@ -300,19 +316,10 @@ paths:
             type: string
       requestBody:
         content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/AcquireAssetLicensesRequest"
           application/json:
             schema:
               $ref: "#/components/schemas/AcquireAssetLicensesRequest"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/AcquireAssetLicensesRequest"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/AcquireAssetLicensesRequest"
-        description: "Structure that specifies an array of LicenseTypes (Multiseat, Unlimited, Resale, Indemnification) to acquire,\r
+        description: "Structure that specifies an array of LicenseTypes (multiseat, unlimited, resale, indemnification) to acquire,\r
 
           \            and whether or not to use Team Credits. Authenticated User must have access to Team Credits if UseTeamCredits is set to \"true\"."
       responses:
@@ -333,9 +340,61 @@ paths:
       summary: Endpoint for acquiring extended licenses with iStock credits for an asset.
       tags:
         - AssetLicensing
+  /v3/asset-management/assets/send-events:
+    get:
+      parameters:
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+          in: header
+          name: Accept-Language
+          schema:
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+            type: string
+        - description: "Specifies a date/time (with timezone information) for continuing retrieval of events.\r
+
+            Events occuring _after_ the `last_offset` value provided will be returned."
+          in: query
+          name: last_offset
+          schema:
+            description: "Specifies a date/time (with timezone information) for continuing retrieval of events.\r
+
+              Events occuring _after_ the `last_offset` value provided will be returned."
+            format: date-time
+            nullable: true
+            type: string
+        - description: Specifies the number of events to return. Default is 50, maximum value is 100.
+          in: query
+          name: event_count
+          schema:
+            description: Specifies the number of events to return. Default is 50, maximum value is 100.
+            format: int32
+            nullable: true
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSendEventsResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/GetSendEventsResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/GetSendEventsResponse"
+          description: Success
+        "400":
+          description: EventCountOutOfRange
+      tags:
+        - AssetManagement
   /v3/boards:
     get:
       parameters:
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+          in: header
+          name: Accept-Language
+          schema:
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+            type: string
         - description: Request results starting at a page number (default is 1).
           in: query
           name: page
@@ -377,6 +436,13 @@ paths:
       tags:
         - Boards
     post:
+      parameters:
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+          in: header
+          name: Accept-Language
+          schema:
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+            type: string
       requestBody:
         content:
           application/json:
@@ -400,6 +466,12 @@ paths:
   "/v3/boards/{board_id}":
     delete:
       parameters:
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+          in: header
+          name: Accept-Language
+          schema:
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+            type: string
         - description: Specify the board to delete.
           in: path
           name: board_id
@@ -426,6 +498,12 @@ paths:
         - Boards
     get:
       parameters:
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+          in: header
+          name: Accept-Language
+          schema:
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+            type: string
         - description: Retrieve details for a specific board.
           in: path
           name: board_id
@@ -452,6 +530,12 @@ paths:
         - Boards
     put:
       parameters:
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+          in: header
+          name: Accept-Language
+          schema:
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+            type: string
         - description: Specify the board to update.
           in: path
           name: board_id
@@ -485,6 +569,12 @@ paths:
   "/v3/boards/{board_id}/assets":
     delete:
       parameters:
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+          in: header
+          name: Accept-Language
+          schema:
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+            type: string
         - description: Specify the board to remove assets from.
           in: path
           name: board_id
@@ -518,6 +608,12 @@ paths:
         - Boards
     put:
       parameters:
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+          in: header
+          name: Accept-Language
+          schema:
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+            type: string
         - description: Specify the board to add assets to.
           in: path
           name: board_id
@@ -557,6 +653,12 @@ paths:
   "/v3/boards/{board_id}/assets/{asset_id}":
     delete:
       parameters:
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+          in: header
+          name: Accept-Language
+          schema:
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+            type: string
         - description: Specify the board to remove an asset from.
           in: path
           name: board_id
@@ -589,6 +691,12 @@ paths:
         - Boards
     put:
       parameters:
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+          in: header
+          name: Accept-Language
+          schema:
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+            type: string
         - description: Specify the board to add an asset to.
           in: path
           name: board_id
@@ -622,6 +730,12 @@ paths:
   "/v3/boards/{board_id}/comments":
     get:
       parameters:
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+          in: header
+          name: Accept-Language
+          schema:
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+            type: string
         - description: Specify the board to retrieve comments from.
           in: path
           name: board_id
@@ -648,6 +762,12 @@ paths:
         - Boards
     post:
       parameters:
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+          in: header
+          name: Accept-Language
+          schema:
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+            type: string
         - description: Specify the board to add a comment to.
           in: path
           name: board_id
@@ -683,6 +803,12 @@ paths:
   "/v3/boards/{board_id}/comments/{comment_id}":
     delete:
       parameters:
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+          in: header
+          name: Accept-Language
+          schema:
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
+            type: string
         - description: Specify the board containing the comment to delete.
           in: path
           name: board_id
@@ -722,11 +848,11 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
       responses:
         "200":
@@ -747,11 +873,11 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
       responses:
         "200":
@@ -774,11 +900,11 @@ paths:
         	
         Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
       responses:
         "200":
@@ -808,11 +934,11 @@ paths:
         you need to also include an authorization token in the header of your request. 
         Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: "If specified, selects assets downloaded on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD). \r
 
@@ -877,10 +1003,11 @@ paths:
             description: Specifies page size. Default is 30, maximum page_size is 100.
             format: int32
             type: integer
-        - in: query
+        - description: Specifies product type to be included in the previous download results. Product types easyaccess, editorialsubscription, imagepack, and premiumaccess are for GettyImages API keys. Product types royaltyfreesubscription and creditpack are for iStock API keys. To get previous iStockPhoto credit downloads, creditpack must be selected.
+          in: query
           name: product_type
           schema:
-            $ref: "#/components/schemas/ProductTypeRequest"
+            $ref: "#/components/schemas/ProductTypeForDownloads"
         - description: If specified, returns the list of previously downloaded images for all users in your company. Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false.
           in: query
           name: company_downloads
@@ -928,6 +1055,8 @@ paths:
 
         Server Response:
 
+        Your client code should follow redirect (3xx) status codes returned from the URI in the response Location header. More information here: [HTTP 1.1 protocol](https://tools.ietf.org/html/rfc7231#section-6.4).
+
         ```
         HTTP/1.1 303 See Other
         Location: https://delivery.gettyimages.com/...
@@ -951,6 +1080,8 @@ paths:
         ```
         ## Downloading Via the Returned URI
 
+        Your client code should follow redirect (3xx) status codes returned from the URI in the response. More information here: [HTTP 1.1 protocol](https://tools.ietf.org/html/rfc7231#section-6.4).
+
         The URI returned by this call should be considered opaque and the format could change at any time.
         In order to get the filename, length or file type, the response headers must be inspected. An example
         response follows:
@@ -967,11 +1098,11 @@ paths:
 
         Download URIs are _**only valid for 24 hours**_, starting from the moment they are returned from this call.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: "<remarks>\r
 
@@ -1012,7 +1143,12 @@ paths:
 
               \                </remarks>"
             type: boolean
-        - in: query
+        - description: "<remarks>\r
+
+            \                    File Type expressed with three character file extension.\r
+
+            \                </remarks>"
+          in: query
           name: file_type
           schema:
             $ref: "#/components/schemas/DownloadFileType"
@@ -1055,10 +1191,15 @@ paths:
             format: int32
             nullable: true
             type: integer
-        - in: query
+        - description: "<remarks>\r
+
+            \                    Product types easyaccess, editorialsubscription, imagepack, and premiumaccess are for GettyImages API keys. Product types royaltyfreesubscription and creditpack are for iStock API keys. Default product type for iStock API keys is creditpack.\r
+
+            \                </remarks>"
+          in: query
           name: product_type
           schema:
-            $ref: "#/components/schemas/ProductTypeRequest"
+            $ref: "#/components/schemas/ProductTypeForDownloads"
         - description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
           in: query
           name: use_team_credits
@@ -1069,16 +1210,7 @@ paths:
             type: boolean
       requestBody:
         content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/PremiumAccessDownloadData"
           application/json:
-            schema:
-              $ref: "#/components/schemas/PremiumAccessDownloadData"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/PremiumAccessDownloadData"
-          text/json:
             schema:
               $ref: "#/components/schemas/PremiumAccessDownloadData"
         description: "<remarks>\r
@@ -1097,6 +1229,8 @@ paths:
           description: MissingRequiredQueryParameters
         "401":
           description: AuthorizationTokenRequired
+        "403":
+          description: OverageLimitReached
         "404":
           description: ImageNotFound
       summary: Download an image
@@ -1126,6 +1260,8 @@ paths:
 
         Server Response:
 
+        Your client code should follow redirect (3xx) status codes returned from the URI in the response Location header. More information here: [HTTP 1.1 protocol](https://tools.ietf.org/html/rfc7231#section-6.4).
+
         ```
         HTTP/1.1 303 See Other
         Location: https://delivery.gettyimages.com/...
@@ -1150,6 +1286,8 @@ paths:
 
         ## Downloading Via the Returned URI
 
+        Your client code should follow redirect (3xx) status codes returned from the URI in the response. More information here: [HTTP 1.1 protocol](https://tools.ietf.org/html/rfc7231#section-6.4).
+
         The URI returned by this call should be considered opaque and the format could change at any time.
         In order to get the filename, length or file type, the response headers must be inspected. An example
         response follows:
@@ -1166,11 +1304,11 @@ paths:
 
         Download URIs are _**only valid for 24 hours**_, starting from the moment they are returned from this call.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: "<remarks>\r
 
@@ -1234,6 +1372,15 @@ paths:
             format: int32
             nullable: true
             type: integer
+        - description: "<remarks>\r
+
+            \                    Product types easyaccess, editorialsubscription, imagepack, and premiumaccess are for GettyImages API keys. Product types royaltyfreesubscription and creditpack are for iStock API keys. Default product type for iStock API keys is creditpack.\r
+
+            \                </remarks>"
+          in: query
+          name: product_type
+          schema:
+            $ref: "#/components/schemas/ProductTypeForDownloads"
         - description: Specifies whether to download the image with iStock Team Credits. Only applicable to iStock API keys authenticated with a user that has Team Credits. Blank is the same as False.
           in: query
           name: use_team_credits
@@ -1243,16 +1390,7 @@ paths:
             type: boolean
       requestBody:
         content:
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/PremiumAccessDownloadData"
           application/json:
-            schema:
-              $ref: "#/components/schemas/PremiumAccessDownloadData"
-          application/json-patch+json:
-            schema:
-              $ref: "#/components/schemas/PremiumAccessDownloadData"
-          text/json:
             schema:
               $ref: "#/components/schemas/PremiumAccessDownloadData"
         description: "<remarks>\r
@@ -1271,6 +1409,8 @@ paths:
           description: MissingRequiredQueryParameters
         "401":
           description: AuthorizationTokenRequired
+        "403":
+          description: OverageLimitReached
         "404":
           description: VideoNotFound
       summary: Download a video
@@ -1288,11 +1428,11 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: A comma separated list of event ids.
           explode: false
@@ -1342,11 +1482,11 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: An event id.
           in: path
@@ -1459,6 +1599,8 @@ paths:
         files that are most frequently used to build a UI displaying search results. The following fields are provided for every image 
         in your result set when you include **display_set** in your request.
 
+        The URI provided is subject to change at any time and must be used as-is with no modification.
+
         ```
         {
             "images":
@@ -1466,13 +1608,19 @@ paths:
                 "display_sizes": 
                 [
                     {
-                        "name": "comp"
+                        "is_watermarked": <boolean>,
+                        "name": "comp",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "preview"
+                        "is_watermarked": <boolean>,
+                        "name": "preview",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "thumb"
+                        "is_watermarked": <boolean>,
+                        "name": "thumb",
+                        "uri": "<link>"
                     }
                 ]
             ]
@@ -1483,11 +1631,11 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: Specifies one or more image ids to return. Use comma delimiter when requesting multiple ids.  Maximum of 100 ids.
           explode: false
@@ -1533,7 +1681,7 @@ paths:
         - Images
   "/v3/images/{id}":
     get:
-      description: |
+      description: |-
         This endpoint returns the detailed image metadata for a specified image.
 
         You'll need an API key and access token to use this resource. 
@@ -1610,8 +1758,10 @@ paths:
         #### Display Fields Set
 
         The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low
-        resolution files that are most frequently used to build a UI displaying search results. The following fields are provided 
+        resolution files that are most frequently used to build a UI displaying search results. The following fields are provided
         for every image in your result set when you include **display_set** in your request.
+
+        The URI provided is subject to change at any time and must be used as-is with no modification.
 
         ```
         {
@@ -1620,13 +1770,19 @@ paths:
                 "display_sizes": 
                 [
                     {
-                        "name": "comp"
+                        "is_watermarked": <boolean>,
+                        "name": "comp",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "preview"
+                        "is_watermarked": <boolean>,
+                        "name": "preview",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "thumb"
+                        "is_watermarked": <boolean>,
+                        "name": "thumb",
+                        "uri": "<link>"
                     }
                 ]
             ]
@@ -1636,12 +1792,17 @@ paths:
         ## Request Usage Considerations
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
+
+
+
+                  "name": "string",
+                  "uri": "string"
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: An image id. For more than one image please use the /v3/images endpoint.
           in: path
@@ -1686,11 +1847,11 @@ paths:
     get:
       description: ""
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: An image id.
           in: path
@@ -1732,7 +1893,7 @@ paths:
         - Images
   "/v3/images/{id}/same-series":
     get:
-      description: |-
+      description: |
         This endpoint will provide the list of images, if any exist, from the same series as the specified creative asset id. These images are typically from the same photo shoot. This functionality will not work for editorial assets.
 
         You'll need an API key and access token to use this resource.
@@ -1819,6 +1980,8 @@ paths:
         that are most frequently used to build a UI displaying search results. The following fields are provided for every image in your result
         set when you include **display_set** in your request.
 
+        The URI provided is subject to change at any time and must be used as-is with no modification.
+
         ```
         {
             "images":
@@ -1826,24 +1989,30 @@ paths:
                 "display_sizes": 
                 [
                     {
-                        "name": "comp"
+                        "is_watermarked": <boolean>,
+                        "name": "comp",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "preview"
+                        "is_watermarked": <boolean>,
+                        "name": "preview",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "thumb"
+                        "is_watermarked": <boolean>,
+                        "name": "thumb",
+                        "uri": "<link>"
                     }
                 ]
             ]
         }
         ```
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: Identifies an existing image
           in: path
@@ -1853,12 +2022,12 @@ paths:
             description: Identifies an existing image
             nullable: true
             type: string
-        - description: Specifies fields to return. Defaults to 'summary_set'.
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes, height, and width returned by 'download_sizes' field are estimates."
           explode: false
           in: query
           name: fields
           schema:
-            description: Specifies fields to return. Defaults to 'summary_set'.
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes, height, and width returned by 'download_sizes' field are estimates."
             items:
               $ref: "#/components/schemas/ImagesFieldValues"
             nullable: true
@@ -1902,7 +2071,7 @@ paths:
         - Images
   "/v3/images/{id}/similar":
     get:
-      description: |-
+      description: |
         This endpoint will provide a list of images that are similar to the specified asset id.
 
         You'll need an API key and access token to use this resource.
@@ -1989,6 +2158,9 @@ paths:
         that are most frequently used to build a UI displaying search results. The following fields are provided for every image in your result
         set when you include **display_set** in your request.
 
+
+        The URI provided is subject to change at any time and must be used as-is with no modification.
+
         ```
         {
             "images":
@@ -1996,24 +2168,30 @@ paths:
                 "display_sizes": 
                 [
                     {
-                        "name": "comp"
+                        "is_watermarked": <boolean>,
+                        "name": "comp",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "preview"
+                        "is_watermarked": <boolean>,
+                        "name": "preview",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "thumb"
+                        "is_watermarked": <boolean>,
+                        "name": "thumb",
+                        "uri": "<link>"
                     }
                 ]
             ]
         }
         ```
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: Identifies an existing image
           in: path
@@ -2023,12 +2201,12 @@ paths:
             description: Identifies an existing image
             nullable: true
             type: string
-        - description: Specifies fields to return. Defaults to 'summary_set'.
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes, height, and width returned by 'download_sizes' field are estimates."
           explode: false
           in: query
           name: fields
           schema:
-            description: Specifies fields to return. Defaults to 'summary_set'.
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes, height, and width returned by 'download_sizes' field are estimates."
             items:
               $ref: "#/components/schemas/ImagesFieldValues"
             nullable: true
@@ -2078,11 +2256,11 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: An order id.
           in: path
@@ -2116,11 +2294,11 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: Comma separated list of fields. Allows product download requirements to be returned.
           explode: false
@@ -2158,11 +2336,11 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: If specified, retrieves previous purchases on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).
           in: query
@@ -2219,6 +2397,44 @@ paths:
       summary: Get Previously Purchased Images and Video
       tags:
         - Purchases
+  "/v3/search/by-image/uploads/{file-name}":
+    put:
+      parameters:
+        - description: ""
+          in: path
+          name: file-name
+          required: true
+          schema:
+            description: ""
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          image/jpeg:
+            schema:
+              description: ""
+              format: byte
+              nullable: true
+              type: string
+          image/png:
+            schema:
+              description: ""
+              format: byte
+              nullable: true
+              type: string
+        description: ""
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: InvalidParameterValue
+        "401":
+          description: AuthorizationTokenRequired
+        "403":
+          description: UnauthorizedDisplaySize
+      summary: Upload image for use by the search creative images/videos operations
+      tags:
+        - Search
   /v3/search/events:
     get:
       description: |
@@ -2230,19 +2446,20 @@ paths:
         You can show different information in the response by specifying values on the "fields" parameter (see details below).
         You can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Receive regionally relevant search results based on the value specified. Accepts only ISO Alpha-3 country codes. The Countries operation can be used to retrieve the codes.
           in: header
           name: GI-Country-Code
           schema:
             description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
             type: string
-        - in: query
+        - description: Filters to events with a matching editorial segment.
+          in: query
           name: editorial_segment
           schema:
             $ref: "#/components/schemas/EditorialSegmentContract"
@@ -2297,6 +2514,11 @@ paths:
             description: Filters to events related to this phrase
             nullable: true
             type: string
+        - description: Specifies the order in which to sort the results. Default is `newest`.
+          in: query
+          name: sort_order
+          schema:
+            $ref: "#/components/schemas/EventSearchSortOrder"
       responses:
         "200":
           content:
@@ -2316,7 +2538,9 @@ paths:
   /v3/search/images:
     get:
       description: |
-        Use this endpoint to search over a blend of our contemporary stock photos, illustrations, archival images, editorial photos, illustrations and archival images. Because this draws from such a large diversity of content, the results will not be as relevant as when the more specific Creative or Editorial endpoints are used. Additionally, the response time for this endpoint is slower compared to that for Creative and Editorial-specific endpoints. For these reasons, it is highly recommended that those endpoints are used instead of this blended endpoint.
+        ## _This endpoint draws from such a large diversity of content, the results will not be as relevant as when the more specific Creative or Editorial endpoints are used. Additionally, the response time for this endpoint is slower compared to that for Creative and Editorial-specific endpoints. For these reasons,_ _**it is highly recommended that those endpoints are used instead of this blended endpoint.**_
+
+
 
         You'll need an API key and access token to use this resource.
 
@@ -2325,6 +2549,8 @@ paths:
         To include your API token in the search request, add it to the headers as a Bearer token (example in curl):
 
         	-H "Authorization: Bearer <your-token>"
+
+        Search requests without a phrase parameter are not supported and may not always work.
 
         ## Working with Fields Sets
 
@@ -2407,20 +2633,28 @@ paths:
         frequently used to build a UI displaying search results. The following fields are provided for every image in your result set when you include **display_set**
         in your request.
 
+        The URI provided is subject to change at any time and must be used as-is with no modification.
+
         ```
         {
-            "images": 
+            "images":
             [
                 "display_sizes": 
                 [
                     {
-                        "name": "comp"
+                        "is_watermarked": <boolean>,
+                        "name": "comp",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "preview"
+                        "is_watermarked": <boolean>,
+                        "name": "preview",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "thumb"
+                        "is_watermarked": <boolean>,
+                        "name": "thumb",
+                        "uri": "<link>"
                     }
                 ]
             ]
@@ -2431,13 +2665,13 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Receive regionally relevant search results based on the value specified. Accepts only ISO Alpha-3 country codes. The Countries operation can be used to retrieve the codes.
           in: header
           name: GI-Country-Code
           schema:
@@ -2472,7 +2706,8 @@ paths:
             nullable: true
             type: array
           style: form
-        - in: query
+        - description: Provides searching based on specified collection(s). The default is Include
+          in: query
           name: collections_filter_type
           schema:
             $ref: "#/components/schemas/CollectionsFilterType"
@@ -2521,6 +2756,7 @@ paths:
           in: query
           name: embed_content_only
           schema:
+            default: false
             description: Restrict search results to embeddable images. The default is false.
             type: boolean
         - description: Filter based on specific events
@@ -2550,6 +2786,7 @@ paths:
           in: query
           name: exclude_nudity
           schema:
+            default: false
             description: Excludes images containing nudity. The default is false.
             type: boolean
         - description: Specifies fields to return. Defaults to 'summary_set'.
@@ -2585,7 +2822,8 @@ paths:
             nullable: true
             type: array
           style: form
-        - in: query
+        - description: Provides searching based on specified graphical style(s). The default is Include
+          in: query
           name: graphical_styles_filter_type
           schema:
             $ref: "#/components/schemas/GraphicalStylesFilterType"
@@ -2608,7 +2846,8 @@ paths:
             nullable: true
             type: array
           style: form
-        - in: query
+        - description: Filter based on minimum size requested. The default is x-small
+          in: query
           name: minimum_size
           schema:
             $ref: "#/components/schemas/TeeShirtSize"
@@ -2630,7 +2869,7 @@ paths:
           schema:
             description: Return only images with selected aspect ratios.
             items:
-              $ref: "#/components/schemas/OrientationRequest"
+              $ref: "#/components/schemas/ImageOrientationRequest"
             nullable: true
             type: array
           style: form
@@ -2657,7 +2896,8 @@ paths:
             description: Search images using a search phrase.
             nullable: true
             type: string
-        - in: query
+        - description: Select sort order of results.  The default is best_match
+          in: query
           name: sort_order
           schema:
             $ref: "#/components/schemas/BlendedImageSortOrder"
@@ -2685,18 +2925,20 @@ paths:
           description: AuthorizationTokenRequired
         "403":
           description: UnauthorizedDisplaySize
-      summary: Search for both creative and editorial images
+      summary: Search for both creative and editorial images - *** DEPRECATED ***
       tags:
         - Search
   /v3/search/images/creative:
     get:
-      description: |
+      description: |-
         Use this endpoint to search our contemporary stock photos, illustrations and archival images.
 
         You'll need an API key and access token to use this resource.
          
         You can show different information in the response by specifying values on the "fields" parameter (see details below).
         You can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.
+
+        Search requests without a phrase parameter are not supported and may not always work.
 
         ## Working with Fields Sets
 
@@ -2780,33 +3022,41 @@ paths:
         files that are most frequently used to build a UI displaying search results. The following fields are provided for every image 
         in your result set when you include **display_set** in your request.
 
-        ```Go
+        The URI provided is subject to change at any time and must be used as-is with no modification.
+
+        ```
         {
-            "images": 
+            "images":
             [
                 "display_sizes": 
                 [
                     {
-                        "name": "comp"
+                        "is_watermarked": <boolean>,
+                        "name": "comp",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "preview"
+                        "is_watermarked": <boolean>,
+                        "name": "preview",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "thumb"
+                        "is_watermarked": <boolean>,
+                        "name": "thumb",
+                        "uri": "<link>"
                     }
                 ]
             ]
         }
         ```
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Receive regionally relevant search results based on the value specified. Accepts only ISO Alpha-3 country codes. The Countries operation can be used to retrieve the codes.
           in: header
           name: GI-Country-Code
           schema:
@@ -2841,15 +3091,16 @@ paths:
             nullable: true
             type: array
           style: form
-        - in: query
+        - description: Use to include or exclude collections from search. The default is include
+          in: query
           name: collections_filter_type
           schema:
             $ref: "#/components/schemas/CollectionsFilterType"
-        - description: "Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244)."
+        - description: "Filter based on predominant color in an image. Use 6 character hexadecimal format (e.g., #002244)."
           in: query
           name: color
           schema:
-            description: "Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244)."
+            description: "Filter based on predominant color in an image. Use 6 character hexadecimal format (e.g., #002244)."
             nullable: true
             type: string
         - description: Filter based on image composition.
@@ -2890,6 +3141,7 @@ paths:
           in: query
           name: embed_content_only
           schema:
+            default: false
             description: Restrict search results to embeddable images. The default is false.
             type: boolean
         - description: Filter search results based on the ethnicity of individuals in an image.
@@ -2903,10 +3155,23 @@ paths:
             nullable: true
             type: array
           style: form
+        - description: Return only images not tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also do not contain the requested keyword(s) are returned.
+          explode: false
+          in: query
+          name: exclude_keyword_ids
+          schema:
+            description: Return only images not tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also do not contain the requested keyword(s) are returned.
+            items:
+              format: int32
+              type: integer
+            nullable: true
+            type: array
+          style: form
         - description: Excludes images containing nudity. The default is false.
           in: query
           name: exclude_nudity
           schema:
+            default: false
             description: Excludes images containing nudity. The default is false.
             type: boolean
         - description: Exclude images that are only available for editorial (non-commercial) use. Default value is false.
@@ -2916,12 +3181,12 @@ paths:
             description: Exclude images that are only available for editorial (non-commercial) use. Default value is false.
             nullable: true
             type: boolean
-        - description: Specifies fields to return. Defaults to 'summary_set'.
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes, height, and width returned by 'download_sizes' field are estimates."
           explode: false
           in: query
           name: fields
           schema:
-            description: Specifies fields to return. Defaults to 'summary_set'.
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes, height, and width returned by 'download_sizes' field are estimates."
             items:
               $ref: "#/components/schemas/CreativeImagesFieldValues"
             nullable: true
@@ -2949,7 +3214,8 @@ paths:
             nullable: true
             type: array
           style: form
-        - in: query
+        - description: Provides searching based on specified graphical style(s). The default is include.
+          in: query
           name: graphical_styles_filter_type
           schema:
             $ref: "#/components/schemas/GraphicalStylesFilterType"
@@ -2972,7 +3238,8 @@ paths:
             nullable: true
             type: array
           style: form
-        - in: query
+        - description: Filter based on minimum size requested. The default is x-small.
+          in: query
           name: minimum_size
           schema:
             $ref: "#/components/schemas/TeeShirtSize"
@@ -2994,7 +3261,7 @@ paths:
           schema:
             description: Return only images with selected aspect ratios.
             items:
-              $ref: "#/components/schemas/OrientationRequest"
+              $ref: "#/components/schemas/ImageOrientationRequest"
             nullable: true
             type: array
           style: form
@@ -3029,7 +3296,8 @@ paths:
             default: false
             description: Setting safe_search to "true" excludes images containing nudity, death, profanity, drugs and alcohol, suggestive content, and graphic content from the result set. The default is false. Because this is a keyword-based filter, it's possible that a small number of unsafe images may not be caught by the filter. Please direct feedback to your Getty Images Account or API support representative.
             type: boolean
-        - in: query
+        - description: Select sort order of results.  The default is best_match
+          in: query
           name: sort_order
           schema:
             $ref: "#/components/schemas/CreativeImageSortOrder"
@@ -3059,6 +3327,7 @@ paths:
           in: query
           name: facet_max_count
           schema:
+            default: 300
             description: Specifies the maximum number of facets to return per type. Default is 300.
             format: int32
             type: integer
@@ -3083,46 +3352,40 @@ paths:
   /v3/search/images/creative/by-image:
     get:
       description: |
-        Allows searching for similar creative images by passing the URL to an existing image. All responses will have the exclude_nudity filter automatically applied.
+        Search for **similar creative images** by passing an `image_url` to an uploaded image OR an `asset_id` of an asset in our catalog.  All responses will have the `exclude_nudity` filter automatically applied.
 
-        Before calling the search by image endpoint, an image must be uploaded to a specific AWS S3 bucket. The bucket name is `search-by-image.s3.amazonaws.com`.
+        ## Searching by URL
+
+        Before calling the search by image endpoint, an image in JPEG format must be uploaded to `https://api.gettyimages.com/v3/search/by-image/uploads/{CLIENT_IMAGE.jpg}`, where the client defines the `{CLIENT_IMAGE.jpg}` portion of the URL.
+
         For example, using cURL:
-        ```sh
-        curl -i -X PUT https://search-by-image.s3.amazonaws.com/my-test-image.jpg -H "Content-Type: image/jpeg" --data-binary "@testimage.jpg"
+
+        ``` sh
+        curl -i -X PUT https://api.gettyimages.com/v3/search/by-image/uploads/my-test-image.jpg -H 'Content-Type: image/jpeg' -H 'Api-Key: API_KEY' --data-binary "@testimage.jpg"
         ```
 
-        Uploads can be overwritten if the names are the same, so using a prefix like the API Key, application name or company name is recommended. Uploads will expire from the bucket after 24 hours.
+        Once the image has been uploaded, use the full URL in the `image_url` parameter, e.g. `image_url=https://api.gettyimages.com/v3/search/by-image/uploads/my-test-image.jpg`.
 
-        Once the image has been uploaded, use the full URL in the `image_url` parameter, e.g. `image_url=https://search-by-image.s3.amazonaws.com/my-test-image.jpg`.
+        - Uploaded files must be 10MB or smaller.
+        - Uploads to the same URL will overwrite each other, so ensure that the client application is handling naming uniqueness appropriately.
+        - Uploads expire after 24 hours.
+        - Uploads and searches must be performed using the _same_ API Key.
 
-        <!-- TODO/HACK from https://app.clickup.com/t/8mfmv3 - Uncomment this if image_fingerprint ever comes back to be useful -->
-        <!-- Subsequent searches for the same image can be executed using the `image_fingerprint` that is returned by the initial search. -->
+        ## Searching by asset id
+
+        When searching by `asset_id`, any image or video asset id in the Getty/iStock catalog can be used as the source for similar images.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Receive regionally relevant search results based on the value specified. Accepts only ISO Alpha-3 country codes. The Countries operation can be used to retrieve the codes.
           in: header
           name: GI-Country-Code
           schema:
             description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
-            type: string
-        - description: Specifies the location of the image to use in the search.
-          in: query
-          name: image_url
-          schema:
-            description: Specifies the location of the image to use in the search.
-            nullable: true
-            type: string
-        - description: CURRENTLY HAS NO EFFECT
-          in: query
-          name: image_fingerprint
-          schema:
-            description: CURRENTLY HAS NO EFFECT
-            nullable: true
             type: string
         - description: Specifies the Getty image id to use in the search.
           in: query
@@ -3131,17 +3394,77 @@ paths:
             description: Specifies the Getty image id to use in the search.
             nullable: true
             type: string
-        - description: Specifies fields to return. Defaults to 'summary_set'.
+        - description: Exclude images that are only available for editorial (non-commercial) use. Default value is false.
+          in: query
+          name: exclude_editorial_use_only
+          schema:
+            description: Exclude images that are only available for editorial (non-commercial) use. Default value is false.
+            nullable: true
+            type: boolean
+        - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+
+            \                    The include_facets parameter must be set to \"true\" for facets to be returned."
+          explode: false
+          in: query
+          name: facet_fields
+          schema:
+            description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+
+              \                    The include_facets parameter must be set to \"true\" for facets to be returned."
+            items:
+              $ref: "#/components/schemas/CreateImageSearchFacetsFields"
+            nullable: true
+            type: array
+          style: form
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
+          in: query
+          name: facet_max_count
+          schema:
+            default: 300
+            description: Specifies the maximum number of facets to return per type. Default is 300.
+            format: int32
+            type: integer
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes, height, and width returned by 'download_sizes' field are estimates."
           explode: false
           in: query
           name: fields
           schema:
-            description: Specifies fields to return. Defaults to 'summary_set'.
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes, height, and width returned by 'download_sizes' field are estimates."
             items:
               $ref: "#/components/schemas/CreativeImagesFieldValues"
             nullable: true
             type: array
           style: form
+        - description: Specifies the location of the image to use in the search.
+          in: query
+          name: image_url
+          schema:
+            description: Specifies the location of the image to use in the search.
+            nullable: true
+            type: string
+        - description: Specifies whether or not to include facets in the result set. Default is "false".
+          in: query
+          name: include_facets
+          schema:
+            description: Specifies whether or not to include facets in the result set. Default is "false".
+            nullable: true
+            type: boolean
+        - description: Request results starting at a page number (default is 1).
+          in: query
+          name: page
+          schema:
+            default: 1
+            description: Request results starting at a page number (default is 1).
+            format: int32
+            type: integer
+        - description: Request number of images to return in each page. Default is 30, maximum page_size is 100.
+          in: query
+          name: page_size
+          schema:
+            default: 30
+            description: Request number of images to return in each page. Default is 30, maximum page_size is 100.
+            format: int32
+            type: integer
         - description: "Filter images to those from one of your product types. \r
 
             \                    Allowed values are easyaccess, imagepack, premiumaccess and royaltyfreesubscription. \r
@@ -3169,51 +3492,6 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Request results starting at a page number (default is 1).
-          in: query
-          name: page
-          schema:
-            default: 1
-            description: Request results starting at a page number (default is 1).
-            format: int32
-            type: integer
-        - description: Request number of images to return in each page. Default is 30, maximum page_size is 100.
-          in: query
-          name: page_size
-          schema:
-            default: 30
-            description: Request number of images to return in each page. Default is 30, maximum page_size is 100.
-            format: int32
-            type: integer
-        - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
-
-            \                    The include_facets parameter must be set to \"true\" for facets to be returned."
-          explode: false
-          in: query
-          name: facet_fields
-          schema:
-            description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
-
-              \                    The include_facets parameter must be set to \"true\" for facets to be returned."
-            items:
-              $ref: "#/components/schemas/CreateImageSearchFacetsFields"
-            nullable: true
-            type: array
-          style: form
-        - description: Specifies the maximum number of facets to return per type. Default is 300.
-          in: query
-          name: facet_max_count
-          schema:
-            description: Specifies the maximum number of facets to return per type. Default is 300.
-            format: int32
-            type: integer
-        - description: Specifies whether or not to include facets in the result set. Default is "false".
-          in: query
-          name: include_facets
-          schema:
-            description: Specifies whether or not to include facets in the result set. Default is "false".
-            nullable: true
-            type: boolean
       responses:
         "200":
           content:
@@ -3236,7 +3514,7 @@ paths:
         - Search
   /v3/search/images/editorial:
     get:
-      description: |
+      description: |-
         Use this endpoint to search our editorial stock photos, illustrations and archival images.  Editorial images represent newsworthy events or illustrate matters of general interest, such as news, sport and entertainment and are generally intended for editorial use.
 
         You'll need an API key and access token to use this resource.
@@ -3246,6 +3524,8 @@ paths:
         To include your API token in the search request, add it to the headers as a Bearer token (example in curl):
 
         	-H "Authorization: Bearer <your-token>"
+
+        Search requests without a phrase parameter are not supported and may not always work.
 
         ## Working with Fields Sets
 
@@ -3325,37 +3605,41 @@ paths:
 
         The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every image in your result set when you include **display_set** in your request.
 
+        The URI provided is subject to change at any time and must be used as-is with no modification.
+
         ```
         {
-            "images": 
+            "images":
             [
                 "display_sizes": 
                 [
                     {
-                        "name": "comp"
+                        "is_watermarked": <boolean>,
+                        "name": "comp",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "preview"
+                        "is_watermarked": <boolean>,
+                        "name": "preview",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "thumb"
+                        "is_watermarked": <boolean>,
+                        "name": "thumb",
+                        "uri": "<link>"
                     }
                 ]
             ]
         }
         ```
-
-        ## Request Usage Considerations
-
-        - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Receive regionally relevant search results based on the value specified. Accepts only ISO Alpha-3 country codes. The Countries operation can be used to retrieve the codes.
           in: header
           name: GI-Country-Code
           schema:
@@ -3390,7 +3674,8 @@ paths:
             nullable: true
             type: array
           style: form
-        - in: query
+        - description: Use to include or exclude collections from search. The default is include
+          in: query
           name: collections_filter_type
           schema:
             $ref: "#/components/schemas/CollectionsFilterType"
@@ -3405,6 +3690,22 @@ paths:
             nullable: true
             type: array
           style: form
+        - description: Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
+          in: query
+          name: date_from
+          schema:
+            description: Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
+            format: date-time
+            nullable: true
+            type: string
+        - description: Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).
+          in: query
+          name: date_to
+          schema:
+            description: Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).
+            format: date-time
+            nullable: true
+            type: string
         - description: "Filters based on which product the asset will download against.\r
 
             \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
@@ -3439,39 +3740,24 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: specify linked data entity uri.
-          explode: false
-          in: query
-          name: entity_uris
-          schema:
-            description: specify linked data entity uri.
-            items:
-              type: string
-            nullable: true
-            type: array
-          style: form
         - description: Restrict search results to embeddable images. The default is false.
           in: query
           name: embed_content_only
           schema:
+            default: false
             description: Restrict search results to embeddable images. The default is false.
             type: boolean
-        - description: Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
+        - description: Filter search results based on the ethnicity of individuals in an image.
+          explode: false
           in: query
-          name: date_from
+          name: ethnicity
           schema:
-            description: Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
-            format: date-time
+            description: Filter search results based on the ethnicity of individuals in an image.
+            items:
+              $ref: "#/components/schemas/EthnicityFilterType"
             nullable: true
-            type: string
-        - description: Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).
-          in: query
-          name: date_to
-          schema:
-            description: Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).
-            format: date-time
-            nullable: true
-            type: string
+            type: array
+          style: form
         - description: Filter based on specific events
           explode: false
           in: query
@@ -3484,23 +3770,24 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Filter search results based on the ethnicity of individuals in an image.
+        - description: Return only images not tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also do not contain the requested keyword(s) are returned.
           explode: false
           in: query
-          name: ethnicity
+          name: exclude_keyword_ids
           schema:
-            description: Filter search results based on the ethnicity of individuals in an image.
+            description: Return only images not tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also do not contain the requested keyword(s) are returned.
             items:
-              $ref: "#/components/schemas/EthnicityFilterType"
+              format: int32
+              type: integer
             nullable: true
             type: array
           style: form
-        - description: Specifies fields to return. Defaults to 'summary_set'.
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes, height, and width returned by 'download_sizes' field are estimates."
           explode: false
           in: query
           name: fields
           schema:
-            description: Specifies fields to return. Defaults to 'summary_set'.
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes, height, and width returned by 'download_sizes' field are estimates."
             items:
               $ref: "#/components/schemas/EditorialImagesFieldValues"
             nullable: true
@@ -3528,7 +3815,8 @@ paths:
             nullable: true
             type: array
           style: form
-        - in: query
+        - description: Provides searching based on specified graphical style(s). The default is include.
+          in: query
           name: graphical_styles_filter_type
           schema:
             $ref: "#/components/schemas/GraphicalStylesFilterType"
@@ -3551,7 +3839,8 @@ paths:
             nullable: true
             type: array
           style: form
-        - in: query
+        - description: Filter based on minimum size requested. The default is x-small.
+          in: query
           name: minimum_size
           schema:
             $ref: "#/components/schemas/TeeShirtSize"
@@ -3573,7 +3862,7 @@ paths:
           schema:
             description: Return only images with selected aspect ratios.
             items:
-              $ref: "#/components/schemas/OrientationRequest"
+              $ref: "#/components/schemas/ImageOrientationRequest"
             nullable: true
             type: array
           style: form
@@ -3600,7 +3889,8 @@ paths:
             description: Search images using a search phrase.
             nullable: true
             type: string
-        - in: query
+        - description: Select sort order of results.  The default is best_match
+          in: query
           name: sort_order
           schema:
             $ref: "#/components/schemas/SortOrder"
@@ -3649,6 +3939,7 @@ paths:
           in: query
           name: facet_max_count
           schema:
+            default: 300
             description: Specifies the maximum number of facets to return per type. Default is 300.
             format: int32
             type: integer
@@ -3680,6 +3971,8 @@ paths:
         being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only 
         assets that you have a license to use, you need to also include an authorization token in the header of your request.
         Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.
+
+        Search requests without a phrase parameter are not supported and may not always work.
 
         ## Working with Fields Sets
 
@@ -3768,33 +4061,41 @@ paths:
         that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result 
         set when you include **display_set** in your request.
 
+        The URI provided is subject to change at any time and must be used as-is with no modification.
+
         ```
         {
             "videos":
             [
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
-                        "name": "comp"
+                        "is_watermarked": <boolean>,
+                        "name": "comp",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "preview"
+                        "is_watermarked": <boolean>,
+                        "name": "preview",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "thumb"
+                        "is_watermarked": <boolean>,
+                        "name": "thumb",
+                        "uri": "<link>"
                     }
                 ]
             ]
         }
         ```
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Receive regionally relevant search results based on the value specified. Accepts only ISO Alpha-3 country codes. The Countries operation can be used to retrieve the codes.
           in: header
           name: GI-Country-Code
           schema:
@@ -3840,7 +4141,8 @@ paths:
             nullable: true
             type: array
           style: form
-        - in: query
+        - description: Use to include or exclude collections from search. The default is include
+          in: query
           name: collections_filter_type
           schema:
             $ref: "#/components/schemas/CollectionsFilterType"
@@ -3882,6 +4184,7 @@ paths:
           in: query
           name: exclude_nudity
           schema:
+            default: false
             description: Excludes videos containing nudity. The default is false.
             type: boolean
         - description: Exclude videos that are only available for editorial (non-commercial) use. Default value is false.
@@ -3891,18 +4194,31 @@ paths:
             description: Exclude videos that are only available for editorial (non-commercial) use. Default value is false.
             nullable: true
             type: boolean
-        - description: Specifies fields to return. Defaults to 'summary_set'.
+        - description: Return only videos not tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those videos matching the query phrase which also do not contain the requested keyword(s) are returned.
+          explode: false
+          in: query
+          name: exclude_keyword_ids
+          schema:
+            description: Return only videos not tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those videos matching the query phrase which also do not contain the requested keyword(s) are returned.
+            items:
+              format: int32
+              type: integer
+            nullable: true
+            type: array
+          style: form
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field is an estimate."
           explode: false
           in: query
           name: fields
           schema:
-            description: Specifies fields to return. Defaults to 'summary_set'.
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field is an estimate."
             items:
               $ref: "#/components/schemas/CreativeVideosFieldValues"
             nullable: true
             type: array
           style: form
-        - in: query
+        - description: Filters according to the digital video format available on a film asset.
+          in: query
           name: format_available
           schema:
             $ref: "#/components/schemas/VideoFormatsRequest"
@@ -4016,11 +4332,13 @@ paths:
             default: false
             description: Setting safe_search to "true" excludes images containing nudity, death, profanity, drugs and alcohol, suggestive content, and graphic content from the result set. The default is false. Because this is a keyword-based filter, it's possible that a small number of unsafe images may not be caught by the filter. Please direct feedback to your Getty Images Account or API support representative.
             type: boolean
-        - in: query
+        - description: Select sort order of results.  The default is best_match
+          in: query
           name: sort_order
           schema:
             $ref: "#/components/schemas/CreativeVideoSortOrder"
-        - in: query
+        - description: Allows filtering by type of model release.
+          in: query
           name: release_status
           schema:
             $ref: "#/components/schemas/ReleaseStatus"
@@ -4043,6 +4361,7 @@ paths:
           in: query
           name: facet_max_count
           schema:
+            default: 300
             description: Specifies the maximum number of facets to return per type. Default is 300.
             format: int32
             type: integer
@@ -4084,43 +4403,41 @@ paths:
         - Search
   /v3/search/videos/creative/by-image:
     get:
-      description: |-
-        Search for **similar creative videos** by passing an `asset_id` to an asset in our catalog OR `image_url` to any image or a frame grab from a video. All responses will have the exclude_nudity filter automatically applied.
+      description: |
+        Search for **similar creative videos** by passing an `image_url` to an uploaded image/frame grab from a video OR an `asset_id` of an asset in our catalog.  All responses will have the `exclude_nudity` filter automatically applied.
 
         ## Searching by URL
 
-        When searching by `image_url`, an image or frame grab in JPEG format must be uploaded to a specific AWS S3 bucket. The bucket name is `search-by-image.s3.amazonaws.com`.
-        Example using cURL:
-        ```sh
-        curl -i -X PUT https://search-by-image.s3.amazonaws.com/my-test-image.jpg -H "Content-Type: image/jpeg" --data-binary "@testimage.jpg"
+        Before calling the search by image endpoint, an image or frame grab in JPEG format must be uploaded to `https://api.gettyimages.com/v3/search/by-image/uploads/{CLIENT_IMAGE.jpg}`, where the client defines the `{CLIENT_IMAGE.jpg}` portion of the URL.
+
+        For example, using cURL:
+
+        ``` sh
+        curl -i -X PUT https://api.gettyimages.com/v3/search/by-image/uploads/my-test-image.jpg -H 'Content-Type: image/jpeg' -H 'Api-Key: API_KEY' --data-binary "@testimage.jpg"
         ```
 
-        Uploads will be overwritten if the names are the same, so using a prefix like the API Key, application name or company name is recommended. Uploads will expire from the bucket after 24 hours.
+        Once the image has been uploaded, use the full URL in the `image_url` parameter, e.g. `image_url=https://api.gettyimages.com/v3/search/by-image/uploads/my-test-image.jpg`.
 
-        Once the JPEG has been uploaded, use the full URL in the `image_url` parameter, e.g. `image_url=https://search-by-image.s3.amazonaws.com/my-test-image.jpg`.
+        - Uploaded files must be 10MB or smaller
+        - Uploads to the same URL will overwrite each other, so ensure that the client application is handling naming uniqueness appropriately.
+        - Uploads expire after 24 hours.
+        - Uploads and searches must be performed using the _same_ API Key.
 
         ## Searching by asset id
 
-        When searching by `asset_id`, any image or video asset id in the Getty/iStock catalog can be used. 
+        When searching by `asset_id`, any image or video asset id in the Getty/iStock catalog can be used as the source for similar videos.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Receive regionally relevant search results based on the value specified. Accepts only ISO Alpha-3 country codes. The Countries operation can be used to retrieve the codes.
           in: header
           name: GI-Country-Code
           schema:
             description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
-            type: string
-        - description: Specifies the location of the image to use in the search.
-          in: query
-          name: image_url
-          schema:
-            description: Specifies the location of the image to use in the search.
-            nullable: true
             type: string
         - description: Specifies the Getty video id to use in the search.
           in: query
@@ -4129,17 +4446,77 @@ paths:
             description: Specifies the Getty video id to use in the search.
             nullable: true
             type: string
-        - description: Specifies fields to return. Defaults to 'summary_set'.
+        - description: Exclude videos that are only available for editorial (non-commercial) use. Default value is false.
+          in: query
+          name: exclude_editorial_use_only
+          schema:
+            description: Exclude videos that are only available for editorial (non-commercial) use. Default value is false.
+            nullable: true
+            type: boolean
+        - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+
+            \                    The include_facets parameter must be set to \"true\" for facets to be returned."
+          explode: false
+          in: query
+          name: facet_fields
+          schema:
+            description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
+
+              \                    The include_facets parameter must be set to \"true\" for facets to be returned."
+            items:
+              $ref: "#/components/schemas/CreateVideoSearchFacetsFields"
+            nullable: true
+            type: array
+          style: form
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
+          in: query
+          name: facet_max_count
+          schema:
+            default: 300
+            description: Specifies the maximum number of facets to return per type. Default is 300.
+            format: int32
+            type: integer
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field is an estimate."
           explode: false
           in: query
           name: fields
           schema:
-            description: Specifies fields to return. Defaults to 'summary_set'.
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field is an estimate."
             items:
               $ref: "#/components/schemas/CreativeVideosFieldValues"
             nullable: true
             type: array
           style: form
+        - description: Specifies the location of the image to use in the search.
+          in: query
+          name: image_url
+          schema:
+            description: Specifies the location of the image to use in the search.
+            nullable: true
+            type: string
+        - description: Specifies whether or not to include facets in the result set. Default is "false".
+          in: query
+          name: include_facets
+          schema:
+            description: Specifies whether or not to include facets in the result set. Default is "false".
+            nullable: true
+            type: boolean
+        - description: Request results starting at a page number (default is 1).
+          in: query
+          name: page
+          schema:
+            default: 1
+            description: Request results starting at a page number (default is 1).
+            format: int32
+            type: integer
+        - description: Request number of images to return in each page. Default is 30, maximum page_size is 100.
+          in: query
+          name: page_size
+          schema:
+            default: 30
+            description: Request number of images to return in each page. Default is 30, maximum page_size is 100.
+            format: int32
+            type: integer
         - description: "Filter images to those from one of your product types. \r
 
             \                    Allowed values are easyaccess, imagepack, premiumaccess and royaltyfreesubscription. \r
@@ -4167,51 +4544,6 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Request results starting at a page number (default is 1).
-          in: query
-          name: page
-          schema:
-            default: 1
-            description: Request results starting at a page number (default is 1).
-            format: int32
-            type: integer
-        - description: Request number of images to return in each page. Default is 30, maximum page_size is 100.
-          in: query
-          name: page_size
-          schema:
-            default: 30
-            description: Request number of images to return in each page. Default is 30, maximum page_size is 100.
-            format: int32
-            type: integer
-        - description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
-
-            \                    The include_facets parameter must be set to \"true\" for facets to be returned."
-          explode: false
-          in: query
-          name: facet_fields
-          schema:
-            description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r
-
-              \                    The include_facets parameter must be set to \"true\" for facets to be returned."
-            items:
-              $ref: "#/components/schemas/CreateVideoSearchFacetsFields"
-            nullable: true
-            type: array
-          style: form
-        - description: Specifies the maximum number of facets to return per type. Default is 300.
-          in: query
-          name: facet_max_count
-          schema:
-            description: Specifies the maximum number of facets to return per type. Default is 300.
-            format: int32
-            type: integer
-        - description: Specifies whether or not to include facets in the result set. Default is "false".
-          in: query
-          name: include_facets
-          schema:
-            description: Specifies whether or not to include facets in the result set. Default is "false".
-            nullable: true
-            type: boolean
       responses:
         "200":
           content:
@@ -4234,13 +4566,15 @@ paths:
         - Search
   /v3/search/videos/editorial:
     get:
-      description: |
+      description: |-
         Use this endpoint to search current and archival video clips of celebrities, newsmakers, and events.
 
         You'll need an API key and access token to use this resource.
 
         You can show different information in the response by specifying values on the "fields" parameter (see details below).
         You can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.
+
+        Search requests without a phrase parameter are not supported and may not always work.
 
         ## Working with Fields Sets
 
@@ -4326,37 +4660,41 @@ paths:
 
         The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.
 
+        The URI provided is subject to change at any time and must be used as-is with no modification.
+
         ```
         {
             "videos":
             [
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
-                        "name": "comp"
+                        "is_watermarked": <boolean>,
+                        "name": "comp",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "preview"
+                        "is_watermarked": <boolean>,
+                        "name": "preview",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "thumb"
+                        "is_watermarked": <boolean>,
+                        "name": "thumb",
+                        "uri": "<link>"
                     }
                 ]
             ]
         }
         ```
-
-        ## Request Usage Considerations
-
-        - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
-        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+        - description: Receive regionally relevant search results based on the value specified. Accepts only ISO Alpha-3 country codes. The Countries operation can be used to retrieve the codes.
           in: header
           name: GI-Country-Code
           schema:
@@ -4402,7 +4740,8 @@ paths:
             nullable: true
             type: array
           style: form
-        - in: query
+        - description: Use to include or exclude collections from search. The default is include
+          in: query
           name: collections_filter_type
           schema:
             $ref: "#/components/schemas/CollectionsFilterType"
@@ -4451,29 +4790,19 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Specify link data entity uri.
-          explode: false
-          in: query
-          name: entity_uris
-          schema:
-            description: Specify link data entity uri.
-            items:
-              type: string
-            nullable: true
-            type: array
-          style: form
-        - description: Specifies fields to return. Defaults to 'summary_set'.
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field is an estimate."
           explode: false
           in: query
           name: fields
           schema:
-            description: Specifies fields to return. Defaults to 'summary_set'.
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field is an estimate."
             items:
               $ref: "#/components/schemas/EditorialVideosFieldValues"
             nullable: true
             type: array
           style: form
-        - in: query
+        - description: Filters according to the digital video format available on a film asset.
+          in: query
           name: format_available
           schema:
             $ref: "#/components/schemas/VideoFormatsRequest"
@@ -4569,7 +4898,8 @@ paths:
             description: Free-text search query.
             nullable: true
             type: string
-        - in: query
+        - description: Select sort order of results.  The default is best_match
+          in: query
           name: sort_order
           schema:
             $ref: "#/components/schemas/SortOrder"
@@ -4584,7 +4914,8 @@ paths:
             nullable: true
             type: array
           style: form
-        - in: query
+        - description: Allows filtering by type of model release.
+          in: query
           name: release_status
           schema:
             $ref: "#/components/schemas/ReleaseStatus"
@@ -4614,6 +4945,7 @@ paths:
           in: query
           name: facet_max_count
           schema:
+            default: 300
             description: Specifies the maximum number of facets to return per type. Default is 300.
             format: int32
             type: integer
@@ -4789,22 +5121,49 @@ paths:
 
         The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.
 
+        The URI provided is subject to change at any time and must be used as-is with no modification.
+
         ```
         {
             "videos":
             [
+              {
                 "display_sizes": 
                 [
                     {
-                        "name": "comp"
+                        "is_watermarked": <boolean>,
+                        "name": "comp",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "preview"
+                        "is_watermarked": <boolean>,
+                        "name": "preview",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "thumb"
+                        "is_watermarked": <boolean>,
+                        "name": "thumb",
+                        "uri": "<link>"
+                    }
+                ],
+                "key_frames": [
+                    {
+                      "uri": "<link>"
+                    },
+                    {
+                      "uri": "<link>"
+                    },
+                    {
+                      "uri": "<link>"
+                    },
+                    {
+                      "uri": "<link>"
+                    },
+                    {
+                      "uri": "<link>"
                     }
                 ]
+              }
             ]
         }
         ```
@@ -4813,11 +5172,11 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: Specifies one or more video ids to return. Use comma delimiter when requesting multiple ids.  Maximum of 100 ids.
           explode: false
@@ -4830,12 +5189,12 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Specifies fields to return. Defaults to 'summary_set'.
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field is an estimate."
           explode: false
           in: query
           name: fields
           schema:
-            description: Specifies fields to return. Defaults to 'summary_set'.
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field is an estimate."
             items:
               $ref: "#/components/schemas/VideoDetailFieldValues"
             nullable: true
@@ -4952,22 +5311,43 @@ paths:
 
         The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.
 
+        The URI provided is subject to change at any time and must be used as-is with no modification.
+
         ```
         {
-            "videos":
-            [
-                "display_sizes":
-                [
-                    {
-                        "name": "comp"
-                    },
-                    {
-                        "name": "preview"
-                    },
-                    {
-                        "name": "thumb"
-                    }
-                ]
+            "display_sizes": [
+                {
+                    "is_watermarked": <boolean>,
+                    "name": "comp",
+                    "uri": "<link>"
+                },
+                {
+                    "is_watermarked": <boolean>,
+                    "name": "preview",
+                    "uri": "<link>"
+                },
+                {
+                    "is_watermarked": <boolean>,
+                    "name": "thumb",
+                    "uri": "<link>"
+                }
+            ],
+            "key_frames": [
+                {
+                    "uri": "<link>"
+                },
+                {
+                    "uri": "<link>"
+                },
+                {
+                    "uri": "<link>"
+                },
+                {
+                    "uri": "<link>"
+                },
+                {
+                    "uri": "<link>"
+                }
             ]
         }
         ```
@@ -4976,11 +5356,11 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: A video id. For more than one video please use the /v3/video endpoint.
           in: path
@@ -4990,12 +5370,12 @@ paths:
             description: A video id. For more than one video please use the /v3/video endpoint.
             nullable: true
             type: string
-        - description: comma delimited list of fields to retrieve for the video
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field is an estimate."
           explode: false
           in: query
           name: fields
           schema:
-            description: comma delimited list of fields to retrieve for the video
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field is an estimate."
             items:
               $ref: "#/components/schemas/VideoDetailFieldValues"
             nullable: true
@@ -5021,11 +5401,11 @@ paths:
     get:
       description: ""
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: A video id.
           in: path
@@ -5067,7 +5447,7 @@ paths:
         - Videos
   "/v3/videos/{id}/same-series":
     get:
-      description: |-
+      description: |
         This endpoint will provide the list of videos, if any exist, from the same series as the specified creative asset id. These images are typically from the same photo shoot. This functionality will not work for editorial assets.
 
         You'll need an API key and access token to use this resource.
@@ -5156,31 +5536,39 @@ paths:
 
         The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.
 
+        The URI provided is subject to change at any time and must be used as-is with no modification.
+
         ```
         {
             "videos":
             [
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
-                        "name": "comp"
+                        "is_watermarked": <boolean>,
+                        "name": "comp",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "preview"
+                        "is_watermarked": <boolean>,
+                        "name": "preview",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "thumb"
+                        "is_watermarked": <boolean>,
+                        "name": "thumb",
+                        "uri": "<link>"
                     }
                 ]
             ]
         }
         ```
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: Identifies an existing video
           in: path
@@ -5190,14 +5578,14 @@ paths:
             description: Identifies an existing video
             nullable: true
             type: string
-        - description: Specifies fields to return. Defaults to 'summary_set'.
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field is an estimate."
           explode: false
           in: query
           name: fields
           schema:
-            description: Specifies fields to return. Defaults to 'summary_set'.
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field is an estimate."
             items:
-              $ref: "#/components/schemas/BlendedVideosFieldValues"
+              $ref: "#/components/schemas/AssociatedVideoDetailFieldValues"
             nullable: true
             type: array
           style: form
@@ -5325,6 +5713,8 @@ paths:
 
         The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result set when you include **display_set** in your request.
 
+        The URI provided is subject to change at any time and must be used as-is with no modification.
+
         ```
         {
             "videos":
@@ -5332,24 +5722,30 @@ paths:
                 "display_sizes": 
                 [
                     {
-                        "name": "comp"
+                        "is_watermarked": <boolean>,
+                        "name": "comp",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "preview"
+                        "is_watermarked": <boolean>,
+                        "name": "preview",
+                        "uri": "<link>"
                     },
                     {
-                        "name": "thumb"
+                        "is_watermarked": <boolean>,
+                        "name": "thumb",
+                        "uri": "<link>"
                     }
                 ]
             ]
         }
         ```
       parameters:
-        - description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+        - description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
           in: header
           name: Accept-Language
           schema:
-            description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), ru (creative assets only), tr, cs (iStock only), id (iStock only), th (iStock only), vi (iStock only)."
+            description: "Provide a header to specify the language of result values. Supported values: cs (iStock only), de, en-GB, en-US, es, fi (iStock only), fr, hu (iStock only), id (iStock only), it, ja, ko (creative assets only), nl, pl (creative assets only), pt-BR, pt-PT, ro (iStock only), ru (creative assets only), sv, th (iStock only), tr, uk (iStock only), vi (iStock only), zh-HK (creative assets only)."
             type: string
         - description: A video id.
           in: path
@@ -5359,14 +5755,14 @@ paths:
             description: A video id.
             nullable: true
             type: string
-        - description: Comma delimited list of fields to retrieve for the videos
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field is an estimate."
           explode: false
           in: query
           name: fields
           schema:
-            description: Comma delimited list of fields to retrieve for the videos
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field is an estimate."
             items:
-              $ref: "#/components/schemas/BlendedVideosFieldValues"
+              $ref: "#/components/schemas/AssociatedVideoDetailFieldValues"
             nullable: true
             type: array
           style: form
@@ -5407,15 +5803,15 @@ components:
     AcquireAssetLicensesRequest:
       additionalProperties: false
       properties:
-        LicenseTypes:
+        extended_licenses:
           items:
             $ref: "#/components/schemas/ExtendedLicenses"
           type: array
-        UseTeamCredits:
+        use_team_credits:
           description: Defaults to false.
           type: boolean
       required:
-        - LicenseTypes
+        - extended_licenses
       type: object
     AddBoardAssetsResult:
       additionalProperties: false
@@ -5492,6 +5888,7 @@ components:
           type: integer
       type: object
     AffiliateSearchStyle:
+      description: Specifies the graphical style of images desired.
       enum:
         - photography
         - vector
@@ -5639,11 +6036,9 @@ components:
         - editorial_segments
         - event_ids
         - graphical_style
-        - high_res_comp
         - keywords
         - license_model
         - max_dimensions
-        - mid_res_comp
         - orientation
         - preview
         - product_types
@@ -5676,11 +6071,9 @@ components:
         - editorial_segments
         - event_ids
         - graphical_style
-        - high_res_comp
         - keywords
         - license_model
         - max_dimensions
-        - mid_res_comp
         - orientation
         - preview
         - product_types
@@ -5731,6 +6124,19 @@ components:
           nullable: true
           type: string
       type: object
+    AssetEvent:
+      additionalProperties: false
+      properties:
+        asset_id:
+          nullable: true
+          type: string
+        email_address:
+          nullable: true
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+      type: object
     AssetFamily:
       enum:
         - NotSet
@@ -5756,12 +6162,12 @@ components:
     AssetLicensingResponse:
       additionalProperties: false
       properties:
-        AcquiredLicenses:
+        acquired_licenses:
           items:
-            $ref: "#/components/schemas/AssetLicenseName"
+            $ref: "#/components/schemas/ExtendedLicenses"
           nullable: true
           type: array
-        CreditsUsed:
+        credits_used:
           format: int32
           type: integer
       type: object
@@ -5771,6 +6177,50 @@ components:
         - Image
         - Film
         - Music
+      type: string
+    AssociatedVideoDetailFieldValues:
+      enum:
+        - allowed_use
+        - artist
+        - aspect_ratio
+        - asset_family
+        - call_for_image
+        - caption
+        - clip_length
+        - collection_code
+        - collection_id
+        - collection_name
+        - color_type
+        - comp
+        - copyright
+        - date_created
+        - date_submitted
+        - detail_set
+        - display_set
+        - download_product
+        - download_sizes
+        - editorial_segments
+        - entity_details
+        - era
+        - event_ids
+        - id
+        - istock_collection
+        - keywords
+        - largest_downloads
+        - license_model
+        - mastered_to
+        - orientation
+        - originally_shot_on
+        - preview
+        - product_types
+        - quality_rank
+        - referral_destinations
+        - shot_speed
+        - source
+        - summary_set
+        - thumb
+        - title
+        - istock_licenses
       type: string
     AutoCorrections:
       additionalProperties: false
@@ -6693,7 +7143,6 @@ components:
         - download_sizes
         - editorial_segments
         - editorial_source
-        - entity_details
         - event_ids
         - graphical_style
         - id
@@ -6882,7 +7331,6 @@ components:
         - download_product
         - download_sizes
         - editorial_segments
-        - entity_details
         - era
         - event_ids
         - id
@@ -6984,6 +7432,11 @@ components:
         - start_date
         - type
       type: string
+    EventSearchSortOrder:
+      enum:
+        - newest
+        - oldest
+      type: string
     EventsSearchResult:
       additionalProperties: false
       properties:
@@ -6998,10 +7451,10 @@ components:
       type: object
     ExtendedLicenses:
       enum:
-        - Multiseat
-        - Unlimited
-        - Resale
-        - Indemnification
+        - multiseat
+        - unlimited
+        - resale
+        - indemnification
       type: string
     FacetEvent:
       additionalProperties: false
@@ -7027,6 +7480,19 @@ components:
         result_count:
           format: int32
           type: integer
+      type: object
+    GetSendEventsResponse:
+      additionalProperties: false
+      properties:
+        asset_send_events:
+          items:
+            $ref: "#/components/schemas/AssetEvent"
+          nullable: true
+          type: array
+        last_offset:
+          format: date-time
+          nullable: true
+          type: string
       type: object
     GraphicalStyle:
       enum:
@@ -7161,6 +7627,14 @@ components:
         - thumb
         - title
         - uri_oembed
+      type: string
+    ImageOrientationRequest:
+      enum:
+        - horizontal
+        - vertical
+        - square
+        - panoramic_horizontal
+        - panoramic_vertical
       type: string
     ImageSearchItem:
       additionalProperties: false
@@ -7735,14 +8209,6 @@ components:
           nullable: true
           type: string
       type: object
-    OrientationRequest:
-      enum:
-        - horizontal
-        - vertical
-        - square
-        - panoramic_horizontal
-        - panoramic_vertical
-      type: string
     OverageDetails:
       additionalProperties: false
       properties:
@@ -7918,13 +8384,14 @@ components:
         - active
         - inactive
       type: string
-    ProductTypeRequest:
+    ProductTypeForDownloads:
       enum:
         - easyaccess
         - editorialsubscription
         - imagepack
         - premiumaccess
         - royaltyfreesubscription
+        - creditpack
       type: string
     ProductTypeResponse:
       enum:
@@ -8114,6 +8581,7 @@ components:
         - asset_family
         - call_for_image
         - caption
+        - city
         - clip_length
         - collection_code
         - collection_id
@@ -8121,6 +8589,7 @@ components:
         - color_type
         - comp
         - copyright
+        - country
         - date_created
         - date_submitted
         - detail_set
@@ -8134,6 +8603,7 @@ components:
         - event_ids
         - istock_collection
         - istock_licenses
+        - key_frames
         - keywords
         - license_model
         - mastered_to
@@ -8146,6 +8616,7 @@ components:
         - referral_destinations
         - shot_speed
         - source
+        - state_province
         - summary_set
         - thumb
         - title
@@ -8251,18 +8722,18 @@ components:
     OAuth2:
       flows:
         authorizationCode:
-          authorizationUrl: https://api.gettyimages.com/oauth2/auth
-          refreshUrl: https://api.gettyimages.com/oauth2/token
+          authorizationUrl: https://api.gettyimages.com/v4/oauth2/auth
+          refreshUrl: https://api.gettyimages.com/v4/oauth2/token
           scopes: {}
-          tokenUrl: https://api.gettyimages.com/oauth2/token
+          tokenUrl: https://api.gettyimages.com/v4/oauth2/token
         clientCredentials:
           scopes: {}
-          tokenUrl: https://api.gettyimages.com/oauth2/token
+          tokenUrl: https://api.gettyimages.com/v4/oauth2/token
         implicit:
-          authorizationUrl: https://api.gettyimages.com/oauth2/auth
+          authorizationUrl: https://api.gettyimages.com/v4/oauth2/auth
           scopes: {}
         password:
-          refreshUrl: https://api.gettyimages.com/oauth2/token
+          refreshUrl: https://api.gettyimages.com/v4/oauth2/token
           scopes: {}
-          tokenUrl: https://api.gettyimages.com/oauth2/token
+          tokenUrl: https://api.gettyimages.com/v4/oauth2/token
       type: oauth2

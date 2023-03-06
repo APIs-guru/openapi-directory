@@ -121,6 +121,15 @@ parameters:
     name: currencyCode
     required: false
     type: string
+  query.country.sort:
+    description: |-
+      How to sort countries. 
+      Format: ±SORT_FIELD 
+      where SORT_FIELD = code | name
+    in: query
+    name: sort
+    required: false
+    type: string
   query.currency.countryId:
     description: Currencies for this country id
     in: query
@@ -142,6 +151,14 @@ parameters:
     name: namePrefix
     required: false
     type: string
+  query.entity.namePrefixDefaultLangResults:
+    default: true
+    description: |
+      When name-prefix matching, whether or not to match on names in the default language if a non-default languageCode is set.
+    in: query
+    name: namePrefixDefaultLangResults
+    required: false
+    type: boolean
   query.hateoasMode:
     default: true
     description: Include HATEOAS-style links in results
@@ -219,8 +236,8 @@ parameters:
     type: integer
   query.place.sort:
     description: |
-      How to sort place results. 
-      'Format: ±SORT_FIELD,±SORT_FIELD' 
+      How to sort places. 
+      Format: ±SORT_FIELD,±SORT_FIELD 
       where SORT_FIELD = countryCode | elevation | name | population
     in: query
     name: sort
@@ -239,6 +256,15 @@ parameters:
     description: "Only places for these types (comma-delimited): CITY | ADM2"
     in: query
     name: types
+    required: false
+    type: string
+  query.region.sort:
+    description: |-
+      How to sort regions. 
+      Format: ±SORT_FIELD 
+      where SORT_FIELD = fipsCode | isoCode | name
+    in: query
+    name: sort
     required: false
     type: string
   query.sort:
@@ -323,6 +349,10 @@ responses:
     description: An ISO-8601 time response
     schema:
       $ref: "#/definitions/TimeResponse"
+  TimeZone:
+    description: A time-zone
+    schema:
+      $ref: "#/definitions/TimeZoneResponse"
   TimeZones:
     description: A list of time-zones
     schema:
@@ -352,6 +382,7 @@ paths:
         - $ref: "#/parameters/query.place.minPopulation"
         - $ref: "#/parameters/query.place.maxPopulation"
         - $ref: "#/parameters/query.entity.namePrefix"
+        - $ref: "#/parameters/query.entity.namePrefixDefaultLangResults"
         - $ref: "#/parameters/query.timeZoneIds"
         - $ref: "#/parameters/query.asciiMode"
         - $ref: "#/parameters/query.hateoasMode"
@@ -419,6 +450,7 @@ paths:
         - $ref: "#/parameters/query.place.minPopulation"
         - $ref: "#/parameters/query.place.maxPopulation"
         - $ref: "#/parameters/query.entity.namePrefix"
+        - $ref: "#/parameters/query.entity.namePrefixDefaultLangResults"
         - $ref: "#/parameters/query.timeZoneIds"
         - $ref: "#/parameters/query.place.types"
         - $ref: "#/parameters/query.asciiMode"
@@ -461,6 +493,7 @@ paths:
         - $ref: "#/parameters/query.place.minPopulation"
         - $ref: "#/parameters/query.place.maxPopulation"
         - $ref: "#/parameters/query.entity.namePrefix"
+        - $ref: "#/parameters/query.entity.namePrefixDefaultLangResults"
         - $ref: "#/parameters/query.timeZoneIds"
         - $ref: "#/parameters/query.asciiMode"
         - $ref: "#/parameters/query.hateoasMode"
@@ -501,6 +534,7 @@ paths:
         - $ref: "#/parameters/query.place.minPopulation"
         - $ref: "#/parameters/query.place.maxPopulation"
         - $ref: "#/parameters/query.entity.namePrefix"
+        - $ref: "#/parameters/query.entity.namePrefixDefaultLangResults"
         - $ref: "#/parameters/query.timeZoneIds"
         - $ref: "#/parameters/query.place.types"
         - $ref: "#/parameters/query.asciiMode"
@@ -647,6 +681,7 @@ paths:
         - $ref: "#/parameters/query.place.minPopulation"
         - $ref: "#/parameters/query.place.maxPopulation"
         - $ref: "#/parameters/query.entity.namePrefix"
+        - $ref: "#/parameters/query.entity.namePrefixDefaultLangResults"
         - $ref: "#/parameters/query.timeZoneIds"
         - $ref: "#/parameters/query.place.types"
         - $ref: "#/parameters/query.asciiMode"
@@ -706,11 +741,13 @@ paths:
       parameters:
         - $ref: "#/parameters/query.country.currencyCode"
         - $ref: "#/parameters/query.entity.namePrefix"
+        - $ref: "#/parameters/query.entity.namePrefixDefaultLangResults"
         - $ref: "#/parameters/query.asciiMode"
         - $ref: "#/parameters/query.hateoasMode"
         - $ref: "#/parameters/query.languageCode"
         - $ref: "#/parameters/query.limit"
         - $ref: "#/parameters/query.offset"
+        - $ref: "#/parameters/query.country.sort"
       produces:
         - application/json
       responses:
@@ -762,11 +799,13 @@ paths:
       parameters:
         - $ref: "#/parameters/path.countryId"
         - $ref: "#/parameters/query.entity.namePrefix"
+        - $ref: "#/parameters/query.entity.namePrefixDefaultLangResults"
         - $ref: "#/parameters/query.asciiMode"
         - $ref: "#/parameters/query.hateoasMode"
         - $ref: "#/parameters/query.languageCode"
         - $ref: "#/parameters/query.limit"
         - $ref: "#/parameters/query.offset"
+        - $ref: "#/parameters/query.region.sort"
       produces:
         - application/json
       responses:
@@ -824,6 +863,7 @@ paths:
         - $ref: "#/parameters/query.place.minPopulation"
         - $ref: "#/parameters/query.place.maxPopulation"
         - $ref: "#/parameters/query.entity.namePrefix"
+        - $ref: "#/parameters/query.entity.namePrefixDefaultLangResults"
         - $ref: "#/parameters/query.timeZoneIds"
         - $ref: "#/parameters/query.asciiMode"
         - $ref: "#/parameters/query.hateoasMode"
@@ -861,6 +901,7 @@ paths:
         - $ref: "#/parameters/query.place.minPopulation"
         - $ref: "#/parameters/query.place.maxPopulation"
         - $ref: "#/parameters/query.entity.namePrefix"
+        - $ref: "#/parameters/query.entity.namePrefixDefaultLangResults"
         - $ref: "#/parameters/query.timeZoneIds"
         - $ref: "#/parameters/query.place.types"
         - $ref: "#/parameters/query.asciiMode"
@@ -903,6 +944,7 @@ paths:
         - $ref: "#/parameters/query.place.minPopulation"
         - $ref: "#/parameters/query.place.maxPopulation"
         - $ref: "#/parameters/query.entity.namePrefix"
+        - $ref: "#/parameters/query.entity.namePrefixDefaultLangResults"
         - $ref: "#/parameters/query.timeZoneIds"
         - $ref: "#/parameters/query.place.types"
         - $ref: "#/parameters/query.asciiMode"
@@ -943,6 +985,7 @@ paths:
         - $ref: "#/parameters/query.place.minPopulation"
         - $ref: "#/parameters/query.place.maxPopulation"
         - $ref: "#/parameters/query.entity.namePrefix"
+        - $ref: "#/parameters/query.entity.namePrefixDefaultLangResults"
         - $ref: "#/parameters/query.timeZoneIds"
         - $ref: "#/parameters/query.asciiMode"
         - $ref: "#/parameters/query.hateoasMode"
@@ -1060,6 +1103,30 @@ paths:
         "403":
           $ref: "#/responses/Forbidden"
       summary: Get time-zones
+      tags:
+        - Locale
+  "/locale/timezones/{zoneId}":
+    get:
+      consumes:
+        - application/json
+      description: Get time-zone
+      operationId: getTimeZoneUsingGET
+      parameters:
+        - $ref: "#/parameters/path.zoneId"
+      produces:
+        - application/json
+      responses:
+        "200":
+          $ref: "#/responses/TimeZone"
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/Forbidden"
+        "404":
+          $ref: "#/responses/NotFound"
+      summary: Get time-zone
       tags:
         - Locale
   "/locale/timezones/{zoneId}/dateTime":
@@ -1215,6 +1282,7 @@ definitions:
   CountryDetails:
     description: Full country details
     example:
+      callingCode: "+1"
       code: US
       currencyCodes:
         - USD
@@ -1223,6 +1291,9 @@ definitions:
       numRegions: 56
       wikiDataId: Q30
     properties:
+      callingCode:
+        description: The country dialing prefix
+        type: string
       code:
         description: The ISO-3166 country code
         type: string
@@ -1255,6 +1326,7 @@ definitions:
     description: Country details response
     example:
       data:
+        callingCode: "+1"
         code: US
         currencyCodes:
           - USD
@@ -2126,6 +2198,28 @@ definitions:
         format: int32
         type: integer
     title: Time-Zone
+    type: object
+  TimeZoneResponse:
+    allOf:
+      - $ref: "#/definitions/BaseResponse"
+      - properties:
+          id:
+            description: The time-zone id
+            type: string
+          name:
+            description: The time-zone name
+            type: string
+          rawUtcOffsetHours:
+            description: The number of hours this time-zone is offset from UTC
+            format: int32
+            type: integer
+    description: A time-zone
+    example:
+      data:
+        id: America__Marigot
+        name: Atlantic Standard Time
+        rawUtcOffsetHours: -4
+    title: Time-Zone Response
     type: object
   TimeZonesResponse:
     allOf:

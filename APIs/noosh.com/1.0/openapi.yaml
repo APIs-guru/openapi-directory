@@ -10847,6 +10847,11 @@ components:
           description: ""
           example: sample submitted_by
           type: string
+        submitted_by_user_id:
+          description: ""
+          example: "1"
+          format: int64
+          type: integer
         supplier_workgroup:
           $ref: "#/components/schemas/WorkgroupBaseVO"
         transactional_currency:
