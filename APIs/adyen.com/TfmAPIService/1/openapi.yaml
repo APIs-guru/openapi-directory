@@ -46,7 +46,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TfmAPIService
-  x-timestamp: 2022-10-31T10:21:01Z
+  x-timestamp: 2023-02-20T18:23:12Z
 tags:
   - name: General
 paths:
@@ -128,6 +128,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: assignTerminals
       x-sortIndex: 1
   /findTerminal:
     post:
@@ -199,6 +200,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: findTerminal
       x-sortIndex: 1
   /getStoresUnderAccount:
     post:
@@ -274,6 +276,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: getStoresUnderAccount
       x-sortIndex: 1
   /getTerminalDetails:
     post:
@@ -345,6 +348,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: getTerminalDetails
       x-sortIndex: 1
   /getTerminalsUnderAccount:
     post:
@@ -424,6 +428,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: getTerminalsUnderAccount
       x-sortIndex: 1
 components:
   examples:
@@ -644,6 +649,7 @@ components:
           type: string
         streetAddress2:
           type: string
+      type: object
     AssignTerminalsRequest:
       properties:
         companyAccount:
@@ -674,6 +680,7 @@ components:
       required:
         - companyAccount
         - terminals
+      type: object
     AssignTerminalsResponse:
       properties:
         results:
@@ -694,6 +701,7 @@ components:
           type: object
       required:
         - results
+      type: object
     FindTerminalRequest:
       properties:
         terminal:
@@ -704,6 +712,7 @@ components:
           type: string
       required:
         - terminal
+      type: object
     FindTerminalResponse:
       properties:
         companyAccount:
@@ -729,6 +738,7 @@ components:
       required:
         - companyAccount
         - terminal
+      type: object
     GetStoresUnderAccountRequest:
       properties:
         companyAccount:
@@ -739,6 +749,7 @@ components:
           type: string
       required:
         - companyAccount
+      type: object
     GetStoresUnderAccountResponse:
       properties:
         stores:
@@ -746,6 +757,7 @@ components:
           items:
             $ref: "#/components/schemas/Store"
           type: array
+      type: object
     GetTerminalDetailsRequest:
       properties:
         terminal:
@@ -756,6 +768,7 @@ components:
           type: string
       required:
         - terminal
+      type: object
     GetTerminalDetailsResponse:
       properties:
         bluetoothIp:
@@ -868,6 +881,7 @@ components:
       required:
         - companyAccount
         - terminal
+      type: object
     GetTerminalsUnderAccountRequest:
       properties:
         companyAccount:
@@ -881,6 +895,7 @@ components:
           type: string
       required:
         - companyAccount
+      type: object
     GetTerminalsUnderAccountResponse:
       properties:
         companyAccount:
@@ -898,6 +913,7 @@ components:
           type: array
       required:
         - companyAccount
+      type: object
     MerchantAccount:
       properties:
         inStoreTerminals:
@@ -920,6 +936,7 @@ components:
           type: array
       required:
         - merchantAccount
+      type: object
     ServiceError:
       properties:
         errorCode:
@@ -938,6 +955,7 @@ components:
           description: The HTTP response status.
           format: int32
           type: integer
+      type: object
     Store:
       properties:
         address:
@@ -973,6 +991,7 @@ components:
           type: string
       required:
         - store
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header

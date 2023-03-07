@@ -1416,6 +1416,9 @@ paths:
       tags:
         - Folders
       x-apideck-api: fileStorage
+      x-apideck-gotchas:
+        - connector: dropbox
+          description: Dropbox does not support getting metadata for the `root` folder.
       x-codeSamples:
         - label: Node
           lang: TypeScript

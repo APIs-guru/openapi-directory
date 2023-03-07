@@ -423,6 +423,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/billsSort"
       responses:
         "200":
           $ref: "#/components/responses/GetBillsResponse"
@@ -2748,7 +2749,8 @@ paths:
                 ],
                 memo: 'Thank you for your business and have a great day!',
                 posted_at: '2020-09-30T07:43:32.000Z',
-                journal_symbol: 'IND'
+                journal_symbol: 'IND',
+                row_version: '1-12345'
               }
             }
 
@@ -2955,7 +2957,8 @@ paths:
                 ],
                 memo: 'Thank you for your business and have a great day!',
                 posted_at: '2020-09-30T07:43:32.000Z',
-                journal_symbol: 'IND'
+                journal_symbol: 'IND',
+                row_version: '1-12345'
               }
             }
 
@@ -4531,6 +4534,14 @@ components:
       schema:
         $ref: "#/components/schemas/BalanceSheetFilter"
       style: deepObject
+    billsSort:
+      description: Apply sorting
+      explode: true
+      in: query
+      name: sort
+      schema:
+        $ref: "#/components/schemas/BillsSort"
+      style: deepObject
     consumerId:
       description: ID of the consumer which you want to get or push data from
       in: header
@@ -5991,6 +6002,25 @@ components:
         unit_price: medium
         updated_at: high
         updated_by: edge-case
+    BillsSort:
+      additionalProperties: false
+      example:
+        by: updated_at
+        direction: desc
+      properties:
+        by:
+          description: The field on which to sort the Bills
+          enum:
+            - updated_at
+          example: updated_at
+          type: string
+          x-apideck-enum-id: bills.sort_by
+          x-graphql-type-name: BillsSortBy
+        direction:
+          $ref: "#/components/schemas/SortDirection"
+      type: object
+      x-apideck-schema-id: BillsSort
+      x-graphql-type-name: BillsSort
     Company:
       additionalProperties: false
       properties:
@@ -9392,7 +9422,7 @@ components:
         description: high
         discount_percentage: low
         id: high
-        item: critical
+        item: high
         ledger_account: low
         line_number: medium
         location_id: low
@@ -9471,6 +9501,8 @@ components:
           format: date-time
           title: Posted at (timestamp)
           type: string
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
         title:
           description: Journal entry title
           example: "Purchase Invoice-Inventory (USD): 2019/02/01 Batch Summary Entry"
@@ -9494,6 +9526,7 @@ components:
         line_items: medium
         memo: low
         posted_at: low
+        row_version: edge-case
         title: medium
         updated_at: medium
         updated_by: edge-case

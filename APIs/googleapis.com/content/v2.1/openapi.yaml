@@ -1312,7 +1312,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Claims the website of a Merchant Center sub-account.
+      description: Claims the website of a Merchant Center sub-account. Merchant accounts with approved third-party CSSs aren't required to claim a website.
       operationId: content.accounts.claimwebsite
       parameters:
         - description: The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and `accountId` must be the ID of a sub-account of this account.
@@ -9044,7 +9044,7 @@ components:
             type: string
           type: array
         feedLabel:
-          description: Feed label for the DatafeedTarget. Either `country` or `feedLabel` is required. If both `feedLabel` and `country` is specified, the values must match.
+          description: Feed label for the DatafeedTarget. Either `country` or `feedLabel` is required. If both `feedLabel` and `country` is specified, the values must match. Must be less than or equal to 20 uppercase letters (A-Z), numbers (0-9), and dashes (-).
           type: string
         includedDestinations:
           description: The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in `excludedDestinations`.
@@ -12446,7 +12446,7 @@ components:
           description: Required for multi-seller accounts. Use this attribute if you're a marketplace uploading products for various sellers to your multi-seller account.
           type: string
         feedLabel:
-          description: Feed label for the item. Either `targetCountry` or `feedLabel` is required.
+          description: Feed label for the item. Either `targetCountry` or `feedLabel` is required. Must be less than or equal to 20 uppercase letters (A-Z), numbers (0-9), and dashes (-).
           type: string
         gender:
           description: Target gender of the item.
@@ -12991,7 +12991,7 @@ components:
           type: number
       type: object
     ProductView:
-      description: Product fields. Values are only set for fields requested explicitly in the request's search query. Available only to selected merchants. Submit the [interest form](https://forms.gle/7Uy8htzAN8oNokz9A) to request access.
+      description: Product fields. Values are only set for fields requested explicitly in the request's search query.
       properties:
         aggregatedDestinationStatus:
           description: Aggregated destination status.
@@ -13770,7 +13770,7 @@ components:
           description: Product cluster fields requested by the merchant in the query. Field values are only set if the merchant queries `BestSellersProductClusterView`.
         productView:
           $ref: "#/components/schemas/ProductView"
-          description: Product fields requested by the merchant in the query. Field values are only set if the merchant queries `ProductView`. Available only to selected merchants. Submit the [interest form](https://forms.gle/7Uy8htzAN8oNokz9A) to request access.
+          description: Product fields requested by the merchant in the query. Field values are only set if the merchant queries `ProductView`.
         segments:
           $ref: "#/components/schemas/Segments"
           description: Segmentation dimensions requested by the merchant in the query. Dimension values are only set for dimensions requested explicitly in the query.

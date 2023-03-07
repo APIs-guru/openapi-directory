@@ -9538,12 +9538,6 @@ components:
         clickImpersonationSupported:
           description: Whether client supports user impersonation on suggestion chip click. go/suggestion-click-impersonation
           type: boolean
-        coloredChipBackgroundBorderSupported:
-          description: Whether client supports suggestion chips with colored background/border. Deprecated in favor of go/color-token-suggestion-chip.
-          type: boolean
-        coloredChipTextSupported:
-          description: "Whether client supports suggestion chips with colored text. See design doc: http://go/opa-suggestions-ux-eng-design. Deprecated in favor of go/color-token-suggestion-chip."
-          type: boolean
         debugDataSupported:
           description: Whether client supports suggestions debug data to be displayed.
           type: boolean
@@ -11615,6 +11609,10 @@ components:
           description: The timestamp that DeviceArbitration is created in milliseconds.
           format: int64
           type: string
+        deviceTargetingInputCreationTimestampMs:
+          description: The timestamp that DeviceTargetingInput is built in milliseconds.
+          format: int64
+          type: string
         eliminatedByFurtherDistance:
           format: int32
           type: integer
@@ -11786,7 +11784,7 @@ components:
           type: string
       type: object
     AssistantPrefulfillmentRankerPrefulfillmentSignals:
-      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 41"
+      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 44"
       properties:
         bindingSetAuis:
           description: Assistant User Interaction Score for binding set.
@@ -11820,6 +11818,9 @@ components:
         groundingProviderFeatures:
           $ref: "#/components/schemas/AssistantGroundingRankerGroundingProviderFeatures"
           description: Grounding Provider related ranking features, including general Grounding Provider ranking features(shared among multiple GPs) and specific Grounding Provider ranking features(provided by a specific GP).
+        hasAnswerGroup:
+          description: Whether the interpretation has a Search answer group object, signifying it came from Search resolution.
+          type: boolean
         inQueryMaxEffectiveArgSpanLength:
           description: This is a cross-intent feature which is calculated by iterating all intent candidates. This feature should be populated in post-IG stage (before GB).
           format: float
@@ -11843,6 +11844,9 @@ components:
           type: boolean
         isPlayGenericMusic:
           description: Whether the intent is a PlayGenericMusic-type intent.
+          type: boolean
+        isPodcastIntent:
+          description: Whether the intent is a podcast intent.
           type: boolean
         kscorerRank:
           description: The rank order of the interpretation as determined by kscorer. The kscorer-determined dominant interpretation, if any, gets a rank of 0. The remaining N interpretations get a rank of 1 through N.
@@ -11886,6 +11890,10 @@ components:
           description: Number of arguments, possibly nested, that the Grounding Box was able to ground. This includes ambiguously grounded arguments.
           format: double
           type: number
+        parsingScoreMse8BucketId:
+          description: A ID corresponding to which bucket a given parsing score belongs in.
+          format: int32
+          type: integer
         pq2tVsAssistantIbstCosine:
           description: Cosine similarity between predicted query-to-term model and assistant intent-type-based salient terms. This is intended to be only used for ACE ranking and only populated for assistant traffic.
           format: double
@@ -12811,6 +12819,7 @@ components:
             - DIALOGFLOW_DELEGATION
             - AD_LEAD_VERIFICATION
             - GET_HUMAN
+            - CHECK_INSURANCE_ACCEPTANCE
           type: string
       type: object
     BookCitationPerDocData:
@@ -19318,7 +19327,6 @@ components:
           description: The globally unique id for this feature.
         inferredGeometry:
           $ref: "#/components/schemas/GeostoreInferredGeometryProto"
-          description: RESERVED
         interiorCovering:
           $ref: "#/components/schemas/GeostoreCellCoveringProto"
           description: S2 interior covering that consists of cells completely enclosed within the feature's geometry (for features with polygonal geometry).
@@ -19903,7 +19911,7 @@ components:
           $ref: "#/components/schemas/GeostoreInternalFieldMetadataProto"
       type: object
     GeostoreFieldWithRightsProto:
-      description: "Proto used to represent rights for a field type. See go/geo-rights for more details. NOTE: Use google3/geostore/provenance/public/rights.h or google3/java/com/google/geostore/provenance/rights/Rights.swig instead of accessing this proto directly."
+      description: "Proto used to represent rights for a field type. See go/geo-rights for more details. NOTE: Use google3/geostore/provenance/public/rights.h or google3/java/com/google/geostore/provenance/rights/Rights.java instead of accessing this proto directly."
       properties:
         attributeId:
           description: "** DEPRECATED ** If field_type is set to FEATURE_ATTRIBUTE or KNOWLEDGE_GRAPH_PROPERTY, the attribute ID / KG property ID that makes this field with rights complete."
@@ -23800,7 +23808,7 @@ components:
           description: The restriction only applies to vehicles that meet all of the attributes defined here. If this is empty, it does not affect the scope of the restriction.
       type: object
     GeostoreRightsStatusProto:
-      description: "Proto used to represent rights for FeatureProto. See go/geo-rights for more details. NOTE: Use google3/geostore/provenance/public/rights.h or google3/java/com/google/geostore/provenance/rights/Rights.swig instead of accessing this proto directly."
+      description: "Proto used to represent rights for FeatureProto. See go/geo-rights for more details. NOTE: Use google3/geostore/provenance/public/rights.h or google3/java/com/google/geostore/provenance/rights/Rights.java instead of accessing this proto directly."
       properties:
         fieldWithRights:
           items:
@@ -23985,10 +23993,13 @@ components:
           enum:
             - BICYCLE_FACILITY_SEPARATE_TRAIL
             - BICYCLE_FACILITY_PEDESTRIAN_PATH
+            - BICYCLE_FACILITY_WIDE_PEDESTRIAN_PATH
             - BICYCLE_FACILITY_SHARED_ROAD
             - BICYCLE_FACILITY_BIKE_LANE
+            - BICYCLE_FACILITY_BIKE_LANE_WITH_PEDESTRIAN_PATH
             - BICYCLE_FACILITY_WIDE_SHOULDER
             - BICYCLE_FACILITY_SHARROW
+            - BICYCLE_FACILITY_SHARED_ROAD_WITH_PEDESTRIAN_PATH
           type: string
         bicycleSafety:
           enum:
@@ -24186,7 +24197,7 @@ components:
           $ref: "#/components/schemas/GeostoreFeatureIdProto"
           description: The other segment of this segment pair (see above). The segment that is referenced by the sibling field refers to this feature back via the same sibling field. Both segment and sibling should have the same properties such as geometry, country code, elevation, level relation, priority etc. Since routes are required to have segment and sibling at the same time, the set of routes on a segment is same to that of the sibling.
         surface:
-          description: clang-format on LINT.ThenChange(//depot/google3/geostore/base/proto/lane.proto) If this option is missing it means that the surface is unknown. Specific lanes may override this segment-level surface type.
+          description: clang-format on LINT.ThenChange(//depot/google3/geostore/base/proto/lane.proto) Specific lanes may override this segment-level surface type.
           enum:
             - SURFACE_UNKNOWN
             - SURFACE_PAVED
@@ -24421,6 +24432,13 @@ components:
           items:
             $ref: "#/components/schemas/GeostoreRoadConditionalProto"
           type: array
+        sourceType:
+          description: RESERVED
+          enum:
+            - SPEED_LIMIT_SOURCE_TYPE_UNKNOWN
+            - EXPLICIT
+            - IMPLICIT
+          type: string
         speedWithUnit:
           $ref: "#/components/schemas/GeostoreSpeedProto"
           description: A constant speed limit.
@@ -26919,8 +26937,8 @@ components:
         inputPath:
           description: "The input Cloud Storage folder. All files under this folder will be imported to Document Warehouse. Format: gs:///."
           type: string
-        processorResultsFolderPath:
-          description: "The Cloud Storage folder path used to store the raw results from processors. Format: gs:///."
+        processorType:
+          description: "The Doc AI processor type name. Only used when the format of ingested files is Doc AI Document proto format. Reference: https://source.corp.google.com/piper///depot/google3/cloud/ai/documentai/core/c/proto/processor.proto;l=21"
           type: string
         schemaName:
           description: "The Document Warehouse schema resource name. All documents processed by this pipeline will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}."
@@ -27497,6 +27515,9 @@ components:
         processWithDocAiPipeline:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessWithDocAi"
           description: Use a DocAI processor to process documents in Document Warehouse, and re-ingest the updated results into Document Warehouse.
+        requestMetadata:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RequestMetadata"
+          description: The meta information collected about the end user, used to enforce access control for the service.
       type: object
     GoogleCloudContentwarehouseV1SearchDocumentsRequest:
       description: Request message for DocumentService.SearchDocuments.
@@ -27734,6 +27755,7 @@ components:
             - UPDATE_TYPE_INSERT_PROPERTIES_BY_NAMES
             - UPDATE_TYPE_REPLACE_PROPERTIES_BY_NAMES
             - UPDATE_TYPE_DELETE_PROPERTIES_BY_NAMES
+            - UPDATE_TYPE_REPLACE_OR_INSERT_PROPERTIES_BY_NAMES
           type: string
       type: object
     GoogleCloudContentwarehouseV1UpdateRuleSetRequest:
@@ -27943,7 +27965,7 @@ components:
       properties:
         addressValue:
           $ref: "#/components/schemas/GoogleTypePostalAddress"
-          description: "Postal address. See also: https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto"
+          description: "Postal address. See also: https://github.com/googleapis/googleapis/blob/master/google/type/postal_ address.proto"
         booleanValue:
           description: Boolean value. Can be used for entities with binary values, or for checkboxes.
           type: boolean
@@ -30730,6 +30752,14 @@ components:
             - VPREVIEW_TENOR_100K_FIXED_200P_MP4
             - VPREVIEW_TENOR_50K_FIXED_100W_MP4
             - VPREVIEW_TENOR_100K_FIXED_200W_MP4
+          type: string
+        videoSegmentEndUs:
+          description: The end timestamp of the video segment in microseconds that this preview is generated from. Used for segmented video previews.
+          format: int64
+          type: string
+        videoSegmentStartUs:
+          description: The start timestamp of the video segment in microseconds that this preview is generated from. Used for segmented video previews.
+          format: int64
           type: string
         width:
           description: Width of the stored preview.
@@ -33841,9 +33871,11 @@ components:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         chromeCounts:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        creator:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+          description: LINT.ThenChange(//depot/google3/indexing/ames/spanner/schema/web-version.proto)
         instantNavboost:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
-          description: LINT.ThenChange(//depot/google3/indexing/ames/spanner/schema/websearch_main.sdl)
         localyp:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         localypVersion:
@@ -37848,6 +37880,7 @@ components:
             - WRITE_NUTRITION
             - READ_WELLNESS
             - WRITE_WELLNESS
+            - MAKE_BROADCAST
           type: string
         myActivityRedactionKey:
           description: This field will be translated by footprints and is used to describe the content that was redacted that will be displayed to the user in MyActivity.
@@ -38528,7 +38561,7 @@ components:
           type: integer
       type: object
     LensDiscoveryStylePersonAttributes:
-      description: "This message holds person attributes from the LookNet-Person model (go/looknet-person) and the Style AI Iconic Person Scorer (http://go/styleai-indexing-g3doc#iconic-person-scorer) for the most iconic person in a style image. There is an ongoing collaboration with the Human Sensing team on LookNet-Person v3 (go/looknet-person-v3-collaboration) that deals with some of these signals together. Hence, the combined proto definition. Discretization of float values is recommended by CDS for cheaper and more efficient storage. Next ID: 11"
+      description: "This message holds person attributes from the Person Interpreter model (go/person-interpreter) and the Style AI Iconic Person Scorer (go/styleai-indexing-g3doc#iconic-person-scorer) for the most iconic person in a style image. Discretization of float values is recommended by CDS for cheaper and more efficient storage. Next ID: 11"
       properties:
         discretizedFaceVisibilityScore:
           description: The visibility of the face of the most iconic person in the image discretized into range [0, 100].
@@ -38569,6 +38602,7 @@ components:
           enum:
             - VERSION_UNKNOWN
             - LOOKNET_PERSON_V2B
+            - PERSON_INTERPRETATION_V1
           type: string
       type: object
     LensDiscoveryStylePersonAttributesPersonVisibilityScores:
@@ -38611,6 +38645,7 @@ components:
           enum:
             - VERSION_UNKNOWN
             - FASTER_RCNN
+            - PERSON_INTERPRETATION_V1
           type: string
       type: object
     LensDiscoveryStylePersonDetectionSignalsDetectedPerson:
@@ -47159,6 +47194,7 @@ components:
             - DOCS
             - PHOTOS
             - PHOTOS_TAKEOUT
+            - PHOTOS_ABUSE
             - SIMBA_MOBILE
             - GOOGLE_JOBS
             - CLOUD_PLATFORM
@@ -50393,7 +50429,9 @@ components:
             - REMINDER_PROACTIVE_API
             - REMINDER_POST_TASK_MIGRATION
             - REMINDER_VOLUNTARY_TASK_MIGRATION
+            - REMINDER_NOTIFICATION_ENABLE_FIRST_NOTICE
             - REMINDER_NOTIFICATION_ENABLE_NOTICE
+            - REMINDER_ONE_OFF_DUP_NOTIFICATION_POST_MIGRATION
             - CROSS_SURFACE
             - CROSS_SURFACE_MOVIE_SHOWTIMES
             - CROSS_SURFACE_EVENTS
@@ -50637,6 +50675,7 @@ components:
             - SUPPORT_ARTICLE
             - LOCKSCREEN_PERSONAL_RESULTS_SETTING
             - ASSISTANT_ON_LOCKSCREEN_SETTING
+            - SKIP_VOICE_RECOGNITION_SETTING
             - MULTI_DEVICE_NOTIFICATION_FEEDBACK
             - MULTI_DEVICE_FEEDBACK_CHIRP
             - DRAGONGLASS_SPORT_MODULE
@@ -52509,6 +52548,9 @@ components:
           items:
             type: string
           type: array
+        raffiaSignalMergerUrl:
+          description: "The url used by NsrSignalMerger (http://google3/indexing/signals/signal-merger.h;l=1801;rcl=509297232) to select which NsrData value to keep. The SignalMerger merges all the NsrData coming from the dup url cluster, and select the NsrData value to return by choosing a single url in the cluster (see NsrSignalMerger class for details). NOTE: This field is populated only when there *is* a cluster. If there is no cluster, this is empty and the key used is the canonical (and only) url."
+          type: string
       type: object
     QualityNsrPQData:
       description: "Next id: 17"
@@ -52670,7 +52712,7 @@ components:
               - MUGSHOT
               - CRIME
               - SHOPPING_TOPN
-              - AUTHENTIC
+              - AUTHENTICITY
               - RESERVED_FOR_NEW_ENUM_128
               - RESERVED_FOR_NEW_ENUM_129
               - RESERVED_FOR_NEW_ENUM_130
@@ -52837,7 +52879,7 @@ components:
               - MUGSHOT
               - CRIME
               - SHOPPING_TOPN
-              - AUTHENTIC
+              - AUTHENTICITY
               - RESERVED_FOR_NEW_ENUM_128
               - RESERVED_FOR_NEW_ENUM_129
               - RESERVED_FOR_NEW_ENUM_130
@@ -56317,9 +56359,6 @@ components:
     RepositoryWebrefDocumentMetadata:
       description: "Information about the document which is not produced by webref, typically copied from the docjoin. Next available tag: 15"
       properties:
-        cdocAttachments:
-          $ref: "#/components/schemas/Proto2BridgeMessageSet"
-          description: "A copy of selected extensions from cdoc.doc_attachments and cdoc.per_doc_data, controlled by: --webref_doc_metadata_copy_instant_navboost_document (copies doc_attachments[quality_freshness_abacus::InstantNavBoostDocument] (TypeId 105421467), defined in quality/freshness/abacus/public/abacus.proto). Used in Querybase to have navboost associated with relevant cdocs. --webref_doc_metadata_copy_per_doc_navboost (copies per_doc_data[navboostdata]) (TypeId 4256936), defined in mustang/repository/navboost/proto/navboostmustang.proto. Used in Querybase to have navboost associated with relevant docs. Note that it is not present in the original doc_attachments, but in per_doc_data, and we copy it over here so as not to depend on the proto directly, as they are not compatible due to different app_engine compatibility. --webref_doc_metadata_copy_images (copies doc_attachments[indexing::images::RelatedImageSignal]) (TypeId 21265426), defined in indexing/images/proto/image-linker.proto."
         crawlTime:
           description: The timestamp of when the document was crawled (if known). Copied from CompositeDoc.Content.CrawlTime.
           format: int64
@@ -56530,11 +56569,6 @@ components:
           description: The (weighted) number of incoming anchors (links from other documents).
           format: float
           type: number
-        repeatedCdocAttachments:
-          description: "Copies of selected repeated extensions from cdoc, controlled by: --webref_doc_metadata_copy_images (copies the repeated doc_images field (TypeId 8798074), defined in image/search/imagedoc.proto)."
-          items:
-            $ref: "#/components/schemas/Proto2BridgeMessageSet"
-          type: array
         salientTerms:
           $ref: "#/components/schemas/QualitySalientTermsSalientTermSet"
           description: The salient terms for this document. Only set if --webref_doc_metadata_copy_salient_terms is true. Same motivation as the title field above.
@@ -57349,10 +57383,10 @@ components:
           type: array
       type: object
     RepositoryWebrefLexicalRange:
-      description: A single understood lexicon of the |category| on byte range from |begin_offset| (inclusive) to |end_offset| (exclusive). The byte range could be a subtoken range or span across multiple tokens.
+      description: A single understood lexicon of the |category| on byte range from |begin_offset| (inclusive) to |end_offset| (exclusive). The offsets are all byte offsets relative to the full original query and cover both the mentions and surrounding markers.
       properties:
         beginOffset:
-          description: Byte offset of the begin of the |category|.
+          description: Begin byte offset relative to the full original query.
           format: int32
           type: integer
         category:
@@ -57419,7 +57453,7 @@ components:
             - MEASURABLE_ASPECT_DECREASING
           type: string
         endOffset:
-          description: Byte offset of the end of the |category|.
+          description: End byte offset relative to the full original query.
           format: int32
           type: integer
         facetMid:
@@ -61262,6 +61296,9 @@ components:
     SafesearchVideoContentSignals:
       description: "SafeSearch video content classification scores are computed based on go/golden7 video features. To access these scores see the library at: google3/quality/safesearch/video/api/video_score_info.h"
       properties:
+        isAbuseWithHighConfidence:
+          description: This is used by Amarna to determine whether it should notify Raffia for immediate reprocessing. This field will be generated in Amarna's image_metadata corpus and exported to references_video_search corpus and written to ExportState.module_state.critical_metadata_checksum for determining whether Amarna should immediately notify Raffia whenever is_abuse_with_high_confidence's value changes.
+          type: boolean
         scores:
           additionalProperties:
             format: float
@@ -62264,6 +62301,8 @@ components:
           type: boolean
         followon:
           $ref: "#/components/schemas/SearchPolicyRankableSensitivityFollowOn"
+        groundingProvider:
+          $ref: "#/components/schemas/SearchPolicyRankableSensitivityGroundingProvider"
         prefilter:
           $ref: "#/components/schemas/SearchPolicyRankableSensitivityPrefilter"
         qu:
@@ -62330,6 +62369,10 @@ components:
       description: Marks that this sensitivity is from fulfillment.
       properties: {}
       type: object
+    SearchPolicyRankableSensitivityGroundingProvider:
+      description: Marks that sensitivity is from a Grounding Provider.
+      properties: {}
+      type: object
     SearchPolicyRankableSensitivityPrefilter:
       description: Deprecated, do not use.
       properties:
@@ -62347,7 +62390,7 @@ components:
           type: string
       type: object
     SearchPolicyRankableSensitivitySyntheticIntent:
-      description: Marks that this sensitivity is form a synthetic intent.
+      description: Marks that this sensitivity is from a synthetic intent.
       properties: {}
       type: object
     SecurityCredentialsAllAuthenticatedUsersProto:
@@ -62847,6 +62890,34 @@ components:
         inferredImageId:
           format: uint64
           type: string
+        inferredImageSource:
+          enum:
+            - INFERRED_IMAGE_SOURCE_UNKNOWN
+            - INFERRED_IMAGE_SOURCE_WEB_INDEX
+            - INFERRED_IMAGE_SOURCE_OVERLAY
+            - INFERRED_IMAGE_SOURCE_SCARAB
+          type: string
+        inferredImageType:
+          enum:
+            - INFERRED_IMAGE_TYPE_UNKNOWN
+            - INFERRED_IMAGE_TYPE_NEARDUP_STARBURST_V3
+            - INFERRED_IMAGE_TYPE_STRIDE_EXTRACTION
+            - INFERRED_IMAGE_TYPE_CRAWLED_OFFER_DUPLICATE
+            - INFERRED_IMAGE_TYPE_NEARDUP_FOR_INFERRED_IMAGES
+            - INFERRED_IMAGE_TYPE_OTHER_ML_MATCHED_IMAGES
+            - INFERRED_IMAGE_TYPE_PRODUCT_BLOCKS
+            - INFERRED_IMAGE_TYPE_SCHEMA_DOT_ORG
+            - INFERRED_IMAGE_TYPE_CRAWZALL
+            - INFERRED_IMAGE_TYPE_OPEN_GRAPH
+          type: string
+        neardupInfo:
+          description: This field will only be populated if the inferred image is a neardup of an inferred image. It stores the type and source of the images it is a neardup of.
+          items:
+            $ref: "#/components/schemas/ShoppingWebentityShoppingAnnotationInferredImageNeardupInfo"
+          type: array
+      type: object
+    ShoppingWebentityShoppingAnnotationInferredImageNeardupInfo:
+      properties:
         inferredImageSource:
           enum:
             - INFERRED_IMAGE_SOURCE_UNKNOWN
@@ -64700,6 +64771,12 @@ components:
         lmsPolicyMetadata:
           $ref: "#/components/schemas/StorageGraphBfgLmsPolicyMetadata"
           description: Policy metadata fields for LMS data. Only expected to be used by LMS providers -- please consult ke-data-governance@ before populating this field.
+        policyDataScopeKeys:
+          description: This triple is protected by the policies with PolicyDataScope identified by these global unique ids.
+          items:
+            format: int32
+            type: integer
+          type: array
         policySourceType:
           description: Policy metadata are VERTICAL by default. Vertical policy makers / providers does not need to set this field explicitly.
           enum:
@@ -64812,6 +64889,7 @@ components:
             - ISOLATION_KE_INTERNAL
             - ISOLATION_WEB_CHANNELS
             - ISOLATION_ONRAMP_DICTIONARY_EXPERIMENT
+            - ISOLATION_S3_TRAVEL_HOTEL_ROOMS
             - ISOLATION_PKG_ANDROID_AUTO_EMBEDDED_SIGNED_IN
             - ISOLATION_PKG_ANDROID_AUTO_EMBEDDED_SIGNED_OUT
             - ISOLATION_PKG_APP_NAMES
@@ -66980,7 +67058,6 @@ components:
               - BOOKS_XSELL_ELIGIBLE_APP
               - NAV_EXT_EVENT
               - ADS_CUSTOM_DETAILS_PAGE_ASSETS_SERVED_EVENT_LEVEL
-              - BOOKS_DETAILS_PAGE_KEYWORD_CLUSTER_EVENT_LEVEL
               - BOOKS_DETAILS_PAGE_SIMILAR_CLUSTER
               - BOOKS_DETAILS_PAGE_POST_ACQUIRE_SIMILAR_CLUSTER
               - APPS_PERSONALIZED_TOPIC_QUERY_EVENT_LEVEL
@@ -67079,34 +67156,28 @@ components:
               - FRESH_RESULTS_SEEKING_CURRENT_YEAR_EVENT_LEVEL
               - FILTER_TQ_FAILURE_APP
               - EDITORIAL_CONTENT_CLUSTER_FHR_SERP_EVENT_LEVEL
-              - DETAILS_PAGE_AQUALITY_FAILED_EVENT_LEVEL
-              - DETAILS_PAGE_AQUALITY_PASSED_EVENT_LEVEL
               - PGSS_DETAILS_PAGE_TQUALITY_UNKNOWN_EVENT_LEVEL
               - PGSS_DETAILS_PAGE_TQUALITY_FAILED_EVENT_LEVEL
               - PGSS_DETAILS_PAGE_TQUALITY_PASSED_EVENT_LEVEL
               - PGSS_DETAILS_PAGE_AQUALITY_UNKNOWN_EVENT_LEVEL
               - PGSS_DETAILS_PAGE_AQUALITY_FAILED_EVENT_LEVEL
               - PGSS_DETAILS_PAGE_AQUALITY_PASSED_EVENT_LEVEL
+              - PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_SIMILAR_APPS_ABSENT_EVENT_LEVEL
+              - PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_SIMILAR_APPS_PRESENT_EVENT_LEVEL
               - INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS
               - INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL
-              - HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_UNKNOWN
               - HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_PASS
               - HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_FAIL
-              - HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_UNKNOWN
-              - HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_PASS
-              - HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_FAIL
+              - HSDP_INDEPENDENT_APP_TABLET_AQUALITY_CHECK_UNKNOWN
+              - HSDP_INDEPENDENT_APP_TABLET_AQUALITY_CHECK_PASS
+              - HSDP_INDEPENDENT_APP_TABLET_AQUALITY_CHECK_FAIL
               - PTP_CLUSTER_SERP_P13N_RANKING_EVENT_LEVEL
               - BROAD_INTENT_REWEIGHTING_EVENT_LEVEL
               - QUERY_DEPENDENT_SNIPPET_EVENT_LEVEL
-              - TRUSTED_ENTITY_L1_AND_ATTRIBUTE_SEARCH_QUERY_EVENT
-              - TRUSTED_ENTITY_L2_L3_SEARCH_QUERY_EVENT
               - EXPANDED_DEV_SUCCESS_CLUSTER_EVENT_LEVEL
               - COLLAPSED_DEV_SUCCESS_CLUSTER_EVENT_LEVEL
               - TRIGGERED_DEV_SUCCESS_CLUSTER_EVENT_LEVEL
-              - GAME_DEV_SUCCESS_CLUSTER_EVENT_LEVEL
-              - APP_DEV_SUCCESS_CLUSTER_EVENT_LEVEL
               - BROAD_INTENT_GAMES_TIMESPENT_EVENT_LEVEL
-              - PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE_EAP_PARTNER_APPS_EVENT_LEVEL
               - GEARHEAD_ATTEMPT_USB_RECOVERY
               - MDP_P13N_ALL_EVENT_LEVEL
               - MDP_P13N_GAME_QUERY_L5_EVENT_LEVEL
@@ -67121,125 +67192,27 @@ components:
               - MDP_P13N_RERANKING_NAVIGATIONAL_EXT_EVENT_LEVEL
               - SECOND_PASS_POLARIS_RERANKING_EVENT_LEVEL
               - SECOND_PASS_POLARIS_WITH_RANKING_CHANGE_EVENT_LEVEL
-              - EXPLORATORY_BOOSTING_EVENT_LEVEL
               - GEARHEAD_TOOLTIP_COOLWALK_DASHBOARD_UNAVAILABLE
-              - TIMESLICED_SAFE_SELF_UPDATE
-              - NORMAL_SELF_UPDATE
               - SECOND_PASS_BROAD_INTENT_QUERY_EVENT_LEVEL
               - SECOND_PASS_REWEIGHTING_TRIGGERED_EVENT_LEVEL
               - GEARHEAD_TOOLTIP_COOLWALK_RAIL_WIDGET
               - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN
-              - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN_FRONTEND
               - SUPERROOT_PDS_SHORT_DESCRIPTION_EVENT_LEVEL
               - PGSS_SHORT_DESCRIPTION_DIFF_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
-              - RESERVED_4
-              - RESERVED_5
-              - RESERVED_6
-              - HOME_SPONSORED_ADS_CLUSTER_AT_SESSION_LEVEL
-              - HOME_SPONSORED_ADS_CLUSTER_GAP_OPTOUT_AT_SESSION_LEVEL
-              - FAMILY_FRAUD_CHALLENGE_AT_SESSION_LEVEL
-              - SHOULD_SEE_LIVE_OP_CLUSTER_SESSION_LEVEL
-              - BOOKS_MONETIZABLE_QUERY_AT_SESSION_LEVEL
-              - BOOKS_NONMONETIZABLE_QUERY_AT_SESSION_LEVEL
-              - NON_BOOKS_QUERY_AT_SESSION_LEVEL
-              - BOOTS_PROD_V1_QUERY_AT_SESSION_LEVEL
-              - BOOTS_TAG_OVERRIDE_QUERY_AT_SESSION_LEVEL
-              - BOOTS_KG_ANNOTATION_QUERY_AT_SESSION_LEVEL
-              - EDITORIAL_REVIEW_CARD_ELIGIBLE_AT_SESSION_LEVEL
-              - BOOTS_DEST_QUERY_100_INSTALLS_QUERY_AT_SESSION_LEVEL
-              - BOOTS_DEST_QUERY_150_INSTALLS_QUERY_AT_SESSION_LEVEL
-              - SHOULD_SEE_LIVE_OP_CLUSTER_CANDIDATES_SESSION_LEVEL
-              - REV_BOOST_V2_TEST_CODE_AT_SESSION_LEVEL
               - ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
-              - BOOTS_MIN_TAGS_2_AT_SESSION_LEVEL
-              - BOOTS_EN_IN_AT_SESSION_LEVEL
-              - BOOTS_EN_GB_AT_SESSION_LEVEL
-              - BOOTS_EN_PH_AT_SESSION_LEVEL
-              - BOOTS_EN_CA_AT_SESSION_LEVEL
-              - BOOTS_EN_AU_AT_SESSION_LEVEL
-              - BOOTS_EN_I18N_AT_SESSION_LEVEL
-              - BOOTS_V2_STAGING_AT_SESSION_LEVEL
-              - OFFLINE_APP_SEARCH_AT_SESSION_LEVEL
-              - ENTERTAINMENT_CLUSTER_CONTAINER_SEARCH_ENABLED_AT_SESSION_LEVEL
               - BEST_SELLER_CART_TAG_AT_SESSION_LEVEL
-              - BOOTS_DEST_QUERY_50_INSTALLS_QUERY_AT_SESSION_LEVEL
-              - BOOTS_SAFT_SPEC2_AT_SESSION_LEVEL
-              - SEARCH_NAV_SPONSORED_ADS_CLUSTER_AT_SESSION_LEVEL
-              - BOOTS_ISTA_AT_SESSION_LEVEL
-              - BOOTS_EN_GLOBAL_AT_SESSION_LEVEL
-              - TOP_CHART_RANKING_INFO_AT_SESSION_LEVEL
-              - CLIENT_TEST_CODE_VERIFICATION_AT_SESSION_LEVEL
-              - APPS_PUB_QUERY_AT_SESSION_LEVEL
-              - BOOTS_V2_AT_SESSION_LEVEL
-              - HAS_BOOKS_BIGPOOL_RECS_AT_SESSION_LEVEL
-              - TESTING_DEFAULT
-              - TESTING_BOTH_AT_SESSION_LEVEL
-              - PLAY_COMMERCE_FRIEDNLY_FRAUD_PREDICT_CHALLENGE_BUT_FORCE_NO_OVERRIDE
-              - PLAY_COMMERCE_FRIENDLY_FRAUD_PREDICT_CHALLENGE
-              - PLAY_COMMERCE_FRIENDLY_FRAUD_NO_PREDICT
-              - PLAY_COMMERCE_FRIENDLY_FRAUD_PREDICT_NO_CHALLENGE
-              - PLAY_COMMERCE_FRIENDLY_FRAUD_NO_PREDICT_NO_CHALLENGE
-              - PLAY_COMMERCE_FRIENDLY_FRAUD_NO_PREDICT_HAS_CHALLENGE
-              - BOOTS_V2_STAGING_150_INSTALLS
               - SHOULD_SEE_BOOKS_WISHLIST_CLUSTER
-              - BOOTS_MORE_CHIPS_AT_SESSION_LEVEL
-              - BOOTS_TAG_CONVERSION_BASED_RERANKING_AT_SESSION_LEVEL
-              - BOOTS_KG_FILTERS_AT_SESSION_LEVEL
-              - BOOTS_JP_KR_AT_SESSION_LEVEL
-              - DETAILS_POST_INSTALL_SPONSORED_ADS_CLUSTER
-              - DETAILS_POST_INSTALL_SPONSORED_ADS_CLUSTER_ATLEAST_ONE_AD
-              - BOOTS_ISTA_V2_AT_SESSION_LEVEL
-              - PRIMETIME_DISTRIBUTOR_IN_DETAILS_PAGES
-              - BOOTS_FILTERS_AT_SESSION_LEVEL
               - PRIMETIME_CONTENT_IN_DETAILS_PAGES
-              - INSTANT_CART_ELIGIBLE_USERS
-              - INSTANT_CART_CACHE_STUDY
-              - QUICK_FIX_EXPIRED_CREDIT_CARD
-              - BOOTS_EN_GLOBAL_V2_AT_SESSION_LEVEL
-              - BOOTS_ISTA_V2_WITH_BOOTS_V2_AT_SESSION_LEVEL
               - SEARCH_NON_NAV_SPONSORED_ADS_CLUSTER
-              - BOOTS_NO_TAG_AT_SESSION_LEVEL
               - BOOTS_NO_DIFF_AT_SESSION_LEVEL
-              - BOOTS_ISTA_JP_KR_AT_SESSION_LEVEL
-              - BOOTS_VS_ISTA_JP_KR_AT_SESSION_LEVEL
-              - CHURNED_LIVE_OP_CANDIDATES_SESSION
-              - CHURNED_LIVE_OP_SESSION
-              - INSTANT_FOP_ELIGIBLE_USERS
-              - DCB_ABANDONMENT_TEST_CODE
-              - HOME_SPONSORED_ADS_RE_ENGAGEMENT_CLUSTER
               - ABUSIVE_QUERY_SQUASHING_AT_SESSION_LEVEL
-              - MENDEL_TEST_CODE_VERIFICATION
-              - MOVIES_QUICK_SUGGESTION_CLUSTER_PRESENT
-              - MOVIES_BECAUSE_OF_YOU_CLUSTER_PRESENT
               - CART_ABANDONMENT_TEST_CODE
-              - CLASH_ROYALE_AIA_TRY_NOW_TREATMENT
-              - CLASH_ROYALE_AIA_TRY_NOW_CONTROL
-              - SEARCH_LIVE_OP_QUERY_SESSION
-              - BOOTS_ES_PT_AT_SESSION_LEVEL
-              - BOOTS_ISTA_ES_PT
-              - BOOTS_VS_ISTA_ES_PT
-              - CLASH_ROYALE_AIA_TRY_NOW
-              - BOOTS_QUERY
-              - BOOTS_QUERY_HAS_SELECTED_CHIP
-              - BOOTS_QUERY_HAS_ONLY_UNSELECTED_CHIP
-              - BOOTS_JPKR_KG_FILTERS
-              - BOOTS_URUC_AT_SESSION_LEVEL
-              - BOOTS_URUC_PER_INSTALL_AT_SESSION_LEVEL
-              - GAMES_HOME_VIDEO_SPONSORED_CLUSTER_IS_PRESENT
-              - BOOTS_JP_KR_V2_AT_SESSION_LEVEL
-              - HOUSE_OF_FUN_AIA_TRY_NOW
-              - BOOTS_FILTERS_AT_END_AT_SESSION_LEVEL
               - APP_SUPPORTS_INSTANT_LAUNCH_AT_SESSION_LEVEL
-              - SEARCH_MDP_LIVE_OP_QUERY_SESSION
-              - BOOTS_I18N_AT_SESSION_LEVEL
-              - GEARHEAD_VANAGON_FRX_PHASE1_CANDIDATE
               - LOW_RESULT_CLUSTER_AT_SESSION_LEVEL
               - PERSONALIZED_CLUSTER_AT_SESSION_LEVEL
               - GAME_SEEKING_PERSONALIZED_CLUSTER_AT_SESSION_LEVEL
               - VX_CLUSTER_AT_SESSION_LEVEL
-              - LOW_RESULT_LATENCY_AT_SESSION_LEVEL
-              - PSEUDOCREDIT_UX_REVAMP_TEST_CODE
               - MOVIES_GROOT_20_AT_SESSION_LEVEL
               - MOVIES_GROOT_10_AT_SESSION_LEVEL
               - MOVIES_GROOT_5_AT_SESSION_LEVEL
@@ -67249,151 +67222,53 @@ components:
               - MOVIES_DORA_SEARCH_AT_SESSION_LEVEL
               - MOVIES_MDP_SEARCH_AT_SESSION_LEVEL
               - MOVIES_ORGANIC_SEARCH_AT_SESSION_LEVEL
-              - FULL_PAGE_REPLACEMENT_AT_SESSION_LEVEL
-              - DISPLAY_ADS_RESPONSE_RECEIVED
-              - ENTERTAINMENT_CLUSTER_TRIGGERING_UNDER_FPR_AT_SESSION_LEVEL
-              - WORDS_WITH_FRIENDS_AIA_TRY_NOW
-              - ENTERTAINMENT_CLUSTER_TRIGGERING_WHEN_FPR_ENABLED_AT_SESSION_LEVEL
-              - ENTERTAINMENT_CLUSTER_TRIGGERING_WHEN_FPR_TRIGGERED_AT_SESSION_LEVEL
-              - MIGHTY_BATTLES_AIA_TRY_NOW
-              - BUBBLE_WITCH_AIA_TRY_NOW
-              - PANDA_POP_AIA_TRY_NOW
-              - FINAL_FANTASY_XV_AIA_TRY_NOW
-              - BOOTS_V2_ES_PT
-              - BOOTS_VS_V2_ES_PT
               - BUY_NOW_BUTTON
-              - BOOTS_SELECTOR
-              - ADS_EXPERIMENT_ID_RECEIVED
-              - BOOTS_I18N_V2_AT_SESSION_LEVEL
-              - BOOTS_I18N_V2_VS_V1_AT_SESSION_LEVEL
-              - BEST_SELLER_CART_TAG_FOR_MENDEL
-              - VIDEO_CLUSTER_TRIGGERING_WHEN_VIDEO_LANDING_ENABLED
               - AUDIOBOOKS_KIDS_CATEGORICAL_SEARCH_AT_SESSION_LEVEL
               - ZERO_RESULT_AT_SESSION_LEVEL
-              - BOOTS_I18N_100_THRESH_AT_SESSION_LEVEL
-              - BOOTS_I18N_150_THRESH_AT_SESSION_LEVEL
-              - SHOULD_SEE_MY_APPS_LIVE_OP_CLUSTER
-              - CANDY_CRUSH_AIA_TRY_NOW
               - ABUSIVE_QUERY_AT_SESSION_LEVEL
-              - PERMISS_TESTING_FOR_TEST_CODE_TOOL
-              - PARTNER_VIOLENCE_TRIGGERING_AT_SESSION_LEVEL
-              - BOOTS_V3_AT_SESSION_LEVEL
               - HOME_SPONSORED_ADS_CLUSTER_NO_ADS_AT_SESSION_LEVEL
               - BOOKS_XSELL_ELIGIBLE_APP_AT_SESSION_LEVEL
               - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_SESSION_LEVEL
-              - SUBSCRIBE_AND_INSTALL_AVAILABLE_CLIENT_SESSION_LEVEL
-              - NAV_EXT_UI_SESSION
-              - NAV_EXT_UI_EVENT
               - NAV_EXT_SESSION
-              - CART_ABANDONMENT_SUB_DOLLAR_TEST_CODE
-              - PGS_TEST_CODE_LOGGING_VERIFICATION_AT_SESSION_LEVEL
-              - DEFAULT_FOP_NON_INSTANT_IAB_EVENT_LEVEL
-              - DEFAULT_FOP_INSTANT_FOP_EVENT_LEVEL
-              - CART_ABANDONMENT_V2_EXP1_TEST_CODE
               - FAST_REINSTALL_TEST_CODE
-              - ADS_CUSTOM_DETAILS_PAGE_ASSETS_PRESENT
-              - WELLNET_CASH_DEPRECATED
               - APPS_DETAILS_PAGE_PROMOTION_SESSION_LEVEL
               - BOOKS_DETAILS_PAGE_PROMOTION_SESSION_LEVEL
-              - CART_NO_FOP
-              - CART_ABANDONMENT_BOOK_NEVER_TEST_CODE
-              - CART_ABANDONMENT_BOOK_NEVER_SESSION_LEVEL
-              - CART_ABANDONMENT_BOOK_VX_NEVER_SESSION_LEVEL
-              - CART_ABANDONMENT_MOVIE_NEVER_SESSION_LEVEL
-              - CART_ABANDONMENT_MOVIE_VX_NEVER_SESSION_LEVEL
-              - ADS_CUSTOM_DETAILS_PAGE_ASSETS_SERVED
               - DETAILS_PAGE_PROMOTION_SESSION_LEVEL
-              - BURNSIE_FOR_EXPIRED_CARD_EVENT_LEVEL
-              - CART_ABANDONMENT_HIGH_CART_SESSION_LEVEL
-              - BOOKS_DETAILS_PAGE_KEYWORD_CLUSTER
               - SHOULD_SEE_LIVE_OPS_V2_CLUSTER
-              - DETAILS_PAGE_LIVE_OPS_AT_SESSION_LEVEL
-              - SHOULD_SEE_LIVE_OPS_FROM_NEW_APPS
-              - SHOULD_SEE_LIVE_OPS_FROM_NEW_APPS_ONLY
               - BOOKS_DETAILS_PAGE_SIMILAR_CLUSTER_AT_SESSION_LEVEL
               - BOOKS_DETAILS_PAGE_POST_ACQUIRE_SIMILAR_CLUSTER_AT_SESSION_LEVEL
               - FLOATING_HIGHLIGHTS_ROW_TRIGGERING_AT_SESSION_LEVEL
-              - ADS_SEARCH_PAGE_SC_PRESENT
-              - ADS_SEARCH_PAGE_SC_ABSENT
-              - CART_ABANDON_SURVEY_V1
-              - GEARHEAD_PROJECTION_FRX_ADDITIONAL_INSTALL_REQUIREMENTS
               - APPS_DETAILS_PAGE_EXISTING_PROMOTION_SESSION_LEVEL
               - BOOKS_DETAILS_PAGE_EXISTING_PROMOTION_SESSION_LEVEL
               - BOOKS_ELIGIBLE_FOR_BUNDLE
-              - IN_ACQUIRE_TEST_CODE
-              - CDP_PROMOTIONAL_DESCRIPTION_LOCALE_MISMATCH_AT_SESSION_LEVEL
-              - CDP_PROMOTIONAL_DESCRIPTION_LOCALE_MATCH_AT_SESSION_LEVEL
-              - APPS_SEARCH_PRICE_INTENT
-              - APPS_ST_PRICE_INTENT_AT_SESSION_LEVEL
-              - PERSONALIZED_FOP_OPTIONS_RECOMMENDED
               - FALLBACK_FOP_OPTIONS_RECOMMENDED
-              - APPS_ST_AUDIENCE_INTENT_AT_SESSION_LEVEL
-              - INSTANT_APP_LAUNCH_KEY_ELIGIBLE_APP
-              - CDP_PROMOTIONAL_IMAGE_LOCALE_MATCH_AT_SESSION_LEVEL
-              - CDP_PROMOTIONAL_IMAGE_LOCALE_MISMATCH_AT_SESSION_LEVEL
-              - CDP_SCREENSHOT_LOCALE_MISMATCH_AT_SESSION_LEVEL
-              - CDP_SCREENSHOT_LOCALE_MATCH_AT_SESSION_LEVEL
-              - CDP_PROMOTIONAL_VIDEO_LOCALE_MISMATCH_AT_SESSION_LEVEL
-              - CDP_PROMOTIONAL_VIDEO_LOCALE_MATCH_AT_SESSION_LEVEL
-              - ADS_SEARCH_PAGE_IS_MDP
-              - CLOSED_TESTING_TRACK
               - SHOULD_SEE_PREREG_LIVE_OPS_EH
               - SHOULD_SEE_PREREG_LIVE_OPS_DP
-              - SHOULD_SEE_PREREG_LIVE_OPS_DEP
-              - INTERNAL_TESTING_PROGRAM
-              - FETCH_IN_PGS
-              - APPS_DETAILS_PAGE_PROMOTION_DEFAULT_SESSION_LEVEL
-              - BOOKS_DETAILS_PAGE_PROMOTION_DEFAULT_SESSION_LEVEL
               - HERO_CARD_CLUSTER_AT_SESSION_LEVEL
-              - BOOKS_QUERY_ELIGIBLE_FOR_APPS_CLUSTER_AT_SESSION_LEVEL
-              - ADS_SEARCH_CATEGORICAL_SC
-              - ADS_SEARCH_CATEGORICAL_SC_COUNTERFACTUAL
               - FALLBACK_FOP_OPTIONS_AVAILABLE
-              - PERSONALIZED_FOP_OPTIONS_AVAILABLE
               - SWOOP_10P_OFF_SESSION_LEVEL
               - SWOOP_25P_OFF_SESSION_LEVEL
               - SWOOP_50P_OFF_SESSION_LEVEL
               - SWOOP_75P_OFF_SESSION_LEVEL
-              - SWOOP_90P_OFF_SESSION_LEVEL
-              - RETRIEVAL_SERVICE_GLUE_SCORE_UNDETERMINED
-              - RETRIEVAL_SERVICE_GLUE_SCORE_LOW
-              - RETRIEVAL_SERVICE_GLUE_SCORE_MEDIUM
-              - RETRIEVAL_SERVICE_GLUE_SCORE_HIGH
-              - APPS_DETAILS_PAGE_PROMOTION_EXP_2_IN_APP_ITEM_NEVERS_SESSION_LEVEL
-              - APPS_DETAILS_PAGE_PROMOTION_EXP_2_IN_APP_ITEM_BUYERS_SESSION_LEVEL
-              - APPS_DETAILS_PAGE_PROMOTION_EXP_2_PREMIUM_APP_NEVERS_SESSION_LEVEL
               - CANCEL_SUBSCRIPTION_CONFIRMATION_DIALOG_SHOWN_WHEN_ELIGIBLE_FOR_ENTITLEMENT_BENEFITS
-              - INSTANT_APP_MULTI_LAYOUT_CLUSTER_TOP_VISIBLE_APP
-              - TEST_CODE_BUILD_VERIFICATION_AT_SESSION_LEVEL
               - PREREGISTRATION_AT_SESSION_LEVEL
-              - CALL_PDS_FETCH_DIRECTLY_IN_PGS
-              - RETRIEVAL_SERVICE_GLUE_SCORE_MISSING
               - GAMES_PROFILE_CREATION
               - IN_APP_SALE_IN_CART
               - MOVIES_MAX_NUMBER_MEESEEKS_CLUSTERS_SHOWN
               - MOVIES_MAX_NUMBER_BYW_CLUSTERS_SHOWN
-              - GET_BOOKS_HOME_STREAM
               - RANDOM_FOP_OPTIONS_RECOMMENDED
               - MOVIES_QUERY_ELIGIBLE_FOR_APPS_CLUSTER_AT_SESSION_LEVEL
               - INSTANT_BANNER_ELIGIBLE
               - SUGGEST_NAV_SUGGEST_TRIGGERED
               - TRUSTED_ENTITY_SEARCH_QUERY
               - BURNSIE_ADD_FOP_PROMOTION_SESSION_LEVEL
-              - APPS_DETAILS_PAGE_PROMOTION_EXP_3_PREMIUM_APP_NEVERS
-              - MDP_MISMATCH
-              - MDP_MATCH
               - MOVIES_WALLE_SEARCH_AT_SESSION_LEVEL
               - BUNDLE_FBT_DISCOUNT_AT_SESSION_LEVEL
               - BUNDLE_SERIES_DISCOUNT_AT_SESSION_LEVEL
-              - DETAILS_PAGE_DFF_BADGE
               - MOVIES_REPEATED_BUYER
-              - PURCHASE_MANAGER_CHALLENGE_SHOWN
               - SUBSCRIPTION_CANCELLATION_PROMOTION_SESSION_LEVEL
               - SUBSCRIPTION_RETRY_FOP_FOR_DCB_AS_PRIMARY_SESSION_LEVEL
-              - SUBSCRIPTION_DCB_AS_DEFAULT_FOP_WITH_BETTER_FOPS_SESSION_LEVEL
               - SUBSCRIPTION_DCB_AS_ADD_FOP_OPTION_SESSION_LEVEL
-              - DFF_ON_KIDS_SEEKING_QUERY
-              - SHOULD_SEE_CHURNED_LIVEOPS_IN_GAMES_HOME
               - APPS_SEARCH_TOPIC_RFY_CLUSTER_AT_SESSION_LEVEL
               - APPS_SEARCH_MINI_TOP_CHARTS_CLUSTER_AT_SESSION_LEVEL
               - APPS_PERSONALIZED_TOPIC_QUERY_SESSION_LEVEL
@@ -67401,102 +67276,30 @@ components:
               - APPS_PERSONALIZED_ALL_GAME_QUERIES_SESSION_LEVEL
               - APPS_PERSONALIZED_CATEGORICAL_GAME_SEEKING_QUERIES_SESSION_LEVEL
               - APPS_PERSONALIZED_CATEGORICAL_NON_TG_QUERIES_SESSION_LEVEL
-              - APPS_PERSONALIZED_VERTICAL_RFY_CLUSTER_SESSION_LEVEL
-              - APPS_PERSONALIZED_NAVIGATIONAL_SESSION_LEVEL
-              - APPS_PERSONALIZED_NAVIGATIONAL_GAME_SESSION_LEVEL
-              - APPS_PERSONALIZED_MDP_SESSION_LEVEL
-              - APPS_PERSONALIZED_MDP_GAME_SESSION_LEVEL
               - PLAY_STORE_SHOW_CART
               - MOVIES_RENTER
-              - LOYALTY_HOME_FIRST_TAB_SESSION_LEVEL
-              - LOYALTY_HOME_SECOND_TAB_SESSION_LEVEL
-              - LOYALTY_HOME_THIRD_TAB_SESSION_LEVEL
-              - SHOULD_SEE_LIVEOPS_ON_APPS_HOME
-              - MARKETING_OPTIN_INTERSTITIAL_AT_SESSION_LEVEL
-              - CART_ABANDONMENT_RETAIL_EXCELLENCE_TEXT_EXPERIMENT_USER_LEVEL
-              - CART_ABANDONMENT_RETAIL_EXCELLENCE_TEXT_EXPERIMENT_TEST_CODE
-              - HAS_BOOK_SERIES_BUNDLE
-              - HAS_BOOK_FREQUENTLY_BOUGHT_TOGETHER_BUNDLE
               - APPS_SEARCH_TOPIC_RFY_CLUSTER_COUNTERFACTUAL_AT_SESSION_LEVEL
               - APPS_SEARCH_MINI_TOP_CHARTS_CLUSTER_COUNTERFACTUAL_AT_SESSION_LEVEL
-              - ASYNC_ADS_FALLBACK_CLUSTER
-              - DETAILS_PAGE_KIDS_QUALITY_BADGE
               - FREE_TRIAL_SUBSCRIPTION_CANCELATION_APP_INSTALLED
               - FREE_TRIAL_SUBSCRIPTION_CANCELATION_APP_NOT_INSTALLED
               - NON_FREE_TRIAL_SUBSCRIPTION_CANCELATION_APP_INSTALLED
               - NON_FREE_TRIAL_SUBSCRIPTION_CANCELATION_APP_NOT_INSTALLED
               - CLIENT_NOTIFICATION_APP_UNINSTALLED_WITH_SUBSCRIPTION
               - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_1_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_2_AT_SESSION_LEVEL
               - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_3_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_4_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_5_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_6_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_7_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_8_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_9_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_10_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_11_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_12_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_13_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_14_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_15_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_16_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_17_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_18_AT_SESSION_LEVEL
-              - ADD_FORM_OF_PAYMENT_DEEP_LINK_MATCH_SUCCESS
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_19_AT_SESSION_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_20_AT_SESSION_LEVEL
               - KIDS_AGE_SCORE_BONUS
-              - NOTIFICATION_IMPRESSION_FOR_APP_UNINSTALLED_WITH_SUBSCRIPTION
-              - BUNDLE_DISCOUNT_SHOWN_ON_DETAIL_PAGE_AT_SESSION_LEVEL
-              - GLUE_SCORE_INTEGRATION_DETAILS_PAGE_SESSION_LEVEL
               - UPDATE_SUBSCRIPTION_INSTRUMENT_PAYMENT_DECLINED_FOP_IMPRESSION
               - UPDATE_SUBSCRIPTION_INSTRUMENT_PAYMENT_DECLINED_FOP_MESSAGE_IMPRESSION
-              - RECS_STALENESS_DEMOTION_1_SESSION_LEVEL
-              - RECS_STALENESS_DEMOTION_2_SESSION_LEVEL
-              - RECS_STALENESS_DEMOTION_3_SESSION_LEVEL
-              - RECS_STALENESS_DEMOTION_4_SESSION_LEVEL
-              - RECS_STALENESS_DEMOTION_5_SESSION_LEVEL
-              - ADD_FOP_WITHOUT_EXISTING_FOP
               - KIDS_QUALITY_TAG_SCORE_BONUS_AT_SESSION_LEVEL
-              - RECS_ANIMA_FEATURES_GH_RANKING_1_SESSION_LEVEL
-              - RECS_ANIMA_FEATURES_GH_RANKING_2_SESSION_LEVEL
-              - RECS_ANIMA_FEATURES_GH_RANKING_3_SESSION_LEVEL
-              - RECS_ANIMA_FEATURES_GH_RANKING_4_SESSION_LEVEL
-              - RECS_ANIMA_FEATURES_GH_RANKING_5_SESSION_LEVEL
-              - RECS_ANIMA_FEATURES_GH_RANKING_6_SESSION_LEVEL
-              - RECS_ANIMA_FEATURES_GH_RANKING_7_SESSION_LEVEL
-              - SHOULD_SEE_LOYALTY_SIGNUP_INTERSTITIAL_SESSION_LEVEL
               - SHOULD_SEE_REVIEW_MORE_LINK
-              - TEST_FOR_LEVELS_FLAG_AT_SESSION_LEVEL
               - INCENTIVIZED_OPTIN_INTERSTITIAL_AT_SESSION_LEVEL
               - PREMIUM_GAME_HOME
-              - TESTING_THE_TESTCODE_TOOL
               - LB_TARGETED_AT_SESSION_LEVEL
-              - LB_ABOVE_AT_SESSION_LEVEL
-              - LB_BELOW_AT_SESSION_LEVEL
-              - LB_PAGINATED_AT_SESSION_LEVEL
-              - SHOULD_SEE_POINTS_SPEND_PROMOTION_REORDERING
-              - SHOULD_SEE_DEFAULT_POINTS_SPEND_PROMOTION_ORDER
-              - RECS_USER_INTENT_HP_LOW_INTENT
               - PCD_APP_DETAILS
               - MIXED_AUDIENCE_APP_DETAILS
               - LB_IMPRESSED_AT_SESSION_LEVEL
-              - RENEWAL_REMINDER_IN_CANCEL_FLOW
-              - RECS_STALENESS_DEMOTION_6_AT_SESSION_LEVEL
-              - RECS_STALENESS_DEMOTION_7_AT_SESSION_LEVEL
-              - RECS_STALENESS_DEMOTION_8_AT_SESSION_LEVEL
               - HERO_CARD_CLUSTER_INSTANT_ELIGIBLE
-              - LOYALTY_SHOULD_SEE_FREE_TRIAL_SUBSCRIPTION_POINTS_EARN_MESSAGE
               - LOYALTY_SHOULD_NOT_SEE_FREE_TRIAL_SUBSCRIPTION_POINTS_EARN_MESSAGE
-              - QREWRITE_TRUE_MDP_TRUE
-              - QREWRITE_TRUE_ONETREE_TRUE
-              - QREWRITE_FALSE_ONETREE_FALSE
-              - QREWRITE_TRUE_ONETREE_FALSE
-              - QREWRITE_FALSE_ONETREE_TRUE
-              - DOC_ID_MISMATCH
-              - MDP_DOC_ID_MISMATCH
               - MOVIES_USER_INTERESTS_NONE_AT_SESSION_LEVEL
               - MOVIES_USER_INTERESTS_LOW_AT_SESSION_LEVEL
               - MOVIES_USER_INTERESTS_MEDIUM_AT_SESSION_LEVEL
@@ -67505,9 +67308,6 @@ components:
               - MOVIES_BOY_SEEDS_LOW_AT_SESSION_LEVEL
               - MOVIES_BOY_SEEDS_MEDIUM_AT_SESSION_LEVEL
               - MOVIES_BOY_SEEDS_HIGH_AT_SESSION_LEVEL
-              - LOYALTY_NO_PERSONALIZABLE_CONTENT_CREDIT_ON_TOP
-              - LOYALTY_PERSONALIZABLE_CONTENT_CREDIT_ON_BOTTOM
-              - PIXER_DUMMY_TEST_CODE
               - RENEWAL_REMINDER_SET_IN_CANCEL_FLOW
               - RENEWAL_REMINDER_CAN_BE_SET_IN_CANCEL_FLOW
               - PLAY_PASS_SIGNUP_INTERSTITIAL_ELIGIBLE_SESSION_LEVEL
@@ -67517,146 +67317,46 @@ components:
               - DOUBLE_WIDE_SCREENSHOT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
               - TRIPLE_WIDE_VIDEO_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
               - WIDE_MEDIA_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
-              - LOYALTY_CALLED_GET_POINTS_SPEND_PROMOTIONS
-              - RENEWAL_REMINDER_ELIGIBLE_EXPERIMENT_NOT_ENABLED
-              - SMART_FOP_SESSION_LEVEL_AT_SESSION_LEVEL
               - SMART_FOP_AT_SESSION_LEVEL
-              - MOVIES_USER_FREE_AT_SESSION_LEVEL
-              - MOVIES_USER_FAMILY_AT_SESSION_LEVEL
-              - MOVIES_USER_RENTER_AT_SESSION_LEVEL
-              - MOVIES_USER_BUYER_AT_SESSION_LEVEL
-              - HAS_NON_RELOADABLE_PREPAID_CARD_AT_SESSION_LEVEL
               - BILLING_PROFILE_DCB_ELIGIBLE
-              - BILLING_PROFILE_GC_ELIGIBLE
-              - LOYALTY_CALLED_GET_POINTS_SPEND_PROMOTIONS_AT_SESSION_LEVEL
-              - LOYALTY_SHOULD_SEE_UPSELL_AT_SESSION_LEVEL
               - LOYALTY_UPSELL_AFTER_IN_APP_PURCHASE_AT_SESSION_LEVEL
-              - REDEEM_WITH_SUBSCRIBE_AND_INSTALL
               - SHOULD_SEE_APPS_COMPARISON_CLUSTER
-              - IS_APPS_COMPARISON_VISIBLE
               - RESIGNUP_FROM_SUBS_CENTER
               - VX_CLUSTER_IN_APPS_SERP_IMPRESSION_SESSIONS
               - PARTNER_REWARD_ON_LOYALTY_SIGNUP_PAGE
               - UGC_CLUSTER_AT_SESSION_LEVEL
-              - UGC_LANDING_PAGE_AT_SESSION_LEVEL
               - REGIONAL_TRENDING_CLUSTER
-              - MONETIZABLE_FOP_OPTIONS_AVAILABLE
-              - MONETIZABLE_FOP_OPTIONS_RECOMMENDED
-              - ORIGINAL_ML_FOP_OPTIONS_AVAILABLE
-              - ANON_ML_FOP_OPTIONS_AVAILABLE
-              - ORIGINAL_ML_FOP_OPTIONS_RECOMMENDED
-              - USABLE_ORIGINAL_ML_FOP_OPTIONS_FOUND
               - USABLE_ANON_ML_FOP_OPTIONS_FOUND
               - ANON_ML_FOP_OPTIONS_RECOMMENDED
-              - NEW_ABUSE_MODEL_AT_SESSION_LEVEL
-              - RENT_BUTTON_CLICK
               - BUY_BUTTON_CLICK
-              - TVOD_BUTTON_CLICK
-              - MULTIQUANTITY_EAP_NCSOFT_SKU1
-              - MULTIQUANTITY_EAP_NCSOFT_SKU2
-              - MULTIQUANTITY_EAP_NCSOFT_SKU3
-              - MULTIQUANTITY_EAP_PACKAGE_GAMANIA
-              - MULTIQUANTITY_EAP_PACKAGE_GARENA_FF
-              - MULTIQUANTITY_EAP_PACKAGE_GARENA_FF_MAX
-              - VX_QREF_TRIGGERED_AT_SESSION_LEVEL_AT_SESSION_LEVEL
-              - VX_NAVBOOST_SUPPRESSED_AT_SESSION_LEVEL_AT_SESSION_LEVEL
-              - VX_QREF_TRIGGERED_AT_SESSION_LEVEL
-              - VX_NAVBOOST_SUPPRESSED_AT_SESSION_LEVEL
-              - ABUSE_FOR_BANNER
-              - ABUSE_FOR_CART_ABANDON
-              - ABUSE_FOR_DETAILS_PAGE
-              - ABUSE_FOR_PLAY_OPT_IN_PROMPT
-              - MOVIE_BUTTON_CLICK
               - TV_BUTTON_CLICK
               - LOYALTY_SEES_POINTS_EARN_PROMOTIONS_AT_SESSION_LEVEL
               - KIDS_CONTENT_SEEKING_QUERY_SESSION
               - KIDS_CONTENT_SEEKING_QUERY_TREATMENT_APPLIED_SESSION
-              - FAMILY_BUTTON_CLICK
               - UGC_CLUSTER_NON_FIRST_PAGE_AT_SESSION_LEVEL
               - UGC_CLUSTER_ELIGIBLE_AT_SESSION_LEVEL
               - LOYALTY_SEES_FREE_TRIAL_SUBSCRIPTION_AT_SESSION_LEVEL
-              - MOVIES_FAMILY_USER
-              - MAIN_FHR_CCI_TRIGGERING_AT_SESSION_LEVEL
-              - BASELIST_FHR_CCI_TRIGGERING_AT_SESSION_LEVEL
-              - FIREBALL_LANGUAGE_BUTTON_CLICK
-              - QUEST_GET_ADDITIONAL_CHALLENGE_SUCCESS_AT_SESSION_LEVEL
-              - BASELIST_FHR_IMPRESSION_CAPPING_AT_SESSION_LEVEL
               - APPS_SEARCH_FILTERS_TRIGGERED
               - APPS_SEARCH_FILTERS_ACTIVATED
               - PLAY_SUBMANAGEMENT_LOG_HOOK_SESSION_EXAMPLE
-              - OUT_OF_APP_PURCHASABLE_PRODUCTS_ON_DETAILS_PAGE_PREFETCH_AT_SESSION_LEVEL
               - LOYALTY_SIGNUP_INTERSTITIAL_AT_SESSION_LEVEL
-              - LOYALTY_SIGNUP_SUCCESS_AT_SESSION_LEVEL
-              - BOOTS_CHIPS_NOT_TRIGGERED
-              - MAIN_FHR_IMPRESSION_CAPPING_AT_SESSION_LEVEL
               - BOOTS_CHIPS_NOT_TRIGGERED_COUNTERFACTUAL
               - BOOTS_CHIPS_TRIGGERED_COUNTERFACTUAL
               - APPS_SEARCH_FILTERS_NOT_TRIGGERED
-              - IN_APP_ITEM_DUPLICATE_PURCHASE
-              - MOVIES_SERIES_CLUSTER
-              - FOP_OPTION_OR_EXISTING_INSTRUMENTS_MATCHED_PROMOTION_AT_SESSION_LEVEL
-              - FOP_OPTION_MATCHED_PROMOTION_ONLY_AT_SESSION_LEVEL
               - PREFERRED_FOP_AT_SESSION_LEVEL
               - REDEEM_NOT_ENROLLED_TO_LOYALTY_AT_SESSION_LEVEL
               - VIDEO_CLUSTER_EXPANDED
               - LOYALTY_UPSELL_SEEN_AT_SESSION_LEVEL
-              - GEARHEAD_TOOLTIP_SETTINGS_NTH_RUN
-              - LELOLAND_INSTANT_FOP_V1
-              - LOYALTY_ELIGIBLE_TO_SEE_UPSELL_AT_SESSION_LEVEL
               - TRIPLE_WIDE_SCREENSHOT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
-              - ONETREE_MDP_BUT_POST_RESPONSE_NOT_MDP_AT_USER_LEVEL
-              - POST_RESPONSE_MDP_BUT_QCM_IS_CATEGORITCAL_AT_USER_LEVEL
-              - POST_RESPONSE_MDP_BUT_QCM_IS_MULTINAV_AT_USER_LEVEL
-              - POST_RESPONSE_MDP_BUT_QCM_IS_NAVIGATIONAL_AT_USER_LEVEL
-              - POST_RESPONSE_MDP_BUT_QCM_IS_NAVEXT_AT_USER_LEVEL
-              - POST_RESPONSE_MDP_BUT_QCM_IS_UNKNOWN_AT_USER_LEVEL
-              - POST_RESPONSE_MDP_BUT_QCM_IS_UNKNOWN_AT_SESSION_LEVEL
-              - POST_RESPONSE_MDP_BUT_QCM_IS_NAVEXT_AT_SESSION_LEVEL
-              - POST_RESPONSE_MDP_BUT_QCM_IS_NAVIGATIONAL_AT_SESSION_LEVEL
-              - POST_RESPONSE_MDP_BUT_QCM_IS_MULTINAV_AT_SESSION_LEVEL
-              - POST_RESPONSE_MDP_BUT_QCM_IS_CATEGORITCAL_AT_SESSION_LEVEL
-              - ONETREE_MDP_BUT_POST_RESPONSE_NOT_MDP_AT_SESSION_LEVEL
-              - LELOLAND_INSTANT_FOP_V1_1
-              - LEGOLAND_INSTANT_FOP_KERAS_V1
-              - LEGOLAND_INSTANT_FOP_KERAS_V1_1
-              - PROMOTION_P13N_BANNER_IN_HOME_AT_SESSION_LEVEL
-              - SHOULD_SEE_POINTS_BALANCE_ON_HOME_TOOLBAR_AT_SESSION_LEVEL
-              - BOOKS_HAS_USER_FEEDBACK
-              - BOOKS_USER_FEEDBACK_ADVANCED
               - LOYALTY_LIVE_OPS_RETURNED_AT_SESSION_LEVEL
-              - LOCALIZED_PRICING_EAP_EA_NFS
-              - LOCALIZED_PRICING_EAP_EA_RR3
-              - PURCHASE_FLOW_ENTRY_PROMOTION_AT_SESSION_LEVEL
-              - PURCHASE_FLOW_ENTRY_PROMOTION_ELIGIBLE_AT_SESSION_LEVEL
-              - PLAY_POINTS_HOME_AT_SESSION_LEVEL
-              - UGC_VIDEO_CLIENT
-              - APPS_DETAILS_PAGE_SIMILAR_APPS
               - SEARCH_MDP_TRIGGERED_SESSION_LEVEL
               - PROMOLINK_CDP_SESSION_LEVEL
               - PROMOLINK_CDP_TITLE_PAGE_SESSION_LEVEL
               - PROMOLINK_CDP_TOPIC_PAGE_SESSION_LEVEL
               - PROMOLINK_CDP_GENERIC_PAGE_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_1_AT_SESSION_LEVEL
               - WMC_INSTANT_PREVIEW_CLUSTER_AT_SESSION_LEVEL
-              - POINTS_PROMOTION_CONTENT_HOME_AT_SESSION_LEVEL
               - POINTS_PROMOTION_CONTENT_PAGE_AT_SESSION_LEVEL
               - SEARCH_SYN_APPS_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_2_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_3_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_4_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_5_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_6_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_7_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_8_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_9_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_10_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_11_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_12_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_13_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_14_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_15_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_16_AT_SESSION_LEVEL
-              - IN_APP_MESSAGING_APP_17_AT_SESSION_LEVEL
               - IN_APP_OFFER_AT_SESSION_LEVEL
               - IN_APP_OFFER_APP_1_AT_SESSION_LEVEL
               - IN_APP_OFFER_APP_2_AT_SESSION_LEVEL
@@ -67679,46 +67379,17 @@ components:
               - BOOKS_FREE_FIXED_DURATION_RENTAL_SESSION_LEVEL
               - BOOKS_FREE_FIXED_DATE_RENTAL_SESSION_LEVEL
               - PAYMENTS_DELAYED_CHARGING_AT_SESSION_LEVEL
-              - QUICK_BUY_ELIGIBLE_AT_SESSION_LEVEL
               - BOOKS_PRICE_DROP_SESSION_LEVEL
-              - LEGOLAND_FOP_COVERSION_V1
-              - LEGOLAND_FOP_COVERSION_V1_1
-              - LIVE_OP_EVAL_QUALITY_FILTERING
-              - TG_VALIDATED_CRISPR_TAG_AT_SESSION_LEVEL
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_0
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_1
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_2
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_3
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_4
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_5
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_6
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_7
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_8
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_9
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_10
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_11
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_12
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_13
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_14
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_15
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_16
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_17
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_18
-              - LEGOLAND_ADD_FOP_SERVING_CANDIDATE_19
               - NON_EMPTY_HOME_STREAM_LIVE_OPS_CLUSTER_SERVED
               - SHOULD_SEE_LIVE_OPS_CARD_IN_SEARCH_MDP
-              - FIRST_PARTY_PROMOTION_LIVE_OP_SESSION_LEVEL
               - CART_ABANDONMENT_SUBSCRIPTION_ONE_TIME_PASS_SESSION_LEVEL
-              - LEGOLAND_INSTANT_FOP_SCREEN_SESSION_LEVEL
               - MY_REVIEWS_PAGE_VISIT_USER_LEVEL
               - SERIES_BUNDLE_MULTI_TIER_DISCOUNT_SESSION_LEVEL
-              - DEVELOPER_PROMOTIONS_ELIGIBLE_SESSION_LEVEL
               - GOOGLE_PROMOTIONS_ELIGIBLE_SESSION_LEVEL
               - USER_TRIGGERED_IAP_PROMOTION_RETRIEVAL_SESSION_LEVEL
               - IAP_HAS_UNREDEEMED_PROMOTIONS_CLIENT_SESSION_LEVEL
               - SUBSCRIPTION_UPDATE_FOP_FOR_DCB_AS_PRIMARY_SIGNUP_SESSION_LEVEL
               - SUBSCRIPTION_UPDATE_FOP_FOR_DCB_AS_PRIMARY_SUB_CENTER_SESSION_LEVEL
-              - SUBS_PRICE_CHANGE_VERSION_TIME_CHECK_SESSION_LEVEL
               - RENEW_TASK_DELAYED_SUBSCRIPTION_TARGETED
               - RENEW_TASK_DELAYED_SUBSCRIPTION_NOT_TARGETED
               - PRE_AUTH_TASK_DELAYED_SUBSCRIPTION_TARGETED
@@ -67726,37 +67397,12 @@ components:
               - REDEEM_REDIRECT_CHALLENGE_AT_SESSION_LEVEL
               - PLAY_STORE_IAP_SALES
               - PLAY_STORE_IAP_SALES_APP_1
-              - PLAY_STORE_IAP_SALES_APP_2
-              - PLAY_STORE_IAP_SALES_APP_3
-              - PLAY_STORE_IAP_SALES_APP_4
-              - PLAY_STORE_IAP_SALES_APP_5
-              - PLAY_STORE_IAP_SALES_APP_6
-              - PLAY_STORE_IAP_SALES_APP_7
-              - PLAY_STORE_IAP_SALES_APP_8
-              - PLAY_STORE_IAP_SALES_APP_9
-              - PLAY_STORE_IAP_SALES_APP_10
-              - PLAY_STORE_IAP_SALES_APP_11
-              - PLAY_STORE_IAP_SALES_APP_12
-              - PLAY_STORE_IAP_SALES_APP_13
               - PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE
-              - PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE_EAP_PARTNER_APPS
               - CROSS_DEVICE_INSTALL_OPTIONS_FETCHED_IN_SESSION
               - CROSS_DEVICE_INSTALL_OPTIONS_ITEM_FIELDS_TRIGGERED
-              - PAIRED_DEVICE_COMPATIBILITY_CHECKED_IN_SESSION
               - OTHER_DEVICES_SUBNAV_RETURNED_IN_SESSION
-              - G1_PLAY_PASS_BUNDLE_ELIGIBLE_IN_PLAY_STORE_SESSION_LEVEL
-              - G1_PLAY_PASS_BUNDLE_ELIGIBLE_IN_PLAY_STORE_COMBINED_CHANNEL_SESSION_LEVEL
-              - PLAY_PASS_BUNDLE_ELIGIBLE_SHOWN_PLAY_STORE_PROMOTION_PLAY_ARM_SESSION_LEVEL
-              - PLAY_PASS_BUNDLE_ELIGIBLE_SHOWN_PLAY_STORE_PROMOTION_COMBINED_ARM_SESSION_LEVEL
               - GEARHEAD_FRX_SENSITIVE_PERMISSION_SCREEN_SEEN
               - POST_PURCHASE_ITEM_UPSELL_SESSION_LEVEL
-              - POST_PURCHASE_ITEM_UPSELL_APP_1_SESSION_LEVEL
-              - POST_PURCHASE_ITEM_UPSELL_APP_2_SESSION_LEVEL
-              - POST_PURCHASE_ITEM_UPSELL_APP_3_SESSION_LEVEL
-              - POST_PURCHASE_ITEM_UPSELL_APP_4_SESSION_LEVEL
-              - POST_PURCHASE_ITEM_UPSELL_APP_5_SESSION_LEVEL
-              - POST_PURCHASE_ITEM_UPSELL_APP_6_SESSION_LEVEL
-              - POST_PURCHASE_ITEM_UPSELL_APP_7_SESSION_LEVEL
               - PLAY_PASS_SIGNUP_INTERSTITIAL_SHOWN_SESSION_LEVEL
               - FETCH_PROMOTION_BANNER_FROM_P3_SESSION_LEVEL
               - AVP_SWOOP_10P_OFF_SESSION_LEVEL
@@ -67809,22 +67455,15 @@ components:
               - USE_SUBSCRIPTION_NEW_DOCUMENT_FORMAT_SKU_DETAILS_SESSION_LEVEL
               - USE_SUBSCRIPTION_NEW_DOCUMENT_FORMAT_PREVIEW_BATCH_SKU_DETAILS_SESSION_LEVEL
               - USE_SUBSCRIPTION_NEW_DOCUMENT_FORMAT_FOR_ALL_SUBS_SESSION_LEVEL
-              - SHOULD_SEE_DYNAMIC_HOME_CONTAINER
-              - FROM_GAME_PROFILE_ID_ALLOWLIST
               - LEON_LIVEOPS_DEAL_STATE_SYNC_SESSION_LEVEL
               - SURVEY_AHC_AT_SESSION_LEVEL
-              - PLAY_PASS_CART_MAREKTING_BANNER_ELIGIBLE_SESSION_LEVEL
               - PLAY_PASS_CART_MAREKTING_BANNER_ELIGIBLE_AND_SHOWN_CART_SESSION_LEVEL
               - PLAY_PASS_PERKS_VOUCHER_IN_CART_SESSION_LEVEL
               - PLAY_SEARCH_MDP_TRIGGERING
               - PLAY_SEARCH_NON_MDP_TRIGGERING
               - PRICE_TRANSPARENCY_IS_OFFER_PERSONALIZED_SESSION_LEVEL
               - GEARHEAD_SKIP_LEGACY_FRX_FOR_CAKEWALK_USB_CANDIDATE
-              - QUEST_PLATFORM_LIST_QUEST_HOLDBACK_SESSION_LEVEL
-              - QUEST_PLATFORM_LIST_QUEST_HOLDBACK_2_SESSION_LEVEL
-              - QUEST_PLATFORM_LIST_QUEST_HOLDBACK_3_SESSION_LEVEL
               - PLAY_PASS_PARENT_FOCUSED_SPLASH_PAGE_SESSION_LEVEL
-              - PLAY_PASS_SPLASH_PAGE_FOR_PARENT_SESSION_LEVEL
               - PLAY_PASS_SPLASH_PAGE_FOR_UNICORN_SESSION_LEVEL
               - REVIEW_SUBMITTED_SESSION_LEVEL
               - REVIEW_TOPIC_FILTER_SELECTED_SESSION_LEVEL
@@ -67832,15 +67471,10 @@ components:
               - IN_CART_EXCHANGE_OPTIONS_ELIGIBLE_SESSION_LEVEL
               - PLAY_SEARCH_MULTINAV_PAGINATION_SESSION_LEVEL
               - REGIONAL_NAV_EXT_SESSION_LEVEL
-              - SUPPORT_SUBSCRIPTIONS_IN_FEATURED_SKU_SESSION_LEVEL
               - IAP_SKU_DEALS_LIVE_OP_DEALS_HOME_SESSION_LEVEL
               - IAP_SKU_DEALS_LIVE_OP_GAMES_HOME_SESSION_LEVEL
               - FEATURING_AHC_OR_FHR_TRIGGERED_SESSION_LEVEL
-              - STARTERKIT_CLUSTERS_ELIGIBLE_SESSION_LEVEL
               - ALLOWLIST_EXPANSION_FOR_P13N_INTERSTITIAL_SESSION_LEVEL
-              - NOVEL_TOPIC_CLUSTER_ELIGIBLE_SESSION_LEVEL
-              - NOVEL_TOPIC_CLUSTER_IMPRESSED_AT_SESSION_LEVEL
-              - ALLOWLIST_EXPANSION_FOR_P13N_LIVEOPS_SESSION_LEVEL
               - SURVEY_RECS_LIST_AT_SESSION_LEVEL
               - GEARHEAD_FRX_RUNNING_CW175_IN_GH
               - RANDOM_SHUFFLE_CLUSTERS_ON_TARGET_USERS_SESSION_LEVEL
@@ -67857,12 +67491,9 @@ components:
               - NAV_TG_RELATED_QUERY_SESSION
               - PROMOTABLE_APPS_SESSION
               - PROMOTABLE_APPS_STRONG_CAT_SESSION
-              - PROMOTABLE_APPS_CAT_SESSION
               - GROWTH_COFFEE_CARD_IN_PURCHASE_FLOW_SESSION_LEVEL
               - GROWTH_COFFEE_CARD_IN_PURCHASE_FLOW_SERVER_SESSION_LEVEL
               - LIVE_OPS_ROI_HOLDBACK
-              - TRUSTED_GENOME_OR_BROAD_INTENT_CATEGORICAL_QUERY_CLUSTER_SESSION
-              - CLUSTER_REQUEST_LATENCY_SESSION_LEVEL
               - EDITORS_CHOICE_CLUSTER_SERP_SESSION_LEVEL
               - BESTK_CLUSTER_SERP_SESSION_LEVEL
               - LIVEOPS_CLUSTER_SERP_SESSION_LEVEL
@@ -67876,58 +67507,38 @@ components:
               - SUGGEST_CROSS_FORM_FACTOR_APPS_TV_SUGGESTIONS_ENABLED
               - SUGGEST_CROSS_FORM_FACTOR_APPS_TV_SUGGESTIONS_AVAILABLE
               - SUGGEST_APPS_SUBTEXT_SUGGESTIONS_SESSION_LEVEL
+              - SUGGEST_ZERO_PREFIX_LIVE_OPS_AVAILABLE
               - INLINE_DETAILS_TQUALITY_CHECK_PASS_SESSION_LEVEL
               - INLINE_DETAILS_TQUALITY_CHECK_FAIL_SESSION_LEVEL
               - INLINE_DETAILS_AQUALITY_CHECK_PASS_SESSION_LEVEL
               - INLINE_DETAILS_AQUALITY_CHECK_FAIL_SESSION_LEVEL
               - INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS_SESSION_LEVEL
               - INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL_SESSION_LEVEL
-              - HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_UNKNOWN_SESSION_LEVEL
               - HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_PASS_SESSION_LEVEL
               - HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_FAIL_SESSION_LEVEL
-              - HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_UNKNOWN_SESSION_LEVEL
-              - HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_PASS_SESSION_LEVEL
-              - HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_FAIL_SESSION_LEVEL
+              - HSDP_INDEPENDENT_APP_TABLET_AQUALITY_CHECK_UNKNOWN_SESSION_LEVEL
+              - HSDP_INDEPENDENT_APP_TABLET_AQUALITY_CHECK_PASS_SESSION_LEVEL
+              - HSDP_INDEPENDENT_APP_TABLET_AQUALITY_CHECK_FAIL_SESSION_LEVEL
               - INLINE_DETAILS_IS_INLINE_URL_SESSION_LEVEL
-              - INLINE_DETAILS_IS_INLINE_URL_FRONTEND_SESSION_LEVEL
-              - INLINE_DETAILS_TQUALITY_CHECK_PASS_FRONTEND_SESSION_LEVEL
-              - INLINE_DETAILS_TQUALITY_CHECK_FAIL_FRONTEND_SESSION_LEVEL
-              - INLINE_DETAILS_AQUALITY_CHECK_PASS_FRONTEND_SESSION_LEVEL
-              - INLINE_DETAILS_AQUALITY_CHECK_FAIL_FRONTEND_SESSION_LEVEL
-              - INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS_FRONTEND_SESSION_LEVEL
-              - INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL_FRONTEND_SESSION_LEVEL
               - SENT_EMAIL_ENTER_GRACE_PERIOD_SESSION_LEVEL
               - SENT_EMAIL_ENTER_SUSPENDED_PERIOD_SESSION_LEVEL
               - ANALYTICS_AD_LINKING_RECOMMENDATION_ELIGIBLE_SESSION_LEVEL
-              - ANALYTICS_MERCHANT_UPSELL_ELIGIBLE_SESSION_LEVEL
-              - ANALYTICS_PREDICTIVE_INSIGHT_ELIGIBLE_SESSION_LEVEL
-              - ANALYTICS_CONSENT_MODE_INSIGHT_ELIGIBLE_SESSION_LEVEL
-              - ANALYTICS_DIVERSITY_30D_ELIGIBLE_SESSION_LEVEL
-              - ANALYTICS_DIVERSITY_60D_ELIGIBLE_SESSION_LEVEL
-              - ANALYTICS_ADS_UPSELL_ELIGIBLE_SESSION_LEVEL
-              - ANALYTICS_DOWNLOAD_MOBILE_APP_ELIGIBLE_SESSION_LEVEL
               - EDITORIAL_FCC_AT_SESSION_LEVEL
               - FRESH_RESULTS_SEEKING_CURRENT_YEAR_SESSION_LEVEL
               - FILTER_TQ_FAILURE_APP_SESSION_LEVEL
               - EDITORIAL_CONTENT_CLUSTER_FHR_SERP_SESSION_LEVEL
-              - CONNECTED_WITH_DATA
-              - AUTOPLAY_VIDEOS_AT_ANY_TIME
-              - AUTOPLAY_VIDEOS_OVER_WIFI_ONLY
-              - AUTOPLAY_VIDEOS_NEVER
               - HAS_DECLINE_REASON_IN_PAYMENT_DECLINE_EMAIL_SESSION_LEVEL
               - QUEST_CONTENT_CARD_IN_DEALS_HOME_SESSION_LEVEL
-              - DETAILS_PAGE_TQUALITY_UNKNOWN_SESSION_LEVEL
-              - DETAILS_PAGE_TQUALITY_FAILED_SESSION_LEVEL
-              - DETAILS_PAGE_TQUALITY_PASSED_SESSION_LEVEL
-              - DETAILS_PAGE_AQUALITY_UNKNOWN_SESSION_LEVEL
-              - DETAILS_PAGE_AQUALITY_FAILED_SESSION_LEVEL
-              - DETAILS_PAGE_AQUALITY_PASSED_SESSION_LEVEL
               - PGSS_DETAILS_PAGE_TQUALITY_UNKNOWN_SESSION_LEVEL
               - PGSS_DETAILS_PAGE_TQUALITY_FAILED_SESSION_LEVEL
               - PGSS_DETAILS_PAGE_TQUALITY_PASSED_SESSION_LEVEL
               - PGSS_DETAILS_PAGE_AQUALITY_UNKNOWN_SESSION_LEVEL
               - PGSS_DETAILS_PAGE_AQUALITY_FAILED_SESSION_LEVEL
               - PGSS_DETAILS_PAGE_AQUALITY_PASSED_SESSION_LEVEL
+              - PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_SIMILAR_APPS_ABSENT_SESSION_LEVEL
+              - PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_SIMILAR_APPS_PRESENT_SESSION_LEVEL
+              - PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_WITH_GAME_SESSION_LEVEL
+              - PRE_INSTALL_LOW_QUALITY_DETAILS_PAGE_WITH_NON_GAME_SESSION_LEVEL
               - QUERY_DEPENDENT_SNIPPET_SESSION_LEVEL
               - FOP_STEERING_PROMOTION_INITIAL_BILLING_PROFILE_SESSION_LEVEL
               - FOP_STEERING_PROMOTION_CART_ADD_FOP_SESSION_LEVEL
@@ -67947,7 +67558,6 @@ components:
               - PLAY_SEARCH_GENERAL_QUERY_MDP_PAGINATION_WITH_GAME_SEEKING_RYF_CLUSTER_SESSION_LEVEL
               - PLAY_SEARCH_GENERAL_QUERY_NON_MDP_PAGINATION_WITH_GAME_SEEKING_RYF_CLUSTER_SESSION_LEVEL
               - BUY_BUTTON_WITH_AUTHENTICATION_DISABLED
-              - SEND_PAYMENT_DECLINE_EMAIL_SESSION_LEVEL
               - PSS_GENERAL_PAGINATION_SESSION_LEVEL
               - PSS_GENERAL_PAGINATION_GAME_SEEKING_SESSION_LEVEL
               - INLINE_ADD_PAYMENT_CREDIT_CARD_ELIGIBLE
@@ -68044,18 +67654,12 @@ components:
               - SHOULD_SEE_TOP_NOW_CONTENT_MERCH_NEW_RELEASE_GH
               - SHOULD_SEE_TOP_NOW_CONTENT_MERCH_PRE_REGISTRATION_GH
               - SHOULD_SEE_TOP_NOW_CONTENT_MERCH_LIVE_OPS_GH
-              - LOYALTY_STAMP_CARD_IN_PURCHASE_FLOW_SESSION_LEVEL
               - WALLET_WELLBEING_ALERT_SESSION_LEVEL
               - BROAD_INTENT_REWEIGHTING_SESSION_LEVEL
               - DYNASTY_DEVICE_HANDOFF_SESSION_LEVEL
-              - TRUSTED_ENTITY_L1_AND_ATTRIBUTE_SEARCH_QUERY_SESSION
-              - TRUSTED_ENTITY_L2_L3_SEARCH_QUERY_SESSION
               - EXPANDED_DEV_SUCCESS_CLUSTER_SESSION_LEVEL
               - COLLAPSED_DEV_SUCCESS_CLUSTER_SESSION_LEVEL
               - TRIGGERED_DEV_SUCCESS_CLUSTER_SESSION_LEVEL
-              - GAME_QUERY_DEV_SUCCESS_CLUSTER_SESSION_LEVEL
-              - APP_QUERY_DEV_SUCCESS_CLUSTER_SESSION_LEVEL
-              - DOWNLOAD_COUNT_ELIGIBLE
               - PLANOGRAM_MERCH_AMERICAS_GAMES_PAYPAL_SESSION_LEVEL
               - BROAD_INTENT_GAMES_TIMESPENT_SESSION_LEVEL
               - ELIGIBLE_FOR_MANAGE_IN_APP_DETAILS_SESSION_LEVEL
@@ -68073,15 +67677,9 @@ components:
               - MDP_P13N_RERANKING_NAVIGATIONAL_SESSION_LEVEL
               - MDP_P13N_RERANKING_MULTI_NAVIGATIONAL_SESSION_LEVEL
               - MDP_P13N_RERANKING_NAVIGATIONAL_EXT_SESSION_LEVEL
-              - VIDEO_CAN_AUTOPLAY
-              - VIDEO_CANNOT_AUTOPLAY
-              - YOUTUBE_OPT_IN_NOTIFICATION_DRIVEN_PREFETCH_SESSION_LEVEL
-              - YOUTUBE_COUNTERFACTUAL_OPT_IN_NOTIFICATION_DRIVEN_PREFETCH_SESSION_LEVEL
-              - YOUTUBE_NOT_OPT_IN_NOTIFICATION_DRIVEN_PREFETCH_SESSION_LEVEL
               - YOUTUBE_FROM_LANDING_PAGE_SESSION_LEVEL
               - SECOND_PASS_POLARIS_RERANKING_SESSION_LEVEL
               - SECOND_PASS_POLARIS_WITH_RANKING_CHANGE_SESSION_LEVEL
-              - EXPLORATORY_BOOSTING_SESSION_LEVEL
               - PLAY_BOOKS_READING_PROGRESS_TOOLTIP_SESSION_LEVEL
               - NAV_SEARCH_D2D_EMBEDDING_BOOST_SESSION_LEVEL
               - HAS_NO_BACKUP_FOP_FOR_ORDER_SESSION_LEVEL
@@ -68089,20 +67687,17 @@ components:
               - SECOND_PASS_REWEIGHTING_TRIGGERED_SESSION_LEVEL
               - BOOKS_SEARCH_PAGE_DORA_QUERY_SESSION_LEVEL
               - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN_SESSION_LEVEL
-              - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN_FRONTEND_SESSION_LEVEL
               - APPS_LAUNCHER_CLUSTER_AT_SESSION_LEVEL
               - SUPERROOT_PDS_SHORT_DESCRIPTION_SESSION_LEVEL
               - PGSS_SHORT_DESCRIPTION_DIFF_SESSION_LEVEL
-              - WEAR_AQ_SEARCH_PHONE_DEVICE_WITH_WEAR_FILTER
-              - WEAR_AQ_SEARCH_WEAR_DEVICE
               - NAV_ADS_DUPLICATE_SERVED_SESSION_LEVEL
               - NAV_ADS_NON_DUPLICATE_SERVED_SESSION_LEVEL
               - NAV_ADS_NO_AD_SERVED_SESSION_LEVEL
+              - PAYMENTS_TOS_ACCEPTANCE_CHALLENGE_SHOWN
+              - PAYMENTS_TOS_ACCEPTANCE_CHALLENGE_RESOLVED
+              - WEBSKY_SEARCH_THIRD_PARTY_CONTENT_ELIGIBLE_QUERY_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
-              - SHOULD_SEE_LIVE_OP_CLUSTER_USER_LEVEL
               - CART_ABANDONMENT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_USER_LEVEL
-              - CART_ABANDONMENT_SUB_DOLLAR_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL
               - BOOKS_DETAILS_PAGE_PROMOTION_USER_LEVEL
               - BURNSIE_ADD_FOP_PROMOTION_USER_LEVEL
@@ -68129,28 +67724,8 @@ components:
               - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_1_AT_USER_LEVEL
               - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_3_AT_USER_LEVEL
               - DETAILS_PAGE_PROMOTION_HOLDBACK_USER_LEVEL
-              - RECS_STALENESS_DEMOTION_3_USER_LEVEL
-              - RECS_STALENESS_DEMOTION_4_USER_LEVEL
-              - RECS_STALENESS_DEMOTION_5_USER_LEVEL
-              - RECS_ANIMA_FEATURES_GH_RANKING_1_USER_LEVEL
-              - RECS_ANIMA_FEATURES_GH_RANKING_2_USER_LEVEL
-              - RECS_ANIMA_FEATURES_GH_RANKING_3_USER_LEVEL
-              - RECS_ANIMA_FEATURES_GH_RANKING_4_USER_LEVEL
-              - RECS_ANIMA_FEATURES_GH_RANKING_5_USER_LEVEL
-              - RECS_ANIMA_FEATURES_GH_RANKING_6_USER_LEVEL
-              - RECS_ANIMA_FEATURES_GH_RANKING_7_USER_LEVEL
-              - TEST_FOR_LEVELS_FLAG_AT_USER_LEVEL
-              - USER_LB_TARGETED
-              - LB_ABOVE_AT_USER_LEVEL
-              - LB_BELOW_AT_USER_LEVEL
               - LB_TARGETED_AT_USER_LEVEL
-              - LB_PAGINATED_AT_USER_LEVEL
               - LB_IMPRESSED_AT_USER_LEVEL
-              - APPS_DETAILS_PAGE_PROMOTION_EXP_4_NEVERS_USER_LEVEL
-              - APPS_DETAILS_PAGE_PROMOTION_EXP_5_NEVERS_USER_LEVEL
-              - RECS_STALENESS_DEMOTION_6_AT_USER_LEVEL
-              - RECS_STALENESS_DEMOTION_7_AT_USER_LEVEL
-              - RECS_STALENESS_DEMOTION_8_AT_USER_LEVEL
               - MOVIES_USER_INTERESTS_NONE_AT_USER_LEVEL
               - MOVIES_USER_INTERESTS_LOW_AT_USER_LEVEL
               - MOVIES_USER_INTERESTS_MEDIUM_AT_USER_LEVEL
@@ -68163,66 +67738,21 @@ components:
               - PLAY_PASS_SIGNUP_INTERSTITIAL_TARGETED_USER_LEVEL
               - PLAY_PASS_IPD_ELIGIBLE_USER_LEVEL
               - PLAY_PASS_FHR_ELIGIBLE_USER_LEVEL
-              - MOVIES_USER_FREE_AT_USER_LEVEL
-              - MOVIES_USER_FAMILY_AT_USER_LEVEL
-              - MOVIES_USER_RENTER_AT_USER_LEVEL
-              - MOVIES_USER_BUYER_AT_USER_LEVEL
-              - HAS_NON_RELOADABLE_PREPAID_CARD_AT_USER_LEVEL
-              - LOYALTY_CALLED_GET_POINTS_SPEND_PROMOTIONS_USER_LEVEL
-              - LOYALTY_CALLED_GET_POINTS_SPEND_PROMOTIONS_SESSION_LEVEL
-              - LOYALTY_CALLED_GET_POINTS_SPEND_PROMOTIONS_AT_USER_LEVEL
-              - LOYALTY_SHOULD_SEE_UPSELL_AT_USER_LEVEL
               - LOYALTY_UPSELL_AFTER_IN_APP_PURCHASE_AT_USER_LEVEL
-              - IN_APP_MESSAGING_USER_LEVEL
-              - RESIGNUP_FROM_SUBS_CENTER_USER
               - PROMOTION_BANNER_ELIGIBLE_USER_LEVEL
-              - NEW_ABUSE_MODEL_AT_USER_LEVEL
-              - LOYALTY_RECEIPT_UPSELL_SENT_WITH_ICON_AT_USER_LEVEL
-              - LOYALTY_RECEIPT_UPSELL_SENT_WITH_GIF_AT_USER_LEVEL
-              - LOYALTY_RECEIPT_UPSELL_SENT_AT_USER_LEVEL
-              - VX_QREF_TRIGGERED_AT_USER_LEVEL_AT_USER_LEVEL
               - LOYALTY_SEES_POINTS_EARN_PROMOTIONS_AT_USER_LEVEL
               - LOYALTY_SEES_FREE_TRIAL_SUBSCRIPTION_AT_USER_LEVEL
-              - QUEST_GET_ADDITIONAL_CHALLENGE_SUCCESS_AT_USER_LEVEL
-              - OUT_OF_APP_PURCHASABLE_PRODUCTS_ON_DETAILS_PAGE_PREFETCH_AT_USER_LEVEL
               - LOYALTY_SIGNUP_INTERSTITIAL_AT_USER_LEVEL
-              - LOYALTY_SIGNUP_SUCCESS_AT_USER_LEVEL
               - PLAY_SUBMANAGEMENT_LOG_HOOK_USER_EXAMPLE
-              - FOP_OPTION_MATCHED_PROMOTION_ONLY_AT_USER_LEVEL
-              - PROMOTION_P13N_BANNER_ELIGIBLE_AT_USER_LEVEL
               - NEW_USER_FOP_PROMOTION_SEEN
               - LOYALTY_UPSELL_SEEN_AT_USER_LEVEL
-              - PROMOTION_OMNICHANNEL_ELIGIBLE_AT_USER_LEVEL
               - LOYALTY_ELIGIBLE_TO_SEE_UPSELL_AT_USER_LEVEL
-              - LOYALTY_ELIGIBLE_TO_SEE_UPSELL_WITH_3_DAY_GUARDRAIL_AT_USER_LEVEL
-              - LOYALTY_ELIGIBLE_TO_SEE_UPSELL_WITH_7_DAY_GUARDRAIL_AT_USER_LEVEL
-              - PROMOTION_P13N_BANNER_IN_HOME_AT_USER_LEVEL
-              - SHOULD_SEE_POINTS_BALANCE_ON_HOME_TOOLBAR_AT_USER_LEVEL
               - LOYALTY_LIVE_OPS_RETURNED_AT_USER_LEVEL
-              - PURCHASE_FLOW_ENTRY_PROMOTION_AT_USER_LEVEL
-              - PURCHASE_FLOW_ENTRY_PROMOTION_ELIGIBLE_AT_USER_LEVEL
-              - PLAY_POINTS_HOME_AT_USER_LEVEL
               - PROMOLINK_CDP_USER_LEVEL
               - PROMOLINK_CDP_TITLE_PAGE_USER_LEVEL
               - PROMOLINK_CDP_TOPIC_PAGE_USER_LEVEL
               - PROMOLINK_CDP_GENERIC_PAGE_USER_LEVEL
               - POINTS_PROMOTION_CONTENT_PAGE_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_2_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_3_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_4_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_5_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_6_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_7_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_8_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_9_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_10_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_11_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_12_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_13_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_14_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_15_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_16_AT_USER_LEVEL
-              - IN_APP_MESSAGING_APP_17_AT_USER_LEVEL
               - IN_APP_OFFER_AT_USER_LEVEL
               - IN_APP_OFFER_APP_1_AT_USER_LEVEL
               - IN_APP_OFFER_APP_2_AT_USER_LEVEL
@@ -68247,39 +67777,10 @@ components:
               - IAP_HAS_UNREDEEMED_PROMOTIONS_CLIENT_USER_LEVEL
               - PLAY_STORE_IAP_SALES_USER_LEVEL
               - PLAY_STORE_IAP_SALES_APP_1_USER_LEVEL
-              - PLAY_STORE_IAP_SALES_APP_8_USER_LEVEL
-              - PLAY_STORE_IAP_SALES_APP_9_USER_LEVEL
-              - PLAY_STORE_IAP_SALES_APP_10_USER_LEVEL
-              - PLAY_STORE_IAP_SALES_APP_11_USER_LEVEL
-              - PLAY_STORE_IAP_SALES_APP_12_USER_LEVEL
-              - PLAY_STORE_IAP_SALES_APP_13_USER_LEVEL
               - PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE_USER_LEVEL
-              - PLAY_PASS_SUBNAV_USER_IN_FAMILY_USER_LEVEL
-              - PLAY_GROWTH_BUYER_RETENTION_R1_CLIENT_USER_LEVEL
-              - PLAY_GROWTH_BUYER_RETENTION_R1_SERVER_USER_LEVEL
-              - PLAY_GROWTH_BUYER_RETENTION_R2_CLIENT_USER_LEVEL
-              - PLAY_GROWTH_BUYER_RETENTION_R2_SERVER_USER_LEVEL
-              - PLAY_GROWTH_BUYER_RETENTION_R3_CLIENT_USER_LEVEL
-              - PLAY_GROWTH_BUYER_RETENTION_R3_SERVER_USER_LEVEL
-              - PLAY_GROWTH_BUYER_RETENTION_R4_CLIENT_USER_LEVEL
-              - PLAY_GROWTH_BUYER_RETENTION_R4_SERVER_USER_LEVEL
               - PLAY_GROWTH_IS_SCHEDULED
-              - PLAY_PASS_BUNDLE_ELIGIBLE_USER_SHOWN_IPD_OR_INTERSTITIAL_USER_LEVEL
-              - PLAY_PASS_BUNDLE_ELIGIBLE_SHOWN_PROMOTION_COMBINED_ARM_USER_LEVEL
-              - PLAY_PASS_BUNDLE_ELIGIBLE_SHOWN_PROMOTION_PLAY_ARM_USER_LEVEL
-              - HYPE_PANEL_USER_LEVEL
-              - HYPE_PANEL_NOT_OWNED_USER_LEVEL
-              - HYPE_PANEL_OWNED_NOT_INSTALED_USER_LEVEL
-              - HYPE_PANEL_INSTALLED_USER_LEVEL
               - GEARHEAD_VISUAL_PREVIEW_UNCHAINED_ELIGIBLE
               - POST_PURCHASE_ITEM_UPSELL_USER_LEVEL
-              - POST_PURCHASE_ITEM_UPSELL_APP_1_USER_LEVEL
-              - POST_PURCHASE_ITEM_UPSELL_APP_2_USER_LEVEL
-              - POST_PURCHASE_ITEM_UPSELL_APP_3_USER_LEVEL
-              - POST_PURCHASE_ITEM_UPSELL_APP_4_USER_LEVEL
-              - POST_PURCHASE_ITEM_UPSELL_APP_5_USER_LEVEL
-              - POST_PURCHASE_ITEM_UPSELL_APP_6_USER_LEVEL
-              - POST_PURCHASE_ITEM_UPSELL_APP_7_USER_LEVEL
               - PLAY_PASS_SIGNUP_INTERSTITIAL_SHOWN_USER_LEVEL
               - DISABLE_TOPUP_EXPERIMENT_CONTROL_GROUP_USER_LEVEL
               - DISABLE_TOPUP_EXPERIMENT_TREATMENT_GROUP_USER_LEVEL
@@ -68296,29 +67797,13 @@ components:
               - USE_SUBSCRIPTION_NEW_DOCUMENT_FORMAT_SKU_DETAILS_USER_LEVEL
               - USE_SUBSCRIPTION_NEW_DOCUMENT_FORMAT_PREVIEW_BATCH_SKU_DETAILS_USER_LEVEL
               - USE_SUBSCRIPTION_NEW_DOCUMENT_FORMAT_FOR_ALL_SUBS_USER_LEVEL
-              - LOYALTY_EARN_TAB_APP_INSTALL_ELIGIBLE_USER_LEVEL
-              - LOYALTY_DETAILS_PAGE_APP_INSTALL_ELIGIBLE_USER_LEVEL
               - LEON_LIVEOPS_DEAL_STATE_SYNC_USER_LEVEL
               - SURVEY_AHC_AT_USER_LEVEL
-              - CART_ABANDONMENT_CHURN_USER_LEVEL
-              - PLAY_PASS_CART_MAREKTING_BANNER_ELIGIBLE_USER_LEVEL
               - PLAY_PASS_CART_MAREKTING_BANNER_ELIGIBLE_AND_SHOWN_CART_USER_LEVEL
               - PLAY_PASS_PERKS_VOUCHER_IN_CART_USER_LEVEL
-              - QUEST_PLATFORM_LIST_QUEST_HOLDBACK_USER_LEVEL
-              - QUEST_PLATFORM_LIST_QUEST_HOLDBACK_2_USER_LEVEL
-              - QUEST_PLATFORM_LIST_QUEST_HOLDBACK_3_USER_LEVEL
-              - PSO_ELIGIBLE_PROMOTION_HOLDBACK_USER_LEVEL
-              - PSO_ELIGIBLE_PROMOTION_USER_LEVEL
               - PLAY_PASS_PARENT_FOCUSED_SPLASH_PAGE_USER_LEVEL
-              - PLAY_PASS_SPLASH_PAGE_FOR_PARENT_USER_LEVEL
               - PLAY_PASS_SPLASH_PAGE_FOR_UNICORN_USER_LEVEL
-              - OMNICHANNEL_P13N_CANDIDATES_FOR_LIVEOPS_USER_LEVEL
-              - PLAY_SEARCH_GENERAL_QUERY_PAGINATION_USER_LEVEL
               - IN_CART_EXCHANGE_OPTIONS_ELIGIBLE_USER_LEVEL
-              - CART_ABANDONMENT_GE_MODEL_EXPERIMENT
-              - REDEEM_SAVE_GE_MODEL_EXPERIMENT
-              - GE_COFFEE_CARD_INDIVIDUALIZATION_EXPERIMENT
-              - GE_NOTIFICATION_REVENUE_ACCELERATION_EXPERIMENT
               - GE_USER_BUYER_STATE_UNKNOWN
               - GE_USER_BUYER_STATE_NEVER
               - GE_USER_BUYER_STATE_NEW
@@ -68341,22 +67826,11 @@ components:
               - GE_IS_SCHEDULED_INTERSTITIAL
               - GE_IS_SCHEDULED_COFFEE_CARD
               - GE_IS_SCHEDULED_QUEST
-              - GE_RANKING_CONFIG_EXPERIMENT
-              - SUPPORT_SUBSCRIPTIONS_IN_FEATURED_SKU_USER_LEVEL
+              - GE_IS_SCHEDULED_LOYALTY_MULTIPLIER
               - IAP_SKU_DEALS_LIVE_OP_DEALS_HOME_USER_LEVEL
               - IAP_SKU_DEALS_LIVE_OP_GAMES_HOME_USER_LEVEL
               - FEATURING_AHC_OR_FHR_TRIGGERED_USER_LEVEL
-              - STARTERKIT_CLUSTERS_ELIGIBLE_USER_LEVEL
               - ALLOWLIST_EXPANSION_FOR_P13N_INTERSTITIAL_USER_LEVEL
-              - NOVEL_TOPIC_CLUSTER_ELIGIBLE_USER_LEVEL
-              - NOVEL_TOPIC_CLUSTER_ELIGIBLE_USER_LEVEL_V0
-              - NOVEL_TOPIC_CLUSTER_ELIGIBLE_USER_LEVEL_V1
-              - NOVEL_TOPIC_CLUSTER_ELIGIBLE_USER_LEVEL_V2
-              - NOVEL_TOPIC_CLUSTER_ELIGIBLE_USER_LEVEL_V3
-              - NOVEL_TOPIC_CLUSTER_IMPRESSED_AT_USER_LEVEL
-              - NOVEL_TOPIC_CLUSTER_ELIGIBLE_USER_LEVEL_V4
-              - IPS_ITEM_LEVEL_RECS_REMOVED_USER_LEVEL
-              - ALLOWLIST_EXPANSION_FOR_P13N_LIVEOPS_USER_LEVEL
               - SURVEY_RECS_LIST_AT_USER_LEVEL
               - DEV_OFFER_SWGOH_USER_LEVEL
               - ALLOWLIST_EXPANSION_FOR_P13N_NOTIFICATIONS_USER_LEVEL
@@ -68372,98 +67846,32 @@ components:
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL_V2
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_WITH_EXISTING_FOP_USER_LEVEL
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_WITHOUT_EXISTING_FOP_USER_LEVEL
-              - SUBS_PRICE_CHANGE_VERSION_TIME_CHECK_USER_LEVEL
               - WIDE_MEDIA_CLUSTER_INVALID_VIDEO_ASSET_USER_LEVEL
               - WEBSKY_SEARCH_THIRD_PARTY_CONTENT_ELIGIBLE_QUERY_USER_LEVEL
               - EDITORIAL_FCC_AT_USER_LEVEL
               - QUEST_CONTENT_CARD_IN_DEALS_HOME_USER_LEVEL
-              - FOP_STEERING_PROMOTION_INITIAL_BILLING_PROFILE_USER_LEVEL
               - FOP_STEERING_PROMOTION_INITIAL_BILLING_PROFILE_USER_LEVEL_V2
-              - FOP_STEERING_PROMOTION_CART_ADD_FOP_USER_LEVEL
               - FOP_STEERING_PROMOTION_CART_ADD_FOP_USER_LEVEL_V2
-              - FOP_STEERING_PROMOTION_CART_CHANGE_FOP_USER_LEVEL
               - FOP_STEERING_PROMOTION_CART_CHANGE_FOP_USER_LEVEL_V2
-              - FOP_STEERING_PROMOTION_CART_APPLY_PROMOTION_USER_LEVEL
               - FOP_STEERING_PROMOTION_CART_APPLY_PROMOTION_USER_LEVEL_V2
+              - FOP_STEERING_PROMOTION_USER_LEVEL
               - LOYALTY_STAMP_CARD_IN_PURCHASE_FLOW_USER_LEVEL
               - HAS_MONETIZATION_BEHAVIOR_USER_LEVEL
               - HAS_MONETIZATION_BEHAVIOR_LAST_180D_USER_LEVEL
               - HAS_LAST_28D_CART_ABANDONMENT_USER_LEVEL
               - HAS_LAST_7D_CART_ABANDONMENT_USER_LEVEL
-              - LINK_BIOMETRICS_USER_LEVEL
-              - LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL
               - POST_SUCCESS_ADD_BACKUP_FLOW_USER_LEVEL
               - SKIP_CHECK_MARK_SCREEN_WITH_BACKUP_FLOW_USER_LEVEL
               - IS_ELIGIBLE_FOR_ONE_CLICK_BACKUP_FOP_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_INVALID_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_0_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_1_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_2_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_3_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_4_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_5_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_6_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_7_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_8_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_9_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_10_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_11_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_12_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_13_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_14_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_15_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_16_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_17_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_18_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_19_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_20_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_21_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_22_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_23_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_24_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_25_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_26_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_27_USER_LEVEL
-              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_28_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_INVALID_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_0_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_1_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_2_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_3_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_4_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_5_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_6_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_7_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_8_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_9_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_10_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_11_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_12_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_13_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_14_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_15_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_16_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_17_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_18_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_19_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_20_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_21_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_22_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_23_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_24_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_25_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_26_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_27_USER_LEVEL
-              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_28_USER_LEVEL
               - LOYALTY_STAMP_CARD_IN_PURCHASE_FLOW_SERVER_USER_LEVEL
               - ELIGIBLE_FOR_MANAGE_IN_APP_DETAILS_USER_LEVEL
               - PLAY_ONBOARDING_QUEST_GAMES_HOME_USER_LEVEL
               - SERVED_GPP_ONBOARDING_QUEST_USER_LEVEL
-              - YOUTUBE_OPTED_IN_NOTIFICATION_DRIVEN_PREFETCH_USER_LEVEL
               - PLAY_ONBOARDING_QUEST_GAMES_HOME_SERVER_USER_LEVEL
               - PCH_O2_WITH_CRE_USER_LEVEL
               - MERCH_USER_JOURNEY_SPEND_USER_LEVEL
-              - PBUY_FINE_TUNING_WITH_TEXT_TREAT_USER_LEVEL
+              - MERCH_USER_JOURNEY_PUBG_NPU
+              - MERCH_USER_JOURNEY_PUBG_REPEAT_SPEND
               - PLAY_GAMES_ACHIEVEMENT_LOYALTY_QUEST_USER_LEVEL
               - PLAY_BOOKS_READING_PROGRESS_TOOLTIP_USER_LEVEL
               - IAP_SKU_DEALS_LIVE_OP_GAMES_HOME_USER_LEVEL1
@@ -68477,13 +67885,38 @@ components:
               - MDP_P13N_RERANKING_NAVIGATIONAL_EXT_USER_LEVEL
               - PLAY_ONBOARDING_QUEST_PLATFORM_SERVING_USER_LEVEL
               - APPS_LAUNCHER_CLUSTER_AT_USER_LEVEL
-              - PBUY_V1_SEQUENCE_MODEL_LAUNCH_USER_LEVEL
-              - NOTIFICATION_SPEND_UPLIFT_MODEL_LAUNCH_USER_LEVEL
-              - EXPANDED_DEV_SUCCESS_CLUSTER_USER_LEVEL
-              - COLLAPSED_DEV_SUCCESS_CLUSTER_USER_LEVEL
               - TRIGGERED_DEV_SUCCESS_CLUSTER_USER_LEVEL
-              - GAME_DEV_SUCCESS_CLUSTER_USER_LEVEL
-              - APP_DEV_SUCCESS_CLUSTER_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_INVALID_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_0_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_1_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_2_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_3_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_4_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_5_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_6_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_7_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_8_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_9_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_10_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_11_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_12_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_13_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_14_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_15_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_16_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_17_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_18_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_19_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_20_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_21_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_22_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_23_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_24_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_25_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_26_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_27_USER_LEVEL_V2
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_28_USER_LEVEL_V2
+              - HAS_REINSTALL_APP_PASSING_FILTERING_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array

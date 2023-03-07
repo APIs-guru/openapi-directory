@@ -558,6 +558,9 @@ paths:
       tags:
         - Products
       x-apideck-api: ecommerce
+      x-apideck-gotchas:
+        - connector: prestashop
+          description: "Prestashop primarily uses an `id` field to identify product associations (Ie: categories, variants etc). To maintain performance on the list endpoint, fewer properties are returned than other connectors."
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -608,6 +611,9 @@ paths:
       tags:
         - Products
       x-apideck-api: ecommerce
+      x-apideck-gotchas:
+        - connector: prestashop
+          description: Product images for Prestashop are limited to the default image set on the product.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2334,9 +2340,9 @@ components:
           type: string
         quantity:
           description: The quantity of the product or variant associated with the line item.
-          example: 2
+          example: "2"
           title: Quantity
-          type: number
+          type: string
         sku:
           description: The SKU of the product or variant associated with the line item.
           example: MBP123-16GB-SILVER-13
@@ -3028,6 +3034,7 @@ components:
       title: Last name
       type: string
     LinkedEcommerceCustomer:
+      additionalProperties: false
       description: The customer this entity is linked to.
       properties:
         company_name:
@@ -3086,6 +3093,7 @@ components:
         phone_numbers: medium
       x-graphql-type-name: LinkedEcommerceCustomer
     LinkedEcommerceOrder:
+      additionalProperties: false
       description: The order this entity is linked to.
       properties:
         id:

@@ -45,7 +45,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-03-06T17:25:20Z
+  x-timestamp: 2023-03-07T17:23:17Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -3319,7 +3319,9 @@ components:
           description: |-
             Defines the relationship of the legal entity to the current legal entity. 
 
-            For example, **uboThroughOwnership**, **uboThroughControl**, **signatory**, or **soleProprietorship**. 
+            Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **signatory**, or **ultimateParentCompany**. 
+
+            Possible values for sole proprietorships: **soleProprietorship**. 
           enum:
             - pciSignatory
             - signatory
