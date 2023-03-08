@@ -219,7 +219,7 @@ paths:
         - projects
   "/v1/{name}/operations":
     get:
-      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
+      description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: contactcenterinsights.projects.locations.operations.list
       parameters:
         - description: The name of the operation's parent resource.
@@ -1590,6 +1590,23 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudContactcenterinsightsV1CreateIssueMetadata:
+      description: Metadata for creating an issue.
+      properties:
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        request:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1CreateIssueRequest"
+          description: The original request for creation.
+      type: object
     GoogleCloudContactcenterinsightsV1CreateIssueModelMetadata:
       description: Metadata for creating an issue model.
       properties:
@@ -1615,6 +1632,16 @@ components:
           description: Required. The issue model to create.
         parent:
           description: Required. The parent resource of the issue model.
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1CreateIssueRequest:
+      description: The request to create an issue.
+      properties:
+        issue:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1Issue"
+          description: Required. The values for the new issue.
+        parent:
+          description: Required. The parent resource of the issue.
           type: string
       type: object
     GoogleCloudContactcenterinsightsV1DeleteIssueModelMetadata:

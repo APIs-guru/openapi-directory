@@ -2215,7 +2215,7 @@ paths:
           name: roleId
           schema:
             type: string
-        - description: The user's primary email address, alias email address, or unique user ID. If included in the request, returns role assignments only for this user.
+        - description: The primary email address, alias email address, or unique user or group ID. If included in the request, returns role assignments only for this user or group.
           in: query
           name: userKey
           schema:
@@ -6059,6 +6059,7 @@ components:
             - WIPE_USERS
             - REMOTE_POWERWASH
             - DEVICE_START_CRD_SESSION
+            - CAPTURE_LOGS
           type: string
       type: object
     DirectoryChromeosdevicesCommandResult:
@@ -6096,6 +6097,7 @@ components:
             - WIPE_USERS
             - REMOTE_POWERWASH
             - DEVICE_START_CRD_SESSION
+            - CAPTURE_LOGS
           type: string
         payload:
           description: 'The payload for the command, provide it only if command supports it. The following commands support adding payload: * `SET_VOLUME`: Payload is a stringified JSON object in the form: { "volume": 50 }. The volume has to be an integer in the range [0,100]. * `DEVICE_START_CRD_SESSION`: Payload is optionally a stringified JSON object in the form: { "ackedUserPresence": true }. `ackedUserPresence` is a boolean. By default, `ackedUserPresence` is set to `false`. To start a Chrome Remote Desktop session for an active device, set `ackedUserPresence` to `true`.'

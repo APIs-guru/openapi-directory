@@ -2130,10 +2130,15 @@ components:
       additionalProperties: false
       example:
         email: elon@musk.com
+        phone_number: 111-111-1111
       properties:
         email:
           description: Customer email address to filter on
           example: elon@musk.com
+          type: string
+        phone_number:
+          description: Customer phone number to filter on
+          example: 111-111-1111
           type: string
       type: object
       x-apideck-schema-id: EcommerceCustomersFilter

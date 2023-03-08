@@ -1649,7 +1649,7 @@ components:
           type: integer
       type: object
     RestoreConfig:
-      description: "Configuration of a restore. Next id: 12"
+      description: "Configuration of a restore. Next id: 11"
       properties:
         allNamespaces:
           description: Restore all namespaced resources in the Backup if set to "True". Specifying this field to "False" is an error.
@@ -1692,7 +1692,7 @@ components:
           type: string
       type: object
     RestorePlan:
-      description: "The configuration of a potential series of Restore operations to be performed against Backups belong to a particular BackupPlan. Next id: 13"
+      description: "The configuration of a potential series of Restore operations to be performed against Backups belong to a particular BackupPlan. Next id: 11"
       properties:
         backupPlan:
           description: "Required. Immutable. A reference to the BackupPlan from which Backups may be used as the source for Restores created via this RestorePlan. Format: `projects/*/locations/*/backupPlans/*`."

@@ -4518,7 +4518,7 @@ components:
       properties: {}
       type: object
     DeviceGroup:
-      description: LINT.IfChange A group of devices. A group is defined by a set of device selectors. A device belongs to the group if it matches any selector (logical OR).
+      description: A group of devices. A group is defined by a set of device selectors. A device belongs to the group if it matches any selector (logical OR).
       properties:
         deviceSelectors:
           description: Device selectors for this group. A device matching any of the selectors is included in this group.
@@ -4652,7 +4652,7 @@ components:
           type: integer
       type: object
     DeviceTierConfig:
-      description: LINT.IfChange Configuration describing device targeting criteria for the content of an app.
+      description: Configuration describing device targeting criteria for the content of an app.
       properties:
         deviceGroups:
           description: Definition of device groups for the app.

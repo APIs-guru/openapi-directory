@@ -4737,6 +4737,7 @@ components:
               - ACCESS_TYPE_OPEN
               - ACCESS_TYPE_TRUSTED
               - ACCESS_TYPE_RESTRICTED
+              - ACCESS_TYPE_CLOSED
             type: string
           type: array
         availableReactions:
@@ -4817,6 +4818,7 @@ components:
             - ACCESS_TYPE_OPEN
             - ACCESS_TYPE_TRUSTED
             - ACCESS_TYPE_RESTRICTED
+            - ACCESS_TYPE_CLOSED
           type: string
         allowJoiningBeforeHost:
           description: Whether users can join this conference before a host (Host or Cohost).
@@ -5598,7 +5600,7 @@ components:
           description: The scan ID of the corresponding {@link DlpViolationScanRecord} in the {@link EphemeralDlpScans} Spanner table. This can be used to fetch additional details about the scan, e.g. for audit logging.
           type: string
         scanNotApplicableForContext:
-          description: Indicates that was no attempt to scan a message or attachment because it was not applicable in the given context (e.g. atomic mutuate). If this is true, scan_outcome should not be set. This flag is used to identify messages that DLP did not attempt to scan for monitoring scan coverage. Contents that DLP attempted to scan but skipped can be identified by DlpScanOutcome.SCAN_SKIPPED_* reasons.
+          description: "Indicates that was no attempt to scan a message or attachment because it was not applicable in the given context (e.g. atomic mutuate). If this is true, scan_outcome should not be set. This flag is used to identify messages that DLP did not attempt to scan for monitoring scan coverage. Contents that DLP attempted to scan but skipped can be identified by DlpScanOutcome.SCAN_SKIPPED_* reasons. DEPRECATED: The prober can determine this from the context."
           type: boolean
         scanOutcome:
           description: The outcome of a DLP Scan. If this is set, scan_not_applicable_for_context should not be true.
@@ -5836,6 +5838,9 @@ components:
           type: string
         creatorInSearcherContactList:
           type: boolean
+        crowdingMultiplier:
+          format: double
+          type: number
         dasContactCount:
           format: int64
           type: string
@@ -8947,40 +8952,9 @@ components:
         deletedByVault:
           description: Was this message deleted by Vault (Only used for Vault support) This is false if message is live or message was deleted by user.
           type: boolean
-        dlpScanOutcome:
-          description: "Data Loss Prevention scan information for this message. Messages are evaluated in the backend on create message/topic and edit message actions. DEPRECATED: use dlp_scan_summary instead."
-          enum:
-            - SCAN_UNKNOWN_OUTCOME
-            - SCAN_SUCCEEDED_NO_VIOLATION
-            - SCAN_SUCCEEDED_BLOCK
-            - SCAN_SUCCEEDED_WARN
-            - SCAN_SUCCEEDED_AUDIT_ONLY
-            - SCAN_FAILURE_EXCEPTION
-            - SCAN_FAILURE_RULE_FETCH_FAILED
-            - SCAN_FAILURE_TIMEOUT
-            - SCAN_FAILURE_ALL_RULES_FAILED
-            - SCAN_FAILURE_ILLEGAL_STATE_FOR_ATTACHMENTS
-            - SCAN_SKIPPED_EXPERIMENT_DISABLED
-            - SCAN_SKIPPED_CONSUMER
-            - SCAN_SKIPPED_NON_HUMAN_USER
-            - SCAN_SKIPPED_NO_MESSAGE
-            - SCAN_SKIPPED_USER_ACKNOWLEDGED_WARNING
-            - SCAN_SKIPPED_MESSAGE_FROM_UNSUPPORTED_ORIGIN
-            - SCAN_SKIPPED_MESSAGE_SENT_DURING_SPACE_MIGRATION
-            - SCAN_RULE_EVALUATION_SKIPPED_NO_RULES_FOUND
-            - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_ACTION_PARAMS
-            - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_TRIGGER
-            - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_PERMANENT_ERROR
-            - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_EMPTY_RESPONSE
-            - SCAN_RULE_EVALUATION_SKIPPED_UNSUPPORTED_FILE_TYPE
-            - SCAN_SUCCEEDED_WITH_FAILURES_NO_VIOLATION
-            - SCAN_SUCCEEDED_WITH_FAILURES_BLOCK
-            - SCAN_SUCCEEDED_WITH_FAILURES_WARN
-            - SCAN_SUCCEEDED_WITH_FAILURES_AUDIT_ONLY
-          type: string
         dlpScanSummary:
           $ref: "#/components/schemas/DlpScanSummary"
-          description: Data Loss Prevention scan information for this message. Messages are evaluated in the backend on create message/topic and edit message actions.
+          description: "Data Loss Prevention scan information for this message. Messages are evaluated in the backend on create message/topic and edit message actions. DEPRECATED: Use DATA_LOSS_PREVENTION Annotation."
         editableBy:
           description: Indicates who can edit the message. This field is set on the read path (e.g. ListTopics) but doesn’t have any effect on the write path (e.g. CreateMessageRequest).
           enum:
@@ -10417,6 +10391,7 @@ components:
               - REQUIRED_FEATURE_MESSAGE_QUOTING
               - REQUIRED_FEATURE_TOMBSTONES_IN_DMS_AND_UFRS
               - REQUIRED_FEATURE_CUSTOM_HYPERLINK
+              - REQUIRED_FEATURE_SMART_CHIP
             type: string
           type: array
       type: object
@@ -11035,6 +11010,7 @@ components:
             - ACCESS_TYPE_OPEN
             - ACCESS_TYPE_TRUSTED
             - ACCESS_TYPE_RESTRICTED
+            - ACCESS_TYPE_CLOSED
           type: string
         allowJoiningBeforeHost:
           description: Whether users can join before host in the conferences of this meeting space.

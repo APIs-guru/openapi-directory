@@ -624,7 +624,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Updates the metadate for a shared drive.
+      description: Updates the metadata for a shared drive.
       operationId: drive.drives.update
       parameters:
         - description: The ID of the shared drive.
@@ -633,7 +633,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
+        - description: Issue the request as a domain administrator. If set to true, then the requester is granted access if they're an administrator of the domain to which the shared drive belongs.
           in: query
           name: useDomainAdminAccess
           schema:
@@ -3084,7 +3084,7 @@ components:
       description: Representation of a shared drive.
       properties:
         backgroundImageFile:
-          description: An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
+          description: An image file and cropping parameters from which a background image for this shared drive is set. This is a write-only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
           properties:
             id:
               description: The ID of an image file in Google Drive to use for the background image.
@@ -3170,7 +3170,7 @@ components:
               type: boolean
           type: object
         colorRgb:
-          description: The color of this shared drive as an RGB hex string. It can only be set on a drive.drives.update request that does not set themeId.
+          description: The color of this shared drive as an RGB hex string. It can only be set on drive.drives.update requests that don't set themeId.
           type: string
         createdTime:
           description: The time at which the shared drive was created (RFC 3339 date-time).
@@ -3212,7 +3212,7 @@ components:
               type: boolean
           type: object
         themeId:
-          description: The ID of the theme from which the background image and color will be set. The set of possible driveThemes can be retrieved from a drive.about.get response. When not specified on a drive.drives.create request, a random theme is chosen from which the background image and color are set. This is a write-only field; it can only be set on requests that don't set colorRgb or backgroundImageFile.
+          description: The ID of the theme from which the background image and color are set. The set of possible driveThemes can be retrieved from a drive.about.get response. When not specified on a drive.drives.create request, a random theme is chosen from which the background image and color are set. This is a write-only field; it can only be set on requests that don't set colorRgb or backgroundImageFile.
           type: string
       type: object
     DriveList:

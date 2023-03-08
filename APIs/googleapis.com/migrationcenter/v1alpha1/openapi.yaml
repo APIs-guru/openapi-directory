@@ -521,48 +521,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/assets:batchUpdate":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Updates the parameters of a list of assets.
-      operationId: migrationcenter.projects.locations.assets.batchUpdate
-      parameters:
-        - description: Required. Parent value for batch asset update.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/BatchUpdateAssetsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BatchUpdateAssetsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1alpha1/{parent}/assets:reportAssetFrames":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1077,24 +1035,6 @@ components:
         virtualMachineDetails:
           $ref: "#/components/schemas/VirtualMachineDetails"
           description: Asset information specific for virtual machines.
-      type: object
-    BatchUpdateAssetsRequest:
-      description: A request to update a list of assets.
-      properties:
-        requests:
-          description: Required. The request message specifying the resources to update. A maximum of 1000 assets can be modified in a batch.
-          items:
-            $ref: "#/components/schemas/UpdateAssetRequest"
-          type: array
-      type: object
-    BatchUpdateAssetsResponse:
-      description: Response for updating a list of assets.
-      properties:
-        assets:
-          description: Update asset content. The content only includes values after field mask being applied.
-          items:
-            $ref: "#/components/schemas/Asset"
-          type: array
       type: object
     BiosDetails:
       description: Details about the bios.
@@ -2102,20 +2042,6 @@ components:
           type: string
         version:
           description: Optional. IANA Time Zone Database version number, e.g. "2019a".
-          type: string
-      type: object
-    UpdateAssetRequest:
-      description: A request to update an asset.
-      properties:
-        asset:
-          $ref: "#/components/schemas/Asset"
-          description: Required. The resource being updated.
-        requestId:
-          description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-          type: string
-        updateMask:
-          description: Required. Field mask is used to specify the fields to be overwritten in the `Asset` resource by the update. The values specified in the `update_mask` field are relative to the resource, not the full request. A field will be overwritten if it is in the mask. A single * value in the mask lets you to overwrite all fields.
-          format: google-fieldmask
           type: string
       type: object
     ValidateImportJobRequest:
