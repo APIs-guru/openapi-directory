@@ -655,6 +655,8 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ColumnWildcard'
                         - description: <p>A wildcard with exclusions.</p> <p>You must specify either a <code>ColumnNames</code> list or the <code>ColumnWildCard</code>. </p>
+                    VersionId:
+                      $ref: '#/components/schemas/VersionString'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1249,6 +1251,92 @@ paths:
                   pattern: '[\p{L}\p{N}\p{P}]*'
                   minLength: 1
                   maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /GetDataCellsFilter:
+    post:
+      operationId: GetDataCellsFilter
+      description: Returns a data cells filter.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDataCellsFilterResponse'
+        '480':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - TableCatalogId
+                - DatabaseName
+                - TableName
+                - Name
+              properties:
+                TableCatalogId:
+                  description: The ID of the catalog to which the table belongs.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                  x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+                DatabaseName:
+                  description: A database in the Glue Data Catalog.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                  x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+                TableName:
+                  description: A table in the database.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                  x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+                Name:
+                  description: The name given by the user to the data filter cell.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                  x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2177,7 +2265,7 @@ paths:
   /GrantPermissions:
     post:
       operationId: GrantPermissions
-      description: '<p>Grants permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.</p> <p>For information about permissions, see <a href="https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.</p>'
+      description: '<p>Grants permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.</p> <p>For information about permissions, see <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.</p>'
       responses:
         '200':
           description: Success
@@ -3562,6 +3650,105 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UpdateDataCellsFilter:
+    post:
+      operationId: UpdateDataCellsFilter
+      description: Updates a data cell filter.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDataCellsFilterResponse'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '484':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - TableData
+              properties:
+                TableData:
+                  description: A structure that describes certain columns on certain rows.
+                  type: object
+                  properties:
+                    TableCatalogId:
+                      allOf:
+                        - $ref: '#/components/schemas/CatalogIdString'
+                        - description: The ID of the catalog to which the table belongs.
+                    DatabaseName:
+                      allOf:
+                        - $ref: '#/components/schemas/NameString'
+                        - description: A database in the Glue Data Catalog.
+                    TableName:
+                      allOf:
+                        - $ref: '#/components/schemas/NameString'
+                        - description: A table in the database.
+                    Name:
+                      allOf:
+                        - $ref: '#/components/schemas/NameString'
+                        - description: The name given by the user to the data filter cell.
+                    RowFilter:
+                      allOf:
+                        - $ref: '#/components/schemas/RowFilter'
+                        - description: A PartiQL predicate.
+                    ColumnNames:
+                      allOf:
+                        - $ref: '#/components/schemas/ColumnNames'
+                        - description: A list of column names.
+                    ColumnWildcard:
+                      allOf:
+                        - $ref: '#/components/schemas/ColumnWildcard'
+                        - description: <p>A wildcard with exclusions.</p> <p>You must specify either a <code>ColumnNames</code> list or the <code>ColumnWildCard</code>. </p>
+                    VersionId:
+                      $ref: '#/components/schemas/VersionString'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /UpdateLFTag:
     post:
       operationId: UpdateLFTag
@@ -4240,6 +4427,11 @@ components:
             - $ref: '#/components/schemas/ColumnNames'
             - description: Excludes column names. Any column with this name will be excluded.
       description: 'A wildcard object, consisting of an optional list of excluded column names or indexes.'
+    VersionString:
+      type: string
+      minLength: 1
+      maxLength: 255
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
     AlreadyExistsException: {}
     ResourceNumberLimitExceededException: {}
     CreateLFTagResponse:
@@ -4294,6 +4486,13 @@ components:
     ExtendTransactionResponse:
       type: object
       properties: {}
+    GetDataCellsFilterResponse:
+      type: object
+      properties:
+        DataCellsFilter:
+          allOf:
+            - $ref: '#/components/schemas/DataCellsFilter'
+            - description: A structure that describes certain columns on certain rows.
     GetDataLakeSettingsResponse:
       type: object
       properties:
@@ -4686,6 +4885,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/TransactionIdString'
             - description: An opaque identifier for the transaction.
+    UpdateDataCellsFilterResponse:
+      type: object
+      properties: {}
     UpdateLFTagResponse:
       type: object
       properties: {}
@@ -5055,6 +5257,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ColumnWildcard'
             - description: <p>A wildcard with exclusions.</p> <p>You must specify either a <code>ColumnNames</code> list or the <code>ColumnWildCard</code>. </p>
+        VersionId:
+          $ref: '#/components/schemas/VersionString'
       description: A structure that describes certain columns on certain rows.
     CreateDataCellsFilterRequest:
       type: object
@@ -5390,6 +5594,31 @@ components:
         $ref: '#/components/schemas/FilterCondition'
       minItems: 1
       maxItems: 20
+    GetDataCellsFilterRequest:
+      type: object
+      required:
+        - TableCatalogId
+        - DatabaseName
+        - TableName
+        - Name
+      title: GetDataCellsFilterRequest
+      properties:
+        TableCatalogId:
+          allOf:
+            - $ref: '#/components/schemas/CatalogIdString'
+            - description: The ID of the catalog to which the table belongs.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: A database in the Glue Data Catalog.
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: A table in the database.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name given by the user to the data filter cell.
     GetDataLakeSettingsRequest:
       type: object
       title: GetDataLakeSettingsRequest
@@ -6256,6 +6485,16 @@ components:
             - $ref: '#/components/schemas/ObjectSize'
             - description: The size of the Amazon S3 object in bytes.
       description: Specifies the details of a governed table.
+    UpdateDataCellsFilterRequest:
+      type: object
+      required:
+        - TableData
+      title: UpdateDataCellsFilterRequest
+      properties:
+        TableData:
+          allOf:
+            - $ref: '#/components/schemas/DataCellsFilter'
+            - description: A <code>DataCellsFilter</code> structure containing information about the data cells filter.
     UpdateLFTagRequest:
       type: object
       required:

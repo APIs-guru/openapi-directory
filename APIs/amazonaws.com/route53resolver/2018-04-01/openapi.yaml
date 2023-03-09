@@ -1806,7 +1806,7 @@ paths:
   /#X-Amz-Target=Route53Resolver.GetResolverConfig:
     post:
       operationId: GetResolverConfig
-      description: Retrieves the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
+      description: "Retrieves the behavior configuration of Route\_53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud."
       responses:
         '200':
           description: Success
@@ -1844,6 +1844,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -2336,6 +2342,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceErrorException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -2862,7 +2874,7 @@ paths:
   /#X-Amz-Target=Route53Resolver.ListResolverConfigs:
     post:
       operationId: ListResolverConfigs
-      description: Retrieves the Resolver configurations that you have defined. Route 53 Resolver uses the configurations to manage DNS resolution behavior for your VPCs.
+      description: "Retrieves the Resolver configurations that you have defined. Route\_53 Resolver uses the configurations to manage DNS resolution behavior for your VPCs."
       responses:
         '200':
           description: Success
@@ -2906,6 +2918,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -3731,6 +3749,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceErrorException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -4170,7 +4194,7 @@ paths:
   /#X-Amz-Target=Route53Resolver.UpdateResolverConfig:
     post:
       operationId: UpdateResolverConfig
-      description: Updates the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
+      description: "Updates the behavior configuration of Route\_53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud."
       responses:
         '200':
           description: Success
@@ -4226,6 +4250,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '488':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -4320,7 +4350,7 @@ paths:
   /#X-Amz-Target=Route53Resolver.UpdateResolverEndpoint:
     post:
       operationId: UpdateResolverEndpoint
-      description: 'Updates the name of an inbound or an outbound Resolver endpoint. '
+      description: 'Updates the name, or enpoint type for an inbound or an outbound Resolver endpoint. You can only update between IPV4 and DUALSTACK, IPV6 endpoint type can''t be updated to other type. '
       responses:
         '200':
           description: Success
@@ -4783,6 +4813,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: A list of the tag keys and values that you want to associate with the endpoint.
+        ResolverEndpointType:
+          allOf:
+            - $ref: '#/components/schemas/ResolverEndpointType'
+            - description: ' For the endpoint type you can choose either IPv4, IPv6. or dual-stack. A dual-stack endpoint means that it will resolve via both IPv4 and IPv6. This endpoint type is applied to all IP addresses. '
     CreateResolverQueryLogConfigResponse:
       type: object
       properties:
@@ -5139,7 +5173,7 @@ components:
         ResolverConfig:
           allOf:
             - $ref: '#/components/schemas/ResolverConfig'
-            - description: Information about the behavior configuration of Route 53 Resolver behavior for the VPC you specified in the <code>GetResolverConfig</code> request.
+            - description: "Information about the behavior configuration of Route\_53 Resolver behavior for the VPC you specified in the <code>GetResolverConfig</code> request."
     GetResolverConfigRequest:
       type: object
       required:
@@ -5301,7 +5335,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/FirewallDomainListStatus'
-            - description: ' '
+            - description: Status of the import request.
         StatusMessage:
           allOf:
             - $ref: '#/components/schemas/StatusMessage'
@@ -5506,7 +5540,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: '<p>If a response includes the last of the Resolver configurations that are associated with the current Amazon Web Services account, <code>NextToken</code> doesn''t appear in the response.</p> <p>If a response doesn''t include the last of the configurations, you can get more configurations by submitting another <code>ListResolverConfigs</code> request. Get the value of <code>NextToken</code> that Amazon Route 53 returned in the previous response and include it in <code>NextToken</code> in the next request.</p>'
+            - description: "<p>If a response includes the last of the Resolver configurations that are associated with the current Amazon Web Services account, <code>NextToken</code> doesn't appear in the response.</p> <p>If a response doesn't include the last of the configurations, you can get more configurations by submitting another <code>ListResolverConfigs</code> request. Get the value of <code>NextToken</code> that Amazon Route\_53 returned in the previous response and include it in <code>NextToken</code> in the next request.</p>"
         ResolverConfigs:
           allOf:
             - $ref: '#/components/schemas/ResolverConfigList'
@@ -5934,7 +5968,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/FirewallDomainListStatus'
-            - description: ' '
+            - description: Status of the <code>UpdateFirewallDomains</code> request.
         StatusMessage:
           allOf:
             - $ref: '#/components/schemas/StatusMessage'
@@ -5958,7 +5992,7 @@ components:
         Domains:
           allOf:
             - $ref: '#/components/schemas/FirewallDomains'
-            - description: '<p>A list of domains to use in the update operation.</p> <p>Each domain specification in your domain list must satisfy the following requirements: </p> <ul> <li> <p>It can optionally start with <code>*</code> (asterisk).</p> </li> <li> <p>With the exception of the optional starting asterisk, it must only contain the following characters: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>-</code> (hyphen).</p> </li> <li> <p>It must be from 1-255 characters in length. </p> </li> </ul>'
+            - description: '<p>A list of domains to use in the update operation.</p> <important> <p>There is a limit of 1000 domains per request.</p> </important> <p>Each domain specification in your domain list must satisfy the following requirements: </p> <ul> <li> <p>It can optionally start with <code>*</code> (asterisk).</p> </li> <li> <p>With the exception of the optional starting asterisk, it must only contain the following characters: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>-</code> (hyphen).</p> </li> <li> <p>It must be from 1-255 characters in length. </p> </li> </ul>'
     UpdateFirewallRuleResponse:
       type: object
       properties:
@@ -6059,7 +6093,7 @@ components:
         AutodefinedReverseFlag:
           allOf:
             - $ref: '#/components/schemas/AutodefinedReverseFlag'
-            - description: '<p>Indicates whether or not the Resolver will create autodefined rules for reverse DNS lookups. This is enabled by default. Disabling this option will also affect EC2-Classic instances using ClassicLink. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon EC2 guide</i>.</p> <note> <p>It can take some time for the status change to be completed.</p> </note> <p/>'
+            - description: '<p>Indicates whether or not the Resolver will create autodefined rules for reverse DNS lookups. This is enabled by default. Disabling this option will also affect EC2-Classic instances using ClassicLink. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon EC2 guide</i>.</p> <important> <p>We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html">Migrate from EC2-Classic to a VPC</a> in the <i>Amazon EC2 guide</i> and the blog <a href="http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/">EC2-Classic Networking is Retiring – Here’s How to Prepare</a>.</p> </important> <note> <p>It can take some time for the status change to be completed.</p> </note> <p/>'
     UpdateResolverDnssecConfigResponse:
       type: object
       properties:
@@ -6103,6 +6137,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Name'
             - description: The name of the Resolver endpoint that you want to update.
+        ResolverEndpointType:
+          allOf:
+            - $ref: '#/components/schemas/ResolverEndpointType'
+            - description: ' Specifies the endpoint type for what type of IP address the endpoint uses to forward DNS queries. '
+        UpdateIpAddresses:
+          allOf:
+            - $ref: '#/components/schemas/UpdateIpAddresses'
+            - description: ' Updates the Resolver endpoint type to IpV4, Ipv6, or dual-stack. '
     UpdateResolverRuleResponse:
       type: object
       properties:
@@ -6233,7 +6275,11 @@ components:
         Ip:
           allOf:
             - $ref: '#/components/schemas/Ip'
-            - description: The new IP address.
+            - description: The new IPv4 address.
+        Ipv6:
+          allOf:
+            - $ref: '#/components/schemas/Ipv6'
+            - description: ' The new IPv6 address. '
       description: 'In an <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverEndpoint.html">UpdateResolverEndpoint</a> request, information about an IP address to update.'
     ResolverEndpoint:
       type: object
@@ -6286,7 +6332,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Rfc3339TimeString'
             - description: 'The date and time that the endpoint was last modified, in Unix time format and Coordinated Universal Time (UTC).'
-      description: 'In the response to a <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverEndpoint.html">CreateResolverEndpoint</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DeleteResolverEndpoint.html">DeleteResolverEndpoint</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html">GetResolverEndpoint</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverEndpoints.html">ListResolverEndpoints</a>, or <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverEndpoint.html">UpdateResolverEndpoint</a> request, a complex type that contains settings for an existing inbound or outbound Resolver endpoint.'
+        ResolverEndpointType:
+          allOf:
+            - $ref: '#/components/schemas/ResolverEndpointType'
+            - description: ' The Resolver endpoint IP address type. '
+      description: 'In the response to a <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverEndpoint.html">CreateResolverEndpoint</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DeleteResolverEndpoint.html">DeleteResolverEndpoint</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html">GetResolverEndpoint</a>, Updates the name, or ResolverEndpointType for an endpoint, or <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverEndpoint.html">UpdateResolverEndpoint</a> request, a complex type that contains settings for an existing inbound or outbound Resolver endpoint.'
     ResolverQueryLogConfigAssociation:
       type: object
       properties:
@@ -6352,6 +6402,7 @@ components:
       enum:
         - ENABLE
         - DISABLE
+        - USE_LOCAL_RESOURCE_SETTING
     BlockOverrideDnsType:
       type: string
       enum:
@@ -6532,7 +6583,13 @@ components:
       items:
         $ref: '#/components/schemas/IpAddressRequest'
       minItems: 1
-      maxItems: 10
+      maxItems: 20
+    ResolverEndpointType:
+      type: string
+      enum:
+        - IPV6
+        - IPV4
+        - DUALSTACK
     ResolverQueryLogConfigName:
       type: string
       pattern: '(?!^[0-9]+$)([a-zA-Z0-9\-_'' '']+)'
@@ -6698,6 +6755,7 @@ components:
       enum:
         - ENABLED
         - DISABLED
+        - USE_LOCAL_RESOURCE_SETTING
     FirewallConfig:
       type: object
       properties:
@@ -6868,7 +6926,7 @@ components:
         AutodefinedReverse:
           allOf:
             - $ref: '#/components/schemas/ResolverAutodefinedReverseStatus'
-            - description: '<p> The status of whether or not the Resolver will create autodefined rules for reverse DNS lookups. This is enabled by default. The status can be one of following:</p> <p> Status of the rules generated by VPCs based on CIDR/Region for reverse DNS resolution. The status can be one of following:</p> <ul> <li> <p> <b>ENABLING:</b> Autodefined rules for reverse DNS lookups are being enabled but are not complete.</p> </li> <li> <p> <b>ENABLED:</b> Autodefined rules for reverse DNS lookups are enabled.</p> </li> <li> <p> <b>DISABLING:</b> Autodefined rules for reverse DNS lookups are being disabled but are not complete.</p> </li> <li> <p> <b>DISABLED:</b> Autodefined rules for reverse DNS lookups are disabled.</p> </li> </ul>'
+            - description: '<p> The status of whether or not the Resolver will create autodefined rules for reverse DNS lookups. This is enabled by default. The status can be one of following:</p> <ul> <li> <p> <b>ENABLING:</b> Autodefined rules for reverse DNS lookups are being enabled but are not complete.</p> </li> <li> <p> <b>ENABLED:</b> Autodefined rules for reverse DNS lookups are enabled.</p> </li> <li> <p> <b>DISABLING:</b> Autodefined rules for reverse DNS lookups are being disabled but are not complete.</p> </li> <li> <p> <b>DISABLED:</b> Autodefined rules for reverse DNS lookups are disabled.</p> </li> </ul>'
       description: A complex type that contains information about a Resolver configuration for a VPC.
     ResolverDnssecConfig:
       type: object
@@ -6895,7 +6953,7 @@ components:
       maxLength: 30000
     ResolverRulePolicy:
       type: string
-      maxLength: 5000
+      maxLength: 30000
     Ip:
       type: string
       minLength: 7
@@ -6906,6 +6964,10 @@ components:
       type: string
       minLength: 1
       maxLength: 32
+    Ipv6:
+      type: string
+      minLength: 7
+      maxLength: 39
     IpAddressRequest:
       type: object
       required:
@@ -6918,7 +6980,11 @@ components:
         Ip:
           allOf:
             - $ref: '#/components/schemas/Ip'
-            - description: The IP address that you want to use for DNS queries.
+            - description: The IPv4 address that you want to use for DNS queries.
+        Ipv6:
+          allOf:
+            - $ref: '#/components/schemas/Ipv6'
+            - description: ' The IPv6 address that you want to use for DNS queries. '
       description: 'In a <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverEndpoint.html">CreateResolverEndpoint</a> request, the IP address that DNS queries originate from (for outbound endpoints) or that you forward DNS queries to (for inbound endpoints). <code>IpAddressRequest</code> also includes the ID of the subnet that contains the IP address.'
     IpAddressStatus:
       type: string
@@ -6933,6 +6999,7 @@ components:
         - FAILED_RESOURCE_GONE
         - DELETING
         - DELETE_FAILED_FAS_EXPIRED
+        - UPDATING
     IpAddressResponse:
       type: object
       properties:
@@ -6947,7 +7014,11 @@ components:
         Ip:
           allOf:
             - $ref: '#/components/schemas/Ip'
-            - description: One IP address that the Resolver endpoint uses for DNS queries.
+            - description: One IPv4 address that the Resolver endpoint uses for DNS queries.
+        Ipv6:
+          allOf:
+            - $ref: '#/components/schemas/Ipv6'
+            - description: ' One IPv6 address that the Resolver endpoint uses for DNS queries. '
         Status:
           allOf:
             - $ref: '#/components/schemas/IpAddressStatus'
@@ -7035,6 +7106,8 @@ components:
         - ENABLED
         - DISABLING
         - DISABLED
+        - UPDATING_TO_USE_LOCAL_RESOURCE_SETTING
+        - USE_LOCAL_RESOURCE_SETTING
     ResolverDNSSECValidationStatus:
       type: string
       enum:
@@ -7042,6 +7115,8 @@ components:
         - ENABLED
         - DISABLING
         - DISABLED
+        - UPDATING_TO_USE_LOCAL_RESOURCE_SETTING
+        - USE_LOCAL_RESOURCE_SETTING
     ResolverEndpointStatus:
       type: string
       enum:
@@ -7136,22 +7211,46 @@ components:
       maxItems: 200
     TargetAddress:
       type: object
-      required:
-        - Ip
       properties:
         Ip:
           allOf:
             - $ref: '#/components/schemas/Ip'
-            - description: One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
+            - description: One IPv4 address that you want to forward DNS queries to.
         Port:
           allOf:
             - $ref: '#/components/schemas/Port'
             - description: The port at <code>Ip</code> that you want to forward DNS queries to.
+        Ipv6:
+          allOf:
+            - $ref: '#/components/schemas/Ipv6'
+            - description: ' One IPv6 address that you want to forward DNS queries to. '
       description: 'In a <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverRule.html">CreateResolverRule</a> request, an array of the IPs that you want to forward DNS queries to.'
+    UpdateIpAddress:
+      type: object
+      required:
+        - IpId
+        - Ipv6
+      properties:
+        IpId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: ' The ID of the IP address, specified by the <code>ResolverEndpointId</code>. '
+        Ipv6:
+          allOf:
+            - $ref: '#/components/schemas/Ipv6'
+            - description: ' The IPv6 address that you want to use for DNS queries. '
+      description: ' Provides information about the IP address type in response to <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverEndpoint.html">UpdateResolverEndpoint</a>. '
+    UpdateIpAddresses:
+      type: array
+      items:
+        $ref: '#/components/schemas/UpdateIpAddress'
+      minItems: 0
+      maxItems: 50
     Validation:
       type: string
       enum:
         - ENABLE
         - DISABLE
+        - USE_LOCAL_RESOURCE_SETTING
 security:
   - hmac: []

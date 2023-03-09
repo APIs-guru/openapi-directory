@@ -2013,6 +2013,12 @@ components:
             - xml:
                 name: arn
               description: The Amazon Resource Name (ARN) assigned to the Channel.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: createdAt
+              description: The date and time the Channel was created.
         Description:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2062,6 +2068,12 @@ components:
             - xml:
                 name: arn
               description: The Amazon Resource Name (ARN) assigned to the Channel.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: createdAt
+              description: The date and time the Channel was created.
         Description:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2117,7 +2129,7 @@ components:
             - xml:
                 name: createdAt
               description: |
-                The time the HarvestJob was submitted
+                The date and time the HarvestJob was submitted.
         EndTime:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2187,6 +2199,12 @@ components:
             - $ref: '#/components/schemas/CmafPackage'
             - xml:
                 name: cmafPackage
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: createdAt
+              description: The date and time the OriginEndpoint was created.
         DashPackage:
           allOf:
             - $ref: '#/components/schemas/DashPackage'
@@ -2466,6 +2484,12 @@ components:
             - xml:
                 name: arn
               description: The Amazon Resource Name (ARN) assigned to the Channel.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: createdAt
+              description: The date and time the Channel was created.
         Description:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2521,7 +2545,7 @@ components:
             - xml:
                 name: createdAt
               description: |
-                The time the HarvestJob was submitted
+                The date and time the HarvestJob was submitted.
         EndTime:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2591,6 +2615,12 @@ components:
             - $ref: '#/components/schemas/CmafPackage'
             - xml:
                 name: cmafPackage
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: createdAt
+              description: The date and time the OriginEndpoint was created.
         DashPackage:
           allOf:
             - $ref: '#/components/schemas/DashPackage'
@@ -2729,6 +2759,12 @@ components:
             - xml:
                 name: arn
               description: The Amazon Resource Name (ARN) assigned to the Channel.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: createdAt
+              description: The date and time the Channel was created.
         Description:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2770,6 +2806,12 @@ components:
             - xml:
                 name: arn
               description: The Amazon Resource Name (ARN) assigned to the Channel.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: createdAt
+              description: The date and time the Channel was created.
         Description:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2811,6 +2853,12 @@ components:
             - xml:
                 name: arn
               description: The Amazon Resource Name (ARN) assigned to the Channel.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: createdAt
+              description: The date and time the Channel was created.
         Description:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2868,6 +2916,12 @@ components:
             - $ref: '#/components/schemas/CmafPackage'
             - xml:
                 name: cmafPackage
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: createdAt
+              description: The date and time the OriginEndpoint was created.
         DashPackage:
           allOf:
             - $ref: '#/components/schemas/DashPackage'
@@ -3019,6 +3073,12 @@ components:
             - xml:
                 name: arn
               description: The Amazon Resource Name (ARN) assigned to the Channel.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: createdAt
+              description: The date and time the Channel was created.
         Description:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3725,7 +3785,7 @@ components:
             - xml:
                 name: createdAt
               description: |
-                The time the HarvestJob was submitted
+                The date and time the HarvestJob was submitted.
         EndTime:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -4028,6 +4088,12 @@ components:
             - $ref: '#/components/schemas/CmafPackage'
             - xml:
                 name: cmafPackage
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: createdAt
+              description: The date and time the OriginEndpoint was created.
         DashPackage:
           allOf:
             - $ref: '#/components/schemas/DashPackage'
