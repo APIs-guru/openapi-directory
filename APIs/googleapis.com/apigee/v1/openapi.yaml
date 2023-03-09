@@ -3944,6 +3944,58 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  "/v1/{parent}/securityIncidents":
+    get:
+      description: ListSecurityIncidents lists all the security incident associated with the environment.
+      operationId: apigee.organizations.environments.securityIncidents.list
+      parameters:
+        - description: "Required. For a specific organization, list of all the security incidents. Format: `organizations/{org}/environments/{environment}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: 'The filter expression to be used to get the list of security incidents, where filtering can be done on API Proxies. Example: filter = "api_proxy = /", "first_detected_time >", "last_detected_time <"'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of incidents to return. The service may return fewer than this value. If unspecified, at most 50 incidents will be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListSecurityIncident` call. Provide this to retrieve the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ListSecurityIncidentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/securityProfiles":
     get:
       description: ListSecurityProfiles lists all the security profiles associated with the org including attached and unattached profiles.
@@ -7170,6 +7222,18 @@ components:
             $ref: "#/components/schemas/GoogleCloudApigeeV1RatePlan"
           type: array
       type: object
+    GoogleCloudApigeeV1ListSecurityIncidentsResponse:
+      description: Response for ListSecurityIncidents.
+      properties:
+        nextPageToken:
+          description: A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        securityIncidents:
+          description: List of security incidents in the organization
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityIncident"
+          type: array
+      type: object
     GoogleCloudApigeeV1ListSecurityProfileRevisionsResponse:
       description: Response for ListSecurityProfileRevisions.
       properties:
@@ -8396,6 +8460,45 @@ components:
       properties:
         documentationLink:
           description: Documentation link for the action.
+          type: string
+      type: object
+    GoogleCloudApigeeV1SecurityIncident:
+      description: Represents an SecurityIncident resource.
+      properties:
+        detectionTypes:
+          description: "Output only. Detection types which are part of the incident. Examples: Flooder, OAuth Abuser, Static Content Scraper, Anomaly Detection."
+          items:
+            type: string
+          readOnly: true
+          type: array
+        displayName:
+          description: Display name of the security incident.
+          type: string
+        firstDetectedTime:
+          description: Output only. The time when events associated with the incident were first detected.
+          format: google-datetime
+          readOnly: true
+          type: string
+        lastDetectedTime:
+          description: Output only. The time when events associated with the incident were last detected.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: "Immutable. Name of the security incident resource. Format: organizations/{org}/environments/{environment}/securityIncidents/{incident} Example: organizations/apigee-org/environments/dev/securityIncidents/1234-5678-9101-1111"
+          type: string
+        riskLevel:
+          description: Output only. Risk level of the incident.
+          enum:
+            - RISK_LEVEL_UNSPECIFIED
+            - LOW
+            - MODERATE
+            - SEVERE
+          readOnly: true
+          type: string
+        trafficCount:
+          description: Total traffic detected as part of the incident.
+          format: int64
           type: string
       type: object
     GoogleCloudApigeeV1SecurityProfile:

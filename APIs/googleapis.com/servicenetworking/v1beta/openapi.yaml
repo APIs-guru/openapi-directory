@@ -867,7 +867,7 @@ components:
             type: string
           type: array
         domain:
-          description: Required. The DNS or domain name of the record set, e.g. `test.example.com`.
+          description: Required. The DNS or domain name of the record set, e.g. `test.example.com`. Cloud DNS requires that a DNS suffix ends with a trailing dot.
           type: string
         ttl:
           description: Required. The period of time for which this RecordSet can be cached by resolvers.
@@ -881,7 +881,7 @@ components:
       description: Represents a DNS zone resource.
       properties:
         dnsSuffix:
-          description: The DNS name suffix of this zone e.g. `example.com.`.
+          description: The DNS name suffix of this zone e.g. `example.com.`. Cloud DNS requires that a DNS suffix ends with a trailing dot.
           type: string
         name:
           description: User assigned name for this resource. Must be unique within the project. The name must be 1-63 characters long, must begin with a letter, end with a letter or digit, and only contain lowercase letters, digits or dashes.

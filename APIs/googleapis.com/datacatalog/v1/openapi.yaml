@@ -222,7 +222,7 @@ paths:
         - projects
   "/v1/{name}/operations":
     get:
-      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
+      description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: datacatalog.projects.locations.operations.list
       parameters:
         - description: The name of the operation's parent resource.
@@ -1016,48 +1016,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/tags:reconcile":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: "`ReconcileTags` creates or updates a list of tags on the entry. If the ReconcileTagsRequest.force_delete_missing parameter is set, the operation deletes tags not included in the input tag list. `ReconcileTags` returns a long-running operation resource that can be queried with Operations.GetOperation to return ReconcileTagsMetadata and a ReconcileTagsResponse message."
-      operationId: datacatalog.projects.locations.entryGroups.entries.tags.reconcile
-      parameters:
-        - description: Required. Name of Entry to be tagged.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudDatacatalogV1ReconcileTagsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{parent}/taxonomies":
     get:
       description: Lists all taxonomies in a project in a particular location that you have a permission to view.
@@ -1792,6 +1750,13 @@ components:
           description: Indicates if the table schema is managed by the user or not.
           type: boolean
       type: object
+    GoogleCloudDatacatalogV1DumpItem:
+      description: Wrapper for any item that can be contained in the dump.
+      properties:
+        taggedEntry:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1TaggedEntry"
+          description: Entry and its tags.
+      type: object
     GoogleCloudDatacatalogV1Entry:
       description: Entry metadata. A Data Catalog entry represents another resource in Google Cloud Platform (such as a BigQuery dataset or a Pub/Sub topic) or outside of it. You can use the `linked_resource` field in the entry resource to refer to the original resource ID of the source system. An entry resource contains resource details, for example, its schema. Additionally, you can attach flexible metadata to an entry in the form of a Tag.
       properties:
@@ -2255,54 +2220,6 @@ components:
           description: Resource name of this policy tag's parent policy tag. If empty, this is a top level tag. If not set, defaults to an empty string. For example, for the "LatLong" policy tag in the example above, this field contains the resource name of the "Geolocation" policy tag, and, for "Geolocation", this field is empty.
           type: string
       type: object
-    GoogleCloudDatacatalogV1ReconcileTagsMetadata:
-      description: Long-running operation metadata message returned by the ReconcileTags.
-      properties:
-        errors:
-          additionalProperties:
-            $ref: "#/components/schemas/Status"
-          description: Maps the name of each tagged column (or empty string for a sole entry) to tagging operation status.
-          type: object
-        state:
-          description: State of the reconciliation operation.
-          enum:
-            - RECONCILIATION_STATE_UNSPECIFIED
-            - RECONCILIATION_QUEUED
-            - RECONCILIATION_IN_PROGRESS
-            - RECONCILIATION_DONE
-          type: string
-      type: object
-    GoogleCloudDatacatalogV1ReconcileTagsRequest:
-      description: Request message for ReconcileTags.
-      properties:
-        forceDeleteMissing:
-          description: If set to `true`, deletes entry tags related to a tag template not listed in the tags source from an entry. If set to `false`, unlisted tags are retained.
-          type: boolean
-        tagTemplate:
-          description: Required. The name of the tag template, which is used for reconciliation.
-          type: string
-        tags:
-          description: A list of tags to apply to an entry. A tag can specify a tag template, which must be the template specified in the `ReconcileTagsRequest`. The sole entry and each of its columns must be mentioned at most once.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDatacatalogV1Tag"
-          type: array
-      type: object
-    GoogleCloudDatacatalogV1ReconcileTagsResponse:
-      description: Long-running operation response message returned by ReconcileTags.
-      properties:
-        createdTagsCount:
-          description: Number of tags created in the request.
-          format: int64
-          type: string
-        deletedTagsCount:
-          description: Number of tags deleted in the request.
-          format: int64
-          type: string
-        updatedTagsCount:
-          description: Number of tags updated in the request.
-          format: int64
-          type: string
-      type: object
     GoogleCloudDatacatalogV1RenameTagTemplateFieldEnumValueRequest:
       description: Request message for RenameTagTemplateFieldEnumValue.
       properties:
@@ -2695,6 +2612,23 @@ components:
         type:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1FieldType"
           description: Required. The type of value this tag field can contain.
+      type: object
+    GoogleCloudDatacatalogV1TaggedEntry:
+      description: Wrapper containing Entry and information about Tags that should and should not be attached to it.
+      properties:
+        absentTags:
+          description: Tags that should be deleted from the Data Catalog. Caller should populate template name and column only.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDatacatalogV1Tag"
+          type: array
+        presentTags:
+          description: Tags that should be ingested into the Data Catalog. Caller should populate template name, column and fields.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDatacatalogV1Tag"
+          type: array
+        v1Entry:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1Entry"
+          description: Non-encrypted Data Catalog v1 Entry.
       type: object
     GoogleCloudDatacatalogV1Taxonomy:
       description: 'A taxonomy is a collection of hierarchical policy tags that classify data along a common axis. For example, a "data sensitivity" taxonomy might contain the following policy tags: ``` + PII + Account number + Age + SSN + Zipcode + Financials + Revenue ``` A "data origin" taxonomy might contain the following policy tags: ``` + User data + Employee data + Partner data + Public data ```'
