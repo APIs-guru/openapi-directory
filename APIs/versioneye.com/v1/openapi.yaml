@@ -207,14 +207,6 @@ paths:
       summary: Retrieves a file object, containing information about dependencies in the file
       tags:
         - Scans
-  /projects:
-    post:
-      consumes:
-        - application/x-www-form-urlencoded
-  "/projects/{project_key}":
-    post:
-      consumes:
-        - application/x-www-form-urlencoded
 components:
   securitySchemes:
     api_key:
