@@ -773,7 +773,7 @@ components:
         WorkgroupName:
           allOf:
             - $ref: '#/components/schemas/WorkgroupNameString'
-            - description: The serverless workgroup name. This element is not returned when connecting to a provisioned cluster.
+            - description: The serverless workgroup name or Amazon Resource Name (ARN). This element is not returned when connecting to a provisioned cluster.
     BatchExecuteStatementInput:
       type: object
       required:
@@ -816,7 +816,7 @@ components:
         WorkgroupName:
           allOf:
             - $ref: '#/components/schemas/WorkgroupNameString'
-            - description: The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
+            - description: The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
     ValidationException: {}
     ActiveStatementsExceededException: {}
     BatchExecuteStatementException: {}
@@ -920,7 +920,7 @@ components:
         WorkgroupName:
           allOf:
             - $ref: '#/components/schemas/WorkgroupNameString'
-            - description: The serverless workgroup name.
+            - description: The serverless workgroup name or Amazon Resource Name (ARN).
     DescribeStatementRequest:
       type: object
       required:
@@ -991,7 +991,7 @@ components:
         WorkgroupName:
           allOf:
             - $ref: '#/components/schemas/WorkgroupNameString'
-            - description: The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
+            - description: The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
     ExecuteStatementOutput:
       type: object
       properties:
@@ -1022,7 +1022,7 @@ components:
         WorkgroupName:
           allOf:
             - $ref: '#/components/schemas/WorkgroupNameString'
-            - description: The serverless workgroup name. This element is not returned when connecting to a provisioned cluster.
+            - description: The serverless workgroup name or Amazon Resource Name (ARN). This element is not returned when connecting to a provisioned cluster.
     ExecuteStatementInput:
       type: object
       required:
@@ -1069,7 +1069,7 @@ components:
         WorkgroupName:
           allOf:
             - $ref: '#/components/schemas/WorkgroupNameString'
-            - description: The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
+            - description: The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
     ExecuteStatementException: {}
     GetStatementResultResponse:
       type: object
@@ -1150,7 +1150,7 @@ components:
         WorkgroupName:
           allOf:
             - $ref: '#/components/schemas/WorkgroupNameString'
-            - description: The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
+            - description: The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
     ListSchemasResponse:
       type: object
       properties:
@@ -1203,7 +1203,7 @@ components:
         WorkgroupName:
           allOf:
             - $ref: '#/components/schemas/WorkgroupNameString'
-            - description: The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
+            - description: The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
     ListStatementsResponse:
       type: object
       required:
@@ -1297,7 +1297,7 @@ components:
         WorkgroupName:
           allOf:
             - $ref: '#/components/schemas/WorkgroupNameString'
-            - description: The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
+            - description: The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
     ClientToken:
       type: string
       minLength: 1
@@ -1322,9 +1322,9 @@ components:
       type: boolean
     WorkgroupNameString:
       type: string
-      pattern: '^[a-z0-9-]+$'
+      pattern: '^(([a-z0-9-]+)|(arn:(aws(-[a-z]+)*):redshift-serverless:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:workgroup/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))$'
       minLength: 3
-      maxLength: 64
+      maxLength: 128
     Timestamp:
       type: string
       format: date-time

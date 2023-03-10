@@ -6565,7 +6565,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}':
     delete:
       operationId: DeleteUser
-      description: 'Deletes the Amazon QuickSight user that is associated with the identity of the Identity and Access Management (IAM) user or role that''s making the call. The IAM user isn''t deleted as a result of this call. '
+      description: 'Deletes the Amazon QuickSight user that is associated with the identity of the IAM user or role that''s making the call. The IAM user isn''t deleted as a result of this call. '
       responses:
         '200':
           description: Success
@@ -7061,7 +7061,7 @@ paths:
                 - DefaultNamespace
               properties:
                 DefaultNamespace:
-                  description: 'The default namespace for this Amazon Web Services account. Currently, the default is <code>default</code>. Identity and Access Management (IAM) users that register for the first time with Amazon QuickSight provide an email address that becomes associated with the default namespace. '
+                  description: 'The default namespace for this Amazon Web Services account. Currently, the default is <code>default</code>. IAM users that register for the first time with Amazon QuickSight provide an email address that becomes associated with the default namespace. '
                   type: string
                   pattern: '^[a-zA-Z0-9._-]*$'
                   maxLength: 64
@@ -9385,7 +9385,7 @@ paths:
         - name: user-arn
           in: query
           required: false
-          description: '<p>The Amazon QuickSight user''s Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be authenticated as one of the following:</p> <ol> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>Identity and Access Management (IAM) users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation</p> </li> </ol> <p>Omit this parameter for users in the third group, IAM users and IAM role-based sessions.</p>'
+          description: '<p>The Amazon QuickSight user''s Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be authenticated as one of the following:</p> <ol> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation</p> </li> </ol> <p>Omit this parameter for users in the third group, IAM users and IAM role-based sessions.</p>'
           schema:
             type: string
     parameters:
@@ -14615,6 +14615,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ShortRestrictiveResourceId'
             - description: '<p>The dashboard ID for the dashboard that you want the user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this dashboard if the user has permissions to view it.</p> <p>If the user does not have permission to view this dashboard, they see a permissions error message.</p>'
+        FeatureConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/RegisteredUserDashboardFeatureConfigurations'
+            - description: The feature configurations of an embbedded Amazon QuickSight dashboard.
       description: Information about the dashboard you want to embed.
     RegisteredUserQuickSightConsoleEmbeddingConfiguration:
       type: object
@@ -14623,6 +14627,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EntryPath'
             - description: '<p>The initial URL path for the Amazon QuickSight console. <code>InitialPath</code> is required.</p> <p>The entry point URL is constrained to the following paths:</p> <ul> <li> <p> <code>/start</code> </p> </li> <li> <p> <code>/start/analyses</code> </p> </li> <li> <p> <code>/start/dashboards</code> </p> </li> <li> <p> <code>/start/favorites</code> </p> </li> <li> <p> <code>/dashboards/DashboardId</code>. <i>DashboardId</i> is the actual ID key from the Amazon QuickSight console URL of the dashboard.</p> </li> <li> <p> <code>/analyses/AnalysisId</code>. <i>AnalysisId</i> is the actual ID key from the Amazon QuickSight console URL of the analysis.</p> </li> </ul>'
+        FeatureConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/RegisteredUserConsoleFeatureConfigurations'
+            - description: The embedding configuration of an embedded Amazon QuickSight console.
       description: Information about the Amazon QuickSight console that you want to embed.
     RegisteredUserQSearchBarEmbeddingConfiguration:
       type: object
@@ -16252,7 +16260,7 @@ components:
         ViolatedEntities:
           allOf:
             - $ref: '#/components/schemas/EntityList'
-            - description: <p/>
+            - description: Lists the violated entities that caused the analysis error
       description: Analysis error.
     AnalysisFilterAttribute:
       type: string
@@ -21911,7 +21919,7 @@ components:
         Active:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'The active status of user. When you create an Amazon QuickSight user that’s not an IAM user or an Active Directory user, that user is inactive until they sign in and provide a password.'
+            - description: 'The active status of user. When you create an Amazon QuickSight user that''s not an IAM user or an Active Directory user, that user is inactive until they sign in and provide a password.'
         PrincipalId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -26490,6 +26498,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RowAlternateColorOptions'
             - description: 'The row alternate color options (widget status, row alternate colors).'
+        CollapsedRowDimensionsVisibility:
+          allOf:
+            - $ref: '#/components/schemas/Visibility'
+            - description: 'The visibility setting of a pivot table''s collapsed row dimension fields. If the value of this structure is <code>HIDDEN</code>, all collapsed columns in a pivot table are automatically hidden. The default value is <code>VISIBLE</code>.'
       description: The table options for a pivot table visual.
     PivotTableTotalOptions:
       type: object
@@ -27207,6 +27219,32 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The identity ID for a user in the external login provider.
+    StatePersistenceConfigurations:
+      type: object
+      required:
+        - Enabled
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Determines if a Amazon QuickSight dashboard's state persistence settings are turned on or off.
+      description: The state perssitence configuration of an embedded dashboard.
+    RegisteredUserConsoleFeatureConfigurations:
+      type: object
+      properties:
+        StatePersistence:
+          allOf:
+            - $ref: '#/components/schemas/StatePersistenceConfigurations'
+            - description: The state persistence configurations of an embedded Amazon QuickSight console.
+      description: The feature configurations of an embedded Amazon QuickSight console.
+    RegisteredUserDashboardFeatureConfigurations:
+      type: object
+      properties:
+        StatePersistence:
+          allOf:
+            - $ref: '#/components/schemas/StatePersistenceConfigurations'
+            - description: The state persistence settings of an embedded dashboard.
+      description: The feature configuration for an embedded dashboard.
     RelationalTableCatalog:
       type: string
       maxLength: 256
@@ -28895,7 +28933,7 @@ components:
         DefaultNamespace:
           allOf:
             - $ref: '#/components/schemas/Namespace'
-            - description: 'The default namespace for this Amazon Web Services account. Currently, the default is <code>default</code>. Identity and Access Management (IAM) users that register for the first time with Amazon QuickSight provide an email address that becomes associated with the default namespace. '
+            - description: 'The default namespace for this Amazon Web Services account. Currently, the default is <code>default</code>. IAM users that register for the first time with Amazon QuickSight provide an email address that becomes associated with the default namespace. '
         NotificationEmail:
           allOf:
             - $ref: '#/components/schemas/String'
