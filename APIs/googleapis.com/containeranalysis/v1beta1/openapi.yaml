@@ -770,6 +770,14 @@ components:
         cve:
           description: Holds the MITRE standard Common Vulnerabilities and Exposures (CVE) tracking number for the vulnerability.
           type: string
+        impacts:
+          description: Contains information about the impact of this vulnerability, this will change with time.
+          items:
+            type: string
+          type: array
+        justification:
+          $ref: "#/components/schemas/Justification"
+          description: Justification provides the justification when the state of the assessment if NOT_AFFECTED.
         longDescription:
           description: A detailed description of this Vex.
           type: string
@@ -795,11 +803,6 @@ components:
             - FIXED
             - UNDER_INVESTIGATION
           type: string
-        threats:
-          description: Contains information about this vulnerability, this will change with time.
-          items:
-            $ref: "#/components/schemas/Threat"
-          type: array
       type: object
     Attestation:
       description: Occurrence that represents a single "attestation". The authenticity of an attestation can be verified using the attached signature. If the verifier trusts the public key of the signer, then verifying the signature is sufficient to establish trust. In this circumstance, the authority to which this attestation is attached is primarily useful for look-up (how to find this attestation if you already know the authority and artifact to be verified) and intent (which authority was this attestation intended to sign for).
@@ -2702,6 +2705,23 @@ components:
           description: Output only. The version of the package.
           readOnly: true
       type: object
+    Justification:
+      description: Justification provides the justification when the state of the assessment if NOT_AFFECTED.
+      properties:
+        details:
+          description: Additional details on why this justification was chosen.
+          type: string
+        justificationType:
+          description: The justification type for this vulnerability.
+          enum:
+            - JUSTIFICATION_TYPE_UNSPECIFIED
+            - COMPONENT_NOT_PRESENT
+            - VULNERABLE_CODE_NOT_PRESENT
+            - VULNERABLE_CODE_NOT_IN_EXECUTE_PATH
+            - VULNERABLE_CODE_CANNOT_BE_CONTROLLED_BY_ADVERSARY
+            - INLINE_MITIGATIONS_ALREADY_EXIST
+          type: string
+      type: object
     KnowledgeBase:
       properties:
         name:
@@ -3515,20 +3535,6 @@ components:
             type: string
           type: array
       type: object
-    Threat:
-      description: Contains the vulnerability kinetic information. This information can change as the vulnerability ages and new information becomes available.
-      properties:
-        details:
-          description: Represents a thorough human-readable discussion of the threat.
-          type: string
-        threatType:
-          description: The type of threat.
-          enum:
-            - THREAT_TYPE_UNSPECIFIED
-            - IMPACT
-            - EXPLOIT_STATUS
-          type: string
-      type: object
     TimeSpan:
       description: "Start and end times for a build execution phase. Next ID: 3"
       properties:
@@ -3572,6 +3578,14 @@ components:
         cve:
           description: Holds the MITRE standard Common Vulnerabilities and Exposures (CVE) tracking number for the vulnerability.
           type: string
+        impacts:
+          description: Contains information about the impact of this vulnerability, this will change with time.
+          items:
+            type: string
+          type: array
+        justification:
+          $ref: "#/components/schemas/Justification"
+          description: Justification provides the justification when the state of the assessment if NOT_AFFECTED.
         noteName:
           description: "The VulnerabilityAssessment note from which this VexAssessment was generated. This will be of the form: `projects/[PROJECT_ID]/notes/[NOTE_ID]`."
           type: string
@@ -3594,11 +3608,6 @@ components:
             - FIXED
             - UNDER_INVESTIGATION
           type: string
-        threats:
-          description: Contains information about this vulnerability, this will change with time.
-          items:
-            $ref: "#/components/schemas/Threat"
-          type: array
       type: object
     Volume:
       description: "Volume describes a Docker container volume which is mounted into build steps in order to persist files across build step execution. Next ID: 3"

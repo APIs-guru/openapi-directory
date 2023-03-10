@@ -1741,12 +1741,20 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        externalDestructionFailureReason:
+          description: Output only. The root cause of the most recent external destruction failure. Only present if state is EXTERNAL_DESTRUCTION_FAILED.
+          readOnly: true
+          type: string
         externalProtectionLevelOptions:
           $ref: "#/components/schemas/ExternalProtectionLevelOptions"
           description: ExternalProtectionLevelOptions stores a group of additional fields for configuring a CryptoKeyVersion that are specific to the EXTERNAL protection level and EXTERNAL_VPC protection levels.
         generateTime:
           description: Output only. The time this CryptoKeyVersion's key material was generated.
           format: google-datetime
+          readOnly: true
+          type: string
+        generationFailureReason:
+          description: Output only. The root cause of the most recent generation failure. Only present if state is GENERATION_FAILED.
           readOnly: true
           type: string
         importFailureReason:
@@ -1791,6 +1799,9 @@ components:
             - DESTROY_SCHEDULED
             - PENDING_IMPORT
             - IMPORT_FAILED
+            - GENERATION_FAILED
+            - PENDING_EXTERNAL_DESTRUCTION
+            - EXTERNAL_DESTRUCTION_FAILED
           type: string
       type: object
     CryptoKeyVersionTemplate:
@@ -1903,6 +1914,17 @@ components:
           format: byte
           type: string
       type: object
+    EkmConfig:
+      description: An EkmConfig is a singleton resource that represents configuration parameters that apply to all CryptoKeys and CryptoKeyVersions with a ProtectionLevel of EXTERNAL_VPC in a given project and location.
+      properties:
+        defaultEkmConnection:
+          description: Optional. Resource name of the default EkmConnection. Setting this field to the empty string removes the default.
+          type: string
+        name:
+          description: Output only. The resource name for the EkmConfig in the format `projects/*/locations/*/ekmConfig`.
+          readOnly: true
+          type: string
+      type: object
     EkmConnection:
       description: An EkmConnection represents an individual EKM connection. It can be used for creating CryptoKeys and CryptoKeyVersions with a ProtectionLevel of EXTERNAL_VPC, as well as performing cryptographic operations using keys created within the EkmConnection.
       properties:
@@ -1911,8 +1933,18 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        cryptoSpacePath:
+          description: "Optional. Identifies the EKM Crypto Space that this EkmConnection maps to. Note: This field is required if KeyManagementMode is CLOUD_KMS."
+          type: string
         etag:
           description: Optional. Etag of the currently stored EkmConnection.
+          type: string
+        keyManagementMode:
+          description: Optional. Describes who can perform control plane operations on the EKM. If unset, this defaults to MANUAL.
+          enum:
+            - KEY_MANAGEMENT_MODE_UNSPECIFIED
+            - MANUAL
+            - CLOUD_KMS
           type: string
         name:
           description: Output only. The resource name for the EkmConnection in the format `projects/*/locations/*/ekmConnections/*`.

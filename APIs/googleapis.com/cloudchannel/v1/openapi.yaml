@@ -1357,6 +1357,11 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: Optional. A boolean flag that determines if a response returns future offers 30 days from now. If the show_future_offers is true, the response will only contain offers that are scheduled to be available 30 days from now.
+          in: query
+          name: showFutureOffers
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -1534,6 +1539,58 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
+  "/v1/{parent}:listEntitlementChanges":
+    get:
+      description: "List entitlement history. Possible error codes: * PERMISSION_DENIED: The reseller account making the request and the provided reseller account are different. * INVALID_ARGUMENT: Missing or invalid required fields in the request. * NOT_FOUND: The parent resource doesn't exist. Usually the result of an invalid name parameter. * INTERNAL: Any non-user error related to a technical issue in the backend. In this case, contact CloudChannel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. In this case, contact Cloud Channel support. Return value: List of EntitlementChanges."
+      operationId: cloudchannel.accounts.customers.entitlements.listEntitlementChanges
+      parameters:
+        - description: "Required. The resource name of the entitlement for which to list entitlement changes. The `-` wildcard may be used to match entitlements across a customer. Formats: * accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id} * accounts/{account_id}/customers/{customer_id}/entitlements/-"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filters applied to the list results.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of entitlement changes to return. The service may return fewer than this value. If unspecified, returns at most 10 entitlement changes. The maximum value is 50; the server will coerce values above 50.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token, received from a previous CloudChannelService.ListEntitlementChanges call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to CloudChannelService.ListEntitlementChanges must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudChannelV1ListEntitlementChangesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/apps.order
+          Oauth2c:
+            - https://www.googleapis.com/auth/apps.order
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}:listTransferableOffers":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2331,6 +2388,89 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudChannelV1EntitlementChange:
+      description: Change event entry for Entitlement order history
+      properties:
+        activationReason:
+          description: The Entitlement's activation reason
+          enum:
+            - ACTIVATION_REASON_UNSPECIFIED
+            - RESELLER_REVOKED_SUSPENSION
+            - CUSTOMER_ACCEPTED_PENDING_TOS
+            - RENEWAL_SETTINGS_CHANGED
+            - OTHER_ACTIVATION_REASON
+          type: string
+        cancellationReason:
+          description: Cancellation reason for the Entitlement.
+          enum:
+            - CANCELLATION_REASON_UNSPECIFIED
+            - SERVICE_TERMINATED
+            - RELATIONSHIP_ENDED
+            - PARTIAL_TRANSFER
+          type: string
+        changeType:
+          description: The change action type.
+          enum:
+            - CHANGE_TYPE_UNSPECIFIED
+            - CREATED
+            - PRICE_PLAN_SWITCHED
+            - COMMITMENT_CHANGED
+            - RENEWED
+            - SUSPENDED
+            - ACTIVATED
+            - CANCELLED
+            - SKU_CHANGED
+            - RENEWAL_SETTING_CHANGED
+            - PAID_SUBSCRIPTION_STARTED
+            - LICENSE_CAP_CHANGED
+            - SUSPENSION_DETAILS_CHANGED
+            - TRIAL_END_DATE_EXTENDED
+            - TRIAL_STARTED
+          type: string
+        createTime:
+          description: The submitted time of the change.
+          format: google-datetime
+          type: string
+        entitlement:
+          description: "Required. Resource name of an entitlement in the form: accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}"
+          type: string
+        offer:
+          description: "Required. Resource name of the Offer at the time of change. Takes the form: accounts/{account_id}/offers/{offer_id}."
+          type: string
+        operator:
+          description: Human-readable identifier that shows what operator made a change. When the operator_type is RESELLER, this is the user's email address. For all other operator types, this is empty.
+          type: string
+        operatorType:
+          description: Operator type responsible for the change.
+          enum:
+            - OPERATOR_TYPE_UNSPECIFIED
+            - CUSTOMER_SERVICE_REPRESENTATIVE
+            - SYSTEM
+            - CUSTOMER
+            - RESELLER
+          type: string
+        otherChangeReason:
+          description: e.g. purchase_number change reason, entered by CRS.
+          type: string
+        parameters:
+          description: "Extended parameters, such as: purchase_order_number, gcp_details; internal_correlation_id, long_running_operation_id, order_id; etc."
+          items:
+            $ref: "#/components/schemas/GoogleCloudChannelV1Parameter"
+          type: array
+        provisionedService:
+          $ref: "#/components/schemas/GoogleCloudChannelV1ProvisionedService"
+          description: Service provisioned for an Entitlement.
+        suspensionReason:
+          description: Suspension reason for the Entitlement.
+          enum:
+            - SUSPENSION_REASON_UNSPECIFIED
+            - RESELLER_INITIATED
+            - TRIAL_ENDED
+            - RENEWAL_WITH_TYPE_CANCEL
+            - PENDING_TOS_ACCEPTANCE
+            - OTHER
+          type: string
+      type: object
     GoogleCloudChannelV1EntitlementEvent:
       description: Represents Pub/Sub message content describing entitlement update.
       properties:
@@ -2449,6 +2589,18 @@ components:
           type: array
         nextPageToken:
           description: A token to retrieve the next page of results. Pass to ListCustomersRequest.page_token to obtain that page.
+          type: string
+      type: object
+    GoogleCloudChannelV1ListEntitlementChangesResponse:
+      description: Response message for CloudChannelService.ListEntitlementChanges
+      properties:
+        entitlementChanges:
+          description: The list of entitlement changes.
+          items:
+            $ref: "#/components/schemas/GoogleCloudChannelV1EntitlementChange"
+          type: array
+        nextPageToken:
+          description: A token to list the next page of results.
           type: string
       type: object
     GoogleCloudChannelV1ListEntitlementsResponse:

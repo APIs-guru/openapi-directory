@@ -1383,6 +1383,9 @@ components:
           items:
             $ref: "#/components/schemas/ErrorSummary"
           type: array
+        loggingConfig:
+          $ref: "#/components/schemas/LoggingConfig"
+          description: Cloud Logging configuration.
         name:
           description: A globally unique ID assigned by the system.
           type: string

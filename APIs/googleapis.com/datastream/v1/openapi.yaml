@@ -1099,6 +1099,7 @@ components:
       properties: {}
       type: object
     BigQueryDestinationConfig:
+      description: BigQuery destination configuration
       properties:
         dataFreshness:
           description: The guaranteed data freshness (in seconds) when querying tables created by the stream. Editing this field will only affect new tables created in the future, but existing tables will not be impacted. Lower values mean that queries will return fresher data, but may result in higher cost.
@@ -2027,6 +2028,7 @@ components:
       properties:
         datasetTemplate:
           $ref: "#/components/schemas/DatasetTemplate"
+          description: The dataset template to use for dynamic dataset creation.
       type: object
     SourceObjectIdentifier:
       description: Represents an identifier of an object in the data source.
@@ -2053,7 +2055,7 @@ components:
           description: The stream object resource a backfill job was started for.
       type: object
     StaticServiceIpConnectivity:
-      description: Static IP address connectivity.
+      description: Static IP address connectivity. Used when the source database is configured to allow incoming connections from the Datastream public IP addresses for the region specified in the connection profile.
       properties: {}
       type: object
     Status:
