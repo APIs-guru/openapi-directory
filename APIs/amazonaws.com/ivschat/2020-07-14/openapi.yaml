@@ -1161,24 +1161,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateLoggingConfigurationResponse'
         '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
-        '481':
+        '482':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '482':
+        '483':
           description: PendingVerification
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PendingVerification'
-        '483':
+        '484':
           description: ValidationException
           content:
             application/json:

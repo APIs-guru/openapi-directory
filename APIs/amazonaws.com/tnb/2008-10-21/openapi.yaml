@@ -156,7 +156,7 @@ paths:
         - name: nsLcmOpOccId
           in: path
           required: true
-          description: The ID of a network operation occurrence.
+          description: The identifier of the network operation.
           schema:
             type: string
             pattern: '^no-[a-f0-9]{17}$'
@@ -171,7 +171,7 @@ paths:
   /sol/vnfpkgm/v1/vnf_packages:
     post:
       operationId: CreateSolFunctionPackage
-      description: '<p>Creates a function package.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network. For more information, see <a href="https://docs.aws.amazon.com/tnb/latest/ug/function-packages.html">Function packages</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>. </p> <p>Creating a function package is the first step for creating a network in AWS TNB. This request creates an empty container with an ID. The next step is to upload the actual CSAR zip file into that empty container. To upload function package content, see <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolFunctionPackageContent.html">PutSolFunctionPackageContent</a>.</p>'
+      description: '<p>Creates a function package.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network. For more information, see <a href="https://docs.aws.amazon.com/tnb/latest/ug/function-packages.html">Function packages</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>. </p> <p>Creating a function package is the first step for creating a network in AWS TNB. This request creates an empty container with an ID. The next step is to upload the actual CSAR zip file into that empty container. To upload function package content, see <a href="https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolFunctionPackageContent.html">PutSolFunctionPackageContent</a>.</p>'
       responses:
         '201':
           description: Success
@@ -296,7 +296,7 @@ paths:
   /sol/nslcm/v1/ns_instances:
     post:
       operationId: CreateSolNetworkInstance
-      description: '<p>Creates a network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed. Creating a network instance is the third step after creating a network package. For more information about network instances, <a href="https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html">Network instances</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>.</p> <p>Once you create a network instance, you can instantiate it. To instantiate a network, see <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_InstantiateSolNetworkInstance.html">InstantiateSolNetworkInstance</a>.</p>'
+      description: '<p>Creates a network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed. Creating a network instance is the third step after creating a network package. For more information about network instances, <a href="https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html">Network instances</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>.</p> <p>Once you create a network instance, you can instantiate it. To instantiate a network, see <a href="https://docs.aws.amazon.com/tnb/latest/APIReference/API_InstantiateSolNetworkInstance.html">InstantiateSolNetworkInstance</a>.</p>'
       responses:
         '201':
           description: Success
@@ -354,13 +354,13 @@ paths:
                 nsDescription:
                   description: Network instance description.
                   type: string
-                  minLength: 1
-                  maxLength: 124
+                  minLength: 0
+                  maxLength: 255
                 nsName:
                   description: Network instance name.
                   type: string
                   minLength: 1
-                  maxLength: 80
+                  maxLength: 100
                 nsdInfoId:
                   description: ID for network service descriptor.
                   type: string
@@ -444,7 +444,7 @@ paths:
   /sol/nsd/v1/ns_descriptors:
     post:
       operationId: CreateSolNetworkPackage
-      description: '<p>Creates a network package.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on. For more information, see <a href="https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html">Network instances</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>. </p> <p>A network package consists of a network service descriptor (NSD) file (required) and any additional files (optional), such as scripts specific to your needs. For example, if you have multiple function packages in your network package, you can use the NSD to define which network functions should run in certain VPCs, subnets, or EKS clusters.</p> <p>This request creates an empty network package container with an ID. Once you create a network package, you can upload the network package content using <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolNetworkPackageContent.html">PutSolNetworkPackageContent</a>.</p>'
+      description: '<p>Creates a network package.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on. For more information, see <a href="https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html">Network instances</a> in the <i>Amazon Web Services Telco Network Builder User Guide</i>. </p> <p>A network package consists of a network service descriptor (NSD) file (required) and any additional files (optional), such as scripts specific to your needs. For example, if you have multiple function packages in your network package, you can use the NSD to define which network functions should run in certain VPCs, subnets, or EKS clusters.</p> <p>This request creates an empty network package container with an ID. Once you create a network package, you can upload the network package content using <a href="https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html">PutSolNetworkPackageContent</a>.</p>'
       responses:
         '201':
           description: Success
@@ -569,7 +569,7 @@ paths:
   '/sol/vnfpkgm/v1/vnf_packages/{vnfPkgId}':
     delete:
       operationId: DeleteSolFunctionPackage
-      description: '<p>Deletes a function package.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p> <p>To delete a function package, the package must be in a disabled state. To disable a function package, see <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_UpdateSolFunctionPackage.html">UpdateSolFunctionPackage</a>. </p>'
+      description: '<p>Deletes a function package.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p> <p>To delete a function package, the package must be in a disabled state. To disable a function package, see <a href="https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolFunctionPackage.html">UpdateSolFunctionPackage</a>. </p>'
       responses:
         '204':
           description: Success
@@ -733,7 +733,7 @@ paths:
   '/sol/nslcm/v1/ns_instances/{nsInstanceId}':
     delete:
       operationId: DeleteSolNetworkInstance
-      description: '<p>Deletes a network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p> <p>To delete a network instance, the instance must be in a stopped or terminated state. To terminate a network instance, see <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_TerminateSolNetworkInstance.html">TerminateSolNetworkInstance</a>.</p>'
+      description: '<p>Deletes a network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p> <p>To delete a network instance, the instance must be in a stopped or terminated state. To terminate a network instance, see <a href="https://docs.aws.amazon.com/tnb/latest/APIReference/API_TerminateSolNetworkInstance.html">TerminateSolNetworkInstance</a>.</p>'
       responses:
         '204':
           description: Success
@@ -834,7 +834,7 @@ paths:
   '/sol/nsd/v1/ns_descriptors/{nsdInfoId}':
     delete:
       operationId: DeleteSolNetworkPackage
-      description: '<p>Deletes network package.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p> <p>To delete a network package, the package must be in a disable state. To disable a network package, see <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_UpdateSolNetworkPackage.html">UpdateSolNetworkPackage</a>.</p>'
+      description: '<p>Deletes network package.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p> <p>To delete a network package, the package must be in a disable state. To disable a network package, see <a href="https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolNetworkPackage.html">UpdateSolNetworkPackage</a>.</p>'
       responses:
         '204':
           description: Success
@@ -1227,7 +1227,7 @@ paths:
         - name: nsLcmOpOccId
           in: path
           required: true
-          description: The identifier of the operation occurrence.
+          description: The identifier of the network operation.
           schema:
             type: string
             pattern: '^no-[a-f0-9]{17}$'
@@ -1364,7 +1364,7 @@ paths:
   '/sol/nslcm/v1/ns_instances/{nsInstanceId}/instantiate':
     post:
       operationId: InstantiateSolNetworkInstance
-      description: '<p>Instantiates a network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p> <p>Before you can instantiate a network instance, you have to create a network instance. For more information, see <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_CreateSolNetworkInstance.html">CreateSolNetworkInstance</a>.</p>'
+      description: '<p>Instantiates a network instance.</p> <p>A network instance is a single network created in Amazon Web Services TNB that can be deployed and on which life-cycle operations (like terminate, update, and delete) can be performed.</p> <p>Before you can instantiate a network instance, you have to create a network instance. For more information, see <a href="https://docs.aws.amazon.com/tnb/latest/APIReference/API_CreateSolNetworkInstance.html">CreateSolNetworkInstance</a>.</p>'
       responses:
         '201':
           description: Success
@@ -1433,6 +1433,13 @@ paths:
                   description: Provides values for the configurable properties.
                   type: object
                   properties: {}
+                tags:
+                  description: 'A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1911,6 +1918,20 @@ paths:
           schema:
             type: string
             pattern: '^ni-[a-f0-9]{17}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tags:
+                  description: 'A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2062,6 +2083,13 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/VnfInstanceId'
                         - description: <p>ID of the network function instance.</p> <p>A network function instance is a function in a function package .</p>
+                tags:
+                  description: 'A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
                 updateType:
                   description: The type of update.
                   type: string
@@ -2078,7 +2106,7 @@ paths:
   '/sol/vnfpkgm/v1/vnf_packages/{vnfPkgId}/package_content/validate':
     put:
       operationId: ValidateSolFunctionPackageContent
-      description: '<p>Validates function package content. This can be used as a dry run before uploading function package content with <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolFunctionPackageContent.html">PutSolFunctionPackageContent</a>.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>'
+      description: '<p>Validates function package content. This can be used as a dry run before uploading function package content with <a href="https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolFunctionPackageContent.html">PutSolFunctionPackageContent</a>.</p> <p>A function package is a .zip file in CSAR (Cloud Service Archive) format that contains a network function (an ETSI standard telecommunication application) and function package descriptor that uses the TOSCA standard to describe how the network functions should run on your network.</p>'
       responses:
         '202':
           description: Success
@@ -2155,7 +2183,7 @@ paths:
   '/sol/nsd/v1/ns_descriptors/{nsdInfoId}/nsd_content/validate':
     put:
       operationId: ValidateSolNetworkPackageContent
-      description: '<p>Validates network package content. This can be used as a dry run before uploading network package content with <a href="https://docs.aws.amazon.com/TNB/latest/APIReference/API_PutSolNetworkPackageContent.html">PutSolNetworkPackageContent</a>.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>'
+      description: '<p>Validates network package content. This can be used as a dry run before uploading network package content with <a href="https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html">PutSolNetworkPackageContent</a>.</p> <p>A network package is a .zip file in CSAR (Cloud Service Archive) format defines the function packages you want to deploy and the Amazon Web Services infrastructure you want to deploy them on.</p>'
       responses:
         '200':
           description: Success
@@ -2564,7 +2592,7 @@ components:
         error:
           allOf:
             - $ref: '#/components/schemas/ProblemDetails'
-            - description: Error related to this specific network operation occurence.
+            - description: Error related to this specific network operation occurrence.
         id:
           allOf:
             - $ref: '#/components/schemas/NsLcmOpOccId'
@@ -2671,7 +2699,11 @@ components:
         nsLcmOpOccId:
           allOf:
             - $ref: '#/components/schemas/NsLcmOpOccId'
-            - description: The identifier of the network instance.
+            - description: The identifier of the network operation.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.'
     ListSolFunctionInstancesOutput:
       type: object
       properties:
@@ -2822,7 +2854,11 @@ components:
         nsLcmOpOccId:
           allOf:
             - $ref: '#/components/schemas/NsLcmOpOccId'
-            - description: The identifier of the operation occurrence.
+            - description: The identifier of the network operation.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.'
     UntagResourceOutput:
       type: object
       properties: {}
@@ -2844,7 +2880,11 @@ components:
         nsLcmOpOccId:
           allOf:
             - $ref: '#/components/schemas/NsLcmOpOccId'
-            - description: The identifier of the network instance operation occurrence.
+            - description: The identifier of the network operation.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.'
     Document:
       type: object
       properties: {}
@@ -2982,12 +3022,12 @@ components:
         - NOT_IN_USE
     CreateSolNetworkInstanceInputNsDescriptionString:
       type: string
-      minLength: 1
-      maxLength: 124
+      minLength: 0
+      maxLength: 255
     CreateSolNetworkInstanceInputNsNameString:
       type: string
       minLength: 1
-      maxLength: 80
+      maxLength: 100
     NsdInfoId:
       type: string
       pattern: '^np-[a-f0-9]{17}$'
@@ -3217,7 +3257,7 @@ components:
         nsLcmOpOccId:
           allOf:
             - $ref: '#/components/schemas/NsLcmOpOccId'
-            - description: The identifier of the latest network lifecycle management operation occurrence.
+            - description: The identifier of the network operation.
       description: '<p>Lifecycle management operation details on the network instance.</p> <p>Lifecycle management operations are deploy, update, or delete operations.</p>'
     NsState:
       type: string
@@ -3251,7 +3291,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
             - description: The date that the resource was last modified.
-      description: '<p>Metadata related to a network operation occurence.</p> <p>A network operation is any operation that is done to your network, such as network instance instantiation or termination.</p>'
+      description: '<p>Metadata related to a network operation occurrence.</p> <p>A network operation is any operation that is done to your network, such as network instance instantiation or termination.</p>'
     NsLcmOpOccArn:
       type: string
       pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-b|aws-us-gov):tnb:([a-z]{2}(-(gov|isob|iso))?-(east|west|north|south|central){1,2}-[0-9]):\d{12}:(network-operation/no-[a-f0-9]{17})$'
@@ -3408,6 +3448,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Document'
             - description: Provides values for the configurable properties.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.'
     ListSolFunctionInstanceMetadata:
       type: object
       required:
@@ -3848,7 +3892,11 @@ components:
     TerminateSolNetworkInstanceInput:
       type: object
       title: TerminateSolNetworkInstanceInput
-      properties: {}
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.'
     UntagResourceInput:
       type: object
       title: UntagResourceInput
@@ -3892,6 +3940,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/UpdateSolNetworkModify'
             - description: Identifies the network function information parameters and/or the configurable properties of the network function to be modified.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.'
         updateType:
           allOf:
             - $ref: '#/components/schemas/UpdateSolNetworkType'

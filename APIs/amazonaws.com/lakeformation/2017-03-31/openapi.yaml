@@ -656,7 +656,9 @@ paths:
                         - $ref: '#/components/schemas/ColumnWildcard'
                         - description: <p>A wildcard with exclusions.</p> <p>You must specify either a <code>ColumnNames</code> list or the <code>ColumnWildCard</code>. </p>
                     VersionId:
-                      $ref: '#/components/schemas/VersionString'
+                      allOf:
+                        - $ref: '#/components/schemas/VersionString'
+                        - description: The ID of the data cells filter version.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3313,7 +3315,7 @@ paths:
                         - $ref: '#/components/schemas/LFTagPolicyResource'
                         - description: A list of LF-tag conditions that define a resource's LF-tag policy.
                 Permissions:
-                  description: 'The permissions revoked to the principal on the resource. For information about permissions, see <a href="https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.'
+                  description: 'The permissions revoked to the principal on the resource. For information about permissions, see <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.'
                   type: array
                   items:
                     $ref: '#/components/schemas/Permission'
@@ -3740,7 +3742,9 @@ paths:
                         - $ref: '#/components/schemas/ColumnWildcard'
                         - description: <p>A wildcard with exclusions.</p> <p>You must specify either a <code>ColumnNames</code> list or the <code>ColumnWildCard</code>. </p>
                     VersionId:
-                      $ref: '#/components/schemas/VersionString'
+                      allOf:
+                        - $ref: '#/components/schemas/VersionString'
+                        - description: The ID of the data cells filter version.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5258,7 +5262,9 @@ components:
             - $ref: '#/components/schemas/ColumnWildcard'
             - description: <p>A wildcard with exclusions.</p> <p>You must specify either a <code>ColumnNames</code> list or the <code>ColumnWildCard</code>. </p>
         VersionId:
-          $ref: '#/components/schemas/VersionString'
+          allOf:
+            - $ref: '#/components/schemas/VersionString'
+            - description: The ID of the data cells filter version.
       description: A structure that describes certain columns on certain rows.
     CreateDataCellsFilterRequest:
       type: object
@@ -6326,7 +6332,7 @@ components:
         Permissions:
           allOf:
             - $ref: '#/components/schemas/PermissionList'
-            - description: 'The permissions revoked to the principal on the resource. For information about permissions, see <a href="https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.'
+            - description: 'The permissions revoked to the principal on the resource. For information about permissions, see <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.'
         PermissionsWithGrantOption:
           allOf:
             - $ref: '#/components/schemas/PermissionList'

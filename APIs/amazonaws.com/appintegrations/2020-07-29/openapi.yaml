@@ -171,6 +171,9 @@ paths:
               type: object
               required:
                 - Name
+                - KmsKey
+                - SourceURI
+                - ScheduleConfig
               properties:
                 Name:
                   description: The name of the DataIntegration.
@@ -193,9 +196,9 @@ paths:
                 SourceURI:
                   description: The URI of the data source.
                   type: string
-                  pattern: .*\S.*
+                  pattern: '^(\w+\:\/\/[\w.-]+[\w/!@#+=.-]+$)|(\w+\:\/\/[\w.-]+[\w/!@#+=.-]+[\w/!@#+=.-]+[\w/!@#+=.,-]+$)'
                   minLength: 1
-                  maxLength: 255
+                  maxLength: 1000
                 ScheduleConfig:
                   description: The name of the data and how often it should be pulled from the source.
                   type: object
@@ -203,28 +206,45 @@ paths:
                     FirstExecutionFrom:
                       allOf:
                         - $ref: '#/components/schemas/NonBlankString'
-                        - description: The start date for objects to import in the first flow run.
+                        - description: The start date for objects to import in the first flow run as an Unix/epoch timestamp in milliseconds or in ISO-8601 format.
                     Object:
                       allOf:
                         - $ref: '#/components/schemas/Object'
                         - description: The name of the object to pull from the data source.
                     ScheduleExpression:
                       allOf:
-                        - $ref: '#/components/schemas/Schedule'
+                        - $ref: '#/components/schemas/NonBlankString'
                         - description: How often the data should be pulled from data source.
                 Tags:
-                  description: One or more tags.
+                  description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
                   type: object
                   minProperties: 1
                   maxProperties: 200
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 ClientToken:
-                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
                   type: string
                   pattern: .*
                   minLength: 1
                   maxLength: 2048
+                FileConfiguration:
+                  description: The configuration for what files should be pulled from the source.
+                  type: object
+                  properties:
+                    Folders:
+                      allOf:
+                        - $ref: '#/components/schemas/FolderList'
+                        - description: Identifiers for the source folders to pull all files from recursively.
+                    Filters:
+                      allOf:
+                        - $ref: '#/components/schemas/FieldsMap'
+                        - description: Restrictions for what files should be pulled from the source.
+                ObjectConfiguration:
+                  description: The configuration for what data should be pulled from the source.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/FieldsMap'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -371,13 +391,13 @@ paths:
                   minLength: 1
                   maxLength: 255
                 ClientToken:
-                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
                   type: string
                   pattern: .*
                   minLength: 1
                   maxLength: 2048
                 Tags:
-                  description: One or more tags.
+                  description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
                   type: object
                   minProperties: 1
                   maxProperties: 200
@@ -1052,7 +1072,7 @@ paths:
                 - tags
               properties:
                 tags:
-                  description: 'One or more tags. '
+                  description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
                   type: object
                   minProperties: 1
                   maxProperties: 200
@@ -1198,7 +1218,7 @@ components:
             - description: The KMS key for the DataIntegration.
         SourceURI:
           allOf:
-            - $ref: '#/components/schemas/NonBlankString'
+            - $ref: '#/components/schemas/SourceURI'
             - description: The URI of the data source.
         ScheduleConfiguration:
           allOf:
@@ -1207,11 +1227,19 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: One or more tags.
+            - description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
+        FileConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/FileConfiguration'
+            - description: The configuration for what files should be pulled from the source.
+        ObjectConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ObjectConfiguration'
+            - description: The configuration for what data should be pulled from the source.
     NonBlankString:
       type: string
       pattern: .*\S.*
@@ -1222,14 +1250,19 @@ components:
       pattern: '^[a-zA-Z0-9\/\._\-]+$'
       minLength: 1
       maxLength: 255
-    Schedule:
-      type: string
-      pattern: '^[a-zA-Z0-9\/\._\-]+$'
-      minLength: 1
-      maxLength: 255
     TagValue:
       type: string
       maxLength: 256
+    FolderList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonBlankLongString'
+      minItems: 1
+      maxItems: 10
+    FieldsMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/FieldsList'
     InternalServiceError: {}
     ResourceQuotaExceededException: {}
     DuplicateResourceException: {}
@@ -1280,7 +1313,7 @@ components:
             - description: The KMS key for the DataIntegration.
         SourceURI:
           allOf:
-            - $ref: '#/components/schemas/NonBlankString'
+            - $ref: '#/components/schemas/SourceURI'
             - description: The URI of the data source.
         ScheduleConfiguration:
           allOf:
@@ -1289,7 +1322,15 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: One or more tags.
+            - description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
+        FileConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/FileConfiguration'
+            - description: The configuration for what files should be pulled from the source.
+        ObjectConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ObjectConfiguration'
+            - description: The configuration for what data should be pulled from the source.
     GetEventIntegrationResponse:
       type: object
       properties:
@@ -1316,7 +1357,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: One or more tags.
+            - description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
     ListDataIntegrationAssociationsResponse:
       type: object
       properties:
@@ -1409,20 +1450,27 @@ components:
       pattern: .*
       minLength: 1
       maxLength: 1000
+    SourceURI:
+      type: string
+      pattern: '^(\w+\:\/\/[\w.-]+[\w/!@#+=.-]+$)|(\w+\:\/\/[\w.-]+[\w/!@#+=.-]+[\w/!@#+=.-]+[\w/!@#+=.,-]+$)'
+      minLength: 1
+      maxLength: 1000
     ScheduleConfiguration:
       type: object
+      required:
+        - ScheduleExpression
       properties:
         FirstExecutionFrom:
           allOf:
             - $ref: '#/components/schemas/NonBlankString'
-            - description: The start date for objects to import in the first flow run.
+            - description: The start date for objects to import in the first flow run as an Unix/epoch timestamp in milliseconds or in ISO-8601 format.
         Object:
           allOf:
             - $ref: '#/components/schemas/Object'
             - description: The name of the object to pull from the data source.
         ScheduleExpression:
           allOf:
-            - $ref: '#/components/schemas/Schedule'
+            - $ref: '#/components/schemas/NonBlankString'
             - description: How often the data should be pulled from data source.
       description: The name of the data and how often it should be pulled from the source.
     TagMap:
@@ -1436,10 +1484,32 @@ components:
       pattern: .*
       minLength: 1
       maxLength: 2048
+    FileConfiguration:
+      type: object
+      required:
+        - Folders
+      properties:
+        Folders:
+          allOf:
+            - $ref: '#/components/schemas/FolderList'
+            - description: Identifiers for the source folders to pull all files from recursively.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FieldsMap'
+            - description: Restrictions for what files should be pulled from the source.
+      description: The configuration for what files should be pulled from the source.
+    ObjectConfiguration:
+      type: object
+      description: The configuration for what data should be pulled from the source.
+      additionalProperties:
+        $ref: '#/components/schemas/FieldsMap'
     CreateDataIntegrationRequest:
       type: object
       required:
         - Name
+        - KmsKey
+        - SourceURI
+        - ScheduleConfig
       title: CreateDataIntegrationRequest
       properties:
         Name:
@@ -1456,7 +1526,7 @@ components:
             - description: The KMS key for the DataIntegration.
         SourceURI:
           allOf:
-            - $ref: '#/components/schemas/NonBlankString'
+            - $ref: '#/components/schemas/SourceURI'
             - description: The URI of the data source.
         ScheduleConfig:
           allOf:
@@ -1465,11 +1535,19 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: One or more tags.
+            - description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
+        FileConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/FileConfiguration'
+            - description: The configuration for what files should be pulled from the source.
+        ObjectConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ObjectConfiguration'
+            - description: The configuration for what data should be pulled from the source.
     UUID:
       type: string
       pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
@@ -1515,11 +1593,11 @@ components:
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: One or more tags.
+            - description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
     DataIntegrationAssociationSummary:
       type: object
       properties:
@@ -1530,11 +1608,11 @@ components:
         DataIntegrationArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN)of the DataIntegration.
+            - description: The Amazon Resource Name (ARN) of the DataIntegration.
         ClientId:
           allOf:
             - $ref: '#/components/schemas/ClientId'
-            - description: The identifier for teh client that is associated with the DataIntegration association.
+            - description: The identifier for the client that is associated with the DataIntegration association.
       description: Summary information about the DataIntegration association.
     DataIntegrationAssociationsList:
       type: array
@@ -1555,7 +1633,7 @@ components:
             - description: The name of the DataIntegration.
         SourceURI:
           allOf:
-            - $ref: '#/components/schemas/NonBlankString'
+            - $ref: '#/components/schemas/SourceURI'
             - description: The URI of the data source.
       description: Summary information about the DataIntegration.
     DataIntegrationsList:
@@ -1608,7 +1686,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: The tags.
+            - description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
       description: The event integration.
     EventIntegrationAssociation:
       type: object
@@ -1650,6 +1728,22 @@ components:
         $ref: '#/components/schemas/EventIntegration'
       minItems: 1
       maxItems: 50
+    Fields:
+      type: string
+      pattern: '^[a-zA-Z0-9\/\._\-]+$'
+      minLength: 1
+      maxLength: 255
+    FieldsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Fields'
+      minItems: 1
+      maxItems: 2048
+    NonBlankLongString:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 200
     GetDataIntegrationRequest:
       type: object
       title: GetDataIntegrationRequest
@@ -1702,7 +1796,7 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: 'One or more tags. '
+            - description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
