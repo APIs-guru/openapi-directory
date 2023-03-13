@@ -2361,6 +2361,51 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - purchases
+  "/androidpublisher/v3/applications/{packageName}/purchases/products/{productId}/tokens/{token}:consume":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Consumes a purchase for an inapp item.
+      operationId: androidpublisher.purchases.products.consume
+      parameters:
+        - description: The package name of the application the inapp product was sold in (for example, 'com.some.thing').
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: The inapp product SKU (for example, 'com.some.thing.inapp1').
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - description: The token provided to the user's device when the inapp product was purchased.
+          in: path
+          name: token
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - purchases
   "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}":
     get:
       description: Checks whether a user's subscription purchase is valid and returns its expiry time.

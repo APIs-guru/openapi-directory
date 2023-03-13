@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 9.1.0
+  version: 9.1.1
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1037,6 +1037,7 @@ paths:
                     unit_price: 27500.5,
                     unit_of_measure: 'pc.',
                     discount_percentage: 0.01,
+                    discount_amount: 19.99,
                     location_id: '1234',
                     department_id: '1234',
                     item: {
@@ -1268,6 +1269,7 @@ paths:
                     unit_price: 27500.5,
                     unit_of_measure: 'pc.',
                     discount_percentage: 0.01,
+                    discount_amount: 19.99,
                     location_id: '1234',
                     department_id: '1234',
                     item: {
@@ -2203,7 +2205,7 @@ paths:
       x-apideck-api: accounting
       x-apideck-gotchas:
         - connector: quickbooks
-          description: Quickbooks offers limited (regional) support for applying discount on a Line Item. Including discount_percentage applies to entire invoice.
+          description: Quickbooks offers limited (regional) support for applying discount on a Line Item. Including discount_percentage or discount_amount applies to entire invoice.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2239,6 +2241,7 @@ paths:
                 total_tax: 2500,
                 tax_code: '1234',
                 discount_percentage: 5.5,
+                discount_amount: 25,
                 total: 27500,
                 balance: 27500,
                 deposit: 0,
@@ -2257,6 +2260,7 @@ paths:
                     unit_price: 27500.5,
                     unit_of_measure: 'pc.',
                     discount_percentage: 0.01,
+                    discount_amount: 19.99,
                     location_id: '1234',
                     department_id: '1234',
                     item: {
@@ -2472,6 +2476,9 @@ paths:
       tags:
         - Invoices
       x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: quickbooks
+          description: Quickbooks offers limited (regional) support for applying discount on a Line Item. Including discount_percentage or discount_amount applies to entire invoice.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2508,6 +2515,7 @@ paths:
                 total_tax: 2500,
                 tax_code: '1234',
                 discount_percentage: 5.5,
+                discount_amount: 25,
                 total: 27500,
                 balance: 27500,
                 deposit: 0,
@@ -2526,6 +2534,7 @@ paths:
                     unit_price: 27500.5,
                     unit_of_measure: 'pc.',
                     discount_percentage: 0.01,
+                    discount_amount: 19.99,
                     location_id: '1234',
                     department_id: '1234',
                     item: {
@@ -8987,11 +8996,17 @@ components:
           nullable: true
           title: Deposit
           type: number
+        discount_amount:
+          description: Discount amount applied to this invoice.
+          example: 25
+          nullable: true
+          title: Discount Amount
+          type: number
         discount_percentage:
           description: Discount percentage applied to this invoice.
           example: 5.5
           nullable: true
-          title: Discount
+          title: Discount Percent
           type: number
         downstream_id:
           $ref: "#/components/schemas/DownstreamId"
@@ -9133,6 +9148,7 @@ components:
         customer: high
         customer_memo: low
         deposit: low
+        discount_amount: medium
         discount_percentage: medium
         downstream_id: low
         due_date: edge-case
@@ -9344,11 +9360,17 @@ components:
           nullable: true
           title: Description
           type: string
+        discount_amount:
+          description: Discount amount applied to the line item when supported downstream.
+          example: 19.99
+          nullable: true
+          title: Discount Amount
+          type: number
         discount_percentage:
           description: Discount percentage applied to the line item when supported downstream.
           example: 0.01
           nullable: true
-          title: Discount
+          title: Discount Percentage
           type: number
         id:
           $ref: "#/components/schemas/Id"

@@ -1284,6 +1284,13 @@ components:
             - DOCKER_HUB
           type: string
       type: object
+    DockerRepositoryConfig:
+      description: DockerRepositoryConfig is docker related repository details. Provides additional configuration details for repositories of the docker format type.
+      properties:
+        immutableTags:
+          description: The repository which enabled this flag prevents all tags from being modified, moved or deleted. This does not prevent tags from being created.
+          type: boolean
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
@@ -1828,12 +1835,16 @@ components:
       description: A Repository for storing artifacts with a specific format.
       properties:
         createTime:
-          description: The time when the repository was created.
+          description: Output only. The time when the repository was created.
           format: google-datetime
+          readOnly: true
           type: string
         description:
           description: The user-provided description of the repository.
           type: string
+        dockerConfig:
+          $ref: "#/components/schemas/DockerRepositoryConfig"
+          description: Docker repository config contains repository level configuration for the repositories of docker type.
         format:
           description: The format of packages that are stored in the repository.
           enum:
@@ -1881,8 +1892,9 @@ components:
           readOnly: true
           type: string
         updateTime:
-          description: The time when the repository was last updated.
+          description: Output only. The time when the repository was last updated.
           format: google-datetime
+          readOnly: true
           type: string
         virtualRepositoryConfig:
           $ref: "#/components/schemas/VirtualRepositoryConfig"

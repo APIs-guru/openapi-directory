@@ -433,10 +433,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: RenameInstance sets a new name for an instance.
-      operationId: baremetalsolution.projects.locations.instances.rename
+      description: RenameVolume sets a new name for a volume. Use with caution, previous names become immediately invalidated.
+      operationId: baremetalsolution.projects.locations.volumes.rename
       parameters:
-        - description: "Required. The `name` field is used to identify the instance. Format: projects/{project}/locations/{location}/instances/{instance}"
+        - description: "Required. The `name` field is used to identify the volume. Format: projects/{project}/locations/{location}/volumes/{volume}"
           in: path
           name: name
           required: true
@@ -446,13 +446,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RenameInstanceRequest"
+              $ref: "#/components/schemas/RenameVolumeRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Instance"
+                $ref: "#/components/schemas/Volume"
           description: Successful response
       security:
         - Oauth2:
@@ -1467,6 +1467,10 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        firmwareVersion:
+          description: Output only. The firmware version for the instance.
+          readOnly: true
+          type: string
         hyperthreadingEnabled:
           description: True if you enable hyperthreading for the server, otherwise false. The default value is false.
           type: boolean
@@ -2314,8 +2318,29 @@ components:
     RenameInstanceRequest:
       description: Message requesting rename of a server.
       properties:
-        newName:
-          description: "Required. The new `name` of the instance. Format: {instancename}"
+        newInstanceId:
+          description: Required. The new `id` of the instance.
+          type: string
+      type: object
+    RenameNetworkRequest:
+      description: Message requesting rename of a server.
+      properties:
+        newNetworkId:
+          description: Required. The new `id` of the network.
+          type: string
+      type: object
+    RenameNfsShareRequest:
+      description: Message requesting rename of a server.
+      properties:
+        newNfsshareId:
+          description: Required. The new `id` of the nfsshare.
+          type: string
+      type: object
+    RenameVolumeRequest:
+      description: Message requesting rename of a server.
+      properties:
+        newVolumeId:
+          description: Required. The new `id` of the volume.
           type: string
       type: object
     ResetInstanceRequest:
