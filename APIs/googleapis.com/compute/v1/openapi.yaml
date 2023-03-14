@@ -39348,6 +39348,70 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - nodeGroups
+  "/projects/{project}/zones/{zone}/nodeGroups/{nodeGroup}/simulateMaintenanceEvent":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Simulates maintenance event on specified nodes from the node group.
+      operationId: compute.nodeGroups.simulateMaintenanceEvent
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name of the NodeGroup resource whose nodes will go under maintenance simulation.
+          in: path
+          name: nodeGroup
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NodeGroupsSimulateMaintenanceEventRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - nodeGroups
   "/projects/{project}/zones/{zone}/nodeGroups/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
@@ -45602,13 +45666,14 @@ components:
       description: Guest OS features.
       properties:
         type:
-          description: "The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_SNP_CAPABLE For more information, see Enabling guest operating system features."
+          description: "The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_SNP_CAPABLE - TDX_CAPABLE For more information, see Enabling guest operating system features."
           enum:
             - FEATURE_TYPE_UNSPECIFIED
             - GVNIC
             - MULTI_IP_SUBNET
             - SECURE_BOOT
             - SEV_CAPABLE
+            - SEV_LIVE_MIGRATABLE
             - SEV_SNP_CAPABLE
             - UEFI_COMPATIBLE
             - VIRTIO_SCSI_MULTIQUEUE
@@ -46362,7 +46427,7 @@ components:
           format: int32
           type: integer
         requestPath:
-          description: The request path of the HTTP health check request. The default value is /. This field does not support query parameters.
+          description: The request path of the HTTP health check request. The default value is /. This field does not support query parameters. Must comply with RFC3986.
           type: string
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."
@@ -46633,7 +46698,7 @@ components:
           format: int32
           type: integer
         requestPath:
-          description: The request path of the HTTPS health check request. The default value is "/".
+          description: The request path of the HTTPS health check request. The default value is "/". Must comply with RFC3986.
           type: string
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."
@@ -52510,6 +52575,14 @@ components:
         nodeTemplate:
           description: Full or partial URL of the node template resource to be updated for this node group.
           type: string
+      type: object
+    NodeGroupsSimulateMaintenanceEventRequest:
+      properties:
+        nodes:
+          description: Names of the nodes to go under maintenance simulation.
+          items:
+            type: string
+          type: array
       type: object
     NodeTemplate:
       description: Represent a sole-tenant Node Template resource. You can use a template to define properties for nodes in a node group. For more information, read Creating node groups and instances.

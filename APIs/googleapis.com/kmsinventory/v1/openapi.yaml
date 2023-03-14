@@ -447,12 +447,20 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        externalDestructionFailureReason:
+          description: Output only. The root cause of the most recent external destruction failure. Only present if state is EXTERNAL_DESTRUCTION_FAILED.
+          readOnly: true
+          type: string
         externalProtectionLevelOptions:
           $ref: "#/components/schemas/GoogleCloudKmsV1ExternalProtectionLevelOptions"
           description: ExternalProtectionLevelOptions stores a group of additional fields for configuring a CryptoKeyVersion that are specific to the EXTERNAL protection level and EXTERNAL_VPC protection levels.
         generateTime:
           description: Output only. The time this CryptoKeyVersion's key material was generated.
           format: google-datetime
+          readOnly: true
+          type: string
+        generationFailureReason:
+          description: Output only. The root cause of the most recent generation failure. Only present if state is GENERATION_FAILED.
           readOnly: true
           type: string
         importFailureReason:
@@ -497,6 +505,9 @@ components:
             - DESTROY_SCHEDULED
             - PENDING_IMPORT
             - IMPORT_FAILED
+            - GENERATION_FAILED
+            - PENDING_EXTERNAL_DESTRUCTION
+            - EXTERNAL_DESTRUCTION_FAILED
           type: string
       type: object
     GoogleCloudKmsV1CryptoKeyVersionTemplate:

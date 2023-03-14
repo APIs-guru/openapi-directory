@@ -15156,6 +15156,11 @@ paths:
           name: priority
           schema:
             type: integer
+        - description: Indicates fields to be cleared as part of this request.
+          in: query
+          name: updateMask
+          schema:
+            type: string
         - description: If true, the request will not be committed.
           in: query
           name: validateOnly
@@ -50168,7 +50173,7 @@ components:
       description: Guest OS features.
       properties:
         type:
-          description: "The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_SNP_CAPABLE For more information, see Enabling guest operating system features."
+          description: "The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_SNP_CAPABLE - TDX_CAPABLE For more information, see Enabling guest operating system features."
           enum:
             - FEATURE_TYPE_UNSPECIFIED
             - GVNIC
@@ -50947,7 +50952,7 @@ components:
           format: int32
           type: integer
         requestPath:
-          description: The request path of the HTTP health check request. The default value is /. This field does not support query parameters.
+          description: The request path of the HTTP health check request. The default value is /. This field does not support query parameters. Must comply with RFC3986.
           type: string
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."
@@ -51234,7 +51239,7 @@ components:
           format: int32
           type: integer
         requestPath:
-          description: The request path of the HTTPS health check request. The default value is "/".
+          description: The request path of the HTTPS health check request. The default value is "/". Must comply with RFC3986.
           type: string
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."

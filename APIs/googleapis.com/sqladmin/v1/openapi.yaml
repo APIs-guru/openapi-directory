@@ -11,7 +11,7 @@ info:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: sqladmin API (prod)
+  title: Cloud SQL Admin API
   version: v1
   x-apiClientRegistration:
     url: https://console.developers.google.com
@@ -1141,6 +1141,53 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
+  "/v1/projects/{project}/instances/{instance}/getDiskShrinkConfig":
+    get:
+      description: Get Disk Shrink Config for a given instance.
+      operationId: sql.projects.instances.getDiskShrinkConfig
+      parameters:
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SqlInstancesGetDiskShrinkConfigResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/sqlservice.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/sqlservice.admin
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/projects/{project}/instances/{instance}/import":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1236,6 +1283,58 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/projects/{project}/instances/{instance}/performDiskShrink":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Perform Disk Shrink on primary instance.
+      operationId: sql.projects.instances.performDiskShrink
+      parameters:
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerformDiskShrinkContext"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/sqlservice.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/sqlservice.admin
+      tags:
+        - projects
   "/v1/projects/{project}/instances/{instance}/promoteReplica":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1317,6 +1416,58 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/SqlInstancesRescheduleMaintenanceRequestBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/sqlservice.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/sqlservice.admin
+      tags:
+        - projects
+  "/v1/projects/{project}/instances/{instance}/resetReplicaSize":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Reset Replica Size to primary instance disk size.
+      operationId: sql.projects.instances.resetReplicaSize
+      parameters:
+        - description: ID of the project that contains the read replica.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Cloud SQL read replica instance name.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SqlInstancesResetReplicaSizeRequest"
       responses:
         "200":
           content:
@@ -3705,6 +3856,7 @@ components:
             - START_EXTERNAL_SYNC
             - LOG_CLEANUP
             - AUTO_RESTART
+            - REENCRYPT
           type: string
         selfLink:
           description: The URI of this resource.
@@ -3845,6 +3997,14 @@ components:
           description: Number of previous passwords that cannot be reused.
           format: int32
           type: integer
+      type: object
+    PerformDiskShrinkContext:
+      description: Perform disk shrink context.
+      properties:
+        targetSizeGb:
+          description: The target disk shrink size in GigaBytes.
+          format: int64
+          type: string
       type: object
     ReplicaConfiguration:
       description: Read-replica configuration for connecting to the primary instance.
@@ -4079,6 +4239,18 @@ components:
             - BINLOG_RETENTION_SETTING
             - UNSUPPORTED_STORAGE_ENGINE
             - LIMITED_SUPPORT_TABLES
+            - EXISTING_DATA_IN_REPLICA
+          type: string
+      type: object
+    SqlInstancesGetDiskShrinkConfigResponse:
+      description: Instance get disk shrink config response.
+      properties:
+        kind:
+          description: This is always `sql#getDiskShrinkConfig`.
+          type: string
+        minimalTargetSizeGb:
+          description: The minimum size to which a disk can be shrunk in GigaBytes.
+          format: int64
           type: string
       type: object
     SqlInstancesRescheduleMaintenanceRequestBody:
@@ -4087,6 +4259,10 @@ components:
         reschedule:
           $ref: "#/components/schemas/Reschedule"
           description: Required. The type of the reschedule the user wants.
+      type: object
+    SqlInstancesResetReplicaSizeRequest:
+      description: Instance reset replica size request.
+      properties: {}
       type: object
     SqlInstancesStartExternalSyncRequest:
       description: Instance start external sync request.

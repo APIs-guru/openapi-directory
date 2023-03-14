@@ -5062,6 +5062,20 @@ components:
           description: A message providing more details about the human review state.
           type: string
       type: object
+    GoogleCloudDocumentaiV1beta3ImportProcessorVersionMetadata:
+      description: The long running operation metadata for the ImportProcessorVersion method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
+          description: The basic metadata for the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1beta3ImportProcessorVersionResponse:
+      description: The response message for the ImportProcessorVersion method.
+      properties:
+        processorVersion:
+          description: The destination processor version name.
+          type: string
+      type: object
     GoogleCloudDocumentaiV1beta3ReviewDocumentOperationMetadata:
       description: The long running operation metadata for review document method.
       properties:

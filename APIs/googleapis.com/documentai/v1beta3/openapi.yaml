@@ -630,6 +630,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1beta3/{parent}/processorVersions:importProcessorVersion":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Imports a processor version from source processor version.
+      operationId: documentai.projects.locations.processors.processorVersions.importProcessorVersion
+      parameters:
+        - description: "Required. The destination processor name to create the processor version in. Format: `projects/{project}/locations/{location}/processors/{processor}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3ImportProcessorVersionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta3/{parent}/processorVersions:train":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -4782,6 +4824,27 @@ components:
           description: A message providing more details about the human review state.
           type: string
       type: object
+    GoogleCloudDocumentaiV1beta3ImportProcessorVersionMetadata:
+      description: The long running operation metadata for the ImportProcessorVersion method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
+          description: The basic metadata for the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1beta3ImportProcessorVersionRequest:
+      description: The request message for the ImportProcessorVersion method. This method requires Document AI Service Agent of the destination project in the source project's IAM with [Document AI Editor role](https://cloud.google.com/document-ai/docs/access-control/iam-roles). The destination project is specified as part of the `parent` field. The source project is specified as part of `source` field. The Service Agent for Document AI can be found in https://cloud.google.com/iam/docs/service-agents.
+      properties:
+        processorVersionSource:
+          description: Required. The source processor version to import from.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta3ImportProcessorVersionResponse:
+      description: The response message for the ImportProcessorVersion method.
+      properties:
+        processorVersion:
+          description: The destination processor version name.
+          type: string
+      type: object
     GoogleCloudDocumentaiV1beta3ListEvaluationsResponse:
       description: The response from ListEvaluations.
       properties:
@@ -4850,9 +4913,27 @@ components:
           items:
             type: string
           type: array
+        enableImageQualityScores:
+          description: Enables intelligent document quality scores after OCR. Can help with diagnosing why OCR responses are of poor quality for a given input. Adds additional latency comparable to regular OCR to the process call.
+          type: boolean
         enableNativePdfParsing:
           description: Enables special handling for PDFs with existing text information. Results in better text extraction quality in such PDF inputs.
           type: boolean
+        enableSymbol:
+          description: Includes symbol level OCR information if set to true.
+          type: boolean
+        hints:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3OcrConfigHints"
+          description: Hints for the OCR model.
+      type: object
+    GoogleCloudDocumentaiV1beta3OcrConfigHints:
+      description: Hints for OCR Engine
+      properties:
+        languageHints:
+          description: List of BCP-47 language codes to use for OCR. In most cases, not specifying it yields the best results since it enables automatic language detection. For languages based on the Latin alphabet, setting hints is not needed. In rare cases, when the language of the text in the image is known, setting a hint will help get better results (although it will be a significant hindrance if the hint is wrong).
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudDocumentaiV1beta3ProcessOptions:
       description: Options for Process API

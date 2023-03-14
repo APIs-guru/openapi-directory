@@ -937,6 +937,46 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /games/v1/players/me/multipleApplicationPlayerIds:
+    get:
+      description: Get the application player ids for the currently authenticated player across all requested games by the same developer as the calling application. This will only return ids for players that actually have an id (scoped or otherwise) with that game.
+      operationId: games.players.getMultipleApplicationPlayerIds
+      parameters:
+        - description: Required. The application IDs from the Google Play developer console for the games to return scoped ids for.
+          explode: true
+          in: query
+          name: applicationIds
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetMultipleApplicationPlayerIdsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/games
+          Oauth2c:
+            - https://www.googleapis.com/auth/games
+      tags:
+        - players
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/games/v1/players/me/players/{collection}":
     get:
       description: Get the collection of players for the currently authenticated user.
@@ -1785,6 +1825,16 @@ components:
           description: The secondary category.
           type: string
       type: object
+    ApplicationPlayerId:
+      description: Primary scoped player identifier for an application.
+      properties:
+        applicationId:
+          description: The application that this player identifier is for.
+          type: string
+        playerId:
+          description: The player identifier for the application.
+          type: string
+      type: object
     ApplicationVerifyResponse:
       description: A third party application verification response resource.
       properties:
@@ -2042,6 +2092,16 @@ components:
           description: The minimum number of steps for the achievement to be set to.
           format: int32
           type: integer
+      type: object
+    GetMultipleApplicationPlayerIdsResponse:
+      description: Response message for GetMultipleApplicationPlayerIds rpc.
+      properties:
+        playerIds:
+          description: Output only. The requested applications along with the scoped ids for tha player, if that player has an id for the application. If not, the application is not included in the response.
+          items:
+            $ref: "#/components/schemas/ApplicationPlayerId"
+          readOnly: true
+          type: array
       type: object
     ImageAsset:
       description: An image asset object.
