@@ -3,7 +3,7 @@ info:
   version: '2020-02-19'
   x-release: v4
   title: Migration Hub Strategy Recommendations
-  description: '<p><fullname>Migration Hub Strategy Recommendations</fullname></p> <pre><code> &lt;p&gt;This API reference provides descriptions, syntax, and other details about each of the actions and data types for Migration Hub Strategy Recommendations (Strategy Recommendations). The topic for each action shows the API request parameters and the response. Alternatively, you can use one of the AWS SDKs to access an API that is tailored to the programming language or platform that you''re using. For more information, see &lt;a href=&quot;http://aws.amazon.com/tools/#SDKs&quot;&gt;AWS SDKs&lt;/a&gt;.&lt;/p&gt; </code></pre>'
+  description: '<p><fullname>Migration Hub Strategy Recommendations</fullname> <p>This API reference provides descriptions, syntax, and other details about each of the actions and data types for Migration Hub Strategy Recommendations (Strategy Recommendations). The topic for each action shows the API request parameters and the response. Alternatively, you can use one of the AWS SDKs to access an API that is tailored to the programming language or platform that you''re using. For more information, see <a href="http://aws.amazon.com/tools/#SDKs">AWS SDKs</a>.</p></p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -1992,12 +1992,123 @@ components:
     UpdateServerConfigResponse:
       type: object
       properties: {}
+    RuntimeAnalysisStatus:
+      type: string
+      enum:
+        - ANALYSIS_TO_BE_SCHEDULED
+        - ANALYSIS_STARTED
+        - ANALYSIS_SUCCESS
+        - ANALYSIS_FAILED
+    SrcCodeOrDbAnalysisStatus:
+      type: string
+      enum:
+        - ANALYSIS_TO_BE_SCHEDULED
+        - ANALYSIS_STARTED
+        - ANALYSIS_SUCCESS
+        - ANALYSIS_FAILED
+        - ANALYSIS_PARTIAL_SUCCESS
+        - UNCONFIGURED
+        - CONFIGURED
+    AnalysisStatusUnion:
+      type: object
+      properties:
+        runtimeAnalysisStatus:
+          allOf:
+            - $ref: '#/components/schemas/RuntimeAnalysisStatus'
+            - description: The status of the analysis.
+        srcCodeOrDbAnalysisStatus:
+          allOf:
+            - $ref: '#/components/schemas/SrcCodeOrDbAnalysisStatus'
+            - description: The status of the source code or database analysis.
+      description: A combination of existing analysis statuses.
+    AnalysisType:
+      type: string
+      enum:
+        - SOURCE_CODE_ANALYSIS
+        - DATABASE_ANALYSIS
+        - RUNTIME_ANALYSIS
+        - BINARY_ANALYSIS
+    BinaryAnalyzerName:
+      type: string
+      enum:
+        - DLL_ANALYZER
+        - BYTECODE_ANALYZER
+    RunTimeAnalyzerName:
+      type: string
+      enum:
+        - A2C_ANALYZER
+        - REHOST_ANALYZER
+        - EMP_PA_ANALYZER
+        - DATABASE_ANALYZER
+        - SCT_ANALYZER
+    SourceCodeAnalyzerName:
+      type: string
+      enum:
+        - CSHARP_ANALYZER
+        - JAVA_ANALYZER
+        - BYTECODE_ANALYZER
+        - PORTING_ASSISTANT
+    AnalyzerNameUnion:
+      type: object
+      properties:
+        binaryAnalyzerName:
+          allOf:
+            - $ref: '#/components/schemas/BinaryAnalyzerName'
+            - description: The binary analyzer names.
+        runTimeAnalyzerName:
+          allOf:
+            - $ref: '#/components/schemas/RunTimeAnalyzerName'
+            - description: The assessment analyzer names.
+        sourceCodeAnalyzerName:
+          allOf:
+            - $ref: '#/components/schemas/SourceCodeAnalyzerName'
+            - description: The source code analyzer names.
+      description: The combination of the existing analyzers.
+    S3Object:
+      type: object
+      properties:
+        s3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/S3Bucket'
+            - description: ' The S3 bucket name. '
+        s3key:
+          allOf:
+            - $ref: '#/components/schemas/S3Key'
+            - description: ' The Amazon S3 key name. '
+      description: ' Contains the S3 bucket name and the Amazon S3 key name. '
     AntipatternReportStatus:
       type: string
       enum:
         - FAILED
         - IN_PROGRESS
         - SUCCESS
+    StatusMessage:
+      type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 1024
+    AntipatternReportResult:
+      type: object
+      properties:
+        analyzerName:
+          allOf:
+            - $ref: '#/components/schemas/AnalyzerNameUnion'
+            - description: The analyzer name.
+        antiPatternReportS3Object:
+          $ref: '#/components/schemas/S3Object'
+        antipatternReportStatus:
+          allOf:
+            - $ref: '#/components/schemas/AntipatternReportStatus'
+            - description: The status of the anti-pattern report generation.
+        antipatternReportStatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: The status message for the anti-pattern.
+      description: The anti-pattern report result.
+    AntipatternReportResultList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AntipatternReportResult'
     Integer:
       type: integer
     Severity:
@@ -2070,33 +2181,6 @@ components:
         - DESTINATION
         - ANALYSIS_STATUS
         - ERROR_CATEGORY
-    SrcCodeOrDbAnalysisStatus:
-      type: string
-      enum:
-        - ANALYSIS_TO_BE_SCHEDULED
-        - ANALYSIS_STARTED
-        - ANALYSIS_SUCCESS
-        - ANALYSIS_FAILED
-        - ANALYSIS_PARTIAL_SUCCESS
-        - UNCONFIGURED
-        - CONFIGURED
-    S3Object:
-      type: object
-      properties:
-        s3Bucket:
-          allOf:
-            - $ref: '#/components/schemas/S3Bucket'
-            - description: ' The S3 bucket name. '
-        s3key:
-          allOf:
-            - $ref: '#/components/schemas/S3Key'
-            - description: ' The Amazon S3 key name. '
-      description: ' Contains the S3 bucket name and the Amazon S3 key name. '
-    StatusMessage:
-      type: string
-      pattern: .*\S.*
-      minLength: 0
-      maxLength: 1024
     ServerId:
       type: string
       pattern: .*\S.*
@@ -2156,13 +2240,10 @@ components:
         - Database
         - Process
         - DatabaseProcess
-    RuntimeAnalysisStatus:
-      type: string
-      enum:
-        - ANALYSIS_TO_BE_SCHEDULED
-        - ANALYSIS_STARTED
-        - ANALYSIS_SUCCESS
-        - ANALYSIS_FAILED
+    ResultList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Result'
     SourceCodeRepositories:
       type: array
       items:
@@ -2242,6 +2323,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceSubType'
             - description: ' The application component subtype.'
+        resultList:
+          allOf:
+            - $ref: '#/components/schemas/ResultList'
+            - description: A list of the analysis results.
         runtimeStatus:
           allOf:
             - $ref: '#/components/schemas/RuntimeAnalysisStatus'
@@ -3262,6 +3347,26 @@ components:
             - $ref: '#/components/schemas/TranformationToolInstallationLink'
             - description: ' URL for installing the tool. '
       description: ' Information of the transformation tool that can be used to migrate and modernize the application. '
+    Result:
+      type: object
+      properties:
+        analysisStatus:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisStatusUnion'
+            - description: The error in server analysis.
+        analysisType:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisType'
+            - description: The error in server analysis.
+        antipatternReportResultList:
+          allOf:
+            - $ref: '#/components/schemas/AntipatternReportResultList'
+            - description: The error in server analysis.
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: The error in server analysis.
+      description: The error in server analysis.
     RunTimeAssessmentStatus:
       type: string
       enum:
