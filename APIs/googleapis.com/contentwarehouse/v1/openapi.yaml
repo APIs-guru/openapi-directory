@@ -161,6 +161,53 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{name}/links/{linksId}":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates the link using provided UpdateLinkRequest.
+      operationId: contentwarehouse.projects.locations.links.patch
+      parameters:
+        - description: "The resource name of the link. Format: projects/{project_number}/locations/{location}/links/{link}. The name is ignored when creating a link."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: linksId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudContentwarehouseV1Link"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudContentwarehouseV1Link"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}:delete":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -195,6 +242,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleProtobufEmpty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{name}:fetchCollectionAcl":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Gets the access control policy for the collection. Returns NOT_FOUND error if the collection does not exist. Returns an empty policy if the collection exists but does not have a policy set.
+      operationId: contentwarehouse.projects.locations.collections.fetchCollectionAcl
+      parameters:
+        - description: Required. The name of the collection. projects/{project_number}/locations/{location}/collections/{document_id}.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudContentwarehouseV1FetchCollectionAclRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudContentwarehouseV1FetchCollectionAclResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -245,6 +334,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{name}:lock":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Lock the document so the document cannot be updated by other users.
+      operationId: contentwarehouse.projects.locations.documents.lock
+      parameters:
+        - description: "Required. The name of the document to lock. Format: projects/{project_number}/locations/{location}/documents/{document}."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudContentwarehouseV1LockDocumentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudContentwarehouseV1Document"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}:runPipeline":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -279,6 +410,132 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{name}:setCollectionAcl":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Sets the access control policy for the collection. Replaces any existing policy.
+      operationId: contentwarehouse.projects.locations.collections.setCollectionAcl
+      parameters:
+        - description: Required. The name of the collection for which the policy is being set. projects/{project_number}/locations/{location}/collections/{document_id}.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudContentwarehouseV1SetCollectionAclRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudContentwarehouseV1SetCollectionAclResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/collections":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a collection.
+      operationId: contentwarehouse.projects.locations.collections.create
+      parameters:
+        - description: Required. The parent name.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudContentwarehouseV1Collection"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudContentwarehouseV1Collection"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/collections:search":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Searches for collections using provided SearchCollectionsRequest. This call only returns collections that the caller has permission to search against.
+      operationId: contentwarehouse.projects.locations.collections.search
+      parameters:
+        - description: "Required. The parent, which owns the collections. Format: projects/{project_number}/locations/{location}."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudContentwarehouseV1SearchCollectionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudContentwarehouseV1SearchCollectionsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -565,6 +822,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ListLinkedTargetsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/links":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a link.
+      operationId: contentwarehouse.projects.locations.links.create
+      parameters:
+        - description: Required. The parent name.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudContentwarehouseV1Link"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudContentwarehouseV1Link"
           description: Successful response
       security:
         - Oauth2:
@@ -2492,6 +2791,7 @@ components:
             - NUDGEIT_CAMPAIGN_MANAGER_AFFINITY
             - LEGAL_CONTRACTS_EXTERNAL_AFFINITY
             - CONTACTS_TO_STAR_AFFINITY
+            - DECS_AFFINITY
           type: string
         containerId:
           description: The ID of the container
@@ -3110,7 +3410,7 @@ components:
         contactGroupId:
           type: string
         isSynthetic:
-          description: If the Preference was implicitly set by PeopleApi. A preference with this bit will not be saved. See go/contact-group-email-preference-papi-problem for more info.
+          description: If the Preference was implicitly set by PeopleApi/Contacts Service. A preference with this bit will not be saved to storage. See go/contact-group-email-preference-papi-problem for more info.
           type: boolean
         type:
           enum:
@@ -5797,6 +6097,13 @@ components:
         volumeProperties:
           $ref: "#/components/schemas/AssistantApiVolumeProperties"
       type: object
+    AssistantApiBluetoothCapabilities:
+      description: Bluetooth capabilities related to usage of a feature.
+      properties:
+        isBluetoothConnectedProfileRequired:
+          description: If this surface needs to bluetooth pair a phone before using a feature.
+          type: boolean
+      type: object
     AssistantApiCallCapabilities:
       description: "CallCapabilities supported by a surface. See go/call-capabilities. Next ID: 7"
       properties:
@@ -7397,7 +7704,7 @@ components:
           description: A time zone in IANA format.
       type: object
     AssistantApiDeviceCapabilities:
-      description: "This message describes roughly what a surface is capable of doing and metadata around those capabilities. These capabilities are determined based on: - device hardware - software - status (e.g. volume level, battery percentage) These capabilities refer to the surface and not the physical device. The list of supported surfaces can be found in the assistant.api.core_types.SurfaceType enum. A surface's capabilities can differ from the device's. An example would be ANDROID_ALLO running on Pixel. Allo does not support AudioInput while the Pixel does. In this case, audio_input will be set to false for Assistant Allo requests while it might be set to true for OPA_NEXUS requests. Next ID: 34"
+      description: "This message describes roughly what a surface is capable of doing and metadata around those capabilities. These capabilities are determined based on: - device hardware - software - status (e.g. volume level, battery percentage) These capabilities refer to the surface and not the physical device. The list of supported surfaces can be found in the assistant.api.core_types.SurfaceType enum. A surface's capabilities can differ from the device's. An example would be ANDROID_ALLO running on Pixel. Allo does not support AudioInput while the Pixel does. In this case, audio_input will be set to false for Assistant Allo requests while it might be set to true for OPA_NEXUS requests. Next ID: 35"
       properties:
         androidIntentCapabilities:
           $ref: "#/components/schemas/AssistantApiAndroidIntentCapabilities"
@@ -7408,6 +7715,9 @@ components:
         audioOutput:
           $ref: "#/components/schemas/AssistantApiAudioOutput"
           description: These capabilities are scoped to the ability to play audio. It includes information like the type of audio that can be played (e.g. public, private).
+        bluetoothCapabilities:
+          $ref: "#/components/schemas/AssistantApiBluetoothCapabilities"
+          description: Bluetooth capabilities related to usage of a feature.
         callCapabilities:
           $ref: "#/components/schemas/AssistantApiCallCapabilities"
           description: The call capabilities of this device. go/call-capabilities
@@ -10095,6 +10405,7 @@ components:
             - NO_DEVICE_AFTER_LOCAL_DEVICE_EXCLUDED
             - UNABLE_TO_TARGET_ONLY_LOCAL_DEVICE
             - NO_DEVICE_MATCHED_REQUIRED_TRAITS
+            - NO_DEVICE_MATCHED_REQUIRED_ATTRIBUTES
             - NO_DEVICE_MATCHED_REQUIRED_DEVICE_TYPE
             - NO_DEVICE_IN_SAME_OR_MENTIONED_STRUCTURE
             - NO_DEVICE_SATISFIES_PLAYBACK_REQUIREMENT
@@ -11091,6 +11402,7 @@ components:
             - APP_FILTER
             - HYBRID_DEVICE_PROPERTIES_FILTER
             - NEARBY_DEVICE_FILTER
+            - DEVICE_ATTRIBUTES_FILTER
             - DEFAULT_MEDIA_OUTPUT_PROMOTER
             - DEVICE_GROUP_PROMOTER
             - LOCAL_DEVICE_PROMOTER
@@ -11356,6 +11668,7 @@ components:
             - NO_DEVICE_AFTER_LOCAL_DEVICE_EXCLUDED
             - UNABLE_TO_TARGET_ONLY_LOCAL_DEVICE
             - NO_DEVICE_MATCHED_REQUIRED_TRAITS
+            - NO_DEVICE_MATCHED_REQUIRED_ATTRIBUTES
             - NO_DEVICE_MATCHED_REQUIRED_DEVICE_TYPE
             - NO_DEVICE_IN_SAME_OR_MENTIONED_STRUCTURE
             - NO_DEVICE_SATISFIES_PLAYBACK_REQUIREMENT
@@ -11481,6 +11794,7 @@ components:
             - APP_FILTER
             - HYBRID_DEVICE_PROPERTIES_FILTER
             - NEARBY_DEVICE_FILTER
+            - DEVICE_ATTRIBUTES_FILTER
             - DEFAULT_MEDIA_OUTPUT_PROMOTER
             - DEVICE_GROUP_PROMOTER
             - LOCAL_DEVICE_PROMOTER
@@ -19152,6 +19466,7 @@ components:
             - SEGMENT_ROUTE
             - SEGMENT_ROUTE_ASSOCIATION
             - SEGMENT_SEPARATED_ROADWAYS
+            - SEGMENT_SLOPE
             - SEGMENT_SURFACE
             - SEGMENT_SWEEP
             - SEGMENT_TOLL_ROAD
@@ -19475,7 +19790,7 @@ components:
           $ref: "#/components/schemas/GeostoreExistenceProto"
           description: All features can have "existence" information associated with them.
         storefrontGeometry:
-          description: Represents information about the store front geoemtry. Only TYPE_ESTABLISHMENT_POI should have this field set.
+          description: Represents information about the store front geometry. Only TYPE_ESTABLISHMENT_POI should have this field set.
           items:
             $ref: "#/components/schemas/GeostoreAnchoredGeometryProto"
           type: array
@@ -22393,7 +22708,7 @@ components:
           type: array
       type: object
     GeostorePolygonProto:
-      description: A general non-self-intersecting spherical polygon, consisting of one or more loops defining multiple disconnected regions possibly with holes. All loops should be oriented CCW around the region they define. This applies to the exterior loop(s) as well as any holes. Within MapFacts (and underlying infrastructure) the data fields may be replaced by a single shape_id; see comments on shape_id below. Any such PolygonProtos shouldn't be expected to work with public functions in //geostore/base/public/polygon.h.
+      description: A general non-self-intersecting spherical polygon, consisting of one or more loops defining multiple disconnected regions possibly with holes. All loops should be oriented CCW around the region they define. This applies to the exterior loop(s) as well as any holes. Within MapFacts (and underlying infrastructure) the data fields may be replaced by a single shape_id stored in internal_feature. Any such PolygonProtos shouldn't be expected to work with public functions in //geostore/base/public/polygon.h.
       properties:
         baseMeters:
           description: "The polygon loops above are basically flat: each point has a latitude and a longitude but no altitude. We don't want to build real 3D models here, but we do want to be able to generate 2.5D models. A 2.5D model is built by translating the flat polygon upward some distance (base) then extruding it upward some additional distance (height). The elevation of the bottom of the extruded polygon (above ground level)."
@@ -22419,9 +22734,6 @@ components:
         metadata:
           $ref: "#/components/schemas/GeostoreFieldMetadataProto"
           description: Field-level metadata for this polygon.
-        shapeId:
-          description: A unique identifier for this polygon's data which is being held externally in Shapestore (see go/shapestore). This is only ever set internally within MapFacts or underlying infrastructure and if set is set in lieu of other fields. Clients of MapFacts (or anyone downstream of them) can rely on the guarantee that this field will never be set and that the actual data for the polygon will be present instead. This field has been deprecated in favor of FeatureProto.internal.polygon_shape_id
-          type: string
         temporaryData:
           $ref: "#/components/schemas/Proto2BridgeMessageSet"
           description: A place for clients to attach arbitrary data to a polygon. Never set in MapFacts.
@@ -24196,6 +24508,11 @@ components:
         sibling:
           $ref: "#/components/schemas/GeostoreFeatureIdProto"
           description: The other segment of this segment pair (see above). The segment that is referenced by the sibling field refers to this feature back via the same sibling field. Both segment and sibling should have the same properties such as geometry, country code, elevation, level relation, priority etc. Since routes are required to have segment and sibling at the same time, the set of routes on a segment is same to that of the sibling.
+        slope:
+          description: RESERVED
+          items:
+            $ref: "#/components/schemas/GeostoreSlopeProto"
+          type: array
         surface:
           description: clang-format on LINT.ThenChange(//depot/google3/geostore/base/proto/lane.proto) Specific lanes may override this segment-level surface type.
           enum:
@@ -24332,6 +24649,17 @@ components:
             - TYPE_RACE_COURSE
             - TYPE_BOWL
           type: string
+      type: object
+    GeostoreSlopeProto:
+      properties:
+        slopeValue:
+          description: Slope value as elevation change divided by horizontal distance, in the format of decimal, e.g., ‘0.1234’ means a 12.34% slope. If a slope_value is unset, it indicates we don’t have enough information to compute slope at this location.
+          format: float
+          type: number
+        startPointFraction:
+          description: Indicates how far along the segment this slope value starts to apply, in the format of decimal between 0 and 1.
+          format: float
+          type: number
       type: object
     GeostoreSocialReferenceProto:
       description: MapFacts GAIA ID assigned to this feature. These values are virtual GAIA IDs from MapFacts, and as such are not stored in Focus.
@@ -26103,15 +26431,15 @@ components:
     GoogleAssistantAccessoryV1DeviceConfig:
       description: "*Required* Fields that identify the device to the Assistant. See also: * [Register a Device - REST API](https: //developers.google.com/assistant/sdk/re // ference/device-registration/register-device-manual) * [Device Model and Instance Schemas](https: //developers.google.com/assistant/sdk/re // ference/device-registration/model-and-instance-schemas) * [Device Proto](https: //developers.google.com/assistant/sdk/re // ference/rpc/google.assistant.devices.v1#device)"
       properties:
-        deviceBuild:
-          $ref: "#/components/schemas/GoogleAssistantEmbeddedV1DeviceBuild"
-          description: "*Required* Identifier for the device which sent the request."
         deviceModelCapabilitiesOverride:
           $ref: "#/components/schemas/GoogleAssistantEmbeddedV1DeviceModelCapabilitiesOverride"
           description: Device model capabilities from client to override capabilities in the primary device model.
         heterodyneToken:
           description: "*Optional* An encrypted heterodyne_experiment_token containing the list of experiment_ids (go/ph-server-tokens)."
           type: string
+        surfaceIdentity:
+          $ref: "#/components/schemas/GoogleAssistantEmbeddedV1SurfaceIdentity"
+          description: "*Required* Identifier for the device which sent the request."
       type: object
     GoogleAssistantAccessoryV1DeviceState:
       description: "Information about the state of the device. This contains any state that Assistant may need to know about in order to fulfill requests, for example which timers and alarms are set. Next ID: 9"
@@ -26281,13 +26609,6 @@ components:
             - STATE_FETCH_ERROR_TIMEOUT
           type: string
       type: object
-    GoogleAssistantEmbeddedV1DeviceBuild:
-      description: Contains fields to identify the device which sent the request.
-      properties:
-        userAgentSuffix:
-          description: "* Fully formed user agent suffix string."
-          type: string
-      type: object
     GoogleAssistantEmbeddedV1DeviceModelCapabilitiesOverride:
       description: Device model capabilities override from client.
       properties:
@@ -26364,6 +26685,74 @@ components:
             - STANDUP_PADDLEBOARDING
             - STRENGTH_TRAINING
             - SNOWBOARDING
+          type: string
+      type: object
+    GoogleAssistantEmbeddedV1SurfaceIdentity:
+      description: Contains fields to identify the device which sent the request.
+      properties:
+        surfaceType:
+          description: Surface type that the device identifies as.
+          enum:
+            - UNKNOWN_TYPE
+            - ACCL
+            - AGSA
+            - ANDROID
+            - ANDROID_AUTO
+            - ANDROID_LITE
+            - ANDROID_PHONE
+            - ANDROID_SCREENLESS
+            - ANDROID_SMART_DISPLAY
+            - ANDROID_TABLET
+            - ANDROID_THINGS
+            - ANDROID_THINGS_CUBE
+            - ANDROID_THINGS_JASPER
+            - ANDROID_TV
+            - ANDROID_WEAR
+            - ASSISTANT_KIT
+            - ASSISTANT_SDK
+            - AUTO
+            - CAST_OS
+            - CHROME_OS
+            - CHROMECAST_MANHATTAN
+            - CLOUD_DEVICE
+            - CROS
+            - FITBIT_OS_WATCH
+            - FITBIT_OS_WATCH_ANDROID
+            - FITBIT_OS_WATCH_IOS
+            - GOOGLE_HOME
+            - HEADPHONE
+            - HEADPHONE_ANDROID
+            - HEADPHONE_IOS
+            - IOPA
+            - IOS
+            - IOS_SCREENLESS
+            - IPAD
+            - IPHONE
+            - KAI_OS
+            - KAI_OS_AMA
+            - LIBASSISTANT
+            - PHONE
+            - PIXEL
+            - PIXEL5
+            - PIXEL6
+            - PIXEL7
+            - PIXEL_BUDS
+            - PIXEL_TABLET
+            - PIXEL_TABLET_HUB_MODE
+            - PIXEL_TABLET_PERSONAL_MODE
+            - PIXEL_WATCH
+            - SCREENLESS
+            - SMART_DISPLAY
+            - SPEAKER
+            - TABLET
+            - TELEPHONE
+            - THING
+            - WATCH
+            - WEAR_OS
+            - WEAR_OS_WATCH
+          type: string
+        userAgentSuffix:
+          description: "* Fully formed user agent suffix string."
           type: string
       type: object
     GoogleAssistantEmbeddedV1Timer:
@@ -26502,6 +26891,54 @@ components:
         enableEntitiesConversions:
           description: Whether to convert all the entities to properties.
           type: boolean
+      type: object
+    GoogleCloudContentwarehouseV1Collection:
+      description: Defines the structure for content warehouse collection proto.
+      properties:
+        allowLinkDocuments:
+          description: Whether allow the collection to link to documents. Cannot be updated after the collection is created.
+          type: boolean
+        attributes:
+          additionalProperties:
+            description: Properties of the object.
+          description: Other collection attributes for the use cases.
+          type: object
+        collectionType:
+          description: Indicate this collection’s type.
+          enum:
+            - COLLECTION_TYPE_UNSPECIFIED
+            - DATASET
+            - RECORD_SET
+            - WORK_QUEUE
+            - WORKFLOW
+            - LEGAL_HOLD
+          type: string
+        createTime:
+          description: Output only. The time when the document is created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Required. Display name of the collection given by the user.
+          type: string
+        name:
+          description: "The resource name of the collection. Format: projects/{project_number}/locations/{location}/collections/{collection}. The name is ignored when creating a collection."
+          type: string
+        parentCollectionId:
+          description: The parent collection ID of the collection. One collection only can have one parent collection, and they should be in the same project and location.
+          type: string
+        revokeDocEditPermission:
+          description: If it is true, after adding the document to the collection, the users with document edit permission will only have view permission. Can not be updated after the collection is created.
+          type: boolean
+        updateTime:
+          description: Output only. The time when the document is last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudContentwarehouseV1CollectionQuery:
+      description: The query string that matches against the collections.
+      properties: {}
       type: object
     GoogleCloudContentwarehouseV1CreateDocumentLinkRequest:
       description: Request message for DocumentLinkService.CreateDocumentLink.
@@ -26905,6 +27342,23 @@ components:
           $ref: "#/components/schemas/GoogleIamV1Policy"
           description: The IAM policy.
       type: object
+    GoogleCloudContentwarehouseV1FetchCollectionAclRequest:
+      description: Request message for CollectionService.FetchAcl
+      properties:
+        requestMetadata:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RequestMetadata"
+          description: The meta information collected about the end user, used to enforce access control for the service.
+      type: object
+    GoogleCloudContentwarehouseV1FetchCollectionAclResponse:
+      description: Response message for CollectionService.FetchAcl.
+      properties:
+        metadata:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ResponseMetadata"
+          description: Additional information for the API invocation.
+        policy:
+          $ref: "#/components/schemas/GoogleIamV1Policy"
+          description: The IAM policy.
+      type: object
     GoogleCloudContentwarehouseV1FileTypeFilter:
       description: Filter for the specific types of documents returned.
       properties:
@@ -27084,6 +27538,33 @@ components:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1Rule"
           description: Triggered rule.
       type: object
+    GoogleCloudContentwarehouseV1Link:
+      description: Defines the structure for content warehouse link proto.
+      properties:
+        attributes:
+          additionalProperties:
+            description: Properties of the object.
+          description: Other link attributes.
+          type: object
+        collectionId:
+          description: The collection the link connects to. Should have the same project and location with the link.
+          type: string
+        createTime:
+          description: Output only. The create timestamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+        creator:
+          description: Output only. Indicates who created this link.
+          readOnly: true
+          type: string
+        documentId:
+          description: The document the link connects to. Should have the same project and location with the link.
+          type: string
+        name:
+          description: "The resource name of the link. Format: projects/{project_number}/locations/{location}/links/{link}. The name is ignored when creating a link."
+          type: string
+      type: object
     GoogleCloudContentwarehouseV1ListDocumentSchemasResponse:
       description: Response message for DocumentSchemaService.ListDocumentSchemas.
       properties:
@@ -27165,6 +27646,16 @@ components:
             $ref: "#/components/schemas/GoogleCloudContentwarehouseV1SynonymSet"
           type: array
       type: object
+    GoogleCloudContentwarehouseV1LockDocumentRequest:
+      description: Request message for DocumentService.LockDocument.
+      properties:
+        collectionId:
+          description: The collection the document connects to.
+          type: string
+        lockingUser:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1UserInfo"
+          description: The user information who locks the document.
+      type: object
     GoogleCloudContentwarehouseV1MapProperty:
       description: Map property value. Represents a structured entries of key value pairs, consisting of field names which map to dynamically typed values.
       properties:
@@ -27188,7 +27679,7 @@ components:
           description: When merging repeated fields, the default behavior is to append entries from the source repeated field to the destination repeated field. If you instead want to keep only the entries from the source repeated field, set this flag to true. If you want to replace a repeated field within a message field on the destination message, you must set both replace_repeated_fields and replace_message_fields to true, otherwise the repeated fields will be appended.
           type: boolean
       type: object
-    GoogleCloudContentwarehouseV1ProcessWithDocAi:
+    GoogleCloudContentwarehouseV1ProcessWithDocAiPipeline:
       description: The configuration of processing documents in Document Warehouse with DocAi processors pipeline.
       properties:
         documents:
@@ -27513,11 +28004,44 @@ components:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1GcsIngestWithDocAiProcessorsPipeline"
           description: Use DocAI processors to process documents in Cloud Storage and ingest them to Document Warehouse.
         processWithDocAiPipeline:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessWithDocAi"
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessWithDocAiPipeline"
           description: Use a DocAI processor to process documents in Document Warehouse, and re-ingest the updated results into Document Warehouse.
         requestMetadata:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RequestMetadata"
           description: The meta information collected about the end user, used to enforce access control for the service.
+      type: object
+    GoogleCloudContentwarehouseV1SearchCollectionsRequest:
+      description: Request message for CollectionService.SearchCollections.
+      properties:
+        pageSize:
+          description: A limit on the number of collections returned in the search results. Increasing this value above the default value of 10 can increase search response time. The value can be between 1 and 100.
+          format: int32
+          type: integer
+        pageToken:
+          description: The token specifying the current offset within search results. See SearchCollectionsResponse.next_page_token for an explanation of how to obtain the next set of query results.
+          type: string
+        query:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1CollectionQuery"
+          description: Query used to search against collections.
+      type: object
+    GoogleCloudContentwarehouseV1SearchCollectionsResponse:
+      description: Response message for CollectionService.SearchCollections.
+      properties:
+        matchingCollections:
+          description: The collection entities that match the specified SearchCollectionsRequest.
+          items:
+            $ref: "#/components/schemas/GoogleCloudContentwarehouseV1SearchCollectionsResponseMatchingCollection"
+          type: array
+        nextPageToken:
+          description: The token that specifies the starting position of the next page of results. This field is empty if there are no more results.
+          type: string
+      type: object
+    GoogleCloudContentwarehouseV1SearchCollectionsResponseMatchingCollection:
+      description: Collection entry with metadata inside SearchCollectionsResponse
+      properties:
+        collection:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1Collection"
+          description: Collection that matches the specified SearchCollectionsRequest.
       type: object
     GoogleCloudContentwarehouseV1SearchDocumentsRequest:
       description: Request message for DocumentService.SearchDocuments.
@@ -27621,6 +28145,26 @@ components:
         policy:
           $ref: "#/components/schemas/GoogleIamV1Policy"
           description: The policy will be attached to a resource (e.g. projecct, document).
+      type: object
+    GoogleCloudContentwarehouseV1SetCollectionAclRequest:
+      description: Request message for CollectionService.SetAcl.
+      properties:
+        policy:
+          $ref: "#/components/schemas/GoogleIamV1Policy"
+          description: "Required. REQUIRED: The complete policy to be applied to the collection. The size of the policy is limited to a few 10s of KB."
+        requestMetadata:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RequestMetadata"
+          description: The meta information collected about the end user, used to enforce access control for the service.
+      type: object
+    GoogleCloudContentwarehouseV1SetCollectionAclResponse:
+      description: Response message for CollectionService.SetAcl.
+      properties:
+        metadata:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ResponseMetadata"
+          description: Additional information for the API invocation, such as the request tracking id.
+        policy:
+          $ref: "#/components/schemas/GoogleIamV1Policy"
+          description: The policy created for the Collection.
       type: object
     GoogleCloudContentwarehouseV1SynonymSet:
       description: 'Represents a list of synonyms for a given context. For example a context "sales" could contain: Synonym 1: sale, invoice, bill, order Synonym 2: money, credit, finance, payment Synonym 3: shipping, freight, transport Each SynonymSets should be disjoint'
@@ -27755,7 +28299,7 @@ components:
             - UPDATE_TYPE_INSERT_PROPERTIES_BY_NAMES
             - UPDATE_TYPE_REPLACE_PROPERTIES_BY_NAMES
             - UPDATE_TYPE_DELETE_PROPERTIES_BY_NAMES
-            - UPDATE_TYPE_REPLACE_OR_INSERT_PROPERTIES_BY_NAMES
+            - UPDATE_TYPE_MERGE_AND_REPLACE_OR_INSERT_PROPERTIES_BY_NAMES
           type: string
       type: object
     GoogleCloudContentwarehouseV1UpdateRuleSetRequest:
@@ -27965,7 +28509,7 @@ components:
       properties:
         addressValue:
           $ref: "#/components/schemas/GoogleTypePostalAddress"
-          description: "Postal address. See also: https://github.com/googleapis/googleapis/blob/master/google/type/postal_ address.proto"
+          description: "Postal address. See also: https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto"
         booleanValue:
           description: Boolean value. Can be used for entities with binary values, or for checkboxes.
           type: boolean
@@ -28822,6 +29366,9 @@ components:
           type: string
         experimentalFloorId:
           description: Experimental. Can change or disappear without warning or notice. The floor id. For example "11".
+          type: string
+        label:
+          description: The display label of this office location. For example a building name.
           type: string
       type: object
     GoogleInternalAppsWaldoV1alphaOutOfOffice:
@@ -32015,6 +32562,7 @@ components:
             - GENUS_CONTRIB_SERVICE_GEO_UGC
             - GENUS_SEARCH_SPORTS
             - GENUS_BUSINESSMESSAGING
+            - GENUS_AERIAL_VIEW
           type: string
         state:
           description: Indicates the state in Venom for this transcode type.
@@ -32551,6 +33099,7 @@ components:
             - GENUS_CONTRIB_SERVICE_GEO_UGC
             - GENUS_SEARCH_SPORTS
             - GENUS_BUSINESSMESSAGING
+            - GENUS_AERIAL_VIEW
           type: string
         insertionResponseTimestampUsec:
           description: Time that VideoNotification result was received from Venom.
@@ -33878,30 +34427,19 @@ components:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         localyp:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
-        localypVersion:
-          type: string
         modernFormatContent:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
-        modernFormatContentVersion:
-          type: string
         navboost:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
           description: LINT.IfChange
-        navboostVersion:
-          description: DEPRECATED
-          type: string
         rankembed:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         universalFacts:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         videoScoringSignal:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
-        videoScoringSignalVersion:
-          type: string
         volt:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
-        voltVersion:
-          type: string
       type: object
     IndexingDocjoinerDataVersionVersionInfo:
       properties:
@@ -39951,6 +40489,7 @@ components:
             - QU_PHASE_HIGH_PRECISION
             - QU_PHASE_COMBINED_RBT_RESOLUTION
             - QU_PHASE_ANALYZER_INPUT
+            - QU_PHASE_NAGE
           type: string
       type: object
     NlpLoggingQusClientCallPathInfo:
@@ -47493,6 +48032,7 @@ components:
             - MONOSPACE
             - MY_ACCOUNT
             - NUDGEIT_CAMPAIGN_MANAGER
+            - DECS
             - DEPRECATED_QUICKSTART_FLUME
             - DUO_CLIENT
             - ALBERT
@@ -50676,6 +51216,7 @@ components:
             - LOCKSCREEN_PERSONAL_RESULTS_SETTING
             - ASSISTANT_ON_LOCKSCREEN_SETTING
             - SKIP_VOICE_RECOGNITION_SETTING
+            - ASSISTANT_ON_LOCKSCREEN_SETTING_TNG
             - MULTI_DEVICE_NOTIFICATION_FEEDBACK
             - MULTI_DEVICE_FEEDBACK_CHIRP
             - DRAGONGLASS_SPORT_MODULE
@@ -50727,6 +51268,7 @@ components:
             - GEO_TTL_RESERVED_RESTAURANT
             - GEO_TTL_RESERVED_SOCIAL_EVENT
             - GEO_TTL_FLIGHT_PASSENGER_DEPARTURE
+            - GEO_TTL_FLIGHT_PASSENGER_DEPARTURE_RIDESHARE
             - GEO_AAP_GROCERY_STORE
             - GEO_AAP_BEAUTY_WELLNESS
             - GEO_AAP_RESTAURANT
@@ -50793,6 +51335,7 @@ components:
             - AADC_MINOR_MOMENT
             - PAYMENTS_SETTINGS
             - SMARTSPACE_HOLIDAY_ALARMS
+            - CROSS_DEVICE_ALARM
             - CROSS_DEVICE_TIMER
             - CROSS_DEVICE_TIMER_FCM_PING
             - MEMORY_AWARENESS
@@ -52304,12 +52847,13 @@ components:
         siteChunkSource:
           description: These are annotated in the Goldmine NSR annotator.
           enum:
-            - SITE_CHUNK_SOURCE_UNKNOWN
-            - SITE_CHUNK_SOURCE_WEBUTIL
-            - SITE_CHUNK_SOURCE_BREADCRUMBS
-            - SITE_CHUNK_SOURCE_AUTHOR
-            - SITE_CHUNK_SOURCE_COOKBOOK
-            - SITE_CHUNK_SOURCE_CRAWLED_SELLER_DATA
+            - UNKNOWN
+            - HOST_LEVEL_V3
+            - MARKUP_BREADCRUMBS
+            - MARKUP_AUTHOR
+            - COOKBOOK
+            - CRAWLED_SELLER_DATA
+            - FALLBACK
           type: string
       type: object
     QualityNsrNsrData:
@@ -52433,6 +52977,7 @@ components:
             - SITE_CHUNK_SOURCE_AUTHOR
             - SITE_CHUNK_SOURCE_COOKBOOK
             - SITE_CHUNK_SOURCE_CRAWLED_SELLER_DATA
+            - SITE_CHUNK_SOURCE_FALLBACK
           type: string
         siteLinkIn:
           description: Average value of the site_link_in for pages in the sitechunk.
@@ -62012,6 +62557,7 @@ components:
             - BEFORE_REFS
             - AFTER_REFS
             - DOC_SUFFIX
+            - ACK_SECTION
           type: string
         ParseSection:
           enum:
@@ -63195,13 +63741,15 @@ components:
           description: SnippetsBrain model information for snippets popup debug.
       type: object
     SnippetExtraInfoSnippetCandidateInfo:
-      description: "Next ID: 14"
+      description: "Next ID: 15"
       properties:
         boldedRanges:
           description: Bolded ranges in the printed snippet lines.
           items:
             $ref: "#/components/schemas/QualitySnippetsTruncationSnippetBoldedRange"
           type: array
+        extendedSnippet:
+          $ref: "#/components/schemas/SnippetExtraInfoSnippetCandidateInfoExtendedSnippet"
         id:
           description: "Candidate identifier number, unique among all snippet candidates under each document in each request. What does this number mean: - Muppet candidates: This equals to the candidate's rank by Muppet snippets scorer. - Superroot candidates: No specific meaning, this number should be larger than that of Muppet candidates. This field is used to: - Verify whether snippet brain chooses a different snippet from Muppet (the one chosen by Muppet is always in id 0). - Print debugging information and sort candidates in debug output."
           format: int32
@@ -63245,6 +63793,15 @@ components:
             - RADISH_TABLE
             - ANNOTATED_FULL
             - PEREGRINE
+          type: string
+      type: object
+    SnippetExtraInfoSnippetCandidateInfoExtendedSnippet:
+      description: The extended version of this snippet.
+      properties:
+        numChars:
+          format: int32
+          type: integer
+        snippetText:
           type: string
       type: object
     SnippetExtraInfoSnippetScoringInfo:
@@ -67199,6 +67756,8 @@ components:
               - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN
               - SUPERROOT_PDS_SHORT_DESCRIPTION_EVENT_LEVEL
               - PGSS_SHORT_DESCRIPTION_DIFF_EVENT_LEVEL
+              - SECOND_PASS_QUALITY_REWEIGTHING_EVENT_LEVEL
+              - SECOND_PASS_QUALITY_REWEIGTHING_MDP_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
               - BEST_SELLER_CART_TAG_AT_SESSION_LEVEL
@@ -67690,12 +68249,21 @@ components:
               - APPS_LAUNCHER_CLUSTER_AT_SESSION_LEVEL
               - SUPERROOT_PDS_SHORT_DESCRIPTION_SESSION_LEVEL
               - PGSS_SHORT_DESCRIPTION_DIFF_SESSION_LEVEL
+              - WEAR_AQ_SEARCH_PHONE_DEVICE_WITH_WEAR_FILTER
+              - WEAR_AQ_SEARCH_WEAR_DEVICE
+              - WEAR_AQ_SEARCH_COMBINED
               - NAV_ADS_DUPLICATE_SERVED_SESSION_LEVEL
               - NAV_ADS_NON_DUPLICATE_SERVED_SESSION_LEVEL
               - NAV_ADS_NO_AD_SERVED_SESSION_LEVEL
-              - PAYMENTS_TOS_ACCEPTANCE_CHALLENGE_SHOWN
-              - PAYMENTS_TOS_ACCEPTANCE_CHALLENGE_RESOLVED
+              - PAYMENTS_TOS_ACCEPTANCE_SESSION_LEVEL
               - WEBSKY_SEARCH_THIRD_PARTY_CONTENT_ELIGIBLE_QUERY_SESSION_LEVEL
+              - SHORTEN_COMMERCE_CACHE_TTL_SESSION_LEVEL
+              - SKIP_CHECK_MARK_SCREEN_FOR_BACKUP_FLOW_SESSION_LEVEL
+              - ONE_CLICK_BACKUP_FOP_SESSION_LEVEL
+              - KIDS_LAUNCHER_USER_FEATURES_PRESENT
+              - KIDS_LAUNCHER_USER_FEATURES_MISSING
+              - SECOND_PASS_QUALITY_REWEIGTHING_SESSION_LEVEL
+              - SECOND_PASS_QUALITY_REWEIGTHING_MDP_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - CART_ABANDONMENT_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL
@@ -67872,6 +68440,15 @@ components:
               - MERCH_USER_JOURNEY_SPEND_USER_LEVEL
               - MERCH_USER_JOURNEY_PUBG_NPU
               - MERCH_USER_JOURNEY_PUBG_REPEAT_SPEND
+              - MERCH_USER_JOURNEY_APEX_NEW_ACTIVE_USERS
+              - MERCH_USER_JOURNEY_APEX_NEW_CHURN
+              - MERCH_USER_JOURNEY_PUBG_NEW_USERS
+              - MERCH_USER_JOURNEY_PUBG_ADVANCED_AND_CHURN
+              - MERCH_USER_JOURNEY_FREE_FIRE_ADVANCED_AND_CHURN
+              - MERCH_USER_JOURNEY_GARENA_REPEAT
+              - MERCH_USER_JOURNEY_NIKKE_NEW_UPDATE
+              - MERCH_USER_JOURNEY_NIKKE_ADVANCED_UPDATE
+              - MERCH_USER_JOURNEY_POKEMON_GO_ADVANCED_AND_CHURN
               - PLAY_GAMES_ACHIEVEMENT_LOYALTY_QUEST_USER_LEVEL
               - PLAY_BOOKS_READING_PROGRESS_TOOLTIP_USER_LEVEL
               - IAP_SKU_DEALS_LIVE_OP_GAMES_HOME_USER_LEVEL1
@@ -68180,6 +68757,7 @@ components:
             - NS_CONTRIB_SERVICE_GEO_UGC
             - NS_SEARCH_SPORTS
             - NS_BUSINESSMESSAGING
+            - NS_AERIAL_VIEW
           type: string
       type: object
     VideoAudioStream:
@@ -68235,10 +68813,18 @@ components:
           type: boolean
       type: object
     VideoContentSearchAnchorCommonFeatureSet:
-      description: "Contains anchor level features that apply to all anchor types. Next id: 18."
+      description: "Contains anchor level features that apply to all anchor types. Next id: 22."
       properties:
         anchorQbstDistance:
           description: QBST distance between the anchor and the top navboost query of the video if exists, or the video title otherwise.
+          format: float
+          type: number
+        asrAverageBabelSimilarityScore:
+          description: Average of babel similarity between the anchor and all asr sentences.
+          format: float
+          type: number
+        asrMaximumBabelSimilarityScore:
+          description: Maximum babel similarity between the anchor and the asr sentences.
           format: float
           type: number
         bleurtFeatures:
@@ -68250,6 +68836,14 @@ components:
           type: number
         descartesScoreWithTitle:
           description: Descartes similarity score between video title and anchor label.
+          format: float
+          type: number
+        descriptionAverageBabelSimilarityScore:
+          description: Average of babel similarity between the anchor and all description sentences.
+          format: float
+          type: number
+        descriptionMaximumBabelSimilarityScore:
+          description: Maximum babel similarity between the anchor and the description sentences.
           format: float
           type: number
         dolphinDescriptivenessScore:
@@ -70301,6 +70895,7 @@ components:
             - OCR_EDU
             - ASR_SPAN_EDU
             - GENERATIVE_ASR_I18N
+            - YT_AUTO_CHAPTERS
           type: string
         contextText:
           description: Context text from ASR of long duration, used for longT5 models.
@@ -70566,6 +71161,7 @@ components:
             - OCR_EDU
             - ASR_SPAN_EDU
             - GENERATIVE_ASR_I18N
+            - YT_AUTO_CHAPTERS
           type: string
         entityGroupInfo:
           $ref: "#/components/schemas/VideoContentSearchEntityGroupInfo"
@@ -70631,6 +71227,7 @@ components:
               - OCR_EDU
               - ASR_SPAN_EDU
               - GENERATIVE_ASR_I18N
+              - YT_AUTO_CHAPTERS
             type: string
           type: array
         predictedQuerylessTocUsefulness:

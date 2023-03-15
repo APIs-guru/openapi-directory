@@ -42,7 +42,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: DataProtectionService
-  x-timestamp: 2023-02-16T11:26:53Z
+  x-timestamp: 2023-02-20T18:24:23Z
 tags:
   - name: General
 paths:
@@ -122,6 +122,7 @@ components:
           description: The HTTP response status.
           format: int32
           type: integer
+      type: object
     SubjectErasureByPspReferenceRequest:
       properties:
         forceErasure:
@@ -133,6 +134,7 @@ components:
         pspReference:
           description: The PSP reference of the payment. We will delete all shopper-related data for this payment.
           type: string
+      type: object
     SubjectErasureResponse:
       properties:
         result:
@@ -143,6 +145,7 @@ components:
             - PAYMENT_NOT_FOUND
             - SUCCESS
           type: string
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header

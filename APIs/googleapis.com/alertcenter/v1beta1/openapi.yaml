@@ -1020,6 +1020,10 @@ components:
         recipient:
           description: The recipient of this email.
           type: string
+        sentTime:
+          description: The sent time of the email.
+          format: google-datetime
+          type: string
         subjectText:
           description: The email subject text (only available for reported emails).
           type: string

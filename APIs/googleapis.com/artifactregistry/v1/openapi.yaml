@@ -1455,7 +1455,7 @@ components:
           type: array
       type: object
     KfpArtifact:
-      description: A detailed representation of a GooGet artifact.
+      description: A detailed representation of a KFP artifact.
       properties:
         name:
           description: Output only. Resource name of the KFP artifact. Since users don't directly interact with this resource, the name will be derived from the associated version. For example, when version = ".../versions/sha256:abcdef...", the name will be ".../kfpArtifacts/sha256:abcdef...".

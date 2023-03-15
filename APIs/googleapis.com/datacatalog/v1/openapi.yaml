@@ -1016,6 +1016,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{parent}/tags:reconcile":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "`ReconcileTags` creates or updates a list of tags on the entry. If the ReconcileTagsRequest.force_delete_missing parameter is set, the operation deletes tags not included in the input tag list. `ReconcileTags` returns a long-running operation resource that can be queried with Operations.GetOperation to return ReconcileTagsMetadata and a ReconcileTagsResponse message."
+      operationId: datacatalog.projects.locations.entryGroups.entries.tags.reconcile
+      parameters:
+        - description: Required. Name of Entry to be tagged.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDatacatalogV1ReconcileTagsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/taxonomies":
     get:
       description: Lists all taxonomies in a project in a particular location that you have a permission to view.
@@ -1708,6 +1750,7 @@ components:
             - CLOUD_PUBSUB
             - DATAPROC_METASTORE
             - DATAPLEX
+            - CLOUD_SPANNER
             - CLOUD_SQL
             - LOOKER
           type: string
@@ -1804,6 +1847,7 @@ components:
             - CLOUD_PUBSUB
             - DATAPROC_METASTORE
             - DATAPLEX
+            - CLOUD_SPANNER
             - CLOUD_SQL
             - LOOKER
           readOnly: true
@@ -2220,6 +2264,54 @@ components:
           description: Resource name of this policy tag's parent policy tag. If empty, this is a top level tag. If not set, defaults to an empty string. For example, for the "LatLong" policy tag in the example above, this field contains the resource name of the "Geolocation" policy tag, and, for "Geolocation", this field is empty.
           type: string
       type: object
+    GoogleCloudDatacatalogV1ReconcileTagsMetadata:
+      description: Long-running operation metadata message returned by the ReconcileTags.
+      properties:
+        errors:
+          additionalProperties:
+            $ref: "#/components/schemas/Status"
+          description: Maps the name of each tagged column (or empty string for a sole entry) to tagging operation status.
+          type: object
+        state:
+          description: State of the reconciliation operation.
+          enum:
+            - RECONCILIATION_STATE_UNSPECIFIED
+            - RECONCILIATION_QUEUED
+            - RECONCILIATION_IN_PROGRESS
+            - RECONCILIATION_DONE
+          type: string
+      type: object
+    GoogleCloudDatacatalogV1ReconcileTagsRequest:
+      description: Request message for ReconcileTags.
+      properties:
+        forceDeleteMissing:
+          description: If set to `true`, deletes entry tags related to a tag template not listed in the tags source from an entry. If set to `false`, unlisted tags are retained.
+          type: boolean
+        tagTemplate:
+          description: Required. The name of the tag template, which is used for reconciliation.
+          type: string
+        tags:
+          description: A list of tags to apply to an entry. A tag can specify a tag template, which must be the template specified in the `ReconcileTagsRequest`. The sole entry and each of its columns must be mentioned at most once.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDatacatalogV1Tag"
+          type: array
+      type: object
+    GoogleCloudDatacatalogV1ReconcileTagsResponse:
+      description: Long-running operation response message returned by ReconcileTags.
+      properties:
+        createdTagsCount:
+          description: Number of tags created in the request.
+          format: int64
+          type: string
+        deletedTagsCount:
+          description: Number of tags deleted in the request.
+          format: int64
+          type: string
+        updatedTagsCount:
+          description: Number of tags updated in the request.
+          format: int64
+          type: string
+      type: object
     GoogleCloudDatacatalogV1RenameTagTemplateFieldEnumValueRequest:
       description: Request message for RenameTagTemplateFieldEnumValue.
       properties:
@@ -2381,6 +2473,7 @@ components:
             - CLOUD_PUBSUB
             - DATAPROC_METASTORE
             - DATAPLEX
+            - CLOUD_SPANNER
             - CLOUD_SQL
             - LOOKER
           readOnly: true
