@@ -424,6 +424,11 @@ paths:
                   maxProperties: 200
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                features:
+                  description: A list of features that will be configured for the detector.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DetectorFeatureConfiguration'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -484,7 +489,7 @@ paths:
   '/detector/{detectorId}/filter':
     post:
       operationId: CreateFilter
-      description: Creates a filter using the specified finding criteria.
+      description: 'Creates a filter using the specified finding criteria. The maximum number of saved filters per Amazon Web Services account per Region is 100. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_limits.html">Quotas for GuardDuty</a>.'
       responses:
         '200':
           description: Success
@@ -529,7 +534,7 @@ paths:
                   minLength: 3
                   maxLength: 64
                 description:
-                  description: 'The description of the filter. Valid characters include alphanumeric characters, and special characters such as <code>-</code>, <code>.</code>, <code>:</code>, <code>{ }</code>, <code>[ ]</code>, <code>( )</code>, <code>/</code>, <code>\t</code>, <code>\n</code>, <code>\x0B</code>, <code>\f</code>, <code>\r</code>, <code>_</code>, and whitespace.'
+                  description: 'The description of the filter. Valid characters include alphanumeric characters, and special characters such as hyphen, period, colon, underscore, parentheses (<code>{ }</code>, <code>[ ]</code>, and <code>( )</code>), forward slash, horizontal tab, vertical tab, newline, form feed, return, and whitespace.'
                   type: string
                   minLength: 0
                   maxLength: 512
@@ -1422,6 +1427,11 @@ paths:
                         - xml:
                             name: malwareProtection
                           description: Describes whether Malware Protection is enabled as a data source.
+                features:
+                  description: Provides the features that will be updated for the detector.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DetectorFeatureConfiguration'
   '/detector/{detectorId}/filter/{filterName}':
     delete:
       operationId: DeleteFilter
@@ -2229,6 +2239,32 @@ paths:
             type: string
             minLength: 1
             maxLength: 300
+        - name: maxResults
+          in: query
+          required: false
+          description: You can use this parameter to indicate the maximum number of items that you want in the response.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: nextToken
+          in: query
+          required: false
+          description: 'You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill <code>nextToken</code> in the request with the value of <code>NextToken</code> from the previous response to continue listing data.'
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2302,6 +2338,11 @@ paths:
                         - xml:
                             name: malwareProtection
                           description: Describes the configuration of Malware Protection for new members of the organization.
+                features:
+                  description: A list of features that will be configured for the organization.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OrganizationFeatureConfiguration'
   /admin/disable:
     post:
       operationId: DisableOrganizationAdminAccount
@@ -3025,6 +3066,7 @@ paths:
                     - SUM_BY_DATA_SOURCE
                     - SUM_BY_RESOURCE
                     - TOP_RESOURCES
+                    - SUM_BY_FEATURES
                 usageCriteria:
                   description: Contains information about the criteria used to query usage statistics.
                   type: object
@@ -3038,15 +3080,22 @@ paths:
                     DataSources:
                       allOf:
                         - $ref: '#/components/schemas/DataSourceList'
-                        - xml:
+                        - deprecated: true
+                          xml:
                             name: dataSources
-                          description: The data sources to aggregate usage statistics from.
+                          description: 'The data sources to aggregate usage statistics from.This parameter is deprecated, use Features instead'
                     Resources:
                       allOf:
                         - $ref: '#/components/schemas/ResourceList'
                         - xml:
                             name: resources
                           description: The resources to aggregate usage statistics from. Only accepts exact resource names.
+                    Features:
+                      allOf:
+                        - $ref: '#/components/schemas/UsageFeatureList'
+                        - xml:
+                            name: features
+                          description: The features to aggregate usage statistics from.
                 unit:
                   description: The currency unit you would like to view your usage statistics in. Current valid values are USD.
                   type: string
@@ -3775,6 +3824,11 @@ paths:
                         - xml:
                             name: malwareProtection
                           description: Describes whether Malware Protection is enabled as a data source.
+                features:
+                  description: A list of features that will be updated for the specified member accounts.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MemberFeaturesConfiguration'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3904,6 +3958,22 @@ components:
     TagValue:
       type: string
       maxLength: 256
+    DetectorFeatureConfiguration:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DetectorFeature'
+            - xml:
+                name: name
+              description: The name of the feature.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FeatureStatus'
+            - xml:
+                name: status
+              description: The status of the feature.
+      description: Contains information about a GuardDuty feature.
     CreateFilterResponse:
       type: object
       required:
@@ -4092,9 +4162,22 @@ components:
         DataSources:
           allOf:
             - $ref: '#/components/schemas/OrganizationDataSourceConfigurationsResult'
-            - xml:
+            - deprecated: true
+              xml:
                 name: dataSources
-              description: Describes which data sources are enabled automatically for member accounts.
+              description: 'Describes which data sources are enabled automatically for member accounts.This parameter is deprecated, use Features instead'
+        Features:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationFeaturesConfigurationsResults'
+            - xml:
+                name: features
+              description: A list of features that are configured for this organization.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: nextToken
+              description: The pagination parameter to be used on the next list operation to retrieve more items.
     DescribePublishingDestinationResponse:
       type: object
       required:
@@ -4209,15 +4292,22 @@ components:
         DataSources:
           allOf:
             - $ref: '#/components/schemas/DataSourceConfigurationsResult'
-            - xml:
+            - deprecated: true
+              xml:
                 name: dataSources
-              description: Describes which data sources are enabled for the detector.
+              description: 'Describes which data sources are enabled for the detector.This parameter is deprecated, use Features instead'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - xml:
                 name: tags
               description: The tags of the detector resource.
+        Features:
+          allOf:
+            - $ref: '#/components/schemas/DetectorFeatureConfigurationsResults'
+            - xml:
+                name: features
+              description: Describes the features that have been enabled for the detector.
     GetFilterResponse:
       type: object
       required:
@@ -4480,6 +4570,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/String'
+    UsageFeatureList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UsageFeature'
     InviteMembersResponse:
       type: object
       required:
@@ -4722,6 +4816,22 @@ components:
             - xml:
                 name: unprocessedAccounts
               description: A list of member account IDs that were unable to be processed along with an explanation for why they were not processed.
+    MemberFeaturesConfiguration:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/OrgFeature'
+            - xml:
+                name: name
+              description: The name of the feature.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FeatureStatus'
+            - xml:
+                name: status
+              description: The status of the feature.
+      description: Contains information about the features for the member account.
     UpdateOrganizationConfigurationResponse:
       type: object
       properties: {}
@@ -4759,6 +4869,22 @@ components:
                 name: scanEc2InstanceWithFindings
               description: Whether Malware Protection for EC2 instances with findings should be auto-enabled for new members joining the organization.
       description: Organization-wide Malware Protection configurations.
+    OrganizationFeatureConfiguration:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/OrgFeature'
+            - xml:
+                name: name
+              description: The name of the feature that will be configured for the organization.
+        AutoEnable:
+          allOf:
+            - $ref: '#/components/schemas/OrgFeatureStatus'
+            - xml:
+                name: autoEnable
+              description: The status of the feature that will be configured for the organization.
+      description: A list of features which will be configured for the organization.
     UpdatePublishingDestinationResponse:
       type: object
       properties: {}
@@ -4905,6 +5031,10 @@ components:
                 name: malwareProtection
               description: Describes whether Malware Protection is enabled as a data source.
       description: Contains information about which data sources are enabled for the GuardDuty member account.
+    FreeTrialFeatureConfigurationsResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/FreeTrialFeatureConfigurationResult'
     AccountFreeTrialInfo:
       type: object
       properties:
@@ -4917,9 +5047,16 @@ components:
         DataSources:
           allOf:
             - $ref: '#/components/schemas/DataSourcesFreeTrial'
-            - xml:
+            - deprecated: true
+              xml:
                 name: dataSources
-              description: Describes the data source enabled for the GuardDuty member account.
+              description: 'Describes the data source enabled for the GuardDuty member account.This parameter is deprecated, use Features instead'
+        Features:
+          allOf:
+            - $ref: '#/components/schemas/FreeTrialFeatureConfigurationsResults'
+            - xml:
+                name: features
+              description: A list of features enabled for the GuardDuty account.
       description: Provides details of the GuardDuty member account that uses a free trial service.
     AccountFreeTrialInfos:
       type: array
@@ -5150,6 +5287,19 @@ components:
                 name: parameters
               description: Parameters related to the Kubernetes API call action.
       description: Information about the Kubernetes API call action described in this finding.
+    RdsLoginAttemptAction:
+      type: object
+      properties:
+        RemoteIpDetails:
+          allOf:
+            - $ref: '#/components/schemas/RemoteIpDetails'
+            - xml:
+                name: remoteIpDetails
+        LoginAttributes:
+          allOf:
+            - $ref: '#/components/schemas/LoginAttributes'
+            - description: Indicates the login attributes used in the login attempt.
+      description: Indicates that a login attempt was made to the potentially compromised database from a remote IP address.
     Action:
       type: object
       properties:
@@ -5189,6 +5339,12 @@ components:
             - xml:
                 name: kubernetesApiCallAction
               description: Information about the Kubernetes API call action described in this finding.
+        RdsLoginAttemptAction:
+          allOf:
+            - $ref: '#/components/schemas/RdsLoginAttemptAction'
+            - xml:
+                name: rdsLoginAttemptAction
+              description: Information about <code>RDS_LOGIN_ATTEMPT</code> action described in this finding.
       description: Contains information about actions.
     AdminStatus:
       type: string
@@ -5620,6 +5776,10 @@ components:
       maxProperties: 200
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
+    DetectorFeatureConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/DetectorFeatureConfiguration'
     CreateDetectorRequest:
       type: object
       required:
@@ -5647,15 +5807,22 @@ components:
         DataSources:
           allOf:
             - $ref: '#/components/schemas/DataSourceConfigurations'
-            - xml:
+            - deprecated: true
+              xml:
                 name: dataSources
-              description: '<p>Describes which data sources will be enabled for the detector.</p> <p>There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html">Regions and endpoints</a>.</p>'
+              description: '<p>Describes which data sources will be enabled for the detector.</p> <p>There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html">Regions and endpoints</a>.</p>This parameter is deprecated, use Features instead'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - xml:
                 name: tags
               description: The tags to be added to a new detector resource.
+        Features:
+          allOf:
+            - $ref: '#/components/schemas/DetectorFeatureConfigurations'
+            - xml:
+                name: features
+              description: A list of features that will be configured for the detector.
     UnprocessedDataSourcesResult:
       type: object
       properties:
@@ -5712,7 +5879,7 @@ components:
             - $ref: '#/components/schemas/FilterDescription'
             - xml:
                 name: description
-              description: 'The description of the filter. Valid characters include alphanumeric characters, and special characters such as <code>-</code>, <code>.</code>, <code>:</code>, <code>{ }</code>, <code>[ ]</code>, <code>( )</code>, <code>/</code>, <code>\t</code>, <code>\n</code>, <code>\x0B</code>, <code>\f</code>, <code>\r</code>, <code>_</code>, and whitespace.'
+              description: 'The description of the filter. Valid characters include alphanumeric characters, and special characters such as hyphen, period, colon, underscore, parentheses (<code>{ }</code>, <code>[ ]</code>, and <code>( )</code>), forward slash, horizontal tab, vertical tab, newline, form feed, return, and whitespace.'
         Action:
           allOf:
             - $ref: '#/components/schemas/FilterAction'
@@ -6235,6 +6402,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Scan'
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
     DescribeOrganizationConfigurationRequest:
       type: object
       title: DescribeOrganizationConfigurationRequest
@@ -6263,6 +6434,10 @@ components:
                 name: malwareProtection
               description: Describes the configuration of Malware Protection data source for an organization.
       description: An object that contains information on which data sources are automatically enabled for new members within the organization.
+    OrganizationFeaturesConfigurationsResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/OrganizationFeatureConfigurationResult'
     DescribePublishingDestinationRequest:
       type: object
       title: DescribePublishingDestinationRequest
@@ -6306,6 +6481,57 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Destination'
+    DetectorFeature:
+      type: string
+      enum:
+        - S3_DATA_EVENTS
+        - EKS_AUDIT_LOGS
+        - EBS_MALWARE_PROTECTION
+        - RDS_LOGIN_EVENTS
+    FeatureStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    DetectorFeatureResult:
+      type: string
+      enum:
+        - FLOW_LOGS
+        - CLOUD_TRAIL
+        - DNS_LOGS
+        - S3_DATA_EVENTS
+        - EKS_AUDIT_LOGS
+        - EBS_MALWARE_PROTECTION
+        - RDS_LOGIN_EVENTS
+    Timestamp:
+      type: string
+      format: date-time
+    DetectorFeatureConfigurationResult:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DetectorFeatureResult'
+            - xml:
+                name: name
+              description: Indicates the name of the feature that can be enabled for the detector.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FeatureStatus'
+            - xml:
+                name: status
+              description: Indicates the status of the feature that is enabled for the detector.
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - xml:
+                name: updatedAt
+              description: The timestamp at which the feature object was updated.
+      description: Contains information about a GuardDuty feature.
+    DetectorFeatureConfigurationsResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/DetectorFeatureConfigurationResult'
     DetectorIds:
       type: array
       items:
@@ -6381,9 +6607,6 @@ components:
                 name: skippedVolumeDetails
               description: List of EBS volumes that were skipped from the malware scan.
       description: Contains list of scanned and skipped EBS volumes with details.
-    Timestamp:
-      type: string
-      format: date-time
     Sources:
       type: array
       items:
@@ -6805,6 +7028,18 @@ components:
             - $ref: '#/components/schemas/Container'
             - xml:
                 name: containerDetails
+        RdsDbInstanceDetails:
+          allOf:
+            - $ref: '#/components/schemas/RdsDbInstanceDetails'
+            - xml:
+                name: rdsDbInstanceDetails
+              description: Contains information about the database instance to which an anomalous login attempt was made.
+        RdsDbUserDetails:
+          allOf:
+            - $ref: '#/components/schemas/RdsDbUserDetails'
+            - xml:
+                name: rdsDbUserDetails
+              description: Contains information about the user details through which anomalous login attempt was made.
       description: Contains information about the Amazon Web Services resource associated with the activity that prompted GuardDuty to generate a finding.
     Service:
       type: object
@@ -7013,6 +7248,32 @@ components:
         $ref: '#/components/schemas/Finding'
       minItems: 0
       maxItems: 50
+    FreeTrialFeatureResult:
+      type: string
+      enum:
+        - FLOW_LOGS
+        - CLOUD_TRAIL
+        - DNS_LOGS
+        - S3_DATA_EVENTS
+        - EKS_AUDIT_LOGS
+        - EBS_MALWARE_PROTECTION
+        - RDS_LOGIN_EVENTS
+    FreeTrialFeatureConfigurationResult:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/FreeTrialFeatureResult'
+            - xml:
+                name: name
+              description: The name of the feature for which the free trial is configured.
+        FreeTrialDaysRemaining:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - xml:
+                name: freeTrialDaysRemaining
+              description: The number of the remaining free trial days for the feature.
+      description: Contains information about the free trial period for a feature.
     GeoLocation:
       type: object
       properties:
@@ -7220,10 +7481,9 @@ components:
         - SUM_BY_DATA_SOURCE
         - SUM_BY_RESOURCE
         - TOP_RESOURCES
+        - SUM_BY_FEATURES
     UsageCriteria:
       type: object
-      required:
-        - DataSources
       properties:
         AccountIds:
           allOf:
@@ -7234,20 +7494,23 @@ components:
         DataSources:
           allOf:
             - $ref: '#/components/schemas/DataSourceList'
-            - xml:
+            - deprecated: true
+              xml:
                 name: dataSources
-              description: The data sources to aggregate usage statistics from.
+              description: 'The data sources to aggregate usage statistics from.This parameter is deprecated, use Features instead'
         Resources:
           allOf:
             - $ref: '#/components/schemas/ResourceList'
             - xml:
                 name: resources
               description: The resources to aggregate usage statistics from. Only accepts exact resource names.
+        Features:
+          allOf:
+            - $ref: '#/components/schemas/UsageFeatureList'
+            - xml:
+                name: features
+              description: The features to aggregate usage statistics from.
       description: Contains information about the criteria used to query usage statistics.
-    MaxResults:
-      type: integer
-      minimum: 1
-      maximum: 50
     GetUsageStatisticsRequest:
       type: object
       required:
@@ -7312,6 +7575,12 @@ components:
             - xml:
                 name: topResources
               description: 'Lists the top 50 resources that have generated the most GuardDuty usage, in order from most to least expensive.'
+        SumByFeature:
+          allOf:
+            - $ref: '#/components/schemas/UsageFeatureResultList'
+            - xml:
+                name: sumByFeature
+              description: The usage statistic sum organized by feature.
       description: 'Contains the result of GuardDuty usage. If a UsageStatisticType is provided the result for other types will be null. '
     Groups:
       type: array
@@ -7737,6 +8006,38 @@ components:
                 name: portName
               description: The port name of the local connection.
       description: Contains information about the port for the local connection.
+    LoginAttribute:
+      type: object
+      properties:
+        User:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: user
+              description: Indicates the user name which attempted to log in.
+        Application:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: application
+              description: Indicates the application name used to attempt log in.
+        FailedLoginAttempts:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - xml:
+                name: failedLoginAttempts
+              description: Represents the sum of failed (unsuccessful) login attempts made to establish a connection to the database instance.
+        SuccessfulLoginAttempts:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - xml:
+                name: successfulLoginAttempts
+              description: Represents the sum of successful connections (a correct combination of login attributes) made to the database instance by the actor.
+      description: Information about the login attempts.
+    LoginAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/LoginAttribute'
     ScanEc2InstanceWithFindings:
       type: object
       properties:
@@ -7837,11 +8138,14 @@ components:
                 name: administratorId
               description: The administrator account ID.
       description: 'Contains information about the member account. '
+    MemberFeaturesConfigurationsResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/MemberFeaturesConfigurationResult'
     MemberDataSourceConfiguration:
       type: object
       required:
         - AccountId
-        - DataSources
       properties:
         AccountId:
           allOf:
@@ -7852,10 +8156,50 @@ components:
         DataSources:
           allOf:
             - $ref: '#/components/schemas/DataSourceConfigurationsResult'
-            - xml:
+            - deprecated: true
+              xml:
                 name: dataSources
-              description: Contains information on the status of data sources for the account.
+              description: 'Contains information on the status of data sources for the account.This parameter is deprecated, use Features instead'
+        Features:
+          allOf:
+            - $ref: '#/components/schemas/MemberFeaturesConfigurationsResults'
+            - xml:
+                name: features
+              description: Contains information about the status of the features for the member account.
       description: Contains information on which data sources are enabled for a member account.
+    OrgFeature:
+      type: string
+      enum:
+        - S3_DATA_EVENTS
+        - EKS_AUDIT_LOGS
+        - EBS_MALWARE_PROTECTION
+        - RDS_LOGIN_EVENTS
+    MemberFeaturesConfigurationResult:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/OrgFeature'
+            - xml:
+                name: name
+              description: Indicates the name of the feature that is enabled for the detector.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FeatureStatus'
+            - xml:
+                name: status
+              description: Indicates the status of the feature that is enabled for the detector.
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - xml:
+                name: updatedAt
+              description: The timestamp at which the feature object was updated.
+      description: Contains information about the features for the member account.
+    MemberFeaturesConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/MemberFeaturesConfiguration'
     RemotePortDetails:
       type: object
       properties:
@@ -7944,6 +8288,11 @@ components:
                 name: vpcId
               description: The VPC ID of the EC2 instance.
       description: Contains information about the elastic network interface of the EC2 instance.
+    OrgFeatureStatus:
+      type: string
+      enum:
+        - NEW
+        - NONE
     Organization:
       type: object
       properties:
@@ -8048,6 +8397,26 @@ components:
                 name: autoEnable
               description: An object that contains the status of whether scanning EBS volumes should be auto-enabled for new members joining the organization.
       description: An object that contains information on the status of whether EBS volumes scanning will be enabled as a data source for an organization.
+    OrganizationFeatureConfigurationResult:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/OrgFeature'
+            - xml:
+                name: name
+              description: The name of the feature that is configured for the member accounts within the organization.
+        AutoEnable:
+          allOf:
+            - $ref: '#/components/schemas/OrgFeatureStatus'
+            - xml:
+                name: autoEnable
+              description: '<p>Describes how The status of the feature that are configured for the member accounts within the organization.</p> <p>If you set <code>AutoEnable</code> to <code>NEW</code>, a feature will be configured for only the new accounts when they join the organization.</p> <p>If you set <code>AutoEnable</code> to <code>NONE</code>, no feature will be configured for the accounts when they join the organization.</p>'
+      description: A list of features which will be configured for the organization.
+    OrganizationFeaturesConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/OrganizationFeatureConfiguration'
     OrganizationKubernetesAuditLogsConfiguration:
       type: object
       required:
@@ -8195,6 +8564,80 @@ components:
                 name: effectivePermission
               description: Describes the effective permission on this bucket after factoring all attached policies.
       description: Describes the public access policies that apply to the S3 bucket.
+    RdsDbInstanceDetails:
+      type: object
+      properties:
+        DbInstanceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: dbInstanceIdentifier
+              description: The identifier associated to the database instance that was involved in the finding.
+        Engine:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: engine
+              description: The database engine of the database instance involved in the finding.
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: engineVersion
+              description: The version of the database engine that was involved in the finding.
+        DbClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: dbClusterIdentifier
+              description: The identifier of the database cluster that contains the database instance ID involved in the finding.
+        DbInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: dbInstanceArn
+              description: The Amazon Resource Name (ARN) that identifies the database instance involved in the finding.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+              description: Instance tag key-value pairs associated with the database instance ID.
+      description: Contains information about the resource type <code>RDSDBInstance</code> involved in a GuardDuty finding.
+    RdsDbUserDetails:
+      type: object
+      properties:
+        User:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: user
+              description: The user name used in the anomalous login attempt.
+        Application:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: application
+              description: The application name used in the anomalous login attempt.
+        Database:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: database
+              description: The name of the database instance involved in the anomalous login attempt.
+        Ssl:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: ssl
+              description: The version of the Secure Socket Layer (SSL) used for the network.
+        AuthMethod:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: authMethod
+              description: The authentication method used by the user involved in the finding.
+      description: Contains information about the user and authentication details for a database instance involved in the finding.
     S3BucketDetails:
       type: array
       items:
@@ -8675,9 +9118,16 @@ components:
         DataSources:
           allOf:
             - $ref: '#/components/schemas/DataSourceConfigurations'
-            - xml:
+            - deprecated: true
+              xml:
                 name: dataSources
-              description: '<p>Describes which data sources will be updated.</p> <p>There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html">Regions and endpoints</a>.</p>'
+              description: '<p>Describes which data sources will be updated.</p> <p>There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html">Regions and endpoints</a>.</p>This parameter is deprecated, use Features instead'
+        Features:
+          allOf:
+            - $ref: '#/components/schemas/DetectorFeatureConfigurations'
+            - xml:
+                name: features
+              description: Provides the features that will be updated for the detector.
     UpdateFilterRequest:
       type: object
       title: UpdateFilterRequest
@@ -8784,9 +9234,16 @@ components:
         DataSources:
           allOf:
             - $ref: '#/components/schemas/DataSourceConfigurations'
-            - xml:
+            - deprecated: true
+              xml:
                 name: dataSources
-              description: Describes which data sources will be updated.
+              description: 'Describes which data sources will be updated.This parameter is deprecated, use Features instead'
+        Features:
+          allOf:
+            - $ref: '#/components/schemas/MemberFeaturesConfigurations'
+            - xml:
+                name: features
+              description: A list of features that will be updated for the specified member accounts.
     UpdateOrganizationConfigurationRequest:
       type: object
       required:
@@ -8802,9 +9259,16 @@ components:
         DataSources:
           allOf:
             - $ref: '#/components/schemas/OrganizationDataSourceConfigurations'
-            - xml:
+            - deprecated: true
+              xml:
                 name: dataSources
-              description: Describes which data sources will be updated.
+              description: 'Describes which data sources will be updated.This parameter is deprecated, use Features instead'
+        Features:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationFeaturesConfigurations'
+            - xml:
+                name: features
+              description: A list of features that will be configured for the organization.
     UpdatePublishingDestinationRequest:
       type: object
       title: UpdatePublishingDestinationRequest
@@ -8877,6 +9341,37 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/UsageDataSourceResult'
+    UsageFeature:
+      type: string
+      enum:
+        - FLOW_LOGS
+        - CLOUD_TRAIL
+        - DNS_LOGS
+        - S3_DATA_EVENTS
+        - EKS_AUDIT_LOGS
+        - EBS_MALWARE_PROTECTION
+        - RDS_LOGIN_EVENTS
+        - LAMBDA_NETWORK_LOGS
+        - EKS_RUNTIME_MONITORING
+    UsageFeatureResult:
+      type: object
+      properties:
+        Feature:
+          allOf:
+            - $ref: '#/components/schemas/UsageFeature'
+            - xml:
+                name: feature
+              description: The feature that generated the usage cost.
+        Total:
+          allOf:
+            - $ref: '#/components/schemas/Total'
+            - xml:
+                name: total
+      description: Contains information about the result of the total usage based on the feature.
+    UsageFeatureResultList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UsageFeatureResult'
     UsageResourceResult:
       type: object
       properties:

@@ -344,7 +344,7 @@ paths:
         - name: X-Amzn-SageMaker-RequestTTLSeconds
           in: header
           required: false
-          description: Maximum age in seconds a request can be in the queue before it is marked as expired.
+          description: 'Maximum age in seconds a request can be in the queue before it is marked as expired. The default is 6 hours, or 21,600 seconds.'
           schema:
             type: integer
             minimum: 60
@@ -352,7 +352,7 @@ paths:
         - name: X-Amzn-SageMaker-InvocationTimeoutSeconds
           in: header
           required: false
-          description: Maximum amount of time in seconds a request can be processed before it is marked as expired.
+          description: 'Maximum amount of time in seconds a request can be processed before it is marked as expired. The default is 15 minutes, or 900 seconds.'
           schema:
             type: integer
             minimum: 1
