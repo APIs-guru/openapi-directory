@@ -2391,6 +2391,7 @@ paths:
                 refunded: false,
                 customers: [
                   {
+                    id: '12345',
                     first_name: 'Elon',
                     middle_name: 'D.',
                     last_name: 'Musk',
@@ -2782,6 +2783,7 @@ paths:
                 refunded: false,
                 customers: [
                   {
+                    id: '12345',
                     first_name: 'Elon',
                     middle_name: 'D.',
                     last_name: 'Musk',
@@ -3072,6 +3074,7 @@ paths:
                 refunded: false,
                 customers: [
                   {
+                    id: '12345',
                     first_name: 'Elon',
                     middle_name: 'D.',
                     last_name: 'Musk',
@@ -7296,6 +7299,10 @@ components:
                 example: Elon
                 nullable: true
                 type: string
+              id:
+                example: "12345"
+                title: Customer ID
+                type: string
               last_name:
                 example: Musk
                 nullable: true
@@ -7312,6 +7319,7 @@ components:
             x-apideck-weights:
               emails: medium
               first_name: medium
+              id: medium
               last_name: medium
               middle_name: medium
               phone_numbers: medium

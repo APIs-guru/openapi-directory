@@ -321,7 +321,7 @@ paths:
           name: _since
           schema:
             type: string
-        - description: String of comma-delimited FHIR resource types. If provided, only resources of the specified resource type(s) are returned.
+        - description: String of comma-delimited FHIR resource types. If provided, only resources of the specified resource type(s) are returned. Specifying multiple `_type` parameters isn't supported. For example, the result of `_type=Observation&_type=Encounter` is undefined. Use `_type=Observation,Encounter` instead.
           in: query
           name: _type
           schema:

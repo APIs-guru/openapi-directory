@@ -533,6 +533,15 @@ paths:
           name: alwaysIncludeEmail
           schema:
             type: boolean
+        - description: Event types to return. Optional. The default is ["default", "outOfOffice", "focusTime"]. This is used by the Working Location developer preview and only the default value is allowed for non-opted-in users.
+          explode: true
+          in: query
+          name: eventTypes
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
         - description: Specifies an event ID in the iCalendar format to be provided in the response. Optional. Use this if you want to search for an event by its iCalendar ID.
           in: query
           name: iCalUID
@@ -880,6 +889,15 @@ paths:
           name: alwaysIncludeEmail
           schema:
             type: boolean
+        - description: Event types to return. Optional. The default is ["default", "outOfOffice", "focusTime"]. This is used by the Working Location developer preview and only the default value is allowed for non-opted-in users.
+          explode: true
+          in: query
+          name: eventTypes
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
         - description: Specifies an event ID in the iCalendar format to be provided in the response. Optional. Use this if you want to search for an event by its iCalendar ID.
           in: query
           name: iCalUID

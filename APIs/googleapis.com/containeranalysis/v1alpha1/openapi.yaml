@@ -1605,6 +1605,12 @@ components:
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions:
       description: Optional arguments to enable specific features of builds.
       properties:
+        defaultLogsBucketBehavior:
+          description: Optional. Option to specify how default logs buckets are setup.
+          enum:
+            - DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED
+            - REGIONAL_USER_OWNED_BUCKET
+          type: string
         diskSizeGb:
           description: Requested disk size for the VM that runs the build. Note that this is *NOT* "disk free"; some of the space will be used by the operating system and build utilities. Also note that this is the minimum disk size that will be allocated for the build -- the build may run with a larger disk than requested. At present, the maximum disk size is 2000GB; builds that request more than the maximum are rejected with an error.
           format: int64
@@ -3411,14 +3417,14 @@ components:
     Publisher:
       description: Publisher contains information about the publisher of this Note.
       properties:
-        context:
-          description: "The context or namespace. Contains a URL which is under control of the issuing party and can be used as a globally unique identifier for that issuing party. Example: https://csaf.io"
-          type: string
         issuingAuthority:
           description: Provides information about the authority of the issuing party to release the document, in particular, the party's constituency and responsibilities or other obligations.
           type: string
         name:
           description: "Name of the publisher. Examples: 'Google', 'Google Cloud Platform'."
+          type: string
+        publisherNamespace:
+          description: "The context or namespace. Contains a URL which is under control of the issuing party and can be used as a globally unique identifier for that issuing party. Example: https://csaf.io"
           type: string
       type: object
     Recipe:
@@ -3578,10 +3584,6 @@ components:
       properties:
         details:
           description: Contains a comprehensive human-readable discussion of the remediation.
-          type: string
-        remediationTime:
-          description: Contains the date from which the remediation is available.
-          format: google-datetime
           type: string
         remediationType:
           description: The type of remediation that can be applied.

@@ -113,7 +113,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: If set to true, and if the Service does not exist, it will create a new one. Caller must have both create and update permissions for this call if this is set to true.
+        - description: This field is currently not used by Cloud Run; setting it does not have any effect.
           in: query
           name: allowMissing
           schema:
@@ -847,6 +847,7 @@ components:
             - JOB_STATUS_SERVICE_POLLING_ERROR
             - NON_ZERO_EXIT_CODE
             - CANCELLED
+            - CANCELLING
           type: string
         lastTransitionTime:
           description: Last time the condition transitioned from one status to another.
@@ -1053,7 +1054,7 @@ components:
           description: KRM-style labels for the resource. User-provided labels are shared with Google's billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https://cloud.google.com/resource-manager/docs/creating-managing-labels or https://cloud.google.com/run/docs/configuring/labels
           type: object
         launchStage:
-          description: Set the launch stage to a preview stage on write to allow use of preview features in that stage. On read, describes whether the resource uses preview features. Launch Stages are defined at [Google Cloud Platform Launch Stages](https://cloud.google.com/terms/launch-stages).
+          description: The least stable launch stage needed to create this resource, as defined by [Google Cloud Platform Launch Stages](https://cloud.google.com/terms/launch-stages). Cloud Run supports `ALPHA`, `BETA`, and `GA`. Note that this value might not be what was used as input. For example, if ALPHA was provided as input in the parent resource, but only BETA and GA-level features are were, this field will be BETA.
           enum:
             - LAUNCH_STAGE_UNSPECIFIED
             - UNIMPLEMENTED
@@ -1276,7 +1277,7 @@ components:
           description: Output only. Name of the last created execution.
           readOnly: true
         launchStage:
-          description: The launch stage as defined by [Google Cloud Platform Launch Stages](https://cloud.google.com/terms/launch-stages). Cloud Run supports `ALPHA`, `BETA`, and `GA`. If no value is specified, GA is assumed.
+          description: The launch stage as defined by [Google Cloud Platform Launch Stages](https://cloud.google.com/terms/launch-stages). Cloud Run supports `ALPHA`, `BETA`, and `GA`. If no value is specified, GA is assumed. Set the launch stage to a preview stage on input to allow use of preview features in that stage. On read (or output), describes whether the resource uses preview features. For example, if ALPHA is provided as input, but only BETA and GA-level features are used, this field will be BETA on output.
           enum:
             - LAUNCH_STAGE_UNSPECIFIED
             - UNIMPLEMENTED
@@ -1491,7 +1492,7 @@ components:
           description: KRM-style labels for the resource. User-provided labels are shared with Google's billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https://cloud.google.com/resource-manager/docs/creating-managing-labels or https://cloud.google.com/run/docs/configuring/labels
           type: object
         launchStage:
-          description: Set the launch stage to a preview stage on write to allow use of preview features in that stage. On read, describes whether the resource uses preview features. Launch Stages are defined at [Google Cloud Platform Launch Stages](https://cloud.google.com/terms/launch-stages).
+          description: The least stable launch stage needed to create this resource, as defined by [Google Cloud Platform Launch Stages](https://cloud.google.com/terms/launch-stages). Cloud Run supports `ALPHA`, `BETA`, and `GA`. Note that this value might not be what was used as input. For example, if ALPHA was provided as input in the parent resource, but only BETA and GA-level features are were, this field will be BETA.
           enum:
             - LAUNCH_STAGE_UNSPECIFIED
             - UNIMPLEMENTED
@@ -1741,7 +1742,7 @@ components:
           readOnly: true
           type: string
         launchStage:
-          description: The launch stage as defined by [Google Cloud Platform Launch Stages](https://cloud.google.com/terms/launch-stages). Cloud Run supports `ALPHA`, `BETA`, and `GA`. If no value is specified, GA is assumed.
+          description: The launch stage as defined by [Google Cloud Platform Launch Stages](https://cloud.google.com/terms/launch-stages). Cloud Run supports `ALPHA`, `BETA`, and `GA`. If no value is specified, GA is assumed. Set the launch stage to a preview stage on input to allow use of preview features in that stage. On read (or output), describes whether the resource uses preview features. For example, if ALPHA is provided as input, but only BETA and GA-level features are used, this field will be BETA on output.
           enum:
             - LAUNCH_STAGE_UNSPECIFIED
             - UNIMPLEMENTED
