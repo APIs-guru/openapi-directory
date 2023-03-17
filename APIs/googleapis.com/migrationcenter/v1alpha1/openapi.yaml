@@ -29,6 +29,90 @@ externalDocs:
 tags:
   - name: projects
 paths:
+  "/v1alpha1/{group}:addAssets":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Adds assets to a group.
+      operationId: migrationcenter.projects.locations.groups.addAssets
+      parameters:
+        - description: Required. Group reference.
+          in: path
+          name: group
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddAssetsToGroupRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{group}:removeAssets":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Removes assets from a group.
+      operationId: migrationcenter.projects.locations.groups.removeAssets
+      parameters:
+        - description: Required. Group reference.
+          in: path
+          name: group
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemoveAssetsFromGroupRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1alpha1/{name}":
     delete:
       description: Deletes a source.
@@ -198,7 +282,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1alpha1/{name}/operations":
     get:
-      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
+      description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: migrationcenter.projects.locations.operations.list
       parameters:
         - description: The name of the operation's parent resource.
@@ -441,44 +525,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    post:
-      description: "Creates a new asset in a given project and location. Deprecated: Use ReportAssetFrames instead."
-      operationId: migrationcenter.projects.locations.assets.create
-      parameters:
-        - description: Required. Value for parent.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: assetId
-          schema:
-            type: string
-        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Asset"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1alpha1/{parent}/assets:aggregateValues":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -513,6 +559,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AggregateAssetsValuesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{parent}/assets:batchDelete":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deletes list of Assets.
+      operationId: migrationcenter.projects.locations.assets.batchDelete
+      parameters:
+        - description: Required. Parent value for batch asset delete.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchDeleteAssetsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
@@ -602,6 +690,198 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ReportAssetFramesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{parent}/groups":
+    get:
+      description: Lists all groups in a given project and location.
+      operationId: migrationcenter.projects.locations.groups.list
+      parameters:
+        - description: Required. Parent value for `ListGroupsRequest`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filtering results.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Field to sort by. See https://google.aip.dev/132#ordering for more details.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListGroupsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new group in a given project and location.
+      operationId: migrationcenter.projects.locations.groups.create
+      parameters:
+        - description: Required. Value for parent.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. User specified ID for the group. It will become the last component of the group name. The ID must be unique within the project, must conform with RFC-1034, is restricted to lower-cased letters, and has a maximum length of 63 characters. The ID must match the regular expression: `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`."
+          in: query
+          name: groupId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Group"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{parent}/importDataFiles":
+    get:
+      description: List import data files.
+      operationId: migrationcenter.projects.locations.importJobs.importDataFiles.list
+      parameters:
+        - description: Required. Name of the parent of the `ImportDataFiles` resource.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filtering results.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Field to sort by. See https://google.aip.dev/132#ordering for more details.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: The maximum number of data files to return. The service may return fewer than this value. If unspecified, at most 500 data files will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListImportDataFiles` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListImportDataFiles` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListImportDataFilesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates an import data file.
+      operationId: migrationcenter.projects.locations.importJobs.importDataFiles.create
+      parameters:
+        - description: Required. Name of the parent of the ImportDataFile.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the new data file.
+          in: query
+          name: importDataFileId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportDataFile"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -701,6 +981,96 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ImportJob"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{parent}/preferenceSets":
+    get:
+      description: Lists all the preference sets in a given project and location.
+      operationId: migrationcenter.projects.locations.preferenceSets.list
+      parameters:
+        - description: Required. Parent value for `ListPreferenceSetsRequest`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Field to sort by. See https://google.aip.dev/132#ordering for more details.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, at most 500 preference sets will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPreferenceSetsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new preference set in a given project and location.
+      operationId: migrationcenter.projects.locations.preferenceSets.create
+      parameters:
+        - description: Required. Value for parent.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: preferenceSetId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreferenceSet"
       responses:
         "200":
           content:
@@ -887,6 +1257,19 @@ components:
       schema:
         type: string
   schemas:
+    AddAssetsToGroupRequest:
+      description: A request to add assets to a group.
+      properties:
+        allowExisting:
+          description: Optional. When this value is set to `false` and one of the given assets is already an existing member of the group, the operation fails with an `Already Exists` error. When set to `true` this situation is silently ignored by the server. Default value is `false`.
+          type: boolean
+        assets:
+          $ref: "#/components/schemas/AssetList"
+          description: Required. List of assets to be added. The maximum number of assets that can be added in a single request is 1000.
+        requestId:
+          description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          type: string
+      type: object
     AggregateAssetsValuesRequest:
       description: A request to aggregate one or more values.
       properties:
@@ -1014,6 +1397,12 @@ components:
     Asset:
       description: An asset represents a resource in your environment. Asset types include virtual machines and databases.
       properties:
+        assignedGroups:
+          description: Output only. The list of groups that the asset is assigned to.
+          items:
+            type: string
+          readOnly: true
+          type: array
         attributes:
           additionalProperties:
             type: string
@@ -1024,6 +1413,10 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        insightList:
+          $ref: "#/components/schemas/InsightList"
+          description: Output only. The list of insights associated with the asset.
+          readOnly: true
         labels:
           additionalProperties:
             type: string
@@ -1033,6 +1426,10 @@ components:
           description: Output only. The full name of the asset.
           readOnly: true
           type: string
+        performanceData:
+          $ref: "#/components/schemas/AssetPerformanceData"
+          description: Output only. Performance data for the asset.
+          readOnly: true
         sources:
           description: Output only. The list of sources contributing to the asset.
           items:
@@ -1078,6 +1475,59 @@ components:
           $ref: "#/components/schemas/VirtualMachineDetails"
           description: Asset information specific for virtual machines.
       type: object
+    AssetList:
+      description: Lists the asset IDs of all assets.
+      properties:
+        assetIds:
+          description: A list of asset IDs
+          items:
+            type: string
+          type: array
+      type: object
+    AssetPerformanceData:
+      description: Performance data for an asset.
+      properties:
+        dailyResourceUsageAggregations:
+          description: Daily resource usage aggregations. Contains all of the data available for an asset, up to the last 420 days.
+          items:
+            $ref: "#/components/schemas/DailyResourceUsageAggregation"
+          type: array
+      type: object
+    AwsEc2PlatformDetails:
+      description: AWS EC2 specific details.
+      properties:
+        location:
+          description: The location of the machine in the AWS format.
+          type: string
+        machineTypeLabel:
+          description: AWS platform's machine type label.
+          type: string
+      type: object
+    AzureVmPlatformDetails:
+      description: Azure VM specific details.
+      properties:
+        location:
+          description: The location of the machine in the Azure format.
+          type: string
+        machineTypeLabel:
+          description: Azure platform's machine type label.
+          type: string
+        provisioningState:
+          description: Azure platform's provisioning state.
+          type: string
+      type: object
+    BatchDeleteAssetsRequest:
+      description: A request to delete a list of asset.
+      properties:
+        allowMissing:
+          description: Optional. When this value is set to `true` the request is a no-op for non-existing assets. See https://google.aip.dev/135#delete-if-existing for additional details. Default value is `false`.
+          type: boolean
+        names:
+          description: "Required. The IDs of the assets to delete. A maximum of 10 assets can be deleted in a batch. format: projects/{project}/locations/{location}/asset/{name}."
+          items:
+            type: string
+          type: array
+      type: object
     BatchUpdateAssetsRequest:
       description: A request to update a list of assets.
       properties:
@@ -1097,33 +1547,154 @@ components:
           type: array
       type: object
     BiosDetails:
-      description: Details about the bios.
+      description: Details about the BIOS.
       properties:
         biosManufacturer:
-          description: Bios manufacturer.
+          description: BIOS manufacturer.
           type: string
         biosName:
-          description: Bios name.
+          description: BIOS name.
           type: string
         biosReleaseDate:
-          description: Bios release date.
+          description: BIOS release date.
           type: string
         biosVersion:
-          description: Bios version.
+          description: BIOS version.
           type: string
         smbiosUuid:
-          description: SMBios UUID.
+          description: SMBIOS UUID.
           type: string
       type: object
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
       type: object
+    ComputeEngineMigrationTarget:
+      description: Compute engine migration target.
+      properties:
+        shape:
+          $ref: "#/components/schemas/ComputeEngineShapeDescriptor"
+          description: Description of the suggested shape for the migration target.
+      type: object
+    ComputeEnginePreferences:
+      description: The user preferences relating to Compute Engine target platform.
+      properties:
+        licenseType:
+          description: License type to consider when calculating costs for virtual machine insights and recommendations. If unspecified, costs are calculated based on the default licensing plan.
+          enum:
+            - LICENSE_TYPE_UNSPECIFIED
+            - LICENSE_TYPE_DEFAULT
+            - LICENSE_TYPE_BRING_YOUR_OWN_LICENSE
+          type: string
+        machinePreferences:
+          $ref: "#/components/schemas/MachinePreferences"
+          description: Preferences concerning the machine types to consider on Compute Engine.
+        persistentDiskType:
+          description: Persistent disk type to use. If unspecified (default), all types are considered, based on available usage data.
+          enum:
+            - PERSISTENT_DISK_TYPE_UNSPECIFIED
+            - PERSISTENT_DISK_TYPE_STANDARD
+            - PERSISTENT_DISK_TYPE_BALANCED
+            - PERSISTENT_DISK_TYPE_SSD
+          type: string
+      type: object
+    ComputeEngineShapeDescriptor:
+      description: Compute Engine target shape descriptor.
+      properties:
+        logicalCoreCount:
+          description: Number of logical cores.
+          format: int32
+          type: integer
+        machineType:
+          description: Compute Engine machine type.
+          type: string
+        memoryMb:
+          description: Memory in mebibytes.
+          format: int32
+          type: integer
+        physicalCoreCount:
+          description: Number of physical cores.
+          format: int32
+          type: integer
+        series:
+          description: Compute Engine machine series.
+          type: string
+      type: object
     CpuUsageSample:
       description: CPU usage sample.
       properties:
         utilizedPercentage:
           description: Percentage of total CPU capacity utilized. Must be in the interval [0, 100]. On most systems can be calculated using 100 - idle percentage.
+          format: float
+          type: number
+      type: object
+    DailyResourceUsageAggregation:
+      description: Usage data aggregation for a single day.
+      properties:
+        cpu:
+          $ref: "#/components/schemas/DailyResourceUsageAggregationCPU"
+          description: CPU usage.
+        date:
+          $ref: "#/components/schemas/Date"
+          description: Aggregation date. Day boundaries are at midnight UTC.
+        disk:
+          $ref: "#/components/schemas/DailyResourceUsageAggregationDisk"
+          description: Disk usage.
+        memory:
+          $ref: "#/components/schemas/DailyResourceUsageAggregationMemory"
+          description: Memory usage.
+        network:
+          $ref: "#/components/schemas/DailyResourceUsageAggregationNetwork"
+          description: Network usage.
+      type: object
+    DailyResourceUsageAggregationCPU:
+      description: Statistical aggregation of CPU usage.
+      properties:
+        utilizationPercentage:
+          $ref: "#/components/schemas/DailyResourceUsageAggregationStats"
+          description: CPU utilization percentage.
+      type: object
+    DailyResourceUsageAggregationDisk:
+      description: Statistical aggregation of disk usage.
+      properties:
+        iops:
+          $ref: "#/components/schemas/DailyResourceUsageAggregationStats"
+          description: Disk I/O operations per second.
+      type: object
+    DailyResourceUsageAggregationMemory:
+      description: Statistical aggregation of memory usage.
+      properties:
+        utilizationPercentage:
+          $ref: "#/components/schemas/DailyResourceUsageAggregationStats"
+          description: Memory utilization percentage.
+      type: object
+    DailyResourceUsageAggregationNetwork:
+      description: Statistical aggregation of network usage.
+      properties:
+        egressBps:
+          $ref: "#/components/schemas/DailyResourceUsageAggregationStats"
+          description: Network egress in B/s.
+        ingressBps:
+          $ref: "#/components/schemas/DailyResourceUsageAggregationStats"
+          description: Network ingress in B/s.
+      type: object
+    DailyResourceUsageAggregationStats:
+      description: Statistical aggregation of samples for a single resource usage.
+      properties:
+        average:
+          description: Average usage value.
+          format: float
+          type: number
+        median:
+          description: Median usage value.
+          format: float
+          type: number
+        ninteyFifthPercentile:
+          description: 95th percentile usage value.
+          format: float
+          type: number
+        peak:
+          description: Peak usage value.
           format: float
           type: number
       type: object
@@ -1204,16 +1775,16 @@ components:
           description: Disk status (e.g. online).
           type: string
         totalCapacityBytes:
-          description: Disk Capacity (required).
+          description: Disk capacity.
           format: int64
           type: string
         totalFreeBytes:
-          description: Disk Free Space.
+          description: Disk free space.
           format: int64
           type: string
         vmwareConfig:
           $ref: "#/components/schemas/VmwareDiskConfig"
-          description: Optional. Optional disk VMware details.
+          description: VMware disk details.
       type: object
     DiskEntryList:
       description: VM disks.
@@ -1252,6 +1823,7 @@ components:
           type: string
       type: object
     DiskPartitionList:
+      description: Disk partition list.
       properties:
         entries:
           description: Partition entries.
@@ -1311,6 +1883,18 @@ components:
             $ref: "#/components/schemas/ImportRowError"
           type: array
       type: object
+    FitDescriptor:
+      description: Describes the fit level of an asset for migration to a specific target.
+      properties:
+        fitLevel:
+          description: Fit level.
+          enum:
+            - FIT_LEVEL_UNSPECIFIED
+            - FIT
+            - NO_FIT
+            - REQUIRES_EFFORT
+          type: string
+      type: object
     Frames:
       description: Collection of frame data.
       properties:
@@ -1364,9 +1948,52 @@ components:
             - IMPORT_JOB_FORMAT_RVTOOLS_XLSX
             - IMPORT_JOB_FORMAT_RVTOOLS_CSV
             - IMPORT_JOB_FORMAT_JSON_FRAME
+            - IMPORT_JOB_FORMAT_EXPORTED_AWS_CSV
+            - IMPORT_JOB_FORMAT_EXPORTED_AZURE_CSV
+            - IMPORT_JOB_FORMAT_MANUAL_CSV
           type: string
         path:
           description: The payload path in Google Cloud Storage.
+          type: string
+      type: object
+    GenericPlatformDetails:
+      description: Generic platform details.
+      properties:
+        location:
+          description: Free text representation of the machine location. The format of this field should not be relied on. Different VMs in the same location may have different string values for this field.
+          type: string
+      type: object
+    GoogleKubernetesEngineMigrationTarget:
+      description: GKE migration target.
+      properties: {}
+      type: object
+    Group:
+      description: A resource that represents an asset group. The purpose of an asset group is to bundle a set of assets that have something in common, while allowing users to add annotations to the group. An asset can belong to multiple groups.
+      properties:
+        createTime:
+          description: Output only. The timestamp when the group was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: The description of the resource.
+          type: string
+        displayName:
+          description: User-friendly display name.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels as key value pairs.
+          type: object
+        name:
+          description: Output only. The name of the group.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The timestamp when the group was last updated.
+          format: google-datetime
+          readOnly: true
           type: string
       type: object
     GuestConfigDetails:
@@ -1411,6 +2038,7 @@ components:
       description: Guest installed application list.
       properties:
         entries:
+          description: Application entries.
           items:
             $ref: "#/components/schemas/GuestInstalledApplication"
           type: array
@@ -1442,7 +2070,7 @@ components:
           type: string
         networkInfo:
           $ref: "#/components/schemas/RuntimeNetworkInfo"
-          description: Runtime network information (connections ports).
+          description: Runtime network information (connections, ports).
         openFileList:
           $ref: "#/components/schemas/OpenFileList"
           description: Open files information.
@@ -1474,6 +2102,45 @@ components:
             $ref: "#/components/schemas/HostsEntry"
           type: array
       type: object
+    ImportDataFile:
+      description: A resource that represents a payload file in an import job.
+      properties:
+        createTime:
+          description: Output only. The timestamp when the file was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: User-friendly display name. Maximum length is 63 characters.
+          type: string
+        format:
+          description: The payload format.
+          enum:
+            - IMPORT_JOB_FORMAT_UNSPECIFIED
+            - IMPORT_JOB_FORMAT_CMDB
+            - IMPORT_JOB_FORMAT_RVTOOLS_XLSX
+            - IMPORT_JOB_FORMAT_RVTOOLS_CSV
+            - IMPORT_JOB_FORMAT_JSON_FRAME
+            - IMPORT_JOB_FORMAT_EXPORTED_AWS_CSV
+            - IMPORT_JOB_FORMAT_EXPORTED_AZURE_CSV
+            - IMPORT_JOB_FORMAT_MANUAL_CSV
+          type: string
+        name:
+          description: Output only. The name of the file.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. The state of the import data file.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+          readOnly: true
+          type: string
+        uploadFileInfo:
+          $ref: "#/components/schemas/UploadFileInfo"
+          description: Information about a file that is uploaded to a storage service.
+      type: object
     ImportError:
       description: A resource that reports the errors encountered while processing an import job.
       properties:
@@ -1504,6 +2171,9 @@ components:
           description: Output only. The timestamp when the import job was created.
           format: google-datetime
           readOnly: true
+          type: string
+        displayName:
+          description: User-friendly display name. Maximum length is 63 characters.
           type: string
         executionReport:
           $ref: "#/components/schemas/ExecutionReport"
@@ -1577,12 +2247,38 @@ components:
             - IMPORT_JOB_FORMAT_RVTOOLS_XLSX
             - IMPORT_JOB_FORMAT_RVTOOLS_CSV
             - IMPORT_JOB_FORMAT_JSON_FRAME
+            - IMPORT_JOB_FORMAT_EXPORTED_AWS_CSV
+            - IMPORT_JOB_FORMAT_EXPORTED_AZURE_CSV
+            - IMPORT_JOB_FORMAT_MANUAL_CSV
           type: string
         payload:
           description: List of payload files.
           items:
             $ref: "#/components/schemas/PayloadFile"
           type: array
+      type: object
+    Insight:
+      description: An insight about an asset.
+      properties:
+        migrationInsight:
+          $ref: "#/components/schemas/MigrationInsight"
+          description: Output only. An insight about potential migrations for an asset.
+          readOnly: true
+      type: object
+    InsightList:
+      description: Message containing insights list.
+      properties:
+        insights:
+          description: Output only. Insights of the list.
+          items:
+            $ref: "#/components/schemas/Insight"
+          readOnly: true
+          type: array
+        updateTime:
+          description: Output only. Update timestamp.
+          format: google-datetime
+          readOnly: true
+          type: string
       type: object
     ListAssetsResponse:
       description: Response message for listing assets.
@@ -1594,6 +2290,40 @@ components:
           type: array
         nextPageToken:
           description: A token identifying a page of results the server should return.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListGroupsResponse:
+      description: A response for listing groups.
+      properties:
+        groups:
+          description: The list of Group
+          items:
+            $ref: "#/components/schemas/Group"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results the server should return.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListImportDataFilesResponse:
+      description: Response for listing payload files of an import job.
+      properties:
+        importDataFiles:
+          description: The list of import data files.
+          items:
+            $ref: "#/components/schemas/ImportDataFile"
+          type: array
+        nextPageToken:
+          description: A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
         unreachable:
           description: Locations that could not be reached.
@@ -1642,6 +2372,23 @@ components:
             $ref: "#/components/schemas/Operation"
           type: array
       type: object
+    ListPreferenceSetsResponse:
+      description: Response message for listing preference sets.
+      properties:
+        nextPageToken:
+          description: A token identifying a page of results the server should return.
+          type: string
+        preferenceSets:
+          description: The list of PreferenceSets
+          items:
+            $ref: "#/components/schemas/PreferenceSet"
+          type: array
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
     ListSourcesResponse:
       description: Response message for listing sources.
       properties:
@@ -1682,6 +2429,22 @@ components:
           description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
           type: string
       type: object
+    MachinePreferences:
+      description: The type of machines to consider when calculating virtual machine migration insights and recommendations. Not all machine types are available in all zones and regions.
+      properties:
+        allowedMachineSeries:
+          description: Compute Engine machine series to consider for insights and recommendations. If empty, no restriction is applied on the machine series.
+          items:
+            $ref: "#/components/schemas/MachineSeries"
+          type: array
+      type: object
+    MachineSeries:
+      description: A Compute Engine machine series.
+      properties:
+        code:
+          description: Code to identify a Compute Engine machine series. Consult https://cloud.google.com/compute/docs/machine-resource#machine_type_comparison for more details on the available series.
+          type: string
+      type: object
     MemoryUsageSample:
       description: Memory usage sample.
       properties:
@@ -1689,6 +2452,26 @@ components:
           description: Percentage of system memory utilized. Must be in the interval [0, 100].
           format: float
           type: number
+      type: object
+    MigrationInsight:
+      description: An insight about potential migrations for an asset.
+      properties:
+        computeEngineTarget:
+          $ref: "#/components/schemas/ComputeEngineMigrationTarget"
+          description: Output only. A Google Compute Engine target.
+          readOnly: true
+        fit:
+          $ref: "#/components/schemas/FitDescriptor"
+          description: Output only. Description of how well the asset this insight is associated with fits the proposed migration.
+          readOnly: true
+        gkeTarget:
+          $ref: "#/components/schemas/GoogleKubernetesEngineMigrationTarget"
+          description: Output only. A Google Kubernetes Engine target.
+          readOnly: true
+        vmwareEngineTarget:
+          $ref: "#/components/schemas/VmwareEngineMigrationTarget"
+          description: Output only. A VMWare Engine target.
+          readOnly: true
       type: object
     NetworkAdapterDetails:
       description: Details of network adapter.
@@ -1704,9 +2487,10 @@ components:
           type: string
       type: object
     NetworkAdapterList:
+      description: List of network adapters.
       properties:
         networkAdapters:
-          description: Network Adapter descriptions.
+          description: Network adapter descriptions.
           items:
             $ref: "#/components/schemas/NetworkAdapterDetails"
           type: array
@@ -1715,7 +2499,7 @@ components:
       description: Details of network address.
       properties:
         assignment:
-          description: If DHCP is used to assign addresses.
+          description: Whether DHCP is used to assign addresses.
           enum:
             - ADDRESS_ASSIGNMENT_UNSPECIFIED
             - ADDRESS_ASSIGNMENT_STATIC
@@ -1738,6 +2522,7 @@ components:
       description: List of allocated/assigned network addresses.
       properties:
         addresses:
+          description: Network address entries.
           items:
             $ref: "#/components/schemas/NetworkAddress"
           type: array
@@ -1776,6 +2561,7 @@ components:
       description: Network connection list.
       properties:
         entries:
+          description: Network connection entries.
           items:
             $ref: "#/components/schemas/NetworkConnection"
           type: array
@@ -1926,12 +2712,80 @@ components:
           format: google-datetime
           type: string
       type: object
+    PhysicalPlatformDetails:
+      description: Platform specific details for Physical Machines.
+      properties:
+        location:
+          description: Free text representation of the machine location. The format of this field should not be relied on. Different machines in the same location may have different string values for this field.
+          type: string
+      type: object
     PlatformDetails:
       description: Information about the platform.
       properties:
+        awsEc2Details:
+          $ref: "#/components/schemas/AwsEc2PlatformDetails"
+          description: AWS EC2 specific details.
+        azureVmDetails:
+          $ref: "#/components/schemas/AzureVmPlatformDetails"
+          description: Azure VM specific details.
+        genericDetails:
+          $ref: "#/components/schemas/GenericPlatformDetails"
+          description: Generic platform details.
+        physicalDetails:
+          $ref: "#/components/schemas/PhysicalPlatformDetails"
+          description: Physical machines platform details.
         vmwareDetails:
           $ref: "#/components/schemas/VmwarePlatformDetails"
           description: VMware specific details.
+      type: object
+    PreferenceSet:
+      description: The preferences that apply to all assets in a given context.
+      properties:
+        createTime:
+          description: Output only. The timestamp when the preference set was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: A description of the preference set.
+          type: string
+        displayName:
+          description: User-friendly display name. Maximum length is 63 characters.
+          type: string
+        name:
+          description: Output only. Name of the preference set.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The timestamp when the preference set was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        virtualMachinePreferences:
+          $ref: "#/components/schemas/VirtualMachinePreferences"
+          description: A set of preferences that applies to all virtual machines in the context.
+      type: object
+    RegionPreferences:
+      description: The user preferences relating to target regions.
+      properties:
+        preferredRegions:
+          description: A list of preferred regions, ordered by the most preferred region first. Set only valid Google Cloud region names. See https://cloud.google.com/compute/docs/regions-zones for available regions.
+          items:
+            type: string
+          type: array
+      type: object
+    RemoveAssetsFromGroupRequest:
+      description: A request to remove assets from a group.
+      properties:
+        allowMissing:
+          description: Optional. When this value is set to `false` and one of the given assets is not an existing member of the group, the operation fails with a `Not Found` error. When set to `true` this situation is silently ignored by the server. Default value is `false`.
+          type: boolean
+        assets:
+          $ref: "#/components/schemas/AssetList"
+          description: Required. List of assets to be removed. The maximum number of assets that can be removed in a single request is 1000.
+        requestId:
+          description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          type: string
       type: object
     ReportAssetFramesResponse:
       description: A response to a call to `ReportAssetFrame`.
@@ -1970,6 +2824,7 @@ components:
       description: List of running guest OS processes.
       properties:
         processes:
+          description: Running process entries.
           items:
             $ref: "#/components/schemas/RunningProcess"
           type: array
@@ -2004,6 +2859,7 @@ components:
       description: List of running guest OS services.
       properties:
         services:
+          description: Running service entries.
           items:
             $ref: "#/components/schemas/RunningService"
           type: array
@@ -2029,6 +2885,17 @@ components:
           type: boolean
         mode:
           description: SELinux mode enforcing / permissive.
+          type: string
+      type: object
+    Settings:
+      description: Describes the Migration Center settings related to the project.
+      properties:
+        name:
+          description: Output only. The name of the resource.
+          readOnly: true
+          type: string
+        preferenceSet:
+          description: The preference set used by default for a project.
           type: string
       type: object
     Source:
@@ -2118,6 +2985,19 @@ components:
           format: google-fieldmask
           type: string
       type: object
+    UploadFileInfo:
+      description: A resource that contains a URI to which a data file can be uploaded.
+      properties:
+        uri:
+          description: Output only. Upload URI for the file.
+          readOnly: true
+          type: string
+        uriExpirationTime:
+          description: Output only. Expiration time of the upload URI.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     ValidateImportJobRequest:
       description: A request to validate an import job.
       properties:
@@ -2144,29 +3024,29 @@ components:
       properties:
         bios:
           $ref: "#/components/schemas/BiosDetails"
-          description: Bios Details.
+          description: BIOS Details.
         cpuArchitecture:
-          description: 'CPU architecture e.g.: "x64-based PC", "x86_64", "i686" etc.'
+          description: CPU architecture, e.g., "x64-based PC", "x86_64", "i686" etc.
           type: string
         cpuManufacturer:
-          description: 'CPU manufacturer e.g.: "Intel", "AMD".'
+          description: CPU manufacturer, e.g., "Intel", "AMD".
           type: string
         cpuName:
-          description: CPU name e.g. "Intel Xeon E5-2690", "AMD EPYC 7571" etc.
+          description: CPU name, e.g., "Intel Xeon E5-2690", "AMD EPYC 7571" etc.
           type: string
         cpuSocketCount:
           description: Number of processor sockets allocated to the machine.
           format: int32
           type: integer
         cpuThreadCount:
-          description: Number of cpu threads allocated to the machine.
+          description: Number of CPU threads allocated to the machine.
           format: int32
           type: integer
         firmware:
           description: Firmware (BIOS/efi).
           type: string
         hyperthreading:
-          description: CPU hyperthreading support (inner enum).
+          description: CPU hyperthreading support.
           enum:
             - HYPER_THREADING_UNSPECIFIED
             - HYPER_THREADING_DISABLED
@@ -2183,6 +3063,10 @@ components:
           description: Number of CPU cores in the VirtualMachine. Must be non-negative.
           format: int32
           type: integer
+        createTime:
+          description: VM creation timestamp.
+          format: google-datetime
+          type: string
         guestOs:
           $ref: "#/components/schemas/GuestOsDetails"
           description: Guest OS information.
@@ -2200,6 +3084,9 @@ components:
           type: string
         osName:
           description: The name of the operating system running on the VirtualMachine.
+          type: string
+        osVersion:
+          description: The version of the operating system running on the virtual machine.
           type: string
         platform:
           $ref: "#/components/schemas/PlatformDetails"
@@ -2229,7 +3116,7 @@ components:
           $ref: "#/components/schemas/VirtualMachineNetworkDetails"
           description: VM network details.
         vmUuid:
-          description: Virtual Machine uniqe identifier.
+          description: Virtual Machine unique identifier.
           type: string
       type: object
     VirtualMachineDiskDetails:
@@ -2251,19 +3138,48 @@ components:
           type: string
       type: object
     VirtualMachineNetworkDetails:
-      description: Details of network adapters and settings
+      description: Details of network adapters and settings.
       properties:
         defaultGw:
-          description: Default GW address. Top-level object, will be later encriched by full RouteInfo.
+          description: Default gateway address.
           type: string
         networkAdapters:
           $ref: "#/components/schemas/NetworkAdapterList"
-          description: List of Network Adapters.
+          description: List of network adapters.
         primaryIpAddress:
-          description: IP Address of the machine.
+          description: IP address of the machine.
           type: string
         primaryMacAddress:
-          description: MAC Address of the machine. This property is used to uniqly identify the machine.
+          description: MAC address of the machine. This property is used to uniqly identify the machine.
+          type: string
+        publicIpAddress:
+          description: Public IP address of the machine.
+          type: string
+      type: object
+    VirtualMachinePreferences:
+      description: VirtualMachinePreferences enables you to create sets of assumptions, for example, a geographical location and pricing track, for your migrated virtual machines. The set of preferences influence recommendations for migrating virtual machine assets.
+      properties:
+        commitmentPlan:
+          description: Commitment plan to consider when calculating costs for virtual machine insights and recommendations. If you are unsure which value to set, a 3 year commitment plan is often a good value to start with.
+          enum:
+            - COMMITMENT_PLAN_UNSPECIFIED
+            - COMMITMENT_PLAN_NONE
+            - COMMITMENT_PLAN_ONE_YEAR
+            - COMMITMENT_PLAN_THREE_YEARS
+          type: string
+        computeEnginePreferences:
+          $ref: "#/components/schemas/ComputeEnginePreferences"
+          description: Compute Engine preferences concern insights and recommendations for Compute Engine target.
+        regionPreferences:
+          $ref: "#/components/schemas/RegionPreferences"
+          description: Region preferences for assets using this preference set. If you are unsure which value to set, the migration service API region is often a good value to start with.
+        sizingOptimizationStrategy:
+          description: Sizing optimization strategy specifies the preferred strategy used when extrapolating usage data to calculate insights and recommendations for a virtual machine. If you are unsure which value to set, a moderate sizing optimization strategy is often a good value to start with.
+          enum:
+            - SIZING_OPTIMIZATION_STRATEGY_UNSPECIFIED
+            - SIZING_OPTIMIZATION_STRATEGY_SAME_AS_SOURCE
+            - SIZING_OPTIMIZATION_STRATEGY_MODERATE
+            - SIZING_OPTIMIZATION_STRATEGY_AGGRESSIVE
           type: string
       type: object
     VmwareDiskConfig:
@@ -2291,6 +3207,10 @@ components:
         vmdkDiskMode:
           description: VMDK disk mode.
           type: string
+      type: object
+    VmwareEngineMigrationTarget:
+      description: VMWare engine migration target.
+      properties: {}
       type: object
     VmwarePlatformDetails:
       description: VMware specific details.

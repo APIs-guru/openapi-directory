@@ -91,6 +91,40 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates a Serverless VPC Access connector, returns an operation.
+      operationId: vpcaccess.projects.locations.connectors.patch
+      parameters:
+        - description: The resource name in the format `projects/*/locations/*/connectors/*`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The fields to update on the entry group. If absent or empty, all modifiable fields are updated.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Connector"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
@@ -145,7 +179,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{name}/operations":
     get:
-      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
+      description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: vpcaccess.projects.locations.operations.list
       parameters:
         - description: The name of the operation's parent resource.

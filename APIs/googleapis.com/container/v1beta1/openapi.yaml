@@ -3292,6 +3292,9 @@ components:
         expireTime:
           description: "[Output only] The time the cluster will be automatically deleted in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format."
           type: string
+        fleet:
+          $ref: "#/components/schemas/Fleet"
+          description: Fleet information for the cluster.
         id:
           description: Output only. Unique id for the cluster.
           readOnly: true
@@ -3859,6 +3862,19 @@ components:
               - SECURITY_BULLETIN_EVENT
             type: string
           type: array
+      type: object
+    Fleet:
+      description: Fleet is the fleet configuration for the cluster.
+      properties:
+        membership:
+          description: "[Output only] The full resource name of the registered fleet membership of the cluster, in the format `//gkehub.googleapis.com/projects/*/locations/*/memberships/*`."
+          type: string
+        preRegistered:
+          description: "[Output only] Whether the cluster has been registered through the fleet API."
+          type: boolean
+        project:
+          description: The Fleet host project(project ID or project number) where this cluster will be registered to. This field cannot be changed after the cluster has been registered.
+          type: string
       type: object
     GPUSharingConfig:
       description: GPUSharingConfig represents the GPU sharing configuration for Hardware Accelerators.

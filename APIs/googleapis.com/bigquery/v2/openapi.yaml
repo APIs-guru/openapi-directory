@@ -3675,6 +3675,9 @@ components:
           items:
             $ref: "#/components/schemas/ConnectionProperty"
           type: array
+        continuous:
+          description: "[Optional] Specifies whether the query should be executed as a continuous query. The default value is false."
+          type: boolean
         createDisposition:
           description: "[Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE_IF_NEEDED: If the table does not exist, BigQuery creates the table. CREATE_NEVER: The table must already exist. If it does not, a 'notFound' error is returned in the job result. The default value is CREATE_IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion."
           type: string
@@ -4509,6 +4512,9 @@ components:
           items:
             $ref: "#/components/schemas/ConnectionProperty"
           type: array
+        continuous:
+          description: "[Optional] Specifies whether the query should be executed as a continuous query. The default value is false."
+          type: boolean
         createSession:
           description: If true, creates a new session, where session id will be a server generated random id. If false, runs query with an existing session_id passed in ConnectionProperty, otherwise runs query in non-session mode.
           type: boolean
@@ -4772,6 +4778,8 @@ components:
             - SQL
             - JAVASCRIPT
             - PYTHON
+            - JAVA
+            - SCALA
           type: string
         lastModifiedTime:
           description: Output only. The time when this routine was last modified, in milliseconds since the epoch.
@@ -4981,6 +4989,9 @@ components:
           items:
             type: string
           type: array
+        mainClass:
+          description: The fully qualified name of a class in jar_uris, for example, com.example.wordcount. Exactly one of main_class and main_jar_uri field should be set for Java/Scala language type.
+          type: string
         mainFileUri:
           description: The main file/jar URI of the Spark application. Exactly one of the definition_body field and the main_file_uri field must be set for Python. Exactly one of main_class and main_file_uri field should be set for Java/Scala language type.
           type: string
@@ -5025,7 +5036,7 @@ components:
           $ref: "#/components/schemas/StandardSqlStructType"
           description: The fields of this struct, in order, if type_kind = "STRUCT".
         typeKind:
-          description: Required. The top level type of this field. Can be any standard SQL data type (e.g., "INT64", "DATE", "ARRAY").
+          description: Required. The top level type of this field. Can be any GoogleSQL data type (e.g., "INT64", "DATE", "ARRAY").
           enum:
             - TYPE_KIND_UNSPECIFIED
             - INT64

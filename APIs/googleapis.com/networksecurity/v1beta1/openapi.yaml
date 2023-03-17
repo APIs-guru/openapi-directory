@@ -206,10 +206,10 @@ paths:
         - projects
   "/v1beta1/{name}":
     delete:
-      description: Deletes a single ServerTlsPolicy.
-      operationId: networksecurity.projects.locations.serverTlsPolicies.delete
+      description: Deletes a single UrlList.
+      operationId: networksecurity.projects.locations.urlLists.delete
       parameters:
-        - description: Required. A name of the ServerTlsPolicy to delete. Must be in the format `projects/*/locations/{location}/serverTlsPolicies/*`.
+        - description: Required. A name of the UrlList to delete. Must be in the format `projects/*/locations/{location}/urlLists/*`.
           in: path
           name: name
           required: true
@@ -235,10 +235,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets details of a single ServerTlsPolicy.
-      operationId: networksecurity.projects.locations.serverTlsPolicies.get
+      description: Gets details of a single UrlList.
+      operationId: networksecurity.projects.locations.urlLists.get
       parameters:
-        - description: Required. A name of the ServerTlsPolicy to get. Must be in the format `projects/*/locations/{location}/serverTlsPolicies/*`.
+        - description: Required. A name of the UrlList to get. Must be in the format `projects/*/locations/{location}/urlLists/*`.
           in: path
           name: name
           required: true
@@ -249,7 +249,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ServerTlsPolicy"
+                $ref: "#/components/schemas/UrlList"
           description: Successful response
       security:
         - Oauth2:
@@ -271,16 +271,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the parameters of a single ServerTlsPolicy.
-      operationId: networksecurity.projects.locations.serverTlsPolicies.patch
+      description: Updates the parameters of a single UrlList.
+      operationId: networksecurity.projects.locations.urlLists.patch
       parameters:
-        - description: Required. Name of the ServerTlsPolicy resource. It matches the pattern `projects/*/locations/{location}/serverTlsPolicies/{server_tls_policy}`
+        - description: Required. Name of the resource provided by the user. Name is of the form projects/{project}/locations/{location}/urlLists/{url_list} url_list should match the pattern:(^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Optional. Field mask is used to specify the fields to be overwritten in the ServerTlsPolicy resource by the update. The fields specified in the update_mask are relative to the resource, not the full request. A field will be overwritten if it is in the mask. If the user does not provide a mask then all fields will be overwritten.
+        - description: Optional. Field mask is used to specify the fields to be overwritten in the UrlList resource by the update. The fields specified in the update_mask are relative to the resource, not the full request. A field will be overwritten if it is in the mask. If the user does not provide a mask then all fields will be overwritten.
           in: query
           name: updateMask
           schema:
@@ -289,7 +289,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ServerTlsPolicy"
+              $ref: "#/components/schemas/UrlList"
       responses:
         "200":
           content:
@@ -698,6 +698,168 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1beta1/{parent}/gatewaySecurityPolicies":
+    get:
+      description: Lists GatewaySecurityPolicies in a given project and location.
+      operationId: networksecurity.projects.locations.gatewaySecurityPolicies.list
+      parameters:
+        - description: Required. The project and location from which the GatewaySecurityPolicies should be listed, specified in the format `projects/{project}/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of GatewaySecurityPolicies to return per call.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The value returned by the last 'ListGatewaySecurityPoliciesResponse' Indicates that this is a continuation of a prior 'ListGatewaySecurityPolicies' call, and that the system should return the next page of data.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListGatewaySecurityPoliciesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new GatewaySecurityPolicy in a given project and location.
+      operationId: networksecurity.projects.locations.gatewaySecurityPolicies.create
+      parameters:
+        - description: Required. The parent resource of the GatewaySecurityPolicy. Must be in the format `projects/{project}/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Short name of the GatewaySecurityPolicy resource to be created. This value should be 1-63 characters long, containing only letters, numbers, hyphens, and underscores, and should not start with a number. E.g. "gateway_security_policy1".
+          in: query
+          name: gatewaySecurityPolicyId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GatewaySecurityPolicy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{parent}/rules":
+    get:
+      description: Lists GatewaySecurityPolicyRules in a given project and location.
+      operationId: networksecurity.projects.locations.gatewaySecurityPolicies.rules.list
+      parameters:
+        - description: Required. The project, location and GatewaySecurityPolicy from which the GatewaySecurityPolicyRules should be listed, specified in the format `projects/{project}/locations/{location}/gatewaySecurityPolicies/{gatewaySecurityPolicy}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of GatewaySecurityPolicyRules to return per call.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The value returned by the last 'ListGatewaySecurityPolicyRulesResponse' Indicates that this is a continuation of a prior 'ListGatewaySecurityPolicyRules' call, and that the system should return the next page of data.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListGatewaySecurityPolicyRulesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new GatewaySecurityPolicy in a given project and location.
+      operationId: networksecurity.projects.locations.gatewaySecurityPolicies.rules.create
+      parameters:
+        - description: "Required. The parent where this rule will be created. Format : projects/{project}/location/{location}/gatewaySecurityPolicies/*"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The ID to use for the rule, which will become the final component of the rule's resource name. This value should be 4-63 characters, and valid characters are /a-z-/.
+          in: query
+          name: gatewaySecurityPolicyRuleId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GatewaySecurityPolicyRule"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta1/{parent}/serverTlsPolicies":
     get:
       description: Lists ServerTlsPolicies in a given project and location.
@@ -765,6 +927,87 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ServerTlsPolicy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{parent}/urlLists":
+    get:
+      description: Lists UrlLists in a given project and location.
+      operationId: networksecurity.projects.locations.urlLists.list
+      parameters:
+        - description: Required. The project and location from which the UrlLists should be listed, specified in the format `projects/{project}/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of UrlLists to return per call.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The value returned by the last `ListUrlListsResponse` Indicates that this is a continuation of a prior `ListUrlLists` call, and that the system should return the next page of data.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListUrlListsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new UrlList in a given project and location.
+      operationId: networksecurity.projects.locations.urlLists.create
+      parameters:
+        - description: Required. The parent resource of the UrlList. Must be in the format `projects/*/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Short name of the UrlList resource to be created. This value should be 1-63 characters long, containing only letters, numbers, hyphens, and underscores, and should not start with a number. E.g. "url_list".
+          in: query
+          name: urlListId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UrlList"
       responses:
         "200":
           content:
@@ -1175,6 +1418,66 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
+    GatewaySecurityPolicy:
+      description: The GatewaySecurityPolicy resource contains a collection of GatewaySecurityPolicyRules and associated metadata.
+      properties:
+        createTime:
+          description: Output only. The timestamp when the resource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. Free-text description of the resource.
+          type: string
+        name:
+          description: Required. Name of the resource. Name is of the form projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy} gateway_security_policy should match the pattern:(^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+          type: string
+        updateTime:
+          description: Output only. The timestamp when the resource was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GatewaySecurityPolicyRule:
+      description: The GatewaySecurityPolicyRule resource is in a nested collection within a GatewaySecurityPolicy and represents a traffic matching condition and associated action to perform.
+      properties:
+        applicationMatcher:
+          description: Optional. CEL expression for matching on L7/application level criteria.
+          type: string
+        basicProfile:
+          description: Required. Profile which tells what the primitive action should be.
+          enum:
+            - BASIC_PROFILE_UNSPECIFIED
+            - ALLOW
+            - DENY
+          type: string
+        createTime:
+          description: Output only. Time when the rule was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. Free-text description of the resource.
+          type: string
+        enabled:
+          description: Required. Whether the rule is enforced.
+          type: boolean
+        name:
+          description: "Required. Immutable. Name of the resource. ame is the full resource name so projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}/rules/{rule} rule should match the pattern: (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$)."
+          type: string
+        priority:
+          description: Required. Priority of the rule. Lower number corresponds to higher precedence.
+          format: int32
+          type: integer
+        sessionMatcher:
+          description: Required. CEL expression for matching on session criteria.
+          type: string
+        updateTime:
+          description: Output only. Time when the rule was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     GoogleCloudNetworksecurityV1beta1CertificateProvider:
       description: Specification of certificate provider. Defines the mechanism to obtain the certificate and private key for peer to peer authentication.
       properties:
@@ -1356,6 +1659,30 @@ components:
           description: If there might be more results than those appearing in this response, then `next_page_token` is included. To get the next set of results, call this method again using the value of `next_page_token` as `page_token`.
           type: string
       type: object
+    ListGatewaySecurityPoliciesResponse:
+      description: Response returned by the ListGatewaySecurityPolicies method.
+      properties:
+        gatewaySecurityPolicies:
+          description: List of GatewaySecurityPolicies resources.
+          items:
+            $ref: "#/components/schemas/GatewaySecurityPolicy"
+          type: array
+        nextPageToken:
+          description: If there might be more results than those appearing in this response, then 'next_page_token' is included. To get the next set of results, call this method again using the value of 'next_page_token' as 'page_token'.
+          type: string
+      type: object
+    ListGatewaySecurityPolicyRulesResponse:
+      description: Response returned by the ListGatewaySecurityPolicyRules method.
+      properties:
+        gatewaySecurityPolicyRules:
+          description: List of GatewaySecurityPolicyRule resources.
+          items:
+            $ref: "#/components/schemas/GatewaySecurityPolicyRule"
+          type: array
+        nextPageToken:
+          description: If there might be more results than those appearing in this response, then 'next_page_token' is included. To get the next set of results, call this method again using the value of 'next_page_token' as 'page_token'.
+          type: string
+      type: object
     ListLocationsResponse:
       description: The response message for Locations.ListLocations.
       properties:
@@ -1390,6 +1717,23 @@ components:
           description: List of ServerTlsPolicy resources.
           items:
             $ref: "#/components/schemas/ServerTlsPolicy"
+          type: array
+      type: object
+    ListUrlListsResponse:
+      description: Response returned by the ListUrlLists method.
+      properties:
+        nextPageToken:
+          description: If there might be more results than those appearing in this response, then `next_page_token` is included. To get the next set of results, call this method again using the value of `next_page_token` as `page_token`.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+        urlLists:
+          description: List of UrlList resources.
+          items:
+            $ref: "#/components/schemas/UrlList"
           type: array
       type: object
     Location:
@@ -1572,6 +1916,31 @@ components:
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
+      type: object
+    UrlList:
+      description: UrlList proto helps users to set reusable, independently manageable lists of hosts, host patterns, URLs, URL patterns.
+      properties:
+        createTime:
+          description: Output only. Time when the security policy was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. Free-text description of the resource.
+          type: string
+        name:
+          description: Required. Name of the resource provided by the user. Name is of the form projects/{project}/locations/{location}/urlLists/{url_list} url_list should match the pattern:(^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+          type: string
+        updateTime:
+          description: Output only. Time when the security policy was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        values:
+          description: Required. FQDNs and URLs.
+          items:
+            type: string
+          type: array
       type: object
     ValidationCA:
       description: Specification of ValidationCA. Defines the mechanism to obtain the Certificate Authority certificate to validate the peer certificate.

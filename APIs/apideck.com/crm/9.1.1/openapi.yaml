@@ -375,7 +375,7 @@ paths:
       x-apideck-api: crm
       x-apideck-gotchas:
         - connector: hubspot
-          description: Hubspot will only return activities from the last 30 days when using the `filter[updated_since]` parameter. More info [here](https://legacydocs.hubspot.com/docs/methods/engagements/get-recent-engagements).
+          description: Hubspot will only return activities from the last 30 days when using the `filter[updated_since]` parameter, with a maximum of 10.000 records. More info [here](https://legacydocs.hubspot.com/docs/methods/engagements/get-recent-engagements).
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -820,6 +820,9 @@ paths:
       tags:
         - Companies
       x-apideck-api: crm
+      x-apideck-gotchas:
+        - connector: hubspot
+          description: When using a filter or sorting for companies, Hubspot will only return a maximum of 10.000 companies.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1306,6 +1309,9 @@ paths:
       tags:
         - Contacts
       x-apideck-api: crm
+      x-apideck-gotchas:
+        - connector: hubspot
+          description: When using a filter or sorting for contacts, Hubspot will only return a maximum of 10.000 contacts.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1762,6 +1768,9 @@ paths:
       tags:
         - Leads
       x-apideck-api: crm
+      x-apideck-gotchas:
+        - connector: hubspot
+          description: When using a filter or sorting for leads, Hubspot will only return a maximum of 10.000 leads.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2486,6 +2495,9 @@ paths:
       tags:
         - Opportunities
       x-apideck-api: crm
+      x-apideck-gotchas:
+        - connector: hubspot
+          description: When using a filter or sorting for opportunities, Hubspot will only return a maximum of 10.000 opportunities.
       x-codeSamples:
         - label: Node
           lang: TypeScript
