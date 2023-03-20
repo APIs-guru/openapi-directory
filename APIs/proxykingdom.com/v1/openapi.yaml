@@ -1,14 +1,21 @@
 openapi: 3.0.1
+servers:
+  - url: https://api.proxykingdom.com/
 info:
   title: ProxyKingdom-Api
   version: v1
+  x-apisguru-categories:
+    - developer_tools
   x-logo:
-    url: https://s.imgur.com/images/favicon-152.png
+    url: https://i.imgur.com/9ojm4rP.jpeg
   x-origin:
     - format: openapi
       url: https://api.proxykingdom.com/swagger/v1/swagger.json
       version: "3.0"
-  x-providerName: imgur.com
+  x-providerName: proxykingdom.com
+externalDocs:
+  description: ProxyKingdom's Documentation
+  url: https://proxykingdom.com/documentation
 paths:
   /proxy:
     get:
@@ -66,7 +73,7 @@ paths:
           name: correlation_id
           required: true
           schema:
-            default: deb07c23-79c3-471f-844b-68bdeb5378c2
+            default: d85ab6a3-51a9-4359-b9d3-41f5dffb366e
             type: string
       responses:
         "200":
@@ -79,7 +86,7 @@ paths:
                 isp:
                   id: 10232
                   name: Comcast
-                lastTested: 2023-03-06T07:39:34Z
+                lastTested: 2023-03-20T18:36:08Z
                 location:
                   accuracyRadius: 1
                   cityName: Timișoara
@@ -113,7 +120,7 @@ paths:
                 isp:
                   id: 10232
                   name: Comcast
-                lastTested: 2023-03-06T07:39:34Z
+                lastTested: 2023-03-20T18:36:08Z
                 location:
                   accuracyRadius: 1
                   cityName: Timișoara
@@ -147,7 +154,7 @@ paths:
                 isp:
                   id: 10232
                   name: Comcast
-                lastTested: 2023-03-06T07:39:34Z
+                lastTested: 2023-03-20T18:36:08Z
                 location:
                   accuracyRadius: 1
                   cityName: Timișoara
