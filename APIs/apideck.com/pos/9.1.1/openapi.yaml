@@ -16,10 +16,6 @@ info:
 
     We also provide a [Mock API](https://developers.apideck.com/mock-api) that can be used for testing purposes: `https://mock-api.apideck.com`
 
-    ## GraphQL
-
-    Use the [GraphQL playground](https://developers.apideck.com/graphql/playground) to test out the GraphQL API.
-
     ## Headers
 
     Custom headers that are expected as part of the request. Note that [RFC7230](https://tools.ietf.org/html/rfc7230) states header names are case insensitive.
@@ -2351,6 +2347,9 @@ paths:
       tags:
         - Orders
       x-apideck-api: pos
+      x-apideck-gotchas:
+        - connector: clover
+          description: Clover doens't link customers on order creation, you need to update the order with the customer data.
       x-codeSamples:
         - label: Node
           lang: TypeScript

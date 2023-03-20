@@ -181,7 +181,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{name}/operations":
     get:
-      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
+      description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: networkmanagement.projects.locations.global.operations.list
       parameters:
         - description: The name of the operation's parent resource.
@@ -932,6 +932,19 @@ components:
         cloudSqlInstance:
           description: A [Cloud SQL](https://cloud.google.com/sql) instance URI.
           type: string
+        forwardingRule:
+          description: "Forwarding rule URI. Forwarding rules are frontends for load balancers, PSC endpoints and Protocol Forwarding. Format: projects/{project}/global/forwardingRules/{id} or projects/{project}/regions/{region}/forwardingRules/{id}"
+          type: string
+        forwardingRuleTarget:
+          description: Output only. Specifies the type of the target of the forwarding rule.
+          enum:
+            - FORWARDING_RULE_TARGET_UNSPECIFIED
+            - INSTANCE
+            - LOAD_BALANCER
+            - VPN_GATEWAY
+            - PSC
+          readOnly: true
+          type: string
         gkeMasterCluster:
           description: A cluster URI for [Google Kubernetes Engine master](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture).
           type: string
@@ -940,6 +953,26 @@ components:
           type: string
         ipAddress:
           description: The IP address of the endpoint, which can be an external or internal IP. An IPv6 address is only allowed when the test's destination is a [global load balancer VIP](https://cloud.google.com/load-balancing/docs/load-balancing-overview).
+          type: string
+        loadBalancerId:
+          description: Output only. ID of the load balancer the forwarding rule points to. Empty for forwarding rules not related to load balancers.
+          readOnly: true
+          type: string
+        loadBalancerType:
+          description: Output only. Type of the load balancer the forwarding rule points to.
+          enum:
+            - LOAD_BALANCER_TYPE_UNSPECIFIED
+            - HTTPS_ADVANCED_LOAD_BALANCER
+            - HTTPS_LOAD_BALANCER
+            - REGIONAL_HTTPS_LOAD_BALANCER
+            - INTERNAL_HTTPS_LOAD_BALANCER
+            - SSL_PROXY_LOAD_BALANCER
+            - TCP_PROXY_LOAD_BALANCER
+            - INTERNAL_TCP_PROXY_LOAD_BALANCER
+            - NETWORK_LOAD_BALANCER
+            - LEGACY_NETWORK_LOAD_BALANCER
+            - TCP_UDP_INTERNAL_LOAD_BALANCER
+          readOnly: true
           type: string
         network:
           description: A Compute Engine network URI.

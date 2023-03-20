@@ -5817,6 +5817,9 @@ components:
         parentTemplateId:
           description: Optional. The id of the template which was used to create this integration_version.
           type: string
+        runAsServiceAccount:
+          description: Optional. The run-as service account email, if set and auth config is not configured, that will be used to generate auth token to be used in Connector task, Rest caller task and Cloud function task.
+          type: string
         snapshotNumber:
           description: Optional. An increasing sequence that is set when a new snapshot is created. The last created snapshot can be identified by [workflow_name, org_id latest(snapshot_number)]. However, last created snapshot need not be same as the HEAD. So users should always use "HEAD" tag to identify the head.
           format: int64
