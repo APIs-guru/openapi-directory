@@ -688,6 +688,18 @@ paths:
             type: string
             minLength: 1
             maxLength: 2048
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     delete:
       operationId: RemoveAllResourcePermissions
       description: Removes all the permissions from the specified resource.
@@ -1158,6 +1170,7 @@ paths:
                   pattern: '[\u0020-\u202D\u202F-\uFFFF]+'
                   minLength: 1
                   maxLength: 255
+                  format: password
                 ParentFolderId:
                   description: The ID of the parent folder.
                   type: string
@@ -1475,6 +1488,18 @@ paths:
             type: integer
             minimum: 1
             maximum: 999
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
   /api/v1/users:
     post:
       operationId: CreateUser
@@ -1550,6 +1575,7 @@ paths:
                   pattern: '[\w\-+.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z]+)?'
                   minLength: 1
                   maxLength: 256
+                  format: password
                 EmailAddress:
                   description: The email address of the user.
                   type: string
@@ -1562,11 +1588,13 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 64
+                  format: password
                 Surname:
                   description: The surname of the user.
                   type: string
                   minLength: 1
                   maxLength: 64
+                  format: password
                 Password:
                   description: The password of the user.
                   type: string
@@ -2113,6 +2141,7 @@ paths:
                   pattern: '[\u0020-\u202D\u202F-\uFFFF]+'
                   minLength: 1
                   maxLength: 255
+                  format: password
                 ParentFolderId:
                   description: The ID of the parent folder.
                   type: string
@@ -2487,6 +2516,7 @@ paths:
                   pattern: '[\u0020-\u202D\u202F-\uFFFF]+'
                   minLength: 1
                   maxLength: 255
+                  format: password
                 ParentFolderId:
                   description: The ID of the parent folder.
                   type: string
@@ -2924,11 +2954,13 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 64
+                  format: password
                 Surname:
                   description: The surname of the user.
                   type: string
                   minLength: 1
                   maxLength: 64
+                  format: password
                 Type:
                   description: The type of the user.
                   type: string
@@ -3100,6 +3132,18 @@ paths:
             pattern: '[\u0000-\u00FF]+'
             minLength: 1
             maxLength: 12288
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3200,6 +3244,18 @@ paths:
             pattern: '[\u0000-\u00FF]+'
             minLength: 1
             maxLength: 2048
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3420,6 +3476,18 @@ paths:
           schema:
             type: integer
             minimum: 1
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3495,6 +3563,18 @@ paths:
             type: string
             minLength: 1
             maxLength: 2048
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3929,6 +4009,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidPasswordException'
+        '493':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
       parameters:
         - name: Authentication
           in: header
@@ -3958,6 +4044,7 @@ paths:
                   pattern: '[\u0020-\u202D\u202F-\uFFFF]+'
                   minLength: 1
                   maxLength: 255
+                  format: password
                 ContentCreatedTimestamp:
                   description: The timestamp when the content of the document was originally created.
                   type: string
@@ -4141,6 +4228,163 @@ paths:
             pattern: '[\w+-.@]+'
             minLength: 1
             maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /api/v1/search:
+    post:
+      operationId: SearchResources
+      description: 'Searches metadata and the content of folders, documents, document versions, and comments.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResourcesResponse'
+        '480':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '481':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '482':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: Authentication
+          in: header
+          required: false
+          description: Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 8199
+            format: password
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                QueryText:
+                  description: The String to search for. Searches across different text fields based on request parameters. Use double quotes around the query string for exact phrase matches.
+                  type: string
+                  pattern: '[\u0020-\uFFFF]+'
+                  minLength: 1
+                  maxLength: 512
+                  format: password
+                QueryScopes:
+                  description: Filter based on the text field type. A Folder has only a name and no content. A Comment has only content and no name. A Document or Document Version has a name and content
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SearchQueryScopeType'
+                  maxItems: 2
+                OrganizationId:
+                  description: Filters based on the resource owner OrgId. This is a mandatory parameter when using Admin SigV4 credentials.
+                  type: string
+                  pattern: '[&\w+-.@]+'
+                  minLength: 1
+                  maxLength: 256
+                AdditionalResponseFields:
+                  description: A list of attributes to include in the response. Used to request fields that are not normally returned in a standard response.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AdditionalResponseFieldType'
+                Filters:
+                  description: Filters results based on entity metadata.
+                  type: object
+                  properties:
+                    TextLocales:
+                      allOf:
+                        - $ref: '#/components/schemas/TextLocaleTypeList'
+                        - description: Filters by the locale of the content or comment.
+                    ContentCategories:
+                      allOf:
+                        - $ref: '#/components/schemas/SearchContentCategoryTypeList'
+                        - description: Filters by content category.
+                    ResourceTypes:
+                      allOf:
+                        - $ref: '#/components/schemas/SearchResourceTypeList'
+                        - description: Filters based on entity type.
+                    Labels:
+                      allOf:
+                        - $ref: '#/components/schemas/SearchLabelList'
+                        - description: Filter by labels using exact match.
+                    Principals:
+                      allOf:
+                        - $ref: '#/components/schemas/SearchPrincipalTypeList'
+                        - description: Filter based on UserIds or GroupIds.
+                    AncestorIds:
+                      allOf:
+                        - $ref: '#/components/schemas/SearchAncestorIdList'
+                        - description: Filter based on resource’s path.
+                    SearchCollectionTypes:
+                      allOf:
+                        - $ref: '#/components/schemas/SearchCollectionTypeList'
+                        - description: Filter based on file groupings.
+                    SizeRange:
+                      allOf:
+                        - $ref: '#/components/schemas/LongRangeType'
+                        - description: Filter based on size (in bytes).
+                    CreatedRange:
+                      allOf:
+                        - $ref: '#/components/schemas/DateRangeType'
+                        - description: Filter based on resource’s creation timestamp.
+                    ModifiedRange:
+                      allOf:
+                        - $ref: '#/components/schemas/DateRangeType'
+                        - description: Filter based on resource’s modified timestamp.
+                OrderBy:
+                  description: Order by results in one or more categories.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SearchSortResult'
+                  maxItems: 1
+                Limit:
+                  description: Max results count per page.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                Marker:
+                  description: The marker for the next set of results.
+                  type: string
+                  pattern: '[\d]+'
+                  minLength: 1
+                  maxLength: 2048
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4516,6 +4760,97 @@ components:
     StorageLimitWillExceedException: {}
     DraftUploadOutOfSyncException: {}
     ResourceAlreadyCheckedOutException: {}
+    SearchResourcesResponse:
+      type: object
+      properties:
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/ResponseItemsList'
+            - description: 'List of Documents, Folders, Comments, and Document Versions matching the query.'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/NextMarkerType'
+            - description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+    SearchQueryScopeType:
+      type: string
+      enum:
+        - NAME
+        - CONTENT
+    AdditionalResponseFieldType:
+      type: string
+      enum:
+        - WEBURL
+    TextLocaleTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LanguageCodeType'
+      maxItems: 1
+    SearchContentCategoryTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContentCategoryType'
+      maxItems: 9
+    SearchResourceTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchResourceType'
+      maxItems: 4
+    SearchLabelList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchLabel'
+      maxItems: 10
+    SearchPrincipalTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchPrincipalType'
+      maxItems: 10
+    SearchAncestorIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchAncestorId'
+      maxItems: 10
+    SearchCollectionTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchCollectionType'
+      maxItems: 2
+    LongRangeType:
+      type: object
+      properties:
+        StartValue:
+          allOf:
+            - $ref: '#/components/schemas/LongType'
+            - description: The size start range (in bytes).
+        EndValue:
+          allOf:
+            - $ref: '#/components/schemas/LongType'
+            - description: The size end range (in bytes).
+      description: Filter based on size (in bytes).
+    DateRangeType:
+      type: object
+      properties:
+        StartValue:
+          allOf:
+            - $ref: '#/components/schemas/TimestampType'
+            - description: Timestamp range start value (in epochs)
+        EndValue:
+          allOf:
+            - $ref: '#/components/schemas/TimestampType'
+            - description: Timestamp range end value (in epochs).
+      description: Filters results based on timestamp range (in epochs).
+    SearchSortResult:
+      type: object
+      properties:
+        Field:
+          allOf:
+            - $ref: '#/components/schemas/OrderByFieldType'
+            - description: Sort search results based on this field name.
+        Order:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: Sort direction.
+      description: The result of the sort operation.
     UpdateUserResponse:
       type: object
       properties:
@@ -4747,6 +5082,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IdType'
             - description: The ID of the user being replied to.
+        ContributorId:
+          allOf:
+            - $ref: '#/components/schemas/IdType'
+            - description: The ID of the user who made the comment.
       description: Describes the metadata of a comment.
     Activity:
       type: object
@@ -4827,6 +5166,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ShareResult'
+    AdditionalResponseFieldsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AdditionalResponseFieldType'
     BooleanEnumType:
       type: string
       enum:
@@ -4899,6 +5242,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Comment'
+    ContentCategoryType:
+      type: string
+      enum:
+        - IMAGE
+        - DOCUMENT
+        - PDF
+        - SPREADSHEET
+        - PRESENTATION
+        - AUDIO
+        - VIDEO
+        - SOURCE_CODE
+        - OTHER
     CreateCommentRequest:
       type: object
       required:
@@ -4946,6 +5301,7 @@ components:
       pattern: '[\u0020-\u202D\u202F-\uFFFF]+'
       minLength: 1
       maxLength: 255
+      format: password
     CreateFolderRequest:
       type: object
       required:
@@ -5077,6 +5433,7 @@ components:
       pattern: '[\w\-+.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z]+)?'
       minLength: 1
       maxLength: 256
+      format: password
     EmailAddressType:
       type: string
       pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
@@ -5087,6 +5444,7 @@ components:
       type: string
       minLength: 1
       maxLength: 64
+      format: password
     PasswordType:
       type: string
       pattern: '[\u0020-\u00FF]+'
@@ -5473,6 +5831,50 @@ components:
       type: string
       enum:
         - ACTIVE
+    Filters:
+      type: object
+      properties:
+        TextLocales:
+          allOf:
+            - $ref: '#/components/schemas/TextLocaleTypeList'
+            - description: Filters by the locale of the content or comment.
+        ContentCategories:
+          allOf:
+            - $ref: '#/components/schemas/SearchContentCategoryTypeList'
+            - description: Filters by content category.
+        ResourceTypes:
+          allOf:
+            - $ref: '#/components/schemas/SearchResourceTypeList'
+            - description: Filters based on entity type.
+        Labels:
+          allOf:
+            - $ref: '#/components/schemas/SearchLabelList'
+            - description: Filter by labels using exact match.
+        Principals:
+          allOf:
+            - $ref: '#/components/schemas/SearchPrincipalTypeList'
+            - description: Filter based on UserIds or GroupIds.
+        AncestorIds:
+          allOf:
+            - $ref: '#/components/schemas/SearchAncestorIdList'
+            - description: Filter based on resource’s path.
+        SearchCollectionTypes:
+          allOf:
+            - $ref: '#/components/schemas/SearchCollectionTypeList'
+            - description: Filter based on file groupings.
+        SizeRange:
+          allOf:
+            - $ref: '#/components/schemas/LongRangeType'
+            - description: Filter based on size (in bytes).
+        CreatedRange:
+          allOf:
+            - $ref: '#/components/schemas/DateRangeType'
+            - description: Filter based on resource’s creation timestamp.
+        ModifiedRange:
+          allOf:
+            - $ref: '#/components/schemas/DateRangeType'
+            - description: Filter based on resource’s modified timestamp.
+      description: Filters results based on entity metadata.
     GetCurrentUserRequest:
       type: object
       title: GetCurrentUserRequest
@@ -5580,6 +5982,40 @@ components:
             - $ref: '#/components/schemas/SignedHeaderMap'
             - description: The signed headers.
       description: Describes the upload.
+    LanguageCodeType:
+      type: string
+      enum:
+        - AR
+        - BG
+        - BN
+        - DA
+        - DE
+        - CS
+        - EL
+        - EN
+        - ES
+        - FA
+        - FI
+        - FR
+        - HI
+        - HU
+        - ID
+        - IT
+        - JA
+        - KO
+        - LT
+        - LV
+        - NL
+        - 'NO'
+        - PT
+        - RO
+        - RU
+        - SV
+        - SW
+        - TH
+        - TR
+        - ZH
+        - DEFAULT
     LocaleType:
       type: string
       enum:
@@ -5594,6 +6030,21 @@ components:
         - zh_TW
         - pt_BR
         - default
+    LongType:
+      type: integer
+    NextMarkerType:
+      type: string
+      pattern: '[\d]+'
+      minLength: 1
+      maxLength: 2048
+    OrderByFieldType:
+      type: string
+      enum:
+        - RELEVANCE
+        - NAME
+        - SIZE
+        - CREATED_TIMESTAMP
+        - MODIFIED_TIMESTAMP
     UserMetadataList:
       type: array
       items:
@@ -5650,6 +6101,13 @@ components:
             - $ref: '#/components/schemas/PermissionInfoList'
             - description: The permission information for the resource.
       description: Describes a resource.
+    PrincipalRoleType:
+      type: string
+      enum:
+        - VIEWER
+        - CONTRIBUTOR
+        - OWNER
+        - COOWNER
     RemoveAllResourcePermissionsRequest:
       type: object
       title: RemoveAllResourcePermissionsRequest
@@ -5679,10 +6137,150 @@ components:
             - $ref: '#/components/schemas/ResourceNameType'
             - description: The name of the resource path.
       description: Describes the resource path.
+    ResponseItemType:
+      type: string
+      enum:
+        - DOCUMENT
+        - FOLDER
+        - COMMENT
+        - DOCUMENT_VERSION
+    ResponseItemWebUrl:
+      type: string
+      pattern: '[\u0020-\uFFFF]+'
+      minLength: 1
+      maxLength: 512
+      format: password
+    ResponseItem:
+      type: object
+      properties:
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResponseItemType'
+            - description: The type of item being returned.
+        WebUrl:
+          allOf:
+            - $ref: '#/components/schemas/ResponseItemWebUrl'
+            - description: The webUrl of the item being returned.
+        DocumentMetadata:
+          allOf:
+            - $ref: '#/components/schemas/DocumentMetadata'
+            - description: The document that matches the query.
+        FolderMetadata:
+          allOf:
+            - $ref: '#/components/schemas/FolderMetadata'
+            - description: The folder that matches the query.
+        CommentMetadata:
+          allOf:
+            - $ref: '#/components/schemas/CommentMetadata'
+            - description: The comment that matches the query.
+        DocumentVersionMetadata:
+          allOf:
+            - $ref: '#/components/schemas/DocumentVersionMetadata'
+            - description: The document version that matches the metadata.
+      description: 'List of Documents, Folders, Comments, and Document Versions matching the query.'
+    ResponseItemsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResponseItem'
+      maxItems: 100
     RestoreDocumentVersionsRequest:
       type: object
       title: RestoreDocumentVersionsRequest
       properties: {}
+    SearchAncestorId:
+      type: string
+      minLength: 1
+      maxLength: 128
+    SearchCollectionType:
+      type: string
+      enum:
+        - OWNED
+        - SHARED_WITH_ME
+    SearchLabel:
+      type: string
+      minLength: 1
+      maxLength: 128
+    SearchPrincipalRoleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PrincipalRoleType'
+      maxItems: 4
+    SearchPrincipalType:
+      type: object
+      required:
+        - Id
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/IdType'
+            - description: UserIds or GroupIds.
+        Roles:
+          allOf:
+            - $ref: '#/components/schemas/SearchPrincipalRoleList'
+            - description: The Role of a User or Group.
+      description: Filter based on UserIds or GroupIds.
+    SearchQueryScopeTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchQueryScopeType'
+      maxItems: 2
+    SearchResourceType:
+      type: string
+      enum:
+        - FOLDER
+        - DOCUMENT
+        - COMMENT
+        - DOCUMENT_VERSION
+    SearchResultSortList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchSortResult'
+      maxItems: 1
+    SearchResultsLimitType:
+      type: integer
+      minimum: 1
+      maximum: 100
+    SearchResourcesRequest:
+      type: object
+      title: SearchResourcesRequest
+      properties:
+        QueryText:
+          allOf:
+            - $ref: '#/components/schemas/SearchQueryType'
+            - description: The String to search for. Searches across different text fields based on request parameters. Use double quotes around the query string for exact phrase matches.
+        QueryScopes:
+          allOf:
+            - $ref: '#/components/schemas/SearchQueryScopeTypeList'
+            - description: Filter based on the text field type. A Folder has only a name and no content. A Comment has only content and no name. A Document or Document Version has a name and content
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/IdType'
+            - description: Filters based on the resource owner OrgId. This is a mandatory parameter when using Admin SigV4 credentials.
+        AdditionalResponseFields:
+          allOf:
+            - $ref: '#/components/schemas/AdditionalResponseFieldsList'
+            - description: A list of attributes to include in the response. Used to request fields that are not normally returned in a standard response.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/Filters'
+            - description: Filters results based on entity metadata.
+        OrderBy:
+          allOf:
+            - $ref: '#/components/schemas/SearchResultSortList'
+            - description: Order by results in one or more categories.
+        Limit:
+          allOf:
+            - $ref: '#/components/schemas/SearchResultsLimitType'
+            - description: Max results count per page.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/NextMarkerType'
+            - description: The marker for the next set of results.
+    SortOrder:
+      type: string
+      enum:
+        - ASC
+        - DESC
     ShareStatusType:
       type: string
       enum:

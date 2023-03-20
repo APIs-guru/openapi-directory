@@ -2196,7 +2196,7 @@ paths:
                     name: Tag
         - name: DBClusterIdentifier
           in: query
-          required: false
+          required: true
           description: '<p>The identifier of the DB cluster that the instance will belong to.</p> <p>For information on creating a DB cluster, see <a>CreateDBCluster</a>.</p> <p>Type: String</p>'
           schema:
             type: string
@@ -11357,6 +11357,52 @@ components:
             - $ref: '#/components/schemas/LogTypeList'
             - description: The list of log types to disable.
       description: <p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.</p> <p>The <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays determine which logs will be exported (or not exported) to CloudWatch Logs.</p>
+    PendingCloudwatchLogsExports:
+      type: object
+      properties:
+        LogTypesToEnable:
+          allOf:
+            - $ref: '#/components/schemas/LogTypeList'
+            - description: 'Log types that are in the process of being deactivated. After they are deactivated, these log types aren''t exported to CloudWatch Logs.'
+        LogTypesToDisable:
+          allOf:
+            - $ref: '#/components/schemas/LogTypeList'
+            - description: 'Log types that are in the process of being enabled. After they are enabled, these log types are exported to CloudWatch Logs.'
+      description: 'A list of the log types whose configuration is still pending. In other words, these log types are in the process of being activated or deactivated.'
+    IntegerOptional:
+      type: integer
+    ClusterPendingModifiedValues:
+      type: object
+      properties:
+        PendingCloudwatchLogsExports:
+          allOf:
+            - $ref: '#/components/schemas/PendingCloudwatchLogsExports'
+            - description: This <code>PendingCloudwatchLogsExports</code> structure specifies pending changes to which CloudWatch logs are enabled and which are disabled.
+        DBClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DBClusterIdentifier value for the DB cluster.
+        IAMDatabaseAuthenticationEnabled:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: A value that indicates whether mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts is enabled.
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The database engine version.
+        BackupRetentionPeriod:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The number of days for which automatic DB snapshots are retained.
+        AllocatedStorage:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The allocated storage size in gibibytes (GiB) for database engines. For Neptune, <code>AllocatedStorage</code> always returns 1, because Neptune DB cluster storage size isn''t fixed, but instead automatically adjusts as needed.'
+        Iops:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The Provisioned IOPS (I/O operations per second) value. This setting is only for non-Aurora Multi-AZ DB clusters.
+      description: This data type is used as a response element in the <code>ModifyDBCluster</code> operation and contains changes that will be applied during the next maintenance window.
     CopyDBClusterParameterGroupMessage:
       type: object
       required:
@@ -11596,8 +11642,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The tags to be assigned to the Amazon Neptune resource.
-    IntegerOptional:
-      type: integer
     VpcSecurityGroupIdList:
       type: array
       items:
@@ -11910,6 +11954,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LogTypeList'
             - description: A list of log types that this DB cluster is configured to export to CloudWatch Logs.
+        PendingModifiedValues:
+          allOf:
+            - $ref: '#/components/schemas/ClusterPendingModifiedValues'
+            - description: This data type is used as a response element in the <code>ModifyDBCluster</code> operation and contains changes that will be applied during the next maintenance window.
         DeletionProtection:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -11924,6 +11972,10 @@ components:
             - description: Time at which the DB cluster will be automatically restarted.
         ServerlessV2ScalingConfiguration:
           $ref: '#/components/schemas/ServerlessV2ScalingConfigurationInfo'
+        GlobalClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/GlobalClusterIdentifier'
+            - description: Contains a user-supplied global database cluster identifier. This identifier is the unique key that identifies a global database.
       description: <p>Contains the details of an Amazon Neptune DB cluster.</p> <p>This data type is used as a response element in the <a>DescribeDBClusters</a> action.</p>
     CreateDBClusterSnapshotMessage:
       type: object
@@ -11957,6 +12009,7 @@ components:
         - DBInstanceIdentifier
         - DBInstanceClass
         - Engine
+        - DBClusterIdentifier
       title: CreateDBInstanceMessage
       properties:
         DBName:
@@ -14327,18 +14380,6 @@ components:
           - $ref: '#/components/schemas/OrderableDBInstanceOption'
           - xml:
               name: OrderableDBInstanceOption
-    PendingCloudwatchLogsExports:
-      type: object
-      properties:
-        LogTypesToEnable:
-          allOf:
-            - $ref: '#/components/schemas/LogTypeList'
-            - description: 'Log types that are in the process of being deactivated. After they are deactivated, these log types aren''t exported to CloudWatch Logs.'
-        LogTypesToDisable:
-          allOf:
-            - $ref: '#/components/schemas/LogTypeList'
-            - description: 'Log types that are in the process of being enabled. After they are enabled, these log types are exported to CloudWatch Logs.'
-      description: 'A list of the log types whose configuration is still pending. In other words, these log types are in the process of being activated or deactivated.'
     PendingMaintenanceAction:
       type: object
       properties:

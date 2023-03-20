@@ -161,6 +161,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: OutpostOfflineException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutpostOfflineException'
       parameters: []
       requestBody:
         required: true
@@ -240,6 +246,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: OutpostOfflineException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutpostOfflineException'
       parameters:
         - name: endpointId
           in: query
@@ -566,6 +578,7 @@ components:
     ResourceNotFoundException: {}
     ConflictException: {}
     ThrottlingException: {}
+    OutpostOfflineException: {}
     ListEndpointsResult:
       type: object
       properties:
@@ -670,12 +683,26 @@ components:
         - Pending
         - Available
         - Deleting
+        - Create_Failed
+        - Delete_Failed
     NetworkInterfaces:
       type: array
       items:
         $ref: '#/components/schemas/NetworkInterface'
     VpcId:
       type: string
+    FailedReason:
+      type: object
+      properties:
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: 'The failure code, if any, for a create or delete endpoint operation.'
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/Message'
+            - description: Additional error details describing the endpoint failure and recommended action.
+      description: 'The failure reason, if any, for a create or delete endpoint operation.'
     Endpoint:
       type: object
       properties:
@@ -723,11 +750,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/CustomerOwnedIpv4Pool'
             - description: The ID of the customer-owned IPv4 address pool used for the endpoint.
+        FailedReason:
+          allOf:
+            - $ref: '#/components/schemas/FailedReason'
+            - description: 'The failure reason, if any, for a create or delete endpoint operation.'
       description: 'Amazon S3 on Outposts Access Points simplify managing data access at scale for shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/WorkingWithS3Outposts.html"> Accessing S3 on Outposts using VPC-only access points</a> in the <i>Amazon Simple Storage Service User Guide</i>.'
     Endpoints:
       type: array
       items:
         $ref: '#/components/schemas/Endpoint'
+    ErrorCode:
+      type: string
+    Message:
+      type: string
     NextToken:
       type: string
       pattern: '^[A-Za-z0-9\+\:\/\=\?\#-_]+$'
