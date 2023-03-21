@@ -3,7 +3,7 @@ info:
   version: '2022-02-17'
   x-release: v4
   title: AWS Clean Rooms Service
-  description: '<note> <p>AWS Clean Rooms is in preview release and is subject to change.</p> </note> <p>Welcome to the <i>AWS Clean Rooms API Reference</i>.</p> <p>AWS Clean Rooms is an AWS service that helps multiple parties to join their data together in a secure collaboration workspace. In the collaboration, members who can query and receive results can get insights into the combined data without either party getting access to the other party''s raw data.</p> <p>To learn more about AWS Clean Rooms concepts, procedures, and best practices, see the <a href="https://docs.aws.amazon.com/clean-rooms/latest/userguide/what-is.html">AWS Clean Rooms User Guide</a>.</p>'
+  description: '<p>Welcome to the <i>AWS Clean Rooms API Reference</i>.</p> <p>AWS Clean Rooms is an AWS service that helps multiple parties to join their data together in a secure collaboration workspace. In the collaboration, members who can query and receive results can get insights into the collective datasets without either party getting access to the other party''s raw data.</p> <p>To learn more about AWS Clean Rooms concepts, procedures, and best practices, see the <a href="https://docs.aws.amazon.com/clean-rooms/latest/userguide/what-is.html">AWS Clean Rooms User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -113,6 +113,7 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The AWS Clean Rooms Service endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 paths:
   '/collaborations/{collaborationIdentifier}/batch-schema':
     post:
@@ -301,6 +302,13 @@ paths:
                   enum:
                     - ENABLED
                     - DISABLED
+                tags:
+                  description: Map of tags assigned to a resource
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -448,7 +456,7 @@ paths:
                   minLength: 0
                   maxLength: 255
                 tableReference:
-                  description: 'A pointer to the data set that underlies this table. Currently, this can only be an AWS Glue table.'
+                  description: 'A pointer to the dataset that underlies this table. Currently, this can only be an AWS Glue table.'
                   type: object
                   properties:
                     glue:
@@ -461,12 +469,19 @@ paths:
                   items:
                     $ref: '#/components/schemas/ColumnName'
                   minItems: 1
-                  maxItems: 250
+                  maxItems: 100
                 analysisMethod:
                   description: The analysis method for the configured tables. The only valid value is currently `DIRECT_QUERY`.
                   type: string
                   enum:
                     - DIRECT_QUERY
+                tags:
+                  description: Map of tags assigned to a resource
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -713,6 +728,13 @@ paths:
                   pattern: 'arn:aws:iam::[\w]+:role/[\w+=,./@-]+'
                   minLength: 32
                   maxLength: 512
+                tags:
+                  description: Map of tags assigned to a resource
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -732,24 +754,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListConfiguredTableAssociationsOutput'
         '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
           description: InternalServerException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
-        '481':
+        '482':
           description: ValidationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
-        '482':
+        '483':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
-        '483':
+        '484':
           description: AccessDeniedException
           content:
             application/json:
@@ -857,6 +885,13 @@ paths:
                   enum:
                     - ENABLED
                     - DISABLED
+                tags:
+                  description: Map of tags assigned to a resource
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2345,24 +2380,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListProtectedQueriesOutput'
         '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
           description: InternalServerException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
-        '481':
+        '482':
           description: ValidationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
-        '482':
+        '483':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
-        '483':
+        '484':
           description: AccessDeniedException
           content:
             application/json:
@@ -2587,6 +2628,144 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists all of the tags that have been added to a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) associated with the resource you want to list tags on.
+          schema:
+            type: string
+            pattern: 'arn:aws:cleanrooms:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:[\d\w/-]+'
+            minLength: 0
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Tags a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) associated with the resource you want to tag.
+          schema:
+            type: string
+            pattern: 'arn:aws:cleanrooms:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:[\d\w/-]+'
+            minLength: 0
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: Map of tags assigned to a resource
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes a tag or list of tags from a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) associated with the resource you want to remove the tag from.
+          schema:
+            type: string
+            pattern: 'arn:aws:cleanrooms:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:[\d\w/-]+'
+            minLength: 0
+            maxLength: 100
+        - name: tagKeys
+          in: query
+          required: true
+          description: A list of key names of tags to be removed.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -2699,6 +2878,10 @@ components:
         - CAN_RECEIVE_RESULTS
     Boolean:
       type: boolean
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
     ServiceQuotaExceededException: {}
     CreateConfiguredTableOutput:
       type: object
@@ -2952,6 +3135,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: The token value retrieved from a previous call to access the next page of results.
+    ListTagsForResourceOutput:
+      type: object
+      required:
+        - tags
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A map of objects specifying each key name and value.
     StartProtectedQueryOutput:
       type: object
       required:
@@ -2973,6 +3165,17 @@ components:
             - $ref: '#/components/schemas/ProtectedQueryS3OutputConfiguration'
             - description: Required configuration for a protected query with an `S3` output type.
       description: Contains configuration details for protected query output.
+    TagResourceOutput:
+      type: object
+      properties: {}
+    UntagResourceOutput:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '(?!aws:).{1,128}'
+      minLength: 1
+      maxLength: 128
     UpdateCollaborationOutput:
       type: object
       required:
@@ -3066,6 +3269,7 @@ components:
     AggregationConstraintMinimumInteger:
       type: integer
       minimum: 2
+      maximum: 100000
     AggregationType:
       type: string
       enum:
@@ -3100,7 +3304,7 @@ components:
       items:
         $ref: '#/components/schemas/ColumnName'
       minItems: 1
-      maxItems: 250
+      maxItems: 100
     AnalysisMethod:
       type: string
       enum:
@@ -3298,6 +3502,11 @@ components:
         $ref: '#/components/schemas/Schema'
       minItems: 0
       maxItems: 25
+    CleanroomsArn:
+      type: string
+      pattern: 'arn:aws:cleanrooms:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:[\d\w/-]+'
+      minLength: 0
+      maxLength: 100
     UUID:
       type: string
       pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
@@ -3529,7 +3738,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/GlueTableReference'
             - description: 'If present, a reference to the AWS Glue table referred to by this table reference.'
-      description: 'A pointer to the data set that underlies this table. Currently, this can only be an AWS Glue table.'
+      description: 'A pointer to the dataset that underlies this table. Currently, this can only be an AWS Glue table.'
     ConfiguredTableAnalysisRuleTypeList:
       type: array
       items:
@@ -3825,6 +4034,13 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/MemberAbility'
+    TagMap:
+      type: object
+      description: Map of tags assigned to a resource
+      minProperties: 0
+      maxProperties: 200
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
     CreateCollaborationInput:
       type: object
       required:
@@ -3864,6 +4080,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CollaborationQueryLogStatus'
             - description: An indicator as to whether query logging has been enabled or disabled for the collaboration.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.'
     CreateConfiguredTableAnalysisRuleInput:
       type: object
       required:
@@ -3903,6 +4123,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
             - description: The service will assume this role to access catalog metadata and query the table.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.'
     CreateConfiguredTableInput:
       type: object
       required:
@@ -3932,6 +4156,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AnalysisMethod'
             - description: The analysis method for the configured tables. The only valid value is currently `DIRECT_QUERY`.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.'
     MembershipQueryLogStatus:
       type: string
       enum:
@@ -3952,6 +4180,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MembershipQueryLogStatus'
             - description: An indicator as to whether query logging has been enabled or disabled for the collaboration.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.'
     Membership:
       type: object
       required:
@@ -4157,7 +4389,7 @@ components:
         partitionKeys:
           allOf:
             - $ref: '#/components/schemas/ColumnList'
-            - description: The partition keys for the data set underlying this schema.
+            - description: The partition keys for the dataset underlying this schema.
         analysisRuleTypes:
           allOf:
             - $ref: '#/components/schemas/AnalysisRuleTypeList'
@@ -4279,6 +4511,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SchemaSummary'
+    ListTagsForResourceInput:
+      type: object
+      title: ListTagsForResourceInput
+      properties: {}
     Long:
       type: integer
     MemberSummary:
@@ -4603,10 +4839,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProtectedQueryResultConfiguration'
             - description: The details needed to write the query results.
+    TagKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+    TagResourceInput:
+      type: object
+      required:
+        - tags
+      title: TagResourceInput
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A map of objects specifying each key name and value.
     TargetProtectedQueryStatus:
       type: string
       enum:
         - CANCELLED
+    UntagResourceInput:
+      type: object
+      title: UntagResourceInput
+      properties: {}
     UpdateCollaborationInput:
       type: object
       title: UpdateCollaborationInput

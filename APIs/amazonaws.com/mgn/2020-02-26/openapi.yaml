@@ -2069,6 +2069,276 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListExportErrors:
+    post:
+      operationId: ListExportErrors
+      description: List export errors.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExportErrorsResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - exportID
+              properties:
+                exportID:
+                  description: List export errors request export id.
+                  type: string
+                  pattern: '^export-[0-9a-zA-Z]{17}$'
+                  minLength: 24
+                  maxLength: 24
+                maxResults:
+                  description: List export errors request max results.
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: List export errors request next token.
+                  type: string
+                  minLength: 0
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListExports:
+    post:
+      operationId: ListExports
+      description: List exports.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExportsResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  description: List exports request filters.
+                  type: object
+                  properties:
+                    exportIDs:
+                      allOf:
+                        - $ref: '#/components/schemas/ListExportsRequestFiltersExportIDs'
+                        - description: List exports request filters export ids.
+                maxResults:
+                  description: List export request max results.
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: List export request next token.
+                  type: string
+                  minLength: 0
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListImportErrors:
+    post:
+      operationId: ListImportErrors
+      description: List import errors.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListImportErrorsResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - importID
+              properties:
+                importID:
+                  description: List import errors request import id.
+                  type: string
+                  pattern: '^import-[0-9a-zA-Z]{17}$'
+                  minLength: 24
+                  maxLength: 24
+                maxResults:
+                  description: List import errors request max results.
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: List import errors request next token.
+                  type: string
+                  minLength: 0
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListImports:
+    post:
+      operationId: ListImports
+      description: List imports.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListImportsResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  description: List imports request filters.
+                  type: object
+                  properties:
+                    importIDs:
+                      allOf:
+                        - $ref: '#/components/schemas/ImportIDsFilter'
+                        - description: List imports request filters import IDs.
+                maxResults:
+                  description: List imports request max results.
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: List imports request next token.
+                  type: string
+                  minLength: 0
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /ListSourceServerActions:
     post:
       operationId: ListSourceServerActions
@@ -2524,6 +2794,26 @@ paths:
                 active:
                   description: Source server post migration custom action active status.
                   type: boolean
+                category:
+                  description: Source server post migration custom action category.
+                  type: string
+                  enum:
+                    - DISASTER_RECOVERY
+                    - OPERATING_SYSTEM
+                    - LICENSE_AND_SUBSCRIPTION
+                    - VALIDATION
+                    - OBSERVABILITY
+                    - SECURITY
+                    - NETWORKING
+                    - CONFIGURATION
+                    - BACKUP
+                    - OTHER
+                description:
+                  description: Source server post migration custom action description.
+                  type: string
+                  pattern: '^[0-9a-zA-Z ():/.,''-_#*; ]*$'
+                  minLength: 0
+                  maxLength: 256
                 documentIdentifier:
                   description: Source server post migration custom action document identifier.
                   type: string
@@ -2533,6 +2823,13 @@ paths:
                   description: Source server post migration custom action document version.
                   type: string
                   pattern: '^(\$DEFAULT|\$LATEST|[0-9]+)$'
+                externalParameters:
+                  description: Source server post migration custom action external parameters.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 20
+                  additionalProperties:
+                    $ref: '#/components/schemas/SsmExternalParameter'
                 mustSucceedForCutover:
                   description: Source server post migration custom action must succeed for cutover.
                   type: boolean
@@ -2629,6 +2926,26 @@ paths:
                 active:
                   description: Template post migration custom action active status.
                   type: boolean
+                category:
+                  description: Template post migration custom action category.
+                  type: string
+                  enum:
+                    - DISASTER_RECOVERY
+                    - OPERATING_SYSTEM
+                    - LICENSE_AND_SUBSCRIPTION
+                    - VALIDATION
+                    - OBSERVABILITY
+                    - SECURITY
+                    - NETWORKING
+                    - CONFIGURATION
+                    - BACKUP
+                    - OTHER
+                description:
+                  description: Template post migration custom action description.
+                  type: string
+                  pattern: '^[0-9a-zA-Z ():/.,''-_#*; ]*$'
+                  minLength: 0
+                  maxLength: 256
                 documentIdentifier:
                   description: Template post migration custom action document identifier.
                   type: string
@@ -2638,6 +2955,13 @@ paths:
                   description: Template post migration custom action document version.
                   type: string
                   pattern: '^(\$DEFAULT|\$LATEST|[0-9]+)$'
+                externalParameters:
+                  description: Template post migration custom action external parameters.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 20
+                  additionalProperties:
+                    $ref: '#/components/schemas/SsmExternalParameter'
                 launchConfigurationTemplateID:
                   description: Launch configuration template ID.
                   type: string
@@ -2899,6 +3223,148 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /StartExport:
+    post:
+      operationId: StartExport
+      description: Start export.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartExportResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - s3Bucket
+                - s3Key
+              properties:
+                s3Bucket:
+                  description: Start export request s3 bucket.
+                  type: string
+                  pattern: '^[a-zA-Z0-9.\-_]{1,255}$'
+                s3BucketOwner:
+                  description: Start export request s3 bucket owner.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
+                s3Key:
+                  description: Start export request s3key.
+                  type: string
+                  pattern: '^[^\x00]{1,1020}\.csv$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /StartImport:
+    post:
+      operationId: StartImport
+      description: Start import.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartImportResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - s3BucketSource
+              properties:
+                clientToken:
+                  description: Start import request client token.
+                  type: string
+                  minLength: 0
+                  maxLength: 64
+                s3BucketSource:
+                  description: S3 bucket source.
+                  type: object
+                  properties:
+                    s3Bucket:
+                      allOf:
+                        - $ref: '#/components/schemas/S3BucketName'
+                        - description: S3 bucket source s3 bucket.
+                    s3BucketOwner:
+                      allOf:
+                        - $ref: '#/components/schemas/AccountID'
+                        - description: S3 bucket source s3 bucket owner.
+                    s3Key:
+                      allOf:
+                        - $ref: '#/components/schemas/S3Key'
+                        - description: S3 bucket source s3 key.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4174,6 +4640,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataReplicationInfo'
             - description: Source server data replication info.
+        fqdnForActionFramework:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: Source server fqdn for action framework.
         isArchived:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -4202,6 +4672,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
             - description: Source server Tags.
+        userProvidedID:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: Source server user provided ID.
         vcenterClientID:
           allOf:
             - $ref: '#/components/schemas/VcenterClientID'
@@ -4672,6 +5146,66 @@ components:
         $ref: '#/components/schemas/WaveID'
       minItems: 0
       maxItems: 200
+    ListExportErrorsResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/ExportErrors'
+            - description: List export errors response items.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: List export errors response next token.
+      description: List export errors response.
+    ListExportsResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/ExportsList'
+            - description: List export response items.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: List export response next token.
+      description: List export response.
+    ListExportsRequestFiltersExportIDs:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportID'
+      minItems: 0
+      maxItems: 10
+    ListImportErrorsResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/ImportErrors'
+            - description: List imports errors response items.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: List imports errors response next token.
+      description: List imports errors response.
+    ListImportsResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/ImportList'
+            - description: List import response items.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: List import response next token.
+      description: List import response.
+    ImportIDsFilter:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportID'
+      minItems: 0
+      maxItems: 10
     ListSourceServerActionsResponse:
       type: object
       properties:
@@ -4735,6 +5269,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Source server post migration custom action active status.
+        category:
+          allOf:
+            - $ref: '#/components/schemas/ActionCategory'
+            - description: Source server post migration custom action category.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ActionDescription'
+            - description: Source server post migration custom action description.
         documentIdentifier:
           allOf:
             - $ref: '#/components/schemas/BoundedString'
@@ -4743,6 +5285,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentVersion'
             - description: Source server post migration custom action document version.
+        externalParameters:
+          allOf:
+            - $ref: '#/components/schemas/SsmDocumentExternalParameters'
+            - description: Source server post migration custom action external parameters.
         mustSucceedForCutover:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -4759,6 +5305,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/StrictlyPositiveInteger'
             - description: Source server post migration custom action timeout in seconds.
+    SsmExternalParameter:
+      type: object
+      properties:
+        dynamicPath:
+          allOf:
+            - $ref: '#/components/schemas/JmesPathString'
+            - description: AWS Systems Manager Document external parameters dynamic path.
+      description: AWS Systems Manager Document external parameter.
     SsmParameterStoreParameters:
       type: array
       items:
@@ -4780,6 +5334,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Template post migration custom action active status.
+        category:
+          allOf:
+            - $ref: '#/components/schemas/ActionCategory'
+            - description: Template post migration custom action category.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ActionDescription'
+            - description: Template post migration custom action description.
         documentIdentifier:
           allOf:
             - $ref: '#/components/schemas/BoundedString'
@@ -4788,6 +5350,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentVersion'
             - description: Template post migration custom action document version.
+        externalParameters:
+          allOf:
+            - $ref: '#/components/schemas/SsmDocumentExternalParameters'
+            - description: Template post migration custom action external parameters.
         mustSucceedForCutover:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -4821,6 +5387,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/Job'
             - description: Start Cutover Job response.
+    StartExportResponse:
+      type: object
+      properties:
+        exportTask:
+          allOf:
+            - $ref: '#/components/schemas/ExportTask'
+            - description: Start export response export task.
+      description: Start export response.
+    StartImportResponse:
+      type: object
+      properties:
+        importTask:
+          allOf:
+            - $ref: '#/components/schemas/ImportTask'
+            - description: Start import response import task.
+      description: Start import response.
+    S3BucketName:
+      type: string
+      pattern: '^[a-zA-Z0-9.\-_]{1,255}$'
+    AccountID:
+      type: string
+      pattern: '[0-9]{12,}'
+      minLength: 12
+      maxLength: 12
+    S3Key:
+      type: string
+      pattern: '^[^\x00]{1,1020}\.csv$'
     StartTestResponse:
       type: object
       properties:
@@ -4867,6 +5460,24 @@ components:
       type: string
       minLength: 20
       maxLength: 2048
+    ActionCategory:
+      type: string
+      enum:
+        - DISASTER_RECOVERY
+        - OPERATING_SYSTEM
+        - LICENSE_AND_SUBSCRIPTION
+        - VALIDATION
+        - OBSERVABILITY
+        - SECURITY
+        - NETWORKING
+        - CONFIGURATION
+        - BACKUP
+        - OTHER
+    ActionDescription:
+      type: string
+      pattern: '^[0-9a-zA-Z ():/.,''-_#*; ]*$'
+      minLength: 0
+      maxLength: 256
     ActionID:
       type: string
       pattern: '[0-9a-zA-Z]$'
@@ -5036,6 +5647,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
             - description: The request to change the source server migration lifecycle state by source server ID.
+    ClientIdempotencyToken:
+      type: string
+      minLength: 0
+      maxLength: 64
     Cpus:
       type: array
       items:
@@ -5802,6 +6417,105 @@ components:
       pattern: '^lt-[0-9a-z]{17}$'
       minLength: 20
       maxLength: 20
+    ExportErrorData:
+      type: object
+      properties:
+        rawError:
+          allOf:
+            - $ref: '#/components/schemas/LargeBoundedString'
+            - description: Export errors data raw error.
+      description: Export errors data.
+    ExportTaskError:
+      type: object
+      properties:
+        errorData:
+          allOf:
+            - $ref: '#/components/schemas/ExportErrorData'
+            - description: Export task error data.
+        errorDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: Export task error datetime.
+      description: Export task error.
+    ExportErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportTaskError'
+    ExportID:
+      type: string
+      pattern: '^export-[0-9a-zA-Z]{17}$'
+      minLength: 24
+      maxLength: 24
+    ExportStatus:
+      type: string
+      enum:
+        - PENDING
+        - STARTED
+        - FAILED
+        - SUCCEEDED
+    Float:
+      type: number
+      format: float
+    ExportTaskSummary:
+      type: object
+      properties:
+        applicationsCount:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Export task summary applications count.
+        serversCount:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Export task summary servers count.
+        wavesCount:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Export task summary waves count.
+      description: Export task summary.
+    ExportTask:
+      type: object
+      properties:
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: Export task creation datetime.
+        endDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: Export task end datetime.
+        exportID:
+          allOf:
+            - $ref: '#/components/schemas/ExportID'
+            - description: Export task id.
+        progressPercentage:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: Export task progress percentage.
+        s3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: Export task s3 bucket.
+        s3BucketOwner:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Export task s3 bucket owner.
+        s3Key:
+          allOf:
+            - $ref: '#/components/schemas/S3Key'
+            - description: Export task s3 key.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ExportStatus'
+            - description: Export task status.
+        summary:
+          allOf:
+            - $ref: '#/components/schemas/ExportTaskSummary'
+            - description: Export task summary.
+      description: Export task.
+    ExportsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportTask'
     FinalizeCutoverRequest:
       type: object
       required:
@@ -5867,6 +6581,178 @@ components:
             - $ref: '#/components/schemas/BoundedString'
             - description: vmWare UUID identification hint.
       description: Identification hints.
+    ImportErrorData:
+      type: object
+      properties:
+        applicationID:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationID'
+            - description: Import error data application ID.
+        ec2LaunchTemplateID:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: Import error data ec2 LaunchTemplate ID.
+        rawError:
+          allOf:
+            - $ref: '#/components/schemas/LargeBoundedString'
+            - description: Import error data raw error.
+        rowNumber:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Import error data row number.
+        sourceServerID:
+          allOf:
+            - $ref: '#/components/schemas/SourceServerID'
+            - description: Import error data source server ID.
+        waveID:
+          allOf:
+            - $ref: '#/components/schemas/WaveID'
+            - description: Import error data wave id.
+      description: Import error data.
+    ImportErrorType:
+      type: string
+      enum:
+        - VALIDATION_ERROR
+        - PROCESSING_ERROR
+    ImportTaskError:
+      type: object
+      properties:
+        errorData:
+          allOf:
+            - $ref: '#/components/schemas/ImportErrorData'
+            - description: Import task error data.
+        errorDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: Import task error datetime.
+        errorType:
+          allOf:
+            - $ref: '#/components/schemas/ImportErrorType'
+            - description: Import task error type.
+      description: Import task error.
+    ImportErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportTaskError'
+    ImportID:
+      type: string
+      pattern: '^import-[0-9a-zA-Z]{17}$'
+      minLength: 24
+      maxLength: 24
+    ImportTask:
+      type: object
+      properties:
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: Import task creation datetime.
+        endDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: Import task end datetime.
+        importID:
+          allOf:
+            - $ref: '#/components/schemas/ImportID'
+            - description: Import task id.
+        progressPercentage:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: Import task progress percentage.
+        s3BucketSource:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketSource'
+            - description: Import task s3 bucket source.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ImportStatus'
+            - description: Import task status.
+        summary:
+          allOf:
+            - $ref: '#/components/schemas/ImportTaskSummary'
+            - description: Import task summary.
+      description: Import task.
+    ImportList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportTask'
+    ImportStatus:
+      type: string
+      enum:
+        - PENDING
+        - STARTED
+        - FAILED
+        - SUCCEEDED
+    S3BucketSource:
+      type: object
+      required:
+        - s3Bucket
+        - s3Key
+      properties:
+        s3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: S3 bucket source s3 bucket.
+        s3BucketOwner:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: S3 bucket source s3 bucket owner.
+        s3Key:
+          allOf:
+            - $ref: '#/components/schemas/S3Key'
+            - description: S3 bucket source s3 key.
+      description: S3 bucket source.
+    ImportTaskSummary:
+      type: object
+      properties:
+        applications:
+          allOf:
+            - $ref: '#/components/schemas/ImportTaskSummaryApplications'
+            - description: Import task summary applications.
+        servers:
+          allOf:
+            - $ref: '#/components/schemas/ImportTaskSummaryServers'
+            - description: Import task summary servers.
+        waves:
+          allOf:
+            - $ref: '#/components/schemas/ImportTaskSummaryWaves'
+            - description: Import task summary waves.
+      description: Import task summary.
+    ImportTaskSummaryApplications:
+      type: object
+      properties:
+        createdCount:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Import task summary applications created count.
+        modifiedCount:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Import task summary applications modified count.
+      description: Import task summary applications.
+    ImportTaskSummaryServers:
+      type: object
+      properties:
+        createdCount:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Import task summary servers created count.
+        modifiedCount:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Import task summary servers modified count.
+      description: Import task summary servers.
+    ImportTaskSummaryWaves:
+      type: object
+      properties:
+        createdCount:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Import task summery waves created count.
+        modifiedCount:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Import task summery waves modified count.
+      description: Import task summery waves.
     InitializeServiceRequest:
       type: object
       title: InitializeServiceRequest
@@ -5878,6 +6764,11 @@ components:
         - START_CUTOVER
         - DIAGNOSTIC
         - TERMINATE
+    JmesPathString:
+      type: string
+      pattern: '^[a-zA-Z0-9_]+(\.[a-zA-Z0-9_\[\]]+)*$'
+      minLength: 1
+      maxLength: 1011
     ParticipatingServers:
       type: array
       items:
@@ -6006,6 +6897,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoundedString'
             - description: User-friendly name for the AWS Systems Manager Document.
+        externalParameters:
+          allOf:
+            - $ref: '#/components/schemas/SsmDocumentExternalParameters'
+            - description: AWS Systems Manager Document external parameters.
         mustSucceedForCutover:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -6124,6 +7019,7 @@ components:
         - CUTOVER
         - DISCONNECTED
         - DISCOVERED
+        - PENDING_INSTALLATION
     LifeCycle:
       type: object
       properties:
@@ -6244,6 +7140,92 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: Request next token.
+    ListExportErrorsRequest:
+      type: object
+      required:
+        - exportID
+      title: ListExportErrorsRequest
+      properties:
+        exportID:
+          allOf:
+            - $ref: '#/components/schemas/ExportID'
+            - description: List export errors request export id.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsType'
+            - description: List export errors request max results.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: List export errors request next token.
+      description: List export errors request.
+    ListExportsRequestFilters:
+      type: object
+      properties:
+        exportIDs:
+          allOf:
+            - $ref: '#/components/schemas/ListExportsRequestFiltersExportIDs'
+            - description: List exports request filters export ids.
+      description: List exports request filters.
+    ListExportsRequest:
+      type: object
+      title: ListExportsRequest
+      properties:
+        filters:
+          $ref: '#/components/schemas/ListExportsRequestFilters'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsType'
+            - description: List export request max results.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: List export request next token.
+      description: List export request.
+    ListImportErrorsRequest:
+      type: object
+      required:
+        - importID
+      title: ListImportErrorsRequest
+      properties:
+        importID:
+          allOf:
+            - $ref: '#/components/schemas/ImportID'
+            - description: List import errors request import id.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsType'
+            - description: List import errors request max results.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: List import errors request next token.
+      description: List import errors request.
+    ListImportsRequestFilters:
+      type: object
+      properties:
+        importIDs:
+          allOf:
+            - $ref: '#/components/schemas/ImportIDsFilter'
+            - description: List imports request filters import IDs.
+      description: List imports request filters.
+    ListImportsRequest:
+      type: object
+      title: ListImportsRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/ListImportsRequestFilters'
+            - description: List imports request filters.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsType'
+            - description: List imports request max results.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: List imports request next token.
+      description: List imports request.
     SourceServerActionsRequestFilters:
       type: object
       properties:
@@ -6437,6 +7419,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/JobPostLaunchActionsLaunchStatus'
+    SsmDocumentExternalParameters:
+      type: object
+      minProperties: 0
+      maxProperties: 20
+      additionalProperties:
+        $ref: '#/components/schemas/SsmExternalParameter'
     SsmDocumentParameters:
       type: object
       minProperties: 0
@@ -6468,6 +7456,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Source server post migration custom action active status.
+        category:
+          allOf:
+            - $ref: '#/components/schemas/ActionCategory'
+            - description: Source server post migration custom action category.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ActionDescription'
+            - description: Source server post migration custom action description.
         documentIdentifier:
           allOf:
             - $ref: '#/components/schemas/BoundedString'
@@ -6476,6 +7472,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentVersion'
             - description: Source server post migration custom action document version.
+        externalParameters:
+          allOf:
+            - $ref: '#/components/schemas/SsmDocumentExternalParameters'
+            - description: Source server post migration custom action external parameters.
         mustSucceedForCutover:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -6518,6 +7518,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Template post migration custom action active status.
+        category:
+          allOf:
+            - $ref: '#/components/schemas/ActionCategory'
+            - description: Template post migration custom action category.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ActionDescription'
+            - description: Template post migration custom action description.
         documentIdentifier:
           allOf:
             - $ref: '#/components/schemas/BoundedString'
@@ -6526,6 +7534,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentVersion'
             - description: Template post migration custom action document version.
+        externalParameters:
+          allOf:
+            - $ref: '#/components/schemas/SsmDocumentExternalParameters'
+            - description: Template post migration custom action external parameters.
         launchConfigurationTemplateID:
           allOf:
             - $ref: '#/components/schemas/LaunchConfigurationTemplateID'
@@ -6702,6 +7714,41 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
             - description: Start Cutover by Tags.
+    StartExportRequest:
+      type: object
+      required:
+        - s3Bucket
+        - s3Key
+      title: StartExportRequest
+      properties:
+        s3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: Start export request s3 bucket.
+        s3BucketOwner:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Start export request s3 bucket owner.
+        s3Key:
+          allOf:
+            - $ref: '#/components/schemas/S3Key'
+            - description: Start export request s3key.
+      description: Start export request.
+    StartImportRequest:
+      type: object
+      required:
+        - s3BucketSource
+      title: StartImportRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientIdempotencyToken'
+            - description: Start import request client token.
+        s3BucketSource:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketSource'
+            - description: Start import request s3 bucket source.
+      description: Start import request.
     StartReplicationRequest:
       type: object
       required:

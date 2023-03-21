@@ -2603,6 +2603,207 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+  '/app-instances/{appInstanceArn}/streaming-configurations':
+    delete:
+      operationId: DeleteMessagingStreamingConfigurations
+      description: 'Deletes the streaming configurations for an <code>AppInstance</code>. For more information, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html">Streaming messaging data</a> in the <i>Amazon Chime SDK Developer Guide</i>.'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '481':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceArn
+          in: path
+          required: true
+          description: The ARN of the streaming configurations being deleted.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetMessagingStreamingConfigurations
+      description: 'Retrieves the data streaming configuration for an <code>AppInstance</code>. For more information, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html">Streaming messaging data</a> in the <i>Amazon Chime SDK Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMessagingStreamingConfigurationsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceArn
+          in: path
+          required: true
+          description: The ARN of the streaming configurations.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    put:
+      operationId: PutMessagingStreamingConfigurations
+      description: 'Sets the data streaming configuration for an <code>AppInstance</code>. For more information, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html">Streaming messaging data</a> in the <i>Amazon Chime SDK Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutMessagingStreamingConfigurationsResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceArn
+          in: path
+          required: true
+          description: The ARN of the streaming configuration.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - StreamingConfigurations
+              properties:
+                StreamingConfigurations:
+                  description: The streaming configurations.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StreamingConfiguration'
+                  minItems: 1
+                  maxItems: 2
   '/channels/{channelArn}#scope=app-instance-user-membership&app-instance-user-arn&x-amz-chime-bearer':
     get:
       operationId: DescribeChannelMembershipForAppInstanceUser
@@ -4987,6 +5188,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/MessagingSessionEndpoint'
             - description: The endpoint returned in the response.
+    GetMessagingStreamingConfigurationsResponse:
+      type: object
+      properties:
+        StreamingConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/StreamingConfigurationList'
+            - description: The streaming settings.
     ListChannelBansResponse:
       type: object
       properties:
@@ -5157,6 +5365,28 @@ components:
             - $ref: '#/components/schemas/FilterRule'
             - description: The simple JSON object used to send a subset of a push notification to the requested member.
       description: The channel membership preferences for push notification.
+    PutMessagingStreamingConfigurationsResponse:
+      type: object
+      properties:
+        StreamingConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/StreamingConfigurationList'
+            - description: The requested streaming configurations.
+    StreamingConfiguration:
+      type: object
+      required:
+        - DataType
+        - ResourceArn
+      properties:
+        DataType:
+          allOf:
+            - $ref: '#/components/schemas/MessagingDataType'
+            - description: The data type of the configuration.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: 'The ARN of the resource in the configuration. '
+      description: The configuration for connecting a messaging stream to Amazon Kinesis.
     RedactChannelMessageResponse:
       type: object
       properties:
@@ -6163,6 +6393,10 @@ components:
       type: object
       title: DeleteChannelRequest
       properties: {}
+    DeleteMessagingStreamingConfigurationsRequest:
+      type: object
+      title: DeleteMessagingStreamingConfigurationsRequest
+      properties: {}
     DescribeChannelBanRequest:
       type: object
       title: DescribeChannelBanRequest
@@ -6229,6 +6463,16 @@ components:
             - $ref: '#/components/schemas/UrlType'
             - description: The endpoint to which you establish a websocket connection.
       description: The websocket endpoint used to connect to Amazon Chime SDK messaging.
+    GetMessagingStreamingConfigurationsRequest:
+      type: object
+      title: GetMessagingStreamingConfigurationsRequest
+      properties: {}
+    StreamingConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StreamingConfiguration'
+      minItems: 1
+      maxItems: 2
     ResourceName:
       type: string
       pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -6340,6 +6584,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/MessageAttributeStringValue'
+    MessagingDataType:
+      type: string
+      enum:
+        - Channel
+        - ChannelMessage
     UrlType:
       type: string
       maxLength: 4096
@@ -6363,6 +6612,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChannelMembershipPreferences'
             - description: The channel membership preferences of an <code>AppInstanceUser</code> .
+    PutMessagingStreamingConfigurationsRequest:
+      type: object
+      required:
+        - StreamingConfigurations
+      title: PutMessagingStreamingConfigurationsRequest
+      properties:
+        StreamingConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/StreamingConfigurationList'
+            - description: The streaming configurations.
     RedactChannelMessageRequest:
       type: object
       title: RedactChannelMessageRequest
