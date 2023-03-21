@@ -346,6 +346,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetHrisCompaniesResponse"
@@ -561,6 +562,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetHrisCompanyResponse"
@@ -730,6 +732,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetDepartmentsResponse"
@@ -891,6 +894,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetDepartmentResponse"
@@ -1008,6 +1012,7 @@ paths:
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/employeesFilter"
         - $ref: "#/components/parameters/employeesSort"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetEmployeesResponse"
@@ -1351,6 +1356,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetEmployeeResponse"
@@ -1640,6 +1646,7 @@ paths:
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetHrisJobsResponse"
@@ -1695,6 +1702,7 @@ paths:
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetHrisJobResponse"
@@ -1751,6 +1759,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/payrollsFilter"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetPayrollsResponse"
@@ -1802,6 +1811,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/payrollsFilter"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetEmployeePayrollsResponse"
@@ -1855,6 +1865,7 @@ paths:
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetEmployeePayrollResponse"
@@ -1910,6 +1921,7 @@ paths:
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetPayrollResponse"
@@ -1962,6 +1974,7 @@ paths:
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetEmployeeSchedulesResponse"
@@ -2016,6 +2029,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/timeOffRequestsFilter"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetTimeOffRequestsResponse"
@@ -2192,6 +2206,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetTimeOffRequestResponse"
@@ -2362,6 +2377,14 @@ components:
       schema:
         $ref: "#/components/schemas/EmployeesSort"
       style: deepObject
+    fields:
+      description: "The 'fields' parameter allows API users to specify the fields they want to include in the API response. If this parameter is not present, the API will return all available fields. If this parameter is present, only the fields specified in the comma-separated string will be included in the response. Nested properties can also be requested by using a dot notation. <br /><br />Example: `fields=name,email,addresses.city`<br /><br />In the example above, the response will only include the fields \"name\", \"email\" and \"addresses.city\". If any other fields are available, they will be excluded."
+      example: id,updated_at
+      in: query
+      name: fields
+      schema:
+        nullable: true
+        type: string
     id:
       description: ID of the record you are acting upon.
       in: path
@@ -5218,6 +5241,12 @@ components:
           type: string
         id:
           $ref: "#/components/schemas/Id"
+        is_primary:
+          description: Indicates whether this the employee's primary job.
+          example: true
+          nullable: true
+          title: Primary
+          type: boolean
         location:
           additionalProperties: false
           properties:
@@ -5241,6 +5270,7 @@ components:
         employment_status: high
         end_date: high
         id: critical
+        is_primary: medium
         location: medium
         start_date: high
         title: critical

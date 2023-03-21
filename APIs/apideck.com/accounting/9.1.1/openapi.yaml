@@ -420,6 +420,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/billsSort"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetBillsResponse"
@@ -661,6 +662,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetBillResponse"
@@ -854,6 +856,7 @@ paths:
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetCompanyInfoResponse"
@@ -905,6 +908,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetCreditNotesResponse"
@@ -1131,6 +1135,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetCreditNoteResponse"
@@ -1312,6 +1317,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/customersFilter"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetCustomersResponse"
@@ -1561,6 +1567,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetCustomerResponse"
@@ -1765,6 +1772,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/invoiceItemsFilter"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetInvoiceItemsResponse"
@@ -1967,6 +1975,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetInvoiceItemResponse"
@@ -2124,6 +2133,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/invoicesSort"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetInvoicesResponse"
@@ -2395,6 +2405,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetInvoiceResponse"
@@ -2620,6 +2631,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetJournalEntriesResponse"
@@ -2825,6 +2837,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetJournalEntryResponse"
@@ -2984,6 +2997,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetLedgerAccountsResponse"
@@ -3181,6 +3195,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetLedgerAccountResponse"
@@ -3332,6 +3347,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetPaymentsResponse"
@@ -3551,6 +3567,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetPaymentResponse"
@@ -3723,6 +3740,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/profitAndLossFilter"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetProfitAndLossResponse"
@@ -3775,6 +3793,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/suppliersFilter"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetSuppliersResponse"
@@ -4019,6 +4038,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetSupplierResponse"
@@ -4219,6 +4239,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/taxRatesFilter"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetTaxRatesResponse"
@@ -4399,6 +4420,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetTaxRateResponse"
@@ -4569,6 +4591,14 @@ components:
       schema:
         $ref: "#/components/schemas/CustomersFilter"
       style: deepObject
+    fields:
+      description: "The 'fields' parameter allows API users to specify the fields they want to include in the API response. If this parameter is not present, the API will return all available fields. If this parameter is present, only the fields specified in the comma-separated string will be included in the response. Nested properties can also be requested by using a dot notation. <br /><br />Example: `fields=name,email,addresses.city`<br /><br />In the example above, the response will only include the fields \"name\", \"email\" and \"addresses.city\". If any other fields are available, they will be excluded."
+      example: id,updated_at
+      in: query
+      name: fields
+      schema:
+        nullable: true
+        type: string
     id:
       description: ID of the record you are acting upon.
       in: path
@@ -10211,6 +10241,7 @@ components:
       type: object
       x-apideck-schema-id: NotImplemented
     Payment:
+      additionalProperties: false
       properties:
         account:
           $ref: "#/components/schemas/LinkedLedgerAccount"

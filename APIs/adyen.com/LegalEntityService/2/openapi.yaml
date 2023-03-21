@@ -45,7 +45,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-03-09T13:21:13Z
+  x-timestamp: 2023-03-21T09:21:18Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -2208,8 +2208,10 @@ components:
           enum:
             - adyenAccount
             - adyenCapital
+            - adyenCard
             - adyenForPlatformsAdvanced
             - adyenForPlatformsManage
+            - adyenFranchisee
             - adyenIssuing
           type: string
       type: object
@@ -2475,8 +2477,10 @@ components:
             enum:
               - adyenAccount
               - adyenCapital
+              - adyenCard
               - adyenForPlatformsAdvanced
               - adyenForPlatformsManage
+              - adyenFranchisee
               - adyenIssuing
             type: string
           type: array
@@ -2492,6 +2496,10 @@ components:
       type: object
     CapabilityProblemEntity:
       properties:
+        documents:
+          items:
+            type: string
+          type: array
         id:
           type: string
         owner:
@@ -2505,6 +2513,10 @@ components:
       type: object
     CapabilityProblemEntity-recursive:
       properties:
+        documents:
+          items:
+            type: string
+          type: array
         id:
           type: string
         type:
@@ -2636,7 +2648,6 @@ components:
         - description
         - owner
         - attachments
-        - id
       type: object
     DocumentReference:
       properties:
@@ -2684,8 +2695,10 @@ components:
           enum:
             - adyenAccount
             - adyenCapital
+            - adyenCard
             - adyenForPlatformsAdvanced
             - adyenForPlatformsManage
+            - adyenFranchisee
             - adyenIssuing
           type: string
       type: object
@@ -2709,8 +2722,10 @@ components:
           enum:
             - adyenAccount
             - adyenCapital
+            - adyenCard
             - adyenForPlatformsAdvanced
             - adyenForPlatformsManage
+            - adyenFranchisee
             - adyenIssuing
           type: string
       type: object
@@ -3353,14 +3368,11 @@ components:
       type: object
     SourceOfFunds:
       properties:
-        acquiringBusinessLineId:
-          description: The unique identifier of the business line that will be the source of funds.This must be a business line for a **receivePayments** or **receiveFromPlatformPayments** capability.
-          type: string
         adyenProcessedFunds:
           description: Indicates whether the funds are coming from transactions processed by Adyen. If **false**, a `description` is required.
           type: boolean
         description:
-          description: Text describing the source of funds. For example, for `type` **business**, provide a description of the business. Required when `adyenProcessedFunds` is **false**.
+          description: Text describing the source of funds. For example, for `type` **business**, provide a description of where the business transactions come from, such as payments through bank transfer. Required when `adyenProcessedFunds` is **false**.
           type: string
         type:
           description: "The type of the source of funds. Possible value: **business**."
@@ -3491,8 +3503,10 @@ components:
           enum:
             - adyenAccount
             - adyenCapital
+            - adyenCard
             - adyenForPlatformsAdvanced
             - adyenForPlatformsManage
+            - adyenFranchisee
             - adyenIssuing
           type: string
       type: object
@@ -3558,6 +3572,9 @@ components:
           type: string
         id:
           description: The unique identifier of the resource.
+          type: string
+        realLastFour:
+          description: Four last digits of the bank account number.
           type: string
       required:
         - id

@@ -309,6 +309,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetMessagesResponse"
@@ -476,6 +477,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
           $ref: "#/components/responses/GetMessageResponse"
@@ -607,6 +609,14 @@ components:
       description: Cursor to start from. You can find cursors for next/previous pages in the meta.cursors property of the response.
       in: query
       name: cursor
+      schema:
+        nullable: true
+        type: string
+    fields:
+      description: "The 'fields' parameter allows API users to specify the fields they want to include in the API response. If this parameter is not present, the API will return all available fields. If this parameter is present, only the fields specified in the comma-separated string will be included in the response. Nested properties can also be requested by using a dot notation. <br /><br />Example: `fields=name,email,addresses.city`<br /><br />In the example above, the response will only include the fields \"name\", \"email\" and \"addresses.city\". If any other fields are available, they will be excluded."
+      example: id,updated_at
+      in: query
+      name: fields
       schema:
         nullable: true
         type: string

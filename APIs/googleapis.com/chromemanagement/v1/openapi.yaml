@@ -404,7 +404,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Query string to filter results, AND-separated fields in EBNF syntax. Note: OR operations are not supported in this filter. Note: Only >= and <= comparators are supported in this filter. Supported filter fields: * completion_time"
+        - description: "Query string to filter results, AND-separated fields in EBNF syntax. Note: OR operations are not supported in this filter. Note: Only >= and <= comparators are supported in this filter. Supported filter fields: * complete_time"
           in: query
           name: filter
           schema:
@@ -466,7 +466,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Query string to filter results, AND-separated fields in EBNF syntax. Note: OR operations are not supported in this filter. Note: Only >= and <= comparators are supported in this filter. Supported filter fields: * completion_time"
+        - description: "Query string to filter results, AND-separated fields in EBNF syntax. Note: OR operations are not supported in this filter. Note: Only >= and <= comparators are supported in this filter. Supported filter fields: * complete_time"
           in: query
           name: filter
           schema:

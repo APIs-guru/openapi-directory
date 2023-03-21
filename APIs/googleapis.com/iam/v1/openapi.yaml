@@ -1,6 +1,7 @@
 openapi: 3.0.0
 servers:
   - url: https://iam.googleapis.com/
+x-hasEquivalentPaths: true
 info:
   contact:
     name: Google
@@ -875,6 +876,92 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{parent}/keys":
+    get:
+      description: Lists all non-deleted WorkloadIdentityPoolProviderKeys in a project. If show_deleted is set to `true`, then deleted pools are also listed.
+      operationId: iam.projects.locations.workloadIdentityPools.providers.keys.list
+      parameters:
+        - description: Required. The parent provider resource to list encryption keys for.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of keys to return. If unspecified, all keys are returned. The maximum value is 10; values above 10 are truncated to 10.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListWorkloadIdentityPoolProviderKeys` call. Provide this to retrieve the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Whether to return soft deleted resources as well.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListWorkloadIdentityPoolProviderKeysResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a new WorkloadIdentityPoolProviderKey in a WorkloadIdentityPoolProvider.
+      operationId: iam.projects.locations.workloadIdentityPools.providers.keys.create
+      parameters:
+        - description: Required. The parent provider resource to create the key in.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the key, which becomes the final component of the resource name. This value should be 4-32 characters, and may contain the characters [a-z0-9-].
+          in: query
+          name: workloadIdentityPoolProviderKeyId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkloadIdentityPoolProviderKey"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/providers":
     get:
       description: Lists all non-deleted WorkloadIdentityPoolProviders in a WorkloadIdentityPool. If `show_deleted` is set to `true`, then deleted providers are also listed.
@@ -1541,6 +1628,39 @@ components:
           description: "Required. SAML Identity provider configuration metadata xml doc. The xml document should comply with [SAML 2.0 specification](https://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf). The max size of the acceptable xml document will be bounded to 128k characters. The metadata xml document should satisfy the following constraints: 1) Must contain an Identity Provider Entity ID. 2) Must contain at least one non-expired signing key certificate. 3) For each signing key: a) Valid from should be no more than 7 days from now. b) Valid to should be no more than 14 years in the future. 4) Up to 3 IdP signing keys are allowed in the metadata xml. When updating the provider's metadata xml, at least one non-expired signing key must overlap with the existing metadata. This requirement is skipped if there are no non-expired signing keys present in the existing metadata."
           type: string
       type: object
+    KeyData:
+      description: Represents a public key data along with its format.
+      properties:
+        format:
+          description: Output only. The format of the key.
+          enum:
+            - KEY_FORMAT_UNSPECIFIED
+            - RSA_X509_PEM
+          readOnly: true
+          type: string
+        key:
+          description: Output only. The key data. The format of the key is represented by the format field.
+          readOnly: true
+          type: string
+        keySpec:
+          description: Immutable. The specifications for the key.
+          enum:
+            - KEY_SPEC_UNSPECIFIED
+            - RSA_2048
+            - RSA_3072
+            - RSA_4096
+          type: string
+        notAfterTime:
+          description: Output only. Latest timestamp when this key is valid. Attempts to use this key after this time will fail. Only present if the key data represents a X.509 certificate.
+          format: google-datetime
+          readOnly: true
+          type: string
+        notBeforeTime:
+          description: Output only. Earliest timestamp when this key is valid. Attempts to use this key before this time will fail. Only present if the key data represents a X.509 certificate.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     LintPolicyRequest:
       description: The request to lint a Cloud IAM policy object.
       properties:
@@ -1626,6 +1746,18 @@ components:
           description: To retrieve the next page of results, set ListServiceAccountsRequest.page_token to this value.
           type: string
       type: object
+    ListWorkforcePoolProviderKeysResponse:
+      description: Response message for ListWorkforcePoolProviderKeys.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        workforcePoolProviderKeys:
+          description: A list of WorkforcePoolProviderKeys.
+          items:
+            $ref: "#/components/schemas/WorkforcePoolProviderKey"
+          type: array
+      type: object
     ListWorkforcePoolProvidersResponse:
       description: Response message for ListWorkforcePoolProviders.
       properties:
@@ -1648,6 +1780,18 @@ components:
           description: A list of pools.
           items:
             $ref: "#/components/schemas/WorkforcePool"
+          type: array
+      type: object
+    ListWorkloadIdentityPoolProviderKeysResponse:
+      description: Response message for ListWorkloadIdentityPoolProviderKeys.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        workloadIdentityPoolProviderKeys:
+          description: A list of WorkloadIdentityPoolProviderKey
+          items:
+            $ref: "#/components/schemas/WorkloadIdentityPoolProviderKey"
           type: array
       type: object
     ListWorkloadIdentityPoolProvidersResponse:
@@ -2106,6 +2250,10 @@ components:
           $ref: "#/components/schemas/ServiceAccount"
           description: Metadata for the restored service account.
       type: object
+    UndeleteWorkforcePoolProviderKeyRequest:
+      description: Request message for UndeleteWorkforcePoolProviderKey.
+      properties: {}
+      type: object
     UndeleteWorkforcePoolProviderRequest:
       description: Request message for UndeleteWorkforcePoolProvider.
       properties: {}
@@ -2116,6 +2264,10 @@ components:
       type: object
     UndeleteWorkforcePoolSubjectRequest:
       description: Request message for UndeleteWorkforcePoolSubject.
+      properties: {}
+      type: object
+    UndeleteWorkloadIdentityPoolProviderKeyRequest:
+      description: Request message for UndeleteWorkloadIdentityPoolProviderKey.
       properties: {}
       type: object
     UndeleteWorkloadIdentityPoolProviderRequest:
@@ -2205,6 +2357,36 @@ components:
           readOnly: true
           type: string
       type: object
+    WorkforcePoolProviderKey:
+      description: Represents a public key configuration for a Workforce Pool Provider. The key can be configured in your identity provider to encrypt SAML assertions. Google holds the corresponding private key, which it uses to decrypt encrypted tokens.
+      properties:
+        expireTime:
+          description: Output only. The time after which the key will be permanently deleted and cannot be recovered. Note that the key may get purged before this time if the total limit of keys per provider is exceeded.
+          format: google-datetime
+          readOnly: true
+          type: string
+        keyData:
+          $ref: "#/components/schemas/KeyData"
+          description: Immutable. Public half of the asymmetric key.
+        name:
+          description: Output only. The resource name of the key.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. The state of the key.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - DELETED
+          readOnly: true
+          type: string
+        use:
+          description: Immutable. The purpose of the key.
+          enum:
+            - KEY_USE_UNSPECIFIED
+            - ENCRYPTION
+          type: string
+      type: object
     WorkloadIdentityPool:
       description: Represents a collection of external workload identities. You can define IAM policies to grant these identities access to Google Cloud resources.
       properties:
@@ -2274,6 +2456,36 @@ components:
             - ACTIVE
             - DELETED
           readOnly: true
+          type: string
+      type: object
+    WorkloadIdentityPoolProviderKey:
+      description: Represents a public key configuration for your workload identity pool provider. The key can be configured in your identity provider to encrypt the SAML assertions. Google holds the corresponding private key which it uses to decrypt encrypted tokens.
+      properties:
+        expireTime:
+          description: Output only. Time after which the key will be permanently purged and cannot be recovered. Note that the key may get purged before this timestamp if the total limit of keys per provider is crossed.
+          format: google-datetime
+          readOnly: true
+          type: string
+        keyData:
+          $ref: "#/components/schemas/KeyData"
+          description: Immutable. Public half of the asymmetric key.
+        name:
+          description: Output only. The resource name of the key.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. The state of the key.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - DELETED
+          readOnly: true
+          type: string
+        use:
+          description: Immutable. The purpose of the key.
+          enum:
+            - KEY_USE_UNSPECIFIED
+            - ENCRYPTION
           type: string
       type: object
   securitySchemes:

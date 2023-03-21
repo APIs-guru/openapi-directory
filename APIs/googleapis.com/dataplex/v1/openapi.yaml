@@ -232,7 +232,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{name}/operations":
     get:
-      description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns UNIMPLEMENTED.
+      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns UNIMPLEMENTED.NOTE: the name binding allows API services to override the binding to use different resource name schemes, such as users/*/operations. To override the binding, API services can add a binding such as \"/v1/{name=users/*}/operations\" to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
       operationId: dataplex.projects.locations.operations.list
       parameters:
         - description: The name of the operation's parent resource.
@@ -3085,9 +3085,6 @@ components:
       properties:
         entity:
           description: "Immutable. The Dataplex entity that represents the data source (e.g. BigQuery table) for DataScan, of the form: projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}."
-          type: string
-        resource:
-          description: 'Immutable. The service-qualified full resource name of the cloud resource for a DataScan job to scan against. The field could be: BigQuery table of type "TABLE" for DataProfileScan/DataQualityScan Format: //bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID'
           type: string
       type: object
     GoogleCloudDataplexV1DataTaxonomy:
