@@ -37,6 +37,11 @@ paths:
       description: List labels.
       operationId: drivelabels.labels.list
       parameters:
+        - description: 'The customer to scope this list request to. For example: "customers/abcd1234". If unset, will return all labels within the current customer.'
+          in: query
+          name: customer
+          schema:
+            type: string
         - description: The BCP-47 language code to use for evaluating localized field labels. When not specified, values in the default configured language are used.
           in: query
           name: languageCode
@@ -201,9 +206,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: The BCP-47 language code to use for evaluating localized field labels. When not specified, values in the default configured language are used.
+        - description: 'The customer to scope this request to. For example: "customers/abcd1234". If unset, will return settings within the current customer.'
           in: query
-          name: languageCode
+          name: customer
           schema:
             type: string
         - description: Set to `true` in order to use the user's admin credentials. The server verifies that the user is an admin for the label before allowing access.

@@ -30,7 +30,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: MarketPayNotificationService
-  x-timestamp: 2022-09-27T19:26:20Z
+  x-timestamp: 2023-02-20T18:23:38Z
 tags: []
 components:
   examples:
@@ -1030,7 +1030,7 @@ components:
         - pspReference
         - eventType
         - live
-        - content
+      type: object
     AccountCreateNotification:
       properties:
         content:
@@ -1053,7 +1053,7 @@ components:
         - pspReference
         - eventType
         - live
-        - content
+      type: object
     AccountEvent:
       properties:
         event:
@@ -1072,10 +1072,7 @@ components:
         reason:
           description: The reason why this event has been created.
           type: string
-      required:
-        - event
-        - executionDate
-        - reason
+      type: object
     AccountFundsBelowThresholdNotification:
       properties:
         content:
@@ -1098,6 +1095,7 @@ components:
         - pspReference
         - eventType
         - live
+      type: object
     AccountFundsBelowThresholdNotificationContent:
       properties:
         accountCode:
@@ -1116,9 +1114,9 @@ components:
           description: The code of the merchant account.
           type: string
       required:
-        - accountCode
         - merchantAccountCode
         - fundThreshold
+      type: object
     AccountHolderCreateNotification:
       properties:
         content:
@@ -1141,7 +1139,7 @@ components:
         - pspReference
         - eventType
         - live
-        - content
+      type: object
     AccountHolderDetails:
       properties:
         address:
@@ -1193,10 +1191,7 @@ components:
         webAddress:
           description: The URL of the website of the account holder.
           type: string
-      required:
-        - fullPhoneNumber
-        - email
-        - webAddress
+      type: object
     AccountHolderPayoutNotification:
       properties:
         content:
@@ -1219,7 +1214,7 @@ components:
         - pspReference
         - eventType
         - live
-        - content
+      type: object
     AccountHolderPayoutNotificationContent:
       properties:
         accountCode:
@@ -1249,9 +1244,7 @@ components:
         status:
           $ref: "#/components/schemas/OperationStatus"
           description: The payout status.
-      required:
-        - accountHolderCode
-        - accountCode
+      type: object
     AccountHolderStatus:
       properties:
         events:
@@ -1280,6 +1273,7 @@ components:
           type: string
       required:
         - status
+      type: object
     AccountHolderStatusChangeNotification:
       properties:
         content:
@@ -1302,6 +1296,7 @@ components:
         - pspReference
         - eventType
         - live
+      type: object
     AccountHolderStatusChangeNotificationContent:
       properties:
         accountHolderCode:
@@ -1320,8 +1315,7 @@ components:
           type: string
       required:
         - accountHolderCode
-        - oldStatus
-        - newStatus
+      type: object
     AccountHolderStoreStatusChangeNotification:
       properties:
         content:
@@ -1344,7 +1338,9 @@ components:
         - pspReference
         - eventType
         - live
-    AccountHolderStoreStatusChangeNotificationContent: {}
+      type: object
+    AccountHolderStoreStatusChangeNotificationContent:
+      type: object
     AccountHolderUpcomingDeadlineNotification:
       properties:
         content:
@@ -1367,6 +1363,7 @@ components:
         - pspReference
         - eventType
         - live
+      type: object
     AccountHolderUpcomingDeadlineNotificationContent:
       properties:
         accountHolderCode:
@@ -1388,6 +1385,7 @@ components:
             - DeleteSignatories
             - InactivateAccount
             - KYCDeadlineExtension
+            - MigrateAccountToBP
             - RecalculateAccountStatusAndProcessingTier
             - RefundNotPaidOutTransfers
             - ResolveEvents
@@ -1406,6 +1404,7 @@ components:
         reason:
           description: The reason that leads to scheduling of the event.
           type: string
+      type: object
     AccountHolderUpdateNotification:
       properties:
         content:
@@ -1428,7 +1427,7 @@ components:
         - pspReference
         - eventType
         - live
-        - content
+      type: object
     AccountHolderVerificationNotification:
       properties:
         content:
@@ -1451,7 +1450,7 @@ components:
         - pspReference
         - eventType
         - live
-        - content
+      type: object
     AccountHolderVerificationNotificationContent:
       properties:
         accountHolderCode:
@@ -1498,8 +1497,7 @@ components:
             - PAYOUT_METHOD_VERIFICATION
             - PCI_VERIFICATION
           type: string
-      required:
-        - accountHolderCode
+      type: object
     AccountPayoutState:
       properties:
         allowPayout:
@@ -1519,6 +1517,7 @@ components:
           format: int32
           type: integer
           x-addedInVersion: "3"
+      type: object
     AccountProcessingState:
       properties:
         disableReason:
@@ -1538,6 +1537,7 @@ components:
           format: int32
           type: integer
           x-addedInVersion: "3"
+      type: object
     AccountUpdateNotification:
       properties:
         content:
@@ -1560,7 +1560,7 @@ components:
         - pspReference
         - eventType
         - live
-        - content
+      type: object
     Amount:
       properties:
         currency:
@@ -1575,6 +1575,7 @@ components:
       required:
         - value
         - currency
+      type: object
     BankAccountDetail:
       properties:
         accountNumber:
@@ -1726,6 +1727,7 @@ components:
 
             >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
+      type: object
     BeneficiarySetupNotification:
       properties:
         content:
@@ -1748,7 +1750,7 @@ components:
         - pspReference
         - eventType
         - live
-        - content
+      type: object
     BeneficiarySetupNotificationContent:
       properties:
         destinationAccountCode:
@@ -1774,13 +1776,7 @@ components:
           description: The number of transactions transferred upon the setup of the beneficiary.
           format: int32
           type: integer
-      required:
-        - sourceAccountHolderCode
-        - sourceAccountCode
-        - destinationAccountHolderCode
-        - destinationAccountCode
-        - transferDate
-        - transferredTransactionCount
+      type: object
     BusinessDetails:
       properties:
         doingBusinessAs:
@@ -1809,6 +1805,7 @@ components:
         taxId:
           description: The tax ID of the company.
           type: string
+      type: object
     CloseAccountResponse:
       properties:
         pspReference:
@@ -1834,8 +1831,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
-      required:
-        - status
+      type: object
     CompensateNegativeBalanceNotification:
       properties:
         content:
@@ -1858,6 +1854,7 @@ components:
         - pspReference
         - eventType
         - live
+      type: object
     CompensateNegativeBalanceNotificationContent:
       properties:
         records:
@@ -1865,8 +1862,7 @@ components:
           items:
             $ref: "#/components/schemas/CompensateNegativeBalanceNotificationRecord"
           type: array
-      required:
-        - records
+      type: object
     CompensateNegativeBalanceNotificationRecord:
       properties:
         accountCode:
@@ -1879,10 +1875,7 @@ components:
           description: The date on which the compensation took place.
           format: date-time
           type: string
-      required:
-        - accountCode
-        - transferDate
-        - amount
+      type: object
     CreateAccountHolderResponse:
       properties:
         accountCode:
@@ -1920,11 +1913,7 @@ components:
           $ref: "#/components/schemas/KYCVerificationResult"
           description: The details of KYC Verification of the account holder.
           x-addedInVersion: "2"
-      required:
-        - accountHolderCode
-        - accountHolderStatus
-        - accountHolderDetails
-        - verification
+      type: object
     CreateAccountResponse:
       properties:
         accountCode:
@@ -1959,10 +1948,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
-      required:
-        - accountHolderCode
-        - accountCode
-        - status
+      type: object
     DirectDebitInitiatedNotification:
       properties:
         content:
@@ -1985,6 +1971,7 @@ components:
         - pspReference
         - eventType
         - live
+      type: object
     DirectDebitInitiatedNotificationContent:
       properties:
         accountCode:
@@ -2016,6 +2003,7 @@ components:
         - amount
         - accountCode
         - merchantAccountCode
+      type: object
     ErrorFieldType:
       properties:
         errorCode:
@@ -2028,6 +2016,7 @@ components:
         fieldType:
           $ref: "#/components/schemas/FieldType"
           description: The type of error field.
+      type: object
     FieldType:
       properties:
         field:
@@ -2064,6 +2053,7 @@ components:
             - city
             - companyRegistration
             - constitutionalDocument
+            - controller
             - country
             - countryCode
             - currency
@@ -2149,6 +2139,7 @@ components:
             - shareholderCodeAndSignatoryCode
             - shareholderCodeOrSignatoryCode
             - shareholderType
+            - shareholderTypes
             - shopperInteraction
             - signatory
             - signatoryCode
@@ -2195,6 +2186,7 @@ components:
         shareholderCode:
           description: The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.
           type: string
+      type: object
     IndividualDetails:
       properties:
         name:
@@ -2205,6 +2197,7 @@ components:
         personalData:
           $ref: "#/components/schemas/ViasPersonalData"
           description: Personal information of the individual.
+      type: object
     KYCBankAccountCheckResult:
       properties:
         bankAccountUUID:
@@ -2215,6 +2208,7 @@ components:
           items:
             $ref: "#/components/schemas/KYCCheckStatusData"
           type: array
+      type: object
     KYCCheckDataSummaryItem:
       properties:
         itemCode:
@@ -2224,6 +2218,7 @@ components:
         itemDescription:
           description: A description of the item reviewed.
           type: string
+      type: object
     KYCCheckResult:
       properties:
         checks:
@@ -2231,6 +2226,7 @@ components:
           items:
             $ref: "#/components/schemas/KYCCheckStatusData"
           type: array
+      type: object
     KYCCheckStatusData:
       properties:
         requiredFields:
@@ -2294,6 +2290,7 @@ components:
       required:
         - type
         - status
+      type: object
     KYCCheckSummary:
       properties:
         code:
@@ -2305,6 +2302,7 @@ components:
           type: string
       required:
         - code
+      type: object
     KYCShareholderCheckResult:
       properties:
         checks:
@@ -2315,6 +2313,7 @@ components:
         shareholderCode:
           description: The code of the shareholder to which the check applies.
           type: string
+      type: object
     KYCSignatoryCheckResult:
       properties:
         checks:
@@ -2325,6 +2324,7 @@ components:
         signatoryCode:
           description: The code of the signatory to which the check applies.
           type: string
+      type: object
     KYCVerificationResult:
       properties:
         accountHolder:
@@ -2345,6 +2345,7 @@ components:
           items:
             $ref: "#/components/schemas/KYCSignatoryCheckResult"
           type: array
+      type: object
     LocalDate:
       properties:
         month:
@@ -2353,6 +2354,7 @@ components:
         year:
           format: int32
           type: integer
+      type: object
     Message:
       properties:
         code:
@@ -2361,11 +2363,13 @@ components:
         text:
           description: The message text.
           type: string
+      type: object
     NotificationResponse:
       properties:
         notificationResponse:
           description: Set this parameter to **[accepted]** to acknowledge that you received a notification from Adyen.
           type: string
+      type: object
     OperationStatus:
       properties:
         message:
@@ -2374,6 +2378,7 @@ components:
         statusCode:
           description: The status code.
           type: string
+      type: object
     PaymentFailureNotification:
       properties:
         content:
@@ -2396,7 +2401,7 @@ components:
         - pspReference
         - eventType
         - live
-        - content
+      type: object
     PaymentFailureNotificationContent:
       properties:
         errorFields:
@@ -2419,9 +2424,7 @@ components:
         paymentPspReference:
           description: The `pspReference` of the payment.
           type: string
-      required:
-        - errorMessage
-        - errorFields
+      type: object
     PayoutScheduleResponse:
       properties:
         nextScheduledPayout:
@@ -2444,8 +2447,7 @@ components:
             - WEEKLY
             - WEEKLY_ON_TUE_FRI_MIDNIGHT
           type: string
-      required:
-        - schedule
+      type: object
     PersonalDocumentData:
       properties:
         expirationDate:
@@ -2480,6 +2482,7 @@ components:
           type: string
       required:
         - type
+      type: object
     RefundFundsTransferNotification:
       properties:
         content:
@@ -2502,7 +2505,7 @@ components:
         - pspReference
         - eventType
         - live
-        - content
+      type: object
     RefundFundsTransferNotificationContent:
       properties:
         amount:
@@ -2520,6 +2523,7 @@ components:
       required:
         - originalReference
         - amount
+      type: object
     RefundResult:
       properties:
         originalTransaction:
@@ -2531,9 +2535,7 @@ components:
         response:
           description: The response indicating if the refund has been received for processing.
           type: string
-      required:
-        - pspReference
-        - originalTransaction
+      type: object
     ReportAvailableNotification:
       properties:
         content:
@@ -2556,7 +2558,7 @@ components:
         - pspReference
         - eventType
         - live
-        - content
+      type: object
     ReportAvailableNotificationContent:
       properties:
         accountCode:
@@ -2575,6 +2577,7 @@ components:
         success:
           description: Indicates whether the event resulted in a success.
           type: boolean
+      type: object
     ScheduledRefundsNotification:
       properties:
         content:
@@ -2597,7 +2600,7 @@ components:
         - pspReference
         - eventType
         - live
-        - content
+      type: object
     ScheduledRefundsNotificationContent:
       properties:
         accountCode:
@@ -2614,10 +2617,7 @@ components:
           items:
             $ref: "#/components/schemas/RefundResult"
           type: array
-      required:
-        - accountHolderCode
-        - accountCode
-        - refundResults
+      type: object
     ShareholderContact:
       properties:
         address:
@@ -2674,6 +2674,7 @@ components:
         webAddress:
           description: The URL of the person's website.
           type: string
+      type: object
     SignatoryContact:
       properties:
         address:
@@ -2719,6 +2720,7 @@ components:
         webAddress:
           description: The URL of the person's website.
           type: string
+      type: object
     Split:
       properties:
         account:
@@ -2741,7 +2743,7 @@ components:
         type:
           description: |-
             The type of split.
-            Possible values: **Default**, **PaymentFee**, **VAT**, **Commission**, **MarketPlace**, **BalanceAccount**, **Remainder**.
+            Possible values: **Default**, **PaymentFee**, **VAT**, **Commission**, **MarketPlace**, **BalanceAccount**, **Remainder**, **Surcharge**, **Tip**.
           enum:
             - BalanceAccount
             - Commission
@@ -2749,12 +2751,15 @@ components:
             - MarketPlace
             - PaymentFee
             - Remainder
+            - Surcharge
+            - Tip
             - VAT
             - Verification
           type: string
       required:
         - amount
         - type
+      type: object
     SplitAmount:
       properties:
         currency:
@@ -2771,6 +2776,7 @@ components:
           type: integer
       required:
         - value
+      type: object
     Transaction:
       properties:
         amount:
@@ -2825,7 +2831,7 @@ components:
           enum:
             - BalanceNotPaidOutTransfer
             - BalancePlatformSweep
-            - BalancePlatfromSweepReturned
+            - BalancePlatformSweepReturned
             - Chargeback
             - ChargebackCorrection
             - ChargebackCorrectionReceived
@@ -2872,6 +2878,7 @@ components:
         transferCode:
           description: The transfer code of the transaction.
           type: string
+      type: object
     TransferFundsNotification:
       properties:
         content:
@@ -2894,7 +2901,7 @@ components:
         - pspReference
         - eventType
         - live
-        - content
+      type: object
     TransferFundsNotificationContent:
       properties:
         amount:
@@ -2916,11 +2923,7 @@ components:
         transferCode:
           description: The transfer code.
           type: string
-      required:
-        - sourceAccountCode
-        - destinationAccountCode
-        - amount
-        - transferCode
+      type: object
     UltimateParentCompany:
       properties:
         address:
@@ -2932,6 +2935,7 @@ components:
         ultimateParentCompanyCode:
           description: Adyen-generated unique alphanumeric identifier (UUID) for the entry, returned in the response when you create an ultimate parent company. Required when updating an existing entry in an `/updateAccountHolder` request.
           type: string
+      type: object
     UltimateParentCompanyBusinessDetails:
       properties:
         legalBusinessName:
@@ -2949,6 +2953,7 @@ components:
         stockTicker:
           description: Stock Ticker symbol.
           type: string
+      type: object
     UpdateAccountHolderResponse:
       properties:
         accountHolderCode:
@@ -2988,9 +2993,7 @@ components:
           $ref: "#/components/schemas/KYCVerificationResult"
           description: The details of KYC Verification of the account holder.
           x-addedInVersion: "2"
-      required:
-        - accountHolderStatus
-        - verification
+      type: object
     UpdateAccountResponse:
       properties:
         accountCode:
@@ -3013,6 +3016,7 @@ components:
           type: boolean
       required:
         - accountCode
+      type: object
     ViasAddress:
       properties:
         city:
@@ -3047,8 +3051,7 @@ components:
         street:
           description: The name of the street. Required if the `houseNumberOrName`, `city`, `postalCode`, or `stateOrProvince` are provided.
           type: string
-      required:
-        - country
+      type: object
     ViasName:
       properties:
         firstName:
@@ -3075,9 +3078,7 @@ components:
           description: The last name.
           maxLength: 80
           type: string
-      required:
-        - firstName
-        - lastName
+      type: object
     ViasPersonalData:
       properties:
         dateOfBirth:
@@ -3101,6 +3102,7 @@ components:
           maxLength: 2
           minLength: 2
           type: string
+      type: object
     ViasPhoneNumber:
       properties:
         phoneCountryCode:
@@ -3123,9 +3125,7 @@ components:
             - Mobile
             - SIP
           type: string
-      required:
-        - phoneCountryCode
-        - phoneNumber
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header
@@ -3164,6 +3164,7 @@ webhooks:
       tags:
         - Accounts
       x-groupName: Accounts
+      x-methodName: accountClosed
       x-sortIndex: 3
   /ACCOUNT_CREATED:
     post:
@@ -3194,6 +3195,7 @@ webhooks:
       tags:
         - Accounts
       x-groupName: Accounts
+      x-methodName: accountCreated
       x-sortIndex: 1
   /ACCOUNT_FUNDS_BELOW_THRESHOLD:
     post:
@@ -3218,6 +3220,7 @@ webhooks:
       tags:
         - Fund management
       x-groupName: Fund management
+      x-methodName: liableAccountsFundsAreBelowConfiguredThreshold
       x-sortIndex: 7
   /ACCOUNT_HOLDER_CREATED:
     post:
@@ -3256,6 +3259,7 @@ webhooks:
       tags:
         - Account holders
       x-groupName: Account holders
+      x-methodName: accountHolderCreated
       x-sortIndex: 1
   /ACCOUNT_HOLDER_PAYOUT:
     post:
@@ -3290,6 +3294,7 @@ webhooks:
       tags:
         - Fund management
       x-groupName: Fund management
+      x-methodName: paidOutToAccountHolder
       x-sortIndex: 1
   /ACCOUNT_HOLDER_STATUS_CHANGE:
     post:
@@ -3320,6 +3325,7 @@ webhooks:
       tags:
         - Account holders
       x-groupName: Account holders
+      x-methodName: accountHolderStatusChanged
       x-sortIndex: 4
   /ACCOUNT_HOLDER_STORE_STATUS_CHANGE:
     post:
@@ -3350,6 +3356,7 @@ webhooks:
       tags:
         - Account holders
       x-groupName: Account holders
+      x-methodName: storeStatusChanged
       x-sortIndex: 4
   /ACCOUNT_HOLDER_UPCOMING_DEADLINE:
     post:
@@ -3374,6 +3381,7 @@ webhooks:
       tags:
         - Account holders
       x-groupName: Account holders
+      x-methodName: upcomingDeadline
       x-sortIndex: 1
   /ACCOUNT_HOLDER_UPDATED:
     post:
@@ -3404,6 +3412,7 @@ webhooks:
       tags:
         - Account holders
       x-groupName: Account holders
+      x-methodName: accountHolderUpdated
       x-sortIndex: 2
   /ACCOUNT_HOLDER_VERIFICATION:
     post:
@@ -3434,6 +3443,7 @@ webhooks:
       tags:
         - Account holders
       x-groupName: Account holders
+      x-methodName: verificationResultsReceived
       x-sortIndex: 3
   /ACCOUNT_UPDATED:
     post:
@@ -3464,6 +3474,7 @@ webhooks:
       tags:
         - Accounts
       x-groupName: Accounts
+      x-methodName: accountUpdated
       x-sortIndex: 2
   /BENEFICIARY_SETUP:
     post:
@@ -3494,6 +3505,7 @@ webhooks:
       tags:
         - Fund management
       x-groupName: Fund management
+      x-methodName: beneficiaryDefined
       x-sortIndex: 3
   /COMPENSATE_NEGATIVE_BALANCE:
     post:
@@ -3524,6 +3536,7 @@ webhooks:
       tags:
         - Fund management
       x-groupName: Fund management
+      x-methodName: negativeAccountBalancesCompensated
       x-sortIndex: 5
   /DIRECT_DEBIT_INITIATED:
     post:
@@ -3558,6 +3571,7 @@ webhooks:
       tags:
         - Fund management
       x-groupName: Fund management
+      x-methodName: automatedDirectDebitInitiated
       x-sortIndex: 7
   /PAYMENT_FAILURE:
     post:
@@ -3588,6 +3602,7 @@ webhooks:
       tags:
         - Other
       x-groupName: Other
+      x-methodName: bookingForCaptureOrRefundFailed
       x-sortIndex: 1
   /REFUND_FUNDS_TRANSFER:
     post:
@@ -3612,6 +3627,7 @@ webhooks:
       tags:
         - Fund management
       x-groupName: Fund management
+      x-methodName: fundsTransferBetweenAccountsRefunded
       x-sortIndex: 6
   /REPORT_AVAILABLE:
     post:
@@ -3642,6 +3658,7 @@ webhooks:
       tags:
         - Other
       x-groupName: Other
+      x-methodName: reportAvailable
       x-sortIndex: 2
   /SCHEDULED_REFUNDS:
     post:
@@ -3672,6 +3689,7 @@ webhooks:
       tags:
         - Fund management
       x-groupName: Fund management
+      x-methodName: refundTransfersNotPaidOutCallProcessedAndRefundsScheduled
       x-sortIndex: 4
   /TRANSFER_FUNDS:
     post:
@@ -3702,6 +3720,7 @@ webhooks:
       tags:
         - Fund management
       x-groupName: Fund management
+      x-methodName: fundsTransferredBetweenAccounts
       x-sortIndex: 2
 x-groups:
   - Account holders

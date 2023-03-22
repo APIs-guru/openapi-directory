@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: NotificationConfigurationService
-  x-timestamp: 2022-10-03T13:24:04Z
+  x-timestamp: 2023-02-20T18:23:38Z
 tags:
   - name: General
 paths:
@@ -118,6 +118,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: createNotificationConfiguration
       x-sortIndex: 1
   /deleteNotificationConfigurations:
     post:
@@ -178,6 +179,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: deleteNotificationConfigurations
       x-sortIndex: 6
   /getNotificationConfiguration:
     post:
@@ -238,6 +240,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: getNotificationConfiguration
       x-sortIndex: 2
   /getNotificationConfigurationList:
     post:
@@ -298,6 +301,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: getNotificationConfigurationList
       x-sortIndex: 3
   /testNotificationConfiguration:
     post:
@@ -358,6 +362,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: testNotificationConfiguration
       x-sortIndex: 4
   /updateNotificationConfiguration:
     post:
@@ -418,6 +423,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: updateNotificationConfiguration
       x-sortIndex: 5
 components:
   examples:
@@ -433,7 +439,7 @@ components:
           notifyPassword: testPassword
           notifyURL: https://www.adyen.com/notification-handler
           notifyUsername: testUserName
-          sslProtocol: SSL
+          sslProtocol: TLSv13
     post-createNotificationConfiguration-basic-200:
       summary: Example response for request 'basic'
       value:
@@ -445,7 +451,7 @@ components:
               includeMode: INCLUDE
           notificationId: 28468
           notifyURL: https://www.adyen.com/notification-handler
-          sslProtocol: SSLInsecureCiphers
+          sslProtocol: TLSv13
         pspReference: "8516178952380553"
     post-deleteNotificationConfigurations-basic:
       description: Deletes an existing notification subscription configuration
@@ -476,7 +482,7 @@ components:
               includeMode: INCLUDE
           notificationId: 50054
           notifyURL: https://www.adyen.com/notification-handler
-          sslProtocol: SSLInsecureCiphers
+          sslProtocol: TLSv13
         pspReference: "8616480378704419"
     post-getNotificationConfigurationList-basic:
       description: Returns the details of the configurations of all of the notification subscriptions in the platform of the executing user.
@@ -494,7 +500,7 @@ components:
                 includeMode: INCLUDE
             notificationId: 27893
             notifyURL: https://www.adyen.com/notification-handler
-            sslProtocol: SSLInsecureCiphers
+            sslProtocol: TLSv13
           - active: true
             description: just testing things
             eventConfigs:
@@ -502,7 +508,7 @@ components:
                 includeMode: INCLUDE
             notificationId: 25032
             notifyURL: https://www.adyen.com/notification-handler
-            sslProtocol: SSLInsecureCiphers
+            sslProtocol: TLSv13
         pspReference: "8516480437185726"
     post-testNotificationConfiguration-basic:
       description: Returns the test result for a notification subscription
@@ -545,7 +551,7 @@ components:
           notifyPassword: testPassword2
           notifyURL: https://www.adyen.com/notification-handler
           notifyUsername: testUserName2
-          sslProtocol: TLSv10
+          sslProtocol: TLSv13
     post-updateNotificationConfiguration-basic-200:
       summary: Example response for request 'basic'
       value:
@@ -559,7 +565,7 @@ components:
               includeMode: EXCLUDE
           notificationId: 21259
           notifyURL: https://www.adyen.com/notification-handler
-          sslProtocol: TLSv10
+          sslProtocol: TLSv13
         pspReference: "8516178952580574"
   schemas:
     CreateNotificationConfigurationRequest:
@@ -569,6 +575,7 @@ components:
           description: Details of the prospective notification subscription configuration.
       required:
         - configurationDetails
+      type: object
     DeleteNotificationConfigurationRequest:
       properties:
         notificationIds:
@@ -579,7 +586,9 @@ components:
           type: array
       required:
         - notificationIds
-    EmptyRequest: {}
+      type: object
+    EmptyRequest:
+      type: object
     ErrorFieldType:
       properties:
         errorCode:
@@ -592,12 +601,14 @@ components:
         fieldType:
           $ref: "#/components/schemas/FieldType"
           description: The type of error field.
+      type: object
     ExchangeMessage:
       properties:
         messageCode:
           type: string
         messageDescription:
           type: string
+      type: object
     FieldType:
       properties:
         field:
@@ -634,6 +645,7 @@ components:
             - city
             - companyRegistration
             - constitutionalDocument
+            - controller
             - country
             - countryCode
             - currency
@@ -723,6 +735,7 @@ components:
             - shareholderCodeAndSignatoryCode
             - shareholderCodeOrSignatoryCode
             - shareholderType
+            - shareholderTypes
             - shopperInteraction
             - signatory
             - signatoryCode
@@ -769,6 +782,7 @@ components:
         shareholderCode:
           description: The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.
           type: string
+      type: object
     GenericResponse:
       properties:
         invalidFields:
@@ -783,6 +797,7 @@ components:
         resultCode:
           description: The result code.
           type: string
+      type: object
     GetNotificationConfigurationListResponse:
       properties:
         configurations:
@@ -802,8 +817,7 @@ components:
         resultCode:
           description: The result code.
           type: string
-      required:
-        - configurations
+      type: object
     GetNotificationConfigurationRequest:
       properties:
         notificationId:
@@ -812,6 +826,7 @@ components:
           type: integer
       required:
         - notificationId
+      type: object
     GetNotificationConfigurationResponse:
       properties:
         configurationDetails:
@@ -831,6 +846,7 @@ components:
           type: string
       required:
         - configurationDetails
+      type: object
     NotificationConfigurationDetails:
       properties:
         active:
@@ -878,9 +894,7 @@ components:
             - TLSv12
             - TLSv13
           type: string
-      required:
-        - eventConfigs
-        - notifyURL
+      type: object
     NotificationEventConfiguration:
       properties:
         eventType:
@@ -905,6 +919,7 @@ components:
             - BENEFICIARY_SETUP
             - COMPENSATE_NEGATIVE_BALANCE
             - DIRECT_DEBIT_INITIATED
+            - FUNDS_MIGRATED
             - PAYMENT_FAILURE
             - PENDING_CREDIT
             - REFUND_FUNDS_TRANSFER
@@ -927,6 +942,7 @@ components:
       required:
         - eventType
         - includeMode
+      type: object
     ServiceError:
       properties:
         errorCode:
@@ -945,6 +961,7 @@ components:
           description: The HTTP response status.
           format: int32
           type: integer
+      type: object
     TestNotificationConfigurationRequest:
       properties:
         eventTypes:
@@ -969,6 +986,7 @@ components:
               - BENEFICIARY_SETUP
               - COMPENSATE_NEGATIVE_BALANCE
               - DIRECT_DEBIT_INITIATED
+              - FUNDS_MIGRATED
               - PAYMENT_FAILURE
               - PENDING_CREDIT
               - REFUND_FUNDS_TRANSFER
@@ -985,6 +1003,7 @@ components:
           type: integer
       required:
         - notificationId
+      type: object
     TestNotificationConfigurationResponse:
       properties:
         errorMessages:
@@ -1014,6 +1033,7 @@ components:
               - BENEFICIARY_SETUP
               - COMPENSATE_NEGATIVE_BALANCE
               - DIRECT_DEBIT_INITIATED
+              - FUNDS_MIGRATED
               - PAYMENT_FAILURE
               - PENDING_CREDIT
               - REFUND_FUNDS_TRANSFER
@@ -1052,9 +1072,7 @@ components:
           type: string
       required:
         - notificationId
-        - eventTypes
-        - okMessages
-        - exchangeMessages
+      type: object
     UpdateNotificationConfigurationRequest:
       properties:
         configurationDetails:
@@ -1062,6 +1080,7 @@ components:
           description: Details of the notification subscription configuration to be updated.
       required:
         - configurationDetails
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header

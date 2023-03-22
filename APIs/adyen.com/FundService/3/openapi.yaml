@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: FundService
-  x-timestamp: 2022-09-27T19:26:19Z
+  x-timestamp: 2023-02-20T18:23:37Z
 tags:
   - name: General
 paths:
@@ -121,6 +121,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: accountHolderBalance
       x-sortIndex: 1
   /accountHolderTransactionList:
     post:
@@ -186,6 +187,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: accountHolderTransactionList
       x-sortIndex: 2
   /debitAccountHolder:
     post:
@@ -255,6 +257,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: debitAccountHolder
       x-sortIndex: 8
   /payoutAccountHolder:
     post:
@@ -318,6 +321,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: payoutAccountHolder
       x-sortIndex: 3
   /refundFundsTransfer:
     post:
@@ -381,6 +385,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: refundFundsTransfer
       x-sortIndex: 5
   /refundNotPaidOutTransfers:
     post:
@@ -444,6 +449,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: refundNotPaidOutTransfers
       x-sortIndex: 7
   /setupBeneficiary:
     post:
@@ -507,6 +513,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: setupBeneficiary
       x-sortIndex: 6
   /transferFunds:
     post:
@@ -570,6 +577,7 @@ paths:
       tags:
         - General
       x-groupName: General
+      x-methodName: transferFunds
       x-sortIndex: 4
 components:
   examples:
@@ -671,6 +679,7 @@ components:
         detailBalance:
           $ref: "#/components/schemas/DetailBalance"
           description: Details of the balance held by the account.
+      type: object
     AccountHolderBalanceRequest:
       properties:
         accountHolderCode:
@@ -678,6 +687,7 @@ components:
           type: string
       required:
         - accountHolderCode
+      type: object
     AccountHolderBalanceResponse:
       properties:
         balancePerAccount:
@@ -700,6 +710,7 @@ components:
         totalBalance:
           $ref: "#/components/schemas/DetailBalance"
           description: The total balance of the account holder.
+      type: object
     AccountHolderTransactionListRequest:
       properties:
         accountHolderCode:
@@ -738,7 +749,7 @@ components:
             enum:
               - BalanceNotPaidOutTransfer
               - BalancePlatformSweep
-              - BalancePlatfromSweepReturned
+              - BalancePlatformSweepReturned
               - Chargeback
               - ChargebackCorrection
               - ChargebackCorrectionReceived
@@ -785,6 +796,7 @@ components:
           type: array
       required:
         - accountHolderCode
+      type: object
     AccountHolderTransactionListResponse:
       properties:
         accountTransactionLists:
@@ -804,6 +816,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
+      type: object
     AccountTransactionList:
       properties:
         accountCode:
@@ -817,6 +830,7 @@ components:
           items:
             $ref: "#/components/schemas/Transaction"
           type: array
+      type: object
     Amount:
       properties:
         currency:
@@ -831,6 +845,7 @@ components:
       required:
         - value
         - currency
+      type: object
     BankAccountDetail:
       properties:
         accountNumber:
@@ -982,6 +997,7 @@ components:
 
             >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
+      type: object
     DebitAccountHolderRequest:
       properties:
         accountHolderCode:
@@ -1014,6 +1030,7 @@ components:
         - amount
         - splits
         - merchantAccount
+      type: object
     DebitAccountHolderResponse:
       properties:
         accountHolderCode:
@@ -1039,6 +1056,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
+      type: object
     DetailBalance:
       properties:
         balance:
@@ -1051,6 +1069,7 @@ components:
           items:
             $ref: "#/components/schemas/Amount"
           type: array
+      type: object
     PayoutAccountHolderRequest:
       properties:
         accountCode:
@@ -1086,6 +1105,7 @@ components:
       required:
         - accountHolderCode
         - accountCode
+      type: object
     PayoutAccountHolderResponse:
       properties:
         bankAccountUUID:
@@ -1107,6 +1127,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
+      type: object
     RefundFundsTransferRequest:
       properties:
         amount:
@@ -1121,6 +1142,7 @@ components:
       required:
         - originalReference
         - amount
+      type: object
     RefundFundsTransferResponse:
       properties:
         merchantReference:
@@ -1144,6 +1166,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
+      type: object
     RefundNotPaidOutTransfersRequest:
       properties:
         accountCode:
@@ -1155,6 +1178,7 @@ components:
       required:
         - accountHolderCode
         - accountCode
+      type: object
     RefundNotPaidOutTransfersResponse:
       properties:
         pspReference:
@@ -1169,6 +1193,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
+      type: object
     ServiceError:
       properties:
         errorCode:
@@ -1187,6 +1212,7 @@ components:
           description: The HTTP response status.
           format: int32
           type: integer
+      type: object
     SetupBeneficiaryRequest:
       properties:
         destinationAccountCode:
@@ -1201,6 +1227,7 @@ components:
       required:
         - sourceAccountCode
         - destinationAccountCode
+      type: object
     SetupBeneficiaryResponse:
       properties:
         pspReference:
@@ -1215,6 +1242,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
+      type: object
     Split:
       properties:
         account:
@@ -1237,7 +1265,7 @@ components:
         type:
           description: |-
             The type of split.
-            Possible values: **Default**, **PaymentFee**, **VAT**, **Commission**, **MarketPlace**, **BalanceAccount**, **Remainder**.
+            Possible values: **Default**, **PaymentFee**, **VAT**, **Commission**, **MarketPlace**, **BalanceAccount**, **Remainder**, **Surcharge**, **Tip**.
           enum:
             - BalanceAccount
             - Commission
@@ -1245,12 +1273,15 @@ components:
             - MarketPlace
             - PaymentFee
             - Remainder
+            - Surcharge
+            - Tip
             - VAT
             - Verification
           type: string
       required:
         - amount
         - type
+      type: object
     SplitAmount:
       properties:
         currency:
@@ -1267,6 +1298,7 @@ components:
           type: integer
       required:
         - value
+      type: object
     Transaction:
       properties:
         amount:
@@ -1321,7 +1353,7 @@ components:
           enum:
             - BalanceNotPaidOutTransfer
             - BalancePlatformSweep
-            - BalancePlatfromSweepReturned
+            - BalancePlatformSweepReturned
             - Chargeback
             - ChargebackCorrection
             - ChargebackCorrectionReceived
@@ -1368,6 +1400,7 @@ components:
         transferCode:
           description: The transfer code of the transaction.
           type: string
+      type: object
     TransactionListForAccount:
       properties:
         accountCode:
@@ -1382,6 +1415,7 @@ components:
       required:
         - accountCode
         - page
+      type: object
     TransferFundsRequest:
       properties:
         amount:
@@ -1411,6 +1445,7 @@ components:
         - destinationAccountCode
         - transferCode
         - amount
+      type: object
     TransferFundsResponse:
       properties:
         merchantReference:
@@ -1429,6 +1464,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header

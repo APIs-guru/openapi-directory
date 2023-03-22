@@ -4835,7 +4835,7 @@ components:
       description: The request message for the ImportProcessorVersion method. This method requires Document AI Service Agent of the destination project in the source project's IAM with [Document AI Editor role](https://cloud.google.com/document-ai/docs/access-control/iam-roles). The destination project is specified as part of the `parent` field. The source project is specified as part of `source` field. The Service Agent for Document AI can be found in https://cloud.google.com/iam/docs/service-agents.
       properties:
         processorVersionSource:
-          description: Required. The source processor version to import from.
+          description: The source processor version to import from.
           type: string
       type: object
     GoogleCloudDocumentaiV1beta3ImportProcessorVersionResponse:
@@ -5106,6 +5106,7 @@ components:
             - CREATING
             - DELETING
             - FAILED
+            - IMPORTING
           type: string
       type: object
     GoogleCloudDocumentaiV1beta3ProcessorVersionDeprecationInfo:

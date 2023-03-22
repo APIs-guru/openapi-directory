@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: AccountService
-  x-timestamp: 2022-09-23T17:24:11Z
+  x-timestamp: 2023-03-22T11:13:03Z
 tags:
   - name: Account holders
   - name: Verification
@@ -129,6 +129,7 @@ paths:
       tags:
         - Accounts
       x-groupName: Accounts
+      x-methodName: closeAccount
       x-sortIndex: 3
   /closeAccountHolder:
     post:
@@ -198,6 +199,7 @@ paths:
       tags:
         - Account holders
       x-groupName: Account holders
+      x-methodName: closeAccountHolder
       x-sortIndex: 7
   /createAccount:
     post:
@@ -267,6 +269,7 @@ paths:
       tags:
         - Accounts
       x-groupName: Accounts
+      x-methodName: createAccount
       x-sortIndex: 1
   /createAccountHolder:
     post:
@@ -348,6 +351,7 @@ paths:
       tags:
         - Account holders
       x-groupName: Account holders
+      x-methodName: createAccountHolder
       x-sortIndex: 1
   /deleteBankAccounts:
     post:
@@ -417,6 +421,7 @@ paths:
       tags:
         - Verification
       x-groupName: Verification
+      x-methodName: deleteBankAccounts
       x-sortIndex: 4
   /deleteLegalArrangements:
     post:
@@ -497,6 +502,7 @@ paths:
       tags:
         - Verification
       x-groupName: Verification
+      x-methodName: deleteLegalArrangements
       x-sortIndex: 6
   /deleteShareholders:
     post:
@@ -566,6 +572,7 @@ paths:
       tags:
         - Verification
       x-groupName: Verification
+      x-methodName: deleteShareholders
       x-sortIndex: 7
   /deleteSignatories:
     post:
@@ -632,6 +639,7 @@ paths:
       tags:
         - Verification
       x-groupName: Verification
+      x-methodName: deleteSignatories
       x-sortIndex: 8
   /getAccountHolder:
     post:
@@ -703,6 +711,7 @@ paths:
       tags:
         - Account holders
       x-groupName: Account holders
+      x-methodName: getAccountHolder
       x-sortIndex: 2
   /getTaxForm:
     post:
@@ -766,6 +775,7 @@ paths:
       tags:
         - Account holders
       x-groupName: Account holders
+      x-methodName: getTaxForm
       x-sortIndex: 8
   /getUploadedDocuments:
     post:
@@ -830,6 +840,7 @@ paths:
       tags:
         - Verification
       x-groupName: Verification
+      x-methodName: getUploadedDocuments
       x-sortIndex: 2
   /suspendAccountHolder:
     post:
@@ -899,6 +910,7 @@ paths:
       tags:
         - Account holders
       x-groupName: Account holders
+      x-methodName: suspendAccountHolder
       x-sortIndex: 5
   /unSuspendAccountHolder:
     post:
@@ -972,6 +984,7 @@ paths:
       tags:
         - Account holders
       x-groupName: Account holders
+      x-methodName: unSuspendAccountHolder
       x-sortIndex: 6
   /updateAccount:
     post:
@@ -1041,6 +1054,7 @@ paths:
       tags:
         - Accounts
       x-groupName: Accounts
+      x-methodName: updateAccount
       x-sortIndex: 2
   /updateAccountHolder:
     post:
@@ -1136,6 +1150,7 @@ paths:
       tags:
         - Account holders
       x-groupName: Account holders
+      x-methodName: updateAccountHolder
       x-sortIndex: 3
   /updateAccountHolderState:
     post:
@@ -1205,6 +1220,7 @@ paths:
       tags:
         - Account holders
       x-groupName: Account holders
+      x-methodName: updateAccountHolderState
       x-sortIndex: 4
   /uploadDocument:
     post:
@@ -1274,6 +1290,7 @@ paths:
       tags:
         - Verification
       x-groupName: Verification
+      x-methodName: uploadDocument
       x-sortIndex: 1
 components:
   examples:
@@ -1315,7 +1332,6 @@ components:
               - ShareholderContact:
                   name:
                     firstName: John
-                    gender: MALE
                     lastName: Carpenter
           email: test@adyen.com
           webAddress: https://www.your-website.com
@@ -1333,7 +1349,6 @@ components:
           individualDetails:
             name:
               firstName: Tim
-              gender: MALE
               lastName: Green
           merchantCategoryCode: "7999"
           payoutMethods: []
@@ -1406,7 +1421,6 @@ components:
           individualDetails:
             name:
               firstName: Tim
-              gender: MALE
               lastName: Green
           webAddress: https://www.your-website.com
         legalEntity: Individual
@@ -1423,7 +1437,6 @@ components:
           individualDetails:
             name:
               firstName: Tim
-              gender: MALE
               lastName: Green
           merchantCategoryCode: "7999"
           payoutMethods: []
@@ -1601,7 +1614,6 @@ components:
           individualDetails:
             name:
               firstName: Tim
-              gender: MALE
               lastName: Green
         createDefaultAccount: "true"
         legalEntity: Individual
@@ -1626,7 +1638,6 @@ components:
                   email: testShareholder@adyen.com
                   name:
                     firstName: TestFirstName
-                    gender: MALE
                     lastName: TestLastName
             taxId: BV123456789
           email: test@adyen.com
@@ -1651,7 +1662,6 @@ components:
           individualDetails:
             name:
               firstName: First name
-              gender: MALE
               lastName: Last Name
             personalData:
               dateOfBirth: 1970-01-01
@@ -1694,6 +1704,7 @@ components:
         payoutSchedule:
           $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The account's payout schedule.
+      type: object
     AccountEvent:
       properties:
         event:
@@ -1712,10 +1723,7 @@ components:
         reason:
           description: The reason why this event has been created.
           type: string
-      required:
-        - event
-        - executionDate
-        - reason
+      type: object
     AccountHolderDetails:
       properties:
         address:
@@ -1767,10 +1775,7 @@ components:
         webAddress:
           description: The URL of the website of the account holder.
           type: string
-      required:
-        - fullPhoneNumber
-        - email
-        - webAddress
+      type: object
     AccountHolderStatus:
       properties:
         events:
@@ -1799,6 +1804,7 @@ components:
           type: string
       required:
         - status
+      type: object
     AccountPayoutState:
       properties:
         allowPayout:
@@ -1818,6 +1824,7 @@ components:
           format: int32
           type: integer
           x-addedInVersion: "3"
+      type: object
     AccountProcessingState:
       properties:
         disableReason:
@@ -1837,6 +1844,7 @@ components:
           format: int32
           type: integer
           x-addedInVersion: "3"
+      type: object
     Amount:
       properties:
         currency:
@@ -1851,6 +1859,7 @@ components:
       required:
         - value
         - currency
+      type: object
     BankAccountDetail:
       properties:
         accountNumber:
@@ -2002,6 +2011,7 @@ components:
 
             >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
+      type: object
     BusinessDetails:
       properties:
         doingBusinessAs:
@@ -2030,6 +2040,7 @@ components:
         taxId:
           description: The tax ID of the company.
           type: string
+      type: object
     CloseAccountHolderRequest:
       properties:
         accountHolderCode:
@@ -2037,6 +2048,7 @@ components:
           type: string
       required:
         - accountHolderCode
+      type: object
     CloseAccountHolderResponse:
       properties:
         accountHolderStatus:
@@ -2054,8 +2066,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
-      required:
-        - accountHolderStatus
+      type: object
     CloseAccountRequest:
       properties:
         accountCode:
@@ -2063,6 +2074,7 @@ components:
           type: string
       required:
         - accountCode
+      type: object
     CloseAccountResponse:
       properties:
         pspReference:
@@ -2088,8 +2100,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
-      required:
-        - status
+      type: object
     CreateAccountHolderRequest:
       properties:
         accountHolderCode:
@@ -2128,6 +2139,7 @@ components:
         - accountHolderCode
         - legalEntity
         - accountHolderDetails
+      type: object
     CreateAccountHolderResponse:
       properties:
         accountCode:
@@ -2165,11 +2177,7 @@ components:
           $ref: "#/components/schemas/KYCVerificationResult"
           description: The details of KYC Verification of the account holder.
           x-addedInVersion: "2"
-      required:
-        - accountHolderCode
-        - accountHolderStatus
-        - accountHolderDetails
-        - verification
+      type: object
     CreateAccountRequest:
       properties:
         accountHolderCode:
@@ -2198,6 +2206,7 @@ components:
           type: string
       required:
         - accountHolderCode
+      type: object
     CreateAccountResponse:
       properties:
         accountCode:
@@ -2232,10 +2241,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
-      required:
-        - accountHolderCode
-        - accountCode
-        - status
+      type: object
     DeleteBankAccountRequest:
       properties:
         accountHolderCode:
@@ -2249,6 +2255,7 @@ components:
       required:
         - accountHolderCode
         - bankAccountUUIDs
+      type: object
     DeleteLegalArrangementRequest:
       properties:
         accountHolderCode:
@@ -2262,6 +2269,7 @@ components:
       required:
         - accountHolderCode
         - legalArrangements
+      type: object
     DeleteShareholderRequest:
       properties:
         accountHolderCode:
@@ -2275,6 +2283,7 @@ components:
       required:
         - accountHolderCode
         - shareholderCodes
+      type: object
     DeleteSignatoriesRequest:
       properties:
         accountHolderCode:
@@ -2288,6 +2297,7 @@ components:
       required:
         - accountHolderCode
         - signatoryCodes
+      type: object
     DocumentDetail:
       properties:
         accountHolderCode:
@@ -2342,9 +2352,8 @@ components:
           description: The Adyen-generated [`signatoryCode`](https://docs.adyen.com/api-explorer/#/Account/v6/post/createAccountHolder__resParam_accountHolderDetails-businessDetails-signatories-signatoryCode) to which the document must be linked.
           type: string
       required:
-        - accountHolderCode
         - documentType
-        - filename
+      type: object
     ErrorFieldType:
       properties:
         errorCode:
@@ -2357,6 +2366,7 @@ components:
         fieldType:
           $ref: "#/components/schemas/FieldType"
           description: The type of error field.
+      type: object
     FieldType:
       properties:
         field:
@@ -2393,6 +2403,7 @@ components:
             - city
             - companyRegistration
             - constitutionalDocument
+            - controller
             - country
             - countryCode
             - currency
@@ -2478,6 +2489,7 @@ components:
             - shareholderCodeAndSignatoryCode
             - shareholderCodeOrSignatoryCode
             - shareholderType
+            - shareholderTypes
             - shopperInteraction
             - signatory
             - signatoryCode
@@ -2524,6 +2536,7 @@ components:
         shareholderCode:
           description: The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.
           type: string
+      type: object
     GenericResponse:
       properties:
         pspReference:
@@ -2538,6 +2551,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
+      type: object
     GetAccountHolderRequest:
       properties:
         accountCode:
@@ -2550,6 +2564,7 @@ components:
             The code of the account holder of which to retrieve the details.
             > Required if no `accountCode` is provided.
           type: string
+      type: object
     GetAccountHolderResponse:
       properties:
         accountHolderCode:
@@ -2590,12 +2605,7 @@ components:
           $ref: "#/components/schemas/KYCVerificationResult"
           description: The details of KYC Verification of the account holder.
           x-addedInVersion: "2"
-      required:
-        - accountHolderCode
-        - legalEntity
-        - accountHolderStatus
-        - accountHolderDetails
-        - verification
+      type: object
     GetAccountHolderStatusResponse:
       properties:
         accountHolderCode:
@@ -2617,9 +2627,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
-      required:
-        - accountHolderCode
-        - accountHolderStatus
+      type: object
     GetTaxFormRequest:
       properties:
         accountHolderCode:
@@ -2636,6 +2644,7 @@ components:
         - accountHolderCode
         - formType
         - year
+      type: object
     GetTaxFormResponse:
       properties:
         content:
@@ -2657,6 +2666,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
+      type: object
     GetUploadedDocumentsRequest:
       properties:
         accountHolderCode:
@@ -2671,6 +2681,7 @@ components:
           type: string
       required:
         - accountHolderCode
+      type: object
     GetUploadedDocumentsResponse:
       properties:
         documentDetails:
@@ -2690,6 +2701,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
+      type: object
     IndividualDetails:
       properties:
         name:
@@ -2700,6 +2712,7 @@ components:
         personalData:
           $ref: "#/components/schemas/ViasPersonalData"
           description: Personal information of the individual.
+      type: object
     KYCBankAccountCheckResult:
       properties:
         bankAccountUUID:
@@ -2710,6 +2723,7 @@ components:
           items:
             $ref: "#/components/schemas/KYCCheckStatusData"
           type: array
+      type: object
     KYCCheckResult:
       properties:
         checks:
@@ -2717,6 +2731,7 @@ components:
           items:
             $ref: "#/components/schemas/KYCCheckStatusData"
           type: array
+      type: object
     KYCCheckStatusData:
       properties:
         requiredFields:
@@ -2780,6 +2795,7 @@ components:
       required:
         - type
         - status
+      type: object
     KYCCheckSummary:
       properties:
         code:
@@ -2791,6 +2807,7 @@ components:
           type: string
       required:
         - code
+      type: object
     KYCShareholderCheckResult:
       properties:
         checks:
@@ -2801,6 +2818,7 @@ components:
         shareholderCode:
           description: The code of the shareholder to which the check applies.
           type: string
+      type: object
     KYCSignatoryCheckResult:
       properties:
         checks:
@@ -2811,6 +2829,7 @@ components:
         signatoryCode:
           description: The code of the signatory to which the check applies.
           type: string
+      type: object
     KYCVerificationResult:
       properties:
         accountHolder:
@@ -2831,6 +2850,7 @@ components:
           items:
             $ref: "#/components/schemas/KYCSignatoryCheckResult"
           type: array
+      type: object
     LegalArrangementRequest:
       properties:
         legalArrangementCode:
@@ -2843,6 +2863,7 @@ components:
           type: array
       required:
         - legalArrangementCode
+      type: object
     PayoutScheduleResponse:
       properties:
         nextScheduledPayout:
@@ -2865,8 +2886,7 @@ components:
             - WEEKLY
             - WEEKLY_ON_TUE_FRI_MIDNIGHT
           type: string
-      required:
-        - schedule
+      type: object
     PersonalDocumentData:
       properties:
         expirationDate:
@@ -2901,6 +2921,7 @@ components:
           type: string
       required:
         - type
+      type: object
     ServiceError:
       properties:
         errorCode:
@@ -2919,6 +2940,7 @@ components:
           description: The HTTP response status.
           format: int32
           type: integer
+      type: object
     ShareholderContact:
       properties:
         address:
@@ -2975,6 +2997,7 @@ components:
         webAddress:
           description: The URL of the person's website.
           type: string
+      type: object
     SignatoryContact:
       properties:
         address:
@@ -3020,6 +3043,7 @@ components:
         webAddress:
           description: The URL of the person's website.
           type: string
+      type: object
     SuspendAccountHolderRequest:
       properties:
         accountHolderCode:
@@ -3027,6 +3051,7 @@ components:
           type: string
       required:
         - accountHolderCode
+      type: object
     SuspendAccountHolderResponse:
       properties:
         accountHolderStatus:
@@ -3044,8 +3069,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
-      required:
-        - accountHolderStatus
+      type: object
     UltimateParentCompany:
       properties:
         address:
@@ -3057,6 +3081,7 @@ components:
         ultimateParentCompanyCode:
           description: Adyen-generated unique alphanumeric identifier (UUID) for the entry, returned in the response when you create an ultimate parent company. Required when updating an existing entry in an `/updateAccountHolder` request.
           type: string
+      type: object
     UltimateParentCompanyBusinessDetails:
       properties:
         legalBusinessName:
@@ -3074,6 +3099,7 @@ components:
         stockTicker:
           description: Stock Ticker symbol.
           type: string
+      type: object
     UnSuspendAccountHolderRequest:
       properties:
         accountHolderCode:
@@ -3081,6 +3107,7 @@ components:
           type: string
       required:
         - accountHolderCode
+      type: object
     UnSuspendAccountHolderResponse:
       properties:
         accountHolderStatus:
@@ -3098,8 +3125,7 @@ components:
             * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
             * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
-      required:
-        - accountHolderStatus
+      type: object
     UpdateAccountHolderRequest:
       properties:
         accountHolderCode:
@@ -3122,6 +3148,7 @@ components:
           x-addedInVersion: "3"
       required:
         - accountHolderCode
+      type: object
     UpdateAccountHolderResponse:
       properties:
         accountHolderCode:
@@ -3161,9 +3188,7 @@ components:
           $ref: "#/components/schemas/KYCVerificationResult"
           description: The details of KYC Verification of the account holder.
           x-addedInVersion: "2"
-      required:
-        - accountHolderStatus
-        - verification
+      type: object
     UpdateAccountHolderStateRequest:
       properties:
         accountHolderCode:
@@ -3193,6 +3218,7 @@ components:
         - accountHolderCode
         - stateType
         - disable
+      type: object
     UpdateAccountRequest:
       properties:
         accountCode:
@@ -3204,6 +3230,7 @@ components:
       required:
         - accountCode
         - payoutSchedule
+      type: object
     UpdateAccountResponse:
       properties:
         accountCode:
@@ -3226,6 +3253,7 @@ components:
           type: boolean
       required:
         - accountCode
+      type: object
     UpdatePayoutScheduleRequest:
       properties:
         action:
@@ -3264,6 +3292,7 @@ components:
           type: string
       required:
         - schedule
+      type: object
     UploadDocumentRequest:
       properties:
         accountHolderCode:
@@ -3295,6 +3324,7 @@ components:
       required:
         - documentDetail
         - documentContent
+      type: object
     ViasAddress:
       properties:
         city:
@@ -3329,8 +3359,7 @@ components:
         street:
           description: The name of the street. Required if the `houseNumberOrName`, `city`, `postalCode`, or `stateOrProvince` are provided.
           type: string
-      required:
-        - country
+      type: object
     ViasName:
       properties:
         firstName:
@@ -3357,9 +3386,7 @@ components:
           description: The last name.
           maxLength: 80
           type: string
-      required:
-        - firstName
-        - lastName
+      type: object
     ViasPersonalData:
       properties:
         dateOfBirth:
@@ -3383,6 +3410,7 @@ components:
           maxLength: 2
           minLength: 2
           type: string
+      type: object
     ViasPhoneNumber:
       properties:
         phoneCountryCode:
@@ -3405,9 +3433,7 @@ components:
             - Mobile
             - SIP
           type: string
-      required:
-        - phoneCountryCode
-        - phoneNumber
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header

@@ -1368,6 +1368,58 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{parent}/memberships:searchDirectGroups":
+    get:
+      description: Searches direct groups of a member.
+      operationId: cloudidentity.groups.memberships.searchDirectGroups
+      parameters:
+        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: groups/{group_id}, where group_id is always '-' as this API will search across all groups for a given member."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: 'The ordering of membership relation for the display name or email in the response. The syntax for this field can be found at https://cloud.google.com/apis/design/design_patterns#sorting_order. Example: Sort by the ascending display name: order_by="group_name" or order_by="group_name asc". Sort by the descending display name: order_by="group_name desc". Sort by the ascending group key: order_by="group_key" or order_by="group_key asc". Sort by the descending group key: order_by="group_key desc".'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: The default page size is 200 (max 1000).
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous list request, if any
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: "Required. A CEL expression that MUST include member specification AND label(s). Users can search on label attributes of groups. CONTAINS match ('in') is supported on labels. Identity-mapped groups are uniquely identified by both a `member_key_id` and a `member_key_namespace`, which requires an additional query input: `member_key_namespace`. Example query: `member_key_id == 'member_key_id_value' && 'label_value' in labels`"
+          in: query
+          name: query
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchDirectGroupsResponse"
+          description: Successful response
+      tags:
+        - groups
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{parent}/memberships:searchTransitiveGroups":
     get:
       description: Search transitive groups of a member. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. A transitive group is any group that has a direct or indirect membership to the member. Actor must have view permissions all transitive groups.
@@ -3022,6 +3074,17 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        deliverySetting:
+          description: Output only. Delivery setting associated with the membership.
+          enum:
+            - DELIVERY_SETTING_UNSPECIFIED
+            - ALL_MAIL
+            - DIGEST
+            - DAILY
+            - NONE
+            - DISABLED
+          readOnly: true
+          type: string
         memberKey:
           $ref: "#/components/schemas/EntityKey"
           description: Immutable. The `EntityKey` of the member. Either `member_key` or `preferred_member_key` must be set when calling MembershipsService.CreateMembership but not both; both shall be set when returned.
@@ -3065,6 +3128,35 @@ components:
         group:
           description: Resource name of the group that the members belong to.
           type: string
+      type: object
+    MembershipRelation:
+      description: Message containing membership relation.
+      properties:
+        description:
+          description: An extended description to help users determine the purpose of a `Group`.
+          type: string
+        displayName:
+          description: The display name of the `Group`.
+          type: string
+        group:
+          description: The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Group`. Shall be of the form `groups/{group_id}`.
+          type: string
+        groupKey:
+          $ref: "#/components/schemas/EntityKey"
+          description: The `EntityKey` of the `Group`.
+        labels:
+          additionalProperties:
+            type: string
+          description: One or more label entries that apply to the Group. Currently supported labels contain a key with an empty value.
+          type: object
+        membership:
+          description: The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership`. Shall be of the form `groups/{group_id}/memberships/{membership_id}`.
+          type: string
+        roles:
+          description: The `MembershipRole`s that apply to the `Membership`.
+          items:
+            $ref: "#/components/schemas/MembershipRole"
+          type: array
       type: object
     MembershipRole:
       description: A membership role within the Cloud Identity Groups API. A `MembershipRole` defines the privileges granted to a `Membership`.
@@ -3247,6 +3339,18 @@ components:
       properties:
         inboundSamlSsoProfile:
           description: "Required. Name of the `InboundSamlSsoProfile` to use. Must be of the form `inboundSamlSsoProfiles/{inbound_saml_sso_profile}`. "
+          type: string
+      type: object
+    SearchDirectGroupsResponse:
+      description: The response message for MembershipsService.SearchDirectGroups.
+      properties:
+        memberships:
+          description: List of direct groups satisfying the query.
+          items:
+            $ref: "#/components/schemas/MembershipRelation"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results available for listing.
           type: string
       type: object
     SearchGroupsResponse:

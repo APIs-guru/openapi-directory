@@ -54,7 +54,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: HopService
-  x-timestamp: 2022-07-28T16:19:59Z
+  x-timestamp: 2023-03-22T11:13:03Z
 tags:
   - name: Hosted Onboarding Page
   - name: PCI Compliance Questionnaire Page
@@ -118,6 +118,7 @@ paths:
       tags:
         - Hosted Onboarding Page
       x-groupName: Hosted Onboarding Page
+      x-methodName: getOnboardingUrl
       x-sortIndex: 1
   /getPciQuestionnaireUrl:
     post:
@@ -180,6 +181,7 @@ paths:
       tags:
         - PCI Compliance Questionnaire Page
       x-groupName: PCI Compliance Questionnaire Page
+      x-methodName: getPciQuestionnaireUrl
       x-sortIndex: 1
 components:
   examples:
@@ -232,6 +234,7 @@ components:
         shareholderDetails:
           description: Indicates whether [shareholder details](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-checks/identity-check) must be collected. Defaults to **true**.
           type: boolean
+      type: object
     ErrorFieldType:
       properties:
         errorCode:
@@ -244,6 +247,7 @@ components:
         fieldType:
           $ref: "#/components/schemas/FieldType"
           description: The type of error field.
+      type: object
     FieldType:
       properties:
         field:
@@ -280,6 +284,7 @@ components:
             - city
             - companyRegistration
             - constitutionalDocument
+            - controller
             - country
             - countryCode
             - currency
@@ -369,6 +374,7 @@ components:
             - shareholderCodeAndSignatoryCode
             - shareholderCodeOrSignatoryCode
             - shareholderType
+            - shareholderTypes
             - shopperInteraction
             - signatory
             - signatoryCode
@@ -415,6 +421,7 @@ components:
         shareholderCode:
           description: The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.
           type: string
+      type: object
     GetOnboardingUrlRequest:
       properties:
         accountHolderCode:
@@ -426,6 +433,9 @@ components:
         editMode:
           description: Indicates if editing checks is allowed even if all the checks have passed.
           type: boolean
+        mobileOAuthCallbackUrl:
+          description: The URL to which the account holder is redirected after completing an OAuth authentication with a bank through Trustly/PayMyBank.
+          type: string
         platformName:
           description: The platform name which will show up in the welcome page.
           type: string
@@ -445,6 +455,7 @@ components:
           description: Contains indicators whether specific pages must be shown to the account holder.
       required:
         - accountHolderCode
+      type: object
     GetOnboardingUrlResponse:
       properties:
         invalidFields:
@@ -462,6 +473,7 @@ components:
         resultCode:
           description: The result code.
           type: string
+      type: object
     GetPciUrlRequest:
       properties:
         accountHolderCode:
@@ -472,6 +484,7 @@ components:
           type: string
       required:
         - accountHolderCode
+      type: object
     GetPciUrlResponse:
       properties:
         invalidFields:
@@ -489,6 +502,7 @@ components:
         resultCode:
           description: The result code.
           type: string
+      type: object
     ServiceError:
       properties:
         errorCode:
@@ -507,6 +521,7 @@ components:
           description: The HTTP response status.
           format: int32
           type: integer
+      type: object
     ShowPages:
       properties:
         bankDetailsSummaryPage:
@@ -536,6 +551,7 @@ components:
         welcomePage:
           description: Indicates whether the welcome page must be shown. Defaults to **false**.
           type: boolean
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header
