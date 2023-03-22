@@ -199,7 +199,7 @@ paths:
                 Enrichment:
                   description: The ARN of the enrichment resource.
                   type: string
-                  pattern: '^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.*)$'
+                  pattern: '^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.+)$'
                   minLength: 0
                   maxLength: 1600
                 EnrichmentParameters:
@@ -223,7 +223,7 @@ paths:
                 Source:
                   description: The ARN of the source resource.
                   type: string
-                  pattern: '^smk://(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9]):[0-9]{1,5}|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.*)$'
+                  pattern: '^smk://(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9]):[0-9]{1,5}|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.+)$'
                   minLength: 1
                   maxLength: 1600
                 SourceParameters:
@@ -272,7 +272,7 @@ paths:
                 Target:
                   description: The ARN of the target resource.
                   type: string
-                  pattern: '^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.*)$'
+                  pattern: '^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.+)$'
                   minLength: 1
                   maxLength: 1600
                 TargetParameters:
@@ -504,7 +504,7 @@ paths:
                 Enrichment:
                   description: The ARN of the enrichment resource.
                   type: string
-                  pattern: '^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.*)$'
+                  pattern: '^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.+)$'
                   minLength: 0
                   maxLength: 1600
                 EnrichmentParameters:
@@ -564,7 +564,7 @@ paths:
                 Target:
                   description: The ARN of the target resource.
                   type: string
-                  pattern: '^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.*)$'
+                  pattern: '^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.+)$'
                   minLength: 1
                   maxLength: 1600
                 TargetParameters:
@@ -762,7 +762,7 @@ paths:
           description: The ARN of the pipe for which you want to view tags.
           schema:
             type: string
-            pattern: '^arn:aws([a-z]|\-)*:([a-zA-Z0-9\-]+):([a-z]|\d|\-)*:([0-9]{12})?:(.*)$'
+            pattern: '^arn:aws([a-z]|\-)*:([a-zA-Z0-9\-]+):([a-z]|\d|\-)*:([0-9]{12})?:(.+)$'
             minLength: 1
             maxLength: 1600
     parameters:
@@ -808,7 +808,7 @@ paths:
           description: The ARN of the pipe.
           schema:
             type: string
-            pattern: '^arn:aws([a-z]|\-)*:([a-zA-Z0-9\-]+):([a-z]|\d|\-)*:([0-9]{12})?:(.*)$'
+            pattern: '^arn:aws([a-z]|\-)*:([a-zA-Z0-9\-]+):([a-z]|\d|\-)*:([0-9]{12})?:(.+)$'
             minLength: 1
             maxLength: 1600
       requestBody:
@@ -981,7 +981,7 @@ paths:
           description: The ARN of the pipe.
           schema:
             type: string
-            pattern: '^arn:aws([a-z]|\-)*:([a-zA-Z0-9\-]+):([a-z]|\d|\-)*:([0-9]{12})?:(.*)$'
+            pattern: '^arn:aws([a-z]|\-)*:([a-zA-Z0-9\-]+):([a-z]|\d|\-)*:([0-9]{12})?:(.+)$'
             minLength: 1
             maxLength: 1600
         - name: tagKeys
@@ -1922,17 +1922,17 @@ components:
       description: The parameters for using a Amazon SQS stream as a source.
     Arn:
       type: string
-      pattern: '^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.*)$'
+      pattern: '^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.+)$'
       minLength: 1
       maxLength: 1600
     ArnOrJsonPath:
       type: string
-      pattern: '^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.*)|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)$'
+      pattern: '^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.+)|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)$'
       minLength: 1
       maxLength: 1600
     ArnOrUrl:
       type: string
-      pattern: '^smk://(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9]):[0-9]{1,5}|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.*)$'
+      pattern: '^smk://(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9]):[0-9]{1,5}|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.+)$'
       minLength: 1
       maxLength: 1600
     AssignPublicIp:
@@ -2140,7 +2140,7 @@ components:
         - STOPPED
     OptionalArn:
       type: string
-      pattern: '^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.*)$'
+      pattern: '^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:(.+)$'
       minLength: 0
       maxLength: 1600
     PipeEnrichmentParameters:
@@ -2309,7 +2309,7 @@ components:
             - description: The parameters required to set up a target for your pipe.
     PipeArn:
       type: string
-      pattern: '^arn:aws([a-z]|\-)*:([a-zA-Z0-9\-]+):([a-z]|\d|\-)*:([0-9]{12})?:(.*)$'
+      pattern: '^arn:aws([a-z]|\-)*:([a-zA-Z0-9\-]+):([a-z]|\d|\-)*:([0-9]{12})?:(.+)$'
       minLength: 1
       maxLength: 1600
     Timestamp:
@@ -2679,7 +2679,7 @@ components:
       maxLength: 256
     SecretManagerArn:
       type: string
-      pattern: '^(^arn:aws([a-z]|\-)*:secretsmanager:[a-z0-9-.]+:.*)$'
+      pattern: '^(^arn:aws([a-z]|\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}):(\d{12}):secret:.+)$'
       description: // Optional SecretManager ARN which stores the database credentials
       minLength: 1
       maxLength: 1600
@@ -2881,7 +2881,7 @@ components:
         - FIRE_AND_FORGET
     SecretManagerArnOrJsonPath:
       type: string
-      pattern: '^(^arn:aws([a-z]|\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)$'
+      pattern: '^(^arn:aws([a-z]|\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}):(\d{12}):secret:.+)|(\$(\.[\w/_-]+(\[(\d+|\*)\])*)*)$'
       description: '// For targets, can either specify an ARN or a jsonpath pointing to the ARN.'
       minLength: 1
       maxLength: 1600

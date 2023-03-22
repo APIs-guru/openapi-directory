@@ -3,7 +3,7 @@ info:
   version: '2020-04-30'
   x-release: v4
   title: AWS Resilience Hub
-  description: 'AWS Resilience Hub helps you proactively prepare and protect your Amazon Web Services applications from disruptions. Resilience Hub offers continuous resiliency assessment and validation that integrates into your software development lifecycle. This enables you to uncover resiliency weaknesses, ensure recovery time objective (RTO) and recovery point objective (RPO) targets for your applications are met, and resolve issues before they are released into production. '
+  description: 'Resilience Hub helps you proactively prepare and protect your Amazon Web Services applications from disruptions. It offers continual resiliency assessment and validation that integrates into your software development lifecycle. This enables you to uncover resiliency weaknesses, ensure recovery time objective (RTO) and recovery point objective (RPO) targets for your applications are met, and resolve issues before they are released into production. '
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -193,7 +193,7 @@ paths:
   /create-app:
     post:
       operationId: CreateApp
-      description: '<p>Creates an AWS Resilience Hub application. An AWS Resilience Hub application is a collection of Amazon Web Services resources structured to prevent and recover Amazon Web Services application disruptions. To describe a AWS Resilience Hub application, you provide an application name, resources from one or more–up to five–CloudFormation stacks, and an appropriate resiliency policy.</p> <p>After you create an AWS Resilience Hub application, you publish it so that you can run a resiliency assessment on it. You can then use recommendations from the assessment to improve resiliency by running another assessment, comparing results, and then iterating the process until you achieve your goals for recovery time objective (RTO) and recovery point objective (RPO).</p>'
+      description: '<p>Creates an Resilience Hub application. An Resilience Hub application is a collection of Amazon Web Services resources structured to prevent and recover Amazon Web Services application disruptions. To describe a Resilience Hub application, you provide an application name, resources from one or more–up to five–CloudFormation stacks, and an appropriate resiliency policy.</p> <p>After you create an Resilience Hub application, you publish it so that you can run a resiliency assessment on it. You can then use recommendations from the assessment to improve resiliency by running another assessment, comparing results, and then iterating the process until you achieve your goals for recovery time objective (RTO) and recovery point objective (RPO).</p>'
       responses:
         '200':
           description: Success
@@ -296,7 +296,7 @@ paths:
   /create-app-version-app-component:
     post:
       operationId: CreateAppVersionAppComponent
-      description: '<p>Creates a new Application Component in the AWS Resilience Hub application.</p> <note> <p>This API updates the AWS Resilience Hub application draft version. To use this Application Component for running assessments, you must publish the AWS Resilience Hub application using the <code>PublishAppVersion</code> API.</p> </note>'
+      description: '<p>Creates a new Application Component in the Resilience Hub application.</p> <note> <p>This API updates the Resilience Hub application draft version. To use this Application Component for running assessments, you must publish the Resilience Hub application using the <code>PublishAppVersion</code> API.</p> </note>'
       responses:
         '200':
           description: Success
@@ -399,7 +399,7 @@ paths:
   /create-app-version-resource:
     post:
       operationId: CreateAppVersionResource
-      description: '<p>Adds a resource to the AWS Resilience Hub applicationand assigns it to the specified Application Components. If you specify a new Application Component, AWS Resilience Hub will automatically create the Application Component.</p> <note> <ul> <li> <p>This action has no effect outside AWS Resilience Hub.</p> </li> <li> <p>This API updates the AWS Resilience Hub application draft version. To use this resource for running resiliency assessments, you must publish the AWS Resilience Hub application using the <code>PublishAppVersion</code> API.</p> </li> <li> <p>To update application version with new <code>physicalResourceID</code>, you must call <code>ResolveAppVersionResources</code> API.</p> </li> </ul> </note>'
+      description: '<p>Adds a resource to the Resilience Hub application and assigns it to the specified Application Components. If you specify a new Application Component, Resilience Hub will automatically create the Application Component.</p> <note> <ul> <li> <p>This action has no effect outside Resilience Hub.</p> </li> <li> <p>This API updates the Resilience Hub application draft version. To use this resource for running resiliency assessments, you must publish the Resilience Hub application using the <code>PublishAppVersion</code> API.</p> </li> <li> <p>To update application version with new <code>physicalResourceID</code>, you must call <code>ResolveAppVersionResources</code> API.</p> </li> </ul> </note>'
       responses:
         '200':
           description: Success
@@ -496,6 +496,10 @@ paths:
                   description: Defines a logical resource identifier.
                   type: object
                   properties:
+                    eksSourceName:
+                      allOf:
+                        - $ref: '#/components/schemas/String255'
+                        - description: <p>The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.</p> <note> <p>This parameter accepts values in "eks-cluster/namespace" format.</p> </note>
                     identifier:
                       allOf:
                         - $ref: '#/components/schemas/String255'
@@ -537,7 +541,7 @@ paths:
   /create-recommendation-template:
     post:
       operationId: CreateRecommendationTemplate
-      description: Creates a new recommendation template for the AWS Resilience Hub application.
+      description: Creates a new recommendation template for the Resilience Hub application.
       responses:
         '200':
           description: Success
@@ -764,7 +768,7 @@ paths:
   /delete-app:
     post:
       operationId: DeleteApp
-      description: Deletes an AWS Resilience Hub application. This is a destructive action that can't be undone.
+      description: Deletes an Resilience Hub application. This is a destructive action that can't be undone.
       responses:
         '200':
           description: Success
@@ -823,7 +827,7 @@ paths:
                   minLength: 1
                   maxLength: 63
                 forceDelete:
-                  description: 'A boolean option to force the deletion of an AWS Resilience Hub application. '
+                  description: 'A boolean option to force the deletion of an Resilience Hub application. '
                   type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -836,7 +840,7 @@ paths:
   /delete-app-assessment:
     post:
       operationId: DeleteAppAssessment
-      description: Deletes an AWS Resilience Hub application assessment. This is a destructive action that can't be undone.
+      description: Deletes an Resilience Hub application assessment. This is a destructive action that can't be undone.
       responses:
         '200':
           description: Success
@@ -911,7 +915,7 @@ paths:
   /delete-app-input-source:
     post:
       operationId: DeleteAppInputSource
-      description: Deletes the input source and all of its imported resources from the AWS Resilience Hub application.
+      description: Deletes the input source and all of its imported resources from the Resilience Hub application.
       responses:
         '200':
           description: Success
@@ -975,8 +979,20 @@ paths:
                   pattern: '^[A-za-z0-9_.-]{0,63}$'
                   minLength: 1
                   maxLength: 63
+                eksSourceClusterNamespace:
+                  description: The input source of the namespace that is located on your Amazon Elastic Kubernetes Service cluster.
+                  type: object
+                  properties:
+                    eksClusterArn:
+                      allOf:
+                        - $ref: '#/components/schemas/Arn'
+                        - description: 'The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster. The format for this ARN is: arn:<code>aws</code>:eks:<code>region</code>:<code>account-id</code>:cluster/<code>cluster-name</code>. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i> guide.'
+                    namespace:
+                      allOf:
+                        - $ref: '#/components/schemas/EksNamespace'
+                        - description: Name of the namespace that is located on your Amazon Elastic Kubernetes Service cluster.
                 sourceArn:
-                  description: 'The Amazon Resource Name (ARN) of the imported resource you want to remove from the AWS Resilience Hub application. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i> guide.'
+                  description: 'The Amazon Resource Name (ARN) of the imported resource you want to remove from the Resilience Hub application. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i> guide.'
                   type: string
                   pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+.-]{0,1023}$'
                 terraformSource:
@@ -986,7 +1002,7 @@ paths:
                     s3StateFileUrl:
                       allOf:
                         - $ref: '#/components/schemas/S3Url'
-                        - description: ' The Terraform s3 state file you need to import. '
+                        - description: ' The URL of the Terraform s3 state file you need to import. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -998,7 +1014,7 @@ paths:
   /delete-app-version-app-component:
     post:
       operationId: DeleteAppVersionAppComponent
-      description: '<p>Deletes an Application Component from the AWS Resilience Hub application.</p> <note> <ul> <li> <p>This API updates the AWS Resilience Hub application draft version. To use this Application Component for running assessments, you must publish the AWS Resilience Hub application using the <code>PublishAppVersion</code> API.</p> </li> <li> <p>You will not be able to delete an Application Component if it has resources associated with it.</p> </li> </ul> </note>'
+      description: '<p>Deletes an Application Component from the Resilience Hub application.</p> <note> <ul> <li> <p>This API updates the Resilience Hub application draft version. To use this Application Component for running assessments, you must publish the Resilience Hub application using the <code>PublishAppVersion</code> API.</p> </li> <li> <p>You will not be able to delete an Application Component if it has resources associated with it.</p> </li> </ul> </note>'
       responses:
         '200':
           description: Success
@@ -1079,7 +1095,7 @@ paths:
   /delete-app-version-resource:
     post:
       operationId: DeleteAppVersionResource
-      description: '<p>Deletes a resource from the AWS Resilience Hub application.</p> <note> <ul> <li> <p>You can only delete a manually added resource. To exclude non-manually added resources, use the <code>UpdateAppVersionResource</code> API.</p> </li> <li> <p>This action has no effect outside AWS Resilience Hub.</p> </li> <li> <p>This API updates the AWS Resilience Hub application draft version. To use this resource for running resiliency assessments, you must publish the AWS Resilience Hub application using the <code>PublishAppVersion</code> API.</p> </li> </ul> </note>'
+      description: '<p>Deletes a resource from the Resilience Hub application.</p> <note> <ul> <li> <p>You can only delete a manually added resource. To exclude non-manually added resources, use the <code>UpdateAppVersionResource</code> API.</p> </li> <li> <p>This action has no effect outside Resilience Hub.</p> </li> <li> <p>This API updates the Resilience Hub application draft version. To use this resource for running resiliency assessments, you must publish the Resilience Hub application using the <code>PublishAppVersion</code> API.</p> </li> </ul> </note>'
       responses:
         '200':
           description: Success
@@ -1155,6 +1171,10 @@ paths:
                   description: Defines a logical resource identifier.
                   type: object
                   properties:
+                    eksSourceName:
+                      allOf:
+                        - $ref: '#/components/schemas/String255'
+                        - description: <p>The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.</p> <note> <p>This parameter accepts values in "eks-cluster/namespace" format.</p> </note>
                     identifier:
                       allOf:
                         - $ref: '#/components/schemas/String255'
@@ -1335,7 +1355,7 @@ paths:
   /describe-app:
     post:
       operationId: DescribeApp
-      description: Describes an AWS Resilience Hub application.
+      description: Describes an Resilience Hub application.
       responses:
         '200':
           description: Success
@@ -1398,7 +1418,7 @@ paths:
   /describe-app-assessment:
     post:
       operationId: DescribeAppAssessment
-      description: Describes an assessment for an AWS Resilience Hub application.
+      description: Describes an assessment for an Resilience Hub application.
       responses:
         '200':
           description: Success
@@ -1461,7 +1481,7 @@ paths:
   /describe-app-version:
     post:
       operationId: DescribeAppVersion
-      description: Describes the AWS Resilience Hub application version.
+      description: Describes the Resilience Hub application version.
       responses:
         '200':
           description: Success
@@ -1529,7 +1549,7 @@ paths:
   /describe-app-version-app-component:
     post:
       operationId: DescribeAppVersionAppComponent
-      description: Describes an Application Component in the AWS Resilience Hub application.
+      description: Describes an Application Component in the Resilience Hub application.
       responses:
         '200':
           description: Success
@@ -1609,7 +1629,7 @@ paths:
   /describe-app-version-resource:
     post:
       operationId: DescribeAppVersionResource
-      description: '<p>Describes a resource of the AWS Resilience Hub application.</p> <note> <p>This API accepts only one of the following parameters to descibe the resource:</p> <ul> <li> <p> <code>resourceName</code> </p> </li> <li> <p> <code>logicalResourceId</code> </p> </li> <li> <p> <code>physicalResourceId</code> (Along with <code>physicalResourceId</code>, you can also provide <code>awsAccountId</code>, and <code>awsRegion</code>)</p> </li> </ul> </note>'
+      description: '<p>Describes a resource of the Resilience Hub application.</p> <note> <p>This API accepts only one of the following parameters to descibe the resource:</p> <ul> <li> <p> <code>resourceName</code> </p> </li> <li> <p> <code>logicalResourceId</code> </p> </li> <li> <p> <code>physicalResourceId</code> (Along with <code>physicalResourceId</code>, you can also provide <code>awsAccountId</code>, and <code>awsRegion</code>)</p> </li> </ul> </note>'
       responses:
         '200':
           description: Success
@@ -1684,6 +1704,10 @@ paths:
                   description: Defines a logical resource identifier.
                   type: object
                   properties:
+                    eksSourceName:
+                      allOf:
+                        - $ref: '#/components/schemas/String255'
+                        - description: <p>The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.</p> <note> <p>This parameter accepts values in "eks-cluster/namespace" format.</p> </note>
                     identifier:
                       allOf:
                         - $ref: '#/components/schemas/String255'
@@ -1793,7 +1817,7 @@ paths:
   /describe-app-version-template:
     post:
       operationId: DescribeAppVersionTemplate
-      description: Describes details about an AWS Resilience Hub application.
+      description: Describes details about an Resilience Hub application.
       responses:
         '200':
           description: Success
@@ -1924,7 +1948,7 @@ paths:
   /describe-resiliency-policy:
     post:
       operationId: DescribeResiliencyPolicy
-      description: 'Describes a specified resiliency policy for an AWS Resilience Hub application. The returned policy object includes creation time, data location constraints, the Amazon Resource Name (ARN) for the policy, tags, tier, and more.'
+      description: 'Describes a specified resiliency policy for an Resilience Hub application. The returned policy object includes creation time, data location constraints, the Amazon Resource Name (ARN) for the policy, tags, tier, and more.'
       responses:
         '200':
           description: Success
@@ -1987,7 +2011,7 @@ paths:
   /import-resources-to-draft-app-version:
     post:
       operationId: ImportResourcesToDraftAppVersion
-      description: 'Imports resources to AWS Resilience Hub application draft version from different input sources. For more information about the input sources supported by AWS Resilience Hub, see <a href="https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html">Discover the structure and describe your Resilience Hub application</a>.'
+      description: 'Imports resources to Resilience Hub application draft version from different input sources. For more information about the input sources supported by Resilience Hub, see <a href="https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html">Discover the structure and describe your Resilience Hub application</a>.'
       responses:
         '200':
           description: Success
@@ -2045,14 +2069,19 @@ paths:
                   description: 'The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: arn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i> guide.'
                   type: string
                   pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+.-]{0,1023}$'
+                eksSources:
+                  description: The input sources of the Amazon Elastic Kubernetes Service resources you need to import.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/EksSource'
                 importStrategy:
-                  description: The import strategy you would like to set to import resources into AWS Resilience Hub application.
+                  description: The import strategy you would like to set to import resources into Resilience Hub application.
                   type: string
                   enum:
                     - AddOnly
                     - ReplaceAll
                 sourceArns:
-                  description: The Amazon Resource Names (ARNs) for the resources that you want to import.
+                  description: The Amazon Resource Names (ARNs) for the resources.
                   type: array
                   items:
                     $ref: '#/components/schemas/Arn'
@@ -2072,7 +2101,7 @@ paths:
   /list-alarm-recommendations:
     post:
       operationId: ListAlarmRecommendations
-      description: Lists the alarm recommendations for an AWS Resilience Hub application.
+      description: Lists the alarm recommendations for an Resilience Hub application.
       responses:
         '200':
           description: Success
@@ -2156,7 +2185,7 @@ paths:
   /list-app-assessments:
     get:
       operationId: ListAppAssessments
-      description: Lists the assessments for an AWS Resilience Hub application. You can use request parameters to refine the results for the response object.
+      description: Lists the assessments for an Resilience Hub application. You can use request parameters to refine the results for the response object.
       responses:
         '200':
           description: Success
@@ -2269,7 +2298,7 @@ paths:
   /list-app-component-compliances:
     post:
       operationId: ListAppComponentCompliances
-      description: Lists the compliances for an AWS Resilience Hub Application Component.
+      description: Lists the compliances for an Resilience Hub Application Component.
       responses:
         '200':
           description: Success
@@ -2353,7 +2382,7 @@ paths:
   /list-app-component-recommendations:
     post:
       operationId: ListAppComponentRecommendations
-      description: Lists the recommendations for an AWS Resilience Hub Application Component.
+      description: Lists the recommendations for an Resilience Hub Application Component.
       responses:
         '200':
           description: Success
@@ -2437,7 +2466,7 @@ paths:
   /list-app-input-sources:
     post:
       operationId: ListAppInputSources
-      description: 'Lists all the input sources of the AWS Resilience Hub application. For more information about the input sources supported by AWS Resilience Hub, see <a href="https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html">Discover the structure and describe your Resilience Hub application</a>.'
+      description: 'Lists all the input sources of the Resilience Hub application. For more information about the input sources supported by Resilience Hub, see <a href="https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html">Discover the structure and describe your Resilience Hub application</a>.'
       responses:
         '200':
           description: Success
@@ -2507,7 +2536,7 @@ paths:
                   type: string
                   pattern: '^\S{1,50}$'
                 maxResults:
-                  description: Maximum number of input sources to be displayed per AWS Resilience Hub application.
+                  description: Maximum number of input sources to be displayed per Resilience Hub application.
                   type: integer
                   minimum: 1
                   maximum: 100
@@ -2526,7 +2555,7 @@ paths:
   /list-app-version-app-components:
     post:
       operationId: ListAppVersionAppComponents
-      description: Lists all the Application Components in the AWS Resilience Hub application.
+      description: Lists all the Application Components in the Resilience Hub application.
       responses:
         '200':
           description: Success
@@ -2710,7 +2739,7 @@ paths:
   /list-app-version-resources:
     post:
       operationId: ListAppVersionResources
-      description: Lists all the resources in an AWS Resilience Hub application.
+      description: Lists all the resources in an Resilience Hub application.
       responses:
         '200':
           description: Success
@@ -2810,7 +2839,7 @@ paths:
   /list-app-versions:
     post:
       operationId: ListAppVersions
-      description: Lists the different versions for the AWS Resilience Hub applications.
+      description: Lists the different versions for the Resilience Hub applications.
       responses:
         '200':
           description: Success
@@ -2888,7 +2917,7 @@ paths:
   /list-apps:
     get:
       operationId: ListApps
-      description: '<p>Lists your AWS Resilience Hub applications.</p> <note> <p>You can filter applications using only one filter at a time or without using any filter. If you try to filter applications using multiple filters, you will get the following error:</p> <p> <code>An error occurred (ValidationException) when calling the ListApps operation: Only one filter is supported for this operation.</code> </p> </note>'
+      description: '<p>Lists your Resilience Hub applications.</p> <note> <p>You can filter applications using only one filter at a time or without using any filter. If you try to filter applications using multiple filters, you will get the following error:</p> <p> <code>An error occurred (ValidationException) when calling the ListApps operation: Only one filter is supported for this operation.</code> </p> </note>'
       responses:
         '200':
           description: Success
@@ -2961,7 +2990,7 @@ paths:
   /list-recommendation-templates#assessmentArn:
     get:
       operationId: ListRecommendationTemplates
-      description: Lists the recommendation templates for the AWS Resilience Hub applications.
+      description: Lists the recommendation templates for the Resilience Hub applications.
       responses:
         '200':
           description: Success
@@ -3057,7 +3086,7 @@ paths:
   /list-resiliency-policies:
     get:
       operationId: ListResiliencyPolicies
-      description: Lists the resiliency policies for the AWS Resilience Hub applications.
+      description: Lists the resiliency policies for the Resilience Hub applications.
       responses:
         '200':
           description: Success
@@ -3129,7 +3158,7 @@ paths:
   /list-sop-recommendations:
     post:
       operationId: ListSopRecommendations
-      description: Lists the standard operating procedure (SOP) recommendations for the AWS Resilience Hub applications.
+      description: Lists the standard operating procedure (SOP) recommendations for the Resilience Hub applications.
       responses:
         '200':
           description: Success
@@ -3219,7 +3248,7 @@ paths:
   /list-suggested-resiliency-policies:
     get:
       operationId: ListSuggestedResiliencyPolicies
-      description: Lists the suggested resiliency policies for the AWS Resilience Hub applications.
+      description: Lists the suggested resiliency policies for the Resilience Hub applications.
       responses:
         '200':
           description: Success
@@ -3284,7 +3313,7 @@ paths:
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: Lists the tags for your resources in your AWS Resilience Hub applications.
+      description: Lists the tags for your resources in your Resilience Hub applications.
       responses:
         '200':
           description: Success
@@ -3326,7 +3355,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) for a specific resource in your AWS Resilience Hub application.
+          description: The Amazon Resource Name (ARN) for a specific resource in your Resilience Hub application.
           schema:
             type: string
             pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+.-]{0,1023}$'
@@ -3405,7 +3434,7 @@ paths:
   /list-test-recommendations:
     post:
       operationId: ListTestRecommendations
-      description: Lists the test recommendations for the AWS Resilience Hub application.
+      description: Lists the test recommendations for the Resilience Hub application.
       responses:
         '200':
           description: Success
@@ -3495,7 +3524,7 @@ paths:
   /list-unsupported-app-version-resources:
     post:
       operationId: ListUnsupportedAppVersionResources
-      description: 'Lists the resources that are not currently supported in AWS Resilience Hub. An unsupported resource is a resource that exists in the object that was used to create an app, but is not supported by AWS Resilience Hub.'
+      description: 'Lists the resources that are not currently supported in Resilience Hub. An unsupported resource is a resource that exists in the object that was used to create an app, but is not supported by Resilience Hub.'
       responses:
         '200':
           description: Success
@@ -3595,7 +3624,7 @@ paths:
   /publish-app-version:
     post:
       operationId: PublishAppVersion
-      description: Publishes a new version of a specific AWS Resilience Hub application.
+      description: Publishes a new version of a specific Resilience Hub application.
       responses:
         '200':
           description: Success
@@ -3664,7 +3693,7 @@ paths:
   /put-draft-app-version-template:
     post:
       operationId: PutDraftAppVersionTemplate
-      description: Adds or updates the app template for an AWS Resilience Hub application draft version.
+      description: Adds or updates the app template for an Resilience Hub application draft version.
       responses:
         '200':
           description: Success
@@ -3724,9 +3753,9 @@ paths:
                   type: string
                   pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+.-]{0,1023}$'
                 appTemplateBody:
-                  description: '<p>A JSON string that provides information about your application structure. To learn more about the <code>appTemplateBody</code> template, see the sample template provided in the <i>Examples</i> section.</p> <p>The <code>appTemplateBody</code> JSON string has the following structure:</p> <ul> <li> <p> <b> <code>resources</code> </b> </p> <p>The list of logical resources that needs to be included in the application.</p> <p>Type: Array</p> <note> <p>Don''t add the resources that you want to exclude.</p> </note> <p>Each <code>resources</code> array item includes the following fields:</p> <ul> <li> <p> <i> <code>logicalResourceId</code> </i> </p> <p>The logical identifier of the resource.</p> <p>Type: Object</p> <p>Each <code>logicalResourceId</code> object includes the following fields:</p> <ul> <li> <p> <code>identifier</code> </p> <p>The identifier of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>logicalStackName</code> </p> <p>The name of the CloudFormation stack this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>resourceGroupName</code> </p> <p>The name of the resource group this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>terraformSourceName</code> </p> <p>The name of the Terraform S3 state file this resource belongs to.</p> <p>Type: String</p> </li> </ul> </li> <li> <p> <i> <code>type</code> </i> </p> <p>The type of resource.</p> <p>Type: string</p> </li> <li> <p> <i> <code>name</code> </i> </p> <p>The name of the resource.</p> <p>Type: String</p> </li> </ul> </li> <li> <p> <b> <code>appComponents</code> </b> </p> <p>The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added.</p> <p>Type: Array</p> <p>Each <code>appComponents</code> array item includes the following fields:</p> <ul> <li> <p> <code>name</code> </p> <p>The name of the Application Component.</p> <p>Type: String</p> </li> <li> <p> <code>type</code> </p> <p>The type of Application Component. For more information about the types of Application Component, see <a href="https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html">Grouping resources in an AppComponent</a>.</p> <p>Type: String</p> </li> <li> <p> <code>resourceNames</code> </p> <p>The list of included resources that are assigned to the Application Component.</p> <p>Type: Array of strings</p> </li> <li> <p> <code>additionalInfo</code> </p> <p>Additional configuration parameters for an AWS Resilience Hub application.</p> <note> <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p> <p>Key: <code>"failover-regions"</code> </p> <p>Value: <code>"[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"</code> </p> </note> </li> </ul> </li> <li> <p> <b> <code>excludedResources</code> </b> </p> <p>The list of logical resource identifiers to be excluded from the application.</p> <p>Type: Array</p> <note> <p>Don''t add the resources that you want to include.</p> </note> <p>Each <code>excludedResources</code> array item includes the following fields:</p> <ul> <li> <p> <i> <code>logicalResourceIds</code> </i> </p> <p>The logical identifier of the resource.</p> <p>Type: Object</p> <note> <p>You can configure only one of the following fields:</p> <ul> <li> <p> <code>logicalStackName</code> </p> </li> <li> <p> <code>resourceGroupName</code> </p> </li> <li> <p> <code>terraformSourceName</code> </p> </li> </ul> </note> <p>Each <code>logicalResourceIds</code> object includes the following fields:</p> <ul> <li> <p> <code>identifier</code> </p> <p>The identifier of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>logicalStackName</code> </p> <p>The name of the CloudFormation stack this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>resourceGroupName</code> </p> <p>The name of the resource group this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>terraformSourceName</code> </p> <p>The name of the Terraform S3 state file this resource belongs to.</p> <p>Type: String</p> </li> </ul> </li> </ul> </li> </ul>'
+                  description: '<p>A JSON string that provides information about your application structure. To learn more about the <code>appTemplateBody</code> template, see the sample template provided in the <i>Examples</i> section.</p> <p>The <code>appTemplateBody</code> JSON string has the following structure:</p> <ul> <li> <p> <b> <code>resources</code> </b> </p> <p>The list of logical resources that needs to be included in the Resilience Hub application.</p> <p>Type: Array</p> <note> <p>Don''t add the resources that you want to exclude.</p> </note> <p>Each <code>resources</code> array item includes the following fields:</p> <ul> <li> <p> <i> <code>logicalResourceId</code> </i> </p> <p>The logical identifier of the resource.</p> <p>Type: Object</p> <p>Each <code>logicalResourceId</code> object includes the following fields:</p> <ul> <li> <p> <code>identifier</code> </p> <p>The identifier of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>logicalStackName</code> </p> <p>The name of the CloudFormation stack this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>resourceGroupName</code> </p> <p>The name of the resource group this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>terraformSourceName</code> </p> <p>The name of the Terraform S3 state file this resource belongs to.</p> <p>Type: String</p> </li> </ul> </li> <li> <p> <i> <code>type</code> </i> </p> <p>The type of resource.</p> <p>Type: string</p> </li> <li> <p> <i> <code>name</code> </i> </p> <p>The name of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>additionalInfo</code> </p> <p>Additional configuration parameters for an AWS Resilience Hub application.</p> <note> <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p> <p>Key: <code>"failover-regions"</code> </p> <p>Value: <code>"[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"</code> </p> </note> </li> </ul> </li> <li> <p> <b> <code>appComponents</code> </b> </p> <p>The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added.</p> <p>Type: Array</p> <p>Each <code>appComponents</code> array item includes the following fields:</p> <ul> <li> <p> <code>name</code> </p> <p>The name of the Application Component.</p> <p>Type: String</p> </li> <li> <p> <code>type</code> </p> <p>The type of Application Component. For more information about the types of Application Component, see <a href="https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html">Grouping resources in an AppComponent</a>.</p> <p>Type: String</p> </li> <li> <p> <code>resourceNames</code> </p> <p>The list of included resources that are assigned to the Application Component.</p> <p>Type: Array of strings</p> </li> <li> <p> <code>additionalInfo</code> </p> <p>Additional configuration parameters for an AWS Resilience Hub application.</p> <note> <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p> <p>Key: <code>"failover-regions"</code> </p> <p>Value: <code>"[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"</code> </p> </note> </li> </ul> </li> <li> <p> <b> <code>excludedResources</code> </b> </p> <p>The list of logical resource identifiers to be excluded from the application.</p> <p>Type: Array</p> <note> <p>Don''t add the resources that you want to include.</p> </note> <p>Each <code>excludedResources</code> array item includes the following fields:</p> <ul> <li> <p> <i> <code>logicalResourceIds</code> </i> </p> <p>The logical identifier of the resource.</p> <p>Type: Object</p> <note> <p>You can configure only one of the following fields:</p> <ul> <li> <p> <code>logicalStackName</code> </p> </li> <li> <p> <code>resourceGroupName</code> </p> </li> <li> <p> <code>terraformSourceName</code> </p> </li> </ul> </note> <p>Each <code>logicalResourceIds</code> object includes the following fields:</p> <ul> <li> <p> <code>identifier</code> </p> <p>The identifier of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>logicalStackName</code> </p> <p>The name of the CloudFormation stack this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>resourceGroupName</code> </p> <p>The name of the resource group this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>terraformSourceName</code> </p> <p>The name of the Terraform S3 state file this resource belongs to.</p> <p>Type: String</p> </li> </ul> </li> </ul> </li> <li> <p> <b> <code>version</code> </b> </p> <p>The AWS Resilience Hub application version.</p> </li> <li> <p> <code>additionalInfo</code> </p> <p>Additional configuration parameters for an AWS Resilience Hub application.</p> <note> <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p> <p>Key: <code>"failover-regions"</code> </p> <p>Value: <code>"[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"</code> </p> </note> </li> </ul>'
                   type: string
-                  pattern: '^[\w\s:,-\.''{}\[\]:"]+$'
+                  pattern: '^[\w\s:,-\.''\/{}\[\]:"\\]+$'
                   minLength: 0
                   maxLength: 204800
     parameters:
@@ -3803,6 +3832,11 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/EntityName'
+                eksSourceNames:
+                  description: <p>The names of the Amazon Elastic Kubernetes Service clusters and namespaces you want to remove from the resource mappings.</p> <note> <p>This parameter accepts values in "eks-cluster/namespace" format.</p> </note>
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/String255'
                 logicalStackNames:
                   description: The names of the CloudFormation stacks you want to remove from the resource mappings.
                   type: array
@@ -4160,7 +4194,7 @@ paths:
   /update-app-version:
     post:
       operationId: UpdateAppVersion
-      description: '<p>Updates the AWS Resilience Hub application version.</p> <note> <p>This API updates the AWS Resilience Hub application draft version. To use this information for running resiliency assessments, you must publish the AWS Resilience Hub application using the <code>PublishAppVersion</code> API.</p> </note>'
+      description: '<p>Updates the Resilience Hub application version.</p> <note> <p>This API updates the Resilience Hub application draft version. To use this information for running resiliency assessments, you must publish the Resilience Hub application using the <code>PublishAppVersion</code> API.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4234,7 +4268,7 @@ paths:
   /update-app-version-app-component:
     post:
       operationId: UpdateAppVersionAppComponent
-      description: '<p>Updates an existing Application Component in the AWS Resilience Hub application.</p> <note> <p>This API updates the AWS Resilience Hub application draft version. To use this Application Component for running assessments, you must publish the AWS Resilience Hub application using the <code>PublishAppVersion</code> API.</p> </note>'
+      description: '<p>Updates an existing Application Component in the Resilience Hub application.</p> <note> <p>This API updates the Resilience Hub application draft version. To use this Application Component for running assessments, you must publish the Resilience Hub application using the <code>PublishAppVersion</code> API.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4324,7 +4358,7 @@ paths:
   /update-app-version-resource:
     post:
       operationId: UpdateAppVersionResource
-      description: '<p>Updates the resource details in the AWS Resilience Hub application.</p> <note> <ul> <li> <p>This action has no effect outside AWS Resilience Hub.</p> </li> <li> <p>This API updates the AWS Resilience Hub application draft version. To use this resource for running resiliency assessments, you must publish the AWS Resilience Hub application using the <code>PublishAppVersion</code> API.</p> </li> <li> <p>To update application version with new <code>physicalResourceID</code>, you must call <code>ResolveAppVersionResources</code> API.</p> </li> </ul> </note>'
+      description: '<p>Updates the resource details in the Resilience Hub application.</p> <note> <ul> <li> <p>This action has no effect outside Resilience Hub.</p> </li> <li> <p>This API updates the Resilience Hub application draft version. To use this resource for running resiliency assessments, you must publish the Resilience Hub application using the <code>PublishAppVersion</code> API.</p> </li> <li> <p>To update application version with new <code>physicalResourceID</code>, you must call <code>ResolveAppVersionResources</code> API.</p> </li> </ul> </note>'
       responses:
         '200':
           description: Success
@@ -4407,12 +4441,16 @@ paths:
                   type: string
                   pattern: '^[a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]$'
                 excluded:
-                  description: <p>Indicates if a resource is excluded from an AWS Resilience Hub application.</p> <note> <p>You can exclude only imported resources from an AWS Resilience Hub application.</p> </note>
+                  description: <p>Indicates if a resource is excluded from an Resilience Hub application.</p> <note> <p>You can exclude only imported resources from an Resilience Hub application.</p> </note>
                   type: boolean
                 logicalResourceId:
                   description: Defines a logical resource identifier.
                   type: object
                   properties:
+                    eksSourceName:
+                      allOf:
+                        - $ref: '#/components/schemas/String255'
+                        - description: <p>The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.</p> <note> <p>This parameter accepts values in "eks-cluster/namespace" format.</p> </note>
                     identifier:
                       allOf:
                         - $ref: '#/components/schemas/String255'
@@ -4631,6 +4669,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EntityName'
             - description: The name of the application this resource is mapped to.
+        eksSourceName:
+          allOf:
+            - $ref: '#/components/schemas/String255'
+            - description: <p>The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.</p> <note> <p>This parameter accepts values in "eks-cluster/namespace" format.</p> </note>
         logicalStackName:
           allOf:
             - $ref: '#/components/schemas/String255'
@@ -4638,7 +4680,7 @@ components:
         mappingType:
           allOf:
             - $ref: '#/components/schemas/ResourceMappingType'
-            - description: <p>Specifies the type of resource mapping.</p> <dl> <dt>AppRegistryApp</dt> <dd> <p>The resource is mapped to another application. The name of the application is contained in the <code>appRegistryAppName</code> property.</p> </dd> <dt>CfnStack</dt> <dd> <p>The resource is mapped to a CloudFormation stack. The name of the CloudFormation stack is contained in the <code>logicalStackName</code> property.</p> </dd> <dt>Resource</dt> <dd> <p>The resource is mapped to another resource. The name of the resource is contained in the <code>resourceName</code> property.</p> </dd> <dt>ResourceGroup</dt> <dd> <p>The resource is mapped to a resource group. The name of the resource group is contained in the <code>resourceGroupName</code> property.</p> </dd> </dl>
+            - description: <p>Specifies the type of resource mapping.</p> <dl> <dt>AppRegistryApp</dt> <dd> <p>The resource is mapped to another application. The name of the application is contained in the <code>appRegistryAppName</code> property.</p> </dd> <dt>CfnStack</dt> <dd> <p>The resource is mapped to a CloudFormation stack. The name of the CloudFormation stack is contained in the <code>logicalStackName</code> property.</p> </dd> <dt>Resource</dt> <dd> <p>The resource is mapped to another resource. The name of the resource is contained in the <code>resourceName</code> property.</p> </dd> <dt>ResourceGroup</dt> <dd> <p>The resource is mapped to an Resource Groups. The name of the resource group is contained in the <code>resourceGroupName</code> property.</p> </dd> </dl>
         physicalResourceId:
           allOf:
             - $ref: '#/components/schemas/PhysicalResourceId'
@@ -4688,7 +4730,9 @@ components:
             - $ref: '#/components/schemas/Arn'
             - description: 'The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: arn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i> guide.'
         appComponent:
-          $ref: '#/components/schemas/AppComponent'
+          allOf:
+            - $ref: '#/components/schemas/AppComponent'
+            - description: The list of Application Components that belong to this resource.
         appVersion:
           allOf:
             - $ref: '#/components/schemas/EntityVersion'
@@ -4798,6 +4842,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/AppInputSource'
             - description: The name of the input source from where the application resource is imported from.
+    Arn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+.-]{0,1023}$'
+    EksNamespace:
+      type: string
+      pattern: '^[a-z0-9]([-a-z0-9]*[a-z0-9])?$'
+      minLength: 1
+      maxLength: 63
     S3Url:
       type: string
       pattern: '^((https://([^/]+)\.s3((-|\.)[^/]+)?\.amazonaws\.com(.cn)?)|(s3://([^/]+)))/\S{1,2000}$'
@@ -4814,7 +4866,9 @@ components:
             - $ref: '#/components/schemas/Arn'
             - description: 'The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: arn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i> guide.'
         appComponent:
-          $ref: '#/components/schemas/AppComponent'
+          allOf:
+            - $ref: '#/components/schemas/AppComponent'
+            - description: The list of Application Components that belong to this resource.
         appVersion:
           allOf:
             - $ref: '#/components/schemas/EntityVersion'
@@ -4877,7 +4931,7 @@ components:
         assessment:
           allOf:
             - $ref: '#/components/schemas/AppAssessment'
-            - description: 'The assessment for an AWS Resilience Hub application, returned as an object. This object includes Amazon Resource Names (ARNs), compliance information, compliance status, cost, messages, resiliency scores, and more.'
+            - description: 'The assessment for an Resilience Hub application, returned as an object. This object includes Amazon Resource Names (ARNs), compliance information, compliance status, cost, messages, resiliency scores, and more.'
     DescribeAppVersionResponse:
       type: object
       required:
@@ -4907,7 +4961,9 @@ components:
             - $ref: '#/components/schemas/Arn'
             - description: 'The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: arn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i> guide.'
         appComponent:
-          $ref: '#/components/schemas/AppComponent'
+          allOf:
+            - $ref: '#/components/schemas/AppComponent'
+            - description: The list of Application Components that belong to this resource.
         appVersion:
           allOf:
             - $ref: '#/components/schemas/EntityVersion'
@@ -4972,7 +5028,7 @@ components:
         appTemplateBody:
           allOf:
             - $ref: '#/components/schemas/AppTemplateBody'
-            - description: '<p>A JSON string that provides information about your application structure. To learn more about the <code>appTemplateBody</code> template, see the sample template provided in the <i>Examples</i> section.</p> <p>The <code>appTemplateBody</code> JSON string has the following structure:</p> <ul> <li> <p> <b> <code>resources</code> </b> </p> <p>The list of logical resources that needs to be included in the application.</p> <p>Type: Array</p> <note> <p>Don''t add the resources that you want to exclude.</p> </note> <p>Each <code>resources</code> array item includes the following fields:</p> <ul> <li> <p> <i> <code>logicalResourceId</code> </i> </p> <p>The logical identifier of the resource.</p> <p>Type: Object</p> <p>Each <code>logicalResourceId</code> object includes the following fields:</p> <ul> <li> <p> <code>identifier</code> </p> <p>The identifier of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>logicalStackName</code> </p> <p>The name of the CloudFormation stack this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>resourceGroupName</code> </p> <p>The name of the resource group this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>terraformSourceName</code> </p> <p>The name of the Terraform S3 state file this resource belongs to.</p> <p>Type: String</p> </li> </ul> </li> <li> <p> <i> <code>type</code> </i> </p> <p>The type of resource.</p> <p>Type: string</p> </li> <li> <p> <i> <code>name</code> </i> </p> <p>The name of the resource.</p> <p>Type: String</p> </li> </ul> </li> <li> <p> <b> <code>appComponents</code> </b> </p> <p>The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added.</p> <p>Type: Array</p> <p>Each <code>appComponents</code> array item includes the following fields:</p> <ul> <li> <p> <code>name</code> </p> <p>The name of the Application Component.</p> <p>Type: String</p> </li> <li> <p> <code>type</code> </p> <p>The type of Application Component. For more information about the types of Application Component, see <a href="https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html">Grouping resources in an AppComponent</a>.</p> <p>Type: String</p> </li> <li> <p> <code>resourceNames</code> </p> <p>The list of included resources that are assigned to the Application Component.</p> <p>Type: Array of strings</p> </li> <li> <p> <code>additionalInfo</code> </p> <p>Additional configuration parameters for an AWS Resilience Hub application.</p> <note> <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p> <p>Key: <code>"failover-regions"</code> </p> <p>Value: <code>"[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"</code> </p> </note> </li> </ul> </li> <li> <p> <b> <code>excludedResources</code> </b> </p> <p>The list of logical resource identifiers to be excluded from the application.</p> <p>Type: Array</p> <note> <p>Don''t add the resources that you want to include.</p> </note> <p>Each <code>excludedResources</code> array item includes the following fields:</p> <ul> <li> <p> <i> <code>logicalResourceIds</code> </i> </p> <p>The logical identifier of the resource.</p> <p>Type: Object</p> <note> <p>You can configure only one of the following fields:</p> <ul> <li> <p> <code>logicalStackName</code> </p> </li> <li> <p> <code>resourceGroupName</code> </p> </li> <li> <p> <code>terraformSourceName</code> </p> </li> </ul> </note> <p>Each <code>logicalResourceIds</code> object includes the following fields:</p> <ul> <li> <p> <code>identifier</code> </p> <p>The identifier of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>logicalStackName</code> </p> <p>The name of the CloudFormation stack this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>resourceGroupName</code> </p> <p>The name of the resource group this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>terraformSourceName</code> </p> <p>The name of the Terraform S3 state file this resource belongs to.</p> <p>Type: String</p> </li> </ul> </li> </ul> </li> </ul>'
+            - description: '<p>A JSON string that provides information about your application structure. To learn more about the <code>appTemplateBody</code> template, see the sample template provided in the <i>Examples</i> section.</p> <p>The <code>appTemplateBody</code> JSON string has the following structure:</p> <ul> <li> <p> <b> <code>resources</code> </b> </p> <p>The list of logical resources that needs to be included in the Resilience Hub application.</p> <p>Type: Array</p> <note> <p>Don''t add the resources that you want to exclude.</p> </note> <p>Each <code>resources</code> array item includes the following fields:</p> <ul> <li> <p> <i> <code>logicalResourceId</code> </i> </p> <p>The logical identifier of the resource.</p> <p>Type: Object</p> <p>Each <code>logicalResourceId</code> object includes the following fields:</p> <ul> <li> <p> <code>identifier</code> </p> <p>The identifier of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>logicalStackName</code> </p> <p>The name of the CloudFormation stack this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>resourceGroupName</code> </p> <p>The name of the resource group this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>terraformSourceName</code> </p> <p>The name of the Terraform S3 state file this resource belongs to.</p> <p>Type: String</p> </li> </ul> </li> <li> <p> <i> <code>type</code> </i> </p> <p>The type of resource.</p> <p>Type: string</p> </li> <li> <p> <i> <code>name</code> </i> </p> <p>The name of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>additionalInfo</code> </p> <p>Additional configuration parameters for an AWS Resilience Hub application.</p> <note> <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p> <p>Key: <code>"failover-regions"</code> </p> <p>Value: <code>"[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"</code> </p> </note> </li> </ul> </li> <li> <p> <b> <code>appComponents</code> </b> </p> <p>The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added.</p> <p>Type: Array</p> <p>Each <code>appComponents</code> array item includes the following fields:</p> <ul> <li> <p> <code>name</code> </p> <p>The name of the Application Component.</p> <p>Type: String</p> </li> <li> <p> <code>type</code> </p> <p>The type of Application Component. For more information about the types of Application Component, see <a href="https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html">Grouping resources in an AppComponent</a>.</p> <p>Type: String</p> </li> <li> <p> <code>resourceNames</code> </p> <p>The list of included resources that are assigned to the Application Component.</p> <p>Type: Array of strings</p> </li> <li> <p> <code>additionalInfo</code> </p> <p>Additional configuration parameters for an AWS Resilience Hub application.</p> <note> <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p> <p>Key: <code>"failover-regions"</code> </p> <p>Value: <code>"[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"</code> </p> </note> </li> </ul> </li> <li> <p> <b> <code>excludedResources</code> </b> </p> <p>The list of logical resource identifiers to be excluded from the application.</p> <p>Type: Array</p> <note> <p>Don''t add the resources that you want to include.</p> </note> <p>Each <code>excludedResources</code> array item includes the following fields:</p> <ul> <li> <p> <i> <code>logicalResourceIds</code> </i> </p> <p>The logical identifier of the resource.</p> <p>Type: Object</p> <note> <p>You can configure only one of the following fields:</p> <ul> <li> <p> <code>logicalStackName</code> </p> </li> <li> <p> <code>resourceGroupName</code> </p> </li> <li> <p> <code>terraformSourceName</code> </p> </li> </ul> </note> <p>Each <code>logicalResourceIds</code> object includes the following fields:</p> <ul> <li> <p> <code>identifier</code> </p> <p>The identifier of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>logicalStackName</code> </p> <p>The name of the CloudFormation stack this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>resourceGroupName</code> </p> <p>The name of the resource group this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>terraformSourceName</code> </p> <p>The name of the Terraform S3 state file this resource belongs to.</p> <p>Type: String</p> </li> </ul> </li> </ul> </li> <li> <p> <b> <code>version</code> </b> </p> <p>The AWS Resilience Hub application version.</p> </li> <li> <p> <code>additionalInfo</code> </p> <p>Additional configuration parameters for an AWS Resilience Hub application.</p> <note> <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p> <p>Key: <code>"failover-regions"</code> </p> <p>Value: <code>"[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"</code> </p> </note> </li> </ul>'
         appVersion:
           allOf:
             - $ref: '#/components/schemas/EntityVersion'
@@ -5029,10 +5085,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/EntityVersion'
             - description: The version of the application.
+        eksSources:
+          allOf:
+            - $ref: '#/components/schemas/EksSourceList'
+            - description: The input sources of the Amazon Elastic Kubernetes Service resources you have imported.
         sourceArns:
           allOf:
             - $ref: '#/components/schemas/ArnList'
-            - description: The Amazon Resource Names (ARNs) for the resources that you imported.
+            - description: The Amazon Resource Names (ARNs) for the resources you have imported.
         status:
           allOf:
             - $ref: '#/components/schemas/ResourceImportStatusType'
@@ -5040,10 +5100,22 @@ components:
         terraformSources:
           allOf:
             - $ref: '#/components/schemas/TerraformSourceList'
-            - description: ' A list of terraform file s3 URLs you need to import. '
-    Arn:
-      type: string
-      pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+.-]{0,1023}$'
+            - description: ' A list of terraform file s3 URLs you have imported. '
+    EksSource:
+      type: object
+      required:
+        - eksClusterArn
+        - namespaces
+      properties:
+        eksClusterArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster. The format for this ARN is: arn:<code>aws</code>:eks:<code>region</code>:<code>account-id</code>:cluster/<code>cluster-name</code>. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i> guide.'
+        namespaces:
+          allOf:
+            - $ref: '#/components/schemas/EksNamespaceList'
+            - description: The list of namespaces located on your Amazon Elastic Kubernetes Service cluster.
+      description: The input source of the Amazon Elastic Kubernetes Service cluster.
     TerraformSource:
       type: object
       required:
@@ -5052,7 +5124,7 @@ components:
         s3StateFileUrl:
           allOf:
             - $ref: '#/components/schemas/S3Url'
-            - description: ' The Terraform s3 state file you need to import. '
+            - description: ' The URL of the Terraform s3 state file you need to import. '
       description: ' The Terraform s3 state file you need to import. '
     ListAlarmRecommendationsResponse:
       type: object
@@ -5062,7 +5134,7 @@ components:
         alarmRecommendations:
           allOf:
             - $ref: '#/components/schemas/AlarmRecommendationList'
-            - description: 'The alarm recommendations for an AWS Resilience Hub application, returned as an object. This object includes Application Component names, descriptions, information about whether a recommendation has already been implemented or not, prerequisites, and more.'
+            - description: 'The alarm recommendations for an Resilience Hub application, returned as an object. This object includes Application Component names, descriptions, information about whether a recommendation has already been implemented or not, prerequisites, and more.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -5095,7 +5167,7 @@ components:
         componentCompliances:
           allOf:
             - $ref: '#/components/schemas/ComponentCompliancesList'
-            - description: 'The compliances for an AWS Resilience Hub Application Component, returned as an object. This object contains the names of the Application Components, compliances, costs, resiliency scores, outage scores, and more.'
+            - description: 'The compliances for an Resilience Hub Application Component, returned as an object. This object contains the names of the Application Components, compliances, costs, resiliency scores, outage scores, and more.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -5108,7 +5180,7 @@ components:
         componentRecommendations:
           allOf:
             - $ref: '#/components/schemas/ComponentRecommendationList'
-            - description: 'The recommendations for an AWS Resilience Hub Application Component, returned as an object. This object contains the names of the Application Components, configuration recommendations, and recommendation statuses.'
+            - description: 'The recommendations for an Resilience Hub Application Component, returned as an object. This object contains the names of the Application Components, configuration recommendations, and recommendation statuses.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -5121,7 +5193,7 @@ components:
         appInputSources:
           allOf:
             - $ref: '#/components/schemas/AppInputSourceList'
-            - description: The list of AWS Resilience Hub application input sources.
+            - description: The list of Resilience Hub application input sources.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -5200,7 +5272,7 @@ components:
         appSummaries:
           allOf:
             - $ref: '#/components/schemas/AppSummaryList'
-            - description: Summaries for the AWS Resilience Hub application.
+            - description: Summaries for the Resilience Hub application.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -5215,7 +5287,7 @@ components:
         recommendationTemplates:
           allOf:
             - $ref: '#/components/schemas/RecommendationTemplateList'
-            - description: The recommendation templates for the AWS Resilience Hub applications.
+            - description: The recommendation templates for the Resilience Hub applications.
     RecommendationTemplateStatus:
       type: string
       enum:
@@ -5235,7 +5307,7 @@ components:
         resiliencyPolicies:
           allOf:
             - $ref: '#/components/schemas/ResiliencyPolicies'
-            - description: The resiliency policies for the AWS Resilience Hub applications.
+            - description: The resiliency policies for the Resilience Hub applications.
     ListSopRecommendationsResponse:
       type: object
       required:
@@ -5248,7 +5320,7 @@ components:
         sopRecommendations:
           allOf:
             - $ref: '#/components/schemas/SopRecommendationList'
-            - description: The standard operating procedure (SOP) recommendations for the AWS Resilience Hub applications.
+            - description: The standard operating procedure (SOP) recommendations for the Resilience Hub applications.
     ListSuggestedResiliencyPoliciesResponse:
       type: object
       required:
@@ -5261,7 +5333,7 @@ components:
         resiliencyPolicies:
           allOf:
             - $ref: '#/components/schemas/ResiliencyPolicies'
-            - description: The suggested resiliency policies for the AWS Resilience Hub applications.
+            - description: The suggested resiliency policies for the Resilience Hub applications.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -5281,7 +5353,7 @@ components:
         testRecommendations:
           allOf:
             - $ref: '#/components/schemas/TestRecommendationList'
-            - description: The test recommendations for the AWS Resilience Hub application.
+            - description: The test recommendations for the Resilience Hub application.
     ListUnsupportedAppVersionResourcesResponse:
       type: object
       required:
@@ -5417,7 +5489,9 @@ components:
             - $ref: '#/components/schemas/Arn'
             - description: 'The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: arn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i> guide.'
         appComponent:
-          $ref: '#/components/schemas/AppComponent'
+          allOf:
+            - $ref: '#/components/schemas/AppComponent'
+            - description: The list of Application Components that belong to this resource.
         appVersion:
           allOf:
             - $ref: '#/components/schemas/EntityVersion'
@@ -5641,7 +5715,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
-      description: Defines an AWS Resilience Hub application.
+      description: Defines an Resilience Hub application.
     AssessmentCompliance:
       type: object
       additionalProperties:
@@ -5933,6 +6007,21 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/String255'
+    EksSourceClusterNamespace:
+      type: object
+      required:
+        - eksClusterArn
+        - namespace
+      properties:
+        eksClusterArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster. The format for this ARN is: arn:<code>aws</code>:eks:<code>region</code>:<code>account-id</code>:cluster/<code>cluster-name</code>. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i> guide.'
+        namespace:
+          allOf:
+            - $ref: '#/components/schemas/EksNamespace'
+            - description: Name of the namespace that is located on your Amazon Elastic Kubernetes Service cluster.
+      description: The input source of the namespace that is located on your Amazon Elastic Kubernetes Service cluster.
     ResourceMappingType:
       type: string
       enum:
@@ -5941,6 +6030,7 @@ components:
         - AppRegistryApp
         - ResourceGroup
         - Terraform
+        - EKS
     Integer:
       type: integer
     AppInputSource:
@@ -5948,6 +6038,10 @@ components:
       required:
         - importType
       properties:
+        eksSourceClusterNamespace:
+          allOf:
+            - $ref: '#/components/schemas/EksSourceClusterNamespace'
+            - description: The namespace on your Amazon Elastic Kubernetes Service cluster.
         importType:
           allOf:
             - $ref: '#/components/schemas/ResourceMappingType'
@@ -5955,7 +6049,7 @@ components:
         resourceCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The number of resources that were imported.
+            - description: The number of resources.
         sourceArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -5968,7 +6062,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TerraformSource'
             - description: The name of the Terraform s3 state ﬁle.
-      description: The list of AWS Resilience Hub application input sources.
+      description: The list of Resilience Hub application input sources.
     AppInputSourceList:
       type: array
       items:
@@ -6019,7 +6113,7 @@ components:
         $ref: '#/components/schemas/AppSummary'
     AppTemplateBody:
       type: string
-      pattern: '^[\w\s:,-\.''{}\[\]:"]+$'
+      pattern: '^[\w\s:,-\.''\/{}\[\]:"\\]+$'
       minLength: 0
       maxLength: 204800
     AppVersionSummary:
@@ -6135,7 +6229,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecommendationComplianceStatus'
             - description: The recommendation status.
-      description: 'Defines recommendations for an AWS Resilience Hub Application Component, returned as an object. This object contains component names, configuration recommendations, and recommendation statuses.'
+      description: 'Defines recommendations for an Resilience Hub Application Component, returned as an object. This object contains component names, configuration recommendations, and recommendation statuses.'
     ComponentRecommendationList:
       type: array
       items:
@@ -6294,6 +6388,10 @@ components:
       required:
         - identifier
       properties:
+        eksSourceName:
+          allOf:
+            - $ref: '#/components/schemas/String255'
+            - description: <p>The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.</p> <note> <p>This parameter accepts values in "eks-cluster/namespace" format.</p> </note>
         identifier:
           allOf:
             - $ref: '#/components/schemas/String255'
@@ -6401,7 +6499,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String255'
             - description: The type of resource.
-      description: 'Defines a physical resource. A physical resource is a resource that exists in your account. It can be identified using an Amazon Resource Name (ARN) or an AWS Resilience Hub-native identifier. '
+      description: 'Defines a physical resource. A physical resource is a resource that exists in your account. It can be identified using an Amazon Resource Name (ARN) or an Resilience Hub-native identifier. '
     TemplateFormat:
       type: string
       enum:
@@ -6607,14 +6705,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: 'Used for an idempotency token. A client token is a unique, case-sensitive string of up to 64 ASCII characters. You should not reuse the same client token for other API requests.'
+        eksSourceClusterNamespace:
+          allOf:
+            - $ref: '#/components/schemas/EksSourceClusterNamespace'
+            - description: The namespace on your Amazon Elastic Kubernetes Service cluster that you want to delete from the Resilience Hub application.
         sourceArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: 'The Amazon Resource Name (ARN) of the imported resource you want to remove from the AWS Resilience Hub application. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i> guide.'
+            - description: 'The Amazon Resource Name (ARN) of the imported resource you want to remove from the Resilience Hub application. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i> guide.'
         terraformSource:
           allOf:
             - $ref: '#/components/schemas/TerraformSource'
-            - description: The imported Terraform s3 state ﬁle you want to remove from the AWS Resilience Hub application.
+            - description: The imported Terraform s3 state ﬁle you want to remove from the Resilience Hub application.
     DeleteAppRequest:
       type: object
       required:
@@ -6632,7 +6734,7 @@ components:
         forceDelete:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: 'A boolean option to force the deletion of an AWS Resilience Hub application. '
+            - description: 'A boolean option to force the deletion of an Resilience Hub application. '
     DeleteAppVersionAppComponentRequest:
       type: object
       required:
@@ -6890,6 +6992,14 @@ components:
       type: string
       minLength: 1
       maxLength: 500
+    EksNamespaceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EksNamespace'
+    EksSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EksSource'
     EntityNameList:
       type: array
       items:
@@ -6924,14 +7034,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: 'The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format for this ARN is: arn:<code>partition</code>:resiliencehub:<code>region</code>:<code>account</code>:app/<code>app-id</code>. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i> guide.'
+        eksSources:
+          allOf:
+            - $ref: '#/components/schemas/EksSourceList'
+            - description: The input sources of the Amazon Elastic Kubernetes Service resources you need to import.
         importStrategy:
           allOf:
             - $ref: '#/components/schemas/ResourceImportStrategyType'
-            - description: The import strategy you would like to set to import resources into AWS Resilience Hub application.
+            - description: The import strategy you would like to set to import resources into Resilience Hub application.
         sourceArns:
           allOf:
             - $ref: '#/components/schemas/ArnList'
-            - description: The Amazon Resource Names (ARNs) for the resources that you want to import.
+            - description: The Amazon Resource Names (ARNs) for the resources.
         terraformSources:
           allOf:
             - $ref: '#/components/schemas/TerraformSourceList'
@@ -7019,7 +7133,7 @@ components:
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: Maximum number of input sources to be displayed per AWS Resilience Hub application.
+            - description: Maximum number of input sources to be displayed per Resilience Hub application.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -7254,7 +7368,7 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/PhysicalIdentifierType'
-            - description: <p>Specifies the type of physical resource identifier.</p> <dl> <dt>Arn</dt> <dd> <p>The resource identifier is an Amazon Resource Name (ARN) .</p> </dd> <dt>Native</dt> <dd> <p>The resource identifier is an AWS Resilience Hub-native identifier.</p> </dd> </dl>
+            - description: <p>Specifies the type of physical resource identifier.</p> <dl> <dt>Arn</dt> <dd> <p>The resource identifier is an Amazon Resource Name (ARN) .</p> </dd> <dt>Native</dt> <dd> <p>The resource identifier is an Resilience Hub-native identifier.</p> </dd> </dl>
       description: Defines a physical resource identifier.
     PublishAppVersionRequest:
       type: object
@@ -7280,7 +7394,7 @@ components:
         appTemplateBody:
           allOf:
             - $ref: '#/components/schemas/AppTemplateBody'
-            - description: '<p>A JSON string that provides information about your application structure. To learn more about the <code>appTemplateBody</code> template, see the sample template provided in the <i>Examples</i> section.</p> <p>The <code>appTemplateBody</code> JSON string has the following structure:</p> <ul> <li> <p> <b> <code>resources</code> </b> </p> <p>The list of logical resources that needs to be included in the application.</p> <p>Type: Array</p> <note> <p>Don''t add the resources that you want to exclude.</p> </note> <p>Each <code>resources</code> array item includes the following fields:</p> <ul> <li> <p> <i> <code>logicalResourceId</code> </i> </p> <p>The logical identifier of the resource.</p> <p>Type: Object</p> <p>Each <code>logicalResourceId</code> object includes the following fields:</p> <ul> <li> <p> <code>identifier</code> </p> <p>The identifier of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>logicalStackName</code> </p> <p>The name of the CloudFormation stack this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>resourceGroupName</code> </p> <p>The name of the resource group this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>terraformSourceName</code> </p> <p>The name of the Terraform S3 state file this resource belongs to.</p> <p>Type: String</p> </li> </ul> </li> <li> <p> <i> <code>type</code> </i> </p> <p>The type of resource.</p> <p>Type: string</p> </li> <li> <p> <i> <code>name</code> </i> </p> <p>The name of the resource.</p> <p>Type: String</p> </li> </ul> </li> <li> <p> <b> <code>appComponents</code> </b> </p> <p>The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added.</p> <p>Type: Array</p> <p>Each <code>appComponents</code> array item includes the following fields:</p> <ul> <li> <p> <code>name</code> </p> <p>The name of the Application Component.</p> <p>Type: String</p> </li> <li> <p> <code>type</code> </p> <p>The type of Application Component. For more information about the types of Application Component, see <a href="https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html">Grouping resources in an AppComponent</a>.</p> <p>Type: String</p> </li> <li> <p> <code>resourceNames</code> </p> <p>The list of included resources that are assigned to the Application Component.</p> <p>Type: Array of strings</p> </li> <li> <p> <code>additionalInfo</code> </p> <p>Additional configuration parameters for an AWS Resilience Hub application.</p> <note> <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p> <p>Key: <code>"failover-regions"</code> </p> <p>Value: <code>"[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"</code> </p> </note> </li> </ul> </li> <li> <p> <b> <code>excludedResources</code> </b> </p> <p>The list of logical resource identifiers to be excluded from the application.</p> <p>Type: Array</p> <note> <p>Don''t add the resources that you want to include.</p> </note> <p>Each <code>excludedResources</code> array item includes the following fields:</p> <ul> <li> <p> <i> <code>logicalResourceIds</code> </i> </p> <p>The logical identifier of the resource.</p> <p>Type: Object</p> <note> <p>You can configure only one of the following fields:</p> <ul> <li> <p> <code>logicalStackName</code> </p> </li> <li> <p> <code>resourceGroupName</code> </p> </li> <li> <p> <code>terraformSourceName</code> </p> </li> </ul> </note> <p>Each <code>logicalResourceIds</code> object includes the following fields:</p> <ul> <li> <p> <code>identifier</code> </p> <p>The identifier of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>logicalStackName</code> </p> <p>The name of the CloudFormation stack this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>resourceGroupName</code> </p> <p>The name of the resource group this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>terraformSourceName</code> </p> <p>The name of the Terraform S3 state file this resource belongs to.</p> <p>Type: String</p> </li> </ul> </li> </ul> </li> </ul>'
+            - description: '<p>A JSON string that provides information about your application structure. To learn more about the <code>appTemplateBody</code> template, see the sample template provided in the <i>Examples</i> section.</p> <p>The <code>appTemplateBody</code> JSON string has the following structure:</p> <ul> <li> <p> <b> <code>resources</code> </b> </p> <p>The list of logical resources that needs to be included in the Resilience Hub application.</p> <p>Type: Array</p> <note> <p>Don''t add the resources that you want to exclude.</p> </note> <p>Each <code>resources</code> array item includes the following fields:</p> <ul> <li> <p> <i> <code>logicalResourceId</code> </i> </p> <p>The logical identifier of the resource.</p> <p>Type: Object</p> <p>Each <code>logicalResourceId</code> object includes the following fields:</p> <ul> <li> <p> <code>identifier</code> </p> <p>The identifier of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>logicalStackName</code> </p> <p>The name of the CloudFormation stack this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>resourceGroupName</code> </p> <p>The name of the resource group this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>terraformSourceName</code> </p> <p>The name of the Terraform S3 state file this resource belongs to.</p> <p>Type: String</p> </li> </ul> </li> <li> <p> <i> <code>type</code> </i> </p> <p>The type of resource.</p> <p>Type: string</p> </li> <li> <p> <i> <code>name</code> </i> </p> <p>The name of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>additionalInfo</code> </p> <p>Additional configuration parameters for an AWS Resilience Hub application.</p> <note> <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p> <p>Key: <code>"failover-regions"</code> </p> <p>Value: <code>"[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"</code> </p> </note> </li> </ul> </li> <li> <p> <b> <code>appComponents</code> </b> </p> <p>The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added.</p> <p>Type: Array</p> <p>Each <code>appComponents</code> array item includes the following fields:</p> <ul> <li> <p> <code>name</code> </p> <p>The name of the Application Component.</p> <p>Type: String</p> </li> <li> <p> <code>type</code> </p> <p>The type of Application Component. For more information about the types of Application Component, see <a href="https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html">Grouping resources in an AppComponent</a>.</p> <p>Type: String</p> </li> <li> <p> <code>resourceNames</code> </p> <p>The list of included resources that are assigned to the Application Component.</p> <p>Type: Array of strings</p> </li> <li> <p> <code>additionalInfo</code> </p> <p>Additional configuration parameters for an AWS Resilience Hub application.</p> <note> <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p> <p>Key: <code>"failover-regions"</code> </p> <p>Value: <code>"[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"</code> </p> </note> </li> </ul> </li> <li> <p> <b> <code>excludedResources</code> </b> </p> <p>The list of logical resource identifiers to be excluded from the application.</p> <p>Type: Array</p> <note> <p>Don''t add the resources that you want to include.</p> </note> <p>Each <code>excludedResources</code> array item includes the following fields:</p> <ul> <li> <p> <i> <code>logicalResourceIds</code> </i> </p> <p>The logical identifier of the resource.</p> <p>Type: Object</p> <note> <p>You can configure only one of the following fields:</p> <ul> <li> <p> <code>logicalStackName</code> </p> </li> <li> <p> <code>resourceGroupName</code> </p> </li> <li> <p> <code>terraformSourceName</code> </p> </li> </ul> </note> <p>Each <code>logicalResourceIds</code> object includes the following fields:</p> <ul> <li> <p> <code>identifier</code> </p> <p>The identifier of the resource.</p> <p>Type: String</p> </li> <li> <p> <code>logicalStackName</code> </p> <p>The name of the CloudFormation stack this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>resourceGroupName</code> </p> <p>The name of the resource group this resource belongs to.</p> <p>Type: String</p> </li> <li> <p> <code>terraformSourceName</code> </p> <p>The name of the Terraform S3 state file this resource belongs to.</p> <p>Type: String</p> </li> </ul> </li> </ul> </li> <li> <p> <b> <code>version</code> </b> </p> <p>The AWS Resilience Hub application version.</p> </li> <li> <p> <code>additionalInfo</code> </p> <p>Additional configuration parameters for an AWS Resilience Hub application.</p> <note> <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p> <p>Key: <code>"failover-regions"</code> </p> <p>Value: <code>"[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"</code> </p> </note> </li> </ul>'
     RecommendationDisruptionCompliance:
       type: object
       required:
@@ -7357,6 +7471,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EntityNameList'
             - description: The names of the registered applications you want to remove from the resource mappings.
+        eksSourceNames:
+          allOf:
+            - $ref: '#/components/schemas/String255List'
+            - description: <p>The names of the Amazon Elastic Kubernetes Service clusters and namespaces you want to remove from the resource mappings.</p> <note> <p>This parameter accepts values in "eks-cluster/namespace" format.</p> </note>
         logicalStackNames:
           allOf:
             - $ref: '#/components/schemas/String255List'
@@ -7581,7 +7699,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/String255'
             - description: The type of resource.
-      description: Defines a resource that is not supported by AWS Resilience Hub.
+        unsupportedResourceStatus:
+          allOf:
+            - $ref: '#/components/schemas/String255'
+            - description: The status of unsupported resource.
+      description: Defines a resource that is not supported by Resilience Hub.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -7682,7 +7804,7 @@ components:
         excluded:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: <p>Indicates if a resource is excluded from an AWS Resilience Hub application.</p> <note> <p>You can exclude only imported resources from an AWS Resilience Hub application.</p> </note>
+            - description: <p>Indicates if a resource is excluded from an Resilience Hub application.</p> <note> <p>You can exclude only imported resources from an Resilience Hub application.</p> </note>
         logicalResourceId:
           allOf:
             - $ref: '#/components/schemas/LogicalResourceId'

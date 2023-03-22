@@ -3,7 +3,7 @@ info:
   version: '2021-11-29'
   x-release: v4
   title: AWS IoT TwinMaker
-  description: 'IoT TwinMaker is a service that enables you to build operational digital twins of physical systems. IoT TwinMaker overlays measurements and analysis from real-world sensors, cameras, and enterprise applications so you can create data visualizations to monitor your physical factory, building, or industrial plant. You can use this real-world data to monitor operations and diagnose and repair errors.'
+  description: 'IoT TwinMaker is a service with which you can build operational digital twins of physical systems. IoT TwinMaker overlays measurements and analysis from real-world sensors, cameras, and enterprise applications so you can create data visualizations to monitor your physical factory, building, or industrial plant. You can use this real-world data to monitor operations and diagnose and repair errors.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -522,7 +522,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/FunctionRequest'
                 propertyGroups:
-                  description: The property groups
+                  description: The property groups.
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/PropertyGroupRequest'
@@ -741,6 +741,13 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                sceneMetadata:
+                  description: The request metadata.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/SceneMetadataValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -800,7 +807,7 @@ paths:
         - name: workspaceId
           in: path
           required: true
-          description: The workspace Id.
+          description: The workspace ID.
           schema:
             type: string
             pattern: '[a-zA-Z_0-9][a-zA-Z_\-0-9]*[a-zA-Z0-9]+'
@@ -809,7 +816,7 @@ paths:
         - name: syncSource
           in: path
           required: true
-          description: <p>The sync source.</p> <note> <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p> </note>
+          description: <p>The sync source.</p> <note> <p>Currently the only supported syncSoource is <code>SITEWISE </code>.</p> </note>
           schema:
             type: string
             pattern: '[a-zA-Z_0-9]+'
@@ -823,7 +830,7 @@ paths:
                 - syncRole
               properties:
                 syncRole:
-                  description: 'The SyncJob IAM role. This IAM role is used by the sync job to read from the syncSource, and create, update or delete the corresponding resources.'
+                  description: 'The SyncJob IAM role. This IAM role is used by the SyncJob to read from the syncSource, and create, update, or delete the corresponding resources.'
                   type: string
                   pattern: 'arn:((aws)|(aws-cn)|(aws-us-gov)):iam::[0-9]{12}:role/.*'
                   minLength: 20
@@ -893,7 +900,7 @@ paths:
         - name: workspaceId
           in: path
           required: true
-          description: The workspace Id.
+          description: The workspace ID.
           schema:
             type: string
             pattern: '[a-zA-Z_0-9][a-zA-Z_\-0-9]*[a-zA-Z0-9]+'
@@ -902,7 +909,7 @@ paths:
         - name: syncSource
           in: path
           required: true
-          description: <p>The sync source.</p> <note> <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p> </note>
+          description: <p>The sync source.</p> <note> <p>Currently the only supported syncSource is <code>SITEWISE </code>.</p> </note>
           schema:
             type: string
             pattern: '[a-zA-Z_0-9]+'
@@ -1633,6 +1640,13 @@ paths:
                     $ref: '#/components/schemas/SceneCapability'
                   minItems: 0
                   maxItems: 50
+                sceneMetadata:
+                  description: The scene metadata.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/SceneMetadataValue'
   /queries/execution:
     post:
       operationId: ExecuteQuery
@@ -2204,14 +2218,14 @@ paths:
         - name: syncSource
           in: path
           required: true
-          description: <p>The sync soucre.</p> <note> <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p> </note>
+          description: <p>The sync source.</p> <note> <p>Currently the only supported syncSource is <code>SITEWISE </code>.</p> </note>
           schema:
             type: string
             pattern: '[a-zA-Z_0-9]+'
         - name: workspace
           in: query
           required: false
-          description: The workspace Id.
+          description: The workspace ID.
           schema:
             type: string
             pattern: '[a-zA-Z_0-9][a-zA-Z_\-0-9]*[a-zA-Z0-9]+'
@@ -2627,7 +2641,7 @@ paths:
         - name: syncSource
           in: path
           required: true
-          description: <p>The sync soucre.</p> <note> <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p> </note>
+          description: <p>The sync source.</p> <note> <p>Currently the only supported syncSource is <code>SITEWISE </code>.</p> </note>
           schema:
             type: string
             pattern: '[a-zA-Z_0-9]+'
@@ -2651,7 +2665,7 @@ paths:
               type: object
               properties:
                 filters:
-                  description: A list of objects that filter the request.
+                  description: '<p>A list of objects that filter the request.</p> <p>The following filter combinations are supported:</p> <ul> <li> <p>Filter with state</p> </li> <li> <p>Filter with ResourceType and ResourceId</p> </li> <li> <p>Filter with ResourceType and ExternalId</p> </li> </ul>'
                   type: array
                   items:
                     $ref: '#/components/schemas/SyncResourceFilter'
@@ -3154,6 +3168,11 @@ components:
       pattern: .*
       minLength: 0
       maxLength: 256
+    SceneMetadataValue:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 2048
     CreateSyncJobResponse:
       type: object
       required:
@@ -3304,7 +3323,7 @@ components:
         syncSource:
           allOf:
             - $ref: '#/components/schemas/SyncSource'
-            - description: 'The syncSource of the sync job, if this entity was created by a sync job.'
+            - description: 'The syncSource of the SyncJob, if this entity was created by a SyncJob.'
         componentTypeName:
           allOf:
             - $ref: '#/components/schemas/ComponentTypeName'
@@ -3494,6 +3513,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/SceneCapabilities'
             - description: A list of capabilities that the scene uses to render.
+        sceneMetadata:
+          allOf:
+            - $ref: '#/components/schemas/SceneMetadataMap'
+            - description: The response metadata.
+        generatedSceneMetadata:
+          allOf:
+            - $ref: '#/components/schemas/GeneratedSceneMetadataMap'
+            - description: The generated scene metadata.
     GetSyncJobResponse:
       type: object
       required:
@@ -3516,7 +3543,7 @@ components:
         syncSource:
           allOf:
             - $ref: '#/components/schemas/SyncSource'
-            - description: <p>The sync soucre.</p> <note> <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p> </note>
+            - description: <p>The sync soucre.</p> <note> <p>Currently the only supported syncSource is <code>SITEWISE </code>.</p> </note>
         syncRole:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
@@ -3679,15 +3706,15 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/SyncResourceType'
-            - description: The sync resource filter resoucre type
+            - description: The sync resource filter resource type
         resourceId:
           allOf:
             - $ref: '#/components/schemas/Id'
-            - description: The sync resource filter resource Id.
+            - description: The sync resource filter resource ID.
         externalId:
           allOf:
             - $ref: '#/components/schemas/Id'
-            - description: The external Id.
+            - description: The external ID.
       description: The sync resource filter.
     ListTagsForResourceResponse:
       type: object
@@ -3922,7 +3949,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PricingTier'
             - description: The pricing tier.
-      description: Information about pricing bundle.
+      description: Information about the pricing bundle.
     ColumnName:
       type: string
       pattern: .*
@@ -3977,7 +4004,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PropertyGroupUpdateType'
             - description: The update type.
-      description: <p/>
+      description: The component property group request.
     ComponentPropertyGroupRequests:
       type: object
       additionalProperties:
@@ -4266,6 +4293,12 @@ components:
         $ref: '#/components/schemas/SceneCapability'
       minItems: 0
       maxItems: 50
+    SceneMetadataMap:
+      type: object
+      minProperties: 0
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/SceneMetadataValue'
     CreateSceneRequest:
       type: object
       required:
@@ -4293,6 +4326,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: Metadata that you can use to manage the scene.
+        sceneMetadata:
+          allOf:
+            - $ref: '#/components/schemas/SceneMetadataMap'
+            - description: The request metadata.
     RoleArn:
       type: string
       pattern: 'arn:((aws)|(aws-cn)|(aws-us-gov)):iam::[0-9]{12}:role/.*'
@@ -4307,7 +4344,7 @@ components:
         syncRole:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: 'The SyncJob IAM role. This IAM role is used by the sync job to read from the syncSource, and create, update or delete the corresponding resources.'
+            - description: 'The SyncJob IAM role. This IAM role is used by the SyncJob to read from the syncSource, and create, update, or delete the corresponding resources.'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4690,6 +4727,12 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/FunctionResponse'
+    GeneratedSceneMetadataMap:
+      type: object
+      minProperties: 0
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/SceneMetadataValue'
     GetComponentTypeRequest:
       type: object
       title: GetComponentTypeRequest
@@ -4741,7 +4784,7 @@ components:
         updateReason:
           allOf:
             - $ref: '#/components/schemas/UpdateReason'
-            - description: 'The update reason, for changing a pricing plan.'
+            - description: The update reason for changing a pricing plan.
       description: The pricing plan.
     SelectedPropertyList:
       type: array
@@ -5014,7 +5057,7 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/SyncResourceFilters'
-            - description: A list of objects that filter the request.
+            - description: '<p>A list of objects that filter the request.</p> <p>The following filter combinations are supported:</p> <ul> <li> <p>Filter with state</p> </li> <li> <p>Filter with ResourceType and ResourceId</p> </li> <li> <p>Filter with ResourceType and ExternalId</p> </li> </ul>'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -5198,7 +5241,7 @@ components:
         propertyReference:
           allOf:
             - $ref: '#/components/schemas/EntityPropertyReference'
-            - description: An object that specifies information about a property.&gt;
+            - description: An object that specifies information about a property.
         propertyValue:
           allOf:
             - $ref: '#/components/schemas/DataValue'
@@ -5401,11 +5444,11 @@ components:
         externalId:
           allOf:
             - $ref: '#/components/schemas/Id'
-            - description: The external Id.
+            - description: The external ID.
         resourceId:
           allOf:
             - $ref: '#/components/schemas/Id'
-            - description: The resource Id.
+            - description: The resource ID.
         status:
           allOf:
             - $ref: '#/components/schemas/SyncResourceStatus'
@@ -5471,7 +5514,7 @@ components:
         propertyGroups:
           allOf:
             - $ref: '#/components/schemas/PropertyGroupsRequest'
-            - description: The property groups
+            - description: The property groups.
         componentTypeName:
           allOf:
             - $ref: '#/components/schemas/ComponentTypeName'
@@ -5526,6 +5569,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SceneCapabilities'
             - description: A list of capabilities that the scene uses to render.
+        sceneMetadata:
+          allOf:
+            - $ref: '#/components/schemas/SceneMetadataMap'
+            - description: The scene metadata.
     UpdateWorkspaceRequest:
       type: object
       title: UpdateWorkspaceRequest
