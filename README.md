@@ -72,6 +72,7 @@ Existing integrations
  - [Apideck](https://apideck.com) - **Faster data integration through Unified APIs**
  - [HTTP Toolkit](https://httptoolkit.tech/) **Beautiful & open-source tools to debug, test and develop with HTTP(S)**
  - [OpenAPI-Directory-JS](https://github.com/httptoolkit/openapi-directory-js) - The OpenAPI directory precompiled & indexed for JS usage & searching.
+ - [Microsoft Kiota](https://microsoft.github.io/kiota/) - Generate an API client to call any OpenAPI described API
  - [API Tracker](https://apitracker.io/) - Aggregates 14,000+ APIs, SDKs, API specifications, integrations and DX profiles. It aims to help developers access the information they need to integrate APIs faster.
  - [API Watch](https://www.apiwatch.io)
  - https://pipedream.com/ - The integration platform built for developers
