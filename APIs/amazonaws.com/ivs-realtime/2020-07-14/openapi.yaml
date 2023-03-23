@@ -1,0 +1,1205 @@
+openapi: 3.0.0
+info:
+  version: '2020-07-14'
+  x-release: v4
+  title: Amazon Interactive Video Service RealTime
+  description: '<p> <b>Introduction</b> </p> <p>The Amazon Interactive Video Service (IVS) stage API is REST compatible, using a standard HTTP API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses, including errors. </p> <p>Terminology: The IVS stage API sometimes is referred to as the IVS RealTime API.</p> <p> <b>Resources</b> </p> <p>The following resources contain information about your IVS live stream (see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/getting-started.html">Getting Started with Amazon IVS</a>):</p> <ul> <li> <p> <b>Stage</b> — A stage is a virtual space where multiple participants can exchange audio and video in real time.</p> </li> </ul> <p> <b>Tagging</b> </p> <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag comprises a <i>key</i> and a <i>value</i>, both set by you. For example, you might set a tag as <code>topic:nature</code> to label a particular video category. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS stages has no service-specific constraints beyond what is documented there.</p> <p>Tags can help you identify and organize your AWS resources. For example, you can use the same tag for different resources to indicate that they are related. You can also use tags to manage access (see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html">Access Tags</a>).</p> <p>The Amazon IVS stage API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following resource supports tagging: Stage.</p> <p>At most 50 tags can be applied to a resource.</p> <p> <b>Stages Endpoints</b> </p> <ul> <li> <p> <a>CreateParticipantToken</a> — Creates an additional token for a specified stage. This can be done after stage creation or when tokens expire.</p> </li> <li> <p> <a>CreateStage</a> — Creates a new stage (and optionally participant tokens).</p> </li> <li> <p> <a>DeleteStage</a> — Shuts down and deletes the specified stage (disconnecting all participants).</p> </li> <li> <p> <a>DisconnectParticipant</a> — Disconnects a specified participant and revokes the participant permanently from a specified stage.</p> </li> <li> <p> <a>GetStage</a> — Gets information for the specified stage.</p> </li> <li> <p> <a>ListStages</a> — Gets summary information about all stages in your account, in the AWS region where the API request is processed.</p> </li> <li> <p> <a>UpdateStage</a> — Updates a stage’s configuration.</p> </li> </ul> <p> <b>Tags Endpoints</b> </p> <ul> <li> <p> <a>ListTagsForResource</a> — Gets information about AWS tags for the specified ARN.</p> </li> <li> <p> <a>TagResource</a> — Adds or updates tags for the AWS resource with the specified ARN.</p> </li> <li> <p> <a>UntagResource</a> — Removes tags from the resource with the specified ARN.</p> </li> </ul>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: ivs-realtime
+  x-aws-signingName: ivs
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/ivs-realtime-2020-07-14.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/ivsrealtime/'
+servers:
+  - url: 'http://ivsrealtime.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The ivsrealtime multi-region endpoint
+  - url: 'https://ivsrealtime.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The ivsrealtime multi-region endpoint
+  - url: 'http://ivsrealtime.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The ivsrealtime endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://ivsrealtime.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The ivsrealtime endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /CreateParticipantToken:
+    post:
+      operationId: CreateParticipantToken
+      description: <p>Creates an additional token for a specified stage. This can be done after stage creation or when tokens expire. Tokens always are scoped to the stage for which they are created.</p> <p>Encryption keys are owned by Amazon IVS and never used directly by your application.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateParticipantTokenResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - stageArn
+              properties:
+                attributes:
+                  description: 'Application-provided attributes to encode into the token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> '
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
+                capabilities:
+                  description: 'Set of capabilities that the user is allowed to perform in the stage. Default: <code>PUBLISH, SUBSCRIBE</code>.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ParticipantTokenCapability'
+                  minItems: 0
+                  maxItems: 2
+                duration:
+                  description: 'Duration (in minutes), after which the token expires. Default: 60 (1 hour).'
+                  type: integer
+                  minimum: 1
+                  maximum: 20160
+                stageArn:
+                  description: ARN of the stage to which this token is scoped.
+                  type: string
+                  pattern: '^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+                userId:
+                  description: 'Name that can be specified to help identify the token. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> '
+                  type: string
+                  minLength: 0
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /CreateStage:
+    post:
+      operationId: CreateStage
+      description: Creates a new stage (and optionally participant tokens).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateStageResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: Optional name that can be specified for the stage being created.
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]*$'
+                  minLength: 0
+                  maxLength: 128
+                participantTokenConfigurations:
+                  description: Array of participant token configuration objects to attach to the new stage.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ParticipantTokenConfiguration'
+                  minItems: 0
+                  maxItems: 12
+                tags:
+                  description: 'Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there. '
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeleteStage:
+    post:
+      operationId: DeleteStage
+      description: Shuts down and deletes the specified stage (disconnecting all participants).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteStageResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - arn
+              properties:
+                arn:
+                  description: ARN of the stage to be deleted.
+                  type: string
+                  pattern: '^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DisconnectParticipant:
+    post:
+      operationId: DisconnectParticipant
+      description: Disconnects a specified participant and revokes the participant permanently from a specified stage.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisconnectParticipantResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - participantId
+                - stageArn
+              properties:
+                participantId:
+                  description: Identifier of the participant to be disconnected. This is returned by <a>CreateParticipantToken</a>.
+                  type: string
+                reason:
+                  description: Description of why this participant is being disconnected.
+                  type: string
+                  minLength: 0
+                  maxLength: 128
+                stageArn:
+                  description: ARN of the stage to which the participant is attached.
+                  type: string
+                  pattern: '^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /GetStage:
+    post:
+      operationId: GetStage
+      description: Gets information for the specified stage.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStageResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - arn
+              properties:
+                arn:
+                  description: ARN of the stage for which the information is to be retrieved.
+                  type: string
+                  pattern: '^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListStages:
+    post:
+      operationId: ListStages
+      description: 'Gets summary information about all stages in your account, in the AWS region where the API request is processed.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStagesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                maxResults:
+                  description: 'Maximum number of results to return. Default: 50.'
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                nextToken:
+                  description: The first stage to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+                  type: string
+                  pattern: '^[a-zA-Z0-9+/=_-]*$'
+                  minLength: 0
+                  maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Gets information about AWS tags for the specified ARN.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource to be retrieved. The ARN must be URL-encoded.
+          schema:
+            type: string
+            pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$'
+            minLength: 1
+            maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds or updates tags for the AWS resource with the specified ARN.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource to be tagged. The ARN must be URL-encoded.
+          schema:
+            type: string
+            pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$'
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: 'Array of tags to be added or updated. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints beyond what is documented there.'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes tags from the resource with the specified ARN.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource to be untagged. The ARN must be URL-encoded.
+          schema:
+            type: string
+            pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$'
+            minLength: 1
+            maxLength: 128
+        - name: tagKeys
+          in: query
+          required: true
+          description: 'Array of tags to be removed. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints beyond what is documented there.'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 0
+            maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UpdateStage:
+    post:
+      operationId: UpdateStage
+      description: Updates a stage’s configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateStageResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - arn
+              properties:
+                arn:
+                  description: ARN of the stage to be updated.
+                  type: string
+                  pattern: '^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+                name:
+                  description: Name of the stage to be updated.
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]*$'
+                  minLength: 0
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateParticipantTokenResponse:
+      type: object
+      properties:
+        participantToken:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantToken'
+            - description: The participant token that was created.
+    String:
+      type: string
+    ParticipantTokenCapability:
+      type: string
+      enum:
+        - PUBLISH
+        - SUBSCRIBE
+    ResourceNotFoundException: {}
+    ValidationException: {}
+    AccessDeniedException: {}
+    ServiceQuotaExceededException: {}
+    PendingVerification: {}
+    CreateStageResponse:
+      type: object
+      properties:
+        participantTokens:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenList'
+            - description: Participant tokens attached to the stage. These correspond to the <code>participants</code> in the request.
+        stage:
+          allOf:
+            - $ref: '#/components/schemas/Stage'
+            - description: The stage that was created.
+    ParticipantTokenConfiguration:
+      type: object
+      properties:
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenAttributes'
+            - description: 'Application-provided attributes to encode into the corresponding participant token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> '
+        capabilities:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenCapabilities'
+            - description: Set of capabilities that the user is allowed to perform in the stage.
+        duration:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenDurationMinutes'
+            - description: 'Duration (in minutes), after which the corresponding participant token expires. Default: 60 (1 hour).'
+        userId:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenUserId'
+            - description: 'Name that can be specified to help identify the corresponding participant token. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> '
+      description: Object specifying a participant token configuration in a stage.
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    DeleteStageResponse:
+      type: object
+      properties: {}
+    ConflictException: {}
+    DisconnectParticipantResponse:
+      type: object
+      properties: {}
+    GetStageResponse:
+      type: object
+      properties:
+        stage:
+          allOf:
+            - $ref: '#/components/schemas/Stage'
+            - description: <p/>
+    ListStagesResponse:
+      type: object
+      required:
+        - stages
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If there are more rooms than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+        stages:
+          allOf:
+            - $ref: '#/components/schemas/StageSummaryList'
+            - description: List of the matching stages (summary information only).
+    ListTagsForResourceResponse:
+      type: object
+      required:
+        - tags
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>.'
+    InternalServerException: {}
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    UpdateStageResponse:
+      type: object
+      properties:
+        stage:
+          allOf:
+            - $ref: '#/components/schemas/Stage'
+            - description: 'The updated stage. '
+    ParticipantTokenAttributes:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    ParticipantTokenCapabilities:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParticipantTokenCapability'
+      minItems: 0
+      maxItems: 2
+    ParticipantTokenDurationMinutes:
+      type: integer
+      minimum: 1
+      maximum: 20160
+    StageArn:
+      type: string
+      pattern: '^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$'
+      minLength: 1
+      maxLength: 128
+    ParticipantTokenUserId:
+      type: string
+      minLength: 0
+      maxLength: 128
+    CreateParticipantTokenRequest:
+      type: object
+      required:
+        - stageArn
+      title: CreateParticipantTokenRequest
+      properties:
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenAttributes'
+            - description: 'Application-provided attributes to encode into the token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> '
+        capabilities:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenCapabilities'
+            - description: 'Set of capabilities that the user is allowed to perform in the stage. Default: <code>PUBLISH, SUBSCRIBE</code>.'
+        duration:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenDurationMinutes'
+            - description: 'Duration (in minutes), after which the token expires. Default: 60 (1 hour).'
+        stageArn:
+          allOf:
+            - $ref: '#/components/schemas/StageArn'
+            - description: ARN of the stage to which this token is scoped.
+        userId:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenUserId'
+            - description: 'Name that can be specified to help identify the token. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> '
+    ParticipantToken:
+      type: object
+      properties:
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenAttributes'
+            - description: 'Application-provided attributes to encode into the token and attach to a stage. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> '
+        capabilities:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenCapabilities'
+            - description: Set of capabilities that the user is allowed to perform in the stage.
+        duration:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenDurationMinutes'
+            - description: 'Duration (in minutes), after which the participant token expires. Default: 60 (1 hour).'
+        expirationTime:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenExpirationTime'
+            - description: ISO 8601 timestamp (returned as a string) for when this token expires.
+        participantId:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenId'
+            - description: 'Unique identifier for this participant token, assigned by IVS.'
+        token:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenString'
+            - description: 'The issued client token, encrypted.'
+        userId:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenUserId'
+            - description: 'Name to help identify the token. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> '
+      description: Object specifying a participant token in a stage.
+    StageName:
+      type: string
+      pattern: '^[a-zA-Z0-9-_]*$'
+      minLength: 0
+      maxLength: 128
+    ParticipantTokenConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParticipantTokenConfiguration'
+      minItems: 0
+      maxItems: 12
+    Tags:
+      type: object
+      minProperties: 0
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    CreateStageRequest:
+      type: object
+      title: CreateStageRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: Optional name that can be specified for the stage being created.
+        participantTokenConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenConfigurations'
+            - description: Array of participant token configuration objects to attach to the new stage.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there. '
+    ParticipantTokenList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParticipantToken'
+    Stage:
+      type: object
+      required:
+        - arn
+      properties:
+        activeSessionId:
+          allOf:
+            - $ref: '#/components/schemas/StageSessionId'
+            - description: ID of the active session within the stage.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/StageArn'
+            - description: Stage ARN.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: Stage name.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.'
+      description: Object specifying a stage.
+    DeleteStageRequest:
+      type: object
+      required:
+        - arn
+      title: DeleteStageRequest
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/StageArn'
+            - description: ARN of the stage to be deleted.
+    DisconnectParticipantReason:
+      type: string
+      minLength: 0
+      maxLength: 128
+    ParticipantTokenId:
+      type: string
+    DisconnectParticipantRequest:
+      type: object
+      required:
+        - participantId
+        - stageArn
+      title: DisconnectParticipantRequest
+      properties:
+        participantId:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenId'
+            - description: Identifier of the participant to be disconnected. This is returned by <a>CreateParticipantToken</a>.
+        reason:
+          allOf:
+            - $ref: '#/components/schemas/DisconnectParticipantReason'
+            - description: Description of why this participant is being disconnected.
+        stageArn:
+          allOf:
+            - $ref: '#/components/schemas/StageArn'
+            - description: ARN of the stage to which the participant is attached.
+    GetStageRequest:
+      type: object
+      required:
+        - arn
+      title: GetStageRequest
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/StageArn'
+            - description: ARN of the stage for which the information is to be retrieved.
+    MaxStageResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    PaginationToken:
+      type: string
+      pattern: '^[a-zA-Z0-9+/=_-]*$'
+      minLength: 0
+      maxLength: 1024
+    ListStagesRequest:
+      type: object
+      title: ListStagesRequest
+      properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxStageResults'
+            - description: 'Maximum number of results to return. Default: 50.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The first stage to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+    StageSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StageSummary'
+    ResourceArn:
+      type: string
+      pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$'
+      minLength: 1
+      maxLength: 128
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    ParticipantTokenExpirationTime:
+      type: string
+      format: date-time
+    ParticipantTokenString:
+      type: string
+    StageSessionId:
+      type: string
+      pattern: '^st-[a-zA-Z0-9]+$'
+      minLength: 16
+      maxLength: 16
+    StageSummary:
+      type: object
+      required:
+        - arn
+      properties:
+        activeSessionId:
+          allOf:
+            - $ref: '#/components/schemas/StageSessionId'
+            - description: ID of the active session within the stage.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/StageArn'
+            - description: Stage ARN.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: Stage name.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.'
+      description: Summary information about a stage.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Array of tags to be added or updated. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints beyond what is documented there.'
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateStageRequest:
+      type: object
+      required:
+        - arn
+      title: UpdateStageRequest
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/StageArn'
+            - description: ARN of the stage to be updated.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: Name of the stage to be updated.
+security:
+  - hmac: []

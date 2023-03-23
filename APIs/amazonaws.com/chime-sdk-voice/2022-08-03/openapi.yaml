@@ -945,6 +945,7 @@ paths:
                 Name:
                   description: ''
                   type: string
+                  pattern: '[a-zA-Z0-9 _.-]+'
                   minLength: 1
                   maxLength: 256
                 Endpoints:
@@ -1225,6 +1226,7 @@ paths:
                 Name:
                   description: ''
                   type: string
+                  pattern: '[a-zA-Z0-9 _.-]+'
                   minLength: 1
                   maxLength: 256
                 TriggerType:
@@ -1409,6 +1411,7 @@ paths:
                 Name:
                   description: ''
                   type: string
+                  pattern: '[a-zA-Z0-9 _.-]+'
                   minLength: 1
                   maxLength: 256
                 AwsRegion:
@@ -1581,6 +1584,7 @@ paths:
                 Name:
                   description: ''
                   type: string
+                  pattern: '[a-zA-Z0-9 _.-]+'
                   minLength: 1
                   maxLength: 256
                 VoiceConnectorItems:
@@ -1637,6 +1641,298 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
         '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+        - name: max-results
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /voice-profiles:
+    post:
+      operationId: CreateVoiceProfile
+      description: ''
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateVoiceProfileResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '487':
+          description: GoneException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoneException'
+        '488':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '489':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '490':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - SpeakerSearchTaskId
+              properties:
+                SpeakerSearchTaskId:
+                  description: ''
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /voice-profile-domains:
+    post:
+      operationId: CreateVoiceProfileDomain
+      description: ''
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateVoiceProfileDomainResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '487':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '488':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - ServerSideEncryptionConfiguration
+              properties:
+                Name:
+                  description: ''
+                  type: string
+                  pattern: '[a-zA-Z0-9 _.-]+'
+                  minLength: 1
+                  maxLength: 256
+                Description:
+                  description: ''
+                  type: string
+                  minLength: 0
+                  maxLength: 1024
+                ServerSideEncryptionConfiguration:
+                  description: ''
+                  type: object
+                  properties:
+                    KmsKeyArn:
+                      $ref: '#/components/schemas/Arn'
+                ClientRequestToken:
+                  description: ''
+                  type: string
+                  pattern: '^[-_a-zA-Z0-9]*$\{2,64\}$'
+                Tags:
+                  description: ''
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListVoiceProfileDomains
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVoiceProfileDomainsResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
           description: ServiceFailureException
           content:
             application/json:
@@ -2324,6 +2620,7 @@ paths:
                 Name:
                   description: ''
                   type: string
+                  pattern: '[a-zA-Z0-9 _.-]+'
                   minLength: 1
                   maxLength: 256
                 Endpoints:
@@ -2548,6 +2845,7 @@ paths:
                 Name:
                   description: ''
                   type: string
+                  pattern: '[a-zA-Z0-9 _.-]+'
                   minLength: 1
                   maxLength: 256
                 Disabled:
@@ -2764,6 +3062,7 @@ paths:
                 Name:
                   description: ''
                   type: string
+                  pattern: '[a-zA-Z0-9 _.-]+'
                   minLength: 1
                   maxLength: 256
                 RequireEncryption:
@@ -3179,6 +3478,7 @@ paths:
                 Name:
                   description: ''
                   type: string
+                  pattern: '[a-zA-Z0-9 _.-]+'
                   minLength: 1
                   maxLength: 256
                 VoiceConnectorItems:
@@ -3817,6 +4117,8 @@ paths:
                       $ref: '#/components/schemas/Boolean'
                     StreamingNotificationTargets:
                       $ref: '#/components/schemas/StreamingNotificationTargetList'
+                    MediaInsightsConfiguration:
+                      $ref: '#/components/schemas/MediaInsightsConfiguration'
   '/voice-connectors/{voiceConnectorId}/termination':
     delete:
       operationId: DeleteVoiceConnectorTermination
@@ -4117,6 +4419,481 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/voice-profiles/{VoiceProfileId}':
+    delete:
+      operationId: DeleteVoiceProfile
+      description: ''
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '487':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '488':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: VoiceProfileId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetVoiceProfile
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVoiceProfileResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: VoiceProfileId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 256
+    put:
+      operationId: UpdateVoiceProfile
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateVoiceProfileResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: GoneException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoneException'
+        '487':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '488':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '489':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: VoiceProfileId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - SpeakerSearchTaskId
+              properties:
+                SpeakerSearchTaskId:
+                  description: ''
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 256
+  '/voice-profile-domains/{VoiceProfileDomainId}':
+    delete:
+      operationId: DeleteVoiceProfileDomain
+      description: ''
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '487':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '488':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: VoiceProfileDomainId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetVoiceProfileDomain
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVoiceProfileDomainResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: VoiceProfileDomainId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 256
+    put:
+      operationId: UpdateVoiceProfileDomain
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateVoiceProfileDomainResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: VoiceProfileDomainId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Name:
+                  description: ''
+                  type: string
+                  pattern: '[a-zA-Z0-9 _.-]+'
+                  minLength: 1
+                  maxLength: 256
+                Description:
+                  description: ''
+                  type: string
+                  minLength: 0
+                  maxLength: 1024
   '/voice-connectors/{voiceConnectorId}#operation=disassociate-phone-numbers':
     post:
       operationId: DisassociatePhoneNumbersFromVoiceConnector
@@ -4875,6 +5652,98 @@ paths:
                   properties:
                     EnableSipMediaApplicationMessageLogs:
                       $ref: '#/components/schemas/Boolean'
+  '/voice-connectors/{VoiceConnectorId}/speaker-search-tasks/{SpeakerSearchTaskId}':
+    get:
+      operationId: GetSpeakerSearchTask
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSpeakerSearchTaskResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+        '488':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: VoiceConnectorId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+        - name: SpeakerSearchTaskId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/voice-connectors/{voiceConnectorId}/logging-configuration':
     get:
       operationId: GetVoiceConnectorLoggingConfiguration
@@ -5082,6 +5951,104 @@ paths:
           schema:
             type: string
             pattern: .*\S.*
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/voice-connectors/{VoiceConnectorId}/voice-tone-analysis-tasks/{VoiceToneAnalysisTaskId}#isCaller':
+    get:
+      operationId: GetVoiceToneAnalysisTask
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVoiceToneAnalysisTaskResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+        '488':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: VoiceConnectorId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+        - name: VoiceToneAnalysisTaskId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 256
+        - name: isCaller
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5335,6 +6302,72 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /tags#arn:
+    get:
+      operationId: ListTagsForResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: arn
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+            minLength: 1
+            maxLength: 1024
+            format: password
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/voice-connectors/{voiceConnectorId}/termination/credentials':
     get:
       operationId: ListVoiceConnectorTerminationCredentials
@@ -5396,6 +6429,103 @@ paths:
           schema:
             type: string
             pattern: .*\S.*
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /voice-profiles#voice-profile-domain-id:
+    get:
+      operationId: ListVoiceProfiles
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVoiceProfilesResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: voice-profile-domain-id
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 256
+        - name: next-token
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+        - name: max-results
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5701,6 +6831,633 @@ paths:
             type: string
             enum:
               - phone-numbers
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/voice-connectors/{VoiceConnectorId}/speaker-search-tasks':
+    post:
+      operationId: StartSpeakerSearchTask
+      description: ''
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartSpeakerSearchTaskResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '487':
+          description: GoneException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoneException'
+        '488':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '489':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '490':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '491':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: VoiceConnectorId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - TransactionId
+                - VoiceProfileDomainId
+              properties:
+                TransactionId:
+                  description: ''
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 256
+                VoiceProfileDomainId:
+                  description: ''
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 256
+                ClientRequestToken:
+                  description: ''
+                  type: string
+                  pattern: '^[-_a-zA-Z0-9]*$\{2,64\}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/voice-connectors/{VoiceConnectorId}/voice-tone-analysis-tasks':
+    post:
+      operationId: StartVoiceToneAnalysisTask
+      description: ''
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartVoiceToneAnalysisTaskResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '487':
+          description: GoneException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoneException'
+        '488':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '489':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '490':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '491':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: VoiceConnectorId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - TransactionId
+                - LanguageCode
+              properties:
+                TransactionId:
+                  description: ''
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 256
+                LanguageCode:
+                  description: ''
+                  type: string
+                  enum:
+                    - en-US
+                ClientRequestToken:
+                  description: ''
+                  type: string
+                  pattern: '^[-_a-zA-Z0-9]*$\{2,64\}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/voice-connectors/{VoiceConnectorId}/speaker-search-tasks/{SpeakerSearchTaskId}#operation=stop':
+    post:
+      operationId: StopSpeakerSearchTask
+      description: ''
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '487':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '488':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '489':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: VoiceConnectorId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+        - name: SpeakerSearchTaskId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 256
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - stop
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/voice-connectors/{VoiceConnectorId}/voice-tone-analysis-tasks/{VoiceToneAnalysisTaskId}#operation=stop':
+    post:
+      operationId: StopVoiceToneAnalysisTask
+      description: ''
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '487':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '488':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '489':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: VoiceConnectorId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+        - name: VoiceToneAnalysisTaskId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 256
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - stop
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /tags#operation=tag-resource:
+    post:
+      operationId: TagResource
+      description: ''
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - tag-resource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceARN
+                - Tags
+              properties:
+                ResourceARN:
+                  description: ''
+                  type: string
+                  pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+                  minLength: 1
+                  maxLength: 1024
+                  format: password
+                Tags:
+                  description: ''
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /tags#operation=untag-resource:
+    post:
+      operationId: UntagResource
+      description: ''
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - untag-resource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceARN
+                - TagKeys
+              properties:
+                ResourceARN:
+                  description: ''
+                  type: string
+                  pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+                  minLength: 1
+                  maxLength: 1024
+                  format: password
+                TagKeys:
+                  description: ''
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TagKey'
+                  minItems: 1
+                  maxItems: 50
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6090,6 +7847,33 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
         Priority:
           $ref: '#/components/schemas/VoiceConnectorItemPriority'
+    CreateVoiceProfileResponse:
+      type: object
+      properties:
+        VoiceProfile:
+          $ref: '#/components/schemas/VoiceProfile'
+    GoneException: {}
+    CreateVoiceProfileDomainResponse:
+      type: object
+      properties:
+        VoiceProfileDomain:
+          $ref: '#/components/schemas/VoiceProfileDomain'
+    Arn:
+      type: string
+      pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+      minLength: 1
+      maxLength: 1024
+      format: password
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+        Value:
+          $ref: '#/components/schemas/TagValue'
     DisassociatePhoneNumbersFromVoiceConnectorResponse:
       type: object
       properties:
@@ -6147,6 +7931,11 @@ components:
       properties:
         SipRule:
           $ref: '#/components/schemas/SipRule'
+    GetSpeakerSearchTaskResponse:
+      type: object
+      properties:
+        SpeakerSearchTask:
+          $ref: '#/components/schemas/SpeakerSearchTask'
     GetVoiceConnectorResponse:
       type: object
       properties:
@@ -6192,6 +7981,21 @@ components:
       properties:
         TerminationHealth:
           $ref: '#/components/schemas/TerminationHealth'
+    GetVoiceProfileResponse:
+      type: object
+      properties:
+        VoiceProfile:
+          $ref: '#/components/schemas/VoiceProfile'
+    GetVoiceProfileDomainResponse:
+      type: object
+      properties:
+        VoiceProfileDomain:
+          $ref: '#/components/schemas/VoiceProfileDomain'
+    GetVoiceToneAnalysisTaskResponse:
+      type: object
+      properties:
+        VoiceToneAnalysisTask:
+          $ref: '#/components/schemas/VoiceToneAnalysisTask'
     ListAvailableVoiceConnectorRegionsResponse:
       type: object
       properties:
@@ -6237,6 +8041,11 @@ components:
       properties:
         PhoneNumberCountries:
           $ref: '#/components/schemas/PhoneNumberCountriesList'
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          $ref: '#/components/schemas/TagList'
     ListVoiceConnectorGroupsResponse:
       type: object
       properties:
@@ -6254,6 +8063,20 @@ components:
       properties:
         VoiceConnectors:
           $ref: '#/components/schemas/VoiceConnectorList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    ListVoiceProfileDomainsResponse:
+      type: object
+      properties:
+        VoiceProfileDomains:
+          $ref: '#/components/schemas/VoiceProfileDomainSummaryList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    ListVoiceProfilesResponse:
+      type: object
+      properties:
+        VoiceProfiles:
+          $ref: '#/components/schemas/VoiceProfileSummaryList'
         NextToken:
           $ref: '#/components/schemas/String'
     PutSipMediaApplicationAlexaSkillConfigurationResponse:
@@ -6321,6 +8144,13 @@ components:
         $ref: '#/components/schemas/StreamingNotificationTarget'
       minItems: 1
       maxItems: 3
+    MediaInsightsConfiguration:
+      type: object
+      properties:
+        Disabled:
+          $ref: '#/components/schemas/Boolean'
+        ConfigurationArn:
+          $ref: '#/components/schemas/Arn'
     PutVoiceConnectorTerminationResponse:
       type: object
       properties:
@@ -6356,6 +8186,22 @@ components:
           $ref: '#/components/schemas/E164PhoneNumberList'
         NextToken:
           $ref: '#/components/schemas/String'
+    StartSpeakerSearchTaskResponse:
+      type: object
+      properties:
+        SpeakerSearchTask:
+          $ref: '#/components/schemas/SpeakerSearchTask'
+    UnprocessableEntityException: {}
+    StartVoiceToneAnalysisTaskResponse:
+      type: object
+      properties:
+        VoiceToneAnalysisTask:
+          $ref: '#/components/schemas/VoiceToneAnalysisTask'
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+      format: password
     UpdatePhoneNumberResponse:
       type: object
       properties:
@@ -6391,6 +8237,16 @@ components:
       properties:
         VoiceConnectorGroup:
           $ref: '#/components/schemas/VoiceConnectorGroup'
+    UpdateVoiceProfileResponse:
+      type: object
+      properties:
+        VoiceProfile:
+          $ref: '#/components/schemas/VoiceProfile'
+    UpdateVoiceProfileDomainResponse:
+      type: object
+      properties:
+        VoiceProfileDomain:
+          $ref: '#/components/schemas/VoiceProfileDomain'
     ValidateE911AddressResponse:
       type: object
       properties:
@@ -6495,6 +8351,25 @@ components:
       properties:
         UpdatePhoneNumberRequestItems:
           $ref: '#/components/schemas/UpdatePhoneNumberRequestItemList'
+    NonEmptyString128:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 128
+    NonEmptyString256:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 256
+    CallDetails:
+      type: object
+      properties:
+        VoiceConnectorId:
+          $ref: '#/components/schemas/NonEmptyString128'
+        TransactionId:
+          $ref: '#/components/schemas/NonEmptyString256'
+        IsCaller:
+          $ref: '#/components/schemas/Boolean'
     CallingName:
       type: string
       pattern: '^$|^[a-zA-Z0-9 ]{2,15}$'
@@ -6533,6 +8408,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Capability'
+    ClientRequestId:
+      type: string
+      pattern: '^[-_a-zA-Z0-9]*$\{2,64\}$'
+    ConfidenceScore:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 1
     CountryList:
       type: array
       items:
@@ -6572,11 +8455,6 @@ components:
           $ref: '#/components/schemas/Iso8601Timestamp'
         UpdatedTimestamp:
           $ref: '#/components/schemas/Iso8601Timestamp'
-    NonEmptyString128:
-      type: string
-      pattern: .*\S.*
-      minLength: 1
-      maxLength: 128
     ParticipantPhoneNumberList:
       type: array
       items:
@@ -6694,6 +8572,7 @@ components:
           $ref: '#/components/schemas/GuidString'
     SipMediaApplicationName:
       type: string
+      pattern: '[a-zA-Z0-9 _.-]+'
       minLength: 1
       maxLength: 256
     SipMediaApplicationEndpointList:
@@ -6733,6 +8612,7 @@ components:
           $ref: '#/components/schemas/Iso8601Timestamp'
     SipRuleName:
       type: string
+      pattern: '[a-zA-Z0-9 _.-]+'
       minLength: 1
       maxLength: 256
     SipRuleTriggerType:
@@ -6785,6 +8665,7 @@ components:
           $ref: '#/components/schemas/Iso8601Timestamp'
     VoiceConnectorGroupName:
       type: string
+      pattern: '[a-zA-Z0-9 _.-]+'
       minLength: 1
       maxLength: 256
     VoiceConnectorItemList:
@@ -6818,6 +8699,7 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
     VoiceConnectorName:
       type: string
+      pattern: '[a-zA-Z0-9 _.-]+'
       minLength: 1
       maxLength: 256
     VoiceConnectorAwsRegion:
@@ -6865,6 +8747,85 @@ components:
           $ref: '#/components/schemas/Iso8601Timestamp'
         VoiceConnectorArn:
           $ref: '#/components/schemas/NonEmptyString'
+    VoiceProfileDomainName:
+      type: string
+      pattern: '[a-zA-Z0-9 _.-]+'
+      minLength: 1
+      maxLength: 256
+    VoiceProfileDomainDescription:
+      type: string
+      minLength: 0
+      maxLength: 1024
+    ServerSideEncryptionConfiguration:
+      type: object
+      required:
+        - KmsKeyArn
+      properties:
+        KmsKeyArn:
+          $ref: '#/components/schemas/Arn'
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 50
+    CreateVoiceProfileDomainRequest:
+      type: object
+      required:
+        - Name
+        - ServerSideEncryptionConfiguration
+      title: CreateVoiceProfileDomainRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/VoiceProfileDomainName'
+        Description:
+          $ref: '#/components/schemas/VoiceProfileDomainDescription'
+        ServerSideEncryptionConfiguration:
+          $ref: '#/components/schemas/ServerSideEncryptionConfiguration'
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestId'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    VoiceProfileDomain:
+      type: object
+      properties:
+        VoiceProfileDomainId:
+          $ref: '#/components/schemas/NonEmptyString256'
+        VoiceProfileDomainArn:
+          $ref: '#/components/schemas/Arn'
+        Name:
+          $ref: '#/components/schemas/VoiceProfileDomainName'
+        Description:
+          $ref: '#/components/schemas/VoiceProfileDomainDescription'
+        ServerSideEncryptionConfiguration:
+          $ref: '#/components/schemas/ServerSideEncryptionConfiguration'
+        CreatedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        UpdatedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+    CreateVoiceProfileRequest:
+      type: object
+      required:
+        - SpeakerSearchTaskId
+      title: CreateVoiceProfileRequest
+      properties:
+        SpeakerSearchTaskId:
+          $ref: '#/components/schemas/NonEmptyString256'
+    VoiceProfile:
+      type: object
+      properties:
+        VoiceProfileId:
+          $ref: '#/components/schemas/NonEmptyString256'
+        VoiceProfileArn:
+          $ref: '#/components/schemas/Arn'
+        VoiceProfileDomainId:
+          $ref: '#/components/schemas/NonEmptyString256'
+        CreatedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        UpdatedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        ExpirationTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
     CredentialList:
       type: array
       items:
@@ -6936,6 +8897,14 @@ components:
     DeleteVoiceConnectorTerminationRequest:
       type: object
       title: DeleteVoiceConnectorTerminationRequest
+      properties: {}
+    DeleteVoiceProfileDomainRequest:
+      type: object
+      title: DeleteVoiceProfileDomainRequest
+      properties: {}
+    DeleteVoiceProfileRequest:
+      type: object
+      title: DeleteVoiceProfileRequest
       properties: {}
     DisassociatePhoneNumbersFromVoiceConnectorGroupRequest:
       type: object
@@ -7067,6 +9036,29 @@ components:
       type: object
       title: GetSipRuleRequest
       properties: {}
+    GetSpeakerSearchTaskRequest:
+      type: object
+      title: GetSpeakerSearchTaskRequest
+      properties: {}
+    SpeakerSearchTask:
+      type: object
+      properties:
+        SpeakerSearchTaskId:
+          $ref: '#/components/schemas/NonEmptyString256'
+        SpeakerSearchTaskStatus:
+          $ref: '#/components/schemas/NonEmptyString'
+        CallDetails:
+          $ref: '#/components/schemas/CallDetails'
+        SpeakerSearchDetails:
+          $ref: '#/components/schemas/SpeakerSearchDetails'
+        CreatedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        UpdatedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        StartedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        StatusMessage:
+          $ref: '#/components/schemas/String'
     GetVoiceConnectorEmergencyCallingConfigurationRequest:
       type: object
       title: GetVoiceConnectorEmergencyCallingConfigurationRequest
@@ -7132,6 +9124,8 @@ components:
           $ref: '#/components/schemas/Boolean'
         StreamingNotificationTargets:
           $ref: '#/components/schemas/StreamingNotificationTargetList'
+        MediaInsightsConfiguration:
+          $ref: '#/components/schemas/MediaInsightsConfiguration'
     GetVoiceConnectorTerminationHealthRequest:
       type: object
       title: GetVoiceConnectorTerminationHealthRequest
@@ -7160,8 +9154,41 @@ components:
           $ref: '#/components/schemas/StringList'
         Disabled:
           $ref: '#/components/schemas/Boolean'
+    GetVoiceProfileDomainRequest:
+      type: object
+      title: GetVoiceProfileDomainRequest
+      properties: {}
+    GetVoiceProfileRequest:
+      type: object
+      title: GetVoiceProfileRequest
+      properties: {}
+    GetVoiceToneAnalysisTaskRequest:
+      type: object
+      title: GetVoiceToneAnalysisTaskRequest
+      properties: {}
+    VoiceToneAnalysisTask:
+      type: object
+      properties:
+        VoiceToneAnalysisTaskId:
+          $ref: '#/components/schemas/NonEmptyString256'
+        VoiceToneAnalysisTaskStatus:
+          $ref: '#/components/schemas/NonEmptyString'
+        CallDetails:
+          $ref: '#/components/schemas/CallDetails'
+        CreatedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        UpdatedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        StartedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        StatusMessage:
+          $ref: '#/components/schemas/String'
     Integer:
       type: integer
+    LanguageCode:
+      type: string
+      enum:
+        - en-US
     VoiceConnectorAwsRegionList:
       type: array
       items:
@@ -7233,6 +9260,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PhoneNumberCountry'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
     ListVoiceConnectorGroupsRequest:
       type: object
       title: ListVoiceConnectorGroupsRequest
@@ -7253,6 +9284,22 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/VoiceConnector'
+    ListVoiceProfileDomainsRequest:
+      type: object
+      title: ListVoiceProfileDomainsRequest
+      properties: {}
+    VoiceProfileDomainSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VoiceProfileDomainSummary'
+    ListVoiceProfilesRequest:
+      type: object
+      title: ListVoiceProfilesRequest
+      properties: {}
+    VoiceProfileSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VoiceProfileSummary'
     NotificationTarget:
       type: string
       enum:
@@ -7505,11 +9552,96 @@ components:
     SipApplicationPriority:
       type: integer
       minimum: 1
+    SpeakerSearchResultList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SpeakerSearchResult'
+    SpeakerSearchDetails:
+      type: object
+      properties:
+        Results:
+          $ref: '#/components/schemas/SpeakerSearchResultList'
+        VoiceprintGenerationStatus:
+          $ref: '#/components/schemas/NonEmptyString256'
+    SpeakerSearchResult:
+      type: object
+      properties:
+        ConfidenceScore:
+          $ref: '#/components/schemas/ConfidenceScore'
+        VoiceProfileId:
+          $ref: '#/components/schemas/NonEmptyString256'
+    StartSpeakerSearchTaskRequest:
+      type: object
+      required:
+        - TransactionId
+        - VoiceProfileDomainId
+      title: StartSpeakerSearchTaskRequest
+      properties:
+        TransactionId:
+          $ref: '#/components/schemas/NonEmptyString256'
+        VoiceProfileDomainId:
+          $ref: '#/components/schemas/NonEmptyString256'
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestId'
+    StartVoiceToneAnalysisTaskRequest:
+      type: object
+      required:
+        - TransactionId
+        - LanguageCode
+      title: StartVoiceToneAnalysisTaskRequest
+      properties:
+        TransactionId:
+          $ref: '#/components/schemas/NonEmptyString256'
+        LanguageCode:
+          $ref: '#/components/schemas/LanguageCode'
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestId'
+    StopSpeakerSearchTaskRequest:
+      type: object
+      title: StopSpeakerSearchTaskRequest
+      properties: {}
+    StopVoiceToneAnalysisTaskRequest:
+      type: object
+      title: StopVoiceToneAnalysisTaskRequest
+      properties: {}
     StreamingNotificationTarget:
       type: object
       properties:
         NotificationTarget:
           $ref: '#/components/schemas/NotificationTarget'
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+      format: password
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/Arn'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/Arn'
+        TagKeys:
+          $ref: '#/components/schemas/TagKeyList'
     UpdateGlobalSettingsRequest:
       type: object
       title: UpdateGlobalSettingsRequest
@@ -7592,6 +9724,22 @@ components:
           $ref: '#/components/schemas/VoiceConnectorName'
         RequireEncryption:
           $ref: '#/components/schemas/Boolean'
+    UpdateVoiceProfileDomainRequest:
+      type: object
+      title: UpdateVoiceProfileDomainRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/VoiceProfileDomainName'
+        Description:
+          $ref: '#/components/schemas/VoiceProfileDomainDescription'
+    UpdateVoiceProfileRequest:
+      type: object
+      required:
+        - SpeakerSearchTaskId
+      title: UpdateVoiceProfileRequest
+      properties:
+        SpeakerSearchTaskId:
+          $ref: '#/components/schemas/NonEmptyString256'
     ValidateE911AddressRequest:
       type: object
       required:
@@ -7626,5 +9774,35 @@ components:
       type: integer
       minimum: 1
       maximum: 99
+    VoiceProfileDomainSummary:
+      type: object
+      properties:
+        VoiceProfileDomainId:
+          $ref: '#/components/schemas/NonEmptyString256'
+        VoiceProfileDomainArn:
+          $ref: '#/components/schemas/Arn'
+        Name:
+          $ref: '#/components/schemas/VoiceProfileDomainName'
+        Description:
+          $ref: '#/components/schemas/VoiceProfileDomainDescription'
+        CreatedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        UpdatedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+    VoiceProfileSummary:
+      type: object
+      properties:
+        VoiceProfileId:
+          $ref: '#/components/schemas/NonEmptyString256'
+        VoiceProfileArn:
+          $ref: '#/components/schemas/Arn'
+        VoiceProfileDomainId:
+          $ref: '#/components/schemas/NonEmptyString256'
+        CreatedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        UpdatedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        ExpirationTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
 security:
   - hmac: []

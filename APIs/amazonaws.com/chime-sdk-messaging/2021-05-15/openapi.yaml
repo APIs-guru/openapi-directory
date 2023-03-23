@@ -118,7 +118,7 @@ paths:
   '/channels/{channelArn}/channel-flow#x-amz-chime-bearer':
     put:
       operationId: AssociateChannelFlow
-      description: '<p>Associates a channel flow with a channel. Once associated, all messages to that channel go through channel flow processors. To stop processing, use the <code>DisassociateChannelFlow</code> API.</p> <note> <p>Only administrators or channel moderators can associate a channel flow. The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>Associates a channel flow with a channel. Once associated, all messages to that channel go through channel flow processors. To stop processing, use the <code>DisassociateChannelFlow</code> API.</p> <note> <p>Only administrators or channel moderators can associate a channel flow. The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>'
       responses:
         '200':
           description: Success
@@ -215,7 +215,7 @@ paths:
   '/channels/{channelArn}/memberships#operation=batch-create&x-amz-chime-bearer':
     post:
       operationId: BatchCreateChannelMembership
-      description: 'Adds a specified number of users to a channel. '
+      description: 'Adds a specified number of users and bots to a channel. '
       responses:
         '200':
           description: Success
@@ -275,7 +275,7 @@ paths:
         - name: channelArn
           in: path
           required: true
-          description: The ARN of the channel to which you're adding users.
+          description: The ARN of the channel to which you're adding users or bots.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -284,7 +284,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -313,7 +313,7 @@ paths:
                     - DEFAULT
                     - HIDDEN
                 MemberArns:
-                  description: The <code>AppInstanceUserArn</code>s of the members you want to add to the channel.
+                  description: The ARNs of the members you want to add to the channel. Only <code>AppInstanceUsers</code> and <code>AppInstanceBots</code> can be added as a channel member.
                   type: array
                   items:
                     $ref: '#/components/schemas/ChimeArn'
@@ -449,6 +449,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/SubChannelId'
                         - description: The ID of the SubChannel.
+                    ContentType:
+                      allOf:
+                        - $ref: '#/components/schemas/ContentType'
+                        - description: The content type of the call-back message.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -460,7 +464,7 @@ paths:
   /channels#x-amz-chime-bearer:
     post:
       operationId: CreateChannel
-      description: '<p>Creates a channel to which you can add users and send messages.</p> <p> <b>Restriction</b>: You can''t change a channel''s privacy.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>Creates a channel to which you can add users and send messages.</p> <p> <b>Restriction</b>: You can''t change a channel''s privacy.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>'
       responses:
         '201':
           description: Success
@@ -520,7 +524,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -620,6 +624,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/MinimumMembershipPercentage'
                         - description: The minimum allowed percentage of TargetMembershipsPerSubChannel users. Ceil of the calculated value is used in balancing members among SubChannels of the elastic channel.
+                ExpirationSettings:
+                  description: Settings that control the interval after which a channel is deleted.
+                  type: object
+                  properties:
+                    ExpirationDays:
+                      allOf:
+                        - $ref: '#/components/schemas/ExpirationDays'
+                        - description: The period in days after which the system automatically deletes a channel.
+                    ExpirationCriterion:
+                      allOf:
+                        - $ref: '#/components/schemas/ExpirationCriterion'
+                        - description: The conditions that must be met for a channel to expire.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -631,7 +647,7 @@ paths:
   '/channels/{channelArn}/bans#x-amz-chime-bearer':
     post:
       operationId: CreateChannelBan
-      description: '<p>Permanently bans a member from a channel. Moderators can''t add banned members to a channel. To undo a ban, you first have to <code>DeleteChannelBan</code>, and then <code>CreateChannelMembership</code>. Bans are cleaned up when you delete users or channels.</p> <p>If you ban a user who is already part of a channel, that user is automatically kicked from the channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>Permanently bans a member from a channel. Moderators can''t add banned members to a channel. To undo a ban, you first have to <code>DeleteChannelBan</code>, and then <code>CreateChannelMembership</code>. Bans are cleaned up when you delete users or channels.</p> <p>If you ban a user who is already part of a channel, that user is automatically kicked from the channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>'
       responses:
         '201':
           description: Success
@@ -700,7 +716,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -731,7 +747,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListChannelBans
-      description: <p>Lists all the users banned from a particular channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>Lists all the users and bots banned from a particular channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -806,7 +822,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -941,7 +957,7 @@ paths:
   '/channels/{channelArn}/memberships#x-amz-chime-bearer':
     post:
       operationId: CreateChannelMembership
-      description: '<p>Adds a user to a channel. The <code>InvitedBy</code> field in <code>ChannelMembership</code> is derived from the request header. A channel member can:</p> <ul> <li> <p>List messages</p> </li> <li> <p>Send messages</p> </li> <li> <p>Receive messages</p> </li> <li> <p>Edit their own messages</p> </li> <li> <p>Leave the channel</p> </li> </ul> <p>Privacy settings impact this action as follows:</p> <ul> <li> <p>Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.</p> </li> <li> <p>Private Channels: You must be a member to list or send messages.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>Adds a member to a channel. The <code>InvitedBy</code> field in <code>ChannelMembership</code> is derived from the request header. A channel member can:</p> <ul> <li> <p>List messages</p> </li> <li> <p>Send messages</p> </li> <li> <p>Receive messages</p> </li> <li> <p>Edit their own messages</p> </li> <li> <p>Leave the channel</p> </li> </ul> <p>Privacy settings impact this action as follows:</p> <ul> <li> <p>Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.</p> </li> <li> <p>Private Channels: You must be a member to list or send messages.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUserArn</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>'
       responses:
         '201':
           description: Success
@@ -1016,7 +1032,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1060,7 +1076,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListChannelMemberships
-      description: '<p>Lists all channel memberships in a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <p>If you want to list the channels to which a specific app instance user belongs, see the <a href="https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html">ListChannelMembershipsForAppInstanceUser</a> API.</p>'
+      description: '<p>Lists all channel memberships in a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note> <p>If you want to list the channels to which a specific app instance user belongs, see the <a href="https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html">ListChannelMembershipsForAppInstanceUser</a> API.</p>'
       responses:
         '200':
           description: Success
@@ -1144,7 +1160,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1174,7 +1190,7 @@ paths:
   '/channels/{channelArn}/moderators#x-amz-chime-bearer':
     post:
       operationId: CreateChannelModerator
-      description: '<p>Creates a new <code>ChannelModerator</code>. A channel moderator can:</p> <ul> <li> <p>Add and remove other members of the channel.</p> </li> <li> <p>Add and remove other moderators of the channel.</p> </li> <li> <p>Add and remove user bans for the channel.</p> </li> <li> <p>Redact messages in the channel.</p> </li> <li> <p>List messages in the channel.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>Creates a new <code>ChannelModerator</code>. A channel moderator can:</p> <ul> <li> <p>Add and remove other members of the channel.</p> </li> <li> <p>Add and remove other moderators of the channel.</p> </li> <li> <p>Add and remove user bans for the channel.</p> </li> <li> <p>Redact messages in the channel.</p> </li> <li> <p>List messages in the channel.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code>of the user that makes the API call as the value in the header.</p> </note>'
       responses:
         '201':
           description: Success
@@ -1243,7 +1259,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1274,7 +1290,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListChannelModerators
-      description: <p>Lists all the moderators for a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>Lists all the moderators for a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -1349,7 +1365,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1370,7 +1386,7 @@ paths:
   '/channels/{channelArn}#x-amz-chime-bearer':
     delete:
       operationId: DeleteChannel
-      description: <p>Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUserArn</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '204':
           description: Success
@@ -1423,7 +1439,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1448,7 +1464,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeChannel
-      description: <p>Returns the full details of a channel in an Amazon Chime <code>AppInstance</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>Returns the full details of a channel in an Amazon Chime <code>AppInstance</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -1505,7 +1521,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1513,7 +1529,7 @@ paths:
             maxLength: 1600
     put:
       operationId: UpdateChannel
-      description: '<p>Update a channel''s attributes.</p> <p> <b>Restriction</b>: You can''t change a channel''s privacy. </p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>Update a channel''s attributes.</p> <p> <b>Restriction</b>: You can''t change a channel''s privacy. </p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1576,7 +1592,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1612,7 +1628,7 @@ paths:
   '/channels/{channelArn}/bans/{memberArn}#x-amz-chime-bearer':
     delete:
       operationId: DeleteChannelBan
-      description: <p>Removes a user from a channel's ban list.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>Removes a member from a channel's ban list.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '204':
           description: Success
@@ -1674,7 +1690,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1690,7 +1706,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeChannelBan
-      description: <p>Returns the full details of a channel ban.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>Returns the full details of a channel ban.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -1762,7 +1778,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -2048,7 +2064,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -2073,7 +2089,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeChannelMembership
-      description: <p>Returns the full details of a user's channel membership.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>Returns the full details of a user's channel membership.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -2145,7 +2161,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -2163,7 +2179,7 @@ paths:
   '/channels/{channelArn}/messages/{messageId}#x-amz-chime-bearer':
     delete:
       operationId: DeleteChannelMessage
-      description: <p>Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by <code>UpdateChannelMessage</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by <code>UpdateChannelMessage</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '204':
           description: Success
@@ -2225,7 +2241,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -2250,7 +2266,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetChannelMessage
-      description: <p>Gets the full details of a channel message.</p> <note> <p>The x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>Gets the full details of a channel message.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -2322,7 +2338,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -2339,7 +2355,7 @@ paths:
             maxLength: 128
     put:
       operationId: UpdateChannelMessage
-      description: <p>Updates the content of a message.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>Updates the content of a message.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -2411,7 +2427,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -2423,13 +2439,14 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - Content
               properties:
                 Content:
                   description: The content of the message being updated.
                   type: string
                   pattern: '[\s\S]*'
-                  minLength: 0
-                  maxLength: 4096
+                  minLength: 1
                   format: password
                 Metadata:
                   description: The metadata of the message being updated.
@@ -2444,10 +2461,17 @@ paths:
                   pattern: '[-_a-zA-Z0-9]*'
                   minLength: 1
                   maxLength: 128
+                ContentType:
+                  description: The content type of the channel message.
+                  type: string
+                  pattern: '[\s\S]*'
+                  minLength: 0
+                  maxLength: 45
+                  format: password
   '/channels/{channelArn}/moderators/{channelModeratorArn}#x-amz-chime-bearer':
     delete:
       operationId: DeleteChannelModerator
-      description: <p>Deletes a channel moderator.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>Deletes a channel moderator.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '204':
           description: Success
@@ -2509,7 +2533,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -2597,7 +2621,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -2807,7 +2831,7 @@ paths:
   '/channels/{channelArn}#scope=app-instance-user-membership&app-instance-user-arn&x-amz-chime-bearer':
     get:
       operationId: DescribeChannelMembershipForAppInstanceUser
-      description: <p> Returns the details of a channel based on the membership of the specified <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p> Returns the details of a channel based on the membership of the specified <code>AppInstanceUser</code> or <code>AppInstanceBot</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -2864,7 +2888,7 @@ paths:
         - name: app-instance-user-arn
           in: query
           required: true
-          description: The ARN of the user in a channel.
+          description: The ARN of the user or bot in a channel.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -2873,7 +2897,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -2897,7 +2921,7 @@ paths:
   '/channels/{channelArn}#scope=app-instance-user-moderated-channel&app-instance-user-arn&x-amz-chime-bearer':
     get:
       operationId: DescribeChannelModeratedByAppInstanceUser
-      description: <p>Returns the full details of a channel moderated by the specified <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>Returns the full details of a channel moderated by the specified <code>AppInstanceUser</code> or <code>AppInstanceBot</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -2954,7 +2978,7 @@ paths:
         - name: app-instance-user-arn
           in: query
           required: true
-          description: The ARN of the <code>AppInstanceUser</code> in the moderated channel.
+          description: The ARN of the user or bot in the moderated channel.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -2963,7 +2987,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -2987,7 +3011,7 @@ paths:
   '/channels/{channelArn}/channel-flow/{channelFlowArn}#x-amz-chime-bearer':
     delete:
       operationId: DisassociateChannelFlow
-      description: '<p>Disassociates a channel flow from all its channels. Once disassociated, all messages to that channel stop going through the channel flow processor.</p> <note> <p>Only administrators or channel moderators can disassociate a channel flow. The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>Disassociates a channel flow from all its channels. Once disassociated, all messages to that channel stop going through the channel flow processor.</p> <note> <p>Only administrators or channel moderators can disassociate a channel flow.</p> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>'
       responses:
         '204':
           description: Success
@@ -3078,7 +3102,7 @@ paths:
   '/channels/{channelArn}/memberships/{memberArn}/preferences#x-amz-chime-bearer':
     get:
       operationId: GetChannelMembershipPreferences
-      description: Gets the membership preferences of an <code>AppInstanceUser</code> for the specified channel. The <code>AppInstanceUser</code> must be a member of the channel. Only the <code>AppInstanceUser</code> who owns the membership can retrieve preferences. Users in the <code>AppInstanceAdmin</code> and channel moderator roles can't retrieve preferences for other users. Banned users can't retrieve membership preferences for the channel from which they are banned.
+      description: <p>Gets the membership preferences of an <code>AppInstanceUser</code> or <code>AppInstanceBot</code> for the specified channel. A user or a bot must be a member of the channel and own the membership to be able to retrieve membership preferences. Users or bots in the <code>AppInstanceAdmin</code> and channel moderator roles can't retrieve preferences for other users or bots. Banned users or bots can't retrieve membership preferences for the channel from which they are banned.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -3144,7 +3168,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserARN</code> of the user making the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -3160,7 +3184,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: PutChannelMembershipPreferences
-      description: Sets the membership preferences of an <code>AppInstanceUser</code> for the specified channel. The <code>AppInstanceUser</code> must be a member of the channel. Only the <code>AppInstanceUser</code> who owns the membership can set preferences. Users in the <code>AppInstanceAdmin</code> and channel moderator roles can't set preferences for other users. Banned users can't set membership preferences for the channel from which they are banned.
+      description: <p>Sets the membership preferences of an <code>AppInstanceUser</code> or <code>AppIntanceBot</code> for the specified channel. The user or bot must be a member of the channel. Only the user or bot who owns the membership can set preferences. Users or bots in the <code>AppInstanceAdmin</code> and channel moderator roles can't set preferences for other users or users. Banned users or bots can't set membership preferences for the channel from which they are banned.</p> <note> <p>The x-amz-chime-bearer request header is mandatory. Use the ARN of an <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -3223,7 +3247,7 @@ paths:
         - name: memberArn
           in: path
           required: true
-          description: The <code>AppInstanceUserArn</code> of the member setting the preferences.
+          description: The ARN of the member setting the preferences.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -3232,7 +3256,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserARN</code> of the user making the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -3258,7 +3282,7 @@ paths:
   '/channels/{channelArn}/messages/{messageId}#scope=message-status&x-amz-chime-bearer':
     get:
       operationId: GetChannelMessageStatus
-      description: '<p>Gets message status for a specified <code>messageId</code>. Use this API to determine the intermediate status of messages going through channel flow processing. The API provides an alternative to retrieving message status if the event was not received because a client wasn''t connected to a websocket. </p> <p>Messages can have any one of these statuses.</p> <dl> <dt>SENT</dt> <dd> <p>Message processed successfully</p> </dd> <dt>PENDING</dt> <dd> <p>Ongoing processing</p> </dd> <dt>FAILED</dt> <dd> <p>Processing failed</p> </dd> <dt>DENIED</dt> <dd> <p>Messasge denied by the processor</p> </dd> </dl> <note> <ul> <li> <p>This API does not return statuses for denied messages, because we don''t store them once the processor denies them. </p> </li> <li> <p>Only the message sender can invoke this API.</p> </li> <li> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header</p> </li> </ul> </note>'
+      description: '<p>Gets message status for a specified <code>messageId</code>. Use this API to determine the intermediate status of messages going through channel flow processing. The API provides an alternative to retrieving message status if the event was not received because a client wasn''t connected to a websocket. </p> <p>Messages can have any one of these statuses.</p> <dl> <dt>SENT</dt> <dd> <p>Message processed successfully</p> </dd> <dt>PENDING</dt> <dd> <p>Ongoing processing</p> </dd> <dt>FAILED</dt> <dd> <p>Processing failed</p> </dd> <dt>DENIED</dt> <dd> <p>Messasge denied by the processor</p> </dd> </dl> <note> <ul> <li> <p>This API does not return statuses for denied messages, because we don''t store them once the processor denies them. </p> </li> <li> <p>Only the message sender can invoke this API.</p> </li> <li> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </li> </ul> </note>'
       responses:
         '200':
           description: Success
@@ -3502,7 +3526,7 @@ paths:
   /channels#scope=app-instance-user-memberships&x-amz-chime-bearer:
     get:
       operationId: ListChannelMembershipsForAppInstanceUser
-      description: <p> Lists all channels that a particular <code>AppInstanceUser</code> is a part of. Only an <code>AppInstanceAdmin</code> can call the API with a user ARN that is not their own. </p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p> Lists all channels that anr <code>AppInstanceUser</code> or <code>AppInstanceBot</code> is a part of. Only an <code>AppInstanceAdmin</code> can call the API with a user ARN that is not their own. </p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -3550,7 +3574,7 @@ paths:
         - name: app-instance-user-arn
           in: query
           required: false
-          description: The ARN of the <code>AppInstanceUser</code>s
+          description: The ARN of the user or bot.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -3577,7 +3601,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -3613,7 +3637,7 @@ paths:
   '/channels/{channelArn}/messages#x-amz-chime-bearer':
     get:
       operationId: ListChannelMessages
-      description: '<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. By default, sorted by creation timestamp in descending order.</p> <note> <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.</p> <p>Also, the x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. By default, sorted by creation timestamp in descending order.</p> <note> <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.</p> <p>Also, the <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3711,7 +3735,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -3748,7 +3772,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: SendChannelMessage
-      description: '<p>Sends a message to a particular channel that the member is a part of.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> <p>Also, <code>STANDARD</code> messages can contain 4KB of data and the 1KB of metadata. <code>CONTROL</code> messages can contain 30 bytes of data and no metadata.</p> </note>'
+      description: '<p>Sends a message to a particular channel that the member is a part of.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> <p>Also, <code>STANDARD</code> messages can contain 4KB of data and the 1KB of metadata. <code>CONTROL</code> messages can contain 30 bytes of data and no metadata.</p> </note>'
       responses:
         '201':
           description: Success
@@ -3811,7 +3835,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -3888,10 +3912,17 @@ paths:
                   pattern: '[-_a-zA-Z0-9]*'
                   minLength: 1
                   maxLength: 128
+                ContentType:
+                  description: The content type of the channel message.
+                  type: string
+                  pattern: '[\s\S]*'
+                  minLength: 0
+                  maxLength: 45
+                  format: password
   /channels#app-instance-arn&x-amz-chime-bearer:
     get:
       operationId: ListChannels
-      description: <p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p> <p class="title"> <b>Functionality &amp; restrictions</b> </p> <ul> <li> <p>Use privacy = <code>PUBLIC</code> to retrieve all public channels in the account.</p> </li> <li> <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the private channels in an account.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p> <p class="title"> <b>Functionality &amp; restrictions</b> </p> <ul> <li> <p>Use privacy = <code>PUBLIC</code> to retrieve all public channels in the account.</p> </li> <li> <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the private channels in an account.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -3975,7 +4006,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -4106,7 +4137,7 @@ paths:
   /channels#scope=app-instance-user-moderated-channels&x-amz-chime-bearer:
     get:
       operationId: ListChannelsModeratedByAppInstanceUser
-      description: <p>A list of the channels moderated by an <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>A list of the channels moderated by an <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -4154,7 +4185,7 @@ paths:
         - name: app-instance-user-arn
           in: query
           required: false
-          description: The ARN of the user in the moderated channel.
+          description: The ARN of the user or bot in the moderated channel.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -4181,7 +4212,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -4383,10 +4414,109 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/channels/{channelArn}/expiration-settings':
+    put:
+      operationId: PutChannelExpirationSettings
+      description: '<p>Sets the number of days before the channel is automatically deleted.</p> <note> <ul> <li> <p>A background process deletes expired channels within 6 hours of expiration. Actual deletion times may vary.</p> </li> <li> <p>Expired channels that have not yet been deleted appear as active, and you can update their expiration settings. The system honors the new settings.</p> </li> <li> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </li> </ul> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutChannelExpirationSettingsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ExpirationSettings:
+                  description: Settings that control the interval after which a channel is deleted.
+                  type: object
+                  properties:
+                    ExpirationDays:
+                      allOf:
+                        - $ref: '#/components/schemas/ExpirationDays'
+                        - description: The period in days after which the system automatically deletes a channel.
+                    ExpirationCriterion:
+                      allOf:
+                        - $ref: '#/components/schemas/ExpirationCriterion'
+                        - description: The conditions that must be met for a channel to expire.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/channels/{channelArn}/messages/{messageId}#operation=redact&x-amz-chime-bearer':
     post:
       operationId: RedactChannelMessage
-      description: '<p>Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4458,7 +4588,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -4495,7 +4625,7 @@ paths:
   /channels#operation=search:
     post:
       operationId: SearchChannels
-      description: Allows <code>ChimeBearer</code> to search channels by channel members. AppInstanceUsers can search across the channels that they belong to. AppInstanceAdmins can search across all channels.
+      description: <p>Allows the <code>ChimeBearer</code> to search channels by channel members. Users or bots can search across the channels that they belong to. Users in the <code>AppInstanceAdmin</code> role can search across all channels.</p> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p>
       responses:
         '200':
           description: Success
@@ -4783,7 +4913,7 @@ paths:
   '/channels/{channelArn}/readMarker#x-amz-chime-bearer':
     put:
       operationId: UpdateChannelReadMarker
-      description: <p>The details of the time when a user last read messages in a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: <p>The details of the time when a user last read messages in a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -4846,7 +4976,7 @@ paths:
         - name: x-amz-chime-bearer
           in: header
           required: true
-          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          description: The ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -5002,6 +5132,12 @@ components:
       pattern: '[-_a-zA-Z0-9]*'
       minLength: 1
       maxLength: 128
+    ContentType:
+      type: string
+      pattern: '[\s\S]*'
+      minLength: 0
+      maxLength: 45
+      format: password
     CreateChannelResponse:
       type: object
       properties:
@@ -5034,6 +5170,15 @@ components:
       type: integer
       minimum: 1
       maximum: 40
+    ExpirationDays:
+      type: integer
+      minimum: 1
+      maximum: 5475
+    ExpirationCriterion:
+      type: string
+      enum:
+        - CREATED_TIMESTAMP
+        - LAST_MESSAGE_TIMESTAMP
     CreateChannelBanResponse:
       type: object
       properties:
@@ -5336,6 +5481,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The tag key-value pairs.
+    PutChannelExpirationSettingsResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The channel ARN.
+        ExpirationSettings:
+          allOf:
+            - $ref: '#/components/schemas/ExpirationSettings'
+            - description: Settings that control the interval after which a channel is deleted.
     PutChannelMembershipPreferencesResponse:
       type: object
       properties:
@@ -5455,13 +5611,13 @@ components:
     PushNotificationTitle:
       type: string
       pattern: .*
-      minLength: 0
+      minLength: 1
       maxLength: 50
       format: password
     PushNotificationBody:
       type: string
       pattern: '[\s\S]*'
-      minLength: 0
+      minLength: 1
       maxLength: 150
       format: password
     PushNotificationType:
@@ -5577,7 +5733,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name in an Identity.
-      description: The details of a user.
+      description: The details of a user or bot.
     Members:
       type: array
       items:
@@ -5592,7 +5748,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/ChannelMembershipType'
-            - description: The membership types set for the channel users.
+            - description: The membership types set for the channel members.
         Members:
           allOf:
             - $ref: '#/components/schemas/Members'
@@ -5600,7 +5756,7 @@ components:
         ChannelArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel to which you're adding users.
+            - description: The ARN of the channel to which you're adding members.
         SubChannelId:
           allOf:
             - $ref: '#/components/schemas/SubChannelId'
@@ -5665,7 +5821,7 @@ components:
         MemberArns:
           allOf:
             - $ref: '#/components/schemas/MemberArns'
-            - description: The <code>AppInstanceUserArn</code>s of the members you want to add to the channel.
+            - description: The ARNs of the members you want to add to the channel. Only <code>AppInstanceUsers</code> and <code>AppInstanceBots</code> can be added as a channel member.
         SubChannelId:
           allOf:
             - $ref: '#/components/schemas/SubChannelId'
@@ -5710,6 +5866,21 @@ components:
             - $ref: '#/components/schemas/MinimumMembershipPercentage'
             - description: The minimum allowed percentage of TargetMembershipsPerSubChannel users. Ceil of the calculated value is used in balancing members among SubChannels of the elastic channel.
       description: The attributes required to configure and create an elastic channel. An elastic channel can support a maximum of 1-million members.
+    ExpirationSettings:
+      type: object
+      required:
+        - ExpirationDays
+        - ExpirationCriterion
+      properties:
+        ExpirationDays:
+          allOf:
+            - $ref: '#/components/schemas/ExpirationDays'
+            - description: The period in days after which the system automatically deletes a channel.
+        ExpirationCriterion:
+          allOf:
+            - $ref: '#/components/schemas/ExpirationCriterion'
+            - description: The conditions that must be met for a channel to expire.
+      description: Settings that control the interval after which a channel is deleted.
     Channel:
       type: object
       properties:
@@ -5757,6 +5928,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ElasticChannelConfiguration'
             - description: The attributes required to configure and create an elastic channel. An elastic channel can support a maximum of 1-million members.
+        ExpirationSettings:
+          allOf:
+            - $ref: '#/components/schemas/ExpirationSettings'
+            - description: Settings that control when a channel expires.
       description: The details of a channel.
     ChannelAssociatedWithFlowSummary:
       type: object
@@ -5879,6 +6054,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SubChannelId'
             - description: The ID of the SubChannel.
+        ContentType:
+          allOf:
+            - $ref: '#/components/schemas/ContentType'
+            - description: The content type of the call-back message.
       description: Stores information about a callback.
     ChannelFlowCallbackRequest:
       type: object
@@ -6118,6 +6297,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SubChannelId'
             - description: The ID of the SubChannel.
+        ContentType:
+          allOf:
+            - $ref: '#/components/schemas/ContentType'
+            - description: The content type of the channel message.
       description: The details of a message in a channel.
     ChannelMessageStatus:
       type: string
@@ -6178,6 +6361,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MessageAttributeMap'
             - description: The message attribues listed in a the summary of a channel message.
+        ContentType:
+          allOf:
+            - $ref: '#/components/schemas/ContentType'
+            - description: The content type of the channel messsage listed in the summary.
       description: Summary of the messages in a <code>Channel</code>.
     ChannelMessageSummaryList:
       type: array
@@ -6369,6 +6556,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ElasticChannelConfiguration'
             - description: 'The attributes required to configure and create an elastic channel. An elastic channel can support a maximum of 1-million users, excluding moderators.'
+        ExpirationSettings:
+          allOf:
+            - $ref: '#/components/schemas/ExpirationSettings'
+            - description: Settings that control the interval after which the channel is automatically deleted.
     DeleteChannelBanRequest:
       type: object
       title: DeleteChannelBanRequest
@@ -6602,6 +6793,14 @@ components:
             - $ref: '#/components/schemas/LambdaConfiguration'
             - description: Indicates that the processor is of type Lambda.
       description: A processor's metadata.
+    PutChannelExpirationSettingsRequest:
+      type: object
+      title: PutChannelExpirationSettingsRequest
+      properties:
+        ExpirationSettings:
+          allOf:
+            - $ref: '#/components/schemas/ExpirationSettings'
+            - description: Settings that control the interval after which a channel is deleted.
     PutChannelMembershipPreferencesRequest:
       type: object
       required:
@@ -6707,6 +6906,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SubChannelId'
             - description: The ID of the SubChannel in the request.
+        ContentType:
+          allOf:
+            - $ref: '#/components/schemas/ContentType'
+            - description: The content type of the channel message.
     SubChannelSummary:
       type: object
       properties:
@@ -6777,11 +6980,13 @@ components:
             - description: The name of the channel flow.
     UpdateChannelMessageRequest:
       type: object
+      required:
+        - Content
       title: UpdateChannelMessageRequest
       properties:
         Content:
           allOf:
-            - $ref: '#/components/schemas/Content'
+            - $ref: '#/components/schemas/NonEmptyContent'
             - description: The content of the message being updated.
         Metadata:
           allOf:
@@ -6791,6 +6996,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SubChannelId'
             - description: <p>The ID of the SubChannel in the request.</p> <note> <p>Only required when updating messages in a SubChannel that the user belongs to.</p> </note>
+        ContentType:
+          allOf:
+            - $ref: '#/components/schemas/ContentType'
+            - description: The content type of the channel message.
     UpdateChannelReadMarkerRequest:
       type: object
       title: UpdateChannelReadMarkerRequest

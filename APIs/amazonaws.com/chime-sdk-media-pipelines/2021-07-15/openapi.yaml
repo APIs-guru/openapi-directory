@@ -3,7 +3,7 @@ info:
   version: '2021-07-15'
   x-release: v4
   title: Amazon Chime SDK Media Pipelines
-  description: 'The Amazon Chime SDK media pipeline APIs in this section allow software developers to create Amazon Chime SDK media pipelines that capture, concatenate, or stream your Amazon Chime SDK meetings. For more information about media pipleines, see <a href="http://amazonaws.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Media_Pipelines.html">Amazon Chime SDK media pipelines</a>. '
+  description: 'The Amazon Chime SDK media pipeline APIs in this section allow software developers to create Amazon Chime SDK media pipelines that capture, concatenate, or stream your Amazon Chime SDK meetings. For more information about media pipelines, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_Operations_Amazon_Chime_SDK_Media_Pipelines.html">Amazon Chime SDK media pipelines</a>. '
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -219,7 +219,7 @@ paths:
                     SourceConfiguration:
                       allOf:
                         - $ref: '#/components/schemas/SourceConfiguration'
-                        - description: The source configuration for a specified media pipline.
+                        - description: The source configuration for a specified media pipeline.
                     ArtifactsConfiguration:
                       allOf:
                         - $ref: '#/components/schemas/ArtifactsConfiguration'
@@ -230,7 +230,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
-                  maxItems: 50
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -411,7 +411,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
-                  maxItems: 50
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -420,10 +420,357 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /media-insights-pipelines:
+    post:
+      operationId: CreateMediaInsightsPipeline
+      description: Creates a media insights pipeline.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMediaInsightsPipelineResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - MediaInsightsPipelineConfigurationArn
+              properties:
+                MediaInsightsPipelineConfigurationArn:
+                  description: The ARN of the pipeline's configuration.
+                  type: string
+                  pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+                  minLength: 1
+                  maxLength: 1024
+                  format: password
+                KinesisVideoStreamSourceRuntimeConfiguration:
+                  description: The runtime configuration settings for the Kinesis video stream source.
+                  type: object
+                  properties:
+                    Streams:
+                      allOf:
+                        - $ref: '#/components/schemas/Streams'
+                        - description: The streams in the source runtime configuration of a Kinesis video stream.
+                    MediaEncoding:
+                      allOf:
+                        - $ref: '#/components/schemas/MediaEncoding'
+                        - description: '<p>Specifies the encoding of your input audio. Supported format: PCM (only signed 16-bit little-endian audio formats, which does not include WAV)</p> <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> in the <i>Amazon Transcribe Developer Guide</i>.</p>'
+                    MediaSampleRate:
+                      allOf:
+                        - $ref: '#/components/schemas/MediaSampleRateHertz'
+                        - description: '<p>The sample rate of the input audio (in hertz). Low-quality audio, such as telephone audio, is typically around 8,000 Hz. High-quality audio typically ranges from 16,000 Hz to 48,000 Hz. Note that the sample rate you specify must match that of your audio.</p> <p>Valid Range: Minimum value of 8000. Maximum value of 48000.</p>'
+                MediaInsightsRuntimeMetadata:
+                  description: The runtime metadata for the media insights pipeline. Consists of a key-value map of strings.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
+                KinesisVideoStreamRecordingSourceRuntimeConfiguration:
+                  description: A structure that contains the runtime settings for recording a Kinesis video stream.
+                  type: object
+                  properties:
+                    Streams:
+                      allOf:
+                        - $ref: '#/components/schemas/RecordingStreamList'
+                        - description: The stream or streams to be recorded.
+                    FragmentSelector:
+                      allOf:
+                        - $ref: '#/components/schemas/FragmentSelector'
+                        - description: Describes the timestamp range and timestamp origin of a range of fragments in the Kinesis video stream.
+                S3RecordingSinkRuntimeConfiguration:
+                  description: A structure that holds the settings for transmitting audio and video recordings to the runtime Amazon S3 bucket.
+                  type: object
+                  properties:
+                    Destination:
+                      allOf:
+                        - $ref: '#/components/schemas/Arn'
+                        - description: The URL of the S3 bucket used as the runtime sink.
+                    RecordingFileFormat:
+                      allOf:
+                        - $ref: '#/components/schemas/RecordingFileFormat'
+                        - description: The file formats for the audio and video files sent to the Amazon S3 bucket.
+                Tags:
+                  description: The tags assigned to the media insights pipeline.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 200
+                ClientRequestToken:
+                  description: The unique identifier for the media insights pipeline request.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /media-insights-pipeline-configurations:
+    post:
+      operationId: CreateMediaInsightsPipelineConfiguration
+      description: A structure that contains the static configurations for a media insights pipeline.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMediaInsightsPipelineConfigurationResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - MediaInsightsPipelineConfigurationName
+                - ResourceAccessRoleArn
+                - Elements
+              properties:
+                MediaInsightsPipelineConfigurationName:
+                  description: The name of the media insights pipeline configuration.
+                  type: string
+                  pattern: '^[0-9a-zA-Z._-]+'
+                  minLength: 2
+                  maxLength: 64
+                ResourceAccessRoleArn:
+                  description: 'The ARN of the role used by the service to access Amazon Web Services resources, including <code>Transcribe</code> and <code>Transcribe Call Analytics</code>, on the caller’s behalf.'
+                  type: string
+                  pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+                  minLength: 1
+                  maxLength: 1024
+                  format: password
+                RealTimeAlertConfiguration:
+                  description: A structure that contains the configuration settings for real-time alerts.
+                  type: object
+                  properties:
+                    Disabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Turns off real-time alerts.
+                    Rules:
+                      allOf:
+                        - $ref: '#/components/schemas/RealTimeAlertRuleList'
+                        - description: The rules in the alert. Rules specify the words or phrases that you want to be notified about.
+                Elements:
+                  description: 'The elements in the request, such as a processor for Amazon Transcribe or a sink for a Kinesis Data Stream.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MediaInsightsPipelineConfigurationElement'
+                Tags:
+                  description: The tags assigned to the media insights pipeline configuration.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 200
+                ClientRequestToken:
+                  description: The unique identifier for the media insights pipeline configuration request.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListMediaInsightsPipelineConfigurations
+      description: Lists the available media insights pipeline configurations.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMediaInsightsPipelineConfigurationsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: The token used to return the next page of results.
+          schema:
+            type: string
+            pattern: .*
+            maxLength: 4096
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
   /sdk-media-live-connector-pipelines:
     post:
       operationId: CreateMediaLiveConnectorPipeline
-      description: Creates a streaming media pipeline in an Amazon Chime SDK meeting.
+      description: Creates a media live connector pipeline in an Amazon Chime SDK meeting.
       responses:
         '201':
           description: Success
@@ -485,14 +832,14 @@ paths:
                 - Sinks
               properties:
                 Sources:
-                  description: The media pipeline's data sources.
+                  description: The media live connector pipeline's data sources.
                   type: array
                   items:
                     $ref: '#/components/schemas/LiveConnectorSourceConfiguration'
                   minItems: 1
                   maxItems: 1
                 Sinks:
-                  description: The media pipeline's data sinks.
+                  description: The media live connector pipeline's data sinks.
                   type: array
                   items:
                     $ref: '#/components/schemas/LiveConnectorSinkConfiguration'
@@ -506,12 +853,12 @@ paths:
                   maxLength: 64
                   format: password
                 Tags:
-                  description: The tags associated with the media pipeline.
+                  description: The tags associated with the media live connector pipeline.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
-                  maxItems: 50
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -649,6 +996,240 @@ paths:
             pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
             minLength: 36
             maxLength: 36
+  '/media-insights-pipeline-configurations/{identifier}':
+    delete:
+      operationId: DeleteMediaInsightsPipelineConfiguration
+      description: Deletes the specified configuration settings.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: identifier
+          in: path
+          required: true
+          description: The unique identifier of the resource to be deleted. Valid values include the name and ARN of the media insights pipeline configuration.
+          schema:
+            type: string
+            pattern: .*\S.*
+            maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetMediaInsightsPipelineConfiguration
+      description: Gets the configuration settings for a media insights pipeline.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMediaInsightsPipelineConfigurationResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: identifier
+          in: path
+          required: true
+          description: The unique identifier of the requested resource. Valid values include the name and ARN of the media insights pipeline configuration.
+          schema:
+            type: string
+            pattern: .*\S.*
+            maxLength: 1024
+    put:
+      operationId: UpdateMediaInsightsPipelineConfiguration
+      description: Updates the media insights pipeline's configuration settings.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMediaInsightsPipelineConfigurationResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: identifier
+          in: path
+          required: true
+          description: The unique identifier for the resource to be updated. Valid values include the name and ARN of the media insights pipeline configuration.
+          schema:
+            type: string
+            pattern: .*\S.*
+            maxLength: 1024
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceAccessRoleArn
+                - Elements
+              properties:
+                ResourceAccessRoleArn:
+                  description: The ARN of the role used by the service to access Amazon Web Services resources.
+                  type: string
+                  pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+                  minLength: 1
+                  maxLength: 1024
+                  format: password
+                RealTimeAlertConfiguration:
+                  description: A structure that contains the configuration settings for real-time alerts.
+                  type: object
+                  properties:
+                    Disabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Turns off real-time alerts.
+                    Rules:
+                      allOf:
+                        - $ref: '#/components/schemas/RealTimeAlertRuleList'
+                        - description: The rules in the alert. Rules specify the words or phrases that you want to be notified about.
+                Elements:
+                  description: 'The elements in the request, such as a processor for Amazon Transcribe or a sink for a Kinesis Data Stream..'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MediaInsightsPipelineConfigurationElement'
   '/sdk-media-pipelines/{mediaPipelineId}':
     delete:
       operationId: DeleteMediaPipeline
@@ -942,7 +1523,7 @@ paths:
   /tags#operation=tag-resource:
     post:
       operationId: TagResource
-      description: 'The ARN of the media pipeline that you want to tag. Consists of he pipeline''s endpoint region, resource ID, and pipeline ID.'
+      description: 'The ARN of the media pipeline that you want to tag. Consists of the pipeline''s endpoint region, resource ID, and pipeline ID.'
       responses:
         '204':
           description: Success
@@ -1022,7 +1603,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
-                  maxItems: 50
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1114,7 +1695,94 @@ paths:
                   items:
                     $ref: '#/components/schemas/TagKey'
                   minItems: 1
-                  maxItems: 50
+                  maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/media-insights-pipeline-status/{identifier}':
+    put:
+      operationId: UpdateMediaInsightsPipelineStatus
+      description: Updates the status of a media insights pipeline.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: identifier
+          in: path
+          required: true
+          description: The unique identifier of the resource to be updated. Valid values include the ID and ARN of the media insights pipeline.
+          schema:
+            type: string
+            pattern: .*\S.*
+            maxLength: 1024
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - UpdateStatus
+              properties:
+                UpdateStatus:
+                  description: The requested status of the media insights pipeline.
+                  type: string
+                  enum:
+                    - Pause
+                    - Resume
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1273,13 +1941,130 @@ components:
             - $ref: '#/components/schemas/S3BucketSinkConfiguration'
             - description: The configuration settings for an Amazon S3 bucket sink.
       description: The data sink of the configuration object.
+    CreateMediaInsightsPipelineResponse:
+      type: object
+      required:
+        - MediaInsightsPipeline
+      properties:
+        MediaInsightsPipeline:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsPipeline'
+            - description: The media insights pipeline object.
+    Streams:
+      type: array
+      items:
+        $ref: '#/components/schemas/StreamConfiguration'
+      minItems: 1
+      maxItems: 2
+    MediaEncoding:
+      type: string
+      enum:
+        - pcm
+    MediaSampleRateHertz:
+      type: integer
+      minimum: 8000
+      maximum: 48000
+    String:
+      type: string
+      pattern: .*
+      maxLength: 4096
+    RecordingStreamList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecordingStreamConfiguration'
+      minItems: 2
+      maxItems: 2
+    FragmentSelector:
+      type: object
+      required:
+        - FragmentSelectorType
+        - TimestampRange
+      properties:
+        FragmentSelectorType:
+          allOf:
+            - $ref: '#/components/schemas/FragmentSelectorType'
+            - description: 'The origin of the timestamps to use, <code>Server</code> or <code>Producer</code>. For more information, see <a href="kinesisvideostreams/latest/dg/API_dataplane_StartSelector.html#KinesisVideo-Type-dataplane_StartSelector-StartSelectorType">StartSelectorType</a> in the <i>Amazon Kinesis Video Streams Developer Guide</i>.'
+        TimestampRange:
+          allOf:
+            - $ref: '#/components/schemas/TimestampRange'
+            - description: The range of timestamps to return.
+      description: '<p>Describes the timestamp range and timestamp origin of a range of fragments.</p> <p>Only fragments with a start timestamp greater than or equal to the given start time and less than or equal to the end time are returned. For example, say a stream contains fragments with the following start timestamps:</p> <ul> <li> <p>00:00:00</p> </li> <li> <p>00:00:02</p> </li> <li> <p>00:00:04</p> </li> <li> <p>00:00:06</p> </li> </ul> <p>A fragment selector range with a start time of 00:00:01 and end time of 00:00:04 would return the fragments with start times of 00:00:02 and 00:00:04.</p>'
+    Arn:
+      type: string
+      pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+      minLength: 1
+      maxLength: 1024
+      format: password
+    RecordingFileFormat:
+      type: string
+      enum:
+        - Wav
+        - Opus
+    NotFoundException: {}
+    CreateMediaInsightsPipelineConfigurationResponse:
+      type: object
+      properties:
+        MediaInsightsPipelineConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsPipelineConfiguration'
+            - description: The configuration settings for the media insights pipeline.
+    Boolean:
+      type: boolean
+    RealTimeAlertRuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RealTimeAlertRule'
+      minItems: 1
+      maxItems: 3
+    MediaInsightsPipelineConfigurationElement:
+      type: object
+      required:
+        - Type
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsPipelineConfigurationElementType'
+            - description: The element type.
+        AmazonTranscribeCallAnalyticsProcessorConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AmazonTranscribeCallAnalyticsProcessorConfiguration'
+            - description: The analytics configuration settings for transcribing audio in a media insights pipeline configuration element.
+        AmazonTranscribeProcessorConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AmazonTranscribeProcessorConfiguration'
+            - description: The transcription processor configuration settings in a media insights pipeline configuration element.
+        KinesisDataStreamSinkConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/KinesisDataStreamSinkConfiguration'
+            - description: The configuration settings for the Kinesis Data Stream Sink in a media insights pipeline configuration element.
+        S3RecordingSinkConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/S3RecordingSinkConfiguration'
+            - description: The configuration settings for the Amazon S3 recording bucket in a media insights pipeline configuration element.
+        VoiceAnalyticsProcessorConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/VoiceAnalyticsProcessorConfiguration'
+            - description: The voice analytics configuration settings in a media insights pipeline configuration element.
+        LambdaFunctionSinkConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionSinkConfiguration'
+            - description: The configuration settings for the Amazon Web Services Lambda sink in a media insights pipeline configuration element.
+        SqsQueueSinkConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SqsQueueSinkConfiguration'
+            - description: The configuration settings for an SQS queue sink in a media insights pipeline configuration element.
+        SnsTopicSinkConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SnsTopicSinkConfiguration'
+            - description: The configuration settings for an SNS topic sink in a media insights pipeline configuration element.
+      description: An element in a media insights pipeline configuration.
     CreateMediaLiveConnectorPipelineResponse:
       type: object
       properties:
         MediaLiveConnectorPipeline:
           allOf:
             - $ref: '#/components/schemas/MediaLiveConnectorPipeline'
-            - description: The new media pipeline.
+            - description: The new media live connector pipeline.
     LiveConnectorSourceConfiguration:
       type: object
       required:
@@ -1308,9 +2093,9 @@ components:
         RTMPConfiguration:
           allOf:
             - $ref: '#/components/schemas/LiveConnectorRTMPConfiguration'
-            - description: The sink configuration's RTMP configuration setttings.
+            - description: The sink configuration's RTMP configuration settings.
       description: The media pipeline's sink configuration settings.
-    NotFoundException: {}
+    ConflictException: {}
     GetMediaCapturePipelineResponse:
       type: object
       properties:
@@ -1318,6 +2103,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/MediaCapturePipeline'
             - description: The media pipeline object.
+    GetMediaInsightsPipelineConfigurationResponse:
+      type: object
+      properties:
+        MediaInsightsPipelineConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsPipelineConfiguration'
+            - description: The requested media insights pipeline configuration.
     GetMediaPipelineResponse:
       type: object
       properties:
@@ -1336,6 +2128,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The token used to retrieve the next page of results. '
+    ListMediaInsightsPipelineConfigurationsResponse:
+      type: object
+      properties:
+        MediaInsightsPipelineConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsPipelineConfigurationSummaryList'
+            - description: The requested list of media insights pipeline configurations.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The token used to return the next page of results. '
     ListMediaPipelinesResponse:
       type: object
       properties:
@@ -1364,17 +2167,207 @@ components:
       type: string
       minLength: 1
       maxLength: 128
+    UpdateMediaInsightsPipelineConfigurationResponse:
+      type: object
+      properties:
+        MediaInsightsPipelineConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsPipelineConfiguration'
+            - description: The updated configuration settings.
     AmazonResourceName:
       type: string
       pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
       minLength: 1
       maxLength: 1011
-    Arn:
+    CallAnalyticsLanguageCode:
       type: string
-      pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+      enum:
+        - en-US
+        - en-GB
+        - es-US
+        - fr-CA
+        - fr-FR
+        - en-AU
+        - it-IT
+        - de-DE
+        - pt-BR
+    VocabularyName:
+      type: string
+      pattern: '^[0-9a-zA-Z._-]+'
       minLength: 1
-      maxLength: 1024
-      format: password
+      maxLength: 200
+    VocabularyFilterName:
+      type: string
+      pattern: '^[0-9a-zA-Z._-]+'
+      minLength: 1
+      maxLength: 200
+    VocabularyFilterMethod:
+      type: string
+      enum:
+        - remove
+        - mask
+        - tag
+    ModelName:
+      type: string
+      pattern: '^[0-9a-zA-Z._-]+'
+      minLength: 1
+      maxLength: 200
+    PartialResultsStability:
+      type: string
+      enum:
+        - high
+        - medium
+        - low
+    ContentType:
+      type: string
+      enum:
+        - PII
+    PiiEntityTypes:
+      type: string
+      pattern: '^[A-Z_, ]+'
+      minLength: 1
+      maxLength: 300
+    PostCallAnalyticsSettings:
+      type: object
+      required:
+        - OutputLocation
+        - DataAccessRoleArn
+      properties:
+        OutputLocation:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL of the Amazon S3 bucket that contains the post-call data.
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The ARN of the role used by Amazon Web Services Transcribe to upload your post call analysis. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html">Post-call analytics with real-time transcriptions</a> in the <i>Amazon Transcribe Developer Guide</i>.'
+        ContentRedactionOutput:
+          allOf:
+            - $ref: '#/components/schemas/ContentRedactionOutput'
+            - description: The content redaction output settings for a post-call analysis task.
+        OutputEncryptionKMSKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the KMS (Key Management System) key used to encrypt the output.
+      description: The settings for a post-call voice analytics task.
+    CategoryNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CategoryName'
+      minItems: 1
+      maxItems: 20
+    AmazonTranscribeCallAnalyticsProcessorConfiguration:
+      type: object
+      required:
+        - LanguageCode
+      properties:
+        LanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsLanguageCode'
+            - description: The language code in the configuration.
+        VocabularyName:
+          allOf:
+            - $ref: '#/components/schemas/VocabularyName'
+            - description: '<p>Specifies the name of the custom vocabulary to use when processing a transcription. Note that vocabulary names are case sensitive.</p> <p>If the language of the specified custom vocabulary doesn''t match the language identified in your media, the custom vocabulary is not applied to your transcription.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html">Custom vocabularies</a> in the <i>Amazon Transcribe Developer Guide</i>.</p> <p>Length Constraints: Minimum length of 1. Maximum length of 200. </p>'
+        VocabularyFilterName:
+          allOf:
+            - $ref: '#/components/schemas/VocabularyFilterName'
+            - description: '<p>Specifies the name of the custom vocabulary filter to use when processing a transcription. Note that vocabulary filter names are case sensitive.</p> <p>If the language of the specified custom vocabulary filter doesn''t match the language identified in your media, the vocabulary filter is not applied to your transcription.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted words</a> in the <i>Amazon Transcribe Developer Guide</i>.</p> <p>Length Constraints: Minimum length of 1. Maximum length of 200. </p>'
+        VocabularyFilterMethod:
+          allOf:
+            - $ref: '#/components/schemas/VocabularyFilterMethod'
+            - description: '<p>Specifies how to apply a vocabulary filter to a transcript.</p> <p>To replace words with <b>***</b>, choose <code>mask</code>.</p> <p>To delete words, choose <code>remove</code>.</p> <p>To flag words without changing them, choose <code>tag</code>. </p>'
+        LanguageModelName:
+          allOf:
+            - $ref: '#/components/schemas/ModelName'
+            - description: '<p>Specifies the name of the custom language model to use when processing a transcription. Note that language model names are case sensitive.</p> <p>The language of the specified language model must match the language code specified in the transcription request. If the languages don''t match, the custom language model isn''t applied. Language mismatches don''t generate errors or warnings.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html">Custom language models</a> in the <i>Amazon Transcribe Developer Guide</i>.</p>'
+        EnablePartialResultsStabilization:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Enables partial result stabilization for your transcription. Partial result stabilization can reduce latency in your output, but may impact accuracy. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result stabilization</a> in the <i>Amazon Transcribe Developer Guide</i>.'
+        PartialResultsStability:
+          allOf:
+            - $ref: '#/components/schemas/PartialResultsStability'
+            - description: '<p>Specifies the level of stability to use when you enable partial results stabilization (<code>EnablePartialResultsStabilization</code>).</p> <p>Low stability provides the highest accuracy. High stability transcribes faster, but with slightly lower accuracy.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result stabilization</a> in the <i>Amazon Transcribe Developer Guide</i>.</p>'
+        ContentIdentificationType:
+          allOf:
+            - $ref: '#/components/schemas/ContentType'
+            - description: '<p>Labels all personally identifiable information (PII) identified in your transcript.</p> <p>Content identification is performed at the segment level; PII specified in <code>PiiEntityTypes</code> is flagged upon complete transcription of an audio segment.</p> <p>You can’t set <code>ContentIdentificationType</code> and <code>ContentRedactionType</code> in the same request. If you do, your request returns a <code>BadRequestException</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html">Redacting or identifying personally identifiable information</a> in the <i>Amazon Transcribe Developer Guide</i>.</p>'
+        ContentRedactionType:
+          allOf:
+            - $ref: '#/components/schemas/ContentType'
+            - description: '<p>Redacts all personally identifiable information (PII) identified in your transcript.</p> <p>Content redaction is performed at the segment level; PII specified in <code>PiiEntityTypes</code> is redacted upon complete transcription of an audio segment.</p> <p>You can’t set <code>ContentRedactionType</code> and <code>ContentIdentificationType</code> in the same request. If you do, your request returns a <code>BadRequestException</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html">Redacting or identifying personally identifiable information</a> in the <i>Amazon Transcribe Developer Guide</i>.</p>'
+        PiiEntityTypes:
+          allOf:
+            - $ref: '#/components/schemas/PiiEntityTypes'
+            - description: '<p>Specifies the types of personally identifiable information (PII) to redact from a transcript. You can include as many types as you''d like, or you can select <code>ALL</code>.</p> <p>To include <code>PiiEntityTypes</code> in your Call Analytics request, you must also include <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>, but you can''t include both. </p> <p>Values must be comma-separated and can include: <code>ADDRESS</code>, <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>, <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>, <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>, <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, <code>SSN</code>, or <code>ALL</code>.</p> <p>Length Constraints: Minimum length of 1. Maximum length of 300.</p>'
+        FilterPartialResults:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'If true, <code>UtteranceEvents</code> with <code>IsPartial: true</code> are filtered out of the insights target.'
+        PostCallAnalyticsSettings:
+          allOf:
+            - $ref: '#/components/schemas/PostCallAnalyticsSettings'
+            - description: The settings for a post-call analysis task in an analytics configuration.
+        CallAnalyticsStreamCategories:
+          allOf:
+            - $ref: '#/components/schemas/CategoryNameList'
+            - description: 'By default, all <code>CategoryEvents</code> will be sent to the insights target. If this parameter is specified, only included categories will be sent to the insights target. '
+      description: A structure that contains the configuration settings for an Amazon Transcribe call analytics processor.
+    AmazonTranscribeProcessorConfiguration:
+      type: object
+      required:
+        - LanguageCode
+      properties:
+        LanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsLanguageCode'
+            - description: '<p>The language code that represents the language spoken in your audio.</p> <p>If you''re unsure of the language spoken in your audio, consider using <code>IdentifyLanguage</code> to enable automatic language identification.</p> <p>For a list of languages that real-time Call Analytics supports, see the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported languages table</a> in the <i>Amazon Transcribe Developer Guide</i>.</p>'
+        VocabularyName:
+          allOf:
+            - $ref: '#/components/schemas/VocabularyName'
+            - description: '<p>The name of the custom vocabulary that you specified in your Call Analytics request.</p> <p>Length Constraints: Minimum length of 1. Maximum length of 200.</p>'
+        VocabularyFilterName:
+          allOf:
+            - $ref: '#/components/schemas/VocabularyFilterName'
+            - description: '<p>The name of the custom vocabulary filter that you specified in your Call Analytics request.</p> <p>Length Constraints: Minimum length of 1. Maximum length of 200.</p>'
+        VocabularyFilterMethod:
+          allOf:
+            - $ref: '#/components/schemas/VocabularyFilterMethod'
+            - description: The vocabulary filtering method used in your Call Analytics transcription.
+        ShowSpeakerLabel:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Enables speaker partitioning (diarization) in your transcription output. Speaker partitioning labels the speech from individual speakers in your media file.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html">Partitioning speakers (diarization)</a> in the <i>Amazon Transcribe Developer Guide</i>.</p>'
+        EnablePartialResultsStabilization:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Enables partial result stabilization for your transcription. Partial result stabilization can reduce latency in your output, but may impact accuracy.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result stabilization</a> in the <i>Amazon Transcribe Developer Guide</i>.</p>'
+        PartialResultsStability:
+          allOf:
+            - $ref: '#/components/schemas/PartialResultsStability'
+            - description: '<p>The level of stability to use when you enable partial results stabilization (<code>EnablePartialResultsStabilization</code>).</p> <p>Low stability provides the highest accuracy. High stability transcribes faster, but with slightly lower accuracy.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result stabilization</a> in the <i>Amazon Transcribe Developer Guide</i>.</p>'
+        ContentIdentificationType:
+          allOf:
+            - $ref: '#/components/schemas/ContentType'
+            - description: '<p>Labels all personally identifiable information (PII) identified in your transcript.</p> <p>Content identification is performed at the segment level; PII specified in <code>PiiEntityTypes</code> is flagged upon complete transcription of an audio segment.</p> <p>You can’t set <code>ContentIdentificationType</code> and <code>ContentRedactionType</code> in the same request. If you set both, your request returns a <code>BadRequestException</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html">Redacting or identifying personally identifiable information</a> in the <i>Amazon Transcribe Developer Guide</i>.</p>'
+        ContentRedactionType:
+          allOf:
+            - $ref: '#/components/schemas/ContentType'
+            - description: '<p>Redacts all personally identifiable information (PII) identified in your transcript.</p> <p>Content redaction is performed at the segment level; PII specified in PiiEntityTypes is redacted upon complete transcription of an audio segment.</p> <p>You can’t set ContentRedactionType and ContentIdentificationType in the same request. If you set both, your request returns a <code>BadRequestException</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html">Redacting or identifying personally identifiable information</a> in the <i>Amazon Transcribe Developer Guide</i>.</p>'
+        PiiEntityTypes:
+          allOf:
+            - $ref: '#/components/schemas/PiiEntityTypes'
+            - description: '<p>The types of personally identifiable information (PII) to redact from a transcript. You can include as many types as you''d like, or you can select <code>ALL</code>.</p> <p>To include <code>PiiEntityTypes</code> in your Call Analytics request, you must also include <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>, but you can''t include both.</p> <p>Values must be comma-separated and can include: <code>ADDRESS</code>, <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>, <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>, <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>, <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, <code>SSN</code>, or <code>ALL</code>.</p> <p>Length Constraints: Minimum length of 1. Maximum length of 300.</p>'
+        LanguageModelName:
+          allOf:
+            - $ref: '#/components/schemas/ModelName'
+            - description: '<p>The name of the custom language model that you want to use when processing your transcription. Note that language model names are case sensitive.</p> <p>The language of the specified language model must match the language code you specify in your transcription request. If the languages don''t match, the custom language model isn''t applied. There are no errors or warnings associated with a language mismatch.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html">Custom language models</a> in the <i>Amazon Transcribe Developer Guide</i>.</p>'
+        FilterPartialResults:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'If true, <code>TranscriptEvents</code> with <code>IsPartial: true</code> are filtered out of the insights target.'
+      description: A structure that contains the configuration settings for an Amazon Transcribe processor.
     AudioConcatenationConfiguration:
       type: object
       required:
@@ -1383,7 +2376,7 @@ components:
         State:
           allOf:
             - $ref: '#/components/schemas/AudioArtifactsConcatenationState'
-            - description: 'Enables the <i>name</i> object, where <i>name</i> is the name of the configuration object, such as <code>AudioConcatenation</code>.'
+            - description: Enables or disables the configuration object.
       description: The audio artifact concatenation configuration object.
     VideoConcatenationConfiguration:
       type: object
@@ -1394,7 +2387,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ArtifactsConcatenationState'
             - description: Enables or disables the configuration object.
-      description: The configuration object of a video contacatentation pipeline.
+      description: The configuration object of a video concatenation pipeline.
     ContentConcatenationConfiguration:
       type: object
       required:
@@ -1545,7 +2538,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/GridViewConfiguration'
             - description: The <code>GridView</code> configuration setting.
-      description: Describes the configuration for the composited video artifacts.
+      description: Specifies the configuration for compositing video artifacts.
     ArtifactsState:
       type: string
       enum:
@@ -1579,6 +2572,40 @@ components:
     AudioSampleRateOption:
       type: string
       pattern: 44100|48000
+    CategoryName:
+      type: string
+      pattern: '^[0-9a-zA-Z._-]+'
+      minLength: 1
+      maxLength: 200
+    ChannelId:
+      type: integer
+      minimum: 0
+      maximum: 1
+    ParticipantRole:
+      type: string
+      enum:
+        - AGENT
+        - CUSTOMER
+    ChannelDefinition:
+      type: object
+      required:
+        - ChannelId
+      properties:
+        ChannelId:
+          allOf:
+            - $ref: '#/components/schemas/ChannelId'
+            - description: The channel ID.
+        ParticipantRole:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantRole'
+            - description: Specifies whether the audio in a channel belongs to the <code>AGENT</code> or <code>CUSTOMER</code>.
+      description: Defines an audio channel in a Kinesis video stream.
+    ChannelDefinitions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChannelDefinition'
+      minItems: 1
+      maxItems: 2
     ChimeSdkMeetingConcatenationConfiguration:
       type: object
       required:
@@ -1595,7 +2622,7 @@ components:
         SourceConfiguration:
           allOf:
             - $ref: '#/components/schemas/SourceConfiguration'
-            - description: The source configuration for a specified media pipline.
+            - description: The source configuration for a specified media pipeline.
         ArtifactsConfiguration:
           allOf:
             - $ref: '#/components/schemas/ArtifactsConfiguration'
@@ -1707,6 +2734,11 @@ components:
       type: string
       enum:
         - ContentOnly
+    ContentRedactionOutput:
+      type: string
+      enum:
+        - redacted
+        - redacted_and_unredacted
     ContentShareLayoutOption:
       type: string
       enum:
@@ -1726,7 +2758,7 @@ components:
       items:
         $ref: '#/components/schemas/Tag'
       minItems: 1
-      maxItems: 50
+      maxItems: 200
     CreateMediaCapturePipelineRequest:
       type: object
       required:
@@ -1845,7 +2877,7 @@ components:
         Sources:
           allOf:
             - $ref: '#/components/schemas/ConcatenationSourceList'
-            - description: The data sources being concatnated.
+            - description: The data sources being concatenated.
         Sinks:
           allOf:
             - $ref: '#/components/schemas/ConcatenationSinkList'
@@ -1863,6 +2895,223 @@ components:
             - $ref: '#/components/schemas/Iso8601Timestamp'
             - description: The time at which the concatenation pipeline was last updated.
       description: Concatenates audio and video data from one or more data streams.
+    MediaInsightsPipelineConfigurationNameString:
+      type: string
+      pattern: '^[0-9a-zA-Z._-]+'
+      minLength: 2
+      maxLength: 64
+    RealTimeAlertConfiguration:
+      type: object
+      properties:
+        Disabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Turns off real-time alerts.
+        Rules:
+          allOf:
+            - $ref: '#/components/schemas/RealTimeAlertRuleList'
+            - description: The rules in the alert. Rules specify the words or phrases that you want to be notified about.
+      description: A structure that contains the configuration settings for real-time alerts.
+    MediaInsightsPipelineConfigurationElements:
+      type: array
+      items:
+        $ref: '#/components/schemas/MediaInsightsPipelineConfigurationElement'
+    CreateMediaInsightsPipelineConfigurationRequest:
+      type: object
+      required:
+        - MediaInsightsPipelineConfigurationName
+        - ResourceAccessRoleArn
+        - Elements
+      title: CreateMediaInsightsPipelineConfigurationRequest
+      properties:
+        MediaInsightsPipelineConfigurationName:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsPipelineConfigurationNameString'
+            - description: The name of the media insights pipeline configuration.
+        ResourceAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The ARN of the role used by the service to access Amazon Web Services resources, including <code>Transcribe</code> and <code>Transcribe Call Analytics</code>, on the caller’s behalf.'
+        RealTimeAlertConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/RealTimeAlertConfiguration'
+            - description: The configuration settings for the real-time alerts in a media insights pipeline configuration.
+        Elements:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsPipelineConfigurationElements'
+            - description: 'The elements in the request, such as a processor for Amazon Transcribe or a sink for a Kinesis Data Stream.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags assigned to the media insights pipeline configuration.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The unique identifier for the media insights pipeline configuration request.
+    MediaInsightsPipelineConfiguration:
+      type: object
+      properties:
+        MediaInsightsPipelineConfigurationName:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsPipelineConfigurationNameString'
+            - description: The name of the configuration.
+        MediaInsightsPipelineConfigurationArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the configuration.
+        ResourceAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the role used by the service to access Amazon Web Services resources.
+        RealTimeAlertConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/RealTimeAlertConfiguration'
+            - description: Lists the rules that trigger a real-time alert.
+        Elements:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsPipelineConfigurationElements'
+            - description: The elements in the configuration.
+        MediaInsightsPipelineConfigurationId:
+          allOf:
+            - $ref: '#/components/schemas/GuidString'
+            - description: The ID of the configuration.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: The time at which the configuration was created.
+        UpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: The time at which the configuration was last updated.
+      description: A structure that contains the configuration settings for a media insights pipeline.
+    KinesisVideoStreamSourceRuntimeConfiguration:
+      type: object
+      required:
+        - Streams
+        - MediaEncoding
+        - MediaSampleRate
+      properties:
+        Streams:
+          allOf:
+            - $ref: '#/components/schemas/Streams'
+            - description: The streams in the source runtime configuration of a Kinesis video stream.
+        MediaEncoding:
+          allOf:
+            - $ref: '#/components/schemas/MediaEncoding'
+            - description: '<p>Specifies the encoding of your input audio. Supported format: PCM (only signed 16-bit little-endian audio formats, which does not include WAV)</p> <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> in the <i>Amazon Transcribe Developer Guide</i>.</p>'
+        MediaSampleRate:
+          allOf:
+            - $ref: '#/components/schemas/MediaSampleRateHertz'
+            - description: '<p>The sample rate of the input audio (in hertz). Low-quality audio, such as telephone audio, is typically around 8,000 Hz. High-quality audio typically ranges from 16,000 Hz to 48,000 Hz. Note that the sample rate you specify must match that of your audio.</p> <p>Valid Range: Minimum value of 8000. Maximum value of 48000.</p>'
+      description: The runtime configuration settings for the Kinesis video stream source.
+    MediaInsightsRuntimeMetadata:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    KinesisVideoStreamRecordingSourceRuntimeConfiguration:
+      type: object
+      required:
+        - Streams
+        - FragmentSelector
+      properties:
+        Streams:
+          allOf:
+            - $ref: '#/components/schemas/RecordingStreamList'
+            - description: The stream or streams to be recorded.
+        FragmentSelector:
+          allOf:
+            - $ref: '#/components/schemas/FragmentSelector'
+            - description: Describes the timestamp range and timestamp origin of a range of fragments in the Kinesis video stream.
+      description: A structure that contains the runtime settings for recording a Kinesis video stream.
+    S3RecordingSinkRuntimeConfiguration:
+      type: object
+      required:
+        - Destination
+        - RecordingFileFormat
+      properties:
+        Destination:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The URL of the S3 bucket used as the runtime sink.
+        RecordingFileFormat:
+          allOf:
+            - $ref: '#/components/schemas/RecordingFileFormat'
+            - description: The file formats for the audio and video files sent to the Amazon S3 bucket.
+      description: A structure that holds the settings for transmitting audio and video recordings to the runtime Amazon S3 bucket.
+    CreateMediaInsightsPipelineRequest:
+      type: object
+      required:
+        - MediaInsightsPipelineConfigurationArn
+      title: CreateMediaInsightsPipelineRequest
+      properties:
+        MediaInsightsPipelineConfigurationArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the pipeline's configuration.
+        KinesisVideoStreamSourceRuntimeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/KinesisVideoStreamSourceRuntimeConfiguration'
+            - description: The runtime configuration for the Kinesis video stream source of the media insights pipeline.
+        MediaInsightsRuntimeMetadata:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsRuntimeMetadata'
+            - description: The runtime metadata for the media insights pipeline. Consists of a key-value map of strings.
+        KinesisVideoStreamRecordingSourceRuntimeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/KinesisVideoStreamRecordingSourceRuntimeConfiguration'
+            - description: The runtime configuration for the Kinesis video recording stream source.
+        S3RecordingSinkRuntimeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/S3RecordingSinkRuntimeConfiguration'
+            - description: The runtime configuration for the S3 recording sink.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags assigned to the media insights pipeline.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The unique identifier for the media insights pipeline request.
+    MediaInsightsPipeline:
+      type: object
+      properties:
+        MediaPipelineId:
+          allOf:
+            - $ref: '#/components/schemas/GuidString'
+            - description: The ID of a media insights pipeline.
+        MediaPipelineArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of a media insights pipeline.
+        MediaInsightsPipelineConfigurationArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of a media insight pipeline's configuration settings.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineStatus'
+            - description: The status of a media insights pipeline.
+        KinesisVideoStreamSourceRuntimeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/KinesisVideoStreamSourceRuntimeConfiguration'
+            - description: The configuration settings for a Kinesis runtime video stream in a media insights pipeline.
+        MediaInsightsRuntimeMetadata:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsRuntimeMetadata'
+            - description: The runtime metadata of a media insights pipeline.
+        KinesisVideoStreamRecordingSourceRuntimeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/KinesisVideoStreamRecordingSourceRuntimeConfiguration'
+            - description: The runtime configuration settings for a Kinesis recording video stream in a media insights pipeline.
+        S3RecordingSinkRuntimeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/S3RecordingSinkRuntimeConfiguration'
+            - description: The runtime configuration of the Amazon S3 bucket that stores recordings in a media insights pipeline.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: The time at which the media insights pipeline was created.
+      description: A media pipeline that streams call analytics data.
     LiveConnectorSourceList:
       type: array
       items:
@@ -1885,11 +3134,11 @@ components:
         Sources:
           allOf:
             - $ref: '#/components/schemas/LiveConnectorSourceList'
-            - description: The media pipeline's data sources.
+            - description: The media live connector pipeline's data sources.
         Sinks:
           allOf:
             - $ref: '#/components/schemas/LiveConnectorSinkList'
-            - description: The media pipeline's data sinks.
+            - description: The media live connector pipeline's data sinks.
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
@@ -1897,7 +3146,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: The tags associated with the media pipeline.
+            - description: The tags associated with the media live connector pipeline.
     MediaLiveConnectorPipeline:
       type: object
       properties:
@@ -1924,7 +3173,7 @@ components:
         CreatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
-            - description: Thetime at which the connector pipeline was created.
+            - description: The time at which the connector pipeline was created.
         UpdatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
@@ -1933,6 +3182,14 @@ components:
     DeleteMediaCapturePipelineRequest:
       type: object
       title: DeleteMediaCapturePipelineRequest
+      properties: {}
+    NonEmptyString:
+      type: string
+      pattern: .*\S.*
+      maxLength: 1024
+    DeleteMediaInsightsPipelineConfigurationRequest:
+      type: object
+      title: DeleteMediaInsightsPipelineConfigurationRequest
       properties: {}
     DeleteMediaPipelineRequest:
       type: object
@@ -1948,9 +3205,38 @@ components:
       items:
         $ref: '#/components/schemas/ExternalUserIdType'
       minItems: 1
+    FragmentNumberString:
+      type: string
+      pattern: '^[0-9]+$'
+      minLength: 1
+      maxLength: 128
+    FragmentSelectorType:
+      type: string
+      enum:
+        - ProducerTimestamp
+        - ServerTimestamp
+    TimestampRange:
+      type: object
+      required:
+        - StartTimestamp
+        - EndTimestamp
+      properties:
+        StartTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The starting timestamp for the specified range.
+        EndTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The ending timestamp for the specified range.
+      description: The range of timestamps to return.
     GetMediaCapturePipelineRequest:
       type: object
       title: GetMediaCapturePipelineRequest
+      properties: {}
+    GetMediaInsightsPipelineConfigurationRequest:
+      type: object
+      title: GetMediaInsightsPipelineConfigurationRequest
       properties: {}
     GetMediaPipelineRequest:
       type: object
@@ -1971,6 +3257,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MediaConcatenationPipeline'
             - description: The media concatenation pipeline in a media pipeline.
+        MediaInsightsPipeline:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsPipeline'
+            - description: The media insights pipeline of a media pipeline.
       description: 'A pipeline consisting of a media capture, media concatenation, or live-streaming pipeline.'
     PresenterOnlyConfiguration:
       type: object
@@ -1983,10 +3273,72 @@ components:
     Iso8601Timestamp:
       type: string
       format: date-time
-    String:
+    RuleName:
       type: string
-      pattern: .*
-      maxLength: 4096
+      pattern: '^[0-9a-zA-Z._-]+'
+      minLength: 2
+      maxLength: 64
+    IssueDetectionConfiguration:
+      type: object
+      required:
+        - RuleName
+      properties:
+        RuleName:
+          allOf:
+            - $ref: '#/components/schemas/RuleName'
+            - description: The name of the issue detection rule.
+      description: A structure that contains the configuration settings for an issue detection task.
+    Keyword:
+      type: string
+      pattern: '^[\s0-9a-zA-Z''-]+'
+      minLength: 1
+      maxLength: 100
+    KeywordMatchWordList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Keyword'
+      minItems: 1
+      maxItems: 10
+    KeywordMatchConfiguration:
+      type: object
+      required:
+        - RuleName
+        - Keywords
+      properties:
+        RuleName:
+          allOf:
+            - $ref: '#/components/schemas/RuleName'
+            - description: The name of the keyword match rule.
+        Keywords:
+          allOf:
+            - $ref: '#/components/schemas/KeywordMatchWordList'
+            - description: The keywords or phrases that you want to match.
+        Negate:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Matches keywords or phrases on their presence or absence. If set to <code>TRUE</code>, the rule matches when all the specified keywords or phrases are absent. Default: <code>FALSE</code>.'
+      description: A structure that contains the settings for a keyword match task.
+    KinesisDataStreamSinkConfiguration:
+      type: object
+      properties:
+        InsightsTarget:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The URL of the sink, <a href="https://aws.amazon.com/kinesis/data-streams/">https://aws.amazon.com/kinesis/data-streams/</a>.'
+      description: A structure that contains the configuration settings for a Kinesis Data Stream sink.
+    KinesisVideoStreamArn:
+      type: string
+      pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+      minLength: 1
+      maxLength: 1024
+    LambdaFunctionSinkConfiguration:
+      type: object
+      properties:
+        InsightsTarget:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The URL of the sink, <a href="https://aws.amazon.com/kinesis/data-streams/">https://aws.amazon.com/kinesis/data-streams/</a>.'
+      description: A structure that contains the configuration settings for an AWS Lambda function's data sink.
     ResultMax:
       type: integer
       minimum: 1
@@ -1999,6 +3351,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/MediaCapturePipelineSummary'
+    ListMediaInsightsPipelineConfigurationsRequest:
+      type: object
+      title: ListMediaInsightsPipelineConfigurationsRequest
+      properties: {}
+    MediaInsightsPipelineConfigurationSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MediaInsightsPipelineConfigurationSummary'
     ListMediaPipelinesRequest:
       type: object
       title: ListMediaPipelinesRequest
@@ -2050,6 +3410,7 @@ components:
         - Failed
         - Stopping
         - Stopped
+        - Paused
     MediaCapturePipelineSummary:
       type: object
       properties:
@@ -2062,6 +3423,69 @@ components:
             - $ref: '#/components/schemas/AmazonResourceName'
             - description: The ARN of the media pipeline in the summary.
       description: The summary data of a media capture pipeline.
+    MediaInsightsPipelineConfigurationElementType:
+      type: string
+      enum:
+        - AmazonTranscribeCallAnalyticsProcessor
+        - VoiceAnalyticsProcessor
+        - AmazonTranscribeProcessor
+        - KinesisDataStreamSink
+        - LambdaFunctionSink
+        - SqsQueueSink
+        - SnsTopicSink
+        - S3RecordingSink
+    S3RecordingSinkConfiguration:
+      type: object
+      properties:
+        Destination:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The URL of the Amazon S3 bucket used as the recording sink.
+      description: The structure that holds the settings for transmitting audio and video to the Amazon S3 bucket.
+    VoiceAnalyticsProcessorConfiguration:
+      type: object
+      properties:
+        SpeakerSearchStatus:
+          allOf:
+            - $ref: '#/components/schemas/VoiceAnalyticsConfigurationStatus'
+            - description: The status of the speaker search task.
+        VoiceToneAnalysisStatus:
+          allOf:
+            - $ref: '#/components/schemas/VoiceAnalyticsConfigurationStatus'
+            - description: The status of the voice tone analysis task.
+      description: The configuration settings for a voice analytics processor.
+    SqsQueueSinkConfiguration:
+      type: object
+      properties:
+        InsightsTarget:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The URL of the SQS sink, <a href="https://aws.amazon.com/kinesis/data-streams/">https://aws.amazon.com/kinesis/data-streams/</a>.'
+      description: The URL of the SQS sink.
+    SnsTopicSinkConfiguration:
+      type: object
+      properties:
+        InsightsTarget:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The URL of the SNS sink, <a href="https://aws.amazon.com/kinesis/data-streams/">https://aws.amazon.com/kinesis/data-streams/</a>.'
+      description: The configuration settings for the SNS topic sink.
+    MediaInsightsPipelineConfigurationSummary:
+      type: object
+      properties:
+        MediaInsightsPipelineConfigurationName:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsPipelineConfigurationNameString'
+            - description: The name of the media insights pipeline configuration.
+        MediaInsightsPipelineConfigurationId:
+          allOf:
+            - $ref: '#/components/schemas/GuidString'
+            - description: The ID of the media insights pipeline configuration.
+        MediaInsightsPipelineConfigurationArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the media insights pipeline configuration.
+      description: A summary of the media insights pipeline configuration.
     MediaPipelineSummary:
       type: object
       properties:
@@ -2074,6 +3498,15 @@ components:
             - $ref: '#/components/schemas/AmazonResourceName'
             - description: The ARN of the media pipeline in the summary.
       description: The summary of the media pipeline.
+    MediaPipelineStatusUpdate:
+      type: string
+      enum:
+        - Pause
+        - Resume
+    NumberOfChannels:
+      type: integer
+      minimum: 1
+      maximum: 2
     PresenterPosition:
       type: string
       enum:
@@ -2081,6 +3514,62 @@ components:
         - TopRight
         - BottomLeft
         - BottomRight
+    RealTimeAlertRuleType:
+      type: string
+      enum:
+        - KeywordMatch
+        - Sentiment
+        - IssueDetection
+    SentimentConfiguration:
+      type: object
+      required:
+        - RuleName
+        - SentimentType
+        - TimePeriod
+      properties:
+        RuleName:
+          allOf:
+            - $ref: '#/components/schemas/RuleName'
+            - description: The name of the rule in the sentiment configuration.
+        SentimentType:
+          allOf:
+            - $ref: '#/components/schemas/SentimentType'
+            - description: 'The type of sentiment, <code>POSITIVE</code>, <code>NEGATIVE</code>, or <code>NEUTRAL</code>.'
+        TimePeriod:
+          allOf:
+            - $ref: '#/components/schemas/SentimentTimePeriodInSeconds'
+            - description: Specifies the analysis interval.
+      description: A structure that contains the configuration settings for a sentiment analysis task.
+    RealTimeAlertRule:
+      type: object
+      required:
+        - Type
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/RealTimeAlertRuleType'
+            - description: The type of alert rule.
+        KeywordMatchConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/KeywordMatchConfiguration'
+            - description: Specifies the settings for matching the keywords in a real-time alert rule.
+        SentimentConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SentimentConfiguration'
+            - description: Specifies the settings for predicting sentiment in a real-time alert rule.
+        IssueDetectionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/IssueDetectionConfiguration'
+            - description: Specifies the issue detection settings for a real-time alert rule.
+      description: Specifies the words or phrases that trigger an alert.
+    RecordingStreamConfiguration:
+      type: object
+      properties:
+        StreamArn:
+          allOf:
+            - $ref: '#/components/schemas/KinesisVideoStreamArn'
+            - description: The ARN of the recording stream.
+      description: A structure the holds the settings for recording audio and video.
     SelectedVideoStreams:
       type: object
       properties:
@@ -2093,6 +3582,47 @@ components:
             - $ref: '#/components/schemas/ExternalUserIdList'
             - description: The external user IDs of the streams selected for a media pipeline.
       description: The video streams for a specified media pipeline. The total number of video streams can't exceed 25.
+    SentimentType:
+      type: string
+      enum:
+        - NEGATIVE
+    SentimentTimePeriodInSeconds:
+      type: integer
+      minimum: 60
+      maximum: 1800
+    StreamChannelDefinition:
+      type: object
+      required:
+        - NumberOfChannels
+      properties:
+        NumberOfChannels:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfChannels'
+            - description: The number of channels in a streaming channel.
+        ChannelDefinitions:
+          allOf:
+            - $ref: '#/components/schemas/ChannelDefinitions'
+            - description: The definitions of the channels in a streaming channel.
+      description: Defines a streaming channel.
+    StreamConfiguration:
+      type: object
+      required:
+        - StreamArn
+        - StreamChannelDefinition
+      properties:
+        StreamArn:
+          allOf:
+            - $ref: '#/components/schemas/KinesisVideoStreamArn'
+            - description: The ARN of the stream.
+        FragmentNumber:
+          allOf:
+            - $ref: '#/components/schemas/FragmentNumberString'
+            - description: The unique identifier of the fragment to begin processing.
+        StreamChannelDefinition:
+          allOf:
+            - $ref: '#/components/schemas/StreamChannelDefinition'
+            - description: The streaming channel definition in the stream configuration.
+      description: The configuration settings for a stream.
     TagValue:
       type: string
       minLength: 0
@@ -2102,7 +3632,7 @@ components:
       items:
         $ref: '#/components/schemas/TagKey'
       minItems: 1
-      maxItems: 50
+      maxItems: 200
     TagResourceRequest:
       type: object
       required:
@@ -2118,6 +3648,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The tags associated with the specified media pipeline.
+    Timestamp:
+      type: string
+      format: date-time
     UntagResourceRequest:
       type: object
       required:
@@ -2133,9 +3666,43 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The key/value pairs in the tag that you want to remove.
+    UpdateMediaInsightsPipelineConfigurationRequest:
+      type: object
+      required:
+        - ResourceAccessRoleArn
+        - Elements
+      title: UpdateMediaInsightsPipelineConfigurationRequest
+      properties:
+        ResourceAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the role used by the service to access Amazon Web Services resources.
+        RealTimeAlertConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/RealTimeAlertConfiguration'
+            - description: The configuration settings for real-time alerts for the media insights pipeline.
+        Elements:
+          allOf:
+            - $ref: '#/components/schemas/MediaInsightsPipelineConfigurationElements'
+            - description: 'The elements in the request, such as a processor for Amazon Transcribe or a sink for a Kinesis Data Stream..'
+    UpdateMediaInsightsPipelineStatusRequest:
+      type: object
+      required:
+        - UpdateStatus
+      title: UpdateMediaInsightsPipelineStatusRequest
+      properties:
+        UpdateStatus:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineStatusUpdate'
+            - description: The requested status of the media insights pipeline.
     VideoMuxType:
       type: string
       enum:
         - VideoOnly
+    VoiceAnalyticsConfigurationStatus:
+      type: string
+      enum:
+        - Enabled
+        - Disabled
 security:
   - hmac: []

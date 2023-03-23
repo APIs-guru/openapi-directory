@@ -200,14 +200,13 @@ paths:
                   maxLength: 1024
                   format: password
                 ClientRequestToken:
-                  description: The <code>ClientRequestToken</code> of the <code>AppInstance</code>.
+                  description: The unique ID of the request. Use different tokens to create different <code>AppInstances</code>.
                   type: string
                   pattern: '[-_a-zA-Z0-9]*'
                   minLength: 2
                   maxLength: 64
-                  format: password
                 Tags:
-                  description: Tags assigned to the <code>AppInstanceUser</code>.
+                  description: Tags assigned to the <code>AppInstance</code>.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -301,7 +300,7 @@ paths:
   '/app-instances/{appInstanceArn}/admins':
     post:
       operationId: CreateAppInstanceAdmin
-      description: <p>Promotes an <code>AppInstanceUser</code> to an <code>AppInstanceAdmin</code>. The promoted user can perform the following actions. </p> <ul> <li> <p> <code>ChannelModerator</code> actions across all channels in the <code>AppInstance</code>.</p> </li> <li> <p> <code>DeleteChannelMessage</code> actions.</p> </li> </ul> <p>Only an <code>AppInstanceUser</code> can be promoted to an <code>AppInstanceAdmin</code> role.</p>
+      description: <p>Promotes an <code>AppInstanceUser</code> or <code>AppInstanceBot</code> to an <code>AppInstanceAdmin</code>. The promoted entity can perform the following actions. </p> <ul> <li> <p> <code>ChannelModerator</code> actions across all channels in the <code>AppInstance</code>.</p> </li> <li> <p> <code>DeleteChannelMessage</code> actions.</p> </li> </ul> <p>Only an <code>AppInstanceUser</code> and <code>AppInstanceBot</code> can be promoted to an <code>AppInstanceAdmin</code> role.</p>
       responses:
         '201':
           description: Success
@@ -482,6 +481,126 @@ paths:
             type: string
           description: Pagination token
           required: false
+  /app-instance-bots:
+    post:
+      operationId: CreateAppInstanceBot
+      description: Creates a bot under an Amazon Chime <code>AppInstance</code>. The request consists of a unique <code>Configuration</code> and <code>Name</code> for that bot.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAppInstanceBotResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AppInstanceArn
+                - ClientRequestToken
+                - Configuration
+              properties:
+                AppInstanceArn:
+                  description: The ARN of the <code>AppInstance</code> request.
+                  type: string
+                  pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+                  minLength: 5
+                  maxLength: 1600
+                Name:
+                  description: The user's name.
+                  type: string
+                  pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+                  minLength: 0
+                  maxLength: 256
+                  format: password
+                Metadata:
+                  description: The request metadata. Limited to a 1KB string in UTF-8.
+                  type: string
+                  pattern: .*
+                  minLength: 0
+                  maxLength: 1024
+                  format: password
+                ClientRequestToken:
+                  description: The unique ID for the client making the request. Use different tokens for different <code>AppInstanceBots</code>.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 2
+                  maxLength: 64
+                Tags:
+                  description: The tags assigned to the <code>AppInstanceBot</code>.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+                Configuration:
+                  description: A structure that contains configuration data.
+                  type: object
+                  properties:
+                    Lex:
+                      allOf:
+                        - $ref: '#/components/schemas/LexConfiguration'
+                        - description: The configuration for an Amazon Lex V2 bot.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /app-instance-users:
     post:
       operationId: CreateAppInstanceUser
@@ -582,12 +701,11 @@ paths:
                   maxLength: 1024
                   format: password
                 ClientRequestToken:
-                  description: The token assigned to the user requesting an <code>AppInstance</code>.
+                  description: The unique ID of the request. Use different tokens to request additional <code>AppInstances</code>.
                   type: string
                   pattern: '[-_a-zA-Z0-9]*'
                   minLength: 2
                   maxLength: 64
-                  format: password
                 Tags:
                   description: Tags assigned to the <code>AppInstanceUser</code>.
                   type: array
@@ -595,6 +713,18 @@ paths:
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 50
+                ExpirationSettings:
+                  description: Determines the interval after which an <code>AppInstanceUser</code> is automatically deleted.
+                  type: object
+                  properties:
+                    ExpirationDays:
+                      allOf:
+                        - $ref: '#/components/schemas/ExpirationDays'
+                        - description: The period in days after which an <code>AppInstanceUser</code> will be automatically deleted.
+                    ExpirationCriterion:
+                      allOf:
+                        - $ref: '#/components/schemas/ExpirationCriterion'
+                        - description: Specifies the conditions under which an <code>AppInstanceUser</code> will expire.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -815,7 +945,7 @@ paths:
   '/app-instances/{appInstanceArn}/admins/{appInstanceAdminArn}':
     delete:
       operationId: DeleteAppInstanceAdmin
-      description: Demotes an <code>AppInstanceAdmin</code> to an <code>AppInstanceUser</code>. This action does not delete the user.
+      description: Demotes an <code>AppInstanceAdmin</code> to an <code>AppInstanceUser</code> or <code>AppInstanceBot</code>. This action does not delete the user.
       responses:
         '204':
           description: Success
@@ -959,6 +1089,233 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+  '/app-instance-bots/{appInstanceBotArn}':
+    delete:
+      operationId: DeleteAppInstanceBot
+      description: Deletes an <code>AppInstanceBot</code>.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceBotArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstanceBot</code> being deleted.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeAppInstanceBot
+      description: The <code>AppInstanceBot's</code> information.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAppInstanceBotResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceBotArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstanceBot</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    put:
+      operationId: UpdateAppInstanceBot
+      description: Updates the name and metadata of an <code>AppInstanceBot</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAppInstanceBotResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceBotArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstanceBot</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - Metadata
+              properties:
+                Name:
+                  description: The name of the <code>AppInstanceBot</code>.
+                  type: string
+                  pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+                  minLength: 0
+                  maxLength: 256
+                  format: password
+                Metadata:
+                  description: The metadata of the <code>AppInstanceBot</code>.
+                  type: string
+                  pattern: .*
+                  minLength: 0
+                  maxLength: 1024
+                  format: password
   '/app-instance-users/{appInstanceUserArn}':
     delete:
       operationId: DeleteAppInstanceUser
@@ -1550,6 +1907,107 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ChannelRetentionSettings'
                         - description: The length of time in days to retain the messages in a channel.
+  /app-instance-bots#app-instance-arn:
+    get:
+      operationId: ListAppInstanceBots
+      description: Lists all <code>AppInstanceBots</code> created under a single <code>AppInstance</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAppInstanceBotsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: app-instance-arn
+          in: query
+          required: true
+          description: The ARN of the <code>AppInstance</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of requests to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token passed by previous API calls until all requested bots are returned.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/app-instance-users/{appInstanceUserArn}/endpoints':
     get:
       operationId: ListAppInstanceUserEndpoints
@@ -1747,7 +2205,6 @@ paths:
                   pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
                   minLength: 5
                   maxLength: 1600
-                  format: password
                 EndpointAttributes:
                   description: The attributes of an <code>Endpoint</code>.
                   type: object
@@ -1761,12 +2218,11 @@ paths:
                         - $ref: '#/components/schemas/NonEmptySensitiveString1600'
                         - description: The VOIP device token for the APNS and APNS_SANDBOX endpoint types.
                 ClientRequestToken:
-                  description: 'The idempotency token for each client request. '
+                  description: The unique ID assigned to the request. Use different tokens to register other endpoints.
                   type: string
                   pattern: '[-_a-zA-Z0-9]*'
                   minLength: 2
                   maxLength: 64
-                  format: password
                 AllowMessages:
                   description: Boolean that controls whether the AppInstanceUserEndpoint is opted in to receive messages. <code>ALL</code> indicates the endpoint receives all messages. <code>NONE</code> indicates the endpoint receives no messages.
                   type: string
@@ -1925,6 +2381,96 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/app-instance-users/{appInstanceUserArn}/expiration-settings':
+    put:
+      operationId: PutAppInstanceUserExpirationSettings
+      description: '<p>Sets the number of days before the <code>AppInstanceUser</code> is automatically deleted.</p> <note> <p>A background process deletes expired <code>AppInstanceUsers</code> within 6 hours of expiration. Actual deletion times may vary.</p> <p>Expired <code>AppInstanceUsers</code> that have not yet been deleted appear as active, and you can update their expiration settings. The system honors the new settings.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutAppInstanceUserExpirationSettingsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceUserArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstanceUser</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ExpirationSettings:
+                  description: Determines the interval after which an <code>AppInstanceUser</code> is automatically deleted.
+                  type: object
+                  properties:
+                    ExpirationDays:
+                      allOf:
+                        - $ref: '#/components/schemas/ExpirationDays'
+                        - description: The period in days after which an <code>AppInstanceUser</code> will be automatically deleted.
+                    ExpirationCriterion:
+                      allOf:
+                        - $ref: '#/components/schemas/ExpirationCriterion'
+                        - description: Specifies the conditions under which an <code>AppInstanceUser</code> will expire.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2191,11 +2737,42 @@ components:
         AppInstanceAdmin:
           allOf:
             - $ref: '#/components/schemas/Identity'
-            - description: The name and ARN of the admin for the <code>AppInstance</code>.
+            - description: 'The ARN and name of the administrator, the ARN of the <code>AppInstance</code>, and the created and last-updated timestamps. All timestamps use epoch milliseconds.'
         AppInstanceArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
             - description: The ARN of the of the admin for the <code>AppInstance</code>.
+    CreateAppInstanceBotResponse:
+      type: object
+      properties:
+        AppInstanceBotArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the <code>AppinstanceBot</code>.
+    LexConfiguration:
+      type: object
+      required:
+        - RespondsTo
+        - LexBotAliasArn
+        - LocaleId
+      properties:
+        RespondsTo:
+          allOf:
+            - $ref: '#/components/schemas/RespondsTo'
+            - description: Determines whether the Amazon Lex V2 bot responds to all standard messages. Control messages are not supported.
+        LexBotAliasArn:
+          allOf:
+            - $ref: '#/components/schemas/LexBotAliasArn'
+            - description: 'The ARN of the Amazon Lex V2 bot''s alias. The ARN uses this format: <code>arn:aws:lex:REGION:ACCOUNT:bot-alias/MYBOTID/MYBOTALIAS</code> '
+        LocaleId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Identifies the Amazon Lex V2 bot''s language and locale. The string must match one of the supported locales in Amazon Lex V2. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html">Supported languages</a> in the <i>Amazon Lex V2 Developer Guide</i>.'
+        WelcomeIntent:
+          allOf:
+            - $ref: '#/components/schemas/LexIntentName'
+            - description: The name of the welcome intent configured in the Amazon Lex V2 bot.
+      description: The configuration for an Amazon Lex V2 bot.
     CreateAppInstanceUserResponse:
       type: object
       properties:
@@ -2203,6 +2780,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
             - description: The user's ARN.
+    ExpirationDays:
+      type: integer
+      minimum: 1
+      maximum: 5475
+    ExpirationCriterion:
+      type: string
+      enum:
+        - CREATED_TIMESTAMP
     DescribeAppInstanceResponse:
       type: object
       properties:
@@ -2217,6 +2802,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/AppInstanceAdmin'
             - description: 'The ARN and name of the <code>AppInstanceUser</code>, the ARN of the <code>AppInstance</code>, and the created and last-updated timestamps. All timestamps use epoch milliseconds.'
+    DescribeAppInstanceBotResponse:
+      type: object
+      properties:
+        AppInstanceBot:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceBot'
+            - description: The detials of the <code>AppInstanceBot</code>.
+    NotFoundException: {}
     DescribeAppInstanceUserResponse:
       type: object
       properties:
@@ -2257,6 +2850,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: The token returned from previous API requests until the number of administrators is reached.
+    ListAppInstanceBotsResponse:
+      type: object
+      properties:
+        AppInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the AppInstance.
+        AppInstanceBots:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceBotList'
+            - description: The information for each requested <code>AppInstanceBot</code>.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token passed by previous API calls until all requested bots are returned.
     ListAppInstanceUserEndpointsResponse:
       type: object
       properties:
@@ -2320,6 +2928,17 @@ components:
             - $ref: '#/components/schemas/RetentionDays'
             - description: The time in days to retain the messages in a channel.
       description: The details of the retention settings for a channel.
+    PutAppInstanceUserExpirationSettingsResponse:
+      type: object
+      properties:
+        AppInstanceUserArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the <code>AppInstanceUser</code>.
+        ExpirationSettings:
+          allOf:
+            - $ref: '#/components/schemas/ExpirationSettings'
+            - description: Settings that control the interval after which an <code>AppInstanceUser</code> is automatically deleted.
     RegisterAppInstanceUserEndpointResponse:
       type: object
       properties:
@@ -2349,6 +2968,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
             - description: The ARN of the <code>AppInstance</code>.
+    UpdateAppInstanceBotResponse:
+      type: object
+      properties:
+        AppInstanceBotArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the <code>AppInstanceBot</code>.
     UpdateAppInstanceUserResponse:
       type: object
       properties:
@@ -2427,7 +3053,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name in an Identity.
-      description: The details of a user.
+      description: The details of a user or bot.
     AppInstanceAdmin:
       type: object
       properties:
@@ -2443,7 +3069,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time at which an administrator was created.
-      description: The details of an <code>AppInstanceAdmin</code>.
+      description: The name and ARN of the admin for the <code>AppInstance</code>.
     AppInstanceAdminSummary:
       type: object
       properties:
@@ -2456,6 +3082,70 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AppInstanceAdminSummary'
+    ResourceName:
+      type: string
+      pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+      minLength: 0
+      maxLength: 256
+      format: password
+    Configuration:
+      type: object
+      required:
+        - Lex
+      properties:
+        Lex:
+          allOf:
+            - $ref: '#/components/schemas/LexConfiguration'
+            - description: The configuration for an Amazon Lex V2 bot.
+      description: A structure that contains configuration data.
+    AppInstanceBot:
+      type: object
+      properties:
+        AppInstanceBotArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the AppInstanceBot.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the AppInstanceBot.
+        Configuration:
+          allOf:
+            - $ref: '#/components/schemas/Configuration'
+            - description: The data processing instructions for an AppInstanceBot.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the <code>AppInstanceBot</code> was created.
+        LastUpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the <code>AppInstanceBot</code> was last updated.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata for an AppInstanceBot.
+      description: An Amazon Lex V2 chat bot created under an <code>AppInstance</code>.
+    AppInstanceBotSummary:
+      type: object
+      properties:
+        AppInstanceBotArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the AppInstanceBot.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the AppInstanceBox.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata of the AppInstanceBot.
+      description: High-level information about an AppInstanceBot.
+    AppInstanceBotList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppInstanceBotSummary'
     AppInstanceSummary:
       type: object
       properties:
@@ -2490,6 +3180,21 @@ components:
       minLength: 1
       maxLength: 100
       format: password
+    ExpirationSettings:
+      type: object
+      required:
+        - ExpirationDays
+        - ExpirationCriterion
+      properties:
+        ExpirationDays:
+          allOf:
+            - $ref: '#/components/schemas/ExpirationDays'
+            - description: The period in days after which an <code>AppInstanceUser</code> will be automatically deleted.
+        ExpirationCriterion:
+          allOf:
+            - $ref: '#/components/schemas/ExpirationCriterion'
+            - description: Specifies the conditions under which an <code>AppInstanceUser</code> will expire.
+      description: Determines the interval after which an <code>AppInstanceUser</code> is automatically deleted.
     AppInstanceUser:
       type: object
       properties:
@@ -2513,6 +3218,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time at which the <code>AppInstanceUser</code> was last updated.
+        ExpirationSettings:
+          allOf:
+            - $ref: '#/components/schemas/ExpirationSettings'
+            - description: The interval after which an <code>AppInstanceUser</code> is automatically deleted.
       description: The details of an <code>AppInstanceUser</code>.
     SensitiveChimeArn:
       type: string
@@ -2587,7 +3296,7 @@ components:
             - description: The type of the <code>AppInstanceUserEndpoint</code>.
         ResourceArn:
           allOf:
-            - $ref: '#/components/schemas/SensitiveChimeArn'
+            - $ref: '#/components/schemas/ChimeArn'
             - description: The ARN of the resource to which the endpoint belongs.
         EndpointAttributes:
           allOf:
@@ -2671,7 +3380,6 @@ components:
       pattern: '[-_a-zA-Z0-9]*'
       minLength: 2
       maxLength: 64
-      format: password
     CreateAppInstanceAdminRequest:
       type: object
       required:
@@ -2688,6 +3396,38 @@ components:
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 50
+    CreateAppInstanceBotRequest:
+      type: object
+      required:
+        - AppInstanceArn
+        - ClientRequestToken
+        - Configuration
+      title: CreateAppInstanceBotRequest
+      properties:
+        AppInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the <code>AppInstance</code> request.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The user's name.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The request metadata. Limited to a 1KB string in UTF-8.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The unique ID for the client making the request. Use different tokens for different <code>AppInstanceBots</code>.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags assigned to the <code>AppInstanceBot</code>.
+        Configuration:
+          allOf:
+            - $ref: '#/components/schemas/Configuration'
+            - description: Configuration information about the Amazon Lex V2 V2 bot.
     CreateAppInstanceRequest:
       type: object
       required:
@@ -2706,11 +3446,11 @@ components:
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
-            - description: The <code>ClientRequestToken</code> of the <code>AppInstance</code>.
+            - description: The unique ID of the request. Use different tokens to create different <code>AppInstances</code>.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: Tags assigned to the <code>AppInstanceUser</code>.
+            - description: Tags assigned to the <code>AppInstance</code>.
     UserId:
       type: string
       pattern: '[A-Za-z0-9]([A-Za-z0-9\:\-\_\.\@]{0,62}[A-Za-z0-9])?'
@@ -2745,14 +3485,22 @@ components:
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
-            - description: The token assigned to the user requesting an <code>AppInstance</code>.
+            - description: The unique ID of the request. Use different tokens to request additional <code>AppInstances</code>.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: Tags assigned to the <code>AppInstanceUser</code>.
+        ExpirationSettings:
+          allOf:
+            - $ref: '#/components/schemas/ExpirationSettings'
+            - description: Settings that control the interval after which the <code>AppInstanceUser</code> is automatically deleted.
     DeleteAppInstanceAdminRequest:
       type: object
       title: DeleteAppInstanceAdminRequest
+      properties: {}
+    DeleteAppInstanceBotRequest:
+      type: object
+      title: DeleteAppInstanceBotRequest
       properties: {}
     DeleteAppInstanceRequest:
       type: object
@@ -2769,6 +3517,10 @@ components:
     DescribeAppInstanceAdminRequest:
       type: object
       title: DescribeAppInstanceAdminRequest
+      properties: {}
+    DescribeAppInstanceBotRequest:
+      type: object
+      title: DescribeAppInstanceBotRequest
       properties: {}
     DescribeAppInstanceRequest:
       type: object
@@ -2796,12 +3548,22 @@ components:
       type: object
       title: GetAppInstanceRetentionSettingsRequest
       properties: {}
-    ResourceName:
+    LexBotAliasArn:
       type: string
-      pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-      minLength: 0
-      maxLength: 256
-      format: password
+      pattern: 'arn:aws:lex:[a-z]{2}-[a-z]+-\d{1}:\d{12}:bot-alias/[A-Z0-9]{10}/[A-Z0-9]{10}'
+      minLength: 15
+      maxLength: 2048
+    RespondsTo:
+      type: string
+      enum:
+        - STANDARD_MESSAGES
+    String:
+      type: string
+    LexIntentName:
+      type: string
+      pattern: '^([A-Za-z]_?)+$'
+      minLength: 1
+      maxLength: 100
     MaxResults:
       type: integer
       minimum: 1
@@ -2815,6 +3577,10 @@ components:
     ListAppInstanceAdminsRequest:
       type: object
       title: ListAppInstanceAdminsRequest
+      properties: {}
+    ListAppInstanceBotsRequest:
+      type: object
+      title: ListAppInstanceBotsRequest
       properties: {}
     ListAppInstanceUserEndpointsRequest:
       type: object
@@ -2842,6 +3608,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/AppInstanceRetentionSettings'
             - description: 'The time in days to retain data. Data type: number.'
+    PutAppInstanceUserExpirationSettingsRequest:
+      type: object
+      title: PutAppInstanceUserExpirationSettingsRequest
+      properties:
+        ExpirationSettings:
+          allOf:
+            - $ref: '#/components/schemas/ExpirationSettings'
+            - description: Settings that control the interval after which an <code>AppInstanceUser</code> is automatically deleted.
     RegisterAppInstanceUserEndpointRequest:
       type: object
       required:
@@ -2861,7 +3635,7 @@ components:
             - description: '<p>The type of the <code>AppInstanceUserEndpoint</code>. Supported types:</p> <ul> <li> <p> <code>APNS</code>: The mobile notification service for an Apple device.</p> </li> <li> <p> <code>APNS_SANDBOX</code>: The sandbox environment of the mobile notification service for an Apple device.</p> </li> <li> <p> <code>GCM</code>: The mobile notification service for an Android device.</p> </li> </ul> <p>Populate the <code>ResourceArn</code> value of each type as <code>PinpointAppArn</code>.</p>'
         ResourceArn:
           allOf:
-            - $ref: '#/components/schemas/SensitiveChimeArn'
+            - $ref: '#/components/schemas/ChimeArn'
             - description: The ARN of the resource to which the endpoint belongs.
         EndpointAttributes:
           allOf:
@@ -2870,7 +3644,7 @@ components:
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
-            - description: 'The idempotency token for each client request. '
+            - description: The unique ID assigned to the request. Use different tokens to register other endpoints.
         AllowMessages:
           allOf:
             - $ref: '#/components/schemas/AllowMessages'
@@ -2916,6 +3690,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The tag keys.
+    UpdateAppInstanceBotRequest:
+      type: object
+      required:
+        - Name
+        - Metadata
+      title: UpdateAppInstanceBotRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the <code>AppInstanceBot</code>.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata of the <code>AppInstanceBot</code>.
     UpdateAppInstanceRequest:
       type: object
       required:
