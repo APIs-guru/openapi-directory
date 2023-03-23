@@ -563,6 +563,9 @@ components:
         actionDigest:
           $ref: "#/components/schemas/BuildBazelRemoteExecutionV2Digest"
           description: The digest of the Action being executed.
+        partialExecutionMetadata:
+          $ref: "#/components/schemas/BuildBazelRemoteExecutionV2ExecutedActionMetadata"
+          description: The client can read this field to view details about the ongoing execution.
         stage:
           description: The current stage of execution.
           enum:

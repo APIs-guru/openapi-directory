@@ -52,12 +52,13 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformService
-  x-timestamp: 2022-10-04T15:24:01Z
+  x-timestamp: 2023-03-23T00:20:30Z
 tags:
   - name: Platform
   - name: Payment instrument groups
   - name: Account holders
   - name: Payment instruments
+  - name: Bank account validation
   - name: Balance accounts
   - name: Transaction rules
 paths:
@@ -79,9 +80,6 @@ paths:
         "200":
           content:
             application/json:
-              examples:
-                createAccountHolder:
-                  $ref: "#/components/examples/post-accountHolders-createAccountHolder-200"
               schema:
                 $ref: "#/components/schemas/AccountHolder"
           description: OK - the request has succeeded.
@@ -138,6 +136,7 @@ paths:
         - Account holders
       x-addedInVersion: "1"
       x-groupName: Account holders
+      x-methodName: createAccountHolder
       x-sortIndex: 1
   "/accountHolders/{id}":
     get:
@@ -213,6 +212,7 @@ paths:
         - Account holders
       x-addedInVersion: "1"
       x-groupName: Account holders
+      x-methodName: getAccountHolder
       x-sortIndex: 3
     patch:
       description: Updates an account holder. When updating an account holder resource, if a parameter is not provided in the request, it is left unchanged.
@@ -299,6 +299,7 @@ paths:
         - Account holders
       x-addedInVersion: "1"
       x-groupName: Account holders
+      x-methodName: updateAccountHolder
       x-sortIndex: 2
   "/accountHolders/{id}/balanceAccounts":
     get:
@@ -391,6 +392,7 @@ paths:
         - Account holders
       x-addedInVersion: "1"
       x-groupName: Account holders
+      x-methodName: getAllBalanceAccountsOfAccountHolder
       x-sortIndex: 4
   /balanceAccounts:
     post:
@@ -408,9 +410,6 @@ paths:
         "200":
           content:
             application/json:
-              examples:
-                createBalanceAccount:
-                  $ref: "#/components/examples/post-balanceAccounts-createBalanceAccount-200"
               schema:
                 $ref: "#/components/schemas/BalanceAccount"
           description: OK - the request has succeeded.
@@ -467,6 +466,7 @@ paths:
         - Balance accounts
       x-addedInVersion: "1"
       x-groupName: Balance accounts
+      x-methodName: createBalanceAccount
       x-sortIndex: 1
   "/balanceAccounts/{balanceAccountId}/sweeps":
     get:
@@ -559,6 +559,7 @@ paths:
         - Balance accounts
       x-addedInVersion: "2"
       x-groupName: Balance accounts
+      x-methodName: getAllSweepsForBalanceAccount
       x-sortIndex: 7
     post:
       description: |-
@@ -648,6 +649,7 @@ paths:
         - Balance accounts
       x-addedInVersion: "2"
       x-groupName: Balance accounts
+      x-methodName: createSweep
       x-sortIndex: 5
   "/balanceAccounts/{balanceAccountId}/sweeps/{sweepId}":
     delete:
@@ -722,6 +724,7 @@ paths:
         - Balance accounts
       x-addedInVersion: "2"
       x-groupName: Balance accounts
+      x-methodName: deleteSweep
       x-sortIndex: 9
     get:
       description: Returns a sweep.
@@ -802,6 +805,7 @@ paths:
         - Balance accounts
       x-addedInVersion: "2"
       x-groupName: Balance accounts
+      x-methodName: getSweep
       x-sortIndex: 8
     patch:
       description: Updates a sweep. When updating a sweep resource, note that if a request parameter is not provided, the parameter is left unchanged.
@@ -890,10 +894,11 @@ paths:
         - Balance accounts
       x-addedInVersion: "2"
       x-groupName: Balance accounts
+      x-methodName: updateSweep
       x-sortIndex: 6
   "/balanceAccounts/{id}":
     get:
-      description: Returns a balance account.
+      description: Returns a balance account and its balances for the default currency and other currencies with a non-zero balance.
       operationId: get-balanceAccounts-id
       parameters:
         - description: The unique identifier of the balance account.
@@ -965,6 +970,7 @@ paths:
         - Balance accounts
       x-addedInVersion: "1"
       x-groupName: Balance accounts
+      x-methodName: getBalanceAccount
       x-sortIndex: 3
     patch:
       description: Updates a balance account.
@@ -1041,6 +1047,7 @@ paths:
         - Balance accounts
       x-addedInVersion: "1"
       x-groupName: Balance accounts
+      x-methodName: updateBalanceAccount
       x-sortIndex: 2
   "/balanceAccounts/{id}/paymentInstruments":
     get:
@@ -1133,6 +1140,7 @@ paths:
         - Balance accounts
       x-addedInVersion: "1"
       x-groupName: Balance accounts
+      x-methodName: getAllPaymentInstrumentsForBalanceAccount
       x-sortIndex: 4
   "/balancePlatforms/{id}":
     get:
@@ -1208,6 +1216,7 @@ paths:
         - Platform
       x-addedInVersion: "1"
       x-groupName: Platform
+      x-methodName: getBalancePlatform
       x-sortIndex: 1
   "/balancePlatforms/{id}/accountHolders":
     get:
@@ -1300,6 +1309,7 @@ paths:
         - Platform
       x-addedInVersion: "1"
       x-groupName: Platform
+      x-methodName: getAllAccountHoldersUnderBalancePlatform
       x-sortIndex: 2
   /paymentInstrumentGroups:
     post:
@@ -1317,9 +1327,6 @@ paths:
         "200":
           content:
             application/json:
-              examples:
-                createPaymentInstrumentGroups:
-                  $ref: "#/components/examples/post-paymentInstrumentGroups-createPaymentInstrumentGroups-200"
               schema:
                 $ref: "#/components/schemas/PaymentInstrumentGroup"
           description: OK - the request has succeeded.
@@ -1376,6 +1383,7 @@ paths:
         - Payment instrument groups
       x-addedInVersion: "1"
       x-groupName: Payment instrument groups
+      x-methodName: createPaymentInstrumentGroup
       x-sortIndex: 1
   "/paymentInstrumentGroups/{id}":
     get:
@@ -1451,6 +1459,7 @@ paths:
         - Payment instrument groups
       x-addedInVersion: "1"
       x-groupName: Payment instrument groups
+      x-methodName: getPaymentInstrumentGroup
       x-sortIndex: 2
   "/paymentInstrumentGroups/{id}/transactionRules":
     get:
@@ -1526,6 +1535,7 @@ paths:
         - Payment instrument groups
       x-addedInVersion: "1"
       x-groupName: Payment instrument groups
+      x-methodName: getAllTransactionRulesForPaymentInstrumentGroup
       x-sortIndex: 3
   /paymentInstruments:
     post:
@@ -1538,8 +1548,10 @@ paths:
         content:
           application/json:
             examples:
-              createBusinessAccount:
-                $ref: "#/components/examples/post-paymentInstruments-createBusinessAccount"
+              createBusinessAccountNL:
+                $ref: "#/components/examples/post-paymentInstruments-createBusinessAccountNL"
+              createBusinessAccountUS:
+                $ref: "#/components/examples/post-paymentInstruments-createBusinessAccountUS"
               createPhysicalCard:
                 $ref: "#/components/examples/post-paymentInstruments-createPhysicalCard"
               createVirtualCard:
@@ -1551,8 +1563,10 @@ paths:
           content:
             application/json:
               examples:
-                createBusinessAccount:
-                  $ref: "#/components/examples/post-paymentInstruments-createBusinessAccount-200"
+                createBusinessAccountNL:
+                  $ref: "#/components/examples/post-paymentInstruments-createBusinessAccountNL-200"
+                createBusinessAccountUS:
+                  $ref: "#/components/examples/post-paymentInstruments-createBusinessAccountUS-200"
                 createPhysicalCard:
                   $ref: "#/components/examples/post-paymentInstruments-createPhysicalCard-200"
                 createVirtualCard:
@@ -1613,6 +1627,7 @@ paths:
         - Payment instruments
       x-addedInVersion: "1"
       x-groupName: Payment instruments
+      x-methodName: createPaymentInstrument
       x-sortIndex: 11
   "/paymentInstruments/{id}":
     get:
@@ -1688,6 +1703,7 @@ paths:
         - Payment instruments
       x-addedInVersion: "1"
       x-groupName: Payment instruments
+      x-methodName: getPaymentInstrument
       x-sortIndex: 13
     patch:
       description: Updates a payment instrument. Once a payment instrument is already active, you can only update its status. However, for cards created with **inactive** status, you can still update the balance account associated with the card.
@@ -1719,7 +1735,7 @@ paths:
                 updatePaymentInstrumentStatus:
                   $ref: "#/components/examples/patch-paymentInstruments-id-updatePaymentInstrumentStatus-200"
               schema:
-                $ref: "#/components/schemas/PaymentInstrument"
+                $ref: "#/components/schemas/UpdatePaymentInstrument"
           description: OK - the request has succeeded.
         "400":
           content:
@@ -1774,7 +1790,81 @@ paths:
         - Payment instruments
       x-addedInVersion: "1"
       x-groupName: Payment instruments
+      x-methodName: updatePaymentInstrument
       x-sortIndex: 12
+  "/paymentInstruments/{id}/reveal":
+    get:
+      description: Returns the reveal information of a payment instrument.
+      operationId: get-paymentInstruments-id-reveal
+      parameters:
+        - description: The unique identifier of the payment instrument.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentInstrumentRevealInfo"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-400"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get the reveal information of a payment instrument
+      tags:
+        - Payment instruments
+      x-addedInVersion: "1"
+      x-groupName: Payment instruments
+      x-methodName: getRevealInformationOfPaymentInstrument
+      x-sortIndex: 14
   "/paymentInstruments/{id}/transactionRules":
     get:
       description: Returns a list of transaction rules associated with a payment instrument.
@@ -1849,6 +1939,7 @@ paths:
         - Payment instruments
       x-addedInVersion: "1"
       x-groupName: Payment instruments
+      x-methodName: getAllTransactionRulesForPaymentInstrument
       x-sortIndex: 14
   /transactionRules:
     post:
@@ -1872,15 +1963,6 @@ paths:
         "200":
           content:
             application/json:
-              examples:
-                createTransactionRuleAllowPos:
-                  $ref: "#/components/examples/post-transactionRules-createTransactionRuleAllowPos-200"
-                createTransactionRuleIncreaseScore:
-                  $ref: "#/components/examples/post-transactionRules-createTransactionRuleIncreaseScore-200"
-                createTransactionRuleLimitSliding:
-                  $ref: "#/components/examples/post-transactionRules-createTransactionRuleLimitSliding-200"
-                createTransactionRuleLimitTransaction:
-                  $ref: "#/components/examples/post-transactionRules-createTransactionRuleLimitTransaction-200"
               schema:
                 $ref: "#/components/schemas/TransactionRule"
           description: OK - the request has succeeded.
@@ -1937,6 +2019,7 @@ paths:
         - Transaction rules
       x-addedInVersion: "1"
       x-groupName: Transaction rules
+      x-methodName: createTransactionRule
       x-sortIndex: 1
   "/transactionRules/{transactionRuleId}":
     delete:
@@ -2012,6 +2095,7 @@ paths:
         - Transaction rules
       x-addedInVersion: "1"
       x-groupName: Transaction rules
+      x-methodName: deleteTransactionRule
       x-sortIndex: 5
     get:
       description: Returns the details of a transaction rule.
@@ -2086,6 +2170,7 @@ paths:
         - Transaction rules
       x-addedInVersion: "1"
       x-groupName: Transaction rules
+      x-methodName: getTransactionRule
       x-sortIndex: 2
     patch:
       description: |-
@@ -2173,23 +2258,106 @@ paths:
         - Transaction rules
       x-addedInVersion: "1"
       x-groupName: Transaction rules
+      x-methodName: updateTransactionRule
       x-sortIndex: 3
+  /validateBankAccountIdentification:
+    post:
+      description: Validates bank account identification details. You can use this endpoint to validate bank account details before you [make a transfer](https://docs.adyen.com/api-explorer/transfers/latest/post/transfers) or [create a transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments).
+      operationId: post-validateBankAccountIdentification
+      requestBody:
+        content:
+          application/json:
+            examples:
+              validateBankAccountIdentificationIban:
+                $ref: "#/components/examples/post-validateBankAccountIdentification-validateBankAccountIdentificationIban"
+              validateBankAccountIdentificationUs:
+                $ref: "#/components/examples/post-validateBankAccountIdentification-validateBankAccountIdentificationUs"
+            schema:
+              $ref: "#/components/schemas/BankAccountIdentificationValidationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+          description: OK - the request has succeeded.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-422"
+                validateBankAccountIdentificationIban:
+                  $ref: "#/components/examples/post-validateBankAccountIdentification-validateBankAccountIdentificationIban-422"
+                validateBankAccountIdentificationUs:
+                  $ref: "#/components/examples/post-validateBankAccountIdentification-validateBankAccountIdentificationUs-422"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Validate a bank account
+      tags:
+        - Bank account validation
+      x-addedInVersion: "1"
+      x-groupName: Bank account validation
+      x-methodName: validateBankAccountIdentification
+      x-sortIndex: 1
 components:
   examples:
     delete-transactionRules-transactionRuleId-success-200:
       description: Example response for successfully deleting a transaction rule
       summary: Transaction rule deleted
       value:
-        amount:
-          currency: EUR
-          value: 10000
-        description: Allow up to 100 EUR per month
-        id: TR3227C223222B5CMDKQTBQ5M
+        aggregationLevel: paymentInstrument
+        description: Up to 1000 EUR per card for the last 12 hours
+        entityKey:
+          entityReference: PG3227C223222C5GXR3M5592Q
+          entityType: paymentInstrumentGroup
+        id: TR3227C223222C5GXT3DD5VCF
         interval:
-          type: monthly
-        paymentInstrumentGroupId: PG3227C223222B5CMD3FJFKGZ
-        reference: myRule16378
-        startDate: 2021-01-25T12:46:35
+          duration:
+            unit: hours
+            value: 12
+          timeZone: UTC
+          type: sliding
+        outcomeType: hardBlock
+        reference: myRule12345
+        requestType: authorization
+        ruleRestrictions:
+          totalAmount:
+            operation: greaterThan
+            value:
+              currency: EUR
+              value: 100000
         type: velocity
     generic-400:
       summary: Response code - 400 Bad request
@@ -2202,6 +2370,7 @@ components:
     generic-401:
       summary: Response code - 401 Unauthorized
       value:
+        detail: Not authorized to access this service.
         errorCode: 00_401
         status: 401
         title: Unauthorized
@@ -2217,6 +2386,7 @@ components:
     generic-404:
       summary: Response code 404 - Not found
       value:
+        detail: Service not found.
         errorCode: 00_404
         status: 404
         title: Not found
@@ -2253,18 +2423,27 @@ components:
       summary: List of balance accounts retrieved
       value:
         balanceAccounts:
-          - accountHolderId: AH32272223222B59K6ZKBBFNQ
+          - accountHolderId: AH32272223222B5CTBMZT6W2V
             defaultCurrencyCode: EUR
-            id: BA32272223222B59K6ZXHBFN6
-            status: Active
-          - accountHolderId: AH32272223222B59K6ZKBBFNQ
+            description: S. Hopper - Main Account
+            id: BA32272223222B5CTDNB66W2Z
+            reference: YOUR_REFERENCE-X173L
+            status: active
+            timeZone: Europe/Amsterdam
+          - accountHolderId: AH32272223222B5CTBMZT6W2V
             defaultCurrencyCode: EUR
-            id: BA32272223222B59K72CKBFNJ
-            status: Active
-          - accountHolderId: AH32272223222B59K6ZKBBFNQ
+            description: S. Hopper - Main Account
+            id: BA32272223222B5CTDQPM6W2H
+            reference: YOUR_REFERENCE-X173L
+            status: active
+            timeZone: Europe/Amsterdam
+          - accountHolderId: AH32272223222B5CTBMZT6W2V
             defaultCurrencyCode: EUR
-            id: BA32272223222B5BRR27B2M7G
-            status: Active
+            description: S. Hopper - Main Account
+            id: BA32272223222B5CVF5J63LMW
+            reference: YOUR_REFERENCE-X173L
+            status: active
+            timeZone: Europe/Amsterdam
         hasNext: true
         hasPrevious: false
     get-accountHolders-id-success-200:
@@ -2272,20 +2451,32 @@ components:
       summary: Account holder retrieved
       value:
         balancePlatform: YOUR_BALANCE_PLATFORM
-        contactDetails:
-          address:
-            city: Amsterdam
-            country: NL
-            houseNumberOrName: "274"
-            postalCode: 1020CD
-            street: Brannan Street
-          email: s.hopper@example.com
-          phone:
-            number: "+315551231234"
-            type: Mobile
-        description: S.Hopper - Staff 123
-        id: AH32272223222B5CM4MWJ892H
-        status: Active
+        capabilities:
+          receiveFromBalanceAccount:
+            allowed: false
+            enabled: true
+            requested: true
+            verificationStatus: pending
+          receiveFromPlatformPayments:
+            allowed: false
+            enabled: true
+            requested: true
+            verificationStatus: pending
+          sendToBalanceAccount:
+            allowed: false
+            enabled: true
+            requested: true
+            verificationStatus: pending
+          sendToTransferInstrument:
+            allowed: false
+            enabled: true
+            requested: true
+            verificationStatus: pending
+        description: Liable account holder used for international payments and payouts
+        id: AH3227C223222C5GXQXF658WB
+        legalEntityId: LE322JV223222D5GG42KN6869
+        reference: S.Eller-001
+        status: active
     get-balanceAccounts-balanceAccountId-sweeps-success-200:
       description: Example response when retrieving sweeps under a balance account
       summary: Sweeps under a balance account retrieved
@@ -2329,12 +2520,13 @@ components:
       description: Example response when retrieving a list of payment instruments under a balance account
       summary: List of payment instruments retrieved
       value:
-        hasNext: "true"
-        hasPrevious: "false"
+        hasNext: true
+        hasPrevious: false
         paymentInstruments:
           - balanceAccountId: BA32272223222B59CZ3T52DKZ
             card:
               bin: "555544"
+              brand: mc
               brandVariant: mc
               cardholderName: name
               expiration:
@@ -2345,11 +2537,12 @@ components:
               number: "************2357"
             id: PI32272223222B59M5TM658DT
             issuingCountryCode: GB
-            status: Active
+            status: active
             type: card
           - balanceAccountId: BA32272223222B59CZ3T52DKZ
             card:
               bin: "555544"
+              brand: mc
               brandVariant: mc
               cardholderName: name
               expiration:
@@ -2360,7 +2553,7 @@ components:
               number: "************8331"
             id: PI32272223222B59PXDGQDLSF
             issuingCountryCode: GB
-            status: Active
+            status: active
             type: card
     get-balanceAccounts-id-success-200:
       description: Example response for retrieving a balance account
@@ -2374,34 +2567,30 @@ components:
             reserved: 0
         defaultCurrencyCode: EUR
         id: BA3227C223222B5BLP6JQC3FD
-        status: Active
+        status: active
+        timeZone: Europe/Amsterdam
     get-balancePlatforms-id-accountHolders-success-200:
       description: Example response when retrieving a list of account holders under a balance platform
       summary: List of account holders retrieved
       value:
         accountHolders:
-          - contactDetails:
-              address:
-                city: Amsterdam
-                country: NL
-                houseNumberOrName: "6"
-                postalCode: "12336750"
-                street: Simon Carmiggeltstraat
-            description: J. Doe
-            id: AH32272223222B59DDWSCCMP7
-            status: Active
-          - contactDetails:
-              address:
-                city: Amsterdam
-                country: NL
-                houseNumberOrName: "11"
-                postalCode: "12336750"
-                street: Simon Carmiggeltstraat
-            description: S. Hopper
-            id: AH32272223222B59DJ7QBCMPN
-            status: Active
-        hasNext: "true"
-        hasPrevious: "false"
+          - description: Test-305
+            id: AH32272223222B5GFSNSXFFL9
+            legalEntityId: LE3227C223222D5D8S5S33M4M
+            reference: LegalEntity internal error test
+            status: active
+          - description: Test-751
+            id: AH32272223222B5GFSNVGFFM7
+            legalEntityId: LE3227C223222D5D8S5TT3SRX
+            reference: LegalEntity internal error test
+            status: active
+          - description: Explorer Holder
+            id: AH32272223222B5GFWNRFFVR6
+            legalEntityId: LE3227C223222D5D8S5TT3SRX
+            reference: Account from the Explorer Holder
+            status: active
+        hasNext: true
+        hasPrevious: true
     get-balancePlatforms-id-success-200:
       description: Example response when retrieving a balance platform
       summary: Balance platform retrieved
@@ -2420,27 +2609,51 @@ components:
       summary: Transaction rules for a payment instrument group retrieved
       value:
         transactionRules:
-          - description: Allow 5 transactions per month
-            id: TR32272223222B5CMDGMC9F4F
+          - aggregationLevel: paymentInstrument
+            description: Up to 1000 EUR per card for the last 12 hours
+            entityKey:
+              entityReference: PG3227C223222C5GXR3M5592Q
+              entityType: paymentInstrumentGroup
+            id: TR3227C223222C5GXR3XP596N
             interval:
-              type: monthly
-            maxTransactions: 5
-            paymentInstrumentGroupId: PG3227C223222B5CMD3FJFKGZ
-            reference: myRule12345
-            startDate: 2021-01-25T12:46:35
-            status: active
+              duration:
+                unit: hours
+                value: 12
+              timeZone: UTC
+              type: sliding
+            outcomeType: hardBlock
+            reference: YOUR_REFERENCE_2918A
+            requestType: authorization
+            ruleRestrictions:
+              totalAmount:
+                operation: greaterThan
+                value:
+                  currency: EUR
+                  value: 100000
+            status: inactive
             type: velocity
-          - amount:
-              currency: EUR
-              value: 10000
-            description: Allow up to 100 EUR per month
-            id: TR32272223222B5CMDGT89F4F
+          - aggregationLevel: paymentInstrument
+            description: NL only
+            entityKey:
+              entityReference: PG3227C223222C5GXR3M5592Q
+              entityType: paymentInstrumentGroup
+            id: TR3227C223222C5GXR3WC595H
             interval:
-              type: monthly
-            paymentInstrumentGroupId: PG3227C223222B5CMD3FJFKGZ
-            reference: myRule16378
-            startDate: 2021-01-25T12:46:35
-            status: active
+              duration:
+                unit: hours
+                value: 12
+              timeZone: UTC
+              type: sliding
+            outcomeType: hardBlock
+            reference: myRule12345
+            requestType: authorization
+            ruleRestrictions:
+              totalAmount:
+                operation: greaterThan
+                value:
+                  currency: EUR
+                  value: 100000
+            status: inactive
             type: velocity
     get-paymentInstruments-id-success-200:
       description: Example response for retrieving payment instruments associated with a balance account
@@ -2468,43 +2681,67 @@ components:
       summary: Transaction rules for a payment instrument retrieved
       value:
         transactionRules:
-          - description: Allow 5 transactions per month
-            id: TR32272223222B5CMDGMC9F4F
+          - description: Only allow point-of-sale transactions
+            entityKey:
+              entityReference: PI3227C223222B5FN65FN5NS9
+              entityType: paymentInstrument
+            id: TR32272223222B5GFSGFLFCHM
             interval:
-              type: monthly
-            maxTransactions: 5
-            paymentInstrumentGroupId: PG3227C223222B5CMD3FJFKGZ
-            reference: myRule12345
-            startDate: 2021-01-25T12:46:35.476629Z
+              timeZone: UTC
+              type: perTransaction
+            outcomeType: hardBlock
+            reference: YOUR_REFERENCE_4F7346
+            requestType: authorization
+            ruleRestrictions:
+              processingTypes:
+                operation: noneMatch
+                value:
+                  - pos
+            startDate: 2022-08-02T16:07:00.851374+02:00
             status: active
-            type: velocity
-          - amount:
-              currency: EUR
-              value: 10000
-            description: Allow up to 100 EUR per month
-            id: TR32272223222B5CMDGT89F4F
+            type: blockList
+          - description: Set the maximum number of active network tokens to one for this card
+            entityKey:
+              entityReference: PI3227C223222B5FN65FN5NS9
+              entityType: paymentInstrument
+            id: TR32272223222C5GQJ93L7J8Z
             interval:
-              type: monthly
-            paymentInstrumentGroupId: PG3227C223222B5CMD3FJFKGZ
-            reference: myRule16378
-            startDate: 2021-01-25T12:46:35
+              timeZone: UTC
+              type: perTransaction
+            outcomeType: hardBlock
+            reference: myRule123
+            requestType: authorization
+            ruleRestrictions:
+              activeNetworkTokens:
+                operation: greaterThanOrEqualTo
+                value: 1
+            startDate: 2022-10-03T14:48:28.999314+02:00
             status: active
-            type: velocity
+            type: blockList
     get-transactionRules-transactionRuleId-success-200:
       description: Example response when retrieving a transaction rule
       summary: Transaction rules retrieved
       value:
         transactionRule:
-          description: Allow 5 transactions per month
-          id: TR32272223222B5CMD3V73HXG
+          description: Only allow point-of-sale transactions
+          entityKey:
+            entityReference: PI3227C223222B5FN65FN5NS9
+            entityType: paymentInstrument
+          id: TR32272223222B5GFSGFLFCHM
           interval:
-            type: monthly
-          maxTransactions: 5
-          paymentInstrumentId: PI3227C223222B59KGTXP884R
-          reference: myRule12345
-          startDate: 2021-01-25T12:46:35
+            timeZone: UTC
+            type: perTransaction
+          outcomeType: hardBlock
+          reference: YOUR_REFERENCE_4F7346
+          requestType: authorization
+          ruleRestrictions:
+            processingTypes:
+              operation: noneMatch
+              value:
+                - pos
+          startDate: 2022-08-02T16:07:00.851374+02:00
           status: active
-          type: velocity
+          type: blockList
     patch-accountHolders-id-requestAccountHolderCapability:
       description: Example request for the `receivePayments` capability for an account holder
       summary: Request account holder capability
@@ -2519,12 +2756,12 @@ components:
       description: Example response for requesting the `receivePayments` capability for an account holder
       summary: Account holder capability requested
       value:
-        balancePlatform: APIExplorer
+        balancePlatform: YOUR_BALANCE_PLATFORM
         capabilities:
           receivePayments:
-            allowed: "false"
-            enabled: "false"
-            requested: "true"
+            allowed: false
+            enabled: false
+            requested: true
             verificationStatus: pending
         description: Liable account holder used for international payments and payouts
         id: AH3227C223222C5GKR23686TF
@@ -2540,7 +2777,7 @@ components:
       description: Example response for permanently deactivating an account holder
       summary: Account holder deactivated
       value:
-        balancePlatform: APIExplorer
+        balancePlatform: YOUR_BALANCE_PLATFORM
         description: Liable account holder used for international payments and payouts
         id: AH3227C223222C5GKR23686TF
         legalEntityId: LE322JV223222F5GKQZZ9DS99
@@ -2627,32 +2864,37 @@ components:
       description: Example response for successfully updating the status of a transaction rule
       summary: Transaction rule status updated
       value:
-        description: Allow 5 transactions per month
-        id: TR3227C223222B5B85CDV4DRS
+        aggregationLevel: paymentInstrument
+        description: Up to 1000 EUR per card for the last 12 hours
+        entityKey:
+          entityReference: PG3227C223222C5GXR3M5592Q
+          entityType: paymentInstrumentGroup
+        id: TR3227C223222C5GXR3XP596N
         interval:
-          type: monthly
-        maxTransactions: 5
-        paymentInstrumentId: PI3227C223222B59KGTXP884R
-        reference: myRule12345
-        startDate: 2021-01-21T12:46:35
+          duration:
+            unit: hours
+            value: 12
+          timeZone: UTC
+          type: sliding
+        outcomeType: hardBlock
+        reference: YOUR_REFERENCE_2918A
+        requestType: authorization
+        ruleRestrictions:
+          totalAmount:
+            operation: greaterThan
+            value:
+              currency: EUR
+              value: 100000
+        startDate: 2022-11-17T00:07:09.10057663+01:00
         status: inactive
         type: velocity
     post-accountHolders-createAccountHolder:
+      description: Example request for creating an account holder
       summary: Create an account holder
       value:
         description: Liable account holder used for international payments and payouts
         legalEntityId: LE322JV223222D5GG42KN6869
         reference: S.Eller-001
-    post-accountHolders-createAccountHolder-200:
-      description: Example response for creating an account holder
-      summary: Account holder created
-      value:
-        balancePlatform: APIExplorer
-        description: Liable account holder used for international payments and payouts
-        id: AH3227C223222C5GKR23686TF
-        legalEntityId: LE322JV223222D5GG42KN6869
-        reference: S.Eller-001
-        status: active
     post-balanceAccounts-balanceAccountId-sweeps-createSweep-pull:
       description: Example request for creating a pull sweep
       summary: Create a sweep to pull funds in to a balance account
@@ -2715,52 +2957,54 @@ components:
       description: Example request for creating a balance account
       summary: Create a balance account
       value:
-        accountHolderId: AH32272223222B59K6ZKBBFNQ
+        accountHolderId: AH32272223222C5GXTD343TKP
         description: S.Hopper - Main balance account
-    post-balanceAccounts-createBalanceAccount-200:
-      description: Example response for creating a balance account
-      summary: Balance account created
-      value:
-        accountHolderId: AH32272223222B59K6ZKBBFNQ
-        balances:
-          - available: 0
-            balance: 0
-            currency: EUR
-            reserved: 0
-        defaultCurrencyCode: EUR
-        id: BA32272223222B59CZ3T52DKZ
-        reference: S.Hopper - Main balance account
-        status: active
     post-paymentInstrumentGroups-createPaymentInstrumentGroups:
       description: Example request for creating a payment instrument group
       summary: Create a payment instrument group
       value:
         balancePlatform: YOUR_BALANCE_PLATFORM
         txVariant: mc
-    post-paymentInstrumentGroups-createPaymentInstrumentGroups-200:
-      description: Example response for successfully creating a payment instrument group
-      summary: Payment instrument group created
-      value:
-        balancePlatform: YOUR_BALANCE_PLATFORM
-        id: PG3227C223222B5CMD3FJFKGZ
-        txVariant: mc
-    post-paymentInstruments-createBusinessAccount:
-      description: Example request for creating a business account
-      summary: Create a business account
+    post-paymentInstruments-createBusinessAccountNL:
+      description: Example request for creating a business account in NL
+      summary: Create a business account in NL
       value:
         balanceAccountId: BA3227C223222B5CTBLR8BWJB
         description: YOUR_DESCRIPTION
         issuingCountryCode: NL
         type: bankAccount
-    post-paymentInstruments-createBusinessAccount-200:
-      description: Example response for creating a business account
-      summary: Business account created
+    post-paymentInstruments-createBusinessAccountNL-200:
+      description: Example response for creating a business account in NL
+      summary: Business account in NL created
       value:
         balanceAccountId: BA3227C223222B5CTBLR8BWJB
         bankAccount:
           iban: NL20ADYB2017000035
+        description: YOUR_DESCRIPTION
         id: PI322LJ223222B5DJS7CD9LWL
         issuingCountryCode: NL
+        status: Active
+        type: bankAccount
+    post-paymentInstruments-createBusinessAccountUS:
+      description: Example request for creating a business account in the US
+      summary: Create a business account in the US
+      value:
+        balanceAccountId: BA3227C223222B5CTBLR8BWJB
+        description: YOUR_DESCRIPTION
+        issuingCountryCode: US
+        type: bankAccount
+    post-paymentInstruments-createBusinessAccountUS-200:
+      description: Example response for creating a business account in the US
+      summary: Business account in the US created
+      value:
+        balanceAccountId: BA3227C223222B5CTBLR8BWJB
+        bankAccount:
+          accountNumber: "333720756"
+          accountType: checking
+          routingNumber: "21000021"
+        description: YOUR_DESCRIPTION
+        id: PI322LJ223222B5DJS7CD9LWL
+        issuingCountryCode: US
         status: Active
         type: bankAccount
     post-paymentInstruments-createPhysicalCard:
@@ -2788,7 +3032,7 @@ components:
           formFactor: physical
         description: S.Hopper - Main card
         issuingCountryCode: NL
-        status: Inactive
+        status: inactive
         type: card
     post-paymentInstruments-createPhysicalCard-200:
       description: Example response for creating a physical card
@@ -2823,45 +3067,46 @@ components:
             year: "2024"
           formFactor: physical
           lastFour: "2765"
+          number: "************5785"
         description: S. Hopper - Main card
         id: PI3227C223222B5BPCMFXD2XG
         issuingCountryCode: NL
-        status: Inactive
+        status: inactive
         type: card
     post-paymentInstruments-createVirtualCard:
       description: Example request for creating a virtual card
       summary: Create a virtual card
       value:
-        balanceAccountId: BA32272223222B59CZ3T52DKZ
+        balanceAccountId: BA3227C223222B5FG88S28BGN
         card:
           brand: mc
           brandVariant: mcdebit
-          cardholderName: Sam Hopper
+          cardholderName: Simon Hopper
           formFactor: virtual
-        description: S. Hopper - Main card
+        description: My test card
         issuingCountryCode: NL
         type: card
     post-paymentInstruments-createVirtualCard-200:
       description: Example response for creating a virtual card
       summary: Virtual card created
       value:
-        balanceAccountId: BA32272223222B59CZ3T52DKZ
+        balanceAccountId: BA3227C223222B5FG88S28BGN
         card:
           bin: "555544"
           brand: mc
           brandVariant: mcdebit
-          cardholderName: Sam Hopper
-          cvc: "613"
+          cardholderName: Simon Hopper
+          cvc: "136"
           expiration:
-            month: "03"
+            month: "11"
             year: "2025"
           formFactor: virtual
-          lastFour: "9883"
-          number: "5555444411209883"
-        description: S.Hopper - Virtual card
-        id: PI32272223222B5FR7Z5CFDW4
+          lastFour: "3703"
+          number: "5555444411213703"
+        description: My test card
+        id: PI32272223222C5GXTDWH3TTN
         issuingCountryCode: NL
-        status: Active
+        status: active
         type: card
     post-transactionRules-createTransactionRuleAllowPos:
       description: Example request to allow only point-of-sale transactions
@@ -2869,7 +3114,7 @@ components:
       value:
         description: Allow only point-of-sale transactions
         entityKey:
-          entityReference: PI3227C223222B5BPCMFXD2XG
+          entityReference: PI3227C223222B5FG88SB8BHR
           entityType: paymentInstrument
         interval:
           type: perTransaction
@@ -2879,29 +3124,6 @@ components:
             operation: noneMatch
             value:
               - pos
-        status: active
-        type: blockList
-    post-transactionRules-createTransactionRuleAllowPos-200:
-      description: Example response for allowing only point-of-sale transactions
-      summary: Transaction rule allowing only POS transactions created
-      value:
-        description: Allow only point-of-sale transactions
-        entityKey:
-          entityReference: PI3227C223222B5BPCMFXD2XG
-          entityType: paymentInstrument
-        id: TR3227C223222B5FCB756DV9H
-        interval:
-          timeZone: UTC
-          type: perTransaction
-        outcomeType: hardBlock
-        reference: YOUR_REFERENCE_4F7346
-        requestType: authorization
-        ruleRestrictions:
-          processingTypes:
-            operation: noneMatch
-            value:
-              - pos
-        startDate: 2022-03-23T15:05:11+01:00
         status: active
         type: blockList
     post-transactionRules-createTransactionRuleIncreaseScore:
@@ -2910,7 +3132,7 @@ components:
       value:
         description: Assign score if more than 500 EUR in 2 hours
         entityKey:
-          entityReference: PI3227C223222B5FN65FN5NS9
+          entityReference: PI3227C223222B5FG88SB8BHR
           entityType: paymentInstrument
         interval:
           duration:
@@ -2926,33 +3148,6 @@ components:
               currency: EUR
               value: 50000
         score: 20
-        type: velocity
-    post-transactionRules-createTransactionRuleIncreaseScore-200:
-      description: Example response for increasing the score of a card
-      summary: Score-based transaction rule created
-      value:
-        description: Assign score if more than 500 EUR in 2 hours
-        entityKey:
-          entityReference: PI3227C223222B5FN65FN5NS9
-          entityType: paymentInstrument
-        id: TR3227C223222B5FW3LVW8NRJ
-        interval:
-          duration:
-            unit: hours
-            value: 2
-          timeZone: UTC
-          type: sliding
-        outcomeType: scoreBased
-        reference: myRule11789
-        requestType: authorization
-        ruleRestrictions:
-          totalAmount:
-            operation: greaterThan
-            value:
-              currency: EUR
-              value: 50000
-        score: 20
-        status: inactive
         type: velocity
     post-transactionRules-createTransactionRuleLimitSliding:
       description: Example request to limit the total amount in a sliding interval
@@ -2966,44 +3161,16 @@ components:
         interval:
           duration:
             unit: hours
-            value: "12"
-          type: sliding
-        outcomeType: hardBlock
-        reference: YOUR_REFERENCE_2918A
-        ruleRestrictions:
-          totalAmount:
-            operation: greaterThan
-            value:
-              currency: EUR
-              value: 100000
-        status: active
-        type: velocity
-    post-transactionRules-createTransactionRuleLimitSliding-200:
-      description: Example response for limiting the total amount in a sliding interval
-      summary: Transaction rule with a sliding interval created
-      value:
-        aggregationLevel: paymentInstrument
-        description: Up to 1000 EUR per card for the last 12 hours
-        entityKey:
-          entityReference: BA3227C223222B5FN65355NR3
-          entityType: balanceAccount
-        id: TR32272223222B5FW3LZ74JFB
-        interval:
-          duration:
-            unit: hours
             value: 12
-          timeZone: UTC
           type: sliding
         outcomeType: hardBlock
         reference: YOUR_REFERENCE_2918A
-        requestType: authorization
         ruleRestrictions:
           totalAmount:
             operation: greaterThan
             value:
               currency: EUR
               value: 100000
-        startDate: 2022-04-19T18:43:37+02:00
         status: active
         type: velocity
     post-transactionRules-createTransactionRuleLimitTransaction:
@@ -3029,35 +3196,66 @@ components:
               value: 5000
         status: active
         type: velocity
-    post-transactionRules-createTransactionRuleLimitTransaction-200:
-      description: Example response for limiting the total amount of international transations
-      summary: Transaction rule to limit international transactions created
+    post-validateBankAccountIdentification-validateBankAccountIdentificationIban:
+      summary: Validate an IBAN
       value:
-        description: Up to 50 EUR international transactions
-        entityKey:
-          entityReference: BA3227C223222B5FN65355NR3
-          entityType: balanceAccount
-        id: TR32272223222B5FW3M494JGX
-        interval:
-          timeOfDay: 00:00:00
-          timeZone: UTC
-          type: daily
-        outcomeType: hardBlock
-        reference: YOUR_REFERENCE_B2634
-        requestType: authorization
-        ruleRestrictions:
-          internationalTransaction:
-            operation: equals
-            value: true
-          totalAmount:
-            operation: greaterThan
-            value:
-              currency: EUR
-              value: 5000
-        startDate: 2022-04-19T18:45:03+02:00
-        status: active
-        type: velocity
+        accountIdentification:
+          iban: "1001001234"
+          type: iban
+    post-validateBankAccountIdentification-validateBankAccountIdentificationIban-422:
+      summary: Invalid IBAN details
+      value:
+        errorCode: 33_01
+        invalidFields:
+          - message: Invalid IBAN.
+            name: iban
+        status: 422
+        title: Invalid bank account identification details provided
+        type: https://docs.adyen.com/errors/validation
+    post-validateBankAccountIdentification-validateBankAccountIdentificationUs:
+      summary: Validate a US bank account
+      value:
+        accountIdentification:
+          accountNumber: 12345JHDhjkf67890
+          routingNumber: 121000cxhgjhzxg248
+          type: usLocal
+    post-validateBankAccountIdentification-validateBankAccountIdentificationUs-422:
+      summary: Invalid US bank account details
+      value:
+        errorCode: 33_01
+        invalidFields:
+          - message: Invalid account number.
+            name: accountNumber
+          - message: Invalid routing number.
+            name: routingNumber
+        status: 422
+        title: Invalid bank account identification details provided
+        type: https://docs.adyen.com/errors/validation
   schemas:
+    AULocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The bank account number, without separators or whitespace.
+          maxLength: 9
+          minLength: 5
+          type: string
+        bsbCode:
+          description: The 6-digit [Bank State Branch (BSB) code](https://en.wikipedia.org/wiki/Bank_state_branch), without separators or whitespace.
+          maxLength: 6
+          minLength: 6
+          type: string
+        type:
+          default: auLocal
+          description: "**auLocal**"
+          enum:
+            - auLocal
+          type: string
+      required:
+        - type
+        - accountNumber
+        - bsbCode
+      type: object
     AccountHolder:
       properties:
         balancePlatform:
@@ -3070,6 +3268,7 @@ components:
           type: object
         contactDetails:
           $ref: "#/components/schemas/ContactDetails"
+          deprecated: true
           description: Contact details of the account holder.
         description:
           description: Your description for the account holder, maximum 300 characters.
@@ -3080,7 +3279,7 @@ components:
           readOnly: true
           type: string
         legalEntityId:
-          description: The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) associated with the account holder. Adyen performs a verification process against the legal entity of the account holder.
+          description: The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id) associated with the account holder. Adyen performs a verification process against the legal entity of the account holder.
           type: string
         primaryBalanceAccount:
           description: The ID of the account holder's primary balance account. By default, this is set to the first balance account that you create for the account holder. To assign a different balance account, send a PATCH request.
@@ -3097,7 +3296,7 @@ components:
 
              * **active**: The account holder is active. This is the default status when creating an account holder. 
 
-             * **inactive**: The account holder is temporarily inactive due to missing KYC details. You can set the account back to active by providing the missing KYC details. 
+             * **inactive (Deprecated)**: The account holder is temporarily inactive due to missing KYC details. You can set the account back to active by providing the missing KYC details. 
 
              * **suspended**: The account holder is permanently deactivated by Adyen. This action cannot be undone. 
 
@@ -3111,11 +3310,19 @@ components:
         timeZone:
           description: |-
             The [time zone](https://www.iana.org/time-zones) of the account holder. For example, **Europe/Amsterdam**.
-            If not set, the time zone of the balance account will be used. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+            Defaults to the time zone of the balance platform if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
           type: string
+        verificationDeadlines:
+          description: List of verification deadlines and the capabilities that will be disallowed if verification errors are not resolved.
+          items:
+            $ref: "#/components/schemas/VerificationDeadline"
+          readOnly: true
+          type: array
+          x-addedInVersion: "2"
       required:
         - legalEntityId
         - id
+      type: object
     AccountHolderCapability:
       properties:
         allowed:
@@ -3165,6 +3372,11 @@ components:
           $ref: "#/components/schemas/JSONObject"
           description: A JSON object containing the settings that were requested for the account holder.
           readOnly: true
+        transferInstruments:
+          description: "Contains the status of the transfer instruments associated with this capability. "
+          items:
+            $ref: "#/components/schemas/AccountSupportingEntityCapability"
+          type: array
         verificationStatus:
           description: |
             The status of the verification checks for the capability.
@@ -3185,6 +3397,7 @@ components:
             - valid
           readOnly: true
           type: string
+      type: object
     AccountHolderInfo:
       properties:
         balancePlatform:
@@ -3197,13 +3410,14 @@ components:
           type: object
         contactDetails:
           $ref: "#/components/schemas/ContactDetails"
+          deprecated: true
           description: Contact details of the account holder.
         description:
           description: Your description for the account holder, maximum 300 characters.
           maxLength: 300
           type: string
         legalEntityId:
-          description: The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) associated with the account holder. Adyen performs a verification process against the legal entity of the account holder.
+          description: The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id) associated with the account holder. Adyen performs a verification process against the legal entity of the account holder.
           type: string
         reference:
           description: Your reference for the account holder, maximum 150 characters.
@@ -3212,10 +3426,71 @@ components:
         timeZone:
           description: |-
             The [time zone](https://www.iana.org/time-zones) of the account holder. For example, **Europe/Amsterdam**.
-            If not set, the time zone of the balance account will be used. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+            Defaults to the time zone of the balance platform if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
           type: string
       required:
         - legalEntityId
+      type: object
+    AccountSupportingEntityCapability:
+      properties:
+        allowed:
+          description: Indicates whether the supporting entity capability is allowed. Adyen sets this to **true** if the verification is successful and the account holder is permitted to use the capability.
+          readOnly: true
+          type: boolean
+        allowedLevel:
+          description: |-
+            The capability level that is allowed for the account holder.
+
+            Possible values: **notApplicable**, **low**, **medium**, **high**.
+          enum:
+            - high
+            - low
+            - medium
+            - notApplicable
+          readOnly: true
+          type: string
+        enabled:
+          description: Indicates whether the capability is enabled. If **false**, the capability is temporarily disabled for the account holder.
+          type: boolean
+        id:
+          description: The ID of the supporting entity.
+          readOnly: true
+          type: string
+        requested:
+          description: Indicates whether the capability is requested. To check whether the account holder is permitted to use the capability, refer to the `allowed` field.
+          type: boolean
+        requestedLevel:
+          description: |-
+            The requested level of the capability. Some capabilities, such as those used in [card issuing](https://docs.adyen.com/issuing/add-capabilities#capability-levels), have different levels. Levels increase the capability, but also require additional checks and increased monitoring.
+
+            Possible values: **notApplicable**, **low**, **medium**, **high**.
+          enum:
+            - high
+            - low
+            - medium
+            - notApplicable
+          type: string
+        verificationStatus:
+          description: |
+            The status of the verification checks for the supporting entity capability.
+
+            Possible values:
+
+            * **pending**: Adyen is running the verification.
+
+            * **invalid**: The verification failed. Check if the `errors` array contains more information.
+
+            * **valid**: The verification has been successfully completed.
+
+            * **rejected**: Adyen has verified the information, but found reasons to not allow the capability.
+          enum:
+            - invalid
+            - pending
+            - rejected
+            - valid
+          readOnly: true
+          type: string
+      type: object
     ActiveNetworkTokensRestriction:
       properties:
         operation:
@@ -3227,6 +3502,25 @@ components:
           type: integer
       required:
         - operation
+      type: object
+    AdditionalBankIdentification:
+      properties:
+        code:
+          description: The value of the additional bank identification.
+          type: string
+        type:
+          description: |-
+            The type of additional bank identification, depending on the country.
+
+            Possible values:
+
+             * **gbSortCode**: The 6-digit [UK sort code](https://en.wikipedia.org/wiki/Sort_code), without separators or spaces
+             * **usRoutingNumber**: The 9-digit [routing number](https://en.wikipedia.org/wiki/ABA_routing_transit_number), without separators or spaces.
+          enum:
+            - gbSortCode
+            - usRoutingNumber
+          type: string
+      type: object
     Address:
       properties:
         city:
@@ -3262,6 +3556,7 @@ components:
         - city
         - postalCode
         - country
+      type: object
     Address-2:
       properties:
         city:
@@ -3295,6 +3590,7 @@ components:
           type: string
       required:
         - country
+      type: object
     Amount:
       properties:
         currency:
@@ -3309,6 +3605,7 @@ components:
       required:
         - value
         - currency
+      type: object
     Authentication:
       properties:
         email:
@@ -3338,6 +3635,7 @@ components:
             * A `number` with more than 4 digits, excluding the country code.
 
             >Make sure to verify that the card user owns the phone number.
+      type: object
     Balance:
       properties:
         available:
@@ -3360,6 +3658,7 @@ components:
         - balance
         - reserved
         - available
+      type: object
     BalanceAccount:
       properties:
         accountHolderId:
@@ -3398,11 +3697,12 @@ components:
         timeZone:
           description: |-
             The [time zone](https://www.iana.org/time-zones) of the balance account. For example, **Europe/Amsterdam**.
-            If not set, the time zone of the account holder will be used. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+            Defaults to the time zone of the account holder if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
           type: string
       required:
         - accountHolderId
         - id
+      type: object
     BalanceAccountInfo:
       properties:
         accountHolderId:
@@ -3424,10 +3724,11 @@ components:
         timeZone:
           description: |-
             The [time zone](https://www.iana.org/time-zones) of the balance account. For example, **Europe/Amsterdam**.
-            If not set, the time zone of the account holder will be used. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+            Defaults to the time zone of the account holder if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
           type: string
       required:
         - accountHolderId
+      type: object
     BalanceAccountUpdateRequest:
       properties:
         accountHolderId:
@@ -3460,8 +3761,9 @@ components:
         timeZone:
           description: |-
             The [time zone](https://www.iana.org/time-zones) of the balance account. For example, **Europe/Amsterdam**.
-            If not set, the time zone of the account holder will be used. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+            Defaults to the time zone of the account holder if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
           type: string
+      type: object
     BalancePlatform:
       properties:
         description:
@@ -3479,6 +3781,7 @@ components:
           type: string
       required:
         - id
+      type: object
     BalanceSweepConfigurationsResponse:
       properties:
         hasNext:
@@ -3496,13 +3799,53 @@ components:
         - sweeps
         - hasPrevious
         - hasNext
+      type: object
     BankAccount:
       properties:
+        accountNumber:
+          description: The bank account number, without separators or whitespace.
+          maxLength: 18
+          minLength: 2
+          type: string
+        accountType:
+          description: |-
+            The bank account type.
+
+            Possible values: **checking** only.
+          enum:
+            - checking
+          type: string
         iban:
           description: The [International Bank Account Number](https://en.wikipedia.org/wiki/International_Bank_Account_Number) (IBAN).
           type: string
+        routingNumber:
+          description: The 9-digit [routing number](https://en.wikipedia.org/wiki/ABA_routing_transit_number), without separators or whitespace.
+          maxLength: 9
+          minLength: 9
+          type: string
       required:
         - iban
+      type: object
+    BankAccountIdentificationValidationRequest:
+      properties:
+        accountIdentification:
+          description: Bank account identification.
+          oneOf:
+            - $ref: "#/components/schemas/AULocalAccountIdentification"
+            - $ref: "#/components/schemas/CALocalAccountIdentification"
+            - $ref: "#/components/schemas/CZLocalAccountIdentification"
+            - $ref: "#/components/schemas/HULocalAccountIdentification"
+            - $ref: "#/components/schemas/IbanAccountIdentification"
+            - $ref: "#/components/schemas/NOLocalAccountIdentification"
+            - $ref: "#/components/schemas/NumberAndBicAccountIdentification"
+            - $ref: "#/components/schemas/PLLocalAccountIdentification"
+            - $ref: "#/components/schemas/SELocalAccountIdentification"
+            - $ref: "#/components/schemas/SGLocalAccountIdentification"
+            - $ref: "#/components/schemas/UKLocalAccountIdentification"
+            - $ref: "#/components/schemas/USLocalAccountIdentification"
+      required:
+        - accountIdentification
+      type: object
     BrandVariantsRestriction:
       properties:
         operation:
@@ -3525,6 +3868,7 @@ components:
           type: array
       required:
         - operation
+      type: object
     BulkAddress:
       properties:
         city:
@@ -3566,7 +3910,78 @@ components:
           type: string
       required:
         - country
-    CapabilityProblem: {}
+      type: object
+    CALocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The 5- to 12-digit bank account number, without separators or whitespace.
+          maxLength: 12
+          minLength: 5
+          type: string
+        institutionNumber:
+          description: The 3-digit institution number, without separators or whitespace.
+          maxLength: 3
+          minLength: 3
+          type: string
+        transitNumber:
+          description: The 5-digit transit number, without separators or whitespace.
+          maxLength: 5
+          minLength: 5
+          type: string
+        type:
+          default: caLocal
+          description: "**caLocal**"
+          enum:
+            - caLocal
+          type: string
+      required:
+        - type
+        - accountNumber
+        - institutionNumber
+        - transitNumber
+      type: object
+    CZLocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: |-
+            The 2- to 16-digit bank account number (Číslo účtu) in the following format:
+
+            - The optional prefix (předčíslí).
+
+            - The required second part (základní část) which must be at least two non-zero digits.
+
+            Examples:
+
+            - **19-123457** (with prefix)
+
+            - **123457** (without prefix)
+
+            - **000019-0000123457** (with prefix, normalized)
+
+            - **000000-0000123457** (without prefix, normalized)
+          maxLength: 17
+          minLength: 2
+          type: string
+        bankCode:
+          description: The 4-digit bank code (Kód banky), without separators or whitespace.
+          maxLength: 4
+          minLength: 4
+          type: string
+        type:
+          default: czLocal
+          description: "**czLocal**"
+          enum:
+            - czLocal
+          type: string
+      required:
+        - type
+        - accountNumber
+        - bankCode
+      type: object
+    CapabilityProblem:
+      type: object
     Card:
       properties:
         authentication:
@@ -3577,12 +3992,12 @@ components:
           type: string
         brand:
           description: |-
-            The brand of the payment instrument.
+            The brand of the physical or the virtual card.
             Possible values: **visa**, **mc**.
           type: string
         brandVariant:
           description: |-
-            The brand variant of the payment instrument.
+            The brand variant of the physical or the virtual card.
             >Contact your Adyen Implementation Manager to get the values that are relevant to your integration. Examples: **visadebit**, **mcprepaid**.
           type: string
         cardholderName:
@@ -3594,7 +4009,7 @@ components:
         configuration:
           $ref: "#/components/schemas/CardConfiguration"
           description: |-
-            Settings required when creating a physical card. 
+            Settings required when creating a physical or a virtual card. 
 
             Reach out to your Adyen contact to get the values that you can send in this object.
         cvc:
@@ -3633,6 +4048,7 @@ components:
         - brand
         - brandVariant
         - number
+      type: object
     CardConfiguration:
       properties:
         activation:
@@ -3686,6 +4102,7 @@ components:
           type: string
       required:
         - configurationProfileId
+      type: object
     CardInfo:
       properties:
         authentication:
@@ -3693,12 +4110,12 @@ components:
           description: Contains the card user's password and mobile phone number. This is required when you issue cards that can be used to make online payments within the EEA and the UK, or can be added to digital wallets. Refer to [3D Secure and digital wallets](https://docs.adyen.com/issuing/3d-secure-and-wallets) for more information.
         brand:
           description: |-
-            The brand of the payment instrument.
+            The brand of the physical or the virtual card.
             Possible values: **visa**, **mc**.
           type: string
         brandVariant:
           description: |-
-            The brand variant of the payment instrument.
+            The brand variant of the physical or the virtual card.
             >Contact your Adyen Implementation Manager to get the values that are relevant to your integration. Examples: **visadebit**, **mcprepaid**.
           type: string
         cardholderName:
@@ -3710,7 +4127,7 @@ components:
         configuration:
           $ref: "#/components/schemas/CardConfiguration"
           description: |-
-            Settings required when creating a physical card. 
+            Settings required when creating a physical or a virtual card. 
 
             Reach out to your Adyen contact to get the values that you can send in this object.
         deliveryContact:
@@ -3731,6 +4148,7 @@ components:
         - cardholderName
         - brand
         - brandVariant
+      type: object
     ContactDetails:
       properties:
         address:
@@ -3749,6 +4167,7 @@ components:
         - email
         - phone
         - address
+      type: object
     CountriesRestriction:
       properties:
         operation:
@@ -3761,6 +4180,7 @@ components:
           type: array
       required:
         - operation
+      type: object
     CronSweepSchedule:
       additionalProperties: false
       properties:
@@ -3806,6 +4226,32 @@ components:
           type: string
       required:
         - cronExpression
+      type: object
+    DayOfWeekRestriction:
+      properties:
+        operation:
+          description: Defines how the condition must be evaluated.
+          type: string
+        value:
+          description: |+
+            List of days of the week.
+
+            Possible values: **monday**, **tuesday**, **wednesday**, **thursday**, **friday**, **saturday**, **sunday**.
+
+          items:
+            enum:
+              - friday
+              - monday
+              - saturday
+              - sunday
+              - thursday
+              - tuesday
+              - wednesday
+            type: string
+          type: array
+      required:
+        - operation
+      type: object
     DeliveryContact:
       properties:
         address:
@@ -3831,6 +4277,7 @@ components:
       required:
         - name
         - address
+      type: object
     DifferentCurrenciesRestriction:
       properties:
         operation:
@@ -3849,6 +4296,7 @@ components:
           type: boolean
       required:
         - operation
+      type: object
     Duration:
       properties:
         unit:
@@ -3870,6 +4318,7 @@ components:
             The maximum duration is 90 days or an equivalent in other units. For example, 3 months.
           format: int32
           type: integer
+      type: object
     EntryModesRestriction:
       properties:
         operation:
@@ -3896,6 +4345,7 @@ components:
           type: array
       required:
         - operation
+      type: object
     Expiry:
       properties:
         month:
@@ -3904,6 +4354,41 @@ components:
         year:
           description: The year in which the card will expire.
           type: string
+      type: object
+    HULocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The 24-digit bank account number, without separators or whitespace.
+          maxLength: 24
+          minLength: 24
+          type: string
+        type:
+          default: huLocal
+          description: "**huLocal**"
+          enum:
+            - huLocal
+          type: string
+      required:
+        - type
+        - accountNumber
+      type: object
+    IbanAccountIdentification:
+      additionalProperties: false
+      properties:
+        iban:
+          description: The international bank account number as defined in the [ISO-13616](https://www.iso.org/standard/81090.html) standard.
+          type: string
+        type:
+          default: iban
+          description: "**iban**"
+          enum:
+            - iban
+          type: string
+      required:
+        - type
+        - iban
+      type: object
     InternationalTransactionRestriction:
       properties:
         operation:
@@ -3922,6 +4407,7 @@ components:
           type: boolean
       required:
         - operation
+      type: object
     InvalidField:
       properties:
         message:
@@ -3937,6 +4423,7 @@ components:
         - name
         - value
         - message
+      type: object
     JSONObject:
       properties:
         paths:
@@ -3945,12 +4432,14 @@ components:
           type: array
         rootPath:
           $ref: "#/components/schemas/JSONPath"
+      type: object
     JSONPath:
       properties:
         content:
           items:
             type: string
           type: array
+      type: object
     MatchingTransactionsRestriction:
       properties:
         operation:
@@ -3962,6 +4451,7 @@ components:
           type: integer
       required:
         - operation
+      type: object
     MccsRestriction:
       properties:
         operation:
@@ -3974,6 +4464,7 @@ components:
           type: array
       required:
         - operation
+      type: object
     MerchantAcquirerPair:
       properties:
         acquirerId:
@@ -3982,6 +4473,19 @@ components:
         merchantId:
           description: The merchant identification number (MID).
           type: string
+      type: object
+    MerchantNamesRestriction:
+      properties:
+        operation:
+          description: Defines how the condition must be evaluated.
+          type: string
+        value:
+          items:
+            $ref: "#/components/schemas/StringMatch"
+          type: array
+      required:
+        - operation
+      type: object
     MerchantsRestriction:
       properties:
         operation:
@@ -3994,6 +4498,25 @@ components:
           type: array
       required:
         - operation
+      type: object
+    NOLocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The 11-digit bank account number, without separators or whitespace.
+          maxLength: 11
+          minLength: 11
+          type: string
+        type:
+          default: noLocal
+          description: "**noLocal**"
+          enum:
+            - noLocal
+          type: string
+      required:
+        - type
+        - accountNumber
+      type: object
     Name:
       properties:
         firstName:
@@ -4005,6 +4528,51 @@ components:
       required:
         - firstName
         - lastName
+      type: object
+    NumberAndBicAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The bank account number, without separators or whitespace. The length and format depends on the bank or country.
+          maxLength: 34
+          type: string
+        additionalBankIdentification:
+          $ref: "#/components/schemas/AdditionalBankIdentification"
+          description: Additional identification codes of the bank. Some banks may require these identifiers for cross-border transfers.
+        bic:
+          description: The bank's 8- or 11-character BIC or SWIFT code.
+          maxLength: 11
+          minLength: 8
+          type: string
+        type:
+          default: numberAndBic
+          description: "**numberAndBic**"
+          enum:
+            - numberAndBic
+          type: string
+      required:
+        - type
+        - accountNumber
+        - bic
+      type: object
+    PLLocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The 26-digit bank account number ([Numer rachunku](https://pl.wikipedia.org/wiki/Numer_Rachunku_Bankowego)), without separators or whitespace.
+          maxLength: 26
+          minLength: 26
+          type: string
+        type:
+          default: plLocal
+          description: "**plLocal**"
+          enum:
+            - plLocal
+          type: string
+      required:
+        - type
+        - accountNumber
+      type: object
     PaginatedAccountHoldersResponse:
       properties:
         accountHolders:
@@ -4022,6 +4590,7 @@ components:
         - accountHolders
         - hasPrevious
         - hasNext
+      type: object
     PaginatedBalanceAccountsResponse:
       properties:
         balanceAccounts:
@@ -4039,6 +4608,7 @@ components:
         - balanceAccounts
         - hasPrevious
         - hasNext
+      type: object
     PaginatedPaymentInstrumentsResponse:
       properties:
         hasNext:
@@ -4056,6 +4626,7 @@ components:
         - paymentInstruments
         - hasPrevious
         - hasNext
+      type: object
     PaymentInstrument:
       properties:
         balanceAccountId:
@@ -4144,6 +4715,7 @@ components:
         - issuingCountryCode
         - type
         - id
+      type: object
     PaymentInstrumentGroup:
       properties:
         balancePlatform:
@@ -4171,6 +4743,7 @@ components:
       required:
         - balancePlatform
         - txVariant
+      type: object
     PaymentInstrumentGroupInfo:
       properties:
         balancePlatform:
@@ -4195,6 +4768,7 @@ components:
       required:
         - balancePlatform
         - txVariant
+      type: object
     PaymentInstrumentInfo:
       properties:
         balanceAccountId:
@@ -4276,6 +4850,23 @@ components:
         - balanceAccountId
         - issuingCountryCode
         - type
+      type: object
+    PaymentInstrumentRevealInfo:
+      properties:
+        cvc:
+          description: The cvc of the card.
+          type: string
+        expiration:
+          $ref: "#/components/schemas/Expiry"
+          description: The expiration date of the card.
+        pan:
+          description: The pan number of the card.
+          type: string
+      required:
+        - pan
+        - expiration
+        - cvc
+      type: object
     PaymentInstrumentUpdateRequest:
       properties:
         balanceAccountId:
@@ -4338,6 +4929,7 @@ components:
             - suspectedFraud
           type: string
           x-addedInVersion: "2"
+      type: object
     Phone:
       properties:
         number:
@@ -4359,6 +4951,7 @@ components:
       required:
         - number
         - type
+      type: object
     PhoneNumber:
       properties:
         phoneCountryCode:
@@ -4381,9 +4974,7 @@ components:
             - Mobile
             - SIP
           type: string
-      required:
-        - phoneCountryCode
-        - phoneNumber
+      type: object
     ProcessingTypesRestriction:
       properties:
         operation:
@@ -4409,14 +5000,7 @@ components:
           type: array
       required:
         - operation
-    RemediatingAction:
-      properties:
-        code:
-          description: The remediating action code.
-          type: string
-        message:
-          description: A description of how you can resolve the verification error.
-          type: string
+      type: object
     RestServiceError:
       properties:
         detail:
@@ -4455,8 +5039,85 @@ components:
         - title
         - detail
         - status
+      type: object
+    SELocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The 7- to 10-digit bank account number ([Bankkontonummer](https://sv.wikipedia.org/wiki/Bankkonto)), without the clearing number, separators, or whitespace.
+          maxLength: 10
+          minLength: 7
+          type: string
+        clearingNumber:
+          description: The 4- to 5-digit clearing number ([Clearingnummer](https://sv.wikipedia.org/wiki/Clearingnummer)), without separators or whitespace.
+          maxLength: 5
+          minLength: 4
+          type: string
+        type:
+          default: seLocal
+          description: "**seLocal**"
+          enum:
+            - seLocal
+          type: string
+      required:
+        - type
+        - accountNumber
+        - clearingNumber
+      type: object
+    SGLocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The 4- to 19-digit bank account number, without separators or whitespace.
+          maxLength: 19
+          minLength: 4
+          type: string
+        bic:
+          description: The bank's 8- or 11-character BIC or SWIFT code.
+          maxLength: 11
+          minLength: 8
+          type: string
+        type:
+          default: sgLocal
+          description: "**sgLocal**"
+          enum:
+            - sgLocal
+          type: string
+      required:
+        - accountNumber
+        - bic
+      type: object
+    StringMatch:
+      properties:
+        operation:
+          description: "The type of string matching operation. Possible values:  **startsWith**, **endsWith**, **isEqualTo**, **contains**,"
+          enum:
+            - contains
+            - endsWith
+            - isEqualTo
+            - startsWith
+          type: string
+        value:
+          description: The string to be matched.
+          type: string
+      type: object
     SweepConfigurationV2:
       properties:
+        category:
+          description: |-
+            The type of sweep.
+
+            Possible values:
+
+             - **bank**: Sweep to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) 
+
+            - **internal**: Transfer to another [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.
+          enum:
+            - bank
+            - internal
+            - platformPayment
+          type: string
+          x-addedInVersion: "2"
         counterparty:
           $ref: "#/components/schemas/SweepCounterparty"
           description: |-
@@ -4477,6 +5138,55 @@ components:
           type: string
         id:
           description: The unique identifier of the sweep.
+          readOnly: true
+          type: string
+        priorities:
+          description: |-
+            The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Required for sweeps with `category` **bank**.
+
+            Some transfer routes have an amount limit. The sweep will be executed using the first priority that leads to a valid route given the sweep amount.All supplied priorities need to lead to a valid route at time of configuration given the sweep currency and counterparty details.
+
+            Possible values:
+
+            * **regular**: For normal, low-value transactions.
+
+            * **fast**: Faster way to transfer funds but has higher fees. Recommended for high-priority, low-value transactions.
+
+            * **wire**: Fastest way to transfer funds but has the highest fees. Recommended for high-priority, high-value transactions.
+
+            * **instant**: Instant way to transfer funds in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).
+
+            * **crossBorder**: High-value transfer to a recipient in a different country.
+
+            * **internal**: Transfer to an Adyen-issued business bank account (by bank account number/IBAN).
+          items:
+            enum:
+              - crossBorder
+              - directDebit
+              - fast
+              - instant
+              - internal
+              - regular
+              - wire
+            type: string
+          type: array
+          x-addedInVersion: "2"
+        reason:
+          description: The reason for disabling the sweep.
+          enum:
+            - amountLimitExceeded
+            - approved
+            - counterpartyAccountBlocked
+            - counterpartyAccountClosed
+            - counterpartyAccountNotFound
+            - counterpartyAddressRequired
+            - counterpartyBankTimedOut
+            - counterpartyBankUnavailable
+            - error
+            - notEnoughBalance
+            - refusedByCounterpartyBank
+            - routeNotFound
+            - unknown
           readOnly: true
           type: string
         schedule:
@@ -4536,6 +5246,7 @@ components:
         - schedule
         - currency
         - counterparty
+      type: object
     SweepCounterparty:
       properties:
         balanceAccountId:
@@ -4553,6 +5264,7 @@ components:
 
             You can also use this in combination with a `merchantAccount` and a `type` **pull** to start a direct debit request from the source transfer instrument. To use this feature, reach out to your Adyen contact.
           type: string
+      type: object
     SweepSchedule:
       additionalProperties: false
       properties:
@@ -4578,6 +5290,7 @@ components:
             - balance
             - cron
           type: string
+      type: object
     TimeOfDay:
       properties:
         endTime:
@@ -4590,6 +5303,7 @@ components:
             The start time in a time-only ISO-8601 extended offset format. For example: **08:00:00+02:00**, **22:30:00-03:00**.
 
           type: string
+      type: object
     TimeOfDayRestriction:
       properties:
         operation:
@@ -4599,6 +5313,7 @@ components:
           $ref: "#/components/schemas/TimeOfDay"
       required:
         - operation
+      type: object
     TotalAmountRestriction:
       properties:
         operation:
@@ -4609,6 +5324,7 @@ components:
           description: The amount value and currency.
       required:
         - operation
+      type: object
     TransactionRule:
       properties:
         aggregationLevel:
@@ -4717,6 +5433,7 @@ components:
         - entityKey
         - interval
         - ruleRestrictions
+      type: object
     TransactionRuleEntityKey:
       properties:
         entityReference:
@@ -4728,6 +5445,7 @@ components:
 
             Possible values: **balancePlatform**, **paymentInstrumentGroup**, **accountHolder**, **balanceAccount**, or **paymentInstrument**.
           type: string
+      type: object
     TransactionRuleInfo:
       properties:
         aggregationLevel:
@@ -4833,6 +5551,7 @@ components:
         - entityKey
         - interval
         - ruleRestrictions
+      type: object
     TransactionRuleInterval:
       properties:
         dayOfMonth:
@@ -4890,11 +5609,13 @@ components:
           type: string
       required:
         - type
+      type: object
     TransactionRuleResponse:
       properties:
         transactionRule:
           $ref: "#/components/schemas/TransactionRule"
           description: The transaction rule.
+      type: object
     TransactionRuleRestrictions:
       properties:
         activeNetworkTokens:
@@ -4915,6 +5636,9 @@ components:
             List of countries and the operation.
 
             Supported operations: **anyMatch**, **noneMatch**.
+        dayOfWeek:
+          $ref: "#/components/schemas/DayOfWeekRestriction"
+          description: "List of week days and the operation. Supported operations: **anyMatch**, **noneMatch**."
         differentCurrencies:
           $ref: "#/components/schemas/DifferentCurrenciesRestriction"
           description: |-
@@ -4945,6 +5669,12 @@ components:
             List of merchant category codes (MCCs) and the operation.
 
             Supported operations: **anyMatch**, **noneMatch**.
+        merchantNames:
+          $ref: "#/components/schemas/MerchantNamesRestriction"
+          description: |-
+            List of names that will be compared to the merchant name according to the matching type.
+
+            Supported operations: **anyMatch**, **noneMatch**.
         merchants:
           $ref: "#/components/schemas/MerchantsRestriction"
           description: |-
@@ -4966,6 +5696,7 @@ components:
             The total amount and the operation.
 
             Supported operations: **equals**, **notEquals**, **greaterThanOrEqualTo**, **greaterThan**, **lessThanOrEqualTo**, **lessThan**.
+      type: object
     TransactionRulesResponse:
       properties:
         transactionRules:
@@ -4973,58 +5704,232 @@ components:
           items:
             $ref: "#/components/schemas/TransactionRule"
           type: array
-    VerificationError:
+      type: object
+    UKLocalAccountIdentification:
+      additionalProperties: false
       properties:
-        code:
-          description: The verification error code.
+        accountNumber:
+          description: The 8-digit bank account number, without separators or whitespace.
+          maxLength: 8
+          minLength: 8
           type: string
-        message:
-          description: A description of the error.
+        sortCode:
+          description: The 6-digit [sort code](https://en.wikipedia.org/wiki/Sort_code), without separators or whitespace.
+          maxLength: 6
+          minLength: 6
           type: string
-        remediatingActions:
-          description: Contains the actions that you can take to resolve the verification error.
-          items:
-            $ref: "#/components/schemas/RemediatingAction"
-          type: array
-        subErrors:
-          description: Contains more granular information about the verification error.
-          items:
-            $ref: "#/components/schemas/VerificationError-recursive"
-          type: array
+        type:
+          default: ukLocal
+          description: "**ukLocal**"
+          enum:
+            - ukLocal
+          type: string
+      required:
+        - type
+        - accountNumber
+        - sortCode
+      type: object
+    USLocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The bank account number, without separators or whitespace.
+          maxLength: 18
+          minLength: 2
+          type: string
+        accountType:
+          default: checking
+          description: |-
+            The bank account type.
+
+            Possible values: **checking** or **savings**. Defaults to **checking**.
+          enum:
+            - checking
+            - savings
+          type: string
+        routingNumber:
+          description: The 9-digit [routing number](https://en.wikipedia.org/wiki/ABA_routing_transit_number), without separators or whitespace.
+          maxLength: 9
+          minLength: 9
+          type: string
+        type:
+          default: usLocal
+          description: "**usLocal**"
+          enum:
+            - usLocal
+          type: string
+      required:
+        - type
+        - accountNumber
+        - routingNumber
+      type: object
+    UpdatePaymentInstrument:
+      properties:
+        balanceAccountId:
+          description: The unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/balanceAccounts__resParam_id) associated with the payment instrument.
+          type: string
+        bankAccount:
+          $ref: "#/components/schemas/BankAccount"
+          description: Contains the business account details. Returned when you create a payment instrument with `type` **bankAccount**.
+        card:
+          $ref: "#/components/schemas/Card"
+          description: Contains information about the card payment instrument. Returned when you create a payment instrument with `type` **card**.
+        description:
+          description: Your description for the payment instrument, maximum 300 characters.
+          maxLength: 300
+          type: string
+        id:
+          description: The unique identifier of the payment instrument.
+          type: string
+        issuingCountryCode:
+          description: The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the payment instrument is issued. For example, **NL** or **US**.
+          type: string
+        paymentInstrumentGroupId:
+          description: The unique identifier of the [payment instrument group](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/paymentInstrumentGroups__resParam_id) to which the payment instrument belongs.
+          type: string
+        reference:
+          description: Your reference for the payment instrument, maximum 150 characters.
+          maxLength: 150
+          type: string
+        status:
+          description: |+
+            The status of the payment instrument. If a status is not specified when creating a payment instrument, it is set to **active** by default. However, there can be exceptions for cards based on the `card.formFactor` and the `issuingCountryCode`. For example, when issuing physical cards in the US, the default status is **inactive**.
+
+            Possible values: 
+
+             * **active**:  The payment instrument is active and can be used to make payments. 
+
+             * **inactive**: The payment instrument is inactive and cannot be used to make payments. 
+
+             * **suspended**: The payment instrument is suspended, either because it was stolen or lost. 
+
+             * **closed**: The payment instrument is permanently closed. This action cannot be undone. 
+
+          enum:
+            - active
+            - closed
+            - inactive
+            - suspended
+          type: string
+          x-enum:
+            - description: The payment instrument is active and can be used to make payments.
+              value: active
+            - description: The payment instrument is inactive and cannot be used to make payments.
+              value: inactive
+            - description: The payment instrument is suspended. Either because it was stolen or lost.
+              value: suspended
+            - description: The payment instrument is permanently closed. This action cannot be undone.
+              value: closed
+        statusComment:
+          description: |-
+            Comment for the status of the payment instrument.
+
+            Required if `statusReason` is **other**.
+          type: string
+        statusReason:
+          description: |-
+            The reason for updating the status of the payment instrument.
+
+            Possible values: **lost**, **stolen**, **damaged**, **suspectedFraud**, **expired**, **endOfLife**, **accountClosure**, **other**.
+            If the reason is **other**, you must also send the `statusComment` parameter describing the status change.
+          enum:
+            - accountClosure
+            - damaged
+            - endOfLife
+            - expired
+            - lost
+            - other
+            - stolen
+            - suspectedFraud
+          type: string
+          x-addedInVersion: "2"
         type:
           description: |-
-            The type of error.
+            Type of payment instrument.
 
-             Possible values: **invalidInput**, **dataMissing**.
+            Possible value: **card**, **bankAccount**. 
           enum:
-            - dataMissing
-            - invalidInput
-            - pendingStatus
+            - bankAccount
+            - card
           type: string
-    VerificationError-recursive:
+      required:
+        - balanceAccountId
+        - issuingCountryCode
+        - type
+        - id
+      type: object
+    VerificationDeadline:
       properties:
-        code:
-          description: The verification error code.
-          type: string
-        message:
-          description: A description of the error.
-          type: string
-        remediatingActions:
-          description: Contains the actions that you can take to resolve the verification error.
+        capabilities:
+          description: The names of the capabilities to be disallowed.
           items:
-            $ref: "#/components/schemas/RemediatingAction"
+            enum:
+              - acceptExternalFunding
+              - acceptPspFunding
+              - acceptTransactionInRestrictedCountries
+              - acceptTransactionInRestrictedCountriesCommercial
+              - acceptTransactionInRestrictedCountriesConsumer
+              - acceptTransactionInRestrictedIndustries
+              - acceptTransactionInRestrictedIndustriesCommercial
+              - acceptTransactionInRestrictedIndustriesConsumer
+              - acquiring
+              - atmWithdrawal
+              - atmWithdrawalCommercial
+              - atmWithdrawalConsumer
+              - atmWithdrawalInRestrictedCountries
+              - atmWithdrawalInRestrictedCountriesCommercial
+              - atmWithdrawalInRestrictedCountriesConsumer
+              - authorisedPaymentInstrumentUser
+              - getGrantOffers
+              - issueBankAccount
+              - issueCard
+              - issueCardCommercial
+              - issueCardConsumer
+              - localAcceptance
+              - payout
+              - payoutToTransferInstrument
+              - processing
+              - receiveFromBalanceAccount
+              - receiveFromPlatformPayments
+              - receiveFromThirdParty
+              - receiveFromTransferInstrument
+              - receiveGrants
+              - receivePayments
+              - sendToBalanceAccount
+              - sendToThirdParty
+              - sendToTransferInstrument
+              - thirdPartyFunding
+              - useCard
+              - useCardCommercial
+              - useCardConsumer
+              - useCardInRestrictedCountries
+              - useCardInRestrictedCountriesCommercial
+              - useCardInRestrictedCountriesConsumer
+              - useCardInRestrictedIndustries
+              - useCardInRestrictedIndustriesCommercial
+              - useCardInRestrictedIndustriesConsumer
+              - withdrawFromAtm
+              - withdrawFromAtmCommercial
+              - withdrawFromAtmConsumer
+              - withdrawFromAtmInRestrictedCountries
+              - withdrawFromAtmInRestrictedCountriesCommercial
+              - withdrawFromAtmInRestrictedCountriesConsumer
+            type: string
+          readOnly: true
           type: array
-        type:
-          description: |-
-            The type of error.
-
-             Possible values: **invalidInput**, **dataMissing**.
-          enum:
-            - dataMissing
-            - invalidInput
-            - pendingStatus
+        expiresAt:
+          description: The date that verification is due by before capabilities are disallowed.
+          format: date-time
+          readOnly: true
           type: string
-    void: {}
+      required:
+        - expiresAt
+        - capabilities
+      type: object
+    Void:
+      type: object
+    void:
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header
@@ -5040,3 +5945,4 @@ x-groups:
   - Payment instruments
   - Payment instrument groups
   - Transaction rules
+  - Bank account validation

@@ -45,7 +45,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-03-21T09:21:19Z
+  x-timestamp: 2023-03-22T19:20:50Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -3847,6 +3847,12 @@ components:
       type: object
     SourceOfFunds:
       properties:
+        acquiringBusinessLineId:
+          deprecated: true
+          description: The unique identifier of the business line that will be the source of funds.This must be a business line for a **receivePayments** or **receiveFromPlatformPayments** capability.
+          type: string
+          x-deprecatedInVersion: "3"
+          x-deprecatedMessage: This field will be removed in v4.
         adyenProcessedFunds:
           description: Indicates whether the funds are coming from transactions processed by Adyen. If **false**, a `description` is required.
           type: boolean

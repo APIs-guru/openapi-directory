@@ -19,7 +19,7 @@ tags:
 paths:
   "/oauth/v1/access-tokens/{token}":
     get:
-      operationId: get-/oauth/v1/access-tokens/{token}_getAccessToken
+      operationId: get-/oauth/v1/access-tokens/{token}_get
       parameters:
         - explode: false
           in: path
@@ -42,7 +42,7 @@ paths:
         - Access_Tokens
   "/oauth/v1/refresh-tokens/{token}":
     delete:
-      operationId: delete-/oauth/v1/refresh-tokens/{token}_archiveRefreshToken
+      operationId: delete-/oauth/v1/refresh-tokens/{token}_archive
       parameters:
         - explode: false
           in: path
@@ -61,7 +61,7 @@ paths:
       tags:
         - Refresh_Tokens
     get:
-      operationId: get-/oauth/v1/refresh-tokens/{token}_getRefreshToken
+      operationId: get-/oauth/v1/refresh-tokens/{token}_get
       parameters:
         - explode: false
           in: path
@@ -84,7 +84,7 @@ paths:
         - Refresh_Tokens
   /oauth/v1/token:
     post:
-      operationId: post-/oauth/v1/token_createToken
+      operationId: post-/oauth/v1/token_create
       requestBody:
         content:
           application/x-www-form-urlencoded:

@@ -1125,6 +1125,13 @@ components:
           $ref: "#/components/schemas/GooglePrivacyDlpV2SaveFindings"
           description: Save resulting findings in a provided location.
       type: object
+    GooglePrivacyDlpV2ActionDetails:
+      description: The results of an Action.
+      properties:
+        deidentifyDetails:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DeidentifyDataSourceDetails"
+          description: Outcome of a de-identification action.
+      type: object
     GooglePrivacyDlpV2ActivateJobTriggerRequest:
       description: Request message for ActivateJobTrigger.
       properties: {}
@@ -1981,6 +1988,32 @@ components:
           $ref: "#/components/schemas/GooglePrivacyDlpV2TransformationOverview"
           description: An overview of the changes that were made on the `item`.
       type: object
+    GooglePrivacyDlpV2DeidentifyDataSourceDetails:
+      description: The results of a Deidentify action from an Inspect job.
+      properties:
+        deidentifyStats:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DeidentifyDataSourceStats"
+          description: Stats about de-identification.
+        requestedOptions:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2RequestedDeidentifyOptions"
+          description: De-identification config used for the request.
+      type: object
+    GooglePrivacyDlpV2DeidentifyDataSourceStats:
+      description: Summary of what was modified during a transformation.
+      properties:
+        transformationCount:
+          description: Number of successfully applied transformations.
+          format: int64
+          type: string
+        transformationErrorCount:
+          description: Number of errors encountered while trying to apply transformations.
+          format: int64
+          type: string
+        transformedBytes:
+          description: Total size in bytes that were transformed in some way.
+          format: int64
+          type: string
+      type: object
     GooglePrivacyDlpV2DeidentifyTemplate:
       description: DeidentifyTemplates contains instructions on how to de-identify content. See https://cloud.google.com/dlp/docs/concepts-templates to learn more.
       properties:
@@ -2092,6 +2125,11 @@ components:
     GooglePrivacyDlpV2DlpJob:
       description: Combines all of the information about a DLP job.
       properties:
+        actionDetails:
+          description: Events that should occur after the job has completed.
+          items:
+            $ref: "#/components/schemas/GooglePrivacyDlpV2ActionDetails"
+          type: array
         createTime:
           description: Time when the job was created.
           format: google-datetime
@@ -3714,6 +3752,19 @@ components:
     GooglePrivacyDlpV2ReplaceWithInfoTypeConfig:
       description: Replace each matching finding with the name of the info_type.
       properties: {}
+      type: object
+    GooglePrivacyDlpV2RequestedDeidentifyOptions:
+      description: De-id options.
+      properties:
+        snapshotDeidentifyTemplate:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate"
+          description: Snapshot of the state of the DeidentifyTemplate from the Deidentify action at the time this job was run.
+        snapshotImageRedactTemplate:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate"
+          description: Snapshot of the state of the image redact DeidentifyTemplate from the Deidentify action at the time this job was run.
+        snapshotStructuredDeidentifyTemplate:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate"
+          description: Snapshot of the state of the structured DeidentifyTemplate from the Deidentify action at the time this job was run.
       type: object
     GooglePrivacyDlpV2RequestedOptions:
       description: Snapshot of the inspection configuration.

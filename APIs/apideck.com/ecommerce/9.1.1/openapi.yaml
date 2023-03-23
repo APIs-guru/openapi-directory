@@ -2277,6 +2277,10 @@ components:
           example: "5.16"
           title: Total tax
           type: string
+        tracking:
+          items:
+            $ref: "#/components/schemas/TrackingItem"
+          type: array
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
       required:
@@ -3388,6 +3392,43 @@ components:
           type: string
       type: object
       x-apideck-schema-id: TooManyRequests
+    TrackingItem:
+      description: Represents the tracking information associated with an ecommerce order.
+      properties:
+        number:
+          description: " The tracking number associated with the shipment, which can be used to track the progress of the delivery."
+          example: 1Z9999999999999999
+          nullable: true
+          title: Tracking number
+          type: string
+        provider:
+          description: The name or code of the carrier or shipping company that is handling the shipment.
+          example: UPS
+          nullable: true
+          title: Provider
+          type: string
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        url:
+          description: The URL of the carrier's tracking page, which can be used to view detailed information about the shipment's progress.
+          example: https://www.ups.com/track?tracknum=1Z9999999999999999
+          nullable: true
+          title: Tracking url
+          type: string
+      required:
+        - provider
+        - number
+      title: Ecommerce Order Tracking Item
+      type: object
+      x-apideck-schema-id: EcommerceOrderLineItem
+      x-apideck-strict-required:
+        - provider
+        - number
+      x-apideck-weights:
+        number: critical
+        provider: high
+        updated_at: medium
+        url: medium
     UnauthorizedResponse:
       properties:
         detail:

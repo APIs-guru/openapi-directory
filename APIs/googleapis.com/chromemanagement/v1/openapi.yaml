@@ -519,7 +519,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{customer}/reports:findInstalledAppDevices":
     get:
-      description: Generate report of devices that have a specified app installed.
+      description: Generate report of managed Chrome browser devices that have a specified app installed.
       operationId: chromemanagement.customers.reports.findInstalledAppDevices
       parameters:
         - description: Required. Customer id or "my_customer" to use the customer associated to the account making the request.
