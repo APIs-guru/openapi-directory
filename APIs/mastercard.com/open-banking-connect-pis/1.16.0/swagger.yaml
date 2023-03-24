@@ -45,9 +45,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Get the list of all active ASPSPs supported by the Open Banking
-        Connect platform at this time with possibility to filter by id, name or
-        country. This list is updated regularly as new ASPSPs are connected.
+      description: Get the list of all active ASPSPs supported by the Open Banking Connect platform at this time with possibility to filter by id, name or country. This list is updated regularly as new ASPSPs are connected.
       parameters:
         - description: Request Body
           in: body
@@ -71,8 +69,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         "504":
-          description: Server while acting as a gateway or proxy, cannot get a response in
-            time.
+          description: Server while acting as a gateway or proxy, cannot get a response in time.
           schema:
             $ref: "#/definitions/Error"
       summary: Get list of ASPSPs
@@ -106,8 +103,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         "504":
-          description: Server while acting as a gateway or proxy, cannot get a response in
-            time.
+          description: Server while acting as a gateway or proxy, cannot get a response in time.
           schema:
             $ref: "#/definitions/Error"
       summary: Extracts the original raw consent given by the aspsp
@@ -140,8 +136,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         "504":
-          description: Server while acting as a gateway or proxy, cannot get a response in
-            time.
+          description: Server while acting as a gateway or proxy, cannot get a response in time.
           schema:
             $ref: "#/definitions/Error"
       summary: Redeem the payment
@@ -174,8 +169,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         "504":
-          description: Server while acting as a gateway or proxy, cannot get a response in
-            time.
+          description: Server while acting as a gateway or proxy, cannot get a response in time.
           schema:
             $ref: "#/definitions/Error"
       summary: Request consent initiation via redirect
@@ -191,8 +185,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersPaymentStatusParamsB\
-              ody"
+            $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersPaymentStatusParamsBody"
       produces:
         - application/json
       responses:
@@ -209,8 +202,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         "504":
-          description: Server while acting as a gateway or proxy, cannot get a response in
-            time.
+          description: Server while acting as a gateway or proxy, cannot get a response in time.
           schema:
             $ref: "#/definitions/Error"
       summary: Get payment status
@@ -244,8 +236,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         "504":
-          description: Server while acting as a gateway or proxy, cannot get a response in
-            time.
+          description: Server while acting as a gateway or proxy, cannot get a response in time.
           schema:
             $ref: "#/definitions/Error"
       summary: Redeem the payment
@@ -255,8 +246,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Request Payment Initiation Consent for a domestic credit transfer
-        on behalf of the PSU.
+      description: Request Payment Initiation Consent for a domestic credit transfer on behalf of the PSU.
       parameters:
         - description: Domestic Payment consent to be wired via Faster Payment System
           in: body
@@ -280,8 +270,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         "504":
-          description: Server while acting as a gateway or proxy, cannot get a response in
-            time.
+          description: Server while acting as a gateway or proxy, cannot get a response in time.
           schema:
             $ref: "#/definitions/Error"
       summary: Request consent initiation via redirect
@@ -315,8 +304,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         "504":
-          description: Server while acting as a gateway or proxy, cannot get a response in
-            time.
+          description: Server while acting as a gateway or proxy, cannot get a response in time.
           schema:
             $ref: "#/definitions/Error"
       summary: Get payment status
@@ -374,8 +362,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         "504":
-          description: Server while acting as a gateway or proxy, cannot get a response in
-            time.
+          description: Server while acting as a gateway or proxy, cannot get a response in time.
           schema:
             $ref: "#/definitions/Error"
       summary: Redeem the payment
@@ -385,8 +372,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Request a SEPA credit transfer consent on behalf of the PSU via a
-        URL redirect to the ASPSP.
+      description: Request a SEPA credit transfer consent on behalf of the PSU via a URL redirect to the ASPSP.
       parameters:
         - in: body
           name: body
@@ -409,8 +395,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         "504":
-          description: Server while acting as a gateway or proxy, cannot get a response in
-            time.
+          description: Server while acting as a gateway or proxy, cannot get a response in time.
           schema:
             $ref: "#/definitions/Error"
       summary: Request consent initiation via redirect
@@ -444,8 +429,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         "504":
-          description: Server while acting as a gateway or proxy, cannot get a response in
-            time.
+          description: Server while acting as a gateway or proxy, cannot get a response in time.
           schema:
             $ref: "#/definitions/Error"
       summary: Get payment status
@@ -658,9 +642,7 @@ definitions:
       - consentRequestId
     type: object
   SignatureValidationStatus:
-    description: "For CMA9 ASPSPs: Status of validation of ASPSP's signature present
-      in authorization code that TPP included in the request for credit
-      transfer"
+    description: "For CMA9 ASPSPs: Status of validation of ASPSP's signature present in authorization code that TPP included in the request for credit transfer"
     enum:
       - VALID
       - UNKNOWN
@@ -745,8 +727,7 @@ definitions:
       requestInfo:
         $ref: "#/definitions/postAspspsParamsBodyRequestInfo"
       returnAdditionalData:
-        description: Specifies what additional fields for ASPSP object should be
-          included in response
+        description: Specifies what additional fields for ASPSP object should be included in response
         items:
           $ref: "#/definitions/AdditionalDataField"
         type: array
@@ -818,8 +799,7 @@ definitions:
       _links:
         $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsOKBodyLinks"
       additionalData:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsOKBody_addit\
-          ionalData"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsOKBody_additionalData"
       aspspSCAApproach:
         enum:
           - REDIRECT
@@ -827,8 +807,7 @@ definitions:
       consentRequestId:
         type: string
       originalRequestInfo:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsOKBodyOrigin\
-          alRequestInfo"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsOKBodyOriginalRequestInfo"
     required:
       - originalRequestInfo
     type: object
@@ -853,17 +832,14 @@ definitions:
     description: Returning additional data related to the consent
     properties:
       rawConsent:
-        description: Raw Consent, available only for specific standards and returned
-          only if requestInfo.flag contained 'Return.Raw.Consent'
+        description: Raw Consent, available only for specific standards and returned only if requestInfo.flag contained 'Return.Raw.Consent'
         type: string
   postPaymentsCrossBorderCreditTransfersConsentsParamsBody:
     properties:
       payments:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPa\
-          yments"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPayments"
       requestInfo:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyRe\
-          questInfo"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyRequestInfo"
     required:
       - payments
       - requestInfo
@@ -871,14 +847,11 @@ definitions:
   postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPayments:
     properties:
       creditorAccount:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPa\
-          ymentsCreditorAccount"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPaymentsCreditorAccount"
       creditorAddress:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPa\
-          ymentsCreditorAddress"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPaymentsCreditorAddress"
       creditorAgent:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPa\
-          ymentsCreditorAgent"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPaymentsCreditorAgent"
       creditorName:
         description: Bank name
         example: Wood bank
@@ -886,11 +859,9 @@ definitions:
         minLength: 1
         type: string
       debtorAccount:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPa\
-          ymentsDebtorAccount"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPaymentsDebtorAccount"
       debtorAddress:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPa\
-          yments_debtorAddress"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPayments_debtorAddress"
       debtorName:
         description: Debtor legal name
         example: NordPole PLC
@@ -904,12 +875,9 @@ definitions:
         minLength: 1
         type: string
       instructedAmount:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPa\
-          ymentsInstructedAmount"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsParamsBodyPaymentsInstructedAmount"
       instructionIdentification:
-        description: Unique identification as assigned by an instructing party for an
-          instructed party to unambiguously identify the instruction. If API
-          profile of ASPSP is CMA9, then field is mandatory.
+        description: Unique identification as assigned by an instructing party for an instructed party to unambiguously identify the instruction. If API profile of ASPSP is CMA9, then field is mandatory.
         example: ""
         maxLength: 256
         minLength: 1
@@ -928,8 +896,7 @@ definitions:
         example: Swift
         type: string
       remittanceInformationReference:
-        description: Unique reference, as assigned by the creditor, to unambiguously
-          refer to the payment transaction. (future use)
+        description: Unique reference, as assigned by the creditor, to unambiguously refer to the payment transaction. (future use)
         example: UniqueRef1
         maxLength: 256
         minLength: 1
@@ -1109,8 +1076,7 @@ definitions:
         pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
         type: string
       flags:
-        description: Request information flags which can influence the behaviour or
-          returned data
+        description: Request information flags which can influence the behaviour or returned data
         items:
           enum:
             - Return.Raw.Consent
@@ -1139,8 +1105,7 @@ definitions:
       consent:
         $ref: "#/definitions/PaymentConsent"
       originalRequestInfo:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersOKBodyOriginalReques\
-          tInfo"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersOKBodyOriginalRequestInfo"
       transfer:
         $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersOKBodyTransfer"
     required:
@@ -1184,8 +1149,7 @@ definitions:
   postPaymentsCrossBorderCreditTransfersParamsBody:
     properties:
       requestInfo:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersParamsBodyRequestInf\
-          o"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersParamsBodyRequestInfo"
     required:
       - requestInfo
     type: object
@@ -1197,8 +1161,7 @@ definitions:
         pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
         type: string
       authorization:
-        description: The authorization query / data received after PSU has authorized
-          the consent
+        description: The authorization query / data received after PSU has authorized the consent
         example: code=UKcrossVsbG8gQ2TP9kZWJleft53serYXV0aUK001&state=38948933-38ae-45af-953e-25a69fefa39e
         maxLength: 5000
         minLength: 1
@@ -1218,11 +1181,9 @@ definitions:
   postPaymentsCrossBorderCreditTransfersPaymentStatusOKBody:
     properties:
       originalRequestInfo:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersPaymentStatusOKBodyO\
-          riginalRequestInfo"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersPaymentStatusOKBodyOriginalRequestInfo"
       payments:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersPaymentStatusOKBodyP\
-          ayments"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersPaymentStatusOKBodyPayments"
     required:
       - originalRequestInfo
     type: object
@@ -1267,8 +1228,7 @@ definitions:
         minLength: 1
         type: string
       requestInfo:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersPaymentStatusParamsB\
-          odyRequestInfo"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersPaymentStatusParamsBodyRequestInfo"
     required:
       - paymentId
       - requestInfo
@@ -1303,8 +1263,7 @@ definitions:
       _links:
         $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsOKBodyLinks"
       additionalData:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsOKBody_addit\
-          ionalData"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsOKBody_additionalData"
       aspspSCAApproach:
         enum:
           - REDIRECT
@@ -1312,8 +1271,7 @@ definitions:
       consentRequestId:
         type: string
       originalRequestInfo:
-        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsOKBodyOriginalR\
-          equestInfo"
+        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsOKBodyOriginalRequestInfo"
     required:
       - originalRequestInfo
     type: object
@@ -1337,11 +1295,9 @@ definitions:
   postPaymentsDomesticCreditTransfersConsentsParamsBody:
     properties:
       payments:
-        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyPayme\
-          nts"
+        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyPayments"
       requestInfo:
-        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyReque\
-          stInfo"
+        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyRequestInfo"
     required:
       - payments
       - requestInfo
@@ -1349,14 +1305,11 @@ definitions:
   postPaymentsDomesticCreditTransfersConsentsParamsBodyPayments:
     properties:
       creditorAccount:
-        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyPayme\
-          ntsCreditorAccount"
+        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyPaymentsCreditorAccount"
       creditorAddress:
-        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyPayme\
-          ntsCreditorAddress"
+        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyPaymentsCreditorAddress"
       creditorAgent:
-        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyPayme\
-          ntsCreditorAgent"
+        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyPaymentsCreditorAgent"
       creditorName:
         description: Bank name
         example: Wood bank
@@ -1364,11 +1317,9 @@ definitions:
         minLength: 1
         type: string
       debtorAccount:
-        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyPayme\
-          nts_debtorAccount"
+        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyPayments_debtorAccount"
       debtorAgent:
-        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyPayme\
-          nts_debtorAgent"
+        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyPayments_debtorAgent"
       endToEndIdentification:
         description: Payment end to end identification
         example: Notification
@@ -1376,12 +1327,9 @@ definitions:
         minLength: 1
         type: string
       instructedAmount:
-        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyPayme\
-          ntsInstructedAmount"
+        $ref: "#/definitions/postPaymentsDomesticCreditTransfersConsentsParamsBodyPaymentsInstructedAmount"
       instructionIdentification:
-        description: Unique identification as assigned by an instructing party for an
-          instructed party to unambiguously identify the instruction. If API
-          profile of ASPSP is CMA9, then field is mandatory.
+        description: Unique identification as assigned by an instructing party for an instructed party to unambiguously identify the instruction. If API profile of ASPSP is CMA9, then field is mandatory.
         example: ""
         maxLength: 256
         minLength: 1
@@ -1401,8 +1349,7 @@ definitions:
         example: UK.FasterPayments
         type: string
       remittanceInformationReference:
-        description: Unique reference, as assigned by the creditor, to unambiguously
-          refer to the payment transaction. (future use)
+        description: Unique reference, as assigned by the creditor, to unambiguously refer to the payment transaction. (future use)
         example: UniqueRef1
         maxLength: 256
         minLength: 1
@@ -1527,9 +1474,7 @@ definitions:
   postPaymentsDomesticCreditTransfersConsentsParamsBodyPayments_debtorAccount:
     properties:
       identification:
-        description: Debtor account identification, If localInstrument =
-          'UK.FasterPayments' and debtorAgent was specified then this needs to
-          be a UK Account number (8 digits)
+        description: Debtor account identification, If localInstrument = 'UK.FasterPayments' and debtorAgent was specified then this needs to be a UK Account number (8 digits)
         example: ""
         maxLength: 256
         minLength: 1
@@ -1539,9 +1484,7 @@ definitions:
   postPaymentsDomesticCreditTransfersConsentsParamsBodyPayments_debtorAgent:
     properties:
       identification:
-        description: Debtor agent identification, If localInstrument =
-          'UK.FasterPayments' and debtorAccount was specified then this needs to
-          be a UK Sort code (6 digits)
+        description: Debtor agent identification, If localInstrument = 'UK.FasterPayments' and debtorAccount was specified then this needs to be a UK Sort code (6 digits)
         example: ""
         maxLength: 256
         minLength: 1
@@ -1556,8 +1499,7 @@ definitions:
         pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
         type: string
       flags:
-        description: Request information flags which can influence the behaviour or
-          returned data
+        description: Request information flags which can influence the behaviour or returned data
         items:
           enum:
             - Return.Raw.Consent
@@ -1587,8 +1529,7 @@ definitions:
       consent:
         $ref: "#/definitions/PaymentConsent"
       originalRequestInfo:
-        $ref: "#/definitions/postPaymentsDomesticCreditTransfersOKBodyOriginalRequestIn\
-          fo"
+        $ref: "#/definitions/postPaymentsDomesticCreditTransfersOKBodyOriginalRequestInfo"
       transfer:
         $ref: "#/definitions/postPaymentsDomesticCreditTransfersOKBodyTransfer"
     required:
@@ -1649,8 +1590,7 @@ definitions:
         pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
         type: string
       authorization:
-        description: The authorization query / data received after PSU has authorized
-          the consent
+        description: The authorization query / data received after PSU has authorized the consent
         example: code=UKdpVsbG8gQ2TP9kZWJleft53serYXV0aUK001&state=38948933-38ae-45af-953e-25a69fefa39e
         maxLength: 5000
         minLength: 1
@@ -1670,11 +1610,9 @@ definitions:
   postPaymentsDomesticCreditTransfersPaymentStatusOKBody:
     properties:
       originalRequestInfo:
-        $ref: "#/definitions/postPaymentsDomesticCreditTransfersPaymentStatusOKBodyOrig\
-          inalRequestInfo"
+        $ref: "#/definitions/postPaymentsDomesticCreditTransfersPaymentStatusOKBodyOriginalRequestInfo"
       payments:
-        $ref: "#/definitions/postPaymentsDomesticCreditTransfersPaymentStatusOKBodyPaym\
-          ents"
+        $ref: "#/definitions/postPaymentsDomesticCreditTransfersPaymentStatusOKBodyPayments"
     required:
       - originalRequestInfo
     type: object
@@ -1720,8 +1658,7 @@ definitions:
         minLength: 1
         type: string
       requestInfo:
-        $ref: "#/definitions/postPaymentsDomesticCreditTransfersPaymentStatusParamsBody\
-          RequestInfo"
+        $ref: "#/definitions/postPaymentsDomesticCreditTransfersPaymentStatusParamsBodyRequestInfo"
     required:
       - paymentId
       - requestInfo
@@ -1756,8 +1693,7 @@ definitions:
       _links:
         $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsOKBodyLinks"
       additionalData:
-        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsOKBody_addit\
-          ionalData"
+        $ref: "#/definitions/postPaymentsCrossBorderCreditTransfersConsentsOKBody_additionalData"
       aspspSCAApproach:
         enum:
           - REDIRECT
@@ -1765,8 +1701,7 @@ definitions:
       consentRequestId:
         type: string
       originalRequestInfo:
-        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsOKBodyOriginalReque\
-          stInfo"
+        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsOKBodyOriginalRequestInfo"
     required:
       - originalRequestInfo
     type: object
@@ -1792,8 +1727,7 @@ definitions:
       payments:
         $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPayments"
       requestInfo:
-        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyRequestIn\
-          fo"
+        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyRequestInfo"
     required:
       - payments
       - requestInfo
@@ -1811,14 +1745,11 @@ definitions:
         example: CASH
         type: string
       creditorAccount:
-        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPaymentsC\
-          reditorAccount"
+        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPaymentsCreditorAccount"
       creditorAddress:
-        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPaymentsC\
-          reditorAddress"
+        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPaymentsCreditorAddress"
       creditorAgent:
-        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPayments_\
-          creditorAgent"
+        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPayments_creditorAgent"
       creditorName:
         description: Bank name
         example: Wood bank
@@ -1826,14 +1757,11 @@ definitions:
         minLength: 1
         type: string
       debtorAccount:
-        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPaymentsD\
-          ebtorAccount"
+        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPaymentsDebtorAccount"
       debtorAddress:
-        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPaymentsD\
-          ebtorAddress"
+        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPaymentsDebtorAddress"
       debtorAgent:
-        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPayments_\
-          debtorAgent"
+        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPayments_debtorAgent"
       debtorName:
         description: Debtor legal name
         example: NordPole PLC
@@ -1847,8 +1775,7 @@ definitions:
         minLength: 1
         type: string
       instructedAmount:
-        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPaymentsI\
-          nstructedAmount"
+        $ref: "#/definitions/postPaymentsSepaCreditTransfersConsentsParamsBodyPaymentsInstructedAmount"
       instructionPriority:
         description: Indicator of the urgency or order of importance
         enum:
@@ -1863,8 +1790,7 @@ definitions:
         example: SEPA
         type: string
       remittanceInformationReference:
-        description: Unique reference, as assigned by the creditor, to unambiguously
-          refer to the payment transaction. (future use)
+        description: Unique reference, as assigned by the creditor, to unambiguously refer to the payment transaction. (future use)
         example: UniqueRef1
         maxLength: 256
         minLength: 1
@@ -2034,8 +1960,7 @@ definitions:
         pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
         type: string
       flags:
-        description: Request information flags which can influence the behaviour or
-          returned data
+        description: Request information flags which can influence the behaviour or returned data
         items:
           enum:
             - Return.Raw.Consent
@@ -2125,8 +2050,7 @@ definitions:
         pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
         type: string
       authorization:
-        description: The authorization query / data received after PSU has authorized
-          the consent
+        description: The authorization query / data received after PSU has authorized the consent
         example: code=PLsepaVsbG8gQ2TP9kZWJleft53serYXV0aPL003&state=38948933-38ae-45af-953e-25a69fefa39e
         maxLength: 5000
         minLength: 1
@@ -2146,8 +2070,7 @@ definitions:
   postPaymentsSepaCreditTransfersPaymentStatusOKBody:
     properties:
       originalRequestInfo:
-        $ref: "#/definitions/postPaymentsSepaCreditTransfersPaymentStatusOKBodyOriginal\
-          RequestInfo"
+        $ref: "#/definitions/postPaymentsSepaCreditTransfersPaymentStatusOKBodyOriginalRequestInfo"
       payments:
         $ref: "#/definitions/postPaymentsSepaCreditTransfersPaymentStatusOKBodyPayments"
     required:
@@ -2195,8 +2118,7 @@ definitions:
         minLength: 1
         type: string
       requestInfo:
-        $ref: "#/definitions/postPaymentsSepaCreditTransfersPaymentStatusParamsBodyRequ\
-          estInfo"
+        $ref: "#/definitions/postPaymentsSepaCreditTransfersPaymentStatusParamsBodyRequestInfo"
     required:
       - paymentId
       - requestInfo

@@ -4,10 +4,7 @@ schemes:
 host: api.mastercard.com
 basePath: /billpayAPI/v1
 info:
-  description: The Bill Payment Validator service allows RPPS origination (payment
-    sender) customers to identify if a potential RPPS transaction would process
-    successfully before transmitting the formal payment transaction, reducing
-    RPPS payment rejects and costly payment processing exceptions.
+  description: The Bill Payment Validator service allows RPPS origination (payment sender) customers to identify if a potential RPPS transaction would process successfully before transmitting the formal payment transaction, reducing RPPS payment rejects and costly payment processing exceptions.
   title: Bill Payment Validator
   version: "1.0"
   x-artifactId: billpayAPI
@@ -24,9 +21,7 @@ produces:
 paths:
   /isRoutingValid:
     post:
-      description: Bill Payment Validator performs real time transaction validation
-        against the specified Biller ID's account masks, account check digits
-        and all other registered RPPS processing parameters.
+      description: Bill Payment Validator performs real time transaction validation against the specified Biller ID's account masks, account check digits and all other registered RPPS processing parameters.
       parameters:
         - description: Contains the details of the get PAR API request message.
           in: body
@@ -42,8 +37,7 @@ paths:
           description: unexpected error
           schema:
             $ref: "#/definitions/ErrorResponse"
-      summary: Bill Payment Validator service returns the processing status for a
-        potential RPPS transaction
+      summary: Bill Payment Validator service returns the processing status for a potential RPPS transaction
       tags:
         - RPPSPaymentValidatorAPI
       x-samples:
@@ -124,8 +118,7 @@ definitions:
   BillPayAccountValidation:
     properties:
       AccountNumber:
-        description: Consumer account number populated in the message.  The minimum
-          length is 8 and the maximum length is 22.
+        description: Consumer account number populated in the message.  The minimum length is 8 and the maximum length is 22.
         example: "1234567890"
         type: string
         x-explorer: true
@@ -151,10 +144,7 @@ definitions:
         example: ""
         type: string
       ResponseString:
-        description: Indicates if the bill payment transaction information passed all
-          RPPS transaction processing edits for the specified biller ID or
-          indicates errors. The minimum length is 0 and the maximum length is
-          120.
+        description: Indicates if the bill payment transaction information passed all RPPS transaction processing edits for the specified biller ID or indicates errors. The minimum length is 0 and the maximum length is 120.
         example: Successful
         type: string
       RppsId:
@@ -181,9 +171,7 @@ definitions:
         description: This will identify the reason for the error.
         type: string
       Source:
-        description: This is the unique identifier that attempts to define the field in
-          error when available.  If a specific field can't be identified System
-          will be returned.
+        description: This is the unique identifier that attempts to define the field in error when available.  If a specific field can't be identified System will be returned.
         example: Atms.Atm.Location.Address.Line1
         type: string
   ErrorResponse:

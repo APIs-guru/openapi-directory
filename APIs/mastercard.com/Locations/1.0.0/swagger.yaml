@@ -3,8 +3,7 @@ schemes:
   - https
 host: api.mastercard.com
 info:
-  description: The Locations API provides access to MasterCard's ATM and Merchant
-    location database
+  description: The Locations API provides access to MasterCard's ATM and Merchant location database
   title: Locations API
   version: 1.0.0
   x-artifactId: locations
@@ -21,93 +20,66 @@ produces:
 paths:
   /atms/v1/atm:
     get:
-      description: >
-        Returns detailed information about an ATM location.  This
-        information can be used to display ATMs on a map, provide driving
-        directions, or show special ATM features.
+      description: |
+        Returns detailed information about an ATM location.  This information can be used to display ATMs on a map, provide driving directions, or show special ATM features.
       parameters:
-        - description: Zero-based offset where the response will start. The actual start
-            position is this value +1. An offset of 10 starts at item 11.
-            Combined with the PageLength option this allows pagination to be
-            supported through the service requests.
+        - description: Zero-based offset where the response will start. The actual start position is this value +1. An offset of 10 starts at item 11. Combined with the PageLength option this allows pagination to be supported through the service requests.
           in: query
           name: PageOffset
           required: true
           type: integer
           x-example: "0"
           x-explorer: true
-        - description: Maximum number of items to retrieve within the current "page" of
-            results.
+        - description: Maximum number of items to retrieve within the current "page" of results.
           in: query
           name: PageLength
           required: true
           type: integer
           x-example: "5"
           x-explorer: true
-        - description: Line 1 of the street address for the merchant location.  Usually
-            includes the street number and name. This parameter is ignored if
-            latitude and longitude are provided. If you provide this parameter
-            you must also provide the Country parameter and either City
-            parameter or PostalCode parameter.
+        - description: Line 1 of the street address for the merchant location.  Usually includes the street number and name. This parameter is ignored if latitude and longitude are provided. If you provide this parameter you must also provide the Country parameter and either City parameter or PostalCode parameter.
           in: query
           name: AddressLine1
           required: false
           type: string
           x-example: 114 Fifth Avenue
           x-explorer: false
-        - description: Line 2 of the street address usually an apartment number or suite
-            number. This parameter is used rarely and is ignored if latitude and
-            longitude are provided. If you provide this parameter you must also
-            provide the Country parameter and either City parameter or
-            PostalCode parameter.
+        - description: Line 2 of the street address usually an apartment number or suite number. This parameter is used rarely and is ignored if latitude and longitude are provided. If you provide this parameter you must also provide the Country parameter and either City parameter or PostalCode parameter.
           in: query
           name: AddressLine2
           required: false
           type: string
           x-example: Apartment 1
           x-explorer: false
-        - description: The name of the city for a merchant location.  This parameter is
-            ignored if latitude and longitude are provided. If you provide this
-            parameter you must also provide the Country parameter.
+        - description: The name of the city for a merchant location.  This parameter is ignored if latitude and longitude are provided. If you provide this parameter you must also provide the Country parameter.
           in: query
           name: City
           required: false
           type: string
           x-example: New York City
           x-explorer: false
-        - description: The state or province for a merchant location (only supported for
-            US and Canada locations).  This parameter is ignored if latitude and
-            longitude are provided. If you provide this parameter you must also
-            provide the Country parameter.
+        - description: The state or province for a merchant location (only supported for US and Canada locations).  This parameter is ignored if latitude and longitude are provided. If you provide this parameter you must also provide the Country parameter.
           in: query
           name: CountrySubdivision
           required: false
           type: string
           x-example: NY
           x-explorer: false
-        - description: The zip code or postal code for a merchant location.  This
-            parameter is ignored if latitude and longitude are provided. If you
-            provide this parameter you must also provide the Country parameter.
+        - description: The zip code or postal code for a merchant location.  This parameter is ignored if latitude and longitude are provided. If you provide this parameter you must also provide the Country parameter.
           in: query
           name: PostalCode
           required: false
           type: string
           x-example: "11101"
           x-explorer: true
-        - description: Any three digit country code for an ATM location.  Valid values are
-            Three digit alpha country code as defined in ISO 3166-1.  This
-            parameter is ignored if latitude and longitude are provided. This
-            parameter is required if any other address information is provided
-            including AddressLine1 AddressLine2 City PostalCode or
-            CountrySubdivision.
+        - description: Any three digit country code for an ATM location.  Valid values are Three digit alpha country code as defined in ISO 3166-1.  This parameter is ignored if latitude and longitude are provided. This parameter is required if any other address information is provided including AddressLine1 AddressLine2 City PostalCode or CountrySubdivision.
           in: query
           name: Country
           required: false
           type: string
           x-example: USA
           x-explorer: false
-        - description: The latitude of a merchant location.  If latitude is provided
-            longitude must also be provided.
+        - description: The latitude of a merchant location.  If latitude is provided longitude must also be provided.
           format: double
           in: query
           name: Latitude
@@ -115,8 +87,7 @@ paths:
           type: number
           x-example: "38.76006576913497"
           x-explorer: false
-        - description: The longitude of a merchant location.  If longitude is provided
-            latitude must also be provided.
+        - description: The longitude of a merchant location.  If longitude is provided latitude must also be provided.
           format: double
           in: query
           name: Longitude
@@ -124,35 +95,28 @@ paths:
           type: number
           x-example: "-90.74615107952418"
           x-explorer: false
-        - description: Indicates the unit for the radius as well as the units of the
-            distance of each location from the basepoint in the response.
+        - description: Indicates the unit for the radius as well as the units of the distance of each location from the basepoint in the response.
           in: query
           name: DistanceUnit
           required: false
           type: string
           x-example: MILE
           x-explorer: false
-        - description: This is the radius from the search point in the distance unit you
-            set.  For example if you want to search for locations within 50
-            miles of a certain point you would set DistanceUnit=mile and
-            Radius=50.  This parameter is ignored in non-geocoded countries.
+        - description: This is the radius from the search point in the distance unit you set.  For example if you want to search for locations within 50 miles of a certain point you would set DistanceUnit=mile and Radius=50.  This parameter is ignored in non-geocoded countries.
           in: query
           name: Radius
           required: false
           type: integer
           x-example: "25"
           x-explorer: false
-        - description: This indicates whether the ATM should have the ability to read chip
-            cards or not.
+        - description: This indicates whether the ATM should have the ability to read chip cards or not.
           in: query
           name: SupportEMV
           required: false
           type: integer
           x-example: "1"
           x-explorer: false
-        - description: This field will provide ATM Terminals which can still process
-            Maestro transactions but are not yet EMV chip reader enabled.
-            Information available only for USA and Argentina till October 2014.
+        - description: This field will provide ATM Terminals which can still process Maestro transactions but are not yet EMV chip reader enabled. Information available only for USA and Argentina till October 2014.
           in: query
           name: InternationalMaestroAccepted
           required: false
@@ -168,9 +132,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/ErrorResponse"
-      summary: Returns detailed information about an ATM location.  This information
-        can be used to display ATMs on a map, provide driving directions, or
-        show special ATM features.
+      summary: Returns detailed information about an ATM location.  This information can be used to display ATMs on a map, provide driving directions, or show special ATM features.
       tags:
         - ATM Locations
       x-samples:
@@ -183,7 +145,7 @@ paths:
                 "PostalCode": "11101"
               }
           response:
-            application/json: >-
+            application/json: |-
               {
                "Atms":{
                   "PageOffset":"0",
@@ -279,13 +241,10 @@ paths:
               }
   /atms/v1/countrysubdivision:
     get:
-      description: >
-        Returns country subdivisions that have ATM locations.  A country
-        subdivision is a segment within a country (ex  state or province).
-        Country subdivisions are only available for the US and Canada.
+      description: |
+        Returns country subdivisions that have ATM locations.  A country subdivision is a segment within a country (ex  state or province). Country subdivisions are only available for the US and Canada.
       parameters:
-        - description: Any three digit country code as defined in ISO 3166-1.  "USA" or
-            "CAN"
+        - description: Any three digit country code as defined in ISO 3166-1.  "USA" or "CAN"
           in: query
           name: Country
           required: true
@@ -301,9 +260,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/ErrorResponse"
-      summary: Returns country subdivisions that have ATM locations.  A country
-        subdivision is a segment within a country (ex  state or province).
-        Country subdivisions are only available for the US and Canada.
+      summary: Returns country subdivisions that have ATM locations.  A country subdivision is a segment within a country (ex  state or province). Country subdivisions are only available for the US and Canada.
       tags:
         - ATM Country Subdivisions
       x-samples:
@@ -335,9 +292,8 @@ paths:
               }
   /merchants/v1/category:
     get:
-      description: >
-        Returns a list of all merchant categories for contactless and cash
-        back merchants (example:  Airline, Retail, etc.).
+      description: |
+        Returns a list of all merchant categories for contactless and cash back merchants (example:  Airline, Retail, etc.).
       responses:
         "200":
           description: A list of all the categories supported
@@ -347,9 +303,8 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/ErrorResponse"
-      summary: >
-        Returns a list of all merchant categories for contactless and cash back
-        merchants (example:  Airline, Retail, etc.).
+      summary: |
+        Returns a list of all merchant categories for contactless and cash back merchants (example:  Airline, Retail, etc.).
       tags:
         - Merchant Categories
       x-samples:
@@ -379,17 +334,10 @@ paths:
               }
   /merchants/v1/country:
     get:
-      description: >
-        Returns countries that have Merchants offering the following
-        services: accept contactless-enabled cards and devices, allow customers
-        to add money to an eligible MasterCard or Maestro prepaid card, issue
-        MasterCard Prepaid Travel cards, offer cash at checkout when paying with
-        a Debit MasterCard or Maestro Card.
+      description: |
+        Returns countries that have Merchants offering the following services: accept contactless-enabled cards and devices, allow customers to add money to an eligible MasterCard or Maestro prepaid card, issue MasterCard Prepaid Travel cards, offer cash at checkout when paying with a Debit MasterCard or Maestro Card.
       parameters:
-        - description: This is the type of merchant location.
-            Options  "acceptance.paypass"
-            "topup.repower"  "products.prepaidtravelcard"  and
-            "offers.easysavings"
+        - description: This is the type of merchant location. Options  "acceptance.paypass" "topup.repower"  "products.prepaidtravelcard"  and "offers.easysavings"
           in: query
           name: details
           required: true
@@ -405,12 +353,8 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/ErrorResponse"
-      summary: >
-        Returns countries that have Merchants offering the following services:
-        accept contactless-enabled cards and devices, allow customers to add
-        money to an eligible MasterCard or Maestro prepaid card, issue
-        MasterCard Prepaid Travel cards, offer cash at checkout when paying with
-        a Debit MasterCard or Maestro Card.
+      summary: |
+        Returns countries that have Merchants offering the following services: accept contactless-enabled cards and devices, allow customers to add money to an eligible MasterCard or Maestro prepaid card, issue MasterCard Prepaid Travel cards, offer cash at checkout when paying with a Debit MasterCard or Maestro Card.
       tags:
         - Merchant Countries
       x-samples:
@@ -445,27 +389,17 @@ paths:
               }
   /merchants/v1/countrysubdivision:
     get:
-      description: >
-        Returns country subdivisions that have Merchants offering the
-        following services: accept contactless-enabled cards and devices, allow
-        customers to add money to an eligible MasterCard or Maestro prepaid
-        card, issue MasterCard Prepaid Travel cards, offer cash at checkout when
-        paying with a Debit MasterCard or Maestro Card. A country subdivision is
-        a segment within a country (ex  state or province).  Please note country
-        subdivisions are only available for the US and Canada.
+      description: |
+        Returns country subdivisions that have Merchants offering the following services: accept contactless-enabled cards and devices, allow customers to add money to an eligible MasterCard or Maestro prepaid card, issue MasterCard Prepaid Travel cards, offer cash at checkout when paying with a Debit MasterCard or Maestro Card. A country subdivision is a segment within a country (ex  state or province).  Please note country subdivisions are only available for the US and Canada.
       parameters:
-        - description: This is the type of merchant location.
-            Options  "acceptance.paypass"
-            "topup.repower"  "products.prepaidtravelcard"  and
-            "offers.easysavings"
+        - description: This is the type of merchant location. Options  "acceptance.paypass" "topup.repower"  "products.prepaidtravelcard"  and "offers.easysavings"
           in: query
           name: details
           required: true
           type: string
           x-example: topup.repower
           x-explorer: true
-        - description: Any three digit country code as defined in ISO 3166-1. For example
-            "USA or "CAN"
+        - description: Any three digit country code as defined in ISO 3166-1. For example "USA or "CAN"
           in: query
           name: country
           required: true
@@ -481,14 +415,8 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/ErrorResponse"
-      summary: >
-        Returns country subdivisions that have Merchants offering the following
-        services: accept contactless-enabled cards and devices, allow customers
-        to add money to an eligible MasterCard or Maestro prepaid card, issue
-        MasterCard Prepaid Travel cards, offer cash at checkout when paying with
-        a Debit MasterCard or Maestro Card. A country subdivision is a segment
-        within a country (ex  state or province).  Please note country
-        subdivisions are only available for the US and Canada.
+      summary: |
+        Returns country subdivisions that have Merchants offering the following services: accept contactless-enabled cards and devices, allow customers to add money to an eligible MasterCard or Maestro prepaid card, issue MasterCard Prepaid Travel cards, offer cash at checkout when paying with a Debit MasterCard or Maestro Card. A country subdivision is a segment within a country (ex  state or province).  Please note country subdivisions are only available for the US and Canada.
       tags:
         - Merchant Country Subdivisions
       x-samples:
@@ -521,117 +449,80 @@ paths:
               }
   /merchants/v1/merchant:
     get:
-      description: >
-        Returns merchant location information for merchants offering the
-        following services: accept contactless-enabled cards and devices, allow
-        customers to add money to an eligible MasterCard or Maestro prepaid
-        card, issue MasterCard Prepaid Travel cards, participate in the
-        MasterCard Easy Savings program, and offer cash at checkout when paying
-        with a Debit MasterCard or Maestro Card.
+      description: |
+        Returns merchant location information for merchants offering the following services: accept contactless-enabled cards and devices, allow customers to add money to an eligible MasterCard or Maestro prepaid card, issue MasterCard Prepaid Travel cards, participate in the MasterCard Easy Savings program, and offer cash at checkout when paying with a Debit MasterCard or Maestro Card.
       parameters:
-        - description: Type of merchant location. Options are "acceptance.paypass"
-            "topup.repower" "products.prepaidtravelcard" "offers.easysavings"
-            and "features.cashback". Cash Back is currently only available in
-            the US.
+        - description: Type of merchant location. Options are "acceptance.paypass" "topup.repower" "products.prepaidtravelcard" "offers.easysavings" and "features.cashback". Cash Back is currently only available in the US.
           in: query
           name: Details
           required: true
           type: string
           x-example: acceptance.paypass
           x-explorer: true
-        - description: Zero-based offset where the response will start. The actual start
-            position is this value +1. An offset of 10 starts at item 11.
-            Combined with the PageLength option this allows pagination to be
-            supported through the service requests.
+        - description: Zero-based offset where the response will start. The actual start position is this value +1. An offset of 10 starts at item 11. Combined with the PageLength option this allows pagination to be supported through the service requests.
           in: query
           name: PageOffset
           required: true
           type: integer
           x-example: "0"
           x-explorer: true
-        - description: Maximum number of items to retrieve within the current "page" of
-            results.
+        - description: Maximum number of items to retrieve within the current "page" of results.
           in: query
           name: PageLength
           required: true
           type: integer
           x-example: "5"
           x-explorer: true
-        - description: Category of the merchant location. See the Categories (Merchant)
-            resource for a list of valid categories. This parameter is only
-            valid for merchant queries with Details = "acceptance.paypass" or
-            "features.cashback".
+        - description: Category of the merchant location. See the Categories (Merchant) resource for a list of valid categories. This parameter is only valid for merchant queries with Details = "acceptance.paypass" or "features.cashback".
           in: query
           name: Category
           required: false
           type: string
           x-example: features.cashback
           x-explorer: false
-        - description: Line 1 of the street address for the merchant location.  Usually
-            includes the street number and name. This parameter is ignored if
-            latitude and longitude are provided. If you provide this parameter
-            you must also provide the Country parameter and either City
-            parameter or PostalCode parameter.
+        - description: Line 1 of the street address for the merchant location.  Usually includes the street number and name. This parameter is ignored if latitude and longitude are provided. If you provide this parameter you must also provide the Country parameter and either City parameter or PostalCode parameter.
           in: query
           name: AddressLine1
           required: false
           type: string
           x-example: 42 Elm Street
           x-explorer: false
-        - description: Line 2 of the street address usually an apartment number or suite
-            number. This parameter is used rarely and is ignored if latitude and
-            longitude are provided. If you provide this parameter you must also
-            provide the Country parameter and either City parameter or
-            PostalCode parameter.
+        - description: Line 2 of the street address usually an apartment number or suite number. This parameter is used rarely and is ignored if latitude and longitude are provided. If you provide this parameter you must also provide the Country parameter and either City parameter or PostalCode parameter.
           in: query
           name: AddressLine2
           required: false
           type: string
           x-example: Suite 101
           x-explorer: false
-        - description: Name of the city for a merchant location.  This parameter is
-            ignored if latitude and longitude are provided. If you provide this
-            parameter you must also provide the Country parameter.
+        - description: Name of the city for a merchant location.  This parameter is ignored if latitude and longitude are provided. If you provide this parameter you must also provide the Country parameter.
           in: query
           name: City
           required: false
           type: string
           x-example: New York
           x-explorer: false
-        - description: State or province for a merchant location (only supported for US
-            and Canada locations).  This parameter is ignored if latitude and
-            longitude are provided. If you provide this parameter you must also
-            provide the Country parameter.
+        - description: State or province for a merchant location (only supported for US and Canada locations).  This parameter is ignored if latitude and longitude are provided. If you provide this parameter you must also provide the Country parameter.
           in: query
           name: CountrySubdivision
           required: false
           type: string
           x-example: NY
           x-explorer: false
-        - description: Zip code or postal code for a merchant location.  This parameter is
-            ignored if latitude and longitude are provided. If you provide this
-            parameter you must also provide the Country parameter.
+        - description: Zip code or postal code for a merchant location.  This parameter is ignored if latitude and longitude are provided. If you provide this parameter you must also provide the Country parameter.
           in: query
           name: PostalCode
           required: false
           type: string
           x-example: "11001"
           x-explorer: false
-        - description: Any three digit country code for an ATM location.  Valid values are
-            Three digit alpha country code as defined in ISO 3166-1.  This
-            parameter is ignored if latitude and longitude are provided. This
-            parameter is required if any other address information is provided
-            including AddressLine1 AddressLine2 City PostalCode or
-            CountrySubdivision. By default we supply ATM location data for
-            United States ATMs for up to twenty-five records per request.
+        - description: Any three digit country code for an ATM location.  Valid values are Three digit alpha country code as defined in ISO 3166-1.  This parameter is ignored if latitude and longitude are provided. This parameter is required if any other address information is provided including AddressLine1 AddressLine2 City PostalCode or CountrySubdivision. By default we supply ATM location data for United States ATMs for up to twenty-five records per request.
           in: query
           name: Country
           required: false
           type: string
           x-example: USA
           x-explorer: false
-        - description: Latitude of a merchant location.  If latitude is provided longitude
-            must also be provided.
+        - description: Latitude of a merchant location.  If latitude is provided longitude must also be provided.
           format: double
           in: query
           name: Latitude
@@ -639,8 +530,7 @@ paths:
           type: number
           x-example: "38.53463"
           x-explorer: true
-        - description: Longitude of a merchant location.  If longitude is provided
-            latitude must also be provided.
+        - description: Longitude of a merchant location.  If longitude is provided latitude must also be provided.
           format: double
           in: query
           name: Longitude
@@ -648,26 +538,21 @@ paths:
           type: number
           x-example: "-90.286781"
           x-explorer: true
-        - description: Indicates the unit for the radius as well as the units of the
-            distance of each location from the basepoint in the response.
+        - description: Indicates the unit for the radius as well as the units of the distance of each location from the basepoint in the response.
           in: query
           name: DistanceUnit
           required: false
           type: string
           x-example: MILE
           x-explorer: false
-        - description: This is the radius from the search point in the distance unit you
-            set.  For example if you want to search for locations within 50
-            miles of a certain point you would set DistanceUnit=mile and
-            Radius=50.  This parameter is ignored in non-geocoded countries.
+        - description: This is the radius from the search point in the distance unit you set.  For example if you want to search for locations within 50 miles of a certain point you would set DistanceUnit=mile and Radius=50.  This parameter is ignored in non-geocoded countries.
           in: query
           name: Radius
           required: false
           type: integer
           x-example: "25"
           x-explorer: false
-        - description: Unique identifier that represents the merhcant sponsor of an offer.
-            Any valid merchant ID.
+        - description: Unique identifier that represents the merhcant sponsor of an offer. Any valid merchant ID.
           in: query
           name: OfferMerchantID
           required: false
@@ -683,13 +568,8 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/ErrorResponse"
-      summary: >
-        Returns merchant location information for merchants offering the
-        following services: accept contactless-enabled cards and devices, allow
-        customers to add money to an eligible MasterCard or Maestro prepaid
-        card, issue MasterCard Prepaid Travel cards, participate in the
-        MasterCard Easy Savings program, and offer cash at checkout when paying
-        with a Debit MasterCard or Maestro Card.
+      summary: |
+        Returns merchant location information for merchants offering the following services: accept contactless-enabled cards and devices, allow customers to add money to an eligible MasterCard or Maestro prepaid card, issue MasterCard Prepaid Travel cards, participate in the MasterCard Easy Savings program, and offer cash at checkout when paying with a Debit MasterCard or Maestro Card.
       tags:
         - Merchant Locations
       x-samples:
@@ -761,13 +641,11 @@ definitions:
       CountrySubdivision:
         $ref: "#/definitions/CountrySubdivision"
       Line1:
-        description: Line 1 of the street address for the merchant location.  Usually
-          includes the street number and name.
+        description: Line 1 of the street address for the merchant location.  Usually includes the street number and name.
         example: 42 ELM AVENUE
         type: string
       Line2:
-        description: Line 2 of the street address usually an apartment number or suite
-          number.
+        description: Line 2 of the street address usually an apartment number or suite number.
         example: SUITE 100
         type: string
       PostalCode:
@@ -777,66 +655,49 @@ definitions:
   Atm:
     properties:
       AccessFees:
-        description: This value indicates under what conditions access fees are charged.
-          Options are UNKNOWN, DOMESTIC, INTERNATIONAL,
-          DOMESTIC_AND_INTERNATIONAL, NO_FEE.
+        description: This value indicates under what conditions access fees are charged. Options are UNKNOWN, DOMESTIC, INTERNATIONAL, DOMESTIC_AND_INTERNATIONAL, NO_FEE.
         example: DOMESTIC
         type: string
       Availability:
-        description: This value indicates the availability hours of the ATM. Options are
-          UNKNOWN, ALWAYS_AVAILABLE, BUSINESS_HOURS, IRREGULAR_HOURS.
+        description: This value indicates the availability hours of the ATM. Options are UNKNOWN, ALWAYS_AVAILABLE, BUSINESS_HOURS, IRREGULAR_HOURS.
         example: ALWAYS_AVAILABLE
         type: string
       Camera:
-        description: This value indicates whether or not a security camera is present or
-          near ATM. Options are UNKNOWN, YES, NO.
+        description: This value indicates whether or not a security camera is present or near ATM. Options are UNKNOWN, YES, NO.
         example: YES
         type: string
       HandicapAccessible:
-        description: This value indicates whether or not the ATM is accessible by
-          wheelchair. Options are UNKNOWN, YES, NO.
+        description: This value indicates whether or not the ATM is accessible by wheelchair. Options are UNKNOWN, YES, NO.
         example: YES
         type: string
       InternationalMaestroAccepted:
-        description: This field will provide ATM Terminals which can still process
-          Maestro transactions but are not yet EMV chip reader enabled.
-          Information available only for USA and Argentina till October 2014.
-          1=Yes.
+        description: This field will provide ATM Terminals which can still process Maestro transactions but are not yet EMV chip reader enabled. Information available only for USA and Argentina till October 2014. 1=Yes.
         example: 1
         type: integer
       Location:
         $ref: "#/definitions/Location"
       Owner:
-        description: This is the DBA name of the financial institution affiliate or
-          independent service organization.
+        description: This is the DBA name of the financial institution affiliate or independent service organization.
         example: EGLOBAL
         type: string
       SharedDeposit:
-        description: This value indicates whether or not the ATM participates in the
-          MasterCard Shared Deposit network. Options are YES or NO.
+        description: This value indicates whether or not the ATM participates in the MasterCard Shared Deposit network. Options are YES or NO.
         example: YES
         type: string
       Sponsor:
-        description: This is the legal or business name of the entity that sponsors the
-          owner of the ATM into the MasterCard network.
+        description: This is the legal or business name of the entity that sponsors the owner of the ATM into the MasterCard network.
         example: PeoplesBank
         type: string
       SupportEMV:
-        description: This indicates whether the ATM has the ability to read chip cards
-          or not. Options are 1 = Yes 2 = No or Empty = Unknown.
+        description: This indicates whether the ATM has the ability to read chip cards or not. Options are 1 = Yes 2 = No or Empty = Unknown.
         example: 1
         type: integer
       SurchargeFreeAlliance:
-        description: This value indicates whether or not the ATM participates in the
-          MasterCard Shared (only) Surcharge Free Alliance network. Options are
-          YES or NO.
+        description: This value indicates whether or not the ATM participates in the MasterCard Shared (only) Surcharge Free Alliance network. Options are YES or NO.
         example: YES
         type: string
       SurchargeFreeAllianceNetwork:
-        description: This value indicates whether or not the ATM participates in the
-          MasterCard Shared (only) Surcharge Free Alliance network. Options are
-          DOES_NOT_PARTICIPATE_IN_SFA, ALLPOINT_PREPAID, MONEYPASS_DEBIT, and
-          ALL_SURCHARGE_FREE.
+        description: This value indicates whether or not the ATM participates in the MasterCard Shared (only) Surcharge Free Alliance network. Options are DOES_NOT_PARTICIPATE_IN_SFA, ALLPOINT_PREPAID, MONEYPASS_DEBIT, and ALL_SURCHARGE_FREE.
         example: DOES_NOT_PARTICIPATE_IN_SFA
         type: string
   Atms:
@@ -846,10 +707,7 @@ definitions:
           $ref: "#/definitions/Atm"
         type: array
       PageOffset:
-        description: Zero-based offset where the response will start. The actual start
-          position is this value +1. An offset of 10 starts at item 11. Combined
-          with the PageLength option this allows pagination to be supported
-          through the service requests.
+        description: Zero-based offset where the response will start. The actual start position is this value +1. An offset of 10 starts at item 11. Combined with the PageLength option this allows pagination to be supported through the service requests.
         example: 25
         type: string
       TotalCount:
@@ -928,9 +786,7 @@ definitions:
         description: Identify the reason for the error.
         type: string
       Source:
-        description: Unique identifier that attempts to define the field in error when
-          available.  If a specific field can't be identified System will be
-          returned.
+        description: Unique identifier that attempts to define the field in error when available.  If a specific field can't be identified System will be returned.
         example: Atms.Atm.Location.Address.Line1
         type: string
   ErrorResponse:
@@ -952,14 +808,12 @@ definitions:
       Address:
         $ref: "#/definitions/Address"
       Distance:
-        description: This is the numerical value for the distance from the provided
-          location to the selected ATM.
+        description: This is the numerical value for the distance from the provided location to the selected ATM.
         example: 0.91
         format: double
         type: number
       DistanceUnit:
-        description: This is the unit of measure value for the distance from the
-          provided location to the selected ATM. Options are KILOMETER and MILE.
+        description: This is the unit of measure value for the distance from the provided location to the selected ATM. Options are KILOMETER and MILE.
         example: KILOMETER
         type: string
       LocationType:
@@ -973,13 +827,11 @@ definitions:
   LocationType:
     properties:
       AirportCode:
-        description: Airport code is a 3 digit field. This is an optional field and will
-          only be returned if Atms.Atm.Location.LocationType.Type=AIRPORT
+        description: Airport code is a 3 digit field. This is an optional field and will only be returned if Atms.Atm.Location.LocationType.Type=AIRPORT
         example: JFK
         type: string
       Type:
-        description: Type of location for the ATM. Options are OTHER, AIRPORT, HOSPITAL,
-          FINANCIAL_INSTITUTION.
+        description: Type of location for the ATM. Options are OTHER, AIRPORT, HOSPITAL, FINANCIAL_INSTITUTION.
         example: AIRPORT
         type: string
   Merchant:
@@ -1025,10 +877,7 @@ definitions:
           $ref: "#/definitions/Merchant"
         type: array
       PageOffset:
-        description: Zero-based offset where the response will start. The actual start
-          position is this value +1. An offset of 10 starts at item 11. Combined
-          with the PageLength option this allows pagination to be supported
-          through the service requests.
+        description: Zero-based offset where the response will start. The actual start position is this value +1. An offset of 10 starts at item 11. Combined with the PageLength option this allows pagination to be supported through the service requests.
         example: 25
         type: string
       TotalCount:
@@ -1042,43 +891,35 @@ definitions:
   PayPass:
     properties:
       Concession:
-        description: Boolean value which indicates if the concession area is equipped
-          with a PayPass card reader.
+        description: Boolean value which indicates if the concession area is equipped with a PayPass card reader.
         example: true
         type: boolean
       DriveThru:
-        description: Boolean value which indicates if the drive thru is equipped with a
-          PayPass card reader.
+        description: Boolean value which indicates if the drive thru is equipped with a PayPass card reader.
         example: true
         type: boolean
       FuelPump:
-        description: Boolean value which indicates if the fuel pump is equipped with a
-          PayPass card reader.
+        description: Boolean value which indicates if the fuel pump is equipped with a PayPass card reader.
         example: true
         type: boolean
       Pharmacy:
-        description: Boolean value which indicates if the pharmacy is equipped with a
-          PayPass card reader.
+        description: Boolean value which indicates if the pharmacy is equipped with a PayPass card reader.
         example: true
         type: boolean
       Register:
-        description: Boolean value which indicates if the register is equipped with a
-          PayPass card reader.
+        description: Boolean value which indicates if the register is equipped with a PayPass card reader.
         example: true
         type: boolean
       Ticketing:
-        description: Boolean value which indicates if the ticketing area is equipped
-          with a PayPass card reader.
+        description: Boolean value which indicates if the ticketing area is equipped with a PayPass card reader.
         example: true
         type: boolean
       TollBooth:
-        description: Boolean value which indicates if the toll booth is equipped with a
-          PayPass card reader.
+        description: Boolean value which indicates if the toll booth is equipped with a PayPass card reader.
         example: true
         type: boolean
       VendingMachine:
-        description: Boolean value which indicates if the vending machine is equipped
-          with a PayPass card reader.
+        description: Boolean value which indicates if the vending machine is equipped with a PayPass card reader.
         example: true
         type: boolean
   Point:
@@ -1096,8 +937,7 @@ definitions:
   Products:
     properties:
       PrepaidTravelcard:
-        description: Boolean value which indicates if the merchant accepts MasterCard
-          Prepaid Travel Cards.
+        description: Boolean value which indicates if the merchant accepts MasterCard Prepaid Travel Cards.
         example: true
         type: boolean
   Topup:
@@ -1107,12 +947,10 @@ definitions:
   rePower:
     properties:
       CardSwipe:
-        description: Boolean value which indicates if the repower card load type at this
-          merchant supports Card Swipe.
+        description: Boolean value which indicates if the repower card load type at this merchant supports Card Swipe.
         example: true
         type: boolean
       MoneyPak:
-        description: Boolean value which indicates if the repower card load type at this
-          merchant supports MoneyPak.
+        description: Boolean value which indicates if the repower card load type at this merchant supports MoneyPak.
         example: true
         type: boolean

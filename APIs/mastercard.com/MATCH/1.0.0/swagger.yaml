@@ -3,8 +3,7 @@ schemes:
   - https
 host: api.mastercard.com
 info:
-  description: Helps acquirers identify potentially high-risk merchants before
-    entering to a merchant agreement.
+  description: Helps acquirers identify potentially high-risk merchants before entering to a merchant agreement.
   title: MATCH API
   version: 1.0.0
   x-artifactId: match
@@ -21,10 +20,8 @@ produces:
 paths:
   /fraud/merchant/v3/add-merchant:
     post:
-      description: >
-        Used by Acquirers to add a terminated a merchant in the MATCH
-        system. Merchant information, and up to five principal owners per
-        merchant, can be provided by an acquiring bank as part of the listing.
+      description: |
+        Used by Acquirers to add a terminated a merchant in the MATCH system. Merchant information, and up to five principal owners per merchant, can be provided by an acquiring bank as part of the listing.
       parameters:
         - description: Body of the Add Terminated Merchant Request
           in: body
@@ -41,9 +38,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/ErrorsResponse"
-      summary: Used by Acquirers to add a terminated a merchant in the MATCH system.
-        Merchant information, and up to five principal owners per merchant, can
-        be provided by an acquiring bank as part of the listing.
+      summary: Used by Acquirers to add a terminated a merchant in the MATCH system. Merchant information, and up to five principal owners per merchant, can be provided by an acquiring bank as part of the listing.
       tags:
         - Add Terminated Merchant
       x-samples:
@@ -114,11 +109,8 @@ paths:
               }
   /fraud/merchant/v3/common/contact-details:
     post:
-      description: >
-        Returns the contact information for the acquirer id requested. When
-        MATCH returns a possible merchant match, this resource assists users by
-        retrieving the contact information associated with the Acquirer ID/ICA
-        that added the merchant to MATCH.
+      description: |
+        Returns the contact information for the acquirer id requested. When MATCH returns a possible merchant match, this resource assists users by retrieving the contact information associated with the Acquirer ID/ICA that added the merchant to MATCH.
       parameters:
         - description: The contact request object
           in: body
@@ -139,10 +131,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/ErrorsResponse"
-      summary: Returns the contact information for the acquirer id requested. When
-        MATCH returns a possible merchant match, this resource assists users by
-        retrieving the contact information associated with the Acquirer ID/ICA
-        that added the merchant to MATCH.
+      summary: Returns the contact information for the acquirer id requested. When MATCH returns a possible merchant match, this resource assists users by retrieving the contact information associated with the Acquirer ID/ICA that added the merchant to MATCH.
       tags:
         - Acquirer Contact Request
       x-samples:
@@ -163,26 +152,10 @@ paths:
               }
   /fraud/merchant/v3/retro/retro-inquiry-details:
     post:
-      description: >
-        Returns detailed information about Merchants, URLs and up to five
-        principal owners, that have been terminated by an acquiring bank after
-        the inquiry was made.  This MATCH resource assists acquirer's ability to
-        consider the merchants terminated after the inquiry was made. If an
-        initial inquiry does not result in a possible match, it is still
-        possible that the merchant listing could appear sometime in the next 360
-        days. This may occur when another acquirer enters the merchant into the
-        MATCH database. The system will automatically continue to search the
-        MATCH system for 360 days. To view these notifications, acquirers must
-        use the Retroactive Inquiry Summary service. This resource can be used
-        to obtain detailed information, such as, if a Merchant or individual has
-        been terminated by another acquirer after an inquiry was made, the
-        reason for termination, and the history of fraudulent or risky business
-        practices that led to that termination.
+      description: |
+        Returns detailed information about Merchants, URLs and up to five principal owners, that have been terminated by an acquiring bank after the inquiry was made.  This MATCH resource assists acquirer's ability to consider the merchants terminated after the inquiry was made. If an initial inquiry does not result in a possible match, it is still possible that the merchant listing could appear sometime in the next 360 days. This may occur when another acquirer enters the merchant into the MATCH database. The system will automatically continue to search the MATCH system for 360 days. To view these notifications, acquirers must use the Retroactive Inquiry Summary service. This resource can be used to obtain detailed information, such as, if a Merchant or individual has been terminated by another acquirer after an inquiry was made, the reason for termination, and the history of fraudulent or risky business practices that led to that termination.
       parameters:
-        - description: The Member ICA number which is used to validate that the
-            application has permission to hit the MATCH database. This number
-            must be obtained from a participating MATCH acquiring bank or entity
-            before a developer can access the MATCH resource.
+        - description: The Member ICA number which is used to validate that the application has permission to hit the MATCH database. This number must be obtained from a participating MATCH acquiring bank or entity before a developer can access the MATCH resource.
           in: query
           name: AcquirerId
           required: true
@@ -202,20 +175,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/ErrorsResponse"
-      summary: Returns detailed information about Merchants, URLs and up to five
-        principal owners, that have been terminated by an acquiring bank after
-        the inquiry was made.  This MATCH resource assists acquirer's ability to
-        consider the merchants terminated after the inquiry was made. If an
-        initial inquiry does not result in a possible match, it is still
-        possible that the merchant listing could appear sometime in the next 360
-        days. This may occur when another acquirer enters the merchant into the
-        MATCH database. The system will automatically continue to search the
-        MATCH system for 360 days. To view these notifications, acquirers must
-        use the Retroactive Inquiry Summary service. This resource can be used
-        to obtain detailed information, such as, if a Merchant or individual has
-        been terminated by another acquirer after an inquiry was made, the
-        reason for termination, and the history of fraudulent or risky business
-        practices that led to that termination.
+      summary: Returns detailed information about Merchants, URLs and up to five principal owners, that have been terminated by an acquiring bank after the inquiry was made.  This MATCH resource assists acquirer's ability to consider the merchants terminated after the inquiry was made. If an initial inquiry does not result in a possible match, it is still possible that the merchant listing could appear sometime in the next 360 days. This may occur when another acquirer enters the merchant into the MATCH database. The system will automatically continue to search the MATCH system for 360 days. To view these notifications, acquirers must use the Retroactive Inquiry Summary service. This resource can be used to obtain detailed information, such as, if a Merchant or individual has been terminated by another acquirer after an inquiry was made, the reason for termination, and the history of fraudulent or risky business practices that led to that termination.
       tags:
         - Retroactive Inquiry Details Request
       x-samples:
@@ -236,15 +196,8 @@ paths:
       x-testable: false
   /fraud/merchant/v3/retro/retro-list:
     post:
-      description: >
-        Returns the summary of Retro matches for the given Acquirer Id.
-        This resource will return the summary of Retroactive Inquiry matches for
-        the given Acquirer ID/ICA. If an initial inquiry does not result in a
-        possible match, it is still possible that the merchant listing could
-        appear sometime in the next 360 days. This may occur when another
-        acquirer enters the merchant into the MATCH database. The system will
-        automatically continue to search the MATCH system for 360 days. To view
-        these notifications, acquirers must use the Retroactive Inquiry service.
+      description: |
+        Returns the summary of Retro matches for the given Acquirer Id. This resource will return the summary of Retroactive Inquiry matches for the given Acquirer ID/ICA. If an initial inquiry does not result in a possible match, it is still possible that the merchant listing could appear sometime in the next 360 days. This may occur when another acquirer enters the merchant into the MATCH database. The system will automatically continue to search the MATCH system for 360 days. To view these notifications, acquirers must use the Retroactive Inquiry service.
       parameters:
         - description: The retro request object
           in: body
@@ -261,14 +214,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/ErrorsResponse"
-      summary: Returns the summary of Retro matches for the given Acquirer Id. This
-        resource will return the summary of Retroactive Inquiry matches for the
-        given Acquirer ID/ICA. If an initial inquiry does not result in a
-        possible match, it is still possible that the merchant listing could
-        appear sometime in the next 360 days. This may occur when another
-        acquirer enters the merchant into the MATCH database. The system will
-        automatically continue to search the MATCH system for 360 days. To view
-        these notifications, acquirers must use the Retroactive Inquiry service.
+      summary: Returns the summary of Retro matches for the given Acquirer Id. This resource will return the summary of Retroactive Inquiry matches for the given Acquirer ID/ICA. If an initial inquiry does not result in a possible match, it is still possible that the merchant listing could appear sometime in the next 360 days. This may occur when another acquirer enters the merchant into the MATCH database. The system will automatically continue to search the MATCH system for 360 days. To view these notifications, acquirers must use the Retroactive Inquiry service.
       tags:
         - Retroactive Inquiry Request
       x-samples:
@@ -288,26 +234,16 @@ paths:
       x-testable: false
   /fraud/merchant/v3/termination-inquiry:
     post:
-      description: >
-        Returns information on merchants that have been terminated and
-        merchants which have been inquired upon. MATCH can provide the acquiring
-        bank with information, such as, if a Merchant or individual has been
-        terminated by another acquirer already, the reason for termination, the
-        history of fraudulent or risky business practices that led to that
-        termination and the inquiry that was made already on the Merchant or
-        individual by own or another acquiring bank (If opted)
+      description: |
+        Returns information on merchants that have been terminated and merchants which have been inquired upon. MATCH can provide the acquiring bank with information, such as, if a Merchant or individual has been terminated by another acquirer already, the reason for termination, the history of fraudulent or risky business practices that led to that termination and the inquiry that was made already on the Merchant or individual by own or another acquiring bank (If opted)
       parameters:
-        - description: The zero-based offset to start at. The actual start position is
-            this value +1. An offset of 10 starts at item 11. Combined with the
-            PageLength option this allows pagination to be supported through the
-            service requests.
+        - description: The zero-based offset to start at. The actual start position is this value +1. An offset of 10 starts at item 11. Combined with the PageLength option this allows pagination to be supported through the service requests.
           in: query
           name: PageOffset
           required: true
           type: number
           x-example: 0
-        - description: The maximum number of items to retrieve within the current "page"
-            of results.
+        - description: The maximum number of items to retrieve within the current "page" of results.
           in: query
           name: PageLength
           required: true
@@ -328,13 +264,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/ErrorsResponse"
-      summary: Returns information on merchants that have been terminated and
-        merchants that have inquired upon. Provides the acquiring bank with
-        information, such as, if a Merchant or individual has been terminated by
-        another acquirer already, the reason for termination, the history of
-        fraudulent or risky business practices that led to that termination and
-        the inquiry that was made already on the Merchant or individual by own
-        or another acquiring bank (if opted).
+      summary: Returns information on merchants that have been terminated and merchants that have inquired upon. Provides the acquiring bank with information, such as, if a Merchant or individual has been terminated by another acquirer already, the reason for termination, the history of fraudulent or risky business practices that led to that termination and the inquiry that was made already on the Merchant or individual by own or another acquiring bank (if opted).
       tags:
         - TerminationInquiryRequest
       x-samples:
@@ -801,43 +731,28 @@ paths:
           type: documentation
   "/fraud/merchant/v3/termination-inquiry/{IRN}":
     get:
-      description: >
-        Returns information about Merchants, URLs and up to five principal
-        owners, that have been terminated by an acquiring bank from a previous
-        inquiry. The Inquiry History Results resource displays the inquiry with
-        the option to view either; Possible Merchant Matches or Possible Inquiry
-        Matches.
+      description: |
+        Returns information about Merchants, URLs and up to five principal owners, that have been terminated by an acquiring bank from a previous inquiry. The Inquiry History Results resource displays the inquiry with the option to view either; Possible Merchant Matches or Possible Inquiry Matches.
       parameters:
-        - description: The zero-based offset to start at. The actual start position is
-            this value +1. An offset of 10 starts at item 11. Combined with the
-            PageLength option this allows pagination to be supported through the
-            service requests.
+        - description: The zero-based offset to start at. The actual start position is this value +1. An offset of 10 starts at item 11. Combined with the PageLength option this allows pagination to be supported through the service requests.
           in: query
           name: PageOffset
           required: true
           type: number
           x-example: 0
-        - description: The maximum number of items to retrieve within the current "page"
-            of results.
+        - description: The maximum number of items to retrieve within the current "page" of results.
           in: query
           name: PageLength
           required: true
           type: number
           x-example: 10
-        - description: The Member ICA number which is used to validate that the
-            application has permission to hit the MATCH database. This number
-            must be obtained from a participating MATCH acquiring bank or entity
-            before a developer can access the MATCH resource.
+        - description: The Member ICA number which is used to validate that the application has permission to hit the MATCH database. This number must be obtained from a participating MATCH acquiring bank or entity before a developer can access the MATCH resource.
           in: query
           name: AcquirerId
           required: true
           type: string
           x-example: 1996
-        - description: Inquiry Reference Number (IRN) A unique identifier generated by the
-            MATCH system that is returned in the original, previously submitted
-            POST request (contained within the "TerminationInquiry.Ref" response
-            node). This unique identifier should be present as a URL parameter
-            within all GET requests.
+        - description: Inquiry Reference Number (IRN) A unique identifier generated by the MATCH system that is returned in the original, previously submitted POST request (contained within the "TerminationInquiry.Ref" response node). This unique identifier should be present as a URL parameter within all GET requests.
           in: path
           name: IRN
           required: true
@@ -852,17 +767,13 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/ErrorsResponse"
-      summary: Returns information about Merchants, URLs and up to five principal
-        owners, that have been terminated by an acquiring bank from a previous
-        inquiry. The Inquiry History Results resource displays the inquiry with
-        the option to view either; Possible Merchant Matches or Possible Inquiry
-        Matches.
+      summary: Returns information about Merchants, URLs and up to five principal owners, that have been terminated by an acquiring bank from a previous inquiry. The Inquiry History Results resource displays the inquiry with the option to view either; Possible Merchant Matches or Possible Inquiry Matches.
       tags:
         - Termination Inquiry History Request
       x-samples:
         - name: example_termination_history_inquiry
           request:
-            application/json: >-
+            application/json: |-
               {
                 "IRN" : "19962016070500348",
                 "AcquirerId" : "1996",
@@ -895,8 +806,7 @@ definitions:
         example: Added for reasons of fraud
         type: string
       CountrySubdivisionTaxId:
-        description: The Merchant's state tax ID; for the U.S region only. Return value
-          will be hidden.
+        description: The Merchant's state tax ID; for the U.S region only. Return value will be hidden.
         example: "*****"
         type: string
         x-explorer: true
@@ -911,20 +821,16 @@ definitions:
         type: string
         x-explorer: true
       DoingBusinessAsName:
-        description: The name used by a merchant that could be different from the legal
-          name of the business. Such as Bait R Us instead of the legal name, The
-          Bait Shop
+        description: The name used by a merchant that could be different from the legal name of the business. Such as Bait R Us instead of the legal name, The Bait Shop
         example: BAIT R US
         type: string
       MerchantCategory:
-        description: A classification code used in authorization, clearing, and other
-          transactions or reports to identify the type of merchant.
+        description: A classification code used in authorization, clearing, and other transactions or reports to identify the type of merchant.
         example: "0742"
         type: string
         x-explorer: true
       MerchantId:
-        description: The identifier assigned to a merchant by an Acquirer. An Acquirer
-          Id and Merchant Id combination must be unique.
+        description: The identifier assigned to a merchant by an Acquirer. An Acquirer Id and Merchant Id combination must be unique.
         example: "@random-string[14]@"
         type: string
         x-explorer: true
@@ -934,8 +840,7 @@ definitions:
         type: string
         x-explorer: true
       NationalTaxId:
-        description: The National tax ID or business registration number. Return value
-          will be hidden.
+        description: The National tax ID or business registration number. Return value will be hidden.
         example: "*****"
         type: string
       PhoneNumber:
@@ -946,32 +851,21 @@ definitions:
       Principal:
         $ref: "#/definitions/Principal"
       ReasonCode:
-        description: A two digit numeric code indication why a particular merchant was
-          terminated.  01   Account Data Compromise, 02   Common Points of
-          Purchase, 03   Laundering, 04   Excessive Chargebacks, 05   Excessive
-          Fraud, 06   Reserved for Future Use, 07   Fraud Conviction,
-          08   MasterCard Questionable Merchant Audit Program,
-          09   Bankruptcy/Liquidation/Insolvency, 10   Violation of MasterCard
-          Standards, 11   Merchant collusion, 12   PCI Data Security Standard,
-          Noncompliance, 13   Illegal Transactions, 14   Identity Theft
+        description: A two digit numeric code indication why a particular merchant was terminated.  01   Account Data Compromise, 02   Common Points of Purchase, 03   Laundering, 04   Excessive Chargebacks, 05   Excessive Fraud, 06   Reserved for Future Use, 07   Fraud Conviction, 08   MasterCard Questionable Merchant Audit Program, 09   Bankruptcy/Liquidation/Insolvency, 10   Violation of MasterCard Standards, 11   Merchant collusion, 12   PCI Data Security Standard, Noncompliance, 13   Illegal Transactions, 14   Identity Theft
         example: "13"
         type: string
         x-explorer: true
       ServiceProvDBA:
-        description: The name of the service provider associated with the merchant
-          listed in the MATCH.
+        description: The name of the service provider associated with the merchant listed in the MATCH.
         example: XYZ FINANCIAL SERVICE
         type: string
       ServiceProvLegal:
-        description: The name of the service provider associated with the merchant
-          listed in the MATCH.
+        description: The name of the service provider associated with the merchant listed in the MATCH.
         example: XYZ FINANCIAL SERVICE INCORPORATED
         type: string
       Url:
         items:
-          description: Website address of the merchant. A request may include multiple
-            URLs . The total cumulative size of the URLs cannot exceed 20000
-            bytes.
+          description: Website address of the merchant. A request may include multiple URLs . The total cumulative size of the URLs cannot exceed 20000 bytes.
           example: "www.testmerchant.com "
           type: string
         type: array
@@ -999,14 +893,11 @@ definitions:
   AddMerchantResponse:
     properties:
       MerchantReferenceNumber:
-        description: A number assigned by the MATCH system to uniquely identify the
-          newly added merchant. Return of this number indicates a successful
-          add.
+        description: A number assigned by the MATCH system to uniquely identify the newly added merchant. Return of this number indicates a successful add.
         example: "19962015072000000"
         type: string
       Name:
-        description: Name of the merchant that was added to the MATCH system as
-          verification of what was added.
+        description: Name of the merchant that was added to the MATCH system as verification of what was added.
         example: XYZTEST XYZTECHMERCHANT
         type: string
   AddTerminatedMerchantRequestSchema:
@@ -1025,31 +916,26 @@ definitions:
         type: string
         x-explorer: true
       Country:
-        description: The three digit country code of the principal owner. Valid values
-          are Three digit alpha country codes as defined in ISO 3166-1.
+        description: The three digit country code of the principal owner. Valid values are Three digit alpha country codes as defined in ISO 3166-1.
         example: USA
         type: string
         x-explorer: true
       CountrySubdivision:
-        description: The abbreviated state or province code for a merchant location
-          (only supported for US and Canada merchants).
+        description: The abbreviated state or province code for a merchant location (only supported for US and Canada merchants).
         example: IL
         type: string
         x-explorer: true
       Line1:
-        description: Line 1 of the street address for the merchant location. Usually
-          includes street number and name.
+        description: Line 1 of the street address for the merchant location. Usually includes street number and name.
         example: 42 ELM AVENUE
         type: string
         x-explorer: true
       Line2:
-        description: Line 2 of the street address,usually an apartment number or suite
-          number.
+        description: Line 2 of the street address,usually an apartment number or suite number.
         example: SUITE 201
         type: string
       PostalCode:
-        description: The postal code for a merchant location (only supported for US and
-          Canada merchants).
+        description: The postal code for a merchant location (only supported for US and Canada merchants).
         example: "66579"
         type: string
         x-explorer: true
@@ -1070,40 +956,33 @@ definitions:
         example: THE XYZ BANK
         type: string
       EmailAddress:
-        description: The Email address of primary contact of acquiring bank. The results
-          may return information for more than one Contact.
+        description: The Email address of primary contact of acquiring bank. The results may return information for more than one Contact.
         example: JACK_SMITH@XYZ.COM
         type: string
       FaxNumber:
-        description: The Fax Number of primary contact of acquiring bank. The results
-          may return information for more than one Contact.
+        description: The Fax Number of primary contact of acquiring bank. The results may return information for more than one Contact.
         example: "6360000001"
         type: string
       FirstName:
-        description: The first name of primary contact of acquiring bank. The results
-          may return information for more than one Contact.
+        description: The first name of primary contact of acquiring bank. The results may return information for more than one Contact.
         example: JACK
         type: string
       LastName:
-        description: The last name of primary contact of acquiring bank. The results may
-          return information for more than one Contact.
+        description: The last name of primary contact of acquiring bank. The results may return information for more than one Contact.
         example: SMITH
         type: string
       PhoneNumber:
-        description: The Phone Number of primary contact of acquiring bank. The results
-          may return information for more than one Contact.
+        description: The Phone Number of primary contact of acquiring bank. The results may return information for more than one Contact.
         example: "6360000000"
         type: string
       Region:
-        description: The region of acquiring bank. The results may return information
-          for more than one Contact.
+        description: The region of acquiring bank. The results may return information for more than one Contact.
         example: UNITED STATES
         type: string
   ContactRequest:
     properties:
       AcquirerId:
-        description: The acquiring bank ICA number whose contact information is to be
-          fetched.
+        description: The acquiring bank ICA number whose contact information is to be fetched.
         example: "12086"
         type: string
         x-explorer: true
@@ -1126,17 +1005,11 @@ definitions:
   DriversLicense:
     properties:
       Country:
-        description: The three digit country code of the principal owner. Valid values
-          are Three digit alpha country codes as defined in ISO 3166-1. Required
-          when Drivers License Number is provided. Should not be provided if
-          Drivers License Number is not provided.
+        description: The three digit country code of the principal owner. Valid values are Three digit alpha country codes as defined in ISO 3166-1. Required when Drivers License Number is provided. Should not be provided if Drivers License Number is not provided.
         example: USA
         type: string
       CountrySubdivision:
-        description: The abbreviated state or province code for a merchant location
-          (only supported for US and Canada merchants).  Required when Drivers
-          License Country is 'USA' . Should not be provided for non-US Drivers
-          License Country.
+        description: The abbreviated state or province code for a merchant location (only supported for US and Canada merchants).  Required when Drivers License Country is 'USA' . Should not be provided for non-US Drivers License Country.
         example: IL
         type: string
       Number:
@@ -1146,9 +1019,7 @@ definitions:
   Error:
     properties:
       Description:
-        description: This is the text description of the error. This is optional and
-          will only be displayed if more information is available than is stored
-          in the data identifier and reason code.
+        description: This is the text description of the error. This is optional and will only be displayed if more information is available than is stored in the data identifier and reason code.
         example: Unauthorized Access
         type: string
       ReasonCode:
@@ -1156,14 +1027,11 @@ definitions:
         example: AUTHENTICATION_FAILED
         type: string
       Recoverable:
-        description: This is a true/false presentation to explain if the transaction was
-          submitted again would it be successful or not.
+        description: This is a true/false presentation to explain if the transaction was submitted again would it be successful or not.
         example: true
         type: boolean
       Source:
-        description: This is the unique identifier that attempts to define the field in
-          error when available.  If a specific field cant be identified System
-          will be returned.
+        description: This is the unique identifier that attempts to define the field in error when available.  If a specific field cant be identified System will be returned.
         example: System
         type: string
   Errors:
@@ -1185,8 +1053,7 @@ definitions:
             example: "1234"
             type: string
           AddedOnDate:
-            description: The date on which the merchant was added to the MATCH system.
-              Format MM/DD/YYYY
+            description: The date on which the merchant was added to the MATCH system. Format MM/DD/YYYY
             example: 12/03/2009
             type: string
           Address:
@@ -1196,14 +1063,11 @@ definitions:
             example: "6367558968"
             type: string
           CountrySubdivisionTaxId:
-            description: The Merchant's state tax ID; for the U.S region only. Return value
-              will be hidden.
+            description: The Merchant's state tax ID; for the U.S region only. Return value will be hidden.
             example: "*****"
             type: string
           DoingBusinessAsName:
-            description: The name used by a merchant that could be different from the legal
-              name of the business. Such as Bait R Us instead of the legal name,
-              The Bait Shop
+            description: The name used by a merchant that could be different from the legal name of the business. Such as Bait R Us instead of the legal name, The Bait Shop
             example: BAIT R US
             type: string
           MerchantMatch:
@@ -1213,8 +1077,7 @@ definitions:
             example: THE BAIT SHOP
             type: string
           NationalTaxId:
-            description: The National tax ID or business registration number. Return value
-              will be hidden.
+            description: The National tax ID or business registration number. Return value will be hidden.
             example: "*****"
             type: string
           PhoneNumber:
@@ -1224,25 +1087,15 @@ definitions:
           Principal:
             $ref: "#/definitions/Principal"
           ServiceProvDBA:
-            description: The name of the service provider associated with the merchant
-              listed in the MATCH.
+            description: The name of the service provider associated with the merchant listed in the MATCH.
             example: XYZ FINANCIAL SERVICE
             type: string
           ServiceProvLegal:
-            description: The name of the service provider associated with the merchant
-              listed in the MATCH.
+            description: The name of the service provider associated with the merchant listed in the MATCH.
             example: XYZ FINANCIAL SERVICE INCORPORATED
             type: string
           TerminationReasonCode:
-            description: A two digit numeric code indication why a particular merchant was
-              terminated.  01   Account Data Compromise, 02   Common Points of
-              Purchase, 03   Laundering, 04   Excessive Chargebacks,
-              05   Excessive Fraud, 06   Reserved for Future Use, 07   Fraud
-              Conviction, 08   MasterCard Questionable Merchant Audit Program,
-              09   Bankruptcy/Liquidation/Insolvency, 10   Violation of
-              MasterCard Standards, 11   Merchant collusion, 12   PCI Data
-              Security Standard, Noncompliance, 13   Illegal Transactions,
-              14   Identity Theft
+            description: A two digit numeric code indication why a particular merchant was terminated.  01   Account Data Compromise, 02   Common Points of Purchase, 03   Laundering, 04   Excessive Chargebacks, 05   Excessive Fraud, 06   Reserved for Future Use, 07   Fraud Conviction, 08   MasterCard Questionable Merchant Audit Program, 09   Bankruptcy/Liquidation/Insolvency, 10   Violation of MasterCard Standards, 11   Merchant collusion, 12   PCI Data Security Standard, Noncompliance, 13   Illegal Transactions, 14   Identity Theft
             example: "13"
             type: string
           UrlGroup:
@@ -1260,23 +1113,15 @@ definitions:
       Address:
         $ref: "#/definitions/Address"
       AltPhoneNumber:
-        description: The Business or Merchant's alternate phone number, including the
-          area code. Within the USA, phone numbers have a length of 10, and for
-          out outside the US, a max length of 25. Within the U.S. phone numbers
-          can not start with 0 or 1. If the number is outside the U.S. region;
-          do not include the country code. The number must be digits only, with
-          no format characters such as parenthesis or dashes.
+        description: The Business or Merchant's alternate phone number, including the area code. Within the USA, phone numbers have a length of 10, and for out outside the US, a max length of 25. Within the U.S. phone numbers can not start with 0 or 1. If the number is outside the U.S. region; do not include the country code. The number must be digits only, with no format characters such as parenthesis or dashes.
         example: "3165557625"
         type: string
       CountrySubdivisionTaxId:
-        description: The Merchant Country Subdivision tax ID, leave blank if not in the
-          U.S region.
+        description: The Merchant Country Subdivision tax ID, leave blank if not in the U.S region.
         example: "492321030"
         type: string
       DoingBusinessAsName:
-        description: The name used by a merchant that could be different from the legal
-          name of the business. Such as Bait R Us instead of the legal name, The
-          Bait Shop.
+        description: The name used by a merchant that could be different from the legal name of the business. Such as Bait R Us instead of the legal name, The Bait Shop.
         example: BAIT R US
         type: string
       Name:
@@ -1288,47 +1133,30 @@ definitions:
         example: "888596927"
         type: string
       PhoneNumber:
-        description: The Business or Merchant's phone number, including the area code.
-          Within the USA, phone numbers have a length of 10, and for outside the
-          US, it can be any length with a maximum of 12 digits. Within the U.S.
-          phone numbers can not start with 0 or 1. If the number is outside the
-          U.S. region; do not include the country code. The phone number must be
-          digits only, with no format characters such as parenthesis or dashes.
+        description: The Business or Merchant's phone number, including the area code. Within the USA, phone numbers have a length of 10, and for outside the US, it can be any length with a maximum of 12 digits. Within the U.S. phone numbers can not start with 0 or 1. If the number is outside the U.S. region; do not include the country code. The phone number must be digits only, with no format characters such as parenthesis or dashes.
         example: "3165557625"
         type: string
       Principal:
-        description: The details for the principal owner of the business.  A maximum of
-          5 principals may be submitted.
+        description: The details for the principal owner of the business.  A maximum of 5 principals may be submitted.
         items:
           $ref: "#/definitions/Principal"
         type: array
       SearchCriteria:
         $ref: "#/definitions/SearchCriteria"
       ServiceProvDBA:
-        description: The name of the service provider associated with the merchant
-          listed in the MATCH
+        description: The name of the service provider associated with the merchant listed in the MATCH
         example: XYZ FINANCIAL SERVICE
         type: string
       ServiceProvLegal:
-        description: The name of the service provider associated with the merchant
-          listed in the MATCH
+        description: The name of the service provider associated with the merchant listed in the MATCH
         example: XYZ FINANCIAL SERVICE INCORPORATED
         type: string
       TerminationReasonCode:
-        description: A two digit numeric code indication why a particular merchant was
-          terminated.  01   Account Data Compromise, 02   Common Points of
-          Purchase, 03   Laundering, 04   Excessive Chargebacks, 05   Excessive
-          Fraud, 06   Reserved for Future Use, 07   Fraud Conviction,
-          08   MasterCard Questionable Merchant Audit Program,
-          09   Bankruptcy/Liquidation/Insolvency, 10   Violation of MasterCard
-          Standards, 11   Merchant collusion, 12   PCI Data Security Standard,
-          Noncompliance, 13   Illegal Transactions, 14   Identity Theft
+        description: A two digit numeric code indication why a particular merchant was terminated.  01   Account Data Compromise, 02   Common Points of Purchase, 03   Laundering, 04   Excessive Chargebacks, 05   Excessive Fraud, 06   Reserved for Future Use, 07   Fraud Conviction, 08   MasterCard Questionable Merchant Audit Program, 09   Bankruptcy/Liquidation/Insolvency, 10   Violation of MasterCard Standards, 11   Merchant collusion, 12   PCI Data Security Standard, Noncompliance, 13   Illegal Transactions, 14   Identity Theft
         example: "13"
         type: string
       Url:
-        description: Website address of the merchant. A request may include multiple
-          URLs. The total cumulative size of the URLs cannot exceed 20,000
-          bytes.
+        description: Website address of the merchant. A request may include multiple URLs. The total cumulative size of the URLs cannot exceed 20,000 bytes.
         example: WWW.TESTMERCHANT.COM
         type: string
       UrlGroup:
@@ -1346,14 +1174,11 @@ definitions:
         example: "6367558968"
         type: string
       CountrySubdivisionTaxId:
-        description: The Merchant's state tax ID; for the U.S region only. Return value
-          will be hidden.
+        description: The Merchant's state tax ID; for the U.S region only. Return value will be hidden.
         example: "*****"
         type: string
       DoingBusinessAsName:
-        description: The name used by a merchant that could be different from the legal
-          name of the business. Such as Bait R Us instead of the legal name, The
-          Bait Shop
+        description: The name used by a merchant that could be different from the legal name of the business. Such as Bait R Us instead of the legal name, The Bait Shop
         example: BAIT R US
         type: string
       Name:
@@ -1361,8 +1186,7 @@ definitions:
         example: THE BAIT SHOP
         type: string
       NationalTaxId:
-        description: The National tax ID or business registration number. Return value
-          will be hidden.
+        description: The National tax ID or business registration number. Return value will be hidden.
         example: "*****"
         type: string
       PhoneNumber:
@@ -1374,13 +1198,11 @@ definitions:
           $ref: "#/definitions/PrincipalMatch"
         type: array
       ServiceProvDBA:
-        description: The name of the service provider associated with the merchant
-          listed in the MATCH.
+        description: The name of the service provider associated with the merchant listed in the MATCH.
         example: XYZ FINANCIAL SERVICE
         type: string
       ServiceProvLegal:
-        description: The name of the service provider associated with the merchant
-          listed in the MATCH.
+        description: The name of the service provider associated with the merchant listed in the MATCH.
         example: XYZ FINANCIAL SERVICE INCORPORATED
         type: string
   PossibleInquiryMatches:
@@ -1390,8 +1212,7 @@ definitions:
           $ref: "#/definitions/InquiredMerchant"
         type: array
       TotalLength:
-        description: The total length of the result set from possible merchant matches
-          of inquiry.
+        description: The total length of the result set from possible merchant matches of inquiry.
         example: "2"
         type: string
   PossibleMerchantMatches:
@@ -1401,8 +1222,7 @@ definitions:
           $ref: "#/definitions/TerminatedMerchant"
         type: array
       TotalLength:
-        description: The total length of the result set from possible merchant matches
-          of inquiry.
+        description: The total length of the result set from possible merchant matches of inquiry.
         example: "2"
         type: string
   Principal:
@@ -1410,12 +1230,7 @@ definitions:
       Address:
         $ref: "#/definitions/Address"
       AltPhoneNumber:
-        description: The Business or Merchant's alternate phone number, including the
-          area code. Within the USA, phone numbers have a length of 10, and for
-          out outside the US, a max length of 25. Within the U.S. phone numbers
-          can not start with 0 or 1. If the number is outside the U.S. region;
-          do not include the country code. The number must be digits only, with
-          no format characters such as parenthesis or dashes.
+        description: The Business or Merchant's alternate phone number, including the area code. Within the USA, phone numbers have a length of 10, and for out outside the US, a max length of 25. Within the U.S. phone numbers can not start with 0 or 1. If the number is outside the U.S. region; do not include the country code. The number must be digits only, with no format characters such as parenthesis or dashes.
         example: "3165557625"
         type: string
       DriversLicense:
@@ -1435,18 +1250,11 @@ definitions:
         example: P
         type: string
       NationalId:
-        description: The Social Security number of a principal owner. If the principal
-          owner is not from the U.S. Region, then use their national ID card
-          number.
+        description: The Social Security number of a principal owner. If the principal owner is not from the U.S. Region, then use their national ID card number.
         example: "541022104"
         type: string
       PhoneNumber:
-        description: The Business or Merchant's phone number, including the area code.
-          Within the USA, phone numbers have a length of 10, and for outside the
-          US, it can be any length with a maximum of 12 digits. Within the U.S.
-          phone numbers can not start with 0 or 1. If the number is outside the
-          U.S. region; do not include the country code. The phone number must be
-          digits only, with no format characters such as parenthesis or dashes.
+        description: The Business or Merchant's phone number, including the area code. Within the USA, phone numbers have a length of 10, and for outside the US, it can be any length with a maximum of 12 digits. Within the U.S. phone numbers can not start with 0 or 1. If the number is outside the U.S. region; do not include the country code. The phone number must be digits only, with no format characters such as parenthesis or dashes.
         example: "3165557625"
         type: string
       SearchCriteria:
@@ -1459,12 +1267,7 @@ definitions:
       Address:
         $ref: "#/definitions/Address"
       AltPhoneNumber:
-        description: The Business or Merchant's alternate phone number, including the
-          area code. Within the USA, phone numbers have a length of 10, and for
-          out outside the US, a max length of 25. Within the U.S. phone numbers
-          can not start with 0 or 1. If the number is outside the U.S. region;
-          do not include the country code. The number must be digits only, with
-          no format characters such as parenthesis or dashes.
+        description: The Business or Merchant's alternate phone number, including the area code. Within the USA, phone numbers have a length of 10, and for out outside the US, a max length of 25. Within the U.S. phone numbers can not start with 0 or 1. If the number is outside the U.S. region; do not include the country code. The number must be digits only, with no format characters such as parenthesis or dashes.
         example: "3165557625"
         type: string
       DriversLicense:
@@ -1486,18 +1289,11 @@ definitions:
         example: THE BAIT SHOP
         type: string
       NationalId:
-        description: The Social Security number of a principal owner. If the principal
-          owner is not from the U.S. Region, then use their national ID card
-          number.
+        description: The Social Security number of a principal owner. If the principal owner is not from the U.S. Region, then use their national ID card number.
         example: "541022104"
         type: string
       PhoneNumber:
-        description: The Business or Merchant's phone number, including the area code.
-          Within the USA, phone numbers have a length of 10, and for outside the
-          US, it can be any length with a maximum of 12 digits. Within the U.S.
-          phone numbers can not start with 0 or 1. If the number is outside the
-          U.S. region; do not include the country code. The phone number must be
-          digits only, with no format characters such as parenthesis or dashes.
+        description: The Business or Merchant's phone number, including the area code. Within the USA, phone numbers have a length of 10, and for outside the US, it can be any length with a maximum of 12 digits. Within the U.S. phone numbers can not start with 0 or 1. If the number is outside the U.S. region; do not include the country code. The phone number must be digits only, with no format characters such as parenthesis or dashes.
         example: "3165557625"
         type: string
       SearchCriteria:
@@ -1505,8 +1301,7 @@ definitions:
   RetroInquiryRequest:
     properties:
       InquiryReferenceNumber:
-        description: This is the reference number that was obtained from Retroactive
-          Inquiry Summary resource.
+        description: This is the reference number that was obtained from Retroactive Inquiry Summary resource.
         example: "19962014090300001"
         type: string
   RetroInquiryRequestSchema:
@@ -1538,28 +1333,23 @@ definitions:
         example: THE BAIT SHOP
         type: string
       City:
-        description: The name of the city for the merchant location corresponds to retro
-          inquiry.
+        description: The name of the city for the merchant location corresponds to retro inquiry.
         example: CHICAGO
         type: string
       Country:
-        description: The three digit country code corresponds to retro inquiry. Valid
-          values are Three digit alpha country codes as defined in ISO 3166-1.
+        description: The three digit country code corresponds to retro inquiry. Valid values are Three digit alpha country codes as defined in ISO 3166-1.
         example: USA
         type: string
       Date:
-        description: Date on which the retro inquiry was made. This will be in
-          MM/DD/YYYY format.
+        description: Date on which the retro inquiry was made. This will be in MM/DD/YYYY format.
         example: 09/02/2014
         type: string
       RefNum:
-        description: The reference number of retroactive inquiry. Using this reference
-          number, the details can be obtained.
+        description: The reference number of retroactive inquiry. Using this reference number, the details can be obtained.
         example: "19962014090200009"
         type: string
       State:
-        description: The abbreviated state for a merchant location corresponds to retro
-          inquiry.
+        description: The abbreviated state for a merchant location corresponds to retro inquiry.
         example: IL
         type: string
   RetroResponseSchema:
@@ -1570,23 +1360,17 @@ definitions:
     properties:
       Country:
         items:
-          description: The three digit country code of the principal owner. Valid values
-            are Three digit alpha country codes as defined in ISO 3166-1. A
-            maximum of 10 countries may be submitted.
+          description: The three digit country code of the principal owner. Valid values are Three digit alpha country codes as defined in ISO 3166-1. A maximum of 10 countries may be submitted.
           example: USA
           type: string
         type: array
       MinPossibleMatchCount:
-        description: Determines how many minimum matches present for a merchant or
-          inquiry to appear in the results.
+        description: Determines how many minimum matches present for a merchant or inquiry to appear in the results.
         example: "3"
         type: string
       Region:
         items:
-          description: Region in which the inquiry results must be obtained.  (1)  - U.S.
-            REGION; (A)  - CANADA; (B)  - CARIB,C AMERICA,MEX,S AMERICA; (C)  -
-            ASIA/PACIFIC; (D)  - EUROPE; (E)  - SOUTH ASIA MIDDLE EAST
-            AFRICA.  A maximum of 6 regions may be submitted.
+          description: Region in which the inquiry results must be obtained.  (1)  - U.S. REGION; (A)  - CANADA; (B)  - CARIB,C AMERICA,MEX,S AMERICA; (C)  - ASIA/PACIFIC; (D)  - EUROPE; (E)  - SOUTH ASIA MIDDLE EAST AFRICA.  A maximum of 6 regions may be submitted.
           example: A
           type: string
         type: array
@@ -1620,10 +1404,7 @@ definitions:
   TerminationInquiryRequest:
     properties:
       AcquirerId:
-        description: The Member ICA number which is used to validate that the
-          application has permission to hit the MATCH database. This number must
-          be obtained from a participating MATCH acquiring bank or entity before
-          a developer can access the MATCH resource.
+        description: The Member ICA number which is used to validate that the application has permission to hit the MATCH database. This number must be obtained from a participating MATCH acquiring bank or entity before a developer can access the MATCH resource.
         example: "1996"
         type: string
       Merchant:
@@ -1653,14 +1434,12 @@ definitions:
   UrlGroup:
     properties:
       CloseMatchUrls:
-        description: The closely matched URL of Merchant.The results may return 0 or
-          more URLs.
+        description: The closely matched URL of Merchant.The results may return 0 or more URLs.
         items:
           $ref: "#/definitions/Url"
         type: array
       ExactMatchUrls:
-        description: The exactly matched URL of Merchant.The results may return 0 or
-          more URLs.
+        description: The exactly matched URL of Merchant.The results may return 0 or more URLs.
         items:
           $ref: "#/definitions/Url"
         type: array

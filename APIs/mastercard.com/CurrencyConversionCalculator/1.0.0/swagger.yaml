@@ -2,9 +2,7 @@ swagger: "2.0"
 host: api.mastercard.com
 basePath: /mcapi/settlement/currencyrate
 info:
-  description: This API provides a range of functions to get back currency
-    conversion rates and amounts based on current Mastercard currency conversion
-    values.
+  description: This API provides a range of functions to get back currency conversion rates and amounts based on current Mastercard currency conversion values.
   title: API for the Settlement Currency Rate converter
   version: 1.0.0
   x-artifactId: currency-conversion
@@ -138,7 +136,7 @@ paths:
                 "transAmt":"345"
               }
           response:
-            application/json: >-
+            application/json: |-
               {  
                 "name":"settlement-conversion-rate",
                 "description":"An error occurred during the request",
@@ -268,8 +266,7 @@ definitions:
         format: double
         type: number
       conversionRate:
-        description: Rate applied to the transaction to convert from Transaction
-          Currency to Cardholder Billing Currency.
+        description: Rate applied to the transaction to convert from Transaction Currency to Cardholder Billing Currency.
         example: 0.943078
         format: double
         type: number
@@ -288,8 +285,7 @@ definitions:
         type: string
       errorMessage:
         description: The reason for the error.
-        example: Not Found , The calculated cross rates for the selected date is not
-          available.
+        example: Not Found , The calculated cross rates for the selected date is not available.
         type: string
       fxDate:
         description: Date of the requested FX rates.

@@ -30,8 +30,7 @@ paths:
       description: REST service will retrieve and return the BIN Table file to Merchants.
       responses:
         "200":
-          description: Successfully retrieved the BIN Table Listing file and available to
-            Merchants
+          description: Successfully retrieved the BIN Table Listing file and available to Merchants
           schema:
             $ref: "#/definitions/BinTableResponse"
         "404":
@@ -49,7 +48,7 @@ paths:
               {
                }     
           response:
-            application/json: >-
+            application/json: |-
               {
                  "data":"04241000000000000000424109999999999999MSI0000004782FIFTH"
 

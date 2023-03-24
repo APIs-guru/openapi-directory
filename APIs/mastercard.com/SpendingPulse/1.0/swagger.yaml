@@ -4,8 +4,7 @@ schemes:
 host: api.mastercard.com
 basePath: /spendingpulse/v1/spulse.svc
 info:
-  description: This API will provide monthly data which includes metrics such as
-    sales volume and growth rate.
+  description: This API will provide monthly data which includes metrics such as sales volume and growth rate.
   title: Spending Pulse
   version: "1.0"
   x-artifactId: spending-pulse
@@ -22,11 +21,8 @@ produces:
 paths:
   /gasweekly:
     get:
-      description: >
-        Returns the weekly gasoline report. This resource pulls back the
-        report with ProductLine = "US Weekly Gasoline Demand Report". Keep in
-        mind that you must be subscribed to the gasoline weekly report to be
-        able to receive data back from this resource.
+      description: |
+        Returns the weekly gasoline report. This resource pulls back the report with ProductLine = "US Weekly Gasoline Demand Report". Keep in mind that you must be subscribed to the gasoline weekly report to be able to receive data back from this resource.
       parameters:
         - description: Starting record number to return.
           in: query
@@ -34,8 +30,7 @@ paths:
           required: false
           type: string
           x-example: "1"
-        - description: Used to restrict the number of records returned if needed to be
-            less than max.
+        - description: Used to restrict the number of records returned if needed to be less than max.
           in: query
           name: Offset
           required: false
@@ -50,10 +45,7 @@ paths:
           description: Unexpected errors
           schema:
             $ref: "#/definitions/ErrorSchema"
-      summary: Returns the weekly gasoline report. This resource pulls back the report
-        with ProductLine = "US Weekly Gasoline Demand Report". Keep in mind that
-        you must be subscribed to the gasoline weekly report to be able to
-        receive data back from this resource.
+      summary: Returns the weekly gasoline report. This resource pulls back the report with ProductLine = "US Weekly Gasoline Demand Report". Keep in mind that you must be subscribed to the gasoline weekly report to be able to receive data back from this resource.
       tags:
         - Gas Weekly
       x-samples:
@@ -65,7 +57,7 @@ paths:
                 "Offset" : "25"
               }
           response:
-            application/json: >-
+            application/json: |-
               {
                 "GasWeeklyList": {
                   "Count": "4",
@@ -156,7 +148,7 @@ paths:
                 "Offset" : "2"
               }
           response:
-            application/json: >-
+            application/json: |-
               {
                 "GasWeeklyList": {
                   "Count": "4",
@@ -262,9 +254,8 @@ paths:
           type: documentation
   /parameters:
     get:
-      description: >
-        Returns a distinct list of all reports are available and that one
-        is subscribed to.
+      description: |
+        Returns a distinct list of all reports are available and that one is subscribed to.
       parameters:
         - description: Starting record number to return.
           in: query
@@ -272,8 +263,7 @@ paths:
           required: false
           type: string
           x-example: "1"
-        - description: Used to restrict the number of records returned if needed to be
-            less than max.
+        - description: Used to restrict the number of records returned if needed to be less than max.
           in: query
           name: Offset
           required: false
@@ -288,8 +278,7 @@ paths:
           description: Unexpected errors
           schema:
             $ref: "#/definitions/ErrorSchema"
-      summary: Returns a distinct list of all reports are available and that one is
-        subscribed to.
+      summary: Returns a distinct list of all reports are available and that one is subscribed to.
       tags:
         - Parameters
       x-samples:
@@ -412,10 +401,8 @@ paths:
           type: documentation
   /spendingpulse:
     get:
-      description: >
-        Returns all Spending Pulse reports (with the exception of the
-        gasoline weekly report, which has its own resource), that one is
-        subscribed to.
+      description: |
+        Returns all Spending Pulse reports (with the exception of the gasoline weekly report, which has its own resource), that one is subscribed to.
       parameters:
         - description: Starting record number to return.
           in: query
@@ -423,8 +410,7 @@ paths:
           required: false
           type: string
           x-example: "1"
-        - description: Used to restrict the number of records returned if needed to be
-            less than max.
+        - description: Used to restrict the number of records returned if needed to be less than max.
           in: query
           name: Offset
           required: false
@@ -436,8 +422,7 @@ paths:
           required: false
           type: string
           x-example: Weekly Sales
-        - description: Publication Coverage Period indicates what period is to be covered,
-            often the current report will include the month prior.
+        - description: Publication Coverage Period indicates what period is to be covered, often the current report will include the month prior.
           in: query
           name: PublicationCoveragePeriod
           required: false
@@ -455,8 +440,7 @@ paths:
           required: false
           type: string
           x-example: reportA
-        - description: Indicates the period covered by the data with possible values of -
-            day, week, month, quarter, annual
+        - description: Indicates the period covered by the data with possible values of - day, week, month, quarter, annual
           in: query
           name: Period
           required: false
@@ -483,8 +467,7 @@ paths:
           description: Unexpected errors
           schema:
             $ref: "#/definitions/ErrorSchema"
-      summary: Returns all Spending Pulse reports (with the exception of the gasoline
-        weekly report, which has its own resource), that one is subscribed to.
+      summary: Returns all Spending Pulse reports (with the exception of the gasoline weekly report, which has its own resource), that one is subscribed to.
       tags:
         - SpendingPulse Report
       x-samples:
@@ -781,8 +764,7 @@ paths:
           required: false
           type: string
           x-example: "1"
-        - description: Used to restrict the number of records returned if needed to be
-            less than max.
+        - description: Used to restrict the number of records returned if needed to be less than max.
           in: query
           name: Offset
           required: false
@@ -906,9 +888,7 @@ definitions:
   Error:
     properties:
       Description:
-        description: This is the text description of the error. This is optional and
-          will only be displayed if more information is available than is stored
-          in the data identifier and reason code.
+        description: This is the text description of the error. This is optional and will only be displayed if more information is available than is stored in the data identifier and reason code.
         example: Unauthorized Access
         type: string
       ReasonCode:
@@ -916,14 +896,11 @@ definitions:
         example: AUTHENTICATION_FAILED
         type: string
       Recoverable:
-        description: This is a true/false presentation to explain if the transaction was
-          submitted again would it be successful or not.
+        description: This is a true/false presentation to explain if the transaction was submitted again would it be successful or not.
         example: true
         type: boolean
       Source:
-        description: Unique identifier that attempts to define the field in error when
-          available.  If a specific field can't be identified System will be
-          returned.
+        description: Unique identifier that attempts to define the field in error when available.  If a specific field can't be identified System will be returned.
         example: System
         type: string
   ErrorSchema:
@@ -961,8 +938,7 @@ definitions:
   GasWeeklyRecord:
     properties:
       AveragePricePerGalRegularGasoline:
-        description: Average price at the pump for all gallons sold during the reporting
-          week.
+        description: Average price at the pump for all gallons sold during the reporting week.
         example: true
         type: string
       Country:
@@ -970,17 +946,11 @@ definitions:
         example: UK
         type: string
       PADDCode:
-        description: PADD (Petroleum Administration for Defense Districts) are defined
-          by the U.S. Energy Information Administration. The PADD Districts are
-          New England, Central Atlantic, Lower Atlantic, Midwest, Gulf Coast,
-          Rocky Mountain, West Coast.
+        description: PADD (Petroleum Administration for Defense Districts) are defined by the U.S. Energy Information Administration. The PADD Districts are New England, Central Atlantic, Lower Atlantic, Midwest, Gulf Coast, Rocky Mountain, West Coast.
         example: West Coast
         type: string
       PADDMillionsofBarrelsSold:
-        description: For the PADD being reported, the estimated number of barrels (42
-          U.S. gallons) of regular motor gasoline (includes all finished motor
-          gasoline grades and formulations or blends . It does not contain
-          diesel nor aviation fuel.) sold during the week.
+        description: For the PADD being reported, the estimated number of barrels (42 U.S. gallons) of regular motor gasoline (includes all finished motor gasoline grades and formulations or blends . It does not contain diesel nor aviation fuel.) sold during the week.
         example: 12.023
         type: string
       PADDPercentChangeInBarrelsFromPriorWeek:
@@ -992,19 +962,15 @@ definitions:
         example: true
         type: string
       Period:
-        description: Indicates the period covered by the data with possible values of -
-          day, week, month, quarter, annual
+        description: Indicates the period covered by the data with possible values of - day, week, month, quarter, annual
         example: Week
         type: string
       ProductLine:
-        description: Overall product line that the report belongs to, the only report
-          for this resource is US Weekly Gasoline Demand Report.
+        description: Overall product line that the report belongs to, the only report for this resource is US Weekly Gasoline Demand Report.
         example: US Weekly Gasoline Demand Report
         type: string
       PublicationCoveragePeriod:
-        description: Publication Coverage Period indicates what period is to be
-          covered.  For this report it will include the gasoline week ending
-          date which will always be a Friday.
+        description: Publication Coverage Period indicates what period is to be covered.  For this report it will include the gasoline week ending date which will always be a Friday.
         example: 20150710
         type: string
       ReportType:
@@ -1028,19 +994,15 @@ definitions:
         example: 1.426
         type: string
       TotalMillionsOfBarrels4WeekAverage:
-        description: Average millions of barrels of gasoline sold per week during the
-          prior 4 weeks.
+        description: Average millions of barrels of gasoline sold per week during the prior 4 weeks.
         example: 66.78
         type: string
       TotalMillionsOfBarrelsDailyAverage:
-        description: Average millions of barrels of gasoline sold per day during the
-          week being reported.
+        description: Average millions of barrels of gasoline sold per day during the week being reported.
         example: 9.759
         type: string
       TotalMillionsOfBarrelsSold:
-        description: Estimated number of barrels (42 U.S. Gallons) of regular motor
-          gasoline (includes all finished motor gasoline grades and formulations
-          or blends . IT does not contain diesel nor aviation fuel).
+        description: Estimated number of barrels (42 U.S. Gallons) of regular motor gasoline (includes all finished motor gasoline grades and formulations or blends . IT does not contain diesel nor aviation fuel).
         example: 68.313
         type: string
       TotalPercentChangeInBarrelsFrom52WeeksAgo:
@@ -1052,8 +1014,7 @@ definitions:
         example: 0.021
         type: string
       TotalPercentChangeInThe4WeekAverageFrom52WeeksAgo:
-        description: Percent change from 52 weeks ago in the
-          TotalMillionsOfBarrels4WeekAverage.
+        description: Percent change from 52 weeks ago in the TotalMillionsOfBarrels4WeekAverage.
         example: true
         type: string
       WeekEndDate:
@@ -1071,18 +1032,15 @@ definitions:
         example: yes
         type: string
       Period:
-        description: Indicates the period covered by the data with possible values of -
-          day, week, month, quarter, annual
+        description: Indicates the period covered by the data with possible values of - day, week, month, quarter, annual
         example: Week
         type: string
       ProductLine:
-        description: Product lines available for the consumer ?US Executive Report?
-          and/or ?US Weekly Gasoline Report?.
+        description: Product lines available for the consumer ?US Executive Report? and/or ?US Weekly Gasoline Report?.
         example: US Executive
         type: string
       PublicationCoveragePeriod:
-        description: Publication Coverage Period indicates what period is to be covered
-          by the current report.
+        description: Publication Coverage Period indicates what period is to be covered by the current report.
         example: March 2015
         type: string
       ReportType:
@@ -1144,8 +1102,7 @@ definitions:
         example: UK
         type: string
       CurrencyOfForSalesValue:
-        description: A value to indicate the currency in which the sales value is being
-          reported. For sales index values, this field is not used.
+        description: A value to indicate the currency in which the sales value is being reported. For sales index values, this field is not used.
         example: us dollar
         type: string
       Ecomm:
@@ -1153,27 +1110,19 @@ definitions:
         example: Yes
         type: string
       ImpliedDeflatorMonthOverMonthChange:
-        description: Percent change from one month ago in the implied deflator (the
-          deflator is used in seasonal adjustment calculation).
+        description: Percent change from one month ago in the implied deflator (the deflator is used in seasonal adjustment calculation).
         example: 2
         type: string
       ImpliedDeflatorYearOverYearChange:
-        description: Percent change from one year ago in the implied deflator (the
-          deflator is used in seasonal adjustment calculation).
+        description: Percent change from one year ago in the implied deflator (the deflator is used in seasonal adjustment calculation).
         example: 1
         type: string
       NonGregorianReportingPeriod:
-        description: For only those data reported by a non-Gregorian calendar (e.g. US
-          Sectors which are reported based on the National Retail Federation
-          4-5-4 calendar) this value designates the retail period being
-          reported. As an example, for the US apparel sector, for Period Date =
-          February 2015, the reporting period is 2015-01 (February is the first
-          month of US retail year 2015).
+        description: For only those data reported by a non-Gregorian calendar (e.g. US Sectors which are reported based on the National Retail Federation 4-5-4 calendar) this value designates the retail period being reported. As an example, for the US apparel sector, for Period Date = February 2015, the reporting period is 2015-01 (February is the first month of US retail year 2015).
         example: 2015-01
         type: string
       Period:
-        description: Indicates the period covered by the data with possible values of -
-          day, week, month, quarter, annual
+        description: Indicates the period covered by the data with possible values of - day, week, month, quarter, annual
         example: Week
         type: string
       PeriodEndDate:
@@ -1189,8 +1138,7 @@ definitions:
         example: Yes
         type: string
       PriceIndex3MonthMovingAverageChange:
-        description: Percent change from one year ago in the three-month moving
-          PriceIndexValue average.
+        description: Percent change from one year ago in the three-month moving PriceIndexValue average.
         example: 11
         type: string
       PriceIndexMonthOverMonthChange:
@@ -1198,10 +1146,7 @@ definitions:
         example: 10
         type: string
       PriceIndexValue:
-        description: Published price index value for the period being reported. Not a
-          currency value - a decimal index value. The price index takes into
-          account both the average ticket value and the size of the basket.
-          Changes in either will be reflected in the price index changes.
+        description: Published price index value for the period being reported. Not a currency value - a decimal index value. The price index takes into account both the average ticket value and the size of the basket. Changes in either will be reflected in the price index changes.
         example: 8
         type: string
       PriceIndexYearOverYearChange:
@@ -1213,8 +1158,7 @@ definitions:
         example: US Executive
         type: string
       PublicationCoveragePeriod:
-        description: Publication Coverage Period indicates what period is to be covered,
-          often the current report will include the month prior.
+        description: Publication Coverage Period indicates what period is to be covered, often the current report will include the month prior.
         example: March 2015
         type: string
       ReportType:
@@ -1222,16 +1166,11 @@ definitions:
         example: monitor
         type: string
       ReportingCalender:
-        description: Value indicates calendar used for periodic aggregation (e.g. "G" =
-          Gregorian, "454" = US Retail, "445" = UK ONS, etc.) Please note that
-          some data are reported under more than one calendar. As a result, in
-          order to uniquely identify the data being reported, the reporting
-          calendar must be included.
+        description: Value indicates calendar used for periodic aggregation (e.g. "G" = Gregorian, "454" = US Retail, "445" = UK ONS, etc.) Please note that some data are reported under more than one calendar. As a result, in order to uniquely identify the data being reported, the reporting calendar must be included.
         example: gregorian
         type: string
       Sales3MonthMovingAverageChange:
-        description: Percent change from one year ago in the three-month moving
-          SalesIndexValue average.
+        description: Percent change from one year ago in the three-month moving SalesIndexValue average.
         example: 6
         type: string
       SalesMonthOverMonthChange:
@@ -1239,10 +1178,7 @@ definitions:
         example: 5
         type: string
       SalesValueIndex:
-        description: Aggregated/computed value of sales for the period being reported.
-          This may be an index value (not a currency value - just a decimal
-          value) or it may be a currency value that would typically be in local
-          currency (dollar, pound, yen, etc.)
+        description: Aggregated/computed value of sales for the period being reported. This may be an index value (not a currency value - just a decimal value) or it may be a currency value that would typically be in local currency (dollar, pound, yen, etc.)
         example: 3
         type: string
       SalesYearOverYearChange:
@@ -1270,23 +1206,19 @@ definitions:
         example: Petrol
         type: string
       Segment:
-        description: Sub unit within a sector e.g. Sector = restaurant; SubSector = Full
-          Service; Segment = Fine Dining.
+        description: Sub unit within a sector e.g. Sector = restaurant; SubSector = Full Service; Segment = Fine Dining.
         example: Fine Dining
         type: string
       SubGeographyValue:
-        description: For those data reported by sub-geographies (e.g. regions, states,
-          etc.) the sub-geography being reported.
+        description: For those data reported by sub-geographies (e.g. regions, states, etc.) the sub-geography being reported.
         example: region
         type: string
       SubSector:
-        description: Sub unit within a sector e.g. Sector = Electronics & Appliances;
-          SubSector = Electronics.
+        description: Sub unit within a sector e.g. Sector = Electronics & Appliances; SubSector = Electronics.
         example: Electronics
         type: string
       TransactionIndex3MonthMovingAverageChange:
-        description: Percent change from one year ago in the three-month moving
-          TransactionIndexValue average.
+        description: Percent change from one year ago in the three-month moving TransactionIndexValue average.
         example: 3
         type: string
       TransactionIndexMonthOverMonthChange:
@@ -1294,10 +1226,7 @@ definitions:
         example: 14
         type: string
       TransactionIndexValue:
-        description: Published transaction index value for the period being reported.
-          Not a currency value - a decimal index value. The transaction index is
-          a relative indication of transactions volume in the
-          sector/sub-sector/segment being reported.
+        description: Published transaction index value for the period being reported. Not a currency value - a decimal index value. The transaction index is a relative indication of transactions volume in the sector/sub-sector/segment being reported.
         example: 12
         type: string
       TransactionIndexYearOverYearChange:
@@ -1315,8 +1244,7 @@ definitions:
         example: Yes
         type: string
       Period:
-        description: Indicates the period covered by the data with possible values of -
-          day, week, month, quarter, annual
+        description: Indicates the period covered by the data with possible values of - day, week, month, quarter, annual
         example: Week
         type: string
       ReportType:

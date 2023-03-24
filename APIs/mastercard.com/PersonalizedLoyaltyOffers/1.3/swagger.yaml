@@ -4,9 +4,7 @@ schemes:
 host: api.mastercard.com
 basePath: /plo/v1
 info:
-  description: This API provides content for financial instutions participating in
-    Mastercard Personalized Offers to use in online and mobile banking
-    applications for cardholders.
+  description: This API provides content for financial instutions participating in Mastercard Personalized Offers to use in online and mobile banking applications for cardholders.
   title: Personalized Offers
   version: "1.3"
   x-artifactId: personalized-loyalty-offers
@@ -23,13 +21,10 @@ produces:
 paths:
   /activatestatementcreditoffer:
     post:
-      description: >
-        This resource is used to make a statement credit offer available
-        for redemption.
+      description: |
+        This resource is used to make a statement credit offer available for redemption.
       parameters:
-        - description: Financial Institution Identifier. Code that specifies the platform
-            and configuration instance, provided by Mastercard during
-            implementation.
+        - description: Financial Institution Identifier. Code that specifies the platform and configuration instance, provided by Mastercard during implementation.
           in: query
           name: FId
           required: true
@@ -40,8 +35,7 @@ paths:
           name: UserToken
           required: true
           type: string
-        - description: System-wide identifier for the campaign, not intended for end-user
-            display.
+        - description: System-wide identifier for the campaign, not intended for end-user display.
           in: query
           name: OfferId
           required: true
@@ -62,13 +56,10 @@ paths:
       x-testable: false
   /matchedoffers:
     get:
-      description: >
-        This resource returns offers that are available to the user and
-        conform to the search criteria (if specified).
+      description: |
+        This resource returns offers that are available to the user and conform to the search criteria (if specified).
       parameters:
-        - description: Financial Institution Identifier. Code that specifies the platform
-            and configuration instance, provided by Mastercard during
-            implementation.
+        - description: Financial Institution Identifier. Code that specifies the platform and configuration instance, provided by Mastercard during implementation.
           in: query
           name: FId
           required: true
@@ -79,17 +70,13 @@ paths:
           name: UserToken
           required: true
           type: string
-        - description: When utilized with a multi-lingual implementation, may be the
-            tongue and country of the user in ISO 639-1, underscore, ISO 3166-1
-            alpha-2 format.
+        - description: When utilized with a multi-lingual implementation, may be the tongue and country of the user in ISO 639-1, underscore, ISO 3166-1 alpha-2 format.
           in: query
           name: Lang
           required: false
           type: string
           x-example: en_US
-        - description: Fuzzy term to search retailers with offers for the user. In
-            general, searching of Matched Offers is not advised as users
-            generally have a modest selection of highly relevant promotions.
+        - description: Fuzzy term to search retailers with offers for the user. In general, searching of Matched Offers is not advised as users generally have a modest selection of highly relevant promotions.
           in: query
           name: MerchantName
           required: false
@@ -101,9 +88,7 @@ paths:
           required: false
           type: string
           x-example: DEPARTMENTSTORE
-        - description: The kind of deal. POSTPAIDCREDIT- Statement Credit Offer, which is
-            a discount that is automatically applied to the card linked to the
-            user and utilized to make the purchase.
+        - description: The kind of deal. POSTPAIDCREDIT- Statement Credit Offer, which is a discount that is automatically applied to the card linked to the user and utilized to make the purchase.
           in: query
           name: OfferType
           required: false
@@ -123,8 +108,7 @@ paths:
           x-example: 1
       responses:
         "200":
-          description: This resource returns offers that are available to the user and
-            conform to the search criteria (if specified).
+          description: This resource returns offers that are available to the user and conform to the search criteria (if specified).
           schema:
             $ref: "#/definitions/MatchedOffersResponse"
         default:
@@ -137,13 +121,10 @@ paths:
       x-testable: false
   /offerdetails:
     get:
-      description: >
-        This resource returns extended information for the requested offer,
-        typically used to display a detail view.
+      description: |
+        This resource returns extended information for the requested offer, typically used to display a detail view.
       parameters:
-        - description: Financial Institution Identifier. Code that specifies the platform
-            and configuration instance, provided by Mastercard during
-            implementation.
+        - description: Financial Institution Identifier. Code that specifies the platform and configuration instance, provided by Mastercard during implementation.
           in: query
           name: FId
           required: true
@@ -155,8 +136,7 @@ paths:
           required: true
           type: string
           x-example: mh3WonUm5xmE
-        - description: System-wide identifier for the campaign, not intended for end-user
-            display.
+        - description: System-wide identifier for the campaign, not intended for end-user display.
           in: query
           name: OfferId
           required: true
@@ -164,8 +144,7 @@ paths:
           x-example: c7dcfca7-cf35-36b0-9e67-d4f363d643e0
       responses:
         "200":
-          description: This resource returns extended information for the requested offer,
-            typically used to display a detail view.
+          description: This resource returns extended information for the requested offer, typically used to display a detail view.
           schema:
             $ref: "#/definitions/OfferDetailsResponse"
         default:
@@ -181,9 +160,7 @@ paths:
       description: |
         This resource returns offers that have been fulfilled by the user.
       parameters:
-        - description: Financial Institution Identifier. Code that specifies the platform
-            and configuration instance, provided by Mastercard during
-            implementation.
+        - description: Financial Institution Identifier. Code that specifies the platform and configuration instance, provided by Mastercard during implementation.
           in: query
           name: FId
           required: true
@@ -194,9 +171,7 @@ paths:
           name: UserToken
           required: true
           type: string
-        - description: When utilized with a multi-lingual implementation, may be the
-            tongue and country of the user in ISO 639-1, underscore, ISO 3166-1
-            alpha-2 format.
+        - description: When utilized with a multi-lingual implementation, may be the tongue and country of the user in ISO 639-1, underscore, ISO 3166-1 alpha-2 format.
           in: query
           name: Lang
           required: false
@@ -229,13 +204,10 @@ paths:
       x-testable: false
   /statementcreditactivationdetail:
     get:
-      description: >
-        This resource returns extended information about the specified
-        activated postpaid credit offer.
+      description: |
+        This resource returns extended information about the specified activated postpaid credit offer.
       parameters:
-        - description: Financial Institution Identifier. Code that specifies the platform
-            and configuration instance, provided by Mastercard during
-            implementation.
+        - description: Financial Institution Identifier. Code that specifies the platform and configuration instance, provided by Mastercard during implementation.
           in: query
           name: FId
           required: true
@@ -246,9 +218,7 @@ paths:
           name: UserToken
           required: true
           type: string
-        - description: Distinct identifier for the offer being available for redemption by
-            the user as returned by Activate Statement Credit Offer or Redeemed
-            Offers, not intended for end-user display.
+        - description: Distinct identifier for the offer being available for redemption by the user as returned by Activate Statement Credit Offer or Redeemed Offers, not intended for end-user display.
           in: query
           name: ActivationId
           required: true
@@ -256,8 +226,7 @@ paths:
           x-example: TRU_1000136
       responses:
         "200":
-          description: This resource returns extended information about the specified
-            activated postpaid credit offer.
+          description: This resource returns extended information about the specified activated postpaid credit offer.
           schema:
             $ref: "#/definitions/StatementCreditActivationResponse"
         default:
@@ -270,14 +239,10 @@ paths:
       x-testable: false
   /userfeedback:
     post:
-      description: >
-        This resource allows a user to provide a thumbs-up or a thumbs-down
-        rating of the specified offer. Offer matches that are disliked will be
-        supressed from the results of future calls to Matched Offers.
+      description: |
+        This resource allows a user to provide a thumbs-up or a thumbs-down rating of the specified offer. Offer matches that are disliked will be supressed from the results of future calls to Matched Offers.
       parameters:
-        - description: Financial Institution Identifier. Code that specifies the platform
-            and configuration instance, provided by Mastercard during
-            implementation.
+        - description: Financial Institution Identifier. Code that specifies the platform and configuration instance, provided by Mastercard during implementation.
           in: query
           name: FId
           required: true
@@ -288,8 +253,7 @@ paths:
           name: UserToken
           required: true
           type: string
-        - description: System-wide identifier for the campaign, not intended for end-user
-            display.
+        - description: System-wide identifier for the campaign, not intended for end-user display.
           in: query
           name: OfferId
           required: true
@@ -316,13 +280,10 @@ paths:
       x-testable: false
   /usersavings:
     get:
-      description: >
-        This resource returns the accumulated and potential savings for a
-        Personalized Offers user.
+      description: |
+        This resource returns the accumulated and potential savings for a Personalized Offers user.
       parameters:
-        - description: Financial Institution Identifier. Code that specifies the platform
-            and configuration instance, provided by Mastercard during
-            implementation.
+        - description: Financial Institution Identifier. Code that specifies the platform and configuration instance, provided by Mastercard during implementation.
           in: query
           name: FId
           required: true
@@ -335,8 +296,7 @@ paths:
           type: string
       responses:
         "200":
-          description: This resource returns the accumulated and potential savings for a
-            Personalized Offers user.
+          description: This resource returns the accumulated and potential savings for a Personalized Offers user.
           schema:
             $ref: "#/definitions/UserSavingsResponse"
         default:
@@ -349,31 +309,23 @@ paths:
       x-testable: false
   /usertoken:
     get:
-      description: >
-        This resource creates the user session. It must be called prior to
-        any other API calls for the specified user. The Token value does not
-        expire.
+      description: |
+        This resource creates the user session. It must be called prior to any other API calls for the specified user. The Token value does not expire.
       parameters:
-        - description: Financial Institution Identifier. Code that specifies the platform
-            and configuration instance, provided by Mastercard during
-            implementation.
+        - description: Financial Institution Identifier. Code that specifies the platform and configuration instance, provided by Mastercard during implementation.
           in: query
           name: FId
           required: true
           type: string
           x-example: "999999"
-        - description: Authorization Information. AES 128-bit encrypted concatenation of
-            "User ID as specified in enrollment:FI ID as provided by
-            Mastercard:current Unix time". Key exchange and establishment of
-            maintenance procedures occur during implementation.
+        - description: Authorization Information. AES 128-bit encrypted concatenation of "User ID as specified in enrollment:FI ID as provided by Mastercard:current Unix time". Key exchange and establishment of maintenance procedures occur during implementation.
           in: query
           name: AuthInfo
           required: true
           type: string
       responses:
         "200":
-          description: This resource returns the user session token (UserToken), which is
-            a required input to all other API resources.
+          description: This resource returns the user session token (UserToken), which is a required input to all other API resources.
           schema:
             $ref: "#/definitions/UserTokenResponse"
         default:
@@ -408,8 +360,7 @@ definitions:
         example: 10
         type: string
       CurrencyCode:
-        description: ISO 4217 code in which the redeeming transaction must be made to
-          qualify for the offer.
+        description: ISO 4217 code in which the redeeming transaction must be made to qualify for the offer.
         example: USD
         type: string
       MaxCashback:
@@ -421,8 +372,7 @@ definitions:
         example: 30
         type: string
       StatementCreditType:
-        description: Calculation kind of the redemption value. SPEND_CASH/VISIT_CASH-
-          fixed value. SPEND_PERCENTAGE/VISIT_PERCENTAGE- share value.
+        description: Calculation kind of the redemption value. SPEND_CASH/VISIT_CASH- fixed value. SPEND_PERCENTAGE/VISIT_PERCENTAGE- share value.
         example: SPEND_CASH
         type: string
       VisitThreshold:
@@ -435,9 +385,7 @@ definitions:
         description: This will identify the reason for the error.
         type: string
       Source:
-        description: This is the unique identifier that attempts to define the field in
-          error when available.  If a specific field can't be identified System
-          will be returned.
+        description: This is the unique identifier that attempts to define the field in error when available.  If a specific field can't be identified System will be returned.
         example: Atms.Atm.Location.Address.Line1
         type: string
   ErrorResponse:
@@ -463,14 +411,11 @@ definitions:
   MatchedOffer:
     properties:
       ActiveSc:
-        description: ACTIVATED_STATEMENT_CREDIT- ready for redemption by the user.
-          AVAILABLE- requires call to Activate Statement Credit Offer to make
-          ready for redemption.
+        description: ACTIVATED_STATEMENT_CREDIT- ready for redemption by the user. AVAILABLE- requires call to Activate Statement Credit Offer to make ready for redemption.
         example: AVAILABLE
         type: string
       CurrencyCode:
-        description: ISO 4217 code in which the redeeming transaction must be made to
-          qualify for the offer.
+        description: ISO 4217 code in which the redeeming transaction must be made to qualify for the offer.
         example: USD
         type: string
       Discount:
@@ -478,8 +423,7 @@ definitions:
         example: 20
         type: string
       DiscountType:
-        description: The kind of markdown represented by the offer. ABSOLUTE- fixed
-          amount. PERCENTAGE- share of purchase.
+        description: The kind of markdown represented by the offer. ABSOLUTE- fixed amount. PERCENTAGE- share of purchase.
         example: 20
         type: string
       EventEndDate:
@@ -488,8 +432,7 @@ definitions:
         format: date
         type: string
       EventStartDate:
-        description: First day that redemption can be made by any user, may not apply to
-          the specified user.
+        description: First day that redemption can be made by any user, may not apply to the specified user.
         example: 2012-05-10
         format: date
         type: string
@@ -508,19 +451,15 @@ definitions:
         example: https://truaxis.mastercard.com/assets/sr/source/billshrink/example.png
         type: string
       OfferId:
-        description: System-wide identifier for the campaign, not intended for end-user
-          display.
+        description: System-wide identifier for the campaign, not intended for end-user display.
         example: c7dcfca7-cf35-36b0-9e67-d4f363d643e0
         type: string
       OfferSource:
-        description: Platform that made the offer available, not intended for end-user
-          display.
+        description: Platform that made the offer available, not intended for end-user display.
         example: Truaxis
         type: string
       OfferType:
-        description: The kind of deal. POSTPAIDCREDIT- Statement Credit Offer, which is
-          a discount that is automatically applied to the card linked to the
-          user and utilized to make the purchase.
+        description: The kind of deal. POSTPAIDCREDIT- Statement Credit Offer, which is a discount that is automatically applied to the card linked to the user and utilized to make the purchase.
         example: POSTPAIDCREDIT
         type: string
       Price:
@@ -528,16 +467,12 @@ definitions:
         example: 0
         type: string
       RedemptionMode:
-        description: Type of credit made upon redemption of the offer- CASH, POINTS, or
-          EITHER.
+        description: Type of credit made upon redemption of the offer- CASH, POINTS, or EITHER.
         example: CASH
         type: string
       ShortDescription:
-        description: Summary of the deal, typically displayed beneath the headline in a
-          list view.
-        example: On your next purchase of $25 or more at Example.com online or at a
-          store, receive 20% back posted to the card associated with this
-          account.
+        description: Summary of the deal, typically displayed beneath the headline in a list view.
+        example: On your next purchase of $25 or more at Example.com online or at a store, receive 20% back posted to the card associated with this account.
         type: string
   MatchedOffersResponse:
     properties:
@@ -590,8 +525,7 @@ definitions:
   OfferDetails:
     properties:
       CurrencyCode:
-        description: ISO 4217 code in which the redeeming transaction must be made to
-          qualify for the offer.
+        description: ISO 4217 code in which the redeeming transaction must be made to qualify for the offer.
         example: USD
         type: string
       DetailPostpaidCreditOffer:
@@ -602,8 +536,7 @@ definitions:
         format: date
         type: string
       EventStartDate:
-        description: First day that redemption can be made by any user, may not apply to
-          the specified user.
+        description: First day that redemption can be made by any user, may not apply to the specified user.
         example: 2012-05-10
         format: date
         type: string
@@ -618,52 +551,40 @@ definitions:
       LinkOut:
         description: Deprecated.
       LongDescription:
-        description: Explanation of the deal, typically displayed beneath the headline
-          in a detail view. Often the same as the ShortDescription.
-        example: On your next purchase of $30 or more at Example.com online or at a
-          store, receive $10.00 back posted to the card associated with this
-          account.
+        description: Explanation of the deal, typically displayed beneath the headline in a detail view. Often the same as the ShortDescription.
+        example: On your next purchase of $30 or more at Example.com online or at a store, receive $10.00 back posted to the card associated with this account.
         type: string
       Merchant:
         $ref: "#/definitions/Merchant"
       OfferDisplay:
         $ref: "#/definitions/OfferDisplay"
       OfferId:
-        description: System-wide identifier for the campaign, not intended for end-user
-          display.
+        description: System-wide identifier for the campaign, not intended for end-user display.
         example: c7dcfca7-cf35-36b0-9e67-d4f363d643e0
         type: string
       OfferMedia:
         $ref: "#/definitions/OfferMedia"
       OfferSource:
-        description: Platform that made the offer available, not intended for end-user
-          display.
+        description: Platform that made the offer available, not intended for end-user display.
         example: Truaxis
         type: string
       OfferType:
-        description: The kind of deal. POSTPAIDCREDIT- Statement Credit Offer, which is
-          a discount that is automatically applied to the card linked to the
-          user and utilized to make the purchase.
+        description: The kind of deal. POSTPAIDCREDIT- Statement Credit Offer, which is a discount that is automatically applied to the card linked to the user and utilized to make the purchase.
         example: POSTPAIDCREDIT
         type: string
       OfferUrl:
         description: Deprecated.
       RedemptionMode:
-        description: Type of credit made upon redemption of the offer- CASH, POINTS, or
-          EITHER.
+        description: Type of credit made upon redemption of the offer- CASH, POINTS, or EITHER.
         example: CASH
         type: string
       RedemptionType:
-        description: Where a purchase may be made to qualify for the offer- INSTORE,
-          ONLINE, or ONLINE-INSTORE (either).
+        description: Where a purchase may be made to qualify for the offer- INSTORE, ONLINE, or ONLINE-INSTORE (either).
         example: ONLINE-INSTORE
         type: string
       ShortDescription:
-        description: Summary of the deal, typically displayed beneath the headline in a
-          list view.
-        example: On your next purchase of $25 or more at Example.com online or at a
-          store, receive 20% back posted to the card associated with this
-          account.
+        description: Summary of the deal, typically displayed beneath the headline in a list view.
+        example: On your next purchase of $25 or more at Example.com online or at a store, receive 20% back posted to the card associated with this account.
         type: string
   OfferDetailsResponse:
     properties:
@@ -673,14 +594,12 @@ definitions:
     properties:
       DetailedTerms:
         description: Conditions required for successful redemption of the offer.
-        example: Offer is non-transferable and applies to one purchase of a min. of $30
-          online or in store charged to your card by the expiration date.
+        example: Offer is non-transferable and applies to one purchase of a min. of $30 online or in store charged to your card by the expiration date.
         type: string
   OfferImages:
     properties:
       AltText:
-        description: Description of a picture or graphic that may be displayed along
-          with the offer information.
+        description: Description of a picture or graphic that may be displayed along with the offer information.
         example: Example.com
         type: string
       Description:
@@ -688,8 +607,7 @@ definitions:
         example: The logo for Example.com
         type: string
       ImageUrl:
-        description: A picture or graphic that may be displayed along with the offer
-          information.
+        description: A picture or graphic that may be displayed along with the offer information.
         example: https://truaxis.mastercard.com/assets/sr/source/billshrink/example_medium.png
         type: string
   OfferMedia:
@@ -738,13 +656,11 @@ definitions:
         format: date
         type: string
       ActivationId:
-        description: Distinct identifier for the offer being available for redemption by
-          the user, not intended for end-user display.
+        description: Distinct identifier for the offer being available for redemption by the user, not intended for end-user display.
         example: TRU_1000136
         type: string
       CurrencyCode:
-        description: ISO 4217 code in which the redeeming transaction must be made to
-          qualify for the offer.
+        description: ISO 4217 code in which the redeeming transaction must be made to qualify for the offer.
         example: USD
         type: string
       DetailPostpaidCreditOffer:
@@ -771,15 +687,11 @@ definitions:
         description: Deprecated, disregard.
         type: string
       LongDescription:
-        description: Explanation of the deal, typically displayed beneath the headline
-          in a detail view. Often the same as the ShortDescription.
-        example: On your next purchase of $30 or more at Example.com online or at a
-          store, receive $10.00 back posted to the card associated with this
-          account.
+        description: Explanation of the deal, typically displayed beneath the headline in a detail view. Often the same as the ShortDescription.
+        example: On your next purchase of $30 or more at Example.com online or at a store, receive $10.00 back posted to the card associated with this account.
         type: string
       MaxUserRedemptions:
-        description: The number of times that the cardholder may take advantage of this
-          offer.
+        description: The number of times that the cardholder may take advantage of this offer.
         example: 1
         type: integer
       Merchant:
@@ -787,50 +699,40 @@ definitions:
       OfferDisplay:
         $ref: "#/definitions/OfferDisplay"
       OfferId:
-        description: System-wide identifier for the campaign, not intended for end-user
-          display.
+        description: System-wide identifier for the campaign, not intended for end-user display.
         example: c7dcfca7-cf35-36b0-9e67-d4f363d643e0
         type: string
       OfferMedia:
         $ref: "#/definitions/OfferMedia"
       OfferSource:
-        description: Platform that made the offer available, not intended for end-user
-          display.
+        description: Platform that made the offer available, not intended for end-user display.
         example: Truaxis
         type: string
       OfferType:
-        description: The kind of deal. POSTPAIDCREDIT- Statement Credit Offer, which is
-          a discount that is automatically applied to the card linked to the
-          user and utilized to make the purchase.
+        description: The kind of deal. POSTPAIDCREDIT- Statement Credit Offer, which is a discount that is automatically applied to the card linked to the user and utilized to make the purchase.
         example: POSTPAIDCREDIT
         type: string
       OfferUrl:
         description: Deprecated, disregard.
         type: string
       RedemptionMode:
-        description: Type of credit made upon redemption of the offer- CASH, POINTS, or
-          EITHER.
+        description: Type of credit made upon redemption of the offer- CASH, POINTS, or EITHER.
         example: CASH
         type: string
       RedemptionType:
-        description: Where a purchase may be made to qualify for the offer- INSTORE,
-          ONLINE, or ONLINE-INSTORE (either).
+        description: Where a purchase may be made to qualify for the offer- INSTORE, ONLINE, or ONLINE-INSTORE (either).
         example: ONLINE-INSTORE
         type: string
       ShortDescription:
-        description: Summary of the deal, typically displayed beneath the headline in a
-          list view.
-        example: On your next purchase of $30 or more at Example.com inline or at a
-          store, receive $10.00 back posted to the card associated with this
-          account.
+        description: Summary of the deal, typically displayed beneath the headline in a list view.
+        example: On your next purchase of $30 or more at Example.com inline or at a store, receive $10.00 back posted to the card associated with this account.
         type: string
       Transactions:
         $ref: "#/definitions/Transaction"
   RedemedOfferMerchant:
     properties:
       Category:
-        description: The type of retailer to which the offer applies, not intended for
-          end-user display.
+        description: The type of retailer to which the offer applies, not intended for end-user display.
         example: DEPARTMENTSTORE
         type: string
       MerchantDistance:
@@ -885,13 +787,11 @@ definitions:
         format: date
         type: string
       ActivationId:
-        description: Distinct identifier for the offer being available for redemption by
-          the user, not intended for end-user display.
+        description: Distinct identifier for the offer being available for redemption by the user, not intended for end-user display.
         example: TRU_1000136
         type: string
       CashBack:
-        description: Value earned upon fulfillment of offer conditions, not applicable
-          to points activations.
+        description: Value earned upon fulfillment of offer conditions, not applicable to points activations.
         example: 0
         type: string
       DaysRemaining:
@@ -911,13 +811,11 @@ definitions:
         example: https://truaxis.mastercard.com/assets/sr/source/billshrink/example.png
         type: string
       OfferId:
-        description: System-wide identifier for the campaign, not intended for end-user
-          display.
+        description: System-wide identifier for the campaign, not intended for end-user display.
         example: c7dcfca7-cf35-36b0-9e67-d4f363d643e0
         type: string
       PointsEarned:
-        description: Value earned upon fulfillment of offer conditions, not applicable
-          to cash activations.
+        description: Value earned upon fulfillment of offer conditions, not applicable to cash activations.
         example: 0
         type: string
       RedemptionEndDate:
@@ -934,11 +832,8 @@ definitions:
         example: 30
         type: string
       ShortDescription:
-        description: Summary of the deal, typically displayed beneath the headline in a
-          list view.
-        example: On your next purchase of $30 or more at Example.com inline or at a
-          store, receive $10.00 back posted to the card associated with this
-          account.
+        description: Summary of the deal, typically displayed beneath the headline in a list view.
+        example: On your next purchase of $30 or more at Example.com inline or at a store, receive $10.00 back posted to the card associated with this account.
         type: string
       Status:
         description: Disposition of offer- ACTIVATED, REDEEMED, CREDIT_DECLINED.
@@ -959,8 +854,7 @@ definitions:
         example: 21
         type: string
       NumAvailable:
-        description: Count of postpaid credit deals that are ready for activation or
-          redemption.
+        description: Count of postpaid credit deals that are ready for activation or redemption.
         example: 0
         type: string
       NumRedeemed:
@@ -990,13 +884,11 @@ definitions:
   Transaction:
     properties:
       CashBackEarned:
-        description: Value earned upon fulfillment of offer conditions, not applicable
-          to points activations.
+        description: Value earned upon fulfillment of offer conditions, not applicable to points activations.
         example: 0
         type: string
       PointsEarned:
-        description: Value earned upon fulfillment of offer conditions, not applicable
-          to cash activations.
+        description: Value earned upon fulfillment of offer conditions, not applicable to cash activations.
         example: 0
         type: string
       RedemptionDate:
@@ -1015,8 +907,7 @@ definitions:
         example: 1
         type: string
       OfferId:
-        description: System-wide identifier for the campaign, not intended for end-user
-          display.
+        description: System-wide identifier for the campaign, not intended for end-user display.
         example: c7dcfca7-cf35-36b0-9e67-d4f363d643e0
         type: string
   UserFeedbackResponse:
