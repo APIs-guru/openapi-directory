@@ -49,6 +49,12 @@ paths:
     post:
       description: "Creates an App Engine application for a Google Cloud Platform project. Required fields: id - The ID of the target Cloud Platform project. location - The region (https://cloud.google.com/appengine/docs/locations) where you want the App Engine application located.For more information about App Engine applications, see Managing Projects, Applications, and Billing (https://cloud.google.com/appengine/docs/standard/python/console/)."
       operationId: appengine.apps.create
+      parameters:
+        - description: The project and location in which the application should be created, specified in the format projects/*/locations/*
+          in: query
+          name: parent
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -1817,6 +1823,54 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
+  "/v1/projects/{projectsId}/locations/{locationsId}/applications":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Creates an App Engine application for a Google Cloud Platform project. Required fields: id - The ID of the target Cloud Platform project. location - The region (https://cloud.google.com/appengine/docs/locations) where you want the App Engine application located.For more information about App Engine applications, see Managing Projects, Applications, and Billing (https://cloud.google.com/appengine/docs/standard/python/console/)."
+      operationId: appengine.projects.locations.applications.create
+      parameters:
+        - description: Part of `parent`. The project and location in which the application should be created, specified in the format projects/*/locations/*
+          in: path
+          name: projectsId
+          required: true
+          schema:
+            type: string
+        - description: Part of `parent`. See documentation of `projectsId`.
+          in: path
+          name: locationsId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Application"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/projects/{projectsId}/locations/{locationsId}/applications/{applicationsId}":
     get:
       description: Gets information about an application.
@@ -1998,7 +2052,8 @@ components:
           description: Google Apps authentication domain that controls which users can access this application.Defaults to open access for any Google Account.
           type: string
         codeBucket:
-          description: Google Cloud Storage bucket that can be used for storing files associated with this application. This bucket is associated with the application and can be used by the gcloud deployment commands.@OutputOnly
+          description: Output only. Google Cloud Storage bucket that can be used for storing files associated with this application. This bucket is associated with the application and can be used by the gcloud deployment commands.@OutputOnly
+          readOnly: true
           type: string
         databaseType:
           description: The type of the Cloud Firestore or Cloud Datastore database associated with this application.
@@ -2009,14 +2064,16 @@ components:
             - CLOUD_DATASTORE_COMPATIBILITY
           type: string
         defaultBucket:
-          description: Google Cloud Storage bucket that can be used by this application to store content.@OutputOnly
+          description: Output only. Google Cloud Storage bucket that can be used by this application to store content.@OutputOnly
+          readOnly: true
           type: string
         defaultCookieExpiration:
           description: Cookie expiration policy for this application.
           format: google-duration
           type: string
         defaultHostname:
-          description: Hostname used to reach this application, as resolved by App Engine.@OutputOnly
+          description: Output only. Hostname used to reach this application, as resolved by App Engine.@OutputOnly
+          readOnly: true
           type: string
         dispatchRules:
           description: HTTP path dispatch rules for requests to the application that do not explicitly target a service or version. Rules are order-dependent. Up to 20 dispatch rules can be supported.
@@ -2027,7 +2084,8 @@ components:
           $ref: "#/components/schemas/FeatureSettings"
           description: The feature specific settings to be used in the application.
         gcrDomain:
-          description: The Google Container Registry domain used for storing managed build docker images for this application.
+          description: Output only. The Google Container Registry domain used for storing managed build docker images for this application.
+          readOnly: true
           type: string
         iap:
           $ref: "#/components/schemas/IdentityAwareProxy"
@@ -2038,7 +2096,8 @@ components:
           description: Location from which this application runs. Application instances run out of the data centers in the specified location, which is also where all of the application's end user content is stored.Defaults to us-central.View the list of supported locations (https://cloud.google.com/appengine/docs/locations).
           type: string
         name:
-          description: "Full path to the Application resource in the API. Example: apps/myapp.@OutputOnly"
+          description: "Output only. Full path to the Application resource in the API. Example: apps/myapp.@OutputOnly"
+          readOnly: true
           type: string
         serviceAccount:
           description: The service account associated with the application. This is the app-level default identity. If no identity provided during create version, Admin API will fallback to this one.
@@ -2465,7 +2524,8 @@ components:
           description: OAuth2 client secret to use for the authentication flow.For security reasons, this value cannot be retrieved via the API. Instead, the SHA-256 hash of the value is returned in the oauth2_client_secret_sha256 field.@InputOnly
           type: string
         oauth2ClientSecretSha256:
-          description: Hex-encoded SHA-256 hash of the client secret.@OutputOnly
+          description: Output only. Hex-encoded SHA-256 hash of the client secret.@OutputOnly
+          readOnly: true
           type: string
       type: object
     Instance:

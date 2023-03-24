@@ -287,6 +287,82 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{parent}/firewallpolicies":
+    get:
+      description: Returns the list of all firewall policies that belong to a project.
+      operationId: recaptchaenterprise.projects.firewallpolicies.list
+      parameters:
+        - description: Required. The name of the project to list the policies for, in the format "projects/{project}".
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The maximum number of policies to return. Default is 10. Max limit is 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous. ListFirewallPoliciesRequest, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1ListFirewallPoliciesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new FirewallPolicy, specifying conditions at which reCAPTCHA Enterprise actions can be executed. A project may have a maximum of 1000 policies.
+      operationId: recaptchaenterprise.projects.firewallpolicies.create
+      parameters:
+        - description: Required. The name of the project this policy will apply to, in the format "projects/{project}".
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FirewallPolicy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FirewallPolicy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/keys":
     get:
       description: Returns the list of all keys that belong to a project.
@@ -631,6 +707,9 @@ components:
           items:
             type: string
           type: array
+        supportNonGoogleAppStoreDistribution:
+          description: Set to true for keys that are used in an Android application that is available for download in app stores in addition to the Google Play Store.
+          type: boolean
       type: object
     GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequest:
       description: The request message to annotate an Assessment.
@@ -689,6 +768,9 @@ components:
         event:
           $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1Event"
           description: The event being assessed.
+        firewallPolicyAssessment:
+          $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FirewallPolicyAssessment"
+          description: Assessment returned when firewall policies belonging to the project are evaluated using the field firewall_policy_evaluation.
         fraudPreventionAssessment:
           $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FraudPreventionAssessment"
           description: Assessment returned by Fraud Prevention when TransactionData is provided.
@@ -754,14 +836,17 @@ components:
           description: Optional. The expected action for this type of event. This should be the same action provided at token generation time on client-side platforms already integrated with recaptcha enterprise.
           type: string
         express:
-          description: Optional. Optional flag for a reCAPTCHA express request for an assessment without a token. If enabled, `site_key` must reference a SCORE key with WAF feature set to EXPRESS.
+          description: Optional. Flag for a reCAPTCHA express request for an assessment without a token. If enabled, `site_key` must reference a SCORE key with WAF feature set to EXPRESS.
+          type: boolean
+        firewallPolicyEvaluation:
+          description: Optional. Flag for enabling firewall policy config assessment. If this flag is enabled, the firewall policy will be evaluated and a suggested firewall action will be returned in the response.
           type: boolean
         hashedAccountId:
           description: Optional. Unique stable hashed user identifier for the request. The identifier must be hashed using hmac-sha256 with stable secret.
           format: byte
           type: string
         headers:
-          description: Optional. Optional HTTP header information about the request.
+          description: Optional. HTTP header information about the request.
           items:
             type: string
           type: array
@@ -786,6 +871,89 @@ components:
         userIpAddress:
           description: Optional. The IP address in the request from the user's device related to this event.
           type: string
+        wafTokenAssessment:
+          description: Optional. Flag for running WAF token assessment. If enabled, the token must be specified, and have been created by a WAF-enabled key.
+          type: boolean
+      type: object
+    GoogleCloudRecaptchaenterpriseV1FirewallAction:
+      description: An individual action. Each action represents what to do if a policy matches.
+      properties:
+        allow:
+          $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FirewallActionAllowAction"
+          description: The user request did not match any policy and should be allowed access to the requested resource.
+        block:
+          $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FirewallActionBlockAction"
+          description: This action will deny access to a given page. The user will get an HTTP error code.
+        redirect:
+          $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FirewallActionRedirectAction"
+          description: This action will redirect the request to a ReCaptcha interstitial to attach a token.
+        setHeader:
+          $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FirewallActionSetHeaderAction"
+          description: This action will set a custom header but allow the request to continue to the customer backend.
+        substitute:
+          $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FirewallActionSubstituteAction"
+          description: This action will transparently serve a different page to an offending user.
+      type: object
+    GoogleCloudRecaptchaenterpriseV1FirewallActionAllowAction:
+      description: An allow action continues processing a request unimpeded.
+      properties: {}
+      type: object
+    GoogleCloudRecaptchaenterpriseV1FirewallActionBlockAction:
+      description: A block action serves an HTTP error code a prevents the request from hitting the backend.
+      properties: {}
+      type: object
+    GoogleCloudRecaptchaenterpriseV1FirewallActionRedirectAction:
+      description: A redirect action returns a 307 (temporary redirect) response, pointing the user to a ReCaptcha interstitial page to attach a token.
+      properties: {}
+      type: object
+    GoogleCloudRecaptchaenterpriseV1FirewallActionSetHeaderAction:
+      description: A set header action sets a header and forwards the request to the backend. This can be used to trigger custom protection implemented on the backend.
+      properties:
+        key:
+          description: The header key to set in the request to the backend server.
+          type: string
+        value:
+          description: The header value to set in the request to the backend server.
+          type: string
+      type: object
+    GoogleCloudRecaptchaenterpriseV1FirewallActionSubstituteAction:
+      description: A substitute action transparently serves a different page than the one requested.
+      properties:
+        path:
+          description: 'The address to redirect to. The target is a relative path in the current host. Example: "/blog/404.html".'
+          type: string
+      type: object
+    GoogleCloudRecaptchaenterpriseV1FirewallPolicy:
+      description: A FirewallPolicy represents a single matching pattern and resulting actions to take.
+      properties:
+        actions:
+          description: The actions that the caller should take regarding user access. There should be at most one terminal action. A terminal action is any action that forces a response, such as AllowAction, BlockAction or SubstituteAction. Zero or more non-terminal actions such as SetHeader might be specified. A single policy can contain up to 16 actions.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FirewallAction"
+          type: array
+        condition:
+          description: A CEL (Common Expression Language) conditional expression that specifies if this policy applies to an incoming user request. If this condition evaluates to true and the requested path matched the path pattern, the associated actions should be executed by the caller. The condition string is checked for CEL syntax correctness on creation. For more information, see the [CEL spec](https://github.com/google/cel-spec) and its [language definition](https://github.com/google/cel-spec/blob/master/doc/langdef.md). A condition has a max length of 500 characters.
+          type: string
+        description:
+          description: A description of what this policy aims to achieve, for convenience purposes. The description can at most include 256 UTF-8 characters.
+          type: string
+        name:
+          description: The resource name for the FirewallPolicy in the format "projects/{project}/firewallpolicies/{firewallpolicy}".
+          type: string
+        path:
+          description: The path for which this policy applies, specified as a glob pattern. For more information on glob, see the [manual page](https://man7.org/linux/man-pages/man7/glob.7.html). A path has a max length of 200 characters.
+          type: string
+      type: object
+    GoogleCloudRecaptchaenterpriseV1FirewallPolicyAssessment:
+      description: Policy config assessment.
+      properties:
+        error:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: If the processing of a policy config fails, an error will be populated and the firewall_policy will be left empty.
+        firewallPolicy:
+          $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FirewallPolicy"
+          description: Output only. The policy that matched the request. If more than one policy may match, this is the first match. If no policy matches the incoming request, the policy field will be left empty.
+          readOnly: true
       type: object
     GoogleCloudRecaptchaenterpriseV1FraudPreventionAssessment:
       description: Assessment for Fraud Prevention.
@@ -836,7 +1004,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1AndroidKeySettings"
           description: Settings for keys that can be used by Android apps.
         createTime:
-          description: Output only. The timestamp corresponding to the creation of this Key.
+          description: Output only. The timestamp corresponding to the creation of this key.
           format: google-datetime
           readOnly: true
           type: string
@@ -863,6 +1031,18 @@ components:
         webSettings:
           $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1WebKeySettings"
           description: Settings for keys that can be used by websites.
+      type: object
+    GoogleCloudRecaptchaenterpriseV1ListFirewallPoliciesResponse:
+      description: Response to request to list firewall policies belonging to a key.
+      properties:
+        firewallPolicies:
+          description: Policy details.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FirewallPolicy"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results. It is set to empty if no policies remain in results.
+          type: string
       type: object
     GoogleCloudRecaptchaenterpriseV1ListKeysResponse:
       description: Response to request to list keys in a project.
@@ -1320,6 +1500,24 @@ components:
     GoogleProtobufEmpty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
+      type: object
+    GoogleRpcStatus:
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
       type: object
   securitySchemes:
     Oauth2:

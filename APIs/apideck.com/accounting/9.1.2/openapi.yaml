@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 9.1.1
+  version: 9.1.2
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -420,6 +420,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/billsSort"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -442,6 +443,9 @@ paths:
       tags:
         - Bills
       x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: freshbooks
+          description: The Freshbooks Bills api is currently in beta.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -684,6 +688,9 @@ paths:
       tags:
         - Bills
       x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: freshbooks
+          description: The Freshbooks Bills api is currently in beta.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -908,6 +915,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -1062,6 +1070,7 @@ paths:
                   }
                 ],
                 note: 'Some notes about this credit note',
+                terms: 'Some terms about this credit note',
                 row_version: '1-12345'
               }
             }
@@ -1295,6 +1304,7 @@ paths:
                   }
                 ],
                 note: 'Some notes about this credit note',
+                terms: 'Some terms about this credit note',
                 row_version: '1-12345'
               }
             }
@@ -1317,6 +1327,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/customersFilter"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -1772,6 +1783,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/invoiceItemsFilter"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -2133,6 +2145,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/invoicesSort"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -2631,6 +2644,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -2997,6 +3011,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -3347,6 +3362,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -3740,6 +3756,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/profitAndLossFilter"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -3793,6 +3810,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/suppliersFilter"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -4239,6 +4257,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/taxRatesFilter"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -5062,6 +5081,7 @@ components:
       description: TaxRate updated
   schemas:
     AccountingCustomer:
+      additionalProperties: false
       properties:
         account:
           $ref: "#/components/schemas/LinkedLedgerAccount"
@@ -5163,8 +5183,22 @@ components:
           items:
             $ref: "#/components/schemas/Website"
           type: array
+      required:
+        - id
       type: object
       x-apideck-schema-id: Customer
+      x-apideck-strict-any-of:
+        - required:
+            - first_name
+            - last_name
+        - required:
+            - company_name
+      x-apideck-strict-required:
+        - emails
+        - addresses
+        - phone_numbers
+        - status
+        - updated_at
       x-apideck-weights:
         account: medium
         addresses: high
@@ -5829,10 +5863,10 @@ components:
           title: Purchase Order number
           type: string
         reference:
-          description: Optional invoice reference.
+          description: Optional bill reference.
           example: "123456"
           nullable: true
-          title: Invoice reference
+          title: Bill reference
           type: string
         row_version:
           $ref: "#/components/schemas/RowVersion"
@@ -6980,6 +7014,7 @@ components:
       title: Created by
       type: string
     CreditNote:
+      additionalProperties: false
       properties:
         account:
           $ref: "#/components/schemas/LinkedLedgerAccount"
@@ -7112,6 +7147,12 @@ components:
           type: string
         tax_inclusive:
           $ref: "#/components/schemas/TaxInclusive"
+        terms:
+          description: Optional terms to be associated with the credit note.
+          example: Some terms about this credit note
+          nullable: true
+          title: Terms
+          type: string
         total_amount:
           description: Amount of transaction
           example: 49.99
@@ -7138,9 +7179,14 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       required:
+        - id
         - total_amount
       type: object
       x-apideck-schema-id: CreditNote
+      x-apideck-strict-required:
+        - total_amount
+        - currency
+        - customer
       x-apideck-weights:
         account: critical
         allocations: medium
@@ -10097,6 +10143,13 @@ components:
           readOnly: true
           title: Name
           type: string
+        rate:
+          description: Rate of the tax rate
+          example: 10
+          nullable: true
+          readOnly: true
+          title: Rate
+          type: number
       type: object
       x-apideck-schema-id: LinkedTaxRate
       x-apideck-weights:
@@ -10291,8 +10344,15 @@ components:
                 x-apideck-enum-id: allocations.type
                 x-graphql-type-name: AllocationType
             type: object
+            x-apideck-strict-any-of:
+              - required:
+                  - id
+              - required:
+                  - code
+            x-apideck-strict-required:
+              - amount
             x-apideck-weights:
-              amount: medium
+              amount: critical
               code: medium
               id: medium
               type: medium
@@ -10399,10 +10459,15 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
       required:
+        - id
         - total_amount
         - transaction_date
       type: object
       x-apideck-schema-id: Payment
+      x-apideck-strict-required:
+        - total_amount
+        - transaction_date
+        - allocations
       x-apideck-weights:
         account: critical
         accounts_receivable_account_id: edge-case
@@ -10822,6 +10887,7 @@ components:
       title: Suffix
       type: string
     Supplier:
+      additionalProperties: false
       properties:
         account:
           $ref: "#/components/schemas/LinkedLedgerAccount"
@@ -10915,8 +10981,22 @@ components:
           items:
             $ref: "#/components/schemas/Website"
           type: array
+      required:
+        - id
       type: object
       x-apideck-schema-id: Supplier
+      x-apideck-strict-any-of:
+        - required:
+            - first_name
+            - last_name
+        - required:
+            - company_name
+      x-apideck-strict-required:
+        - emails
+        - addresses
+        - phone_numbers
+        - status
+        - updated_at
       x-apideck-weights:
         account: medium
         addresses: high
@@ -11105,6 +11185,15 @@ components:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
       x-apideck-schema-id: TaxRate
+      x-apideck-strict-any-of:
+        - required:
+            - id
+        - required:
+            - name
+        - required:
+            - code
+      x-apideck-strict-required:
+        - effective_tax_rate
       x-apideck-weights:
         code: edge-case
         components: medium
