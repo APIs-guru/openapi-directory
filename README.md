@@ -7,6 +7,9 @@
 [![OpenAPI definitions][numSpecs-image]][apisDir-link]
 [![Endpoints][endpoints-image]][apisDir-link]
 [![Fixes][fixes-image]][apisDir-link]
+[![Providers][providers-image]][apisDir-link]
+[![Drivers][drivers-image]][apisDir-link]
+
 ![oad Actions](https://api.meercode.io/badge/Mermade/oad?type=ci-count&token=y7EdP0Hxb6q8PoG3h2JEmDVQDatZmttj&lastDay=7)
 [![Chat on Slack][slack-image]][slack-link]
 
@@ -128,6 +131,8 @@ Some definitions are taken from Open Source projects:
 [numSpecs-image]: https://api.apis.guru/badges/openapi_specs.svg
 [endpoints-image]: https://api.apis.guru/badges/endpoints.svg
 [fixes-image]: https://api.apis.guru/badges/fixes.svg
+[providers-image]: https://api.apis.guru/badges/providers.svg
+[drivers-image]: https://api.apis.guru/badges/drivers.svg
 [apisDir-link]: ./APIs
 [addAPI-image]: https://cloud.githubusercontent.com/assets/8336157/15861614/7e31511a-2cd5-11e6-8b79-38ad0f61e598.png
 [addAPI-link]: https://apis.guru/add-api/
