@@ -215,11 +215,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        - description: If set to true, any rules for this TlsInspectionPolicy will also be deleted. (Otherwise, the request will only work if the TlsInspectionPolicy has no rules.)
           in: query
-          name: requestId
+          name: force
           schema:
-            type: string
+            type: boolean
       responses:
         "200":
           content:
@@ -941,6 +941,87 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1beta1/{parent}/tlsInspectionPolicies":
+    get:
+      description: Lists TlsInspectionPolicies in a given project and location.
+      operationId: networksecurity.projects.locations.tlsInspectionPolicies.list
+      parameters:
+        - description: Required. The project and location from which the TlsInspectionPolicies should be listed, specified in the format `projects/{project}/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of TlsInspectionPolicies to return per call.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The value returned by the last 'ListTlsInspectionPoliciesResponse' Indicates that this is a continuation of a prior 'ListTlsInspectionPolicies' call, and that the system should return the next page of data.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTlsInspectionPoliciesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new TlsInspectionPolicy in a given project and location.
+      operationId: networksecurity.projects.locations.tlsInspectionPolicies.create
+      parameters:
+        - description: Required. The parent resource of the TlsInspectionPolicy. Must be in the format `projects/{project}/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Short name of the TlsInspectionPolicy resource to be created. This value should be 1-63 characters long, containing only letters, numbers, hyphens, and underscores, and should not start with a number. E.g. "tls_inspection_policy1".
+          in: query
+          name: tlsInspectionPolicyId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TlsInspectionPolicy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta1/{parent}/urlLists":
     get:
       description: Lists UrlLists in a given project and location.
@@ -1432,6 +1513,9 @@ components:
         name:
           description: Required. Name of the resource. Name is of the form projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy} gateway_security_policy should match the pattern:(^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
           type: string
+        tlsInspectionPolicy:
+          description: Optional. Name of a TLS Inspection Policy resource that defines how TLS inspection will be performed for any rule(s) which enables it.
+          type: string
         updateTime:
           description: Output only. The timestamp when the resource was updated.
           format: google-datetime
@@ -1472,6 +1556,9 @@ components:
         sessionMatcher:
           description: Required. CEL expression for matching on session criteria.
           type: string
+        tlsInspectionEnabled:
+          description: Optional. Flag to enable TLS inspection of traffic matching on , can only be true if the parent GatewaySecurityPolicy references a TLSInspectionConfig.
+          type: boolean
         updateTime:
           description: Output only. Time when the rule was updated.
           format: google-datetime
@@ -1719,6 +1806,18 @@ components:
             $ref: "#/components/schemas/ServerTlsPolicy"
           type: array
       type: object
+    ListTlsInspectionPoliciesResponse:
+      description: Response returned by the ListTlsInspectionPolicies method.
+      properties:
+        nextPageToken:
+          description: If there might be more results than those appearing in this response, then 'next_page_token' is included. To get the next set of results, call this method again using the value of 'next_page_token' as 'page_token'.
+          type: string
+        tlsInspectionPolicies:
+          description: List of TlsInspectionPolicies resources.
+          items:
+            $ref: "#/components/schemas/TlsInspectionPolicy"
+          type: array
+      type: object
     ListUrlListsResponse:
       description: Response returned by the ListUrlLists method.
       properties:
@@ -1915,6 +2014,29 @@ components:
           type: array
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+    TlsInspectionPolicy:
+      description: The TlsInspectionPolicy resource contains references to CA pools in Certificate Authority Service and associated metadata.
+      properties:
+        caPool:
+          description: Required. A CA pool resource used to issue interception certificates. The CA pool string has a relative resource path following the form "projects/{project}/locations/{location}/caPools/{ca_pool}".
+          type: string
+        createTime:
+          description: Output only. The timestamp when the resource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. Free-text description of the resource.
+          type: string
+        name:
+          description: Required. Name of the resource. Name is of the form projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy} tls_inspection_policy should match the pattern:(^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+          type: string
+        updateTime:
+          description: Output only. The timestamp when the resource was updated.
+          format: google-datetime
+          readOnly: true
           type: string
       type: object
     UrlList:
