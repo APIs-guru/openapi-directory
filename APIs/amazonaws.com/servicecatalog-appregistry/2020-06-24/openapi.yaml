@@ -160,21 +160,21 @@ paths:
         - name: application
           in: path
           required: true
-          description: The name or ID of the application.
+          description: ' The name, ID, or ARN of the application. '
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[-.\w]+)'
             minLength: 1
             maxLength: 256
         - name: attributeGroup
           in: path
           required: true
-          description: The name or ID of the attribute group that holds the attributes to describe the application.
+          description: ' The name, ID, or ARN of the attribute group that holds the attributes to describe the application. '
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/attribute-groups/[-.\w]+)'
             minLength: 1
-            maxLength: 256
+            maxLength: 512
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -215,25 +215,25 @@ paths:
         - name: application
           in: path
           required: true
-          description: The name or ID of the application.
+          description: ' The name, ID, or ARN of the application. '
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[-.\w]+)'
             minLength: 1
             maxLength: 256
         - name: attributeGroup
           in: path
           required: true
-          description: The name or ID of the attribute group that holds the attributes to describe the application.
+          description: ' The name, ID, or ARN of the attribute group that holds the attributes to describe the application. '
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/attribute-groups/[-.\w]+)'
             minLength: 1
-            maxLength: 256
+            maxLength: 512
   '/applications/{application}/resources/{resourceType}/{resource}':
     put:
       operationId: AssociateResource
-      description: Associates a resource with an application. Both the resource and the application can be specified either by ID or name.
+      description: ' Associates a resource with an application. The resource can be specified by its ARN or name. The application can be specified by ARN, ID, or name. '
       responses:
         '200':
           description: Success
@@ -271,14 +271,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       parameters:
         - name: application
           in: path
           required: true
-          description: The name or ID of the application.
+          description: ' The name, ID, or ARN of the application. '
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[-.\w]+)'
             minLength: 1
             maxLength: 256
         - name: resourceType
@@ -335,6 +341,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       parameters:
         - name: application
           in: path
@@ -342,7 +354,7 @@ paths:
           description: The name or ID of the application.
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[-.\w]+)'
             minLength: 1
             maxLength: 256
         - name: resourceType
@@ -395,10 +407,10 @@ paths:
         - name: application
           in: path
           required: true
-          description: The name or ID of the application.
+          description: ' The name, ID, or ARN of the application. '
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[-.\w]+)'
             minLength: 1
             maxLength: 256
         - name: resourceType
@@ -454,6 +466,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       parameters: []
       requestBody:
         required: true
@@ -663,7 +681,7 @@ paths:
   '/applications/{application}':
     delete:
       operationId: DeleteApplication
-      description: Deletes an application that is specified either by its application ID or name. All associated attribute groups and resources must be disassociated from it before deleting an application.
+      description: 'Deletes an application that is specified either by its application ID, name, or ARN. All associated attribute groups and resources must be disassociated from it before deleting an application.'
       responses:
         '200':
           description: Success
@@ -693,10 +711,10 @@ paths:
         - name: application
           in: path
           required: true
-          description: The name or ID of the application.
+          description: ' The name, ID, or ARN of the application. '
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[-.\w]+)'
             minLength: 1
             maxLength: 256
     parameters:
@@ -709,7 +727,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetApplication
-      description: 'Retrieves metadata information about one of your applications. The application can be specified either by its unique ID or by its name (which is unique within one account in one region at a given point in time). Specify by ID in automated workflows if you want to make sure that the exact same application is returned or a <code>ResourceNotFoundException</code> is thrown, avoiding the ABA addressing problem.'
+      description: ' Retrieves metadata information about one of your applications. The application can be specified by its ARN, ID, or name (which is unique within one account in one region at a given point in time). Specify by ARN or ID in automated workflows if you want to make sure that the exact same application is returned or a <code>ResourceNotFoundException</code> is thrown, avoiding the ABA addressing problem. '
       responses:
         '200':
           description: Success
@@ -745,10 +763,10 @@ paths:
         - name: application
           in: path
           required: true
-          description: The name or ID of the application.
+          description: ' The name, ID, or ARN of the application. '
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[-.\w]+)'
             minLength: 1
             maxLength: 256
     patch:
@@ -785,14 +803,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       parameters:
         - name: application
           in: path
           required: true
-          description: The name or ID of the application that will be updated.
+          description: ' The name, ID, or ARN of the application that will be updated. '
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[-.\w]+)'
             minLength: 1
             maxLength: 256
       requestBody:
@@ -815,7 +839,7 @@ paths:
   '/attribute-groups/{attributeGroup}':
     delete:
       operationId: DeleteAttributeGroup
-      description: 'Deletes an attribute group, specified either by its attribute group ID or name.'
+      description: 'Deletes an attribute group, specified either by its attribute group ID, name, or ARN.'
       responses:
         '200':
           description: Success
@@ -845,12 +869,12 @@ paths:
         - name: attributeGroup
           in: path
           required: true
-          description: The name or ID of the attribute group that holds the attributes to describe the application.
+          description: ' The name, ID, or ARN of the attribute group that holds the attributes to describe the application. '
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/attribute-groups/[-.\w]+)'
             minLength: 1
-            maxLength: 256
+            maxLength: 512
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -861,7 +885,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetAttributeGroup
-      description: 'Retrieves an attribute group, either by its name or its ID. The attribute group can be specified either by its unique ID or by its name.'
+      description: ' Retrieves an attribute group by its ARN, ID, or name. The attribute group can be specified by its ARN, ID, or name. '
       responses:
         '200':
           description: Success
@@ -897,12 +921,12 @@ paths:
         - name: attributeGroup
           in: path
           required: true
-          description: The name or ID of the attribute group that holds the attributes to describe the application.
+          description: ' The name, ID, or ARN of the attribute group that holds the attributes to describe the application. '
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/attribute-groups/[-.\w]+)'
             minLength: 1
-            maxLength: 256
+            maxLength: 512
     patch:
       operationId: UpdateAttributeGroup
       description: 'Updates an existing attribute group with new details. '
@@ -941,12 +965,12 @@ paths:
         - name: attributeGroup
           in: path
           required: true
-          description: The name or ID of the attribute group that holds the attributes to describe the application.
+          description: ' The name, ID, or ARN of the attribute group that holds the attributes to describe the application. '
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/attribute-groups/[-.\w]+)'
             minLength: 1
-            maxLength: 256
+            maxLength: 512
       requestBody:
         required: true
         content:
@@ -1030,7 +1054,7 @@ paths:
                 - configuration
               properties:
                 configuration:
-                  description: ' Includes all of the Service Catalog AppRegistry settings. '
+                  description: ' Includes all of the AppRegistry settings. '
                   type: object
                   properties:
                     tagQueryConfiguration:
@@ -1073,7 +1097,7 @@ paths:
           description: The name or ID of the application.
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[-.\w]+)'
             minLength: 1
             maxLength: 256
         - name: nextToken
@@ -1134,10 +1158,10 @@ paths:
         - name: application
           in: path
           required: true
-          description: The name or ID of the application.
+          description: ' The name, ID, or ARN of the application. '
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[-.\w]+)'
             minLength: 1
             maxLength: 256
         - name: nextToken
@@ -1201,7 +1225,7 @@ paths:
           description: The name or ID of the application.
           schema:
             type: string
-            pattern: '[-.\w]+'
+            pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[-.\w]+)'
             minLength: 1
             maxLength: 256
         - name: nextToken
@@ -1359,6 +1383,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: resourceType
           in: path
@@ -1522,6 +1558,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon resource name (ARN) that specifies the resource.
+    ThrottlingException: {}
     CreateApplicationResponse:
       type: object
       properties:
@@ -1657,6 +1694,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: Key-value pairs associated with the attribute group.
+        createdBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: The service principal that created the attribute group.
     GetConfigurationResponse:
       type: object
       properties:
@@ -1781,7 +1822,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagQueryConfiguration'
             - description: ' Includes the definition of a <code>tagQuery</code>. '
-      description: ' Includes all of the Service Catalog AppRegistry settings. '
+      description: ' Includes all of the AppRegistry settings. '
     ApplicationId:
       type: string
       pattern: '[a-z0-9]+'
@@ -1841,7 +1882,7 @@ components:
       description: Represents a Amazon Web Services Service Catalog AppRegistry application that is the top-level node in a hierarchy of related cloud resource abstractions.
     ApplicationSpecifier:
       type: string
-      pattern: '[-.\w]+'
+      pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[-.\w]+)'
       minLength: 1
       maxLength: 256
     ApplicationSummary:
@@ -1883,16 +1924,16 @@ components:
       maxLength: 1600
     AttributeGroupSpecifier:
       type: string
-      pattern: '[-.\w]+'
+      pattern: '([-.\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/attribute-groups/[-.\w]+)'
       minLength: 1
-      maxLength: 256
+      maxLength: 512
     AssociateAttributeGroupRequest:
       type: object
       title: AssociateAttributeGroupRequest
       properties: {}
     AttributeGroupArn:
       type: string
-      pattern: 'arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/attribute-groups/[a-z0-9]+'
+      pattern: 'arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/attribute-groups/[-.\w]+'
     ResourceType:
       type: string
       enum:
@@ -1912,9 +1953,9 @@ components:
       minimum: 0
     AttributeGroupId:
       type: string
-      pattern: '[a-z0-9]+'
-      minLength: 26
-      maxLength: 26
+      pattern: '[-.\w]+'
+      minLength: 1
+      maxLength: 256
     AttributeGroup:
       type: object
       properties:
@@ -1947,6 +1988,11 @@ components:
             - $ref: '#/components/schemas/Tags'
             - description: Key-value pairs you can use to associate with the attribute group.
       description: Represents a Amazon Web Services Service Catalog AppRegistry attribute group that is rich metadata which describes an application and its components.
+    CreatedBy:
+      type: string
+      pattern: '^(?!-)([a-z0-9-]+\.)+(aws\.internal|amazonaws\.com(\.cn)?)$'
+      minLength: 1
+      maxLength: 128
     AttributeGroupDetails:
       type: object
       properties:
@@ -1963,6 +2009,10 @@ components:
             - $ref: '#/components/schemas/Name'
             - deprecated: true
               description: <important> <p> This field is no longer supported. We recommend you don't use the field when using <code>ListAttributeGroupsForApplication</code>. </p> </important> <p> The name of the attribute group. </p>This field is deprecated. We recommend not using the field when using ListAttributeGroupsForApplication.
+        createdBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: The service principal that created the attribute group.
       description: ' The details related to a specific AttributeGroup. '
     AttributeGroupDetailsList:
       type: array
@@ -1999,6 +2049,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.
+        createdBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: The service principal that created the attribute group.
       description: Summary of a Amazon Web Services Service Catalog AppRegistry attribute group.
     AttributeGroupSummaries:
       type: array

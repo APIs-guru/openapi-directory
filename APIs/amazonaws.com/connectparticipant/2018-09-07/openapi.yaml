@@ -3,7 +3,7 @@ info:
   version: '2018-09-07'
   x-release: v4
   title: Amazon Connect Participant Service
-  description: 'Amazon Connect is a cloud-based contact center solution that makes it easy to set up and manage a customer contact center. Amazon Connect enables customer contacts through voice or chat. Use the Amazon Connect Participant Service to manage chat participants, such as agents and customers.'
+  description: '<p>Amazon Connect is an easy-to-use omnichannel cloud contact center service that enables companies of any size to deliver superior customer service at a lower cost. Amazon Connect communications capabilities make it easy for companies to deliver personalized interactions across communication channels, including chat. </p> <p>Use the Amazon Connect Participant Service to manage participants (for example, agents, customers, and managers listening in), and to send messages and events within a chat contact. The APIs in the service enable the following: sending chat messages, attachment sharing, managing a participant''s connection state and message events, and retrieving chat transcripts.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -258,7 +258,7 @@ paths:
                     $ref: '#/components/schemas/ConnectionType'
                   minItems: 1
                 ConnectParticipant:
-                  description: Amazon Connect Participant is used to mark the participant as connected for message streaming.
+                  description: 'Amazon Connect Participant is used to mark the participant as connected for customer participant in message streaming, as well as for agent or manager participant in non-streaming chats.'
                   type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -641,12 +641,12 @@ paths:
                 - Content
               properties:
                 ContentType:
-                  description: 'The type of the content. Supported types are <code>text/plain</code>, <code>text/markdown</code>, and <code>application/json</code>.'
+                  description: 'The type of the content. Supported types are <code>text/plain</code>, <code>text/markdown</code>, <code>application/json</code>, and <code>application/vnd.amazonaws.connect.message.interactive.response</code>.'
                   type: string
                   minLength: 1
                   maxLength: 100
                 Content:
-                  description: '<p>The content of the message. </p> <ul> <li> <p>For <code>text/plain</code> and <code>text/markdown</code>, the Length Constraints are Minimum of 1, Maximum of 1024. </p> </li> <li> <p>For <code>application/json</code>, the Length Constraints are Minimum of 1, Maximum of 12000. </p> </li> </ul>'
+                  description: '<p>The content of the message. </p> <ul> <li> <p>For <code>text/plain</code> and <code>text/markdown</code>, the Length Constraints are Minimum of 1, Maximum of 1024. </p> </li> <li> <p>For <code>application/json</code>, the Length Constraints are Minimum of 1, Maximum of 12000. </p> </li> <li> <p>For <code>application/vnd.amazonaws.connect.message.interactive.response</code>, the Length Constraints are Minimum of 1, Maximum of 12288.</p> </li> </ul>'
                   type: string
                   minLength: 1
                   maxLength: 16384
@@ -1038,7 +1038,7 @@ components:
         ConnectParticipant:
           allOf:
             - $ref: '#/components/schemas/Bool'
-            - description: Amazon Connect Participant is used to mark the participant as connected for message streaming.
+            - description: 'Amazon Connect Participant is used to mark the participant as connected for customer participant in message streaming, as well as for agent or manager participant in non-streaming chats.'
     Websocket:
       type: object
       properties:
@@ -1269,11 +1269,11 @@ components:
         ContentType:
           allOf:
             - $ref: '#/components/schemas/ChatContentType'
-            - description: 'The type of the content. Supported types are <code>text/plain</code>, <code>text/markdown</code>, and <code>application/json</code>.'
+            - description: 'The type of the content. Supported types are <code>text/plain</code>, <code>text/markdown</code>, <code>application/json</code>, and <code>application/vnd.amazonaws.connect.message.interactive.response</code>.'
         Content:
           allOf:
             - $ref: '#/components/schemas/ChatContent'
-            - description: '<p>The content of the message. </p> <ul> <li> <p>For <code>text/plain</code> and <code>text/markdown</code>, the Length Constraints are Minimum of 1, Maximum of 1024. </p> </li> <li> <p>For <code>application/json</code>, the Length Constraints are Minimum of 1, Maximum of 12000. </p> </li> </ul>'
+            - description: '<p>The content of the message. </p> <ul> <li> <p>For <code>text/plain</code> and <code>text/markdown</code>, the Length Constraints are Minimum of 1, Maximum of 1024. </p> </li> <li> <p>For <code>application/json</code>, the Length Constraints are Minimum of 1, Maximum of 12000. </p> </li> <li> <p>For <code>application/vnd.amazonaws.connect.message.interactive.response</code>, the Length Constraints are Minimum of 1, Maximum of 12288.</p> </li> </ul>'
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'

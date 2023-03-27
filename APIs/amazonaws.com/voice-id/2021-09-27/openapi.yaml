@@ -3,7 +3,7 @@ info:
   version: '2021-09-27'
   x-release: v4
   title: Amazon Voice ID
-  description: 'Amazon Connect Voice ID provides real-time caller authentication and fraud screening. This guide describes the APIs used for this service. '
+  description: 'Amazon Connect Voice ID provides real-time caller authentication and fraud risk detection, which make voice interactions in contact centers more secure and efficient.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -115,10 +115,85 @@ servers:
     description: The Amazon Voice ID endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#X-Amz-Target=VoiceID.AssociateFraudster:
+    post:
+      operationId: AssociateFraudster
+      description: 'Associates the fraudsters with the watchlist specified in the same domain. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateFraudsterResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateFraudsterRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VoiceID.AssociateFraudster
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=VoiceID.CreateDomain:
     post:
       operationId: CreateDomain
-      description: 'Creates a domain that contains all Amazon Connect Voice ID data, such as speakers, fraudsters, customer audio, and voiceprints. '
+      description: 'Creates a domain that contains all Amazon Connect Voice ID data, such as speakers, fraudsters, customer audio, and voiceprints. Every domain is created with a default watchlist that fraudsters can be a part of.'
       responses:
         '200':
           description: Success
@@ -182,6 +257,81 @@ paths:
             type: string
             enum:
               - VoiceID.CreateDomain
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VoiceID.CreateWatchlist:
+    post:
+      operationId: CreateWatchlist
+      description: Creates a watchlist that fraudsters can be a part of.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWatchlistResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWatchlistRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VoiceID.CreateWatchlist
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -258,7 +408,7 @@ paths:
   /#X-Amz-Target=VoiceID.DeleteFraudster:
     post:
       operationId: DeleteFraudster
-      description: Deletes the specified fraudster from Voice ID.
+      description: Deletes the specified fraudster from Voice ID. This action disassociates the fraudster from any watchlists it is a part of.
       responses:
         '200':
           description: Success
@@ -377,6 +527,71 @@ paths:
             type: string
             enum:
               - VoiceID.DeleteSpeaker
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VoiceID.DeleteWatchlist:
+    post:
+      operationId: DeleteWatchlist
+      description: 'Deletes the specified watchlist from Voice ID. This API throws an exception when there are fraudsters in the watchlist that you are trying to delete. You must delete the fraudsters, and then delete the watchlist. Every domain has a default watchlist which cannot be deleted. '
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteWatchlistRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VoiceID.DeleteWatchlist
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -700,6 +915,138 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VoiceID.DescribeWatchlist:
+    post:
+      operationId: DescribeWatchlist
+      description: Describes the specified watchlist.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWatchlistResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeWatchlistRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VoiceID.DescribeWatchlist
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VoiceID.DisassociateFraudster:
+    post:
+      operationId: DisassociateFraudster
+      description: 'Disassociates the fraudsters from the watchlist specified. Voice ID always expects a fraudster to be a part of at least one watchlist. If you try to disassociate a fraudster from its only watchlist, a <code>ValidationException</code> is thrown. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateFraudsterResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateFraudsterRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VoiceID.DisassociateFraudster
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=VoiceID.EvaluateSession:
     post:
       operationId: EvaluateSession
@@ -913,6 +1260,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VoiceID.ListFraudsters:
+    post:
+      operationId: ListFraudsters
+      description: Lists all fraudsters in a specified watchlist or domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFraudstersResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFraudstersRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VoiceID.ListFraudsters
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=VoiceID.ListSpeakerEnrollmentJobs:
     post:
       operationId: ListSpeakerEnrollmentJobs
@@ -1118,6 +1540,81 @@ paths:
             type: string
             enum:
               - VoiceID.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VoiceID.ListWatchlists:
+    post:
+      operationId: ListWatchlists
+      description: Lists all watchlists in a specified domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWatchlistsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListWatchlistsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VoiceID.ListWatchlists
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1558,6 +2055,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VoiceID.UpdateWatchlist:
+    post:
+      operationId: UpdateWatchlist
+      description: 'Updates the specified watchlist. Every domain has a default watchlist which cannot be updated. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWatchlistResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWatchlistRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VoiceID.UpdateWatchlist
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -1610,6 +2176,38 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AssociateFraudsterResponse:
+      type: object
+      properties:
+        Fraudster:
+          $ref: '#/components/schemas/Fraudster'
+    AssociateFraudsterRequest:
+      type: object
+      required:
+        - DomainId
+        - FraudsterId
+        - WatchlistId
+      title: AssociateFraudsterRequest
+      properties:
+        DomainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: The identifier of the domain that contains the fraudster.
+        FraudsterId:
+          allOf:
+            - $ref: '#/components/schemas/FraudsterId'
+            - description: The identifier of the fraudster to be associated with the watchlist.
+        WatchlistId:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistId'
+            - description: The identifier of the watchlist you want to associate with the fraudster.
+    ServiceQuotaExceededException: {}
+    ResourceNotFoundException: {}
+    ValidationException: {}
+    ConflictException: {}
+    InternalServerException: {}
+    ThrottlingException: {}
+    AccessDeniedException: {}
     CreateDomainResponse:
       type: object
       properties:
@@ -1627,11 +2225,11 @@ components:
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientTokenString'
-            - description: 'The idempotency token for creating a new domain. If not provided, Amazon Web Services SDK populates this field.'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
-            - description: A brief description of the domain.
+            - description: A brief description of this domain.
         Name:
           allOf:
             - $ref: '#/components/schemas/DomainName'
@@ -1644,13 +2242,36 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: A list of tags you want added to the domain.
-    ServiceQuotaExceededException: {}
-    ResourceNotFoundException: {}
-    ValidationException: {}
-    ConflictException: {}
-    InternalServerException: {}
-    ThrottlingException: {}
-    AccessDeniedException: {}
+    CreateWatchlistResponse:
+      type: object
+      properties:
+        Watchlist:
+          allOf:
+            - $ref: '#/components/schemas/Watchlist'
+            - description: Information about the newly created watchlist.
+    CreateWatchlistRequest:
+      type: object
+      required:
+        - DomainId
+        - Name
+      title: CreateWatchlistRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientTokenString'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistDescription'
+            - description: A brief description of this watchlist.
+        DomainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: The identifier of the domain that contains the watchlist.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistName'
+            - description: The name of the watchlist.
     DeleteDomainRequest:
       type: object
       required:
@@ -1671,7 +2292,7 @@ components:
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The identifier of the domain containing the fraudster.
+            - description: The identifier of the domain that contains the fraudster.
         FraudsterId:
           allOf:
             - $ref: '#/components/schemas/FraudsterId'
@@ -1686,11 +2307,26 @@ components:
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The identifier of the domain containing the speaker.
+            - description: The identifier of the domain that contains the speaker.
         SpeakerId:
           allOf:
             - $ref: '#/components/schemas/SpeakerId'
             - description: The identifier of the speaker you want to delete.
+    DeleteWatchlistRequest:
+      type: object
+      required:
+        - DomainId
+        - WatchlistId
+      title: DeleteWatchlistRequest
+      properties:
+        DomainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: The identifier of the domain that contains the watchlist.
+        WatchlistId:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistId'
+            - description: The identifier of the watchlist to be deleted.
     DescribeDomainResponse:
       type: object
       properties:
@@ -1707,7 +2343,7 @@ components:
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The identifier of the domain you are describing.
+            - description: The identifier of the domain that you are describing.
     DescribeFraudsterResponse:
       type: object
       properties:
@@ -1725,7 +2361,7 @@ components:
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The identifier of the domain containing the fraudster.
+            - description: The identifier of the domain that contains the fraudster.
         FraudsterId:
           allOf:
             - $ref: '#/components/schemas/FraudsterId'
@@ -1747,11 +2383,11 @@ components:
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The identifier for the domain containing the fraudster registration job.
+            - description: The identifier of the domain that contains the fraudster registration job.
         JobId:
           allOf:
             - $ref: '#/components/schemas/JobId'
-            - description: The identifier for the fraudster registration job you are describing.
+            - description: The identifier of the fraudster registration job you are describing.
     DescribeSpeakerResponse:
       type: object
       properties:
@@ -1791,11 +2427,58 @@ components:
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The identifier of the domain containing the speaker enrollment job.
+            - description: The identifier of the domain that contains the speaker enrollment job.
         JobId:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier of the speaker enrollment job you are describing.
+    DescribeWatchlistResponse:
+      type: object
+      properties:
+        Watchlist:
+          allOf:
+            - $ref: '#/components/schemas/Watchlist'
+            - description: Information about the specified watchlist.
+    DescribeWatchlistRequest:
+      type: object
+      required:
+        - DomainId
+        - WatchlistId
+      title: DescribeWatchlistRequest
+      properties:
+        DomainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: The identifier of the domain that contains the watchlist.
+        WatchlistId:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistId'
+            - description: The identifier of the watchlist that you are describing.
+    DisassociateFraudsterResponse:
+      type: object
+      properties:
+        Fraudster:
+          $ref: '#/components/schemas/Fraudster'
+    DisassociateFraudsterRequest:
+      type: object
+      required:
+        - DomainId
+        - FraudsterId
+        - WatchlistId
+      title: DisassociateFraudsterRequest
+      properties:
+        DomainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: The identifier of the domain that contains the fraudster.
+        FraudsterId:
+          allOf:
+            - $ref: '#/components/schemas/FraudsterId'
+            - description: The identifier of the fraudster to be disassociated from the watchlist.
+        WatchlistId:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistId'
+            - description: The identifier of the watchlist that you want to disassociate from the fraudster.
     EvaluateSessionResponse:
       type: object
       properties:
@@ -1806,7 +2489,7 @@ components:
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The identifier of the domain containing the session.
+            - description: The identifier of the domain that contains the session.
         FraudDetectionResult:
           allOf:
             - $ref: '#/components/schemas/FraudDetectionResult'
@@ -1848,7 +2531,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. '
+            - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.'
     ListDomainsRequest:
       type: object
       title: ListDomainsRequest
@@ -1856,11 +2539,11 @@ components:
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResultsForListDomainFe'
-            - description: The maximum number of domains to list per API call.
+            - description: The maximum number of results that are returned per call. You can use <code>NextToken</code> to obtain more pages of results. The default is 100; the maximum allowed page size is also 100.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. '
+            - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.'
     ListFraudsterRegistrationJobsResponse:
       type: object
       properties:
@@ -1871,7 +2554,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. '
+            - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.'
     ListFraudsterRegistrationJobsRequest:
       type: object
       required:
@@ -1881,7 +2564,7 @@ components:
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The identifier of the domain containing the fraudster registration Jobs.
+            - description: The identifier of the domain that contains the fraudster registration Jobs.
         JobStatus:
           allOf:
             - $ref: '#/components/schemas/FraudsterRegistrationJobStatus'
@@ -1889,11 +2572,44 @@ components:
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResultsForList'
-            - description: 'The maximum number of results that are returned per call. You can use <code>NextToken</code> to obtain further pages of results. The default is 100; the maximum allowed page size is also 100. '
+            - description: 'The maximum number of results that are returned per call. You can use <code>NextToken</code> to obtain more pages of results. The default is 100; the maximum allowed page size is also 100. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.'
+    ListFraudstersResponse:
+      type: object
+      properties:
+        FraudsterSummaries:
+          allOf:
+            - $ref: '#/components/schemas/FraudsterSummaries'
+            - description: 'A list that contains details about each fraudster in the Amazon Web Services account. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. '
+    ListFraudstersRequest:
+      type: object
+      required:
+        - DomainId
+      title: ListFraudstersRequest
+      properties:
+        DomainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: 'The identifier of the domain. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsForList'
+            - description: 'The maximum number of results that are returned per call. You can use <code>NextToken</code> to obtain more pages of results. The default is 100; the maximum allowed page size is also 100. '
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. '
+        WatchlistId:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistId'
+            - description: 'The identifier of the watchlist. If provided, all fraudsters in the watchlist are listed. If not provided, all fraudsters in the domain are listed.'
     ListSpeakerEnrollmentJobsResponse:
       type: object
       properties:
@@ -1914,7 +2630,7 @@ components:
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The identifier of the domain containing the speaker enrollment jobs.
+            - description: The identifier of the domain that contains the speaker enrollment jobs.
         JobStatus:
           allOf:
             - $ref: '#/components/schemas/SpeakerEnrollmentJobStatus'
@@ -1922,11 +2638,11 @@ components:
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResultsForList'
-            - description: 'The maximum number of results that are returned per call. You can use <code>NextToken</code> to obtain further pages of results. The default is 100; the maximum allowed page size is also 100. '
+            - description: The maximum number of results that are returned per call. You can use <code>NextToken</code> to obtain more pages of results. The default is 100; the maximum allowed page size is also 100.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. '
+            - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.'
     ListSpeakersResponse:
       type: object
       properties:
@@ -1951,11 +2667,11 @@ components:
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResultsForList'
-            - description: 'The maximum number of results that are returned per call. You can use <code>NextToken</code> to obtain further pages of results. The default is 100; the maximum allowed page size is also 100. '
+            - description: 'The maximum number of results that are returned per call. You can use <code>NextToken</code> to obtain more pages of results. The default is 100; the maximum allowed page size is also 100. '
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. '
+            - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.'
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -1973,6 +2689,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
             - description: The Amazon Resource Name (ARN) of the Voice ID resource for which you want to list the tags.
+    ListWatchlistsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. '
+        WatchlistSummaries:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistSummaries'
+            - description: 'A list that contains details about each watchlist in the Amazon Web Services account. '
+    ListWatchlistsRequest:
+      type: object
+      required:
+        - DomainId
+      title: ListWatchlistsRequest
+      properties:
+        DomainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: The identifier of the domain.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsForList'
+            - description: 'The maximum number of results that are returned per call. You can use <code>NextToken</code> to obtain more pages of results. The default is 100; the maximum allowed page size is also 100. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. '
     OptOutSpeakerResponse:
       type: object
       properties:
@@ -1990,7 +2735,7 @@ components:
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The identifier of the domain containing the speaker.
+            - description: The identifier of the domain that contains the speaker.
         SpeakerId:
           allOf:
             - $ref: '#/components/schemas/SpeakerId'
@@ -2014,7 +2759,7 @@ components:
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientTokenString'
-            - description: 'The idempotency token for starting a new fraudster registration job. If not provided, Amazon Web Services SDK populates this field.'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
@@ -2022,7 +2767,7 @@ components:
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The identifier of the domain containing the fraudster registration job and in which the fraudsters are registered.
+            - description: The identifier of the domain that contains the fraudster registration job and in which the fraudsters are registered.
         InputDataConfig:
           allOf:
             - $ref: '#/components/schemas/InputDataConfig'
@@ -2058,7 +2803,7 @@ components:
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientTokenString'
-            - description: 'The idempotency token for starting a new speaker enrollment Job. If not provided, Amazon Web Services SDK populates this field.'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
@@ -2137,7 +2882,7 @@ components:
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
-            - description: A brief description of the domain.
+            - description: A brief description about this domain.
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
@@ -2150,6 +2895,36 @@ components:
           allOf:
             - $ref: '#/components/schemas/ServerSideEncryptionConfiguration'
             - description: 'The configuration, containing the KMS key identifier, to be used by Voice ID for the server-side encryption of your data. Changing the domain''s associated KMS key immediately triggers an asynchronous process to remove dependency on the old KMS key, such that the domain''s data can only be accessed using the new KMS key. The domain''s <code>ServerSideEncryptionUpdateDetails</code> contains the details for this process.'
+    UpdateWatchlistResponse:
+      type: object
+      properties:
+        Watchlist:
+          allOf:
+            - $ref: '#/components/schemas/Watchlist'
+            - description: Details about the updated watchlist.
+    UpdateWatchlistRequest:
+      type: object
+      required:
+        - DomainId
+        - WatchlistId
+      title: UpdateWatchlistRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistDescription'
+            - description: A brief description about this watchlist.
+        DomainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: The identifier of the domain that contains the watchlist.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistName'
+            - description: The name of the watchlist.
+        WatchlistId:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistId'
+            - description: The identifier of the watchlist to be updated.
     AmazonResourceName:
       type: string
       pattern: '^arn:aws(-[^:]+)?:voiceid.+:[0-9]{12}:domain/[a-zA-Z0-9]{22}$'
@@ -2158,6 +2933,42 @@ components:
     Arn:
       type: string
       pattern: '^arn:aws(-[^:]+)?:voiceid.+:[0-9]{12}:domain/[a-zA-Z0-9]{22}$'
+    DomainId:
+      type: string
+      pattern: '^[a-zA-Z0-9]{22}$'
+      minLength: 22
+      maxLength: 22
+    FraudsterId:
+      type: string
+      pattern: '^id#[a-zA-Z0-9]{22}$'
+      minLength: 25
+      maxLength: 25
+      format: password
+    WatchlistId:
+      type: string
+      pattern: '^[a-zA-Z0-9]{22}$'
+      minLength: 22
+      maxLength: 22
+    Fraudster:
+      type: object
+      properties:
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when Voice ID identified the fraudster.
+        DomainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: The identifier of the domain that contains the fraudster.
+        GeneratedFraudsterId:
+          allOf:
+            - $ref: '#/components/schemas/GeneratedFraudsterId'
+            - description: The service-generated identifier for the fraudster.
+        WatchlistIds:
+          allOf:
+            - $ref: '#/components/schemas/ResponseWatchlistIds'
+            - description: The identifier of the watchlists the fraudster is a part of.
+      description: Contains all the information about a fraudster.
     Score:
       type: integer
       minimum: 0
@@ -2207,11 +3018,11 @@ components:
         AudioAggregationEndedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp indicating when audio aggregation ended for this authentication result.
+            - description: A timestamp of when audio aggregation ended for this authentication result.
         AudioAggregationStartedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp indicating when audio aggregation started for this authentication result.
+            - description: A timestamp of when audio aggregation started for this authentication result.
         AuthenticationResultId:
           allOf:
             - $ref: '#/components/schemas/UniqueIdLarge'
@@ -2237,6 +3048,8 @@ components:
             - $ref: '#/components/schemas/Score'
             - description: The authentication score for the speaker whose authentication result is produced. This value is only present if the authentication decision is either <code>ACCEPT</code> or <code>REJECT</code>.
       description: 'The authentication result produced by Voice ID, processed against the current session state and streamed audio of the speaker.'
+    Boolean:
+      type: boolean
     ClientTokenString:
       type: string
       pattern: '^[a-zA-Z0-9-_]+$'
@@ -2280,15 +3093,15 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The timestamp at which the domain is created.
+            - description: The timestamp of when the domain was created.
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
-            - description: The client-provided description of the domain.
+            - description: The description of the domain.
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The service-generated identifier for the domain.
+            - description: The identifier of the domain.
         DomainStatus:
           allOf:
             - $ref: '#/components/schemas/DomainStatus'
@@ -2296,7 +3109,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/DomainName'
-            - description: The client-provided name for the domain.
+            - description: The name for the domain.
         ServerSideEncryptionConfiguration:
           allOf:
             - $ref: '#/components/schemas/ServerSideEncryptionConfiguration'
@@ -2308,19 +3121,56 @@ components:
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The timestamp showing the domain's last update.
+            - description: The timestamp of when the domain was last update.
+        WatchlistDetails:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistDetails'
+            - description: The watchlist details of a domain. Contains the default watchlist ID of the domain.
       description: Contains all the information about a domain.
-    DomainId:
+    WatchlistDescription:
       type: string
-      pattern: '^[a-zA-Z0-9]{22}$'
-      minLength: 22
-      maxLength: 22
-    FraudsterId:
-      type: string
-      pattern: '^id#[a-zA-Z0-9]{22}$'
-      minLength: 25
-      maxLength: 25
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
+      minLength: 1
+      maxLength: 1024
       format: password
+    WatchlistName:
+      type: string
+      pattern: '^[a-zA-Z0-9][a-zA-Z0-9_-]*$'
+      minLength: 1
+      maxLength: 256
+      format: password
+    Watchlist:
+      type: object
+      properties:
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the watchlist was created.
+        DefaultWatchlist:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the specified watchlist is the default watchlist of a domain.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistDescription'
+            - description: The description of the watchlist.
+        DomainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: The identifier of the domain that contains the watchlist.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistName'
+            - description: The name for the watchlist.
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the watchlist was updated.
+        WatchlistId:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistId'
+            - description: The identifier of the watchlist.
+      description: Contains all the information about a watchlist.
     SpeakerId:
       type: string
       pattern: '^(id#[a-zA-Z0-9]{22}|[a-zA-Z0-9][a-zA-Z0-9_-]*)$'
@@ -2338,7 +3188,7 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp showing the creation time of the fraudster registration job.
+            - description: A timestamp of when the fraudster registration job was created.
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
@@ -2346,11 +3196,11 @@ components:
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The identifier of the domain containing the fraudster registration job.
+            - description: The identifier of the domain that contains the fraudster registration job.
         EndedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp showing when the fraudster registration job ended.
+            - description: A timestamp of when the fraudster registration job ended.
         FailureDetails:
           allOf:
             - $ref: '#/components/schemas/FailureDetails'
@@ -2384,29 +3234,13 @@ components:
             - $ref: '#/components/schemas/RegistrationConfig'
             - description: 'The registration config containing details such as the action to take when a duplicate fraudster is detected, and the similarity threshold to use for detecting a duplicate fraudster.'
       description: Contains all the information about a fraudster registration job.
-    Fraudster:
-      type: object
-      properties:
-        CreatedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The timestamp when Voice ID identified the fraudster.
-        DomainId:
-          allOf:
-            - $ref: '#/components/schemas/DomainId'
-            - description: The identifier for the domain containing the fraudster.
-        GeneratedFraudsterId:
-          allOf:
-            - $ref: '#/components/schemas/GeneratedFraudsterId'
-            - description: The service-generated identifier for the fraudster.
-      description: Contains all the information about a fraudster.
     SpeakerEnrollmentJob:
       type: object
       properties:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp showing the creation of the speaker enrollment job.
+            - description: A timestamp of when the speaker enrollment job was created.
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
@@ -2418,7 +3252,7 @@ components:
         EndedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: 'A timestamp showing when the speaker enrollment job ended. '
+            - description: 'A timestamp of when the speaker enrollment job ended. '
         EnrollmentConfig:
           allOf:
             - $ref: '#/components/schemas/EnrollmentConfig'
@@ -2458,7 +3292,7 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: 'A timestamp showing when the speaker is created. '
+            - description: 'A timestamp of when the speaker was created. '
         CustomerSpeakerId:
           allOf:
             - $ref: '#/components/schemas/CustomerSpeakerId'
@@ -2474,7 +3308,7 @@ components:
         LastAccessedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: 'The timestamp when the speaker was last accessed for enrollment, re-enrollment or a successful authentication. This timestamp is accurate to one hour.'
+            - description: 'The timestamp of when the speaker was last accessed for enrollment, re-enrollment or a successful authentication. This timestamp is accurate to one hour.'
         Status:
           allOf:
             - $ref: '#/components/schemas/SpeakerStatus'
@@ -2482,7 +3316,7 @@ components:
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp showing the speaker's last update.
+            - description: A timestamp of the speaker's last update.
       description: Contains all the information about a speaker.
     DomainStatus:
       type: string
@@ -2506,6 +3340,16 @@ components:
             - $ref: '#/components/schemas/ServerSideEncryptionUpdateStatus'
             - description: 'Status of the server-side encryption update. During an update, if there is an issue with the domain''s current or old KMS key ID, such as an inaccessible or disabled key, then the status is FAILED. In order to resolve this, the key needs to be made accessible, and then an UpdateDomain call with the existing server-side encryption configuration will re-attempt this update process.'
       description: 'Details about the most recent server-side encryption configuration update. When the server-side encryption configuration is changed, dependency on the old KMS key is removed through an asynchronous process. When this update is complete, the domain’s data can only be accessed using the new KMS key.'
+    WatchlistDetails:
+      type: object
+      required:
+        - DefaultWatchlistId
+      properties:
+        DefaultWatchlistId:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistId'
+            - description: The identifier of the default watchlist.
+      description: Details of the watchlists in a domain.
     DomainSummary:
       type: object
       properties:
@@ -2516,15 +3360,15 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The timestamp showing when the domain is created.
+            - description: The timestamp of when the domain was created.
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
-            - description: The client-provided description of the domain.
+            - description: The description of the domain.
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The service-generated identifier for the domain.
+            - description: The identifier of the domain.
         DomainStatus:
           allOf:
             - $ref: '#/components/schemas/DomainStatus'
@@ -2544,7 +3388,11 @@ components:
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The timestamp showing the domain's last update.
+            - description: The timestamp of when the domain was last updated.
+        WatchlistDetails:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistDetails'
+            - description: 'Provides information about <code>watchlistDetails</code> and <code>DefaultWatchlistID</code>. '
       description: Contains a summary of information about a domain.
     DomainSummaries:
       type: array
@@ -2571,7 +3419,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Score'
             - description: 'Threshold value for determining whether the speaker is a high risk to be fraudulent. If the detected risk score calculated by Voice ID is greater than or equal to the threshold, the speaker is considered a fraudster.'
-      description: 'The configuration defining the action to take when a speaker is flagged by the fraud detection system during a batch speaker enrollment job, and the risk threshold to use for identification.'
+        WatchlistIds:
+          allOf:
+            - $ref: '#/components/schemas/EnrollmentJobFraudDetectionConfigWatchlistIds'
+            - description: 'The identifier of watchlists against which fraud detection is performed. '
+      description: The fraud detection configuration to be used during the batch speaker enrollment job.
     EnrollmentConfig:
       type: object
       properties:
@@ -2589,6 +3441,12 @@ components:
       enum:
         - IGNORE
         - FAIL
+    EnrollmentJobFraudDetectionConfigWatchlistIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/WatchlistId'
+      minItems: 1
+      maxItems: 1
     SessionNameOrId:
       type: string
       pattern: '^(id#[a-zA-Z0-9]{22}|[a-zA-Z0-9][a-zA-Z0-9_-]*)$'
@@ -2600,11 +3458,11 @@ components:
         AudioAggregationEndedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp indicating when audio aggregation ended for this fraud detection result.
+            - description: A timestamp of when audio aggregation ended for this fraud detection result.
         AudioAggregationStartedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp indicating when audio aggregation started for this fraud detection result.
+            - description: A timestamp of when audio aggregation started for this fraud detection result.
         Configuration:
           allOf:
             - $ref: '#/components/schemas/FraudDetectionConfiguration'
@@ -2661,13 +3519,15 @@ components:
       description: Contains error details for a failed batch job.
     FraudDetectionConfiguration:
       type: object
-      required:
-        - RiskThreshold
       properties:
         RiskThreshold:
           allOf:
             - $ref: '#/components/schemas/Score'
             - description: 'Threshold value for determining whether the speaker is a fraudster. If the detected risk score calculated by Voice ID is higher than the threshold, the speaker is considered a fraudster.'
+        WatchlistId:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistId'
+            - description: 'The identifier of the watchlist against which fraud detection is performed. '
       description: The configuration used for performing fraud detection over a speaker during a session.
     FraudDetectionDecision:
       type: string
@@ -2730,6 +3590,10 @@ components:
       pattern: '^id#[a-zA-Z0-9]{22}$'
       minLength: 25
       maxLength: 25
+    ResponseWatchlistIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/WatchlistId'
     IamRoleArn:
       type: string
       pattern: '^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$'
@@ -2792,22 +3656,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/Score'
             - description: The minimum similarity score between the new and old fraudsters in order to consider the new fraudster a duplicate.
-      description: 'The configuration defining the action to take when a duplicate fraudster is detected, and the similarity threshold to use for detecting a duplicate fraudster during a batch fraudster registration job.'
+        WatchlistIds:
+          allOf:
+            - $ref: '#/components/schemas/RegistrationConfigWatchlistIds'
+            - description: 'The identifiers of watchlists that a fraudster is registered to. If a watchlist isn''t provided, the fraudsters are registered to the default watchlist. '
+      description: The registration configuration to be used during the batch fraudster registration job.
     FraudsterRegistrationJobSummary:
       type: object
       properties:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: 'A timestamp showing when the fraudster registration job is created. '
+            - description: 'A timestamp of when the fraudster registration job was created. '
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
-            - description: The identifier of the domain containing the fraudster registration job.
+            - description: The identifier of the domain that contains the fraudster registration job.
         EndedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp showing when the fraudster registration job ended.
+            - description: A timestamp of when the fraudster registration job ended.
         FailureDetails:
           allOf:
             - $ref: '#/components/schemas/FailureDetails'
@@ -2833,6 +3701,30 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/FraudsterRegistrationJobSummary'
+    FraudsterSummary:
+      type: object
+      properties:
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the fraudster summary was created.
+        DomainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: The identifier of the domain that contains the fraudster summary.
+        GeneratedFraudsterId:
+          allOf:
+            - $ref: '#/components/schemas/GeneratedFraudsterId'
+            - description: The service-generated identifier for the fraudster.
+        WatchlistIds:
+          allOf:
+            - $ref: '#/components/schemas/ResponseWatchlistIds'
+            - description: The identifier of the watchlists the fraudster is a part of.
+      description: 'Contains a summary of information about a fraudster. '
+    FraudsterSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/FraudsterSummary'
     S3Uri:
       type: string
       pattern: '^s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?$'
@@ -2871,6 +3763,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SpeakerSummary'
+    WatchlistSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/WatchlistSummary'
+    RegistrationConfigWatchlistIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/WatchlistId'
+      minItems: 1
+      maxItems: 1
     ServerSideEncryptionUpdateStatus:
       type: string
       enum:
@@ -2890,7 +3792,7 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp showing the creation time of the speaker enrollment job.
+            - description: A timestamp of when of the speaker enrollment job was created.
         DomainId:
           allOf:
             - $ref: '#/components/schemas/DomainId'
@@ -2898,7 +3800,7 @@ components:
         EndedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: A timestamp showing when the speaker enrollment job ended.
+            - description: A timestamp of when the speaker enrollment job ended.
         FailureDetails:
           allOf:
             - $ref: '#/components/schemas/FailureDetails'
@@ -2985,5 +3887,37 @@ components:
         $ref: '#/components/schemas/TagKey'
       minItems: 0
       maxItems: 200
+    WatchlistSummary:
+      type: object
+      properties:
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the watchlist was created.
+        DefaultWatchlist:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the specified watchlist is the default watchlist of a domain.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistDescription'
+            - description: The description of the watchlist.
+        DomainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: The identifier of the domain that contains the watchlist.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistName'
+            - description: The name for the watchlist.
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the watchlist was last updated.
+        WatchlistId:
+          allOf:
+            - $ref: '#/components/schemas/WatchlistId'
+            - description: The identifier of the watchlist.
+      description: Contains a summary of information about a watchlist.
 security:
   - hmac: []

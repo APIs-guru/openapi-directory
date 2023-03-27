@@ -1187,7 +1187,7 @@ paths:
                     ProcessParentPid:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
-                        - description: The parent process ID.
+                        - description: The parent process ID. This field accepts positive integers between <code>O</code> and <code>2147483647</code>.
                     ProcessLaunchedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
@@ -1544,7 +1544,7 @@ paths:
   /invitations/decline:
     post:
       operationId: DeclineInvitations
-      description: <p>Declines invitations to become a member account.</p> <p>This operation is only used by accounts that are not part of an organization. Organization accounts do not receive invitations.</p>
+      description: <p>Declines invitations to become a member account.</p> <p>A prospective member account uses this operation to decline an invitation to become a member.</p> <p>This operation is only called by member accounts that aren't part of an organization. Organization accounts don't receive invitations.</p>
       responses:
         '200':
           description: Success
@@ -1587,7 +1587,7 @@ paths:
                 - AccountIds
               properties:
                 AccountIds:
-                  description: The list of account IDs for the accounts from which to decline the invitations to Security Hub.
+                  description: The list of prospective member account IDs for which to decline an invitation.
                   type: array
                   items:
                     $ref: '#/components/schemas/NonEmptyString'
@@ -2065,7 +2065,7 @@ paths:
                     ProcessParentPid:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
-                        - description: The parent process ID.
+                        - description: The parent process ID. This field accepts positive integers between <code>O</code> and <code>2147483647</code>.
                     ProcessLaunchedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
@@ -2295,7 +2295,7 @@ paths:
   /invitations/delete:
     post:
       operationId: DeleteInvitations
-      description: <p>Deletes invitations received by the Amazon Web Services account to become a member account.</p> <p>This operation is only used by accounts that are not part of an organization. Organization accounts do not receive invitations.</p>
+      description: <p>Deletes invitations received by the Amazon Web Services account to become a member account.</p> <p>A Security Hub administrator account can use this operation to delete invitations sent to one or more member accounts.</p> <p>This operation is only used to delete invitations that are sent to member accounts that aren't part of an organization. Organization accounts don't receive invitations.</p>
       responses:
         '200':
           description: Success
@@ -2344,7 +2344,7 @@ paths:
                 - AccountIds
               properties:
                 AccountIds:
-                  description: The list of the account IDs that sent the invitations to delete.
+                  description: The list of member account IDs that received the invitations you want to delete.
                   type: array
                   items:
                     $ref: '#/components/schemas/NonEmptyString'
@@ -2647,7 +2647,7 @@ paths:
                   description: 'Whether to enable the security standards that Security Hub has designated as automatically enabled. If you do not provide a value for <code>EnableDefaultStandards</code>, it is set to <code>true</code>. To not enable the automatically enabled standards, set <code>EnableDefaultStandards</code> to <code>false</code>.'
                   type: boolean
                 ControlFindingGenerator:
-                  description: '<p>This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards.</p> <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards.</p> <p>The value for this field in a member account matches the value in the administrator account. For accounts that aren''t part of an organization, the default value of this field is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 9, 2023.</p>'
+                  description: '<p>This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards.</p> <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards.</p> <p>The value for this field in a member account matches the value in the administrator account. For accounts that aren''t part of an organization, the default value of this field is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 23, 2023.</p>'
                   type: string
                   enum:
                     - STANDARD_CONTROL
@@ -3799,7 +3799,7 @@ paths:
                     ProcessParentPid:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
-                        - description: The parent process ID.
+                        - description: The parent process ID. This field accepts positive integers between <code>O</code> and <code>2147483647</code>.
                     ProcessLaunchedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
@@ -4266,7 +4266,7 @@ paths:
                     ProcessParentPid:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
-                        - description: The parent process ID.
+                        - description: The parent process ID. This field accepts positive integers between <code>O</code> and <code>2147483647</code>.
                     ProcessLaunchedAt:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
@@ -6017,7 +6017,7 @@ components:
         ControlFindingGenerator:
           allOf:
             - $ref: '#/components/schemas/ControlFindingGenerator'
-            - description: '<p>Specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards.</p> <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards.</p> <p>The value for this field in a member account matches the value in the administrator account. For accounts that aren''t part of an organization, the default value of this field is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 9, 2023.</p>'
+            - description: '<p>Specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards.</p> <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards.</p> <p>The value for this field in a member account matches the value in the administrator account. For accounts that aren''t part of an organization, the default value of this field is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 23, 2023.</p>'
     DescribeOrganizationConfigurationResponse:
       type: object
       properties:
@@ -6699,6 +6699,52 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AssociatedStandard'
+    AssociationStateDetails:
+      type: object
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The state of the association. '
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The status message, if applicable. '
+      description: ' Describes the state of an association between a route table and a subnet or gateway. '
+    Boolean:
+      type: boolean
+    AssociationSetDetails:
+      type: object
+      properties:
+        AssociationState:
+          allOf:
+            - $ref: '#/components/schemas/AssociationStateDetails'
+            - description: ' The state of the association between a route table and a subnet or gateway. '
+        GatewayId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of the internet gateway or virtual private gateway. '
+        Main:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Indicates whether this is the main route table. '
+        RouteTableAssociationId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of the association. '
+        RouteTableId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of the route table. '
+        SubnetId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of the subnet. A subnet ID is not returned for an implicit association. '
+      description: ' The associations between a route table and one or more subnets or a gateway. '
+    AssociationSetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssociationSetDetails'
     AssociationStatus:
       type: string
       enum:
@@ -6749,8 +6795,6 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The ARN of the CloudWatch Logs log group that receives the access logs.
       description: Contains information about settings for logging access for the stage.
-    Boolean:
-      type: boolean
     AwsApiGatewayCanarySettings:
       type: object
       properties:
@@ -9055,6 +9099,14 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: 'Specifies whether to allow access to instance tags from the instance metadata. '
       description: Metadata options that allow you to configure and secure the Amazon EC2 instance.
+    AwsEc2InstanceMonitoringDetails:
+      type: object
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' Indicates whether detailed monitoring is turned on. Otherwise, basic monitoring is turned on. '
+      description: ' The type of monitoring that’s turned on for an Amazon EC2 instance. '
     AwsEc2InstanceDetails:
       type: object
       properties:
@@ -9106,6 +9158,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsEc2InstanceMetadataOptions'
             - description: 'Details about the metadata options for the Amazon EC2 instance. '
+        Monitoring:
+          allOf:
+            - $ref: '#/components/schemas/AwsEc2InstanceMonitoringDetails'
+            - description: ' Describes the type of monitoring that’s turned on for an instance. '
       description: The details of an Amazon EC2 instance.
     AwsEc2InstanceNetworkInterfacesDetails:
       type: object
@@ -10107,6 +10163,42 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The ID of the security group.
       description: A security group associated with the network interface.
+    PropagatingVgwSetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PropagatingVgwSetDetails'
+    RouteSetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RouteSetDetails'
+    AwsEc2RouteTableDetails:
+      type: object
+      properties:
+        AssociationSet:
+          allOf:
+            - $ref: '#/components/schemas/AssociationSetList'
+            - description: ' The associations between a route table and one or more subnets or a gateway. '
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of the Amazon Web Services account that owns the route table. '
+        PropagatingVgwSet:
+          allOf:
+            - $ref: '#/components/schemas/PropagatingVgwSetList'
+            - description: ' Describes a virtual private gateway propagating route. '
+        RouteTableId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of the route table. '
+        RouteSet:
+          allOf:
+            - $ref: '#/components/schemas/RouteSetList'
+            - description: ' The routes in the route table. '
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of the virtual private cloud (VPC). '
+      description: ' Provides details about a route table for the specified VPC. '
     AwsEc2SecurityGroupIpPermissionList:
       type: array
       items:
@@ -12142,6 +12234,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyStringList'
             - description: The subnets that are associated with the cluster.
+        EndpointPublicAccess:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Indicates whether the Amazon EKS public API server endpoint is turned on. If the Amazon EKS public API server endpoint is turned off, your cluster''s Kubernetes API server can only receive requests that originate from within the cluster VPC. '
       description: Information about the VPC configuration used by the cluster control plane.
     AwsEksClusterLoggingDetails:
       type: object
@@ -15786,6 +15882,18 @@ components:
             - $ref: '#/components/schemas/AwsS3BucketNotificationConfigurationDetails'
             - description: Configurations for S3 bucket notifications.
       description: The notification configuration for the S3 bucket.
+    AwsS3BucketObjectLockConfiguration:
+      type: object
+      properties:
+        ObjectLockEnabled:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' Indicates whether the bucket has an Object Lock configuration enabled. '
+        Rule:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketObjectLockConfigurationRuleDetails'
+            - description: ' Specifies the Object Lock rule for the specified object. '
+      description: ' The container element for S3 Object Lock configuration parameters. In Amazon S3, Object Lock can help prevent objects from being deleted or overwritten for a fixed amount of time or indefinitely. '
     AwsS3BucketDetails:
       type: object
       properties:
@@ -15837,6 +15945,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsS3BucketBucketVersioningConfiguration'
             - description: The versioning state of an S3 bucket.
+        ObjectLockConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketObjectLockConfiguration'
+            - description: ' Specifies which rule Amazon S3 applies by default to every new object placed in the specified bucket. '
       description: The details of an Amazon S3 bucket.
     AwsS3BucketNotificationConfigurationDetails:
       type: array
@@ -15903,6 +16015,30 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The filter value.
       description: Details for a filter rule.
+    AwsS3BucketObjectLockConfigurationRuleDetails:
+      type: object
+      properties:
+        DefaultRetention:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails'
+            - description: ' The default Object Lock retention mode and period that you want to apply to new objects placed in the specified bucket. '
+      description: ' Specifies the S3 Object Lock rule for the specified object. In Amazon S3, Object Lock can help prevent objects from being deleted or overwritten for a fixed amount of time or indefinitely. '
+    AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails:
+      type: object
+      properties:
+        Days:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The number of days that you want to specify for the default retention period. '
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. '
+        Years:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The number of years that you want to specify for the default retention period. '
+      description: ' The default S3 Object Lock retention mode and period that you want to apply to new objects placed in the specified Amazon S3 bucket. '
     AwsS3BucketServerSideEncryptionByDefault:
       type: object
       properties:
@@ -16265,7 +16401,7 @@ components:
         ParentPid:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The parent process ID.
+            - description: The parent process ID. This field accepts positive integers between <code>O</code> and <code>2147483647</code>.
         LaunchedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -16615,7 +16751,7 @@ components:
         ProcessParentPid:
           allOf:
             - $ref: '#/components/schemas/NumberFilterList'
-            - description: The parent process ID.
+            - description: The parent process ID. This field accepts positive integers between <code>O</code> and <code>2147483647</code>.
         ProcessLaunchedAt:
           allOf:
             - $ref: '#/components/schemas/DateFilterList'
@@ -18294,7 +18430,7 @@ components:
         AccountIds:
           allOf:
             - $ref: '#/components/schemas/AccountIdList'
-            - description: The list of account IDs for the accounts from which to decline the invitations to Security Hub.
+            - description: The list of prospective member account IDs for which to decline an invitation.
     DeleteActionTargetRequest:
       type: object
       title: DeleteActionTargetRequest
@@ -18316,7 +18452,7 @@ components:
         AccountIds:
           allOf:
             - $ref: '#/components/schemas/AccountIdList'
-            - description: The list of the account IDs that sent the invitations to delete.
+            - description: The list of member account IDs that received the invitations you want to delete.
     DeleteMembersRequest:
       type: object
       required:
@@ -18458,7 +18594,7 @@ components:
         ControlFindingGenerator:
           allOf:
             - $ref: '#/components/schemas/ControlFindingGenerator'
-            - description: '<p>This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards.</p> <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards.</p> <p>The value for this field in a member account matches the value in the administrator account. For accounts that aren''t part of an organization, the default value of this field is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 9, 2023.</p>'
+            - description: '<p>This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards.</p> <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards.</p> <p>The value for this field in a member account matches the value in the administrator account. For accounts that aren''t part of an organization, the default value of this field is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 23, 2023.</p>'
     FilePaths:
       type: object
       properties:
@@ -19160,6 +19296,14 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The resource policy associated with the product.
       description: Contains details about a product.
+    PropagatingVgwSetDetails:
+      type: object
+      properties:
+        GatewayId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of the virtual private gateway. '
+      description: ' Describes a virtual private gateway propagating route. '
     Recommendation:
       type: object
       properties:
@@ -19516,6 +19660,10 @@ components:
           $ref: '#/components/schemas/AwsWafv2WebAclDetails'
         AwsWafv2RuleGroup:
           $ref: '#/components/schemas/AwsWafv2RuleGroupDetails'
+        AwsEc2RouteTable:
+          allOf:
+            - $ref: '#/components/schemas/AwsEc2RouteTableDetails'
+            - description: ' Provides details about a route table. A route table contains a set of rules, called routes, that determine where to direct network traffic from your subnet or gateway. '
       description: '<p>Additional details about a resource related to a finding.</p> <p>To provide the details, use the object that corresponds to the resource type. For example, if the resource type is <code>AwsEc2Instance</code>, then you use the <code>AwsEc2Instance</code> object to provide the details.</p> <p>If the type-specific object does not contain all of the fields you want to populate, then you use the <code>Other</code> object to populate those additional fields.</p> <p>You also use the <code>Other</code> object to populate the details when the selected type does not have a corresponding object.</p>'
     Resource:
       type: object
@@ -19568,6 +19716,74 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The reason that the account was not processed.
       description: Details about the account that was not processed.
+    RouteSetDetails:
+      type: object
+      properties:
+        CarrierGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of the carrier gateway. '
+        CoreNetworkArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The Amazon Resource Name (ARN) of the core network. '
+        DestinationCidrBlock:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The IPv4 CIDR block used for the destination match. '
+        DestinationIpv6CidrBlock:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The IPv6 CIDR block used for the destination match. '
+        DestinationPrefixListId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The prefix of the destination Amazon Web Service. '
+        EgressOnlyInternetGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of the egress-only internet gateway. '
+        GatewayId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of a gateway attached to your VPC. '
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of a NAT instance in your VPC. '
+        InstanceOwnerId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of the Amazon Web Services account that owns the instance. '
+        LocalGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of the local gateway. '
+        NatGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of a NAT gateway. '
+        NetworkInterfaceId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of the network interface. '
+        Origin:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' Describes how the route was created. '
+        State:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The state of the route. '
+        TransitGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of a transit gateway. '
+        VpcPeeringConnectionId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ID of a VPC peering connection. '
+      description: ' Provides details about the routes in the route table. '
     RuleGroupVariables:
       type: object
       properties:

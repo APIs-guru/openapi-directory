@@ -1423,6 +1423,10 @@ paths:
                   pattern: '^[a-zA-Z0-9-_]+$'
                   minLength: 1
                   maxLength: 64
+                Sidewalk:
+                  description: Sidewalk object for creating a device profile.
+                  type: object
+                  properties: {}
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1482,6 +1486,15 @@ paths:
             description: The maximum number of results to return in this operation.
             minimum: 0
             maximum: 250
+        - name: deviceProfileType
+          in: query
+          required: false
+          description: 'A filter to list only device profiles that use this type, which can be <code>LoRaWAN</code> or <code>Sidewalk</code>.'
+          schema:
+            type: string
+            enum:
+              - Sidewalk
+              - LoRaWAN
         - name: MaxResults
           in: query
           schema:
@@ -2284,6 +2297,14 @@ paths:
                   enum:
                     - Enabled
                     - Disabled
+                Sidewalk:
+                  description: Sidewalk object for creating a wireless device.
+                  type: object
+                  properties:
+                    DeviceProfileId:
+                      allOf:
+                        - $ref: '#/components/schemas/DeviceProfileId'
+                        - description: The ID of the Sidewalk device profile.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4217,6 +4238,194 @@ paths:
                   enum:
                     - Enabled
                     - Disabled
+  '/wireless_device_import_task/{Id}':
+    delete:
+      operationId: DeleteWirelessDeviceImportTask
+      description: Delete an import task.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWirelessDeviceImportTaskResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: The unique identifier of the import task to be deleted.
+          schema:
+            type: string
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetWirelessDeviceImportTask
+      description: Get information about an import task and count of device onboarding summary information for the import task.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWirelessDeviceImportTaskResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: The identifier of the import task for which information is requested.
+          schema:
+            type: string
+            maxLength: 256
+    patch:
+      operationId: UpdateWirelessDeviceImportTask
+      description: Update an import task to add more devices to the task.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWirelessDeviceImportTaskResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: The identifier of the import task to be updated.
+          schema:
+            type: string
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Sidewalk
+              properties:
+                Sidewalk:
+                  description: Sidewalk object information for updating an import task.
+                  type: object
+                  properties:
+                    DeviceCreationFile:
+                      allOf:
+                        - $ref: '#/components/schemas/DeviceCreationFile'
+                        - description: The CSV file contained in an S3 bucket that's used for appending devices to an existing import task.
   '/wireless-gateways/{Id}':
     delete:
       operationId: DeleteWirelessGateway
@@ -4458,6 +4667,66 @@ paths:
             type: string
             pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
             maxLength: 36
+  '/wireless-devices/{Identifier}/deregister':
+    patch:
+      operationId: DeregisterWirelessDevice
+      description: Deregister a wireless device from AWS IoT Wireless.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeregisterWirelessDeviceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: Identifier
+          in: path
+          required: true
+          description: The identifier of the wireless device to deregister from AWS IoT Wireless.
+          schema:
+            type: string
+            maxLength: 256
+        - name: WirelessDeviceType
+          in: query
+          required: false
+          description: 'The type of wireless device to deregister from AWS IoT Wireless, which can be <code>LoRaWAN</code> or <code>Sidewalk</code>.'
+          schema:
+            type: string
+            enum:
+              - Sidewalk
+              - LoRaWAN
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/partner-accounts/{PartnerAccountId}#partnerType':
     delete:
       operationId: DisassociateAwsAccountFromPartnerAccount
@@ -6427,6 +6696,96 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /wireless_device_import_task#id:
+    get:
+      operationId: ListDevicesForWirelessDeviceImportTask
+      description: List the Sidewalk devices in an import task and their onboarding status.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDevicesForWirelessDeviceImportTaskResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: The identifier of the import task for which wireless devices are listed.
+          schema:
+            type: string
+            maxLength: 256
+        - name: maxResults
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: integer
+            description: The maximum number of results to return in this operation.
+            minimum: 0
+            maximum: 250
+        - name: nextToken
+          in: query
+          required: false
+          description: 'To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <code>null</code> to receive the first set of results.'
+          schema:
+            type: string
+            maxLength: 4096
+        - name: status
+          in: query
+          required: false
+          description: The status of the devices in the import task.
+          schema:
+            type: string
+            enum:
+              - INITIALIZED
+              - PENDING
+              - ONBOARDED
+              - FAILED
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /event-configurations#resourceType:
     get:
       operationId: ListEventConfigurations
@@ -6964,6 +7323,78 @@ paths:
                     $ref: '#/components/schemas/Tag'
                   minItems: 0
                   maxItems: 200
+  /wireless_device_import_tasks:
+    get:
+      operationId: ListWirelessDeviceImportTasks
+      description: List wireless devices that have been added to an import task.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWirelessDeviceImportTasksResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: integer
+            description: The maximum number of results to return in this operation.
+            minimum: 0
+            maximum: 250
+        - name: nextToken
+          in: query
+          required: false
+          description: 'To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <code>null</code> to receive the first set of results.'
+          schema:
+            type: string
+            maxLength: 4096
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/multicast-groups/{Id}/data':
     post:
       operationId: SendDataToMulticastGroup
@@ -7192,6 +7623,197 @@ paths:
                     $ref: '#/components/schemas/Tag'
                   minItems: 0
                   maxItems: 200
+  /wireless_single_device_import_task:
+    post:
+      operationId: StartSingleWirelessDeviceImportTask
+      description: Start import task for a single wireless device.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartSingleWirelessDeviceImportTaskResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - DestinationName
+                - Sidewalk
+              properties:
+                DestinationName:
+                  description: The name of the Sidewalk destination that describes the IoT rule to route messages from the device in the import task that will be onboarded to AWS IoT Wireless.
+                  type: string
+                  pattern: '[a-zA-Z0-9-_]+'
+                  maxLength: 128
+                ClientRequestToken:
+                  description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.'
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]+$'
+                  minLength: 1
+                  maxLength: 64
+                DeviceName:
+                  description: The name of the wireless device for which an import task is being started.
+                  type: string
+                Tags:
+                  description: The tag to attach to the specified resource. Tags are metadata that you can use to manage a resource.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 200
+                Sidewalk:
+                  description: Information about an import task created for an individual Sidewalk device.
+                  type: object
+                  properties:
+                    SidewalkManufacturingSn:
+                      allOf:
+                        - $ref: '#/components/schemas/SidewalkManufacturingSn'
+                        - description: The Sidewalk manufacturing serial number (SMSN) of the device added to the import task.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /wireless_device_import_task:
+    post:
+      operationId: StartWirelessDeviceImportTask
+      description: Start import task for provisioning Sidewalk devices in bulk using an S3 CSV file.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartWirelessDeviceImportTaskResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - DestinationName
+                - Sidewalk
+              properties:
+                DestinationName:
+                  description: The name of the Sidewalk destination that describes the IoT rule to route messages from the devices in the import task that are onboarded to AWS IoT Wireless.
+                  type: string
+                  pattern: '[a-zA-Z0-9-_]+'
+                  maxLength: 128
+                ClientRequestToken:
+                  description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.'
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]+$'
+                  minLength: 1
+                  maxLength: 64
+                Tags:
+                  description: The tag to attach to the specified resource. Tags are metadata that you can use to manage a resource.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 200
+                Sidewalk:
+                  description: Information about an import task created for bulk provisioning.
+                  type: object
+                  properties:
+                    DeviceCreationFile:
+                      allOf:
+                        - $ref: '#/components/schemas/DeviceCreationFile'
+                        - description: The CSV file contained in an S3 bucket that's used for adding devices to an import task.
+                    Role:
+                      allOf:
+                        - $ref: '#/components/schemas/Role'
+                        - description: The IAM role that allows AWS IoT Wireless to access the CSV file in the S3 bucket.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/wireless-devices/{Id}/test':
     post:
       operationId: TestWirelessDevice
@@ -7535,6 +8157,15 @@ components:
         - US915
         - AU915
         - AS923-1
+        - AS923-2
+        - AS923-3
+        - AS923-4
+        - EU433
+        - CN470
+        - CN779
+        - RU864
+        - KR920
+        - IN865
       description: Supported RfRegions
     CreateMulticastGroupResponse:
       type: object
@@ -7819,6 +8450,9 @@ components:
     DeleteWirelessDeviceResponse:
       type: object
       properties: {}
+    DeleteWirelessDeviceImportTaskResponse:
+      type: object
+      properties: {}
     DeleteWirelessGatewayResponse:
       type: object
       properties: {}
@@ -7826,6 +8460,9 @@ components:
       type: object
       properties: {}
     DeleteWirelessGatewayTaskDefinitionResponse:
+      type: object
+      properties: {}
+    DeregisterWirelessDeviceResponse:
       type: object
       properties: {}
     DisassociateAwsAccountFromPartnerAccountResponse:
@@ -7895,6 +8532,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LoRaWANDeviceProfile'
             - description: Information about the device profile.
+        Sidewalk:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkGetDeviceProfile'
+            - description: Information about the Sidewalk parameters in the device profile.
     GetEventConfigurationByResourceTypesResponse:
       type: object
       properties:
@@ -8070,7 +8711,7 @@ components:
         Rss:
           allOf:
             - $ref: '#/components/schemas/RSS'
-            - description: Recived signal strength of the WLAN measurement data.
+            - description: Received signal strength (dBm) of the WLAN measurement data.
       description: Wi-Fi access point.
     GsmList:
       type: array
@@ -8240,6 +8881,53 @@ components:
           allOf:
             - $ref: '#/components/schemas/PositioningConfigStatus'
             - description: 'FPort values for the GNSS, stream, and ClockSync functions of the positioning information.'
+    GetWirelessDeviceImportTaskResponse:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ImportTaskId'
+            - description: The identifier of the import task for which information is retrieved.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ImportTaskArn'
+            - description: The ARN (Amazon Resource Name) of the import task.
+        DestinationName:
+          allOf:
+            - $ref: '#/components/schemas/DestinationName'
+            - description: The name of the destination that's assigned to the wireless devices in the import task.
+        Sidewalk:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkGetStartImportInfo'
+            - description: The Sidewalk-related information about an import task.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/CreationTime'
+            - description: The time at which the import task was created.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ImportTaskStatus'
+            - description: The import task status.
+        StatusReason:
+          allOf:
+            - $ref: '#/components/schemas/StatusReason'
+            - description: 'The reason for the provided status information, such as a validation error that causes the import task to fail.'
+        InitializedImportedDeviceCount:
+          allOf:
+            - $ref: '#/components/schemas/ImportedWirelessDeviceCount'
+            - description: The number of devices in the import task that are waiting for the control log to start processing.
+        PendingImportedDeviceCount:
+          allOf:
+            - $ref: '#/components/schemas/ImportedWirelessDeviceCount'
+            - description: The number of devices in the import task that are waiting in the import task queue to be onboarded.
+        OnboardedImportedDeviceCount:
+          allOf:
+            - $ref: '#/components/schemas/ImportedWirelessDeviceCount'
+            - description: The number of devices in the import task that have been onboarded to the import task.
+        FailedImportedDeviceCount:
+          allOf:
+            - $ref: '#/components/schemas/ImportedWirelessDeviceCount'
+            - description: The number of devices in the import task that failed to onboard to the import task.
     GetWirelessDeviceStatisticsResponse:
       type: object
       properties:
@@ -8387,6 +9075,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/DeviceProfileList'
             - description: The list of device profiles.
+    ListDevicesForWirelessDeviceImportTaskResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token to use to get the next set of results, or <code>null</code> if there are no additional results.'
+        DestinationName:
+          allOf:
+            - $ref: '#/components/schemas/DestinationName'
+            - description: The name of the Sidewalk destination that describes the IoT rule to route messages received from devices in an import task that are onboarded to AWS IoT Wireless.
+        ImportedWirelessDeviceList:
+          allOf:
+            - $ref: '#/components/schemas/ImportedWirelessDeviceList'
+            - description: List of wireless devices in an import task and their onboarding status.
     ListEventConfigurationsResponse:
       type: object
       properties:
@@ -8489,6 +9192,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
+    ListWirelessDeviceImportTasksResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token to use to get the next set of results, or <code>null</code> if there are no additional results.'
+        WirelessDeviceImportTaskList:
+          allOf:
+            - $ref: '#/components/schemas/WirelessDeviceImportTaskList'
+            - description: List of import tasks and summary information of onboarding status of devices in each import task.
     ListWirelessDevicesResponse:
       type: object
       properties:
@@ -8628,6 +9342,37 @@ components:
       description: How long before a multicast group session is to timeout.
       minimum: 60
       maximum: 172800
+    StartSingleWirelessDeviceImportTaskResponse:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ImportTaskId'
+            - description: The import task ID.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ImportTaskArn'
+            - description: The ARN (Amazon Resource Name) of the import task.
+    SidewalkManufacturingSn:
+      type: string
+      maxLength: 64
+    StartWirelessDeviceImportTaskResponse:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ImportTaskId'
+            - description: The import task ID.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ImportTaskArn'
+            - description: The ARN (Amazon Resource Name) of the import task.
+    DeviceCreationFile:
+      type: string
+      maxLength: 1024
+    Role:
+      type: string
+      maxLength: 2048
     TagResourceResponse:
       type: object
       properties: {}
@@ -8793,6 +9538,9 @@ components:
             - $ref: '#/components/schemas/Applications'
             - description: 'LoRaWAN application, which can be used for geolocation by activating positioning.'
       description: Object for updating the FPorts information.
+    UpdateWirelessDeviceImportTaskResponse:
+      type: object
+      properties: {}
     UpdateWirelessGatewayResponse:
       type: object
       properties: {}
@@ -8877,6 +9625,9 @@ components:
       type: string
       minLength: 1
       maxLength: 1011
+    ApId:
+      type: string
+      maxLength: 256
     AppEui:
       type: string
       pattern: '[a-fA-F0-9]{16}'
@@ -8913,6 +9664,12 @@ components:
             - $ref: '#/components/schemas/DestinationName'
             - description: The name of the position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.
       description: 'LoRaWAN application configuration, which can be used to perform geolocation.'
+    ApplicationServerPublicKey:
+      type: string
+      pattern: '[a-fA-F0-9]{64}'
+      minLength: 1
+      maxLength: 4096
+      format: password
     Applications:
       type: array
       items:
@@ -9420,6 +10177,10 @@ components:
             - $ref: '#/components/schemas/Supports32BitFCnt'
             - description: The Supports32BitFCnt value.
       description: LoRaWANDeviceProfile object.
+    SidewalkCreateDeviceProfile:
+      type: object
+      properties: {}
+      description: Sidewalk object for creating a device profile.
     CreateDeviceProfileRequest:
       type: object
       title: CreateDeviceProfileRequest
@@ -9440,6 +10201,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
+        Sidewalk:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkCreateDeviceProfile'
+            - description: The Sidewalk-related information for creating the Sidewalk device profile.
     DeviceProfileArn:
       type: string
     FuotaTaskName:
@@ -9681,6 +10446,14 @@ components:
       enum:
         - Enabled
         - Disabled
+    SidewalkCreateWirelessDevice:
+      type: object
+      properties:
+        DeviceProfileId:
+          allOf:
+            - $ref: '#/components/schemas/DeviceProfileId'
+            - description: The ID of the Sidewalk device profile.
+      description: Sidewalk object for creating a wireless device.
     CreateWirelessDeviceRequest:
       type: object
       required:
@@ -9720,6 +10493,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/PositioningConfigStatus'
             - description: 'FPort values for the GNSS, stream, and ClockSync functions of the positioning information.'
+        Sidewalk:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkCreateWirelessDevice'
+            - description: The device configuration information to use to create the Sidewalk device.
     WirelessDeviceArn:
       type: string
     WirelessGatewayName:
@@ -9853,6 +10630,49 @@ components:
     CreationDate:
       type: string
       format: date-time
+    CreationTime:
+      type: string
+      format: date-time
+    DakCertificateId:
+      type: string
+      maxLength: 256
+    MaxAllowedSignature:
+      type: integer
+    FactorySupport:
+      type: boolean
+    DeviceTypeId:
+      type: string
+      maxLength: 2048
+    DakCertificateMetadata:
+      type: object
+      required:
+        - CertificateId
+      properties:
+        CertificateId:
+          allOf:
+            - $ref: '#/components/schemas/DakCertificateId'
+            - description: The certificate ID for the DAK.
+        MaxAllowedSignature:
+          allOf:
+            - $ref: '#/components/schemas/MaxAllowedSignature'
+            - description: The maximum number of signatures that the DAK can sign. A value of <code>-1</code> indicates that there's no device limit.
+        FactorySupport:
+          allOf:
+            - $ref: '#/components/schemas/FactorySupport'
+            - description: Whether factory support has been enabled.
+        ApId:
+          allOf:
+            - $ref: '#/components/schemas/ApId'
+            - description: The advertised product ID (APID) that's used for pre-production and production applications.
+        DeviceTypeId:
+          allOf:
+            - $ref: '#/components/schemas/DeviceTypeId'
+            - description: The device type ID that's used for prototyping applications.
+      description: The device attestation key (DAK) information.
+    DakCertificateMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DakCertificateMetadata'
     DeleteDestinationRequest:
       type: object
       title: DeleteDestinationRequest
@@ -9883,6 +10703,13 @@ components:
       type: object
       title: DeleteServiceProfileRequest
       properties: {}
+    ImportTaskId:
+      type: string
+      maxLength: 256
+    DeleteWirelessDeviceImportTaskRequest:
+      type: object
+      title: DeleteWirelessDeviceImportTaskRequest
+      properties: {}
     DeleteWirelessDeviceRequest:
       type: object
       title: DeleteWirelessDeviceRequest
@@ -9898,6 +10725,13 @@ components:
     DeleteWirelessGatewayTaskRequest:
       type: object
       title: DeleteWirelessGatewayTaskRequest
+      properties: {}
+    Identifier:
+      type: string
+      maxLength: 256
+    DeregisterWirelessDeviceRequest:
+      type: object
+      title: DeregisterWirelessDeviceRequest
       properties: {}
     Destinations:
       type: object
@@ -9940,6 +10774,12 @@ components:
       description: List of device certificate chain.
       items:
         $ref: '#/components/schemas/CertificateList'
+    DeviceCreationFileList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeviceCreationFile'
+    DeviceName:
+      type: string
     DeviceProfile:
       type: object
       properties:
@@ -9960,6 +10800,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DeviceProfile'
+    DeviceProfileType:
+      type: string
+      enum:
+        - Sidewalk
+        - LoRaWAN
     DeviceRegistrationStateEventConfiguration:
       type: object
       properties:
@@ -10105,9 +10950,6 @@ components:
         - nack
         - passthrough
       description: Sidewalk device status notification.
-    Identifier:
-      type: string
-      maxLength: 256
     IdentifierType:
       type: string
       enum:
@@ -10304,6 +11146,22 @@ components:
       type: object
       title: GetDeviceProfileRequest
       properties: {}
+    SidewalkGetDeviceProfile:
+      type: object
+      properties:
+        ApplicationServerPublicKey:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationServerPublicKey'
+            - description: The Sidewalk application server public key.
+        QualificationStatus:
+          allOf:
+            - $ref: '#/components/schemas/QualificationStatus'
+            - description: Gets information about the certification status of a Sidewalk device profile.
+        DakCertificateMetadata:
+          allOf:
+            - $ref: '#/components/schemas/DakCertificateMetadataList'
+            - description: The DAK certificate information of the Sidewalk device profile.
+      description: Gets information about a Sidewalk device profile.
     GetEventConfigurationByResourceTypesRequest:
       type: object
       title: GetEventConfigurationByResourceTypesRequest
@@ -10639,6 +11497,38 @@ components:
             - $ref: '#/components/schemas/MinGwDiversity'
             - description: The MinGwDiversity value.
       description: LoRaWANGetServiceProfileInfo object.
+    GetWirelessDeviceImportTaskRequest:
+      type: object
+      title: GetWirelessDeviceImportTaskRequest
+      properties: {}
+    ImportTaskArn:
+      type: string
+      maxLength: 128
+    SidewalkGetStartImportInfo:
+      type: object
+      properties:
+        DeviceCreationFileList:
+          allOf:
+            - $ref: '#/components/schemas/DeviceCreationFileList'
+            - description: List of Sidewalk devices that are added to the import task.
+        Role:
+          allOf:
+            - $ref: '#/components/schemas/Role'
+            - description: The IAM role that allows AWS IoT Wireless to access the CSV file in the S3 bucket.
+      description: Sidewalk-related information for devices in an import task that are being onboarded.
+    ImportTaskStatus:
+      type: string
+      enum:
+        - INITIALIZING
+        - INITIALIZED
+        - PENDING
+        - COMPLETE
+        - FAILED
+        - DELETING
+    StatusReason:
+      type: string
+    ImportedWirelessDeviceCount:
+      type: integer
     WirelessDeviceIdType:
       type: string
       enum:
@@ -10669,6 +11559,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/DeviceCertificateList'
             - description: The sidewalk device certificates for Ed25519 and P256r1.
+        PrivateKeys:
+          allOf:
+            - $ref: '#/components/schemas/PrivateKeysList'
+            - description: The Sidewalk device private keys that will be used for onboarding the device.
+        DeviceProfileId:
+          allOf:
+            - $ref: '#/components/schemas/DeviceProfileId'
+            - description: The ID of the Sidewalk device profile.
+        CertificateId:
+          allOf:
+            - $ref: '#/components/schemas/DakCertificateId'
+            - description: The ID of the Sidewalk device profile.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/WirelessDeviceSidewalkStatus'
+            - description: 'The Sidewalk device status, such as provisioned or registered.'
       description: Sidewalk device object.
     GetWirelessDeviceStatisticsRequest:
       type: object
@@ -10882,6 +11788,50 @@ components:
       maximum: 63
     HrAllowed:
       type: boolean
+    OnboardStatus:
+      type: string
+      enum:
+        - INITIALIZED
+        - PENDING
+        - ONBOARDED
+        - FAILED
+    OnboardStatusReason:
+      type: string
+    LastUpdateTime:
+      type: string
+      format: date-time
+    ImportedSidewalkDevice:
+      type: object
+      properties:
+        SidewalkManufacturingSn:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkManufacturingSn'
+            - description: The Sidewalk manufacturing serial number (SMSN) of the Sidewalk device.
+        OnboardingStatus:
+          allOf:
+            - $ref: '#/components/schemas/OnboardStatus'
+            - description: The onboarding status of the Sidewalk device in the import task.
+        OnboardingStatusReason:
+          allOf:
+            - $ref: '#/components/schemas/OnboardStatusReason'
+            - description: The reason for the onboarding status information for the Sidewalk device.
+        LastUpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/LastUpdateTime'
+            - description: The time at which the status information was last updated.
+      description: Information about a Sidewalk device that has been added to an import task.
+    ImportedWirelessDevice:
+      type: object
+      properties:
+        Sidewalk:
+          allOf:
+            - $ref: '#/components/schemas/ImportedSidewalkDevice'
+            - description: The Sidewalk-related information about a device that has been added to an import task.
+      description: Information about a wireless device that has been added to an import task.
+    ImportedWirelessDeviceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportedWirelessDevice'
     Integer:
       type: integer
     JoinEui:
@@ -10902,6 +11852,10 @@ components:
     ListDeviceProfilesRequest:
       type: object
       title: ListDeviceProfilesRequest
+      properties: {}
+    ListDevicesForWirelessDeviceImportTaskRequest:
+      type: object
+      title: ListDevicesForWirelessDeviceImportTaskRequest
       properties: {}
     ListEventConfigurationsRequest:
       type: object
@@ -10971,6 +11925,14 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    ListWirelessDeviceImportTasksRequest:
+      type: object
+      title: ListWirelessDeviceImportTasksRequest
+      properties: {}
+    WirelessDeviceImportTaskList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WirelessDeviceImportTask'
     ListWirelessDevicesRequest:
       type: object
       title: ListWirelessDevicesRequest
@@ -11417,6 +12379,10 @@ components:
             - $ref: '#/components/schemas/PositionConfigurationFec'
             - description: Whether forward error correction is enabled.
       description: Details of the Semtech GNSS solver object.
+    PrivateKeysList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CertificateList'
     PutPositionConfigurationRequest:
       type: object
       deprecated: true
@@ -11439,6 +12405,8 @@ components:
       properties:
         LogLevel:
           $ref: '#/components/schemas/LogLevel'
+    QualificationStatus:
+      type: boolean
     QueryString:
       type: string
       description: Query string used to search for wireless devices as part of the bulk associate and disassociate process.
@@ -11529,9 +12497,13 @@ components:
       type: string
       description: The sidewalk device identification.
       maxLength: 256
-    SidewalkManufacturingSn:
+    WirelessDeviceSidewalkStatus:
       type: string
-      maxLength: 64
+      enum:
+        - PROVISIONED
+        - REGISTERED
+        - ACTIVATED
+        - UNKNOWN
     SidewalkListDevice:
       type: object
       properties:
@@ -11551,7 +12523,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/DeviceCertificateList'
             - description: The sidewalk device certificates for Ed25519 and P256r1.
+        DeviceProfileId:
+          allOf:
+            - $ref: '#/components/schemas/DeviceProfileId'
+            - description: Sidewalk object used by list functions.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/WirelessDeviceSidewalkStatus'
+            - description: 'The status of the Sidewalk devices, such as provisioned or registered.'
       description: Sidewalk object used by list functions.
+    SidewalkSingleStartImportInfo:
+      type: object
+      properties:
+        SidewalkManufacturingSn:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkManufacturingSn'
+            - description: The Sidewalk manufacturing serial number (SMSN) of the device added to the import task.
+      description: Information about an import task created for an individual Sidewalk device.
+    SidewalkStartImportInfo:
+      type: object
+      properties:
+        DeviceCreationFile:
+          allOf:
+            - $ref: '#/components/schemas/DeviceCreationFile'
+            - description: The CSV file contained in an S3 bucket that's used for adding devices to an import task.
+        Role:
+          allOf:
+            - $ref: '#/components/schemas/Role'
+            - description: The IAM role that allows AWS IoT Wireless to access the CSV file in the S3 bucket.
+      description: Information about an import task created for bulk provisioning.
     SidewalkUpdateAccount:
       type: object
       properties:
@@ -11560,6 +12560,14 @@ components:
             - $ref: '#/components/schemas/AppServerPrivateKey'
             - description: The new Sidewalk application server private key.
       description: Sidewalk update.
+    SidewalkUpdateImportInfo:
+      type: object
+      properties:
+        DeviceCreationFile:
+          allOf:
+            - $ref: '#/components/schemas/DeviceCreationFile'
+            - description: The CSV file contained in an S3 bucket that's used for appending devices to an existing import task.
+      description: Sidewalk object information for updating an import task.
     StartBulkAssociateWirelessDeviceWithMulticastGroupRequest:
       type: object
       title: StartBulkAssociateWirelessDeviceWithMulticastGroupRequest
@@ -11590,6 +12598,48 @@ components:
       properties:
         LoRaWAN:
           $ref: '#/components/schemas/LoRaWANMulticastSession'
+    StartSingleWirelessDeviceImportTaskRequest:
+      type: object
+      required:
+        - DestinationName
+        - Sidewalk
+      title: StartSingleWirelessDeviceImportTaskRequest
+      properties:
+        DestinationName:
+          allOf:
+            - $ref: '#/components/schemas/DestinationName'
+            - description: The name of the Sidewalk destination that describes the IoT rule to route messages from the device in the import task that will be onboarded to AWS IoT Wireless.
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+        DeviceName:
+          allOf:
+            - $ref: '#/components/schemas/DeviceName'
+            - description: The name of the wireless device for which an import task is being started.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+        Sidewalk:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkSingleStartImportInfo'
+            - description: The Sidewalk-related parameters for importing a single wireless device.
+    StartWirelessDeviceImportTaskRequest:
+      type: object
+      required:
+        - DestinationName
+        - Sidewalk
+      title: StartWirelessDeviceImportTaskRequest
+      properties:
+        DestinationName:
+          allOf:
+            - $ref: '#/components/schemas/DestinationName'
+            - description: The name of the Sidewalk destination that describes the IoT rule to route messages from the devices in the import task that are onboarded to AWS IoT Wireless.
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+        Sidewalk:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkStartImportInfo'
+            - description: The Sidewalk-related parameters for importing wireless devices that need to be provisioned in bulk.
     SubBand:
       type: integer
       description: A subset of supported frequency channels in a certain RFRegion.
@@ -11893,6 +12943,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/GeoJsonPayload'
             - description: 'The position information of the resource, displayed as a JSON payload. The payload uses the GeoJSON format, which a format that''s used to encode geographic data structures. For more information, see <a href="https://geojson.org/">GeoJSON</a>.'
+    UpdateWirelessDeviceImportTaskRequest:
+      type: object
+      required:
+        - Sidewalk
+      title: UpdateWirelessDeviceImportTaskRequest
+      properties:
+        Sidewalk:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkUpdateImportInfo'
+            - description: The Sidewalk-related parameters of the import task to be updated.
     UpdateWirelessDeviceRequest:
       type: object
       title: UpdateWirelessDeviceRequest
@@ -12063,6 +13123,54 @@ components:
       description: The list of wireless device event log options.
       items:
         $ref: '#/components/schemas/WirelessDeviceEventLogOption'
+    WirelessDeviceImportTask:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ImportTaskId'
+            - description: The ID of the wireless device import task.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ImportTaskArn'
+            - description: The ARN (Amazon Resource Name) of the wireless device import task.
+        DestinationName:
+          allOf:
+            - $ref: '#/components/schemas/DestinationName'
+            - description: The name of the Sidewalk destination that that describes the IoT rule to route messages from the device in the import task that will be onboarded to AWS IoT Wireless
+        Sidewalk:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkGetStartImportInfo'
+            - description: The Sidewalk-related information of the wireless device import task.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/CreationTime'
+            - description: The time at which the import task was created.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ImportTaskStatus'
+            - description: The status information of the wireless device import task.
+        StatusReason:
+          allOf:
+            - $ref: '#/components/schemas/StatusReason'
+            - description: The reason that provides additional information about the import task status.
+        InitializedImportedDeviceCount:
+          allOf:
+            - $ref: '#/components/schemas/ImportedWirelessDeviceCount'
+            - description: The summary information of count of wireless devices that are waiting for the control log to be added to an import task.
+        PendingImportedDeviceCount:
+          allOf:
+            - $ref: '#/components/schemas/ImportedWirelessDeviceCount'
+            - description: The summary information of count of wireless devices in an import task that are waiting in the queue to be onboarded.
+        OnboardedImportedDeviceCount:
+          allOf:
+            - $ref: '#/components/schemas/ImportedWirelessDeviceCount'
+            - description: The summary information of count of wireless devices in an import task that have been onboarded to the import task.
+        FailedImportedDeviceCount:
+          allOf:
+            - $ref: '#/components/schemas/ImportedWirelessDeviceCount'
+            - description: The summary information of count of wireless devices in an import task that failed to onboarded to the import task.
+      description: Information about an import task for wireless devices.
     WirelessDeviceStatistics:
       type: object
       properties:
