@@ -3,7 +3,7 @@ info:
   version: '2021-05-03'
   x-release: v4
   title: AWS Systems Manager Incident Manager Contacts
-  description: '<p>Systems Manager Incident Manager is an incident management console designed to help users mitigate and recover from incidents affecting their Amazon Web Services-hosted applications. An incident is any unplanned interruption or reduction in quality of services. </p> <p>Incident Manager increases incident resolution by notifying responders of impact, highlighting relevant troubleshooting data, and providing collaboration tools to get services back up and running. To achieve the primary goal of reducing the time-to-resolution of critical incidents, Incident Manager automates response plans and enables responder team escalation. </p>'
+  description: '<p>Systems Manager Incident Manager is an incident management console designed to help users mitigate and recover from incidents affecting their Amazon Web Services-hosted applications. An incident is any unplanned interruption or reduction in quality of services.</p> <p>Incident Manager increases incident resolution by notifying responders of impact, highlighting relevant troubleshooting data, and providing collaboration tools to get services back up and running. To achieve the primary goal of reducing the time-to-resolution of critical incidents, Incident Manager automates response plans and enables responder team escalation.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -244,7 +244,7 @@ paths:
   /#X-Amz-Target=SSMContacts.CreateContact:
     post:
       operationId: CreateContact
-      description: 'Contacts are either the contacts that Incident Manager engages during an incident or the escalation plans that Incident Manager uses to engage contacts in phases during an incident. '
+      description: Contacts are either the contacts that Incident Manager engages during an incident or the escalation plans that Incident Manager uses to engage contacts in phases during an incident.
       responses:
         '200':
           description: Success
@@ -385,6 +385,144 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SSMContacts.CreateRotation:
+    post:
+      operationId: CreateRotation
+      description: Creates a rotation in an on-call schedule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRotationResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRotationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SSMContacts.CreateRotation
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SSMContacts.CreateRotationOverride:
+    post:
+      operationId: CreateRotationOverride
+      description: Creates an override for a rotation in an on-call schedule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRotationOverrideResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRotationOverrideRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SSMContacts.CreateRotationOverride
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SSMContacts.DeactivateContactChannel:
     post:
       operationId: DeactivateContactChannel
@@ -484,6 +622,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
           description: ValidationException
           content:
             application/json:
@@ -566,6 +710,138 @@ paths:
             type: string
             enum:
               - SSMContacts.DeleteContactChannel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SSMContacts.DeleteRotation:
+    post:
+      operationId: DeleteRotation
+      description: 'Deletes a rotation from the system. If a rotation belongs to more than one on-call schedule, this operation deletes it from all of them.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRotationResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRotationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SSMContacts.DeleteRotation
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SSMContacts.DeleteRotationOverride:
+    post:
+      operationId: DeleteRotationOverride
+      description: Deletes an existing override for an on-call rotation.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRotationOverrideResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRotationOverrideRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SSMContacts.DeleteRotationOverride
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -913,6 +1189,132 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SSMContacts.GetRotation:
+    post:
+      operationId: GetRotation
+      description: Retrieves information about an on-call rotation.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRotationResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRotationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SSMContacts.GetRotation
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SSMContacts.GetRotationOverride:
+    post:
+      operationId: GetRotationOverride
+      description: Retrieves information about an override to an on-call rotation.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRotationOverrideResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRotationOverrideRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SSMContacts.GetRotationOverride
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SSMContacts.ListContactChannels:
     post:
       operationId: ListContactChannels
@@ -1135,7 +1537,7 @@ paths:
   /#X-Amz-Target=SSMContacts.ListPageReceipts:
     post:
       operationId: ListPageReceipts
-      description: 'Lists all of the engagements to contact channels that have been acknowledged. '
+      description: Lists all of the engagements to contact channels that have been acknowledged.
       responses:
         '200':
           description: Success
@@ -1199,6 +1601,75 @@ paths:
             type: string
             enum:
               - SSMContacts.ListPageReceipts
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SSMContacts.ListPageResolutions:
+    post:
+      operationId: ListPageResolutions
+      description: 'Returns the resolution path of an engagement. For example, the escalation plan engaged in an incident might target an on-call schedule that includes several contacts in a rotation, but just one contact on-call when the incident starts. The resolution path indicates the hierarchy of <i>escalation plan &gt; on-call schedule &gt; contact</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPageResolutionsResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPageResolutionsRequest'
+      parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SSMContacts.ListPageResolutions
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1349,6 +1820,306 @@ paths:
             type: string
             enum:
               - SSMContacts.ListPagesByEngagement
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SSMContacts.ListPreviewRotationShifts:
+    post:
+      operationId: ListPreviewRotationShifts
+      description: <p>Returns a list of shifts based on rotation configuration parameters.</p> <note> <p>The Incident Manager primarily uses this operation to populate the <b>Preview</b> calendar. It is not typically run by end users.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPreviewRotationShiftsResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPreviewRotationShiftsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SSMContacts.ListPreviewRotationShifts
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SSMContacts.ListRotationOverrides:
+    post:
+      operationId: ListRotationOverrides
+      description: Retrieves a list of overrides currently specified for an on-call rotation.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRotationOverridesResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRotationOverridesRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SSMContacts.ListRotationOverrides
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SSMContacts.ListRotationShifts:
+    post:
+      operationId: ListRotationShifts
+      description: Returns a list of shifts generated by an existing rotation in the system.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRotationShiftsResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRotationShiftsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SSMContacts.ListRotationShifts
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SSMContacts.ListRotations:
+    post:
+      operationId: ListRotations
+      description: Retrieves a list of on-call rotations.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRotationsResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRotationsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SSMContacts.ListRotations
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1699,7 +2470,7 @@ paths:
   /#X-Amz-Target=SSMContacts.TagResource:
     post:
       operationId: TagResource
-      description: 'Tags a contact or escalation plan. You can tag only contacts and escalation plans in the first region of your replication set. '
+      description: Tags a contact or escalation plan. You can tag only contacts and escalation plans in the first region of your replication set.
       responses:
         '200':
           description: Success
@@ -1768,7 +2539,7 @@ paths:
   /#X-Amz-Target=SSMContacts.UntagResource:
     post:
       operationId: UntagResource
-      description: 'Removes tags from the specified resource. '
+      description: Removes tags from the specified resource.
       responses:
         '200':
           description: Success
@@ -1831,7 +2602,7 @@ paths:
   /#X-Amz-Target=SSMContacts.UpdateContact:
     post:
       operationId: UpdateContact
-      description: 'Updates the contact or escalation plan specified. '
+      description: Updates the contact or escalation plan specified.
       responses:
         '200':
           description: Success
@@ -1978,6 +2749,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SSMContacts.UpdateRotation:
+    post:
+      operationId: UpdateRotation
+      description: Updates the information specified for an on-call rotation.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRotationResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRotationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SSMContacts.UpdateRotation
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -2032,7 +2872,6 @@ components:
   schemas:
     AcceptPageResult:
       type: object
-      example: {}
       properties: {}
     AcceptPageRequest:
       type: object
@@ -2061,7 +2900,7 @@ components:
         AcceptCode:
           allOf:
             - $ref: '#/components/schemas/AcceptCode'
-            - description: The accept code is a 6-digit code used to acknowledge the page.
+            - description: A 6-digit code used to acknowledge the page.
         AcceptCodeValidation:
           allOf:
             - $ref: '#/components/schemas/AcceptCodeValidation'
@@ -2073,7 +2912,6 @@ components:
     ValidationException: {}
     ActivateContactChannelResult:
       type: object
-      example: {}
       properties: {}
     ActivateContactChannelRequest:
       type: object
@@ -2089,13 +2927,11 @@ components:
         ActivationCode:
           allOf:
             - $ref: '#/components/schemas/ActivationCode'
-            - description: 'The code sent to the contact channel when it was created in the contact. '
+            - description: The code sent to the contact channel when it was created in the contact.
     CreateContactResult:
       type: object
       required:
         - ContactArn
-      example:
-        ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
       properties:
         ContactArn:
           allOf:
@@ -2112,11 +2948,11 @@ components:
         Alias:
           allOf:
             - $ref: '#/components/schemas/ContactAlias'
-            - description: 'The short name to quickly identify a contact or escalation plan. The contact alias must be unique and identifiable. '
+            - description: The short name to quickly identify a contact or escalation plan. The contact alias must be unique and identifiable.
         DisplayName:
           allOf:
             - $ref: '#/components/schemas/ContactName'
-            - description: 'The full name of the contact or escalation plan. '
+            - description: The full name of the contact or escalation plan.
         Type:
           allOf:
             - $ref: '#/components/schemas/ContactType'
@@ -2124,11 +2960,11 @@ components:
         Plan:
           allOf:
             - $ref: '#/components/schemas/Plan'
-            - description: 'A list of stages. A contact has an engagement plan with stages that contact specified contact channels. An escalation plan uses stages that contact specified contacts. '
+            - description: A list of stages. A contact has an engagement plan with stages that contact specified contact channels. An escalation plan uses stages that contact specified contacts.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagsList'
-            - description: 'Adds a tag to the target. You can only tag resources created in the first Region of your replication set. '
+            - description: Adds a tag to the target. You can only tag resources created in the first Region of your replication set.
         IdempotencyToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
@@ -2140,8 +2976,6 @@ components:
       type: object
       required:
         - ContactChannelArn
-      example:
-        ContactChannelArn: 'arn:aws:ssm-contacts:us-east-1:111122223333:contact-channel/akuam/02f506b9-ea5d-4764-af89-2daa793ff024'
       properties:
         ContactChannelArn:
           allOf:
@@ -2180,9 +3014,92 @@ components:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
             - description: A token ensuring that the operation is called only once with the specified details.
+    CreateRotationResult:
+      type: object
+      required:
+        - RotationArn
+      properties:
+        RotationArn:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArn'
+            - description: The Amazon Resource Name (ARN) of the created rotation.
+    CreateRotationRequest:
+      type: object
+      required:
+        - Name
+        - ContactIds
+        - TimeZoneId
+        - Recurrence
+      title: CreateRotationRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RotationName'
+            - description: The name of the rotation.
+        ContactIds:
+          allOf:
+            - $ref: '#/components/schemas/RotationContactsArnList'
+            - description: '<p>The Amazon Resource Names (ARNs) of the contacts to add to the rotation.</p> <p>The order that you list the contacts in is their shift order in the rotation schedule. To change the order of the contact''s shifts, use the <a>UpdateRotation</a> operation.</p>'
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time that the rotation goes into effect.
+        TimeZoneId:
+          allOf:
+            - $ref: '#/components/schemas/TimeZoneId'
+            - description: '<p>The time zone to base the rotation’s activity on in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.</p> <note> <p>Designators for time zones that don’t support Daylight Savings Time rules, such as Pacific Standard Time (PST) and Pacific Daylight Time (PDT), are not supported.</p> </note>'
+        Recurrence:
+          allOf:
+            - $ref: '#/components/schemas/RecurrenceSettings'
+            - description: Information about the rule that specifies when a shift's team members rotate.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsList'
+            - description: 'Optional metadata to assign to the rotation. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For more information, see <a href="https://docs.aws.amazon.com/incident-manager/latest/userguide/tagging.html">Tagging Incident Manager resources</a> in the <i>Incident Manager User Guide</i>.'
+        IdempotencyToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: A token that ensures that the operation is called only once with the specified details.
+    CreateRotationOverrideResult:
+      type: object
+      required:
+        - RotationOverrideId
+      properties:
+        RotationOverrideId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The Amazon Resource Name (ARN) of the created rotation override.
+    CreateRotationOverrideRequest:
+      type: object
+      required:
+        - RotationId
+        - NewContactIds
+        - StartTime
+        - EndTime
+      title: CreateRotationOverrideRequest
+      properties:
+        RotationId:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArn'
+            - description: The Amazon Resource Name (ARN) of the rotation to create an override for.
+        NewContactIds:
+          allOf:
+            - $ref: '#/components/schemas/RotationOverrideContactsArnList'
+            - description: '<p>The Amazon Resource Names (ARNs) of the contacts to replace those in the current on-call rotation with.</p> <p>If you want to include any current team members in the override shift, you must include their ARNs in the new contact ID list.</p>'
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time when the override goes into effect.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time when the override ends.
+        IdempotencyToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: A token that ensures that the operation is called only once with the specified details.
     DeactivateContactChannelResult:
       type: object
-      example: {}
       properties: {}
     DeactivateContactChannelRequest:
       type: object
@@ -2196,7 +3113,6 @@ components:
             - description: The Amazon Resource Name (ARN) of the contact channel you're deactivating.
     DeleteContactResult:
       type: object
-      example: {}
       properties: {}
     DeleteContactRequest:
       type: object
@@ -2210,7 +3126,6 @@ components:
             - description: The Amazon Resource Name (ARN) of the contact that you're deleting.
     DeleteContactChannelResult:
       type: object
-      example: {}
       properties: {}
     DeleteContactChannelRequest:
       type: object
@@ -2222,6 +3137,37 @@ components:
           allOf:
             - $ref: '#/components/schemas/SsmContactsArn'
             - description: The Amazon Resource Name (ARN) of the contact channel.
+    DeleteRotationResult:
+      type: object
+      properties: {}
+    DeleteRotationRequest:
+      type: object
+      required:
+        - RotationId
+      title: DeleteRotationRequest
+      properties:
+        RotationId:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArn'
+            - description: The Amazon Resource Name (ARN) of the on-call rotation to delete.
+    DeleteRotationOverrideResult:
+      type: object
+      properties: {}
+    DeleteRotationOverrideRequest:
+      type: object
+      required:
+        - RotationId
+        - RotationOverrideId
+      title: DeleteRotationOverrideRequest
+      properties:
+        RotationId:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArn'
+            - description: The Amazon Resource Name (ARN) of the rotation that was overridden.
+        RotationOverrideId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The Amazon Resource Name (ARN) of the on-call rotation override to delete.
     DescribeEngagementResult:
       type: object
       required:
@@ -2230,15 +3176,6 @@ components:
         - Sender
         - Subject
         - Content
-      example:
-        ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/example_escalation'
-        Content: Testing engagements
-        EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/example_escalation/69e40ce1-8dbb-4d57-8962-5fbe7fc53356'
-        PublicContent: Testing engagements
-        PublicSubject: test
-        Sender: tester
-        StartTime: '2021-05-18T18:25:41.151000+00:00'
-        Subject: test
       properties:
         ContactArn:
           allOf:
@@ -2299,18 +3236,6 @@ components:
         - Sender
         - Subject
         - Content
-      example:
-        ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
-        Content: Testing engagements
-        DeliveryTime: '2021-05-18T18:43:55.265000+00:00'
-        EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/78a29753-3674-4ac5-9f83-0468563567f0'
-        PageArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:page/akuam/ad0052bd-e606-498a-861b-25726292eb93'
-        PublicContent: Testing engagements
-        PublicSubject: test
-        ReadTime: '2021-05-18T18:43:55.708000+00:00'
-        Sender: tester
-        SentTime: '2021-05-18T18:43:29.301000+00:00'
-        Subject: test
       properties:
         PageArn:
           allOf:
@@ -2377,28 +3302,6 @@ components:
         - Alias
         - Type
         - Plan
-      example:
-        Alias: example_escalation
-        ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/example_escalation'
-        DisplayName: Example Escalation Plan
-        Plan:
-          Stages:
-            - DurationInMinutes: 5
-              Targets:
-                - ContactTargetInfo:
-                    ContactId: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
-                    IsEssential: true
-            - DurationInMinutes: 5
-              Targets:
-                - ContactTargetInfo:
-                    ContactId: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/alejr'
-                    IsEssential: false
-            - DurationInMinutes: 0
-              Targets:
-                - ContactTargetInfo:
-                    ContactId: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/anasi'
-                    IsEssential: false
-        Type: ESCALATION
       properties:
         ContactArn:
           allOf:
@@ -2415,7 +3318,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/ContactType'
-            - description: 'The type of contact, either <code>PERSONAL</code> or <code>ESCALATION</code>. '
+            - description: 'The type of contact, either <code>PERSONAL</code> or <code>ESCALATION</code>.'
         Plan:
           allOf:
             - $ref: '#/components/schemas/Plan'
@@ -2438,14 +3341,6 @@ components:
         - Name
         - Type
         - DeliveryAddress
-      example:
-        ActivationStatus: ACTIVATED
-        ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
-        ContactChannelArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d'
-        DeliveryAddress:
-          SimpleAddress: '+15005550199'
-        Name: akuas sms
-        Type: SMS
       properties:
         ContactArn:
           allOf:
@@ -2466,7 +3361,7 @@ components:
         DeliveryAddress:
           allOf:
             - $ref: '#/components/schemas/ContactChannelAddress'
-            - description: 'The details that Incident Manager uses when trying to engage the contact channel. '
+            - description: The details that Incident Manager uses when trying to engage the contact channel.
         ActivationStatus:
           allOf:
             - $ref: '#/components/schemas/ActivationStatus'
@@ -2483,9 +3378,6 @@ components:
             - description: The Amazon Resource Name (ARN) of the contact channel you want information about.
     GetContactPolicyResult:
       type: object
-      example:
-        ContactArn: 'arn:aws:ssm-contacts:us-east-1:111122223333:contact/akuam'
-        Policy: '{"Version":"2012-10-17","Statement":[{"Sid":"SharePolicyForDocumentationDralia","Effect":"Allow","Principal":{"AWS":"222233334444"},"Action":["ssm-contacts:GetContact","ssm-contacts:StartEngagement","ssm-contacts:DescribeEngagement","ssm-contacts:ListPagesByEngagement","ssm-contacts:StopEngagement"],"Resource":["arn:aws:ssm-contacts:*:111122223333:contact/akuam","arn:aws:ssm-contacts:*:111122223333:engagement/akuam/*"]}]}'
       properties:
         ContactArn:
           allOf:
@@ -2505,19 +3397,96 @@ components:
           allOf:
             - $ref: '#/components/schemas/SsmContactsArn'
             - description: The Amazon Resource Name (ARN) of the contact or escalation plan.
+    GetRotationResult:
+      type: object
+      required:
+        - RotationArn
+        - Name
+        - ContactIds
+        - StartTime
+        - TimeZoneId
+        - Recurrence
+      properties:
+        RotationArn:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArn'
+            - description: The Amazon Resource Name (ARN) of the on-call rotation.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RotationName'
+            - description: The name of the on-call rotation.
+        ContactIds:
+          allOf:
+            - $ref: '#/components/schemas/RotationContactsArnList'
+            - description: The Amazon Resource Names (ARNs) of the contacts assigned to the on-call rotation team.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The specified start time for the on-call rotation.
+        TimeZoneId:
+          allOf:
+            - $ref: '#/components/schemas/TimeZoneId'
+            - description: 'The time zone that the rotation’s activity is based on, in Internet Assigned Numbers Authority (IANA) format.'
+        Recurrence:
+          allOf:
+            - $ref: '#/components/schemas/RecurrenceSettings'
+            - description: Specifies how long a rotation lasts before restarting at the beginning of the shift order.
+    GetRotationRequest:
+      type: object
+      required:
+        - RotationId
+      title: GetRotationRequest
+      properties:
+        RotationId:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArn'
+            - description: The Amazon Resource Name (ARN) of the on-call rotation to retrieve information about.
+    GetRotationOverrideResult:
+      type: object
+      properties:
+        RotationOverrideId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The Amazon Resource Name (ARN) of the override to an on-call rotation.
+        RotationArn:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArn'
+            - description: The Amazon Resource Name (ARN) of the on-call rotation that was overridden.
+        NewContactIds:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArnList'
+            - description: The Amazon Resource Names (ARNs) of the contacts assigned to the override of the on-call rotation.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time when the override goes into effect.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time when the override ends.
+        CreateTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time when the override was created.
+    GetRotationOverrideRequest:
+      type: object
+      required:
+        - RotationId
+        - RotationOverrideId
+      title: GetRotationOverrideRequest
+      properties:
+        RotationId:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArn'
+            - description: The Amazon Resource Name (ARN) of the overridden rotation to retrieve information about.
+        RotationOverrideId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The Amazon Resource Name (ARN) of the on-call rotation override to retrieve information about.
     ListContactChannelsResult:
       type: object
       required:
         - ContactChannels
-      example:
-        ContactChannels:
-          - ActivationStatus: ACTIVATED
-            ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
-            ContactChannelArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d'
-            DeliveryAddress:
-              SimpleAddress: '+15005550100'
-            Name: akuas sms
-            Type: SMS
       properties:
         NextToken:
           allOf:
@@ -2536,7 +3505,7 @@ components:
         ContactId:
           allOf:
             - $ref: '#/components/schemas/SsmContactsArn'
-            - description: 'The Amazon Resource Name (ARN) of the contact. '
+            - description: The Amazon Resource Name (ARN) of the contact.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
@@ -2547,24 +3516,6 @@ components:
             - description: The maximum number of contact channels per page.
     ListContactsResult:
       type: object
-      example:
-        Contacts:
-          - Alias: akuam
-            ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
-            DisplayName: Akua Mansa
-            Type: PERSONAL
-          - Alias: alejr
-            ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/alejr'
-            DisplayName: Alejandro Rosalez
-            Type: PERSONAL
-          - Alias: anasi
-            ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/anasi'
-            DisplayName: Ana Carolina Silva
-            Type: PERSONAL
-          - Alias: example_escalation
-            ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/example_escalation'
-            DisplayName: Example Escalation
-            Type: ESCALATION
       properties:
         NextToken:
           allOf:
@@ -2598,24 +3549,6 @@ components:
       type: object
       required:
         - Engagements
-      example:
-        Engagements:
-          - ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
-            EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/91792571-0b53-4821-9f73-d25d13d9e529'
-            Sender: cli
-            StartTime: '2021-05-18T20:37:50.300000+00:00'
-          - ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
-            EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/78a29753-3674-4ac5-9f83-0468563567f0'
-            Sender: cli
-            StartTime: '2021-05-18T18:40:26.666000+00:00'
-          - ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/example_escalation'
-            EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/example_escalation/69e40ce1-8dbb-4d57-8962-5fbe7fc53356'
-            Sender: cli
-            StartTime: '2021-05-18T18:25:41.151000+00:00'
-          - ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
-            EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/607ced0e-e8fa-4ea7-8958-a237b8803f8f'
-            Sender: cli
-            StartTime: '2021-05-18T18:20:58.093000+00:00'
       properties:
         NextToken:
           allOf:
@@ -2647,20 +3580,6 @@ components:
             - description: The time range to lists engagements for an incident.
     ListPageReceiptsResult:
       type: object
-      example:
-        Receipts:
-          - ContactChannelArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d'
-            ReceiptInfo: '425440'
-            ReceiptTime: '2021-05-18T20:42:57.485000+00:00'
-            ReceiptType: DELIVERED
-          - ContactChannelArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d'
-            ReceiptInfo: '425440'
-            ReceiptTime: '2021-05-18T20:42:57.907000+00:00'
-            ReceiptType: READ
-          - ContactChannelArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d'
-            ReceiptInfo: SM6656c19132f1465f9c9c1123a5dde7c9
-            ReceiptTime: '2021-05-18T20:40:52.962000+00:00'
-            ReceiptType: SENT
       properties:
         NextToken:
           allOf:
@@ -2688,19 +3607,37 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: The maximum number of acknowledgements per page of results.
+    ListPageResolutionsResult:
+      type: object
+      required:
+        - PageResolutions
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next set of items to return. Use this token to get the next set of results.
+        PageResolutions:
+          allOf:
+            - $ref: '#/components/schemas/ResolutionList'
+            - description: Information about the resolution for an engagement.
+    ListPageResolutionsRequest:
+      type: object
+      required:
+        - PageId
+      title: ListPageResolutionsRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token to start the list. Use this token to get the next set of results.
+        PageId:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArn'
+            - description: The Amazon Resource Name (ARN) of the contact engaged for the incident.
     ListPagesByContactResult:
       type: object
       required:
         - Pages
-      example:
-        Pages:
-          - ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
-            DeliveryTime: '2021-05-18T18:43:55.265000+00:00'
-            EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/78a29753-3674-4ac5-9f83-0468563567f0'
-            PageArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:page/akuam/ad0052bd-e606-498a-861b-25726292eb93'
-            ReadTime: '2021-05-18T18:43:55.708000+00:00'
-            Sender: cli
-            SentTime: '2021-05-18T18:43:29.301000+00:00'
       properties:
         NextToken:
           allOf:
@@ -2732,13 +3669,6 @@ components:
       type: object
       required:
         - Pages
-      example:
-        Pages:
-          - ContactArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam'
-            EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/78a29753-3674-4ac5-9f83-0468563567f0'
-            PageArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:page/akuam/ad0052bd-e606-498a-861b-25726292eb93'
-            Sender: cli
-            SentTime: '2021-05-18T18:40:27.245000+00:00'
       properties:
         NextToken:
           allOf:
@@ -2766,12 +3696,170 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: The maximum number of engagements to contact channels to list per page of results.
+    ListPreviewRotationShiftsResult:
+      type: object
+      properties:
+        RotationShifts:
+          allOf:
+            - $ref: '#/components/schemas/RotationShifts'
+            - description: 'Details about a rotation shift, including times, types, and contacts.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next set of items to return. This token is used to get the next set of results.
+    ListPreviewRotationShiftsRequest:
+      type: object
+      required:
+        - EndTime
+        - Members
+        - TimeZoneId
+        - Recurrence
+      title: ListPreviewRotationShiftsRequest
+      properties:
+        RotationStartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time a rotation would begin. The first shift is calculated from this date and time.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: 'Used to filter the range of calculated shifts before sending the response back to the user. '
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time a rotation shift would end.
+        Members:
+          allOf:
+            - $ref: '#/components/schemas/RotationPreviewMemberList'
+            - description: The contacts that would be assigned to a rotation.
+        TimeZoneId:
+          allOf:
+            - $ref: '#/components/schemas/TimeZoneId'
+            - description: 'The time zone the rotation’s activity would be based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". '
+        Recurrence:
+          allOf:
+            - $ref: '#/components/schemas/RecurrenceSettings'
+            - description: Information about how long a rotation would last before restarting at the beginning of the shift order.
+        Overrides:
+          allOf:
+            - $ref: '#/components/schemas/OverrideList'
+            - description: Information about changes that would be made in a rotation override.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token to start the list. This token is used to get the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of items to return for this call. The call also returns a token that can be specified in a subsequent call to get the next set of results.
+    ListRotationOverridesResult:
+      type: object
+      properties:
+        RotationOverrides:
+          allOf:
+            - $ref: '#/components/schemas/RotationOverrides'
+            - description: A list of rotation overrides in the specified time range.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next set of items to return. Use this token to get the next set of results.
+    ListRotationOverridesRequest:
+      type: object
+      required:
+        - RotationId
+        - StartTime
+        - EndTime
+      title: ListRotationOverridesRequest
+      properties:
+        RotationId:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArn'
+            - description: The Amazon Resource Name (ARN) of the rotation to retrieve information about.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time for the beginning of a time range for listing overrides.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time for the end of a time range for listing overrides.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token to start the list. Use this token to get the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+    ListRotationShiftsResult:
+      type: object
+      properties:
+        RotationShifts:
+          allOf:
+            - $ref: '#/components/schemas/RotationShifts'
+            - description: Information about shifts that meet the filter criteria.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next set of items to return. Use this token to get the next set of results.
+    ListRotationShiftsRequest:
+      type: object
+      required:
+        - RotationId
+        - EndTime
+      title: ListRotationShiftsRequest
+      properties:
+        RotationId:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArn'
+            - description: 'The Amazon Resource Name (ARN) of the rotation to retrieve shift information about. '
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time for the beginning of the time range to list shifts for.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time for the end of the time range to list shifts for.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token to start the list. Use this token to get the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+    ListRotationsResult:
+      type: object
+      required:
+        - Rotations
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next set of items to return. Use this token to get the next set of results.
+        Rotations:
+          allOf:
+            - $ref: '#/components/schemas/Rotations'
+            - description: Information about rotations that meet the filter criteria.
+    ListRotationsRequest:
+      type: object
+      title: ListRotationsRequest
+      properties:
+        RotationNamePrefix:
+          allOf:
+            - $ref: '#/components/schemas/RotationName'
+            - description: 'A filter to include rotations in list results based on their common prefix. For example, entering prod returns a list of all rotation names that begin with <code>prod</code>, such as <code>production</code> and <code>prod-1</code>.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token to start the list. Use this token to get the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
     ListTagsForResourceResult:
       type: object
-      example:
-        Tags:
-          - Key: group1
-            Value: '1'
       properties:
         Tags:
           allOf:
@@ -2789,7 +3877,6 @@ components:
             - description: The Amazon Resource Name (ARN) of the contact or escalation plan.
     PutContactPolicyResult:
       type: object
-      example: {}
       properties: {}
     PutContactPolicyRequest:
       type: object
@@ -2808,7 +3895,6 @@ components:
             - description: Details of the resource policy.
     SendActivationCodeResult:
       type: object
-      example: {}
       properties: {}
     SendActivationCodeRequest:
       type: object
@@ -2824,8 +3910,6 @@ components:
       type: object
       required:
         - EngagementArn
-      example:
-        EngagementArn: 'arn:aws:ssm-contacts:us-east-2:111122223333:engagement/example_escalation/69e40ce1-8dbb-4d57-8962-5fbe7fc53356'
       properties:
         EngagementArn:
           allOf:
@@ -2874,7 +3958,6 @@ components:
             - description: A token ensuring that the operation is called only once with the specified details.
     StopEngagementResult:
       type: object
-      example: {}
       properties: {}
     StopEngagementRequest:
       type: object
@@ -2889,10 +3972,9 @@ components:
         Reason:
           allOf:
             - $ref: '#/components/schemas/StopReason'
-            - description: 'The reason that you''re stopping the engagement. '
+            - description: The reason that you're stopping the engagement.
     TagResourceResult:
       type: object
-      example: {}
       properties: {}
     TagResourceRequest:
       type: object
@@ -2911,7 +3993,6 @@ components:
             - description: A list of tags that you are adding to the contact or escalation plan.
     UntagResourceResult:
       type: object
-      example: {}
       properties: {}
     UntagResourceRequest:
       type: object
@@ -2930,7 +4011,6 @@ components:
             - description: The key of the tag that you want to remove.
     UpdateContactResult:
       type: object
-      example: {}
       properties: {}
     UpdateContactRequest:
       type: object
@@ -2949,10 +4029,9 @@ components:
         Plan:
           allOf:
             - $ref: '#/components/schemas/Plan'
-            - description: 'A list of stages. A contact has an engagement plan with stages for specified contact channels. An escalation plan uses these stages to contact specified contacts. '
+            - description: A list of stages. A contact has an engagement plan with stages for specified contact channels. An escalation plan uses these stages to contact specified contacts.
     UpdateContactChannelResult:
       type: object
-      example: {}
       properties: {}
     UpdateContactChannelRequest:
       type: object
@@ -2971,7 +4050,37 @@ components:
         DeliveryAddress:
           allOf:
             - $ref: '#/components/schemas/ContactChannelAddress'
-            - description: 'The details that Incident Manager uses when trying to engage the contact channel. '
+            - description: The details that Incident Manager uses when trying to engage the contact channel.
+    UpdateRotationResult:
+      type: object
+      properties: {}
+    UpdateRotationRequest:
+      type: object
+      required:
+        - RotationId
+        - Recurrence
+      title: UpdateRotationRequest
+      properties:
+        RotationId:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArn'
+            - description: The Amazon Resource Name (ARN) of the rotation to update.
+        ContactIds:
+          allOf:
+            - $ref: '#/components/schemas/RotationContactsArnList'
+            - description: <p>The Amazon Resource Names (ARNs) of the contacts to include in the updated rotation. </p> <p>The order in which you list the contacts is their shift order in the rotation schedule.</p>
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time the rotation goes into effect.
+        TimeZoneId:
+          allOf:
+            - $ref: '#/components/schemas/TimeZoneId'
+            - description: '<p>The time zone to base the updated rotation’s activity on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.</p> <note> <p>Designators for time zones that don’t support Daylight Savings Time Rules, such as Pacific Standard Time (PST) and Pacific Daylight Time (PDT), aren''t supported.</p> </note>'
+        Recurrence:
+          allOf:
+            - $ref: '#/components/schemas/RecurrenceSettings'
+            - description: Information about how long the updated rotation lasts before restarting at the beginning of the shift order.
     AcceptCode:
       type: string
       pattern: '^[0-9]*$'
@@ -3055,6 +4164,7 @@ components:
       enum:
         - PERSONAL
         - ESCALATION
+        - ONCALL_SCHEDULE
     Contact:
       type: object
       required:
@@ -3086,7 +4196,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/SimpleAddress'
             - description: '<p>The format is dependent on the type of the contact channel. The following are the expected formats:</p> <ul> <li> <p>SMS - ''+'' followed by the country code and phone number</p> </li> <li> <p>VOICE - ''+'' followed by the country code and phone number</p> </li> <li> <p>EMAIL - any standard email format</p> </li> </ul>'
-      description: 'The details that Incident Manager uses when trying to engage the contact channel. '
+      description: The details that Incident Manager uses when trying to engage the contact channel.
     ContactChannel:
       type: object
       required:
@@ -3119,7 +4229,7 @@ components:
         ActivationStatus:
           allOf:
             - $ref: '#/components/schemas/ActivationStatus'
-            - description: 'A Boolean value describing if the contact channel has been activated or not. If the contact channel isn''t activated, Incident Manager can''t engage the contact through it. '
+            - description: 'A Boolean value describing if the contact channel has been activated or not. If the contact channel isn''t activated, Incident Manager can''t engage the contact through it.'
       description: The method that Incident Manager uses to engage a contact.
     SimpleAddress:
       type: string
@@ -3154,6 +4264,37 @@ components:
       pattern: '^[.\s\S]*$'
       minLength: 1
       maxLength: 8192
+    HandOffTime:
+      type: object
+      required:
+        - HourOfDay
+        - MinuteOfHour
+      properties:
+        HourOfDay:
+          allOf:
+            - $ref: '#/components/schemas/HourOfDay'
+            - description: The hour when an on-call rotation shift begins or ends.
+        MinuteOfHour:
+          allOf:
+            - $ref: '#/components/schemas/MinuteOfHour'
+            - description: The minute when an on-call rotation shift begins or ends.
+      description: Details about when an on-call rotation shift begins or ends.
+    CoverageTime:
+      type: object
+      properties:
+        Start:
+          allOf:
+            - $ref: '#/components/schemas/HandOffTime'
+            - description: Information about when the on-call rotation shift begins.
+        End:
+          allOf:
+            - $ref: '#/components/schemas/HandOffTime'
+            - description: Information about when the on-call rotation shift ends.
+      description: Information about when an on-call shift begins and ends.
+    CoverageTimes:
+      type: array
+      items:
+        $ref: '#/components/schemas/CoverageTime'
     DeferActivation:
       type: boolean
     IdempotencyToken:
@@ -3162,23 +4303,101 @@ components:
       maxLength: 2048
     Plan:
       type: object
-      required:
-        - Stages
       properties:
         Stages:
           allOf:
             - $ref: '#/components/schemas/StagesList'
             - description: A list of stages that the escalation plan or engagement plan uses to engage contacts and contact methods.
-      description: The stages that an escalation plan or engagement plan engages contacts and contact methods in.
+        RotationIds:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArnList'
+            - description: 'The Amazon Resource Names (ARNs) of the on-call rotations associated with the plan. '
+      description: 'Information about the stages and on-call rotation teams associated with an escalation plan or engagement plan. '
     TagsList:
       type: array
       items:
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 50
+    RotationOverrideContactsArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SsmContactsArn'
+      minItems: 0
+      maxItems: 30
     DateTime:
       type: string
       format: date-time
+    Uuid:
+      type: string
+      pattern: '([a-fA-Z0-9]{8,11}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}'
+      minLength: 36
+      maxLength: 39
+    RotationName:
+      type: string
+      pattern: '^[a-zA-Z0-9_\-\s\.]*$'
+      minLength: 1
+      maxLength: 255
+    RotationContactsArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SsmContactsArn'
+      minItems: 1
+      maxItems: 30
+    TimeZoneId:
+      type: string
+      pattern: '^[:a-zA-Z0-9_\-\s\.\\/]*$'
+      minLength: 1
+      maxLength: 255
+    RecurrenceSettings:
+      type: object
+      required:
+        - NumberOfOnCalls
+        - RecurrenceMultiplier
+      properties:
+        MonthlySettings:
+          allOf:
+            - $ref: '#/components/schemas/MonthlySettings'
+            - description: Information about on-call rotations that recur monthly.
+        WeeklySettings:
+          allOf:
+            - $ref: '#/components/schemas/WeeklySettings'
+            - description: Information about on-call rotations that recur weekly.
+        DailySettings:
+          allOf:
+            - $ref: '#/components/schemas/DailySettings'
+            - description: Information about on-call rotations that recur daily.
+        NumberOfOnCalls:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfOnCalls'
+            - description: 'The number of contacts, or shift team members designated to be on call concurrently during a shift. For example, in an on-call schedule containing ten contacts, a value of <code>2</code> designates that two of them are on call at any given time.'
+        ShiftCoverages:
+          allOf:
+            - $ref: '#/components/schemas/ShiftCoveragesMap'
+            - description: Information about the days of the week included in on-call rotation coverage.
+        RecurrenceMultiplier:
+          allOf:
+            - $ref: '#/components/schemas/RecurrenceMultiplier'
+            - description: 'The number of days, weeks, or months a single rotation lasts.'
+      description: Information about when an on-call rotation is in effect and how long the rotation period lasts.
+    DailySettings:
+      type: array
+      items:
+        $ref: '#/components/schemas/HandOffTime'
+    DayOfMonth:
+      type: integer
+      minimum: 1
+      maximum: 31
+    DayOfWeek:
+      type: string
+      enum:
+        - MON
+        - TUE
+        - WED
+        - THU
+        - FRI
+        - SAT
+        - SUN
     Sender:
       type: string
       pattern: '^[\\a-zA-Z0-9_@#%*+=:?.\/!\s-]*$'
@@ -3243,6 +4462,20 @@ components:
       pattern: .*\S.*
       minLength: 1
       maxLength: 395000
+    SsmContactsArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SsmContactsArn'
+      minItems: 0
+      maxItems: 25
+    HourOfDay:
+      type: integer
+      minimum: 0
+      maximum: 23
+    MinuteOfHour:
+      type: integer
+      minimum: 0
+      maximum: 59
     PaginationToken:
       type: string
       pattern: '^[\\\/a-zA-Z0-9_+=\-]*$'
@@ -3267,10 +4500,79 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Receipt'
+    ResolutionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResolutionContact'
     PagesList:
       type: array
       items:
         $ref: '#/components/schemas/Page'
+    RotationPreviewMemberList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Member'
+      minItems: 1
+      maxItems: 30
+    OverrideList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PreviewOverride'
+    RotationShifts:
+      type: array
+      items:
+        $ref: '#/components/schemas/RotationShift'
+    RotationOverrides:
+      type: array
+      items:
+        $ref: '#/components/schemas/RotationOverride'
+    Rotations:
+      type: array
+      items:
+        $ref: '#/components/schemas/Rotation'
+    Member:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 512
+    MonthlySetting:
+      type: object
+      required:
+        - DayOfMonth
+        - HandOffTime
+      properties:
+        DayOfMonth:
+          allOf:
+            - $ref: '#/components/schemas/DayOfMonth'
+            - description: The day of the month when monthly recurring on-call rotations begin.
+        HandOffTime:
+          allOf:
+            - $ref: '#/components/schemas/HandOffTime'
+            - description: The time of day when a monthly recurring on-call shift rotation begins.
+      description: Information about on-call rotations that recur monthly.
+    MonthlySettings:
+      type: array
+      items:
+        $ref: '#/components/schemas/MonthlySetting'
+    NumberOfOnCalls:
+      type: integer
+      minimum: 1
+    PreviewOverride:
+      type: object
+      properties:
+        NewMembers:
+          allOf:
+            - $ref: '#/components/schemas/RotationOverridePreviewMemberList'
+            - description: Information about contacts to add to an on-call rotation override.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: Information about the time a rotation override would begin.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: Information about the time a rotation override would end.
+      description: Information about contacts and times that an on-call override replaces.
     Page:
       type: object
       required:
@@ -3316,6 +4618,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Stage'
+    RotationOverridePreviewMemberList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Member'
+      minItems: 0
+      maxItems: 30
     ReceiptType:
       type: string
       enum:
@@ -3347,6 +4655,144 @@ components:
             - $ref: '#/components/schemas/DateTime'
             - description: 'The time receipt was <code>SENT</code>, <code>DELIVERED</code>, or <code>READ</code>.'
       description: Records events during an engagement.
+    RecurrenceMultiplier:
+      type: integer
+      minimum: 1
+      maximum: 100
+    WeeklySettings:
+      type: array
+      items:
+        $ref: '#/components/schemas/WeeklySetting'
+    ShiftCoveragesMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/CoverageTimes'
+    StageIndex:
+      type: integer
+      minimum: 0
+      maximum: 100
+    ResolutionContact:
+      type: object
+      required:
+        - ContactArn
+        - Type
+      properties:
+        ContactArn:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArn'
+            - description: 'The Amazon Resource Name (ARN) of a contact in the engagement resolution process. '
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ContactType'
+            - description: The type of contact for a resolution step.
+        StageIndex:
+          allOf:
+            - $ref: '#/components/schemas/StageIndex'
+            - description: The stage in the escalation plan that resolves to this contact.
+      description: '<p>Information about the engagement resolution steps. The resolution starts from the first contact, which can be an escalation plan, then resolves to an on-call rotation, and finally to a personal contact.</p> <p>The <code>ResolutionContact</code> structure describes the information for each node or step in that process. It contains information about different contact types, such as the escalation, rotation, and personal contacts.</p>'
+    Rotation:
+      type: object
+      required:
+        - RotationArn
+        - Name
+      properties:
+        RotationArn:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArn'
+            - description: The Amazon Resource Name (ARN) of the rotation.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RotationName'
+            - description: The name of the rotation.
+        ContactIds:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArnList'
+            - description: The Amazon Resource Names (ARNs) of the contacts assigned to the rotation team.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time the rotation becomes active.
+        TimeZoneId:
+          allOf:
+            - $ref: '#/components/schemas/TimeZoneId'
+            - description: 'The time zone the rotation’s activity is based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". '
+        Recurrence:
+          allOf:
+            - $ref: '#/components/schemas/RecurrenceSettings'
+            - description: Information about when an on-call rotation is in effect and how long the rotation period lasts.
+      description: Information about a rotation in an on-call schedule.
+    RotationOverride:
+      type: object
+      required:
+        - RotationOverrideId
+        - NewContactIds
+        - StartTime
+        - EndTime
+        - CreateTime
+      properties:
+        RotationOverrideId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The Amazon Resource Name (ARN) of the override to an on-call rotation.
+        NewContactIds:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArnList'
+            - description: The Amazon Resource Names (ARNs) of the contacts assigned to the override of the on-call rotation.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time a rotation override begins.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time a rotation override ends.
+        CreateTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time a rotation override was created.
+      description: Information about an override specified for an on-call rotation.
+    ShiftType:
+      type: string
+      enum:
+        - REGULAR
+        - OVERRIDDEN
+    ShiftDetails:
+      type: object
+      required:
+        - OverriddenContactIds
+      properties:
+        OverriddenContactIds:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArnList'
+            - description: 'The Amazon Resources Names (ARNs) of the contacts who were replaced in a shift when an override was created. If the override is deleted, these contacts are restored to the shift.'
+      description: Information about overrides to an on-call rotation shift.
+    RotationShift:
+      type: object
+      required:
+        - StartTime
+        - EndTime
+      properties:
+        ContactIds:
+          allOf:
+            - $ref: '#/components/schemas/SsmContactsArnList'
+            - description: 'The Amazon Resource Names (ARNs) of the contacts who are part of the shift rotation. '
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time a shift rotation begins.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time a shift rotation ends.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ShiftType'
+            - description: The type of shift rotation.
+        ShiftDetails:
+          allOf:
+            - $ref: '#/components/schemas/ShiftDetails'
+            - description: Additional information about an on-call rotation shift.
+      description: Information about a shift that belongs to an on-call rotation.
     StageDurationInMins:
       type: integer
       minimum: 0
@@ -3414,5 +4860,20 @@ components:
             - $ref: '#/components/schemas/ContactTargetInfo'
             - description: Information about the contact that Incident Manager is engaging.
       description: The contact or contact channel that's being engaged.
+    WeeklySetting:
+      type: object
+      required:
+        - DayOfWeek
+        - HandOffTime
+      properties:
+        DayOfWeek:
+          allOf:
+            - $ref: '#/components/schemas/DayOfWeek'
+            - description: The day of the week when weekly recurring on-call shift rotations begins.
+        HandOffTime:
+          allOf:
+            - $ref: '#/components/schemas/HandOffTime'
+            - description: The time of day when a weekly recurring on-call shift rotation begins.
+      description: Information about rotations that recur weekly.
 security:
   - hmac: []

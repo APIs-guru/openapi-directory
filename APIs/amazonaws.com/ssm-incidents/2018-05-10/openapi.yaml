@@ -352,7 +352,7 @@ paths:
   /createTimelineEvent:
     post:
       operationId: CreateTimelineEvent
-      description: 'Creates a custom timeline event on the incident details page of an incident record. Timeline events are automatically created by Incident Manager, marking key moment during an incident. You can create custom timeline events to mark important events that are automatically detected by Incident Manager.'
+      description: Creates a custom timeline event on the incident details page of an incident record. Incident Manager automatically creates timeline events that mark key moments during an incident. You can create custom timeline events to mark important events that Incident Manager can detect automatically.
       responses:
         '201':
           description: Success
@@ -410,7 +410,7 @@ paths:
                 - incidentRecordArn
               properties:
                 clientToken:
-                  description: A token ensuring that the action is called only once with the specified details.
+                  description: A token that ensures that a client calls the action only once with the specified details.
                   type: string
                   minLength: 0
                   maxLength: 128
@@ -420,7 +420,7 @@ paths:
                   minLength: 0
                   maxLength: 12000
                 eventReferences:
-                  description: 'Adds one or more references to the <code>TimelineEvent</code>. A reference can be an Amazon Web Services resource involved in the incident or in some way associated with it. When you specify a reference, you enter the Amazon Resource Name (ARN) of the resource. You can also specify a related item. As an example, you could specify the ARN of an Amazon DynamoDB (DynamoDB) table. The table for this example is the resource. You could also specify a Amazon CloudWatch metric for that table. The metric is the related item.'
+                  description: 'Adds one or more references to the <code>TimelineEvent</code>. A reference is an Amazon Web Services resource involved or associated with the incident. To specify a reference, enter its Amazon Resource Name (ARN). You can also specify a related item associated with a resource. For example, to specify an Amazon DynamoDB (DynamoDB) table as a resource, use the table''s ARN. You can also specify an Amazon CloudWatch metric associated with the DynamoDB table as a related item.'
                   type: array
                   items:
                     $ref: '#/components/schemas/EventReference'
@@ -431,12 +431,12 @@ paths:
                   type: string
                   format: date-time
                 eventType:
-                  description: The type of the event. You can create timeline events of type <code>Custom Event</code>.
+                  description: The type of event. You can create timeline events of type <code>Custom Event</code>.
                   type: string
                   minLength: 0
                   maxLength: 100
                 incidentRecordArn:
-                  description: The Amazon Resource Name (ARN) of the incident record to which the event will be added.
+                  description: The Amazon Resource Name (ARN) of the incident record that the action adds the incident to.
                   type: string
                   pattern: '^arn:aws(-cn|-us-gov)?:[a-z0-9-]*:[a-z0-9-]*:([0-9]{12})?:.+$'
                   minLength: 0
@@ -744,7 +744,7 @@ paths:
                 - incidentRecordArn
               properties:
                 eventId:
-                  description: The ID of the event you are updating. You can find this by using <code>ListTimelineEvents</code>.
+                  description: The ID of the event to update. You can use <code>ListTimelineEvents</code> to find an event's ID.
                   type: string
                   minLength: 0
                   maxLength: 50
@@ -1150,7 +1150,7 @@ paths:
               type: object
               properties:
                 filters:
-                  description: '<p>Filters the list of incident records through which you are searching. You can filter on the following keys:</p> <ul> <li> <p> <code>creationTime</code> </p> </li> <li> <p> <code>impact</code> </p> </li> <li> <p> <code>status</code> </p> </li> <li> <p> <code>createdBy</code> </p> </li> </ul> <p>Note the following when deciding how to use Filters:</p> <ul> <li> <p>If you don''t specify a Filter, the response includes all incident records.</p> </li> <li> <p>If you specify more than one filter in a single request, the response returns incident records that match all filters.</p> </li> <li> <p>If you specify a filter with more than one value, the response returns incident records that match any of the values provided.</p> </li> </ul>'
+                  description: '<p>Filters the list of incident records you want to search through. You can filter on the following keys:</p> <ul> <li> <p> <code>creationTime</code> </p> </li> <li> <p> <code>impact</code> </p> </li> <li> <p> <code>status</code> </p> </li> <li> <p> <code>createdBy</code> </p> </li> </ul> <p>Note the following when when you use Filters:</p> <ul> <li> <p>If you don''t specify a Filter, the response includes all incident records.</p> </li> <li> <p>If you specify more than one filter in a single request, the response returns incident records that match all filters.</p> </li> <li> <p>If you specify a filter with more than one value, the response returns incident records that match any of the values provided.</p> </li> </ul>'
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
@@ -1590,7 +1590,7 @@ paths:
                 - incidentRecordArn
               properties:
                 filters:
-                  description: '<p>Filters the timeline events based on the provided conditional values. You can filter timeline events using the following keys:</p> <ul> <li> <p> <code>eventTime</code> </p> </li> <li> <p> <code>eventType</code> </p> </li> </ul> <p>Note the following when deciding how to use Filters:</p> <ul> <li> <p>If you don''t specify a Filter, the response includes all timeline events.</p> </li> <li> <p>If you specify more than one filter in a single request, the response returns timeline events that match all filters.</p> </li> <li> <p>If you specify a filter with more than one value, the response returns timeline events that match any of the values provided.</p> </li> </ul>'
+                  description: '<p>Filters the timeline events based on the provided conditional values. You can filter timeline events with the following keys:</p> <ul> <li> <p> <code>eventTime</code> </p> </li> <li> <p> <code>eventType</code> </p> </li> </ul> <p>Note the following when deciding how to use Filters:</p> <ul> <li> <p>If you don''t specify a Filter, the response includes all timeline events.</p> </li> <li> <p>If you specify more than one filter in a single request, the response returns timeline events that match all filters.</p> </li> <li> <p>If you specify a filter with more than one value, the response returns timeline events that match any of the values provided.</p> </li> </ul>'
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
@@ -1613,7 +1613,7 @@ paths:
                   minLength: 0
                   maxLength: 2000
                 sortBy:
-                  description: Sort by the specified key value pair.
+                  description: Sort timeline events by the specified key value pair.
                   type: string
                   enum:
                     - EVENT_TIME
@@ -1770,7 +1770,7 @@ paths:
                   minimum: 1
                   maximum: 5
                 relatedItems:
-                  description: 'Add related items to the incident for other responders to use. Related items are AWS resources, external links, or files uploaded to an Amazon S3 bucket. '
+                  description: 'Add related items to the incident for other responders to use. Related items are Amazon Web Services resources, external links, or files uploaded to an Amazon S3 bucket. '
                   type: array
                   items:
                     $ref: '#/components/schemas/RelatedItem'
@@ -2037,24 +2037,24 @@ paths:
                         - $ref: '#/components/schemas/EmptyChatChannel'
                         - description: Used to remove the chat channel from an incident record or response plan.
                 clientToken:
-                  description: A token that ensures that the operation is called only once with the specified details.
+                  description: A token that ensures that a client calls the operation only once with the specified details.
                   type: string
                   minLength: 0
                   maxLength: 128
                 impact:
-                  description: '<p>Defines the impact of the incident to customers and applications. Providing an impact overwrites the impact provided by the response plan.</p> <p class="title"> <b>Possible impacts:</b> </p> <ul> <li> <p> <code>1</code> - Critical impact, full application failure that impacts many to all customers. </p> </li> <li> <p> <code>2</code> - High impact, partial application failure with impact to many customers.</p> </li> <li> <p> <code>3</code> - Medium impact, the application is providing reduced service to customers.</p> </li> <li> <p> <code>4</code> - Low impact, customer aren''t impacted by the problem yet.</p> </li> <li> <p> <code>5</code> - No impact, customers aren''t currently impacted but urgent action is needed to avoid impact.</p> </li> </ul>'
+                  description: '<p>Defines the impact of the incident to customers and applications. If you provide an impact for an incident, it overwrites the impact provided by the response plan.</p> <p class="title"> <b>Possible impacts:</b> </p> <ul> <li> <p> <code>1</code> - Critical impact, full application failure that impacts many to all customers. </p> </li> <li> <p> <code>2</code> - High impact, partial application failure with impact to many customers.</p> </li> <li> <p> <code>3</code> - Medium impact, the application is providing reduced service to customers.</p> </li> <li> <p> <code>4</code> - Low impact, customer aren''t impacted by the problem yet.</p> </li> <li> <p> <code>5</code> - No impact, customers aren''t currently impacted but urgent action is needed to avoid impact.</p> </li> </ul>'
                   type: integer
                   minimum: 1
                   maximum: 5
                 notificationTargets:
-                  description: <p>The Amazon SNS targets that are notified when updates are made to an incident.</p> <p>Using multiple SNS topics creates redundancy in the event that a Region is down during the incident.</p>
+                  description: <p>The Amazon SNS targets that Incident Manager notifies when a client updates an incident.</p> <p>Using multiple SNS topics creates redundancy in the event that a Region is down during the incident.</p>
                   type: array
                   items:
                     $ref: '#/components/schemas/NotificationTargetItem'
                   minItems: 0
                   maxItems: 10
                 status:
-                  description: The status of the incident. An incident can be <code>Open</code> or <code>Resolved</code>.
+                  description: The status of the incident. Possible statuses are <code>Open</code> or <code>Resolved</code>.
                   type: string
                   enum:
                     - OPEN
@@ -2063,7 +2063,7 @@ paths:
                   description: A longer description of what occurred during the incident.
                   type: string
                   minLength: 0
-                  maxLength: 4000
+                  maxLength: 8000
                 title:
                   description: A brief description of the incident.
                   type: string
@@ -2136,12 +2136,12 @@ paths:
                 - relatedItemsUpdate
               properties:
                 clientToken:
-                  description: A token ensuring that the operation is called only once with the specified details.
+                  description: A token that ensures that a client calls the operation only once with the specified details.
                   type: string
                   minLength: 0
                   maxLength: 128
                 incidentRecordArn:
-                  description: The Amazon Resource Name (ARN) of the incident record containing the related items you are updating.
+                  description: The Amazon Resource Name (ARN) of the incident record that contains the related items that you update.
                   type: string
                   pattern: '^arn:aws(-cn|-us-gov)?:[a-z0-9-]*:[a-z0-9-]*:([0-9]{12})?:.+$'
                   minLength: 0
@@ -2370,7 +2370,7 @@ paths:
                   description: 'A brief summary of the incident. This typically contains what has happened, what''s currently happening, and next steps.'
                   type: string
                   minLength: 0
-                  maxLength: 4000
+                  maxLength: 8000
                 incidentTemplateTags:
                   description: 'Tags to assign to the template. When the <code>StartIncident</code> API action is called, Incident Manager assigns the tags specified in the template to the incident. To call this action, you must also have permission to call the <code>TagResource</code> API action for the incident record resource.'
                   type: object
@@ -2457,7 +2457,7 @@ paths:
                 - incidentRecordArn
               properties:
                 clientToken:
-                  description: A token ensuring that the operation is called only once with the specified details.
+                  description: A token that ensures that a client calls the operation only once with the specified details.
                   type: string
                   minLength: 0
                   maxLength: 128
@@ -2467,12 +2467,12 @@ paths:
                   minLength: 0
                   maxLength: 12000
                 eventId:
-                  description: The ID of the event you are updating. You can find this by using <code>ListTimelineEvents</code>.
+                  description: The ID of the event to update. You can use <code>ListTimelineEvents</code> to find an event's ID.
                   type: string
                   minLength: 0
                   maxLength: 50
                 eventReferences:
-                  description: '<p>Updates all existing references in a <code>TimelineEvent</code>. A reference can be an Amazon Web Services resource involved in the incident or in some way associated with it. When you specify a reference, you enter the Amazon Resource Name (ARN) of the resource. You can also specify a related item. As an example, you could specify the ARN of an Amazon DynamoDB (DynamoDB) table. The table for this example is the resource. You could also specify a Amazon CloudWatch metric for that table. The metric is the related item.</p> <important> <p>This update action overrides all existing references. If you want to keep existing references, you must specify them in the call. If you don''t, this action removes them and enters only new references.</p> </important>'
+                  description: '<p>Updates all existing references in a <code>TimelineEvent</code>. A reference is an Amazon Web Services resource involved or associated with the incident. To specify a reference, enter its Amazon Resource Name (ARN). You can also specify a related item associated with that resource. For example, to specify an Amazon DynamoDB (DynamoDB) table as a resource, use its ARN. You can also specify an Amazon CloudWatch metric associated with the DynamoDB table as a related item.</p> <important> <p>This update action overrides all existing references. If you want to keep existing references, you must specify them in the call. If you don''t, this action removes any existing references and enters only new references.</p> </important>'
                   type: array
                   items:
                     $ref: '#/components/schemas/EventReference'
@@ -2483,7 +2483,7 @@ paths:
                   type: string
                   format: date-time
                 eventType:
-                  description: The type of the event. You can update events of type <code>Custom Event</code>.
+                  description: The type of event. You can update events of type <code>Custom Event</code>.
                   type: string
                   minLength: 0
                   maxLength: 100
@@ -2636,7 +2636,7 @@ components:
     IncidentSummary:
       type: string
       minLength: 0
-      maxLength: 4000
+      maxLength: 8000
     IncidentTitle:
       type: string
       minLength: 0
@@ -2898,7 +2898,7 @@ components:
     RawData:
       type: string
       minLength: 0
-      maxLength: 4000
+      maxLength: 10000
     IncidentSource:
       type: string
       minLength: 0
@@ -3255,7 +3255,7 @@ components:
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: A token ensuring that the action is called only once with the specified details.
+            - description: A token that ensures that a client calls the action only once with the specified details.
         eventData:
           allOf:
             - $ref: '#/components/schemas/EventData'
@@ -3263,7 +3263,7 @@ components:
         eventReferences:
           allOf:
             - $ref: '#/components/schemas/EventReferenceList'
-            - description: 'Adds one or more references to the <code>TimelineEvent</code>. A reference can be an Amazon Web Services resource involved in the incident or in some way associated with it. When you specify a reference, you enter the Amazon Resource Name (ARN) of the resource. You can also specify a related item. As an example, you could specify the ARN of an Amazon DynamoDB (DynamoDB) table. The table for this example is the resource. You could also specify a Amazon CloudWatch metric for that table. The metric is the related item.'
+            - description: 'Adds one or more references to the <code>TimelineEvent</code>. A reference is an Amazon Web Services resource involved or associated with the incident. To specify a reference, enter its Amazon Resource Name (ARN). You can also specify a related item associated with a resource. For example, to specify an Amazon DynamoDB (DynamoDB) table as a resource, use the table''s ARN. You can also specify an Amazon CloudWatch metric associated with the DynamoDB table as a related item.'
         eventTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -3271,11 +3271,11 @@ components:
         eventType:
           allOf:
             - $ref: '#/components/schemas/TimelineEventType'
-            - description: The type of the event. You can create timeline events of type <code>Custom Event</code>.
+            - description: The type of event. You can create timeline events of type <code>Custom Event</code>.
         incidentRecordArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the incident record to which the event will be added.
+            - description: The Amazon Resource Name (ARN) of the incident record that the action adds the incident to.
     UUID:
       type: string
       minLength: 0
@@ -3343,7 +3343,7 @@ components:
         eventId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: The ID of the event you are updating. You can find this by using <code>ListTimelineEvents</code>.
+            - description: The ID of the event to update. You can use <code>ListTimelineEvents</code> to find an event's ID.
         incidentRecordArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -3785,7 +3785,7 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: '<p>Filters the list of incident records through which you are searching. You can filter on the following keys:</p> <ul> <li> <p> <code>creationTime</code> </p> </li> <li> <p> <code>impact</code> </p> </li> <li> <p> <code>status</code> </p> </li> <li> <p> <code>createdBy</code> </p> </li> </ul> <p>Note the following when deciding how to use Filters:</p> <ul> <li> <p>If you don''t specify a Filter, the response includes all incident records.</p> </li> <li> <p>If you specify more than one filter in a single request, the response returns incident records that match all filters.</p> </li> <li> <p>If you specify a filter with more than one value, the response returns incident records that match any of the values provided.</p> </li> </ul>'
+            - description: '<p>Filters the list of incident records you want to search through. You can filter on the following keys:</p> <ul> <li> <p> <code>creationTime</code> </p> </li> <li> <p> <code>impact</code> </p> </li> <li> <p> <code>status</code> </p> </li> <li> <p> <code>createdBy</code> </p> </li> </ul> <p>Note the following when when you use Filters:</p> <ul> <li> <p>If you don''t specify a Filter, the response includes all incident records.</p> </li> <li> <p>If you specify more than one filter in a single request, the response returns incident records that match all filters.</p> </li> <li> <p>If you specify a filter with more than one value, the response returns incident records that match any of the values provided.</p> </li> </ul>'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -3876,7 +3876,7 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: '<p>Filters the timeline events based on the provided conditional values. You can filter timeline events using the following keys:</p> <ul> <li> <p> <code>eventTime</code> </p> </li> <li> <p> <code>eventType</code> </p> </li> </ul> <p>Note the following when deciding how to use Filters:</p> <ul> <li> <p>If you don''t specify a Filter, the response includes all timeline events.</p> </li> <li> <p>If you specify more than one filter in a single request, the response returns timeline events that match all filters.</p> </li> <li> <p>If you specify a filter with more than one value, the response returns timeline events that match any of the values provided.</p> </li> </ul>'
+            - description: '<p>Filters the timeline events based on the provided conditional values. You can filter timeline events with the following keys:</p> <ul> <li> <p> <code>eventTime</code> </p> </li> <li> <p> <code>eventType</code> </p> </li> </ul> <p>Note the following when deciding how to use Filters:</p> <ul> <li> <p>If you don''t specify a Filter, the response includes all timeline events.</p> </li> <li> <p>If you specify more than one filter in a single request, the response returns timeline events that match all filters.</p> </li> <li> <p>If you specify a filter with more than one value, the response returns timeline events that match any of the values provided.</p> </li> </ul>'
         incidentRecordArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -3892,7 +3892,7 @@ components:
         sortBy:
           allOf:
             - $ref: '#/components/schemas/TimelineEventSort'
-            - description: Sort by the specified key value pair.
+            - description: Sort timeline events by the specified key value pair.
         sortOrder:
           allOf:
             - $ref: '#/components/schemas/SortOrder'
@@ -4120,7 +4120,7 @@ components:
         relatedItems:
           allOf:
             - $ref: '#/components/schemas/RelatedItemList'
-            - description: 'Add related items to the incident for other responders to use. Related items are AWS resources, external links, or files uploaded to an Amazon S3 bucket. '
+            - description: 'Add related items to the incident for other responders to use. Related items are Amazon Web Services resources, external links, or files uploaded to an Amazon S3 bucket. '
         responsePlanArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -4199,19 +4199,19 @@ components:
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: A token that ensures that the operation is called only once with the specified details.
+            - description: A token that ensures that a client calls the operation only once with the specified details.
         impact:
           allOf:
             - $ref: '#/components/schemas/Impact'
-            - description: '<p>Defines the impact of the incident to customers and applications. Providing an impact overwrites the impact provided by the response plan.</p> <p class="title"> <b>Possible impacts:</b> </p> <ul> <li> <p> <code>1</code> - Critical impact, full application failure that impacts many to all customers. </p> </li> <li> <p> <code>2</code> - High impact, partial application failure with impact to many customers.</p> </li> <li> <p> <code>3</code> - Medium impact, the application is providing reduced service to customers.</p> </li> <li> <p> <code>4</code> - Low impact, customer aren''t impacted by the problem yet.</p> </li> <li> <p> <code>5</code> - No impact, customers aren''t currently impacted but urgent action is needed to avoid impact.</p> </li> </ul>'
+            - description: '<p>Defines the impact of the incident to customers and applications. If you provide an impact for an incident, it overwrites the impact provided by the response plan.</p> <p class="title"> <b>Possible impacts:</b> </p> <ul> <li> <p> <code>1</code> - Critical impact, full application failure that impacts many to all customers. </p> </li> <li> <p> <code>2</code> - High impact, partial application failure with impact to many customers.</p> </li> <li> <p> <code>3</code> - Medium impact, the application is providing reduced service to customers.</p> </li> <li> <p> <code>4</code> - Low impact, customer aren''t impacted by the problem yet.</p> </li> <li> <p> <code>5</code> - No impact, customers aren''t currently impacted but urgent action is needed to avoid impact.</p> </li> </ul>'
         notificationTargets:
           allOf:
             - $ref: '#/components/schemas/NotificationTargetSet'
-            - description: <p>The Amazon SNS targets that are notified when updates are made to an incident.</p> <p>Using multiple SNS topics creates redundancy in the event that a Region is down during the incident.</p>
+            - description: <p>The Amazon SNS targets that Incident Manager notifies when a client updates an incident.</p> <p>Using multiple SNS topics creates redundancy in the event that a Region is down during the incident.</p>
         status:
           allOf:
             - $ref: '#/components/schemas/IncidentRecordStatus'
-            - description: The status of the incident. An incident can be <code>Open</code> or <code>Resolved</code>.
+            - description: The status of the incident. Possible statuses are <code>Open</code> or <code>Resolved</code>.
         summary:
           allOf:
             - $ref: '#/components/schemas/IncidentSummary'
@@ -4230,15 +4230,15 @@ components:
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: A token ensuring that the operation is called only once with the specified details.
+            - description: A token that ensures that a client calls the operation only once with the specified details.
         incidentRecordArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the incident record containing the related items you are updating.
+            - description: The Amazon Resource Name (ARN) of the incident record that contains the related items that you update.
         relatedItemsUpdate:
           allOf:
             - $ref: '#/components/schemas/RelatedItemsUpdate'
-            - description: Details about the item you are adding or deleting.
+            - description: 'Details about the item that you are add to, or delete from, an incident.'
     UpdateReplicationSetInputActionsList:
       type: array
       items:
@@ -4332,7 +4332,7 @@ components:
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: A token ensuring that the operation is called only once with the specified details.
+            - description: A token that ensures that a client calls the operation only once with the specified details.
         eventData:
           allOf:
             - $ref: '#/components/schemas/EventData'
@@ -4340,11 +4340,11 @@ components:
         eventId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: The ID of the event you are updating. You can find this by using <code>ListTimelineEvents</code>.
+            - description: The ID of the event to update. You can use <code>ListTimelineEvents</code> to find an event's ID.
         eventReferences:
           allOf:
             - $ref: '#/components/schemas/EventReferenceList'
-            - description: '<p>Updates all existing references in a <code>TimelineEvent</code>. A reference can be an Amazon Web Services resource involved in the incident or in some way associated with it. When you specify a reference, you enter the Amazon Resource Name (ARN) of the resource. You can also specify a related item. As an example, you could specify the ARN of an Amazon DynamoDB (DynamoDB) table. The table for this example is the resource. You could also specify a Amazon CloudWatch metric for that table. The metric is the related item.</p> <important> <p>This update action overrides all existing references. If you want to keep existing references, you must specify them in the call. If you don''t, this action removes them and enters only new references.</p> </important>'
+            - description: '<p>Updates all existing references in a <code>TimelineEvent</code>. A reference is an Amazon Web Services resource involved or associated with the incident. To specify a reference, enter its Amazon Resource Name (ARN). You can also specify a related item associated with that resource. For example, to specify an Amazon DynamoDB (DynamoDB) table as a resource, use its ARN. You can also specify an Amazon CloudWatch metric associated with the DynamoDB table as a related item.</p> <important> <p>This update action overrides all existing references. If you want to keep existing references, you must specify them in the call. If you don''t, this action removes any existing references and enters only new references.</p> </important>'
         eventTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -4352,7 +4352,7 @@ components:
         eventType:
           allOf:
             - $ref: '#/components/schemas/TimelineEventType'
-            - description: The type of the event. You can update events of type <code>Custom Event</code>.
+            - description: The type of event. You can update events of type <code>Custom Event</code>.
         incidentRecordArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
