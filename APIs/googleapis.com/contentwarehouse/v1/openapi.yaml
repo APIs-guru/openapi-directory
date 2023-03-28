@@ -287,90 +287,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:runPipeline":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Run a predefined pipeline.
-      operationId: contentwarehouse.projects.locations.runPipeline
-      parameters:
-        - description: "Required. The resource name which owns the resources of the pipeline. Format: projects/{project_number}/locations/{location}."
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RunPipelineRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleLongrunningOperation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1/{parent}/dataExportJobs":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a data export job.
-      operationId: contentwarehouse.projects.locations.dataExportJobs.create
-      parameters:
-        - description: Required. The resource parent name.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudContentwarehouseV1DataExportJob"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudContentwarehouseV1DataExportJob"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{parent}/documentLinks":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -6813,6 +6729,59 @@ components:
           format: float
           type: number
       type: object
+    AssistantApiCoreTypesGovernedDeviceConfig:
+      description: "The identification information for third party devices that integrates with the assistant. All of these fields will be populated by the third party when the query is sent from the third party device. Next Id: 5"
+      properties:
+        agentId:
+          description: Pantheon Project ID that uniquely identifies the consumer project ID. Required
+          type: string
+        deviceId:
+          description: "Unique identifier for the device. Example: DBCDW098234. Required"
+          type: string
+      type: object
+    AssistantApiCoreTypesGovernedDeviceId:
+      description: "LINT.IfChange Specifies identifier of a device AKA surface. Note there may be multiple device ids for the same physical device E.g. Allo app and Assistant app on Nexus. Note: DeviceId usage is complicated. Please do not depend on it for surface specific logic. Please use google3/assistant/api/capabilities.proto instead. IMPORTANT: When checking for equality between two `DeviceId`s, you should always use an `isSameDevice{As}` function to check for equality, as deep equality between `DeviceId`'s is not guaranteed. * C++: http://google3/assistant/assistant_server/util/device_id_util.cc;l=23;rcl=421295740 * Dart: http://google3/assistant/context/util/lib/device_id.dart;l=26;rcl=442126145 * Java: http://google3/java/com/google/assistant/assistantserver/utils/DeviceIdHelper.java;l=9;rcl=390378522 See http://go/deviceid-equality for more details. Next ID: 14"
+      properties:
+        agsaClientInstanceId:
+          description: The client_instance_id on devices with GSA. See 'client_instance_field' in go/androidids.
+          type: string
+        alloDeviceId:
+          description: "Allo Id. Corresponds to the GBotRequest.Sender.sender. NOTE(dychen): This may change to standard android/ios physical device ids in order to enable shared data (e.g. installed app on physical device shared between Allo and Opa apps on Nexus)."
+          type: string
+        canonicalDeviceId:
+          description: "A unique device ID for Assistant devices as proposed by go/ocelot-team to solve the device id fragmentation problem. The value of this id is the HomeGraph id of the device. See go/ocelot-track-0-registry-design. New surfaces should use the canonical_device_id instead of using other ids, and the registration should utilize the DeviceDataLayer (go/ddl-v0). Please contact the assistant-state-management@ team for guidance. Note: We didn't reuse |home_graph_device_id| because in Assistant code base |home_graph_device_id| is common to associate it with 3P devices. See go/project-yellowstone for more context."
+          type: string
+        castDeviceId:
+          description: If set, indicates that the device is a cast device, and contains the UUID of the cast device. Corresponds to the device_id field of the CastDevice proto.
+          type: string
+        clientInstanceId:
+          description: DUSI (go/dusi) is used as the identifier here. This identifier is unique to the user and device. This will help identify which device or application the user's request originated from. This is not to be confused with the client_instance_id that android devices provide. This is currently used by surfaces that use the assistant-legacy-nexus and assistant-legacy-clockwork pipelines. DUSI is created and set in S3. This field is only filled for GAIA requests.
+          type: string
+        connectedDockId:
+          description: A device ID produced by a connected dock, which is registered in HomeGraph.
+          type: string
+        deviceConfig:
+          $ref: "#/components/schemas/AssistantApiCoreTypesGovernedDeviceConfig"
+          description: The unique DeviceConfig to the specific third party device. It is also used by Android Auto Embedded first party device. See go/opa-ids.
+        deviceType:
+          description: The device's surface type. This is the string version of surface_type. The server should use the SurfaceType value derived from this string. If the device_type isn't supported within the SurfaceType enum, it will be set as UNKNOWN. Developers should use the enum in ServerParams instead of this string.
+          type: string
+        homeGraphDeviceId:
+          description: The unique device ID for HomeGraph devices. This is the HomeGraph ID, created when the device is registered into HomeGraph. It is immutable for the same device unless it is completely deleted and recreated. See go/home-graph for details.
+          type: string
+        libassistantDeviceId:
+          description: The unique ID for libassistant based devices. See go/libassistant-id for details.
+          type: string
+        multiHotwordArbitrationDeviceId:
+          description: If set, indicates that the device is participating the multi-hotword arbitration and the id is an UUID to distinguish it from other devices. It should also be consistent between requests from a single device within a session (or short duration).
+          type: string
+        opaIosDeviceId:
+          description: The unique device ID for the Assistant App on iOS. See go/opa-ios-design for details.
+          type: string
+        quartzDeviceId:
+          description: The unique ID of a Quartz device. See go/quartz-design-doc for more details. Quartz ID is a hash of (android_id + gaia).
+          type: string
+      type: object
     AssistantApiCoreTypesGovernedRingtoneTaskMetadata:
       description: "Task metadata information describing the ringtone. Next id: 11"
       properties:
@@ -10182,6 +10151,127 @@ components:
           format: int32
           type: integer
       type: object
+    AssistantContextAppProviderId:
+      description: "LINT.IfChanged Identifier for an application provider. NOTE: AppProviderId contains surface-specific info, such as the Android package name of the application. This was necessary for supporting current use cases that rely on surface-specific info in feature code. Eventually we want to deprecate AppProviderId and fetch surface-specific info in some other way (e.g. in a surface-translation layer). But until then, we may continue extending AppProviderId with other surface-specific info."
+      properties:
+        activityClassName:
+          description: The activity class name. E.g. com.google.android.gm.ui.MailActivityGmail
+          type: string
+        androidPackageName:
+          description: Unique package name that identifies an Android app of the provider.
+          type: string
+        versionCode:
+          description: Version code of the application.
+          format: int32
+          type: integer
+      type: object
+    AssistantContextMediaProviderId:
+      description: "IMPORTANT: This proto is being migrated to ProviderId. If you are adding new field, please add to ProviderId as well."
+      properties:
+        androidPackageName:
+          description: Unique package name that identifies a Android app of the provider.
+          type: string
+        castAppId:
+          description: Unique app id that identifies a Cast app of the provider.
+          type: string
+        chromeOsPackageName:
+          description: Unique package name that identifies a ChromeOS app of the provider.
+          type: string
+        homeAppPackageName:
+          description: Unique package name that identifies a Home app of the provider.
+          type: string
+        iosBundleIdentifier:
+          description: Bundle identifier that identifies an iOS app of the provider.
+          type: string
+        kaiOsPackageName:
+          description: Unique package name that identifies a KaiOS app of the provider.
+          type: string
+        kgProviderKey:
+          description: Each onboarded provider has a unique provider key. KG provider keys are string identifiers used to identify a provider in some Media backends since mids, names, etc can change.
+          type: string
+        mid:
+          description: The MID of the provider. A MID is a unique identifier issued by Knowledge Graph for all entities contained in it's graph.
+          type: string
+        providerVariant:
+          $ref: "#/components/schemas/AssistantContextProviderVariant"
+          description: Provider variant corresponding to the current MediaProviderId.
+        sipProviderId:
+          description: Bundle id that identifies an Session Initiation Protocol (SIP) provider.
+          type: string
+      type: object
+    AssistantContextProviderId:
+      description: 'Identifier used to represent a single application (a.k.a. provider). This model represents the surface-agnostic counterpart for assistant.api.core_types.Provider. E.g. it should avoid directly using package names for Android, bundle identifiers for iOS, etc. We require the transformation between assistant.context.ProviderId and assistant.api.core_types.Provider to either be lossless, or "lossy yet retrievable" (e.g. if package name is not available in ProviderId, it can still be retrieved using the ProviderMappingsModule). NOTE: 1. As of May 2021, verticals are highly fragmented in terms of how they represent/identify a provider, and so we may need to accommodate some vertical-specific representations. However, these should be generalized as much as possible so that they can be used by other verticals if needed. 2. If we need to differentiate between whether a provider is a media provider, app actions provider, timer provider, etc. we should capture this information in the context proto that contains a ProviderId field, rather than in the ProviderId message itself. 3. Any common fields across different provider identifier representations (e.g. ecosystem type) should be part of assistant.context.ProviderId directly.'
+      properties:
+        appProviderId:
+          $ref: "#/components/schemas/AssistantContextAppProviderId"
+          description: TODO(b/241170835) Deprecate this field.
+        ecosystemType:
+          description: Ecosystem type for this provider.
+          enum:
+            - ECOSYSTEM_TYPE_UNSPECIFIED
+            - NATIVE
+            - CAST
+          type: string
+        mediaProviderId:
+          $ref: "#/components/schemas/AssistantContextMediaProviderId"
+          description: DEPRECATED. Fields in MediaProviderId have been pulled out into separate fields in ProviderId and ProviderMetadata. TODO(b/243953766) Deprecate this field.
+        mid:
+          description: The MID of the provider. A MID is a unique identifier issued by Knowledge Graph for all entities contained in it's graph.
+          type: string
+        naturalProviderId:
+          $ref: "#/components/schemas/AssistantContextProviderIdNaturalProviderId"
+          description: Natural Provider Id returned from Provider Corpus. Note that feature teams should almost always use provider_corpus_id which is the canonical representation for provider. Surface-specific identiers should only be used in final surface rendering.
+        providerCorpusId:
+          description: ID issued by the Provider Corpus to uniquely identify a provider entity e.g. an Android app, a Cast app or a Cloud provider. In practice, a single partner can have multiple providers entities. For more detail, see go/se-storage-provider-id. This is the preferred/ standardized ID to use for ProviderId that all use-cases should eventually migrate to.
+          format: int64
+          type: string
+        providerVariant:
+          $ref: "#/components/schemas/AssistantContextProviderVariant"
+          description: Provider variant corresponding to the current provider. It's used together with mid to uniquely identify provider.
+      type: object
+    AssistantContextProviderIdNaturalProviderId:
+      description: Represents how to naturally identify a provider. A copy of google3/assistant/serviceengine/proto/serving/natural_provider_id.proto.
+      properties:
+        providerType:
+          description: ProviderType is an enum to represent the category of where this id is from.
+          enum:
+            - UNKNOWN
+            - CLOUD_PROJECT
+            - APP_ACTIONS
+            - WEBSITE
+            - NARRATIVE_NEWS
+            - IOS_BUNDLE
+            - CAST_APP
+            - ZEROTH_PARTY
+            - ANDROID_SYSTEM_API
+          type: string
+        value:
+          description: String of provider_id_value is the actual value of the id.
+          type: string
+      type: object
+    AssistantContextProviderVariant:
+      description: "Note: As of May 2021, multiple providers use the same mids (e.g. YouTube Main, YouTube Go, and YouTube Music all have the same mids). However, quite often we end up using surface specific identifiers (e.g. Android package names, iOS bundle identifiers, etc.) to differentiate amongst them. This field allows us to move away from surface specific identifiers towards a surface-agnostic enum representing the same information."
+      properties:
+        emptyMidVariant:
+          enum:
+            - UNSPECIFIED_EMPTY_MID_VARIANT
+            - BACKDROP_CAST
+            - CAST_RECEIVER
+          type: string
+        spotifyVariant:
+          enum:
+            - UNSPECIFIED_SPOTIFY_VARIANT
+            - SPOTIFY_MAIN
+            - SPOTIFY_LITE
+          type: string
+        youtubeVariant:
+          enum:
+            - UNSPECIFIED_YOUTUBE_VARIANT
+            - YOUTUBE_MAIN
+            - YOUTUBE_MUSIC
+            - YOUTUBE_GO
+          type: string
+      type: object
     AssistantDeviceTargetingDeviceTargetingError:
       description: "The information associated with an error while selecting the target device. Next ID: 2"
       properties:
@@ -10754,11 +10844,20 @@ components:
           format: float
           type: number
       type: object
+    AssistantGroundingRankerDeviceGroundingProviderFeatures:
+      description: "Features to be extracted from Device GP for ranking in HGR. Next ID: 2"
+      properties:
+        deviceId:
+          $ref: "#/components/schemas/AssistantApiCoreTypesGovernedDeviceId"
+          description: ID for the device. PRR specific feature.
+      type: object
     AssistantGroundingRankerGroundingProviderFeatures:
-      description: "Next ID: 4"
+      description: "Next ID: 5"
       properties:
         contactGroundingProviderFeatures:
           $ref: "#/components/schemas/AssistantGroundingRankerContactGroundingProviderFeatures"
+        deviceGroundingProviderFeatures:
+          $ref: "#/components/schemas/AssistantGroundingRankerDeviceGroundingProviderFeatures"
         mediaGroundingProviderFeatures:
           $ref: "#/components/schemas/AssistantGroundingRankerMediaGroundingProviderFeatures"
         providerGroundingProviderFeatures:
@@ -10861,8 +10960,16 @@ components:
           type: string
       type: object
     AssistantGroundingRankerProviderGroundingProviderFeatures:
-      description: "Features to be extracted from Provider GP for ranking in HGR. Next ID: 2"
+      description: "Features to be extracted from Provider GP for ranking in HGR. Next ID: 4"
       properties:
+        providerClusterId:
+          description: Cluster IDs for the provider. This field is repeated because some providers can be associated with multiple clusters. PRR specific feature.
+          items:
+            type: string
+          type: array
+        providerId:
+          $ref: "#/components/schemas/AssistantContextProviderId"
+          description: ProviderId for the provider in the binding set. PRR specific feature.
         pslScore:
           description: Provider quality score in the range [0,1] that can be used for ranking providers. Incorporates both policy rules and quality considerations.
           format: float
@@ -26817,49 +26924,6 @@ components:
             $ref: "#/components/schemas/GoogleCloudContentwarehouseV1WeightedSchemaProperty"
           type: array
       type: object
-    GoogleCloudContentwarehouseV1DataExportJob:
-      description: Describes a data export job.
-      properties:
-        createTime:
-          description: The create time of the job.
-          format: google-datetime
-          type: string
-        dataset:
-          description: BigQuery dataset name.
-          type: string
-        frequency:
-          description: Frequency of the data export job.
-          enum:
-            - FREQUENCY_UNSPECIFIED
-            - ADHOC
-            - DAILY
-            - HOURLY
-          type: string
-        id:
-          description: The data export job ID.
-          type: string
-        location:
-          description: Location of document warehouse API.
-          type: string
-        projectNumber:
-          description: User project number. The project should have document warehouse API enabled. The BigQuery database should also be in the same project.
-          format: int64
-          type: string
-        state:
-          description: The current state of the data export job.
-          enum:
-            - JOB_STATE_UNSPECIFIED
-            - ACTIVE
-            - ARCHIVED
-          type: string
-        table:
-          description: BigQuery table name.
-          type: string
-        updateTime:
-          description: The last update time of the job.
-          format: google-datetime
-          type: string
-      type: object
     GoogleCloudContentwarehouseV1DataUpdateAction:
       description: Represents the action responsible for properties update operations.
       properties:
@@ -27162,25 +27226,6 @@ components:
           description: String value of the enum field. This must match defined set of enums in document schema using EnumTypeOptions.
           type: string
       type: object
-    GoogleCloudContentwarehouseV1ExportToCdwPipeline:
-      description: The configuration of exporting documents from the Document Warehouse to CDW pipeline.
-      properties:
-        docAiDataset:
-          description: "The CDW dataset resource name. Format: projects/{project}/locations/{location}/processors/{processor}/dataset"
-          type: string
-        documents:
-          description: "The list of all the resource names of the documents to be processed. Format: projects/{project_number}/locations/{location}/documents/{document_id}."
-          items:
-            type: string
-          type: array
-        exportFolderPath:
-          description: "The Cloud Storage folder path used to store the exported documents before being sent to CDW. Format: gs:///."
-          type: string
-        trainingSplitRatio:
-          description: Ratio of training dataset split. When importing into Document AI Workbench, documents will be automatically split into training and test split category with the specified ratio.
-          format: float
-          type: number
-      type: object
     GoogleCloudContentwarehouseV1FetchAclRequest:
       description: Request message for DocumentService.FetchAcl
       properties:
@@ -27226,37 +27271,6 @@ components:
     GoogleCloudContentwarehouseV1FloatTypeOptions:
       description: Configurations for a float property.
       properties: {}
-      type: object
-    GoogleCloudContentwarehouseV1GcsIngestPipeline:
-      description: The configuration of the Cloud Storage ingestion pipeline.
-      properties:
-        inputPath:
-          description: "The input Cloud Storage folder. All files under this folder will be imported to Document Warehouse. Format: gs:///."
-          type: string
-        processorType:
-          description: "The Doc AI processor type name. Only used when the format of ingested files is Doc AI Document proto format. Reference: https://source.corp.google.com/piper///depot/google3/cloud/ai/documentai/core/c/proto/processor.proto;l=21"
-          type: string
-        schemaName:
-          description: "The Document Warehouse schema resource name. All documents processed by this pipeline will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}."
-          type: string
-      type: object
-    GoogleCloudContentwarehouseV1GcsIngestWithDocAiProcessorsPipeline:
-      description: The configuration of the document classify/split and entity/kvp extraction pipeline.
-      properties:
-        extractProcessorInfos:
-          description: The extract processors information. One matched extract processor will be used to process documents based on the classify processor result. If no classify processor is specificied, the first extract processor will be used.
-          items:
-            $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
-          type: array
-        inputPath:
-          description: "The input Cloud Storage folder. All files under this folder will be imported to Document Warehouse. Format: gs:///."
-          type: string
-        processorResultsFolderPath:
-          description: "The Cloud Storage folder path used to store the raw results from processors. Format: gs:///."
-          type: string
-        splitClassifyProcessorInfo:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
-          description: The split and classify processor information. The split and classify result will be used to find a matched extract processor.
       type: object
     GoogleCloudContentwarehouseV1GetDocumentRequest:
       description: Request message for DocumentService.GetDocument.
@@ -27493,37 +27507,6 @@ components:
         replaceRepeatedFields:
           description: When merging repeated fields, the default behavior is to append entries from the source repeated field to the destination repeated field. If you instead want to keep only the entries from the source repeated field, set this flag to true. If you want to replace a repeated field within a message field on the destination message, you must set both replace_repeated_fields and replace_message_fields to true, otherwise the repeated fields will be appended.
           type: boolean
-      type: object
-    GoogleCloudContentwarehouseV1ProcessWithDocAiPipeline:
-      description: The configuration of processing documents in Document Warehouse with DocAi processors pipeline.
-      properties:
-        documents:
-          description: "The list of all the resource names of the documents to be processed. Format: projects/{project_number}/locations/{location}/documents/{document_id}."
-          items:
-            type: string
-          type: array
-        exportFolderPath:
-          description: "The Cloud Storage folder path used to store the exported documents before being sent to CDW. Format: gs:///."
-          type: string
-        processorInfo:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
-          description: The CDW processor information.
-        processorResultsFolderPath:
-          description: "The Cloud Storage folder path used to store the raw results from processors. Format: gs:///."
-          type: string
-      type: object
-    GoogleCloudContentwarehouseV1ProcessorInfo:
-      description: The DocAI processor information.
-      properties:
-        documentType:
-          description: The processor will process the documents with this document type.
-          type: string
-        processorName:
-          description: The processor resource name. Format is `projects/{project}/locations/{location}/processors/{processor}`, or `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
-          type: string
-        schemaName:
-          description: "The Document schema resource name. All documents processed by this processor will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}."
-          type: string
       type: object
     GoogleCloudContentwarehouseV1Property:
       description: Property of a document.
@@ -27806,24 +27789,30 @@ components:
           description: Source of the rules i.e., customer name.
           type: string
       type: object
-    GoogleCloudContentwarehouseV1RunPipelineRequest:
-      description: Request message for DocumentService.RunPipeline.
+    GoogleCloudContentwarehouseV1RunPipelineMetadata:
+      description: Metadata message of RunPipeline method.
       properties:
-        exportCdwPipeline:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ExportToCdwPipeline"
-          description: Export docuemnts from Document Warehouse to CDW for training purpose.
-        gcsIngestPipeline:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1GcsIngestPipeline"
-          description: Cloud Storage ingestion pipeline.
-        gcsIngestWithDocAiProcessorsPipeline:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1GcsIngestWithDocAiProcessorsPipeline"
-          description: Use DocAI processors to process documents in Cloud Storage and ingest them to Document Warehouse.
-        processWithDocAiPipeline:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessWithDocAiPipeline"
-          description: Use a DocAI processor to process documents in Document Warehouse, and re-ingest the updated results into Document Warehouse.
-        requestMetadata:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RequestMetadata"
-          description: The meta information collected about the end user, used to enforce access control for the service.
+        failedFileCount:
+          description: Number of files that have failed at some point in the pipeline.
+          format: int32
+          type: integer
+        gcsIngestPipelineMetadata:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RunPipelineMetadataGcsIngestPipelineMetadata"
+          description: The pipeline metadata for GcsIngest pipeline.
+        totalFileCount:
+          description: Number of files that were processed by the pipeline.
+          format: int32
+          type: integer
+        userInfo:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1UserInfo"
+          description: User unique identification and groups information.
+      type: object
+    GoogleCloudContentwarehouseV1RunPipelineMetadataGcsIngestPipelineMetadata:
+      description: The metadata message for GcsIngest pipeline.
+      properties:
+        inputPath:
+          description: "The input Cloud Storage folder in this pipeline. Format: `gs:///`."
+          type: string
       type: object
     GoogleCloudContentwarehouseV1SearchDocumentsRequest:
       description: Request message for DocumentService.SearchDocuments.
@@ -29029,9 +29018,6 @@ components:
           description: The time when the user will either stop being committed or change commitment type (i.e. InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh). Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh).
           format: google-datetime
           type: string
-        committedUntilIsMixed:
-          description: TODO(b/265939748) To be removed, always false.
-          type: boolean
         eventSummary:
           description: The summary of the corresponding event in Calendar.
           type: string
@@ -29064,9 +29050,6 @@ components:
           description: The time when the user will either stop being committed or change commitment type (i.e. InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh). Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh).
           format: google-datetime
           type: string
-        committedUntilIsMixed:
-          description: TODO(b/265939748) To be removed, always false.
-          type: boolean
         nextAvailable:
           description: The next time when the user will be available, i.e., when their status will be neither InMeeting, CalendarBusy, DoNotDisturb, OutsideWorkingHours, nor OutOfOffice.
           format: google-datetime
@@ -29087,9 +29070,6 @@ components:
           description: The time when the user will either stop being committed or change commitment type (i.e. InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh). Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh).
           format: google-datetime
           type: string
-        committedUntilIsMixed:
-          description: TODO(b/265939748) To be removed, always false.
-          type: boolean
         eventSummary:
           description: The summary of the corresponding event in Calendar.
           type: string
@@ -29144,9 +29124,6 @@ components:
           description: The time when the user will either stop being committed or change commitment type (i.e. InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh). Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh). Note that if this OOO block is large (>=Xh), committed_until is not set.
           format: google-datetime
           type: string
-        committedUntilIsMixed:
-          description: TODO(b/265939748) To be removed, always false.
-          type: boolean
         eventSummary:
           description: The summary of the corresponding OOO block in Calendar. This is entered by the user, so we return it "as is" - no i18n.
           type: string
@@ -37235,6 +37212,7 @@ components:
             - AUDIO_MESSAGE_METADATA_ID
             - BROADCAST
             - MESSAGE_CONTENT
+            - INLINE_INVENTORY
           type: string
       type: object
     KnowledgeAnswersIntentQueryImpliedEntity:
@@ -50684,7 +50662,7 @@ components:
           type: number
       type: object
     QualityActionsReminder:
-      description: "Next id: 32"
+      description: "Next id: 33"
       properties:
         archived:
           description: OPTIONAL. True if the reminder is archived. Not present implies false.
@@ -51149,6 +51127,9 @@ components:
           $ref: "#/components/schemas/QualityActionsReminderDocument"
         dynamiteGroupAssignmentSource:
           $ref: "#/components/schemas/QualityActionsReminderDynamiteGroup"
+        extraNotificationDeviceId:
+          description: OPTIONAL. Device ID for home notification which should have loud notification. See go/device-id-storage-in-tasks
+          type: string
         id:
           description: DEPRECATED. Use `client_id` or `server_id` instead.
           type: string
@@ -53285,7 +53266,7 @@ components:
             type: integer
           type: array
         version:
-          description: "Version 0: Presence of an intent label in the 'intents' field represents our best-effort classification. The 'scores' field is not meaningful. Version 1: Values in the 'scores' field represent the estimated precision of the classifier for a threshold at that score."
+          description: DEPRECATED. DO NOT USE IT FOR ANY REASON! contact orbit@ if necessary.
           format: int32
           type: integer
       type: object
@@ -55041,6 +55022,11 @@ components:
             format: uint64
             type: string
           type: array
+        gtinValue:
+          description: Global trade item number (GTIN).
+          items:
+            type: string
+          type: array
         imageId:
           description: image_id is sorted and distinct for efficient search during serving.
           items:
@@ -55173,6 +55159,12 @@ components:
         pblock:
           $ref: "#/components/schemas/QualityShoppingShoppingAttachmentPBlock"
           description: Client needs to make decision on which field to use when both non_displayable_title and pblock.final_title are present.
+        productBrowseonomyIds:
+          description: Product level Browseonomy ids from shopping_annotation.product.browseonomy.
+          items:
+            format: int32
+            type: integer
+          type: array
         productClusterMid:
           format: uint64
           type: string
@@ -60680,6 +60672,32 @@ components:
           format: int32
           type: integer
       type: object
+    ResearchScamNumericRestrictNamespace:
+      properties:
+        namespace:
+          description: The name of this namespace.
+          type: string
+        op:
+          description: This MUST be specified for queries and must NOT be specified for database points.
+          enum:
+            - OP_UNSPECIFIED
+            - LESS
+            - LESS_EQUAL
+            - EQUAL
+            - GREATER_EQUAL
+            - GREATER
+          type: string
+        valueDouble:
+          format: double
+          type: number
+        valueFloat:
+          format: float
+          type: number
+        valueInt:
+          description: "NOTE: Integers are represented in 64 bits here, but if all integer values for a given namespace fit in a narrower integer type (e.g. int8), we use the narrower integer type internally, increasing performance."
+          format: int64
+          type: string
+      type: object
     ResearchScamOnlineSearchLatencyStats:
       description: "Structure to hold the response time for a node. Last used: 3"
       properties:
@@ -60784,6 +60802,11 @@ components:
           description: '//////////////////////////////////////////////////////////////////////////// NAMESPACES - a repeating field, where each entry specifies the set of tokens, within a single namespace, that apply to the query, or database point, on which this V3Restrict proto is defined. Note that: * Your overall query is an AND across namespaces. * Explicitly specifying a namespace with 0 tokens is identical to omitting that namespace. ie, "{ns:}" == "". * It is an error to specify the same namespace more than once per instance of the V3Restrict proto.'
           items:
             $ref: "#/components/schemas/ResearchScamTokenNamespace"
+          type: array
+        numericNamespaces:
+          description: 'This field allows restricts to be based on numeric comparisons rather than categorical tokens. HINT: To allow a range of values in a namespace (e.g. 42 <= x < 128), specify the same namespace twice in the query, e.g.: {namespace: "x" op: LESS value_int: 128 } {namespace: "x" op: GREATER_EQUAL value_int: 42 }'
+          items:
+            $ref: "#/components/schemas/ResearchScamNumericRestrictNamespace"
           type: array
       type: object
     ResearchScienceSearchCatalog:
@@ -61815,6 +61838,7 @@ components:
             - MAIN_ABSTRACT_DISPLAY
             - GRAPHICAL_ABSTRACT_DISPLAY
             - SUMMARY_ABSTRACT_DISPLAY
+            - HIGHLIGHTS_ABSTRACT_DISPLAY
           type: string
         AbstractHtml:
           description: Version of abstract field for display. Contains unsanitized XML/HTML.
@@ -62215,6 +62239,7 @@ components:
             - MAIN_ABSTRACT_DISPLAY
             - GRAPHICAL_ABSTRACT_DISPLAY
             - SUMMARY_ABSTRACT_DISPLAY
+            - HIGHLIGHTS_ABSTRACT_DISPLAY
           type: string
         AbstractHtml:
           description: Version of abstract field for display. This may contain XML/HTML tags.
@@ -62491,6 +62516,12 @@ components:
     ScienceCitationFundingExtractionInfo:
       description: Holds information about the source of the funding entry.
       properties:
+        ClearedFunding:
+          description: Set when we clear all extracted funding from this citation in the parser.
+          enum:
+            - UNSPECIFIED_REASON
+            - SHORT_ARTICLE
+          type: string
         DebugFundingTextBlock:
           description: Text block context from which the funding entry was extracted. Optionally filled and intended to be used for offline analysis.
           type: string
@@ -63399,6 +63430,7 @@ components:
             - INFERRED_IMAGE_TYPE_SCHEMA_DOT_ORG
             - INFERRED_IMAGE_TYPE_CRAWZALL
             - INFERRED_IMAGE_TYPE_OPEN_GRAPH
+            - INFERRED_IMAGE_TYPE_NEARDUP_STARBURST_V5
           type: string
         neardupInfo:
           description: This field will only be populated if the inferred image is a neardup of an inferred image. It stores the type and source of the images it is a neardup of.
@@ -63427,6 +63459,7 @@ components:
             - INFERRED_IMAGE_TYPE_SCHEMA_DOT_ORG
             - INFERRED_IMAGE_TYPE_CRAWZALL
             - INFERRED_IMAGE_TYPE_OPEN_GRAPH
+            - INFERRED_IMAGE_TYPE_NEARDUP_STARBURST_V5
           type: string
       type: object
     ShoppingWebentityShoppingAnnotationProductRating:
@@ -67703,6 +67736,7 @@ components:
               - SECOND_PASS_QUALITY_REWEIGTHING_EVENT_LEVEL
               - SECOND_PASS_QUALITY_REWEIGTHING_MDP_EVENT_LEVEL
               - PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE_EVENT_LEVEL
+              - UNACK_IN_APP_SUBSCRIPTION_WARNING_DETAIL_PAGE_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
               - BEST_SELLER_CART_TAG_AT_SESSION_LEVEL
@@ -68209,6 +68243,8 @@ components:
               - KIDS_LAUNCHER_USER_FEATURES_MISSING
               - SECOND_PASS_QUALITY_REWEIGTHING_SESSION_LEVEL
               - SECOND_PASS_QUALITY_REWEIGTHING_MDP_SESSION_LEVEL
+              - UNACK_IN_APP_SUBSCRIPTION_WARNING_DETAIL_PAGE_SESSION_LEVEL
+              - ELIGIBLE_FOR_FORM_FACTOR_FILTER_ON_TOP_CHARTS
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - CART_ABANDONMENT_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL
@@ -68327,6 +68363,7 @@ components:
               - GE_USER_VALUE_SEGMENT_MEDIUM
               - GE_USER_VALUE_SEGMENT_HIGH
               - GE_USER_VALUE_SEGMENT_NEVER
+              - GE_POINTS_BOOSTER_MODEL_LAUNCH
               - GE_IS_SCHEDULED_UNKNOWN_SURFACE
               - GE_IS_SCHEDULED_LEON
               - GE_IS_SCHEDULED_NOTIFICATION
@@ -68443,6 +68480,7 @@ components:
               - HAS_RECOMMENDED_APP_WITH_OOP_REINSTALL_ELIGIBILITY_USER_LEVEL
               - NOTIFICATION_PREDICTED_REV_GAIN_FILTERING_USER_LEVEL
               - NOTIFICATION_PUBLICITY_GAIN_DISABLED_USER_LEVEL
+              - UNACK_IN_APP_SUBSCRIPTION_WARNING_DETAIL_PAGE_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -72355,11 +72393,15 @@ components:
             - MODEL_RACY_WATCHPAGE_2021_05_04_FLAGGED_HOME
             - MODEL_RACY_WATCHPAGE_2021_05_04_FLAGGED_WATCHNEXT
             - MODEL_RACY_WATCHPAGE_V4
+            - MODEL_RACY_WATCHPAGE_V5
+            - MODEL_RACY_WATCHPAGE_V5_FLAGGED
             - MODEL_RACY_WATCHPAGE_RELEASE
             - MODEL_RACY_SHORTS_WATCHPAGE_V1
             - MODEL_RACY_SHORTS_WATCHPAGE_V1_FLAGGED
             - MODEL_RACY_SHORTS_WATCHPAGE_V2
             - MODEL_RACY_SHORTS_WATCHPAGE_V2_FLAGGED
+            - MODEL_RACY_SHORTS_WATCHPAGE_V3
+            - MODEL_RACY_SHORTS_WATCHPAGE_V3_FLAGGED
             - MODEL_RACY_SHORTS_WATCHPAGE_RELEASE
             - MODEL_RACY_THUMB_2019_04_02
             - MODEL_RACY_THUMB_2019_08_12

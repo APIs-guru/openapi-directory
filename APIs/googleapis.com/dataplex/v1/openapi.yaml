@@ -2473,7 +2473,7 @@ components:
           readOnly: true
           type: string
         paths:
-          description: Optional. The list of paths for items within the associated resource (eg. columns within a table) along with attribute bindings.
+          description: Optional. The list of paths for items within the associated resource (eg. columns and partitions within a table) along with attribute bindings.
           items:
             $ref: "#/components/schemas/GoogleCloudDataplexV1DataAttributeBindingPath"
           type: array
@@ -2491,7 +2491,7 @@ components:
           type: string
       type: object
     GoogleCloudDataplexV1DataAttributeBindingPath:
-      description: Represents a subresource of a given resource, and associated bindings with it.
+      description: Represents a subresource of the given resource, and associated bindings with it. Currently supported subresources are column and partition schema fields within a table.
       properties:
         attributes:
           description: "Optional. List of attributes to be associated with the path of the resource, provided in the form: projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}"
@@ -2499,7 +2499,7 @@ components:
             type: string
           type: array
         name:
-          description: "Required. The name identifier of the path. Nested columns should be of the form: 'country.state.city'."
+          description: "Required. The name identifier of the path. Nested columns should be of the form: 'address.city'."
           type: string
       type: object
     GoogleCloudDataplexV1DataProfileResult:

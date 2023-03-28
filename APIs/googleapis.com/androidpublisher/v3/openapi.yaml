@@ -1643,7 +1643,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Identifier of the track.
+        - description: Identifier of the track. [More on track name](https://developers.google.com/android-publisher/tracks#ff-track-name)
           in: path
           name: track
           required: true
@@ -1691,7 +1691,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Identifier of the track.
+        - description: Identifier of the track. [More on track name](https://developers.google.com/android-publisher/tracks#ff-track-name)
           in: path
           name: track
           required: true
@@ -1732,7 +1732,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Identifier of the track.
+        - description: Identifier of the track. [More on track name](https://developers.google.com/android-publisher/tracks#ff-track-name)
           in: path
           name: track
           required: true
@@ -6041,7 +6041,7 @@ components:
             $ref: "#/components/schemas/TrackRelease"
           type: array
         track:
-          description: Identifier of the track.
+          description: Identifier of the track. Form factor tracks have a special prefix as an identifier, for example `wear:production`, `automotive:production`. [More on track name](https://developers.google.com/android-publisher/tracks#ff-track-name)
           type: string
       type: object
     TrackCountryAvailability:
