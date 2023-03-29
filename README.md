@@ -94,6 +94,7 @@ Existing integrations
 
 Also used as test suite in the following projects:
  - [ReDoc](https://github.com/Redocly/redoc) - **OpenAPI-generated API Reference Documentation**
+ - [Speakeasy](https://speakeasyapi.dev) - Generate SDKs Now
  - [swagger-parser](https://github.com/BigstickCarpet/swagger-parser) - OpenAPI parser and validator for Node and browsers
  - [OpenAPI-schema-validator](https://github.com/seriousme/openapi-schema-validator) - OpenApi schema validation for OpenApi versions v2, v3.0.x and v3.1.x
  - [SwaggerProvider](https://github.com/sergey-tihon/SwaggerProvider) - F# Type Provider for Swagger
