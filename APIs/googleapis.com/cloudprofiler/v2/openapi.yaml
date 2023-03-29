@@ -270,9 +270,9 @@ components:
       properties:
         deployment:
           $ref: "#/components/schemas/Deployment"
-          description: Deployment details.
+          description: Required. Deployment details.
         profileType:
-          description: One or more profile types that the agent is capable of providing.
+          description: Required. One or more profile types that the agent is capable of providing.
           items:
             enum:
               - PROFILE_TYPE_UNSPECIFIED

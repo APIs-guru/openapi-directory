@@ -855,6 +855,10 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        url:
+          description: Output only. The deployed url for the function.
+          readOnly: true
+          type: string
       type: object
     GenerateDownloadUrlRequest:
       description: Request of `GenerateDownloadUrl` method.

@@ -26,7 +26,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformConfigurationNotification-v1
-  x-timestamp: 2023-03-23T00:20:31Z
+  x-timestamp: 2023-03-28T16:25:31Z
 tags: []
 components:
   examples:
@@ -680,32 +680,6 @@ components:
           description: Respond with **HTTP 200 OK** and `[accepted]` in the response body to [accept the webhook](https://docs.adyen.com/development-resources/webhooks#accept-notifications).
           type: string
       type: object
-    BankAccount:
-      properties:
-        accountNumber:
-          description: The bank account number, without separators or whitespace.
-          maxLength: 18
-          minLength: 2
-          type: string
-        accountType:
-          description: |-
-            The bank account type.
-
-            Possible values: **checking** only.
-          enum:
-            - checking
-          type: string
-        iban:
-          description: The [International Bank Account Number](https://en.wikipedia.org/wiki/International_Bank_Account_Number) (IBAN).
-          type: string
-        routingNumber:
-          description: The 9-digit [routing number](https://en.wikipedia.org/wiki/ABA_routing_transit_number), without separators or whitespace.
-          maxLength: 9
-          minLength: 9
-          type: string
-      required:
-        - iban
-      type: object
     BulkAddress:
       properties:
         city:
@@ -969,6 +943,22 @@ components:
           description: The year in which the card will expire.
           type: string
       type: object
+    IbanAccountIdentification:
+      additionalProperties: false
+      properties:
+        iban:
+          description: The international bank account number as defined in the [ISO-13616](https://www.iso.org/standard/81090.html) standard.
+          type: string
+        type:
+          default: iban
+          description: "**iban**"
+          enum:
+            - iban
+          type: string
+      required:
+        - type
+        - iban
+      type: object
     JSONObject:
       properties:
         paths:
@@ -1003,8 +993,10 @@ components:
           description: The unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/balanceAccounts__resParam_id) associated with the payment instrument.
           type: string
         bankAccount:
-          $ref: "#/components/schemas/BankAccount"
           description: Contains the business account details. Returned when you create a payment instrument with `type` **bankAccount**.
+          oneOf:
+            - $ref: "#/components/schemas/IbanAccountIdentification"
+            - $ref: "#/components/schemas/USLocalAccountIdentification"
         card:
           $ref: "#/components/schemas/Card"
           description: Contains information about the card payment instrument. Returned when you create a payment instrument with `type` **card**.
@@ -1462,6 +1454,40 @@ components:
             - balance
             - cron
           type: string
+      type: object
+    USLocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The bank account number, without separators or whitespace.
+          maxLength: 18
+          minLength: 2
+          type: string
+        accountType:
+          default: checking
+          description: |-
+            The bank account type.
+
+            Possible values: **checking** or **savings**. Defaults to **checking**.
+          enum:
+            - checking
+            - savings
+          type: string
+        routingNumber:
+          description: The 9-digit [routing number](https://en.wikipedia.org/wiki/ABA_routing_transit_number), without separators or whitespace.
+          maxLength: 9
+          minLength: 9
+          type: string
+        type:
+          default: usLocal
+          description: "**usLocal**"
+          enum:
+            - usLocal
+          type: string
+      required:
+        - type
+        - accountNumber
+        - routingNumber
       type: object
   securitySchemes:
     ApiKeyAuth:

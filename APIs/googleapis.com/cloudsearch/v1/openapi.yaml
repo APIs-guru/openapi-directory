@@ -2516,7 +2516,7 @@ components:
       properties: {}
       type: object
     Annotation:
-      description: "NOTE WHEN ADDING NEW PROTO FIELDS: Be sure to add datapol annotations to new fields with potential PII, so they get scrubbed when logging protos for errors. NEXT TAG: 31"
+      description: "NOTE WHEN ADDING NEW PROTO FIELDS: Be sure to add datapol annotations to new fields with potential PII, so they get scrubbed when logging protos for errors. NEXT TAG: 32"
       properties:
         babelPlaceholderMetadata:
           $ref: "#/components/schemas/BabelPlaceholderMetadata"
@@ -2531,6 +2531,9 @@ components:
             - RENDER_IF_POSSIBLE
             - DO_NOT_RENDER
           type: string
+        componentSearchInfo:
+          $ref: "#/components/schemas/AppsDynamiteSharedMessageComponentSearchInfo"
+          description: "Contains additional metadata that further enhances the annotation when it is returned as part of search response. For example, this can be used to define how the annotation matches the search. Information can be used to highlight in rendering search results. The following are the different annotation text fields that can be highlighted by this field: 1. DriveMetadata.title 2. UploadMetadata.content_name 3. GsuiteIntegrationMetadata.TasksMessageIntegrationRenderData.title 4. GsuiteIntegrationMetadata.CalendarEventAnnotationData.title"
         consentedAppUnfurlMetadata:
           $ref: "#/components/schemas/ConsentedAppUnfurlMetadata"
         customEmojiMetadata:
@@ -3265,6 +3268,16 @@ components:
           description: Required. A URL, in the format "https://meet.google.com/*" (e.g. https://meet.google.com/cxv-zbgj-wzw), to identify and access the meeting space.
           type: string
       type: object
+    AppsDynamiteSharedMessageComponentSearchInfo:
+      description: Metadata used to describe search information in a specific component of a chat message, for example an annotation or an attachment.
+      properties:
+        matchedSearch:
+          description: Whether the whole component matched the search.
+          type: boolean
+        titleTextWithDescription:
+          $ref: "#/components/schemas/AppsDynamiteSharedTextWithDescription"
+          description: Backend should always set TextWithDescription.text_body based on the title (or its snippet) of the annotation or attachment.
+      type: object
     AppsDynamiteSharedMessageInfo:
       description: Information that references a Dynamite chat message. This is only used for Activity Feed messages.
       properties:
@@ -3496,6 +3509,41 @@ components:
     AppsDynamiteSharedTasksMessageIntegrationPayload:
       description: A payload containing Tasks metadata for rendering a live card. Currently not used by the Tasks integration.
       properties: {}
+      type: object
+    AppsDynamiteSharedTextSegment:
+      description: Defines a segment in a text.
+      properties:
+        length:
+          description: Length of the segment in the text.
+          format: int32
+          type: integer
+        startIndex:
+          description: Start index (0-indexed and inclusive) of the segment in the text.
+          format: int32
+          type: integer
+      type: object
+    AppsDynamiteSharedTextSegmentsWithDescription:
+      description: Defines text segments with description type associated.
+      properties:
+        descriptionType:
+          enum:
+            - DESCRIPTION_TYPE_UNSPECIFIED
+            - KEYWORD_MATCH
+          type: string
+        textSegment:
+          items:
+            $ref: "#/components/schemas/AppsDynamiteSharedTextSegment"
+          type: array
+      type: object
+    AppsDynamiteSharedTextWithDescription:
+      description: Defines a text with descriptive text segments associated.
+      properties:
+        textBody:
+          type: string
+        textSegmentsWithDescription:
+          items:
+            $ref: "#/components/schemas/AppsDynamiteSharedTextSegmentsWithDescription"
+          type: array
       type: object
     AppsDynamiteSharedUserBlockRelationship:
       description: User-block relationship
@@ -5614,9 +5662,24 @@ components:
     Divider:
       properties: {}
       type: object
+    DlpAction:
+      properties:
+        actionType:
+          enum:
+            - NO_ACTION
+            - BLOCK
+            - AUDIT_ONLY
+            - WARN
+          type: string
+        unsafeHtmlMessageBody:
+          description: The custom error message defined by the customer administrator.
+          type: string
+      type: object
     DlpScanSummary:
       description: A summary of a DLP scan event. This is a summary and should contain the minimum amount of data required to identify and process DLP scans. It is written to Starcast and encoded & returned to the client on attachment upload.
       properties:
+        dlpAction:
+          $ref: "#/components/schemas/DlpAction"
         scanId:
           description: The scan ID of the corresponding {@link DlpViolationScanRecord} in the {@link EphemeralDlpScans} Spanner table. This can be used to fetch additional details about the scan, e.g. for audit logging.
           type: string
@@ -5923,6 +5986,9 @@ components:
         lastReadTimestampSecs:
           format: int64
           type: string
+        memberCountScore:
+          format: double
+          type: number
         memberMetadataCount:
           format: double
           type: number
@@ -7387,7 +7453,7 @@ components:
           description: The updated space retention settings
       type: object
     GsuiteIntegrationMetadata:
-      description: Annotation metadata for an GsuiteIntegration artifact.
+      description: Annotation metadata for a GsuiteIntegration artifact.
       properties:
         activityFeedData:
           $ref: "#/components/schemas/AppsDynamiteSharedActivityFeedAnnotationData"
@@ -7628,7 +7694,7 @@ components:
       description: Identifies a particular object, including both Users and DirEntries. This Id is unique across the entire server instance, such as the production or qa instance.
       properties:
         creatorUserId:
-          description: The User account in which the DirEntry was originally created. If name_space==GAIA, then it's the gaia_id of the user this id is referring to.
+          description: The User account in which the DirEntry was originally created. If name_space==GAIA, then it's the gaia_id of the user this id is referring to. This field should really be called the "bucket ID", not the creator ID. In some circumstances, such as copying a Google Docs file, a user can create an item in a different user's bucket, so it should not be relied upon for anything other than bucket location. To look up the requesting user who initially created item, use the `creator_id` DirEntry field instead.
           format: uint64
           type: string
         localId:

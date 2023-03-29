@@ -583,6 +583,16 @@ components:
           description: "The resource name. Format: apps/{app}/crashRateMetricSet"
           type: string
       type: object
+    GooglePlayDeveloperReportingV1alpha1DecimalConfidenceInterval:
+      description: Represents the confidence interval of a metric.
+      properties:
+        lowerBound:
+          $ref: "#/components/schemas/GoogleTypeDecimal"
+          description: The confidence interval's lower bound.
+        upperBound:
+          $ref: "#/components/schemas/GoogleTypeDecimal"
+          description: The confidence interval's upper bound.
+      type: object
     GooglePlayDeveloperReportingV1alpha1DimensionValue:
       description: Represents the value of a single dimension.
       properties:
@@ -701,6 +711,9 @@ components:
         decimalValue:
           $ref: "#/components/schemas/GoogleTypeDecimal"
           description: Actual value, represented as a decimal number.
+        decimalValueConfidenceInterval:
+          $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1DecimalConfidenceInterval"
+          description: Confidence interval of a value that is of type type.Decimal.
         metric:
           description: Name of the metric.
           type: string

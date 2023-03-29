@@ -494,6 +494,13 @@ components:
             $ref: "#/components/schemas/Signature"
           type: array
       type: object
+    Binary:
+      properties:
+        name:
+          type: string
+        version:
+          type: string
+      type: object
     BuildOccurrence:
       description: Details of a build occurrence.
       properties:
@@ -1277,6 +1284,9 @@ components:
         architecture:
           description: The architecture of the package.
           type: string
+        binary:
+          $ref: "#/components/schemas/Binary"
+          description: The binary package. This is significant when the source is different than the binary itself. Historically if they've differed, we've stored the name of the source and its version in the package/version fields, but we should also store the binary package info, as that's what's actually installed. See https://b.corp.google.com/issues/175908657#comment15
         cpeUri:
           description: The cpe_uri in [cpe format] (https://cpe.mitre.org/specification/) in which the vulnerability may manifest. Examples include distro or storage location for vulnerable jar.
           type: string

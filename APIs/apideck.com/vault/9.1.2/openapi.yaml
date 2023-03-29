@@ -1442,7 +1442,8 @@ paths:
                   show_suggestions: false,
                   show_sidebar: true,
                   auto_redirect: false,
-                  hide_guides: false
+                  hide_guides: false,
+                  allow_actions: ['delete']
                 },
                 theme: {
                   favicon: 'https://res.cloudinary.com/apideck/icons/intercom',
@@ -3264,6 +3265,20 @@ components:
           additionalProperties: false
           description: Settings to change the way the Vault is displayed.
           properties:
+            allow_actions:
+              description: |-
+                Hide actions from your users in [Vault](/apis/vault/reference#section/Get-Started). Actions in `allow_actions` will be shown on a connection in Vault.
+                Available actions are: `delete`, `disconnect`, `reauthorize` and `disable`.
+                Empty array will hide all actions. By default all actions are visible.
+              items:
+                enum:
+                  - delete
+                  - disconnect
+                  - reauthorize
+                  - disable
+                type: string
+              title: Allow actions
+              type: array
             auto_redirect:
               default: false
               description: Automatically redirect to redirect uri after the connection has been configured as callable. Defaults to `false`.
