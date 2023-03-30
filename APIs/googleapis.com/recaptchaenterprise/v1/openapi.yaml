@@ -958,6 +958,9 @@ components:
     GoogleCloudRecaptchaenterpriseV1FraudPreventionAssessment:
       description: Assessment for Fraud Prevention.
       properties:
+        behavioralTrustVerdict:
+          $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FraudPreventionAssessmentBehavioralTrustVerdict"
+          description: Assessment of this transaction for behavioral trust.
         cardTestingVerdict:
           $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FraudPreventionAssessmentCardTestingVerdict"
           description: Assessment of this transaction for risk of being part of a card testing attack.
@@ -966,6 +969,14 @@ components:
           description: Assessment of this transaction for risk of a stolen instrument.
         transactionRisk:
           description: Probability (0-1) of this transaction being fraudulent. Summarizes the combined risk of attack vectors below.
+          format: float
+          type: number
+      type: object
+    GoogleCloudRecaptchaenterpriseV1FraudPreventionAssessmentBehavioralTrustVerdict:
+      description: Information about behavioral trust of the transaction.
+      properties:
+        trust:
+          description: Probability (0-1) of this transaction attempt being executed in a behaviorally trustworthy way.
           format: float
           type: number
       type: object

@@ -30,8 +30,6 @@ tags:
   - name: caseClassifications
   - name: cases
   - name: media
-  - name: organizations
-  - name: projects
 paths:
   /v2beta/caseClassifications:search:
     get:
@@ -128,7 +126,7 @@ paths:
   "/v2beta/{name}":
     get:
       description: Retrieve the specified case.
-      operationId: cloudsupport.projects.cases.get
+      operationId: cloudsupport.cases.get
       parameters:
         - description: Required. The fully qualified name of a case to be retrieved.
           in: path
@@ -149,7 +147,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - cases
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -164,7 +162,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     patch:
       description: Update the specified case. Only a subset of fields can be updated.
-      operationId: cloudsupport.projects.updateCases
+      operationId: cloudsupport.cases.patch
       parameters:
         - description: The resource name for the case.
           in: path
@@ -195,7 +193,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - cases
   "/v2beta/{name}:close":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -211,7 +209,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Close the specified case.
-      operationId: cloudsupport.projects.cases.close
+      operationId: cloudsupport.cases.close
       parameters:
         - description: Required. The fully qualified name of the case resource to be closed.
           in: path
@@ -237,7 +235,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - cases
   "/v2beta/{name}:download":
     get:
       description: 'Download a file attachment on a case. Note: HTTP requests must append "?alt=media" to the URL.'
@@ -290,7 +288,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Escalate a case. Escalating a case will initiate the Cloud Support escalation management process. This operation is only available to certain Customer Care tiers. Go to https://cloud.google.com/support and look for 'Technical support escalations' in the feature list to find out which tiers are able to perform escalations.
-      operationId: cloudsupport.projects.cases.escalate
+      operationId: cloudsupport.cases.escalate
       parameters:
         - description: Required. The fully qualified name of the Case resource to be escalated.
           in: path
@@ -316,11 +314,11 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - cases
   "/v2beta/{parent}/attachments":
     get:
       description: Retrieve all attachments associated with a support case.
-      operationId: cloudsupport.projects.cases.attachments.list
+      operationId: cloudsupport.cases.attachments.list
       parameters:
         - description: Required. The resource name of Case object for which attachments should be listed.
           in: path
@@ -351,7 +349,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - cases
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -396,7 +394,7 @@ paths:
   "/v2beta/{parent}/cases":
     get:
       description: "Retrieve all cases under the specified parent. Note: Listing cases under an Organization returns only the cases directly parented by that organization. To retrieve all cases under an organization, including cases parented by projects under that organization, use `cases.search`."
-      operationId: cloudsupport.projects.cases.list
+      operationId: cloudsupport.cases.list
       parameters:
         - description: Required. The fully qualified name of parent resource to list cases under.
           in: path
@@ -432,7 +430,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - cases
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -447,7 +445,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Create a new case and associate it with the given Cloud resource. The case object must have the following fields set: display_name, description, classification, and severity."
-      operationId: cloudsupport.projects.cases.create
+      operationId: cloudsupport.cases.create
       parameters:
         - description: Required. The name of the Cloud resource under which the case should be created.
           in: path
@@ -473,11 +471,11 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - cases
   "/v2beta/{parent}/comments":
     get:
       description: Retrieve all Comments associated with the Case object.
-      operationId: cloudsupport.projects.cases.comments.list
+      operationId: cloudsupport.cases.comments.list
       parameters:
         - description: Required. The resource name of Case object for which comments should be listed.
           in: path
@@ -508,7 +506,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - cases
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -523,7 +521,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Add a new comment to the specified Case. The comment object must have the following fields set: body."
-      operationId: cloudsupport.projects.cases.comments.create
+      operationId: cloudsupport.cases.comments.create
       parameters:
         - description: Required. The resource name of Case to which this comment should be added.
           in: path
@@ -549,7 +547,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - cases
 components:
   parameters:
     _.xgafv:

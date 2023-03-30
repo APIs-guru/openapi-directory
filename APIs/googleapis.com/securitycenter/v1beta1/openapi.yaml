@@ -910,19 +910,6 @@ components:
             type: string
           type: array
       type: object
-    AssociatedFinding:
-      description: A finding that is associated with this node in the exposure path.
-      properties:
-        canonicalFindingName:
-          description: "Canonical name of the associated findings. Example: organizations/123/sources/456/findings/789"
-          type: string
-        findingCategory:
-          description: The additional taxonomy group within findings from a given source.
-          type: string
-        name:
-          description: Full resource name of the finding.
-          type: string
-      type: object
     AuditConfig:
       description: 'Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both `allServices` and a specific service, the union of the two AuditConfigs is used for that service: the log_types specified in each AuditConfig are enabled, and the exempted_members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { "audit_configs": [ { "service": "allServices", "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:jose@example.com" ] }, { "log_type": "DATA_WRITE" }, { "log_type": "ADMIN_READ" } ] }, { "service": "sampleservice.googleapis.com", "audit_log_configs": [ { "log_type": "DATA_READ" }, { "log_type": "DATA_WRITE", "exempted_members": [ "user:aliya@example.com" ] } ] } ] } For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ logging. It also exempts `jose@example.com` from DATA_READ logging, and `aliya@example.com` from DATA_WRITE logging.'
       properties:
@@ -1192,16 +1179,6 @@ components:
           format: double
           type: number
       type: object
-    Edge:
-      description: Represents a connection between a source node and a destination node in this exposure path.
-      properties:
-        destination:
-          description: This is the resource name of the destination node.
-          type: string
-        source:
-          description: This is the resource name of the source node.
-          type: string
-      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
@@ -1404,11 +1381,6 @@ components:
         nextSteps:
           description: Next steps associate to the finding.
           type: string
-        orgPolicyConstraints:
-          description: Contains information about the org policy constraints associated with the finding.
-          items:
-            $ref: "#/components/schemas/OrgPolicyConstraint"
-          type: array
         parent:
           description: 'The relative resource name of the source the finding belongs to. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name This field is immutable after creation time. For example: "organizations/{organization_id}/sources/{source_id}"'
           type: string
@@ -1540,55 +1512,6 @@ components:
       description: The response to a BulkMute request. Contains the LRO information.
       properties: {}
       type: object
-    GoogleCloudSecuritycenterV1ExposedResource:
-      description: A resource that is exposed as a result of a finding.
-      properties:
-        displayName:
-          description: Human readable name of the resource that is exposed.
-          type: string
-        methods:
-          description: "The ways in which this resource is exposed. Examples: Read, Write"
-          items:
-            type: string
-          type: array
-        name:
-          description: "Exposed Resource Name e.g.: `organizations/123/attackExposureResults/456/exposedResources/789`"
-          type: string
-        resource:
-          description: "The name of the resource that is exposed. See: https://cloud.google.com/apis/design/resource_names#full_resource_name"
-          type: string
-        resourceType:
-          description: "The resource type of the exposed resource. See: https://cloud.google.com/asset-inventory/docs/supported-asset-types"
-          type: string
-        resourceValue:
-          description: How valuable this resource is.
-          enum:
-            - RESOURCE_VALUE_UNSPECIFIED
-            - RESOURCE_VALUE_LOW
-            - RESOURCE_VALUE_MEDIUM
-            - RESOURCE_VALUE_HIGH
-          type: string
-      type: object
-    GoogleCloudSecuritycenterV1ExposurePath:
-      description: A path that an attacker could take to reach an exposed resource.
-      properties:
-        edges:
-          description: A list of the edges between nodes in this exposure path.
-          items:
-            $ref: "#/components/schemas/Edge"
-          type: array
-        exposedResource:
-          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1ExposedResource"
-          description: The leaf node of this exposure path.
-        name:
-          description: "Exposure Path Name e.g.: `organizations/123/attackExposureResults/456/exposurePaths/789`"
-          type: string
-        pathNodes:
-          description: A list of nodes that exist in this exposure path.
-          items:
-            $ref: "#/components/schemas/PathNode"
-          type: array
-      type: object
     GoogleCloudSecuritycenterV1ExternalSystem:
       description: Representation of third party SIEM/SOAR fields within SCC.
       properties:
@@ -1683,51 +1606,6 @@ components:
           type: string
         type:
           description: The full resource type of the resource.
-          type: string
-      type: object
-    GoogleCloudSecuritycenterV1ResourceValueConfig:
-      description: A resource value config is a mapping configuration of user's tag values to resource values. Used by the attack path simulation.
-      properties:
-        createTime:
-          description: Output only. Timestamp this resource value config was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        description:
-          description: Description of the resource value config.
-          type: string
-        name:
-          description: Name for the resource value config
-          type: string
-        resourceLabelsSelector:
-          additionalProperties:
-            type: string
-          description: 'List of resource labels to search for, evaluated with AND. E.g. "resource_labels_selector": {"key": "value", "env": "prod"} will match resources with labels "key": "value" AND "env": "prod" https://cloud.google.com/resource-manager/docs/creating-managing-labels'
-          type: object
-        resourceType:
-          description: Apply resource_value only to resources that match resource_type. resource_type will be checked with "AND" of other resources. E.g. "storage.googleapis.com/Bucket" with resource_value "HIGH" will apply "HIGH" value only to "storage.googleapis.com/Bucket" resources.
-          type: string
-        resourceValue:
-          description: Required. Resource value level this expression represents
-          enum:
-            - RESOURCE_VALUE_UNSPECIFIED
-            - HIGH
-            - MEDIUM
-            - LOW
-            - NONE
-          type: string
-        scope:
-          description: Project or folder to scope this config to. For example, "project/456" would apply this config only to resources in "project/456" scope will be checked with "AND" of other resources.
-          type: string
-        tagValues:
-          description: Required. Tag values combined with AND to check against. Values in the form "tagValues/123" E.g. [ "tagValues/123", "tagValues/456", "tagValues/789" ] https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing
-          items:
-            type: string
-          type: array
-        updateTime:
-          description: Output only. Timestamp this resource value config was last updated.
-          format: google-datetime
-          readOnly: true
           type: string
       type: object
     GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse:
@@ -2420,13 +2298,6 @@ components:
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
-    OrgPolicyConstraint:
-      description: Encapsulates data about a constraint associated with an organization policy.
-      properties:
-        name:
-          description: 'The resource name of the constraint. Example: "organizations/{organization_id}/constraints/{constraint_name}"'
-          type: string
-      type: object
     OrganizationSettings:
       description: User specified settings that are attached to the Security Command Center organization.
       properties:
@@ -2438,24 +2309,6 @@ components:
           type: boolean
         name:
           description: 'The relative resource name of the settings. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Example: "organizations/{organization_id}/organizationSettings".'
-          type: string
-      type: object
-    PathNode:
-      description: Represents one point that an attacker passes through in this exposure path.
-      properties:
-        associatedFindings:
-          description: The findings associated with this node in the exposure path.
-          items:
-            $ref: "#/components/schemas/AssociatedFinding"
-          type: array
-        displayName:
-          description: Human readable name of this resource.
-          type: string
-        resource:
-          description: "The name of the resource at this point in the exposure path. The format of the name is: https://cloud.google.com/apis/design/resource_names#full_resource_name"
-          type: string
-        resourceType:
-          description: "The resource type of this resource. See: https://cloud.google.com/asset-inventory/docs/supported-asset-types"
           type: string
       type: object
     Pod:
