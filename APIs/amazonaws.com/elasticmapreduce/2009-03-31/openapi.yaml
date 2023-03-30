@@ -4298,6 +4298,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClusterTimeline'
             - description: A timeline that represents the status of a cluster over the lifetime of the cluster.
+        ErrorDetails:
+          allOf:
+            - $ref: '#/components/schemas/ErrorDetailList'
+            - description: A list of tuples that provide information about the errors that caused a cluster termination. This structure may have up to 10 different <code>ErrorDetail</code> tuples.
       description: The detailed status of the cluster.
     Ec2InstanceAttributes:
       type: object
@@ -4587,6 +4591,10 @@ components:
             - $ref: '#/components/schemas/Date'
             - description: The date and time when the cluster was terminated.
       description: Represents the timeline of the cluster's lifecycle.
+    ErrorDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ErrorDetail'
     ClusterSummary:
       type: object
       properties:
@@ -4997,6 +5005,26 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/XmlStringMaxLen256'
+    ErrorData:
+      type: array
+      items:
+        $ref: '#/components/schemas/StringMap'
+    ErrorDetail:
+      type: object
+      properties:
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name or code that's associated with the error.
+        ErrorData:
+          allOf:
+            - $ref: '#/components/schemas/ErrorData'
+            - description: A list of key value pairs that provide contextual information to explain why the error may have occured.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A message describing the error that occured.
+      description: A tuple that provides information about an error that caused a cluster to terminate.
     ExecutionEngineType:
       type: string
       enum:

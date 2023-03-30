@@ -454,6 +454,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=NetworkFirewall_20201112.CreateTLSInspectionConfiguration:
+    post:
+      operationId: CreateTLSInspectionConfiguration
+      description: '<p>Creates an Network Firewall TLS inspection configuration. A TLS inspection configuration contains the Certificate Manager certificate references that Network Firewall uses to decrypt and re-encrypt inbound traffic.</p> <p>After you create a TLS inspection configuration, you associate it with a firewall policy.</p> <p>To update the settings for a TLS inspection configuration, use <a>UpdateTLSInspectionConfiguration</a>.</p> <p>To manage a TLS inspection configuration''s tags, use the standard Amazon Web Services resource tagging operations, <a>ListTagsForResource</a>, <a>TagResource</a>, and <a>UntagResource</a>.</p> <p>To retrieve information about TLS inspection configurations, use <a>ListTLSInspectionConfigurations</a> and <a>DescribeTLSInspectionConfiguration</a>.</p> <p> For more information about TLS inspection configurations, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Decrypting SSL/TLS traffic with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTLSInspectionConfigurationResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTLSInspectionConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - NetworkFirewall_20201112.CreateTLSInspectionConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=NetworkFirewall_20201112.DeleteFirewall:
     post:
       operationId: DeleteFirewall
@@ -716,6 +767,69 @@ paths:
             type: string
             enum:
               - NetworkFirewall_20201112.DeleteRuleGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=NetworkFirewall_20201112.DeleteTLSInspectionConfiguration:
+    post:
+      operationId: DeleteTLSInspectionConfiguration
+      description: Deletes the specified <a>TLSInspectionConfiguration</a>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTLSInspectionConfigurationResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTLSInspectionConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - NetworkFirewall_20201112.DeleteTLSInspectionConfiguration
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1066,6 +1180,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=NetworkFirewall_20201112.DescribeTLSInspectionConfiguration:
+    post:
+      operationId: DescribeTLSInspectionConfiguration
+      description: Returns the data objects for the specified TLS inspection configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTLSInspectionConfigurationResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTLSInspectionConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - NetworkFirewall_20201112.DescribeTLSInspectionConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=NetworkFirewall_20201112.DisassociateSubnets:
     post:
       operationId: DisassociateSubnets
@@ -1316,6 +1487,69 @@ paths:
             type: string
             enum:
               - NetworkFirewall_20201112.ListRuleGroups
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=NetworkFirewall_20201112.ListTLSInspectionConfigurations:
+    post:
+      operationId: ListTLSInspectionConfigurations
+      description: 'Retrieves the metadata for the TLS inspection configurations that you have defined. Depending on your setting for max results and the number of TLS inspection configurations, a single call might not return the full list.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTLSInspectionConfigurationsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTLSInspectionConfigurationsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - NetworkFirewall_20201112.ListTLSInspectionConfigurations
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2104,6 +2338,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=NetworkFirewall_20201112.UpdateTLSInspectionConfiguration:
+    post:
+      operationId: UpdateTLSInspectionConfiguration
+      description: '<p>Updates the TLS inspection configuration settings for the specified TLS inspection configuration. You use a TLS inspection configuration by reference in one or more firewall policies. When you modify a TLS inspection configuration, you modify all firewall policies that use the TLS inspection configuration. </p> <p>To update a TLS inspection configuration, first call <a>DescribeTLSInspectionConfiguration</a> to retrieve the current <a>TLSInspectionConfiguration</a> object, update the object as needed, and then provide the updated object to this call. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTLSInspectionConfigurationResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '484':
+          description: InvalidTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTokenException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTLSInspectionConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - NetworkFirewall_20201112.UpdateTLSInspectionConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -2413,6 +2710,45 @@ components:
           allOf:
             - $ref: '#/components/schemas/SourceMetadata'
             - description: A complex type that contains metadata about the rule group that your own rule group is copied from. You can use the metadata to keep track of updates made to the originating rule group.
+    CreateTLSInspectionConfigurationResponse:
+      type: object
+      required:
+        - UpdateToken
+        - TLSInspectionConfigurationResponse
+      properties:
+        UpdateToken:
+          allOf:
+            - $ref: '#/components/schemas/UpdateToken'
+            - description: '<p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the TLS inspection configuration. The token marks the state of the TLS inspection configuration resource at the time of the request. </p> <p>To make changes to the TLS inspection configuration, you provide the token in your request. Network Firewall uses the token to ensure that the TLS inspection configuration hasn''t changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the TLS inspection configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>'
+        TLSInspectionConfigurationResponse:
+          allOf:
+            - $ref: '#/components/schemas/TLSInspectionConfigurationResponse'
+            - description: 'The high-level properties of a TLS inspection configuration. This, along with the <a>TLSInspectionConfiguration</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. '
+    CreateTLSInspectionConfigurationRequest:
+      type: object
+      required:
+        - TLSInspectionConfigurationName
+        - TLSInspectionConfiguration
+      title: CreateTLSInspectionConfigurationRequest
+      properties:
+        TLSInspectionConfigurationName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The descriptive name of the TLS inspection configuration. You can't change the name of a TLS inspection configuration after you create it.
+        TLSInspectionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/TLSInspectionConfiguration'
+            - description: '<p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p> <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p> <p>To use a TLS inspection configuration, you add it to a Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect inbound traffic. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Decrypting SSL/TLS traffic with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: 'A description of the TLS inspection configuration. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'The key:value pairs to associate with the resource.'
+        EncryptionConfiguration:
+          $ref: '#/components/schemas/EncryptionConfiguration'
     DeleteFirewallResponse:
       type: object
       properties:
@@ -2493,6 +2829,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/RuleGroupType'
             - description: '<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules. </p> <note> <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p> </note>'
+    DeleteTLSInspectionConfigurationResponse:
+      type: object
+      required:
+        - TLSInspectionConfigurationResponse
+      properties:
+        TLSInspectionConfigurationResponse:
+          allOf:
+            - $ref: '#/components/schemas/TLSInspectionConfigurationResponse'
+            - description: 'The high-level properties of a TLS inspection configuration. This, along with the <a>TLSInspectionConfiguration</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. '
+    DeleteTLSInspectionConfigurationRequest:
+      type: object
+      title: DeleteTLSInspectionConfigurationRequest
+      properties:
+        TLSInspectionConfigurationArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the TLS inspection configuration.</p> <p>You must specify the ARN or the name, and you can specify both. </p>'
+        TLSInspectionConfigurationName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: '<p>The descriptive name of the TLS inspection configuration. You can''t change the name of a TLS inspection configuration after you create it.</p> <p>You must specify the ARN or the name, and you can specify both. </p>'
     DescribeFirewallResponse:
       type: object
       properties:
@@ -2670,6 +3027,36 @@ components:
           allOf:
             - $ref: '#/components/schemas/RuleGroupType'
             - description: '<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules. </p> <note> <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p> </note>'
+    DescribeTLSInspectionConfigurationResponse:
+      type: object
+      required:
+        - UpdateToken
+        - TLSInspectionConfigurationResponse
+      properties:
+        UpdateToken:
+          allOf:
+            - $ref: '#/components/schemas/UpdateToken'
+            - description: '<p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the TLS inspection configuration. The token marks the state of the TLS inspection configuration resource at the time of the request. </p> <p>To make changes to the TLS inspection configuration, you provide the token in your request. Network Firewall uses the token to ensure that the TLS inspection configuration hasn''t changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the TLS inspection configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>'
+        TLSInspectionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/TLSInspectionConfiguration'
+            - description: '<p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p> <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p> <p>To use a TLS inspection configuration, you add it to a Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect inbound traffic. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Decrypting SSL/TLS traffic with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>'
+        TLSInspectionConfigurationResponse:
+          allOf:
+            - $ref: '#/components/schemas/TLSInspectionConfigurationResponse'
+            - description: 'The high-level properties of a TLS inspection configuration. This, along with the <a>TLSInspectionConfiguration</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. '
+    DescribeTLSInspectionConfigurationRequest:
+      type: object
+      title: DescribeTLSInspectionConfigurationRequest
+      properties:
+        TLSInspectionConfigurationArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the TLS inspection configuration.</p> <p>You must specify the ARN or the name, and you can specify both. </p>'
+        TLSInspectionConfigurationName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: '<p>The descriptive name of the TLS inspection configuration. You can''t change the name of a TLS inspection configuration after you create it.</p> <p>You must specify the ARN or the name, and you can specify both. </p>'
     DisassociateSubnetsResponse:
       type: object
       properties:
@@ -2796,6 +3183,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/RuleGroupType'
             - description: 'Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules.'
+    ListTLSInspectionConfigurationsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.'
+        TLSInspectionConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/TLSInspectionConfigurations'
+            - description: 'The TLS inspection configuration metadata objects that you''ve defined. Depending on your setting for max results and the number of TLS inspection configurations, this might not be the full list.'
+    ListTLSInspectionConfigurationsRequest:
+      type: object
+      title: ListTLSInspectionConfigurationsRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/PaginationMaxResults'
+            - description: 'The maximum number of objects that you want Network Firewall to return for this request. If more objects are available, in the response, Network Firewall provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.'
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -3216,6 +3626,51 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'A setting indicating whether the firewall is protected against changes to the subnet associations. Use this setting to protect against accidentally modifying the subnet associations for a firewall that is in use. When you create a firewall, the operation initializes this setting to <code>TRUE</code>.'
+    UpdateTLSInspectionConfigurationResponse:
+      type: object
+      required:
+        - UpdateToken
+        - TLSInspectionConfigurationResponse
+      properties:
+        UpdateToken:
+          allOf:
+            - $ref: '#/components/schemas/UpdateToken'
+            - description: '<p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the TLS inspection configuration. The token marks the state of the TLS inspection configuration resource at the time of the request. </p> <p>To make changes to the TLS inspection configuration, you provide the token in your request. Network Firewall uses the token to ensure that the TLS inspection configuration hasn''t changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the TLS inspection configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>'
+        TLSInspectionConfigurationResponse:
+          allOf:
+            - $ref: '#/components/schemas/TLSInspectionConfigurationResponse'
+            - description: 'The high-level properties of a TLS inspection configuration. This, along with the <a>TLSInspectionConfiguration</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. '
+    UpdateTLSInspectionConfigurationRequest:
+      type: object
+      required:
+        - TLSInspectionConfiguration
+        - UpdateToken
+      title: UpdateTLSInspectionConfigurationRequest
+      properties:
+        TLSInspectionConfigurationArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the TLS inspection configuration.
+        TLSInspectionConfigurationName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The descriptive name of the TLS inspection configuration. You can't change the name of a TLS inspection configuration after you create it.
+        TLSInspectionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/TLSInspectionConfiguration'
+            - description: '<p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p> <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p> <p>To use a TLS inspection configuration, you add it to a Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect inbound traffic. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Decrypting SSL/TLS traffic with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: 'A description of the TLS inspection configuration. '
+        EncryptionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionConfiguration'
+            - description: A complex type that contains the Amazon Web Services KMS encryption configuration settings for your TLS inspection configuration.
+        UpdateToken:
+          allOf:
+            - $ref: '#/components/schemas/UpdateToken'
+            - description: '<p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the TLS inspection configuration. The token marks the state of the TLS inspection configuration resource at the time of the request. </p> <p>To make changes to the TLS inspection configuration, you provide the token in your request. Network Firewall uses the token to ensure that the TLS inspection configuration hasn''t changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the TLS inspection configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>'
     PublishMetricAction:
       type: object
       required:
@@ -3353,6 +3808,30 @@ components:
             - $ref: '#/components/schemas/CIDRSummary'
             - description: Describes the capacity usage of the CIDR blocks used by the IP set references in a firewall.
       description: The capacity usage summary of the resources used by the <a>ReferenceSets</a> in a firewall.
+    TlsCertificateData:
+      type: object
+      properties:
+        CertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the certificate.
+        CertificateSerial:
+          allOf:
+            - $ref: '#/components/schemas/CollectionMember_String'
+            - description: The serial number of the certificate.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/CollectionMember_String'
+            - description: The status of the certificate.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusReason'
+            - description: 'Contains details about the certificate status, including information about certificate errors.'
+      description: Contains metadata about an Certificate Manager certificate.
+    Certificates:
+      type: array
+      items:
+        $ref: '#/components/schemas/TlsCertificateData'
     CollectionMember_String:
       type: string
     ConfigurationSyncState:
@@ -3395,6 +3874,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatefulEngineOptions'
             - description: Additional options governing how Network Firewall handles stateful rules. The stateful rule groups that you use in your policy must have stateful rule options settings that are compatible with these settings.
+        TLSInspectionConfigurationArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the TLS inspection configuration.
       description: '<p>The firewall policy defines the behavior of a firewall using a collection of stateless and stateful rule groups and other settings. You can use one firewall policy for multiple firewalls. </p> <p>This, along with <a>FirewallPolicyResponse</a>, define the policy. You can retrieve all objects for a firewall policy by calling <a>DescribeFirewallPolicy</a>.</p>'
     Description:
       type: string
@@ -3666,6 +4149,62 @@ components:
             - $ref: '#/components/schemas/LastUpdateTime'
             - description: The last time that the rule group was changed.
       description: 'The high-level properties of a rule group. This, along with the <a>RuleGroup</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. '
+    TLSInspectionConfiguration:
+      type: object
+      properties:
+        ServerCertificateConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/ServerCertificateConfigurations'
+            - description: Lists the server certificate configurations that are associated with the TLS configuration.
+      description: '<p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p> <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p> <p>To use a TLS inspection configuration, you add it to a Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect inbound traffic. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Decrypting SSL/TLS traffic with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>'
+    TLSInspectionConfigurationResponse:
+      type: object
+      required:
+        - TLSInspectionConfigurationArn
+        - TLSInspectionConfigurationName
+        - TLSInspectionConfigurationId
+      properties:
+        TLSInspectionConfigurationArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the TLS inspection configuration.
+        TLSInspectionConfigurationName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The descriptive name of the TLS inspection configuration. You can't change the name of a TLS inspection configuration after you create it.
+        TLSInspectionConfigurationId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: A unique identifier for the TLS inspection configuration. This ID is returned in the responses to create and list commands. You provide it to operations such as update and delete.
+        TLSInspectionConfigurationStatus:
+          allOf:
+            - $ref: '#/components/schemas/ResourceStatus'
+            - description: Detailed information about the current status of a <a>TLSInspectionConfiguration</a>. You can retrieve this for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a> and providing the TLS inspection configuration name and ARN.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: 'A description of the TLS inspection configuration. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'The key:value pairs to associate with the resource.'
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/LastUpdateTime'
+            - description: The last time that the TLS inspection configuration was changed.
+        NumberOfAssociations:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfAssociations'
+            - description: The number of firewall policies that use this TLS inspection configuration.
+        EncryptionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionConfiguration'
+            - description: A complex type that contains the Amazon Web Services KMS encryption configuration settings for your TLS inspection configuration.
+        Certificates:
+          allOf:
+            - $ref: '#/components/schemas/Certificates'
+            - description: A list of the certificates associated with the TLS inspection configuration.
+      description: 'The high-level properties of a TLS inspection configuration. This, along with the <code>TLSInspectionConfiguration</code>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <code>DescribeTLSInspectionConfiguration</code>.'
     CustomAction:
       type: object
       required:
@@ -3967,7 +4506,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceArn'
             - description: The Amazon Resource Name (ARN) of the resource that you are referencing in your rule group.
-      description: '<p>Configures one or more IP set references for a Suricata-compatible rule group. This is used in <a>CreateRuleGroup</a> or <a>UpdateRuleGroup</a>. An IP set reference is a rule variable that references a resource that you create and manage in another Amazon Web Services service, such as an Amazon VPC prefix list. Network Firewall IP set references enable you to dynamically update the contents of your rules. When you create, update, or delete the IP set you are referencing in your rule, Network Firewall automatically updates the rule''s content with the changes. For more information about IP set references in Network Firewall, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references">Using IP set references</a> in the <i>Network Firewall Developer Guide</i>.</p> <p> Network Firewall currently supports only <a href="https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html">Amazon VPC prefix lists</a> as IP set references. </p>'
+      description: '<p>Configures one or more IP set references for a Suricata-compatible rule group. This is used in <a>CreateRuleGroup</a> or <a>UpdateRuleGroup</a>. An IP set reference is a rule variable that references resources that you create and manage in another Amazon Web Services service, such as an Amazon VPC prefix list. Network Firewall IP set references enable you to dynamically update the contents of your rules. When you create, update, or delete the resource you are referencing in your rule, Network Firewall automatically updates the rule''s content with the changes. For more information about IP set references in Network Firewall, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references">Using IP set references</a> in the <i>Network Firewall Developer Guide</i>.</p> <p> Network Firewall currently supports <a href="https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html">Amazon VPC prefix lists</a> and <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references.html#rule-groups-referencing-resource-groups">resource groups</a> in IP set references. </p>'
     IPSetReferenceMap:
       type: object
       additionalProperties:
@@ -4013,6 +4552,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RuleGroupMetadata'
+    TLSInspectionConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/TLSInspectionConfigurationMetadata'
     TagsPaginationMaxResults:
       type: integer
       minimum: 0
@@ -4305,6 +4848,62 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TargetType'
+    ServerCertificate:
+      type: object
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the Certificate Manager SSL/TLS server certificate.
+      description: 'Any Certificate Manager Secure Sockets Layer/Transport Layer Security (SSL/TLS) server certificate that''s associated with a <a>ServerCertificateConfiguration</a> used in a <a>TLSInspectionConfiguration</a>. You must request or import a SSL/TLS certificate into ACM for each domain Network Firewall needs to decrypt and inspect. Network Firewall uses the SSL/TLS certificates to decrypt specified inbound SSL/TLS traffic going to your firewall. For information about working with certificates in Certificate Manager, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html">Request a public certificate </a> or <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html">Importing certificates</a> in the <i>Certificate Manager User Guide</i>.'
+    ServerCertificates:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServerCertificate'
+    ServerCertificateScopes:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServerCertificateScope'
+    ServerCertificateConfiguration:
+      type: object
+      properties:
+        ServerCertificates:
+          allOf:
+            - $ref: '#/components/schemas/ServerCertificates'
+            - description: The list of a server certificate configuration's Certificate Manager SSL/TLS certificates.
+        Scopes:
+          allOf:
+            - $ref: '#/components/schemas/ServerCertificateScopes'
+            - description: A list of a server certificate configuration's scopes.
+      description: '<p>Configures the associated Certificate Manager Secure Sockets Layer/Transport Layer Security (SSL/TLS) server certificates and scope settings Network Firewall uses to decrypt traffic in a <a>TLSInspectionConfiguration</a>. For information about working with SSL/TLS certificates for TLS inspection, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html"> Requirements for using SSL/TLS server certficiates with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p> <note> <p>If a server certificate that''s associated with your <a>TLSInspectionConfiguration</a> is revoked, deleted, or expired it can result in client-side TLS errors.</p> </note>'
+    ServerCertificateConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServerCertificateConfiguration'
+    ServerCertificateScope:
+      type: object
+      properties:
+        Sources:
+          allOf:
+            - $ref: '#/components/schemas/Addresses'
+            - description: 'The source IP addresses and address ranges to decrypt for inspection, in CIDR notation. If not specified, this matches with any source address.'
+        Destinations:
+          allOf:
+            - $ref: '#/components/schemas/Addresses'
+            - description: 'The destination IP addresses and address ranges to decrypt for inspection, in CIDR notation. If not specified, this matches with any destination address.'
+        SourcePorts:
+          allOf:
+            - $ref: '#/components/schemas/PortRanges'
+            - description: '<p>The source ports to decrypt for inspection, in Transmission Control Protocol (TCP) format. If not specified, this matches with any source port.</p> <p>You can specify individual ports, for example <code>1994</code>, and you can specify port ranges, such as <code>1990:1994</code>.</p>'
+        DestinationPorts:
+          allOf:
+            - $ref: '#/components/schemas/PortRanges'
+            - description: '<p>The destination ports to decrypt for inspection, in Transmission Control Protocol (TCP) format. If not specified, this matches with any destination port.</p> <p>You can specify individual ports, for example <code>1994</code>, and you can specify port ranges, such as <code>1990:1994</code>.</p>'
+        Protocols:
+          allOf:
+            - $ref: '#/components/schemas/ProtocolNumbers'
+            - description: 'The protocols to decrypt for inspection, specified using each protocol''s assigned internet protocol number (IANA). Network Firewall currently supports only TCP.'
+      description: Settings that define the Secure Sockets Layer/Transport Layer Security (SSL/TLS) traffic that Network Firewall should decrypt for inspection by the stateful rule engine.
     Setting:
       type: string
       pattern: .*
@@ -4402,6 +5001,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/StatelessRule'
+    StatusReason:
+      type: string
+      pattern: '^[a-zA-Z0-9- ]+$'
+      minLength: 1
+      maxLength: 256
     SubnetMapping:
       type: object
       required:
@@ -4446,6 +5050,18 @@ components:
             - $ref: '#/components/schemas/Flags'
             - description: 'The set of flags to consider in the inspection. To inspect all flags in the valid values list, leave this with no setting.'
       description: 'TCP flags and masks to inspect packets for, used in stateless rules <a>MatchAttributes</a> settings.'
+    TLSInspectionConfigurationMetadata:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The descriptive name of the TLS inspection configuration. You can't change the name of a TLS inspection configuration after you create it.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the TLS inspection configuration.
+      description: 'High-level information about a TLS inspection configuration, returned by <code>ListTLSInspectionConfigurations</code>. You can use the information provided in the metadata to retrieve and manage a TLS configuration.'
     TagKey:
       type: string
       pattern: ^.*$

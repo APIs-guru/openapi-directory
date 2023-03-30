@@ -322,6 +322,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.BatchDeleteFeaturedResultsSet:
+    post:
+      operationId: BatchDeleteFeaturedResultsSet
+      description: 'Removes one or more sets of featured results. Features results are placed above all other results for certain queries. If there''s an exact match of a query, then one or more specific documents are featured in the search results.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDeleteFeaturedResultsSetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchDeleteFeaturedResultsSetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.BatchDeleteFeaturedResultsSet
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSKendraFrontendService.BatchGetDocumentStatus:
     post:
       operationId: BatchGetDocumentStatus
@@ -609,7 +672,7 @@ paths:
   /#X-Amz-Target=AWSKendraFrontendService.CreateDataSource:
     post:
       operationId: CreateDataSource
-      description: '<p>Creates a data source connector that you want to use with an Amazon Kendra index.</p> <p>You specify a name, data source connector type and description for your data source. You also specify configuration information for the data source connector.</p> <p> <code>CreateDataSource</code> is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.</p> <p>Amazon S3 and <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-custom.html">custom</a> data sources are the only supported data sources in the Amazon Web Services GovCloud (US-West) region.</p> <p>For an example of creating an index and data source using the Python SDK, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html">Getting started with Python SDK</a>. For an example of creating an index and data source using the Java SDK, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html">Getting started with Java SDK</a>.</p>'
+      description: '<p>Creates a data source connector that you want to use with an Amazon Kendra index.</p> <p>You specify a name, data source connector type and description for your data source. You also specify configuration information for the data source connector.</p> <p> <code>CreateDataSource</code> is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.</p> <p>For an example of creating an index and data source using the Python SDK, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html">Getting started with Python SDK</a>. For an example of creating an index and data source using the Java SDK, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html">Getting started with Java SDK</a>.</p>'
       responses:
         '200':
           description: Success
@@ -765,7 +828,7 @@ paths:
   /#X-Amz-Target=AWSKendraFrontendService.CreateFaq:
     post:
       operationId: CreateFaq
-      description: '<p>Creates an new set of frequently asked question (FAQ) questions and answers.</p> <p>Adding FAQs to an index is an asynchronous operation.</p> <p>For an example of adding an FAQ to an index using Python and Java SDKs, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html#using-faq-file">Using your FAQ file</a>.</p>'
+      description: '<p>Creates a set of frequently ask questions (FAQs) using a specified FAQ file stored in an Amazon S3 bucket.</p> <p>Adding FAQs to an index is an asynchronous operation.</p> <p>For an example of adding an FAQ to an index using Python and Java SDKs, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html#using-faq-file">Using your FAQ file</a>.</p>'
       responses:
         '200':
           description: Success
@@ -829,6 +892,81 @@ paths:
             type: string
             enum:
               - AWSKendraFrontendService.CreateFaq
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.CreateFeaturedResultsSet:
+    post:
+      operationId: CreateFeaturedResultsSet
+      description: '<p>Creates a set of featured results to display at the top of the search results page. Featured results are placed above all other results for certain queries. You map specific queries to specific documents for featuring in the results. If a query contains an exact match, then one or more specific documents are featured in the search results.</p> <p>You can create up to 50 sets of featured results per index. You can request to increase this limit by contacting <a href="http://aws.amazon.com/contact-us/">Support</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFeaturedResultsSetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: FeaturedResultsConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeaturedResultsConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFeaturedResultsSetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.CreateFeaturedResultsSet
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1834,6 +1972,69 @@ paths:
             type: string
             enum:
               - AWSKendraFrontendService.DescribeFaq
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.DescribeFeaturedResultsSet:
+    post:
+      operationId: DescribeFeaturedResultsSet
+      description: 'Gets information about a set of featured results. Features results are placed above all other results for certain queries. If there''s an exact match of a query, then one or more specific documents are featured in the search results.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeFeaturedResultsSetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeFeaturedResultsSetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.DescribeFeaturedResultsSet
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2952,6 +3153,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.ListFeaturedResultsSets:
+    post:
+      operationId: ListFeaturedResultsSets
+      description: 'Lists all your sets of featured results for a given index. Features results are placed above all other results for certain queries. If there''s an exact match of a query, then one or more specific documents are featured in the search results.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFeaturedResultsSetsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFeaturedResultsSetsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.ListFeaturedResultsSets
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSKendraFrontendService.ListGroupsOlderThanOrderingId:
     post:
       operationId: ListGroupsOlderThanOrderingId
@@ -3318,7 +3582,7 @@ paths:
   /#X-Amz-Target=AWSKendraFrontendService.PutPrincipalMapping:
     post:
       operationId: PutPrincipalMapping
-      description: '<p>Maps users to their groups so that you only need to provide the user ID when you issue the query.</p> <p>You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results.</p> <p>This is useful for user context filtering, where search results are filtered based on the user or their group access to documents. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html">Filtering on user context</a>.</p> <p>If more than five <code>PUT</code> actions for a group are currently processing, a validation exception is thrown.</p> <p> <code>PutPrincipalMapping</code> is currently not supported in the Amazon Web Services GovCloud (US-West) region.</p>'
+      description: '<p>Maps users to their groups so that you only need to provide the user ID when you issue the query.</p> <p>You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results.</p> <p>This is useful for user context filtering, where search results are filtered based on the user or their group access to documents. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html">Filtering on user context</a>.</p> <p>If more than five <code>PUT</code> actions for a group are currently processing, a validation exception is thrown.</p>'
       responses:
         '200':
           description: Success
@@ -3991,6 +4255,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.UpdateFeaturedResultsSet:
+    post:
+      operationId: UpdateFeaturedResultsSet
+      description: 'Updates a set of featured results. Features results are placed above all other results for certain queries. You map specific queries to specific documents for featuring in the results. If a query contains an exact match of a query, then one or more specific documents are featured in the search results.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFeaturedResultsSetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: FeaturedResultsConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeaturedResultsConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFeaturedResultsSetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.UpdateFeaturedResultsSet
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSKendraFrontendService.UpdateIndex:
     post:
       operationId: UpdateIndex
@@ -4394,6 +4727,30 @@ components:
         DataSourceSyncJobMetricTarget:
           $ref: '#/components/schemas/DataSourceSyncJobMetricTarget'
     ConflictException: {}
+    BatchDeleteFeaturedResultsSetResponse:
+      type: object
+      required:
+        - Errors
+      properties:
+        Errors:
+          allOf:
+            - $ref: '#/components/schemas/BatchDeleteFeaturedResultsSetErrors'
+            - description: 'The list of errors for the featured results set IDs, explaining why they couldn''t be removed from the index.'
+    BatchDeleteFeaturedResultsSetRequest:
+      type: object
+      required:
+        - IndexId
+        - FeaturedResultsSetIds
+      title: BatchDeleteFeaturedResultsSetRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index used for featuring results.
+        FeaturedResultsSetIds:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetIdList'
+            - description: The identifiers of the featured results sets that you want to delete.
     BatchGetDocumentStatusResponse:
       type: object
       properties:
@@ -4441,11 +4798,11 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: 'The Amazon Resource Name (ARN) of a role that is allowed to run the <code>BatchPutDocument</code> API. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM Roles for Amazon Kendra</a>.'
+            - description: 'The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM access roles for Amazon Kendra</a>.'
         Documents:
           allOf:
             - $ref: '#/components/schemas/DocumentList'
-            - description: '<p>One or more documents to add to the index.</p> <p>Documents have the following file size limits.</p> <ul> <li> <p>5 MB total size for inline documents</p> </li> <li> <p>50 MB total size for files from an S3 bucket</p> </li> <li> <p>5 MB extracted text for any file</p> </li> </ul> <p>For more information about file size and transaction per second quotas, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas</a>.</p>'
+            - description: '<p>One or more documents to add to the index.</p> <p>Documents have the following file size limits.</p> <ul> <li> <p>50 MB total size for any file</p> </li> <li> <p>5 MB extracted text for any file</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas</a>.</p>'
         CustomDocumentEnrichmentConfiguration:
           allOf:
             - $ref: '#/components/schemas/CustomDocumentEnrichmentConfiguration'
@@ -4545,15 +4902,15 @@ components:
         Schedule:
           allOf:
             - $ref: '#/components/schemas/ScanSchedule'
-            - description: '<p>Sets the frequency for Amazon Kendra to check the documents in your data source repository and update the index. If you don''t set a schedule Amazon Kendra will not periodically update the index. You can call the <code>StartDataSourceSyncJob</code> API to update the index.</p> <p>You can''t specify the <code>Schedule</code> parameter when the <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do, you receive a <code>ValidationException</code> exception.</p>'
+            - description: '<p>Sets the frequency for Amazon Kendra to check the documents in your data source repository and update the index. If you don''t set a schedule Amazon Kendra will not periodically update the index. You can call the <code>StartDataSourceSyncJob</code> API to update the index.</p> <p>Specify a <code>cron-</code> format schedule string or an empty string to indicate that the index is updated on demand.</p> <p>You can''t specify the <code>Schedule</code> parameter when the <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do, you receive a <code>ValidationException</code> exception.</p>'
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: '<p>The Amazon Resource Name (ARN) of a role with permission to access the data source and required resources. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM roles for Amazon Kendra</a>.</p> <p>You can''t specify the <code>RoleArn</code> parameter when the <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do, you receive a <code>ValidationException</code> exception.</p> <p>The <code>RoleArn</code> parameter is required for all other data sources.</p>'
+            - description: '<p>The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM access roles for Amazon Kendra.</a>.</p> <p>You can''t specify the <code>RoleArn</code> parameter when the <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do, you receive a <code>ValidationException</code> exception.</p> <p>The <code>RoleArn</code> parameter is required for all other data sources.</p>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: A list of key-value pairs that identify the data source connector. You can use the tags to identify and organize your resources and to control access to resources.
+            - description: 'A list of key-value pairs that identify or categorize the data source connector. You can also use tags to help control access to the data source connector. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.'
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientTokenName'
@@ -4574,7 +4931,7 @@ components:
         Id:
           allOf:
             - $ref: '#/components/schemas/ExperienceId'
-            - description: The identifier for your created Amazon Kendra experience.
+            - description: The identifier of your Amazon Kendra experience.
     CreateExperienceRequest:
       type: object
       required:
@@ -4593,7 +4950,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: 'The Amazon Resource Name (ARN) of a role with permission to access <code>Query</code> API, <code>QuerySuggestions</code> API, <code>SubmitFeedback</code> API, and IAM Identity Center that stores your user and group information. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM roles for Amazon Kendra</a>.'
+            - description: 'The Amazon Resource Name (ARN) of an IAM role with permission to access <code>Query</code> API, <code>GetQuerySuggestions</code> API, and other required APIs. The role also must include permission to access IAM Identity Center (successor to Single Sign-On) that stores your user and group information. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM access roles for Amazon Kendra</a>.'
         Configuration:
           allOf:
             - $ref: '#/components/schemas/ExperienceConfiguration'
@@ -4641,7 +4998,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: 'The Amazon Resource Name (ARN) of a role with permission to access the S3 bucket that contains the FAQs. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM Roles for Amazon Kendra</a>.'
+            - description: 'The Amazon Resource Name (ARN) of an IAM role with permission to access the S3 bucket that contains the FAQs. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM access roles for Amazon Kendra</a>.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -4658,6 +5015,53 @@ components:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
             - description: 'The code for a language. This allows you to support a language for the FAQ document. English is supported by default. For more information on supported languages, including their codes, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding documents in languages other than English</a>.'
+    CreateFeaturedResultsSetResponse:
+      type: object
+      properties:
+        FeaturedResultsSet:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSet'
+            - description: 'Information on the set of featured results. This includes the identifier of the featured results set, whether the featured results set is active or inactive, when the featured results set was created, and more.'
+    CreateFeaturedResultsSetRequest:
+      type: object
+      required:
+        - IndexId
+        - FeaturedResultsSetName
+      title: CreateFeaturedResultsSetRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index that you want to use for featuring results.
+        FeaturedResultsSetName:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetName'
+            - description: A name for the set of featured results.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetDescription'
+            - description: A description for the set of featured results.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientTokenName'
+            - description: A token that you provide to identify the request to create a set of featured results. Multiple calls to the <code>CreateFeaturedResultsSet</code> API with the same client token will create only one featured results set.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetStatus'
+            - description: 'The current status of the set of featured results. When the value is <code>ACTIVE</code>, featured results are ready for use. You can still configure your settings before setting the status to <code>ACTIVE</code>. You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code> using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html">UpdateFeaturedResultsSet</a> API. The queries you specify for featured results must be unique per featured results set for each index, whether the status is <code>ACTIVE</code> or <code>INACTIVE</code>.'
+        QueryTexts:
+          allOf:
+            - $ref: '#/components/schemas/QueryTextList'
+            - description: 'A list of queries for featuring results. For more information on the list of queries, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html">FeaturedResultsSet</a>.'
+        FeaturedDocuments:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedDocumentList'
+            - description: 'A list of document IDs for the documents you want to feature at the top of the search results page. For more information on the list of documents, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html">FeaturedResultsSet</a>.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of key-value pairs that identify or categorize the featured results set. You can also use tags to help control access to the featured results set. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols:_ . : / = + - @.'
+    FeaturedResultsConflictException: {}
     CreateIndexResponse:
       type: object
       properties:
@@ -4679,11 +5083,11 @@ components:
         Edition:
           allOf:
             - $ref: '#/components/schemas/IndexEdition'
-            - description: '<p>The Amazon Kendra edition to use for the index. Choose <code>DEVELOPER_EDITION</code> for indexes intended for development, testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for your production databases. Once you set the edition for an index, it can''t be changed.</p> <p>The <code>Edition</code> parameter is optional. If you don''t supply a value, the default is <code>ENTERPRISE_EDITION</code>.</p> <p>For more information on quota limits for enterprise and developer editions, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas</a>.</p>'
+            - description: '<p>The Amazon Kendra edition to use for the index. Choose <code>DEVELOPER_EDITION</code> for indexes intended for development, testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for production. Once you set the edition for an index, it can''t be changed.</p> <p>The <code>Edition</code> parameter is optional. If you don''t supply a value, the default is <code>ENTERPRISE_EDITION</code>.</p> <p>For more information on quota limits for Enterprise and Developer editions, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas</a>.</p>'
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: An Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role you use when you call the <code>BatchPutDocument</code> API to index documents from an Amazon S3 bucket.
+            - description: 'The Amazon Resource Name (ARN) of an IAM role with permission to access your Amazon CloudWatch logs and metrics. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM access roles for Amazon Kendra</a>.'
         ServerSideEncryptionConfiguration:
           allOf:
             - $ref: '#/components/schemas/ServerSideEncryptionConfiguration'
@@ -4699,7 +5103,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: A list of key-value pairs that identify the index. You can use the tags to identify and organize your resources and to control access to resources.
+            - description: 'A list of key-value pairs that identify or categorize the index. You can also use tags to help control access to the index. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.'
         UserTokenConfigurations:
           allOf:
             - $ref: '#/components/schemas/UserTokenConfigurationList'
@@ -4711,14 +5115,14 @@ components:
         UserGroupResolutionConfiguration:
           allOf:
             - $ref: '#/components/schemas/UserGroupResolutionConfiguration'
-            - description: 'Enables fetching access levels of groups and users from an IAM Identity Center (successor to Single Sign-On) identity source. To configure this, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html">UserGroupResolutionConfiguration</a>.'
+            - description: 'Gets users and groups from IAM Identity Center (successor to Single Sign-On) identity source. To configure this, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html">UserGroupResolutionConfiguration</a>.'
     CreateQuerySuggestionsBlockListResponse:
       type: object
       properties:
         Id:
           allOf:
             - $ref: '#/components/schemas/QuerySuggestionsBlockListId'
-            - description: The identifier of the created block list.
+            - description: The identifier of the block list.
     CreateQuerySuggestionsBlockListRequest:
       type: object
       required:
@@ -4735,11 +5139,11 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/QuerySuggestionsBlockListName'
-            - description: '<p>A user friendly name for the block list.</p> <p>For example, the block list named ''offensive-words'' includes all offensive words that could appear in user queries and need to be blocked from suggestions.</p>'
+            - description: '<p>A name for the block list.</p> <p>For example, the name ''offensive-words'', which includes all offensive words that could appear in user queries and need to be blocked from suggestions.</p>'
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
-            - description: '<p>A user-friendly description for the block list.</p> <p>For example, the description "List of all offensive words that can appear in user queries and need to be blocked from suggestions."</p>'
+            - description: '<p>A description for the block list.</p> <p>For example, the description "List of all offensive words that can appear in user queries and need to be blocked from suggestions."</p>'
         SourceS3Path:
           allOf:
             - $ref: '#/components/schemas/S3Path'
@@ -4751,11 +5155,11 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: <p>The IAM (Identity and Access Management) role used by Amazon Kendra to access the block list text file in your S3 bucket.</p> <p>You need permissions to the role ARN (Amazon Web Services Resource Name). The role needs S3 read permissions to your file in S3 and needs to give STS (Security Token Service) assume role permissions to Amazon Kendra.</p>
+            - description: 'The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket that contains the block list text file. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM access roles for Amazon Kendra</a>.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: A tag that you can assign to a block list that categorizes the block list.
+            - description: 'A list of key-value pairs that identify or categorize the block list. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.'
     CreateThesaurusResponse:
       type: object
       properties:
@@ -4787,11 +5191,11 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: 'An IAM role that gives Amazon Kendra permissions to access thesaurus file specified in <code>SourceS3Path</code>. '
+            - description: 'The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket that contains the thesaurus file. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM access roles for Amazon Kendra</a>.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'A list of key-value pairs that identify the thesaurus. You can use the tags to identify and organize your resources and to control access to resources. '
+            - description: 'A list of key-value pairs that identify or categorize the thesaurus. You can also use tags to help control access to the thesaurus. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.'
         SourceS3Path:
           allOf:
             - $ref: '#/components/schemas/S3Path'
@@ -4898,7 +5302,7 @@ components:
         OrderingId:
           allOf:
             - $ref: '#/components/schemas/PrincipalOrderingId'
-            - description: '<p>The timestamp identifier you specify to ensure Amazon Kendra does not override the latest <code>DELETE</code> action with previous actions. The highest number ID, which is the ordering ID, is the latest action you want to process and apply on top of other actions with lower number IDs. This prevents previous actions with lower number IDs from possibly overriding the latest action.</p> <p>The ordering ID can be the UNIX time of the last update you made to a group members list. You would then provide this list when calling <code>PutPrincipalMapping</code>. This ensures your <code>DELETE</code> action for that updated group with the latest members list doesn''t get overwritten by earlier <code>DELETE</code> actions for the same group which are yet to be processed.</p> <p>The default ordering ID is the current UNIX time in milliseconds that the action was received by Amazon Kendra. </p>'
+            - description: '<p>The timestamp identifier you specify to ensure Amazon Kendra does not override the latest <code>DELETE</code> action with previous actions. The highest number ID, which is the ordering ID, is the latest action you want to process and apply on top of other actions with lower number IDs. This prevents previous actions with lower number IDs from possibly overriding the latest action.</p> <p>The ordering ID can be the Unix time of the last update you made to a group members list. You would then provide this list when calling <code>PutPrincipalMapping</code>. This ensures your <code>DELETE</code> action for that updated group with the latest members list doesn''t get overwritten by earlier <code>DELETE</code> actions for the same group which are yet to be processed.</p> <p>The default ordering ID is the current Unix time in milliseconds that the action was received by Amazon Kendra. </p>'
     DeleteQuerySuggestionsBlockListRequest:
       type: object
       required:
@@ -4999,11 +5403,11 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix timestamp of when the data source connector was created.
+            - description: The Unix timestamp when the data source connector was created.
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix timestamp of when the data source connector was last updated.
+            - description: The Unix timestamp when the data source connector was last updated.
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
@@ -5073,11 +5477,11 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Shows the date-time your Amazon Kendra experience was created.
+            - description: The Unix timestamp when your Amazon Kendra experience was created.
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Shows the date-time your Amazon Kendra experience was last updated.
+            - description: The Unix timestamp when your Amazon Kendra experience was last updated.
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
@@ -5131,11 +5535,11 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time that the FAQ was created.
+            - description: The Unix timestamp when the FAQ was created.
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date and time that the FAQ was last updated.
+            - description: The Unix timestamp when the FAQ was last updated.
         S3Path:
           $ref: '#/components/schemas/S3Path'
         Status:
@@ -5173,6 +5577,60 @@ components:
           allOf:
             - $ref: '#/components/schemas/IndexId'
             - description: The identifier of the index for the FAQ.
+    DescribeFeaturedResultsSetResponse:
+      type: object
+      properties:
+        FeaturedResultsSetId:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetId'
+            - description: The identifier of the set of featured results.
+        FeaturedResultsSetName:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetName'
+            - description: The name for the set of featured results.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetDescription'
+            - description: The description for the set of featured results.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetStatus'
+            - description: 'The current status of the set of featured results. When the value is <code>ACTIVE</code>, featured results are ready for use. You can still configure your settings before setting the status to <code>ACTIVE</code>. You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code> using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html">UpdateFeaturedResultsSet</a> API. The queries you specify for featured results must be unique per featured results set for each index, whether the status is <code>ACTIVE</code> or <code>INACTIVE</code>.'
+        QueryTexts:
+          allOf:
+            - $ref: '#/components/schemas/QueryTextList'
+            - description: 'The list of queries for featuring results. For more information on the list of queries, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html">FeaturedResultsSet</a>.'
+        FeaturedDocumentsWithMetadata:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedDocumentWithMetadataList'
+            - description: 'The list of document IDs for the documents you want to feature with their metadata information. For more information on the list of featured documents, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html">FeaturedResultsSet</a>.'
+        FeaturedDocumentsMissing:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedDocumentMissingList'
+            - description: 'The list of document IDs that don''t exist but you have specified as featured documents. Amazon Kendra cannot feature these documents if they don''t exist in the index. You can check the status of a document and its ID or check for documents with status errors using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_BatchGetDocumentStatus.html">BatchGetDocumentStatus</a> API.'
+        LastUpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The timestamp when the set of featured results was last updated.
+        CreationTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The Unix timestamp when the set of the featured results was created.
+    DescribeFeaturedResultsSetRequest:
+      type: object
+      required:
+        - IndexId
+        - FeaturedResultsSetId
+      title: DescribeFeaturedResultsSetRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index used for featuring results.
+        FeaturedResultsSetId:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetId'
+            - description: The identifier of the set of featured results that you want to get information on.
     DescribeIndexResponse:
       type: object
       properties:
@@ -5207,11 +5665,11 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix datetime that the index was created.
+            - description: The Unix timestamp when the index was created.
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix datetime that the index was last updated.
+            - description: The Unix when the index was last updated.
         DocumentMetadataConfigurations:
           allOf:
             - $ref: '#/components/schemas/DocumentMetadataConfigurationList'
@@ -5268,7 +5726,7 @@ components:
         GroupOrderingIdSummaries:
           allOf:
             - $ref: '#/components/schemas/GroupOrderingIdSummaries'
-            - description: '<p>Shows the following information on the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups:</p> <ul> <li> <p>Status – the status can be either <code>PROCESSING</code>, <code>SUCCEEDED</code>, <code>DELETING</code>, <code>DELETED</code>, or <code>FAILED</code>.</p> </li> <li> <p>Last updated – the last date-time an action was updated.</p> </li> <li> <p>Received – the last date-time an action was received or submitted.</p> </li> <li> <p>Ordering ID – the latest action that should process and apply after other actions.</p> </li> <li> <p>Failure reason – the reason an action could not be processed.</p> </li> </ul>'
+            - description: '<p>Shows the following information on the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups:</p> <ul> <li> <p>Status—the status can be either <code>PROCESSING</code>, <code>SUCCEEDED</code>, <code>DELETING</code>, <code>DELETED</code>, or <code>FAILED</code>.</p> </li> <li> <p>Last updated—the last date-time an action was updated.</p> </li> <li> <p>Received—the last date-time an action was received or submitted.</p> </li> <li> <p>Ordering ID—the latest action that should process and apply after other actions.</p> </li> <li> <p>Failure reason—the reason an action could not be processed.</p> </li> </ul>'
     DescribePrincipalMappingRequest:
       type: object
       required:
@@ -5318,11 +5776,11 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date-time a block list for query suggestions was created.
+            - description: The Unix timestamp when a block list for query suggestions was created.
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date-time a block list for query suggestions was last updated.
+            - description: The Unix timestamp when a block list for query suggestions was last updated.
         SourceS3Path:
           allOf:
             - $ref: '#/components/schemas/S3Path'
@@ -5384,11 +5842,11 @@ components:
         LastSuggestionsBuildTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date-time query suggestions for an index was last updated.
+            - description: The Unix timestamp when query suggestions for an index was last updated.
         LastClearTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: '<p>The date-time query suggestions for an index was last cleared.</p> <p>After you clear suggestions, Amazon Kendra learns new suggestions based on new queries added to the query log from the time you cleared suggestions. Amazon Kendra only considers re-occurences of a query from the time you cleared suggestions. </p>'
+            - description: '<p>The Unix timestamp when query suggestions for an index was last cleared.</p> <p>After you clear suggestions, Amazon Kendra learns new suggestions based on new queries added to the query log from the time you cleared suggestions. Amazon Kendra only considers re-occurences of a query from the time you cleared suggestions. </p>'
         TotalSuggestionsCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -5433,11 +5891,11 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix datetime that the thesaurus was created.
+            - description: The Unix timestamp when the thesaurus was created.
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix datetime that the thesaurus was last updated.
+            - description: The Unix timestamp when the thesaurus was last updated.
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
@@ -5561,7 +6019,7 @@ components:
         SnapShotTimeFilter:
           allOf:
             - $ref: '#/components/schemas/TimeRange'
-            - description: The date-time for the beginning and end of the time window for the search metrics data.
+            - description: The Unix timestamp for the beginning and end of the time window for the search metrics data.
         SnapshotsDataHeader:
           allOf:
             - $ref: '#/components/schemas/SnapshotsDataHeaderFields'
@@ -5827,6 +6285,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResultsIntegerForListFaqsRequest'
             - description: 'The maximum number of FAQs to return in the response. If there are fewer results in the list, this response contains only the actual results.'
+    ListFeaturedResultsSetsResponse:
+      type: object
+      properties:
+        FeaturedResultsSetSummaryItems:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetSummaryItems'
+            - description: An array of summary information for one or more featured results sets.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response is truncated, Amazon Kendra returns a pagination token in the response.'
+    ListFeaturedResultsSetsRequest:
+      type: object
+      required:
+        - IndexId
+      title: ListFeaturedResultsSetsRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index used for featuring results.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response is truncated, Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of featured results sets.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsIntegerForListFeaturedResultsSetsRequest'
+            - description: The maximum number of featured results sets to return.
     ListGroupsOlderThanOrderingIdResponse:
       type: object
       properties:
@@ -5991,7 +6478,7 @@ components:
         OrderingId:
           allOf:
             - $ref: '#/components/schemas/PrincipalOrderingId'
-            - description: '<p>The timestamp identifier you specify to ensure Amazon Kendra does not override the latest <code>PUT</code> action with previous actions. The highest number ID, which is the ordering ID, is the latest action you want to process and apply on top of other actions with lower number IDs. This prevents previous actions with lower number IDs from possibly overriding the latest action.</p> <p>The ordering ID can be the UNIX time of the last update you made to a group members list. You would then provide this list when calling <code>PutPrincipalMapping</code>. This ensures your <code>PUT</code> action for that updated group with the latest members list doesn''t get overwritten by earlier <code>PUT</code> actions for the same group which are yet to be processed.</p> <p>The default ordering ID is the current UNIX time in milliseconds that the action was received by Amazon Kendra.</p>'
+            - description: '<p>The timestamp identifier you specify to ensure Amazon Kendra does not override the latest <code>PUT</code> action with previous actions. The highest number ID, which is the ordering ID, is the latest action you want to process and apply on top of other actions with lower number IDs. This prevents previous actions with lower number IDs from possibly overriding the latest action.</p> <p>The ordering ID can be the Unix time of the last update you made to a group members list. You would then provide this list when calling <code>PutPrincipalMapping</code>. This ensures your <code>PUT</code> action for that updated group with the latest members list doesn''t get overwritten by earlier <code>PUT</code> actions for the same group which are yet to be processed.</p> <p>The default ordering ID is the current Unix time in milliseconds that the action was received by Amazon Kendra.</p>'
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
@@ -6023,6 +6510,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SpellCorrectedQueryList'
             - description: A list of information related to suggested spell corrections for a query.
+        FeaturedResultsItems:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsItemList'
+            - description: 'The list of featured result items. Featured results are displayed at the top of the search results page, placed above all other results for certain queries. If there''s an exact match of a query, then certain documents are featured in the search results.'
     QueryRequest:
       type: object
       required:
@@ -6290,6 +6781,48 @@ components:
           allOf:
             - $ref: '#/components/schemas/Description'
             - description: A new description for your Amazon Kendra experience.
+    UpdateFeaturedResultsSetResponse:
+      type: object
+      properties:
+        FeaturedResultsSet:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSet'
+            - description: 'Information on the set of featured results. This includes the identifier of the featured results set, whether the featured results set is active or inactive, when the featured results set was last updated, and more.'
+    UpdateFeaturedResultsSetRequest:
+      type: object
+      required:
+        - IndexId
+        - FeaturedResultsSetId
+      title: UpdateFeaturedResultsSetRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index used for featuring results.
+        FeaturedResultsSetId:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetId'
+            - description: The identifier of the index used for featuring results.
+        FeaturedResultsSetName:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetName'
+            - description: A new name for the set of featured results.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetDescription'
+            - description: A new description for the set of featured results.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetStatus'
+            - description: 'You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code>. When the value is <code>ACTIVE</code>, featured results are ready for use. You can still configure your settings before setting the status to <code>ACTIVE</code>. The queries you specify for featured results must be unique per featured results set for each index, whether the status is <code>ACTIVE</code> or <code>INACTIVE</code>.'
+        QueryTexts:
+          allOf:
+            - $ref: '#/components/schemas/QueryTextList'
+            - description: 'A list of queries for featuring results. For more information on the list of queries, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html">FeaturedResultsSet</a>.'
+        FeaturedDocuments:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedDocumentList'
+            - description: 'A list of document IDs for the documents you want to feature at the top of the search results page. For more information on the list of featured documents, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html">FeaturedResultsSet</a>.'
     UpdateIndexRequest:
       type: object
       required:
@@ -6882,6 +7415,41 @@ components:
             - $ref: '#/components/schemas/ErrorMessage'
             - description: An explanation for why the document couldn't be removed from the index.
       description: Provides information about documents that could not be removed from an index by the <code>BatchDeleteDocument</code> API.
+    FeaturedResultsSetId:
+      type: string
+      pattern: '^[a-zA-Z-0-9]*'
+      minLength: 36
+      maxLength: 36
+    BatchDeleteFeaturedResultsSetError:
+      type: object
+      required:
+        - Id
+        - ErrorCode
+        - ErrorMessage
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetId'
+            - description: The identifier of the set of featured results that couldn't be removed from the index.
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: The error code for why the set of featured results couldn't be removed from the index.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: An explanation for why the set of featured results couldn't be removed from the index.
+      description: 'Provides information about a set of featured results that couldn''t be removed from an index by the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_BatchDeleteFeaturedResultsSet.html">BatchDeleteFeaturedResultsSet</a> API.'
+    BatchDeleteFeaturedResultsSetErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchDeleteFeaturedResultsSetError'
+    FeaturedResultsSetIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FeaturedResultsSetId'
+      minItems: 1
+      maxItems: 50
     DocumentInfoList:
       type: array
       items:
@@ -7081,7 +7649,7 @@ components:
         ClickTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix timestamp of the date and time that the result was clicked.
+            - description: The Unix timestamp when the result was clicked.
       description: Gathers information about when a particular result was clicked by a user. Your application uses the <code>SubmitFeedback</code> API to provide click information.
     ClickFeedbackList:
       type: array
@@ -7721,6 +8289,67 @@ components:
       pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
       minLength: 1
       maxLength: 100
+    FeaturedResultsSetName:
+      type: string
+      pattern: '[a-zA-Z0-9][ a-zA-Z0-9_-]*'
+      minLength: 1
+      maxLength: 1000
+    FeaturedResultsSetDescription:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 0
+      maxLength: 1000
+    FeaturedResultsSetStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+    QueryTextList:
+      type: array
+      items:
+        $ref: '#/components/schemas/QueryText'
+      minItems: 0
+      maxItems: 49
+    FeaturedDocumentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FeaturedDocument'
+    FeaturedResultsSet:
+      type: object
+      properties:
+        FeaturedResultsSetId:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetId'
+            - description: The identifier of the set of featured results.
+        FeaturedResultsSetName:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetName'
+            - description: The name for the set of featured results.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetDescription'
+            - description: The description for the set of featured results.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetStatus'
+            - description: 'The current status of the set of featured results. When the value is <code>ACTIVE</code>, featured results are ready for use. You can still configure your settings before setting the status to <code>ACTIVE</code>. You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code> using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html">UpdateFeaturedResultsSet</a> API. The queries you specify for featured results must be unique per featured results set for each index, whether the status is <code>ACTIVE</code> or <code>INACTIVE</code>.'
+        QueryTexts:
+          allOf:
+            - $ref: '#/components/schemas/QueryTextList'
+            - description: '<p>The list of queries for featuring results.</p> <p>Specific queries are mapped to specific documents for featuring in the results. If a query contains an exact match, then one or more specific documents are featured in the results. The exact match applies to the full query. For example, if you only specify ''Kendra'', queries such as ''How does kendra semantically rank results?'' will not render the featured results. Featured results are designed for specific queries, rather than queries that are too broad in scope.</p>'
+        FeaturedDocuments:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedDocumentList'
+            - description: '<p>The list of document IDs for the documents you want to feature at the top of the search results page. You can use the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_Query.html">Query</a> API to search for specific documents with their document IDs included in the result items, or you can use the console.</p> <p>You can add up to four featured documents. You can request to increase this limit by contacting <a href="http://aws.amazon.com/contact-us/">Support</a>.</p> <p>Specific queries are mapped to specific documents for featuring in the results. If a query contains an exact match, then one or more specific documents are featured in the results. The exact match applies to the full query. For example, if you only specify ''Kendra'', queries such as ''How does kendra semantically rank results?'' will not render the featured results. Featured results are designed for specific queries, rather than queries that are too broad in scope.</p>'
+        LastUpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The Unix timestamp when the set of featured results was last updated.
+        CreationTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The Unix timestamp when the set of featured results was created.
+      description: 'A set of featured results that are displayed at the top of your search results. Featured results are placed above all other results for certain queries. If there''s an exact match of a query, then one or more specific documents are featured in the search results.'
     IndexName:
       type: string
       pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
@@ -7757,8 +8386,8 @@ components:
         UserGroupResolutionMode:
           allOf:
             - $ref: '#/components/schemas/UserGroupResolutionMode'
-            - description: The identity store provider (mode) you want to use to fetch access levels of groups and users. IAM Identity Center (successor to Single Sign-On) is currently the only available mode. Your users and groups must exist in an IAM Identity Center identity source in order to use this mode.
-      description: '<p>Provides the configuration information to fetch access levels of groups and users from an IAM Identity Center (successor to Single Sign-On) identity source. This is useful for user context filtering, where search results are filtered based on the user or their group access to documents. You can also use the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html">PutPrincipalMapping</a> API to map users to their groups so that you only need to provide the user ID when you issue the query.</p> <p>To set up an IAM Identity Center identity source in the console to use with Amazon Kendra, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html">Getting started with an IAM Identity Center identity source</a>. You must also grant the required permissions to use IAM Identity Center with Amazon Kendra. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso">IAM roles for IAM Identity Center</a>.</p> <p>Amazon Kendra currently does not support using <code>UserGroupResolutionConfiguration</code> with an Amazon Web Services organization member account for your IAM Identity Center identify source. You must create your index in the management account for the organization in order to use <code>UserGroupResolutionConfiguration</code>.</p>'
+            - description: The identity store provider (mode) you want to use to get users and groups. IAM Identity Center (successor to Single Sign-On) is currently the only available mode. Your users and groups must exist in an IAM Identity Center identity source in order to use this mode.
+      description: '<p>Provides the configuration information to get users and groups from an IAM Identity Center (successor to Single Sign-On) identity source. This is useful for user context filtering, where search results are filtered based on the user or their group access to documents. You can also use the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html">PutPrincipalMapping</a> API to map users to their groups so that you only need to provide the user ID when you issue the query.</p> <p>To set up an IAM Identity Center identity source in the console to use with Amazon Kendra, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html">Getting started with an IAM Identity Center identity source</a>. You must also grant the required permissions to use IAM Identity Center with Amazon Kendra. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso">IAM roles for IAM Identity Center</a>.</p> <p>Amazon Kendra currently does not support using <code>UserGroupResolutionConfiguration</code> with an Amazon Web Services organization member account for your IAM Identity Center identify source. You must create your index in the management account for the organization in order to use <code>UserGroupResolutionConfiguration</code>.</p>'
     QuerySuggestionsBlockListName:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
@@ -7850,7 +8479,7 @@ components:
         SecretArn:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
-            - description: '<p>The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the user name and password required to connect to the SharePoint instance. If you use SharePoint Server, you also need to provide the sever domain name as part of the credentials. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html">Using a Microsoft SharePoint Data Source</a>.</p> <p>You can also provide OAuth authentication credentials of user name, password, client ID, and client secret. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html">Using a SharePoint data source</a>.</p>'
+            - description: 'The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the user name and password required to connect to the SharePoint instance. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html">Microsoft SharePoint</a>.'
         CrawlAttachments:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -7886,11 +8515,11 @@ components:
         SslCertificateS3Path:
           allOf:
             - $ref: '#/components/schemas/S3Path'
-            - description: '<p>The path to the SSL certificate stored in an Amazon S3 bucket. You use this to connect to SharePoint Server if you require a secure SSL connection.</p> <p>You can simply generate a self-signed X509 certificate on any computer using OpenSSL. For an example of using OpenSSL to create an X509 certificate, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html">Create and sign an X509 certificate</a>.</p>'
+            - description: '<p>The path to the SSL certificate stored in an Amazon S3 bucket. You use this to connect to SharePoint Server if you require a secure SSL connection.</p> <p>You can generate a self-signed X509 certificate on any computer using OpenSSL. For an example of using OpenSSL to create an X509 certificate, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html">Create and sign an X509 certificate</a>.</p>'
         AuthenticationType:
           allOf:
             - $ref: '#/components/schemas/SharePointOnlineAuthenticationType'
-            - description: 'Whether you want to connect to SharePoint using basic authentication of user name and password, or OAuth authentication of user name, password, client ID, and client secret. You can use OAuth authentication for SharePoint Online.'
+            - description: 'Whether you want to connect to SharePoint Online using basic authentication of user name and password, or OAuth authentication of user name, password, client ID, and client secret, or AD App-only authentication of client secret.'
         ProxyConfiguration:
           allOf:
             - $ref: '#/components/schemas/ProxyConfiguration'
@@ -7939,7 +8568,7 @@ components:
         SecretArn:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
-            - description: '<p>The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the key/value pairs required to connect to your Salesforce instance. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token. </p> </li> <li> <p>consumerKey - The application public key generated when you created your Salesforce application.</p> </li> <li> <p>consumerSecret - The application private key generated when you created your Salesforce application.</p> </li> <li> <p>password - The password associated with the user logging in to the Salesforce instance.</p> </li> <li> <p>securityToken - The token associated with the user account logging in to the Salesforce instance.</p> </li> <li> <p>username - The user name of the user logging in to the Salesforce instance.</p> </li> </ul>'
+            - description: '<p>The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the key/value pairs required to connect to your Salesforce instance. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token. </p> </li> <li> <p>consumerKey - The application public key generated when you created your Salesforce application.</p> </li> <li> <p>consumerSecret - The application private key generated when you created your Salesforce application.</p> </li> <li> <p>password - The password associated with the user logging in to the Salesforce instance.</p> </li> <li> <p>securityToken - The token associated with the user logging in to the Salesforce instance.</p> </li> <li> <p>username - The user name of the user logging in to the Salesforce instance.</p> </li> </ul>'
         StandardObjectConfigurations:
           allOf:
             - $ref: '#/components/schemas/SalesforceStandardObjectConfigurationList'
@@ -8079,19 +8708,19 @@ components:
         Urls:
           allOf:
             - $ref: '#/components/schemas/Urls'
-            - description: '<p>Specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl.</p> <p>You can include website subdomains. You can list up to 100 seed URLs and up to three sitemap URLs.</p> <p>You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling.</p> <p> <i>When selecting websites to index, you must adhere to the <a href="https://aws.amazon.com/aup/">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>'
+            - description: '<p>Specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl.</p> <p>You can include website subdomains. You can list up to 100 seed URLs and up to three sitemap URLs.</p> <p>You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling.</p> <p> <i>When selecting websites to index, you must adhere to the <a href="https://aws.amazon.com/aup/">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own web pages, or web pages that you have authorization to index.</i> </p>'
         CrawlDepth:
           allOf:
             - $ref: '#/components/schemas/CrawlDepth'
-            - description: '<p>Specifies the number of levels in a website that you want to crawl.</p> <p>The first level begins from the website seed or starting point URL. For example, if a website has 3 levels – index level (i.e. seed in this example), sections level, and subsections level – and you are only interested in crawling information up to the sections level (i.e. levels 0-1), you can set your depth to 1.</p> <p>The default crawl depth is set to 2.</p>'
+            - description: '<p>Specifies the number of levels in a website that you want to crawl.</p> <p>The first level begins from the website seed or starting point URL. For example, if a website has three levels—index level (the seed in this example), sections level, and subsections level—and you are only interested in crawling information up to the sections level (levels 0-1), you can set your depth to 1.</p> <p>The default crawl depth is set to 2.</p>'
         MaxLinksPerPage:
           allOf:
             - $ref: '#/components/schemas/MaxLinksPerPage'
-            - description: '<p>The maximum number of URLs on a webpage to include when crawling a website. This number is per webpage.</p> <p>As a website’s webpages are crawled, any URLs the webpages link to are also crawled. URLs on a webpage are crawled in order of appearance.</p> <p>The default maximum links per page is 100.</p>'
+            - description: '<p>The maximum number of URLs on a web page to include when crawling a website. This number is per web page.</p> <p>As a website’s web pages are crawled, any URLs the web pages link to are also crawled. URLs on a web page are crawled in order of appearance.</p> <p>The default maximum links per page is 100.</p>'
         MaxContentSizePerPageInMegaBytes:
           allOf:
             - $ref: '#/components/schemas/MaxContentSizePerPageInMegaBytes'
-            - description: <p>The maximum size (in MB) of a webpage or attachment to crawl.</p> <p>Files larger than this size (in MB) are skipped/not crawled.</p> <p>The default maximum size of a webpage or attachment is set to 50 MB.</p>
+            - description: <p>The maximum size (in MB) of a web page or attachment to crawl.</p> <p>Files larger than this size (in MB) are skipped/not crawled.</p> <p>The default maximum size of a web page or attachment is set to 50 MB.</p>
         MaxUrlsPerMinuteCrawlRate:
           allOf:
             - $ref: '#/components/schemas/MaxUrlsPerMinuteCrawlRate'
@@ -8529,11 +9158,11 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The UNIX datetime that the data source was created.
+            - description: The Unix timestamp when the data source connector was created.
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: 'The UNIX datetime that the data source was lasted updated. '
+            - description: The Unix timestamp when the data source connector was last updated.
         Status:
           allOf:
             - $ref: '#/components/schemas/DataSourceStatus'
@@ -8591,11 +9220,11 @@ components:
         StartTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The UNIX datetime that the synchronization job started.
+            - description: The Unix timestamp when the synchronization job started.
         EndTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The UNIX datetime that the synchronization job completed.
+            - description: The Unix timestamp when the synchronization job completed.
         Status:
           allOf:
             - $ref: '#/components/schemas/DataSourceSyncJobStatus'
@@ -8705,6 +9334,16 @@ components:
         - ACTIVE
         - DELETING
         - FAILED
+    FeaturedDocumentWithMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FeaturedDocumentWithMetadata'
+    FeaturedDocumentMissingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FeaturedDocumentMissing'
+    Long:
+      type: integer
     IndexStatus:
       type: string
       enum:
@@ -8749,8 +9388,6 @@ components:
         - UPDATING
         - ACTIVE_BUT_UPDATE_FAILED
         - FAILED
-    Long:
-      type: integer
     Mode:
       type: string
       enum:
@@ -8930,7 +9567,7 @@ components:
         FacetResults:
           allOf:
             - $ref: '#/components/schemas/FacetResultList'
-            - description: '<p>Contains the results of a document attribute that is a nested facet. A <code>FacetResult</code> contains the counts for each facet nested within a facet.</p> <p>For example, the document attribute or facet "Department" includes a value called "Engineering". In addition, the document attribute or facet "SubDepartment" includes the values "Frontend" and "Backend" for documents assigned to "Engineering". You can display nested facets in the search results so that documents can be searched not only by department but also by a sub department within a department. The counts for documents that belong to "Frontend" and "Backend" within "Engineering" are returned for a query.</p>'
+            - description: '<p>Contains the results of a document attribute that is a nested facet. A <code>FacetResult</code> contains the counts for each facet nested within a facet.</p> <p>For example, the document attribute or facet "Department" includes a value called "Engineering". In addition, the document attribute or facet "SubDepartment" includes the values "Frontend" and "Backend" for documents assigned to "Engineering". You can display nested facets in the search results so that documents can be searched not only by department but also by a sub department within a department. The counts for documents that belong to "Frontend" and "Backend" within "Engineering" are returned for a query.</p> <p/> <p/>'
       description: Provides the count of documents that match a particular attribute when doing a faceted search.
     DocumentAttributeValueCountPairList:
       type: array
@@ -9254,7 +9891,7 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date-time your Amazon Kendra experience was created.
+            - description: The Unix timestamp when your Amazon Kendra experience was created.
         Status:
           allOf:
             - $ref: '#/components/schemas/ExperienceStatus'
@@ -9344,11 +9981,11 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The UNIX datetime that the FAQ was added to the index.
+            - description: The Unix timestamp when the FAQ was created.
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The UNIX datetime that the FAQ was last updated.
+            - description: The Unix timestamp when the FAQ was last updated.
         FileFormat:
           allOf:
             - $ref: '#/components/schemas/FaqFileFormat'
@@ -9362,11 +9999,117 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/FaqSummary'
+    FeaturedDocument:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/DocumentId'
+            - description: 'The identifier of the document to feature in the search results. You can use the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_Query.html">Query</a> API to search for specific documents with their document IDs included in the result items, or you can use the console.'
+      description: 'A featured document. This document is displayed at the top of the search results page, placed above all other results for certain queries. If there''s an exact match of a query, then the document is featured in the search results.'
+    FeaturedDocumentMissing:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/DocumentId'
+            - description: The identifier of the document that doesn't exist but you have specified as a featured document.
+      description: 'A document ID doesn''t exist but you have specified as a featured document. Amazon Kendra cannot feature the document if it doesn''t exist in the index. You can check the status of a document and its ID or check for documents with status errors using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_BatchGetDocumentStatus.html">BatchGetDocumentStatus</a> API.'
+    FeaturedDocumentWithMetadata:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/DocumentId'
+            - description: 'The identifier of the featured document with its metadata. You can use the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_Query.html">Query</a> API to search for specific documents with their document IDs included in the result items, or you can use the console.'
+        Title:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The main title of the featured document.
+        URI:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The source URI location of the featured document.
+      description: 'A featured document with its metadata information. This document is displayed at the top of the search results page, placed above all other results for certain queries. If there''s an exact match of a query, then the document is featured in the search results.'
+    QueryResultType:
+      type: string
+      enum:
+        - DOCUMENT
+        - QUESTION_ANSWER
+        - ANSWER
     FeedbackToken:
       type: string
       pattern: '^\P{C}*.\P{C}*$'
       minLength: 1
       maxLength: 2048
+    FeaturedResultsItem:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ResultId'
+            - description: The identifier of the featured result.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/QueryResultType'
+            - description: 'The type of document within the featured result response. For example, a response could include a question-answer type that''s relevant to the query.'
+        AdditionalAttributes:
+          allOf:
+            - $ref: '#/components/schemas/AdditionalResultAttributeList'
+            - description: One or more additional attributes associated with the featured result.
+        DocumentId:
+          allOf:
+            - $ref: '#/components/schemas/DocumentId'
+            - description: The identifier of the featured document.
+        DocumentTitle:
+          $ref: '#/components/schemas/TextWithHighlights'
+        DocumentExcerpt:
+          $ref: '#/components/schemas/TextWithHighlights'
+        DocumentURI:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The source URI location of the featured document.
+        DocumentAttributes:
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttributeList'
+            - description: 'An array of document attributes assigned to a featured document in the search results. For example, the document author (<code>_author</code>) or the source URI (<code>_source_uri</code>) of the document.'
+        FeedbackToken:
+          allOf:
+            - $ref: '#/components/schemas/FeedbackToken'
+            - description: 'A token that identifies a particular featured result from a particular query. Use this token to provide click-through feedback for the result. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html">Submitting feedback</a>.'
+      description: 'A single featured result item. A featured result is displayed at the top of the search results page, placed above all other results for certain queries. If there''s an exact match of a query, then certain documents are featured in the search results.'
+    FeaturedResultsItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FeaturedResultsItem'
+    FeaturedResultsSetSummary:
+      type: object
+      properties:
+        FeaturedResultsSetId:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetId'
+            - description: The identifier of the set of featured results.
+        FeaturedResultsSetName:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetName'
+            - description: The name for the set of featured results.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FeaturedResultsSetStatus'
+            - description: 'The current status of the set of featured results. When the value is <code>ACTIVE</code>, featured results are ready for use. You can still configure your settings before setting the status to <code>ACTIVE</code>. You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code> using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html">UpdateFeaturedResultsSet</a> API. The queries you specify for featured results must be unique per featured results set for each index, whether the status is <code>ACTIVE</code> or <code>INACTIVE</code>.'
+        LastUpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The Unix timestamp when the set of featured results was last updated.
+        CreationTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The Unix timestamp when the set of featured results was created.
+      description: 'Summary information for a set of featured results. Featured results are placed above all other results for certain queries. If there''s an exact match of a query, then one or more specific documents are featured in the search results.'
+    FeaturedResultsSetSummaryItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/FeaturedResultsSetSummary'
     FileSystemId:
       type: string
       pattern: '^(fs-[0-9a-f]{8,})$'
@@ -9423,11 +10166,11 @@ components:
         StartTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The UNIX datetime of the beginning of the time range.
+            - description: The Unix timestamp for the beginning of the time range.
         EndTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The UNIX datetime of the end of the time range.
+            - description: The Unix timestamp for the end of the time range.
       description: Provides a range of time.
     SnapshotsDataHeaderFields:
       type: array
@@ -9560,11 +10303,11 @@ components:
         LastUpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The last date-time an action was updated. An action can be a <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.
+            - description: The Unix timestamp when an action was last updated. An action can be a <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.
         ReceivedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date-time an action was received by Amazon Kendra. An action can be a <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.
+            - description: The Unix timestamp when an action was received by Amazon Kendra. An action can be a <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.
         OrderingId:
           allOf:
             - $ref: '#/components/schemas/PrincipalOrderingId'
@@ -9687,7 +10430,7 @@ components:
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix timestamp when the index was last updated by the <code>UpdateIndex</code> API.
+            - description: The Unix timestamp when the index was last updated.
         Status:
           allOf:
             - $ref: '#/components/schemas/IndexStatus'
@@ -9860,6 +10603,10 @@ components:
       type: integer
       minimum: 1
       maximum: 100
+    MaxResultsIntegerForListFeaturedResultsSetsRequest:
+      type: integer
+      minimum: 1
+      maximum: 100
     MaxResultsIntegerForListPrincipalsRequest:
       type: integer
       minimum: 1
@@ -9991,11 +10738,11 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date-time the summary information was created.
+            - description: The Unix timestamp when the summary information was created.
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date-time the summary information was last updated.
+            - description: The Unix timestamp when the summary information was last updated.
       description: 'Summary information for users or groups in your IAM Identity Center identity source. This applies to users and groups with specific permissions that define their level of access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html">Building a search experience with no code</a>.'
     PrincipalType:
       type: string
@@ -10053,12 +10800,6 @@ components:
       type: string
       minLength: 1
       maxLength: 1000
-    QueryResultType:
-      type: string
-      enum:
-        - DOCUMENT
-        - QUESTION_ANSWER
-        - ANSWER
     SortingConfiguration:
       type: object
       required:
@@ -10218,11 +10959,11 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date-time summary information for a query suggestions block list was last created.
+            - description: The Unix timestamp when the block list was created.
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date-time the block list was last updated.
+            - description: The Unix timestamp when the block list was last updated.
         ItemCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -10250,7 +10991,7 @@ components:
         RelevanceValue:
           allOf:
             - $ref: '#/components/schemas/RelevanceType'
-            - description: Whether to document was relevant or not relevant to the search.
+            - description: Whether the document was relevant or not relevant to the search.
       description: Provides feedback on how relevant a document is to a search. Your application uses the <code>SubmitFeedback</code> API to provide relevance information.
     RelevanceFeedbackList:
       type: array
@@ -10480,8 +11221,8 @@ components:
         WebCrawlerMode:
           allOf:
             - $ref: '#/components/schemas/WebCrawlerMode'
-            - description: '<p>You can choose one of the following modes:</p> <ul> <li> <p> <code>HOST_ONLY</code> – crawl only the website host names. For example, if the seed URL is "abc.example.com", then only URLs with host name "abc.example.com" are crawled.</p> </li> <li> <p> <code>SUBDOMAINS</code> – crawl the website host names with subdomains. For example, if the seed URL is "abc.example.com", then "a.abc.example.com" and "b.abc.example.com" are also crawled.</p> </li> <li> <p> <code>EVERYTHING</code> – crawl the website host names with subdomains and other domains that the webpages link to.</p> </li> </ul> <p>The default mode is set to <code>HOST_ONLY</code>.</p>'
-      description: '<p>Provides the configuration information for the seed or starting point URLs to crawl.</p> <p> <i>When selecting websites to index, you must adhere to the <a href="https://aws.amazon.com/aup/">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>'
+            - description: '<p>You can choose one of the following modes:</p> <ul> <li> <p> <code>HOST_ONLY</code> – crawl only the website host names. For example, if the seed URL is "abc.example.com", then only URLs with host name "abc.example.com" are crawled.</p> </li> <li> <p> <code>SUBDOMAINS</code> – crawl the website host names with subdomains. For example, if the seed URL is "abc.example.com", then "a.abc.example.com" and "b.abc.example.com" are also crawled.</p> </li> <li> <p> <code>EVERYTHING</code> – crawl the website host names with subdomains and other domains that the web pages link to.</p> </li> </ul> <p>The default mode is set to <code>HOST_ONLY</code>.</p>'
+      description: '<p>Provides the configuration information for the seed or starting point URLs to crawl.</p> <p> <i>When selecting websites to index, you must adhere to the <a href="https://aws.amazon.com/aup/">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own web pages, or web pages that you have authorization to index.</i> </p>'
     ServiceNowAuthenticationType:
       type: string
       enum:
@@ -10609,7 +11350,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/SiteMapsList'
             - description: <p>The list of sitemap URLs of the websites you want to crawl.</p> <p>The list can include a maximum of three sitemap URLs.</p>
-      description: '<p>Provides the configuration information for the sitemap URLs to crawl.</p> <p> <i>When selecting websites to index, you must adhere to the <a href="https://aws.amazon.com/aup/">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>'
+      description: '<p>Provides the configuration information for the sitemap URLs to crawl.</p> <p> <i>When selecting websites to index, you must adhere to the <a href="https://aws.amazon.com/aup/">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own web pages, or web pages that you have authorization to index.</i> </p>'
     TeamId:
       type: string
       pattern: '[A-Z0-9]*'
@@ -10793,11 +11534,11 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix datetime that the thesaurus was created.
+            - description: The Unix timestamp when the thesaurus was created.
         UpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix datetime that the thesaurus was last updated.
+            - description: The Unix timestamp when the thesaurus was last updated.
       description: An array of summary information for a thesaurus or multiple thesauri.
     Token:
       type: string
@@ -10810,12 +11551,12 @@ components:
         SeedUrlConfiguration:
           allOf:
             - $ref: '#/components/schemas/SeedUrlConfiguration'
-            - description: '<p>Configuration of the seed or starting point URLs of the websites you want to crawl.</p> <p>You can choose to crawl only the website host names, or the website host names with subdomains, or the website host names with subdomains and other domains that the webpages link to.</p> <p>You can list up to 100 seed URLs.</p>'
+            - description: '<p>Configuration of the seed or starting point URLs of the websites you want to crawl.</p> <p>You can choose to crawl only the website host names, or the website host names with subdomains, or the website host names with subdomains and other domains that the web pages link to.</p> <p>You can list up to 100 seed URLs.</p>'
         SiteMapsConfiguration:
           allOf:
             - $ref: '#/components/schemas/SiteMapsConfiguration'
             - description: <p>Configuration of the sitemap URLs of the websites you want to crawl.</p> <p>Only URLs belonging to the same website host names are crawled. You can list up to three sitemap URLs.</p>
-      description: '<p>Provides the configuration information of the URLs to crawl.</p> <p>You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling.</p> <p> <i>When selecting websites to index, you must adhere to the <a href="https://aws.amazon.com/aup/">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>'
+      description: '<p>Provides the configuration information of the URLs to crawl.</p> <p>You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling.</p> <p> <i>When selecting websites to index, you must adhere to the <a href="https://aws.amazon.com/aup/">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own web pages, or web pages that you have authorization to index.</i> </p>'
     UserGroupResolutionMode:
       type: string
       enum:

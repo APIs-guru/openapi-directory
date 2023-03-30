@@ -193,7 +193,7 @@ paths:
   '/lenses/{LensAlias}/shares':
     post:
       operationId: CreateLensShare
-      description: '<p>Create a lens share.</p> <p>The owner of a lens can share it with other Amazon Web Services accounts, IAM users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Shared access to a lens is not removed until the lens invitation is deleted.</p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>'
+      description: '<p>Create a lens share.</p> <p>The owner of a lens can share it with other Amazon Web Services accounts, users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Lenses provided by Amazon Web Services (Amazon Web Services Official Content) cannot be shared.</p> <p> Shared access to a lens is not removed until the lens invitation is deleted.</p> <p>If you share a lens with an organization or OU, all accounts in the organization or OU are granted access to the lens.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-sharing.html">Sharing a custom lens</a> in the <i>Well-Architected Tool User Guide</i>.</p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>'
       responses:
         '200':
           description: Success
@@ -250,7 +250,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
       requestBody:
@@ -269,7 +269,7 @@ paths:
                   minLength: 12
                   maxLength: 2048
                 ClientRequestToken:
-                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -326,7 +326,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
         - name: SharedWithPrefix
@@ -370,7 +370,7 @@ paths:
   '/lenses/{LensAlias}/versions':
     post:
       operationId: CreateLensVersion
-      description: '<p>Create a new lens version.</p> <p>A lens can have up to 100 versions.</p> <p>After a lens has been imported, create a new lens version to publish it. The owner of a lens can share the lens with other Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. Only the owner of a lens can delete it. </p>'
+      description: <p>Create a new lens version.</p> <p>A lens can have up to 100 versions.</p> <p>Use this operation to publish a new lens version after you have imported a lens. The <code>LensAlias</code> is used to identify the lens to be published. The owner of a lens can share the lens with other Amazon Web Services accounts and users in the same Amazon Web Services Region. Only the owner of a lens can delete it. </p>
       responses:
         '200':
           description: Success
@@ -427,7 +427,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
       requestBody:
@@ -449,7 +449,7 @@ paths:
                   description: Set to true if this new major lens version.
                   type: boolean
                 ClientRequestToken:
-                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -537,7 +537,7 @@ paths:
                   minLength: 3
                   maxLength: 100
                 ClientRequestToken:
-                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -550,7 +550,7 @@ paths:
   /workloads:
     post:
       operationId: CreateWorkload
-      description: '<p>Create a new workload.</p> <p>The owner of a workload can share the workload with other Amazon Web Services accounts, IAM users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Only the owner of a workload can delete it.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html">Defining a Workload</a> in the <i>Well-Architected Tool User Guide</i>.</p>'
+      description: '<p>Create a new workload.</p> <p>The owner of a workload can share the workload with other Amazon Web Services accounts, users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Only the owner of a workload can delete it.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html">Defining a Workload</a> in the <i>Well-Architected Tool User Guide</i>.</p> <important> <p>Either <code>AwsRegions</code>, <code>NonAwsRegions</code>, or both must be specified when creating a workload.</p> <p>You also must specify <code>ReviewOwner</code>, even though the parameter is listed as not being required in the following section. </p> </important>'
       responses:
         '200':
           description: Success
@@ -589,6 +589,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
           description: ThrottlingException
           content:
             application/json:
@@ -675,7 +681,7 @@ paths:
                   type: string
                   maxLength: 2084
                 ClientRequestToken:
-                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
                 Tags:
                   description: The tags to be associated with the workload.
@@ -709,7 +715,7 @@ paths:
   '/workloads/{WorkloadId}/shares':
     post:
       operationId: CreateWorkloadShare
-      description: '<p>Create a workload share.</p> <p>The owner of a workload can share it with other Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. Shared access to a workload is not removed until the workload invitation is deleted.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html">Sharing a Workload</a> in the <i>Well-Architected Tool User Guide</i>.</p>'
+      description: '<p>Create a workload share.</p> <p>The owner of a workload can share it with other Amazon Web Services accounts and users in the same Amazon Web Services Region. Shared access to a workload is not removed until the workload invitation is deleted.</p> <p>If you share a workload with an organization or OU, all accounts in the organization or OU are granted access to the workload.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html">Sharing a workload</a> in the <i>Well-Architected Tool User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -791,7 +797,7 @@ paths:
                     - READONLY
                     - CONTRIBUTOR
                 ClientRequestToken:
-                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -891,7 +897,7 @@ paths:
   '/lenses/{LensAlias}#ClientRequestToken&LensStatus':
     delete:
       operationId: DeleteLens
-      description: '<p>Delete an existing lens.</p> <p>Only the owner of a lens can delete it. After the lens is deleted, Amazon Web Services accounts and IAM users that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads. </p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>'
+      description: '<p>Delete an existing lens.</p> <p>Only the owner of a lens can delete it. After the lens is deleted, Amazon Web Services accounts and users that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads. </p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>'
       responses:
         '200':
           description: Success
@@ -938,7 +944,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
         - name: ClientRequestToken
@@ -947,7 +953,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
         - name: LensStatus
           in: query
           required: true
@@ -969,7 +975,7 @@ paths:
   '/lenses/{LensAlias}/shares/{ShareId}#ClientRequestToken':
     delete:
       operationId: DeleteLensShare
-      description: '<p>Delete a lens share.</p> <p>After the lens share is deleted, Amazon Web Services accounts, IAM users, organizations, and organizational units (OUs) that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.</p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>'
+      description: '<p>Delete a lens share.</p> <p>After the lens share is deleted, Amazon Web Services accounts, users, organizations, and organizational units (OUs) that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.</p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1024,7 +1030,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
         - name: ClientRequestToken
@@ -1033,7 +1039,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1100,7 +1106,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1175,7 +1181,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1262,7 +1268,7 @@ paths:
   '/lenses/{LensAlias}/export':
     get:
       operationId: ExportLens
-      description: '<p>Export an existing lens.</p> <p>Lenses are defined in JSON. For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html">JSON format specification</a> in the <i>Well-Architected Tool User Guide</i>. Only the owner of a lens can export it. </p> <note> <p> <b>Disclaimer</b> </p> <p>Do not include or gather personal identifiable information (PII) of end users or other identifiable individuals in or via your custom lenses. If your custom lens or those shared with you and used in your account do include or collect PII you are responsible for: ensuring that the included PII is processed in accordance with applicable law, providing adequate privacy notices, and obtaining necessary consents for processing such data.</p> </note>'
+      description: '<p>Export an existing lens.</p> <p>Only the owner of a lens can export it. Lenses provided by Amazon Web Services (Amazon Web Services Official Content) cannot be exported.</p> <p>Lenses are defined in JSON. For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html">JSON format specification</a> in the <i>Well-Architected Tool User Guide</i>.</p> <note> <p> <b>Disclaimer</b> </p> <p>Do not include or gather personal identifiable information (PII) of end users or other identifiable individuals in or via your custom lenses. If your custom lens or those shared with you and used in your account do include or collect PII you are responsible for: ensuring that the included PII is processed in accordance with applicable law, providing adequate privacy notices, and obtaining necessary consents for processing such data.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1307,7 +1313,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
         - name: LensVersion
@@ -1382,7 +1388,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
         - name: QuestionId
@@ -1472,7 +1478,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
         - name: QuestionId
@@ -1517,6 +1523,86 @@ paths:
                     - ARCHITECTURE_CONSTRAINTS
                     - OTHER
                     - NONE
+  /consolidatedReport#Format:
+    get:
+      operationId: GetConsolidatedReport
+      description: <p>Get a consolidated report of your workloads.</p> <p>You can optionally choose to include workloads that have been shared with you.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetConsolidatedReportOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: Format
+          in: query
+          required: true
+          description: '<p>The format of the consolidated report.</p> <p>For <code>PDF</code>, <code>Base64String</code> is returned. For <code>JSON</code>, <code>Metrics</code> is returned.</p>'
+          schema:
+            type: string
+            enum:
+              - PDF
+              - JSON
+        - name: IncludeSharedResources
+          in: query
+          required: false
+          description: Set to <code>true</code> to have shared resources included in the report.
+          schema:
+            type: boolean
+        - name: NextToken
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            description: The token to use to retrieve the next set of results.
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to return for this request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 15
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/lenses/{LensAlias}':
     get:
       operationId: GetLens
@@ -1565,7 +1651,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
         - name: LensVersion
@@ -1640,7 +1726,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
         - name: MilestoneNumber
@@ -1662,7 +1748,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     patch:
       operationId: UpdateLensReview
-      description: Update lens review.
+      description: Update lens review for a particular workload.
       responses:
         '200':
           description: Success
@@ -1721,7 +1807,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
       requestBody:
@@ -1796,7 +1882,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
         - name: MilestoneNumber
@@ -1864,7 +1950,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
         - name: BaseLensVersion
@@ -2168,7 +2254,7 @@ paths:
   /importLens:
     put:
       operationId: ImportLens
-      description: '<p>Import a new lens.</p> <p>The lens cannot be applied to workloads or shared with other Amazon Web Services accounts until it''s published with <a>CreateLensVersion</a> </p> <p>Lenses are defined in JSON. For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html">JSON format specification</a> in the <i>Well-Architected Tool User Guide</i>.</p> <p>A custom lens cannot exceed 500 KB in size.</p> <note> <p> <b>Disclaimer</b> </p> <p>Do not include or gather personal identifiable information (PII) of end users or other identifiable individuals in or via your custom lenses. If your custom lens or those shared with you and used in your account do include or collect PII you are responsible for: ensuring that the included PII is processed in accordance with applicable law, providing adequate privacy notices, and obtaining necessary consents for processing such data.</p> </note>'
+      description: '<p>Import a new custom lens or update an existing custom lens.</p> <p>To update an existing custom lens, specify its ARN as the <code>LensAlias</code>. If no ARN is specified, a new custom lens is created.</p> <p>The new or updated lens will have a status of <code>DRAFT</code>. The lens cannot be applied to workloads or shared with other Amazon Web Services accounts until it''s published with <a>CreateLensVersion</a>.</p> <p>Lenses are defined in JSON. For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html">JSON format specification</a> in the <i>Well-Architected Tool User Guide</i>.</p> <p>A custom lens cannot exceed 500 KB in size.</p> <note> <p> <b>Disclaimer</b> </p> <p>Do not include or gather personal identifiable information (PII) of end users or other identifiable individuals in or via your custom lenses. If your custom lens or those shared with you and used in your account do include or collect PII you are responsible for: ensuring that the included PII is processed in accordance with applicable law, providing adequate privacy notices, and obtaining necessary consents for processing such data.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2230,7 +2316,7 @@ paths:
                 - ClientRequestToken
               properties:
                 LensAlias:
-                  description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+                  description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
                   type: string
                   minLength: 1
                   maxLength: 128
@@ -2240,7 +2326,7 @@ paths:
                   minLength: 2
                   maxLength: 500000
                 ClientRequestToken:
-                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
                 Tags:
                   description: Tags to associate to a lens.
@@ -2260,7 +2346,7 @@ paths:
   '/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers':
     get:
       operationId: ListAnswers
-      description: List of answers.
+      description: List of answers for a particular workload and lens.
       responses:
         '200':
           description: Success
@@ -2313,7 +2399,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
         - name: PillarId
@@ -2629,7 +2715,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
         - name: PillarId
@@ -2676,7 +2762,7 @@ paths:
   '/workloads/{WorkloadId}/lensReviews':
     get:
       operationId: ListLensReviews
-      description: List lens reviews.
+      description: List lens reviews for a particular workload.
       responses:
         '200':
           description: Success
@@ -3176,7 +3262,7 @@ paths:
   /workloadsSummaries:
     post:
       operationId: ListWorkloads
-      description: List workloads. Paginated.
+      description: Paginated list of workloads.
       responses:
         '200':
           description: Success
@@ -3524,7 +3610,7 @@ paths:
   '/workloads/{WorkloadId}/lensReviews/{LensAlias}/upgrade':
     put:
       operationId: UpgradeLensReview
-      description: Upgrade lens review.
+      description: Upgrade lens review for a particular workload.
       responses:
         '200':
           description: Success
@@ -3579,7 +3665,7 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
             maxLength: 128
       requestBody:
@@ -3597,7 +3683,7 @@ paths:
                   minLength: 3
                   maxLength: 100
                 ClientRequestToken:
-                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -3661,7 +3747,7 @@ components:
   schemas:
     LensAlias:
       type: string
-      description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+      description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
       minLength: 1
       maxLength: 128
     ValidationException: {}
@@ -3747,7 +3833,7 @@ components:
         LensJSON:
           allOf:
             - $ref: '#/components/schemas/LensJSON'
-            - description: The JSON for the lens.
+            - description: The JSON representation of a lens.
     GetAnswerOutput:
       type: object
       properties:
@@ -3764,6 +3850,17 @@ components:
         Answer:
           $ref: '#/components/schemas/Answer'
       description: Output of a get answer call.
+    GetConsolidatedReportOutput:
+      type: object
+      properties:
+        Metrics:
+          allOf:
+            - $ref: '#/components/schemas/ConsolidatedReportMetrics'
+            - description: <p>The metrics that make up the consolidated report.</p> <p>Only returned when <code>JSON</code> format is requested.</p>
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        Base64String:
+          $ref: '#/components/schemas/Base64String'
     GetLensOutput:
       type: object
       properties:
@@ -3834,7 +3931,7 @@ components:
         LensArn:
           allOf:
             - $ref: '#/components/schemas/LensArn'
-            - description: The ARN for the lens.
+            - description: The ARN for the lens that was created or updated.
         Status:
           allOf:
             - $ref: '#/components/schemas/ImportLensStatus'
@@ -4080,12 +4177,12 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/AdditionalResourceType'
-            - description: Type of additional resource.
+            - description: Type of additional resource for a custom lens.
         Content:
           allOf:
             - $ref: '#/components/schemas/Urls'
-            - description: 'The URLs for additional resources, either helpful resources or improvement plans. Up to five additional URLs can be specified.'
-      description: The choice level additional resources.
+            - description: 'The URLs for additional resources, either helpful resources or improvement plans, for a custom lens. Up to five additional URLs can be specified.'
+      description: <p>The choice level additional resources for a custom lens.</p> <p>This field does not apply to Amazon Web Services official lenses.</p>
     AdditionalResourcesList:
       type: array
       items:
@@ -4107,12 +4204,12 @@ components:
       maxLength: 1024
     ImprovementPlanUrl:
       type: string
-      description: <p>The improvement plan URL for a question.</p> <p>This value is only available if the question has been answered.</p>
+      description: <p>The improvement plan URL for a question in an Amazon Web Services official lenses.</p> <p>This value is only available if the question has been answered.</p> <p>This value does not apply to custom lenses.</p>
       minLength: 1
       maxLength: 2048
     HelpfulResourceUrl:
       type: string
-      description: The helpful resource URL for a question.
+      description: '<p>The helpful resource URL.</p> <p>For Amazon Web Services official lenses, this is the helpful resource URL for a question or choice.</p> <p>For custom lenses, this is the helpful resource URL for a question and is only provided if <code>HelpfulResourceDisplayText</code> was specified for the question.</p>'
       minLength: 1
       maxLength: 2048
     DisplayText:
@@ -4171,7 +4268,7 @@ components:
         HelpfulResourceDisplayText:
           allOf:
             - $ref: '#/components/schemas/DisplayText'
-            - description: The helpful resource text to be displayed.
+            - description: <p>The helpful resource text to be displayed for a custom lens.</p> <p>This field does not apply to Amazon Web Services official lenses.</p>
         Choices:
           $ref: '#/components/schemas/Choices'
         SelectedChoices:
@@ -4247,7 +4344,24 @@ components:
       description: Input to associate lens reviews.
     Base64String:
       type: string
-      description: <p>The Base64-encoded string representation of a lens review report.</p> <p>This data can be used to create a PDF file.</p>
+      description: <p>The Base64-encoded string representation of a lens review report.</p> <p>This data can be used to create a PDF file.</p> <p>Only returned by <a>GetConsolidatedReport</a> when <code>PDF</code> format is requested.</p>
+    ChoiceTitle:
+      type: string
+      description: The title of a choice.
+      minLength: 1
+      maxLength: 512
+    BestPractice:
+      type: object
+      properties:
+        ChoiceId:
+          $ref: '#/components/schemas/ChoiceId'
+        ChoiceTitle:
+          $ref: '#/components/schemas/ChoiceTitle'
+      description: 'A best practice, or question choice, that has been identified as a risk in this question.'
+    BestPractices:
+      type: array
+      items:
+        $ref: '#/components/schemas/BestPractice'
     CheckDescription:
       type: string
     CheckId:
@@ -4377,11 +4491,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CheckSummary'
-    ChoiceTitle:
-      type: string
-      description: The title of a choice.
-      minLength: 1
-      maxLength: 512
     ChoiceDescription:
       type: string
       description: The description of a choice.
@@ -4411,15 +4520,15 @@ components:
         HelpfulResource:
           allOf:
             - $ref: '#/components/schemas/ChoiceContent'
-            - description: The choice level helpful resource.
+            - description: <p>The helpful resource (both text and URL) for a particular choice.</p> <p>This field only applies to custom lenses. Each choice can have only one helpful resource.</p>
         ImprovementPlan:
           allOf:
             - $ref: '#/components/schemas/ChoiceContent'
-            - description: The choice level improvement plan.
+            - description: <p>The improvement plan (both text and URL) for a particular choice.</p> <p>This field only applies to custom lenses. Each choice can have only one improvement plan.</p>
         AdditionalResources:
           allOf:
             - $ref: '#/components/schemas/AdditionalResourcesList'
-            - description: 'The additional resources for a choice. A choice can have up to two additional resources: one of type <code>HELPFUL_RESOURCE</code>, one of type <code>IMPROVEMENT_PLAN</code>, or both.'
+            - description: '<p>The additional resources for a choice in a custom lens.</p> <p>A choice can have up to two additional resources: one of type <code>HELPFUL_RESOURCE</code>, one of type <code>IMPROVEMENT_PLAN</code>, or both.</p>'
       description: A choice available to answer question.
     ChoiceStatus:
       type: string
@@ -4500,7 +4609,61 @@ components:
         $ref: '#/components/schemas/ChoiceUpdate'
     ClientRequestToken:
       type: string
-      description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+      description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+    MetricType:
+      type: string
+      enum:
+        - WORKLOAD
+    RiskCounts:
+      type: object
+      description: A map from risk names to the count of how many questions have that rating.
+      additionalProperties:
+        $ref: '#/components/schemas/Count'
+    WorkloadName:
+      type: string
+      description: <p>The name of the workload.</p> <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization are ignored when checking for uniqueness.</p>
+      minLength: 3
+      maxLength: 100
+    WorkloadArn:
+      type: string
+      description: The ARN for the workload.
+    LensMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/LensMetric'
+    LensesAppliedCount:
+      type: integer
+      minimum: 0
+    ConsolidatedReportMetric:
+      type: object
+      properties:
+        MetricType:
+          allOf:
+            - $ref: '#/components/schemas/MetricType'
+            - description: The metric type of a metric in the consolidated report. Currently only WORKLOAD metric types are supported.
+        RiskCounts:
+          $ref: '#/components/schemas/RiskCounts'
+        WorkloadId:
+          $ref: '#/components/schemas/WorkloadId'
+        WorkloadName:
+          $ref: '#/components/schemas/WorkloadName'
+        WorkloadArn:
+          $ref: '#/components/schemas/WorkloadArn'
+        UpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
+        Lenses:
+          allOf:
+            - $ref: '#/components/schemas/LensMetrics'
+            - description: The metrics for the lenses in the workload.
+        LensesAppliedCount:
+          allOf:
+            - $ref: '#/components/schemas/LensesAppliedCount'
+            - description: The total number of lenses applied to the workload.
+      description: A metric that contributes to the consolidated report.
+    ConsolidatedReportMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConsolidatedReportMetric'
     Count:
       type: integer
       description: A non-negative integer that denotes how many.
@@ -4570,11 +4733,6 @@ components:
       description: <p>The milestone number.</p> <p>A workload can have a maximum of 100 milestones.</p>
       minimum: 1
       maximum: 100
-    WorkloadName:
-      type: string
-      description: <p>The name of the workload.</p> <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization are ignored when checking for uniqueness.</p>
-      minLength: 3
-      maxLength: 100
     WorkloadDescription:
       type: string
       description: The description for the workload.
@@ -4702,9 +4860,6 @@ components:
             - $ref: '#/components/schemas/WorkloadApplications'
             - description: List of AppRegistry application ARNs associated to the workload.
       description: Input for workload creation.
-    WorkloadArn:
-      type: string
-      description: The ARN for the workload.
     PermissionType:
       type: string
       enum:
@@ -4778,6 +4933,24 @@ components:
       title: GetAnswerInput
       properties: {}
       description: Input to get answer.
+    ReportFormat:
+      type: string
+      enum:
+        - PDF
+        - JSON
+    IncludeSharedResources:
+      type: boolean
+    NextToken:
+      type: string
+      description: The token to use to retrieve the next set of results.
+    GetConsolidatedReportMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 15
+    GetConsolidatedReportInput:
+      type: object
+      title: GetConsolidatedReportInput
+      properties: {}
     GetLensInput:
       type: object
       title: GetLensInput
@@ -5025,6 +5198,24 @@ components:
     ShareInvitationId:
       type: string
       pattern: '[0-9a-f]{32}'
+    PillarMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/PillarMetric'
+    LensMetric:
+      type: object
+      properties:
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The lens ARN.
+        Pillars:
+          allOf:
+            - $ref: '#/components/schemas/PillarMetrics'
+            - description: The metrics for the pillars in a lens.
+        RiskCounts:
+          $ref: '#/components/schemas/RiskCounts'
+      description: A metric for a particular lens in a workload.
     LensNamePrefix:
       type: string
       maxLength: 100
@@ -5041,14 +5232,6 @@ components:
       description: List of pillar review summaries of lens review in a workload.
       items:
         $ref: '#/components/schemas/PillarReviewSummary'
-    RiskCounts:
-      type: object
-      description: A map from risk names to the count of how questions have that rating.
-      additionalProperties:
-        $ref: '#/components/schemas/Count'
-    NextToken:
-      type: string
-      description: The token to use to retrieve the next set of results.
     LensReviewSummary:
       type: object
       properties:
@@ -5442,6 +5625,22 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PillarDifference'
+    QuestionMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/QuestionMetric'
+    PillarMetric:
+      type: object
+      properties:
+        PillarId:
+          $ref: '#/components/schemas/PillarId'
+        RiskCounts:
+          $ref: '#/components/schemas/RiskCounts'
+        Questions:
+          allOf:
+            - $ref: '#/components/schemas/QuestionMetrics'
+            - description: The questions that have been identified as risks in the pillar.
+      description: A metric for a particular pillar in a lens.
     PillarNotes:
       type: object
       description: List of pillar notes of a lens review in a workload.
@@ -5471,6 +5670,18 @@ components:
             - $ref: '#/components/schemas/DifferenceStatus'
             - description: Indicates the type of change to the question.
       description: A question difference return object.
+    QuestionMetric:
+      type: object
+      properties:
+        QuestionId:
+          $ref: '#/components/schemas/QuestionId'
+        Risk:
+          $ref: '#/components/schemas/Risk'
+        BestPractices:
+          allOf:
+            - $ref: '#/components/schemas/BestPractices'
+            - description: 'The best practices, or choices, that have been identified as contributing to risk in a question.'
+      description: 'A metric for a particular question in the pillar. '
     ShareInvitation:
       type: object
       properties:

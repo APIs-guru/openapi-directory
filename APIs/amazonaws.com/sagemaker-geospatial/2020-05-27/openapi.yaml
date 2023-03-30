@@ -340,7 +340,7 @@ paths:
   /export-earth-observation-job:
     post:
       operationId: ExportEarthObservationJob
-      description: Use this operation to export results of an Earth Observation job and optionally source images used as input to the EOJ to an S3 location.
+      description: Use this operation to export results of an Earth Observation job and optionally source images used as input to the EOJ to an Amazon S3 location.
       responses:
         '200':
           description: Success
@@ -406,9 +406,17 @@ paths:
                   description: The input Amazon Resource Name (ARN) of the Earth Observation job being exported.
                   type: string
                   pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:earth-observation-job/[a-z0-9]{12,}$'
+                ClientToken:
+                  description: A unique token that guarantees that the call to this API is idempotent.
+                  type: string
+                  minLength: 36
+                  maxLength: 64
                 ExecutionRoleArn:
                   description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
                   type: string
+                  pattern: '^arn:(aws[a-z-]*):iam::([0-9]{12}):role/[a-zA-Z0-9+=,.@_/-]+$'
+                  minLength: 20
+                  maxLength: 2048
                 ExportSourceImages:
                   description: The source images provided to the Earth Observation job being exported.
                   type: boolean
@@ -431,7 +439,7 @@ paths:
   /export-vector-enrichment-jobs:
     post:
       operationId: ExportVectorEnrichmentJob
-      description: Use this operation to copy results of a Vector Enrichment job to an S3 location.
+      description: Use this operation to copy results of a Vector Enrichment job to an Amazon S3 location.
       responses:
         '200':
           description: Success
@@ -497,9 +505,17 @@ paths:
                   description: The Amazon Resource Name (ARN) of the Vector Enrichment job.
                   type: string
                   pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:vector-enrichment-job/[a-z0-9]{12,}$'
+                ClientToken:
+                  description: A unique token that guarantees that the call to this API is idempotent.
+                  type: string
+                  minLength: 36
+                  maxLength: 64
                 ExecutionRoleArn:
                   description: The Amazon Resource Name (ARN) of the IAM rolewith permission to upload to the location in OutputConfig.
                   type: string
+                  pattern: '^arn:(aws[a-z-]*):iam::([0-9]{12}):role/[a-zA-Z0-9+=,.@_/-]+$'
+                  minLength: 20
+                  maxLength: 2048
                 OutputConfig:
                   description: An object containing information about the output file.
                   type: object
@@ -507,7 +523,7 @@ paths:
                     S3Data:
                       allOf:
                         - $ref: '#/components/schemas/VectorEnrichmentJobS3Data'
-                        - description: <p/>
+                        - description: The input structure for Amazon S3 data; representing the Amazon S3 location of the input data objects.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -622,6 +638,15 @@ paths:
           schema:
             type: string
             pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:earth-observation-job/[a-z0-9]{12,}$'
+        - name: ExecutionRoleArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) of the IAM role that you specify.
+          schema:
+            type: string
+            pattern: '^arn:(aws[a-z-]*):iam::([0-9]{12}):role/[a-zA-Z0-9+=,.@_/-]+$'
+            minLength: 20
+            maxLength: 2048
         - name: ImageAssets
           in: query
           required: true
@@ -1158,19 +1183,19 @@ paths:
                     AreaOfInterest:
                       allOf:
                         - $ref: '#/components/schemas/AreaOfInterest'
-                        - description: <p/>
+                        - description: The Area of interest to be used in the search query.
                     BandFilter:
                       allOf:
                         - $ref: '#/components/schemas/StringListInput'
-                        - description: <p/>
+                        - description: The list of Bands to be displayed in the result for each item.
                     PropertyFilters:
                       allOf:
                         - $ref: '#/components/schemas/PropertyFilters'
-                        - description: <p/>
+                        - description: The Property Filters used in the search query.
                     TimeRangeFilter:
                       allOf:
                         - $ref: '#/components/schemas/TimeRangeFilterInput'
-                        - description: <p/>
+                        - description: The TimeRange Filter used in the search query.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1247,9 +1272,14 @@ paths:
                 ClientToken:
                   description: A unique token that guarantees that the call to this API is idempotent.
                   type: string
+                  minLength: 36
+                  maxLength: 64
                 ExecutionRoleArn:
                   description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
                   type: string
+                  pattern: '^arn:(aws[a-z-]*):iam::([0-9]{12}):role/[a-zA-Z0-9+=,.@_/-]+$'
+                  minLength: 20
+                  maxLength: 2048
                 InputConfig:
                   description: Input configuration information.
                   type: object
@@ -1260,12 +1290,12 @@ paths:
                         - description: The location of the input data.&gt;
                     PreviousEarthObservationJobArn:
                       allOf:
-                        - $ref: '#/components/schemas/String'
+                        - $ref: '#/components/schemas/EarthObservationJobArn'
                         - description: The Amazon Resource Name (ARN) of the previous Earth Observation job.
                     RasterDataCollectionQuery:
                       allOf:
                         - $ref: '#/components/schemas/RasterDataCollectionQueryInput'
-                        - description: <p/>
+                        - description: 'The structure representing the RasterDataCollection Query consisting of the Area of Interest, RasterDataCollectionArn,TimeRange and Property Filters.'
                 JobConfig:
                   description: The input structure for the JobConfig in an EarthObservationJob.
                   type: object
@@ -1273,7 +1303,7 @@ paths:
                     BandMathConfig:
                       allOf:
                         - $ref: '#/components/schemas/BandMathConfigInput'
-                        - description: <p/>
+                        - description: An object containing information about the job configuration for BandMath.
                     CloudMaskingConfig:
                       allOf:
                         - $ref: '#/components/schemas/CloudMaskingConfigInput'
@@ -1297,7 +1327,7 @@ paths:
                     StackConfig:
                       allOf:
                         - $ref: '#/components/schemas/StackConfigInput'
-                        - description: <p/>
+                        - description: An object containing information about the job configuration for a Stacking Earth Observation job.
                     TemporalStatisticsConfig:
                       allOf:
                         - $ref: '#/components/schemas/TemporalStatisticsConfigInput'
@@ -1307,11 +1337,15 @@ paths:
                         - $ref: '#/components/schemas/ZonalStatisticsConfigInput'
                         - description: An object containing information about the job configuration for zonal statistics.
                 KmsKeyId:
-                  description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+                  description: The Key Management Service key ID for server-side encryption.
                   type: string
+                  minLength: 0
+                  maxLength: 2048
                 Name:
                   description: The name of the Earth Observation job.
                   type: string
+                  minLength: 0
+                  maxLength: 200
                 Tags:
                   description: Each tag consists of a key and a value.
                   type: object
@@ -1394,9 +1428,14 @@ paths:
                 ClientToken:
                   description: A unique token that guarantees that the call to this API is idempotent.
                   type: string
+                  minLength: 36
+                  maxLength: 64
                 ExecutionRoleArn:
                   description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
                   type: string
+                  pattern: '^arn:(aws[a-z-]*):iam::([0-9]{12}):role/[a-zA-Z0-9+=,.@_/-]+$'
+                  minLength: 20
+                  maxLength: 2048
                 InputConfig:
                   description: The input structure for the InputConfig in a VectorEnrichmentJob.
                   type: object
@@ -1404,11 +1443,11 @@ paths:
                     DataSourceConfig:
                       allOf:
                         - $ref: '#/components/schemas/VectorEnrichmentJobDataSourceConfigInput'
-                        - description: <p/>
+                        - description: The input structure for the data source that represents the storage type of the input data objects.
                     DocumentType:
                       allOf:
                         - $ref: '#/components/schemas/VectorEnrichmentJobDocumentType'
-                        - description: <p/>
+                        - description: The input structure that defines the data source file type.
                 JobConfig:
                   description: It contains configs such as ReverseGeocodingConfig and MapMatchingConfig.
                   type: object
@@ -1416,17 +1455,21 @@ paths:
                     MapMatchingConfig:
                       allOf:
                         - $ref: '#/components/schemas/MapMatchingConfig'
-                        - description: <p/>
+                        - description: The input structure for Map Matching operation type.
                     ReverseGeocodingConfig:
                       allOf:
                         - $ref: '#/components/schemas/ReverseGeocodingConfig'
-                        - description: <p/>
+                        - description: The input structure for Reverse Geocoding operation type.
                 KmsKeyId:
-                  description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+                  description: The Key Management Service key ID for server-side encryption.
                   type: string
+                  minLength: 0
+                  maxLength: 2048
                 Name:
                   description: The name of the Vector Enrichment job.
                   type: string
+                  minLength: 0
+                  maxLength: 200
                 Tags:
                   description: Each tag consists of a key and a value.
                   type: object
@@ -1725,11 +1768,11 @@ components:
             - description: The output Amazon Resource Name (ARN) of the Earth Observation job being exported.
         CreationTime:
           allOf:
-            - $ref: '#/components/schemas/Timestamp'
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
             - description: The creation time.
         ExecutionRoleArn:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/ExecutionRoleArn'
             - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
         ExportSourceImages:
           allOf:
@@ -1750,13 +1793,13 @@ components:
       properties:
         KmsKeyId:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+            - $ref: '#/components/schemas/KmsKey'
+            - description: The Key Management Service key ID for server-side encryption.
         S3Uri:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/S3Uri'
             - description: The URL to the Amazon S3 data input.
-      description: <p/>
+      description: The structure containing the Amazon S3 path to export the Earth Observation job output.
     ServiceQuotaExceededException: {}
     ExportVectorEnrichmentJobOutput:
       type: object
@@ -1773,11 +1816,11 @@ components:
             - description: The Amazon Resource Name (ARN) of the Vector Enrichment job being exported.
         CreationTime:
           allOf:
-            - $ref: '#/components/schemas/Timestamp'
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
             - description: The creation time.
         ExecutionRoleArn:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/ExecutionRoleArn'
             - description: The Amazon Resource Name (ARN) of the IAM role with permission to upload to the location in OutputConfig.
         ExportStatus:
           allOf:
@@ -1794,11 +1837,11 @@ components:
       properties:
         KmsKeyId:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+            - $ref: '#/components/schemas/KmsKey'
+            - description: The Key Management Service key ID for server-side encryption.
         S3Uri:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/S3Uri'
             - description: The URL to the Amazon S3 data for the Vector Enrichment job.
       description: The Amazon S3 data for the Vector Enrichment job.
     GetEarthObservationJobOutput:
@@ -1818,7 +1861,7 @@ components:
             - description: The Amazon Resource Name (ARN) of the Earth Observation job.
         CreationTime:
           allOf:
-            - $ref: '#/components/schemas/Timestamp'
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
             - description: The creation time of the initiated Earth Observation job.
         DurationInSeconds:
           allOf:
@@ -1830,7 +1873,7 @@ components:
             - description: Details about the errors generated during the Earth Observation job.
         ExecutionRoleArn:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/ExecutionRoleArn'
             - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
         ExportErrorDetails:
           allOf:
@@ -1850,8 +1893,8 @@ components:
             - description: An object containing information about the job configuration.
         KmsKeyId:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+            - $ref: '#/components/schemas/KmsKey'
+            - description: The Key Management Service key ID for server-side encryption.
         Name:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1859,7 +1902,7 @@ components:
         OutputBands:
           allOf:
             - $ref: '#/components/schemas/EarthObservationJobOutputBands'
-            - description: <p/>
+            - description: Bands available in the output of an operation.
         Status:
           allOf:
             - $ref: '#/components/schemas/EarthObservationJobStatus'
@@ -1894,7 +1937,7 @@ components:
         ImageSourceBands:
           allOf:
             - $ref: '#/components/schemas/ImageSourceBandList'
-            - description: <p/>
+            - description: The list of image source bands in the raster data collection.
         Name:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1939,7 +1982,7 @@ components:
             - description: The Amazon Resource Name (ARN) of the Vector Enrichment job.
         CreationTime:
           allOf:
-            - $ref: '#/components/schemas/Timestamp'
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
             - description: The creation time.
         DurationInSeconds:
           allOf:
@@ -1951,7 +1994,7 @@ components:
             - description: Details about the errors generated during the Vector Enrichment job.
         ExecutionRoleArn:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/ExecutionRoleArn'
             - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
         ExportErrorDetails:
           allOf:
@@ -1971,8 +2014,8 @@ components:
             - description: An object containing information about the job configuration.
         KmsKeyId:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+            - $ref: '#/components/schemas/KmsKey'
+            - description: The Key Management Service key ID for server-side encryption.
         Name:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2043,11 +2086,11 @@ components:
         ApproximateResultCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: <p/>
+            - description: Approximate number of results in the response.
         Items:
           allOf:
             - $ref: '#/components/schemas/ItemSourceList'
-            - description: <p/>
+            - description: List of items matching the Raster DataCollectionQuery.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -2058,8 +2101,8 @@ components:
         AreaOfInterestGeometry:
           allOf:
             - $ref: '#/components/schemas/AreaOfInterestGeometry'
-            - description: <p/>
-      description: <p/>
+            - description: A GeoJSON object representing the geographic extent in the coordinate space.
+      description: The geographic extent of the Earth Observation job.
     StringListInput:
       type: array
       items:
@@ -2071,12 +2114,12 @@ components:
         LogicalOperator:
           allOf:
             - $ref: '#/components/schemas/LogicalOperator'
-            - description: <p/>
+            - description: The Logical Operator used to combine the Property Filters.
         Properties:
           allOf:
             - $ref: '#/components/schemas/PropertyFiltersList'
-            - description: <p/>
-      description: <p/>
+            - description: A list of Property Filters.
+      description: A list of PropertyFilter objects.
     TimeRangeFilterInput:
       type: object
       required:
@@ -2108,7 +2151,7 @@ components:
             - description: The Amazon Resource Name (ARN) of the Earth Observation job.
         CreationTime:
           allOf:
-            - $ref: '#/components/schemas/Timestamp'
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
             - description: The creation time.
         DurationInSeconds:
           allOf:
@@ -2116,7 +2159,7 @@ components:
             - description: 'The duration of the session, in seconds.'
         ExecutionRoleArn:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/ExecutionRoleArn'
             - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
         InputConfig:
           allOf:
@@ -2128,8 +2171,8 @@ components:
             - description: An object containing information about the job configuration.
         KmsKeyId:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+            - $ref: '#/components/schemas/KmsKey'
+            - description: The Key Management Service key ID for server-side encryption.
         Name:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2148,8 +2191,11 @@ components:
         S3Data:
           allOf:
             - $ref: '#/components/schemas/S3DataInput'
-            - description: <p/>
-      description: <p/>
+            - description: The input structure for S3Data; representing the Amazon S3 location of the input data objects.
+      description: Union representing different data sources to be used as input for an Earth Observation job.
+    EarthObservationJobArn:
+      type: string
+      pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:earth-observation-job/[a-z0-9]{12,}$'
     RasterDataCollectionQueryInput:
       type: object
       required:
@@ -2163,32 +2209,32 @@ components:
         PropertyFilters:
           allOf:
             - $ref: '#/components/schemas/PropertyFilters'
-            - description: <p/>
+            - description: The list of Property filters used in the Raster Data Collection Query.
         RasterDataCollectionArn:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/DataCollectionArn'
             - description: The Amazon Resource Name (ARN) of the raster data collection.
         TimeRangeFilter:
           allOf:
             - $ref: '#/components/schemas/TimeRangeFilterInput'
-            - description: <p/>
-      description: <p/>
+            - description: The TimeRange Filter used in the RasterDataCollection Query.
+      description: 'The input structure for Raster Data Collection Query containing the Area of Interest, TimeRange Filters, and Property Filters.'
     BandMathConfigInput:
       type: object
       properties:
         CustomIndices:
           allOf:
             - $ref: '#/components/schemas/CustomIndicesInput'
-            - description: <p/>
+            - description: CustomIndices that are computed.
         PredefinedIndices:
           allOf:
             - $ref: '#/components/schemas/StringListInput'
-            - description: <p/>
-      description: <p/>
+            - description: 'One or many of the supported predefined indices to compute. Allowed values: <code>NDVI</code>, <code>EVI2</code>, <code>MSAVI</code>, <code>NDWI</code>, <code>NDMI</code>, <code>NDSI</code>, and <code>WDRVI</code>.'
+      description: Input structure for the BandMath operation type. Defines Predefined and CustomIndices to be computed using BandMath.
     CloudMaskingConfigInput:
       type: object
       properties: {}
-      description: <p/>
+      description: Input structure for CloudMasking operation type.
     CloudRemovalConfigInput:
       type: object
       properties:
@@ -2203,8 +2249,8 @@ components:
         TargetBands:
           allOf:
             - $ref: '#/components/schemas/StringListInput'
-            - description: <p/>
-      description: <p/>
+            - description: TargetBands to be returned in the output of CloudRemoval operation.
+      description: Input structure for Cloud Removal Operation type
     GeoMosaicConfigInput:
       type: object
       properties:
@@ -2220,7 +2266,7 @@ components:
     LandCoverSegmentationConfigInput:
       type: object
       properties: {}
-      description: <p/>
+      description: The input structure for Land Cover Operation type.
     ResamplingConfigInput:
       type: object
       required:
@@ -2233,24 +2279,24 @@ components:
         OutputResolution:
           allOf:
             - $ref: '#/components/schemas/OutputResolutionResamplingInput'
-            - description: <p/>
+            - description: The structure representing output resolution (in target georeferenced units) of the result of resampling operation.
         TargetBands:
           allOf:
             - $ref: '#/components/schemas/StringListInput'
-            - description: <p/>
-      description: <p/>
+            - description: 'Bands used in the operation. If no target bands are specified, it uses all bands available in the input.'
+      description: The structure representing input for resampling operation.
     StackConfigInput:
       type: object
       properties:
         OutputResolution:
           allOf:
             - $ref: '#/components/schemas/OutputResolutionStackInput'
-            - description: <p/>
+            - description: The structure representing output resolution (in target georeferenced units) of the result of stacking operation.
         TargetBands:
           allOf:
             - $ref: '#/components/schemas/StringListInput'
-            - description: <p/>
-      description: <p/>
+            - description: 'A list of bands to be stacked in the specified order. When the parameter is not provided, all the available bands in the data collection are stacked in the alphabetical order of their asset names.'
+      description: The input structure for Stacking Operation.
     TemporalStatisticsConfigInput:
       type: object
       required:
@@ -2259,16 +2305,16 @@ components:
         GroupBy:
           allOf:
             - $ref: '#/components/schemas/GroupBy'
-            - description: <p/>
+            - description: The input for the temporal statistics grouping by time frequency option.
         Statistics:
           allOf:
             - $ref: '#/components/schemas/TemporalStatisticsListInput'
-            - description: <p/>
+            - description: The list of the statistics method options.
         TargetBands:
           allOf:
             - $ref: '#/components/schemas/StringListInput'
-            - description: <p/>
-      description: <p/>
+            - description: The list of target band names for the temporal statistic to calculate.
+      description: The structure representing the configuration for Temporal Statistics operation.
     ZonalStatisticsConfigInput:
       type: object
       required:
@@ -2278,16 +2324,20 @@ components:
         Statistics:
           allOf:
             - $ref: '#/components/schemas/ZonalStatisticsListInput'
-            - description: <p/>
+            - description: List of zonal statistics to compute.
         TargetBands:
           allOf:
             - $ref: '#/components/schemas/StringListInput'
-            - description: <p/>
+            - description: 'Bands used in the operation. If no target bands are specified, it uses all bands available input.'
         ZoneS3Path:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: <p/>
-      description: <p/>
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The Amazon S3 path pointing to the GeoJSON containing the polygonal zones.
+        ZoneS3PathKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKey'
+            - description: '<p>The Amazon Resource Name (ARN) or an ID of a Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to decrypt your output artifacts with Amazon S3 server-side encryption. The SageMaker execution role must have <code>kms:GenerateDataKey</code> permission.</p> <p>The <code>KmsKeyId</code> can be any of the following formats:</p> <ul> <li> <p>// KMS Key ID</p> <p> <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>"arn:aws:kms:&lt;region&gt;:&lt;account&gt;:key/&lt;key-id-12ab-34cd-56ef-1234567890ab&gt;"</code> </p> </li> </ul> <p>For more information about key identifiers, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id">Key identifiers (KeyID)</a> in the Amazon Web Services Key Management Service (Amazon Web Services KMS) documentation.</p>'
+      description: The structure representing input configuration of ZonalStatistics operation.
     StartVectorEnrichmentJobOutput:
       type: object
       required:
@@ -2307,7 +2357,7 @@ components:
             - description: The Amazon Resource Name (ARN) of the Vector Enrichment job.
         CreationTime:
           allOf:
-            - $ref: '#/components/schemas/Timestamp'
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
             - description: The creation time.
         DurationInSeconds:
           allOf:
@@ -2315,7 +2365,7 @@ components:
             - description: 'The duration of the Vector Enrichment job, in seconds.'
         ExecutionRoleArn:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/ExecutionRoleArn'
             - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
         InputConfig:
           allOf:
@@ -2327,8 +2377,8 @@ components:
             - description: An object containing information about the job configuration.
         KmsKeyId:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+            - $ref: '#/components/schemas/KmsKey'
+            - description: The Key Management Service key ID for server-side encryption.
         Name:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2351,8 +2401,8 @@ components:
         S3Data:
           allOf:
             - $ref: '#/components/schemas/VectorEnrichmentJobS3Data'
-            - description: <p/>
-      description: <p/>
+            - description: The input structure for the Amazon S3 data that represents the Amazon S3 location of the input data objects.
+      description: The input structure for the data source that represents the storage type of the input data objects.
     VectorEnrichmentJobDocumentType:
       type: string
       enum:
@@ -2368,7 +2418,7 @@ components:
         IdAttributeName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
+            - description: The field name for the data that describes the identifier representing a collection of GPS points belonging to an individual trace.
         TimestampAttributeName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2381,7 +2431,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the Y-attribute
-      description: <p/>
+      description: The input structure for Map Matching operation type.
     ReverseGeocodingConfig:
       type: object
       required:
@@ -2391,12 +2441,12 @@ components:
         XAttributeName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
+            - description: 'The field name for the data that describes x-axis coordinate, eg. longitude of a point.'
         YAttributeName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
-      description: <p/>
+            - description: 'The field name for the data that describes y-axis coordinate, eg. latitude of a point.'
+      description: The input structure for Reverse Geocoding operation type.
     StopEarthObservationJobOutput:
       type: object
       properties: {}
@@ -2453,12 +2503,12 @@ components:
         MultiPolygonGeometry:
           allOf:
             - $ref: '#/components/schemas/MultiPolygonGeometryInput'
-            - description: <p/>
+            - description: The structure representing the MultiPolygon Geometry.
         PolygonGeometry:
           allOf:
             - $ref: '#/components/schemas/PolygonGeometryInput'
-            - description: <p/>
-      description: <p/>
+            - description: The structure representing Polygon Geometry.
+      description: A GeoJSON object representing the geographic extent in the coordinate space.
     MultiPolygonGeometryInput:
       type: object
       required:
@@ -2468,7 +2518,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/LinearRingsList'
             - description: The coordinates of the multipolygon geometry.
-      description: <p/>
+      description: 'The structure representing Polygon Geometry based on the <a href="https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6">GeoJson spec</a>.'
     PolygonGeometryInput:
       type: object
       required:
@@ -2477,8 +2527,8 @@ components:
         Coordinates:
           allOf:
             - $ref: '#/components/schemas/LinearRings'
-            - description: <p/>
-      description: <p/>
+            - description: 'Coordinates representing a Polygon based on the <a href="https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6">GeoJson spec</a>.'
+      description: 'The structure representing Polygon Geometry based on the <a href="https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6">GeoJson spec</a>.'
     Arn:
       type: string
       minLength: 1
@@ -2489,8 +2539,8 @@ components:
         Href:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
-      description: <p/>
+            - description: Link to the asset object.
+      description: The structure containing the asset properties.
     AssetsMap:
       type: object
       additionalProperties:
@@ -2501,8 +2551,8 @@ components:
         Operations:
           allOf:
             - $ref: '#/components/schemas/OperationsListInput'
-            - description: <p/>
-      description: <p/>
+            - description: A list of BandMath indices to compute.
+      description: Input object defining the custom BandMath indices to compute.
     BinaryFile:
       type: string
     Boolean:
@@ -2555,7 +2605,7 @@ components:
         SupportedFilters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: <p/>
+            - description: The list of filters supported by the raster data collection.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2569,9 +2619,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RasterDataCollectionMetadata'
-    EarthObservationJobArn:
-      type: string
-      pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:earth-observation-job/[a-z0-9]{12,}$'
     DeleteEarthObservationJobInput:
       type: object
       title: DeleteEarthObservationJobInput
@@ -2597,11 +2644,11 @@ components:
         Message:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
+            - description: A detailed message describing the error in an Earth Observation job.
         Type:
           allOf:
             - $ref: '#/components/schemas/EarthObservationJobErrorType'
-            - description: <p/>
+            - description: The type of error in an Earth Observation job.
       description: The structure representing the errors in an EarthObservationJob.
     EarthObservationJobExportStatus:
       type: string
@@ -2625,7 +2672,7 @@ components:
             - description: The Amazon Resource Name (ARN) of the list of the Earth Observation jobs.
         CreationTime:
           allOf:
-            - $ref: '#/components/schemas/Timestamp'
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
             - description: The creation time.
         DurationInSeconds:
           allOf:
@@ -2638,7 +2685,7 @@ components:
         OperationType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
+            - description: The operation type for an Earth Observation job.
         Status:
           allOf:
             - $ref: '#/components/schemas/EarthObservationJobStatus'
@@ -2694,12 +2741,12 @@ components:
         LowerBound:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: <p/>
+            - description: Lower bound for EoCloudCover.
         UpperBound:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: <p/>
-      description: <p/>
+            - description: Upper bound for EoCloudCover.
+      description: The structure representing the EoCloudCover filter.
     S3DataInput:
       type: object
       required:
@@ -2708,17 +2755,26 @@ components:
       properties:
         KmsKeyId:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+            - $ref: '#/components/schemas/KmsKey'
+            - description: The Key Management Service key ID for server-side encryption.
         MetadataProvider:
           allOf:
             - $ref: '#/components/schemas/MetadataProvider'
-            - description: <p/>
+            - description: Metadata provider from whom the Amazon S3 data has been acquired.
         S3Uri:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/S3Uri'
             - description: The URL to the Amazon S3 input.
       description: Path to Amazon S3 storage location for input data.
+    ExecutionRoleArn:
+      type: string
+      pattern: '^arn:(aws[a-z-]*):iam::([0-9]{12}):role/[a-zA-Z0-9+=,.@_/-]+$'
+      minLength: 20
+      maxLength: 2048
+    ExportEarthObservationJobInputClientTokenString:
+      type: string
+      minLength: 36
+      maxLength: 64
     OutputConfigInput:
       type: object
       required:
@@ -2741,9 +2797,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/EarthObservationJobArn'
             - description: The input Amazon Resource Name (ARN) of the Earth Observation job being exported.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ExportEarthObservationJobInputClientTokenString'
+            - description: A unique token that guarantees that the call to this API is idempotent.
         ExecutionRoleArn:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/ExecutionRoleArn'
             - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
         ExportSourceImages:
           allOf:
@@ -2753,7 +2813,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutputConfigInput'
             - description: An object containing information about the output file.
-    Timestamp:
+    SyntheticTimestamp_date_time:
       type: string
       format: date-time
     ExportErrorDetailsOutput:
@@ -2762,29 +2822,40 @@ components:
         Message:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
+            - description: A detailed message describing the error in an export EarthObservationJob operation.
         Type:
           allOf:
             - $ref: '#/components/schemas/ExportErrorType'
-            - description: <p/>
-      description: <p/>
+            - description: The type of error in an export EarthObservationJob operation.
+      description: The structure representing the errors in an export EarthObservationJob operation.
     ExportErrorDetails:
       type: object
       properties:
         ExportResults:
           allOf:
             - $ref: '#/components/schemas/ExportErrorDetailsOutput'
-            - description: <p/>
+            - description: The structure for returning the export error details while exporting results of an Earth Observation job.
         ExportSourceImages:
           allOf:
             - $ref: '#/components/schemas/ExportErrorDetailsOutput'
-            - description: <p/>
+            - description: The structure for returning the export error details while exporting the source images of an Earth Observation job.
       description: The structure for returning the export error details in a GetEarthObservationJob.
     ExportErrorType:
       type: string
       enum:
         - CLIENT_ERROR
         - SERVER_ERROR
+    KmsKey:
+      type: string
+      minLength: 0
+      maxLength: 2048
+    S3Uri:
+      type: string
+      pattern: '^s3://([^/]+)/?(.*)$'
+    ExportVectorEnrichmentJobInputClientTokenString:
+      type: string
+      minLength: 36
+      maxLength: 64
     ExportVectorEnrichmentJobOutputConfig:
       type: object
       required:
@@ -2793,7 +2864,7 @@ components:
         S3Data:
           allOf:
             - $ref: '#/components/schemas/VectorEnrichmentJobS3Data'
-            - description: <p/>
+            - description: The input structure for Amazon S3 data; representing the Amazon S3 location of the input data objects.
       description: An object containing information about the output file.
     ExportVectorEnrichmentJobInput:
       type: object
@@ -2807,9 +2878,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/VectorEnrichmentJobArn'
             - description: The Amazon Resource Name (ARN) of the Vector Enrichment job.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ExportVectorEnrichmentJobInputClientTokenString'
+            - description: A unique token that guarantees that the call to this API is idempotent.
         ExecutionRoleArn:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/ExecutionRoleArn'
             - description: The Amazon Resource Name (ARN) of the IAM rolewith permission to upload to the location in OutputConfig.
         OutputConfig:
           allOf:
@@ -2862,12 +2937,12 @@ components:
         Coordinates:
           allOf:
             - $ref: '#/components/schemas/LinearRings'
-            - description: <p/>
+            - description: The coordinates of the GeoJson Geometry.
         Type:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
-      description: <p/>
+            - description: GeoJson Geometry types like Polygon and MultiPolygon.
+      description: The structure representing a Geometry in terms of Type and Coordinates as per GeoJson spec.
     GetEarthObservationJobInput:
       type: object
       title: GetEarthObservationJobInput
@@ -2883,12 +2958,12 @@ components:
             - description: The location of the input data.
         PreviousEarthObservationJobArn:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/EarthObservationJobArn'
             - description: The Amazon Resource Name (ARN) of the previous Earth Observation job.
         RasterDataCollectionQuery:
           allOf:
             - $ref: '#/components/schemas/RasterDataCollectionQueryOutput'
-            - description: <p/>
+            - description: 'The structure representing the RasterDataCollection Query consisting of the Area of Interest, RasterDataCollectionArn, RasterDataCollectionName, TimeRange, and Property Filters.'
       description: The InputConfig for an EarthObservationJob response.
     JobConfigInput:
       type: object
@@ -2896,7 +2971,7 @@ components:
         BandMathConfig:
           allOf:
             - $ref: '#/components/schemas/BandMathConfigInput'
-            - description: <p/>
+            - description: An object containing information about the job configuration for BandMath.
         CloudMaskingConfig:
           allOf:
             - $ref: '#/components/schemas/CloudMaskingConfigInput'
@@ -2920,7 +2995,7 @@ components:
         StackConfig:
           allOf:
             - $ref: '#/components/schemas/StackConfigInput'
-            - description: <p/>
+            - description: An object containing information about the job configuration for a Stacking Earth Observation job.
         TemporalStatisticsConfig:
           allOf:
             - $ref: '#/components/schemas/TemporalStatisticsConfigInput'
@@ -2985,7 +3060,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/VectorEnrichmentJobExportErrorType'
-            - description: <p/>
+            - description: The output error details for an Export operation on a Vector Enrichment job.
       description: VectorEnrichmentJob export error details in response from GetVectorEnrichmentJob.
     VectorEnrichmentJobInputConfig:
       type: object
@@ -2996,11 +3071,11 @@ components:
         DataSourceConfig:
           allOf:
             - $ref: '#/components/schemas/VectorEnrichmentJobDataSourceConfigInput'
-            - description: <p/>
+            - description: The input structure for the data source that represents the storage type of the input data objects.
         DocumentType:
           allOf:
             - $ref: '#/components/schemas/VectorEnrichmentJobDocumentType'
-            - description: <p/>
+            - description: The input structure that defines the data source file type.
       description: The input structure for the InputConfig in a VectorEnrichmentJob.
     VectorEnrichmentJobConfig:
       type: object
@@ -3008,11 +3083,11 @@ components:
         MapMatchingConfig:
           allOf:
             - $ref: '#/components/schemas/MapMatchingConfig'
-            - description: <p/>
+            - description: The input structure for Map Matching operation type.
         ReverseGeocodingConfig:
           allOf:
             - $ref: '#/components/schemas/ReverseGeocodingConfig'
-            - description: <p/>
+            - description: The input structure for Reverse Geocoding operation type.
       description: It contains configs such as ReverseGeocodingConfig and MapMatchingConfig.
     VectorEnrichmentJobStatus:
       type: string
@@ -3044,12 +3119,12 @@ components:
             - description: The location of the input data.&gt;
         PreviousEarthObservationJobArn:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/EarthObservationJobArn'
             - description: The Amazon Resource Name (ARN) of the previous Earth Observation job.
         RasterDataCollectionQuery:
           allOf:
             - $ref: '#/components/schemas/RasterDataCollectionQueryInput'
-            - description: <p/>
+            - description: 'The structure representing the RasterDataCollection Query consisting of the Area of Interest, RasterDataCollectionArn,TimeRange and Property Filters.'
       description: Input configuration information.
     RasterDataCollectionQueryOutput:
       type: object
@@ -3061,52 +3136,55 @@ components:
         AreaOfInterest:
           allOf:
             - $ref: '#/components/schemas/AreaOfInterest'
-            - description: <p/>
+            - description: The Area of Interest used in the search.
         PropertyFilters:
           allOf:
             - $ref: '#/components/schemas/PropertyFilters'
-            - description: <p/>
+            - description: Property filters used in the search.
         RasterDataCollectionArn:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: <p/>
+            - $ref: '#/components/schemas/DataCollectionArn'
+            - description: The ARN of the Raster Data Collection against which the search is done.
         RasterDataCollectionName:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the raster data collection.
         TimeRangeFilter:
           allOf:
-            - $ref: '#/components/schemas/TimeRangeFilterInput'
-            - description: <p/>
-      description: <p/>
+            - $ref: '#/components/schemas/TimeRangeFilterOutput'
+            - description: The TimeRange filter used in the search.
+      description: The output structure contains the Raster Data Collection Query input along with some additional metadata.
+    Timestamp:
+      type: string
+      format: date-time
     Properties:
       type: object
       properties:
         EoCloudCover:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: <p/>
+            - description: Estimate of cloud cover.
         LandsatCloudCoverLand:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: <p/>
+            - description: Land cloud cover for Landsat Data Collection.
         Platform:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
+            - description: 'Platform property. Platform refers to the unique name of the specific platform the instrument is attached to. For satellites it is the name of the satellite, eg. landsat-8 (Landsat-8), sentinel-2a.'
         ViewOffNadir:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: <p/>
+            - description: The angle from the sensor between nadir (straight down) and the scene center. Measured in degrees (0-90).
         ViewSunAzimuth:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: <p/>
+            - description: 'The sun azimuth angle. From the scene center point on the ground, this is the angle between truth north and the sun. Measured clockwise in degrees (0-360).'
         ViewSunElevation:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: <p/>
-      description: <p/>
+            - description: 'The sun elevation angle. The angle from the tangent of the scene center point to the sun. Measured from the horizon in degrees (-90-90). Negative values indicate the sun is below the horizon, e.g. sun elevation of -10° means the data was captured during <a href="https://www.timeanddate.com/astronomy/different-types-twilight.html">nautical twilight</a>.'
+      description: Properties associated with the Item.
     ItemSource:
       type: object
       required:
@@ -3117,15 +3195,15 @@ components:
         Assets:
           allOf:
             - $ref: '#/components/schemas/AssetsMap'
-            - description: <p/>
+            - description: 'This is a dictionary of Asset Objects data associated with the Item that can be downloaded or streamed, each with a unique key.'
         DateTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: <p/>
+            - description: 'The searchable date and time of the item, in UTC.'
         Geometry:
           allOf:
             - $ref: '#/components/schemas/Geometry'
-            - description: <p/>
+            - description: The item Geometry in GeoJson format.
         Id:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3133,8 +3211,8 @@ components:
         Properties:
           allOf:
             - $ref: '#/components/schemas/Properties'
-            - description: <p/>
-      description: Structure representing the items in the response for SearchRasterDataCollection.
+            - description: This field contains additional properties of the item.
+      description: The structure representing the items in the response for SearchRasterDataCollection.
     ItemSourceList:
       type: array
       items:
@@ -3148,12 +3226,12 @@ components:
         LowerBound:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: <p/>
+            - description: The minimum value for Land Cloud Cover property filter. This will filter items having Land Cloud Cover greater than or equal to this value.
         UpperBound:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: <p/>
-      description: <p/>
+            - description: The maximum value for Land Cloud Cover property filter. This will filter items having Land Cloud Cover less than or equal to this value.
+      description: The structure representing Land Cloud Cover property for Landsat data collection.
     Position:
       type: array
       items:
@@ -3267,7 +3345,7 @@ components:
             - description: The Amazon Resource Name (ARN) of the list of the Vector Enrichment jobs.
         CreationTime:
           allOf:
-            - $ref: '#/components/schemas/Timestamp'
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
             - description: The creation time.
         DurationInSeconds:
           allOf:
@@ -3307,7 +3385,7 @@ components:
         Equation:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
+            - description: Textual representation of the math operation; Equation used to compute the spectral index.
         Name:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3316,7 +3394,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutputType'
             - description: The type of the operation.
-      description: <p/>
+      description: Represents an arithmetic operation to compute spectral index.
     UserDefined:
       type: object
       required:
@@ -3326,12 +3404,12 @@ components:
         Unit:
           allOf:
             - $ref: '#/components/schemas/Unit'
-            - description: <p/>
+            - description: The units for output resolution of the result.
         Value:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: <p/>
-      description: <p/>
+            - description: The value for output resolution of the result.
+      description: The output resolution (in target georeferenced units) of the result of the operation
     OutputResolutionResamplingInput:
       type: object
       required:
@@ -3340,8 +3418,8 @@ components:
         UserDefined:
           allOf:
             - $ref: '#/components/schemas/UserDefined'
-            - description: <p/>
-      description: <p/>
+            - description: User Defined Resolution for the output of Resampling operation defined by value and unit.
+      description: OutputResolution Configuration indicating the target resolution for the output of Resampling operation.
     PredefinedResolution:
       type: string
       enum:
@@ -3354,12 +3432,12 @@ components:
         Predefined:
           allOf:
             - $ref: '#/components/schemas/PredefinedResolution'
-            - description: <p/>
+            - description: 'A string value representing Predefined Output Resolution for a stacking operation. Allowed values are <code>HIGHEST</code>, <code>LOWEST</code>, and <code>AVERAGE</code>.'
         UserDefined:
           allOf:
             - $ref: '#/components/schemas/UserDefined'
-            - description: <p/>
-      description: <p/>
+            - description: The structure representing User Output Resolution for a Stacking operation defined as a value and unit.
+      description: The input structure representing Output Resolution for Stacking Operation.
     PlatformInput:
       type: object
       required:
@@ -3368,12 +3446,12 @@ components:
         ComparisonOperator:
           allOf:
             - $ref: '#/components/schemas/ComparisonOperator'
-            - description: <p/>
+            - description: The ComparisonOperator to use with PlatformInput.
         Value:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The value of the platform.
-      description: <p/>
+      description: 'The input structure for specifying Platform. Platform refers to the unique name of the specific platform the instrument is attached to. For satellites it is the name of the satellite, eg. landsat-8 (Landsat-8), sentinel-2a.'
     ViewOffNadirInput:
       type: object
       required:
@@ -3383,12 +3461,12 @@ components:
         LowerBound:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: <p/>
+            - description: 'The minimum value for ViewOffNadir property filter. This filters items having ViewOffNadir greater than or equal to this value. '
         UpperBound:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: <p/>
-      description: <p/>
+            - description: The maximum value for ViewOffNadir property filter. This filters items having ViewOffNadir lesser than or equal to this value.
+      description: The input structure for specifying ViewOffNadir property filter. ViewOffNadir refers to the angle from the sensor between nadir (straight down) and the scene center. Measured in degrees (0-90).
     ViewSunAzimuthInput:
       type: object
       required:
@@ -3398,12 +3476,12 @@ components:
         LowerBound:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: <p/>
+            - description: The minimum value for ViewSunAzimuth property filter. This filters items having ViewSunAzimuth greater than or equal to this value.
         UpperBound:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: <p/>
-      description: <p/>
+            - description: The maximum value for ViewSunAzimuth property filter. This filters items having ViewSunAzimuth lesser than or equal to this value.
+      description: 'The input structure for specifying ViewSunAzimuth property filter. ViewSunAzimuth refers to the Sun azimuth angle. From the scene center point on the ground, this is the angle between truth north and the sun. Measured clockwise in degrees (0-360).'
     ViewSunElevationInput:
       type: object
       required:
@@ -3418,35 +3496,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/Float'
             - description: The upper bound to view the sun elevation.
-      description: <p/>
+      description: 'The input structure for specifying ViewSunElevation angle property filter. '
     Property:
       type: object
       properties:
         EoCloudCover:
           allOf:
             - $ref: '#/components/schemas/EoCloudCoverInput'
-            - description: <p/>
+            - description: The structure representing EoCloudCover property filter containing a lower bound and upper bound.
         LandsatCloudCoverLand:
           allOf:
             - $ref: '#/components/schemas/LandsatCloudCoverLandInput'
-            - description: <p/>
+            - description: The structure representing Land Cloud Cover property filter for Landsat collection containing a lower bound and upper bound.
         Platform:
           allOf:
             - $ref: '#/components/schemas/PlatformInput'
-            - description: <p/>
+            - description: The structure representing Platform property filter consisting of value and comparison operator.
         ViewOffNadir:
           allOf:
             - $ref: '#/components/schemas/ViewOffNadirInput'
-            - description: <p/>
+            - description: The structure representing ViewOffNadir property filter containing a lower bound and upper bound.
         ViewSunAzimuth:
           allOf:
             - $ref: '#/components/schemas/ViewSunAzimuthInput'
-            - description: <p/>
+            - description: The structure representing ViewSunAzimuth property filter containing a lower bound and upper bound.
         ViewSunElevation:
           allOf:
             - $ref: '#/components/schemas/ViewSunElevationInput'
-            - description: <p/>
-      description: <p/>
+            - description: The structure representing ViewSunElevation property filter containing a lower bound and upper bound.
+      description: Represents a single searchable property to search on.
     PropertyFilter:
       type: object
       required:
@@ -3455,12 +3533,27 @@ components:
         Property:
           allOf:
             - $ref: '#/components/schemas/Property'
-            - description: <p/>
-      description: <p/>
+            - description: Represents a single property to match with when searching a raster data collection.
+      description: The structure representing a single PropertyFilter.
     PropertyFiltersList:
       type: array
       items:
         $ref: '#/components/schemas/PropertyFilter'
+    TimeRangeFilterOutput:
+      type: object
+      required:
+        - EndTime
+        - StartTime
+      properties:
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The ending time for the time range filter.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The starting time for the time range filter.
+      description: The output structure of the time range filter.
     RasterDataCollectionQueryWithBandFilterInput:
       type: object
       required:
@@ -3469,19 +3562,19 @@ components:
         AreaOfInterest:
           allOf:
             - $ref: '#/components/schemas/AreaOfInterest'
-            - description: <p/>
+            - description: The Area of interest to be used in the search query.
         BandFilter:
           allOf:
             - $ref: '#/components/schemas/StringListInput'
-            - description: <p/>
+            - description: The list of Bands to be displayed in the result for each item.
         PropertyFilters:
           allOf:
             - $ref: '#/components/schemas/PropertyFilters'
-            - description: <p/>
+            - description: The Property Filters used in the search query.
         TimeRangeFilter:
           allOf:
             - $ref: '#/components/schemas/TimeRangeFilterInput'
-            - description: <p/>
+            - description: The TimeRange Filter used in the search query.
       description: 'This is a RasterDataCollectionQueryInput containing AreaOfInterest, Time Range filter and Property filters.'
     SearchRasterDataCollectionInput:
       type: object
@@ -3501,7 +3594,15 @@ components:
         RasterDataCollectionQuery:
           allOf:
             - $ref: '#/components/schemas/RasterDataCollectionQueryWithBandFilterInput'
-            - description: <p/>
+            - description: 'RasterDataCollectionQuery consisting of <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_AreaOfInterest.html">AreaOfInterest(AOI)</a>, <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_PropertyFilter.html">PropertyFilters</a> and <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_TimeRangeFilterInput.html">TimeRangeFilterInput</a> used in <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_SearchRasterDataCollection.html">SearchRasterDataCollection</a>.'
+    StartEarthObservationJobInputClientTokenString:
+      type: string
+      minLength: 36
+      maxLength: 64
+    StartEarthObservationJobInputNameString:
+      type: string
+      minLength: 0
+      maxLength: 200
     StartEarthObservationJobInput:
       type: object
       required:
@@ -3512,11 +3613,11 @@ components:
       properties:
         ClientToken:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/StartEarthObservationJobInputClientTokenString'
             - description: A unique token that guarantees that the call to this API is idempotent.
         ExecutionRoleArn:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/ExecutionRoleArn'
             - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
         InputConfig:
           allOf:
@@ -3528,16 +3629,24 @@ components:
             - description: An object containing information about the job configuration.
         KmsKeyId:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+            - $ref: '#/components/schemas/KmsKey'
+            - description: The Key Management Service key ID for server-side encryption.
         Name:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/StartEarthObservationJobInputNameString'
             - description: The name of the Earth Observation job.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: Each tag consists of a key and a value.
+    StartVectorEnrichmentJobInputClientTokenString:
+      type: string
+      minLength: 36
+      maxLength: 64
+    StartVectorEnrichmentJobInputNameString:
+      type: string
+      minLength: 0
+      maxLength: 200
     StartVectorEnrichmentJobInput:
       type: object
       required:
@@ -3549,11 +3658,11 @@ components:
       properties:
         ClientToken:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/StartVectorEnrichmentJobInputClientTokenString'
             - description: A unique token that guarantees that the call to this API is idempotent.
         ExecutionRoleArn:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/ExecutionRoleArn'
             - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
         InputConfig:
           allOf:
@@ -3565,11 +3674,11 @@ components:
             - description: An object containing information about the job configuration.
         KmsKeyId:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+            - $ref: '#/components/schemas/KmsKey'
+            - description: The Key Management Service key ID for server-side encryption.
         Name:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/StartVectorEnrichmentJobInputNameString'
             - description: The name of the Vector Enrichment job.
         Tags:
           allOf:

@@ -18510,10 +18510,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/NameString'
             - description: The name of the data quality ruleset.
-        UpdatedName:
-          allOf:
-            - $ref: '#/components/schemas/NameString'
-            - description: 'The new name of the ruleset, if you are renaming it.'
         Description:
           allOf:
             - $ref: '#/components/schemas/DescriptionString'

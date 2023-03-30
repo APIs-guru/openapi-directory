@@ -186,7 +186,7 @@ paths:
                 - clientToken
               properties:
                 imageBuildVersionArn:
-                  description: The Amazon Resource Name (ARN) of the image whose creation you want to cancel.
+                  description: The Amazon Resource Name (ARN) of the image that you want to cancel creation for.
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
                 clientToken:
@@ -317,7 +317,7 @@ paths:
                     - Windows
                     - Linux
                 supportedOsVersions:
-                  description: ' The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the base image OS version during image recipe creation.'
+                  description: 'The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the base image OS version during image recipe creation.'
                   type: array
                   items:
                     $ref: '#/components/schemas/OsVersion'
@@ -643,28 +643,28 @@ paths:
                 - clientToken
               properties:
                 name:
-                  description: ' The name of the distribution configuration.'
+                  description: The name of the distribution configuration.
                   type: string
                   pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
                 description:
-                  description: ' The description of the distribution configuration.'
+                  description: The description of the distribution configuration.
                   type: string
                   minLength: 1
                   maxLength: 1024
                 distributions:
-                  description: ' The distributions of the distribution configuration.'
+                  description: The distributions of the distribution configuration.
                   type: array
                   items:
                     $ref: '#/components/schemas/Distribution'
                 tags:
-                  description: ' The tags of the distribution configuration.'
+                  description: The tags of the distribution configuration.
                   type: object
                   minProperties: 1
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 clientToken:
-                  description: ' The idempotency token of the distribution configuration.'
+                  description: The idempotency token of the distribution configuration.
                   type: string
                   minLength: 1
                   maxLength: 36
@@ -679,7 +679,7 @@ paths:
   /CreateImage:
     put:
       operationId: CreateImage
-      description: ' Creates a new image. This request will create a new image along with all of the configured output resources defined in the distribution configuration. You must specify exactly one recipe for your image, using either a ContainerRecipeArn or an ImageRecipeArn.'
+      description: 'Creates a new image. This request will create a new image along with all of the configured output resources defined in the distribution configuration. You must specify exactly one recipe for your image, using either a ContainerRecipeArn or an ImageRecipeArn.'
       responses:
         '200':
           description: Success
@@ -753,7 +753,7 @@ paths:
                 - clientToken
               properties:
                 imageRecipeArn:
-                  description: ' The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.'
+                  description: 'The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.'
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 containerRecipeArn:
@@ -761,11 +761,11 @@ paths:
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):container-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 distributionConfigurationArn:
-                  description: ' The Amazon Resource Name (ARN) of the distribution configuration that defines and configures the outputs of your pipeline.'
+                  description: The Amazon Resource Name (ARN) of the distribution configuration that defines and configures the outputs of your pipeline.
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):distribution-configuration/[a-z0-9-_]+$'
                 infrastructureConfigurationArn:
-                  description: ' The Amazon Resource Name (ARN) of the infrastructure configuration that defines the environment in which your image will be built and tested.'
+                  description: The Amazon Resource Name (ARN) of the infrastructure configuration that defines the environment in which your image will be built and tested.
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
                 imageTestsConfiguration:
@@ -781,20 +781,32 @@ paths:
                         - $ref: '#/components/schemas/ImageTestsTimeoutMinutes'
                         - description: <p>The maximum time in minutes that tests are permitted to run.</p> <note> <p>The timeoutMinutes attribute is not currently active. This value is ignored.</p> </note>
                 enhancedImageMetadataEnabled:
-                  description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
+                  description: 'Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
                   type: boolean
                 tags:
-                  description: ' The tags of the image.'
+                  description: The tags of the image.
                   type: object
                   minProperties: 1
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 clientToken:
-                  description: ' The idempotency token used to make this request idempotent.'
+                  description: The idempotency token used to make this request idempotent.
                   type: string
                   minLength: 1
                   maxLength: 36
+                imageScanningConfiguration:
+                  description: Contains settings for Image Builder image resource and container image scans.
+                  type: object
+                  properties:
+                    imageScanningEnabled:
+                      allOf:
+                        - $ref: '#/components/schemas/NullableBoolean'
+                        - description: A setting that indicates whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.
+                    ecrConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/EcrConfiguration'
+                        - description: Contains Amazon ECR settings for vulnerability scans.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -806,7 +818,7 @@ paths:
   /CreateImagePipeline:
     put:
       operationId: CreateImagePipeline
-      description: ' Creates a new image pipeline. Image pipelines enable you to automate the creation and distribution of images.'
+      description: Creates a new image pipeline. Image pipelines enable you to automate the creation and distribution of images.
       responses:
         '200':
           description: Success
@@ -887,16 +899,16 @@ paths:
                 - clientToken
               properties:
                 name:
-                  description: ' The name of the image pipeline.'
+                  description: The name of the image pipeline.
                   type: string
                   pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
                 description:
-                  description: ' The description of the image pipeline.'
+                  description: The description of the image pipeline.
                   type: string
                   minLength: 1
                   maxLength: 1024
                 imageRecipeArn:
-                  description: ' The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline.'
+                  description: The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline.
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 containerRecipeArn:
@@ -904,11 +916,11 @@ paths:
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):container-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 infrastructureConfigurationArn:
-                  description: ' The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images created by this image pipeline.'
+                  description: The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images created by this image pipeline.
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
                 distributionConfigurationArn:
-                  description: ' The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images created by this image pipeline.'
+                  description: The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images created by this image pipeline.
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):distribution-configuration/[a-z0-9-_]+$'
                 imageTestsConfiguration:
@@ -924,7 +936,7 @@ paths:
                         - $ref: '#/components/schemas/ImageTestsTimeoutMinutes'
                         - description: <p>The maximum time in minutes that tests are permitted to run.</p> <note> <p>The timeoutMinutes attribute is not currently active. This value is ignored.</p> </note>
                 enhancedImageMetadataEnabled:
-                  description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
+                  description: 'Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
                   type: boolean
                 schedule:
                   description: A schedule configures how often and when a pipeline will automatically create a new image.
@@ -943,23 +955,35 @@ paths:
                         - $ref: '#/components/schemas/PipelineExecutionStartCondition'
                         - description: 'The condition configures when the pipeline should trigger a new image build. When the <code>pipelineExecutionStartCondition</code> is set to <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, and you use semantic version filters on the base image or components in your image recipe, EC2 Image Builder will build a new image only when there are new versions of the image or components in your recipe that match the semantic version filter. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it will build a new image every time the CRON expression matches the current time. For semantic version syntax, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html">CreateComponent</a> in the <i> EC2 Image Builder API Reference</i>.'
                 status:
-                  description: ' The status of the image pipeline.'
+                  description: The status of the image pipeline.
                   type: string
                   enum:
                     - DISABLED
                     - ENABLED
                 tags:
-                  description: ' The tags of the image pipeline.'
+                  description: The tags of the image pipeline.
                   type: object
                   minProperties: 1
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 clientToken:
-                  description: ' The idempotency token used to make this request idempotent.'
+                  description: The idempotency token used to make this request idempotent.
                   type: string
                   minLength: 1
                   maxLength: 36
+                imageScanningConfiguration:
+                  description: Contains settings for Image Builder image resource and container image scans.
+                  type: object
+                  properties:
+                    imageScanningEnabled:
+                      allOf:
+                        - $ref: '#/components/schemas/NullableBoolean'
+                        - description: A setting that indicates whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.
+                    ecrConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/EcrConfiguration'
+                        - description: Contains Amazon ECR settings for vulnerability scans.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -971,7 +995,7 @@ paths:
   /CreateImageRecipe:
     put:
       operationId: CreateImageRecipe
-      description: ' Creates a new image recipe. Image recipes define how images are configured, tested, and assessed.'
+      description: 'Creates a new image recipe. Image recipes define how images are configured, tested, and assessed.'
       responses:
         '200':
           description: Success
@@ -1060,11 +1084,11 @@ paths:
                 - clientToken
               properties:
                 name:
-                  description: ' The name of the image recipe.'
+                  description: The name of the image recipe.
                   type: string
                   pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
                 description:
-                  description: ' The description of the image recipe.'
+                  description: The description of the image recipe.
                   type: string
                   minLength: 1
                   maxLength: 1024
@@ -1089,7 +1113,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/InstanceBlockDeviceMapping'
                 tags:
-                  description: ' The tags of the image recipe.'
+                  description: The tags of the image recipe.
                   type: object
                   minProperties: 1
                   maxProperties: 50
@@ -1128,7 +1152,7 @@ paths:
   /CreateInfrastructureConfiguration:
     put:
       operationId: CreateInfrastructureConfiguration
-      description: ' Creates a new infrastructure configuration. An infrastructure configuration defines the environment in which your image will be built and tested.'
+      description: Creates a new infrastructure configuration. An infrastructure configuration defines the environment in which your image will be built and tested.
       responses:
         '200':
           description: Success
@@ -1300,7 +1324,7 @@ paths:
   /DeleteComponent#componentBuildVersionArn:
     delete:
       operationId: DeleteComponent
-      description: ' Deletes a component build version.'
+      description: Deletes a component build version.
       responses:
         '200':
           description: Success
@@ -1438,7 +1462,7 @@ paths:
   /DeleteDistributionConfiguration#distributionConfigurationArn:
     delete:
       operationId: DeleteDistributionConfiguration
-      description: ' Deletes a distribution configuration.'
+      description: Deletes a distribution configuration.
       responses:
         '200':
           description: Success
@@ -1576,7 +1600,7 @@ paths:
   /DeleteImagePipeline#imagePipelineArn:
     delete:
       operationId: DeleteImagePipeline
-      description: ' Deletes an image pipeline.'
+      description: Deletes an image pipeline.
       responses:
         '200':
           description: Success
@@ -1645,7 +1669,7 @@ paths:
   /DeleteImageRecipe#imageRecipeArn:
     delete:
       operationId: DeleteImageRecipe
-      description: ' Deletes an image recipe.'
+      description: Deletes an image recipe.
       responses:
         '200':
           description: Success
@@ -1714,7 +1738,7 @@ paths:
   /DeleteInfrastructureConfiguration#infrastructureConfigurationArn:
     delete:
       operationId: DeleteInfrastructureConfiguration
-      description: ' Deletes an infrastructure configuration.'
+      description: Deletes an infrastructure configuration.
       responses:
         '200':
           description: Success
@@ -1783,7 +1807,7 @@ paths:
   /GetComponent#componentBuildVersionArn:
     get:
       operationId: GetComponent
-      description: ' Gets a component object.'
+      description: Gets a component object.
       responses:
         '200':
           description: Success
@@ -1831,7 +1855,7 @@ paths:
         - name: componentBuildVersionArn
           in: query
           required: true
-          description: The Amazon Resource Name (ARN) of the component that you want to retrieve. Regex requires "/\d+$" suffix.
+          description: The Amazon Resource Name (ARN) of the component that you want to get. Regex requires the suffix <code>/\d+$</code>.
           schema:
             type: string
             pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/(?:(?:([0-9]+|x)\.([0-9]+|x)\.([0-9]+|x))|(?:[0-9]+\.[0-9]+\.[0-9]+/[0-9]+))$'
@@ -1846,7 +1870,7 @@ paths:
   /GetComponentPolicy#componentArn:
     get:
       operationId: GetComponentPolicy
-      description: ' Gets a component policy.'
+      description: Gets a component policy.
       responses:
         '200':
           description: Success
@@ -2035,7 +2059,7 @@ paths:
   /GetDistributionConfiguration#distributionConfigurationArn:
     get:
       operationId: GetDistributionConfiguration
-      description: ' Gets a distribution configuration.'
+      description: Gets a distribution configuration.
       responses:
         '200':
           description: Success
@@ -2098,7 +2122,7 @@ paths:
   /GetImage#imageBuildVersionArn:
     get:
       operationId: GetImage
-      description: ' Gets an image.'
+      description: Gets an image.
       responses:
         '200':
           description: Success
@@ -2146,7 +2170,7 @@ paths:
         - name: imageBuildVersionArn
           in: query
           required: true
-          description: The Amazon Resource Name (ARN) of the image that you want to retrieve.
+          description: The Amazon Resource Name (ARN) of the image that you want to get.
           schema:
             type: string
             pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/(?:(?:([0-9]+|x)\.([0-9]+|x)\.([0-9]+|x))|(?:[0-9]+\.[0-9]+\.[0-9]+/[0-9]+))$'
@@ -2161,7 +2185,7 @@ paths:
   /GetImagePipeline#imagePipelineArn:
     get:
       operationId: GetImagePipeline
-      description: ' Gets an image pipeline.'
+      description: Gets an image pipeline.
       responses:
         '200':
           description: Success
@@ -2224,7 +2248,7 @@ paths:
   /GetImagePolicy#imageArn:
     get:
       operationId: GetImagePolicy
-      description: ' Gets an image policy.'
+      description: Gets an image policy.
       responses:
         '200':
           description: Success
@@ -2287,7 +2311,7 @@ paths:
   /GetImageRecipe#imageRecipeArn:
     get:
       operationId: GetImageRecipe
-      description: ' Gets an image recipe.'
+      description: Gets an image recipe.
       responses:
         '200':
           description: Success
@@ -2350,7 +2374,7 @@ paths:
   /GetImageRecipePolicy#imageRecipeArn:
     get:
       operationId: GetImageRecipePolicy
-      description: ' Gets an image recipe policy.'
+      description: Gets an image recipe policy.
       responses:
         '200':
           description: Success
@@ -2413,7 +2437,7 @@ paths:
   /GetInfrastructureConfiguration#infrastructureConfigurationArn:
     get:
       operationId: GetInfrastructureConfiguration
-      description: ' Gets an infrastructure configuration.'
+      description: Gets an infrastructure configuration.
       responses:
         '200':
           description: Success
@@ -2465,6 +2489,132 @@ paths:
           schema:
             type: string
             pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /GetWorkflowExecution#workflowExecutionId:
+    get:
+      operationId: GetWorkflowExecution
+      description: Get the runtime information that was logged for a specific runtime instance of the workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkflowExecutionResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '485':
+          description: CallRateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRateLimitExceededException'
+      parameters:
+        - name: workflowExecutionId
+          in: query
+          required: true
+          description: Use the unique identifier for a runtime instance of the workflow to get runtime details.
+          schema:
+            type: string
+            pattern: '^wf-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /GetWorkflowStepExecution#stepExecutionId:
+    get:
+      operationId: GetWorkflowStepExecution
+      description: Get the runtime information that was logged for a specific runtime instance of the workflow step.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkflowStepExecutionResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '485':
+          description: CallRateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRateLimitExceededException'
+      parameters:
+        - name: stepExecutionId
+          in: query
+          required: true
+          description: Use the unique identifier for a specific runtime instance of the workflow step to get runtime details for that step.
+          schema:
+            type: string
+            pattern: '^step-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2560,7 +2710,7 @@ paths:
                 - clientToken
               properties:
                 name:
-                  description: ' The name of the component.'
+                  description: The name of the component.
                   type: string
                   pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
                 semanticVersion:
@@ -2573,7 +2723,7 @@ paths:
                   minLength: 1
                   maxLength: 1024
                 changeDescription:
-                  description: 'The change description of the component. Describes what change has been made in this version, or what makes this version different from other versions of this component.'
+                  description: 'The change description of the component. This description indicates the change that has been made in this version, or what makes this version different from other versions of this component.'
                   type: string
                   minLength: 1
                   maxLength: 1024
@@ -2722,7 +2872,7 @@ paths:
   /ListComponentBuildVersions:
     post:
       operationId: ListComponentBuildVersions
-      description: '<p> Returns the list of component build versions for the specified semantic version.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) to specify the most recent versions or nodes when selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards.</p> </note>'
+      description: '<p>Returns the list of component build versions for the specified semantic version.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) to specify the most recent versions or nodes when selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3014,12 +3164,12 @@ paths:
                   minItems: 1
                   maxItems: 10
                 maxResults:
-                  description: The maximum number of results to return in the list.
+                  description: The maximum items to return in a request.
                   type: integer
                   minimum: 1
                   maximum: 25
                 nextToken:
-                  description: 'Provides a token for pagination, which determines where to begin the next set of results when the current set reaches the maximum for one request.'
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
                   type: string
                   minLength: 1
                   maxLength: 1024
@@ -3132,7 +3282,7 @@ paths:
   /ListImageBuildVersions:
     post:
       operationId: ListImageBuildVersions
-      description: ' Returns a list of image build versions.'
+      description: Returns a list of image build versions.
       responses:
         '200':
           description: Success
@@ -3319,7 +3469,7 @@ paths:
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
                 maxResults:
-                  description: The maxiumum number of results to return from the ListImagePackages request.
+                  description: The maximum items to return in a request.
                   type: integer
                   minimum: 1
                   maximum: 25
@@ -3547,7 +3697,7 @@ paths:
   /ListImageRecipes:
     post:
       operationId: ListImageRecipes
-      description: ' Returns a list of image recipes.'
+      description: Returns a list of image recipes.
       responses:
         '200':
           description: Success
@@ -3632,6 +3782,196 @@ paths:
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
+                maxResults:
+                  description: The maximum items to return in a request.
+                  type: integer
+                  minimum: 1
+                  maximum: 25
+                nextToken:
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+                  type: string
+                  minLength: 1
+                  maxLength: 65535
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListImageScanFindingAggregations:
+    post:
+      operationId: ListImageScanFindingAggregations
+      description: '<p>Returns a list of image scan aggregations for your account. You can filter by the type of key that Image Builder uses to group results. For example, if you want to get a list of findings by severity level for one of your pipelines, you might specify your pipeline with the <code>imagePipelineArn</code> filter. If you don''t specify a filter, Image Builder returns an aggregation for your account.</p> <p>To streamline results, you can use the following filters in your request:</p> <ul> <li> <p> <code>accountId</code> </p> </li> <li> <p> <code>imageBuildVersionArn</code> </p> </li> <li> <p> <code>imagePipelineArn</code> </p> </li> <li> <p> <code>vulnerabilityId</code> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListImageScanFindingAggregationsResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: InvalidPaginationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPaginationTokenException'
+        '485':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '486':
+          description: CallRateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRateLimitExceededException'
+      parameters:
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  description: 'A filter name and value pair that is used to return a more specific list of results from a list operation. Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs.'
+                  type: object
+                  properties:
+                    name:
+                      allOf:
+                        - $ref: '#/components/schemas/FilterName'
+                        - description: The name of the filter. Filter names are case-sensitive.
+                    values:
+                      allOf:
+                        - $ref: '#/components/schemas/FilterValues'
+                        - description: The filter values. Filter values are case-sensitive.
+                nextToken:
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+                  type: string
+                  minLength: 1
+                  maxLength: 65535
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListImageScanFindings:
+    post:
+      operationId: ListImageScanFindings
+      description: Returns a list of image scan findings for your account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListImageScanFindingsResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: InvalidPaginationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPaginationTokenException'
+        '485':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '486':
+          description: CallRateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRateLimitExceededException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  description: '<p>An array of name value pairs that you can use to filter your results. You can use the following filters to streamline results:</p> <ul> <li> <p> <code>imageBuildVersionArn</code> </p> </li> <li> <p> <code>imagePipelineArn</code> </p> </li> <li> <p> <code>vulnerabilityId</code> </p> </li> <li> <p> <code>severity</code> </p> </li> </ul> <p>If you don''t request a filter, then all findings in your account are listed.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ImageScanFindingsFilter'
+                  minItems: 1
+                  maxItems: 1
                 maxResults:
                   description: The maximum items to return in a request.
                   type: integer
@@ -3765,7 +4105,7 @@ paths:
   /ListInfrastructureConfigurations:
     post:
       operationId: ListInfrastructureConfigurations
-      description: ' Returns a list of infrastructure configurations.'
+      description: Returns a list of infrastructure configurations.
       responses:
         '200':
           description: Success
@@ -3863,7 +4203,7 @@ paths:
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: ' Returns the list of tags for the specified resource.'
+      description: Returns the list of tags for the specified resource.
       responses:
         '200':
           description: Success
@@ -3896,7 +4236,7 @@ paths:
           description: The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\.(?:x|[0-9]+)\.(?:x|[0-9]+))(?:/[0-9]+)?)?$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline|workflow\/(?:build|test|distribution))/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\.(?:x|[0-9]+)\.(?:x|[0-9]+))(?:/[0-9]+)?)?$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3907,7 +4247,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: ' Adds a tag to a resource.'
+      description: Adds a tag to a resource.
       responses:
         '200':
           description: Success
@@ -3940,7 +4280,7 @@ paths:
           description: The Amazon Resource Name (ARN) of the resource that you want to tag.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\.(?:x|[0-9]+)\.(?:x|[0-9]+))(?:/[0-9]+)?)?$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline|workflow\/(?:build|test|distribution))/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\.(?:x|[0-9]+)\.(?:x|[0-9]+))(?:/[0-9]+)?)?$'
       requestBody:
         required: true
         content:
@@ -3957,10 +4297,204 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+  /ListWorkflowExecutions:
+    post:
+      operationId: ListWorkflowExecutions
+      description: Returns a list of workflow runtime instance metadata objects for a specific image build version.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorkflowExecutionsResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: InvalidPaginationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPaginationTokenException'
+        '485':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '486':
+          description: CallRateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRateLimitExceededException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - imageBuildVersionArn
+              properties:
+                maxResults:
+                  description: The maximum items to return in a request.
+                  type: integer
+                  minimum: 1
+                  maximum: 25
+                nextToken:
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+                  type: string
+                  minLength: 1
+                  maxLength: 65535
+                imageBuildVersionArn:
+                  description: List all workflow runtime instances for the specified image build version resource ARN.
+                  type: string
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListWorkflowStepExecutions:
+    post:
+      operationId: ListWorkflowStepExecutions
+      description: Shows runtime data for each step in a runtime instance of the workflow that you specify in the request.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorkflowStepExecutionsResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: InvalidPaginationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPaginationTokenException'
+        '485':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '486':
+          description: CallRateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRateLimitExceededException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - workflowExecutionId
+              properties:
+                maxResults:
+                  description: The maximum items to return in a request.
+                  type: integer
+                  minimum: 1
+                  maximum: 25
+                nextToken:
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+                  type: string
+                  minLength: 1
+                  maxLength: 65535
+                workflowExecutionId:
+                  description: The unique identifier that Image Builder assigned to keep track of runtime details when it ran the workflow.
+                  type: string
+                  pattern: '^wf-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /PutComponentPolicy:
     put:
       operationId: PutComponentPolicy
-      description: ' Applies a policy to a component. We recommend that you call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html">CreateResourceShare</a> to share resources. If you call the Image Builder API <code>PutComponentPolicy</code>, you must also call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html">PromoteResourceShareCreatedFromPolicy</a> in order for the resource to be visible to all principals with whom the resource is shared.'
+      description: 'Applies a policy to a component. We recommend that you call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html">CreateResourceShare</a> to share resources. If you call the Image Builder API <code>PutComponentPolicy</code>, you must also call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html">PromoteResourceShareCreatedFromPolicy</a> in order for the resource to be visible to all principals with whom the resource is shared.'
       responses:
         '200':
           description: Success
@@ -4221,7 +4755,7 @@ paths:
   /PutImageRecipePolicy:
     put:
       operationId: PutImageRecipePolicy
-      description: ' Applies a policy to an image recipe. We recommend that you call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html">CreateResourceShare</a> to share resources. If you call the Image Builder API <code>PutImageRecipePolicy</code>, you must also call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html">PromoteResourceShareCreatedFromPolicy</a> in order for the resource to be visible to all principals with whom the resource is shared.'
+      description: 'Applies a policy to an image recipe. We recommend that you call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html">CreateResourceShare</a> to share resources. If you call the Image Builder API <code>PutImageRecipePolicy</code>, you must also call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html">PromoteResourceShareCreatedFromPolicy</a> in order for the resource to be visible to all principals with whom the resource is shared.'
       responses:
         '200':
           description: Success
@@ -4308,7 +4842,7 @@ paths:
   /StartImagePipelineExecution:
     put:
       operationId: StartImagePipelineExecution
-      description: ' Manually triggers a pipeline to create an image.'
+      description: Manually triggers a pipeline to create an image.
       responses:
         '200':
           description: Success
@@ -4401,7 +4935,7 @@ paths:
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: ' Removes a tag from a resource.'
+      description: Removes a tag from a resource.
       responses:
         '200':
           description: Success
@@ -4434,7 +4968,7 @@ paths:
           description: The Amazon Resource Name (ARN) of the resource that you want to untag.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\.(?:x|[0-9]+)\.(?:x|[0-9]+))(?:/[0-9]+)?)?$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline|workflow\/(?:build|test|distribution))/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\.(?:x|[0-9]+)\.(?:x|[0-9]+))(?:/[0-9]+)?)?$'
         - name: tagKeys
           in: query
           required: true
@@ -4456,7 +4990,7 @@ paths:
   /UpdateDistributionConfiguration:
     put:
       operationId: UpdateDistributionConfiguration
-      description: ' Updates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline.'
+      description: Updates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline.
       responses:
         '200':
           description: Success
@@ -4560,7 +5094,7 @@ paths:
   /UpdateImagePipeline:
     put:
       operationId: UpdateImagePipeline
-      description: '<p> Updates an image pipeline. Image pipelines enable you to automate the creation and distribution of images.</p> <note> <p>UpdateImagePipeline does not support selective updates for the pipeline. You must specify all of the required properties in the update request, not just the properties that have changed.</p> </note>'
+      description: '<p>Updates an image pipeline. Image pipelines enable you to automate the creation and distribution of images.</p> <note> <p>UpdateImagePipeline does not support selective updates for the pipeline. You must specify all of the required properties in the update request, not just the properties that have changed.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4646,11 +5180,11 @@ paths:
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):container-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 infrastructureConfigurationArn:
-                  description: The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images updated by this image pipeline.
+                  description: The Amazon Resource Name (ARN) of the infrastructure configuration that Image Builder uses to build images that this image pipeline has updated.
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
                 distributionConfigurationArn:
-                  description: The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images updated by this image pipeline.
+                  description: The Amazon Resource Name (ARN) of the distribution configuration that Image Builder uses to configure and distribute images that this image pipeline has updated.
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):distribution-configuration/[a-z0-9-_]+$'
                 imageTestsConfiguration:
@@ -4666,7 +5200,7 @@ paths:
                         - $ref: '#/components/schemas/ImageTestsTimeoutMinutes'
                         - description: <p>The maximum time in minutes that tests are permitted to run.</p> <note> <p>The timeoutMinutes attribute is not currently active. This value is ignored.</p> </note>
                 enhancedImageMetadataEnabled:
-                  description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
+                  description: 'Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
                   type: boolean
                 schedule:
                   description: A schedule configures how often and when a pipeline will automatically create a new image.
@@ -4695,6 +5229,18 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 36
+                imageScanningConfiguration:
+                  description: Contains settings for Image Builder image resource and container image scans.
+                  type: object
+                  properties:
+                    imageScanningEnabled:
+                      allOf:
+                        - $ref: '#/components/schemas/NullableBoolean'
+                        - description: A setting that indicates whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.
+                    ecrConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/EcrConfiguration'
+                        - description: Contains Amazon ECR settings for vulnerability scans.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4706,7 +5252,7 @@ paths:
   /UpdateInfrastructureConfiguration:
     put:
       operationId: UpdateInfrastructureConfiguration
-      description: ' Updates a new infrastructure configuration. An infrastructure configuration defines the environment in which your image will be built and tested.'
+      description: Updates a new infrastructure configuration. An infrastructure configuration defines the environment in which your image will be built and tested.
       responses:
         '200':
           description: Success
@@ -4922,7 +5468,7 @@ components:
         imageBuildVersionArn:
           allOf:
             - $ref: '#/components/schemas/ImageBuildVersionArn'
-            - description: The Amazon Resource Name (ARN) of the image whose creation has been cancelled.
+            - description: The ARN of the image whose creation this request canceled.
     ServiceException: {}
     ClientException: {}
     ServiceUnavailableException: {}
@@ -4945,7 +5491,7 @@ components:
         componentBuildVersionArn:
           allOf:
             - $ref: '#/components/schemas/ComponentBuildVersionArn'
-            - description: The Amazon Resource Name (ARN) of the component that was created by this request.
+            - description: The Amazon Resource Name (ARN) of the component that this request created.
     OsVersion:
       type: string
       minLength: 1
@@ -4983,7 +5529,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ComponentParameterList'
             - description: A group of parameter settings that Image Builder uses to configure the component for a specific recipe.
-      description: ' Configuration details of the component.'
+      description: Configuration details of the component.
     NonEmptyString:
       type: string
       minLength: 1
@@ -5003,15 +5549,15 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The request ID that uniquely identifies this request.'
+            - description: The request ID that uniquely identifies this request.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: ' The idempotency token used to make this request idempotent.'
+            - description: The idempotency token used to make this request idempotent.
         distributionConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/DistributionConfigurationArn'
-            - description: ' The Amazon Resource Name (ARN) of the distribution configuration that was created by this request.'
+            - description: The Amazon Resource Name (ARN) of the distribution configuration that was created by this request.
     Distribution:
       type: object
       required:
@@ -5045,43 +5591,55 @@ components:
           allOf:
             - $ref: '#/components/schemas/FastLaunchConfigurationList'
             - description: The Windows faster-launching configurations to use for AMI distribution.
-      description: ' Defines the settings for a specific Region.'
+      description: Defines the settings for a specific Region.
     CreateImageResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The request ID that uniquely identifies this request.'
+            - description: The request ID that uniquely identifies this request.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: ' The idempotency token used to make this request idempotent.'
+            - description: The idempotency token used to make this request idempotent.
         imageBuildVersionArn:
           allOf:
             - $ref: '#/components/schemas/ImageBuildVersionArn'
-            - description: ' The Amazon Resource Name (ARN) of the image that was created by this request.'
+            - description: The Amazon Resource Name (ARN) of the image that this request created.
     NullableBoolean:
       type: boolean
     ImageTestsTimeoutMinutes:
       type: integer
       minimum: 60
       maximum: 1440
+    EcrConfiguration:
+      type: object
+      properties:
+        repositoryName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don’t provide this information, Image Builder creates a repository in your account named <code>image-builder-image-scanning-repository</code> for vulnerability scans of your output container images.'
+        containerTags:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Tags for Image Builder to apply to the output container image that &amp;INS; scans. Tags can help you identify and manage your scanned images.
+      description: Settings that Image Builder uses to configure the ECR repository and the output container images that Amazon Inspector scans.
     CreateImagePipelineResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The request ID that uniquely identifies this request.'
+            - description: The request ID that uniquely identifies this request.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: ' The idempotency token used to make this request idempotent.'
+            - description: The idempotency token used to make this request idempotent.
         imagePipelineArn:
           allOf:
             - $ref: '#/components/schemas/ImagePipelineArn'
-            - description: ' The Amazon Resource Name (ARN) of the image pipeline that was created by this request.'
+            - description: The Amazon Resource Name (ARN) of the image pipeline that was created by this request.
     Timezone:
       type: string
       pattern: '[a-zA-Z0-9]{2,}(?:\/[a-zA-z0-9-_+]+)*'
@@ -5186,7 +5744,7 @@ components:
         componentBuildVersionArn:
           allOf:
             - $ref: '#/components/schemas/ComponentBuildVersionArn'
-            - description: The Amazon Resource Name (ARN) of the component build version that was deleted.
+            - description: The ARN of the component build version that this request deleted.
     ResourceDependencyException: {}
     DeleteContainerRecipeResponse:
       type: object
@@ -5220,7 +5778,7 @@ components:
         imageBuildVersionArn:
           allOf:
             - $ref: '#/components/schemas/ImageBuildVersionArn'
-            - description: The Amazon Resource Name (ARN) of the Image Builder image resource that was deleted.
+            - description: The ARN of the Image Builder image resource that this request deleted.
     DeleteImagePipelineResponse:
       type: object
       properties:
@@ -5377,6 +5935,132 @@ components:
             - $ref: '#/components/schemas/InfrastructureConfiguration'
             - description: The infrastructure configuration object.
       description: GetInfrastructureConfiguration response object.
+    GetWorkflowExecutionResponse:
+      type: object
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The request ID that uniquely identifies this request.
+        workflowBuildVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowBuildVersionArn'
+            - description: The Amazon Resource Name (ARN) of the build version for the Image Builder workflow resource that defines the specified runtime instance of the workflow.
+        workflowExecutionId:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowExecutionId'
+            - description: The unique identifier that Image Builder assigned to keep track of runtime details when it ran the workflow.
+        imageBuildVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageBuildVersionArn'
+            - description: The Amazon Resource Name (ARN) of the image resource build version that the specified runtime instance of the workflow created.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowType'
+            - description: The type of workflow that Image Builder ran for the specified runtime instance of the workflow.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowExecutionStatus'
+            - description: The current runtime status for the specified runtime instance of the workflow.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowExecutionMessage'
+            - description: 'The output message from the specified runtime instance of the workflow, if applicable.'
+        totalStepCount:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepCount'
+            - description: 'The total number of steps in the specified runtime instance of the workflow that ran. This number should equal the sum of the step counts for steps that succeeded, were skipped, and failed.'
+        totalStepsSucceeded:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepCount'
+            - description: A runtime count for the number of steps that ran successfully in the specified runtime instance of the workflow.
+        totalStepsFailed:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepCount'
+            - description: A runtime count for the number of steps that failed in the specified runtime instance of the workflow.
+        totalStepsSkipped:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepCount'
+            - description: A runtime count for the number of steps that were skipped in the specified runtime instance of the workflow.
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp when the specified runtime instance of the workflow started.
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp when the specified runtime instance of the workflow finished.
+    GetWorkflowStepExecutionResponse:
+      type: object
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The request ID that uniquely identifies this request.
+        stepExecutionId:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepExecutionId'
+            - description: The unique identifier for the runtime version of the workflow step that you specified in the request.
+        workflowBuildVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowBuildVersionArn'
+            - description: The Amazon Resource Name (ARN) of the build version for the Image Builder workflow resource that defines this workflow step.
+        workflowExecutionId:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowExecutionId'
+            - description: The unique identifier that Image Builder assigned to keep track of runtime details when it ran the workflow.
+        imageBuildVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageBuildVersionArn'
+            - description: The Amazon Resource Name (ARN) of the image resource build version that the specified runtime instance of the workflow step creates.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepName'
+            - description: The name of the specified runtime instance of the workflow step.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepDescription'
+            - description: Describes the specified workflow step.
+        action:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepAction'
+            - description: The name of the action that the specified step performs.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepExecutionStatus'
+            - description: The current status for the specified runtime version of the workflow step.
+        rollbackStatus:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepExecutionRollbackStatus'
+            - description: 'Reports on the rollback status of the specified runtime version of the workflow step, if applicable.'
+        message:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepMessage'
+            - description: 'The output message from the specified runtime instance of the workflow step, if applicable.'
+        inputs:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepInputs'
+            - description: Input parameters that Image Builder provided for the specified runtime instance of the workflow step.
+        outputs:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepOutputs'
+            - description: The file names that the specified runtime version of the workflow step created as output.
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp when the specified runtime version of the workflow step started.
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp when the specified runtime instance of the workflow step finished.
+        onFailure:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The action to perform if the workflow step fails.
+        timeoutSeconds:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepTimeoutSecondsInteger'
+            - description: The maximum duration in seconds for this step to complete its action.
     ImportComponentResponse:
       type: object
       properties:
@@ -5421,7 +6105,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
     InvalidPaginationTokenException: {}
     ListComponentsResponse:
       type: object
@@ -5437,7 +6121,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
     Filter:
       type: object
       properties:
@@ -5464,7 +6148,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The next token field is used for paginated responses. When this is not empty, there are additional container recipes that the service has not included in this response. Use this token with the next request to retrieve additional list items.'
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
     ListDistributionConfigurationsResponse:
       type: object
       properties:
@@ -5479,7 +6163,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
     ListImageBuildVersionsResponse:
       type: object
       properties:
@@ -5494,7 +6178,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
     ListImagePackagesResponse:
       type: object
       properties:
@@ -5509,7 +6193,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
     ListImagePipelineImagesResponse:
       type: object
       properties:
@@ -5524,7 +6208,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
     ListImagePipelinesResponse:
       type: object
       properties:
@@ -5539,7 +6223,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
     ListImageRecipesResponse:
       type: object
       properties:
@@ -5554,7 +6238,62 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
+    ListImageScanFindingAggregationsResponse:
+      type: object
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The request ID that uniquely identifies this request.
+        aggregationType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The aggregation type specifies what type of key is used to group the image scan findings. Image Builder returns results based on the request filter. If you didn''t specify a filter in the request, the type defaults to <code>accountId</code>.</p> <p class="title"> <b>Aggregation types</b> </p> <ul> <li> <p>accountId</p> </li> <li> <p>imageBuildVersionArn</p> </li> <li> <p>imagePipelineArn</p> </li> <li> <p>vulnerabilityId</p> </li> </ul> <p>Each aggregation includes counts by severity level for medium severity and higher level findings, plus a total for all of the findings for each key value.</p>'
+        responses:
+          allOf:
+            - $ref: '#/components/schemas/ImageScanFindingAggregationsList'
+            - description: An array of image scan finding aggregations that match the filter criteria.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
+    FilterName:
+      type: string
+      pattern: '^[a-zA-Z]{1,1024}$'
+    FilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/FilterValue'
+      minItems: 1
+      maxItems: 10
+    ListImageScanFindingsResponse:
+      type: object
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The request ID that uniquely identifies this request.
+        findings:
+          allOf:
+            - $ref: '#/components/schemas/ImageScanFindingsList'
+            - description: The image scan findings for your account that meet your request filter criteria.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
+    ImageScanFindingsFilter:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/FilterName'
+            - description: The name of the image scan finding filter. Filter names are case-sensitive.
+        values:
+          allOf:
+            - $ref: '#/components/schemas/ImageScanFindingsFilterValues'
+            - description: The filter values. Filter values are case-sensitive.
+      description: A name value pair that Image Builder applies to streamline results from the vulnerability scan findings list action.
     ListImagesResponse:
       type: object
       properties:
@@ -5569,7 +6308,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
     ListInfrastructureConfigurationsResponse:
       type: object
       properties:
@@ -5584,7 +6323,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -5593,6 +6332,60 @@ components:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags for the specified resource.
     InvalidParameterException: {}
+    ListWorkflowExecutionsResponse:
+      type: object
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The request ID that uniquely identifies this request.
+        workflowExecutions:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowExecutionsList'
+            - description: Contains an array of runtime details that represents each time a workflow ran for the requested image build version.
+        imageBuildVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageBuildVersionArn'
+            - description: The resource ARN of the image build version for which you requested a list of workflow runtime details.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/ImageBuildMessage'
+            - description: 'The output message from the list action, if applicable.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
+    ListWorkflowStepExecutionsResponse:
+      type: object
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The request ID that uniquely identifies this request.
+        steps:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepExecutionsList'
+            - description: Contains an array of runtime details that represents each step in this runtime instance of the workflow.
+        workflowBuildVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowBuildVersionArn'
+            - description: The build version ARN for the Image Builder workflow resource that defines the steps for this runtime instance of the workflow.
+        workflowExecutionId:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowExecutionId'
+            - description: The unique identifier that Image Builder assigned to keep track of runtime details when it ran the workflow.
+        imageBuildVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageBuildVersionArn'
+            - description: The image build version resource ARN that's associated with the specified runtime instance of the workflow.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/ImageBuildMessage'
+            - description: 'The output message from the list action, if applicable.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The next token used for paginated responses. When this field isn''t empty, there are additional elements that the service has''ot included in this request. Use this token with the next request to retrieve additional objects.'
     PutComponentPolicyResponse:
       type: object
       properties:
@@ -5709,6 +6502,38 @@ components:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationArn'
             - description: The Amazon Resource Name (ARN) of the infrastructure configuration that was updated by this request.
+    SeverityCounts:
+      type: object
+      properties:
+        all:
+          allOf:
+            - $ref: '#/components/schemas/SeverityCountNumber'
+            - description: The total number of findings across all severity levels for the specified filter.
+        critical:
+          allOf:
+            - $ref: '#/components/schemas/SeverityCountNumber'
+            - description: The number of critical severity findings for the specified filter.
+        high:
+          allOf:
+            - $ref: '#/components/schemas/SeverityCountNumber'
+            - description: The number of high severity findings for the specified filter.
+        medium:
+          allOf:
+            - $ref: '#/components/schemas/SeverityCountNumber'
+            - description: The number of medium severity findings for the specified filter.
+      description: 'Includes counts by severity level for medium severity and higher level findings, plus a total for all of the findings for the specified filter.'
+    AccountAggregation:
+      type: object
+      properties:
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: Identifies the account that owns the aggregated resource findings.
+        severityCounts:
+          allOf:
+            - $ref: '#/components/schemas/SeverityCounts'
+            - description: 'Counts by severity level for medium severity and higher level findings, plus a total for all of the findings.'
+      description: 'Contains counts of vulnerability findings from image scans that run when you create new Image Builder images, or build new versions of existing images. The vulnerability counts are grouped by severity level. The counts are aggregated across resources to create the final tally for the account that owns them.'
     AccountId:
       type: string
       pattern: '^[0-9]{12}$'
@@ -5740,8 +6565,8 @@ components:
         reason:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The reason for the image's status.
-      description: ' Image state shows the image status and the reason for that status.'
+            - description: The reason for the status of the image.
+      description: Image status and the reason for that status.
     Ami:
       type: object
       properties:
@@ -5767,7 +6592,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The account ID of the owner of the AMI.
-      description: ' Details of an Amazon EC2 AMI.'
+      description: Details of an Amazon EC2 AMI.
     AmiNameString:
       type: string
       pattern: '^[-_A-Za-z0-9{][-_A-Za-z0-9\s:{}\.]+[-_A-Za-z0-9}]$'
@@ -5825,8 +6650,8 @@ components:
         launchPermission:
           allOf:
             - $ref: '#/components/schemas/LaunchPermissionConfiguration'
-            - description: ' Launch permissions can be used to configure which Amazon Web Services accounts can use the AMI to launch instances.'
-      description: ' Define and configure the output AMIs of the pipeline.'
+            - description: Launch permissions can be used to configure which Amazon Web Services accounts can use the AMI to launch instances.
+      description: Define and configure the output AMIs of the pipeline.
     AmiList:
       type: array
       items:
@@ -5858,14 +6683,14 @@ components:
         imageBuildVersionArn:
           allOf:
             - $ref: '#/components/schemas/ImageBuildVersionArn'
-            - description: The Amazon Resource Name (ARN) of the image whose creation you want to cancel.
+            - description: The Amazon Resource Name (ARN) of the image that you want to cancel creation for.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: 'Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a> in the <i>Amazon EC2 API Reference</i>.'
     ImageBuilderArn:
       type: string
-      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\.(?:x|[0-9]+)\.(?:x|[0-9]+))(?:/[0-9]+)?)?$'
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline|workflow\/(?:build|test|distribution))/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\.(?:x|[0-9]+)\.(?:x|[0-9]+))(?:/[0-9]+)?)?$'
     ResourceName:
       type: string
       pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
@@ -6405,7 +7230,7 @@ components:
         supportedOsVersions:
           allOf:
             - $ref: '#/components/schemas/OsVersionList'
-            - description: ' The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the base image OS version during image recipe creation.'
+            - description: 'The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the base image OS version during image recipe creation.'
         data:
           allOf:
             - $ref: '#/components/schemas/InlineComponentData'
@@ -6522,23 +7347,23 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
-            - description: ' The name of the distribution configuration.'
+            - description: The name of the distribution configuration.
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The description of the distribution configuration.'
+            - description: The description of the distribution configuration.
         distributions:
           allOf:
             - $ref: '#/components/schemas/DistributionList'
-            - description: ' The distributions of the distribution configuration.'
+            - description: The distributions of the distribution configuration.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags of the distribution configuration.'
+            - description: The tags of the distribution configuration.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: ' The idempotency token of the distribution configuration.'
+            - description: The idempotency token of the distribution configuration.
     DistributionConfigurationArn:
       type: string
       pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):distribution-configuration/[a-z0-9-_]+$'
@@ -6581,6 +7406,18 @@ components:
       enum:
         - DISABLED
         - ENABLED
+    ImageScanningConfiguration:
+      type: object
+      properties:
+        imageScanningEnabled:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: A setting that indicates whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.
+        ecrConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/EcrConfiguration'
+            - description: Contains Amazon ECR settings for vulnerability scans.
+      description: Contains settings for Image Builder image resource and container image scans.
     CreateImagePipelineRequest:
       type: object
       required:
@@ -6592,15 +7429,15 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
-            - description: ' The name of the image pipeline.'
+            - description: The name of the image pipeline.
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The description of the image pipeline.'
+            - description: The description of the image pipeline.
         imageRecipeArn:
           allOf:
             - $ref: '#/components/schemas/ImageRecipeArn'
-            - description: ' The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline.'
+            - description: The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline.
         containerRecipeArn:
           allOf:
             - $ref: '#/components/schemas/ContainerRecipeArn'
@@ -6608,35 +7445,39 @@ components:
         infrastructureConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationArn'
-            - description: ' The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images created by this image pipeline.'
+            - description: The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images created by this image pipeline.
         distributionConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/DistributionConfigurationArn'
-            - description: ' The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images created by this image pipeline.'
+            - description: The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images created by this image pipeline.
         imageTestsConfiguration:
           allOf:
             - $ref: '#/components/schemas/ImageTestsConfiguration'
-            - description: ' The image test configuration of the image pipeline.'
+            - description: The image test configuration of the image pipeline.
         enhancedImageMetadataEnabled:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
+            - description: 'Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
         schedule:
           allOf:
             - $ref: '#/components/schemas/Schedule'
-            - description: ' The schedule of the image pipeline.'
+            - description: The schedule of the image pipeline.
         status:
           allOf:
             - $ref: '#/components/schemas/PipelineStatus'
-            - description: ' The status of the image pipeline.'
+            - description: The status of the image pipeline.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags of the image pipeline.'
+            - description: The tags of the image pipeline.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: ' The idempotency token used to make this request idempotent.'
+            - description: The idempotency token used to make this request idempotent.
+        imageScanningConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ImageScanningConfiguration'
+            - description: Contains settings for vulnerability scans.
     ImagePipelineArn:
       type: string
       pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-pipeline/[a-z0-9-_]+$'
@@ -6653,11 +7494,11 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
-            - description: ' The name of the image recipe.'
+            - description: The name of the image recipe.
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The description of the image recipe.'
+            - description: The description of the image recipe.
         semanticVersion:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
@@ -6677,7 +7518,7 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags of the image recipe.'
+            - description: The tags of the image recipe.
         workingDirectory:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6700,7 +7541,7 @@ components:
         imageRecipeArn:
           allOf:
             - $ref: '#/components/schemas/ImageRecipeArn'
-            - description: ' The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.'
+            - description: 'The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.'
         containerRecipeArn:
           allOf:
             - $ref: '#/components/schemas/ContainerRecipeArn'
@@ -6708,27 +7549,31 @@ components:
         distributionConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/DistributionConfigurationArn'
-            - description: ' The Amazon Resource Name (ARN) of the distribution configuration that defines and configures the outputs of your pipeline.'
+            - description: The Amazon Resource Name (ARN) of the distribution configuration that defines and configures the outputs of your pipeline.
         infrastructureConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationArn'
-            - description: ' The Amazon Resource Name (ARN) of the infrastructure configuration that defines the environment in which your image will be built and tested.'
+            - description: The Amazon Resource Name (ARN) of the infrastructure configuration that defines the environment in which your image will be built and tested.
         imageTestsConfiguration:
           allOf:
             - $ref: '#/components/schemas/ImageTestsConfiguration'
-            - description: ' The image tests configuration of the image.'
+            - description: The image tests configuration of the image.
         enhancedImageMetadataEnabled:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
+            - description: 'Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags of the image.'
+            - description: The tags of the image.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: ' The idempotency token used to make this request idempotent.'
+            - description: The idempotency token used to make this request idempotent.
+        imageScanningConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ImageScanningConfiguration'
+            - description: Contains settings for vulnerability scans.
     InstanceTypeList:
       type: array
       items:
@@ -6835,6 +7680,81 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: The idempotency token used to make this request idempotent.
+    NonNegativeDouble:
+      type: number
+      format: double
+      minimum: 0
+    CvssScore:
+      type: object
+      properties:
+        baseScore:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: The CVSS base score.
+        scoringVector:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The vector string of the CVSS score.
+        version:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The CVSS version that generated the score.
+        source:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The source of the CVSS score.
+      description: 'Amazon Inspector generates a risk score for each finding. This score helps you to prioritize findings, to focus on the most critical findings and the most vulnerable resources. The score uses the Common Vulnerability Scoring System (CVSS) format. This format is a modification of the base CVSS score that the National Vulnerability Database (NVD) provides. For more information about severity levels, see <a href="https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html">Severity levels for Amazon Inspector findings</a> in the <i>Amazon Inspector User Guide</i>.'
+    CvssScoreAdjustment:
+      type: object
+      properties:
+        metric:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The metric that Amazon Inspector used to adjust the CVSS score.
+        reason:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The reason for the CVSS score adjustment.
+      description: Details about an adjustment that Amazon Inspector made to the CVSS score for a finding.
+    CvssScoreAdjustmentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CvssScoreAdjustment'
+    CvssScoreDetails:
+      type: object
+      properties:
+        scoreSource:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The source for the CVSS score.
+        cvssSource:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The source of the finding.
+        version:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The CVSS version that generated the score.
+        score:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: The CVSS score.
+        scoringVector:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A vector that measures the severity of the vulnerability.
+        adjustments:
+          allOf:
+            - $ref: '#/components/schemas/CvssScoreAdjustmentList'
+            - description: An object that contains details about an adjustment that Amazon Inspector made to the CVSS score for the finding.
+      description: 'Details about the source of the score, and the factors that determined the adjustments to create the final score.'
+    CvssScoreList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CvssScore'
+    DateTimeTimestamp:
+      type: string
+      format: date-time
     DeleteComponentRequest:
       type: object
       title: DeleteComponentRequest
@@ -7049,7 +7969,7 @@ components:
         throughput:
           allOf:
             - $ref: '#/components/schemas/EbsVolumeThroughput'
-            - description: ' <b>For GP3 volumes only</b> – The throughput in MiB/s that the volume supports. '
+            - description: ' <b>For GP3 volumes only</b> – The throughput in MiB/s that the volume supports.'
       description: Amazon EBS-specific block device mapping specifications.
     EmptyString:
       type: string
@@ -7116,15 +8036,6 @@ components:
       type: integer
       minimum: 1
       maximum: 10000
-    FilterName:
-      type: string
-      pattern: '^[a-zA-Z]{1,1024}$'
-    FilterValues:
-      type: array
-      items:
-        $ref: '#/components/schemas/FilterValue'
-      minItems: 1
-      maxItems: 10
     FilterList:
       type: array
       items:
@@ -7184,7 +8095,7 @@ components:
         enhancedImageMetadataEnabled:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
+            - description: 'Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
         imageRecipeArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -7233,6 +8144,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags of this image pipeline.
+        imageScanningConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ImageScanningConfiguration'
+            - description: Contains settings for vulnerability scans.
       description: Details of an image pipeline.
     GetImagePolicyRequest:
       type: object
@@ -7396,12 +8311,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImageSource'
             - description: The origin of the base image that Image Builder used to build this image.
+        scanState:
+          allOf:
+            - $ref: '#/components/schemas/ImageScanState'
+            - description: Contains information about the current state of scans for this image.
+        imageScanningConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ImageScanningConfiguration'
+            - description: Contains settings for vulnerability scans.
       description: 'An Image Builder image. You must specify exactly one recipe for the image – either a container recipe (<code>containerRecipe</code>), which creates a container image, or an image recipe (<code>imageRecipe</code>), which creates an AMI.'
     GetInfrastructureConfigurationRequest:
       type: object
       title: GetInfrastructureConfigurationRequest
       properties: {}
-      description: ' GetInfrastructureConfiguration request object.'
+      description: GetInfrastructureConfiguration request object.
     InfrastructureConfiguration:
       type: object
       properties:
@@ -7470,6 +8393,83 @@ components:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags of the infrastructure configuration.
       description: Details of the infrastructure configuration.
+    WorkflowExecutionId:
+      type: string
+      pattern: '^wf-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+    GetWorkflowExecutionRequest:
+      type: object
+      title: GetWorkflowExecutionRequest
+      properties: {}
+    WorkflowBuildVersionArn:
+      type: string
+      pattern: '^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws):workflow/(build|test|distribution)/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
+      maxLength: 1024
+    WorkflowType:
+      type: string
+      enum:
+        - BUILD
+        - TEST
+        - DISTRIBUTION
+    WorkflowExecutionStatus:
+      type: string
+      enum:
+        - PENDING
+        - SKIPPED
+        - RUNNING
+        - COMPLETED
+        - FAILED
+        - ROLLBACK_IN_PROGRESS
+        - ROLLBACK_COMPLETED
+    WorkflowExecutionMessage:
+      type: string
+      minLength: 0
+      maxLength: 500
+    WorkflowStepCount:
+      type: integer
+    WorkflowStepExecutionId:
+      type: string
+      pattern: '^step-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+    GetWorkflowStepExecutionRequest:
+      type: object
+      title: GetWorkflowStepExecutionRequest
+      properties: {}
+    WorkflowStepName:
+      type: string
+      pattern: '^[A-Za-z][A-Za-z0-9-_]{1,99}$'
+    WorkflowStepDescription:
+      type: string
+      minLength: 0
+      maxLength: 500
+    WorkflowStepAction:
+      type: string
+      pattern: '^[A-Za-z][A-Za-z0-9-_]{1,99}$'
+    WorkflowStepExecutionStatus:
+      type: string
+      enum:
+        - PENDING
+        - SKIPPED
+        - RUNNING
+        - COMPLETED
+        - FAILED
+    WorkflowStepExecutionRollbackStatus:
+      type: string
+      enum:
+        - RUNNING
+        - COMPLETED
+        - SKIPPED
+        - FAILED
+    WorkflowStepMessage:
+      type: string
+      minLength: 0
+      maxLength: 500
+    WorkflowStepInputs:
+      type: string
+    WorkflowStepOutputs:
+      type: string
+    WorkflowStepTimeoutSecondsInteger:
+      type: integer
+      minimum: 0
+      maximum: 43200
     ImageType:
       type: string
       enum:
@@ -7494,6 +8494,34 @@ components:
         - AWS_MARKETPLACE
         - IMPORTED
         - CUSTOM
+    ImageScanState:
+      type: object
+      properties:
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ImageScanStatus'
+            - description: The current state of vulnerability scans for the image.
+        reason:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The reason for the scan status for the image.
+      description: 'Shows the vulnerability scan status for a specific image, and the reason for that status.'
+    ImageAggregation:
+      type: object
+      properties:
+        imageBuildVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageBuildVersionArn'
+            - description: The Amazon Resource Name (ARN) that identifies the image for this aggregation.
+        severityCounts:
+          allOf:
+            - $ref: '#/components/schemas/SeverityCounts'
+            - description: 'Counts by severity level for medium severity and higher level findings, plus a total for all of the findings for the specified image.'
+      description: Contains vulnerability counts for a specific image.
+    ImageBuildMessage:
+      type: string
+      minLength: 0
+      maxLength: 500
     ImagePackage:
       type: object
       properties:
@@ -7510,6 +8538,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ImagePackage'
+    ImagePipelineAggregation:
+      type: object
+      properties:
+        imagePipelineArn:
+          allOf:
+            - $ref: '#/components/schemas/ImagePipelineArn'
+            - description: The Amazon Resource Name (ARN) that identifies the image pipeline for this aggregation.
+        severityCounts:
+          allOf:
+            - $ref: '#/components/schemas/SeverityCounts'
+            - description: 'Counts by severity level for medium severity and higher level findings, plus a total for all of the findings for the specified image pipeline.'
+      description: Contains vulnerability counts for a specific image pipeline.
     ImagePipelineList:
       type: array
       items:
@@ -7550,6 +8590,191 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ImageRecipeSummary'
+    Remediation:
+      type: object
+      properties:
+        recommendation:
+          allOf:
+            - $ref: '#/components/schemas/RemediationRecommendation'
+            - description: An object that contains information about the recommended course of action to remediate the finding.
+      description: Information about how to remediate a finding.
+    InspectorScoreDetails:
+      type: object
+      properties:
+        adjustedCvss:
+          allOf:
+            - $ref: '#/components/schemas/CvssScoreDetails'
+            - description: An object that contains details about an adjustment that Amazon Inspector made to the CVSS score for the finding.
+      description: Information about the factors that influenced the score that Amazon Inspector assigned for a finding.
+    PackageVulnerabilityDetails:
+      type: object
+      required:
+        - vulnerabilityId
+      properties:
+        vulnerabilityId:
+          allOf:
+            - $ref: '#/components/schemas/VulnerabilityId'
+            - description: A unique identifier for this vulnerability.
+        vulnerablePackages:
+          allOf:
+            - $ref: '#/components/schemas/VulnerablePackageList'
+            - description: The packages that this vulnerability impacts.
+        source:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The source of the vulnerability information.
+        cvss:
+          allOf:
+            - $ref: '#/components/schemas/CvssScoreList'
+            - description: CVSS scores for one or more vulnerabilities that Amazon Inspector identified for a package.
+        relatedVulnerabilities:
+          allOf:
+            - $ref: '#/components/schemas/VulnerabilityIdList'
+            - description: Vulnerabilities that are often related to the findings for the package.
+        sourceUrl:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A link to the source of the vulnerability information.
+        vendorSeverity:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The severity that the vendor assigned to this vulnerability type.
+        vendorCreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/DateTimeTimestamp'
+            - description: The date and time when this vulnerability was first added to the vendor's database.
+        vendorUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/DateTimeTimestamp'
+            - description: The date and time when the vendor last updated this vulnerability in their database.
+        referenceUrls:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: Links to web pages that contain details about the vulnerabilities that Amazon Inspector identified for the package.
+      description: Information about package vulnerability findings.
+    ImageScanFinding:
+      type: object
+      properties:
+        awsAccountId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Web Services account ID that's associated with the finding.
+        imageBuildVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageBuildVersionArn'
+            - description: The Amazon Resource Name (ARN) of the image build version that's associated with the finding.
+        imagePipelineArn:
+          allOf:
+            - $ref: '#/components/schemas/ImagePipelineArn'
+            - description: The Amazon Resource Name (ARN) of the image pipeline that's associated with the finding.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The type of the finding. Image Builder looks for findings of the type <code>PACKAGE_VULNERABILITY</code> that apply to output images, and excludes other types.'
+        description:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The description of the finding.
+        title:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The title of the finding.
+        remediation:
+          allOf:
+            - $ref: '#/components/schemas/Remediation'
+            - description: An object that contains the details about how to remediate the finding.
+        severity:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The severity of the finding.
+        firstObservedAt:
+          allOf:
+            - $ref: '#/components/schemas/DateTimeTimestamp'
+            - description: The date and time when the finding was first observed.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/DateTimeTimestamp'
+            - description: The timestamp when the finding was last updated.
+        inspectorScore:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeDouble'
+            - description: The score that Amazon Inspector assigned for the finding.
+        inspectorScoreDetails:
+          allOf:
+            - $ref: '#/components/schemas/InspectorScoreDetails'
+            - description: An object that contains details of the Amazon Inspector score.
+        packageVulnerabilityDetails:
+          allOf:
+            - $ref: '#/components/schemas/PackageVulnerabilityDetails'
+            - description: An object that contains the details of a package vulnerability finding.
+        fixAvailable:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: Details about whether a fix is available for any of the packages that are identified in the finding through a version update.
+      description: Contains details about a vulnerability scan finding.
+    VulnerabilityIdAggregation:
+      type: object
+      properties:
+        vulnerabilityId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The vulnerability Id for this set of counts.
+        severityCounts:
+          allOf:
+            - $ref: '#/components/schemas/SeverityCounts'
+            - description: 'Counts by severity level for medium severity and higher level findings, plus a total for all of the findings for the specified vulnerability.'
+      description: Includes counts of image and pipeline resource findings by vulnerability.
+    ImageScanFindingAggregation:
+      type: object
+      properties:
+        accountAggregation:
+          allOf:
+            - $ref: '#/components/schemas/AccountAggregation'
+            - description: Returns an object that contains severity counts based on an account ID.
+        imageAggregation:
+          allOf:
+            - $ref: '#/components/schemas/ImageAggregation'
+            - description: Returns an object that contains severity counts based on the Amazon Resource Name (ARN) for a specific image.
+        imagePipelineAggregation:
+          allOf:
+            - $ref: '#/components/schemas/ImagePipelineAggregation'
+            - description: Returns an object that contains severity counts based on an image pipeline ARN.
+        vulnerabilityIdAggregation:
+          allOf:
+            - $ref: '#/components/schemas/VulnerabilityIdAggregation'
+            - description: Returns an object that contains severity counts based on vulnerability ID.
+      description: 'This returns exactly one type of aggregation, based on the filter that Image Builder applies in its API action.'
+    ImageScanFindingAggregationsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImageScanFindingAggregation'
+    ImageScanFindingsFilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/FilterValue'
+      minItems: 1
+      maxItems: 1
+    ImageScanFindingsFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImageScanFindingsFilter'
+      minItems: 1
+      maxItems: 1
+    ImageScanFindingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImageScanFinding'
+      maxItems: 25
+    ImageScanStatus:
+      type: string
+      enum:
+        - PENDING
+        - SCANNING
+        - COLLECTING
+        - COMPLETED
+        - ABANDONED
+        - FAILED
+        - TIMED_OUT
     ImageStatus:
       type: string
       enum:
@@ -7689,7 +8914,7 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
-            - description: ' The name of the component.'
+            - description: The name of the component.
         semanticVersion:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
@@ -7701,7 +8926,7 @@ components:
         changeDescription:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The change description of the component. Describes what change has been made in this version, or what makes this version different from other versions of this component.'
+            - description: 'The change description of the component. This description indicates the change that has been made in this version, or what makes this version different from other versions of this component.'
         type:
           allOf:
             - $ref: '#/components/schemas/ComponentType'
@@ -7925,11 +9150,11 @@ components:
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
-            - description: The maximum number of results to return in the list.
+            - description: The maximum items to return in a request.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'Provides a token for pagination, which determines where to begin the next set of results when the current set reaches the maximum for one request.'
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
     ListDistributionConfigurationsRequest:
       type: object
       title: ListDistributionConfigurationsRequest
@@ -7981,7 +9206,7 @@ components:
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
-            - description: The maxiumum number of results to return from the ListImagePackages request.
+            - description: The maximum items to return in a request.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
@@ -8044,6 +9269,32 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+    ListImageScanFindingAggregationsRequest:
+      type: object
+      title: ListImageScanFindingAggregationsRequest
+      properties:
+        filter:
+          $ref: '#/components/schemas/Filter'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+    ListImageScanFindingsRequest:
+      type: object
+      title: ListImageScanFindingsRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/ImageScanFindingsFilterList'
+            - description: '<p>An array of name value pairs that you can use to filter your results. You can use the following filters to streamline results:</p> <ul> <li> <p> <code>imageBuildVersionArn</code> </p> </li> <li> <p> <code>imagePipelineArn</code> </p> </li> <li> <p> <code>vulnerabilityId</code> </p> </li> <li> <p> <code>severity</code> </p> </li> </ul> <p>If you don''t request a filter, then all findings in your account are listed.</p>'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/RestrictedInteger'
+            - description: The maximum items to return in a request.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
     ListImagesRequest:
       type: object
       title: ListImagesRequest
@@ -8092,12 +9343,75 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    ListWorkflowExecutionsRequest:
+      type: object
+      required:
+        - imageBuildVersionArn
+      title: ListWorkflowExecutionsRequest
+      properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/RestrictedInteger'
+            - description: The maximum items to return in a request.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+        imageBuildVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageBuildVersionArn'
+            - description: List all workflow runtime instances for the specified image build version resource ARN.
+    WorkflowExecutionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkflowExecutionMetadata'
+    ListWorkflowStepExecutionsRequest:
+      type: object
+      required:
+        - workflowExecutionId
+      title: ListWorkflowStepExecutionsRequest
+      properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/RestrictedInteger'
+            - description: The maximum items to return in a request.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+        workflowExecutionId:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowExecutionId'
+            - description: The unique identifier that Image Builder assigned to keep track of runtime details when it ran the workflow.
+    WorkflowStepExecutionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkflowStepMetadata'
+    NonEmptyStringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+      minItems: 1
     OrganizationArn:
       type: string
       pattern: '^arn:aws[^:]*:organizations::[0-9]{12}:organization/o-[a-z0-9]{10,32}$'
     OrganizationalUnitArn:
       type: string
       pattern: '^arn:aws[^:]*:organizations::[0-9]{12}:ou/o-[a-z0-9]{10,32}/ou-[0-9a-z]{4,32}-[0-9a-z]{8,32}'
+    PackageArchitecture:
+      type: string
+    PackageEpoch:
+      type: integer
+    VulnerabilityId:
+      type: string
+    VulnerablePackageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VulnerablePackage'
+    VulnerabilityIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VulnerabilityId'
     PutComponentPolicyRequest:
       type: object
       required:
@@ -8158,6 +9472,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourcePolicyDocument'
             - description: The policy to apply.
+    RemediationRecommendation:
+      type: object
+      properties:
+        text:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The recommended course of action to remediate the finding.
+        url:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A link to more information about the recommended remediation for this vulnerability.
+      description: Details about the recommended course of action to remediate the finding.
+    SeverityCountNumber:
+      type: integer
+    SourceLayerHash:
+      type: string
     StartImagePipelineExecutionRequest:
       type: object
       required:
@@ -8244,11 +9574,11 @@ components:
         infrastructureConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationArn'
-            - description: The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images updated by this image pipeline.
+            - description: The Amazon Resource Name (ARN) of the infrastructure configuration that Image Builder uses to build images that this image pipeline has updated.
         distributionConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/DistributionConfigurationArn'
-            - description: The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images updated by this image pipeline.
+            - description: The Amazon Resource Name (ARN) of the distribution configuration that Image Builder uses to configure and distribute images that this image pipeline has updated.
         imageTestsConfiguration:
           allOf:
             - $ref: '#/components/schemas/ImageTestsConfiguration'
@@ -8256,7 +9586,7 @@ components:
         enhancedImageMetadataEnabled:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
+            - description: 'Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
         schedule:
           allOf:
             - $ref: '#/components/schemas/Schedule'
@@ -8269,6 +9599,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: The idempotency token used to make this request idempotent.
+        imageScanningConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ImageScanningConfiguration'
+            - description: Contains settings for vulnerability scans.
     UpdateInfrastructureConfigurationRequest:
       type: object
       required:
@@ -8329,5 +9663,145 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstanceMetadataOptions'
             - description: '<p>The instance metadata options that you can set for the HTTP requests that pipeline builds use to launch EC2 build and test instances. For more information about instance metadata options, see one of the following links:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html">Configure the instance metadata options</a> in the <i> <i>Amazon EC2 User Guide</i> </i> for Linux instances.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html">Configure the instance metadata options</a> in the <i> <i>Amazon EC2 Windows Guide</i> </i> for Windows instances.</p> </li> </ul>'
+    VulnerablePackage:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the vulnerable package.
+        version:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The version of the vulnerable package.
+        sourceLayerHash:
+          allOf:
+            - $ref: '#/components/schemas/SourceLayerHash'
+            - description: The source layer hash of the vulnerable package.
+        epoch:
+          allOf:
+            - $ref: '#/components/schemas/PackageEpoch'
+            - description: The epoch of the vulnerable package.
+        release:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The release of the vulnerable package.
+        arch:
+          allOf:
+            - $ref: '#/components/schemas/PackageArchitecture'
+            - description: The architecture of the vulnerable package.
+        packageManager:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The package manager of the vulnerable package.
+        filePath:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The file path of the vulnerable package.
+        fixedInVersion:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The version of the package that contains the vulnerability fix.
+        remediation:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The code to run in your environment to update packages with a fix available.
+      description: Information about a vulnerable package that Amazon Inspector identifies in a finding.
+    WorkflowExecutionMetadata:
+      type: object
+      properties:
+        workflowBuildVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowBuildVersionArn'
+            - description: The Amazon Resource Name (ARN) of the workflow resource build version that ran.
+        workflowExecutionId:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowExecutionId'
+            - description: Unique identifier that Image Builder assigns to keep track of runtime resources each time it runs a workflow.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowType'
+            - description: Indicates what type of workflow that Image Builder ran for this runtime instance of the workflow.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowExecutionStatus'
+            - description: The current runtime status for this workflow.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowExecutionMessage'
+            - description: 'The runtime output message from the workflow, if applicable.'
+        totalStepCount:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepCount'
+            - description: 'The total number of steps in the workflow. This should equal the sum of the step counts for steps that succeeded, were skipped, and failed.'
+        totalStepsSucceeded:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepCount'
+            - description: A runtime count for the number of steps in the workflow that ran successfully.
+        totalStepsFailed:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepCount'
+            - description: A runtime count for the number of steps in the workflow that failed.
+        totalStepsSkipped:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepCount'
+            - description: A runtime count for the number of steps in the workflow that were skipped.
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp when the runtime instance of this workflow started.
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp when this runtime instance of the workflow finished.
+      description: Metadata that includes details and status from this runtime instance of the workflow.
+    WorkflowStepMetadata:
+      type: object
+      properties:
+        stepExecutionId:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepExecutionId'
+            - description: 'A unique identifier for the workflow step, assigned at runtime.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepName'
+            - description: The name of the workflow step.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepDescription'
+            - description: Description of the workflow step.
+        action:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepAction'
+            - description: The step action name.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepExecutionStatus'
+            - description: Runtime status for the workflow step.
+        rollbackStatus:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepExecutionRollbackStatus'
+            - description: 'Reports on the rollback status of the step, if applicable.'
+        message:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepMessage'
+            - description: Detailed output message that the workflow step provides at runtime.
+        inputs:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepInputs'
+            - description: Input parameters that Image Builder provides for the workflow step.
+        outputs:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepOutputs'
+            - description: The file names that the workflow step created as output for this runtime instance of the workflow.
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp when the workflow step started.
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp when the workflow step finished.
+      description: Runtime details and status for the workflow step.
 security:
   - hmac: []

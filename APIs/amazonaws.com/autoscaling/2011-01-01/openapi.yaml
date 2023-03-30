@@ -223,7 +223,7 @@ paths:
     get:
       x-aws-operation-name: AttachLoadBalancerTargetGroups
       operationId: GET_AttachLoadBalancerTargetGroups
-      description: '<p>Attaches one or more target groups to the specified Auto Scaling group.</p> <p>This operation is used with the following load balancer types: </p> <ul> <li> <p>Application Load Balancer - Operates at the application layer (layer 7) and supports HTTP and HTTPS. </p> </li> <li> <p>Network Load Balancer - Operates at the transport layer (layer 4) and supports TCP, TLS, and UDP. </p> </li> <li> <p>Gateway Load Balancer - Operates at the network layer (layer 3).</p> </li> </ul> <p>To describe the target groups for an Auto Scaling group, call the <a>DescribeLoadBalancerTargetGroups</a> API. To detach the target group from the Auto Scaling group, call the <a>DetachLoadBalancerTargetGroups</a> API.</p> <p>This operation is additive and does not detach existing target groups or Classic Load Balancers from the Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>'
+      description: '<note> <p>This API call has been replaced with a new "traffic sources" API call (<code>AttachTrafficSources</code>) that can attach multiple traffic sources types. While we continue to support <code>AttachLoadBalancerTargetGroups</code>, and you can use both the original <code>AttachLoadBalancerTargetGroups</code> API call and the new <code>AttachTrafficSources</code> API call on the same Auto Scaling group, we recommend using the new "traffic sources" API call to simplify how you manage traffic sources.</p> </note> <p>Attaches one or more target groups to the specified Auto Scaling group.</p> <p>This operation is used with the following load balancer types: </p> <ul> <li> <p>Application Load Balancer - Operates at the application layer (layer 7) and supports HTTP and HTTPS. </p> </li> <li> <p>Network Load Balancer - Operates at the transport layer (layer 4) and supports TCP, TLS, and UDP. </p> </li> <li> <p>Gateway Load Balancer - Operates at the network layer (layer 3).</p> </li> </ul> <p>To describe the target groups for an Auto Scaling group, call the <a>DescribeLoadBalancerTargetGroups</a> API. To detach the target group from the Auto Scaling group, call the <a>DetachLoadBalancerTargetGroups</a> API.</p> <p>This operation is additive and does not detach existing target groups or Classic Load Balancers from the Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -286,7 +286,7 @@ paths:
     post:
       x-aws-operation-name: AttachLoadBalancerTargetGroups
       operationId: POST_AttachLoadBalancerTargetGroups
-      description: '<p>Attaches one or more target groups to the specified Auto Scaling group.</p> <p>This operation is used with the following load balancer types: </p> <ul> <li> <p>Application Load Balancer - Operates at the application layer (layer 7) and supports HTTP and HTTPS. </p> </li> <li> <p>Network Load Balancer - Operates at the transport layer (layer 4) and supports TCP, TLS, and UDP. </p> </li> <li> <p>Gateway Load Balancer - Operates at the network layer (layer 3).</p> </li> </ul> <p>To describe the target groups for an Auto Scaling group, call the <a>DescribeLoadBalancerTargetGroups</a> API. To detach the target group from the Auto Scaling group, call the <a>DetachLoadBalancerTargetGroups</a> API.</p> <p>This operation is additive and does not detach existing target groups or Classic Load Balancers from the Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>'
+      description: '<note> <p>This API call has been replaced with a new "traffic sources" API call (<code>AttachTrafficSources</code>) that can attach multiple traffic sources types. While we continue to support <code>AttachLoadBalancerTargetGroups</code>, and you can use both the original <code>AttachLoadBalancerTargetGroups</code> API call and the new <code>AttachTrafficSources</code> API call on the same Auto Scaling group, we recommend using the new "traffic sources" API call to simplify how you manage traffic sources.</p> </note> <p>Attaches one or more target groups to the specified Auto Scaling group.</p> <p>This operation is used with the following load balancer types: </p> <ul> <li> <p>Application Load Balancer - Operates at the application layer (layer 7) and supports HTTP and HTTPS. </p> </li> <li> <p>Network Load Balancer - Operates at the transport layer (layer 4) and supports TCP, TLS, and UDP. </p> </li> <li> <p>Gateway Load Balancer - Operates at the network layer (layer 3).</p> </li> </ul> <p>To describe the target groups for an Auto Scaling group, call the <a>DescribeLoadBalancerTargetGroups</a> API. To detach the target group from the Auto Scaling group, call the <a>DetachLoadBalancerTargetGroups</a> API.</p> <p>This operation is additive and does not detach existing target groups or Classic Load Balancers from the Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -330,7 +330,7 @@ paths:
     get:
       x-aws-operation-name: AttachLoadBalancers
       operationId: GET_AttachLoadBalancers
-      description: '<note> <p>To attach an Application Load Balancer, Network Load Balancer, or Gateway Load Balancer, use the <a>AttachLoadBalancerTargetGroups</a> API operation instead.</p> </note> <p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group. Amazon EC2 Auto Scaling registers the running instances with these Classic Load Balancers.</p> <p>To describe the load balancers for an Auto Scaling group, call the <a>DescribeLoadBalancers</a> API. To detach a load balancer from the Auto Scaling group, call the <a>DetachLoadBalancers</a> API.</p> <p>This operation is additive and does not detach existing Classic Load Balancers or target groups from the Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      description: '<note> <p>This API call has been replaced with a new "traffic sources" API call (<code>AttachTrafficSources</code>) that can attach multiple traffic sources types. While we continue to support <code>AttachLoadBalancers</code>, and you can use both the original <code>AttachLoadBalancers</code> API call and the new <code>AttachTrafficSources</code> API call on the same Auto Scaling group, we recommend using the new "traffic sources" API call to simplify how you manage traffic sources.</p> </note> <p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group. Amazon EC2 Auto Scaling registers the running instances with these Classic Load Balancers.</p> <p>To describe the load balancers for an Auto Scaling group, call the <a>DescribeLoadBalancers</a> API. To detach a load balancer from the Auto Scaling group, call the <a>DetachLoadBalancers</a> API.</p> <p>This operation is additive and does not detach existing Classic Load Balancers or target groups from the Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -393,7 +393,7 @@ paths:
     post:
       x-aws-operation-name: AttachLoadBalancers
       operationId: POST_AttachLoadBalancers
-      description: '<note> <p>To attach an Application Load Balancer, Network Load Balancer, or Gateway Load Balancer, use the <a>AttachLoadBalancerTargetGroups</a> API operation instead.</p> </note> <p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group. Amazon EC2 Auto Scaling registers the running instances with these Classic Load Balancers.</p> <p>To describe the load balancers for an Auto Scaling group, call the <a>DescribeLoadBalancers</a> API. To detach a load balancer from the Auto Scaling group, call the <a>DetachLoadBalancers</a> API.</p> <p>This operation is additive and does not detach existing Classic Load Balancers or target groups from the Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      description: '<note> <p>This API call has been replaced with a new "traffic sources" API call (<code>AttachTrafficSources</code>) that can attach multiple traffic sources types. While we continue to support <code>AttachLoadBalancers</code>, and you can use both the original <code>AttachLoadBalancers</code> API call and the new <code>AttachTrafficSources</code> API call on the same Auto Scaling group, we recommend using the new "traffic sources" API call to simplify how you manage traffic sources.</p> </note> <p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group. Amazon EC2 Auto Scaling registers the running instances with these Classic Load Balancers.</p> <p>To describe the load balancers for an Auto Scaling group, call the <a>DescribeLoadBalancers</a> API. To detach a load balancer from the Auto Scaling group, call the <a>DetachLoadBalancers</a> API.</p> <p>This operation is additive and does not detach existing Classic Load Balancers or target groups from the Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -437,7 +437,7 @@ paths:
     get:
       x-aws-operation-name: AttachTrafficSources
       operationId: GET_AttachTrafficSources
-      description: '<p> <b>Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. Do not use this API for production workloads. This API is also subject to change.</b> </p> <p>Attaches one or more traffic sources to the specified Auto Scaling group.</p> <p>To describe the traffic sources for an Auto Scaling group, call the <a>DescribeTrafficSources</a> API. To detach a traffic source from the Auto Scaling group, call the <a>DetachTrafficSources</a> API.</p> <p>This operation is additive and does not detach existing traffic sources from the Auto Scaling group.</p>'
+      description: '<p>Attaches one or more traffic sources to the specified Auto Scaling group.</p> <p>You can use any of the following as traffic sources for an Auto Scaling group:</p> <ul> <li> <p>Application Load Balancer</p> </li> <li> <p>Classic Load Balancer</p> </li> <li> <p>Network Load Balancer</p> </li> <li> <p>Gateway Load Balancer</p> </li> <li> <p>VPC Lattice</p> </li> </ul> <p>This operation is additive and does not detach existing traffic sources from the Auto Scaling group. </p> <p>After the operation completes, use the <a>DescribeTrafficSources</a> API to return details about the state of the attachments between traffic sources and your Auto Scaling group. To detach a traffic source from the Auto Scaling group, call the <a>DetachTrafficSources</a> API.</p>'
       responses:
         '200':
           description: Success
@@ -470,7 +470,7 @@ paths:
         - name: TrafficSources
           in: query
           required: true
-          description: '<p>The unique identifiers of one or more traffic sources. You can specify up to 10 traffic sources.</p> <p>Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC Lattice target group. Amazon EC2 Auto Scaling registers the running instances with the attached target groups. The target groups receive incoming traffic and route requests to one or more registered targets.</p>'
+          description: The unique identifiers of one or more traffic sources. You can specify up to 10 traffic sources.
           schema:
             type: array
             items:
@@ -500,7 +500,7 @@ paths:
     post:
       x-aws-operation-name: AttachTrafficSources
       operationId: POST_AttachTrafficSources
-      description: '<p> <b>Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. Do not use this API for production workloads. This API is also subject to change.</b> </p> <p>Attaches one or more traffic sources to the specified Auto Scaling group.</p> <p>To describe the traffic sources for an Auto Scaling group, call the <a>DescribeTrafficSources</a> API. To detach a traffic source from the Auto Scaling group, call the <a>DetachTrafficSources</a> API.</p> <p>This operation is additive and does not detach existing traffic sources from the Auto Scaling group.</p>'
+      description: '<p>Attaches one or more traffic sources to the specified Auto Scaling group.</p> <p>You can use any of the following as traffic sources for an Auto Scaling group:</p> <ul> <li> <p>Application Load Balancer</p> </li> <li> <p>Classic Load Balancer</p> </li> <li> <p>Network Load Balancer</p> </li> <li> <p>Gateway Load Balancer</p> </li> <li> <p>VPC Lattice</p> </li> </ul> <p>This operation is additive and does not detach existing traffic sources from the Auto Scaling group. </p> <p>After the operation completes, use the <a>DescribeTrafficSources</a> API to return details about the state of the attachments between traffic sources and your Auto Scaling group. To detach a traffic source from the Auto Scaling group, call the <a>DetachTrafficSources</a> API.</p>'
       responses:
         '200':
           description: Success
@@ -1115,7 +1115,7 @@ paths:
         - name: LoadBalancerNames
           in: query
           required: false
-          description: 'A list of Classic Load Balancers associated with this Auto Scaling group. For Application Load Balancers, Network Load Balancers, and Gateway Load Balancer, specify the <code>TargetGroupARNs</code> property instead.'
+          description: 'A list of Classic Load Balancers associated with this Auto Scaling group. For Application Load Balancers, Network Load Balancers, and Gateway Load Balancers, specify the <code>TargetGroupARNs</code> property instead.'
           schema:
             type: array
             items:
@@ -1131,7 +1131,7 @@ paths:
         - name: HealthCheckType
           in: query
           required: false
-          description: '<p>Determines whether any additional health checks are performed on the instances in this group. Amazon EC2 health checks are always on. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health checks for Auto Scaling instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>The valid values are <code>EC2</code> (default), <code>ELB</code>, and <code>VPC_LATTICE</code>. The <code>VPC_LATTICE</code> health check type is reserved for use with VPC Lattice, which is in preview release and is subject to change.</p>'
+          description: '<p>A comma-separated list of one or more health check types.</p> <p>The valid values are <code>EC2</code>, <code>ELB</code>, and <code>VPC_LATTICE</code>. <code>EC2</code> is the default health check and cannot be disabled. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health checks for Auto Scaling instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
           schema:
             type: string
             minLength: 1
@@ -1236,7 +1236,7 @@ paths:
         - name: TrafficSources
           in: query
           required: false
-          description: '<p> <b>Reserved for use with Amazon VPC Lattice, which is in preview release and is subject to change. Do not use this parameter for production workloads. It is also subject to change.</b> </p> <p>The unique identifiers of one or more traffic sources.</p> <p>Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC Lattice target group. Amazon EC2 Auto Scaling registers the running instances with the attached target groups. The target groups receive incoming traffic and route requests to one or more registered targets.</p>'
+          description: 'The list of traffic sources to attach to this Auto Scaling group. You can use any of the following as traffic sources for an Auto Scaling group: Classic Load Balancer, Application Load Balancer, Gateway Load Balancer, Network Load Balancer, and VPC Lattice.'
           schema:
             type: array
             items:
@@ -3376,7 +3376,7 @@ paths:
     get:
       x-aws-operation-name: DescribeLoadBalancerTargetGroups
       operationId: GET_DescribeLoadBalancerTargetGroups
-      description: '<p>Gets information about the Elastic Load Balancing target groups for the specified Auto Scaling group.</p> <p>To determine the attachment status of the target group, use the <code>State</code> element in the response. When you attach a target group to an Auto Scaling group, the initial <code>State</code> value is <code>Adding</code>. The state transitions to <code>Added</code> after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to <code>InService</code> after at least one Auto Scaling instance passes the health check. When the target group is in the <code>InService</code> state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the target group doesn''t enter the <code>InService</code> state. </p> <p>Target groups also have an <code>InService</code> state if you attach them in the <a>CreateAutoScalingGroup</a> API call. If your target group state is <code>InService</code>, but it is not working properly, check the scaling activities by calling <a>DescribeScalingActivities</a> and take any corrective actions necessary.</p> <p>For help with failed health checks, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html">Troubleshooting Amazon EC2 Auto Scaling: Health checks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p> <note> <p>You can use this operation to describe target groups that were attached by using <a>AttachLoadBalancerTargetGroups</a>, but not for target groups that were attached by using <a>AttachTrafficSources</a>.</p> </note>'
+      description: '<note> <p>This API call has been replaced with a new "traffic sources" API call (<code>DescribeTrafficSources</code>) that can describe multiple traffic sources types. While we continue to support <code>DescribeLoadBalancerTargetGroups</code>, and you can use both the original <code>DescribeLoadBalancerTargetGroups</code> API call and the new <code>DescribeTrafficSources</code> API call on the same Auto Scaling group, we recommend using the new "traffic sources" API call to simplify how you manage traffic sources.</p> </note> <p>Gets information about the Elastic Load Balancing target groups for the specified Auto Scaling group.</p> <p>To determine the attachment status of the target group, use the <code>State</code> element in the response. When you attach a target group to an Auto Scaling group, the initial <code>State</code> value is <code>Adding</code>. The state transitions to <code>Added</code> after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to <code>InService</code> after at least one Auto Scaling instance passes the health check. When the target group is in the <code>InService</code> state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the target group doesn''t enter the <code>InService</code> state. </p> <p>Target groups also have an <code>InService</code> state if you attach them in the <a>CreateAutoScalingGroup</a> API call. If your target group state is <code>InService</code>, but it is not working properly, check the scaling activities by calling <a>DescribeScalingActivities</a> and take any corrective actions necessary.</p> <p>For help with failed health checks, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html">Troubleshooting Amazon EC2 Auto Scaling: Health checks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p> <note> <p>You can use this operation to describe target groups that were attached by using <a>AttachLoadBalancerTargetGroups</a>, but not for target groups that were attached by using <a>AttachTrafficSources</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3444,7 +3444,7 @@ paths:
     post:
       x-aws-operation-name: DescribeLoadBalancerTargetGroups
       operationId: POST_DescribeLoadBalancerTargetGroups
-      description: '<p>Gets information about the Elastic Load Balancing target groups for the specified Auto Scaling group.</p> <p>To determine the attachment status of the target group, use the <code>State</code> element in the response. When you attach a target group to an Auto Scaling group, the initial <code>State</code> value is <code>Adding</code>. The state transitions to <code>Added</code> after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to <code>InService</code> after at least one Auto Scaling instance passes the health check. When the target group is in the <code>InService</code> state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the target group doesn''t enter the <code>InService</code> state. </p> <p>Target groups also have an <code>InService</code> state if you attach them in the <a>CreateAutoScalingGroup</a> API call. If your target group state is <code>InService</code>, but it is not working properly, check the scaling activities by calling <a>DescribeScalingActivities</a> and take any corrective actions necessary.</p> <p>For help with failed health checks, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html">Troubleshooting Amazon EC2 Auto Scaling: Health checks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p> <note> <p>You can use this operation to describe target groups that were attached by using <a>AttachLoadBalancerTargetGroups</a>, but not for target groups that were attached by using <a>AttachTrafficSources</a>.</p> </note>'
+      description: '<note> <p>This API call has been replaced with a new "traffic sources" API call (<code>DescribeTrafficSources</code>) that can describe multiple traffic sources types. While we continue to support <code>DescribeLoadBalancerTargetGroups</code>, and you can use both the original <code>DescribeLoadBalancerTargetGroups</code> API call and the new <code>DescribeTrafficSources</code> API call on the same Auto Scaling group, we recommend using the new "traffic sources" API call to simplify how you manage traffic sources.</p> </note> <p>Gets information about the Elastic Load Balancing target groups for the specified Auto Scaling group.</p> <p>To determine the attachment status of the target group, use the <code>State</code> element in the response. When you attach a target group to an Auto Scaling group, the initial <code>State</code> value is <code>Adding</code>. The state transitions to <code>Added</code> after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to <code>InService</code> after at least one Auto Scaling instance passes the health check. When the target group is in the <code>InService</code> state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the target group doesn''t enter the <code>InService</code> state. </p> <p>Target groups also have an <code>InService</code> state if you attach them in the <a>CreateAutoScalingGroup</a> API call. If your target group state is <code>InService</code>, but it is not working properly, check the scaling activities by calling <a>DescribeScalingActivities</a> and take any corrective actions necessary.</p> <p>For help with failed health checks, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html">Troubleshooting Amazon EC2 Auto Scaling: Health checks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p> <note> <p>You can use this operation to describe target groups that were attached by using <a>AttachLoadBalancerTargetGroups</a>, but not for target groups that were attached by using <a>AttachTrafficSources</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3488,7 +3488,7 @@ paths:
     get:
       x-aws-operation-name: DescribeLoadBalancers
       operationId: GET_DescribeLoadBalancers
-      description: '<p>Gets information about the load balancers for the specified Auto Scaling group.</p> <p>This operation describes only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancer, use the <a>DescribeLoadBalancerTargetGroups</a> API instead.</p> <p>To determine the attachment status of the load balancer, use the <code>State</code> element in the response. When you attach a load balancer to an Auto Scaling group, the initial <code>State</code> value is <code>Adding</code>. The state transitions to <code>Added</code> after all Auto Scaling instances are registered with the load balancer. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to <code>InService</code> after at least one Auto Scaling instance passes the health check. When the load balancer is in the <code>InService</code> state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the load balancer doesn''t enter the <code>InService</code> state. </p> <p>Load balancers also have an <code>InService</code> state if you attach them in the <a>CreateAutoScalingGroup</a> API call. If your load balancer state is <code>InService</code>, but it is not working properly, check the scaling activities by calling <a>DescribeScalingActivities</a> and take any corrective actions necessary.</p> <p>For help with failed health checks, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html">Troubleshooting Amazon EC2 Auto Scaling: Health checks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>'
+      description: '<note> <p>This API call has been replaced with a new "traffic sources" API call (<code>DescribeTrafficSources</code>) that can describe multiple traffic sources types. While we continue to support <code>DescribeLoadBalancers</code>, and you can use both the original <code>DescribeLoadBalancers</code> API call and the new <code>DescribeTrafficSources</code> API call on the same Auto Scaling group, we recommend using the new "traffic sources" API call to simplify how you manage traffic sources.</p> </note> <p>Gets information about the load balancers for the specified Auto Scaling group.</p> <p>This operation describes only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancers, use the <a>DescribeLoadBalancerTargetGroups</a> API instead.</p> <p>To determine the attachment status of the load balancer, use the <code>State</code> element in the response. When you attach a load balancer to an Auto Scaling group, the initial <code>State</code> value is <code>Adding</code>. The state transitions to <code>Added</code> after all Auto Scaling instances are registered with the load balancer. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to <code>InService</code> after at least one Auto Scaling instance passes the health check. When the load balancer is in the <code>InService</code> state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the load balancer doesn''t enter the <code>InService</code> state. </p> <p>Load balancers also have an <code>InService</code> state if you attach them in the <a>CreateAutoScalingGroup</a> API call. If your load balancer state is <code>InService</code>, but it is not working properly, check the scaling activities by calling <a>DescribeScalingActivities</a> and take any corrective actions necessary.</p> <p>For help with failed health checks, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html">Troubleshooting Amazon EC2 Auto Scaling: Health checks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -3556,7 +3556,7 @@ paths:
     post:
       x-aws-operation-name: DescribeLoadBalancers
       operationId: POST_DescribeLoadBalancers
-      description: '<p>Gets information about the load balancers for the specified Auto Scaling group.</p> <p>This operation describes only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancer, use the <a>DescribeLoadBalancerTargetGroups</a> API instead.</p> <p>To determine the attachment status of the load balancer, use the <code>State</code> element in the response. When you attach a load balancer to an Auto Scaling group, the initial <code>State</code> value is <code>Adding</code>. The state transitions to <code>Added</code> after all Auto Scaling instances are registered with the load balancer. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to <code>InService</code> after at least one Auto Scaling instance passes the health check. When the load balancer is in the <code>InService</code> state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the load balancer doesn''t enter the <code>InService</code> state. </p> <p>Load balancers also have an <code>InService</code> state if you attach them in the <a>CreateAutoScalingGroup</a> API call. If your load balancer state is <code>InService</code>, but it is not working properly, check the scaling activities by calling <a>DescribeScalingActivities</a> and take any corrective actions necessary.</p> <p>For help with failed health checks, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html">Troubleshooting Amazon EC2 Auto Scaling: Health checks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>'
+      description: '<note> <p>This API call has been replaced with a new "traffic sources" API call (<code>DescribeTrafficSources</code>) that can describe multiple traffic sources types. While we continue to support <code>DescribeLoadBalancers</code>, and you can use both the original <code>DescribeLoadBalancers</code> API call and the new <code>DescribeTrafficSources</code> API call on the same Auto Scaling group, we recommend using the new "traffic sources" API call to simplify how you manage traffic sources.</p> </note> <p>Gets information about the load balancers for the specified Auto Scaling group.</p> <p>This operation describes only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancers, use the <a>DescribeLoadBalancerTargetGroups</a> API instead.</p> <p>To determine the attachment status of the load balancer, use the <code>State</code> element in the response. When you attach a load balancer to an Auto Scaling group, the initial <code>State</code> value is <code>Adding</code>. The state transitions to <code>Added</code> after all Auto Scaling instances are registered with the load balancer. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to <code>InService</code> after at least one Auto Scaling instance passes the health check. When the load balancer is in the <code>InService</code> state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the load balancer doesn''t enter the <code>InService</code> state. </p> <p>Load balancers also have an <code>InService</code> state if you attach them in the <a>CreateAutoScalingGroup</a> API call. If your load balancer state is <code>InService</code>, but it is not working properly, check the scaling activities by calling <a>DescribeScalingActivities</a> and take any corrective actions necessary.</p> <p>For help with failed health checks, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html">Troubleshooting Amazon EC2 Auto Scaling: Health checks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -4501,7 +4501,7 @@ paths:
     get:
       x-aws-operation-name: DescribeTrafficSources
       operationId: GET_DescribeTrafficSources
-      description: '<p> <b>Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. Do not use this API for production workloads. This API is also subject to change.</b> </p> <p>Gets information about the traffic sources for the specified Auto Scaling group.</p>'
+      description: '<p>Gets information about the traffic sources for the specified Auto Scaling group.</p> <p>You can optionally provide a traffic source type. If you provide a traffic source type, then the results only include that traffic source type.</p> <p>If you do not provide a traffic source type, then the results include all the traffic sources for the specified Auto Scaling group. </p>'
       responses:
         '200':
           description: Success
@@ -4533,8 +4533,8 @@ paths:
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: TrafficSourceType
           in: query
-          required: true
-          description: 'The type of traffic source you are describing. Currently, the only valid value is <code>vpc-lattice</code>.'
+          required: false
+          description: '<p>The traffic source type that you want to describe.</p> <p>The following lists the valid values:</p> <ul> <li> <p> <code>elb</code> if the traffic source is a Classic Load Balancer.</p> </li> <li> <p> <code>elbv2</code> if the traffic source is a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer.</p> </li> <li> <p> <code>vpc-lattice</code> if the traffic source is VPC Lattice.</p> </li> </ul>'
           schema:
             type: string
             minLength: 1
@@ -4578,7 +4578,7 @@ paths:
     post:
       x-aws-operation-name: DescribeTrafficSources
       operationId: POST_DescribeTrafficSources
-      description: '<p> <b>Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. Do not use this API for production workloads. This API is also subject to change.</b> </p> <p>Gets information about the traffic sources for the specified Auto Scaling group.</p>'
+      description: '<p>Gets information about the traffic sources for the specified Auto Scaling group.</p> <p>You can optionally provide a traffic source type. If you provide a traffic source type, then the results only include that traffic source type.</p> <p>If you do not provide a traffic source type, then the results include all the traffic sources for the specified Auto Scaling group. </p>'
       responses:
         '200':
           description: Success
@@ -4604,6 +4604,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeTrafficSourcesRequest'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -4847,7 +4859,7 @@ paths:
     get:
       x-aws-operation-name: DetachLoadBalancerTargetGroups
       operationId: GET_DetachLoadBalancerTargetGroups
-      description: '<p>Detaches one or more target groups from the specified Auto Scaling group.</p> <p>When you detach a target group, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the target group using the <a>DescribeLoadBalancerTargetGroups</a> API call. The instances remain running.</p> <note> <p>You can use this operation to detach target groups that were attached by using <a>AttachLoadBalancerTargetGroups</a>, but not for target groups that were attached by using <a>AttachTrafficSources</a>.</p> </note>'
+      description: '<note> <p>This API call has been replaced with a new "traffic sources" API call (<code>DetachTrafficSources</code>) that can detach multiple traffic sources types. While we continue to support <code>DetachLoadBalancerTargetGroups</code>, and you can use both the original <code>DetachLoadBalancerTargetGroups</code> API call and the new <code>DetachTrafficSources</code> API call on the same Auto Scaling group, we recommend using the new "traffic sources" API call to simplify how you manage traffic sources.</p> </note> <p>Detaches one or more target groups from the specified Auto Scaling group.</p> <p>When you detach a target group, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the target group using the <a>DescribeLoadBalancerTargetGroups</a> API call. The instances remain running.</p> <note> <p>You can use this operation to detach target groups that were attached by using <a>AttachLoadBalancerTargetGroups</a>, but not for target groups that were attached by using <a>AttachTrafficSources</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4904,7 +4916,7 @@ paths:
     post:
       x-aws-operation-name: DetachLoadBalancerTargetGroups
       operationId: POST_DetachLoadBalancerTargetGroups
-      description: '<p>Detaches one or more target groups from the specified Auto Scaling group.</p> <p>When you detach a target group, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the target group using the <a>DescribeLoadBalancerTargetGroups</a> API call. The instances remain running.</p> <note> <p>You can use this operation to detach target groups that were attached by using <a>AttachLoadBalancerTargetGroups</a>, but not for target groups that were attached by using <a>AttachTrafficSources</a>.</p> </note>'
+      description: '<note> <p>This API call has been replaced with a new "traffic sources" API call (<code>DetachTrafficSources</code>) that can detach multiple traffic sources types. While we continue to support <code>DetachLoadBalancerTargetGroups</code>, and you can use both the original <code>DetachLoadBalancerTargetGroups</code> API call and the new <code>DetachTrafficSources</code> API call on the same Auto Scaling group, we recommend using the new "traffic sources" API call to simplify how you manage traffic sources.</p> </note> <p>Detaches one or more target groups from the specified Auto Scaling group.</p> <p>When you detach a target group, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the target group using the <a>DescribeLoadBalancerTargetGroups</a> API call. The instances remain running.</p> <note> <p>You can use this operation to detach target groups that were attached by using <a>AttachLoadBalancerTargetGroups</a>, but not for target groups that were attached by using <a>AttachTrafficSources</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4942,7 +4954,7 @@ paths:
     get:
       x-aws-operation-name: DetachLoadBalancers
       operationId: GET_DetachLoadBalancers
-      description: '<p>Detaches one or more Classic Load Balancers from the specified Auto Scaling group.</p> <p>This operation detaches only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancer, use the <a>DetachLoadBalancerTargetGroups</a> API instead.</p> <p>When you detach a load balancer, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the load balancer using the <a>DescribeLoadBalancers</a> API call. The instances remain running.</p>'
+      description: '<note> <p>This API call has been replaced with a new "traffic sources" API call (<code>DetachTrafficSources</code>) that can detach multiple traffic sources types. While we continue to support <code>DetachLoadBalancers</code>, and you can use both the original <code>DetachLoadBalancers</code> API call and the new <code>DetachTrafficSources</code> API call on the same Auto Scaling group, we recommend using the new "traffic sources" API call to simplify how you manage traffic sources.</p> </note> <p>Detaches one or more Classic Load Balancers from the specified Auto Scaling group.</p> <p>This operation detaches only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancers, use the <a>DetachLoadBalancerTargetGroups</a> API instead.</p> <p>When you detach a load balancer, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the load balancer using the <a>DescribeLoadBalancers</a> API call. The instances remain running.</p>'
       responses:
         '200':
           description: Success
@@ -4999,7 +5011,7 @@ paths:
     post:
       x-aws-operation-name: DetachLoadBalancers
       operationId: POST_DetachLoadBalancers
-      description: '<p>Detaches one or more Classic Load Balancers from the specified Auto Scaling group.</p> <p>This operation detaches only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancer, use the <a>DetachLoadBalancerTargetGroups</a> API instead.</p> <p>When you detach a load balancer, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the load balancer using the <a>DescribeLoadBalancers</a> API call. The instances remain running.</p>'
+      description: '<note> <p>This API call has been replaced with a new "traffic sources" API call (<code>DetachTrafficSources</code>) that can detach multiple traffic sources types. While we continue to support <code>DetachLoadBalancers</code>, and you can use both the original <code>DetachLoadBalancers</code> API call and the new <code>DetachTrafficSources</code> API call on the same Auto Scaling group, we recommend using the new "traffic sources" API call to simplify how you manage traffic sources.</p> </note> <p>Detaches one or more Classic Load Balancers from the specified Auto Scaling group.</p> <p>This operation detaches only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancers, use the <a>DetachLoadBalancerTargetGroups</a> API instead.</p> <p>When you detach a load balancer, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the load balancer using the <a>DescribeLoadBalancers</a> API call. The instances remain running.</p>'
       responses:
         '200':
           description: Success
@@ -5037,7 +5049,7 @@ paths:
     get:
       x-aws-operation-name: DetachTrafficSources
       operationId: GET_DetachTrafficSources
-      description: '<p> <b>Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. Do not use this API for production workloads. This API is also subject to change.</b> </p> <p>Detaches one or more traffic sources from the specified Auto Scaling group.</p>'
+      description: '<p>Detaches one or more traffic sources from the specified Auto Scaling group.</p> <p>When you detach a taffic, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the traffic source using the <a>DescribeTrafficSources</a> API call. The instances continue to run.</p>'
       responses:
         '200':
           description: Success
@@ -5064,7 +5076,7 @@ paths:
         - name: TrafficSources
           in: query
           required: true
-          description: '<p>The unique identifiers of one or more traffic sources you are detaching. You can specify up to 10 traffic sources.</p> <p>Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC Lattice target group. When you detach a target group, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the target group using the <a>DescribeTrafficSources</a> API call. The instances continue to run.</p>'
+          description: The unique identifiers of one or more traffic sources you are detaching. You can specify up to 10 traffic sources.
           schema:
             type: array
             items:
@@ -5094,7 +5106,7 @@ paths:
     post:
       x-aws-operation-name: DetachTrafficSources
       operationId: POST_DetachTrafficSources
-      description: '<p> <b>Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. Do not use this API for production workloads. This API is also subject to change.</b> </p> <p>Detaches one or more traffic sources from the specified Auto Scaling group.</p>'
+      description: '<p>Detaches one or more traffic sources from the specified Auto Scaling group.</p> <p>When you detach a taffic, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the traffic source using the <a>DescribeTrafficSources</a> API call. The instances continue to run.</p>'
       responses:
         '200':
           description: Success
@@ -7263,9 +7275,13 @@ paths:
             type: object
             properties:
               LaunchTemplate:
-                $ref: '#/components/schemas/LaunchTemplateSpecification'
+                allOf:
+                  - $ref: '#/components/schemas/LaunchTemplateSpecification'
+                  - description: 'Describes the launch template and the version of the launch template that Amazon EC2 Auto Scaling uses to launch Amazon EC2 instances. For more information about launch templates, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html">Launch templates</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.'
               MixedInstancesPolicy:
-                $ref: '#/components/schemas/MixedInstancesPolicy'
+                allOf:
+                  - $ref: '#/components/schemas/MixedInstancesPolicy'
+                  - description: '<p>Use this structure to launch multiple instance types and On-Demand Instances and Spot Instances within a single Auto Scaling group.</p> <p>A mixed instances policy contains information that Amazon EC2 Auto Scaling can use to launch instances and help optimize your costs. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html">Auto Scaling groups with multiple instance types and purchase options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
             description: '<p>Describes the desired configuration for an instance refresh. </p> <p>If you specify a desired configuration, you must specify either a <code>LaunchTemplate</code> or a <code>MixedInstancesPolicy</code>. </p>'
         - name: Preferences
           in: query
@@ -7698,7 +7714,7 @@ paths:
         - name: HealthCheckType
           in: query
           required: false
-          description: '<p>Determines whether any additional health checks are performed on the instances in this group. Amazon EC2 health checks are always on.</p> <p>The valid values are <code>EC2</code> (default), <code>ELB</code>, and <code>VPC_LATTICE</code>. The <code>VPC_LATTICE</code> health check type is reserved for use with VPC Lattice, which is in preview release and is subject to change.</p>'
+          description: '<p>A comma-separated list of one or more health check types.</p> <p>The valid values are <code>EC2</code>, <code>ELB</code>, and <code>VPC_LATTICE</code>. <code>EC2</code> is the default health check and cannot be disabled. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health checks for Auto Scaling instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
           schema:
             type: string
             minLength: 1
@@ -7928,15 +7944,22 @@ components:
       x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
     AttachTrafficSourcesResultType:
       type: object
+      example: {}
       properties: {}
     TrafficSourceIdentifier:
       type: object
+      required:
+        - Identifier
       properties:
         Identifier:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen511'
-            - description: The unique identifier of the traffic source.
-      description: '<p>Describes the identifier of a traffic source.</p> <p>Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC Lattice target group.</p>'
+            - description: '<p>Identifies the traffic source.</p> <p>For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.</p> <p>For example: </p> <ul> <li> <p>Application Load Balancer ARN: <code>arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456</code> </p> </li> <li> <p>Classic Load Balancer name: <code>my-classic-load-balancer</code> </p> </li> <li> <p>VPC Lattice ARN: <code>arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456</code> </p> </li> </ul> <p>To get the ARN of a target group for a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer, or the name of a Classic Load Balancer, use the Elastic Load Balancing <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> and <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html">DescribeLoadBalancers</a> API operations.</p> <p>To get the ARN of a target group for VPC Lattice, use the VPC Lattice <a href="https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html">GetTargetGroup</a> API operation.</p>'
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen511'
+            - description: '<p>Provides additional context for the value of <code>Identifier</code>.</p> <p>The following lists the valid values:</p> <ul> <li> <p> <code>elb</code> if <code>Identifier</code> is the name of a Classic Load Balancer.</p> </li> <li> <p> <code>elbv2</code> if <code>Identifier</code> is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.</p> </li> <li> <p> <code>vpc-lattice</code> if <code>Identifier</code> is the ARN of a VPC Lattice target group.</p> </li> </ul> <p>Required if the identifier is the name of a Classic Load Balancer.</p>'
+      description: Identifying information for a traffic source.
     BatchDeleteScheduledActionAnswer:
       type: object
       properties:
@@ -8588,6 +8611,12 @@ components:
             - description: 'The termination policies supported by Amazon EC2 Auto Scaling: <code>OldestInstance</code>, <code>OldestLaunchConfiguration</code>, <code>NewestInstance</code>, <code>ClosestToNextInstanceHour</code>, <code>Default</code>, <code>OldestLaunchTemplate</code>, and <code>AllocationStrategy</code>.'
     DescribeTrafficSourcesResponse:
       type: object
+      example:
+        NextToken: ''
+        TrafficSources:
+          - Identifier: 'arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-0e2f2665eEXAMPLE'
+            State: InService
+            Type: vpc-lattice
       properties:
         TrafficSources:
           allOf:
@@ -8637,6 +8666,7 @@ components:
       properties: {}
     DetachTrafficSourcesResultType:
       type: object
+      example: {}
       properties: {}
     EnterStandbyAnswer:
       type: object
@@ -9041,6 +9071,7 @@ components:
         - Successful
         - Failed
         - Cancelled
+        - WaitingForConnectionDraining
     Progress:
       type: integer
     AutoScalingGroupState:
@@ -9165,7 +9196,7 @@ components:
         TrafficSources:
           allOf:
             - $ref: '#/components/schemas/TrafficSources'
-            - description: '<p>The unique identifiers of one or more traffic sources. You can specify up to 10 traffic sources.</p> <p>Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC Lattice target group. Amazon EC2 Auto Scaling registers the running instances with the attached target groups. The target groups receive incoming traffic and route requests to one or more registered targets.</p>'
+            - description: The unique identifiers of one or more traffic sources. You can specify up to 10 traffic sources.
     AutoScalingGroupMinSize:
       type: integer
     AutoScalingGroupMaxSize:
@@ -9315,7 +9346,7 @@ components:
         HealthCheckType:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen32'
-            - description: '<p>Determines whether any additional health checks are performed on the instances in this group. Amazon EC2 health checks are always on.</p> <p>The valid values are <code>EC2</code> (default), <code>ELB</code>, and <code>VPC_LATTICE</code>. The <code>VPC_LATTICE</code> health check type is reserved for use with VPC Lattice, which is in preview release and is subject to change.</p>'
+            - description: A comma-separated list of one or more health check types.
         HealthCheckGracePeriod:
           allOf:
             - $ref: '#/components/schemas/HealthCheckGracePeriod'
@@ -9395,7 +9426,7 @@ components:
         TrafficSources:
           allOf:
             - $ref: '#/components/schemas/TrafficSources'
-            - description: '<p> <b>Reserved for use with Amazon VPC Lattice, which is in preview release and is subject to change. Do not use this parameter for production workloads. It is also subject to change.</b> </p> <p>The unique identifiers of the traffic sources.</p>'
+            - description: The traffic sources associated with this Auto Scaling group.
       description: Describes an Auto Scaling group.
     AutoScalingGroupNames:
       type: array
@@ -9464,7 +9495,7 @@ components:
         HealthStatus:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen32'
-            - description: The last reported health status of this instance. "Healthy" means that the instance is healthy and should remain in service. "Unhealthy" means that the instance is unhealthy and Amazon EC2 Auto Scaling should terminate and replace it.
+            - description: The last reported health status of this instance. <code>Healthy</code> means that the instance is healthy and should remain in service. <code>Unhealthy</code> means that the instance is unhealthy and Amazon EC2 Auto Scaling should terminate and replace it.
         LaunchConfigurationName:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen255'
@@ -9758,7 +9789,7 @@ components:
         LoadBalancerNames:
           allOf:
             - $ref: '#/components/schemas/LoadBalancerNames'
-            - description: 'A list of Classic Load Balancers associated with this Auto Scaling group. For Application Load Balancers, Network Load Balancers, and Gateway Load Balancer, specify the <code>TargetGroupARNs</code> property instead.'
+            - description: 'A list of Classic Load Balancers associated with this Auto Scaling group. For Application Load Balancers, Network Load Balancers, and Gateway Load Balancers, specify the <code>TargetGroupARNs</code> property instead.'
         TargetGroupARNs:
           allOf:
             - $ref: '#/components/schemas/TargetGroupARNs'
@@ -9766,7 +9797,7 @@ components:
         HealthCheckType:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen32'
-            - description: '<p>Determines whether any additional health checks are performed on the instances in this group. Amazon EC2 health checks are always on. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health checks for Auto Scaling instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>The valid values are <code>EC2</code> (default), <code>ELB</code>, and <code>VPC_LATTICE</code>. The <code>VPC_LATTICE</code> health check type is reserved for use with VPC Lattice, which is in preview release and is subject to change.</p>'
+            - description: '<p>A comma-separated list of one or more health check types.</p> <p>The valid values are <code>EC2</code>, <code>ELB</code>, and <code>VPC_LATTICE</code>. <code>EC2</code> is the default health check and cannot be disabled. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health checks for Auto Scaling instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
         HealthCheckGracePeriod:
           allOf:
             - $ref: '#/components/schemas/HealthCheckGracePeriod'
@@ -9822,7 +9853,7 @@ components:
         TrafficSources:
           allOf:
             - $ref: '#/components/schemas/TrafficSources'
-            - description: '<p> <b>Reserved for use with Amazon VPC Lattice, which is in preview release and is subject to change. Do not use this parameter for production workloads. It is also subject to change.</b> </p> <p>The unique identifiers of one or more traffic sources.</p> <p>Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC Lattice target group. Amazon EC2 Auto Scaling registers the running instances with the attached target groups. The target groups receive incoming traffic and route requests to one or more registered targets.</p>'
+            - description: 'The list of traffic sources to attach to this Auto Scaling group. You can use any of the following as traffic sources for an Auto Scaling group: Classic Load Balancer, Application Load Balancer, Gateway Load Balancer, Network Load Balancer, and VPC Lattice.'
     SecurityGroups:
       type: array
       items:
@@ -10329,7 +10360,6 @@ components:
       type: object
       required:
         - AutoScalingGroupName
-        - TrafficSourceType
       title: DescribeTrafficSourcesRequest
       properties:
         AutoScalingGroupName:
@@ -10339,7 +10369,7 @@ components:
         TrafficSourceType:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen255'
-            - description: 'The type of traffic source you are describing. Currently, the only valid value is <code>vpc-lattice</code>.'
+            - description: '<p>The traffic source type that you want to describe.</p> <p>The following lists the valid values:</p> <ul> <li> <p> <code>elb</code> if the traffic source is a Classic Load Balancer.</p> </li> <li> <p> <code>elbv2</code> if the traffic source is a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer.</p> </li> <li> <p> <code>vpc-lattice</code> if the traffic source is VPC Lattice.</p> </li> </ul>'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -10374,9 +10404,13 @@ components:
       type: object
       properties:
         LaunchTemplate:
-          $ref: '#/components/schemas/LaunchTemplateSpecification'
+          allOf:
+            - $ref: '#/components/schemas/LaunchTemplateSpecification'
+            - description: 'Describes the launch template and the version of the launch template that Amazon EC2 Auto Scaling uses to launch Amazon EC2 instances. For more information about launch templates, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html">Launch templates</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.'
         MixedInstancesPolicy:
-          $ref: '#/components/schemas/MixedInstancesPolicy'
+          allOf:
+            - $ref: '#/components/schemas/MixedInstancesPolicy'
+            - description: '<p>Use this structure to launch multiple instance types and On-Demand Instances and Spot Instances within a single Auto Scaling group.</p> <p>A mixed instances policy contains information that Amazon EC2 Auto Scaling can use to launch instances and help optimize your costs. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html">Auto Scaling groups with multiple instance types and purchase options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       description: '<p>Describes the desired configuration for an instance refresh. </p> <p>If you specify a desired configuration, you must specify either a <code>LaunchTemplate</code> or a <code>MixedInstancesPolicy</code>. </p>'
     ShouldDecrementDesiredCapacity:
       type: boolean
@@ -10443,7 +10477,7 @@ components:
         TrafficSources:
           allOf:
             - $ref: '#/components/schemas/TrafficSources'
-            - description: '<p>The unique identifiers of one or more traffic sources you are detaching. You can specify up to 10 traffic sources.</p> <p>Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC Lattice target group. When you detach a target group, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the target group using the <a>DescribeTrafficSources</a> API call. The instances continue to run.</p>'
+            - description: The unique identifiers of one or more traffic sources you are detaching. You can specify up to 10 traffic sources.
     Metrics:
       type: array
       items:
@@ -10675,7 +10709,7 @@ components:
         HealthStatus:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen32'
-            - description: The last reported health status of the instance. "Healthy" means that the instance is healthy and should remain in service. "Unhealthy" means that the instance is unhealthy and that Amazon EC2 Auto Scaling should terminate and replace it.
+            - description: The last reported health status of the instance. <code>Healthy</code> means that the instance is healthy and should remain in service. <code>Unhealthy</code> means that the instance is unhealthy and that Amazon EC2 Auto Scaling should terminate and replace it.
         LaunchConfigurationName:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen255'
@@ -10785,7 +10819,9 @@ components:
             - $ref: '#/components/schemas/InstancesToUpdate'
             - description: Indicates the value of <code>InstancesToUpdate</code> at the time the rollback started.
         ProgressDetailsOnRollback:
-          $ref: '#/components/schemas/InstanceRefreshProgressDetails'
+          allOf:
+            - $ref: '#/components/schemas/InstanceRefreshProgressDetails'
+            - description: Reports progress on replacing instances in an Auto Scaling group that has a warm pool. This includes separate details for instances in the warm pool and instances in the Auto Scaling group (the live pool).
       description: Details about an instance refresh rollback.
     InstanceRefresh:
       type: object
@@ -10827,7 +10863,9 @@ components:
             - $ref: '#/components/schemas/InstanceRefreshProgressDetails'
             - description: Additional progress details for an Auto Scaling group that has a warm pool.
         Preferences:
-          $ref: '#/components/schemas/RefreshPreferences'
+          allOf:
+            - $ref: '#/components/schemas/RefreshPreferences'
+            - description: The preferences for an instance refresh.
         DesiredConfiguration:
           allOf:
             - $ref: '#/components/schemas/DesiredConfiguration'
@@ -12201,16 +12239,18 @@ components:
         - Stat
       properties:
         Metric:
-          $ref: '#/components/schemas/Metric'
+          allOf:
+            - $ref: '#/components/schemas/Metric'
+            - description: The metric to use.
         Stat:
           allOf:
             - $ref: '#/components/schemas/XmlStringMetricStat'
-            - description: '<p>The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic">Statistics</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>The most commonly used metrics for scaling is <code>Average</code> </p>'
+            - description: '<p>The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic">Statistics</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>The most commonly used metric for scaling is <code>Average</code>.</p>'
         Unit:
           allOf:
             - $ref: '#/components/schemas/MetricUnit'
             - description: 'The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html">MetricDatum</a> data type in the <i>Amazon CloudWatch API Reference</i>.'
-      description: '<p>This structure defines the CloudWatch metric to return, along with the statistic, period, and unit.</p> <p>For more information about the CloudWatch terminology below, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html">Amazon CloudWatch concepts</a> in the <i>Amazon CloudWatch User Guide</i>.</p>'
+      description: '<p>This structure defines the CloudWatch metric to return, along with the statistic and unit.</p> <p>For more information about the CloudWatch terminology below, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html">Amazon CloudWatch concepts</a> in the <i>Amazon CloudWatch User Guide</i>.</p>'
     TerminateInstanceInAutoScalingGroupType:
       type: object
       required:
@@ -12232,11 +12272,20 @@ components:
         TrafficSource:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen511'
-            - description: 'The unique identifier of the traffic source. Currently, this is the Amazon Resource Name (ARN) for a VPC Lattice target group.'
+            - deprecated: true
+              description: This is replaced by <code>Identifier</code>.TrafficSource has been replaced by Identifier
         State:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen255'
-            - description: '<p>The following are the possible states for a VPC Lattice target group:</p> <ul> <li> <p> <code>Adding</code> - The Auto Scaling instances are being registered with the target group.</p> </li> <li> <p> <code>Added</code> - All Auto Scaling instances are registered with the target group.</p> </li> <li> <p> <code>InService</code> - At least one Auto Scaling instance passed the <code>VPC_LATTICE</code> health check.</p> </li> <li> <p> <code>Removing</code> - The Auto Scaling instances are being deregistered from the target group. If connection draining is enabled, VPC Lattice waits for in-flight requests to complete before deregistering the instances.</p> </li> <li> <p> <code>Removed</code> - All Auto Scaling instances are deregistered from the target group.</p> </li> </ul>'
+            - description: '<p>Describes the current state of a traffic source.</p> <p>The state values are as follows:</p> <ul> <li> <p> <code>Adding</code> - The Auto Scaling instances are being registered with the load balancer or target group.</p> </li> <li> <p> <code>Added</code> - All Auto Scaling instances are registered with the load balancer or target group.</p> </li> <li> <p> <code>InService</code> - For an Elastic Load Balancing load balancer or target group, at least one Auto Scaling instance passed an <code>ELB</code> health check. For VPC Lattice, at least one Auto Scaling instance passed an <code>VPC_LATTICE</code> health check.</p> </li> <li> <p> <code>Removing</code> - The Auto Scaling instances are being deregistered from the load balancer or target group. If connection draining (deregistration delay) is enabled, Elastic Load Balancing or VPC Lattice waits for in-flight requests to complete before deregistering the instances.</p> </li> <li> <p> <code>Removed</code> - All Auto Scaling instances are deregistered from the load balancer or target group.</p> </li> </ul>'
+        Identifier:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen511'
+            - description: The unique identifier of the traffic source.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen511'
+            - description: '<p>Provides additional context for the value of <code>Identifier</code>.</p> <p>The following lists the valid values:</p> <ul> <li> <p> <code>elb</code> if <code>Identifier</code> is the name of a Classic Load Balancer.</p> </li> <li> <p> <code>elbv2</code> if <code>Identifier</code> is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.</p> </li> <li> <p> <code>vpc-lattice</code> if <code>Identifier</code> is the ARN of a VPC Lattice target group.</p> </li> </ul> <p>Required if the identifier is the name of a Classic Load Balancer.</p>'
       description: Describes the state of a traffic source.
     UpdateAutoScalingGroupType:
       type: object
@@ -12283,7 +12332,7 @@ components:
         HealthCheckType:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen32'
-            - description: '<p>Determines whether any additional health checks are performed on the instances in this group. Amazon EC2 health checks are always on.</p> <p>The valid values are <code>EC2</code> (default), <code>ELB</code>, and <code>VPC_LATTICE</code>. The <code>VPC_LATTICE</code> health check type is reserved for use with VPC Lattice, which is in preview release and is subject to change.</p>'
+            - description: '<p>A comma-separated list of one or more health check types.</p> <p>The valid values are <code>EC2</code>, <code>ELB</code>, and <code>VPC_LATTICE</code>. <code>EC2</code> is the default health check and cannot be disabled. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health checks for Auto Scaling instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
         HealthCheckGracePeriod:
           allOf:
             - $ref: '#/components/schemas/HealthCheckGracePeriod'

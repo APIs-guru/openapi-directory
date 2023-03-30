@@ -268,6 +268,9 @@ paths:
                 associateDefaultSecurityGroup:
                   description: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
                   type: boolean
+                autoReplicateNewDisks:
+                  description: Whether to allow the AWS replication agent to automatically replicate newly added disks.
+                  type: boolean
                 bandwidthThrottling:
                   description: Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
                   type: integer
@@ -1765,8 +1768,9 @@ paths:
                     $ref: '#/components/schemas/TagValue'
   /RetryDataReplication:
     post:
+      deprecated: true
       operationId: RetryDataReplication
-      description: 'Causes the data replication initiation sequence to begin immediately upon next Handshake for the specified Source Server ID, regardless of when the previous initiation started. This command will work only if the Source Server is stalled or is in a DISCONNECTED or STOPPED state.'
+      description: 'WARNING: RetryDataReplication is deprecated. Causes the data replication initiation sequence to begin immediately upon next Handshake for the specified Source Server ID, regardless of when the previous initiation started. This command will work only if the Source Server is stalled or is in a DISCONNECTED or STOPPED state. '
       responses:
         '200':
           description: Success
@@ -2611,6 +2615,9 @@ paths:
                 associateDefaultSecurityGroup:
                   description: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration.
                   type: boolean
+                autoReplicateNewDisks:
+                  description: Whether to allow the AWS replication agent to automatically replicate newly added disks.
+                  type: boolean
                 bandwidthThrottling:
                   description: Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
                   type: integer
@@ -2768,6 +2775,9 @@ paths:
                   maxLength: 2048
                 associateDefaultSecurityGroup:
                   description: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
+                  type: boolean
+                autoReplicateNewDisks:
+                  description: Whether to allow the AWS replication agent to automatically replicate newly added disks.
                   type: boolean
                 bandwidthThrottling:
                   description: Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
@@ -2932,6 +2942,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
+        autoReplicateNewDisks:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to allow the AWS replication agent to automatically replicate newly added disks.
         bandwidthThrottling:
           allOf:
             - $ref: '#/components/schemas/PositiveInteger'
@@ -3253,6 +3267,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration.
+        autoReplicateNewDisks:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to allow the AWS replication agent to automatically replicate newly added disks.
         bandwidthThrottling:
           allOf:
             - $ref: '#/components/schemas/PositiveInteger'
@@ -3489,13 +3507,13 @@ components:
             - $ref: '#/components/schemas/BoundedString'
             - description: The model name of the CPU.
       description: Information about a server's CPU.
-    ebsSnapshot:
+    EbsSnapshot:
       type: string
       pattern: '^snap-[0-9a-zA-Z]{17}$'
     ConversionMap:
       type: object
       additionalProperties:
-        $ref: '#/components/schemas/ebsSnapshot'
+        $ref: '#/components/schemas/EbsSnapshot'
     LargeBoundedString:
       type: string
       minLength: 0
@@ -3620,6 +3638,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
+        autoReplicateNewDisks:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to allow the AWS replication agent to automatically replicate newly added disks.
         bandwidthThrottling:
           allOf:
             - $ref: '#/components/schemas/PositiveInteger'
@@ -4206,7 +4228,7 @@ components:
     EbsSnapshotsList:
       type: array
       items:
-        $ref: '#/components/schemas/ebsSnapshot'
+        $ref: '#/components/schemas/EbsSnapshot'
     EbsVolumeID:
       type: string
       pattern: '^vol-([0-9a-fA-F]{8}|[0-9a-fA-F]{17})$'
@@ -4940,12 +4962,14 @@ components:
       type: object
       required:
         - sourceServerID
+      deprecated: true
       title: RetryDataReplicationRequest
       properties:
         sourceServerID:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
             - description: The ID of the Source Server whose data replication should be retried.
+      description: 'WARNING: RetryDataReplication is deprecated'
     ReverseReplicationRequest:
       type: object
       required:
@@ -5212,6 +5236,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration.
+        autoReplicateNewDisks:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to allow the AWS replication agent to automatically replicate newly added disks.
         bandwidthThrottling:
           allOf:
             - $ref: '#/components/schemas/PositiveInteger'
@@ -5286,6 +5314,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
+        autoReplicateNewDisks:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to allow the AWS replication agent to automatically replicate newly added disks.
         bandwidthThrottling:
           allOf:
             - $ref: '#/components/schemas/PositiveInteger'
