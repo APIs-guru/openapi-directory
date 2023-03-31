@@ -641,7 +641,7 @@ components:
         properties:
           additionalProperties:
             $ref: "#/components/schemas/Value"
-          description: The entity's properties. The map's keys are property names. A property name matching regex `__.*__` is reserved. A reserved property name is forbidden in certain documented contexts. The name must not contain more than 500 characters. The name cannot be `""`.
+          description: The entity's properties. The map's keys are property names. A property name matching regex `__.*__` is reserved. A reserved property name is forbidden in certain documented contexts. The map keys, represented as UTF-8, must not exceed 1,500 bytes and cannot be empty.
           type: object
       type: object
     EntityResult:

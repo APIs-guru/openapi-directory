@@ -683,7 +683,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The unqualified resource name. Should follow the ^[A-Za-z0-9_.~+%-]+$ regex format.
+        - description: The unqualified resource name. Should follow the `^[A-Za-z0-9_.~+%-]+$` regex format.
           in: query
           name: queuedResourceId
           schema:
@@ -1408,6 +1408,9 @@ components:
         queueingPolicy:
           $ref: "#/components/schemas/QueueingPolicy"
           description: The queueing policy of the QueuedRequest.
+        reservationName:
+          description: "Name of the reservation in which the resource should be provisioned. Format: projects/{project}/locations/{zone}/reservations/{reservation}"
+          type: string
         state:
           $ref: "#/components/schemas/QueuedResourceState"
           description: Output only. State of the QueuedResource request.
