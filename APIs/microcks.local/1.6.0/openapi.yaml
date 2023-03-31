@@ -8,7 +8,8 @@ info:
     email: laurent.broudoux@gmail.com
     name: Laurent Broudoux
     url: https://github.com/lbroudoux
-  description: API offered by Microcks, the mock and testing platform for API and microservices (microcks.io)
+  description: API offered by Microcks, the mock and testing platform for API and
+    microservices (microcks.io)
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -40,7 +41,8 @@ paths:
       description: Uploads an artifact to be imported by Microcks.
       operationId: uploadArtifact
       parameters:
-        - description: Flag telling if this should be considered as primary or secondary artifact. Default to 'true'
+        - description: Flag telling if this should be considered as primary or secondary
+            artifact. Default to 'true'
           in: query
           name: mainArtifact
           required: true
@@ -51,21 +53,33 @@ paths:
           multipart/form-data:
             examples:
               Artifact upload:
-                value: |
+                value: >
                   POST /api/artifact/upload HTTP/1.1
+
                   Host: microcks
+
                   User-Agent: curl/7.54.0
+
                   Accept: */*
+
                   Authorization: Bearer <REDACTED>
+
                   Content-Length: 2743
+
                   Expect: 100-continue
+
                   Content-Type: multipart/form-data; boundary=------------------------8af8cbb56dd4bde0
 
+
                   --------------------------8af8cbb56dd4bde0
+
                   Content-Disposition: form-data; name="file"; filename="github.json"
+
                   Content-Type: application/octet-stream
 
+
                   THE ARTIFACT HERE
+
 
                   --------------------------8af8cbb56dd4bde0--
             schema:
@@ -170,7 +184,8 @@ paths:
           name: page
           schema:
             type: integer
-        - description: Size of a page. Maximum number of ImportJobs to include in a response (defaults to 20)
+        - description: Size of a page. Maximum number of ImportJobs to include in a
+            response (defaults to 20)
           in: query
           name: size
           schema:
@@ -291,7 +306,8 @@ paths:
       summary: Update ImportJob
       tags:
         - job
-    summary: This path or subpaths operations deal with specific ImportJob having given id
+    summary: This path or subpaths operations deal with specific ImportJob having
+      given id
   "/jobs/{id}/activate":
     parameters:
       - description: Unique identifier of ImportJob to manage
@@ -349,7 +365,8 @@ paths:
         schema:
           type: string
     put:
-      description: Stopping an ImportJob desactivate it, so that it won't execute at next schedule
+      description: Stopping an ImportJob desactivate it, so that it won't execute at
+        next schedule
       operationId: StopImportJob
       responses:
         "200":
@@ -419,7 +436,8 @@ paths:
     get:
       operationId: GetAggregatedInvocationsStats
       parameters:
-        - description: The day to get statistics for (formatted with yyyyMMdd pattern). Default to today if not provided.
+        - description: The day to get statistics for (formatted with yyyyMMdd pattern).
+            Default to today if not provided.
           in: query
           name: day
           schema:
@@ -450,7 +468,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CounterMap"
-          description: A map where keys are day (formatted using yyyyMMdd pattern) and values are counter of invocations on this day
+          description: A map where keys are day (formatted using yyyyMMdd pattern) and
+            values are counter of invocations on this day
       summary: Get aggregated invocations statistics for latest days
       tags:
         - metrics
@@ -459,7 +478,8 @@ paths:
     get:
       operationId: GetTopIvnocationsStatsByDay
       parameters:
-        - description: The day to get statistics for (formatted with yyyyMMdd pattern). Default to today if not provided.
+        - description: The day to get statistics for (formatted with yyyyMMdd pattern).
+            Default to today if not provided.
           in: query
           name: day
           schema:
@@ -486,7 +506,8 @@ paths:
     get:
       operationId: GetInvocationStatsByService
       parameters:
-        - description: The day to get statistics for (formatted with yyyyMMdd pattern). Default to today if not provided.
+        - description: The day to get statistics for (formatted with yyyyMMdd pattern).
+            Default to today if not provided.
           in: query
           name: day
           schema:
@@ -519,7 +540,8 @@ paths:
     get:
       operationId: GetLatestTestResults
       parameters:
-        - description: Number of days to consider for test results to return. Default is 7 (one week)
+        - description: Number of days to consider for test results to return. Default is 7
+            (one week)
           in: query
           name: limit
           schema:
@@ -591,7 +613,8 @@ paths:
           required: false
           schema:
             type: integer
-        - description: Size of a page. Maximum number of Secrets to include in a response (defaults to 20)
+        - description: Size of a page. Maximum number of Secrets to include in a response
+            (defaults to 20)
           in: query
           name: size
           required: false
@@ -706,7 +729,8 @@ paths:
           name: page
           schema:
             type: integer
-        - description: Size of a page. Maximum number of Services to include in a response (defaults to 20)
+        - description: Size of a page. Maximum number of Services to include in a response
+            (defaults to 20)
           in: query
           name: size
           schema:
@@ -750,7 +774,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LabelsMap"
-          description: "Already used labels: keys are label Keys, values are array of label Values"
+          description: "Already used labels: keys are label Keys, values are array of
+            label Values"
       security:
         - jwt-bearer:
             - admin
@@ -761,7 +786,9 @@ paths:
     get:
       operationId: SearchServices
       parameters:
-        - description: Map of criterion. Key can be simply 'name' with value as the searched string. You can also search by label using keys like 'labels.x' where 'x' is the label and value the label value
+        - description: Map of criterion. Key can be simply 'name' with value as the
+            searched string. You can also search by label using keys like
+            'labels.x' where 'x' is the label and value the label value
           in: query
           name: queryMap
           required: true
@@ -801,7 +828,8 @@ paths:
     get:
       operationId: GetService
       parameters:
-        - description: Whether to include details on services messages into result. Default is false
+        - description: Whether to include details on services messages into result.
+            Default is false
           in: query
           name: messages
           schema:
@@ -900,7 +928,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TestResult"
-          description: Created TestResult (empty shell cause tests are executed asynchronously)
+          description: Created TestResult (empty shell cause tests are executed
+            asynchronously)
       security:
         - jwt-bearer:
             - user
@@ -1090,8 +1119,9 @@ components:
         - type
       type: object
     ArtifactUpload:
-      description: |-
+      description: >-
         Artifact to be imported by Microcks.
+
         This structure represents a mime-multipart file upload (as specified here: https://swagger.io/docs/specification/describing-request-body/file-upload/)
       properties:
         file:
@@ -1163,14 +1193,16 @@ components:
           type: string
         hourlyCount:
           additionalProperties: true
-          description: The number of service mock invocations per hour of the day (keys range from 0 to 23)
+          description: The number of service mock invocations per hour of the day (keys
+            range from 0 to 23)
           type: object
         id:
           description: Unique identifier of this statistic object
           type: string
         minuteCount:
           additionalProperties: true
-          description: The number of service mock invocations per minute of the day (keys range from 0 to 1439)
+          description: The number of service mock invocations per minute of the day (keys
+            range from 0 to 1439)
           type: object
         serviceName:
           description: The name of the service this statistic is related to
@@ -1209,14 +1241,16 @@ components:
           description: Identifier of Operation this message is associated to
           type: string
         testCaseId:
-          description: Unique identifier of TestCase this message is attached (in case of a test)
+          description: Unique identifier of TestCase this message is attached (in case of
+            a test)
           type: string
       required:
         - id
         - mediaType
       type: object
     Exchange:
-      description: Abstract representation of a Service or API exchange type (request/response, event based, ...)
+      description: Abstract representation of a Service or API exchange type
+        (request/response, event based, ...)
       discriminator:
         mapping:
           reqRespPair: "#/components/schemas/RequestResponsePair"
@@ -1326,7 +1360,8 @@ components:
         - values
       type: object
     ImportJob:
-      description: An ImportJob allow defining a repository artifact to poll for discovering Services and APIs mocks and tests
+      description: An ImportJob allow defining a repository artifact to poll for
+        discovering Services and APIs mocks and tests
       properties:
         active:
           description: Whether this ImportJob is active (ie. scheduled for execution)
@@ -1336,7 +1371,8 @@ components:
           format: date-time
           type: string
         etag:
-          description: Etag of repository URL during previous import. Is used for not re-importing if no recent changes
+          description: Etag of repository URL during previous import. Is used for not
+            re-importing if no recent changes
           type: string
         frequency:
           description: Reserved for future usage
@@ -1352,7 +1388,8 @@ components:
           description: Error message of last import (if any)
           type: string
         mainArtifact:
-          description: Flag telling if considered as primary or secondary artifact. Default to `true`
+          description: Flag telling if considered as primary or secondary artifact.
+            Default to `true`
           type: boolean
         metadata:
           $ref: "#/components/schemas/Metadata"
@@ -1361,7 +1398,8 @@ components:
           description: Unique distinct name of this ImportJob
           type: string
         repositoryDisableSSLValidation:
-          description: Whether to disable SSL certificate verification when checking repository
+          description: Whether to disable SSL certificate verification when checking
+            repository
           type: boolean
         repositoryUrl:
           description: URL of mocks and tests repository artifact
@@ -1412,7 +1450,8 @@ components:
       additionalProperties:
         $ref: "#/components/schemas/StringArray"
         type: object
-      description: A map which keys are already used labels keys and values are already used values for this key
+      description: A map which keys are already used labels keys and values are
+        already used values for this key
       type: object
     MessageArray:
       description: Array of Message for Service operations
@@ -1420,7 +1459,8 @@ components:
         $ref: "#/components/schemas/Exchange"
       type: array
     Metadata:
-      description: Commodity object for holding metadata on any entity. This object is inspired by Kubernetes metadata.
+      description: Commodity object for holding metadata on any entity. This object is
+        inspired by Kubernetes metadata.
       properties:
         annotations:
           additionalProperties:
@@ -1490,13 +1530,16 @@ components:
         items:
           $ref: "#/components/schemas/HeaderDTO"
         type: array
-      description: Specification of additional headers for a Service/API operations. Keys are operation name or "globals" (if header applies to all), values are Header objects DTO.
+      description: Specification of additional headers for a Service/API operations.
+        Keys are operation name or "globals" (if header applies to all), values
+        are Header objects DTO.
       type: object
     OperationOverrideDTO:
       description: Data Transfer object for grouping the mutable properties of an Operation
       properties:
         defaultDelay:
-          description: Default delay in milliseconds to apply to mock responses on this operation
+          description: Default delay in milliseconds to apply to mock responses on this
+            operation
           type: integer
         dispatcher:
           description: Type of dispatcher to apply for this operation
@@ -1511,7 +1554,8 @@ components:
           type: array
       type: object
     ParameterConstraint:
-      description: Companion object for Operation that may be used to express constraints on request parameters
+      description: Companion object for Operation that may be used to express
+        constraints on request parameters
       properties:
         in:
           description: Parameter location
@@ -1556,7 +1600,8 @@ components:
           description: Identifier of Operation this Request is associated to
           type: string
         testCaseId:
-          description: Unique identifier of TestCase this Request is attached (in case of a test)
+          description: Unique identifier of TestCase this Request is attached (in case of
+            a test)
           type: string
       required:
         - name
@@ -1578,7 +1623,8 @@ components:
       description: Request associated with corresponding Response
       type: object
     Resource:
-      description: Resource represents a Service or API artifacts such as specification, contract
+      description: Resource represents a Service or API artifacts such as
+        specification, contract
       properties:
         content:
           description: String content of this resource
@@ -1644,14 +1690,17 @@ components:
           description: Identifier of Operation this Response is associated to
           type: string
         testCaseId:
-          description: Unique identifier of TestCase this Response is attached (in case of a test)
+          description: Unique identifier of TestCase this Response is attached (in case of
+            a test)
           type: string
       required:
         - operationId
         - name
     Secret:
-      description: A Secret allows grouping informations on how to access a restricted resource such as a repsoitory URL. Secrets are typically used by ImpoortJobs.
-      example: |-
+      description: A Secret allows grouping informations on how to access a restricted
+        resource such as a repsoitory URL. Secrets are typically used by
+        ImpoortJobs.
+      example: >-
         {
             "id": "5be58fb51ed744d1b87481bd",
             "name": "Gogs internal",
@@ -1701,7 +1750,8 @@ components:
         - secretId
         - name
     Service:
-      description: Represents a Service or API definition as registred into Microcks repository
+      description: Represents a Service or API definition as registred into Microcks
+        repository
       properties:
         id:
           description: Unique identifier for this Service or API
@@ -1710,7 +1760,8 @@ components:
           $ref: "#/components/schemas/Metadata"
           description: Metadata of Service
         name:
-          description: Distinct name for this Service or API (maybe shared among many versions)
+          description: Distinct name for this Service or API (maybe shared among many
+            versions)
           type: string
         operations:
           description: Set of Operations for Service or API
@@ -1760,7 +1811,8 @@ components:
         messagesMap:
           additionalProperties:
             $ref: "#/components/schemas/MessageArray"
-          description: Map of messages for this Service. Keys are operation name, values are array of messages for this operation
+          description: Map of messages for this Service. Keys are operation name, values
+            are array of messages for this operation
           type: object
         service:
           $ref: "#/components/schemas/Service"
@@ -1785,7 +1837,10 @@ components:
         type: string
       type: array
     TestCaseResult:
-      description: Companion objects for TestResult. Each TestCaseResult correspond to a particuliar service operation / action reference by the operationName field. TestCaseResults owns a collection of TestStepResults (one for every request associated to service operation / action).
+      description: Companion objects for TestResult. Each TestCaseResult correspond to
+        a particuliar service operation / action reference by the operationName
+        field. TestCaseResults owns a collection of TestStepResults (one for
+        every request associated to service operation / action).
       properties:
         elapsedTime:
           description: Elapsed time in milliseconds since the test case beginning
@@ -1813,7 +1868,8 @@ components:
       required:
         - operationName
     TestConformanceMetric:
-      description: Represents the test conformance metrics (current score, history and evolution trend) of a Service
+      description: Represents the test conformance metrics (current score, history and
+        evolution trend) of a Service
       properties:
         aggregationLabelValue:
           description: Value of the label used for metrics aggregation (if any)
@@ -1831,13 +1887,15 @@ components:
         latestScores:
           additionalProperties:
             type: number
-          description: History of latest scores (key is date with format yyyyMMdd, value is score as double)
+          description: History of latest scores (key is date with format yyyyMMdd, value
+            is score as double)
           type: object
         latestTrend:
           $ref: "#/components/schemas/Trend"
           description: Evolution trend of currentScore
         maxPossibleScore:
-          description: Maximum conformance score that can be reached (depends on samples expresiveness)
+          description: Maximum conformance score that can be reached (depends on samples
+            expresiveness)
           format: double
           type: number
         serviceId:
@@ -1850,7 +1908,8 @@ components:
         - maxPossibleScore
       type: object
     TestRequest:
-      description: Test request is a minimalist wrapper for requesting the launch of a new test
+      description: Test request is a minimalist wrapper for requesting the launch of a
+        new test
       properties:
         filteredOperations:
           description: A restriction on service operations to test
@@ -1881,7 +1940,12 @@ components:
         - runnerType
         - timeout
     TestResult:
-      description: Represents the result of a Service or API test run by Microcks. Tests are related to a service and made of multiple test cases corresponding to each operations / actions composing service. Tests are run against a specific endpoint named testedEndpoint. It holds global markers telling if test still ran, is a success, how many times is has taken and so on ...
+      description: Represents the result of a Service or API test run by Microcks.
+        Tests are related to a service and made of multiple test cases
+        corresponding to each operations / actions composing service. Tests are
+        run against a specific endpoint named testedEndpoint. It holds global
+        markers telling if test still ran, is a success, how many times is has
+        taken and so on ...
       properties:
         elapsedTime:
           description: Elapsed time in milliseconds since test beginning
@@ -1939,7 +2003,8 @@ components:
         - inProgress
         - runnerType
     TestResultSummary:
-      description: "Represents the summary result of a Service or API test run by Microcks. "
+      description: "Represents the summary result of a Service or API test run by
+        Microcks. "
       properties:
         id:
           description: Unique identifier of TestResult
@@ -1985,7 +2050,8 @@ components:
         - code
         - elapsedTime
     TestRunnerType:
-      description: Type of test strategy (different strategies are implemented by different runners)
+      description: Type of test strategy (different strategies are implemented by
+        different runners)
       enum:
         - HTTP
         - SOAP_HTTP
@@ -1997,7 +2063,9 @@ components:
         - GRAPHQL_SCHEMA
       type: string
     TestStepResult:
-      description: TestStepResult is an entity embedded within TestCaseResult. They are created for each request associated with an operation / action of a microservice.
+      description: TestStepResult is an entity embedded within TestCaseResult. They
+        are created for each request associated with an operation / action of a
+        microservice.
       properties:
         elapsedTime:
           description: Elapsed time in milliseconds since the test step beginning
@@ -2057,7 +2125,8 @@ components:
       type: object
   securitySchemes:
     jwt-bearer:
-      description: JWT Bearer acquired using OAuth 2 Authentication flow or Direct Access Grant
+      description: JWT Bearer acquired using OAuth 2 Authentication flow or Direct
+        Access Grant
       flows:
         clientCredentials:
           refreshUrl: https://keycloak.example.com/auth/realms/microcks/protocol/openid-connect/token
@@ -2065,5 +2134,7 @@ components:
             admin: ""
             manager: ""
             user: ""
+            user:identity: "*Originally missing*"
           tokenUrl: https://keycloak.example.com/auth/realms/microcks/protocol/openid-connect/token
       type: oauth2
+
