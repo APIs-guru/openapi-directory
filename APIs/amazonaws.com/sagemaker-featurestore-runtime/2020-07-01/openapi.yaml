@@ -178,7 +178,7 @@ paths:
   '/FeatureGroup/{FeatureGroupName}#RecordIdentifierValueAsString&EventTime':
     delete:
       operationId: DeleteRecord
-      description: Deletes a <code>Record</code> from a <code>FeatureGroup</code>. When the <code>DeleteRecord</code> API is called a new record will be added to the <code>OfflineStore</code> and the <code>Record</code> will be removed from the <code>OnlineStore</code>. This record will have a value of <code>True</code> in the <code>is_deleted</code> column.
+      description: '<p>Deletes a <code>Record</code> from a <code>FeatureGroup</code> in the <code>OnlineStore</code>. Feature Store supports both <code>SOFT_DELETE</code> and <code>HARD_DELETE</code>. For <code>SOFT_DELETE</code> (default), feature columns are set to <code>null</code> and the record is no longer retrievable by <code>GetRecord</code> or <code>BatchGetRecord</code>. For<code> HARD_DELETE</code>, the complete <code>Record</code> is removed from the <code>OnlineStore</code>. In both cases, Feature Store appends the deleted record marker to the <code>OfflineStore</code> with feature values set to <code>null</code>, <code>is_deleted</code> value set to <code>True</code>, and <code>EventTime</code> set to the delete input <code>EventTime</code>.</p> <p>Note that the <code>EventTime</code> specified in <code>DeleteRecord</code> should be set later than the <code>EventTime</code> of the existing record in the <code>OnlineStore</code> for that <code>RecordIdentifer</code>. If it is not, the deletion does not occur:</p> <ul> <li> <p>For <code>SOFT_DELETE</code>, the existing (undeleted) record remains in the <code>OnlineStore</code>, though the delete record marker is still written to the <code>OfflineStore</code>.</p> </li> <li> <p> <code>HARD_DELETE</code> returns <code>EventTime</code>: <code>400 ValidationException</code> to indicate that the delete operation failed. No delete record marker is written to the <code>OfflineStore</code>.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -213,7 +213,7 @@ paths:
           description: 'The name of the feature group to delete the record from. '
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}'
+            pattern: '^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}'
             minLength: 1
             maxLength: 64
         - name: RecordIdentifierValueAsString
@@ -242,6 +242,15 @@ paths:
               $ref: '#/components/schemas/TargetStore'
             minItems: 1
             maxItems: 2
+        - name: DeletionMode
+          in: query
+          required: false
+          description: 'The name of the deletion mode for deleting the record. By default, the deletion mode is set to <code>SoftDelete</code>.'
+          schema:
+            type: string
+            enum:
+              - SoftDelete
+              - HardDelete
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -298,7 +307,7 @@ paths:
           description: The name of the feature group from which you want to retrieve a record.
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}'
+            pattern: '^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}'
             minLength: 1
             maxLength: 64
         - name: RecordIdentifierValueAsString
@@ -364,7 +373,7 @@ paths:
           description: The name of the feature group that you want to insert the record into.
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}'
+            pattern: '^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}'
             minLength: 1
             maxLength: 64
       requestBody:
@@ -550,11 +559,11 @@ components:
         ErrorCode:
           allOf:
             - $ref: '#/components/schemas/ValueAsString'
-            - description: 'The error code of an error that has occured when attempting to retrieve a batch of Records. For more information on errors, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_GetRecord.html#API_feature_store_GetRecord_Errors">Errors</a>.'
+            - description: 'The error code of an error that has occurred when attempting to retrieve a batch of Records. For more information on errors, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_GetRecord.html#API_feature_store_GetRecord_Errors">Errors</a>.'
         ErrorMessage:
           allOf:
             - $ref: '#/components/schemas/Message'
-            - description: The error message of an error that has occured when attempting to retrieve a record in the batch.
+            - description: The error message of an error that has occurred when attempting to retrieve a record in the batch.
       description: The error that has occurred when attempting to retrieve a batch of Records.
     BatchGetRecordErrors:
       type: array
@@ -563,7 +572,7 @@ components:
       minItems: 0
     FeatureGroupName:
       type: string
-      pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}'
+      pattern: '^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}'
       minLength: 1
       maxLength: 64
     RecordIdentifiers:
@@ -622,7 +631,7 @@ components:
         RecordIdentifierValueAsString:
           allOf:
             - $ref: '#/components/schemas/ValueAsString'
-            - description: The value of the record identifer in string format.
+            - description: The value of the record identifier in string format.
         Record:
           allOf:
             - $ref: '#/components/schemas/Record'
@@ -634,6 +643,11 @@ components:
         $ref: '#/components/schemas/TargetStore'
       minItems: 1
       maxItems: 2
+    DeletionMode:
+      type: string
+      enum:
+        - SoftDelete
+        - HardDelete
     DeleteRecordRequest:
       type: object
       title: DeleteRecordRequest
