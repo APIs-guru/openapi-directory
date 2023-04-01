@@ -16,7 +16,7 @@ info:
     name: CC0 1.0
     url: https://github.com/APIs-guru/openapi-directory#licenses
   title: APIs.guru
-  version: 2.0.4
+  version: 2.0.5
   x-apisguru-categories:
     - open_data
     - developer_tools
@@ -202,11 +202,13 @@ components:
       example:
         datasets: []
         fixedPct: 22
-        fixes: 21119
+        fixes: 81119
         invalid: 598
         issues: 28
-        numAPIs: 1928
-        numEndpoints: 61448
+        numAPIs: 2501
+        numDrivers: 10
+        numEndpoints: 106448
+        numProviders: 659
         numSpecs: 3329
         stars: 2429
         thisWeek:
@@ -232,15 +234,21 @@ components:
           description: Open GitHub issues on our main repo
           type: integer
         numAPIs:
-          description: Number of APIs
+          description: Number of unique APIs
           minimum: 1
+          type: integer
+        numDrivers:
+          description: Number of methods of API retrieval
           type: integer
         numEndpoints:
-          description: Total number of endpoints inside all specifications
+          description: Total number of endpoints inside all definitions
           minimum: 1
           type: integer
+        numProviders:
+          description: Number of API providers in directory
+          type: integer
         numSpecs:
-          description: Number of API specifications including different versions of the same API
+          description: Number of API definitions including different versions of the same API
           minimum: 1
           type: integer
         stars:
