@@ -7,16 +7,14 @@ info:
     name: APIs.guru
     url: https://APIs.guru
   description: |
-    Wikipedia for Web APIs. Repository of API specs in OpenAPI format.
-
+    Wikipedia for Web APIs. Repository of API definitions in OpenAPI format.
     **Warning**: If you want to be notified about changes in advance please join our [Slack channel](https://join.slack.com/t/mermade/shared_invite/zt-g78g7xir-MLE_CTCcXCdfJfG3CJe9qA).
-
     Client sample: [[Demo]](https://apis.guru/simple-ui) [[Repo]](https://github.com/APIs-guru/simple-ui)
   license:
     name: CC0 1.0
     url: https://github.com/APIs-guru/openapi-directory#licenses
   title: APIs.guru
-  version: 2.0.5
+  version: 2.1.0
   x-apisguru-categories:
     - open_data
     - developer_tools
@@ -45,19 +43,15 @@ paths:
     get:
       description: |
         List all APIs in the directory.
-        Returns links to OpenAPI specification for each API in the directory.
+        Returns links to the OpenAPI definitions for each API in the directory.
         If API exist in multiple versions `preferred` one is explicitly marked.
-
-        Some basic info from OpenAPI spec is cached inside each object.
-        This allows to generate some simple views without need to fetch OpenAPI spec for each API.
+        Some basic info from the OpenAPI definition is cached inside each object.
+        This allows you to generate some simple views without needing to fetch the OpenAPI definition for each API.
       operationId: listAPIs
       responses:
         "200":
           content:
             application/json:
-              schema:
-                $ref: "#/components/schemas/APIs"
-            application/json; charset=utf-8:
               schema:
                 $ref: "#/components/schemas/APIs"
           description: OK
@@ -76,11 +70,103 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Metrics"
-            application/json; charset=utf-8:
-              schema:
-                $ref: "#/components/schemas/Metrics"
           description: OK
       summary: Get basic metrics
+      tags:
+        - APIs
+  "/specs/{provider}/{api}.json":
+    get:
+      description: Returns the API entry for one specific version of an API where there is no serviceName.
+      operationId: getAPI
+      parameters:
+        - in: path
+          name: provider
+          required: true
+          schema:
+            example: apis.guru
+            maxLength: 255
+            minLength: 1
+            type: string
+        - in: path
+          name: api
+          required: true
+          schema:
+            example: 2.1.0
+            maxLength: 255
+            minLength: 1
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API"
+          description: OK
+      summary: Retrieve one version of a particular API
+      tags:
+        - APIs
+  "/specs/{provider}/{service}/{api}.json":
+    get:
+      description: Returns the API entry for one specific version of an API where there is a serviceName.
+      operationId: getServiceAPI
+      parameters:
+        - in: path
+          name: provider
+          required: true
+          schema:
+            example: apis.guru
+            maxLength: 255
+            minLength: 1
+            type: string
+        - in: path
+          name: service
+          required: true
+          schema:
+            example: graph
+            maxLength: 255
+            minLength: 1
+            type: string
+        - in: path
+          name: api
+          required: true
+          schema:
+            example: 2.1.0
+            maxLength: 255
+            minLength: 1
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API"
+          description: OK
+      summary: Retrieve one version of a particular API with a serviceName.
+      tags:
+        - APIs
+  "/{provider}.json":
+    get:
+      description: |
+        List all APIs in the directory for a particular providerName
+        Returns links to the individual API entry for each API.
+      operationId: getProvider
+      parameters:
+        - in: path
+          name: provider
+          required: true
+          schema:
+            example: apis.guru
+            maxLength: 255
+            minLength: 1
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIs"
+          description: OK
+      summary: List all APIs for a particular provider
       tags:
         - APIs
 components:
@@ -173,6 +259,10 @@ components:
           description: Copy of `info` section from OpenAPI definition
           minProperties: 1
           type: object
+        link:
+          description: Link to the individual API entry for this API
+          format: url
+          type: string
         openapiVer:
           description: The value of the `openapi` or `swagger` property of the source definition
           type: string
