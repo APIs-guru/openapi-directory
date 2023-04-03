@@ -770,6 +770,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidStateException'
+        '486':
+          description: FederationSourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceException'
+        '487':
+          description: FederationSourceRetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceRetryableException'
       requestBody:
         required: true
         content:
@@ -1724,6 +1736,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConcurrentModificationException'
+        '487':
+          description: FederatedResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederatedResourceAlreadyExistsException'
       requestBody:
         required: true
         content:
@@ -5333,6 +5351,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlueEncryptionException'
+        '485':
+          description: FederationSourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceException'
       requestBody:
         required: true
         content:
@@ -6266,6 +6290,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlueEncryptionException'
+        '485':
+          description: FederationSourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceException'
+        '486':
+          description: FederationSourceRetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceRetryableException'
       requestBody:
         required: true
         content:
@@ -6410,6 +6446,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotReadyException'
+        '487':
+          description: FederationSourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceException'
+        '488':
+          description: FederationSourceRetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceRetryableException'
       requestBody:
         required: true
         content:
@@ -7211,6 +7259,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotReadyException'
+        '486':
+          description: FederationSourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceException'
+        '487':
+          description: FederationSourceRetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceRetryableException'
       requestBody:
         required: true
         content:
@@ -7412,6 +7472,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlueEncryptionException'
+        '485':
+          description: FederationSourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceException'
+        '486':
+          description: FederationSourceRetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceRetryableException'
       requestBody:
         required: true
         content:
@@ -7676,6 +7748,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PermissionTypeMismatchException'
+        '486':
+          description: FederationSourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceException'
+        '487':
+          description: FederationSourceRetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceRetryableException'
       requestBody:
         required: true
         content:
@@ -7745,6 +7829,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PermissionTypeMismatchException'
+        '486':
+          description: FederationSourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceException'
+        '487':
+          description: FederationSourceRetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceRetryableException'
       requestBody:
         required: true
         content:
@@ -7826,6 +7922,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PermissionTypeMismatchException'
+        '486':
+          description: FederationSourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceException'
+        '487':
+          description: FederationSourceRetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationSourceRetryableException'
       requestBody:
         required: true
         content:
@@ -13077,6 +13185,8 @@ components:
             - $ref: '#/components/schemas/BatchGetPartitionValueList'
             - description: A list of partition values identifying the partitions to retrieve.
     InvalidStateException: {}
+    FederationSourceException: {}
+    FederationSourceRetryableException: {}
     BatchGetTriggersResponse:
       type: object
       properties:
@@ -13517,6 +13627,7 @@ components:
             - $ref: '#/components/schemas/TagsMap'
             - description: The tags you assign to the database.
     ConcurrentModificationException: {}
+    FederatedResourceAlreadyExistsException: {}
     CreateDevEndpointResponse:
       type: object
       properties:
@@ -14108,11 +14219,11 @@ components:
         Timeout:
           allOf:
             - $ref: '#/components/schemas/Timeout'
-            - description: 'The number of seconds before request times out. '
+            - description: ' The number of minutes before session times out. Default for Spark ETL jobs is 48 hours (2880 minutes), the maximum session lifetime for this job type. Consult the documentation for other job types. '
         IdleTimeout:
           allOf:
             - $ref: '#/components/schemas/Timeout'
-            - description: 'The number of seconds when idle before request times out. '
+            - description: ' The number of minutes when idle before session times out. Default for Spark ETL jobs is value of Timeout. Consult the documentation for other job types. '
         DefaultArguments:
           allOf:
             - $ref: '#/components/schemas/OrchestrationArgumentsMap'
@@ -14968,7 +15079,7 @@ components:
         ColumnStatisticsList:
           allOf:
             - $ref: '#/components/schemas/ColumnStatisticsList'
-            - description: List of ColumnStatistics that failed to be retrieved.
+            - description: List of ColumnStatistics.
         Errors:
           allOf:
             - $ref: '#/components/schemas/ColumnErrors'
@@ -15449,7 +15560,7 @@ components:
         ResourceShareType:
           allOf:
             - $ref: '#/components/schemas/ResourceShareType'
-            - description: '<p>Allows you to specify that you want to list the databases shared with your account. The allowable values are <code>FOREIGN</code> or <code>ALL</code>. </p> <ul> <li> <p>If set to <code>FOREIGN</code>, will list the databases shared with your account. </p> </li> <li> <p>If set to <code>ALL</code>, will list the databases shared with your account, as well as the databases in yor local account. </p> </li> </ul>'
+            - description: '<p>Allows you to specify that you want to list the databases shared with your account. The allowable values are <code>FEDERATED</code>, <code>FOREIGN</code> or <code>ALL</code>. </p> <ul> <li> <p>If set to <code>FEDERATED</code>, will list the federated databases (referencing an external entity) shared with your account.</p> </li> <li> <p>If set to <code>FOREIGN</code>, will list the databases shared with your account. </p> </li> <li> <p>If set to <code>ALL</code>, will list the databases shared with your account, as well as the databases in yor local account. </p> </li> </ul>'
     GetDataflowGraphResponse:
       type: object
       properties:
@@ -19203,7 +19314,7 @@ components:
         AdditionalAuditContext:
           allOf:
             - $ref: '#/components/schemas/AuditContextString'
-            - description: The context for the audit..
+            - description: A string containing the additional audit context information.
         RequestedColumns:
           allOf:
             - $ref: '#/components/schemas/AuditColumnNamesList'
@@ -19212,7 +19323,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
             - description: All columns request for audit.
-      description: A structure containing information for audit.
+      description: A structure containing the Lake Formation audit context.
     AuthTokenString:
       type: string
       minLength: 1
@@ -22584,7 +22695,7 @@ components:
         DecimalColumnStatisticsData:
           allOf:
             - $ref: '#/components/schemas/DecimalColumnStatisticsData'
-            - description: Decimal column statistics data.
+            - description: ' Decimal column statistics data. UnscaledValues within are Base64-encoded binary objects storing big-endian, two''s complement representations of the decimal''s unscaled value. '
         DoubleColumnStatisticsData:
           allOf:
             - $ref: '#/components/schemas/DoubleColumnStatisticsData'
@@ -23686,6 +23797,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DatabaseIdentifier'
             - description: A <code>DatabaseIdentifier</code> structure that describes a target database for resource linking.
+        FederatedDatabase:
+          allOf:
+            - $ref: '#/components/schemas/FederatedDatabase'
+            - description: A <code>FederatedDatabase</code> structure that references an entity outside the Glue Data Catalog.
       description: The structure used to create or update a database.
     RoleArn:
       type: string
@@ -24612,6 +24727,18 @@ components:
             - $ref: '#/components/schemas/NameString'
             - description: The name of the catalog database.
       description: A structure that describes a target database for resource linking.
+    FederatedDatabase:
+      type: object
+      properties:
+        Identifier:
+          allOf:
+            - $ref: '#/components/schemas/FederationIdentifier'
+            - description: A unique identifier for the federated database.
+        ConnectionName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the connection to the external metastore.
+      description: A database that points to an entity outside the Glue Data Catalog.
     Database:
       type: object
       required:
@@ -24649,6 +24776,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CatalogIdString'
             - description: The ID of the Data Catalog in which the database resides.
+        FederatedDatabase:
+          allOf:
+            - $ref: '#/components/schemas/FederatedDatabase'
+            - description: A <code>FederatedDatabase</code> structure that references an entity outside the Glue Data Catalog.
       description: The <code>Database</code> object represents a logical grouping of tables that might reside in a Hive metastore or an RDBMS.
     DatabaseList:
       type: array
@@ -25090,6 +25221,27 @@ components:
             - $ref: '#/components/schemas/UriString'
             - description: The Amazon Simple Storage Service (Amazon S3) path where you will export the labels.
       description: Specifies configuration properties for an exporting labels task run.
+    FederationIdentifier:
+      type: string
+      minLength: 1
+      maxLength: 512
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+    FederatedTable:
+      type: object
+      properties:
+        Identifier:
+          allOf:
+            - $ref: '#/components/schemas/FederationIdentifier'
+            - description: A unique identifier for the federated table.
+        DatabaseIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/FederationIdentifier'
+            - description: A unique identifier for the federated database.
+        ConnectionName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the connection to the external metastore.
+      description: A table that points to an entity outside the Glue Data Catalog.
     FieldType:
       type: string
     FilterLogicalOperator:
@@ -25234,6 +25386,7 @@ components:
       enum:
         - FOREIGN
         - ALL
+        - FEDERATED
     JobName:
       type: string
     RunId:
@@ -25333,7 +25486,7 @@ components:
         MaxCapacity:
           allOf:
             - $ref: '#/components/schemas/NullableDouble'
-            - description: '<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate a minimum of 2 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul> <p>For Glue version 2.0 jobs, you cannot instead specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p>'
+            - description: '<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul> <p>For Glue version 2.0 jobs, you cannot instead specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p>'
         WorkerType:
           allOf:
             - $ref: '#/components/schemas/WorkerType'
@@ -25875,6 +26028,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VersionString'
             - description: The ID of the table version.
+        FederatedTable:
+          allOf:
+            - $ref: '#/components/schemas/FederatedTable'
+            - description: A <code>FederatedTable</code> structure that references an entity outside the Glue Data Catalog.
       description: Represents a collection of related data organized in columns and rows.
     TableVersion:
       type: object

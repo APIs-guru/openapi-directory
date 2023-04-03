@@ -3094,6 +3094,9 @@ paths:
                   description: The identifier for the role that registers the resource.
                   type: string
                   pattern: 'arn:aws:iam::[0-9]*:role/.*'
+                WithFederation:
+                  description: Whether or not the resource is a federated resource.
+                  type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3897,6 +3900,9 @@ paths:
                 ResourceArn:
                   description: The resource ARN.
                   type: string
+                WithFederation:
+                  description: Whether or not the resource is a federated resource.
+                  type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5500,6 +5506,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LastModifiedTimestamp'
             - description: The date and time the resource was last modified.
+        WithFederation:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Whether or not the resource is a federated resource.
       description: A structure containing information about an Lake Formation resource.
     DescribeTransactionRequest:
       type: object
@@ -6288,6 +6298,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IAMRoleArn'
             - description: The identifier for the role that registers the resource.
+        WithFederation:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Whether or not the resource is a federated resource.
     RemoveLFTagsFromResourceRequest:
       type: object
       required:
@@ -6538,6 +6552,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceArnString'
             - description: The resource ARN.
+        WithFederation:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Whether or not the resource is a federated resource.
     WriteOperationList:
       type: array
       items:
