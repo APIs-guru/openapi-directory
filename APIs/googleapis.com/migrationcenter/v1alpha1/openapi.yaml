@@ -153,15 +153,15 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. The level of details of the import job. Default value is FULL.
+        - description: Determines what information to retrieve for the Report.
           in: query
           name: view
           schema:
             enum:
-              - IMPORT_JOB_VIEW_UNSPECIFIED
-              - IMPORT_JOB_VIEW_BASIC
-              - IMPORT_JOB_VIEW_FULL
-              - ASSET_VIEW_STANDARD
+              - REPORT_VIEW_UNSPECIFIED
+              - REPORT_VIEW_BASIC
+              - REPORT_VIEW_FULL
+              - REPORT_VIEW_STANDARD
             type: string
       responses:
         "200":
@@ -1071,6 +1071,208 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/PreferenceSet"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{parent}/reportConfigs":
+    get:
+      description: Lists ReportConfigs in a given project and location.
+      operationId: migrationcenter.projects.locations.reportConfigs.list
+      parameters:
+        - description: Required. Parent value for `ListReportConfigsRequest`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filtering results.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Field to sort by. See https://google.aip.dev/132#ordering for more details.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListReportConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a report configuration.
+      operationId: migrationcenter.projects.locations.reportConfigs.create
+      parameters:
+        - description: Required. Value for parent.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. User specified ID for the report config. It will become the last component of the report config name. The ID must be unique within the project, must conform with RFC-1034, is restricted to lower-cased letters, and has a maximum length of 63 characters. The ID must match the regular expression: [a-z]([a-z0-9-]{0,61}[a-z0-9])?."
+          in: query
+          name: reportConfigId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReportConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{parent}/reports":
+    get:
+      description: Lists Reports in a given ReportConfig.
+      operationId: migrationcenter.projects.locations.reportConfigs.reports.list
+      parameters:
+        - description: Required. Parent value for `ListReportsRequest`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filtering results.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Field to sort by. See https://google.aip.dev/132#ordering for more details.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. The server may return fewer items than requested. If unspecified, the server will pick an appropriate default value.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results that the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Determines what information to retrieve for each Report.
+          in: query
+          name: view
+          schema:
+            enum:
+              - REPORT_VIEW_UNSPECIFIED
+              - REPORT_VIEW_BASIC
+              - REPORT_VIEW_FULL
+              - REPORT_VIEW_STANDARD
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListReportsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a report.
+      operationId: migrationcenter.projects.locations.reportConfigs.reports.create
+      parameters:
+        - description: Required. Value for parent.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. User specified id for the report. It will become the last component of the report name. The id must be unique within the project, must conform with RFC-1034, is restricted to lower-cased letters, and has a maximum length of 63 characters. The id must match the regular expression: [a-z]([a-z0-9-]{0,61}[a-z0-9])?."
+          in: query
+          name: reportId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Report"
       responses:
         "200":
           content:
@@ -2386,6 +2588,40 @@ components:
             type: string
           type: array
       type: object
+    ListReportConfigsResponse:
+      description: Response message for listing report configs.
+      properties:
+        nextPageToken:
+          description: A token identifying a page of results the server should return.
+          type: string
+        reportConfigs:
+          description: A list of report configs.
+          items:
+            $ref: "#/components/schemas/ReportConfig"
+          type: array
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListReportsResponse:
+      description: Response message for listing Reports.
+      properties:
+        nextPageToken:
+          description: A token identifying a page of results the server should return.
+          type: string
+        reports:
+          description: The list of Reports.
+          items:
+            $ref: "#/components/schemas/Report"
+          type: array
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
     ListSourcesResponse:
       description: Response message for listing sources.
       properties:
@@ -2469,6 +2705,21 @@ components:
           $ref: "#/components/schemas/VmwareEngineMigrationTarget"
           description: Output only. A VMWare Engine target.
           readOnly: true
+      type: object
+    Money:
+      description: Represents an amount of money with its currency type.
+      properties:
+        currencyCode:
+          description: The three-letter currency code defined in ISO 4217.
+          type: string
+        nanos:
+          description: Number of nano (10^-9) units of the amount. The value must be between -999,999,999 and +999,999,999 inclusive. If `units` is positive, `nanos` must be positive or zero. If `units` is zero, `nanos` can be positive, zero, or negative. If `units` is negative, `nanos` must be negative or zero. For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
+          format: int32
+          type: integer
+        units:
+          description: The whole units of the amount. For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
+          format: int64
+          type: string
       type: object
     NetworkAdapterDetails:
       description: Details of network adapter.
@@ -2784,9 +3035,310 @@ components:
           description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           type: string
       type: object
+    Report:
+      description: Report represents a point-in-time rendering of the ReportConfig results.
+      properties:
+        createTime:
+          description: Output only. Creation timestamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Free-text description.
+          type: string
+        displayName:
+          description: User-friendly display name. Maximum length is 63 characters.
+          type: string
+        name:
+          description: Output only. Name of resource.
+          readOnly: true
+          type: string
+        state:
+          description: Report creation state.
+          enum:
+            - STATE_UNSPECIFIED
+            - PENDING
+            - SUCCEEDED
+            - FAILED
+          type: string
+        summary:
+          $ref: "#/components/schemas/ReportSummary"
+          description: Output only. Summary view of the Report.
+          readOnly: true
+        type:
+          description: Report type.
+          enum:
+            - TYPE_UNSPECIFIED
+            - TOTAL_COST_OF_OWNERSHIP
+          type: string
+        updateTime:
+          description: Output only. Last update timestamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     ReportAssetFramesResponse:
       description: A response to a call to `ReportAssetFrame`.
       properties: {}
+      type: object
+    ReportConfig:
+      description: The groups and associated preference sets on which we can generate reports.
+      properties:
+        createTime:
+          description: Output only. The timestamp when the resource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Free-text description.
+          type: string
+        displayName:
+          description: User-friendly display name. Maximum length is 63 characters.
+          type: string
+        groupPreferencesetAssignments:
+          description: Collection of combinations of groups and preference sets.
+          items:
+            $ref: "#/components/schemas/ReportConfigGroupPreferenceSetAssignment"
+          type: array
+        name:
+          description: Output only. Name of resource.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The timestamp when the resource was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    ReportConfigGroupPreferenceSetAssignment:
+      description: Represents a combination of a group with a preference set.
+      properties:
+        group:
+          description: Name of the group.
+          type: string
+        preferenceSet:
+          description: Name of the Preference Set.
+          type: string
+      type: object
+    ReportSummary:
+      description: Describes the Summary view of a Report, which contains aggregated values for all the groups and preference sets included in this Report.
+      properties:
+        allAssetsStats:
+          $ref: "#/components/schemas/ReportSummaryAssetAggregateStats"
+          description: Aggregate statistics for all the assets across all the groups.
+        groupFindings:
+          description: Findings for each Group included in this report.
+          items:
+            $ref: "#/components/schemas/ReportSummaryGroupFinding"
+          type: array
+      type: object
+    ReportSummaryAssetAggregateStats:
+      description: Aggregate statistics for a collection of assets.
+      properties:
+        assetAge:
+          $ref: "#/components/schemas/ReportSummaryChartData"
+          description: Count of assets grouped by age.
+        coreCountHistogram:
+          $ref: "#/components/schemas/ReportSummaryHistogramChartData"
+          description: Histogram showing a distribution of CPU core counts.
+        memoryBytesHistogram:
+          $ref: "#/components/schemas/ReportSummaryHistogramChartData"
+          description: Histogram showing a distribution of memory sizes.
+        memoryUtilization:
+          $ref: "#/components/schemas/ReportSummaryChartData"
+          description: Total memory split into Used/Free buckets.
+        memoryUtilizationChart:
+          $ref: "#/components/schemas/ReportSummaryUtilizationChartData"
+          description: Total memory split into Used/Free buckets.
+        operatingSystem:
+          $ref: "#/components/schemas/ReportSummaryChartData"
+          description: Count of assets grouped by Operating System families.
+        storageBytesHistogram:
+          $ref: "#/components/schemas/ReportSummaryHistogramChartData"
+          description: Histogram showing a distribution of memory sizes.
+        storageUtilization:
+          $ref: "#/components/schemas/ReportSummaryChartData"
+          description: Total storage split into Used/Free buckets.
+        storageUtilizationChart:
+          $ref: "#/components/schemas/ReportSummaryUtilizationChartData"
+          description: Total memory split into Used/Free buckets.
+        totalAssets:
+          description: Count of the number of unique assets in this collection.
+          format: int64
+          type: string
+        totalCores:
+          description: Sum of the CPU core count of all the assets in this collection.
+          format: int64
+          type: string
+        totalMemoryBytes:
+          description: Sum of the memory in bytes of all the assets in this collection.
+          format: int64
+          type: string
+        totalStorageBytes:
+          description: Sum of persistent storage in bytes of all the assets in this collection.
+          format: int64
+          type: string
+      type: object
+    ReportSummaryChartData:
+      description: Describes a collection of data points rendered as a Chart.
+      properties:
+        dataPoints:
+          description: Each data point in the chart is represented as a name-value pair with the name being the x-axis label, and the value being the y-axis value.
+          items:
+            $ref: "#/components/schemas/ReportSummaryChartDataDataPoint"
+          type: array
+      type: object
+    ReportSummaryChartDataDataPoint:
+      description: Describes a single data point in the Chart.
+      properties:
+        label:
+          description: The X-axis label for this data point.
+          type: string
+        value:
+          description: The Y-axis value for this data point.
+          format: double
+          type: number
+      type: object
+    ReportSummaryGroupFinding:
+      description: Summary Findings for a specific Group.
+      properties:
+        assetAggregateStats:
+          $ref: "#/components/schemas/ReportSummaryAssetAggregateStats"
+          description: Summary statistics for all the assets in this group.
+        description:
+          description: Description for the Group.
+          type: string
+        displayName:
+          description: Display Name for the Group.
+          type: string
+        overlappingAssetCount:
+          description: Count of the number of assets in this group which are also included in another group within the same report.
+          format: int64
+          type: string
+        preferenceSetFindings:
+          description: Findings for each of the PreferenceSets for this group.
+          items:
+            $ref: "#/components/schemas/ReportSummaryGroupPreferenceSetFinding"
+          type: array
+      type: object
+    ReportSummaryGroupPreferenceSetFinding:
+      description: Summary Findings for a specific Group/PreferenceSet combination.
+      properties:
+        description:
+          description: Description for the Preference Set.
+          type: string
+        displayName:
+          description: Display Name of the Preference Set
+          type: string
+        machineFinding:
+          $ref: "#/components/schemas/ReportSummaryMachineFinding"
+          description: A set of findings that applies to all machines in the input.
+        machinePreferences:
+          $ref: "#/components/schemas/VirtualMachinePreferences"
+          description: A set of preferences that applies to all machines in the context.
+        monthlyCostCompute:
+          $ref: "#/components/schemas/Money"
+          description: Compute monthly cost for this preference set.
+        monthlyCostNetworkEgress:
+          $ref: "#/components/schemas/Money"
+          description: Network Egress monthly cost for this preference set.
+        monthlyCostOsLicense:
+          $ref: "#/components/schemas/Money"
+          description: Licensing monthly cost for this preference set.
+        monthlyCostOther:
+          $ref: "#/components/schemas/Money"
+          description: Miscellaneous monthly cost for this preference set.
+        monthlyCostStorage:
+          $ref: "#/components/schemas/Money"
+          description: Storage monthly cost for this preference set.
+        monthlyCostTotal:
+          $ref: "#/components/schemas/Money"
+          description: Total monthly cost for this preference set.
+        preferredRegion:
+          description: Target region for this Preference Set
+          type: string
+        pricingTrack:
+          description: Text describing the pricing track specified for this Preference Set
+          type: string
+        topPriority:
+          description: Text describing the business priority specified for this Preference Set
+          type: string
+      type: object
+    ReportSummaryHistogramChartData:
+      description: A Histogram Chart shows a distribution of values into buckets, showing a count of values which fall into a bucket.
+      properties:
+        buckets:
+          description: Buckets in the histogram. There will be `n+1` buckets matching `n` lower bounds in the request. The first bucket will be from -infinity to the first bound. Subsequent buckets will be between one bound and the next. The final bucket will be from the final bound to infinity.
+          items:
+            $ref: "#/components/schemas/ReportSummaryHistogramChartDataBucket"
+          type: array
+      type: object
+    ReportSummaryHistogramChartDataBucket:
+      description: A histogram bucket with a lower and upper bound, and a count of items with a field value between those bounds. The lower bound is inclusive and the upper bound is exclusive. Lower bound may be -infinity and upper bound may be infinity.
+      properties:
+        count:
+          description: Count of items in the bucket.
+          format: int64
+          type: string
+        lowerBound:
+          description: Lower bound - inclusive.
+          format: int64
+          type: string
+        upperBound:
+          description: Upper bound - exclusive.
+          format: int64
+          type: string
+      type: object
+    ReportSummaryMachineFinding:
+      description: A set of findings that applies to assets of type Virtual/Physical Machine.
+      properties:
+        allocatedAssetCount:
+          description: Count of assets which were allocated.
+          format: int64
+          type: string
+        allocatedDiskTypes:
+          description: Set of disk types allocated to assets.
+          items:
+            enum:
+              - PERSISTENT_DISK_TYPE_UNSPECIFIED
+              - PERSISTENT_DISK_TYPE_STANDARD
+              - PERSISTENT_DISK_TYPE_BALANCED
+              - PERSISTENT_DISK_TYPE_SSD
+            type: string
+          type: array
+        allocatedRegions:
+          description: Set of regions in which the assets were allocated.
+          items:
+            type: string
+          type: array
+        machineSeriesAllocations:
+          description: Distribution of assets based on the Machine Series.
+          items:
+            $ref: "#/components/schemas/ReportSummaryMachineSeriesAllocation"
+          type: array
+      type: object
+    ReportSummaryMachineSeriesAllocation:
+      description: Represents a data point tracking the count of assets allocated for a specific Machine Series.
+      properties:
+        allocatedAssetCount:
+          description: Count of assets allocated to this machine series.
+          format: int64
+          type: string
+        machineSeries:
+          $ref: "#/components/schemas/MachineSeries"
+          description: The Machine Series (e.g. "E2", "N2")
+      type: object
+    ReportSummaryUtilizationChartData:
+      description: Utilization Chart is a specific type of visualization which displays a metric classified into "Used" and "Free" buckets.
+      properties:
+        free:
+          description: Aggregate value which falls into the "Free" bucket.
+          format: int64
+          type: string
+        used:
+          description: Aggregate value which falls into the "Used" bucket.
+          format: int64
+          type: string
       type: object
     RunImportJobRequest:
       description: A request to run an import job.

@@ -3770,7 +3770,7 @@ components:
           type: boolean
       type: object
     GoogleCloudDialogflowCxV3Intent:
-      description: An intent represents a user's intent to interact with a conversational agent. You can provide information for the Dialogflow API to use to match user input to an intent by adding training phrases (i.e., examples of user input) to your intent.
+      description: "An intent represents a user's intent to interact with a conversational agent. You can provide information for the Dialogflow API to use to match user input to an intent by adding training phrases (i.e., examples of user input) to your intent. Next ID: 15"
       properties:
         description:
           description: "Human readable description for better understanding an intent like its scope, content, result etc. Maximum character limit: 140 characters."
@@ -4370,7 +4370,7 @@ components:
           type: object
         dtmf:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3DtmfInput"
-          description: If a DTMF was provided as input, this field will contain a copy of the DTMFInput.
+          description: If a DTMF was provided as input, this field will contain a copy of the DtmfInput.
         intent:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Intent"
           description: "The Intent that matched the conversational query. Some, not all fields are filled in this message, including but not limited to: `name` and `display_name`. This field is deprecated, please use QueryResult.match instead."
@@ -5315,6 +5315,9 @@ components:
         detectIntentResponseId:
           description: Always present. The unique identifier of the DetectIntentResponse that will be returned to the API caller.
           type: string
+        dtmfDigits:
+          description: If DTMF was provided as input, this field will contain the DTMF digits.
+          type: string
         fulfillmentInfo:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3WebhookRequestFulfillmentInfo"
           description: Always present. Information about the fulfillment that triggered this webhook call.
@@ -6016,7 +6019,7 @@ components:
           type: boolean
       type: object
     GoogleCloudDialogflowCxV3beta1IntentTrainingPhrase:
-      description: Represents an example that the agent is trained on to identify the intent.
+      description: "Represents an example that the agent is trained on to identify the intent. Next ID: 15"
       properties:
         id:
           description: Output only. The unique identifier of the training phrase.
@@ -6553,6 +6556,9 @@ components:
       properties:
         detectIntentResponseId:
           description: Always present. The unique identifier of the DetectIntentResponse that will be returned to the API caller.
+          type: string
+        dtmfDigits:
+          description: If DTMF was provided as input, this field will contain the DTMF digits.
           type: string
         fulfillmentInfo:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1WebhookRequestFulfillmentInfo"

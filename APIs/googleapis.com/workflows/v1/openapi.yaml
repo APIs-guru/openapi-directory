@@ -534,6 +534,14 @@ components:
     Workflow:
       description: Workflow program to be executed by Workflows.
       properties:
+        callLogLevel:
+          description: Optional. Describes the level of platform logging to apply to calls and call responses during executions of this workflow. If both the workflow and the execution specify a logging level, the execution level takes precedence.
+          enum:
+            - CALL_LOG_LEVEL_UNSPECIFIED
+            - LOG_ALL_CALLS
+            - LOG_ERRORS_ONLY
+            - LOG_NONE
+          type: string
         createTime:
           description: Output only. The timestamp for when the workflow was created.
           format: google-datetime

@@ -890,7 +890,10 @@ components:
       description: Request message for listing the group priority ordering of an app.
       properties:
         policyNamespace:
-          description: Required. The namespace of the policy type for the request.
+          description: The namespace of the policy type for the request.
+          type: string
+        policySchema:
+          description: The schema name of the policy for the request.
           type: string
         policyTargetKey:
           $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
@@ -907,6 +910,10 @@ components:
           type: array
         policyNamespace:
           description: Output only. The namespace of the policy type of the group IDs.
+          readOnly: true
+          type: string
+        policySchema:
+          description: Output only. The schema name of the policy for the group IDs.
           readOnly: true
           type: string
         policyTargetKey:
@@ -1317,7 +1324,10 @@ components:
             type: string
           type: array
         policyNamespace:
-          description: Required. The namespace of the policy type for the request.
+          description: The namespace of the policy type for the request.
+          type: string
+        policySchema:
+          description: The schema name of the policy for the request.
           type: string
         policyTargetKey:
           $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
