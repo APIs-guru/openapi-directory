@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: AccountService
-  x-timestamp: 2023-03-22T11:13:03Z
+  x-timestamp: 2023-04-03T19:29:08Z
 tags:
   - name: Account holders
   - name: Verification
@@ -2387,7 +2387,12 @@ components:
             - HOLD
             - MONTHLY
             - WEEKLY
+            - WEEKLY_MON_TO_FRI_AU
+            - WEEKLY_MON_TO_FRI_EU
+            - WEEKLY_MON_TO_FRI_US
             - WEEKLY_ON_TUE_FRI_MIDNIGHT
+            - WEEKLY_SUN_TO_THU_AU
+            - WEEKLY_SUN_TO_THU_US
           type: string
         payoutScheduleReason:
           description: |-
@@ -3239,7 +3244,12 @@ components:
             - HOLD
             - MONTHLY
             - WEEKLY
+            - WEEKLY_MON_TO_FRI_AU
+            - WEEKLY_MON_TO_FRI_EU
+            - WEEKLY_MON_TO_FRI_US
             - WEEKLY_ON_TUE_FRI_MIDNIGHT
+            - WEEKLY_SUN_TO_THU_AU
+            - WEEKLY_SUN_TO_THU_US
           type: string
       type: object
     PerformVerificationRequest:
@@ -3837,7 +3847,12 @@ components:
             - HOLD
             - MONTHLY
             - WEEKLY
+            - WEEKLY_MON_TO_FRI_AU
+            - WEEKLY_MON_TO_FRI_EU
+            - WEEKLY_MON_TO_FRI_US
             - WEEKLY_ON_TUE_FRI_MIDNIGHT
+            - WEEKLY_SUN_TO_THU_AU
+            - WEEKLY_SUN_TO_THU_US
           type: string
       required:
         - schedule

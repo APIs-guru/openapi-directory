@@ -42,7 +42,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: ManagementService
-  x-timestamp: 2023-03-22T17:23:05Z
+  x-timestamp: 2023-04-03T23:26:06Z
 tags:
   - name: API key - merchant level
   - name: Account - merchant level
@@ -2351,6 +2351,9 @@ paths:
 
         To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
         * Management API—Terminal settings read and write
+
+        For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
+        * Management API—Terminal settings Advanced read and write
       operationId: patch-companies-companyId-terminalSettings
       parameters:
         - description: The unique identifier of the company account.
@@ -5902,6 +5905,9 @@ paths:
         To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
         * Management API—Terminal settings read
         * Management API—Terminal settings read and write
+
+        For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
+        * Management API—Terminal settings Advanced read and write
       operationId: get-merchants-merchantId-stores-reference-terminalSettings
       parameters:
         - description: The unique identifier of the merchant account.
@@ -5977,6 +5983,9 @@ paths:
 
         To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
         * Management API—Terminal settings read and write
+
+        For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
+        * Management API—Terminal settings Advanced read and write
       operationId: patch-merchants-merchantId-stores-reference-terminalSettings
       parameters:
         - description: The unique identifier of the merchant account.
@@ -8346,6 +8355,9 @@ paths:
         To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
         * Management API—Terminal settings read
         * Management API—Terminal settings read and write
+
+        For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
+        * Management API—Terminal settings Advanced read and write
       operationId: get-stores-storeId-terminalSettings
       parameters:
         - description: The unique identifier of the store.
@@ -8413,6 +8425,9 @@ paths:
 
         To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
         * Management API—Terminal settings read and write
+
+        For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
+        * Management API—Terminal settings Advanced read and write
       operationId: patch-stores-storeId-terminalSettings
       parameters:
         - description: The unique identifier of the store.
@@ -8816,6 +8831,9 @@ paths:
         To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
         * Management API—Terminal settings read
         * Management API—Terminal settings read and write
+
+        For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
+        * Management API—Terminal settings Advanced read and write
       operationId: get-terminals-terminalId-terminalSettings
       parameters:
         - description: The unique identifier of the payment terminal.
@@ -8883,6 +8901,9 @@ paths:
 
         To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
         * Management API—Terminal settings read and write
+
+        For [sensitive terminal settings](https://docs.adyen.com/point-of-sale/automating-terminal-management/configure-terminals-api#sensitive-terminal-settings), your API credential must have the following role:
+        * Management API—Terminal settings Advanced read and write
       operationId: patch-terminals-terminalId-terminalSettings
       parameters:
         - description: The unique identifier of the payment terminal.
@@ -14452,6 +14473,11 @@ components:
           items:
             type: string
           type: array
+        authnApps:
+          description: Set of authn apps available to this user
+          items:
+            type: string
+          type: array
         email:
           description: The email address of the user.
           type: string
@@ -14751,6 +14777,11 @@ components:
           type: boolean
         associatedMerchantAccounts:
           description: The list of [merchant accounts](https://docs.adyen.com/account/account-structure#merchant-accounts) associated with this user.
+          items:
+            type: string
+          type: array
+        authnApps:
+          description: Set of authn apps available to this user
           items:
             type: string
           type: array
@@ -15142,6 +15173,11 @@ components:
         active:
           description: Indicates whether this user is active.
           type: boolean
+        authnApps:
+          description: Set of authn apps available to this user
+          items:
+            type: string
+          type: array
         email:
           description: The email address of the user.
           type: string
@@ -15352,6 +15388,11 @@ components:
           maxLength: 20
           minLength: 16
           type: string
+        reuseMerchantId:
+          description: "Indicates whether the Google Pay Merchant ID is used for several merchant accounts. Default value: **false**."
+          type: boolean
+      required:
+        - merchantId
       type: object
     Gratuity:
       properties:
@@ -15952,6 +15993,10 @@ components:
         id:
           description: The unique identifier of the product.
           type: string
+        installments:
+          description: The number of installments for the specified product `id`.
+          format: int64
+          type: integer
         name:
           description: The name of the product.
           type: string
@@ -17845,6 +17890,11 @@ components:
         active:
           description: Indicates whether this user is active.
           type: boolean
+        authnApps:
+          description: Set of authn apps available to this user
+          items:
+            type: string
+          type: array
         email:
           description: The email address of the user.
           type: string

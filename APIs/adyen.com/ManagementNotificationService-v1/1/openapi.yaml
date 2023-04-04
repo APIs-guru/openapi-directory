@@ -27,14 +27,13 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: ManagementNotificationService-v1
-  x-timestamp: 2023-03-22T11:12:36Z
+  x-timestamp: 2023-03-30T18:21:57Z
 tags: []
 components:
   examples:
     WebhookAck:
       summary: Acknowledge Webhook
-      value:
-        notificationResponse: "[accepted]"
+      value: "[accepted]"
     post-merchant.created-merchant.created:
       description: Example webhook when a merchant account was created
       summary: Merchant account created
