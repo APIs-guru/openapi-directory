@@ -156,16 +156,16 @@ paths:
           description: The unique ID of the Amplify app to associate with the component.
           schema:
             type: string
-        - name: clientToken
-          in: query
-          required: false
-          description: The unique client token.
-          schema:
-            type: string
         - name: environmentName
           in: path
           required: true
           description: The name of the backend environment that is a part of the Amplify app.
+          schema:
+            type: string
+        - name: clientToken
+          in: query
+          required: false
+          description: The unique client token.
           schema:
             type: string
       requestBody:
@@ -181,52 +181,52 @@ paths:
                   description: Represents all of the information that is required to create a component.
                   type: object
                   properties:
-                    bindingProperties:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentBindingProperties'
-                        - description: The data binding information for the component's properties.
-                    children:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentChildList'
-                        - description: A list of child components that are instances of the main component.
-                    collectionProperties:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentCollectionProperties'
-                        - description: The data binding configuration for customizing a component's properties. Use this for a collection component.
-                    componentType:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentType'
-                        - description: The component type. This can be an Amplify custom UI component or another custom component.
-                    events:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentEvents'
-                        - description: The event configuration for the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
                     name:
                       allOf:
                         - $ref: '#/components/schemas/ComponentName'
                         - description: The name of the component
-                    overrides:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentOverrides'
-                        - description: Describes the component properties that can be overriden to customize an instance of the component.
-                    properties:
-                      description: Describes the component's properties.
-                    schemaVersion:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The schema version of the component when it was imported.
                     sourceId:
                       allOf:
                         - $ref: '#/components/schemas/String'
                         - description: 'The unique ID of the component in its original source system, such as Figma.'
-                    tags:
+                    componentType:
                       allOf:
-                        - $ref: '#/components/schemas/Tags'
-                        - description: One or more key-value pairs to use when tagging the component data.
+                        - $ref: '#/components/schemas/ComponentType'
+                        - description: The component type. This can be an Amplify custom UI component or another custom component.
+                    properties:
+                      description: Describes the component's properties.
+                    children:
+                      allOf:
+                        - $ref: '#/components/schemas/ComponentChildList'
+                        - description: A list of child components that are instances of the main component.
                     variants:
                       allOf:
                         - $ref: '#/components/schemas/ComponentVariants'
                         - description: A list of the unique variants of this component.
+                    overrides:
+                      allOf:
+                        - $ref: '#/components/schemas/ComponentOverrides'
+                        - description: Describes the component properties that can be overriden to customize an instance of the component.
+                    bindingProperties:
+                      allOf:
+                        - $ref: '#/components/schemas/ComponentBindingProperties'
+                        - description: The data binding information for the component's properties.
+                    collectionProperties:
+                      allOf:
+                        - $ref: '#/components/schemas/ComponentCollectionProperties'
+                        - description: The data binding configuration for customizing a component's properties. Use this for a collection component.
+                    tags:
+                      allOf:
+                        - $ref: '#/components/schemas/Tags'
+                        - description: One or more key-value pairs to use when tagging the component data.
+                    events:
+                      allOf:
+                        - $ref: '#/components/schemas/ComponentEvents'
+                        - description: The event configuration for the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
+                    schemaVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The schema version of the component when it was imported.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -270,6 +270,12 @@ paths:
           description: The name of the backend environment that is a part of the Amplify app.
           schema:
             type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to request the next page of results.
+          schema:
+            type: string
         - name: maxResults
           in: query
           required: false
@@ -278,12 +284,6 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
-        - name: nextToken
-          in: query
-          required: false
-          description: The token to request the next page of results.
-          schema:
-            type: string
   '/app/{appId}/environment/{environmentName}/forms':
     post:
       operationId: CreateForm
@@ -326,16 +326,16 @@ paths:
           description: The unique ID of the Amplify app to associate with the form.
           schema:
             type: string
-        - name: clientToken
-          in: query
-          required: false
-          description: The unique client token.
-          schema:
-            type: string
         - name: environmentName
           in: path
           required: true
           description: The name of the backend environment that is a part of the Amplify app.
+          schema:
+            type: string
+        - name: clientToken
+          in: query
+          required: false
+          description: The unique client token.
           schema:
             type: string
       requestBody:
@@ -351,42 +351,46 @@ paths:
                   description: Represents all of the information that is required to create a form.
                   type: object
                   properties:
-                    cta:
-                      allOf:
-                        - $ref: '#/components/schemas/FormCTA'
-                        - description: The <code>FormCTA</code> object that stores the call to action configuration for the form.
-                    dataType:
-                      allOf:
-                        - $ref: '#/components/schemas/FormDataTypeConfig'
-                        - description: The type of data source to use to create the form.
-                    fields:
-                      allOf:
-                        - $ref: '#/components/schemas/FieldsMap'
-                        - description: The configuration information for the form's fields.
-                    formActionType:
-                      allOf:
-                        - $ref: '#/components/schemas/FormActionType'
-                        - description: Specifies whether to perform a create or update action on the form.
                     name:
                       allOf:
                         - $ref: '#/components/schemas/FormName'
                         - description: The name of the form.
-                    schemaVersion:
+                    dataType:
                       allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The schema version of the form.
-                    sectionalElements:
+                        - $ref: '#/components/schemas/FormDataTypeConfig'
+                        - description: The type of data source to use to create the form.
+                    formActionType:
                       allOf:
-                        - $ref: '#/components/schemas/SectionalElementMap'
-                        - description: The configuration information for the visual helper elements for the form. These elements are not associated with any data.
+                        - $ref: '#/components/schemas/FormActionType'
+                        - description: Specifies whether to perform a create or update action on the form.
+                    fields:
+                      allOf:
+                        - $ref: '#/components/schemas/FieldsMap'
+                        - description: The configuration information for the form's fields.
                     style:
                       allOf:
                         - $ref: '#/components/schemas/FormStyle'
                         - description: The configuration for the form's style.
+                    sectionalElements:
+                      allOf:
+                        - $ref: '#/components/schemas/SectionalElementMap'
+                        - description: The configuration information for the visual helper elements for the form. These elements are not associated with any data.
+                    schemaVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The schema version of the form.
+                    cta:
+                      allOf:
+                        - $ref: '#/components/schemas/FormCTA'
+                        - description: The <code>FormCTA</code> object that stores the call to action configuration for the form.
                     tags:
                       allOf:
                         - $ref: '#/components/schemas/Tags'
                         - description: One or more key-value pairs to use when tagging the form data.
+                    labelDecorator:
+                      allOf:
+                        - $ref: '#/components/schemas/LabelDecorator'
+                        - description: Specifies an icon or decoration to display on the form.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -430,6 +434,12 @@ paths:
           description: The name of the backend environment that is a part of the Amplify app.
           schema:
             type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to request the next page of results.
+          schema:
+            type: string
         - name: maxResults
           in: query
           required: false
@@ -438,12 +448,6 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
-        - name: nextToken
-          in: query
-          required: false
-          description: The token to request the next page of results.
-          schema:
-            type: string
   '/app/{appId}/environment/{environmentName}/themes':
     post:
       operationId: CreateTheme
@@ -486,16 +490,16 @@ paths:
           description: The unique ID of the Amplify app associated with the theme.
           schema:
             type: string
-        - name: clientToken
-          in: query
-          required: false
-          description: The unique client token.
-          schema:
-            type: string
         - name: environmentName
           in: path
           required: true
           description: The name of the backend environment that is a part of the Amplify app.
+          schema:
+            type: string
+        - name: clientToken
+          in: query
+          required: false
+          description: The unique client token.
           schema:
             type: string
       requestBody:
@@ -515,6 +519,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ThemeName'
                         - description: The name of the theme.
+                    values:
+                      allOf:
+                        - $ref: '#/components/schemas/ThemeValuesList'
+                        - description: A list of key-value pairs that deﬁnes the properties of the theme.
                     overrides:
                       allOf:
                         - $ref: '#/components/schemas/ThemeValuesList'
@@ -523,10 +531,6 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Tags'
                         - description: One or more key-value pairs to use when tagging the theme data.
-                    values:
-                      allOf:
-                        - $ref: '#/components/schemas/ThemeValuesList'
-                        - description: A list of key-value pairs that deﬁnes the properties of the theme.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -570,6 +574,12 @@ paths:
           description: The name of the backend environment that is a part of the Amplify app.
           schema:
             type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to request the next page of results.
+          schema:
+            type: string
         - name: maxResults
           in: query
           required: false
@@ -578,12 +588,6 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
-        - name: nextToken
-          in: query
-          required: false
-          description: The token to request the next page of results.
-          schema:
-            type: string
   '/app/{appId}/environment/{environmentName}/components/{id}':
     delete:
       operationId: DeleteComponent
@@ -718,12 +722,6 @@ paths:
           description: The unique ID for the Amplify app.
           schema:
             type: string
-        - name: clientToken
-          in: query
-          required: false
-          description: The unique client token.
-          schema:
-            type: string
         - name: environmentName
           in: path
           required: true
@@ -734,6 +732,12 @@ paths:
           in: path
           required: true
           description: The unique ID for the component.
+          schema:
+            type: string
+        - name: clientToken
+          in: query
+          required: false
+          description: The unique client token.
           schema:
             type: string
       requestBody:
@@ -749,26 +753,6 @@ paths:
                   description: 'Updates and saves all of the information about a component, based on component ID.'
                   type: object
                   properties:
-                    bindingProperties:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentBindingProperties'
-                        - description: The data binding information for the component's properties.
-                    children:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentChildList'
-                        - description: The components that are instances of the main component.
-                    collectionProperties:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentCollectionProperties'
-                        - description: The configuration for binding a component's properties to a data model. Use this for a collection component.
-                    componentType:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentType'
-                        - description: The type of the component. This can be an Amplify custom UI component or another custom component.
-                    events:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentEvents'
-                        - description: The event configuration for the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
                     id:
                       allOf:
                         - $ref: '#/components/schemas/Uuid'
@@ -777,24 +761,44 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ComponentName'
                         - description: The name of the component to update.
-                    overrides:
-                      allOf:
-                        - $ref: '#/components/schemas/ComponentOverrides'
-                        - description: Describes the properties that can be overriden to customize the component.
-                    properties:
-                      description: Describes the component's properties.
-                    schemaVersion:
-                      allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The schema version of the component when it was imported.
                     sourceId:
                       allOf:
                         - $ref: '#/components/schemas/String'
                         - description: 'The unique ID of the component in its original source system, such as Figma.'
+                    componentType:
+                      allOf:
+                        - $ref: '#/components/schemas/ComponentType'
+                        - description: The type of the component. This can be an Amplify custom UI component or another custom component.
+                    properties:
+                      description: Describes the component's properties.
+                    children:
+                      allOf:
+                        - $ref: '#/components/schemas/ComponentChildList'
+                        - description: The components that are instances of the main component.
                     variants:
                       allOf:
                         - $ref: '#/components/schemas/ComponentVariants'
                         - description: A list of the unique variants of the main component being updated.
+                    overrides:
+                      allOf:
+                        - $ref: '#/components/schemas/ComponentOverrides'
+                        - description: Describes the properties that can be overriden to customize the component.
+                    bindingProperties:
+                      allOf:
+                        - $ref: '#/components/schemas/ComponentBindingProperties'
+                        - description: The data binding information for the component's properties.
+                    collectionProperties:
+                      allOf:
+                        - $ref: '#/components/schemas/ComponentCollectionProperties'
+                        - description: The configuration for binding a component's properties to a data model. Use this for a collection component.
+                    events:
+                      allOf:
+                        - $ref: '#/components/schemas/ComponentEvents'
+                        - description: The event configuration for the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
+                    schemaVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The schema version of the component when it was imported.
   '/app/{appId}/environment/{environmentName}/forms/{id}':
     delete:
       operationId: DeleteForm
@@ -929,12 +933,6 @@ paths:
           description: The unique ID for the Amplify app.
           schema:
             type: string
-        - name: clientToken
-          in: query
-          required: false
-          description: The unique client token.
-          schema:
-            type: string
         - name: environmentName
           in: path
           required: true
@@ -945,6 +943,12 @@ paths:
           in: path
           required: true
           description: The unique ID for the form.
+          schema:
+            type: string
+        - name: clientToken
+          in: query
+          required: false
+          description: The unique client token.
           schema:
             type: string
       requestBody:
@@ -960,38 +964,42 @@ paths:
                   description: 'Updates and saves all of the information about a form, based on form ID.'
                   type: object
                   properties:
-                    cta:
-                      allOf:
-                        - $ref: '#/components/schemas/FormCTA'
-                        - description: The <code>FormCTA</code> object that stores the call to action configuration for the form.
-                    dataType:
-                      allOf:
-                        - $ref: '#/components/schemas/FormDataTypeConfig'
-                        - description: The type of data source to use to create the form.
-                    fields:
-                      allOf:
-                        - $ref: '#/components/schemas/FieldsMap'
-                        - description: The configuration information for the form's fields.
-                    formActionType:
-                      allOf:
-                        - $ref: '#/components/schemas/FormActionType'
-                        - description: Specifies whether to perform a create or update action on the form.
                     name:
                       allOf:
                         - $ref: '#/components/schemas/FormName'
                         - description: The name of the form.
-                    schemaVersion:
+                    dataType:
                       allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The schema version of the form.
-                    sectionalElements:
+                        - $ref: '#/components/schemas/FormDataTypeConfig'
+                        - description: The type of data source to use to create the form.
+                    formActionType:
                       allOf:
-                        - $ref: '#/components/schemas/SectionalElementMap'
-                        - description: The configuration information for the visual helper elements for the form. These elements are not associated with any data.
+                        - $ref: '#/components/schemas/FormActionType'
+                        - description: Specifies whether to perform a create or update action on the form.
+                    fields:
+                      allOf:
+                        - $ref: '#/components/schemas/FieldsMap'
+                        - description: The configuration information for the form's fields.
                     style:
                       allOf:
                         - $ref: '#/components/schemas/FormStyle'
                         - description: The configuration for the form's style.
+                    sectionalElements:
+                      allOf:
+                        - $ref: '#/components/schemas/SectionalElementMap'
+                        - description: The configuration information for the visual helper elements for the form. These elements are not associated with any data.
+                    schemaVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The schema version of the form.
+                    cta:
+                      allOf:
+                        - $ref: '#/components/schemas/FormCTA'
+                        - description: The <code>FormCTA</code> object that stores the call to action configuration for the form.
+                    labelDecorator:
+                      allOf:
+                        - $ref: '#/components/schemas/LabelDecorator'
+                        - description: Specifies an icon or decoration to display on the form.
   '/app/{appId}/environment/{environmentName}/themes/{id}':
     delete:
       operationId: DeleteTheme
@@ -1126,12 +1134,6 @@ paths:
           description: The unique ID for the Amplify app.
           schema:
             type: string
-        - name: clientToken
-          in: query
-          required: false
-          description: The unique client token.
-          schema:
-            type: string
         - name: environmentName
           in: path
           required: true
@@ -1142,6 +1144,12 @@ paths:
           in: path
           required: true
           description: The unique ID for the theme.
+          schema:
+            type: string
+        - name: clientToken
+          in: query
+          required: false
+          description: The unique client token.
           schema:
             type: string
       requestBody:
@@ -1165,14 +1173,14 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ThemeName'
                         - description: The name of the theme to update.
-                    overrides:
-                      allOf:
-                        - $ref: '#/components/schemas/ThemeValuesList'
-                        - description: Describes the properties that can be overriden to customize the theme.
                     values:
                       allOf:
                         - $ref: '#/components/schemas/ThemeValuesList'
                         - description: A list of key-value pairs that define the theme's properties.
+                    overrides:
+                      allOf:
+                        - $ref: '#/components/schemas/ThemeValuesList'
+                        - description: Describes the properties that can be overriden to customize the theme.
   '/tokens/{provider}':
     post:
       operationId: ExchangeCodeForToken
@@ -1220,6 +1228,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/String'
                         - description: The location of the application that will receive the access code.
+                    clientId:
+                      allOf:
+                        - $ref: '#/components/schemas/SensitiveString'
+                        - description: The ID of the client to request the token from.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1425,7 +1437,7 @@ paths:
   '/app/{appId}/environment/{environmentName}/metadata/features/{featureName}':
     put:
       operationId: PutMetadataFlag
-      description: Stores the metadata information about a feature on a form or view.
+      description: Stores the metadata information about a feature on a form.
       responses:
         '200':
           description: Success
@@ -1470,7 +1482,7 @@ paths:
                 - body
               properties:
                 body:
-                  description: Stores the metadata information about a feature on a form or view.
+                  description: Stores the metadata information about a feature on a form.
                   type: object
                   properties:
                     newValue:
@@ -1528,6 +1540,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/SensitiveString'
                         - description: The token to use to refresh a previously issued access token that might have expired.
+                    clientId:
+                      allOf:
+                        - $ref: '#/components/schemas/SensitiveString'
+                        - description: The ID of the client to request the token from.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1595,44 +1611,44 @@ components:
           allOf:
             - $ref: '#/components/schemas/Component'
             - description: Describes the configuration of the new component.
-    ComponentBindingProperties:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/ComponentBindingPropertiesValue'
-    ComponentChildList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ComponentChild'
-    ComponentCollectionProperties:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/ComponentDataConfiguration'
-    ComponentType:
-      type: string
-      minLength: 1
-      maxLength: 255
-    ComponentEvents:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/ComponentEvent'
     ComponentName:
       type: string
       minLength: 1
       maxLength: 255
-    ComponentOverrides:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/ComponentOverridesValue'
     String:
       type: string
-    Tags:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
+    ComponentType:
+      type: string
+      minLength: 1
+      maxLength: 255
+    ComponentChildList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ComponentChild'
     ComponentVariants:
       type: array
       items:
         $ref: '#/components/schemas/ComponentVariant'
+    ComponentOverrides:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ComponentOverridesValue'
+    ComponentBindingProperties:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ComponentBindingPropertiesValue'
+    ComponentCollectionProperties:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ComponentDataConfiguration'
+    Tags:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    ComponentEvents:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ComponentEvent'
     ServiceQuotaExceededException: {}
     ResourceConflictException: {}
     InternalServerException: {}
@@ -1644,26 +1660,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Form'
             - description: Describes the configuration of the new form.
-    FormCTA:
-      type: object
-      properties:
-        cancel:
-          allOf:
-            - $ref: '#/components/schemas/FormButton'
-            - description: Displays a cancel button.
-        clear:
-          allOf:
-            - $ref: '#/components/schemas/FormButton'
-            - description: Displays a clear button.
-        position:
-          allOf:
-            - $ref: '#/components/schemas/FormButtonsPosition'
-            - description: The position of the button.
-        submit:
-          allOf:
-            - $ref: '#/components/schemas/FormButton'
-            - description: Displays a submit button.
-      description: Describes the call to action button configuration for the form.
+    FormName:
+      type: string
+      minLength: 1
+      maxLength: 255
     FormDataTypeConfig:
       type: object
       required:
@@ -1679,23 +1679,15 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The unique name of the data type you are using as the data source for the form.
       description: Describes the data type configuration for the data source associated with a form.
-    FieldsMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/FieldConfig'
     FormActionType:
       type: string
       enum:
         - create
         - update
-    FormName:
-      type: string
-      minLength: 1
-      maxLength: 255
-    SectionalElementMap:
+    FieldsMap:
       type: object
       additionalProperties:
-        $ref: '#/components/schemas/SectionalElement'
+        $ref: '#/components/schemas/FieldConfig'
     FormStyle:
       type: object
       properties:
@@ -1703,15 +1695,45 @@ components:
           allOf:
             - $ref: '#/components/schemas/FormStyleConfig'
             - description: The spacing for the horizontal gap.
-        outerPadding:
-          allOf:
-            - $ref: '#/components/schemas/FormStyleConfig'
-            - description: The size of the outer padding for the form.
         verticalGap:
           allOf:
             - $ref: '#/components/schemas/FormStyleConfig'
             - description: The spacing for the vertical gap.
+        outerPadding:
+          allOf:
+            - $ref: '#/components/schemas/FormStyleConfig'
+            - description: The size of the outer padding for the form.
       description: Describes the configuration for the form's style.
+    SectionalElementMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/SectionalElement'
+    FormCTA:
+      type: object
+      properties:
+        position:
+          allOf:
+            - $ref: '#/components/schemas/FormButtonsPosition'
+            - description: The position of the button.
+        clear:
+          allOf:
+            - $ref: '#/components/schemas/FormButton'
+            - description: Displays a clear button.
+        cancel:
+          allOf:
+            - $ref: '#/components/schemas/FormButton'
+            - description: Displays a cancel button.
+        submit:
+          allOf:
+            - $ref: '#/components/schemas/FormButton'
+            - description: Displays a submit button.
+      description: Describes the call to action button configuration for the form.
+    LabelDecorator:
+      type: string
+      enum:
+        - required
+        - optional
+        - none
     CreateThemeResponse:
       type: object
       properties:
@@ -1899,22 +1921,38 @@ components:
     ComponentProperty:
       type: object
       properties:
+        value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The value to assign to the component property.
         bindingProperties:
           allOf:
             - $ref: '#/components/schemas/ComponentPropertyBindingProperties'
             - description: The information to bind the component property to data at runtime.
-        bindings:
-          allOf:
-            - $ref: '#/components/schemas/FormBindings'
-            - description: The information to bind the component property to form data.
         collectionBindingProperties:
           allOf:
             - $ref: '#/components/schemas/ComponentPropertyBindingProperties'
             - description: The information to bind the component property to data at runtime. Use this for collection components.
-        componentName:
+        defaultValue:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the component that is affected by an event.
+            - description: The default value to assign to the component property.
+        model:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The data model to use to assign a value to the component property.
+        bindings:
+          allOf:
+            - $ref: '#/components/schemas/FormBindings'
+            - description: The information to bind the component property to form data.
+        event:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An event that occurs in your app. Use this for workflow data binding.
+        userAttribute:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An authenticated user attribute to use to assign a value to the component property.
         concat:
           allOf:
             - $ref: '#/components/schemas/ComponentPropertyList'
@@ -1927,38 +1965,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Specifies whether the user configured the property in Amplify Studio after importing it.
-        defaultValue:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The default value to assign to the component property.
-        event:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: An event that occurs in your app. Use this for workflow data binding.
-        importedValue:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The default value assigned to the property when the component is imported into an app.
-        model:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The data model to use to assign a value to the component property.
-        property:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the component's property that is affected by an event.
         type:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The component type.
-        userAttribute:
+        importedValue:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: An authenticated user attribute to use to assign a value to the component property.
-        value:
+            - description: The default value assigned to the property when the component is imported into an app.
+        componentName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The value to assign to the component property.
+            - description: The name of the component that is affected by an event.
+        property:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the component's property that is affected by an event.
       description: Describes the configuration for all of a component's properties. Use <code>ComponentProperty</code> to specify the values to render or bind by default.
     ComponentProperties:
       type: object
@@ -1987,34 +2009,6 @@ components:
     ActionParameters:
       type: object
       properties:
-        anchor:
-          allOf:
-            - $ref: '#/components/schemas/ComponentProperty'
-            - description: The HTML anchor link to the location to open. Specify this value for a navigation action.
-        fields:
-          allOf:
-            - $ref: '#/components/schemas/ComponentProperties'
-            - description: A dictionary of key-value pairs mapping Amplify Studio properties to fields in a data model. Use when the action performs an operation on an Amplify DataStore model.
-        global:
-          allOf:
-            - $ref: '#/components/schemas/ComponentProperty'
-            - description: Specifies whether the user should be signed out globally. Specify this value for an auth sign out action.
-        id:
-          allOf:
-            - $ref: '#/components/schemas/ComponentProperty'
-            - description: The unique ID of the component that the <code>ActionParameters</code> apply to.
-        model:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the data model. Use when the action performs an operation on an Amplify DataStore model.
-        state:
-          allOf:
-            - $ref: '#/components/schemas/MutationActionSetStateParameter'
-            - description: A key-value pair that specifies the state property name and its initial value.
-        target:
-          allOf:
-            - $ref: '#/components/schemas/ComponentProperty'
-            - description: The element within the same component to modify when the action occurs.
         type:
           allOf:
             - $ref: '#/components/schemas/ComponentProperty'
@@ -2023,6 +2017,34 @@ components:
           allOf:
             - $ref: '#/components/schemas/ComponentProperty'
             - description: The URL to the location to open. Specify this value for a navigation action.
+        anchor:
+          allOf:
+            - $ref: '#/components/schemas/ComponentProperty'
+            - description: The HTML anchor link to the location to open. Specify this value for a navigation action.
+        target:
+          allOf:
+            - $ref: '#/components/schemas/ComponentProperty'
+            - description: The element within the same component to modify when the action occurs.
+        global:
+          allOf:
+            - $ref: '#/components/schemas/ComponentProperty'
+            - description: Specifies whether the user should be signed out globally. Specify this value for an auth sign out action.
+        model:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the data model. Use when the action performs an operation on an Amplify DataStore model.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ComponentProperty'
+            - description: The unique ID of the component that the <code>ActionParameters</code> apply to.
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/ComponentProperties'
+            - description: A dictionary of key-value pairs mapping Amplify Studio properties to fields in a data model. Use when the action performs an operation on an Amplify DataStore model.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/MutationActionSetStateParameter'
+            - description: A key-value pair that specifies the state property name and its initial value.
       description: Represents the event action configuration for an element of a <code>Component</code> or <code>ComponentChild</code>. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components. <code>ActionParameters</code> defines the action that is performed when an event occurs on the component.
     Boolean:
       type: boolean
@@ -2033,86 +2055,90 @@ components:
       type: object
       required:
         - appId
-        - bindingProperties
-        - componentType
-        - createdAt
         - environmentName
         - id
         - name
-        - overrides
+        - componentType
         - properties
         - variants
+        - overrides
+        - bindingProperties
+        - createdAt
       properties:
         appId:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The unique ID of the Amplify app associated with the component.
-        bindingProperties:
-          allOf:
-            - $ref: '#/components/schemas/ComponentBindingProperties'
-            - description: <p>The information to connect a component's properties to data at runtime. You can't specify <code>tags</code> as a valid property for <code>bindingProperties</code>.</p> <p/>
-        children:
-          allOf:
-            - $ref: '#/components/schemas/ComponentChildList'
-            - description: A list of the component's <code>ComponentChild</code> instances.
-        collectionProperties:
-          allOf:
-            - $ref: '#/components/schemas/ComponentCollectionProperties'
-            - description: The data binding configuration for the component's properties. Use this for a collection component. You can't specify <code>tags</code> as a valid property for <code>collectionProperties</code>.
-        componentType:
-          allOf:
-            - $ref: '#/components/schemas/ComponentType'
-            - description: The type of the component. This can be an Amplify custom UI component or another custom component.
-        createdAt:
-          allOf:
-            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-            - description: The time that the component was created.
         environmentName:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the backend environment that is a part of the Amplify app.
-        events:
-          allOf:
-            - $ref: '#/components/schemas/ComponentEvents'
-            - description: Describes the events that can be raised on the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
-        id:
-          allOf:
-            - $ref: '#/components/schemas/Uuid'
-            - description: The unique ID of the component.
-        modifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-            - description: The time that the component was modified.
-        name:
-          allOf:
-            - $ref: '#/components/schemas/ComponentName'
-            - description: The name of the component.
-        overrides:
-          allOf:
-            - $ref: '#/components/schemas/ComponentOverrides'
-            - description: Describes the component's properties that can be overriden in a customized instance of the component. You can't specify <code>tags</code> as a valid property for <code>overrides</code>.
-        properties:
-          description: Describes the component's properties. You can't specify <code>tags</code> as a valid property for <code>properties</code>.
-        schemaVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The schema version of the component when it was imported.
         sourceId:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The unique ID of the component in its original source system, such as Figma.'
-        tags:
+        id:
           allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: One or more key-value pairs to use when tagging the component.
+            - $ref: '#/components/schemas/Uuid'
+            - description: The unique ID of the component.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ComponentName'
+            - description: The name of the component.
+        componentType:
+          allOf:
+            - $ref: '#/components/schemas/ComponentType'
+            - description: The type of the component. This can be an Amplify custom UI component or another custom component.
+        properties:
+          description: Describes the component's properties. You can't specify <code>tags</code> as a valid property for <code>properties</code>.
+        children:
+          allOf:
+            - $ref: '#/components/schemas/ComponentChildList'
+            - description: A list of the component's <code>ComponentChild</code> instances.
         variants:
           allOf:
             - $ref: '#/components/schemas/ComponentVariants'
             - description: A list of the component's variants. A variant is a unique style configuration of a main component.
+        overrides:
+          allOf:
+            - $ref: '#/components/schemas/ComponentOverrides'
+            - description: Describes the component's properties that can be overriden in a customized instance of the component. You can't specify <code>tags</code> as a valid property for <code>overrides</code>.
+        bindingProperties:
+          allOf:
+            - $ref: '#/components/schemas/ComponentBindingProperties'
+            - description: <p>The information to connect a component's properties to data at runtime. You can't specify <code>tags</code> as a valid property for <code>bindingProperties</code>.</p> <p/>
+        collectionProperties:
+          allOf:
+            - $ref: '#/components/schemas/ComponentCollectionProperties'
+            - description: The data binding configuration for the component's properties. Use this for a collection component. You can't specify <code>tags</code> as a valid property for <code>collectionProperties</code>.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The time that the component was created.
+        modifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The time that the component was modified.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: One or more key-value pairs to use when tagging the component.
+        events:
+          allOf:
+            - $ref: '#/components/schemas/ComponentEvents'
+            - description: Describes the events that can be raised on the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
+        schemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The schema version of the component when it was imported.
       description: 'Contains the configuration settings for a user interface (UI) element for an Amplify app. A component is configured as a primary, stand-alone UI element. Use <code>ComponentChild</code> to configure an instance of a <code>Component</code>. A <code>ComponentChild</code> instance inherits the configuration of the main <code>Component</code>.'
     ComponentBindingPropertiesValue:
       type: object
       properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The property type.
         bindingProperties:
           allOf:
             - $ref: '#/components/schemas/ComponentBindingPropertiesValueProperties'
@@ -2121,46 +2147,42 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The default value of the property.
-        type:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The property type.
       description: Represents the data binding configuration for a component at runtime. You can use <code>ComponentBindingPropertiesValue</code> to add exposed properties to a component to allow different values to be entered when a component is reused in different places in an app.
     ComponentBindingPropertiesValueProperties:
       type: object
       properties:
-        bucket:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: An Amazon S3 bucket.
-        defaultValue:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The default value to assign to the property.
-        field:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The field to bind the data to.
-        key:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The storage key for an Amazon S3 bucket.
         model:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: An Amplify DataStore model.
+        field:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The field to bind the data to.
         predicates:
           allOf:
             - $ref: '#/components/schemas/PredicateList'
             - description: A list of predicates for binding a component's properties to data.
-        slotName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of a component slot.
         userAttribute:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: An authenticated user attribute.
+        bucket:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An Amazon S3 bucket.
+        key:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The storage key for an Amazon S3 bucket.
+        defaultValue:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The default value to assign to the property.
+        slotName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of a component slot.
       description: 'Represents the data binding configuration for a specific property using data stored in Amazon Web Services. For Amazon Web Services connected properties, you can bind a property to data stored in an Amazon S3 bucket, an Amplify DataStore model or an authenticated user attribute.'
     PredicateList:
       type: array
@@ -2173,24 +2195,24 @@ components:
         - name
         - properties
       properties:
-        children:
-          allOf:
-            - $ref: '#/components/schemas/ComponentChildList'
-            - description: The list of <code>ComponentChild</code> instances for this component.
         componentType:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The type of the child component. '
-        events:
-          allOf:
-            - $ref: '#/components/schemas/ComponentEvents'
-            - description: Describes the events that can be raised on the child component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
         name:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the child component.
         properties:
           description: Describes the properties of the child component. You can't specify <code>tags</code> as a valid property for <code>properties</code>.
+        children:
+          allOf:
+            - $ref: '#/components/schemas/ComponentChildList'
+            - description: The list of <code>ComponentChild</code> instances for this component.
+        events:
+          allOf:
+            - $ref: '#/components/schemas/ComponentEvents'
+            - description: Describes the events that can be raised on the child component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
         sourceId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2201,62 +2223,66 @@ components:
       required:
         - model
       properties:
-        identifiers:
-          allOf:
-            - $ref: '#/components/schemas/IdentifierList'
-            - description: 'A list of IDs to use to bind data to a component. Use this property to bind specifically chosen data, rather than data retrieved from a query.'
         model:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the data model to use to bind data to a component.
-        predicate:
-          allOf:
-            - $ref: '#/components/schemas/Predicate'
-            - description: Represents the conditional logic to use when binding data to a component. Use this property to retrieve only a subset of the data in a collection.
         sort:
           allOf:
             - $ref: '#/components/schemas/SortPropertyList'
             - description: Describes how to sort the component's properties.
+        predicate:
+          allOf:
+            - $ref: '#/components/schemas/Predicate'
+            - description: Represents the conditional logic to use when binding data to a component. Use this property to retrieve only a subset of the data in a collection.
+        identifiers:
+          allOf:
+            - $ref: '#/components/schemas/IdentifierList'
+            - description: 'A list of IDs to use to bind data to a component. Use this property to bind specifically chosen data, rather than data retrieved from a query.'
       description: Describes the configuration for binding a component's properties to data.
     ComponentConditionProperty:
       type: object
       properties:
-        else:
-          allOf:
-            - $ref: '#/components/schemas/ComponentProperty'
-            - description: The value to assign to the property if the condition is not met.
-        field:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of a field. Specify this when the property is a data model.
-        operand:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The value of the property to evaluate.
-        operandType:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The type of the property to evaluate.
-        operator:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The operator to use to perform the evaluation, such as <code>eq</code> to represent equals.'
         property:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the conditional property.
+        field:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of a field. Specify this when the property is a data model.
+        operator:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The operator to use to perform the evaluation, such as <code>eq</code> to represent equals.'
+        operand:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The value of the property to evaluate.
         then:
           allOf:
             - $ref: '#/components/schemas/ComponentProperty'
             - description: The value to assign to the property if the condition is met.
+        else:
+          allOf:
+            - $ref: '#/components/schemas/ComponentProperty'
+            - description: The value to assign to the property if the condition is not met.
+        operandType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type of the property to evaluate.
       description: 'Represents a conditional expression to set a component property. Use <code>ComponentConditionProperty</code> to set a property to different values conditionally, based on the value of another property.'
-    IdentifierList:
+    SortPropertyList:
       type: array
       items:
-        $ref: '#/components/schemas/String'
+        $ref: '#/components/schemas/SortProperty'
     Predicate:
       type: object
       properties:
+        or:
+          allOf:
+            - $ref: '#/components/schemas/PredicateList'
+            - description: A list of predicates to combine logically.
         and:
           allOf:
             - $ref: '#/components/schemas/PredicateList'
@@ -2265,23 +2291,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The field to query.
-        operand:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The value to use when performing the evaluation.
         operator:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The operator to use to perform the evaluation.
-        or:
+        operand:
           allOf:
-            - $ref: '#/components/schemas/PredicateList'
-            - description: A list of predicates to combine logically.
+            - $ref: '#/components/schemas/String'
+            - description: The value to use when performing the evaluation.
+        operandType:
+          allOf:
+            - $ref: '#/components/schemas/OperandType'
+            - description: The type of value to use when performing the evaluation.
       description: Stores information for generating Amplify DataStore queries. Use a <code>Predicate</code> to retrieve a subset of the data in a collection.
-    SortPropertyList:
+    IdentifierList:
       type: array
       items:
-        $ref: '#/components/schemas/SortProperty'
+        $ref: '#/components/schemas/String'
     ComponentEvent:
       type: object
       properties:
@@ -2289,14 +2315,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The action to perform when a specific event is raised.
-        bindingEvent:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'Binds an event to an action on a component. When you specify a <code>bindingEvent</code>, the event is called when the action is performed.'
         parameters:
           allOf:
             - $ref: '#/components/schemas/ActionParameters'
             - description: Describes information about the action.
+        bindingEvent:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Binds an event to an action on a component. When you specify a <code>bindingEvent</code>, the event is called when the action is performed.'
       description: 'Describes the configuration of an event. You can bind an event and a corresponding action to a <code>Component</code> or a <code>ComponentChild</code>. A button click is an example of an event. '
     ComponentList:
       type: array
@@ -2311,14 +2337,14 @@ components:
       required:
         - property
       properties:
-        field:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The data field to bind the property to.
         property:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The component property to bind to the data field.
+        field:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The data field to bind the property to.
       description: Associates a component property to a binding property. This enables exposed properties on the top level component to propagate data to the component's property values.
     FormBindings:
       type: object
@@ -2332,19 +2358,15 @@ components:
       type: object
       required:
         - appId
-        - componentType
         - environmentName
         - id
         - name
+        - componentType
       properties:
         appId:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The unique ID of the Amplify app associated with the component.
-        componentType:
-          allOf:
-            - $ref: '#/components/schemas/ComponentType'
-            - description: The component type.
         environmentName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2357,6 +2379,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ComponentName'
             - description: The name of the component.
+        componentType:
+          allOf:
+            - $ref: '#/components/schemas/ComponentType'
+            - description: The component type.
       description: Contains a summary of a component. This is a read-only data type that is returned by <code>ListComponents</code>.
     ComponentSummaryList:
       type: array
@@ -2369,71 +2395,71 @@ components:
     ComponentVariant:
       type: object
       properties:
-        overrides:
-          allOf:
-            - $ref: '#/components/schemas/ComponentOverrides'
-            - description: The properties of the component variant that can be overriden when customizing an instance of the component. You can't specify <code>tags</code> as a valid property for <code>overrides</code>.
         variantValues:
           allOf:
             - $ref: '#/components/schemas/ComponentVariantValues'
             - description: The combination of variants that comprise this variant. You can't specify <code>tags</code> as a valid property for <code>variantValues</code>.
+        overrides:
+          allOf:
+            - $ref: '#/components/schemas/ComponentOverrides'
+            - description: The properties of the component variant that can be overriden when customizing an instance of the component. You can't specify <code>tags</code> as a valid property for <code>overrides</code>.
       description: Describes the style configuration of a unique variation of a main component.
     CreateComponentData:
       type: object
       required:
-        - bindingProperties
-        - componentType
         - name
-        - overrides
+        - componentType
         - properties
         - variants
+        - overrides
+        - bindingProperties
       properties:
-        bindingProperties:
-          allOf:
-            - $ref: '#/components/schemas/ComponentBindingProperties'
-            - description: The data binding information for the component's properties.
-        children:
-          allOf:
-            - $ref: '#/components/schemas/ComponentChildList'
-            - description: A list of child components that are instances of the main component.
-        collectionProperties:
-          allOf:
-            - $ref: '#/components/schemas/ComponentCollectionProperties'
-            - description: The data binding configuration for customizing a component's properties. Use this for a collection component.
-        componentType:
-          allOf:
-            - $ref: '#/components/schemas/ComponentType'
-            - description: The component type. This can be an Amplify custom UI component or another custom component.
-        events:
-          allOf:
-            - $ref: '#/components/schemas/ComponentEvents'
-            - description: The event configuration for the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
         name:
           allOf:
             - $ref: '#/components/schemas/ComponentName'
             - description: The name of the component
-        overrides:
-          allOf:
-            - $ref: '#/components/schemas/ComponentOverrides'
-            - description: Describes the component properties that can be overriden to customize an instance of the component.
-        properties:
-          description: Describes the component's properties.
-        schemaVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The schema version of the component when it was imported.
         sourceId:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The unique ID of the component in its original source system, such as Figma.'
-        tags:
+        componentType:
           allOf:
-            - $ref: '#/components/schemas/Tags'
-            - description: One or more key-value pairs to use when tagging the component data.
+            - $ref: '#/components/schemas/ComponentType'
+            - description: The component type. This can be an Amplify custom UI component or another custom component.
+        properties:
+          description: Describes the component's properties.
+        children:
+          allOf:
+            - $ref: '#/components/schemas/ComponentChildList'
+            - description: A list of child components that are instances of the main component.
         variants:
           allOf:
             - $ref: '#/components/schemas/ComponentVariants'
             - description: A list of the unique variants of this component.
+        overrides:
+          allOf:
+            - $ref: '#/components/schemas/ComponentOverrides'
+            - description: Describes the component properties that can be overriden to customize an instance of the component.
+        bindingProperties:
+          allOf:
+            - $ref: '#/components/schemas/ComponentBindingProperties'
+            - description: The data binding information for the component's properties.
+        collectionProperties:
+          allOf:
+            - $ref: '#/components/schemas/ComponentCollectionProperties'
+            - description: The data binding configuration for customizing a component's properties. Use this for a collection component.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: One or more key-value pairs to use when tagging the component data.
+        events:
+          allOf:
+            - $ref: '#/components/schemas/ComponentEvents'
+            - description: The event configuration for the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
+        schemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The schema version of the component when it was imported.
       description: Represents all of the information that is required to create a component.
     CreateComponentRequest:
       type: object
@@ -2448,50 +2474,54 @@ components:
     CreateFormData:
       type: object
       required:
-        - dataType
-        - fields
-        - formActionType
         - name
-        - schemaVersion
-        - sectionalElements
+        - dataType
+        - formActionType
+        - fields
         - style
+        - sectionalElements
+        - schemaVersion
       properties:
-        cta:
-          allOf:
-            - $ref: '#/components/schemas/FormCTA'
-            - description: The <code>FormCTA</code> object that stores the call to action configuration for the form.
-        dataType:
-          allOf:
-            - $ref: '#/components/schemas/FormDataTypeConfig'
-            - description: The type of data source to use to create the form.
-        fields:
-          allOf:
-            - $ref: '#/components/schemas/FieldsMap'
-            - description: The configuration information for the form's fields.
-        formActionType:
-          allOf:
-            - $ref: '#/components/schemas/FormActionType'
-            - description: Specifies whether to perform a create or update action on the form.
         name:
           allOf:
             - $ref: '#/components/schemas/FormName'
             - description: The name of the form.
-        schemaVersion:
+        dataType:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The schema version of the form.
-        sectionalElements:
+            - $ref: '#/components/schemas/FormDataTypeConfig'
+            - description: The type of data source to use to create the form.
+        formActionType:
           allOf:
-            - $ref: '#/components/schemas/SectionalElementMap'
-            - description: The configuration information for the visual helper elements for the form. These elements are not associated with any data.
+            - $ref: '#/components/schemas/FormActionType'
+            - description: Specifies whether to perform a create or update action on the form.
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/FieldsMap'
+            - description: The configuration information for the form's fields.
         style:
           allOf:
             - $ref: '#/components/schemas/FormStyle'
             - description: The configuration for the form's style.
+        sectionalElements:
+          allOf:
+            - $ref: '#/components/schemas/SectionalElementMap'
+            - description: The configuration information for the visual helper elements for the form. These elements are not associated with any data.
+        schemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The schema version of the form.
+        cta:
+          allOf:
+            - $ref: '#/components/schemas/FormCTA'
+            - description: The <code>FormCTA</code> object that stores the call to action configuration for the form.
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: One or more key-value pairs to use when tagging the form data.
+        labelDecorator:
+          allOf:
+            - $ref: '#/components/schemas/LabelDecorator'
+            - description: Specifies an icon or decoration to display on the form.
       description: Represents all of the information that is required to create a form.
     CreateFormRequest:
       type: object
@@ -2507,40 +2537,24 @@ components:
       type: object
       required:
         - appId
-        - dataType
         - environmentName
-        - fields
-        - formActionType
         - id
         - name
-        - schemaVersion
-        - sectionalElements
+        - formActionType
         - style
+        - dataType
+        - fields
+        - sectionalElements
+        - schemaVersion
       properties:
         appId:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The unique ID of the Amplify app associated with the form.
-        cta:
-          allOf:
-            - $ref: '#/components/schemas/FormCTA'
-            - description: Stores the call to action configuration for the form.
-        dataType:
-          allOf:
-            - $ref: '#/components/schemas/FormDataTypeConfig'
-            - description: The type of data source to use to create the form.
         environmentName:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the backend environment that is a part of the Amplify app.
-        fields:
-          allOf:
-            - $ref: '#/components/schemas/FieldsMap'
-            - description: Stores the information about the form's fields.
-        formActionType:
-          allOf:
-            - $ref: '#/components/schemas/FormActionType'
-            - description: The operation to perform on the specified form.
         id:
           allOf:
             - $ref: '#/components/schemas/Uuid'
@@ -2549,22 +2563,42 @@ components:
           allOf:
             - $ref: '#/components/schemas/FormName'
             - description: The name of the form.
-        schemaVersion:
+        formActionType:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The schema version of the form when it was imported.
-        sectionalElements:
-          allOf:
-            - $ref: '#/components/schemas/SectionalElementMap'
-            - description: Stores the visual helper elements for the form that are not associated with any data.
+            - $ref: '#/components/schemas/FormActionType'
+            - description: The operation to perform on the specified form.
         style:
           allOf:
             - $ref: '#/components/schemas/FormStyle'
             - description: Stores the configuration for the form's style.
+        dataType:
+          allOf:
+            - $ref: '#/components/schemas/FormDataTypeConfig'
+            - description: The type of data source to use to create the form.
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/FieldsMap'
+            - description: Stores the information about the form's fields.
+        sectionalElements:
+          allOf:
+            - $ref: '#/components/schemas/SectionalElementMap'
+            - description: Stores the visual helper elements for the form that are not associated with any data.
+        schemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The schema version of the form when it was imported.
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: One or more key-value pairs to use when tagging the form.
+        cta:
+          allOf:
+            - $ref: '#/components/schemas/FormCTA'
+            - description: Stores the call to action configuration for the form.
+        labelDecorator:
+          allOf:
+            - $ref: '#/components/schemas/LabelDecorator'
+            - description: Specifies an icon or decoration to display on the form.
       description: Contains the configuration settings for a <code>Form</code> user interface (UI) element for an Amplify app. A form is a component you can add to your project by specifying a data source as the default configuration for the form.
     CreateThemeData:
       type: object
@@ -2576,6 +2610,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ThemeName'
             - description: The name of the theme.
+        values:
+          allOf:
+            - $ref: '#/components/schemas/ThemeValuesList'
+            - description: A list of key-value pairs that deﬁnes the properties of the theme.
         overrides:
           allOf:
             - $ref: '#/components/schemas/ThemeValuesList'
@@ -2584,10 +2622,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: One or more key-value pairs to use when tagging the theme data.
-        values:
-          allOf:
-            - $ref: '#/components/schemas/ThemeValuesList'
-            - description: A list of key-value pairs that deﬁnes the properties of the theme.
       description: Represents all of the information that is required to create a theme.
     CreateThemeRequest:
       type: object
@@ -2603,20 +2637,16 @@ components:
       type: object
       required:
         - appId
-        - createdAt
         - environmentName
         - id
         - name
+        - createdAt
         - values
       properties:
         appId:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The unique ID for the Amplify app associated with the theme.
-        createdAt:
-          allOf:
-            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-            - description: The time that the theme was created.
         environmentName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2625,14 +2655,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/Uuid'
             - description: The ID for the theme.
-        modifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-            - description: The time that the theme was modified.
         name:
           allOf:
             - $ref: '#/components/schemas/ThemeName'
             - description: The name of the theme.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The time that the theme was created.
+        modifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The time that the theme was modified.
+        values:
+          allOf:
+            - $ref: '#/components/schemas/ThemeValuesList'
+            - description: A list of key-value pairs that defines the properties of the theme.
         overrides:
           allOf:
             - $ref: '#/components/schemas/ThemeValuesList'
@@ -2641,10 +2679,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: One or more key-value pairs to use when tagging the theme.
-        values:
-          allOf:
-            - $ref: '#/components/schemas/ThemeValuesList'
-            - description: A list of key-value pairs that defines the properties of the theme.
       description: A theme is a collection of style settings that apply globally to the components associated with an Amplify application.
     DeleteComponentRequest:
       type: object
@@ -2676,6 +2710,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The location of the application that will receive the access code.
+        clientId:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The ID of the client to request the token from.
       description: Describes the configuration of a request to exchange an access code for a token.
     ExchangeCodeForTokenRequest:
       type: object
@@ -2713,79 +2751,9 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/String'
-    FieldInputConfig:
-      type: object
-      required:
-        - type
-      properties:
-        defaultChecked:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Specifies whether a field has a default value.
-        defaultCountryCode:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The default country code for a phone number.
-        defaultValue:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The default value for the field.
-        descriptiveText:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The text to display to describe the field.
-        isArray:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Specifies whether to render the field as an array. This property is ignored if the <code>dataSourceType</code> for the form is a Data Store.
-        maxValue:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The maximum value to display for the field.
-        minValue:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The minimum value to display for the field.
-        name:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the field.
-        placeholder:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The text to display as a placeholder for the field.
-        readOnly:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Specifies a read only field.
-        required:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Specifies a field that requires input.
-        step:
-          allOf:
-            - $ref: '#/components/schemas/Float'
-            - description: The stepping increment for a numeric value in a field.
-        type:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The input type for the field. '
-        value:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The value for the field.
-        valueMappings:
-          allOf:
-            - $ref: '#/components/schemas/ValueMappings'
-            - description: The information to use to customize the input fields with data at runtime.
-      description: Describes the configuration for the default input values to display for a field.
     FieldPosition:
       type: object
       properties:
-        below:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The field position is below the field specified by the string.
         fixed:
           allOf:
             - $ref: '#/components/schemas/FixedPosition'
@@ -2794,7 +2762,81 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The field position is to the right of the field specified by the string.
+        below:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The field position is below the field specified by the string.
       description: Describes the field position.
+    FieldInputConfig:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The input type for the field. '
+        required:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies a field that requires input.
+        readOnly:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies a read only field.
+        placeholder:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The text to display as a placeholder for the field.
+        defaultValue:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The default value for the field.
+        descriptiveText:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The text to display to describe the field.
+        defaultChecked:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether a field has a default value.
+        defaultCountryCode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The default country code for a phone number.
+        valueMappings:
+          allOf:
+            - $ref: '#/components/schemas/ValueMappings'
+            - description: The information to use to customize the input fields with data at runtime.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the field.
+        minValue:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: The minimum value to display for the field.
+        maxValue:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: The maximum value to display for the field.
+        step:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: The stepping increment for a numeric value in a field.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The value for the field.
+        isArray:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether to render the field as an array. This property is ignored if the <code>dataSourceType</code> for the form is a Data Store.
+        fileUploaderConfig:
+          allOf:
+            - $ref: '#/components/schemas/FileUploaderFieldConfig'
+            - description: The configuration for the file uploader field.
+      description: Describes the configuration for the default input values to display for a field.
     ValidationsList:
       type: array
       items:
@@ -2802,14 +2844,6 @@ components:
     FieldConfig:
       type: object
       properties:
-        excluded:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Specifies whether to hide a field.
-        inputType:
-          allOf:
-            - $ref: '#/components/schemas/FieldInputConfig'
-            - description: Describes the configuration for the default input value to display for a field.
         label:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2818,14 +2852,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/FieldPosition'
             - description: Specifies the field position.
+        excluded:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether to hide a field.
+        inputType:
+          allOf:
+            - $ref: '#/components/schemas/FieldInputConfig'
+            - description: Describes the configuration for the default input value to display for a field.
         validations:
           allOf:
             - $ref: '#/components/schemas/ValidationsList'
             - description: The validations to perform on the value in the field.
       description: Describes the configuration information for a field in a table.
-    Float:
-      type: number
-      format: float
     ValueMappings:
       type: object
       required:
@@ -2835,41 +2874,85 @@ components:
           allOf:
             - $ref: '#/components/schemas/ValueMappingList'
             - description: The value and display value pairs.
+        bindingProperties:
+          allOf:
+            - $ref: '#/components/schemas/FormInputBindingProperties'
+            - description: The information to bind fields to data at runtime.
       description: Represents the data binding configuration for a value map.
+    Float:
+      type: number
+      format: float
+    FileUploaderFieldConfig:
+      type: object
+      required:
+        - accessLevel
+        - acceptedFileTypes
+      properties:
+        accessLevel:
+          allOf:
+            - $ref: '#/components/schemas/StorageAccessLevel'
+            - description: 'The access level to assign to the uploaded files in the Amazon S3 bucket where they are stored. The valid values for this property are <code>private</code>, <code>protected</code>, or <code>public</code>. For detailed information about the permissions associated with each access level, see <a href="https://docs.amplify.aws/lib/storage/configureaccess/q/platform/js/">File access levels</a> in the <i>Amplify documentation</i>.'
+        acceptedFileTypes:
+          allOf:
+            - $ref: '#/components/schemas/StrValues'
+            - description: The file types that are allowed to be uploaded by the file uploader. Provide this information in an array of strings specifying the valid file extensions.
+        showThumbnails:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether to display or hide the image preview after selecting a file for upload. The default value is <code>true</code> to display the image preview.
+        isResumable:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Allows the file upload operation to be paused and resumed. The default value is <code>false</code>.</p> <p>When <code>isResumable</code> is set to <code>true</code>, the file uploader uses a multipart upload to break the files into chunks before upload. The progress of the upload isn''t continuous, because the file uploader uploads a chunk at a time.</p>'
+        maxFileCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Specifies the maximum number of files that can be selected to upload. The default value is an unlimited number of files.
+        maxSize:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum file size in bytes that the file uploader will accept. The default value is an unlimited file size.
+      description: Describes the configuration for the file uploader field.
     FixedPosition:
       type: string
       enum:
         - first
-    NumValues:
-      type: array
-      items:
-        $ref: '#/components/schemas/Integer'
     StrValues:
       type: array
       items:
         $ref: '#/components/schemas/String'
+    NumValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/Integer'
     FieldValidationConfiguration:
       type: object
       required:
         - type
       properties:
-        numValues:
-          allOf:
-            - $ref: '#/components/schemas/NumValues'
-            - description: The validation to perform on a number value.
-        strValues:
-          allOf:
-            - $ref: '#/components/schemas/StrValues'
-            - description: The validation to perform on a string value.
         type:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The validation to perform on an object type.<code/> '
+        strValues:
+          allOf:
+            - $ref: '#/components/schemas/StrValues'
+            - description: The validation to perform on a string value.
+        numValues:
+          allOf:
+            - $ref: '#/components/schemas/NumValues'
+            - description: The validation to perform on a number value.
         validationMessage:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The validation message to display.
       description: Describes the validation configuration for a field.
+    StorageAccessLevel:
+      type: string
+      enum:
+        - public
+        - protected
+        - private
     FormBindingElement:
       type: object
       required:
@@ -2888,14 +2971,14 @@ components:
     FormButton:
       type: object
       properties:
-        children:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Describes the button's properties.
         excluded:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Specifies whether the button is visible on the form.
+        children:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Describes the button's properties.
         position:
           allOf:
             - $ref: '#/components/schemas/FieldPosition'
@@ -2912,6 +2995,48 @@ components:
       enum:
         - DataStore
         - Custom
+    FormInputBindingPropertiesValue:
+      type: object
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The property type.
+        bindingProperties:
+          allOf:
+            - $ref: '#/components/schemas/FormInputBindingPropertiesValueProperties'
+            - description: Describes the properties to customize with data at runtime.
+      description: Represents the data binding configuration for a form's input fields at runtime.You can use <code>FormInputBindingPropertiesValue</code> to add exposed properties to a form to allow different values to be entered when a form is reused in different places in an app.
+    FormInputBindingProperties:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/FormInputBindingPropertiesValue'
+    FormInputBindingPropertiesValueProperties:
+      type: object
+      properties:
+        model:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An Amplify DataStore model.
+      description: 'Represents the data binding configuration for a specific property using data stored in Amazon Web Services. For Amazon Web Services connected properties, you can bind a property to data stored in an Amplify DataStore model.'
+    FormInputValuePropertyBindingProperties:
+      type: object
+      required:
+        - property
+      properties:
+        property:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The form property to bind to the data field.
+        field:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The data field to bind the property to.
+      description: Associates a form property to a binding property. This enables exposed properties on the top level form to propagate data to the form's property values.
+    FormInputValuePropertyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FormInputValueProperty'
     FormInputValueProperty:
       type: object
       properties:
@@ -2919,6 +3044,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The value to assign to the input field.
+        bindingProperties:
+          allOf:
+            - $ref: '#/components/schemas/FormInputValuePropertyBindingProperties'
+            - description: The information to bind fields to data at runtime.
+        concat:
+          allOf:
+            - $ref: '#/components/schemas/FormInputValuePropertyList'
+            - description: A list of form properties to concatenate to create the value to assign to this field property.
       description: Describes the configuration for an input field on a form. Use <code>FormInputValueProperty</code> to specify the values to render or bind by default.
     FormStyleConfig:
       type: object
@@ -3015,6 +3148,9 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ThemeSummary'
+    OperandType:
+      type: string
+      pattern: boolean|string|number
     PutMetadataFlagBody:
       type: object
       required:
@@ -3024,7 +3160,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The new information to store.
-      description: Stores the metadata information about a feature on a form or view.
+      description: Stores the metadata information about a feature on a form.
     PutMetadataFlagRequest:
       type: object
       required:
@@ -3044,6 +3180,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SensitiveString'
             - description: The token to use to refresh a previously issued access token that might have expired.
+        clientId:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The ID of the client to request the token from.
       description: Describes a refresh token.
     RefreshTokenRequest:
       type: object
@@ -3060,14 +3200,10 @@ components:
       required:
         - type
       properties:
-        level:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: Specifies the size of the font for a <code>Heading</code> sectional element. Valid values are <code>1 | 2 | 3 | 4 | 5 | 6</code>.
-        orientation:
+        type:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Specifies the orientation for a <code>Divider</code> sectional element. Valid values are <code>horizontal</code> or <code>vertical</code>.
+            - description: 'The type of sectional element. Valid values are <code>Heading</code>, <code>Text</code>, and <code>Divider</code>.'
         position:
           allOf:
             - $ref: '#/components/schemas/FieldPosition'
@@ -3076,10 +3212,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The text for a <code>Text</code> sectional element.
-        type:
+        level:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Specifies the size of the font for a <code>Heading</code> sectional element. Valid values are <code>1 | 2 | 3 | 4 | 5 | 6</code>.
+        orientation:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The type of sectional element. Valid values are <code>Heading</code>, <code>Text</code>, and <code>Divider</code>.'
+            - description: Specifies the orientation for a <code>Divider</code> sectional element. Valid values are <code>horizontal</code> or <code>vertical</code>.
+        excluded:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Excludes a sectional element that was generated by default for a specified data model.
       description: 'Stores the configuration information for a visual helper element for a form. A sectional element can be a header, a text block, or a divider. These elements are static and not associated with any data.'
     SortDirection:
       type: string
@@ -3089,21 +3233,21 @@ components:
     SortProperty:
       type: object
       required:
-        - direction
         - field
+        - direction
       properties:
-        direction:
-          allOf:
-            - $ref: '#/components/schemas/SortDirection'
-            - description: 'The direction of the sort, either ascending or descending.'
         field:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The field to perform the sort on.
+        direction:
+          allOf:
+            - $ref: '#/components/schemas/SortDirection'
+            - description: 'The direction of the sort, either ascending or descending.'
       description: Describes how to sort the data that you bind to a component.
     TagKey:
       type: string
-      pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+      pattern: '(?!aws:)[a-zA-Z+-=._:/]+'
       minLength: 1
       maxLength: 128
     TagValue:
@@ -3138,14 +3282,14 @@ components:
     ThemeValue:
       type: object
       properties:
-        children:
-          allOf:
-            - $ref: '#/components/schemas/ThemeValuesList'
-            - description: A list of key-value pairs that define the theme's properties.
         value:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The value of a theme property.
+        children:
+          allOf:
+            - $ref: '#/components/schemas/ThemeValuesList'
+            - description: A list of key-value pairs that define the theme's properties.
       description: Describes the configuration of a theme's properties.
     ThemeValues:
       type: object
@@ -3162,26 +3306,6 @@ components:
     UpdateComponentData:
       type: object
       properties:
-        bindingProperties:
-          allOf:
-            - $ref: '#/components/schemas/ComponentBindingProperties'
-            - description: The data binding information for the component's properties.
-        children:
-          allOf:
-            - $ref: '#/components/schemas/ComponentChildList'
-            - description: The components that are instances of the main component.
-        collectionProperties:
-          allOf:
-            - $ref: '#/components/schemas/ComponentCollectionProperties'
-            - description: The configuration for binding a component's properties to a data model. Use this for a collection component.
-        componentType:
-          allOf:
-            - $ref: '#/components/schemas/ComponentType'
-            - description: The type of the component. This can be an Amplify custom UI component or another custom component.
-        events:
-          allOf:
-            - $ref: '#/components/schemas/ComponentEvents'
-            - description: The event configuration for the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
         id:
           allOf:
             - $ref: '#/components/schemas/Uuid'
@@ -3190,24 +3314,44 @@ components:
           allOf:
             - $ref: '#/components/schemas/ComponentName'
             - description: The name of the component to update.
-        overrides:
-          allOf:
-            - $ref: '#/components/schemas/ComponentOverrides'
-            - description: Describes the properties that can be overriden to customize the component.
-        properties:
-          description: Describes the component's properties.
-        schemaVersion:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The schema version of the component when it was imported.
         sourceId:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The unique ID of the component in its original source system, such as Figma.'
+        componentType:
+          allOf:
+            - $ref: '#/components/schemas/ComponentType'
+            - description: The type of the component. This can be an Amplify custom UI component or another custom component.
+        properties:
+          description: Describes the component's properties.
+        children:
+          allOf:
+            - $ref: '#/components/schemas/ComponentChildList'
+            - description: The components that are instances of the main component.
         variants:
           allOf:
             - $ref: '#/components/schemas/ComponentVariants'
             - description: A list of the unique variants of the main component being updated.
+        overrides:
+          allOf:
+            - $ref: '#/components/schemas/ComponentOverrides'
+            - description: Describes the properties that can be overriden to customize the component.
+        bindingProperties:
+          allOf:
+            - $ref: '#/components/schemas/ComponentBindingProperties'
+            - description: The data binding information for the component's properties.
+        collectionProperties:
+          allOf:
+            - $ref: '#/components/schemas/ComponentCollectionProperties'
+            - description: The configuration for binding a component's properties to a data model. Use this for a collection component.
+        events:
+          allOf:
+            - $ref: '#/components/schemas/ComponentEvents'
+            - description: The event configuration for the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
+        schemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The schema version of the component when it was imported.
       description: 'Updates and saves all of the information about a component, based on component ID.'
     UpdateComponentRequest:
       type: object
@@ -3222,38 +3366,42 @@ components:
     UpdateFormData:
       type: object
       properties:
-        cta:
-          allOf:
-            - $ref: '#/components/schemas/FormCTA'
-            - description: The <code>FormCTA</code> object that stores the call to action configuration for the form.
-        dataType:
-          allOf:
-            - $ref: '#/components/schemas/FormDataTypeConfig'
-            - description: The type of data source to use to create the form.
-        fields:
-          allOf:
-            - $ref: '#/components/schemas/FieldsMap'
-            - description: The configuration information for the form's fields.
-        formActionType:
-          allOf:
-            - $ref: '#/components/schemas/FormActionType'
-            - description: Specifies whether to perform a create or update action on the form.
         name:
           allOf:
             - $ref: '#/components/schemas/FormName'
             - description: The name of the form.
-        schemaVersion:
+        dataType:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The schema version of the form.
-        sectionalElements:
+            - $ref: '#/components/schemas/FormDataTypeConfig'
+            - description: The type of data source to use to create the form.
+        formActionType:
           allOf:
-            - $ref: '#/components/schemas/SectionalElementMap'
-            - description: The configuration information for the visual helper elements for the form. These elements are not associated with any data.
+            - $ref: '#/components/schemas/FormActionType'
+            - description: Specifies whether to perform a create or update action on the form.
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/FieldsMap'
+            - description: The configuration information for the form's fields.
         style:
           allOf:
             - $ref: '#/components/schemas/FormStyle'
             - description: The configuration for the form's style.
+        sectionalElements:
+          allOf:
+            - $ref: '#/components/schemas/SectionalElementMap'
+            - description: The configuration information for the visual helper elements for the form. These elements are not associated with any data.
+        schemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The schema version of the form.
+        cta:
+          allOf:
+            - $ref: '#/components/schemas/FormCTA'
+            - description: The <code>FormCTA</code> object that stores the call to action configuration for the form.
+        labelDecorator:
+          allOf:
+            - $ref: '#/components/schemas/LabelDecorator'
+            - description: Specifies an icon or decoration to display on the form.
       description: 'Updates and saves all of the information about a form, based on form ID.'
     UpdateFormRequest:
       type: object
@@ -3278,14 +3426,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ThemeName'
             - description: The name of the theme to update.
-        overrides:
-          allOf:
-            - $ref: '#/components/schemas/ThemeValuesList'
-            - description: Describes the properties that can be overriden to customize the theme.
         values:
           allOf:
             - $ref: '#/components/schemas/ThemeValuesList'
             - description: A list of key-value pairs that define the theme's properties.
+        overrides:
+          allOf:
+            - $ref: '#/components/schemas/ThemeValuesList'
+            - description: Describes the properties that can be overriden to customize the theme.
       description: Saves the data binding information for a theme.
     UpdateThemeRequest:
       type: object

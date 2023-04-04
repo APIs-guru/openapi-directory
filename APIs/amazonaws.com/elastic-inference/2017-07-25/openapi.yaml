@@ -3,7 +3,7 @@ info:
   version: '2017-07-25'
   x-release: v4
   title: Amazon Elastic  Inference
-  description: ' Elastic Inference public APIs. '
+  description: '<p> Elastic Inference public APIs. </p> <p> February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -118,7 +118,7 @@ paths:
   /describe-accelerator-offerings:
     post:
       operationId: DescribeAcceleratorOfferings
-      description: ' Describes the locations in which a given accelerator type or set of types is present in a given region. '
+      description: '<p> Describes the locations in which a given accelerator type or set of types is present in a given region. </p> <p> February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. </p>'
       responses:
         '200':
           description: Success
@@ -181,7 +181,7 @@ paths:
   /describe-accelerator-types:
     get:
       operationId: DescribeAcceleratorTypes
-      description: ' Describes the accelerator types available in a given region, as well as their characteristics, such as memory and throughput. '
+      description: '<p> Describes the accelerator types available in a given region, as well as their characteristics, such as memory and throughput. </p> <p> February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. </p>'
       responses:
         '200':
           description: Success
@@ -207,7 +207,7 @@ paths:
   /describe-accelerators:
     post:
       operationId: DescribeAccelerators
-      description: ' Describes information over a provided set of accelerators belonging to an account. '
+      description: '<p> Describes information over a provided set of accelerators belonging to an account. </p> <p> February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. </p>'
       responses:
         '200':
           description: Success
@@ -289,7 +289,7 @@ paths:
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: ' Returns all tags of an Elastic Inference Accelerator. '
+      description: '<p> Returns all tags of an Elastic Inference Accelerator. </p> <p> February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. </p>'
       responses:
         '200':
           description: Success
@@ -322,7 +322,7 @@ paths:
           description: ' The ARN of the Elastic Inference Accelerator to list the tags for. '
           schema:
             type: string
-            pattern: '^arn:aws\S*:elastic-inference:\S+:\d{12}:elastic-inference-accelerator/eia-[0-9a-f]+$'
+            pattern: '^arn:aws[^\s:]*:elastic-inference:[^\s:]+:\d{12}:elastic-inference-accelerator/eia-[0-9a-f]+$'
             minLength: 1
             maxLength: 1011
     parameters:
@@ -335,7 +335,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: ' Adds the specified tags to an Elastic Inference Accelerator. '
+      description: '<p> Adds the specified tags to an Elastic Inference Accelerator. </p> <p> February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. </p>'
       responses:
         '200':
           description: Success
@@ -368,7 +368,7 @@ paths:
           description: ' The ARN of the Elastic Inference Accelerator to tag. '
           schema:
             type: string
-            pattern: '^arn:aws\S*:elastic-inference:\S+:\d{12}:elastic-inference-accelerator/eia-[0-9a-f]+$'
+            pattern: '^arn:aws[^\s:]*:elastic-inference:[^\s:]+:\d{12}:elastic-inference-accelerator/eia-[0-9a-f]+$'
             minLength: 1
             maxLength: 1011
       requestBody:
@@ -390,7 +390,7 @@ paths:
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: ' Removes the specified tags from an Elastic Inference Accelerator. '
+      description: '<p> Removes the specified tags from an Elastic Inference Accelerator. </p> <p> February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. </p>'
       responses:
         '200':
           description: Success
@@ -423,7 +423,7 @@ paths:
           description: ' The ARN of the Elastic Inference Accelerator to untag. '
           schema:
             type: string
-            pattern: '^arn:aws\S*:elastic-inference:\S+:\d{12}:elastic-inference-accelerator/eia-[0-9a-f]+$'
+            pattern: '^arn:aws[^\s:]*:elastic-inference:[^\s:]+:\d{12}:elastic-inference-accelerator/eia-[0-9a-f]+$'
             minLength: 1
             maxLength: 1011
         - name: tagKeys
@@ -558,6 +558,7 @@ components:
       properties: {}
     TagValue:
       type: string
+      pattern: .*
       maxLength: 256
     UntagResourceResult:
       type: object
@@ -784,7 +785,7 @@ components:
       description: ' A throughput entry for an Elastic Inference Accelerator type. '
     ResourceARN:
       type: string
-      pattern: '^arn:aws\S*:elastic-inference:\S+:\d{12}:elastic-inference-accelerator/eia-[0-9a-f]+$'
+      pattern: '^arn:aws[^\s:]*:elastic-inference:[^\s:]+:\d{12}:elastic-inference-accelerator/eia-[0-9a-f]+$'
       minLength: 1
       maxLength: 1011
     ListTagsForResourceRequest:
