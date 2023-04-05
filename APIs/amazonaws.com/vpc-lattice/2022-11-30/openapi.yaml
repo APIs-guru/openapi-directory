@@ -1156,7 +1156,7 @@ paths:
   /servicenetworkvpcassociations:
     post:
       operationId: CreateServiceNetworkVpcAssociation
-      description: '<p>Associates a VPC with a service network. When you associate a VPC with the service network, it enables all the resources within that VPC to be clients and communicate with other services in the service network. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-vpc-associations">Manage VPC associations</a> in the <i>Amazon VPC Lattice User Guide</i>.</p> <p>You can''t use this operation if there is a disassociation in progress. If the association fails, retry by deleting the association and recreating it.</p> <p>As a result of this operation, the association gets created in the service network account and the VPC owner account.</p> <p>Once a security group is added to the VPC association it cannot be removed. You can add or update the security groups being used for the VPC association once a security group is attached. To remove all security groups you must reassociate the VPC.</p>'
+      description: '<p>Associates a VPC with a service network. When you associate a VPC with the service network, it enables all the resources within that VPC to be clients and communicate with other services in the service network. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-vpc-associations">Manage VPC associations</a> in the <i>Amazon VPC Lattice User Guide</i>.</p> <p>You can''t use this operation if there is a disassociation in progress. If the association fails, retry by deleting the association and recreating it.</p> <p>As a result of this operation, the association gets created in the service network account and the VPC owner account.</p> <p>If you add a security group to the service network and VPC association, the association must continue to always have at least one security group. You can add or edit security groups at any time. However, to remove all security groups, you must first delete the association and recreate it without security groups.</p>'
       responses:
         '200':
           description: Success
@@ -1707,7 +1707,7 @@ paths:
   '/authpolicy/{resourceIdentifier}':
     delete:
       operationId: DeleteAuthPolicy
-      description: 'Deletes the specified auth policy. If an auth is set to <code>Amazon Web Services_IAM</code> and the auth policy is deleted, all requests will be denied by default. If you are trying to remove the auth policy completely, you must set the auth_type to <code>NONE</code>. If auth is enabled on the resource, but no auth policy is set, all requests will be denied.'
+      description: 'Deletes the specified auth policy. If an auth is set to <code>AWS_IAM</code> and the auth policy is deleted, all requests will be denied by default. If you are trying to remove the auth policy completely, you must set the auth_type to <code>NONE</code>. If auth is enabled on the resource, but no auth policy is set, all requests will be denied.'
       responses:
         '204':
           description: Success
@@ -1815,7 +1815,7 @@ paths:
             maxLength: 200
     put:
       operationId: PutAuthPolicy
-      description: Creates or updates the auth policy.
+      description: Creates or updates the auth policy. The policy string in JSON must not contain newlines or blank lines.
       responses:
         '200':
           description: Success
@@ -1873,7 +1873,7 @@ paths:
                 - policy
               properties:
                 policy:
-                  description: The auth policy.
+                  description: The auth policy. The policy string in JSON must not contain newlines or blank lines.
                   type: string
                   pattern: ^.*\S.*$
                   minLength: 0
@@ -2158,7 +2158,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetResourcePolicy
-      description: Retrieves information about the resource policy. The resource policy is an IAM policy created by AWS RAM on behalf of the resource owner when they share a resource.
+      description: Retrieves information about the resource policy. The resource policy is an IAM policy created on behalf of the resource owner when they share a resource.
       responses:
         '200':
           description: Success
@@ -2200,7 +2200,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: An IAM policy.
+          description: The Amazon Resource Name (ARN) of the service network or service.
           schema:
             type: string
             pattern: '^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:((servicenetwork/sn)|(service/svc))-[0-9a-z]{17}$'
@@ -2266,7 +2266,7 @@ paths:
                 - policy
               properties:
                 policy:
-                  description: An IAM policy.
+                  description: An IAM policy. The policy string in JSON must not contain newlines or blank lines.
                   type: string
                   pattern: ^.*\S.*$
                   minLength: 1
@@ -3136,7 +3136,7 @@ paths:
             maxLength: 2048
     patch:
       operationId: UpdateServiceNetworkVpcAssociation
-      description: 'Updates the service network and VPC association. Once you add a security group, it cannot be removed.'
+      description: 'Updates the service network and VPC association. If you add a security group to the service network and VPC association, the association must continue to always have at least one security group. You can add or edit security groups at any time. However, to remove all security groups, you must first delete the association and recreate it without security groups.'
       responses:
         '200':
           description: Success
@@ -3200,7 +3200,7 @@ paths:
                 - securityGroupIds
               properties:
                 securityGroupIds:
-                  description: 'The IDs of the security groups. Once you add a security group, it cannot be removed.'
+                  description: 'The IDs of the security groups. '
                   type: array
                   items:
                     $ref: '#/components/schemas/SecurityGroupId'
@@ -4494,7 +4494,7 @@ components:
         state:
           allOf:
             - $ref: '#/components/schemas/AuthPolicyState'
-            - description: 'The state of the auth policy. The auth policy is only active when the auth type is set to <code>Amazon Web Services_IAM</code>. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client''s IAM policy. If the auth type is <code>NONE</code>, then any auth policy you provide will remain inactive. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network">Create a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.'
+            - description: 'The state of the auth policy. The auth policy is only active when the auth type is set to <code>AWS_IAM</code>. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client''s IAM policy. If the auth type is <code>NONE</code>, then any auth policy you provide will remain inactive. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network">Create a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.'
     GetListenerResponse:
       type: object
       properties:
@@ -4544,7 +4544,7 @@ components:
         policy:
           allOf:
             - $ref: '#/components/schemas/PolicyString'
-            - description: The Amazon Resource Name (ARN) of the service network or service.
+            - description: An IAM policy.
     GetRuleResponse:
       type: object
       properties:
@@ -4961,11 +4961,11 @@ components:
         policy:
           allOf:
             - $ref: '#/components/schemas/AuthPolicyString'
-            - description: The auth policy.
+            - description: The auth policy. The policy string in JSON must not contain newlines or blank lines.
         state:
           allOf:
             - $ref: '#/components/schemas/AuthPolicyState'
-            - description: 'The state of the auth policy. The auth policy is only active when the auth type is set to <code>Amazon Web Services_IAM</code>. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client''s IAM policy. If the Auth type is <code>NONE</code>, then, any auth policy you provide will remain inactive. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network">Create a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.'
+            - description: 'The state of the auth policy. The auth policy is only active when the auth type is set to <code>AWS_IAM</code>. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client''s IAM policy. If the Auth type is <code>NONE</code>, then, any auth policy you provide will remain inactive. For more information, see <a href="https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network">Create a service network</a> in the <i>Amazon VPC Lattice User Guide</i>.'
     PutResourcePolicyResponse:
       type: object
       properties: {}
@@ -6202,7 +6202,7 @@ components:
         policy:
           allOf:
             - $ref: '#/components/schemas/AuthPolicyString'
-            - description: The auth policy.
+            - description: The auth policy. The policy string in JSON must not contain newlines or blank lines.
     PutResourcePolicyRequest:
       type: object
       required:
@@ -6212,7 +6212,7 @@ components:
         policy:
           allOf:
             - $ref: '#/components/schemas/PolicyString'
-            - description: An IAM policy.
+            - description: An IAM policy. The policy string in JSON must not contain newlines or blank lines.
     RegisterTargetsRequestTargetsList:
       type: array
       items:
@@ -6667,7 +6667,7 @@ components:
         securityGroupIds:
           allOf:
             - $ref: '#/components/schemas/UpdateServiceNetworkVpcAssociationRequestSecurityGroupIdsList'
-            - description: 'The IDs of the security groups. Once you add a security group, it cannot be removed.'
+            - description: 'The IDs of the security groups. '
     UpdateServiceRequest:
       type: object
       title: UpdateServiceRequest

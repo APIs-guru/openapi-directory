@@ -3,7 +3,7 @@ info:
   version: '2020-06-15'
   x-release: v4
   title: AWS SSO Identity Store
-  description: '<p>The Identity Store service used by AWS IAM Identity Center (successor to AWS Single Sign-On) provides a single place to retrieve all of your identities (users and groups). For more information, see the <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">IAM Identity Center User Guide</a>.</p> <pre><code> &lt;note&gt; &lt;p&gt;Although AWS Single Sign-On was renamed, the &lt;code&gt;sso&lt;/code&gt; and &lt;code&gt;identitystore&lt;/code&gt; API namespaces will continue to retain their original name for backward compatibility purposes. For more information, see &lt;a href=&quot;https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed&quot;&gt;IAM Identity Center rename&lt;/a&gt;.&lt;/p&gt; &lt;/note&gt; &lt;p&gt;This reference guide describes the identity store operations that you can call programatically and includes detailed information on data types and errors.&lt;/p&gt; </code></pre>'
+  description: '<p>The Identity Store service used by AWS IAM Identity Center (successor to AWS Single Sign-On) provides a single place to retrieve all of your identities (users and groups). For more information, see the <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">IAM Identity Center User Guide</a>.</p> <pre><code> &lt;note&gt; &lt;p&gt;Although AWS Single Sign-On was renamed, the &lt;code&gt;sso&lt;/code&gt; and &lt;code&gt;identitystore&lt;/code&gt; API namespaces will continue to retain their original name for backward compatibility purposes. For more information, see &lt;a href=&quot;https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed&quot;&gt;IAM Identity Center rename&lt;/a&gt;.&lt;/p&gt; &lt;/note&gt; &lt;p&gt;This reference guide describes the identity store operations that you can call programatically and includes detailed information about data types and errors.&lt;/p&gt; </code></pre>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -268,7 +268,7 @@ paths:
   /#X-Amz-Target=AWSIdentityStore.CreateUser:
     post:
       operationId: CreateUser
-      description: Creates a new user within the specified identity store.
+      description: Creates a user within the specified identity store.
       responses:
         '200':
           description: Success
@@ -1517,7 +1517,7 @@ components:
         DisplayName:
           allOf:
             - $ref: '#/components/schemas/GroupDisplayName'
-            - description: A string containing the name of the group. This value is commonly displayed when the group is referenced.
+            - description: A string containing the name of the group. This value is commonly displayed when the group is referenced. "Administrator" and "AWSAdministrators" are reserved names and can't be used for users or groups.
         Description:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
@@ -1590,15 +1590,15 @@ components:
         UserName:
           allOf:
             - $ref: '#/components/schemas/UserName'
-            - description: 'A unique string used to identify the user. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.'
+            - description: 'A unique string used to identify the user. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store. "Administrator" and "AWSAdministrators" are reserved names and can''t be used for users or groups.'
         Name:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: An object containing the user's name.
+            - description: An object containing the name of the user.
         DisplayName:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: 'A string containing the user''s name. This value is typically formatted for display when the user is referenced. For example, "John Doe."'
+            - description: 'A string containing the name of the user. This value is typically formatted for display when the user is referenced. For example, "John Doe." '
         NickName:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
@@ -1606,7 +1606,7 @@ components:
         ProfileUrl:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: A string containing a URL that may be associated with the user.
+            - description: A string containing a URL that might be associated with the user.
         Emails:
           allOf:
             - $ref: '#/components/schemas/Emails'
@@ -1622,11 +1622,11 @@ components:
         UserType:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: 'A string indicating the user''s type. Possible values depend on each customer''s specific needs, so they are left unspecified.'
+            - description: A string indicating the type of user. Possible values are left unspecified. The value can vary based on your specific use case.
         Title:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: A string containing the user's title. Possible values are left unspecified given that they depend on each customer's specific needs.
+            - description: A string containing the title of the user. Possible values are left unspecified. The value can vary based on your specific use case.
         PreferredLanguage:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
@@ -1634,11 +1634,11 @@ components:
         Locale:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: A string containing the user's geographical region or location.
+            - description: A string containing the geographical region or location of the user.
         Timezone:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: A string containing the user's time zone.
+            - description: A string containing the time zone of the user.
     DeleteGroupResponse:
       type: object
       properties: {}
@@ -1796,7 +1796,7 @@ components:
         DisplayName:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: The user's name value for display.
+            - description: The display name of the user.
         NickName:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
@@ -1808,11 +1808,11 @@ components:
         Emails:
           allOf:
             - $ref: '#/components/schemas/Emails'
-            - description: The user's email value.
+            - description: The email address of the user.
         Addresses:
           allOf:
             - $ref: '#/components/schemas/Addresses'
-            - description: The user's physical address.
+            - description: The physical address of the user.
         PhoneNumbers:
           allOf:
             - $ref: '#/components/schemas/PhoneNumbers'
@@ -1820,11 +1820,11 @@ components:
         UserType:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: A string indicating the user's type.
+            - description: A string indicating the type of user.
         Title:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: A string containing the user's title.
+            - description: A string containing the title of the user.
         PreferredLanguage:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
@@ -1832,7 +1832,7 @@ components:
         Locale:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: A string containing the user's geographical region or location.
+            - description: A string containing the geographical region or location of the user.
         Timezone:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
@@ -1884,7 +1884,7 @@ components:
         AlternateIdentifier:
           allOf:
             - $ref: '#/components/schemas/AlternateIdentifier'
-            - description: 'A unique identifier for a user or group that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For example, a unique <code>GroupDisplayName</code>.'
+            - description: 'A unique identifier for a user or group that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For the unique attribute, the only valid path is <code>displayName</code>.'
     GetGroupMembershipIdResponse:
       type: object
       required:
@@ -1947,7 +1947,7 @@ components:
         AlternateIdentifier:
           allOf:
             - $ref: '#/components/schemas/AlternateIdentifier'
-            - description: 'A unique identifier for a user or group that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For example, a unique <code>UserDisplayName</code>.'
+            - description: 'A unique identifier for a user or group that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For the unique attribute, the only valid paths are <code>userName</code> and <code>emails.value</code>.'
     IsMemberInGroupsResponse:
       type: object
       required:
@@ -2258,7 +2258,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/UniqueAttribute'
             - description: An entity attribute that's unique to a specific entity.
-      description: 'A unique identifier for a user or group that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For example, a unique <code>GroupDisplayName</code>.'
+      description: 'A unique identifier for a user or group that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute.'
     AttributePath:
       type: string
       pattern: '\p{L}+(?:\.\p{L}+){0,2}'
@@ -2426,7 +2426,7 @@ components:
         DisplayName:
           allOf:
             - $ref: '#/components/schemas/GroupDisplayName'
-            - description: 'The group’s display name value. The length limit is 1,024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space, and nonbreaking space in this attribute. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.'
+            - description: 'The display name value for the group. The length limit is 1,024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space, and nonbreaking space in this attribute. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.'
         ExternalIds:
           allOf:
             - $ref: '#/components/schemas/ExternalIds'
@@ -2439,7 +2439,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IdentityStoreId'
             - description: The globally unique identifier for the identity store.
-      description: A group object that contains a specified group’s metadata and attributes.
+      description: A group object that contains the metadata and attributes for a specified group.
     GroupIds:
       type: array
       items:
@@ -2546,11 +2546,11 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: An object containing the user's name.
+            - description: An object containing the name of the user.
         DisplayName:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: 'A string containing the user''s name that''s formatted for display when the user is referenced. For example, "John Doe."'
+            - description: 'A string containing the name of the user that is formatted for display when the user is referenced. For example, "John Doe."'
         NickName:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
@@ -2558,7 +2558,7 @@ components:
         ProfileUrl:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: A string containing a URL that may be associated with the user.
+            - description: A string containing a URL that might be associated with the user.
         Emails:
           allOf:
             - $ref: '#/components/schemas/Emails'
@@ -2574,11 +2574,11 @@ components:
         UserType:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: 'A string indicating the user''s type. Possible values depend on each customer''s specific needs, so they are left unspecified.'
+            - description: A string indicating the type of user. Possible values are left unspecified. The value can vary based on your specific use case.
         Title:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: 'A string containing the user''s title. Possible values depend on each customer''s specific needs, so they are left unspecified.'
+            - description: A string containing the title of the user. Possible values are left unspecified. The value can vary based on your specific use case.
         PreferredLanguage:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
@@ -2586,15 +2586,15 @@ components:
         Locale:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: A string containing the user's geographical region or location.
+            - description: A string containing the geographical region or location of the user.
         Timezone:
           allOf:
             - $ref: '#/components/schemas/SensitiveStringType'
-            - description: A string containing the user's time zone.
+            - description: A string containing the time zone of the user.
         IdentityStoreId:
           allOf:
             - $ref: '#/components/schemas/IdentityStoreId'
             - description: The globally unique identifier for the identity store.
-      description: A user object that contains a specified user’s metadata and attributes.
+      description: A user object that contains the metadata and attributes for a specified user.
 security:
   - hmac: []
