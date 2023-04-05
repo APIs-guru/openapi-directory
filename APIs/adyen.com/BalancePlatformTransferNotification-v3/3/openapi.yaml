@@ -25,7 +25,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformTransferNotification-v3
-  x-timestamp: 2023-03-16T15:26:18Z
+  x-timestamp: 2023-03-28T13:27:37Z
 tags: []
 components:
   examples: {}
@@ -72,7 +72,7 @@ components:
             - usRoutingNumber
           type: string
       type: object
-    Address-2:
+    Address:
       properties:
         city:
           description: The name of the city.
@@ -233,6 +233,16 @@ components:
           description: The 5- to 12-digit bank account number, without separators or whitespace.
           maxLength: 12
           minLength: 5
+          type: string
+        accountType:
+          default: checking
+          description: |-
+            The bank account type.
+
+            Possible values: **checking** or **savings**. Defaults to **checking**.
+          enum:
+            - checking
+            - savings
           type: string
         institutionNumber:
           description: The 3-digit institution number, without separators or whitespace.
@@ -469,7 +479,7 @@ components:
     PartyIdentification:
       properties:
         address:
-          $ref: "#/components/schemas/Address-2"
+          $ref: "#/components/schemas/Address"
           description: Address of the bank account owner.
         dateOfBirth:
           description: |-
@@ -517,7 +527,7 @@ components:
           type: string
           x-addedInVersion: "3"
       type: object
-    RelayedAuthorisationData-2:
+    RelayedAuthorisationData:
       properties:
         metadata:
           additionalProperties:
@@ -668,6 +678,10 @@ components:
       type: object
     TransferEvent:
       properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The original journal amount.
+          x-addedInVersion: "3"
         amountAdjustments:
           description: The amount adjustments in this transfer.
           items:
@@ -701,7 +715,7 @@ components:
         reason:
           description: The reason for the transfer status.
           enum:
-            - amountLimitExceded
+            - amountLimitExceeded
             - approved
             - counterpartyAccountBlocked
             - counterpartyAccountClosed
@@ -719,6 +733,7 @@ components:
         status:
           description: The status of the transfer event.
           enum:
+            - approvalPending
             - atmWithdrawal
             - atmWithdrawalReversalPending
             - atmWithdrawalReversed
@@ -969,7 +984,7 @@ components:
         reason:
           description: Additional information about the status of the transfer.
           enum:
-            - amountLimitExceded
+            - amountLimitExceeded
             - approved
             - counterpartyAccountBlocked
             - counterpartyAccountClosed
@@ -1002,7 +1017,7 @@ components:
           type: string
           x-addedInVersion: "2"
         relayedAuthorisationData:
-          $ref: "#/components/schemas/RelayedAuthorisationData-2"
+          $ref: "#/components/schemas/RelayedAuthorisationData"
           description: If you are using relayed authorisation, this object contains information from the relayed authorisation response from your server.
           x-addedInVersion: "3"
         sequenceNumber:
@@ -1019,6 +1034,7 @@ components:
 
              For example, **authorised**, **refused**, or **error**.
           enum:
+            - approvalPending
             - atmWithdrawal
             - atmWithdrawalReversalPending
             - atmWithdrawalReversed

@@ -27,14 +27,13 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformPaymentNotification-v1
-  x-timestamp: 2023-03-16T17:21:17Z
+  x-timestamp: 2023-03-30T18:22:09Z
 tags: []
 components:
   examples:
     WebhookAck:
       summary: Acknowledge Webhook
-      value:
-        notificationResponse: "[accepted]"
+      value: "[accepted]"
     post-balancePlatform.incomingTransfer.created-balancePlatform-incomingTransfer-created:
       description: Example webhook when there is an incoming transfer
       summary: Pending incoming transfer

@@ -25,14 +25,13 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformReportNotification-v1
-  x-timestamp: 2023-03-03T13:35:21Z
+  x-timestamp: 2023-03-30T18:22:06Z
 tags: []
 components:
   examples:
     WebhookAck:
       summary: Acknowledge Webhook
-      value:
-        notificationResponse: "[accepted]"
+      value: "[accepted]"
     post-balancePlatform.report.created-balancePlatform.report.created:
       description: Example webhook when a report was generated and is ready to be downloaded
       summary: Report created

@@ -300,6 +300,13 @@ components:
         name:
           description: "The resource name of the notification. Format: organizations/{organization}/locations/{location}/notifications/{notification}."
           type: string
+        notificationType:
+          description: Type of notification
+          enum:
+            - NOTIFICATION_TYPE_UNSPECIFIED
+            - NOTIFICATION_TYPE_SECURITY_PRIVACY_ADVISORY
+            - NOTIFICATION_TYPE_SENSITIVE_ACTIONS
+          type: string
         subject:
           $ref: "#/components/schemas/GoogleCloudAdvisorynotificationsV1Subject"
           description: The subject line of the notification.

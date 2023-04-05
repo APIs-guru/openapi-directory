@@ -1172,6 +1172,11 @@ components:
     GoogleCloudRecaptchaenterpriseV1RiskAnalysis:
       description: Risk analysis result for an event.
       properties:
+        extendedVerdictReasons:
+          description: Extended verdict reasons to be used for experimentation only. The set of possible reasons is subject to change.
+          items:
+            type: string
+          type: array
         reasons:
           description: Reasons contributing to the risk analysis verdict.
           items:

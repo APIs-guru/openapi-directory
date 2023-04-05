@@ -558,7 +558,7 @@ components:
           type: string
       type: object
     AccountSuspensionWarning:
-      description: A warning that the customer's account is about to be suspended.
+      description: LINT.IfChange A warning that the customer's account is about to be suspended.
       properties:
         appealWindow:
           description: The amount of time remaining to appeal an imminent suspension. After this window has elapsed, the account will be suspended. Only populated if the account suspension is in WARNING state.

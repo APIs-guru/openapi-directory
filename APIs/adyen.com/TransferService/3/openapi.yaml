@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TransferService
-  x-timestamp: 2023-02-22T12:23:54Z
+  x-timestamp: 2023-03-28T13:27:36Z
 tags:
   - name: Transactions
   - name: Transfers
@@ -311,7 +311,7 @@ components:
         bookingDate: 2022-03-14T12:01:00+01:00
         category: bank
         counterparty:
-          balanceAccountId: NL29ADYX0000000001
+          balanceAccountId: BA00000000000000000000001
         createdAt: 2022-03-14T12:01:00+01:00
         description: YOUR_DESCRIPTION
         id: IZK7C25U7DYVX03Y
@@ -340,6 +340,8 @@ components:
             balancePlatform: YOUR_BALANCE_PLATFORM
             bookingDate: 2022-03-11T11:21:24+01:00
             category: internal
+            counterparty:
+              balanceAccountId: BA00000000000000000000001
             createdAt: 2022-03-11T11:21:24+01:00
             id: 1VVF0D5U66PIUIVP
             instructedAmount:
@@ -358,6 +360,8 @@ components:
             balancePlatform: YOUR_BALANCE_PLATFORM
             bookingDate: 2022-03-12T14:22:52+01:00
             category: internal
+            counterparty:
+              balanceAccountId: BA00000000000000000000001
             createdAt: 2022-03-12T14:22:52+01:00
             id: 1WEPGD5U6MS1CFK3
             instructedAmount:
@@ -375,17 +379,20 @@ components:
             balanceAccountId: BAB8B2C3D4E5F6G7H8D9J6GD4
             balancePlatform: YOUR_BALANCE_PLATFORM
             bookingDate: 2022-03-14T21:00:48+01:00
+            counterparty:
+              balanceAccountId: BA00000000000000000000001
             createdAt: 2022-03-14T15:00:00+01:00
             description: YOUR_DESCRIPTION_2
             id: 2QP32A5U7IWC5WKG
             instructedAmount:
               currency: EUR
               value: -8
+            reference: REFERENCE_46e8c40e
             status: booked
             valueDate: 2022-03-14T21:00:48+01:00
     post-transfers-payout-cross-border:
-      description: Example request to make a cross border transfer
-      summary: Make a cross border transfer
+      description: Example request to make a cross-border transfer
+      summary: Make a cross-border transfer
       value:
         amount:
           currency: EUR
@@ -393,10 +400,6 @@ components:
         balanceAccountId: BAB8B2C3D4E5F6G7H8D9J6GD4
         category: bank
         counterparty:
-          accountIdentification:
-            accountNumber: "123456789"
-            bic: BOFAUS3NXXX
-            type: numberAndBic
           bankAccount:
             accountHolder:
               address:
@@ -407,10 +410,14 @@ components:
                 street: Brannan Street
                 street2: "274"
               fullName: A. Klaassen
+            accountIdentification:
+              accountNumber: "123456789"
+              bic: BOFAUS3NXXX
+              type: numberAndBic
         description: Your description for the transfer
-        priority: wire
+        priority: crossBorder
         reference: Your internal reference for the transfer
-        referenceForBeneficiary: Your reference sent to the beneficiary
+        referenceForBeneficiary: Your-reference-sent-to-the-beneficiary
     post-transfers-payout-cross-border-200:
       description: Example response for a transfers request
       summary: Response code - 200 OK
@@ -437,10 +444,10 @@ components:
               type: numberAndBic
           description: Your description for the transfer
           direction: outgoing
-          priority: wire
+          priority: crossBorder
           reason: approved
           reference: Your internal reference for the transfer
-          referenceForBeneficiary: Your reference sent to the beneficiary
+          referenceForBeneficiary: Your-reference-sent-to-the-beneficiary
           status: authorised
         id: 1W1UG35U8A9J5ZLG
     post-transfers-payout-local-transfer-sepa:
@@ -462,7 +469,7 @@ components:
         description: Your description for the transfer
         priority: regular
         reference: Your internal reference for the transfer
-        referenceForBeneficiary: Your reference sent to the beneficiary
+        referenceForBeneficiary: Your-reference-sent-to-the-beneficiary
     post-transfers-payout-local-transfer-sepa-200:
       description: Example response for a transfers request
       summary: Response code - 200 OK
@@ -485,7 +492,7 @@ components:
         priority: regular
         reason: approved
         reference: Your internal reference for the transfer
-        referenceForBeneficiary: Your reference sent to the beneficiary
+        referenceForBeneficiary: Your-reference-sent-to-the-beneficiary
         status: authorised
     post-transfers-payout-local-transfer-us:
       description: Example request to make a US local funds transfer
@@ -507,7 +514,7 @@ components:
         description: Your description for the transfer
         priority: regular
         reference: Your internal reference for the transfer
-        referenceForBeneficiary: Your reference sent to the beneficiary
+        referenceForBeneficiary: Your-reference-sent-to-the-beneficiary
     post-transfers-payout-local-transfer-us-200:
       description: Example response for a transfers request
       summary: Response code - 200 OK
@@ -531,7 +538,7 @@ components:
         priority: regular
         reason: approved
         reference: Your internal reference for the transfer
-        referenceForBeneficiary: Your reference sent to the beneficiary
+        referenceForBeneficiary: Your-reference-sent-to-the-beneficiary
         status: authorised
     post-transfers-payout-to-balance-account:
       description: Example request to transfer funds to another balance account
@@ -546,7 +553,7 @@ components:
           balanceAccountId: BA32272223222B5LPRFDW7J9G
         description: Your description for the transfer
         reference: Your internal reference for the transfer
-        referenceForBeneficiary: Your reference sent to the beneficiary
+        referenceForBeneficiary: Your-reference-sent-to-the-beneficiary
     post-transfers-payout-to-balance-account-200:
       description: Example response for a transfers request
       summary: Response code - 200 OK
@@ -563,7 +570,7 @@ components:
         id: 1W1UG35U8A9J5ZLG
         reason: approved
         reference: Your internal reference for the transfer
-        referenceForBeneficiary: Your reference sent to the beneficiary
+        referenceForBeneficiary: Your-reference-sent-to-the-beneficiary
         status: authorised
     post-transfers-payout-to-transfer-instrument:
       description: Example request to pay out to a transfer instrument
@@ -579,7 +586,7 @@ components:
         description: Your description for the transfer
         priority: regular
         reference: Your internal reference for the transfer
-        referenceForBeneficiary: Your reference sent to the beneficiary
+        referenceForBeneficiary: Your-reference-sent-to-the-beneficiary
     post-transfers-payout-to-transfer-instrument-200:
       description: Example response for a transfers request
       summary: Response code - 200 OK
@@ -597,7 +604,7 @@ components:
         priority: regular
         reason: approved
         reference: Your internal reference for the transfer
-        referenceForBeneficiary: Your reference sent to the beneficiary
+        referenceForBeneficiary: Your-reference-sent-to-the-beneficiary
         status: authorised
   schemas:
     AULocalAccountIdentification:
@@ -751,6 +758,16 @@ components:
           description: The 5- to 12-digit bank account number, without separators or whitespace.
           maxLength: 12
           minLength: 5
+          type: string
+        accountType:
+          default: checking
+          description: |-
+            The bank account type.
+
+            Possible values: **checking** or **savings**. Defaults to **checking**.
+          enum:
+            - checking
+            - savings
           type: string
         institutionNumber:
           description: The 3-digit institution number, without separators or whitespace.
@@ -1047,14 +1064,21 @@ components:
         address:
           $ref: "#/components/schemas/Address-2"
           description: Address of the bank account owner.
+        dateOfBirth:
+          description: |-
+            The date of birth of the individual.
+            Format: [ISO-8601](https://www.w3.org/TR/NOTE-datetime); example: YYYY-MM-DD
+            Allowed only when `type` is **individual**.
+          format: date
+          type: string
         firstName:
-          description: First name of the individual. Required when `type` is **individual**.
+          description: First name of the individual. Allowed only when `type` is **individual**.
           type: string
         fullName:
           description: The name of the entity.
           type: string
         lastName:
-          description: Last name of the individual. Required when `type` is **individual**.
+          description: Last name of the individual. Allowed only when `type` is **individual**.
           type: string
         type:
           default: unknown
@@ -1404,7 +1428,7 @@ components:
         reason:
           description: Additional information about the status of the transfer.
           enum:
-            - amountLimitExceded
+            - amountLimitExceeded
             - approved
             - counterpartyAccountBlocked
             - counterpartyAccountClosed
@@ -1442,6 +1466,7 @@ components:
 
              For example, **authorised**, **refused**, or **error**.
           enum:
+            - approvalPending
             - atmWithdrawal
             - atmWithdrawalReversalPending
             - atmWithdrawalReversed

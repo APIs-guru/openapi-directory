@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TransferService
-  x-timestamp: 2023-02-22T12:23:54Z
+  x-timestamp: 2023-03-23T20:22:15Z
 tags:
   - name: Transactions
   - name: Transfers
@@ -303,7 +303,7 @@ components:
         bookingDate: 2022-03-14T12:01:00+01:00
         category: bank
         counterparty:
-          balanceAccountId: NL29ADYX0000000001
+          balanceAccountId: BA00000000000000000000001
         createdAt: 2022-03-14T12:01:00+01:00
         description: YOUR_DESCRIPTION
         id: IZK7C25U7DYVX03Y
@@ -332,6 +332,8 @@ components:
             balancePlatform: YOUR_BALANCE_PLATFORM
             bookingDate: 2022-03-11T11:21:24+01:00
             category: internal
+            counterparty:
+              balanceAccountId: BA00000000000000000000001
             createdAt: 2022-03-11T11:21:24+01:00
             id: 1VVF0D5U66PIUIVP
             instructedAmount:
@@ -350,6 +352,8 @@ components:
             balancePlatform: YOUR_BALANCE_PLATFORM
             bookingDate: 2022-03-12T14:22:52+01:00
             category: internal
+            counterparty:
+              balanceAccountId: BA00000000000000000000001
             createdAt: 2022-03-12T14:22:52+01:00
             id: 1WEPGD5U6MS1CFK3
             instructedAmount:
@@ -367,12 +371,15 @@ components:
             balanceAccountId: BAB8B2C3D4E5F6G7H8D9J6GD4
             balancePlatform: YOUR_BALANCE_PLATFORM
             bookingDate: 2022-03-14T21:00:48+01:00
+            counterparty:
+              balanceAccountId: BA00000000000000000000001
             createdAt: 2022-03-14T15:00:00+01:00
             description: YOUR_DESCRIPTION_2
             id: 2QP32A5U7IWC5WKG
             instructedAmount:
               currency: EUR
               value: -8
+            reference: REFERENCE_46e8c40e
             status: booked
             valueDate: 2022-03-14T21:00:48+01:00
     post-transfers-payout-local-transfer-sepa:
@@ -939,7 +946,7 @@ components:
         reason:
           description: Additional information about the status of the transfer.
           enum:
-            - amountLimitExceded
+            - amountLimitExceeded
             - approved
             - counterpartyAccountBlocked
             - counterpartyAccountClosed
@@ -973,6 +980,7 @@ components:
 
              For example, **authorised**, **refused**, or **error**.
           enum:
+            - approvalPending
             - atmWithdrawal
             - atmWithdrawalReversalPending
             - atmWithdrawalReversed

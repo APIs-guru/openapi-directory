@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TransferService
-  x-timestamp: 2023-02-20T18:21:55Z
+  x-timestamp: 2023-03-23T20:22:14Z
 tags:
   - name: Transactions
   - name: Transfers
@@ -291,8 +291,15 @@ components:
       description: Example response for a transfers request
       summary: Response code - 200 OK
       value:
+        amount:
+          currency: EUR
+          value: 10000
+        destination:
+          balanceAccountId: BAB1234567890ABC123456789
         id: 1W1UG35U8A9J5ZLG
         resultCode: Authorised
+        source:
+          balanceAccountId: BAB8B2C3D4E5F6G7H8D9J6GD4
     post-transfers-payout-to-transfer-instrument:
       description: Example request to pay out to a transfer instrument
       summary: Pay out to a transfer instrument
@@ -310,8 +317,15 @@ components:
       description: Example response for a transfers request
       summary: Response code - 200 OK
       value:
+        amount:
+          currency: EUR
+          value: 10000
+        destination:
+          transferInstrumentId: SE1234567890ABC1234567890
         id: 1W1UG35U8A9J5ZLG
         resultCode: Authorised
+        source:
+          balanceAccountId: BAB8B2C3D4E5F6G7H8D9J6GD4
   schemas:
     Address:
       properties:

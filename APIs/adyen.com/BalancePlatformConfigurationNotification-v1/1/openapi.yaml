@@ -26,14 +26,13 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformConfigurationNotification-v1
-  x-timestamp: 2023-03-28T16:25:31Z
+  x-timestamp: 2023-03-30T18:22:05Z
 tags: []
 components:
   examples:
     WebhookAck:
       summary: Acknowledge Webhook
-      value:
-        notificationResponse: "[accepted]"
+      value: "[accepted]"
     post-balancePlatform.accountHolder.created-balancePlatform-accountHolder-created:
       description: Example webhook when an account holder was created
       summary: Account holder created

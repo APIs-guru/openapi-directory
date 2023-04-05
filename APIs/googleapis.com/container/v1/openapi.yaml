@@ -2946,6 +2946,10 @@ components:
           $ref: "#/components/schemas/GPUSharingConfig"
           description: The configuration for GPU sharing options.
       type: object
+    AdditionalPodRangesConfig:
+      description: AdditionalPodRangesConfig is the configuration for additional pod secondary ranges supporting the ClusterUpdate message.
+      properties: {}
+      type: object
     AddonsConfig:
       description: Configuration for the addons that can be automatically spun up in the cluster, enabling additional functionality.
       properties:
@@ -3411,6 +3415,9 @@ components:
     ClusterUpdate:
       description: ClusterUpdate describes an update to the cluster. Exactly one update can be applied to a cluster with each request, so at most one field can be provided.
       properties:
+        additionalPodRangesConfig:
+          $ref: "#/components/schemas/AdditionalPodRangesConfig"
+          description: The additional pod ranges to be added to the cluster. These pod ranges can be used by node pools to allocate pod IPs.
         desiredAddonsConfig:
           $ref: "#/components/schemas/AddonsConfig"
           description: Configurations for the various addons available to run in the cluster.
@@ -3546,6 +3553,9 @@ components:
         etag:
           description: The current etag of the cluster. If an etag is provided and does not match the current etag of the cluster, update will be blocked and an ABORTED error will be returned.
           type: string
+        removedAdditionalPodRangesConfig:
+          $ref: "#/components/schemas/AdditionalPodRangesConfig"
+          description: The additional pod ranges that are to be removed from the cluster. The pod ranges specified here must have been specified earlier in the 'additional_pod_ranges_config' argument.
       type: object
     CompleteIPRotationRequest:
       description: CompleteIPRotationRequest moves the cluster master back into single-IP mode.
@@ -3877,6 +3887,10 @@ components:
     IPAllocationPolicy:
       description: Configuration for controlling how IPs are allocated in the cluster.
       properties:
+        additionalPodRangesConfig:
+          $ref: "#/components/schemas/AdditionalPodRangesConfig"
+          description: Output only. [Output only] The additional pod ranges that are added to the cluster. These pod ranges can be used by new node pools to allocate pod IPs automatically. Once the range is removed it will not show up in IPAllocationPolicy.
+          readOnly: true
         clusterIpv4Cidr:
           description: This field is deprecated, use cluster_ipv4_cidr_block.
           type: string
@@ -3902,6 +3916,9 @@ components:
         nodeIpv4CidrBlock:
           description: The IP address range of the instance IPs in this cluster. This is applicable only if `create_subnetwork` is true. Set to blank to have a range chosen with the default size. Set to /netmask (e.g. `/14`) to have a range chosen with a specific netmask. Set to a [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g. `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range to use.
           type: string
+        podCidrOverprovisionConfig:
+          $ref: "#/components/schemas/PodCIDROverprovisionConfig"
+          description: "[PRIVATE FIELD] Pod CIDR size overprovisioning config for the cluster. Pod CIDR size per node depends on max_pods_per_node. By default, the value of max_pods_per_node is doubled and then rounded off to next power of 2 to get the size of pod CIDR block per node. Example: max_pods_per_node of 30 would result in 64 IPs (/26). This config can disable the doubling of IPs (we still round off to next power of 2) Example: max_pods_per_node of 30 will result in 32 IPs (/27) when overprovisioning is disabled."
         servicesIpv4Cidr:
           description: This field is deprecated, use services_ipv4_cidr_block.
           type: string
@@ -4505,6 +4522,9 @@ components:
         networkPerformanceConfig:
           $ref: "#/components/schemas/NetworkPerformanceConfig"
           description: Network bandwidth tier configuration.
+        podCidrOverprovisionConfig:
+          $ref: "#/components/schemas/PodCIDROverprovisionConfig"
+          description: "[PRIVATE FIELD] Pod CIDR size overprovisioning config for the nodepool. Pod CIDR size per node depends on max_pods_per_node. By default, the value of max_pods_per_node is rounded off to next power of 2 and we then double that to get the size of pod CIDR block per node. Example: max_pods_per_node of 30 would result in 64 IPs (/26). This config can disable the doubling of IPs (we still round off to next power of 2) Example: max_pods_per_node of 30 will result in 32 IPs (/27) when overprovisioning is disabled."
         podIpv4CidrBlock:
           description: The IP address range for pod IPs in this node pool. Only applicable if `create_pod_range` is true. Set to blank to have a range chosen with the default size. Set to /netmask (e.g. `/14`) to have a range chosen with a specific netmask. Set to a [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation (e.g. `10.96.0.0/14`) to pick a specific range to use. Only applicable if `ip_allocation_policy.use_ip_aliases` is true. This field cannot be changed after the node pool has been created.
           type: string
@@ -4792,6 +4812,13 @@ components:
             - TYPE_UNSPECIFIED
             - COMPACT
           type: string
+      type: object
+    PodCIDROverprovisionConfig:
+      description: "[PRIVATE FIELD] Config for pod CIDR size overprovisioning."
+      properties:
+        disable:
+          description: "Whether Pod CIDR overprovisioning is disabled. Note: Pod CIDR overprovisioning is enabled by default."
+          type: boolean
       type: object
     PrivateClusterConfig:
       description: Configuration options for private clusters.

@@ -10897,7 +10897,7 @@ components:
           $ref: "#/components/schemas/AssistantGroundingRankerAssistantInteractionFeatures"
       type: object
     AssistantGroundingRankerMediaGroundingProviderFeatures:
-      description: "Features to be passed from Media GP to HGR. Next ID: 9"
+      description: "Features to be passed from Media GP to HGR. Next ID: 12"
       properties:
         albumReleaseType:
           description: Release type for an album container.
@@ -10907,11 +10907,22 @@ components:
             - SINGLE
             - EXTENDED_PLAY
           type: string
+        ambiguityClassifier:
+          description: Temporary ambiguity classifier signal.
+          enum:
+            - UNKNOWN
+            - SONG_ALBUM_AMBIGUOUS
+            - NOT_AMBIGUOUS
+            - SINGLE_MEDIA_ITEM
+          type: string
         hasTypeSemanticEdge:
           description: True if the argument's type was explicitly mentioned in the query.
           type: boolean
         isCastVideo:
           description: Whether the candidate is YouTube CAST_VIDEO candidate. CAST_VIDEO is a deeplink platform. This signal will be used to promote YouTube Music screenful candidates with CAST_VIDEO platform for free users because free users cannot get exact entities in screenless response and can get exact entities with ads in screenful response.
+          type: boolean
+        isMediaSearchQuerySubsetOfEntityNameAndArtist:
+          description: True if the media search query is included in the entity name and artists.
           type: boolean
         isSeedRadio:
           description: True if the media deeplink has tag SEED_RADIO.
@@ -10958,10 +10969,16 @@ components:
             - PODCAST_SERIES
             - PODCAST_EPISODE
           type: string
+        youtubeConfidenceScore:
+          format: double
+          type: number
       type: object
     AssistantGroundingRankerProviderGroundingProviderFeatures:
-      description: "Features to be extracted from Provider GP for ranking in HGR. Next ID: 4"
+      description: "Features to be extracted from Provider GP for ranking in HGR. Next ID: 5"
       properties:
+        isInAppProvider:
+          description: Indicates that fulfillment on this provider will happen within the provider app.
+          type: boolean
         providerClusterId:
           description: Cluster IDs for the provider. This field is repeated because some providers can be associated with multiple clusters. PRR specific feature.
           items:
@@ -11110,14 +11127,14 @@ components:
             $ref: "#/components/schemas/AssistantLogsCommunicationFuzzyNgramMatchLog"
           type: array
         gaiaId:
-          description: Contact owner's gaia id from cs/symbol::symbol:quality_qrewrite.PersonalContactData.shared_contact_owner_gaia_id. Only populated for is_shared = true and non sign-out mode and user is not the owner of the contact(shared contact from other user).
+          description: Contact owner's gaia id from cs/symbol::symbol:quality_qrewrite.PersonalContactData.shared_contact_owner_gaia_id. Only populated for is_shared = true and non sign-out mode and user is not the owner of the contact(shared contact from other user). This field is not being logged in P2.
           format: int64
           type: string
         isContactFromSecondaryAccount:
           description: Boolean value indicating whether selected contact is from different account than the logged in account.
           type: boolean
         isShared:
-          description: "If this is a shared contact. This is true in 2 cases: - User is calling their own contacts that have been marked as shared. - User is calling shared contacts from some other user's contact list."
+          description: "If this is a shared contact. This is true in 2 cases: - User is calling their own contacts that have been marked as shared. - User is calling shared contacts from some other user's contact list. This field is not being logged in P2."
           type: boolean
         isTransliteratedMatch:
           description: Indicate the contact matches the transliterated query.
@@ -12181,6 +12198,7 @@ components:
             - RANKER_NAME_GROUNDING_RANKER_MEDIA_EXP
             - RANKER_NAME_GROUNDING_RANKER_COMMS_EXP
             - RANKER_NAME_CONSOLIDATED_PFR_HGR
+            - RANKER_NAME_CONSOLIDATED_PFR_HGR_V2
           type: string
         searchDispatch:
           description: The determination made by the SearchDispatchingConfig as to whether and how this interpretation should be dispatched to Search.
@@ -18027,6 +18045,7 @@ components:
             - PROVIDER_GOOGLE_GT_ALF
             - PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE
             - PROVIDER_GOOGLE_LOCAL_SERVICES_ADS
+            - PROVIDER_GOOGLE_GT_LANE_AUTOMATION
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -20671,6 +20690,7 @@ components:
             - PROVIDER_GOOGLE_GT_ALF
             - PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE
             - PROVIDER_GOOGLE_LOCAL_SERVICES_ADS
+            - PROVIDER_GOOGLE_GT_LANE_AUTOMATION
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -21840,6 +21860,7 @@ components:
             - PROVIDER_GOOGLE_GT_ALF
             - PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE
             - PROVIDER_GOOGLE_LOCAL_SERVICES_ADS
+            - PROVIDER_GOOGLE_GT_LANE_AUTOMATION
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -23192,6 +23213,7 @@ components:
             - PROVIDER_GOOGLE_GT_ALF
             - PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE
             - PROVIDER_GOOGLE_LOCAL_SERVICES_ADS
+            - PROVIDER_GOOGLE_GT_LANE_AUTOMATION
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -27508,6 +27530,19 @@ components:
           description: When merging repeated fields, the default behavior is to append entries from the source repeated field to the destination repeated field. If you instead want to keep only the entries from the source repeated field, set this flag to true. If you want to replace a repeated field within a message field on the destination message, you must set both replace_repeated_fields and replace_message_fields to true, otherwise the repeated fields will be appended.
           type: boolean
       type: object
+    GoogleCloudContentwarehouseV1ProcessorInfo:
+      description: The DocAI processor information.
+      properties:
+        documentType:
+          description: The processor will process the documents with this document type.
+          type: string
+        processorName:
+          description: The processor resource name. Format is `projects/{project}/locations/{location}/processors/{processor}`, or `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
+          type: string
+        schemaName:
+          description: "The Document schema resource name. All documents processed by this processor will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}."
+          type: string
+      type: object
     GoogleCloudContentwarehouseV1Property:
       description: Property of a document.
       properties:
@@ -27792,6 +27827,9 @@ components:
     GoogleCloudContentwarehouseV1RunPipelineMetadata:
       description: Metadata message of RunPipeline method.
       properties:
+        exportToCdwPipelineMetadata:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RunPipelineMetadataExportToCdwPipelineMetadata"
+          description: The pipeline metadata for Export-to-CDW pipeline.
         failedFileCount:
           description: Number of files that have failed at some point in the pipeline.
           format: int32
@@ -27799,6 +27837,14 @@ components:
         gcsIngestPipelineMetadata:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RunPipelineMetadataGcsIngestPipelineMetadata"
           description: The pipeline metadata for GcsIngest pipeline.
+        individualDocumentStatuses:
+          description: The list of response details of each document.
+          items:
+            $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RunPipelineMetadataIndividualDocumentStatus"
+          type: array
+        processWithDocAiPipelineMetadata:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RunPipelineMetadataProcessWithDocAiPipelineMetadata"
+          description: The pipeline metadata for Process-with-DocAi pipeline.
         totalFileCount:
           description: Number of files that were processed by the pipeline.
           format: int32
@@ -27807,12 +27853,46 @@ components:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1UserInfo"
           description: User unique identification and groups information.
       type: object
+    GoogleCloudContentwarehouseV1RunPipelineMetadataExportToCdwPipelineMetadata:
+      description: The metadata message for Export-to-CDW pipeline.
+      properties:
+        docAiDataset:
+          description: The output CDW dataset resource name.
+          type: string
+        documents:
+          description: The input list of all the resource names of the documents to be exported.
+          items:
+            type: string
+          type: array
+      type: object
     GoogleCloudContentwarehouseV1RunPipelineMetadataGcsIngestPipelineMetadata:
       description: The metadata message for GcsIngest pipeline.
       properties:
         inputPath:
           description: "The input Cloud Storage folder in this pipeline. Format: `gs:///`."
           type: string
+      type: object
+    GoogleCloudContentwarehouseV1RunPipelineMetadataIndividualDocumentStatus:
+      description: The status of processing a document.
+      properties:
+        documentId:
+          description: Document identifier of an existing document.
+          type: string
+        status:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: The status processing the document.
+      type: object
+    GoogleCloudContentwarehouseV1RunPipelineMetadataProcessWithDocAiPipelineMetadata:
+      description: The metadata message for Process-with-DocAi pipeline.
+      properties:
+        documents:
+          description: The input list of all the resource names of the documents to be processed.
+          items:
+            type: string
+          type: array
+        processorInfo:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
+          description: The DocAI processor to process the documents with.
       type: object
     GoogleCloudContentwarehouseV1SearchDocumentsRequest:
       description: Request message for DocumentService.SearchDocuments.
@@ -28999,7 +29079,7 @@ components:
       description: Represents the information about user's working hours during one day. Note that a period on Monday from 18:00 - 00:00 is represented as a triplet (1, 1080, 1440).
       properties:
         dayOfWeek:
-          description: Day of week, 0 for Sunday, 1 for Monday, ...
+          description: Day of week, 1 for Monday, ..., 7 for Sunday.
           format: int32
           type: integer
         periodEndMinutes:
@@ -37199,6 +37279,8 @@ components:
             - ROOM
             - STRUCTURE
             - ZONE
+            - TRAIT_ATTRIBUTE_VALUE
+            - TRAIT_SEMANTIC_VALUE
             - REMINDER
             - RECIPE
             - PERSON
@@ -48017,7 +48099,7 @@ components:
           type: string
       type: object
     PerDocData:
-      description: "=========================================================================== # Make sure you read the comments in the bottom before you add any new field. NB: As noted in the comments, this protocol buffer is used in both indexing and serving. In mustang serving implementations we only decode perdocdata during the search phase, and so this protocol should only contain data used during search. See mustang/repos_www/attachments.proto:{MustangBasicInfo,MustangContentInfo} for protocols used during search and/or docinfo. Next available tag deprecated, use this (and look for commented out fields): blaze-bin/net/proto_compiler/protocol-compiler --freetags \\ indexer/perdocdata/perdocdata.proto Next tag: 220"
+      description: "=========================================================================== # Make sure you read the comments in the bottom before you add any new field. NB: As noted in the comments, this protocol buffer is used in both indexing and serving. In mustang serving implementations we only decode perdocdata during the search phase, and so this protocol should only contain data used during search. See mustang/repos_www/attachments.proto:{MustangBasicInfo,MustangContentInfo} for protocols used during search and/or docinfo. Next available tag deprecated, use this (and look for commented out fields): blaze-bin/net/proto_compiler/protocol-compiler --freetags \\ indexer/perdocdata/perdocdata.proto Next tag: 221"
       properties:
         BlogData:
           $ref: "#/components/schemas/BlogPerDocData"
@@ -50902,6 +50984,7 @@ components:
             - ASSISTANT_SURVEY
             - ASSISTANT_SURVEY_IMPORTANCE_MIN
             - ASSISTANT_SURVEY_PRIORITY_LOW
+            - ASSISTANT_SURVEY_ATV_AMATI
             - WHEREABOUTS_CHECKIN
             - TRAVEL_ASSISTANT_FLIGHT_CHECKIN
             - DIALER_AUTH
@@ -51009,6 +51092,7 @@ components:
             - GEO_TTL_RESERVED_SOCIAL_EVENT
             - GEO_TTL_FLIGHT_PASSENGER_DEPARTURE
             - GEO_TTL_FLIGHT_PASSENGER_DEPARTURE_RIDESHARE
+            - GEO_TTL_TRANSPORTATION_ROUTE_RESERVATION
             - GEO_AAP_GROCERY_STORE
             - GEO_AAP_BEAUTY_WELLNESS
             - GEO_AAP_RESTAURANT
@@ -51086,6 +51170,7 @@ components:
             - PERSONAL_RESULTS_OPTIN
             - HEADPHONE_PERSONAL_RESULTS_OPTIN
             - DISCOVERY_SPARKS
+            - SPOKEN_NOTIFICATIONS_OOBE_OPTIN
             - UNIT_TESTING
           type: string
         attachment:
@@ -52598,6 +52683,7 @@ components:
             - SITE_CHUNK_SOURCE_COOKBOOK
             - SITE_CHUNK_SOURCE_CRAWLED_SELLER_DATA
             - SITE_CHUNK_SOURCE_FALLBACK
+            - SITE_CHUNK_SOURCE_UV_CHUNK
           type: string
       type: object
     QualityNsrNsrData:
@@ -52722,6 +52808,7 @@ components:
             - SITE_CHUNK_SOURCE_COOKBOOK
             - SITE_CHUNK_SOURCE_CRAWLED_SELLER_DATA
             - SITE_CHUNK_SOURCE_FALLBACK
+            - SITE_CHUNK_SOURCE_UV_CHUNK
           type: string
         siteLinkIn:
           description: Average value of the site_link_in for pages in the sitechunk.
@@ -56425,6 +56512,7 @@ components:
             - TITLE
             - ANY
             - IMAGE_QUERY
+            - PASSAGE_QUERY
             - CONTEXT_ENTITY
             - RESULT_ENTITY
             - CONTEXT_QUERY
@@ -57620,6 +57708,7 @@ components:
             - TITLE
             - ANY
             - IMAGE_QUERY
+            - PASSAGE_QUERY
             - CONTEXT_ENTITY
             - RESULT_ENTITY
             - CONTEXT_QUERY
@@ -58368,7 +58457,7 @@ components:
           type: string
         nameMetadata:
           $ref: "#/components/schemas/RepositoryWebrefConceptNameMetadata"
-          description: Metadata attatched to the name.
+          description: Metadata attached to the name.
         nonLocationalScore:
           description: Whether the mention is a non-locational reference to a geographical entity. Ranges from 0 (locational) to 1 (non-locational).
           format: float
@@ -59178,6 +59267,7 @@ components:
               - URL
               - TITLE
               - IMAGE_QUERY
+              - PASSAGE_QUERY
               - CONTEXT_ENTITY
               - CONTEXT_QUERY
               - SPORE_GRAPH
@@ -59313,6 +59403,7 @@ components:
             - URL
             - TITLE
             - IMAGE_QUERY
+            - PASSAGE_QUERY
             - CONTEXT_ENTITY
             - CONTEXT_QUERY
             - SPORE_GRAPH
@@ -59341,6 +59432,7 @@ components:
             - URL
             - TITLE
             - IMAGE_QUERY
+            - PASSAGE_QUERY
             - CONTEXT_ENTITY
             - CONTEXT_QUERY
             - SPORE_GRAPH
@@ -63585,10 +63677,6 @@ components:
           description: The ratio of the area of the largest Flash to the render area.
           format: double
           type: number
-        mobileFriendlyScore:
-          description: Mobile friendliness score in the range of [0, 100]. See go/modena-ranking.
-          format: int32
-          type: integer
         violatesMobileInterstitialPolicy:
           description: Indicates if the page is violating mobile interstitial policy and should be demoted. See go/interstitials-ranking-dd for details.
           type: boolean
@@ -66081,8 +66169,8 @@ components:
       properties:
         adwordsCid:
           description: Populated using airlines_company_ids.csv for AdWords company map
-          format: int32
-          type: integer
+          format: int64
+          type: string
         alliance:
           description: STAR_ALLIANCE
           enum:
@@ -67737,6 +67825,10 @@ components:
               - SECOND_PASS_QUALITY_REWEIGTHING_MDP_EVENT_LEVEL
               - PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE_EVENT_LEVEL
               - UNACK_IN_APP_SUBSCRIPTION_WARNING_DETAIL_PAGE_EVENT_LEVEL
+              - PACKAGE_NAME_SEARCH_EVENT_LEVEL
+              - ZERO_COPY_NOT_SUFFICIENT_EVENT_LEVEL
+              - ZERO_COPY_ALLOWS_INSTALL_EVENT_LEVEL
+              - ZERO_COPY_NOT_REQUIRED_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
               - BEST_SELLER_CART_TAG_AT_SESSION_LEVEL
@@ -68245,6 +68337,13 @@ components:
               - SECOND_PASS_QUALITY_REWEIGTHING_MDP_SESSION_LEVEL
               - UNACK_IN_APP_SUBSCRIPTION_WARNING_DETAIL_PAGE_SESSION_LEVEL
               - ELIGIBLE_FOR_FORM_FACTOR_FILTER_ON_TOP_CHARTS
+              - PACKAGE_NAME_SEARCH_SESSION_LEVEL
+              - SUBSCRIPTION_PENDING_ACKNOWLEDGEMENT_EMAIL_SESSION_LEVEL
+              - SUBSCRIPTION_PENDING_ACKNOWLEDGEMENT_NOTIFICATION_SESSION_LEVEL
+              - ZERO_COPY_NOT_SUFFICIENT_SESSION_LEVEL
+              - ZERO_COPY_ALLOWS_INSTALL_SESSION_LEVEL
+              - ZERO_COPY_NOT_REQUIRED_SESSION_LEVEL
+              - BOOKS_SEARCH_SERIES_EXPANSION_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - CART_ABANDONMENT_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL
@@ -68406,6 +68505,8 @@ components:
               - FOP_STEERING_PROMOTION_CART_APPLY_PROMOTION_USER_LEVEL_V2
               - FOP_STEERING_PROMOTION_USER_LEVEL
               - FOP_STEERING_PROMOTION_EXCLUDE_CUJ4_USER_LEVEL
+              - SUBSCRIPTION_PENDING_ACKNOWLEDGEMENT_EMAIL_USER_LEVEL
+              - SUBSCRIPTION_PENDING_ACKNOWLEDGEMENT_NOTIFICATION_USER_LEVEL
               - LOYALTY_STAMP_CARD_IN_PURCHASE_FLOW_USER_LEVEL
               - HAS_MONETIZATION_BEHAVIOR_USER_LEVEL
               - HAS_MONETIZATION_BEHAVIOR_LAST_180D_USER_LEVEL
@@ -68481,6 +68582,9 @@ components:
               - NOTIFICATION_PREDICTED_REV_GAIN_FILTERING_USER_LEVEL
               - NOTIFICATION_PUBLICITY_GAIN_DISABLED_USER_LEVEL
               - UNACK_IN_APP_SUBSCRIPTION_WARNING_DETAIL_PAGE_USER_LEVEL
+              - PURCHASE_READINESS_ADD_FOP_USER_LEVEL
+              - PURCHASE_READINESS_ADD_AUTH_USER_LEVEL
+              - PURCHASE_READINESS_ADD_FOP_AUTH_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -77303,7 +77407,7 @@ components:
           type: string
       type: object
     WWWResultInfoSubImageDocInfo:
-      description: "The following message contains info of sub image docs, it is populated in query_state and consumed in web image boost twiddler: (go/WebImageBoostTwiddler)."
+      description: "The following message contains info of sub image docs, it is populated in query_state and consumed in web image boost twiddler: (go/WebImageBoostTwiddler). NextID: 25"
       properties:
         additionalSafesearchSignals:
           items:
@@ -77365,6 +77469,10 @@ components:
           description: Deepcrop thumbnail cropping hints.
           format: byte
           type: string
+        dimeScore:
+          description: "EQ* v3: Deep Image Engagingness(DImE) go/deep-image-engagingness-slides"
+          format: float
+          type: number
         docid:
           format: uint64
           type: string

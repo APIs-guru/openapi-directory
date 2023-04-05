@@ -2067,6 +2067,15 @@ components:
             - NO_AUTOMATIC_RESTART
           type: string
       type: object
+    CutoverForecast:
+      description: CutoverForecast holds information about future CutoverJobs of a MigratingVm.
+      properties:
+        estimatedCutoverJobDuration:
+          description: Output only. Estimation of the CutoverJob duration.
+          format: google-duration
+          readOnly: true
+          type: string
+      type: object
     CutoverJob:
       description: CutoverJob message describes a cutover of a migrating VM. The CutoverJob is the operation of shutting down the VM, creating a snapshot and clonning the VM using the replicated snapshot.
       properties:
@@ -2580,6 +2589,10 @@ components:
         currentSyncInfo:
           $ref: "#/components/schemas/ReplicationCycle"
           description: Output only. Details of the current running replication cycle.
+          readOnly: true
+        cutoverForecast:
+          $ref: "#/components/schemas/CutoverForecast"
+          description: Output only. Provides details of future CutoverJobs of a MigratingVm. Set to empty when cutover forecast is unavailable.
           readOnly: true
         description:
           description: The description attached to the migrating VM by the user.

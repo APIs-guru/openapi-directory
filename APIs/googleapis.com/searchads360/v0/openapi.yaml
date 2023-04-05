@@ -791,29 +791,6 @@ components:
           description: Whether the campaign is opted in to real-time bidding.
           type: boolean
       type: object
-    GoogleAdsSearchads360V0Common__SearchAds360TextAdInfo:
-      description: A Search Ads 360 text ad.
-      properties:
-        adTrackId:
-          description: The tracking id of the ad.
-          format: int64
-          type: string
-        description1:
-          description: The first line of the ad's description.
-          type: string
-        description2:
-          description: The second line of the ad's description.
-          type: string
-        displayMobileUrl:
-          description: The displayed mobile URL of the ad.
-          type: string
-        displayUrl:
-          description: The displayed URL of the ad.
-          type: string
-        headline:
-          description: The headline of the ad.
-          type: string
-      type: object
     GoogleAdsSearchads360V0Common__Segments:
       description: Segment only fields.
       properties:
@@ -1562,9 +1539,6 @@ components:
         resourceName:
           description: "Immutable. The resource name of the ad. Ad resource names have the form: `customers/{customer_id}/ads/{ad_id}`"
           type: string
-        textAd:
-          $ref: "#/components/schemas/GoogleAdsSearchads360V0Common__SearchAds360TextAdInfo"
-          description: Immutable. Details pertaining to a text ad.
         type:
           description: Output only. The type of ad.
           enum:
