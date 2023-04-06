@@ -967,6 +967,144 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AwsProton20200720.CreateServiceInstance:
+    post:
+      operationId: CreateServiceInstance
+      description: Create a service instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateServiceInstanceOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateServiceInstanceInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AwsProton20200720.CreateServiceInstance
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AwsProton20200720.CreateServiceSyncConfig:
+    post:
+      operationId: CreateServiceSyncConfig
+      description: Create the Proton Ops configuration file.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateServiceSyncConfigOutput'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateServiceSyncConfigInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AwsProton20200720.CreateServiceSyncConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AwsProton20200720.CreateServiceTemplate:
     post:
       operationId: CreateServiceTemplate
@@ -1655,6 +1793,75 @@ paths:
             type: string
             enum:
               - AwsProton20200720.DeleteService
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AwsProton20200720.DeleteServiceSyncConfig:
+    post:
+      operationId: DeleteServiceSyncConfig
+      description: Delete the Proton Ops file.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteServiceSyncConfigOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteServiceSyncConfigInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AwsProton20200720.DeleteServiceSyncConfig
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2377,7 +2584,7 @@ paths:
   /#X-Amz-Target=AwsProton20200720.GetResourcesSummary:
     post:
       operationId: GetResourcesSummary
-      description: '<p>Get counts of Proton resources.</p> <p>For infrastructure-provisioning resources (environments, services, service instances, pipelines), the action returns staleness counts. A resource is stale when it''s behind the recommended version of the Proton template that it uses and it needs an update to become current.</p> <p>The action returns staleness counts (counts of resources that are up-to-date, behind a template major version, or behind a template minor version), the total number of resources, and the number of resources that are in a failed state, grouped by resource type. Components, environments, and service templates are exceptions—see the <code>components</code>, <code>environments</code>, and <code>serviceTemplates</code> field descriptions.</p> <p>For context, the action also returns the total number of each type of Proton template in the Amazon Web Services account.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/proton/latest/userguide/monitoring-dashboard.html">Proton dashboard</a> in the <i>Proton User Guide</i>.</p>'
+      description: '<p>Get counts of Proton resources.</p> <p>For infrastructure-provisioning resources (environments, services, service instances, pipelines), the action returns staleness counts. A resource is stale when it''s behind the recommended version of the Proton template that it uses and it needs an update to become current.</p> <p>The action returns staleness counts (counts of resources that are up-to-date, behind a template major version, or behind a template minor version), the total number of resources, and the number of resources that are in a failed state, grouped by resource type. Components, environments, and service templates return less information - see the <code>components</code>, <code>environments</code>, and <code>serviceTemplates</code> field descriptions.</p> <p>For context, the action also returns the total number of each type of Proton template in the Amazon Web Services account.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/proton/latest/userguide/monitoring-dashboard.html">Proton dashboard</a> in the <i>Proton User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -2549,6 +2756,195 @@ paths:
             type: string
             enum:
               - AwsProton20200720.GetServiceInstance
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AwsProton20200720.GetServiceInstanceSyncStatus:
+    post:
+      operationId: GetServiceInstanceSyncStatus
+      description: Get the status of the synced service instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetServiceInstanceSyncStatusOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetServiceInstanceSyncStatusInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AwsProton20200720.GetServiceInstanceSyncStatus
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AwsProton20200720.GetServiceSyncBlockerSummary:
+    post:
+      operationId: GetServiceSyncBlockerSummary
+      description: Get detailed data for the service sync blocker summary.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetServiceSyncBlockerSummaryOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetServiceSyncBlockerSummaryInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AwsProton20200720.GetServiceSyncBlockerSummary
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AwsProton20200720.GetServiceSyncConfig:
+    post:
+      operationId: GetServiceSyncConfig
+      description: Get detailed information for the service sync configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetServiceSyncConfigOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetServiceSyncConfigInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AwsProton20200720.GetServiceSyncConfig
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5128,6 +5524,144 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AwsProton20200720.UpdateServiceSyncBlocker:
+    post:
+      operationId: UpdateServiceSyncBlocker
+      description: Update the service sync blocker by resolving it.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateServiceSyncBlockerOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateServiceSyncBlockerInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AwsProton20200720.UpdateServiceSyncBlocker
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AwsProton20200720.UpdateServiceSyncConfig:
+    post:
+      operationId: UpdateServiceSyncConfig
+      description: Update the Proton Ops config file.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateServiceSyncConfigOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateServiceSyncConfigInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AwsProton20200720.UpdateServiceSyncConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AwsProton20200720.UpdateServiceTemplate:
     post:
       operationId: UpdateServiceTemplate
@@ -5510,6 +6044,10 @@ components:
         - templateFile
       title: CreateComponentInput
       properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The client token for the created component.
         description:
           allOf:
             - $ref: '#/components/schemas/Description'
@@ -5831,6 +6369,88 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the service template that's used to create the service.
+    CreateServiceInstanceOutput:
+      type: object
+      required:
+        - serviceInstance
+      properties:
+        serviceInstance:
+          allOf:
+            - $ref: '#/components/schemas/ServiceInstance'
+            - description: The detailed data of the service instance being created.
+    CreateServiceInstanceInput:
+      type: object
+      required:
+        - name
+        - serviceName
+        - spec
+      title: CreateServiceInstanceInput
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The client token of the service instance to create.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service instance to create.
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service the service instance is added to.
+        spec:
+          allOf:
+            - $ref: '#/components/schemas/SpecContents'
+            - description: The spec for the service instance you want to create.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '<p>An optional list of metadata items that you can associate with the Proton service instance. A tag is a key-value pair.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/proton/latest/userguide/resources.html">Proton resources and tagging</a> in the <i>Proton User Guide</i>.</p>'
+        templateMajorVersion:
+          allOf:
+            - $ref: '#/components/schemas/TemplateVersionPart'
+            - description: 'To create a new major and minor version of the service template, <i>exclude</i> <code>major Version</code>.'
+        templateMinorVersion:
+          allOf:
+            - $ref: '#/components/schemas/TemplateVersionPart'
+            - description: 'To create a new minor version of the service template, include a <code>major Version</code>.'
+    CreateServiceSyncConfigOutput:
+      type: object
+      properties:
+        serviceSyncConfig:
+          allOf:
+            - $ref: '#/components/schemas/ServiceSyncConfig'
+            - description: The detailed data of the Proton Ops file.
+    CreateServiceSyncConfigInput:
+      type: object
+      required:
+        - branch
+        - filePath
+        - repositoryName
+        - repositoryProvider
+        - serviceName
+      title: CreateServiceSyncConfigInput
+      properties:
+        branch:
+          allOf:
+            - $ref: '#/components/schemas/GitBranchName'
+            - description: The repository branch for your Proton Ops file.
+        filePath:
+          allOf:
+            - $ref: '#/components/schemas/OpsFilePath'
+            - description: The path to the Proton Ops file.
+        repositoryName:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryName'
+            - description: The repository name.
+        repositoryProvider:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryProvider'
+            - description: The provider type for your repository.
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service the Proton Ops file is for.
     CreateServiceTemplateOutput:
       type: object
       required:
@@ -6094,6 +6714,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the service to delete.
+    DeleteServiceSyncConfigOutput:
+      type: object
+      properties:
+        serviceSyncConfig:
+          allOf:
+            - $ref: '#/components/schemas/ServiceSyncConfig'
+            - description: The detailed data for the service sync config.
+    DeleteServiceSyncConfigInput:
+      type: object
+      required:
+        - serviceName
+      title: DeleteServiceSyncConfigInput
+      properties:
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service that you want to delete the service sync configuration for.
     DeleteServiceTemplateOutput:
       type: object
       properties:
@@ -6383,7 +7020,75 @@ components:
         serviceName:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service that you want the service instance input for.
+    GetServiceInstanceSyncStatusOutput:
+      type: object
+      properties:
+        desiredState:
+          allOf:
+            - $ref: '#/components/schemas/Revision'
+            - description: The service instance sync desired state that's returned by Proton
+        latestSuccessfulSync:
+          allOf:
+            - $ref: '#/components/schemas/ResourceSyncAttempt'
+            - description: The detailed data of the latest successful sync with the service instance.
+        latestSync:
+          allOf:
+            - $ref: '#/components/schemas/ResourceSyncAttempt'
+            - description: The detailed data of the latest sync with the service instance.
+    GetServiceInstanceSyncStatusInput:
+      type: object
+      required:
+        - serviceInstanceName
+        - serviceName
+      title: GetServiceInstanceSyncStatusInput
+      properties:
+        serviceInstanceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service instance that you want the sync status input for.
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
             - description: The name of the service that the service instance belongs to.
+    GetServiceSyncBlockerSummaryOutput:
+      type: object
+      properties:
+        serviceSyncBlockerSummary:
+          allOf:
+            - $ref: '#/components/schemas/ServiceSyncBlockerSummary'
+            - description: The detailed data of the requested service sync blocker summary.
+    GetServiceSyncBlockerSummaryInput:
+      type: object
+      required:
+        - serviceName
+      title: GetServiceSyncBlockerSummaryInput
+      properties:
+        serviceInstanceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name of the service instance that you want to get the service sync blocker summary for. If given bothe the instance name and the service name, only the instance is blocked.'
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name of the service that you want to get the service sync blocker summary for. If given only the service name, all instances are blocked.'
+    GetServiceSyncConfigOutput:
+      type: object
+      properties:
+        serviceSyncConfig:
+          allOf:
+            - $ref: '#/components/schemas/ServiceSyncConfig'
+            - description: The detailed data of the requested service sync configuration.
+    GetServiceSyncConfigInput:
+      type: object
+      required:
+        - serviceName
+      title: GetServiceSyncConfigInput
+      properties:
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service that you want to get the service sync configuration for.
     GetServiceTemplateOutput:
       type: object
       required:
@@ -7228,6 +7933,10 @@ components:
         - name
       title: UpdateComponentInput
       properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The client token for the updated component.
         deploymentType:
           allOf:
             - $ref: '#/components/schemas/ComponentDeploymentUpdateType'
@@ -7455,6 +8164,10 @@ components:
         - serviceName
       title: UpdateServiceInstanceInput
       properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The client token of the service instance to update.
         deploymentType:
           allOf:
             - $ref: '#/components/schemas/DeploymentUpdateType'
@@ -7516,6 +8229,76 @@ components:
           allOf:
             - $ref: '#/components/schemas/TemplateVersionPart'
             - description: The minor version of the service template that was used to create the service that the pipeline is associated with.
+    UpdateServiceSyncBlockerOutput:
+      type: object
+      required:
+        - serviceName
+        - serviceSyncBlocker
+      properties:
+        serviceInstanceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service instance that you want to update the service sync blocker for.
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service that you want to update the service sync blocker for.
+        serviceSyncBlocker:
+          allOf:
+            - $ref: '#/components/schemas/SyncBlocker'
+            - description: The detailed data on the service sync blocker that was updated.
+    UpdateServiceSyncBlockerInput:
+      type: object
+      required:
+        - id
+        - resolvedReason
+      title: UpdateServiceSyncBlockerInput
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the service sync blocker.
+        resolvedReason:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The reason the service sync blocker was resolved.
+    UpdateServiceSyncConfigOutput:
+      type: object
+      properties:
+        serviceSyncConfig:
+          allOf:
+            - $ref: '#/components/schemas/ServiceSyncConfig'
+            - description: The detailed data of the Proton Ops file.
+    UpdateServiceSyncConfigInput:
+      type: object
+      required:
+        - branch
+        - filePath
+        - repositoryName
+        - repositoryProvider
+        - serviceName
+      title: UpdateServiceSyncConfigInput
+      properties:
+        branch:
+          allOf:
+            - $ref: '#/components/schemas/GitBranchName'
+            - description: The name of the code repository branch where the Proton Ops file is found.
+        filePath:
+          allOf:
+            - $ref: '#/components/schemas/OpsFilePath'
+            - description: The path to the Proton Ops file.
+        repositoryName:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryName'
+            - description: The name of the repository where the Proton Ops file is found.
+        repositoryProvider:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryProvider'
+            - description: The name of the repository provider where the Proton Ops file is found.
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service the Proton Ops file is for.
     UpdateServiceTemplateOutput:
       type: object
       required:
@@ -7744,6 +8527,15 @@ components:
     AwsAccountId:
       type: string
       pattern: '^\d{12}$'
+    BlockerStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - RESOLVED
+    BlockerType:
+      type: string
+      enum:
+        - AUTOMATED
     Boolean:
       type: boolean
     ResourceName:
@@ -7785,6 +8577,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the Proton environment that this component is associated with.
+        lastClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The last token the client requested.
         lastDeploymentAttemptedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -7886,7 +8682,7 @@ components:
         provisioningRepository:
           allOf:
             - $ref: '#/components/schemas/RepositoryBranch'
-            - description: 'The linked repository that you use to host your rendered infrastructure templates for self-managed provisioning. A linked repository is a repository that has been registered with Proton. For more information, see <a>CreateRepository</a>.'
+            - description: 'The linked repository that you use to host your rendered infrastructure templates for self-managed provisioning. A linked repository is a repository that has been registered with Proton. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/APIReference/API_CreateRepository.html">CreateRepository</a>.'
         spec:
           allOf:
             - $ref: '#/components/schemas/SpecContents'
@@ -7939,6 +8735,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the environment that the service instance was deployed into.
+        lastClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The last client request token received.
         lastDeploymentAttemptedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -8099,6 +8899,8 @@ components:
       minLength: 0
       maxLength: 500
       format: password
+    String:
+      type: string
     SpecContents:
       type: string
       minLength: 1
@@ -8204,7 +9006,7 @@ components:
         environmentTemplates:
           allOf:
             - $ref: '#/components/schemas/ResourceCountsSummary'
-            - description: The total number of environment templates in the Amazon Web Services account.
+            - description: The total number of environment templates in the Amazon Web Services account. The <code>environmentTemplates</code> object will only contain <code>total</code> members.
         environments:
           allOf:
             - $ref: '#/components/schemas/ResourceCountsSummary'
@@ -8497,6 +9299,40 @@ components:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the service template.
       description: Detailed data of an Proton service resource.
+    OpsFilePath:
+      type: string
+      minLength: 1
+      maxLength: 4096
+    ServiceSyncConfig:
+      type: object
+      required:
+        - branch
+        - filePath
+        - repositoryName
+        - repositoryProvider
+        - serviceName
+      properties:
+        branch:
+          allOf:
+            - $ref: '#/components/schemas/GitBranchName'
+            - description: The name of the code repository branch that holds the service code Proton will sync with.
+        filePath:
+          allOf:
+            - $ref: '#/components/schemas/OpsFilePath'
+            - description: The file path to the service sync configuration file.
+        repositoryName:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryName'
+            - description: The name of the code repository that holds the service code Proton will sync with.
+        repositoryProvider:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryProvider'
+            - description: The name of the repository provider that holds the repository Proton will sync with.
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service that the service instance is added to.
+      description: Detailed data of the service sync configuration.
     ServiceTemplate:
       type: object
       required:
@@ -8972,6 +9808,7 @@ components:
       type: string
       enum:
         - TEMPLATE_SYNC
+        - SERVICE_SYNC
     RepositorySyncAttempt:
       type: object
       required:
@@ -9057,8 +9894,72 @@ components:
             - $ref: '#/components/schemas/Revision'
             - description: Detail data for the target revision.
       description: Detail data for a resource sync attempt activated by a push to a repository.
+    ServiceSyncBlockerSummary:
+      type: object
+      required:
+        - serviceName
+      properties:
+        latestBlockers:
+          allOf:
+            - $ref: '#/components/schemas/LatestSyncBlockers'
+            - description: The latest active blockers for the synced service.
+        serviceInstanceName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the service instance that you want sync your service configuration with.
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The name of the service that you want to get the sync blocker summary for. If given a service instance name and a service name, it will return the blockers only applying to the instance that is blocked.</p> <p>If given only a service name, it will return the blockers that apply to all of the instances. In order to get the blockers for a single instance, you will need to make two distinct calls, one to get the sync blocker summary for the service and the other to get the sync blocker for the service instance.</p>'
+      description: '<p>If a service instance is manually updated, Proton wants to prevent accidentally overriding a manual change.</p> <p>A blocker is created because of the manual update or deletion of a service instance. The summary describes the blocker as being active or resolved.</p>'
     Integer:
       type: integer
+    SyncBlocker:
+      type: object
+      required:
+        - createdAt
+        - createdReason
+        - id
+        - status
+        - type
+      properties:
+        contexts:
+          allOf:
+            - $ref: '#/components/schemas/SyncBlockerContexts'
+            - description: The contexts for the sync blocker.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the sync blocker was created.
+        createdReason:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The reason why the sync blocker was created.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the sync blocker.
+        resolvedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the sync blocker was resolved.
+        resolvedReason:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The reason the sync blocker was resolved.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/BlockerStatus'
+            - description: The status of the sync blocker.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/BlockerType'
+            - description: The type of the sync blocker.
+      description: Detailed data of the sync blocker.
+    LatestSyncBlockers:
+      type: array
+      items:
+        $ref: '#/components/schemas/SyncBlocker'
     OutputsList:
       type: array
       items:
@@ -9144,8 +10045,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ServiceSummary'
-    String:
-      type: string
     NotifyResourceDeploymentStatusChangeInputOutputsList:
       type: array
       items:
@@ -9220,6 +10119,7 @@ components:
       type: object
       required:
         - arn
+        - connectionArn
         - name
         - provider
       properties:
@@ -9227,6 +10127,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RepositoryArn'
             - description: The Amazon Resource Name (ARN) of the linked repository.
+        connectionArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the of your connection that connects Proton to your repository.
         name:
           allOf:
             - $ref: '#/components/schemas/RepositoryName'
@@ -9594,6 +10498,25 @@ components:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the service template.
       description: Summary data of an Proton service template version resource.
+    SyncBlockerContexts:
+      type: array
+      items:
+        $ref: '#/components/schemas/SyncBlockerContext'
+    SyncBlockerContext:
+      type: object
+      required:
+        - key
+        - value
+      properties:
+        key:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The key for the sync blocker context.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The value of the sync blocker context.
+      description: Detailed data of the context of the sync blocker.
     TagKey:
       type: string
       minLength: 1
