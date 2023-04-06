@@ -1648,7 +1648,7 @@ components:
       description: Wire-format for a Status object
       properties:
         canonicalCode:
-          description: The canonical error code (see codes.proto) that most closely corresponds to this status. May be missing.
+          description: The canonical error code (see codes.proto) that most closely corresponds to this status. This may be missing, and in the common case of the generic space, it definitely will be.
           format: int32
           type: integer
         code:

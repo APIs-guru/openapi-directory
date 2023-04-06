@@ -611,6 +611,45 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudAssuredworkloadsV1beta1CreateWorkloadOperationMetadata:
+      description: Operation metadata to give request details of CreateWorkload.
+      properties:
+        complianceRegime:
+          description: Optional. Compliance controls that should be applied to the resources managed by the workload.
+          enum:
+            - COMPLIANCE_REGIME_UNSPECIFIED
+            - IL4
+            - CJIS
+            - FEDRAMP_HIGH
+            - FEDRAMP_MODERATE
+            - US_REGIONAL_ACCESS
+            - HIPAA
+            - HITRUST
+            - EU_REGIONS_AND_SUPPORT
+            - CA_REGIONS_AND_SUPPORT
+            - ITAR
+            - AU_REGIONS_AND_US_SUPPORT
+            - ASSURED_WORKLOADS_FOR_PARTNERS
+            - ISR_REGIONS
+            - ISR_REGIONS_AND_SUPPORT
+            - CA_PROTECTED_B
+          type: string
+        createTime:
+          description: Optional. Time when the operation was created.
+          format: google-datetime
+          type: string
+        displayName:
+          description: Optional. The display name of the workload.
+          type: string
+        parent:
+          description: Optional. The parent of the workload.
+          type: string
+        resourceSettings:
+          description: Optional. Resource properties in the input that are used for creating/customizing workload resources.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettings"
+          type: array
+      type: object
     GoogleCloudAssuredworkloadsV1beta1ListViolationsResponse:
       description: Response of ListViolations endpoint.
       properties:

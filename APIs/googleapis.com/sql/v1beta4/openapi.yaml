@@ -2642,6 +2642,14 @@ components:
           description: The allowlisted value for the access control list.
           type: string
       type: object
+    AdvancedMachineFeatures:
+      description: Specifies options for controlling advanced machine features.
+      properties:
+        threadsPerCore:
+          description: The number of threads per physical core.
+          format: int32
+          type: integer
+      type: object
     ApiWarning:
       description: An Admin API warning message.
       properties:
@@ -2955,9 +2963,10 @@ components:
       description: A Cloud SQL instance resource.
       properties:
         availableMaintenanceVersions:
-          description: List all maintenance versions applicable on the instance
+          description: Output only. List all maintenance versions applicable on the instance
           items:
             type: string
+          readOnly: true
           type: array
         backendType:
           description: "The backend type. `SECOND_GEN`: Cloud SQL database instance. `EXTERNAL`: A database server that is not managed by Google. This property is read-only; use the `tier` property in the `settings` object to determine the database type."
@@ -4078,6 +4087,9 @@ components:
         activeDirectoryConfig:
           $ref: "#/components/schemas/SqlActiveDirectoryConfig"
           description: Active Directory configuration, relevant only for Cloud SQL for SQL Server.
+        advancedMachineFeatures:
+          $ref: "#/components/schemas/AdvancedMachineFeatures"
+          description: Specifies advance machine configuration for the instance relevant only for SQL Server.
         authorizedGaeApplications:
           description: The App Engine app IDs that can access this instance. (Deprecated) Applied to First Generation instances only.
           items:

@@ -617,13 +617,6 @@ components:
         task:
           description: Task name.
           type: string
-        taskSource:
-          description: TaskSource represents the source of the task.
-          enum:
-            - TASK_SOURCE_UNSPECIFIED
-            - BATCH_INTERNAL
-            - USER
-          type: string
       type: object
     AgentTaskInfo:
       description: Task Info
@@ -1102,7 +1095,6 @@ components:
             - RUNNING
             - FAILED
             - SUCCEEDED
-            - UNEXECUTED
           type: string
         type:
           description: The message type.
@@ -1322,7 +1314,6 @@ components:
             - RUNNING
             - FAILED
             - SUCCEEDED
-            - UNEXECUTED
           type: string
         type:
           description: Type of the event.
@@ -1445,7 +1436,6 @@ components:
             - RUNNING
             - FAILED
             - SUCCEEDED
-            - UNEXECUTED
           type: string
         statusEvents:
           description: Detailed info about why the state is reached.

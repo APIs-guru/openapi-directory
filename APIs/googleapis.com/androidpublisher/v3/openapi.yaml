@@ -32,6 +32,7 @@ externalDocs:
 tags:
   - name: applications
   - name: edits
+  - name: externaltransactions
   - name: generatedapks
   - name: grants
   - name: inappproducts
@@ -3990,6 +3991,30 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - users
+    get:
+      description: Gets an existing external transaction.
+      operationId: androidpublisher.externaltransactions.getexternaltransaction
+      parameters:
+        - description: "Required. The name of the external transaction to retrieve. Format: applications/{package_name}/externalTransactions/{external_transaction}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExternalTransaction"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - externaltransactions
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4036,6 +4061,95 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - users
+  "/androidpublisher/v3/{name}:refund":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Refunds or partially refunds an existing external transaction.
+      operationId: androidpublisher.externaltransactions.refundexternaltransaction
+      parameters:
+        - description: "Required. The name of the external transaction that will be refunded. Format: applications/{package_name}/externalTransactions/{external_transaction}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefundExternalTransactionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExternalTransaction"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - externaltransactions
+  "/androidpublisher/v3/{parent}/externalTransactions":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new external transaction.
+      operationId: androidpublisher.externaltransactions.createexternaltransaction
+      parameters:
+        - description: "Required. The parent resource where this external transaction will be created. Format: applications/{package_name}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The id to use for the external transaction. Must be unique across all other transactions for the app. This value should be 1-63 characters and valid characters are /a-z0-9_-/.
+          in: query
+          name: externalTransactionId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExternalTransaction"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExternalTransaction"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - externaltransactions
   "/androidpublisher/v3/{parent}/grants":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -4759,6 +4873,84 @@ components:
           description: An obfuscated version of the id that is uniquely associated with the user's profile in your app. Only present if specified using https://developer.android.com/reference/com/android/billingclient/api/BillingFlowParams.Builder#setobfuscatedprofileid when the purchase was made.
           type: string
       type: object
+    ExternalSubscription:
+      description: Details of an external subscription.
+      properties:
+        subscriptionType:
+          description: Required. The type of the external subscription.
+          enum:
+            - SUBSCRIPTION_TYPE_UNSPECIFIED
+            - RECURRING
+            - PREPAID
+          type: string
+      type: object
+    ExternalTransaction:
+      description: The details of an external transaction.
+      properties:
+        createTime:
+          description: Output only. The time when this transaction was created. This is the time when Google was notified of the transaction.
+          format: google-datetime
+          readOnly: true
+          type: string
+        currentPreTaxAmount:
+          $ref: "#/components/schemas/Price"
+          description: Output only. The current transaction amount before tax. This represents the current pre-tax amount including any refunds that may have been applied to this transaction.
+          readOnly: true
+        currentTaxAmount:
+          $ref: "#/components/schemas/Price"
+          description: Output only. The current tax amount. This represents the current tax amount including any refunds that may have been applied to this transaction.
+          readOnly: true
+        externalTransactionId:
+          description: Output only. The id of this transaction. All transaction ids under the same package name must be unique. Set when creating the external transaction.
+          readOnly: true
+          type: string
+        oneTimeTransaction:
+          $ref: "#/components/schemas/OneTimeExternalTransaction"
+          description: This is a one-time transaction and not part of a subscription.
+        originalPreTaxAmount:
+          $ref: "#/components/schemas/Price"
+          description: Required. The original transaction amount before taxes. This represents the pre-tax amount originally notified to Google before any refunds were applied.
+        originalTaxAmount:
+          $ref: "#/components/schemas/Price"
+          description: Required. The original tax amount. This represents the tax amount originally notified to Google before any refunds were applied.
+        packageName:
+          description: Output only. The resource name of the external transaction. The package name of the application the inapp products were sold (for example, 'com.some.app').
+          readOnly: true
+          type: string
+        recurringTransaction:
+          $ref: "#/components/schemas/RecurringExternalTransaction"
+          description: This transaction is part of a recurring series of transactions.
+        testPurchase:
+          $ref: "#/components/schemas/ExternalTransactionTestPurchase"
+          description: Output only. If set, this transaction was a test purchase. Google will not charge for a test transaction.
+          readOnly: true
+        transactionState:
+          description: Output only. The current state of the transaction.
+          enum:
+            - TRANSACTION_STATE_UNSPECIFIED
+            - TRANSACTION_REPORTED
+            - TRANSACTION_CANCELED
+          readOnly: true
+          type: string
+        transactionTime:
+          description: Required. The time when the transaction was completed.
+          format: google-datetime
+          type: string
+        userTaxAddress:
+          $ref: "#/components/schemas/ExternalTransactionAddress"
+          description: Required. User address for tax computation.
+      type: object
+    ExternalTransactionAddress:
+      description: User's address for the external transaction.
+      properties:
+        regionCode:
+          description: Required. Two letter region code based on ISO-3166-1 Alpha-2 (UN region codes).
+          type: string
+      type: object
+    ExternalTransactionTestPurchase:
+      description: Represents a transaction performed using a test account. These transactions will not be charged by Google.
+      properties: {}
+      type: object
     ExternallyHostedApk:
       description: Defines an APK available for this application that is hosted externally and not uploaded to Google Play. This function is only available to organizations using Managed Play whose application is configured to restrict distribution to the organizations.
       properties:
@@ -4819,6 +5011,10 @@ components:
         versionName:
           description: The version name of this APK.
           type: string
+      type: object
+    FullRefund:
+      description: A full refund of the remaining amount of a transaction.
+      properties: {}
       type: object
     GeneratedApksListResponse:
       description: Response to list generated APKs.
@@ -5251,6 +5447,13 @@ components:
           description: Must conform with RFC-1034. That is, this string can only contain lower-case letters (a-z), numbers (0-9), and hyphens (-), and be at most 20 characters.
           type: string
       type: object
+    OneTimeExternalTransaction:
+      description: Represents a one-time transaction.
+      properties:
+        externalTransactionToken:
+          description: Input only. Provided during the call to Create. Retrieved from the client when the alternative billing flow is launched.
+          type: string
+      type: object
     OtherRegionsBasePlanConfig:
       description: Pricing information for any new locations Play may launch in.
       properties:
@@ -5310,6 +5513,16 @@ components:
           description: Total number of results available on the backend ! The total number of results in the result set.
           format: int32
           type: integer
+      type: object
+    PartialRefund:
+      description: A partial refund of a transaction.
+      properties:
+        refundId:
+          description: Required. A unique id distinguishing this partial refund. If the refund is successful, subsequent refunds with the same id will fail. Must be unique across refunds for one individual transaction.
+          type: string
+        refundPreTaxAmount:
+          $ref: "#/components/schemas/Price"
+          description: Required. The pre-tax amount of the partial refund. Should be less than the remaining pre-tax amount of the transaction.
       type: object
     PausedStateContext:
       description: Information specific to a subscription in paused state.
@@ -5408,6 +5621,33 @@ components:
       properties:
         developerPayload:
           description: Payload to attach to the purchase.
+          type: string
+      type: object
+    RecurringExternalTransaction:
+      description: Represents a transaction that is part of a recurring series of payments. This can be a subscription or a one-time product with multiple payments (such as preorder).
+      properties:
+        externalSubscription:
+          $ref: "#/components/schemas/ExternalSubscription"
+          description: Details of an external subscription.
+        externalTransactionToken:
+          description: Input only. Provided during the call to Create. Retrieved from the client when the alternative billing flow is launched. Required only for the initial purchase.
+          type: string
+        initialExternalTransactionId:
+          description: The external transaction id of the first transaction of this recurring series of transactions. For example, for a subscription this would be the transaction id of the first payment. Required when creating recurring external transactions.
+          type: string
+      type: object
+    RefundExternalTransactionRequest:
+      description: A request to refund an existing external transaction.
+      properties:
+        fullRefund:
+          $ref: "#/components/schemas/FullRefund"
+          description: A full-amount refund.
+        partialRefund:
+          $ref: "#/components/schemas/PartialRefund"
+          description: A partial refund.
+        refundTime:
+          description: Required. The time that the transaction was refunded.
+          format: google-datetime
           type: string
       type: object
     RegionalBasePlanConfig:
