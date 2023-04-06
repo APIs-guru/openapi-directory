@@ -72,9 +72,9 @@ Existing integrations
 
 [![Become a partner](https://opencollective.com/openapi-directory/tiers/partner.svg?avatarHeight=36&width=600)](https://opencollective.com/openapi-directory)
 
- - [Apideck](https://apideck.com) - **Faster data integration through Unified APIs**
  - [HTTP Toolkit](https://httptoolkit.tech/) **Beautiful & open-source tools to debug, test and develop with HTTP(S)**
  - [OpenAPI-Directory-JS](https://github.com/httptoolkit/openapi-directory-js) - The OpenAPI directory precompiled & indexed for JS usage & searching
+ - [Apideck](https://apideck.com) - Faster data integration through Unified APIs
  - [Microsoft Kiota](https://microsoft.github.io/kiota/) - Generate an API client to call any OpenAPI described API
  - [API Tracker](https://apitracker.io/) - Aggregates 14,000+ APIs, SDKs, API specifications, integrations and DX profiles. It aims to help developers access the information they need to integrate APIs faster
  - [API Watch](https://www.apiwatch.io) - Keep track of the APIs you use
@@ -93,8 +93,8 @@ Existing integrations
  - [Mockcoon](https://mockoon.com/mock-samples/category/all/) - API mock samples for your project
 
 Also used as test suite in the following projects:
- - [ReDoc](https://github.com/Redocly/redoc) - **OpenAPI-generated API Reference Documentation**
- - [Speakeasy](https://speakeasyapi.dev) - Generate SDKs Now
+ - [Speakeasy](https://speakeasyapi.dev) - **Generate SDKs Now. Gives your users the DevEx that makes API integrations easy**
+ - [ReDoc](https://github.com/Redocly/redoc) - OpenAPI-generated API Reference Documentation
  - [swagger-parser](https://github.com/BigstickCarpet/swagger-parser) - OpenAPI parser and validator for Node and browsers
  - [OpenAPI-schema-validator](https://github.com/seriousme/openapi-schema-validator) - OpenApi schema validation for OpenApi versions v2, v3.0.x and v3.1.x
  - [SwaggerProvider](https://github.com/sergey-tihon/SwaggerProvider) - F# Type Provider for Swagger
