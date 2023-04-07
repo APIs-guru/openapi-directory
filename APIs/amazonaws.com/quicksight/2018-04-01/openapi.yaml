@@ -2185,6 +2185,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/RowLevelPermissionTagRuleList'
                         - description: 'A set of rules associated with row-level security, such as the tag names and columns that they are assigned to.'
+                    TagRuleConfigurations:
+                      allOf:
+                        - $ref: '#/components/schemas/RowLevelPermissionTagRuleConfigurationList'
+                        - description: A list of tag configuration rules to apply to a dataset. All tag configurations have the OR condition. Tags within each tile will be joined (AND). At least one rule in this structure must have all tag values assigned to it to apply Row-level security (RLS) to the dataset.
                 ColumnLevelPermissionRules:
                   description: 'A set of one or more definitions of a <code> <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html">ColumnLevelPermissionRule</a> </code>.'
                   type: array
@@ -3881,6 +3885,285 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules':
+    post:
+      operationId: CreateRefreshSchedule
+      description: Creates a refresh schedule for a dataset. You can create up to 5 different schedules for a single dataset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRefreshScheduleResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '486':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: DataSetId
+          in: path
+          required: true
+          description: The ID of the dataset.
+          schema:
+            type: string
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Schedule
+              properties:
+                Schedule:
+                  description: The refresh schedule of a dataset.
+                  type: object
+                  properties:
+                    ScheduleId:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: An identifier for the refresh schedule.
+                    ScheduleFrequency:
+                      allOf:
+                        - $ref: '#/components/schemas/RefreshFrequency'
+                        - description: The frequency for the refresh schedule.
+                    StartAfterDateTime:
+                      allOf:
+                        - $ref: '#/components/schemas/Timestamp'
+                        - description: 'Time after which the refresh schedule can be started, expressed in <code>YYYY-MM-DDTHH:MM:SS</code> format.'
+                    RefreshType:
+                      allOf:
+                        - $ref: '#/components/schemas/IngestionType'
+                        - description: '<p>The type of refresh that a datset undergoes. Valid values are as follows:</p> <ul> <li> <p> <code>FULL_REFRESH</code>: A complete refresh of a dataset.</p> </li> <li> <p> <code>INCREMENTAL_REFRESH</code>: A partial refresh of some rows of a dataset, based on the time window specified.</p> </li> </ul> <p>For more information on full and incremental refreshes, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/refreshing-imported-data.html">Refreshing SPICE data</a> in the <i>Amazon QuickSight User Guide</i>.</p>'
+                    Arn:
+                      allOf:
+                        - $ref: '#/components/schemas/Arn'
+                        - description: The Amazon Resource Name (ARN) for the refresh schedule.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListRefreshSchedules
+      description: 'Lists the refresh schedules of a dataset. Each dataset can have up to 5 schedules. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRefreshSchedulesResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: DataSetId
+          in: path
+          required: true
+          description: The ID of the dataset.
+          schema:
+            type: string
+    put:
+      operationId: UpdateRefreshSchedule
+      description: Updates a refresh schedule for a dataset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRefreshScheduleResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: DataSetId
+          in: path
+          required: true
+          description: The ID of the dataset.
+          schema:
+            type: string
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Schedule
+              properties:
+                Schedule:
+                  description: The refresh schedule of a dataset.
+                  type: object
+                  properties:
+                    ScheduleId:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: An identifier for the refresh schedule.
+                    ScheduleFrequency:
+                      allOf:
+                        - $ref: '#/components/schemas/RefreshFrequency'
+                        - description: The frequency for the refresh schedule.
+                    StartAfterDateTime:
+                      allOf:
+                        - $ref: '#/components/schemas/Timestamp'
+                        - description: 'Time after which the refresh schedule can be started, expressed in <code>YYYY-MM-DDTHH:MM:SS</code> format.'
+                    RefreshType:
+                      allOf:
+                        - $ref: '#/components/schemas/IngestionType'
+                        - description: '<p>The type of refresh that a datset undergoes. Valid values are as follows:</p> <ul> <li> <p> <code>FULL_REFRESH</code>: A complete refresh of a dataset.</p> </li> <li> <p> <code>INCREMENTAL_REFRESH</code>: A partial refresh of some rows of a dataset, based on the time window specified.</p> </li> </ul> <p>For more information on full and incremental refreshes, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/refreshing-imported-data.html">Refreshing SPICE data</a> in the <i>Amazon QuickSight User Guide</i>.</p>'
+                    Arn:
+                      allOf:
+                        - $ref: '#/components/schemas/Arn'
+                        - description: The Amazon Resource Name (ARN) for the refresh schedule.
   '/accounts/{AwsAccountId}/templates/{TemplateId}':
     post:
       operationId: CreateTemplate
@@ -5734,6 +6017,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/RowLevelPermissionTagRuleList'
                         - description: 'A set of rules associated with row-level security, such as the tag names and columns that they are assigned to.'
+                    TagRuleConfigurations:
+                      allOf:
+                        - $ref: '#/components/schemas/RowLevelPermissionTagRuleConfigurationList'
+                        - description: A list of tag configuration rules to apply to a dataset. All tag configurations have the OR condition. Tags within each tile will be joined (AND). At least one rule in this structure must have all tag values assigned to it to apply Row-level security (RLS) to the dataset.
                 ColumnLevelPermissionRules:
                   description: 'A set of one or more definitions of a <code> <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html">ColumnLevelPermissionRule</a> </code>.'
                   type: array
@@ -5752,6 +6039,242 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
                         - description: An option that controls whether a child dataset that's stored in QuickSight can use this dataset as a source.
+  '/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-properties':
+    delete:
+      operationId: DeleteDataSetRefreshProperties
+      description: Deletes the dataset refresh properties of the dataset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDataSetRefreshPropertiesResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: DataSetId
+          in: path
+          required: true
+          description: The ID of the dataset.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeDataSetRefreshProperties
+      description: Describes the refresh properties of a dataset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDataSetRefreshPropertiesResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: DataSetId
+          in: path
+          required: true
+          description: The ID of the dataset.
+          schema:
+            type: string
+    put:
+      operationId: PutDataSetRefreshProperties
+      description: Creates or updates the dataset refresh properties for the dataset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutDataSetRefreshPropertiesResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: DataSetId
+          in: path
+          required: true
+          description: The ID of the dataset.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - DataSetRefreshProperties
+              properties:
+                DataSetRefreshProperties:
+                  description: The refresh properties of a dataset.
+                  type: object
+                  properties:
+                    RefreshConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/RefreshConfiguration'
+                        - description: The refresh configuration for a dataset.
   '/accounts/{AwsAccountId}/data-sources/{DataSourceId}':
     delete:
       operationId: DeleteDataSource
@@ -6562,6 +7085,151 @@ paths:
             type: string
             pattern: '^[a-zA-Z0-9._-]*$'
             maxLength: 64
+  '/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules/{ScheduleId}':
+    delete:
+      operationId: DeleteRefreshSchedule
+      description: Deletes a refresh schedule from a dataset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRefreshScheduleResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: DataSetId
+          in: path
+          required: true
+          description: The ID of the dataset.
+          schema:
+            type: string
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: ScheduleId
+          in: path
+          required: true
+          description: The ID of the refresh schedule.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeRefreshSchedule
+      description: Provides a summary of a refresh schedule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRefreshScheduleResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: DataSetId
+          in: path
+          required: true
+          description: The ID of the dataset.
+          schema:
+            type: string
+        - name: ScheduleId
+          in: path
+          required: true
+          description: The ID of the refresh schedule.
+          schema:
+            type: string
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}':
     delete:
       operationId: DeleteUser
@@ -12814,6 +13482,12 @@ components:
         $ref: '#/components/schemas/RowLevelPermissionTagRule'
       minItems: 1
       maxItems: 50
+    RowLevelPermissionTagRuleConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RowLevelPermissionTagRuleConfiguration'
+      minItems: 1
+      maxItems: 50
     ColumnLevelPermissionRule:
       type: object
       properties:
@@ -13411,6 +14085,56 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
             - description: The HTTP status of the request.
+    CreateRefreshScheduleResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        ScheduleId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the refresh schedule.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the refresh schedule.
+    RefreshFrequency:
+      type: object
+      required:
+        - Interval
+      properties:
+        Interval:
+          allOf:
+            - $ref: '#/components/schemas/RefreshInterval'
+            - description: '<p>The interval between scheduled refreshes. Valid values are as follows:</p> <ul> <li> <p> <code>MINUTE15</code>: The dataset refreshes every 15 minutes. This value is only supported for incremental refreshes. This interval can only be used for one schedule per dataset.</p> </li> <li> <p> <code>MINUTE30</code>:The dataset refreshes every 30 minutes. This value is only supported for incremental refreshes. This interval can only be used for one schedule per dataset.</p> </li> <li> <p> <code>HOURLY</code>: The dataset refreshes every hour. This interval can only be used for one schedule per dataset.</p> </li> <li> <p> <code>DAILY</code>: The dataset refreshes every day.</p> </li> <li> <p> <code>WEEKLY</code>: The dataset refreshes every week.</p> </li> <li> <p> <code>MONTHLY</code>: The dataset refreshes every month.</p> </li> </ul>'
+        RefreshOnDay:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleRefreshOnEntity'
+            - description: The day of the week that you want to schedule the refresh on. This value is required for weekly and monthly refresh intervals.
+        Timezone:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The timezone that you want the refresh schedule to use. The timezone ID must match a corresponding ID found on <code>java.util.time.getAvailableIDs()</code>.
+        TimeOfTheDay:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The time of day that you want the datset to refresh. This value is expressed in HH:MM format. This field is not required for schedules that refresh hourly.'
+      description: Specifies the interval between each scheduled refresh of a dataset.
+    Timestamp:
+      type: string
+      format: date-time
+    IngestionType:
+      type: string
+      enum:
+        - INCREMENTAL_REFRESH
+        - FULL_REFRESH
+      description: This defines the type of ingestion user wants to trigger. This is part of create ingestion request.
     CreateTemplateResponse:
       type: object
       properties:
@@ -13712,6 +14436,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
             - description: The HTTP status of the request.
+    DeleteDataSetRefreshPropertiesResponse:
+      type: object
+      properties:
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
     DeleteDataSourceResponse:
       type: object
       properties:
@@ -13809,6 +14544,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
             - description: The HTTP status of the request.
+    DeleteRefreshScheduleResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        ScheduleId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the refresh schedule.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the refresh schedule.
     DeleteTemplateResponse:
       type: object
       properties:
@@ -14164,6 +14918,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
             - description: The HTTP status of the request.
+    DescribeDataSetRefreshPropertiesResponse:
+      type: object
+      properties:
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+        DataSetRefreshProperties:
+          allOf:
+            - $ref: '#/components/schemas/DataSetRefreshProperties'
+            - description: The dataset refresh properties.
     DescribeDataSourceResponse:
       type: object
       properties:
@@ -14360,6 +15129,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
             - description: The HTTP status of the request.
+    DescribeRefreshScheduleResponse:
+      type: object
+      properties:
+        RefreshSchedule:
+          allOf:
+            - $ref: '#/components/schemas/RefreshSchedule'
+            - description: The refresh schedule.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the refresh schedule.
     DescribeTemplateResponse:
       type: object
       properties:
@@ -14936,6 +15724,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
             - description: The HTTP status of the request.
+    ListRefreshSchedulesResponse:
+      type: object
+      properties:
+        RefreshSchedules:
+          allOf:
+            - $ref: '#/components/schemas/RefreshSchedules'
+            - description: The list of refresh schedules for the dataset.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -15103,6 +15906,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
             - description: The HTTP status of the request.
+    PutDataSetRefreshPropertiesResponse:
+      type: object
+      properties:
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+    RefreshConfiguration:
+      type: object
+      required:
+        - IncrementalRefresh
+      properties:
+        IncrementalRefresh:
+          allOf:
+            - $ref: '#/components/schemas/IncrementalRefresh'
+            - description: The incremental refresh for the dataset.
+      description: The refresh configuration of a dataset.
     RegisterUserResponse:
       type: object
       properties:
@@ -15755,6 +16579,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
             - description: The HTTP status of the request.
+    UpdateRefreshScheduleResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        ScheduleId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the refresh schedule.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the refresh schedule.
     UpdateTemplateResponse:
       type: object
       properties:
@@ -16125,9 +16968,6 @@ components:
       items:
         $ref: '#/components/schemas/Arn'
       maxItems: 100
-    Timestamp:
-      type: string
-      format: date-time
     SheetList:
       type: array
       items:
@@ -19297,6 +20137,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RowLevelPermissionTagRuleList'
             - description: 'A set of rules associated with row-level security, such as the tag names and columns that they are assigned to.'
+        TagRuleConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/RowLevelPermissionTagRuleConfigurationList'
+            - description: A list of tag configuration rules to apply to a dataset. All tag configurations have the OR condition. Tags within each tile will be joined (AND). At least one rule in this structure must have all tag values assigned to it to apply Row-level security (RLS) to the dataset.
       description: 'The configuration of tags on a dataset to set row-level security. '
     DataSetUsageConfiguration:
       type: object
@@ -19717,12 +20561,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/IdentityMap'
             - description: 'The Amazon QuickSight users, groups, or both that you want to assign the policy to.'
-    IngestionType:
-      type: string
-      enum:
-        - INCREMENTAL_REFRESH
-        - FULL_REFRESH
-      description: This defines the type of ingestion user wants to trigger. This is part of create ingestion request.
     CreateIngestionRequest:
       type: object
       title: CreateIngestionRequest
@@ -19771,6 +20609,44 @@ components:
         - DELETING
         - RETRYABLE_FAILURE
         - NON_RETRYABLE_FAILURE
+    RefreshSchedule:
+      type: object
+      required:
+        - ScheduleId
+        - ScheduleFrequency
+        - RefreshType
+      properties:
+        ScheduleId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An identifier for the refresh schedule.
+        ScheduleFrequency:
+          allOf:
+            - $ref: '#/components/schemas/RefreshFrequency'
+            - description: The frequency for the refresh schedule.
+        StartAfterDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'Time after which the refresh schedule can be started, expressed in <code>YYYY-MM-DDTHH:MM:SS</code> format.'
+        RefreshType:
+          allOf:
+            - $ref: '#/components/schemas/IngestionType'
+            - description: '<p>The type of refresh that a datset undergoes. Valid values are as follows:</p> <ul> <li> <p> <code>FULL_REFRESH</code>: A complete refresh of a dataset.</p> </li> <li> <p> <code>INCREMENTAL_REFRESH</code>: A partial refresh of some rows of a dataset, based on the time window specified.</p> </li> </ul> <p>For more information on full and incremental refreshes, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/refreshing-imported-data.html">Refreshing SPICE data</a> in the <i>Amazon QuickSight User Guide</i>.</p>'
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the refresh schedule.
+      description: The refresh schedule of a dataset.
+    CreateRefreshScheduleRequest:
+      type: object
+      required:
+        - Schedule
+      title: CreateRefreshScheduleRequest
+      properties:
+        Schedule:
+          allOf:
+            - $ref: '#/components/schemas/RefreshSchedule'
+            - description: The refresh schedule.
     VersionNumber:
       type: integer
       minimum: 1
@@ -20919,6 +21795,16 @@ components:
             - $ref: '#/components/schemas/Arn'
             - description: Dataset Amazon Resource Name (ARN).
       description: Dataset reference.
+    DataSetRefreshProperties:
+      type: object
+      required:
+        - RefreshConfiguration
+      properties:
+        RefreshConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/RefreshConfiguration'
+            - description: The refresh configuration for a dataset.
+      description: The refresh properties of a dataset.
     DataSetSearchFilterList:
       type: array
       items:
@@ -21313,6 +22199,21 @@ components:
       enum:
         - RECOMMENDED_VALUE
         - 'NULL'
+    DayOfMonth:
+      type: string
+      pattern: '^(?:LAST_DAY_OF_MONTH|1[0-9]|2[0-8]|[12]|[3-9])$'
+      minLength: 1
+      maxLength: 17
+    DayOfWeek:
+      type: string
+      enum:
+        - SUNDAY
+        - MONDAY
+        - TUESDAY
+        - WEDNESDAY
+        - THURSDAY
+        - FRIDAY
+        - SATURDAY
     SensitiveDoubleObject:
       type: number
       format: double
@@ -21493,6 +22394,10 @@ components:
       type: object
       title: DeleteDashboardRequest
       properties: {}
+    DeleteDataSetRefreshPropertiesRequest:
+      type: object
+      title: DeleteDataSetRefreshPropertiesRequest
+      properties: {}
     DeleteDataSetRequest:
       type: object
       title: DeleteDataSetRequest
@@ -21524,6 +22429,10 @@ components:
     DeleteNamespaceRequest:
       type: object
       title: DeleteNamespaceRequest
+      properties: {}
+    DeleteRefreshScheduleRequest:
+      type: object
+      title: DeleteRefreshScheduleRequest
       properties: {}
     DeleteTemplateAliasRequest:
       type: object
@@ -21607,6 +22516,10 @@ components:
     DescribeDataSetPermissionsRequest:
       type: object
       title: DescribeDataSetPermissionsRequest
+      properties: {}
+    DescribeDataSetRefreshPropertiesRequest:
+      type: object
+      title: DescribeDataSetRefreshPropertiesRequest
       properties: {}
     DescribeDataSetRequest:
       type: object
@@ -21798,6 +22711,10 @@ components:
             - $ref: '#/components/schemas/NamespaceError'
             - description: An error that occurred when the namespace was created.
       description: The error type.
+    DescribeRefreshScheduleRequest:
+      type: object
+      title: DescribeRefreshScheduleRequest
+      properties: {}
     DescribeTemplateAliasRequest:
       type: object
       title: DescribeTemplateAliasRequest
@@ -22175,6 +23092,7 @@ components:
         - PERMISSION_NOT_FOUND
         - ELASTICSEARCH_CURSOR_NOT_ENABLED
         - CURSOR_NOT_ENABLED
+        - DUPLICATE_COLUMN_NAMES_FOUND
     ErrorInfo:
       type: object
       properties:
@@ -24616,6 +25534,36 @@ components:
       enum:
         - IAM
         - QUICKSIGHT
+    LookbackWindow:
+      type: object
+      required:
+        - ColumnName
+        - Size
+        - SizeUnit
+      properties:
+        ColumnName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the lookback window column.
+        Size:
+          allOf:
+            - $ref: '#/components/schemas/PositiveLong'
+            - description: The lookback window column size.
+        SizeUnit:
+          allOf:
+            - $ref: '#/components/schemas/LookbackWindowSizeUnit'
+            - description: 'The size unit that is used for the lookback window column. Valid values for this structure are <code>HOUR</code>, <code>DAY</code>, and <code>WEEK</code>.'
+      description: The lookback window setup of an incremental refresh configuration.
+    IncrementalRefresh:
+      type: object
+      required:
+        - LookbackWindow
+      properties:
+        LookbackWindow:
+          allOf:
+            - $ref: '#/components/schemas/LookbackWindow'
+            - description: The lookback window setup for an incremental refresh configuration.
+      description: The incremental refresh configuration for a dataset.
     RowInfo:
       type: object
       properties:
@@ -25456,6 +26404,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/NamespaceInfoV2'
+    ListRefreshSchedulesRequest:
+      type: object
+      title: ListRefreshSchedulesRequest
+      properties: {}
+    RefreshSchedules:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/RefreshSchedule'
+          - description: A list of <code>RefreshSchedule</code> objects.
     ListTagsForResourceRequest:
       type: object
       title: ListTagsForResourceRequest
@@ -25583,6 +26541,15 @@ components:
             - $ref: '#/components/schemas/LongRichText'
             - description: 'Rich text. Examples of rich text include bold, underline, and italics.'
       description: '<p>The text format for a subtitle.</p> <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>'
+    PositiveLong:
+      type: integer
+      minimum: 1
+    LookbackWindowSizeUnit:
+      type: string
+      enum:
+        - HOUR
+        - DAY
+        - WEEK
     S3Bucket:
       type: string
       minLength: 1
@@ -26822,6 +27789,16 @@ components:
             - $ref: '#/components/schemas/ProjectedColumnList'
             - description: Projected columns.
       description: A transform operation that projects columns. Operations that come after a projection can only refer to projected columns.
+    PutDataSetRefreshPropertiesRequest:
+      type: object
+      required:
+        - DataSetRefreshProperties
+      title: PutDataSetRefreshPropertiesRequest
+      properties:
+        DataSetRefreshProperties:
+          allOf:
+            - $ref: '#/components/schemas/DataSetRefreshProperties'
+            - description: The dataset refresh properties.
     Query:
       type: string
       minLength: 1
@@ -27153,6 +28130,27 @@ components:
       enum:
         - BEFORE_CUSTOM_LABEL
         - AFTER_CUSTOM_LABEL
+    RefreshInterval:
+      type: string
+      enum:
+        - MINUTE15
+        - MINUTE30
+        - HOURLY
+        - DAILY
+        - WEEKLY
+        - MONTHLY
+    ScheduleRefreshOnEntity:
+      type: object
+      properties:
+        DayOfWeek:
+          allOf:
+            - $ref: '#/components/schemas/DayOfWeek'
+            - description: The day of the week that you want to schedule a refresh on.
+        DayOfMonth:
+          allOf:
+            - $ref: '#/components/schemas/DayOfMonth'
+            - description: The day of the month that you want to schedule refresh on.
+      description: The refresh on entity for weekly or monthly schedules.
     UserRole:
       type: string
       enum:
@@ -27322,6 +28320,12 @@ components:
             - $ref: '#/components/schemas/SessionTagValue'
             - description: 'A string that you want to use to filter by all the values in a column in the dataset and don’t want to list the values one by one. For example, you can use an asterisk as your match all value.'
       description: A set of rules associated with a tag.
+    RowLevelPermissionTagRuleConfiguration:
+      type: array
+      items:
+        $ref: '#/components/schemas/SessionTagKey'
+      minItems: 1
+      maxItems: 50
     RowSortList:
       type: array
       items:
@@ -29210,6 +30214,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: A Boolean value that indicates whether public sharing is turned on for an Amazon QuickSight account.
+    UpdateRefreshScheduleRequest:
+      type: object
+      required:
+        - Schedule
+      title: UpdateRefreshScheduleRequest
+      properties:
+        Schedule:
+          allOf:
+            - $ref: '#/components/schemas/RefreshSchedule'
+            - description: The refresh schedule.
     UpdateTemplateAliasRequest:
       type: object
       required:

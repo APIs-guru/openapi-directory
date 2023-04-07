@@ -7181,6 +7181,12 @@ paths:
           description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
           schema:
             type: boolean
+        - name: DBClusterParameterGroupName
+          in: query
+          required: false
+          description: "<p>The name of the DB cluster parameter group to associate with this DB cluster.</p> <p> <i>Type:</i> String. \_ \_ \_ <i>Required:</i> No.</p> <p>If this argument is omitted, the default DB cluster parameter group is used. If supplied, must match the name of an existing default DB cluster parameter group. The string must consist of from 1 to 255 letters, numbers or hyphens. Its first character must be a letter, and it cannot end with a hyphen or contain two consecutive hyphens.</p>"
+          schema:
+            type: string
         - name: Action
           in: query
           required: true
@@ -7442,7 +7448,7 @@ paths:
         - name: RestoreType
           in: query
           required: false
-          description: '<p>The type of restore to be performed. You can specify one of the following values:</p> <ul> <li> <p> <code>full-copy</code> - The new DB cluster is restored as a full copy of the source DB cluster.</p> </li> <li> <p> <code>copy-on-write</code> - The new DB cluster is restored as a clone of the source DB cluster.</p> </li> </ul> <p>If you don''t specify a <code>RestoreType</code> value, then the new DB cluster is restored as a full copy of the source DB cluster.</p>'
+          description: '<p>The type of restore to be performed. You can specify one of the following values:</p> <ul> <li> <p> <code>full-copy</code> - The new DB cluster is restored as a full copy of the source DB cluster.</p> </li> <li> <p> <code>copy-on-write</code> - The new DB cluster is restored as a clone of the source DB cluster.</p> </li> </ul> <p>Constraints: You can''t specify <code>copy-on-write</code> if the engine version of the source DB cluster is earlier than 1.11.</p> <p>If you don''t specify a <code>RestoreType</code> value, then the new DB cluster is restored as a full copy of the source DB cluster.</p>'
           schema:
             type: string
         - name: SourceDBClusterIdentifier
@@ -9358,7 +9364,7 @@ components:
         GlobalClusterResourceId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The Amazon Web Services Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS customer master key (CMK) for the cluster is accessed. '
+            - description: 'The Amazon Web Services Region-unique, immutable identifier for the global database cluster. This identifier is found in CloudTrail log entries whenever the KMS customer master key (CMK) for the cluster is accessed. '
         GlobalClusterArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -10779,6 +10785,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: 'Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.'
+        DBClusterParameterGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: "<p>The name of the DB cluster parameter group to associate with this DB cluster.</p> <p> <i>Type:</i> String. \_ \_ \_ <i>Required:</i> No.</p> <p>If this argument is omitted, the default DB cluster parameter group is used. If supplied, must match the name of an existing default DB cluster parameter group. The string must consist of from 1 to 255 letters, numbers or hyphens. Its first character must be a letter, and it cannot end with a hyphen or contain two consecutive hyphens.</p>"
       description: Represents the input to <a>RestoreDBClusterFromSnapshot</a>.
     RestoreDBClusterToPointInTimeMessage:
       type: object
@@ -10794,7 +10804,7 @@ components:
         RestoreType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The type of restore to be performed. You can specify one of the following values:</p> <ul> <li> <p> <code>full-copy</code> - The new DB cluster is restored as a full copy of the source DB cluster.</p> </li> <li> <p> <code>copy-on-write</code> - The new DB cluster is restored as a clone of the source DB cluster.</p> </li> </ul> <p>If you don''t specify a <code>RestoreType</code> value, then the new DB cluster is restored as a full copy of the source DB cluster.</p>'
+            - description: '<p>The type of restore to be performed. You can specify one of the following values:</p> <ul> <li> <p> <code>full-copy</code> - The new DB cluster is restored as a full copy of the source DB cluster.</p> </li> <li> <p> <code>copy-on-write</code> - The new DB cluster is restored as a clone of the source DB cluster.</p> </li> </ul> <p>Constraints: You can''t specify <code>copy-on-write</code> if the engine version of the source DB cluster is earlier than 1.11.</p> <p>If you don''t specify a <code>RestoreType</code> value, then the new DB cluster is restored as a full copy of the source DB cluster.</p>'
         SourceDBClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
