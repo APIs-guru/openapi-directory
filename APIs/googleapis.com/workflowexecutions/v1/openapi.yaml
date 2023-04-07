@@ -402,8 +402,13 @@ components:
             - SUCCEEDED
             - FAILED
             - CANCELLED
+            - UNAVAILABLE
           readOnly: true
           type: string
+        stateError:
+          $ref: "#/components/schemas/StateError"
+          description: Output only. Error regarding the state of the Execution resource. For example, this field will have error details if the Execution data is unavailable due to revoked KMS key permissions.
+          readOnly: true
         status:
           $ref: "#/components/schemas/Status"
           description: Output only. Status tracks the current steps and progress data of this execution.
@@ -484,6 +489,19 @@ components:
           type: string
         step:
           description: The step the error occurred at.
+          type: string
+      type: object
+    StateError:
+      description: Describes an error related to the current state of the Execution resource.
+      properties:
+        details:
+          description: Provides specifics about the error.
+          type: string
+        type:
+          description: The type of this state error.
+          enum:
+            - TYPE_UNSPECIFIED
+            - KMS_ERROR
           type: string
       type: object
     Status:

@@ -49034,6 +49034,12 @@ components:
       type: object
     DiskAsyncReplication:
       properties:
+        consistencyGroupPolicy:
+          description: "[Output Only] URL of the DiskConsistencyGroupPolicy if replication was started on the disk as a member of a group."
+          type: string
+        consistencyGroupPolicyId:
+          description: "[Output Only] ID of the DiskConsistencyGroupPolicy if replication was started on the disk as a member of a group."
+          type: string
         disk:
           description: "The other disk asynchronously replicated to or from the current disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /disks/disk - projects/project/zones/zone/disks/disk - zones/zone/disks/disk "
           type: string
@@ -60301,11 +60307,15 @@ components:
             - NETWORK_ATTACHMENTS
             - NETWORK_ENDPOINT_GROUPS
             - NETWORK_FIREWALL_POLICIES
+            - NET_LB_SECURITY_POLICIES_PER_REGION
+            - NET_LB_SECURITY_POLICY_RULES_PER_REGION
+            - NET_LB_SECURITY_POLICY_RULE_ATTRIBUTES_PER_REGION
             - NODE_GROUPS
             - NODE_TEMPLATES
             - NVIDIA_A100_80GB_GPUS
             - NVIDIA_A100_GPUS
             - NVIDIA_K80_GPUS
+            - NVIDIA_L4_GPUS
             - NVIDIA_P100_GPUS
             - NVIDIA_P100_VWS_GPUS
             - NVIDIA_P4_GPUS
@@ -60320,6 +60330,7 @@ components:
             - PREEMPTIBLE_NVIDIA_A100_80GB_GPUS
             - PREEMPTIBLE_NVIDIA_A100_GPUS
             - PREEMPTIBLE_NVIDIA_K80_GPUS
+            - PREEMPTIBLE_NVIDIA_L4_GPUS
             - PREEMPTIBLE_NVIDIA_P100_GPUS
             - PREEMPTIBLE_NVIDIA_P100_VWS_GPUS
             - PREEMPTIBLE_NVIDIA_P4_GPUS
@@ -60344,6 +60355,7 @@ components:
             - ROUTES
             - SECURITY_POLICIES
             - SECURITY_POLICIES_PER_REGION
+            - SECURITY_POLICY_ADVANCED_RULES_PER_REGION
             - SECURITY_POLICY_CEVAL_RULES
             - SECURITY_POLICY_RULES
             - SECURITY_POLICY_RULES_PER_REGION

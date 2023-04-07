@@ -513,6 +513,19 @@ components:
           description: Name of the verb executed by the operation.
           type: string
       type: object
+    StateError:
+      description: Describes an error related to the current state of the workflow.
+      properties:
+        details:
+          description: Provides specifics about the error.
+          type: string
+        type:
+          description: The type of this state error.
+          enum:
+            - TYPE_UNSPECIFIED
+            - KMS_ERROR
+          type: string
+      type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
@@ -547,6 +560,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        cryptoKeyName:
+          description: "Optional. The resource name of a KMS crypto key used to encrypt or decrypt the data associated with the workflow. Format: projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey} Using `-` as a wildcard for the `{project}` or not providing one at all will infer the project from the account. If not provided, data associated with the workflow will not be CMEK-encrypted."
+          type: string
         description:
           description: Description of the workflow provided by the user. Must be at most 1000 unicode characters long.
           type: string
@@ -578,8 +594,13 @@ components:
           enum:
             - STATE_UNSPECIFIED
             - ACTIVE
+            - UNAVAILABLE
           readOnly: true
           type: string
+        stateError:
+          $ref: "#/components/schemas/StateError"
+          description: Output only. Error regarding the state of the workflow. For example, this field will have error details if the execution data is unavailable due to revoked KMS key permissions.
+          readOnly: true
         updateTime:
           description: Output only. The timestamp for when the workflow was last updated.
           format: google-datetime

@@ -381,16 +381,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates a pending or completed Backup.
-      operationId: spanner.projects.instances.backups.patch
+      description: "Updates a Cloud Spanner database. The returned long-running operation can be used to track the progress of updating the database. If the named database does not exist, returns `NOT_FOUND`. While the operation is pending: * The database's reconciling field is set to true. * Cancelling the operation is best-effort. If the cancellation succeeds, the operation metadata's cancel_time is set, the updates are reverted, and the operation terminates with a `CANCELLED` status. * New UpdateDatabase requests will return a `FAILED_PRECONDITION` error until the pending operation is done (returns successfully or with error). * Reading the database via the API continues to give the pre-request values. Upon completion of the returned operation: * The new values are in effect and readable via the API. * The database's reconciling field becomes false. The returned long-running operation will have a name of the format `projects//instances//databases//operations/` and can be used to track the database modification. The metadata field type is UpdateDatabaseMetadata. The response field type is Database, if successful."
+      operationId: spanner.projects.instances.databases.patch
       parameters:
-        - description: Output only for the CreateBackup operation. Required for the UpdateBackup operation. A globally unique identifier for the backup which cannot be changed. Values are of the form `projects//instances//backups/a-z*[a-z0-9]` The final segment of the name must be between 2 and 60 characters in length. The backup is stored in the location(s) specified in the instance configuration of the instance containing the backup, identified by the prefix of the backup name of the form `projects//instances/`.
+        - description: Required. The name of the database. Values are of the form `projects//instances//databases/`, where `` is as specified in the `CREATE DATABASE` statement. This name can be passed to other API methods to identify the database.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Required. A mask specifying which fields (e.g. `expire_time`) in the Backup resource should be updated. This mask is relative to the Backup resource, not to the request message. The field mask must always be specified; this prevents any future fields from being erased accidentally by clients that do not know about them.
+        - description: Required. The list of fields to update. Currently, only `enable_drop_protection` field can be updated.
           in: query
           name: updateMask
           schema:
@@ -399,13 +399,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Backup"
+              $ref: "#/components/schemas/Database"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Backup"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -2333,6 +2333,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        enableDropProtection:
+          description: Whether drop protection is enabled for this database. Defaults to false, if not set.
+          type: boolean
         encryptionConfig:
           $ref: "#/components/schemas/EncryptionConfig"
           description: Output only. For databases that are using customer managed encryption, this field contains the encryption configuration for the database. For databases that are using Google default or other types of encryption, this field is empty.
@@ -2346,6 +2349,10 @@ components:
         name:
           description: Required. The name of the database. Values are of the form `projects//instances//databases/`, where `` is as specified in the `CREATE DATABASE` statement. This name can be passed to other API methods to identify the database.
           type: string
+        reconciling:
+          description: Output only. If true, the database is being updated. If false, there are no ongoing update operations for the database.
+          readOnly: true
+          type: boolean
         restoreInfo:
           $ref: "#/components/schemas/RestoreInfo"
           description: Output only. Applicable only for restored databases. Contains information about the restore source.
@@ -3838,6 +3845,31 @@ components:
           items:
             type: string
           type: array
+      type: object
+    UpdateDatabaseMetadata:
+      description: Metadata type for the operation returned by UpdateDatabase.
+      properties:
+        cancelTime:
+          description: The time at which this operation was cancelled. If set, this operation is in the process of undoing itself (which is best-effort).
+          format: google-datetime
+          type: string
+        progress:
+          $ref: "#/components/schemas/OperationProgress"
+          description: The progress of the UpdateDatabase operation.
+        request:
+          $ref: "#/components/schemas/UpdateDatabaseRequest"
+          description: The request for UpdateDatabase.
+      type: object
+    UpdateDatabaseRequest:
+      description: The request for UpdateDatabase.
+      properties:
+        database:
+          $ref: "#/components/schemas/Database"
+          description: Required. The database to update. The `name` field of the database is of the form `projects//instances//databases/`.
+        updateMask:
+          description: Required. The list of fields to update. Currently, only `enable_drop_protection` field can be updated.
+          format: google-fieldmask
+          type: string
       type: object
     UpdateInstanceConfigMetadata:
       description: Metadata type for the operation returned by UpdateInstanceConfig.

@@ -132,6 +132,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}/executions:run":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new Execution in a given project and location.
+      operationId: workloadmanager.projects.locations.evaluations.executions.run
+      parameters:
+        - description: "Required. The resource name of the Execution using the form: 'projects/{project}/locations/{location}/evaluations/{evaluation}/executions/{execution}'"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RunEvaluationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
@@ -374,6 +416,229 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{parent}/executions":
+    get:
+      description: Lists Executions in a given project and location.
+      operationId: workloadmanager.projects.locations.evaluations.executions.list
+      parameters:
+        - description: "Required. The resource prefix of the Execution using the form: 'projects/{project}/locations/{location}/evaluations/{evaluation}'"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filtering results
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Field to sort by. See https://google.aip.dev/132#ordering for more details.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListExecutionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/results":
+    get:
+      description: List the running result of a single Execution.
+      operationId: workloadmanager.projects.locations.evaluations.executions.results.list
+      parameters:
+        - description: "Required. The execution results. Format: {parent}/evaluations/*/executions/*/results"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filtering results
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListExecutionResultsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/rules":
+    get:
+      description: Lists rules in a given project.
+      operationId: workloadmanager.projects.locations.rules.list
+      parameters:
+        - description: "Required. The [project] on which to execute the request. The format is: projects/{project_id}/locations/{location} Currently, the pre-defined rules are global available to all projects and all regions"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filter based on primary_category, secondary_category
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListRulesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/scannedResources":
+    get:
+      description: List all scanned resources for a single Execution.
+      operationId: workloadmanager.projects.locations.evaluations.executions.scannedResources.list
+      parameters:
+        - description: Required. parent for ListScannedResourcesRequest
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filtering results
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Field to sort by. See https://google.aip.dev/132#ordering for more details.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: rule name
+          in: query
+          name: rule
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListScannedResourcesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -495,10 +760,82 @@ components:
             type: string
           readOnly: true
           type: array
+        schedule:
+          description: "crontab format schedule for scheduled evaluation, example: 0 */3 * * *"
+          type: string
         updateTime:
           description: Output only. [Output only] Update time stamp
           format: google-datetime
           readOnly: true
+          type: string
+      type: object
+    Execution:
+      description: Message describing Execution object
+      properties:
+        endTime:
+          description: Output only. [Output only] End time stamp
+          format: google-datetime
+          readOnly: true
+          type: string
+        evaluationId:
+          description: Output only. [Output only] Evaluation ID
+          readOnly: true
+          type: string
+        inventoryTime:
+          description: Output only. [Output only] Inventory time stamp
+          format: google-datetime
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels as key value pairs
+          type: object
+        name:
+          description: The name of execution resource. The format is projects/{project}/locations/{location}/evaluations/{evaluation}/executions/{execution}
+          type: string
+        runType:
+          description: type represent whether the execution executed directly by user or scheduled according evaluation.schedule field.
+          enum:
+            - TYPE_UNSPECIFIED
+            - ONE_TIME
+            - SCHEDULED
+          type: string
+        startTime:
+          description: Output only. [Output only] Start time stamp
+          format: google-datetime
+          readOnly: true
+          type: string
+        state:
+          description: Output only. [Output only] State
+          enum:
+            - STATE_UNSPECIFIED
+            - RUNNING
+            - SUCCEEDED
+            - FAILED
+          readOnly: true
+          type: string
+      type: object
+    ExecutionResult:
+      description: Message describing the result of an execution
+      properties:
+        documentationUrl:
+          description: the document url of the rule
+          type: string
+        resource:
+          $ref: "#/components/schemas/Resource"
+          description: the violate resource
+        rule:
+          description: the rule which violate in execution
+          type: string
+        severity:
+          description: severity of violation
+          type: string
+        violationDetails:
+          $ref: "#/components/schemas/ViolationDetails"
+          description: the details of violation in result
+        violationMessage:
+          description: the violation message of an execution
           type: string
       type: object
     GceInstanceFilter:
@@ -542,6 +879,35 @@ components:
             type: string
           type: array
       type: object
+    ListExecutionResultsResponse:
+      description: Message for response of list execution results
+      properties:
+        executionResults:
+          description: The versions from the specified publisher.
+          items:
+            $ref: "#/components/schemas/ExecutionResult"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    ListExecutionsResponse:
+      description: Message for response to listing Executions
+      properties:
+        executions:
+          description: The list of Execution
+          items:
+            $ref: "#/components/schemas/Execution"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results the server should return.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
     ListLocationsResponse:
       description: The response message for Locations.ListLocations.
       properties:
@@ -564,6 +930,30 @@ components:
           description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListRulesResponse:
+      description: Mesesage of response of list rules
+      properties:
+        nextPageToken:
+          description: A token identifying a page of results the server should return.
+          type: string
+        rules:
+          description: all rules in response
+          items:
+            $ref: "#/components/schemas/Rule"
+          type: array
+      type: object
+    ListScannedResourcesResponse:
+      description: Message for response to list scanned resources
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        scannedResources:
+          description: All scanned resources in response
+          items:
+            $ref: "#/components/schemas/ScannedResource"
           type: array
       type: object
     Location:
@@ -646,6 +1036,19 @@ components:
           readOnly: true
           type: string
       type: object
+    Resource:
+      description: Message represent resource in execution result
+      properties:
+        name:
+          description: the name of the resource
+          type: string
+        serviceAccount:
+          description: the service account accosiate with resource
+          type: string
+        type:
+          description: the type of reresource
+          type: string
+      type: object
     ResourceFilter:
       description: Message describing resource filters
       properties:
@@ -683,6 +1086,54 @@ components:
             - CREATING
             - ACTIVE
             - DELETING
+          type: string
+      type: object
+    Rule:
+      description: Message represent a rule
+      properties:
+        description:
+          description: descrite rule in plain language
+          type: string
+        displayName:
+          description: the name display in UI
+          type: string
+        errorMessage:
+          description: the message template for rule
+          type: string
+        name:
+          description: rule name
+          type: string
+        primaryCategory:
+          description: the primary category
+          type: string
+        remediation:
+          description: the remediation for the rule
+          type: string
+        revisionId:
+          description: Output only. the version of the rule
+          readOnly: true
+          type: string
+        secondaryCategory:
+          description: the secondary category
+          type: string
+        severity:
+          description: the severity of the rule
+          type: string
+        uri:
+          description: the docuement url for the rule
+          type: string
+      type: object
+    RunEvaluationRequest:
+      description: Message for creating a Execution
+      properties:
+        execution:
+          $ref: "#/components/schemas/Execution"
+          description: Required. The resource being created
+        executionId:
+          description: Required. Id of the requesting object If auto-generating Id server-side, remove this field and execution_id from the method_signature of Create RPC
+          type: string
+        requestId:
+          description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           type: string
       type: object
     SapDiscovery:
@@ -753,6 +1204,16 @@ components:
         resourceKind:
           description: ComputeInstance, ComputeDisk, VPC, Bare Metal server, etc.
           type: string
+        resourceState:
+          description: Indicates whether this is a new, updated, or missing resource.
+          enum:
+            - RESOURCE_STATE_UNSPECIFIED
+            - ADDED
+            - UPDATED
+            - REMOVED
+            - REPLACED
+            - MISSING
+          type: string
         resourceType:
           description: The type of this resource.
           enum:
@@ -797,6 +1258,13 @@ components:
             - NETWEAVER
           type: string
       type: object
+    ScannedResource:
+      description: Message of scanned resource
+      properties:
+        resource:
+          description: resource name
+          type: string
+      type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
@@ -813,6 +1281,21 @@ components:
           type: array
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+    ViolationDetails:
+      description: Message describing the violdation in execution result
+      properties:
+        asset:
+          description: the name of asset
+          type: string
+        observed:
+          additionalProperties:
+            type: string
+          description: observed
+          type: object
+        serviceAccount:
+          description: the service account associate with resource
           type: string
       type: object
     WriteInsightRequest:

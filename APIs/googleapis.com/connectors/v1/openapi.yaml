@@ -925,6 +925,9 @@ components:
             - SSH_PUBLIC_KEY
             - OAUTH2_AUTH_CODE_FLOW
           type: string
+        oauth2AuthCodeFlow:
+          $ref: "#/components/schemas/Oauth2AuthCodeFlow"
+          description: Oauth2AuthCodeFlow.
         oauth2ClientCredentials:
           $ref: "#/components/schemas/Oauth2ClientCredentials"
           description: Oauth2ClientCredentials.
@@ -1114,6 +1117,9 @@ components:
         lockConfig:
           $ref: "#/components/schemas/LockConfig"
           description: Optional. Configuration that indicates whether or not the Connection can be edited.
+        logConfig:
+          $ref: "#/components/schemas/ConnectorsLogConfig"
+          description: Optional. Log configuration for the connection.
         name:
           description: "Output only. Resource name of the Connection. Format: projects/{project}/locations/{location}/connections/{connection}"
           readOnly: true
@@ -1278,6 +1284,12 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        destinationConfigTemplates:
+          description: Output only. List of destination configs needed to create a connection.
+          items:
+            $ref: "#/components/schemas/DestinationConfigTemplate"
+          readOnly: true
+          type: array
         displayName:
           description: Output only. Display name.
           readOnly: true
@@ -1334,6 +1346,13 @@ components:
           readOnly: true
           type: string
       type: object
+    ConnectorsLogConfig:
+      description: Log configuration for the connection.
+      properties:
+        enabled:
+          description: Enabled represents whether logging is enabled or not for a connection.
+          type: boolean
+      type: object
     Destination:
       properties:
         host:
@@ -1357,6 +1376,45 @@ components:
           type: array
         key:
           description: The key is the destination identifier that is supported by the Connector.
+          type: string
+      type: object
+    DestinationConfigTemplate:
+      description: DestinationConfigTemplate defines required destinations supported by the Connector.
+      properties:
+        defaultPort:
+          description: The default port.
+          format: int32
+          type: integer
+        description:
+          description: Description.
+          type: string
+        displayName:
+          description: Display name of the parameter.
+          type: string
+        isAdvanced:
+          description: Whether the current destination tempalate is part of Advanced settings
+          type: boolean
+        key:
+          description: Key of the destination.
+          type: string
+        max:
+          description: The maximum number of destinations supported for this key.
+          format: int32
+          type: integer
+        min:
+          description: The minimum number of destinations supported for this key.
+          format: int32
+          type: integer
+        portFieldType:
+          description: Whether port number should be provided by customers.
+          enum:
+            - FIELD_TYPE_UNSPECIFIED
+            - REQUIRED
+            - OPTIONAL
+            - NOT_USED
+          type: string
+        regexPattern:
+          description: Regex pattern for host.
           type: string
       type: object
     EgressControlConfig:
@@ -1730,6 +1788,33 @@ components:
           description: Minimum number of nodes in the runtime nodes.
           format: int32
           type: integer
+      type: object
+    Oauth2AuthCodeFlow:
+      description: Parameters to support Oauth 2.0 Auth Code Grant Authentication. See https://www.rfc-editor.org/rfc/rfc6749#section-1.3.1 for more details.
+      properties:
+        authCode:
+          description: Authorization code to be exchanged for access and refresh tokens.
+          type: string
+        clientId:
+          description: Client ID for user-provided OAuth app.
+          type: string
+        clientSecret:
+          $ref: "#/components/schemas/Secret"
+          description: Client secret for user-provided OAuth app.
+        enablePkce:
+          description: Whether to enable PKCE when the user performs the auth code flow.
+          type: boolean
+        pkceVerifier:
+          description: PKCE verifier to be used during the auth code exchange.
+          type: string
+        redirectUri:
+          description: Redirect URI to be provided during the auth code exchange.
+          type: string
+        scopes:
+          description: Scopes the connection will request when the user performs the auth code flow.
+          items:
+            type: string
+          type: array
       type: object
     Oauth2ClientCredentials:
       description: Parameters to support Oauth 2.0 Client Credentials Grant Authentication. See https://tools.ietf.org/html/rfc6749#section-1.3.4 for more details.

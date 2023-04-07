@@ -2392,7 +2392,7 @@ components:
       description: "**Service Mesh**: Spec for a single Membership for the servicemesh feature"
       properties:
         controlPlane:
-          description: Enables automatic control plane management.
+          description: "Deprecated: use `management` instead Enables automatic control plane management."
           enum:
             - CONTROL_PLANE_MANAGEMENT_UNSPECIFIED
             - AUTOMATIC
