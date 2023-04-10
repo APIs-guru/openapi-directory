@@ -36,10 +36,10 @@ tags:
 paths:
   "/v1/{name}":
     delete:
-      description: Deletes a notification config.
-      operationId: securitycenter.projects.notificationConfigs.delete
+      description: Deletes the specified SecurityHealthAnalyticsCustomModule and all of its descendants in the CRM hierarchy. This method is only supported for resident custom modules.
+      operationId: securitycenter.projects.securityHealthAnalyticsSettings.customModules.delete
       parameters:
-        - description: Required. Name of the notification config to delete. Its format is "organizations/[organization_id]/notificationConfigs/[config_id]", "folders/[folder_id]/notificationConfigs/[config_id]", or "projects/[project_id]/notificationConfigs/[config_id]".
+        - description: Required. Name of the custom module to delete. Its format is "organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}", "folders/{folder}/securityHealthAnalyticsSettings/customModules/{customModule}", or "projects/{project}/securityHealthAnalyticsSettings/customModules/{customModule}"
           in: path
           name: name
           required: true
@@ -60,10 +60,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a notification config.
-      operationId: securitycenter.projects.notificationConfigs.get
+      description: Retrieves an EffectiveSecurityHealthAnalyticsCustomModule.
+      operationId: securitycenter.projects.securityHealthAnalyticsSettings.effectiveCustomModules.get
       parameters:
-        - description: Required. Name of the notification config to get. Its format is "organizations/[organization_id]/notificationConfigs/[config_id]", "folders/[folder_id]/notificationConfigs/[config_id]", or "projects/[project_id]/notificationConfigs/[config_id]".
+        - description: Required. Name of the effective custom module to get. Its format is "organizations/{organization}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}", "folders/{folder}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}", or "projects/{project}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}"
           in: path
           name: name
           required: true
@@ -89,7 +89,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NotificationConfig"
+                $ref: "#/components/schemas/GoogleCloudSecuritycenterV1EffectiveSecurityHealthAnalyticsCustomModule"
           description: Successful response
       security:
         - Oauth2:
@@ -502,6 +502,176 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{parent}/customModules":
+    get:
+      description: Returns a list of all SecurityHealthAnalyticsCustomModules for the given parent. This includes resident modules defined at the scope of the parent, and inherited modules, inherited from CRM ancestors.
+      operationId: securitycenter.projects.securityHealthAnalyticsSettings.customModules.list
+      parameters:
+        - description: Required. Name of parent to list custom modules. Its format is "organizations/{organization}/securityHealthAnalyticsSettings", "folders/{folder}/securityHealthAnalyticsSettings", or "projects/{project}/securityHealthAnalyticsSettings"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of results to return in a single response. Default is 10, minimum is 1, maximum is 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The value returned by the last call indicating a continuation
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSecurityHealthAnalyticsCustomModulesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a resident SecurityHealthAnalyticsCustomModule at the scope of the given CRM parent, and also creates inherited SecurityHealthAnalyticsCustomModules for all CRM descendants of the given parent. These modules are enabled by default.
+      operationId: securitycenter.projects.securityHealthAnalyticsSettings.customModules.create
+      parameters:
+        - description: Required. Resource name of the new custom module's parent. Its format is "organizations/{organization}/securityHealthAnalyticsSettings", "folders/{folder}/securityHealthAnalyticsSettings", or "projects/{project}/securityHealthAnalyticsSettings"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudSecuritycenterV1SecurityHealthAnalyticsCustomModule"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudSecuritycenterV1SecurityHealthAnalyticsCustomModule"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/customModules:listDescendant":
+    get:
+      description: Returns a list of all resident SecurityHealthAnalyticsCustomModules under the given CRM parent and all of the parent’s CRM descendants.
+      operationId: securitycenter.projects.securityHealthAnalyticsSettings.customModules.listDescendant
+      parameters:
+        - description: Required. Name of parent to list descendant custom modules. Its format is "organizations/{organization}/securityHealthAnalyticsSettings", "folders/{folder}/securityHealthAnalyticsSettings", or "projects/{project}/securityHealthAnalyticsSettings"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of results to return in a single response. Default is 10, minimum is 1, maximum is 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The value returned by the last call indicating a continuation
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListDescendantSecurityHealthAnalyticsCustomModulesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/effectiveCustomModules":
+    get:
+      description: Returns a list of all EffectiveSecurityHealthAnalyticsCustomModules for the given parent. This includes resident modules defined at the scope of the parent, and inherited modules, inherited from CRM ancestors.
+      operationId: securitycenter.projects.securityHealthAnalyticsSettings.effectiveCustomModules.list
+      parameters:
+        - description: Required. Name of parent to list effective custom modules. Its format is "organizations/{organization}/securityHealthAnalyticsSettings", "folders/{folder}/securityHealthAnalyticsSettings", or "projects/{project}/securityHealthAnalyticsSettings"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of results to return in a single response. Default is 10, minimum is 1, maximum is 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The value returned by the last call indicating a continuation
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEffectiveSecurityHealthAnalyticsCustomModulesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/findings":
     get:
       description: "Lists an organization or source's findings. To list across all sources provide a `-` as the source id. Example: /v1/organizations/{organization_id}/sources/-/findings"
@@ -930,6 +1100,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  "/v1/{parent}:lintCustomModuleExpression":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Lints the given CEL expression.
+      operationId: securitycenter.projects.securityHealthAnalyticsSettings.lintCustomModuleExpression
+      parameters:
+        - description: Required. Resource name of the scope to test the custom module expression. Its format is "organizations/{organization}/securityHealthAnalyticsSettings", "folders/{folder}/securityHealthAnalyticsSettings", or "projects/{project}/securityHealthAnalyticsSettings".
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudSecuritycenterV1LintSecurityHealthAnalyticsCustomModuleExpressionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudSecuritycenterV1LintSecurityHealthAnalyticsCustomModuleExpressionResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{resource}:getIamPolicy":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1853,6 +2065,67 @@ components:
       description: The response to a BulkMute request. Contains the LRO information.
       properties: {}
       type: object
+    GoogleCloudSecuritycenterV1CustomConfig:
+      description: Defines the properties in a custom module configuration for Security Health Analytics. Use the custom module configuration to create custom detectors that generate custom findings for resources that you specify.
+      properties:
+        customOutput:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1CustomOutputSpec"
+          description: Custom output properties.
+        description:
+          description: Text that describes the vulnerability or misconfiguration that the custom module detects. This explanation is returned with each finding instance to help investigators understand the detected issue. The text must be enclosed in quotation marks.
+          type: string
+        predicate:
+          $ref: "#/components/schemas/Expr"
+          description: The CEL expression to evaluate to produce findings. When the expression evaluates to true against a resource, a finding is generated.
+        recommendation:
+          description: An explanation of the recommended steps that security teams can take to resolve the detected issue. This explanation is returned with each finding generated by this module in the `nextSteps` property of the finding JSON.
+          type: string
+        resourceSelector:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1ResourceSelector"
+          description: The resource types that the custom module operates on. Each custom module can specify up to 5 resource types.
+        severity:
+          description: The severity to assign to findings generated by the module.
+          enum:
+            - SEVERITY_UNSPECIFIED
+            - CRITICAL
+            - HIGH
+            - MEDIUM
+            - LOW
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1CustomOutputSpec:
+      description: A set of optional name-value pairs that define custom source properties to return with each finding that is generated by the custom module. The custom source properties that are defined here are included in the finding JSON under `sourceProperties`.
+      properties:
+        properties:
+          description: A list of custom output properties to add to the finding.
+          items:
+            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1Property"
+          type: array
+      type: object
+    GoogleCloudSecuritycenterV1EffectiveSecurityHealthAnalyticsCustomModule:
+      description: "An EffectiveSecurityHealthAnalyticsCustomModule is the representation of a Security Health Analytics custom module at a specified level of the resource hierarchy: organization, folder, or project. If a custom module is inherited from a parent organization or folder, the value of the `enablementState` property in EffectiveSecurityHealthAnalyticsCustomModule is set to the value that is effective in the parent, instead of `INHERITED`. For example, if the module is enabled in a parent organization or folder, the effective enablement_state for the module in all child folders or projects is also `enabled`. EffectiveSecurityHealthAnalyticsCustomModule is read-only."
+      properties:
+        customConfig:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1CustomConfig"
+          description: Output only. The user-specified configuration for the module.
+          readOnly: true
+        displayName:
+          description: Output only. The display name for the custom module. The name must be between 1 and 128 characters, start with a lowercase letter, and contain alphanumeric characters or underscores only.
+          readOnly: true
+          type: string
+        enablementState:
+          description: Output only. The effective state of enablement for the module at the given level of the hierarchy.
+          enum:
+            - ENABLEMENT_STATE_UNSPECIFIED
+            - ENABLED
+            - DISABLED
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The resource name of the custom module. Its format is "organizations/{organization}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}", or "folders/{folder}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}", or "projects/{project}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}"
+          readOnly: true
+          type: string
+      type: object
     GoogleCloudSecuritycenterV1ExternalSystem:
       description: Representation of third party SIEM/SOAR fields within SCC.
       properties:
@@ -1874,6 +2147,53 @@ components:
         status:
           description: Most recent status of the corresponding finding's ticket/tracker in the external system.
           type: string
+      type: object
+    GoogleCloudSecuritycenterV1LintError:
+      description: Error message returned when an error is found during CEL expression validation.
+      properties:
+        location:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1Location"
+        message:
+          description: The error message. The location of the issue
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1LintSecurityHealthAnalyticsCustomModuleExpressionRequest:
+      description: Request message for linting security health analytic custom module CEL expressions.
+      properties:
+        expression:
+          $ref: "#/components/schemas/Expr"
+          description: CEL expression to be validated.
+        expressionKind:
+          description: The kind of expression supported by SHA CEL Engine.
+          enum:
+            - EXPRESSION_KIND_UNSPECIFIED
+            - PREDICATE
+            - CUSTOM_OUTPUT
+          type: string
+        resourceSelector:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1ResourceSelector"
+          description: Selection criteria for the resource type.
+      type: object
+    GoogleCloudSecuritycenterV1LintSecurityHealthAnalyticsCustomModuleExpressionResponse:
+      description: Response message for linting security health analytic custom module CEL expressions.
+      properties:
+        errors:
+          description: CEL based error set only for erroneous CEL expression.
+          items:
+            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1LintError"
+          type: array
+      type: object
+    GoogleCloudSecuritycenterV1Location:
+      description: The location to locate issues in CEL expression. Convention is followed based on the CEL validator response.
+      properties:
+        column:
+          description: 0-indexed column number.
+          format: int32
+          type: integer
+        line:
+          description: 1-indexed line number.
+          format: int32
+          type: integer
       type: object
     GoogleCloudSecuritycenterV1MuteConfig:
       description: A mute config is a Cloud SCC resource that contains the configuration to mute create/update events of findings.
@@ -1918,6 +2238,16 @@ components:
           $ref: "#/components/schemas/GoogleCloudSecuritycenterV1Resource"
           description: The Cloud resource tied to this notification's Finding.
       type: object
+    GoogleCloudSecuritycenterV1Property:
+      description: An individual name-value pair that defines a custom source property.
+      properties:
+        name:
+          description: Name of the property for the custom output.
+          type: string
+        valueExpression:
+          $ref: "#/components/schemas/Expr"
+          description: The CEL expression for the custom output. A resource property can be specified to return the value of the property or a text string enclosed in quotation marks.
+      type: object
     GoogleCloudSecuritycenterV1Resource:
       description: Information related to the Google Cloud resource.
       properties:
@@ -1949,6 +2279,15 @@ components:
           description: The full resource type of the resource.
           type: string
       type: object
+    GoogleCloudSecuritycenterV1ResourceSelector:
+      description: Resource for selecting resource type.
+      properties:
+        resourceTypes:
+          description: The resource types to run the detector on.
+          items:
+            type: string
+          type: array
+      type: object
     GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse:
       description: Response of asset discovery run
       properties:
@@ -1963,6 +2302,40 @@ components:
             - COMPLETED
             - SUPERSEDED
             - TERMINATED
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1SecurityHealthAnalyticsCustomModule:
+      description: Represents an instance of a Security Health Analytics custom module, including its full module name, display name, enablement state, and last updated time. You can create a custom module at the organization, folder, or project level. Custom modules that you create at the organization or folder level are inherited by the child folders and projects.
+      properties:
+        ancestorModule:
+          description: Output only. If empty, indicates that the custom module was created in the organization, folder, or project in which you are viewing the custom module. Otherwise, `ancestor_module` specifies the organization or folder from which the custom module is inherited.
+          readOnly: true
+          type: string
+        customConfig:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1CustomConfig"
+          description: The user specified custom configuration for the module.
+        displayName:
+          description: The display name of the Security Health Analytics custom module. This display name becomes the finding category for all findings that are returned by this custom module. The display name must be between 1 and 128 characters, start with a lowercase letter, and contain alphanumeric characters or underscores only.
+          type: string
+        enablementState:
+          description: The enablement state of the custom module.
+          enum:
+            - ENABLEMENT_STATE_UNSPECIFIED
+            - ENABLED
+            - DISABLED
+            - INHERITED
+          type: string
+        lastEditor:
+          description: Output only. The editor that last updated the custom module.
+          readOnly: true
+          type: string
+        name:
+          description: Immutable. The resource name of the custom module. Its format is "organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}", or "folders/{folder}/securityHealthAnalyticsSettings/customModules/{customModule}", or "projects/{project}/securityHealthAnalyticsSettings/customModules/{customModule}" The id {customModule} is server-generated and is not user settable. It will be a numeric id containing 1-20 digits.
+          type: string
+        updateTime:
+          description: Output only. The time at which the custom module was last updated.
+          format: google-datetime
+          readOnly: true
           type: string
       type: object
     GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse:
@@ -2386,6 +2759,30 @@ components:
           description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
+    ListDescendantSecurityHealthAnalyticsCustomModulesResponse:
+      description: Response message for listing descendant security health analytics custom modules.
+      properties:
+        nextPageToken:
+          description: If not empty, indicates that there may be more custom modules to be returned.
+          type: string
+        securityHealthAnalyticsCustomModules:
+          description: Custom modules belonging to the requested parent and its descendants.
+          items:
+            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1SecurityHealthAnalyticsCustomModule"
+          type: array
+      type: object
+    ListEffectiveSecurityHealthAnalyticsCustomModulesResponse:
+      description: Response message for listing effective security health analytics custom modules.
+      properties:
+        effectiveSecurityHealthAnalyticsCustomModules:
+          description: Effective custom modules belonging to the requested parent.
+          items:
+            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1EffectiveSecurityHealthAnalyticsCustomModule"
+          type: array
+        nextPageToken:
+          description: If not empty, indicates that there may be more effective custom modules to be returned.
+          type: string
+      type: object
     ListFindingsResponse:
       description: Response message for listing findings.
       properties:
@@ -2460,6 +2857,18 @@ components:
           description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListSecurityHealthAnalyticsCustomModulesResponse:
+      description: Response message for listing security health analytics custom modules.
+      properties:
+        nextPageToken:
+          description: If not empty, indicates that there may be more custom modules to be returned.
+          type: string
+        securityHealthAnalyticsCustomModules:
+          description: Custom modules belonging to the requested parent.
+          items:
+            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1SecurityHealthAnalyticsCustomModule"
           type: array
       type: object
     ListSourcesResponse:

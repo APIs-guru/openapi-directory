@@ -747,7 +747,7 @@ components:
           description: Additional parameters controlling delivery channel behavior. Optional.
           type: object
         payload:
-          description: A Boolean value to indicate whether payload is wanted. Optional.
+          description: A Boolean value to indicate whether payload is wanted. A payload is data that is sent in the body of an HTTP POST, PUT, or PATCH message and contains important information about the request. Optional.
           type: boolean
         resourceId:
           description: An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.

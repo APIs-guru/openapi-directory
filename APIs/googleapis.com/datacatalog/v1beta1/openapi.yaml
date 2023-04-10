@@ -1932,12 +1932,12 @@ components:
       description: Wrapper containing Entry and information about Tags that should and should not be attached to it.
       properties:
         absentTags:
-          description: Tags that should be deleted from the Data Catalog. Caller should populate template name and column only.
+          description: Optional. Tags that should be deleted from the Data Catalog. Caller should populate template name and column only.
           items:
             $ref: "#/components/schemas/GoogleCloudDatacatalogV1Tag"
           type: array
         presentTags:
-          description: Tags that should be ingested into the Data Catalog. Caller should populate template name, column and fields.
+          description: Optional. Tags that should be ingested into the Data Catalog. Caller should populate template name, column and fields.
           items:
             $ref: "#/components/schemas/GoogleCloudDatacatalogV1Tag"
           type: array
