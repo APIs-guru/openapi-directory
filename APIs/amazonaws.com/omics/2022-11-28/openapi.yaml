@@ -1326,7 +1326,6 @@ paths:
             type: string
             enum:
               - PRIVATE
-              - SERVICE
             minLength: 1
             maxLength: 64
   '/annotationStore/{name}':
@@ -2554,7 +2553,6 @@ paths:
             type: string
             enum:
               - PRIVATE
-              - SERVICE
             minLength: 1
             maxLength: 64
     post:
@@ -4650,7 +4648,6 @@ paths:
                   type: string
                   enum:
                     - PRIVATE
-                    - SERVICE
                   minLength: 1
                   maxLength: 64
   /sequencestores:
@@ -8256,7 +8253,6 @@ components:
         - UPDATING
         - DELETED
         - FAILED
-        - INACTIVE
       minLength: 1
       maxLength: 64
     PrimitiveBoolean:
@@ -8748,7 +8744,6 @@ components:
       type: string
       enum:
         - PRIVATE
-        - SERVICE
       minLength: 1
       maxLength: 64
     TaskId:

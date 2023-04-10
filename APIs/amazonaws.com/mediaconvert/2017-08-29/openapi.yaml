@@ -2670,7 +2670,7 @@ components:
             - $ref: '#/components/schemas/__integer'
             - xml:
                 name: waitMinutes
-              description: 'Required for setting up a job to use queue hopping. Minimum wait time in minutes until the job can hop to the destination queue. Valid range is 1 to 1440 minutes, inclusive.'
+              description: 'Required for setting up a job to use queue hopping. Minimum wait time in minutes until the job can hop to the destination queue. Valid range is 1 to 4320 minutes, inclusive.'
       description: Optional. Configuration for a destination queue to which the job can hop once a customer-defined minimum wait time has passed.
     __integerMinNegative1000Max1000:
       type: integer
@@ -7840,8 +7840,8 @@ components:
     Job:
       type: object
       required:
-        - Role
         - Settings
+        - Role
       properties:
         AccelerationSettings:
           allOf:
@@ -7867,6 +7867,12 @@ components:
             - xml:
                 name: billingTagsSource
               description: The tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: clientRequestToken
+              description: 'Prevent duplicate jobs from being created and ensure idempotency for your requests. A client request token can be any string that includes up to 64 ASCII characters. If you reuse a client request token within one minute of a successful request, the API returns the job details of the original request instead. For more information see https://docs.aws.amazon.com/mediaconvert/latest/apireference/idempotency.html.'
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/__timestampUnix'
@@ -7993,6 +7999,12 @@ components:
             - xml:
                 name: userMetadata
               description: User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
+        Warnings:
+          allOf:
+            - $ref: '#/components/schemas/__listOfWarningGroup'
+            - xml:
+                name: warnings
+              description: 'Contains any warning messages for the job. Use to help identify potential issues with your input, output, or job. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/warning_codes.html'
       description: 'Each job converts an input file into an output file or files. For more information, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
     JobTemplateSettings:
       type: object
@@ -11772,6 +11784,10 @@ components:
                 name: submitTime
               description: 'The time, in Unix epoch format, that you submitted the job.'
       description: 'Information about when jobs are submitted, started, and finished is specified in Unix epoch format in seconds.'
+    __listOfWarningGroup:
+      type: array
+      items:
+        $ref: '#/components/schemas/WarningGroup'
     __listOf__string:
       type: array
       items:
@@ -14301,6 +14317,25 @@ components:
       type: integer
       minimum: 1000
       maximum: 480000000
+    WarningGroup:
+      type: object
+      required:
+        - Count
+        - Code
+      properties:
+        Code:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: code
+              description: 'Warning code that identifies a specific warning in the job. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/warning_codes.html'
+        Count:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: count
+              description: The number of times this warning occurred in the job.
+      description: Contains any warning codes and their count for the job.
     WavFormat:
       type: string
       enum:

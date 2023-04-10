@@ -188,6 +188,65 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeleteResourcePolicy#resourceArn:
+    delete:
+      operationId: DeleteResourcePolicy
+      description: Deletes a resource-based policy on an Entity that is identified by its resource ARN.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResourcePolicyResponse'
+        '480':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the Entity resource that is associated with the resource policy.
+          schema:
+            type: string
+            pattern: '^arn:[\w+=/,.@-]+:aws-marketplace:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*$'
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /DescribeChangeSet#catalog&changeSetId:
     get:
       operationId: DescribeChangeSet
@@ -320,6 +379,65 @@ paths:
           schema:
             type: string
             pattern: '^[\w\-]+$'
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /GetResourcePolicy#resourceArn:
+    get:
+      operationId: GetResourcePolicy
+      description: Gets a resource-based policy of an Entity that is identified by its resource ARN.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResourcePolicyResponse'
+        '480':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the Entity resource that is associated with the resource policy.
+          schema:
+            type: string
+            pattern: '^arn:[\w+=/,.@-]+:aws-marketplace:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*$'
             minLength: 1
             maxLength: 255
     parameters:
@@ -536,7 +654,13 @@ paths:
                   description: 'Specifies the upper limit of the elements on a single page. If a value isn''t provided, the default value is 20.'
                   type: integer
                   minimum: 1
-                  maximum: 20
+                  maximum: 50
+                OwnershipType:
+                  description: ''
+                  type: string
+                  enum:
+                    - SELF
+                    - SHARED
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -610,10 +734,82 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /PutResourcePolicy:
+    post:
+      operationId: PutResourcePolicy
+      description: 'Attaches a resource-based policy to an Entity. Examples of an entity include: <code>AmiProduct</code> and <code>ContainerProduct</code>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutResourcePolicyResponse'
+        '480':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceArn
+                - Policy
+              properties:
+                ResourceArn:
+                  description: 'The Amazon Resource Name (ARN) of the Entity resource you want to associate with a resource policy. '
+                  type: string
+                  pattern: '^arn:[\w+=/,.@-]+:aws-marketplace:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*$'
+                  minLength: 1
+                  maxLength: 255
+                Policy:
+                  description: The policy document to set; formatted in JSON.
+                  type: string
+                  pattern: '^[\u0009\u000A\u000D\u0020-\u00FF]+$'
+                  minLength: 1
+                  maxLength: 10240
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /StartChangeSet:
     post:
       operationId: StartChangeSet
-      description: '<p>Allows you to request changes for your entities. Within a single <code>ChangeSet</code>, you can''t start the same change type against the same entity multiple times. Additionally, when a <code>ChangeSet</code> is running, all the entities targeted by the different changes are locked until the change set has completed (either succeeded, cancelled, or failed). If you try to start a change set containing a change against an entity that is already locked, you will receive a <code>ResourceInUseException</code> error.</p> <p>For example, you can''t start the <code>ChangeSet</code> described in the <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples">example</a> later in this topic because it contains two changes to run the same change type (<code>AddRevisions</code>) against the same entity (<code>entity-id@1</code>).</p> <p>For more information about working with change sets, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets"> Working with change sets</a>.</p>'
+      description: '<p>Allows you to request changes for your entities. Within a single <code>ChangeSet</code>, you can''t start the same change type against the same entity multiple times. Additionally, when a <code>ChangeSet</code> is running, all the entities targeted by the different changes are locked until the change set has completed (either succeeded, cancelled, or failed). If you try to start a change set containing a change against an entity that is already locked, you will receive a <code>ResourceInUseException</code> error.</p> <p>For example, you can''t start the <code>ChangeSet</code> described in the <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples">example</a> later in this topic because it contains two changes to run the same change type (<code>AddRevisions</code>) against the same entity (<code>entity-id@1</code>).</p> <p>For more information about working with change sets, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets"> Working with change sets</a>. For information on change types for single-AMI products, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products">Working with single-AMI products</a>. Als, for more information on change types available for container-based products, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products">Working with container products</a>.</p>'
       responses:
         '200':
           description: Success
@@ -705,7 +901,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
-                  maxItems: 50
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -778,7 +974,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
-                  maxItems: 50
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -851,7 +1047,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/TagKey'
                   minItems: 1
-                  maxItems: 50
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -929,6 +1125,9 @@ components:
     ResourceNotFoundException: {}
     ResourceInUseException: {}
     ThrottlingException: {}
+    DeleteResourcePolicyResponse:
+      type: object
+      properties: {}
     DescribeChangeSetResponse:
       type: object
       properties:
@@ -992,6 +1191,13 @@ components:
             - $ref: '#/components/schemas/Json'
             - description: This stringified JSON object includes the details of the entity.
     ResourceNotSupportedException: {}
+    GetResourcePolicyResponse:
+      type: object
+      properties:
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicyJson'
+            - description: The policy document to set; formatted in JSON.
     ListChangeSetsResponse:
       type: object
       properties:
@@ -1047,6 +1253,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: 'Required. A list of objects specifying each key name and value. Number of objects allowed: 1-50.'
+    PutResourcePolicyResponse:
+      type: object
+      properties: {}
     StartChangeSetResponse:
       type: object
       properties:
@@ -1068,7 +1277,7 @@ components:
         ChangeType:
           allOf:
             - $ref: '#/components/schemas/ChangeType'
-            - description: Change types are single string values that describe your intention for the change. Each change type is unique for each <code>EntityType</code> provided in the change's scope.
+            - description: 'Change types are single string values that describe your intention for the change. Each change type is unique for each <code>EntityType</code> provided in the change''s scope. For more information on change types available for single-AMI products, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products">Working with single-AMI products</a>. Also, for more information on change types available for container-based products, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products">Working with container products</a>.'
         Entity:
           allOf:
             - $ref: '#/components/schemas/Entity'
@@ -1080,7 +1289,7 @@ components:
         Details:
           allOf:
             - $ref: '#/components/schemas/Json'
-            - description: This object contains details specific to the change type of the requested change.
+            - description: 'This object contains details specific to the change type of the requested change. For more information on change types available for single-AMI products, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products">Working with single-AMI products</a>. Also, for more information on change types available for container-based products, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products">Working with container products</a>.'
         ChangeName:
           allOf:
             - $ref: '#/components/schemas/ChangeName'
@@ -1156,7 +1365,7 @@ components:
       items:
         $ref: '#/components/schemas/Tag'
       minItems: 1
-      maxItems: 50
+      maxItems: 200
     Json:
       type: string
       pattern: '^[\s]*\{[\s\S]*\}[\s]*$'
@@ -1271,6 +1480,15 @@ components:
       pattern: '^[!-~]+$'
       minLength: 1
       maxLength: 64
+    ResourceARN:
+      type: string
+      pattern: '^arn:[\w+=/,.@-]+:aws-marketplace:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*$'
+      minLength: 1
+      maxLength: 255
+    DeleteResourcePolicyRequest:
+      type: object
+      title: DeleteResourcePolicyRequest
+      properties: {}
     DescribeChangeSetRequest:
       type: object
       title: DescribeChangeSetRequest
@@ -1375,6 +1593,19 @@ components:
       pattern: ^(.)+$
       minLength: 1
       maxLength: 255
+    GetResourcePolicyRequest:
+      type: object
+      title: GetResourcePolicyRequest
+      properties: {}
+    ResourcePolicyJson:
+      type: string
+      pattern: '^[\u0009\u000A\u000D\u0020-\u00FF]+$'
+      minLength: 1
+      maxLength: 10240
+    ListChangeSetsMaxResultInteger:
+      type: integer
+      minimum: 1
+      maximum: 20
     Sort:
       type: object
       properties:
@@ -1387,10 +1618,6 @@ components:
             - $ref: '#/components/schemas/SortOrder'
             - description: The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.
       description: 'An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.'
-    MaxResultInteger:
-      type: integer
-      minimum: 1
-      maximum: 20
     NextToken:
       type: string
       pattern: '^[\w+=.:@\-\/]$'
@@ -1416,12 +1643,21 @@ components:
             - description: 'An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.'
         MaxResults:
           allOf:
-            - $ref: '#/components/schemas/MaxResultInteger'
+            - $ref: '#/components/schemas/ListChangeSetsMaxResultInteger'
             - description: 'The maximum number of results returned by a single call. This value must be provided in the next call to retrieve the next set of results. By default, this value is 20.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: The token value retrieved from a previous call to access the next page of results.
+    ListEntitiesMaxResultInteger:
+      type: integer
+      minimum: 1
+      maximum: 50
+    OwnershipType:
+      type: string
+      enum:
+        - SELF
+        - SHARED
     ListEntitiesRequest:
       type: object
       required:
@@ -1451,13 +1687,10 @@ components:
             - description: 'The value of the next token, if it exists. Null if there are no more results.'
         MaxResults:
           allOf:
-            - $ref: '#/components/schemas/MaxResultInteger'
+            - $ref: '#/components/schemas/ListEntitiesMaxResultInteger'
             - description: 'Specifies the upper limit of the elements on a single page. If a value isn''t provided, the default value is 20.'
-    ResourceARN:
-      type: string
-      pattern: '^arn:[\w+=/,.@-]+:aws-marketplace:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*$'
-      minLength: 1
-      maxLength: 255
+        OwnershipType:
+          $ref: '#/components/schemas/OwnershipType'
     ListTagsForResourceRequest:
       type: object
       required:
@@ -1468,6 +1701,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceARN'
             - description: Required. The Amazon Resource Name (ARN) associated with the resource you want to list tags on.
+    PutResourcePolicyRequest:
+      type: object
+      required:
+        - ResourceArn
+        - Policy
+      title: PutResourcePolicyRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: 'The Amazon Resource Name (ARN) of the Entity resource you want to associate with a resource policy. '
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicyJson'
+            - description: The policy document to set; formatted in JSON.
     RequestedChangeList:
       type: array
       items:
@@ -1511,7 +1759,7 @@ components:
       items:
         $ref: '#/components/schemas/TagKey'
       minItems: 1
-      maxItems: 50
+      maxItems: 200
     TagResourceRequest:
       type: object
       required:
