@@ -2019,6 +2019,14 @@ components:
     MailOptions:
       description: Additional options for Gmail search
       properties:
+        clientSideEncryptedOption:
+          description: Specifies whether the results should include encrypted content, unencrypted content, or both. Defaults to including both.
+          enum:
+            - CLIENT_SIDE_ENCRYPTED_OPTION_UNSPECIFIED
+            - CLIENT_SIDE_ENCRYPTED_OPTION_ANY
+            - CLIENT_SIDE_ENCRYPTED_OPTION_ENCRYPTED
+            - CLIENT_SIDE_ENCRYPTED_OPTION_UNENCRYPTED
+          type: string
         excludeDrafts:
           description: Set to **true** to exclude drafts.
           type: boolean

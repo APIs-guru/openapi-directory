@@ -1100,48 +1100,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}:lintCustomModuleExpression":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Lints the given CEL expression.
-      operationId: securitycenter.projects.securityHealthAnalyticsSettings.lintCustomModuleExpression
-      parameters:
-        - description: Required. Resource name of the scope to test the custom module expression. Its format is "organizations/{organization}/securityHealthAnalyticsSettings", "folders/{folder}/securityHealthAnalyticsSettings", or "projects/{project}/securityHealthAnalyticsSettings".
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudSecuritycenterV1LintSecurityHealthAnalyticsCustomModuleExpressionRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudSecuritycenterV1LintSecurityHealthAnalyticsCustomModuleExpressionResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{resource}:getIamPolicy":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2147,53 +2105,6 @@ components:
         status:
           description: Most recent status of the corresponding finding's ticket/tracker in the external system.
           type: string
-      type: object
-    GoogleCloudSecuritycenterV1LintError:
-      description: Error message returned when an error is found during CEL expression validation.
-      properties:
-        location:
-          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1Location"
-        message:
-          description: The error message. The location of the issue
-          type: string
-      type: object
-    GoogleCloudSecuritycenterV1LintSecurityHealthAnalyticsCustomModuleExpressionRequest:
-      description: Request message for linting security health analytic custom module CEL expressions.
-      properties:
-        expression:
-          $ref: "#/components/schemas/Expr"
-          description: CEL expression to be validated.
-        expressionKind:
-          description: The kind of expression supported by SHA CEL Engine.
-          enum:
-            - EXPRESSION_KIND_UNSPECIFIED
-            - PREDICATE
-            - CUSTOM_OUTPUT
-          type: string
-        resourceSelector:
-          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1ResourceSelector"
-          description: Selection criteria for the resource type.
-      type: object
-    GoogleCloudSecuritycenterV1LintSecurityHealthAnalyticsCustomModuleExpressionResponse:
-      description: Response message for linting security health analytic custom module CEL expressions.
-      properties:
-        errors:
-          description: CEL based error set only for erroneous CEL expression.
-          items:
-            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1LintError"
-          type: array
-      type: object
-    GoogleCloudSecuritycenterV1Location:
-      description: The location to locate issues in CEL expression. Convention is followed based on the CEL validator response.
-      properties:
-        column:
-          description: 0-indexed column number.
-          format: int32
-          type: integer
-        line:
-          description: 1-indexed line number.
-          format: int32
-          type: integer
       type: object
     GoogleCloudSecuritycenterV1MuteConfig:
       description: A mute config is a Cloud SCC resource that contains the configuration to mute create/update events of findings.
