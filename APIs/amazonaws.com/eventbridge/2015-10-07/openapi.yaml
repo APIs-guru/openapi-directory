@@ -5581,10 +5581,12 @@ components:
       maxLength: 128
     Database:
       type: string
+      description: Redshift Database
       minLength: 1
       maxLength: 64
     DbUser:
       type: string
+      description: Database user name
       minLength: 1
       maxLength: 128
     ResourceArn:
@@ -6325,21 +6327,31 @@ components:
     RedshiftSecretManagerArn:
       type: string
       pattern: '(^arn:aws([a-z]|\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)'
+      description: Optional SecretManager ARN which stores the database credentials
       minLength: 1
       maxLength: 1600
     Sql:
       type: string
+      description: A single Redshift SQL
       minLength: 1
       maxLength: 100000
+      format: password
     StatementName:
       type: string
+      description: A name for Redshift DataAPI statement which can be used as filter of ListStatement.
       minLength: 1
       maxLength: 500
+    Sqls:
+      type: array
+      description: A list of SQLs.
+      items:
+        $ref: '#/components/schemas/Sql'
+      minItems: 0
+      maxItems: 40
     RedshiftDataParameters:
       type: object
       required:
         - Database
-        - Sql
       properties:
         SecretManagerArn:
           allOf:
@@ -6365,6 +6377,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Indicates whether to send an event back to EventBridge after the SQL statement runs.
+        Sqls:
+          $ref: '#/components/schemas/Sqls'
       description: These are custom parameters to be used when the target is a Amazon Redshift cluster or Redshift Serverless workgroup to invoke the Amazon Redshift Data API ExecuteStatement based on EventBridge events.
     TargetIdList:
       type: array

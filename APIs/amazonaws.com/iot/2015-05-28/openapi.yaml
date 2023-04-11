@@ -2982,6 +2982,14 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
+                tlsConfig:
+                  description: An object that specifies the TLS configuration for a domain.
+                  type: object
+                  properties:
+                    securityPolicy:
+                      allOf:
+                        - $ref: '#/components/schemas/SecurityPolicy'
+                        - description: 'The security policy for a domain configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html#tls-policy-table">Security policies </a> in the <i>Amazon Web Services IoT Core developer guide</i>.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3192,6 +3200,14 @@ paths:
                 removeAuthorizerConfig:
                   description: Removes the authorization configuration from a domain.
                   type: boolean
+                tlsConfig:
+                  description: An object that specifies the TLS configuration for a domain.
+                  type: object
+                  properties:
+                    securityPolicy:
+                      allOf:
+                        - $ref: '#/components/schemas/SecurityPolicy'
+                        - description: 'The security policy for a domain configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html#tls-policy-table">Security policies </a> in the <i>Amazon Web Services IoT Core developer guide</i>.'
   '/dynamic-thing-groups/{thingGroupName}':
     post:
       operationId: CreateDynamicThingGroup
@@ -17907,6 +17923,10 @@ components:
       maxLength: 128
     AllowAuthorizerOverride:
       type: boolean
+    SecurityPolicy:
+      type: string
+      pattern: '[\s\S]*'
+      maxLength: 128
     CertificateValidationException: {}
     CreateDynamicThingGroupResponse:
       type: object
@@ -19039,6 +19059,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateType'
             - description: The date and time the domain configuration's status was last changed.
+        tlsConfig:
+          allOf:
+            - $ref: '#/components/schemas/TlsConfig'
+            - description: An object that specifies the TLS configuration for a domain.
     DescribeEndpointResponse:
       type: object
       properties:
@@ -23582,6 +23606,14 @@ components:
         - DATA
         - CREDENTIAL_PROVIDER
         - JOBS
+    TlsConfig:
+      type: object
+      properties:
+        securityPolicy:
+          allOf:
+            - $ref: '#/components/schemas/SecurityPolicy'
+            - description: 'The security policy for a domain configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html#tls-policy-table">Security policies </a> in the <i>Amazon Web Services IoT Core developer guide</i>.'
+      description: An object that specifies the TLS configuration for a domain.
     CreateDomainConfigurationRequest:
       type: object
       title: CreateDomainConfigurationRequest
@@ -23610,6 +23642,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: '<p>Metadata which can be used to manage the domain configuration.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
+        tlsConfig:
+          allOf:
+            - $ref: '#/components/schemas/TlsConfig'
+            - description: An object that specifies the TLS configuration for a domain.
     DomainConfigurationArn:
       type: string
     ThingGroupProperties:
@@ -28588,6 +28624,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RemoveAuthorizerConfig'
             - description: Removes the authorization configuration from a domain.
+        tlsConfig:
+          allOf:
+            - $ref: '#/components/schemas/TlsConfig'
+            - description: An object that specifies the TLS configuration for a domain.
     UpdateDynamicThingGroupRequest:
       type: object
       required:

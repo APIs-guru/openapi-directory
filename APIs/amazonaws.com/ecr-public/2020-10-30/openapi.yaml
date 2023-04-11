@@ -1737,8 +1737,8 @@ components:
       properties:
         registryId:
           allOf:
-            - $ref: '#/components/schemas/RegistryId'
-            - description: 'The Amazon Web Services account ID that''s associated with the registry that contains the image to delete. If you do not specify a registry, the default public registry is assumed.'
+            - $ref: '#/components/schemas/RegistryIdOrAlias'
+            - description: 'The Amazon Web Services account ID, or registry alias, that''s associated with the registry that contains the image to delete. If you do not specify a registry, the default public registry is assumed.'
         repositoryName:
           allOf:
             - $ref: '#/components/schemas/RepositoryName'
@@ -2397,9 +2397,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/LayerFailure'
-    RegistryId:
-      type: string
-      pattern: '[0-9]{12}'
     ImageIdentifierList:
       type: array
       items:
@@ -2423,6 +2420,9 @@ components:
         $ref: '#/components/schemas/LayerDigest'
       minItems: 1
       maxItems: 100
+    RegistryId:
+      type: string
+      pattern: '[0-9]{12}'
     LayerDigest:
       type: string
       pattern: '[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+'

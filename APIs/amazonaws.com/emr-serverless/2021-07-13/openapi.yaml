@@ -934,7 +934,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: 'Assigns tags to resources. A tag is a label that you assign to an AWS resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your AWS resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you''ve assigned to it. '
+      description: 'Assigns tags to resources. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your Amazon Web Services resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you''ve assigned to it. '
       responses:
         '200':
           description: Success
@@ -1401,7 +1401,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/JobArn'
-            - description: The output lists the execution role ARN of the job run.
+            - description: This output displays the ARN of the job run..
     SparkSubmit:
       type: object
       required:
@@ -1991,6 +1991,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: 'The job run total execution duration in seconds. This field is only available for job runs in a <code>COMPLETED</code>, <code>FAILED</code>, or <code>CANCELLED</code> state.'
+        executionTimeoutMinutes:
+          allOf:
+            - $ref: '#/components/schemas/Duration'
+            - description: 'Maximum duration for the job run to run. If the job run runs beyond this duration, it will be automatically cancelled.'
       description: 'Information about a job run. A job run is a unit of work, such as a Spark JAR, Hive query, or SparkSQL query, that you submit to an EMR Serverless application.'
     Query:
       type: string
