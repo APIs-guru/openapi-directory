@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: NotificationConfigurationService
-  x-timestamp: 2023-02-20T18:23:38Z
+  x-timestamp: 2023-04-11T21:25:35Z
 tags:
   - name: General
 paths:
@@ -625,6 +625,10 @@ components:
         messageDescription:
           type: string
       type: object
+    ExchangeMessageWrapper:
+      properties:
+        ExchangeMessage:
+          $ref: "#/components/schemas/ExchangeMessage"
     GenericResponse:
       properties:
         pspReference:
@@ -645,7 +649,7 @@ components:
         configurations:
           description: Details of the notification subscription configurations.
           items:
-            $ref: "#/components/schemas/NotificationConfigurationDetails"
+            $ref: "#/components/schemas/NotificationConfigurationDetailsWrapper"
           type: array
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
@@ -704,7 +708,7 @@ components:
         eventConfigs:
           description: Contains objects that define event types and their subscription settings.
           items:
-            $ref: "#/components/schemas/NotificationEventConfiguration"
+            $ref: "#/components/schemas/NotificationEventConfigurationWrapper"
           type: array
         messageFormat:
           deprecated: true
@@ -743,6 +747,10 @@ components:
             - TLSv13
           type: string
       type: object
+    NotificationConfigurationDetailsWrapper:
+      properties:
+        NotificationConfigurationDetails:
+          $ref: "#/components/schemas/NotificationConfigurationDetails"
     NotificationEventConfiguration:
       properties:
         eventType:
@@ -791,6 +799,10 @@ components:
         - eventType
         - includeMode
       type: object
+    NotificationEventConfigurationWrapper:
+      properties:
+        NotificationEventConfiguration:
+          $ref: "#/components/schemas/NotificationEventConfiguration"
     ServiceError:
       properties:
         errorCode:
@@ -895,7 +907,7 @@ components:
         exchangeMessages:
           description: The notification message and related response messages.
           items:
-            $ref: "#/components/schemas/ExchangeMessage"
+            $ref: "#/components/schemas/ExchangeMessageWrapper"
           type: array
         notificationId:
           description: The ID of the notification subscription configuration.

@@ -1643,7 +1643,7 @@ components:
           readOnly: true
           type: string
         keySpec:
-          description: Required. The specifications for the key.
+          description: Immutable. The specifications for the key.
           enum:
             - KEY_SPEC_UNSPECIFIED
             - RSA_2048
@@ -2381,7 +2381,7 @@ components:
           readOnly: true
           type: string
         use:
-          description: Required. The purpose of the key.
+          description: Immutable. The purpose of the key.
           enum:
             - KEY_USE_UNSPECIFIED
             - ENCRYPTION
@@ -2482,7 +2482,7 @@ components:
           readOnly: true
           type: string
         use:
-          description: Required. The purpose of the key.
+          description: Immutable. The purpose of the key.
           enum:
             - KEY_USE_UNSPECIFIED
             - ENCRYPTION

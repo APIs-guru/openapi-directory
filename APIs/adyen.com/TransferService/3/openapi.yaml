@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TransferService
-  x-timestamp: 2023-03-28T13:27:36Z
+  x-timestamp: 2023-04-11T19:23:59Z
 tags:
   - name: Transactions
   - name: Transfers
@@ -1379,7 +1379,12 @@ components:
           description: The other party in the transfer.
           x-addedInVersion: "3"
         description:
-          description: A human-readable description for the transfer. You can use alphanumeric characters and hyphens. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.
+          description: |-
+            Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.
+
+            Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**
+
+            Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' " ! ?**
           type: string
           x-addedInVersion: "1"
         direction:
@@ -1569,7 +1574,12 @@ components:
           description: The recipient of the funds transfer. A bank account, a balance account, or a transfer instrument is required.
           x-addedInVersion: "3"
         description:
-          description: A human-readable description for the transfer. You can use alphanumeric characters and hyphens. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.
+          description: |-
+            Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.
+
+            Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**
+
+            Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' " ! ?**
           type: string
           x-addedInVersion: "1"
         id:

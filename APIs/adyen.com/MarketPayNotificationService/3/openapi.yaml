@@ -30,7 +30,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: MarketPayNotificationService
-  x-timestamp: 2023-04-03T19:29:07Z
+  x-timestamp: 2023-04-11T21:25:35Z
 tags: []
 components:
   examples:
@@ -1072,6 +1072,10 @@ components:
           description: The reason why this event has been created.
           type: string
       type: object
+    AccountEventWrapper:
+      properties:
+        AccountEvent:
+          $ref: "#/components/schemas/AccountEvent"
     AccountFundsBelowThresholdNotification:
       properties:
         content:
@@ -1147,7 +1151,7 @@ components:
         bankAccountDetails:
           description: Array of bank accounts associated with the account holder. For details about the required `bankAccountDetail` fields, see [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information).
           items:
-            $ref: "#/components/schemas/BankAccountDetail"
+            $ref: "#/components/schemas/BankAccountDetailWrapper"
           type: array
         businessDetails:
           $ref: "#/components/schemas/BusinessDetails"
@@ -1228,7 +1232,7 @@ components:
         amounts:
           description: The payout amounts (per currency).
           items:
-            $ref: "#/components/schemas/Amount"
+            $ref: "#/components/schemas/AmountWrapper"
           type: array
         bankAccountDetail:
           $ref: "#/components/schemas/BankAccountDetail"
@@ -1249,7 +1253,7 @@ components:
         events:
           description: A list of events scheduled for the account holder.
           items:
-            $ref: "#/components/schemas/AccountEvent"
+            $ref: "#/components/schemas/AccountEventWrapper"
           type: array
         payoutState:
           $ref: "#/components/schemas/AccountPayoutState"
@@ -1468,7 +1472,7 @@ components:
           deprecated: true
           description: A summary of the verification status.
           items:
-            $ref: "#/components/schemas/KYCCheckDataSummaryItem"
+            $ref: "#/components/schemas/KYCCheckDataSummaryItemWrapper"
           type: array
         verificationStatus:
           description: The status of verification.
@@ -1575,6 +1579,10 @@ components:
         - value
         - currency
       type: object
+    AmountWrapper:
+      properties:
+        Amount:
+          $ref: "#/components/schemas/Amount"
     BankAccountDetail:
       properties:
         accountNumber:
@@ -1727,6 +1735,10 @@ components:
             >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
       type: object
+    BankAccountDetailWrapper:
+      properties:
+        BankAccountDetail:
+          $ref: "#/components/schemas/BankAccountDetail"
     BeneficiarySetupNotification:
       properties:
         content:
@@ -1787,19 +1799,19 @@ components:
         listedUltimateParentCompany:
           description: Information about the parent public company. Required if the account holder is 100% owned by a publicly listed company.
           items:
-            $ref: "#/components/schemas/UltimateParentCompany"
+            $ref: "#/components/schemas/UltimateParentCompanyWrapper"
           type: array
         shareholders:
           description: Array containing information about individuals associated with the account holder either through ownership or control. For details about how you can identify them, refer to [our verification guide](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process#identify-ubos).
           items:
-            $ref: "#/components/schemas/ShareholderContact"
+            $ref: "#/components/schemas/ShareholderContactWrapper"
           type: array
         signatories:
           description: |-
             Signatories associated with the company.
             Each array entry should represent one signatory.
           items:
-            $ref: "#/components/schemas/SignatoryContact"
+            $ref: "#/components/schemas/SignatoryContactWrapper"
           type: array
         taxId:
           description: The tax ID of the company.
@@ -1859,7 +1871,7 @@ components:
         records:
           description: A list of the negative balances compensated.
           items:
-            $ref: "#/components/schemas/CompensateNegativeBalanceNotificationRecord"
+            $ref: "#/components/schemas/CompensateNegativeBalanceNotificationRecordWrapper"
           type: array
       type: object
     CompensateNegativeBalanceNotificationRecord:
@@ -1875,6 +1887,10 @@ components:
           format: date-time
           type: string
       type: object
+    CompensateNegativeBalanceNotificationRecordWrapper:
+      properties:
+        CompensateNegativeBalanceNotificationRecord:
+          $ref: "#/components/schemas/CompensateNegativeBalanceNotificationRecord"
     CreateAccountHolderResponse:
       properties:
         accountCode:
@@ -1893,7 +1909,7 @@ components:
         invalidFields:
           description: A list of fields that caused the `/createAccountHolder` request to fail.
           items:
-            $ref: "#/components/schemas/ErrorFieldType"
+            $ref: "#/components/schemas/ErrorFieldTypeWrapper"
           type: array
           x-addedInVersion: "5"
         pspReference:
@@ -1985,7 +2001,7 @@ components:
         invalidFields:
           description: Invalid fields list.
           items:
-            $ref: "#/components/schemas/ErrorFieldType"
+            $ref: "#/components/schemas/ErrorFieldTypeWrapper"
           type: array
         merchantAccountCode:
           description: The code of the merchant account.
@@ -2016,6 +2032,10 @@ components:
           $ref: "#/components/schemas/FieldType"
           description: The type of error field.
       type: object
+    ErrorFieldTypeWrapper:
+      properties:
+        ErrorFieldType:
+          $ref: "#/components/schemas/ErrorFieldType"
     FieldType:
       properties:
         field:
@@ -2186,6 +2206,10 @@ components:
           description: The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.
           type: string
       type: object
+    FieldTypeWrapper:
+      properties:
+        FieldType:
+          $ref: "#/components/schemas/FieldType"
     IndividualDetails:
       properties:
         name:
@@ -2218,6 +2242,10 @@ components:
           description: A description of the item reviewed.
           type: string
       type: object
+    KYCCheckDataSummaryItemWrapper:
+      properties:
+        KYCCheckDataSummaryItem:
+          $ref: "#/components/schemas/KYCCheckDataSummaryItem"
     KYCCheckResult:
       properties:
         checks:
@@ -2406,7 +2434,7 @@ components:
         errorFields:
           description: Missing or invalid fields that caused the payment error.
           items:
-            $ref: "#/components/schemas/ErrorFieldType"
+            $ref: "#/components/schemas/ErrorFieldTypeWrapper"
           type: array
         errorMessage:
           $ref: "#/components/schemas/Message"
@@ -2487,6 +2515,10 @@ components:
       required:
         - type
       type: object
+    PersonalDocumentDataWrapper:
+      properties:
+        PersonalDocumentData:
+          $ref: "#/components/schemas/PersonalDocumentData"
     RefundFundsTransferNotification:
       properties:
         content:
@@ -2540,6 +2572,10 @@ components:
           description: The response indicating if the refund has been received for processing.
           type: string
       type: object
+    RefundResultWrapper:
+      properties:
+        RefundResult:
+          $ref: "#/components/schemas/RefundResult"
     ReportAvailableNotification:
       properties:
         content:
@@ -2619,7 +2655,7 @@ components:
         refundResults:
           description: A list of the refunds that have been scheduled and their results.
           items:
-            $ref: "#/components/schemas/RefundResult"
+            $ref: "#/components/schemas/RefundResultWrapper"
           type: array
       type: object
     ShareholderContact:
@@ -2679,6 +2715,10 @@ components:
           description: The URL of the person's website.
           type: string
       type: object
+    ShareholderContactWrapper:
+      properties:
+        ShareholderContact:
+          $ref: "#/components/schemas/ShareholderContact"
     SignatoryContact:
       properties:
         address:
@@ -2725,6 +2765,10 @@ components:
           description: The URL of the person's website.
           type: string
       type: object
+    SignatoryContactWrapper:
+      properties:
+        SignatoryContact:
+          $ref: "#/components/schemas/SignatoryContact"
     Split:
       properties:
         account:
@@ -2958,6 +3002,10 @@ components:
           description: Stock Ticker symbol.
           type: string
       type: object
+    UltimateParentCompanyWrapper:
+      properties:
+        UltimateParentCompany:
+          $ref: "#/components/schemas/UltimateParentCompany"
     UpdateAccountHolderResponse:
       properties:
         accountHolderCode:
@@ -2973,7 +3021,7 @@ components:
         invalidFields:
           description: in case the account holder has not been updated, contains account holder fields, that did not pass the validation.
           items:
-            $ref: "#/components/schemas/ErrorFieldType"
+            $ref: "#/components/schemas/ErrorFieldTypeWrapper"
           type: array
           x-addedInVersion: "5"
         pspReference:
@@ -2991,7 +3039,7 @@ components:
         updatedFields:
           description: A list of the fields updated through the request.
           items:
-            $ref: "#/components/schemas/FieldType"
+            $ref: "#/components/schemas/FieldTypeWrapper"
           type: array
         verification:
           $ref: "#/components/schemas/KYCVerificationResult"
@@ -3091,7 +3139,7 @@ components:
         documentData:
           description: Array that contains information about the person's identification document. You can submit only one entry per document type.
           items:
-            $ref: "#/components/schemas/PersonalDocumentData"
+            $ref: "#/components/schemas/PersonalDocumentDataWrapper"
           type: array
           x-addedInVersion: "3"
         idNumber:

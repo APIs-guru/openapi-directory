@@ -1790,6 +1790,13 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        deleteProtectionState:
+          description: State of delete protection for the database.
+          enum:
+            - DELETE_PROTECTION_STATE_UNSPECIFIED
+            - DELETE_PROTECTION_DISABLED
+            - DELETE_PROTECTION_ENABLED
+          type: string
         etag:
           description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
           type: string

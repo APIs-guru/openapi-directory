@@ -701,11 +701,8 @@ components:
           description: Output only. The Cloud Build name of the latest successful deployment of the function.
           readOnly: true
           type: string
-        buildpackStack:
-          description: Specifies one of the Google provided buildpack stacks.
-          type: string
         dockerRegistry:
-          description: Optional. Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. If `docker_repository` field is specified, this field will be automatically set as `ARTIFACT_REGISTRY`. If unspecified, it currently defaults to `CONTAINER_REGISTRY`. This field may be overridden by the backend for eligible deployments.
+          description: Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. If `docker_repository` field is specified, this field will be automatically set as `ARTIFACT_REGISTRY`. If unspecified, it currently defaults to `CONTAINER_REGISTRY`. This field may be overridden by the backend for eligible deployments.
           enum:
             - DOCKER_REGISTRY_UNSPECIFIED
             - CONTAINER_REGISTRY
@@ -976,6 +973,19 @@ components:
           description: One-word CamelCase type of the state message.
           type: string
       type: object
+    GoogleCloudFunctionsV2alphaLocationMetadata:
+      description: Extra GCF specific location information.
+      properties:
+        environments:
+          description: The Cloud Function environments this location supports.
+          items:
+            enum:
+              - ENVIRONMENT_UNSPECIFIED
+              - GEN_1
+              - GEN_2
+            type: string
+          type: array
+      type: object
     GoogleCloudFunctionsV2alphaOperationMetadata:
       description: Represents the metadata of the long-running operation.
       properties:
@@ -1001,7 +1011,7 @@ components:
         stages:
           description: Mechanism for reporting in-progress stages
           items:
-            $ref: "#/components/schemas/GoogleCloudFunctionsV2alphaStage"
+            $ref: "#/components/schemas/Stage"
           type: array
         statusDetail:
           description: Human-readable status of the operation, if any.
@@ -1012,43 +1022,6 @@ components:
         verb:
           description: Name of the verb executed by the operation.
           type: string
-      type: object
-    GoogleCloudFunctionsV2alphaStage:
-      description: Each Stage of the deployment process
-      properties:
-        message:
-          description: Message describing the Stage
-          type: string
-        name:
-          description: Name of the Stage. This will be unique for each Stage.
-          enum:
-            - NAME_UNSPECIFIED
-            - ARTIFACT_REGISTRY
-            - BUILD
-            - SERVICE
-            - TRIGGER
-            - SERVICE_ROLLBACK
-            - TRIGGER_ROLLBACK
-          type: string
-        resource:
-          description: Resource of the Stage
-          type: string
-        resourceUri:
-          description: Link to the current Stage resource
-          type: string
-        state:
-          description: Current state of the Stage
-          enum:
-            - STATE_UNSPECIFIED
-            - NOT_STARTED
-            - IN_PROGRESS
-            - COMPLETE
-          type: string
-        stateMessages:
-          description: State messages from the current Stage.
-          items:
-            $ref: "#/components/schemas/GoogleCloudFunctionsV2alphaStateMessage"
-          type: array
       type: object
     GoogleCloudFunctionsV2alphaStateMessage:
       description: Informational messages about the state of the Cloud Function or Operation.
@@ -1067,6 +1040,19 @@ components:
         type:
           description: One-word CamelCase type of the state message.
           type: string
+      type: object
+    GoogleCloudFunctionsV2betaLocationMetadata:
+      description: Extra GCF specific location information.
+      properties:
+        environments:
+          description: The Cloud Function environments this location supports.
+          items:
+            enum:
+              - ENVIRONMENT_UNSPECIFIED
+              - GEN_1
+              - GEN_2
+            type: string
+          type: array
       type: object
     GoogleCloudFunctionsV2betaOperationMetadata:
       description: Represents the metadata of the long-running operation.
@@ -1232,6 +1218,19 @@ components:
         name:
           description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
           type: string
+      type: object
+    LocationMetadata:
+      description: Extra GCF specific location information.
+      properties:
+        environments:
+          description: The Cloud Function environments this location supports.
+          items:
+            enum:
+              - ENVIRONMENT_UNSPECIFIED
+              - GEN_1
+              - GEN_2
+            type: string
+          type: array
       type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
@@ -1418,13 +1417,13 @@ components:
           type: array
       type: object
     ServiceConfig:
-      description: "Describes the Service being deployed. Currently Supported : Cloud Run (fully managed). Next tag: 23"
+      description: "Describes the Service being deployed. Currently Supported : Cloud Run (fully managed)."
       properties:
         allTrafficOnLatestRevision:
           description: Whether 100% of traffic is routed to the latest revision. On CreateFunction and UpdateFunction, when set to true, the revision being deployed will serve 100% of traffic, ignoring any traffic split settings, if any. On GetFunction, true will be returned if the latest revision is serving 100% of traffic.
           type: boolean
         availableCpu:
-          description: 'The number of CPUs used in a single container instance. Default value is calculated from available memory. Supports the same values as Cloud Run, see https://cloud.google.com/run/docs/reference/rest/v1/Container#resourcerequirements Example: "1" indicates 1 vCPU'
+          description: '[Preview] The number of CPUs used in a single container instance. Default value is calculated from available memory. Supports the same values as Cloud Run, see https://cloud.google.com/run/docs/reference/rest/v1/Container#resourcerequirements Example: "1" indicates 1 vCPU'
           type: string
         availableMemory:
           description: The amount of memory available for a function. Defaults to 256M. Supported units are k, M, G, Mi, Gi. If no unit is supplied the value is interpreted as bytes. See https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go a full description.
@@ -1447,7 +1446,7 @@ components:
           format: int32
           type: integer
         maxInstanceRequestConcurrency:
-          description: Sets the maximum number of concurrent requests that each instance can receive. Defaults to 1.
+          description: "[Preview] Sets the maximum number of concurrent requests that each instance can receive. Defaults to 1."
           format: int32
           type: integer
         minInstanceCount:
@@ -1531,6 +1530,43 @@ components:
         resolvedStorageSource:
           $ref: "#/components/schemas/StorageSource"
           description: A copy of the build's `source.storage_source`, if exists, with any generations resolved.
+      type: object
+    Stage:
+      description: Each Stage of the deployment process
+      properties:
+        message:
+          description: Message describing the Stage
+          type: string
+        name:
+          description: Name of the Stage. This will be unique for each Stage.
+          enum:
+            - NAME_UNSPECIFIED
+            - ARTIFACT_REGISTRY
+            - BUILD
+            - SERVICE
+            - TRIGGER
+            - SERVICE_ROLLBACK
+            - TRIGGER_ROLLBACK
+          type: string
+        resource:
+          description: Resource of the Stage
+          type: string
+        resourceUri:
+          description: Link to the current Stage resource
+          type: string
+        state:
+          description: Current state of the Stage
+          enum:
+            - STATE_UNSPECIFIED
+            - NOT_STARTED
+            - IN_PROGRESS
+            - COMPLETE
+          type: string
+        stateMessages:
+          description: State messages from the current Stage.
+          items:
+            $ref: "#/components/schemas/GoogleCloudFunctionsV2alphaStateMessage"
+          type: array
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."

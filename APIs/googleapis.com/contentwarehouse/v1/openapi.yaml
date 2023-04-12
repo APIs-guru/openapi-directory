@@ -10160,6 +10160,9 @@ components:
         androidPackageName:
           description: Unique package name that identifies an Android app of the provider.
           type: string
+        castAppId:
+          description: Unique cast app id that identifies a Cast app of the provider.
+          type: string
         versionCode:
           description: Version code of the application.
           format: int32
@@ -10590,6 +10593,9 @@ components:
         name:
           type: string
       type: object
+    AssistantDevicesPlatformProtoProviderFulfillCapability:
+      properties: {}
+      type: object
     AssistantDevicesPlatformProtoProviderOpenCapability:
       properties:
         clientOpProperty:
@@ -10657,6 +10663,9 @@ components:
           $ref: "#/components/schemas/AssistantDevicesPlatformProtoMediaResumeCapability"
         mediaStop:
           $ref: "#/components/schemas/AssistantDevicesPlatformProtoMediaStopCapability"
+        providerFulfill:
+          $ref: "#/components/schemas/AssistantDevicesPlatformProtoProviderFulfillCapability"
+          description: "|provider_fulfill| specifies the support for provider.FULFILL client_op, and the corresponding provider_fulfill field in assistant.embedded.v1.DeviceOp."
         providerOpen:
           $ref: "#/components/schemas/AssistantDevicesPlatformProtoProviderOpenCapability"
           description: "|provider_open| specifies the support for provider.OPEN client_op, and the corresponding provider_open field in assistant.embedded.v1.DeviceOp."
@@ -10852,7 +10861,7 @@ components:
           description: ID for the device. PRR specific feature.
       type: object
     AssistantGroundingRankerGroundingProviderFeatures:
-      description: "Next ID: 5"
+      description: "Next ID: 6"
       properties:
         contactGroundingProviderFeatures:
           $ref: "#/components/schemas/AssistantGroundingRankerContactGroundingProviderFeatures"
@@ -10860,6 +10869,8 @@ components:
           $ref: "#/components/schemas/AssistantGroundingRankerDeviceGroundingProviderFeatures"
         mediaGroundingProviderFeatures:
           $ref: "#/components/schemas/AssistantGroundingRankerMediaGroundingProviderFeatures"
+        podcastGroundingProviderFeatures:
+          $ref: "#/components/schemas/AssistantGroundingRankerPodcastGroundingProviderFeatures"
         providerGroundingProviderFeatures:
           $ref: "#/components/schemas/AssistantGroundingRankerProviderGroundingProviderFeatures"
       type: object
@@ -10972,6 +10983,13 @@ components:
         youtubeConfidenceScore:
           format: double
           type: number
+      type: object
+    AssistantGroundingRankerPodcastGroundingProviderFeatures:
+      description: "Features to be extracted from Podcast GP for ranking in HGR. Next ID: 2"
+      properties:
+        isExclusive:
+          description: Whether the podcast is exclusive to a provider a not.
+          type: boolean
       type: object
     AssistantGroundingRankerProviderGroundingProviderFeatures:
       description: "Features to be extracted from Provider GP for ranking in HGR. Next ID: 5"
@@ -12057,7 +12075,7 @@ components:
           type: string
       type: object
     AssistantPrefulfillmentRankerPrefulfillmentSignals:
-      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 47"
+      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 48"
       properties:
         bindingSetAuis:
           description: Assistant User Interaction Score for binding set.
@@ -12210,6 +12228,12 @@ components:
             - EMIT_ONLY
             - COUNTERFACTUAL_LOG_ONLY
             - CAPACITY_ACCOUNTING
+          type: string
+        subIntentType:
+          description: 'sub_intent_type differentiates between intents that share the top level intent name. For eg: for TV_FALLBACK_SEARCH_INTENT, the top level intent name must be "Find_media" and the media_object argument within it must be of type "Media_unspecified".'
+          enum:
+            - SUB_INTENT_TYPE_UNKNOWN
+            - SUB_INTENT_TYPE_TV_FALLBACK_SEARCH_INTENT
           type: string
         topHypothesisConfidence:
           description: "Average of per-word confidence for top speech recognition hypothesis. The value is from RecognizerHypothesisLog: http://google3/logs/proto/speech/service/recognizer_log.proto?l=848&rcl=281400256"
@@ -13256,6 +13280,8 @@ components:
           $ref: "#/components/schemas/ClassifierPornQueryClassifierOutput"
         medical:
           $ref: "#/components/schemas/ClassifierPornQueryClassifierOutput"
+        minor:
+          $ref: "#/components/schemas/ClassifierPornQueryClassifierOutput"
         offensive:
           $ref: "#/components/schemas/ClassifierPornQueryClassifierOutput"
         porn:
@@ -13365,6 +13391,216 @@ components:
         videoViolenceScore:
           format: float
           type: number
+      type: object
+    CloudAiPlatformTenantresourceCloudSqlInstanceConfig:
+      description: The identity to configure a CloudSQL instance provisioned via SLM Terraform.
+      properties:
+        cloudSqlInstanceConnectionName:
+          description: Output only. The CloudSQL instance connection name.
+          type: string
+        cloudSqlInstanceName:
+          description: Input/Output [Optional]. The CloudSQL instance name within SLM instance. If not set, a random UUIC will be generated as instance name.
+          type: string
+        kmsKeyReference:
+          description: Input [Optional]. The KMS key name or the KMS grant name used for CMEK encryption. Only set this field when provisioning new CloudSQL instances. For existing CloudSQL instances, this field will be ignored because CMEK re-encryption is not supported.
+          type: string
+        mdbRolesForCorpAccess:
+          description: Input [Optional]. MDB roles for corp access to CloudSQL instance.
+          items:
+            type: string
+          type: array
+        slmInstanceName:
+          description: Output only. The SLM instance's full resource name.
+          type: string
+        slmInstanceTemplate:
+          description: Input [Required]. The SLM instance template to provision CloudSQL.
+          type: string
+        slmInstanceType:
+          description: Input [Required]. The SLM instance type to provision CloudSQL.
+          type: string
+      type: object
+    CloudAiPlatformTenantresourceGcsBucketConfig:
+      description: The identity to configure a GCS bucket.
+      properties:
+        admins:
+          items:
+            type: string
+          type: array
+        bucketName:
+          description: Input/Output [Optional]. The name of a GCS bucket with max length of 63 chars. If not set, a random UUID will be generated as bucket name.
+          type: string
+        entityName:
+          description: Input/Output [Optional]. Only needed for per-entity tenant GCP resources. During Deprovision API, the on-demand deletion will only cover the tenant GCP resources with the specified entity name.
+          type: string
+        kmsKeyReference:
+          description: Input/Output [Optional]. The KMS key name or the KMS grant name used for CMEK encryption. Only set this field when provisioning new GCS bucket. For existing GCS bucket, this field will be ignored because CMEK re-encryption is not supported.
+          type: string
+        ttlDays:
+          description: Input/Output [Optional]. Only needed when the content in bucket need to be garbage collected within some amount of days.
+          format: int32
+          type: integer
+        viewers:
+          description: Input/Output [Required]. IAM roles (viewer/admin) put on the bucket.
+          items:
+            type: string
+          type: array
+      type: object
+    CloudAiPlatformTenantresourceIamPolicyBinding:
+      description: The dynamic IAM bindings to be granted after tenant projects are created.
+      properties:
+        members:
+          description: "Input/Output [Required]. The member service accounts with the roles above. Note: placeholders are same as the resource above."
+          items:
+            type: string
+          type: array
+        resource:
+          description: "Input/Output [Required]. The resource name that will be accessed by members, which also depends on resource_type. Note: placeholders are supported in resource names. For example, ${tpn} will be used when the tenant project number is not ready."
+          type: string
+        resourceType:
+          description: Input/Output [Required]. Specifies the type of resource that will be accessed by members.
+          enum:
+            - RESOURCE_TYPE_UNSPECIFIED
+            - PROJECT
+            - SERVICE_ACCOUNT
+            - GCS_BUCKET
+            - SERVICE_CONSUMER
+            - AR_REPO
+          type: string
+        role:
+          description: Input/Output [Required]. The role for members below.
+          type: string
+      type: object
+    CloudAiPlatformTenantresourceInfraSpannerConfig:
+      description: "The configuration for a spanner database provisioning. Next ID: 8"
+      properties:
+        createDatabaseOptions:
+          $ref: "#/components/schemas/CloudAiPlatformTenantresourceInfraSpannerConfigCreateDatabaseOptions"
+          description: "Input [Optional]. The options to create a spanner database. Note: give the right options to ensure the right KMS key access audit logging and AxT logging in expected logging category."
+        kmsKeyReference:
+          description: Input [Optional]. The KMS key name or the KMS grant name used for CMEK encryption. Only set this field when provisioning new Infra Spanner databases. For existing Infra Spanner databases, this field will be ignored because CMEK re-encryption is not supported. For example, projects//locations//keyRings//cryptoKeys/
+          type: string
+        sdlBundlePath:
+          description: Input [Required]. The file path to the spanner SDL bundle.
+          type: string
+        spannerBorgServiceAccount:
+          description: Input [Optional]. The spanner borg service account for delegating the kms key to. For example, spanner-infra-cmek-nonprod@system.gserviceaccount.com, for the nonprod universe.
+          type: string
+        spannerLocalNamePrefix:
+          type: string
+        spannerNamespace:
+          type: string
+        spannerUniverse:
+          description: "Input [Required]. Every database in Spanner can be identified by the following path name: /span//:"
+          type: string
+      type: object
+    CloudAiPlatformTenantresourceInfraSpannerConfigCreateDatabaseOptions:
+      description: The options to create a spanner database. KMS key access audit logging and AxT logging will be associated with the given resource name, resource type and service name. Please ensure to give right options to enable correct audit logging and AxT logging.
+      properties:
+        cmekCloudResourceName:
+          description: The cloud resource name for the CMEK encryption. For example, projects//locations/
+          type: string
+        cmekCloudResourceType:
+          description: The cloud resource type for the CMEK encryption. For example, contentwarehouse.googleapis.com/Location
+          type: string
+        cmekServiceName:
+          description: The service name for the CMEK encryption. For example, contentwarehouse.googleapis.com
+          type: string
+      type: object
+    CloudAiPlatformTenantresourceServiceAccountIdentity:
+      description: The identity to configure a service account.
+      properties:
+        serviceAccountEmail:
+          description: Output only. The service account email that has been created.
+          type: string
+        tag:
+          description: "Input/Output [Optional]. The tag that configures the service account, as defined in google3/configs/production/cdpush/acl-zanzibar-cloud-prod/activation_grants/activation_grants.gcl. Note: The default P4 service account has the empty tag."
+          type: string
+      type: object
+    CloudAiPlatformTenantresourceTenantProjectConfig:
+      description: The identity to configure a tenant project.
+      properties:
+        billingConfig:
+          $ref: "#/components/schemas/GoogleApiServiceconsumermanagementV1BillingConfig"
+          description: Input/Output [Required]. The billing account properties to create the tenant project.
+        folder:
+          description: "Input/Output [Required]. The folder that holds tenant projects and folder-level permissions will be automatically granted to all tenant projects under the folder. Note: the valid folder format is `folders/{folder_number}`."
+          type: string
+        policyBindings:
+          description: Input/Output [Required]. The policy bindings that are applied to the tenant project during creation. At least one binding must have the role `roles/owner` with either `user` or `group` type.
+          items:
+            $ref: "#/components/schemas/GoogleApiServiceconsumermanagementV1PolicyBinding"
+          type: array
+        services:
+          description: Input/Output [Required]. The API services that are enabled on the tenant project during creation.
+          items:
+            type: string
+          type: array
+      type: object
+    CloudAiPlatformTenantresourceTenantProjectResource:
+      description: "The tenant project and tenant resources. Next ID: 10"
+      properties:
+        cloudSqlInstances:
+          description: The CloudSQL instances that are provisioned under the tenant project.
+          items:
+            $ref: "#/components/schemas/CloudAiPlatformTenantresourceCloudSqlInstanceConfig"
+          type: array
+        gcsBuckets:
+          description: The GCS buckets that are provisioned under the tenant project.
+          items:
+            $ref: "#/components/schemas/CloudAiPlatformTenantresourceGcsBucketConfig"
+          type: array
+        iamPolicyBindings:
+          description: "The dynamic IAM bindings that are granted under the tenant project. Note: this should only add new bindings to the project if they don't exist and the existing bindings won't be affected."
+          items:
+            $ref: "#/components/schemas/CloudAiPlatformTenantresourceIamPolicyBinding"
+          type: array
+        infraSpannerConfigs:
+          description: "The Infra Spanner databases that are provisioned under the tenant project. Note: this is an experimental feature."
+          items:
+            $ref: "#/components/schemas/CloudAiPlatformTenantresourceInfraSpannerConfig"
+          type: array
+        tag:
+          description: "Input/Output [Required]. The tag that uniquely identifies a tenant project within a tenancy unit. Note: for the same tenant project tag, all tenant manager operations should be idempotent."
+          type: string
+        tenantProjectConfig:
+          $ref: "#/components/schemas/CloudAiPlatformTenantresourceTenantProjectConfig"
+          description: The configurations of a tenant project.
+        tenantProjectId:
+          description: Output only. The tenant project ID that has been created.
+          type: string
+        tenantProjectNumber:
+          description: Output only. The tenant project number that has been created.
+          format: int64
+          type: string
+        tenantServiceAccounts:
+          description: The service account identities (or enabled API service's P4SA) that are expclicitly created under the tenant project (before JIT provisioning during enabled API services).
+          items:
+            $ref: "#/components/schemas/CloudAiPlatformTenantresourceTenantServiceAccountIdentity"
+          type: array
+      type: object
+    CloudAiPlatformTenantresourceTenantResource:
+      description: A collection of tenant resources.
+      properties:
+        p4ServiceAccounts:
+          description: A list of P4 service accounts (go/p4sa) to provision or deprovision.
+          items:
+            $ref: "#/components/schemas/CloudAiPlatformTenantresourceServiceAccountIdentity"
+          type: array
+        tenantProjectResources:
+          description: A list of tenant projects and tenant resources to provision or deprovision.
+          items:
+            $ref: "#/components/schemas/CloudAiPlatformTenantresourceTenantProjectResource"
+          type: array
+      type: object
+    CloudAiPlatformTenantresourceTenantServiceAccountIdentity:
+      description: The identity of service accounts that have been explicitly created under tenant projects.
+      properties:
+        serviceAccountEmail:
+          description: Output only. The email address of the generated service account.
+          type: string
+        serviceName:
+          description: Input/Output [Required]. The service that the service account belongs to. (e.g. cloudbuild.googleapis.com for GCB service accounts)
+          type: string
       type: object
     CommerceDatastoreDeepTag:
       description: The basic message that contains a single decision output of go/deeptagger.
@@ -15338,6 +15574,23 @@ components:
             - NO_SITE_INFO
           type: string
       type: object
+    DrishtiCompressedFeature:
+      description: Protocol buffer for storing compressed feature.
+      properties:
+        featureName:
+          enum:
+            - UNKNOWN
+            - STARBURST_V4
+            - RESNETISH_V3
+          type: string
+        inRangeBitstream:
+          description: in_range_bitstream is the string produced by range coder, while out_of_range_bitstream corresponds to the overflow stream, which is used whenever a quantized value is out of range. See https://cs.corp.google.com/piper///depot/google3/research/vision/piedpiper/brain/python/layers/entropy_models.py?l=225&cl=234825412
+          format: byte
+          type: string
+        outOfRangeBitstream:
+          format: byte
+          type: string
+      type: object
     DrishtiDenseFeatureData:
       properties:
         extra:
@@ -15378,6 +15631,8 @@ components:
     DrishtiFeatureSetDataFeatureSetElement:
       description: A FeatureSetElement stores the features coming from a single group.
       properties:
+        compressed:
+          $ref: "#/components/schemas/DrishtiCompressedFeature"
         dense:
           $ref: "#/components/schemas/DrishtiDenseFeatureData"
         indexed:
@@ -26388,6 +26643,25 @@ components:
         Word:
           $ref: "#/components/schemas/GoodocWord"
           description: In order to compile, this recursive message needs to be optional, even though it's within an optional group.
+      type: object
+    GoogleApiServiceconsumermanagementV1BillingConfig:
+      description: Describes the billing configuration for a new tenant project.
+      properties:
+        billingAccount:
+          description: Name of the billing account. For example `billingAccounts/012345-567890-ABCDEF`.
+          type: string
+      type: object
+    GoogleApiServiceconsumermanagementV1PolicyBinding:
+      description: Translates to IAM Policy bindings (without auditing at this level)
+      properties:
+        members:
+          description: Uses the same format as in IAM policy. `member` must include both a prefix and ID. For example, `user:{emailId}`, `serviceAccount:{emailId}`, `group:{emailId}`.
+          items:
+            type: string
+          type: array
+        role:
+          description: Role. (https://cloud.google.com/iam/docs/understanding-roles) For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          type: string
       type: object
     GoogleAssistantAccessoryV1AudioOutConfig:
       description: Specifies the desired format for the server to use when it returns `audio_out` messages.
@@ -60165,10 +60439,6 @@ components:
         oysterId:
           $ref: "#/components/schemas/GeostoreFeatureIdProto"
           description: Oyster Feature ID of the location.
-        singleTopicnessE2:
-          description: "This field is populated for at most one entity. If it is populated, it indicates how confident we are to claim that the page is only about this entity (either it's an official web presence of the entity, or something like a wikipedia page about the entity). For space reasons this is represented as a fixed-point integer with two decimal points precision. Convert it to the interval [0,1] using the following formula: float single_topicness = single_topicness_e2 / 100.f"
-          format: int32
-          type: integer
       type: object
     RepositoryWebrefWebrefDocumentInfo:
       description: "All information that applies globally to the document. Next available tag: 11"
@@ -60361,20 +60631,6 @@ components:
           items:
             format: int32
             type: integer
-          type: array
-        undermergedMembers:
-          description: "[Experimental code. Do not use ] Entities that webref identified as being the same concept (undermerged)."
-          items:
-            $ref: "#/components/schemas/RepositoryWebrefWebrefMustangAttachmentUndermergedMembers"
-          type: array
-      type: object
-    RepositoryWebrefWebrefMustangAttachmentUndermergedMembers:
-      properties:
-        encodedMid:
-          description: Experimental code, do not use.
-          items:
-            format: uint64
-            type: string
           type: array
       type: object
     RepositoryWebrefWebrefOutlinkInfo:
@@ -63523,6 +63779,7 @@ components:
             - INFERRED_IMAGE_TYPE_CRAWZALL
             - INFERRED_IMAGE_TYPE_OPEN_GRAPH
             - INFERRED_IMAGE_TYPE_NEARDUP_STARBURST_V5
+            - INFERRED_IMAGE_TYPE_ANCHOR_IMAGE
           type: string
         neardupInfo:
           description: This field will only be populated if the inferred image is a neardup of an inferred image. It stores the type and source of the images it is a neardup of.
@@ -63552,6 +63809,7 @@ components:
             - INFERRED_IMAGE_TYPE_CRAWZALL
             - INFERRED_IMAGE_TYPE_OPEN_GRAPH
             - INFERRED_IMAGE_TYPE_NEARDUP_STARBURST_V5
+            - INFERRED_IMAGE_TYPE_ANCHOR_IMAGE
           type: string
       type: object
     ShoppingWebentityShoppingAnnotationProductRating:
@@ -67600,7 +67858,7 @@ components:
       description: Wire-format for a Status object
       properties:
         canonicalCode:
-          description: The canonical error code (see codes.proto) that most closely corresponds to this status. May be missing.
+          description: The canonical error code (see codes.proto) that most closely corresponds to this status. This may be missing, and in the common case of the generic space, it definitely will be.
           format: int32
           type: integer
         code:
@@ -67815,6 +68073,8 @@ components:
               - SECOND_PASS_POLARIS_RERANKING_EVENT_LEVEL
               - SECOND_PASS_POLARIS_WITH_RANKING_CHANGE_EVENT_LEVEL
               - GEARHEAD_TOOLTIP_COOLWALK_DASHBOARD_UNAVAILABLE
+              - TIMESLICED_SAFE_SELF_UPDATE
+              - NORMAL_SELF_UPDATE
               - SECOND_PASS_BROAD_INTENT_QUERY_EVENT_LEVEL
               - SECOND_PASS_REWEIGHTING_TRIGGERED_EVENT_LEVEL
               - GEARHEAD_TOOLTIP_COOLWALK_RAIL_WIDGET
@@ -67829,6 +68089,9 @@ components:
               - ZERO_COPY_NOT_SUFFICIENT_EVENT_LEVEL
               - ZERO_COPY_ALLOWS_INSTALL_EVENT_LEVEL
               - ZERO_COPY_NOT_REQUIRED_EVENT_LEVEL
+              - SHOULD_SEE_ICON_XSELL_CLUSTER_LOW_Q_DP_EVENT_LEVEL
+              - SHOULD_SEE_SCREENSHOT_XSELL_CLUSTER_LOW_Q_DP_EVENT_LEVEL
+              - SHOULD_SEE_RICH_LIST_XSELL_CLUSTER_LOW_Q_DP_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
               - BEST_SELLER_CART_TAG_AT_SESSION_LEVEL
@@ -68344,6 +68607,9 @@ components:
               - ZERO_COPY_ALLOWS_INSTALL_SESSION_LEVEL
               - ZERO_COPY_NOT_REQUIRED_SESSION_LEVEL
               - BOOKS_SEARCH_SERIES_EXPANSION_SESSION_LEVEL
+              - SHOULD_SEE_ICON_XSELL_CLUSTER_LOW_Q_DP_SESSION_LEVEL
+              - SHOULD_SEE_SCREENSHOT_XSELL_CLUSTER_LOW_Q_DP_SESSION_LEVEL
+              - SHOULD_SEE_RICH_LIST_XSELL_CLUSTER_LOW_Q_DP_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - CART_ABANDONMENT_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL

@@ -33,6 +33,7 @@ tags:
   - name: accounts
   - name: defaultSupportedIdps
   - name: projects
+  - name: v2
 paths:
   /v2/accounts/mfaEnrollment:finalize:
     parameters:
@@ -209,6 +210,41 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - accounts
+  /v2/accounts:revokeToken:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Revokes a user's token from an Identity Provider (IdP). This is done by manually providing an IdP credential, and the token types for revocation. An [API key](https://cloud.google.com/docs/authentication/api-keys) is required in the request in order to identify the Google Cloud project.
+      operationId: identitytoolkit.accounts.revokeToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2RevokeTokenRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2RevokeTokenResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accounts
   /v2/defaultSupportedIdps:
     get:
       description: List all default supported Idps.
@@ -242,6 +278,60 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - defaultSupportedIdps
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v2/recaptchaConfig:
+    get:
+      description: Gets parameters needed for reCAPTCHA analysis.
+      operationId: identitytoolkit.getRecaptchaConfig
+      parameters:
+        - description: reCAPTCHA Enterprise uses separate site keys for different client types. Specify the client type to get the corresponding key.
+          in: query
+          name: clientType
+          schema:
+            enum:
+              - CLIENT_TYPE_UNSPECIFIED
+              - CLIENT_TYPE_WEB
+              - CLIENT_TYPE_ANDROID
+              - CLIENT_TYPE_IOS
+            type: string
+        - description: The id of a tenant.
+          in: query
+          name: tenantId
+          schema:
+            type: string
+        - description: The reCAPTCHA version.
+          in: query
+          name: version
+          schema:
+            enum:
+              - RECAPTCHA_VERSION_UNSPECIFIED
+              - RECAPTCHA_ENTERPRISE
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2RecaptchaConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - v2
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1100,6 +1190,9 @@ components:
         quota:
           $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2QuotaConfig"
           description: Configuration related to quotas.
+        recaptchaConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2RecaptchaConfig"
+          description: The project-level reCAPTCHA config.
         signIn:
           $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2SignInConfig"
           description: Configuration related to local sign in methods.
@@ -1531,6 +1624,61 @@ components:
           $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2TemporaryQuota"
           description: Quota for the Signup endpoint, if overwritten. Signup quota is measured in sign ups per project per hour per IP.
       type: object
+    GoogleCloudIdentitytoolkitAdminV2RecaptchaConfig:
+      description: The reCAPTCHA Enterprise integration config.
+      properties:
+        emailPasswordEnforcementState:
+          description: The reCAPTCHA config for email/password provider, containing the enforcement status. The email/password provider contains all related user flows protected by reCAPTCHA.
+          enum:
+            - RECAPTCHA_PROVIDER_ENFORCEMENT_STATE_UNSPECIFIED
+            - OFF
+            - AUDIT
+            - ENFORCE
+          type: string
+        managedRules:
+          description: The managed rules for authentication action based on reCAPTCHA scores. The rules are shared across providers for a given tenant project.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2RecaptchaManagedRule"
+          type: array
+        recaptchaKeys:
+          description: Output only. The reCAPTCHA keys.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2RecaptchaKey"
+          readOnly: true
+          type: array
+        useAccountDefender:
+          description: Whether to use the account defender for reCAPTCHA assessment. Defaults to `false`.
+          type: boolean
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2RecaptchaKey:
+      description: The reCAPTCHA key config. reCAPTCHA Enterprise offers different keys for different client platforms.
+      properties:
+        key:
+          description: The reCAPTCHA Enterprise key resource name, e.g. "projects/{project}/keys/{key}"
+          type: string
+        type:
+          description: The client's platform type.
+          enum:
+            - CLIENT_TYPE_UNSPECIFIED
+            - WEB
+            - IOS
+            - ANDROID
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitAdminV2RecaptchaManagedRule:
+      description: The config for a reCAPTCHA managed rule. Models a single interval [start_score, end_score]. The start_score is implicit. It is either the closest smaller end_score (if one is available) or 0. Intervals in aggregate span [0, 1] without overlapping.
+      properties:
+        action:
+          description: The action taken if the reCAPTCHA score of a request is within the interval [start_score, end_score].
+          enum:
+            - RECAPTCHA_ACTION_UNSPECIFIED
+            - BLOCK
+          type: string
+        endScore:
+          description: The end score (inclusive) of the score range for an action. Must be a value between 0.0 and 1.0, at 11 discrete values; e.g. 0, 0.1, 0.2, 0.3, ... 0.9, 1.0. A score of 0.0 indicates the riskiest request (likely a bot), whereas 1.0 indicates the safest request (likely a human). See https://cloud.google.com/recaptcha-enterprise/docs/interpret-assessment.
+          format: float
+          type: number
+      type: object
     GoogleCloudIdentitytoolkitAdminV2RequestLogging:
       description: Configuration for logging requests made to this project to Stackdriver Logging
       properties:
@@ -1736,6 +1884,9 @@ components:
           description: 'Output only. Resource name of a tenant. For example: "projects/{project-id}/tenants/{tenant-id}"'
           readOnly: true
           type: string
+        recaptchaConfig:
+          $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2RecaptchaConfig"
+          description: The tenant-level reCAPTCHA config.
         smsRegionConfig:
           $ref: "#/components/schemas/GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig"
           description: Configures which regions are enabled for SMS verification code sending.
@@ -1888,6 +2039,67 @@ components:
         verificationCode:
           description: User-entered verification code.
           type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2RecaptchaConfig:
+      description: Configuration for reCAPTCHA
+      properties:
+        recaptchaEnforcementState:
+          description: The reCAPTCHA enforcement state for the providers that GCIP supports reCAPTCHA protection.
+          items:
+            $ref: "#/components/schemas/GoogleCloudIdentitytoolkitV2RecaptchaEnforcementState"
+          type: array
+        recaptchaKey:
+          description: The reCAPTCHA Enterprise key resource name, e.g. "projects/{project}/keys/{key}".
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2RecaptchaEnforcementState:
+      description: Enforcement states for reCAPTCHA protection.
+      properties:
+        enforcementState:
+          description: The reCAPTCHA enforcement state for the provider.
+          enum:
+            - ENFORCEMENT_STATE_UNSPECIFIED
+            - OFF
+            - AUDIT
+            - ENFORCE
+          type: string
+        provider:
+          description: The provider that has reCAPTCHA protection.
+          enum:
+            - RECAPTCHA_PROVIDER_UNSPECIFIED
+            - EMAIL_PASSWORD_PROVIDER
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2RevokeTokenRequest:
+      description: Request message for RevokeToken.
+      properties:
+        idToken:
+          description: Required. A valid Identity Platform ID token to link the account. If there was a successful token revocation request on the account and no tokens are generated after the revocation, the duplicate requests will be ignored and returned immediately.
+          type: string
+        providerId:
+          description: Required. The idp provider for the token. Currently only supports Apple Idp. The format should be "apple.com".
+          type: string
+        redirectUri:
+          description: The redirect URI provided in the initial authorization request made by the client to the IDP. The URI must use the HTTPS protocol, include a domain name, and can’t contain an IP address or localhost. Required if token_type is CODE.
+          type: string
+        tenantId:
+          description: The ID of the Identity Platform tenant the user is signing in to. If not set, the user will sign in to the default Identity Platform project.
+          type: string
+        token:
+          description: Required. The token to be revoked. If an authorization_code is passed in, the API will first exchange the code for access token and then revoke the token exchanged.
+          type: string
+        tokenType:
+          description: Required. The type of the token to be revoked.
+          enum:
+            - TOKEN_TYPE_UNSPECIFIED
+            - REFRESH_TOKEN
+            - ACCESS_TOKEN
+            - CODE
+          type: string
+      type: object
+    GoogleCloudIdentitytoolkitV2RevokeTokenResponse:
+      description: Response message for RevokeToken. Empty for now.
+      properties: {}
       type: object
     GoogleCloudIdentitytoolkitV2StartMfaEnrollmentRequest:
       description: Sends MFA enrollment verification SMS for a user.

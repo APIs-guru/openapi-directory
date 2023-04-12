@@ -1681,7 +1681,7 @@ components:
       description: Lists the asset IDs of all assets.
       properties:
         assetIds:
-          description: A list of asset IDs
+          description: Required. A list of asset IDs
           items:
             type: string
           type: array
@@ -2315,7 +2315,7 @@ components:
           description: User-friendly display name. Maximum length is 63 characters.
           type: string
         format:
-          description: The payload format.
+          description: Required. The payload format.
           enum:
             - IMPORT_JOB_FORMAT_UNSPECIFIED
             - IMPORT_JOB_FORMAT_CMDB
@@ -3096,7 +3096,7 @@ components:
           description: User-friendly display name. Maximum length is 63 characters.
           type: string
         groupPreferencesetAssignments:
-          description: Collection of combinations of groups and preference sets.
+          description: Required. Collection of combinations of groups and preference sets.
           items:
             $ref: "#/components/schemas/ReportConfigGroupPreferenceSetAssignment"
           type: array
@@ -3114,10 +3114,10 @@ components:
       description: Represents a combination of a group with a preference set.
       properties:
         group:
-          description: Name of the group.
+          description: Required. Name of the group.
           type: string
         preferenceSet:
-          description: Name of the Preference Set.
+          description: Required. Name of the Preference Set.
           type: string
       type: object
     ReportSummary:
