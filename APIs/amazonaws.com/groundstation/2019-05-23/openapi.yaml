@@ -383,12 +383,12 @@ paths:
                 - endpointDetails
               properties:
                 contactPostPassDurationSeconds:
-                  description: 'Amount of time, in seconds, after a contact ends for the contact to remain in a <code>POSTPASS</code> state. A CloudWatch event is emitted when the contact enters and exits the <code>POSTPASS</code> state.'
+                  description: 'Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state.'
                   type: integer
                   minimum: 120
                   maximum: 480
                 contactPrePassDurationSeconds:
-                  description: 'Amount of time, in seconds, prior to contact start for the contact to remain in a <code>PREPASS</code> state. A CloudWatch event is emitted when the contact enters and exits the <code>PREPASS</code> state.'
+                  description: 'Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state.'
                   type: integer
                   minimum: 120
                   maximum: 480
@@ -1316,7 +1316,7 @@ paths:
   '/agent/{agentId}/configuration':
     get:
       operationId: GetAgentConfiguration
-      description: Gets the latest configuration information for a registered agent.
+      description: <note> <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p> </note> <p>Gets the latest configuration information for a registered agent.</p>
       responses:
         '200':
           description: Success
@@ -1872,7 +1872,7 @@ paths:
   /agent:
     post:
       operationId: RegisterAgent
-      description: Registers a new agent with AWS Groundstation.
+      description: <note> <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p> </note> <p> Registers a new agent with AWS Ground Station. </p>
       responses:
         '200':
           description: Success
@@ -1913,6 +1913,10 @@ paths:
                   description: Detailed information about the agent.
                   type: object
                   properties:
+                    agentCpuCores:
+                      allOf:
+                        - $ref: '#/components/schemas/AgentCpuCoresList'
+                        - description: List of CPU cores reserved for the agent.
                     agentVersion:
                       allOf:
                         - $ref: '#/components/schemas/VersionString'
@@ -1931,8 +1935,8 @@ paths:
                         - description: Type of EC2 instance agent is running on.
                     reservedCpuCores:
                       allOf:
-                        - $ref: '#/components/schemas/ReservedCpuCoresList'
-                        - description: Number of Cpu cores reserved for agent.
+                        - $ref: '#/components/schemas/AgentCpuCoresList'
+                        - description: <note> <p>This field should not be used. Use agentCpuCores instead.</p> </note> <p>List of CPU cores reserved for processes other than the agent running on the EC2 instance.</p>
                 discoveryData:
                   description: Data for agent discovery.
                   type: object
@@ -2093,7 +2097,7 @@ paths:
   '/agent/{agentId}':
     put:
       operationId: UpdateAgentStatus
-      description: Update the status of the agent.
+      description: <note> <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p> </note> <p>Update the status of the agent.</p>
       responses:
         '200':
           description: Success
@@ -2157,7 +2161,7 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/ComponentStatusData'
-                  minItems: 1
+                  minItems: 0
                   maxItems: 20
                 taskId:
                   description: GUID of agent task.
@@ -2381,6 +2385,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataflowEndpoint'
             - description: A dataflow endpoint.
+        healthReasons:
+          allOf:
+            - $ref: '#/components/schemas/CapabilityHealthReasonList'
+            - description: Health reasons for a dataflow endpoint. This field is ignored when calling <code>CreateDataflowEndpointGroup</code>.
+        healthStatus:
+          allOf:
+            - $ref: '#/components/schemas/CapabilityHealth'
+            - description: A dataflow endpoint health status. This field is ignored when calling <code>CreateDataflowEndpointGroup</code>.
         securityDetails:
           allOf:
             - $ref: '#/components/schemas/SecurityDetails'
@@ -2591,11 +2603,11 @@ components:
         contactPostPassDurationSeconds:
           allOf:
             - $ref: '#/components/schemas/DataflowEndpointGroupDurationInSeconds'
-            - description: 'Amount of time, in seconds, after a contact ends for the contact to remain in a <code>POSTPASS</code> state. A CloudWatch event is emitted when the contact enters and exits the <code>POSTPASS</code> state.'
+            - description: 'Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state.'
         contactPrePassDurationSeconds:
           allOf:
             - $ref: '#/components/schemas/DataflowEndpointGroupDurationInSeconds'
-            - description: 'Amount of time, in seconds, prior to contact start for the contact to remain in a <code>PREPASS</code> state. A CloudWatch event is emitted when the contact enters and exits the <code>PREPASS</code> state.'
+            - description: 'Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state.'
         dataflowEndpointGroupArn:
           allOf:
             - $ref: '#/components/schemas/DataflowEndpointGroupArn'
@@ -2836,6 +2848,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/Uuid'
             - description: UUID of registered agent.
+    AgentCpuCoresList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Integer'
+      minItems: 0
+      maxItems: 256
     VersionString:
       type: string
       pattern: '^(0|[1-9]\d*)(\.(0|[1-9]\d*))*$'
@@ -2857,12 +2875,6 @@ components:
       pattern: '^[a-z0-9.-]{1,64}$'
       minLength: 1
       maxLength: 64
-    ReservedCpuCoresList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Integer'
-      minItems: 1
-      maxItems: 256
     CapabilityArnList:
       type: array
       items:
@@ -2929,7 +2941,7 @@ components:
             - description: Capability ARN of the component.
         componentType:
           allOf:
-            - $ref: '#/components/schemas/ComponentType'
+            - $ref: '#/components/schemas/ComponentTypeString'
             - description: The Component type.
         dataflowId:
           allOf:
@@ -2949,6 +2961,8 @@ components:
       pattern: '^[\w-]+$'
       minLength: 1
       maxLength: 128
+    Integer:
+      type: integer
     AgentDetails:
       type: object
       required:
@@ -2956,8 +2970,11 @@ components:
         - componentVersions
         - instanceId
         - instanceType
-        - reservedCpuCores
       properties:
+        agentCpuCores:
+          allOf:
+            - $ref: '#/components/schemas/AgentCpuCoresList'
+            - description: List of CPU cores reserved for the agent.
         agentVersion:
           allOf:
             - $ref: '#/components/schemas/VersionString'
@@ -2976,8 +2993,8 @@ components:
             - description: Type of EC2 instance agent is running on.
         reservedCpuCores:
           allOf:
-            - $ref: '#/components/schemas/ReservedCpuCoresList'
-            - description: Number of Cpu cores reserved for agent.
+            - $ref: '#/components/schemas/AgentCpuCoresList'
+            - description: <note> <p>This field should not be used. Use agentCpuCores instead.</p> </note> <p>List of CPU cores reserved for processes other than the agent running on the EC2 instance.</p>
       description: Detailed information about the agent.
     AggregateStatus:
       type: object
@@ -3167,19 +3184,37 @@ components:
       description: <p/>
     CapabilityArn:
       type: string
-    Long:
-      type: integer
-    ComponentType:
+    CapabilityHealth:
       type: string
       enum:
-        - LAMINAR_FLOW
-        - PRISM
-        - DIGITIZER
+        - UNHEALTHY
+        - HEALTHY
+    CapabilityHealthReason:
+      type: string
+      enum:
+        - NO_REGISTERED_AGENT
+        - INVALID_IP_OWNERSHIP
+        - NOT_AUTHORIZED_TO_CREATE_SLR
+        - UNVERIFIED_IP_OWNERSHIP
+        - INITIALIZING_DATAPLANE
+        - DATAPLANE_FAILURE
+        - HEALTHY
+    CapabilityHealthReasonList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CapabilityHealthReason'
+      minItems: 0
+      maxItems: 500
+    Long:
+      type: integer
+    ComponentTypeString:
+      type: string
+      pattern: '^[a-zA-Z0-9_]{1,64}$'
     ComponentStatusList:
       type: array
       items:
         $ref: '#/components/schemas/ComponentStatusData'
-      minItems: 1
+      minItems: 0
       maxItems: 20
     VersionStringList:
       type: array
@@ -3195,7 +3230,7 @@ components:
       properties:
         componentType:
           allOf:
-            - $ref: '#/components/schemas/ComponentType'
+            - $ref: '#/components/schemas/ComponentTypeString'
             - description: Component type.
         versions:
           allOf:
@@ -3296,8 +3331,6 @@ components:
             - $ref: '#/components/schemas/UplinkEchoConfig'
             - description: '<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>'
       description: <p>Object containing the parameters of a <code>Config</code>.</p> <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>
-    Integer:
-      type: integer
     SocketAddress:
       type: object
       required:
@@ -3438,11 +3471,11 @@ components:
         contactPostPassDurationSeconds:
           allOf:
             - $ref: '#/components/schemas/DataflowEndpointGroupDurationInSeconds'
-            - description: 'Amount of time, in seconds, after a contact ends for the contact to remain in a <code>POSTPASS</code> state. A CloudWatch event is emitted when the contact enters and exits the <code>POSTPASS</code> state.'
+            - description: 'Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state.'
         contactPrePassDurationSeconds:
           allOf:
             - $ref: '#/components/schemas/DataflowEndpointGroupDurationInSeconds'
-            - description: 'Amount of time, in seconds, prior to contact start for the contact to remain in a <code>PREPASS</code> state. A CloudWatch event is emitted when the contact enters and exits the <code>PREPASS</code> state.'
+            - description: 'Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state.'
         endpointDetails:
           allOf:
             - $ref: '#/components/schemas/EndpointDetailsList'
@@ -4204,7 +4237,7 @@ components:
         discoveryData:
           allOf:
             - $ref: '#/components/schemas/DiscoveryData'
-            - description: Data for associating and agent with the capabilities it is managing.
+            - description: Data for associating an agent with the capabilities it is managing.
     ReserveContactRequest:
       type: object
       required:
