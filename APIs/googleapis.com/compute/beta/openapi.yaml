@@ -46591,6 +46591,11 @@ components:
           description: Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must be between 1 and 7,124.
           format: int64
           type: string
+        replicaZones:
+          description: Required for each regional disk associated with the instance. Specify the URLs of the zones where the disk should be replicated to. You must provide exactly two replica zones, and one zone must be the same as the instance zone. You can't use this option with boot disks.
+          items:
+            type: string
+          type: array
         resourceManagerTags:
           additionalProperties:
             type: string
@@ -50436,7 +50441,7 @@ components:
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
         network:
-          description: This field is not used for external load balancing. For Internal TCP/UDP Load Balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If this field is not specified, the default network will be used. For Private Service Connect forwarding rules that forward traffic to Google APIs, a network must be provided.
+          description: This field is not used for external load balancing. For Internal TCP/UDP Load Balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If the subnetwork is specified, the network of the subnetwork will be used. If neither subnetwork nor this field is specified, the default network will be used. For Private Service Connect forwarding rules that forward traffic to Google APIs, a network must be provided.
           type: string
         networkTier:
           description: "This signifies the networking tier used for configuring this load balancer and can only take the following values: PREMIUM, STANDARD. For regional ForwardingRule, the valid values are PREMIUM and STANDARD. For GlobalForwardingRule, the valid value is PREMIUM. If this field is not specified, it is assumed to be PREMIUM. If IPAddress is specified, this value must be equal to the networkTier of the Address."
@@ -56467,7 +56472,7 @@ components:
           description: The project id or number of the interface to which the IP was assigned.
           type: string
         secondaryIpCidrRanges:
-          description: Alias IP ranges from the same subnetwork
+          description: Alias IP ranges from the same subnetwork.
           items:
             type: string
           type: array
@@ -62667,6 +62672,14 @@ components:
     RouterNat:
       description: Represents a Nat resource. It enables the VMs within the specified subnetworks to access Internet without external IP addresses. It specifies a list of subnetworks (and the ranges within) that want to use NAT. Customers can also provide the external IPs that would be used for NAT. GCP would auto-allocate ephemeral IPs if no external IPs are provided.
       properties:
+        autoNetworkTier:
+          description: "The network tier to use when automatically reserving IP addresses. Must be one of: PREMIUM, STANDARD. If not specified, PREMIUM tier will be used."
+          enum:
+            - FIXED_STANDARD
+            - PREMIUM
+            - STANDARD
+            - STANDARD_OVERRIDES_FIXED_STANDARD
+          type: string
         drainNatIps:
           description: A list of URLs of the IP resources to be drained. These IPs must be valid static external IPs that have been assigned to the NAT. These IPs should be used for updating/patching a NAT only.
           items:
@@ -63576,13 +63589,13 @@ components:
           type: number
       type: object
     SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig:
-      description: Configuration options for L7 DDoS detection.
+      description: Configuration options for L7 DDoS detection. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
       properties:
         enable:
-          description: If set to true, enables CAAP for L7 DDoS detection.
+          description: If set to true, enables CAAP for L7 DDoS detection. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
           type: boolean
         ruleVisibility:
-          description: "Rule visibility can be one of the following: STANDARD - opaque rules. (default) PREMIUM - transparent rules."
+          description: "Rule visibility can be one of the following: STANDARD - opaque rules. (default) PREMIUM - transparent rules. This field is only supported in Global Security Policies of type CLOUD_ARMOR."
           enum:
             - PREMIUM
             - STANDARD
@@ -63712,7 +63725,7 @@ components:
     SecurityPolicyRecaptchaOptionsConfig:
       properties:
         redirectSiteKey:
-          description: An optional field to supply a reCAPTCHA site key to be used for all the rules using the redirect action with the type of GOOGLE_RECAPTCHA under the security policy. The specified site key needs to be created from the reCAPTCHA API. The user is responsible for the validity of the specified site key. If not specified, a Google-managed site key is used.
+          description: An optional field to supply a reCAPTCHA site key to be used for all the rules using the redirect action with the type of GOOGLE_RECAPTCHA under the security policy. The specified site key needs to be created from the reCAPTCHA API. The user is responsible for the validity of the specified site key. If not specified, a Google-managed site key is used. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
           type: string
       type: object
     SecurityPolicyReference:
@@ -63724,7 +63737,7 @@ components:
       description: Represents a rule that describes one or more match conditions along with the action to be taken when traffic matches this condition (allow or deny).
       properties:
         action:
-          description: "The Action to perform when the rule is matched. The following are the valid actions: - allow: allow access to target. - deny(STATUS): deny access to target, returns the HTTP response code specified. Valid values for `STATUS` are 403, 404, and 502. - rate_based_ban: limit client traffic to the configured threshold and ban the client if the traffic exceeds the threshold. Configure parameters for this action in RateLimitOptions. Requires rate_limit_options to be set. - redirect: redirect to a different target. This can either be an internal reCAPTCHA redirect, or an external URL-based redirect via a 302 response. Parameters for this action can be configured via redirectOptions. - throttle: limit client traffic to the configured threshold. Configure parameters for this action in rateLimitOptions. Requires rate_limit_options to be set for this. "
+          description: "The Action to perform when the rule is matched. The following are the valid actions: - allow: allow access to target. - deny(STATUS): deny access to target, returns the HTTP response code specified. Valid values for `STATUS` are 403, 404, and 502. - rate_based_ban: limit client traffic to the configured threshold and ban the client if the traffic exceeds the threshold. Configure parameters for this action in RateLimitOptions. Requires rate_limit_options to be set. - redirect: redirect to a different target. This can either be an internal reCAPTCHA redirect, or an external URL-based redirect via a 302 response. Parameters for this action can be configured via redirectOptions. This action is only supported in Global Security Policies of type CLOUD_ARMOR. - throttle: limit client traffic to the configured threshold. Configure parameters for this action in rateLimitOptions. Requires rate_limit_options to be set for this. "
           type: string
         description:
           description: An optional description of this resource. Provide this property when you create the resource.
@@ -63740,7 +63753,7 @@ components:
           type: boolean
         headerAction:
           $ref: "#/components/schemas/SecurityPolicyRuleHttpHeaderAction"
-          description: Optional, additional actions that are performed on headers.
+          description: Optional, additional actions that are performed on headers. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
         kind:
           default: compute#securityPolicyRule
           description: "[Output only] Type of the resource. Always compute#securityPolicyRule for security policy rules"
@@ -63763,7 +63776,7 @@ components:
           description: Must be specified if the action is "rate_based_ban" or "throttle". Cannot be specified for any other actions.
         redirectOptions:
           $ref: "#/components/schemas/SecurityPolicyRuleRedirectOptions"
-          description: Parameters defining the redirect action. Cannot be specified for any other actions.
+          description: Parameters defining the redirect action. Cannot be specified for any other actions. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
         ruleNumber:
           description: Identifier for the rule. This is only unique within the given security policy. This can only be set during rule creation, if rule number is not specified it will be generated by the server.
           format: int64
@@ -63808,7 +63821,7 @@ components:
           description: The configuration options available when specifying versioned_expr. This field must be specified if versioned_expr is specified and cannot be specified if versioned_expr is not specified.
         expr:
           $ref: "#/components/schemas/Expr"
-          description: User defined CEVAL expression. A CEVAL expression is used to specify match criteria such as origin.ip, source.region_code and contents in the request header.
+          description: User defined CEVAL expression. A CEVAL expression is used to specify match criteria such as origin.ip, source.region_code and contents in the request header. Expressions containing `evaluateThreatIntelligence` require Cloud Armor Managed Protection Plus tier and are not supported in Edge Policies nor in Regional Policies. Expressions containing `evaluatePreconfiguredExpr('sourceiplist-*')` require Cloud Armor Managed Protection Plus tier and are only supported in Global Security Policies.
         versionedExpr:
           description: "Preconfigured versioned expression. If this field is specified, config must also be specified. Available preconfigured expressions along with their requirements are: SRC_IPS_V1 - must specify the corresponding src_ip_range field in config."
           enum:
@@ -63933,11 +63946,11 @@ components:
           description: "Rate limit key name applicable only for the following key types: HTTP_HEADER -- Name of the HTTP header whose value is taken as the key value. HTTP_COOKIE -- Name of the HTTP cookie whose value is taken as the key value."
           type: string
         exceedAction:
-          description: Action to take for requests that are above the configured rate limit threshold, to either deny with a specified HTTP response code, or redirect to a different endpoint. Valid options are `deny(STATUS)`, where valid values for `STATUS` are 403, 404, 429, and 502, and `redirect`, where the redirect parameters come from `exceedRedirectOptions` below.
+          description: Action to take for requests that are above the configured rate limit threshold, to either deny with a specified HTTP response code, or redirect to a different endpoint. Valid options are `deny(STATUS)`, where valid values for `STATUS` are 403, 404, 429, and 502, and `redirect`, where the redirect parameters come from `exceedRedirectOptions` below. The `redirect` action is only supported in Global Security Policies of type CLOUD_ARMOR.
           type: string
         exceedRedirectOptions:
           $ref: "#/components/schemas/SecurityPolicyRuleRedirectOptions"
-          description: Parameters defining the redirect action that is used as the exceed action. Cannot be specified if the exceed action is not redirect.
+          description: Parameters defining the redirect action that is used as the exceed action. Cannot be specified if the exceed action is not redirect. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
         rateLimitThreshold:
           $ref: "#/components/schemas/SecurityPolicyRuleRateLimitOptionsThreshold"
           description: Threshold at which to begin ratelimiting.

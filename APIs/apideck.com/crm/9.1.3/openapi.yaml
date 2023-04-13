@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 9.1.2
+  version: 9.1.3
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -5705,6 +5705,7 @@ components:
         - ZMK
         - ZMW
         - BTC
+        - ETH
       example: USD
       nullable: true
       title: Currency
@@ -6074,6 +6075,8 @@ components:
           name: ZMW
         - description: Bitcoin
           name: BTC
+        - description: Ether
+          name: ETH
     CustomField:
       additionalProperties: false
       properties:

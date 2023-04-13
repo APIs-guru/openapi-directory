@@ -611,45 +611,6 @@ components:
             type: string
           type: array
       type: object
-    GoogleCloudAssuredworkloadsV1beta1CreateWorkloadOperationMetadata:
-      description: Operation metadata to give request details of CreateWorkload.
-      properties:
-        complianceRegime:
-          description: Optional. Compliance controls that should be applied to the resources managed by the workload.
-          enum:
-            - COMPLIANCE_REGIME_UNSPECIFIED
-            - IL4
-            - CJIS
-            - FEDRAMP_HIGH
-            - FEDRAMP_MODERATE
-            - US_REGIONAL_ACCESS
-            - HIPAA
-            - HITRUST
-            - EU_REGIONS_AND_SUPPORT
-            - CA_REGIONS_AND_SUPPORT
-            - ITAR
-            - AU_REGIONS_AND_US_SUPPORT
-            - ASSURED_WORKLOADS_FOR_PARTNERS
-            - ISR_REGIONS
-            - ISR_REGIONS_AND_SUPPORT
-            - CA_PROTECTED_B
-          type: string
-        createTime:
-          description: Optional. Time when the operation was created.
-          format: google-datetime
-          type: string
-        displayName:
-          description: Optional. The display name of the workload.
-          type: string
-        parent:
-          description: Optional. The parent of the workload.
-          type: string
-        resourceSettings:
-          description: Optional. Resource properties in the input that are used for creating/customizing workload resources.
-          items:
-            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettings"
-          type: array
-      type: object
     GoogleCloudAssuredworkloadsV1beta1ListViolationsResponse:
       description: Response of ListViolations endpoint.
       properties:
@@ -697,7 +658,7 @@ components:
           description: A boolean that indicates if the violation is acknowledged
           type: boolean
         acknowledgementTime:
-          description: Optional. Timestamp when this violation was acknowledged last. This will be absent when acknowledged field is marked as false.
+          description: Optional. Timestamp when this violation was acknowledged first. Check exception_contexts to find the last time the violation was acknowledged when there are more than one violations. This field will be absent when acknowledged field is marked as false.
           format: google-datetime
           type: string
         auditLogLink:
@@ -917,6 +878,8 @@ components:
             - PARTNER_UNSPECIFIED
             - LOCAL_CONTROLS_BY_S3NS
             - SOVEREIGN_CONTROLS_BY_T_SYSTEMS
+            - SOVEREIGN_CONTROLS_BY_SIA_MINSAIT
+            - SOVEREIGN_CONTROLS_BY_PSN
           type: string
         provisionedResourcesParent:
           description: "Input only. The parent resource for the resources managed by this Assured Workload. May be either empty or a folder resource which is a child of the Workload parent. If not specified all resources are created under the parent organization. Format: folders/{folder_id}"
@@ -969,8 +932,13 @@ components:
             - EXTERNAL_PARTNER_ERROR
             - TIMEOUT_ERROR
           type: string
-        ekmProvisioningErrorMessage:
+        ekmProvisioningErrorMapping:
           description: Detailed error message if Ekm provisioning fails
+          enum:
+            - EKM_PROVISIONING_ERROR_MAPPING_UNSPECIFIED
+            - INVALID_SERVICE_ACCOUNT
+            - MISSING_METRICS_SCOPE_ADMIN_PERMISSION
+            - MISSING_EKM_CONNECTION_ADMIN_PERMISSION
           type: string
         ekmProvisioningState:
           description: Indicates Ekm enrollment Provisioning of a given workload.

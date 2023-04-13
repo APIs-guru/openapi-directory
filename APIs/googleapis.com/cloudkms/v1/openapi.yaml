@@ -670,6 +670,47 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
+  "/v1/{name}:verifyConnectivity":
+    get:
+      description: Verifies that Cloud KMS can successfully connect to the external key manager specified by an EkmConnection. If there is an error connecting to the EKM, this method returns a FAILED_PRECONDITION status containing structured information as described at https://cloud.google.com/kms/docs/reference/ekm_errors.
+      operationId: cloudkms.projects.locations.ekmConnections.verifyConnectivity
+      parameters:
+        - description: Required. The name of the EkmConnection to verify.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VerifyConnectivityResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloudkms
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloudkms
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/cryptoKeyVersions":
     get:
       description: Lists CryptoKeyVersions.
@@ -2558,6 +2599,10 @@ components:
         cryptoKeyVersionId:
           description: Required. The id of the child CryptoKeyVersion to use as primary.
           type: string
+      type: object
+    VerifyConnectivityResponse:
+      description: Response message for EkmService.VerifyConnectivity.
+      properties: {}
       type: object
     WrappingPublicKey:
       description: The public key component of the wrapping key. For details of the type of key this public key corresponds to, see the ImportMethod.

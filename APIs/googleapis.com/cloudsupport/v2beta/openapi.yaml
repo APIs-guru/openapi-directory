@@ -732,7 +732,7 @@ components:
             - P4
           type: string
         severity:
-          description: The severity of this case. Deprecated. Use priority instead.
+          description: REMOVED. The severity of this case. Use priority instead.
           enum:
             - SEVERITY_UNSPECIFIED
             - S0
@@ -803,7 +803,7 @@ components:
           readOnly: true
           type: string
         plainTextBody:
-          description: Output only. An automatically generated plain text version of body with all rich text syntax stripped.
+          description: Output only. DEPRECATED. An automatically generated plain text version of body with all rich text syntax stripped.
           readOnly: true
           type: string
       type: object

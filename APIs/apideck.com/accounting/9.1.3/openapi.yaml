@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 9.1.2
+  version: 9.1.3
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -7399,6 +7399,7 @@ components:
         - ZMK
         - ZMW
         - BTC
+        - ETH
       example: USD
       nullable: true
       title: Currency
@@ -7768,6 +7769,8 @@ components:
           name: ZMW
         - description: Bitcoin
           name: BTC
+        - description: Ether
+          name: ETH
     CurrencyRate:
       description: Currency Exchange Rate at the time entity was recorded/generated.
       example: 0.69

@@ -32,7 +32,7 @@ tags:
 paths:
   "/v1/{name}":
     delete:
-      description: Deletes the workload. Make sure that workload's direct children are already in a deleted state, otherwise the request will fail with a FAILED_PRECONDITION error. In addition to assuredworkloads.workload.delete permission, the user should also have orgpolicy.policy.set permission on the deleted folder to remove Assured Workloads OrgPolicies.
+      description: Deletes the workload. Make sure that workload's direct children are already in a deleted state, otherwise the request will fail with a FAILED_PRECONDITION error.
       operationId: assuredworkloads.organizations.locations.workloads.delete
       parameters:
         - description: "Required. The `name` field is used to identify the workload. Format: organizations/{org_id}/locations/{location_id}/workloads/{workload_id}"
@@ -605,7 +605,7 @@ components:
           type: array
       type: object
     GoogleCloudAssuredworkloadsV1MutatePartnerPermissionsRequest:
-      description: Request for updating permission settings for a partner workload.
+      description: Request of updating permission settings for a partner workload.
       properties:
         etag:
           description: Optional. The etag of the workload. If this is provided, it must match the server's etag.
@@ -641,7 +641,7 @@ components:
           description: A boolean that indicates if the violation is acknowledged
           type: boolean
         acknowledgementTime:
-          description: Optional. Timestamp when this violation was acknowledged last. This will be absent when acknowledged field is marked as false.
+          description: Optional. Timestamp when this violation was acknowledged first. Check exception_contexts to find the last time the violation was acknowledged when there are more than one violations. This field will be absent when acknowledged field is marked as false.
           format: google-datetime
           type: string
         auditLogLink:
@@ -849,6 +849,8 @@ components:
             - PARTNER_UNSPECIFIED
             - LOCAL_CONTROLS_BY_S3NS
             - SOVEREIGN_CONTROLS_BY_T_SYSTEMS
+            - SOVEREIGN_CONTROLS_BY_SIA_MINSAIT
+            - SOVEREIGN_CONTROLS_BY_PSN
           type: string
         provisionedResourcesParent:
           description: "Input only. The parent resource for the resources managed by this Assured Workload. May be either empty or a folder resource which is a child of the Workload parent. If not specified all resources are created under the parent organization. Format: folders/{folder_id}"
@@ -894,8 +896,13 @@ components:
             - EXTERNAL_PARTNER_ERROR
             - TIMEOUT_ERROR
           type: string
-        ekmProvisioningErrorMessage:
+        ekmProvisioningErrorMapping:
           description: Detailed error message if Ekm provisioning fails
+          enum:
+            - EKM_PROVISIONING_ERROR_MAPPING_UNSPECIFIED
+            - INVALID_SERVICE_ACCOUNT
+            - MISSING_METRICS_SCOPE_ADMIN_PERMISSION
+            - MISSING_EKM_CONNECTION_ADMIN_PERMISSION
           type: string
         ekmProvisioningState:
           description: Indicates Ekm enrollment Provisioning of a given workload.
@@ -907,7 +914,7 @@ components:
           type: string
       type: object
     GoogleCloudAssuredworkloadsV1WorkloadKMSSettings:
-      description: Settings specific to the Key Management Service.
+      description: Settings specific to the Key Management Service. This message is deprecated. In order to create a Keyring, callers should specify, ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.
       properties:
         nextRotationTime:
           description: Required. Input only. Immutable. The time at which the Key Management Service will automatically create a new version of the crypto key and mark it as the primary.
@@ -958,7 +965,7 @@ components:
           description: Resource identifier. For a project this represents project_id. If the project is already taken, the workload creation will fail. For KeyRing, this represents the keyring_id. For a folder, don't set this value as folder_id is assigned by Google.
           type: string
         resourceType:
-          description: Indicates the type of resource. This field should be specified to correspond the id to the right project type (CONSUMER_PROJECT or ENCRYPTION_KEYS_PROJECT)
+          description: Indicates the type of resource. This field should be specified to correspond the id to the right resource type (CONSUMER_FOLDER or ENCRYPTION_KEYS_PROJECT)
           enum:
             - RESOURCE_TYPE_UNSPECIFIED
             - CONSUMER_PROJECT

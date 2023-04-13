@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: POS API
-  version: 9.1.2
+  version: 9.1.3
   x-apideck-api: pos
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -5215,6 +5215,7 @@ components:
         - ZMK
         - ZMW
         - BTC
+        - ETH
       example: USD
       nullable: true
       title: Currency
@@ -5584,6 +5585,8 @@ components:
           name: ZMW
         - description: Bitcoin
           name: BTC
+        - description: Ether
+          name: ETH
     CustomField:
       additionalProperties: false
       properties:
