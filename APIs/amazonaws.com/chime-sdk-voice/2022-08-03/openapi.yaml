@@ -755,7 +755,7 @@ paths:
                     Country:
                       allOf:
                         - $ref: '#/components/schemas/Country'
-                        - description: 'The country. '
+                        - description: The country.
                     AreaCode:
                       allOf:
                         - $ref: '#/components/schemas/AreaCode'
@@ -960,6 +960,13 @@ paths:
                     $ref: '#/components/schemas/SipMediaApplicationEndpoint'
                   minItems: 1
                   maxItems: 1
+                Tags:
+                  description: The tags assigned to the SIP media application.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1436,6 +1443,13 @@ paths:
                 RequireEncryption:
                   description: Enables or disables encryption for the Voice Connector.
                   type: boolean
+                Tags:
+                  description: The tags assigned to the Voice Connector.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5928,7 +5942,7 @@ paths:
                     EnableSIPLogs:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
-                        - description: Boolean that enables sending SIP message logs to Amazon CloudWatch logs.
+                        - description: Boolean that enables sending SIP message logs to Amazon CloudWatch.
                     EnableMediaMetricLogs:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
@@ -7871,6 +7885,21 @@ components:
             - $ref: '#/components/schemas/FunctionArn'
             - description: 'Valid Amazon Resource Name (ARN) of the Lambda function, version, or alias. The function must be created in the same AWS Region as the SIP media application.'
       description: The endpoint assigned to a SIP media application.
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The tag's key.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The tag's value.
+      description: Describes a tag applied to a resource.
     ConflictException: {}
     CreateSipMediaApplicationCallResponse:
       type: object
@@ -7955,21 +7984,6 @@ components:
       minLength: 1
       maxLength: 1024
       format: password
-    Tag:
-      type: object
-      required:
-        - Key
-        - Value
-      properties:
-        Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: The tag's key.
-        Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: The tag's value.
-      description: Describes a tag applied to a resource.
     DisassociatePhoneNumbersFromVoiceConnectorResponse:
       type: object
       properties:
@@ -8813,7 +8827,7 @@ components:
         Country:
           allOf:
             - $ref: '#/components/schemas/Country'
-            - description: 'The country. '
+            - description: The country.
         AreaCode:
           allOf:
             - $ref: '#/components/schemas/AreaCode'
@@ -8964,6 +8978,12 @@ components:
         $ref: '#/components/schemas/SipMediaApplicationEndpoint'
       minItems: 1
       maxItems: 1
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 50
     CreateSipMediaApplicationRequest:
       type: object
       required:
@@ -8984,6 +9004,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SipMediaApplicationEndpointList'
             - description: List of endpoints (Lambda ARNs) specified for the SIP media application.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags assigned to the SIP media application.
     SipMediaApplication:
       type: object
       properties:
@@ -9002,7 +9026,7 @@ components:
         Endpoints:
           allOf:
             - $ref: '#/components/schemas/SipMediaApplicationEndpointList'
-            - description: 'List of endpoints for SIP media application. Currently, only one endpoint per SIP media application is permitted.'
+            - description: 'List of endpoints for a SIP media application. Currently, only one endpoint per SIP media application is permitted.'
         CreatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
@@ -9011,6 +9035,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
             - description: The time at which the SIP media application was updated.
+        SipMediaApplicationArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the SIP media application.
       description: 'The details of the SIP media application, including name and endpoints. An AWS account can have multiple SIP media applications.'
     SipRuleName:
       type: string
@@ -9180,6 +9208,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Enables or disables encryption for the Voice Connector.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags assigned to the Voice Connector.
     VoiceConnector:
       type: object
       properties:
@@ -9235,12 +9267,6 @@ components:
             - $ref: '#/components/schemas/Arn'
             - description: The ARN of the KMS key used to encrypt the enrollment data in a voice profile domain. Asymmetric customer managed keys are not supported.
       description: '<p>A structure that contains the configuration settings for server-side encryption.</p> <note> <p>We only support symmetric keys. Do not use asymmetric or HMAC keys, or KMS aliases.</p> </note>'
-    TagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
-      minItems: 1
-      maxItems: 50
     CreateVoiceProfileDomainRequest:
       type: object
       required:
@@ -9662,7 +9688,7 @@ components:
         EnableSIPLogs:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Boolean that enables sending SIP message logs to Amazon CloudWatch logs.
+            - description: Boolean that enables sending SIP message logs to Amazon CloudWatch.
         EnableMediaMetricLogs:
           allOf:
             - $ref: '#/components/schemas/Boolean'

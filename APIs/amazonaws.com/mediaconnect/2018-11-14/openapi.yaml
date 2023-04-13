@@ -115,6 +115,170 @@ servers:
     description: The AWS MediaConnect endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/v1/bridges/{bridgeArn}/outputs':
+    post:
+      operationId: AddBridgeOutputs
+      description: Adds outputs to an existing bridge.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddBridgeOutputsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: bridgeArn
+          in: path
+          required: true
+          description: The ARN of the bridge that you want to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - outputs
+              properties:
+                outputs:
+                  description: The outputs that you want to add to this bridge.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AddBridgeOutputRequest'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/bridges/{bridgeArn}/sources':
+    post:
+      operationId: AddBridgeSources
+      description: Adds sources to an existing bridge.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddBridgeSourcesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: bridgeArn
+          in: path
+          required: true
+          description: The ARN of the bridge that you want to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sources
+              properties:
+                sources:
+                  description: The sources that you want to add to this bridge.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AddBridgeSourceRequest'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/flows/{flowArn}/mediaStreams':
     post:
       operationId: AddFlowMediaStreams
@@ -425,6 +589,221 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/bridges:
+    post:
+      operationId: CreateBridge
+      description: Creates a new bridge. The request must include one source.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBridgeResponse'
+        '480':
+          description: CreateBridge420Exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBridge420Exception'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - placementArn
+                - sources
+              properties:
+                egressGatewayBridge:
+                  description: Create a bridge with the egress bridge type. An egress bridge is a cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises.
+                  type: object
+                  properties:
+                    MaxBitrate:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: maxBitrate
+                          description: The maximum expected bitrate (in bps).
+                ingressGatewayBridge:
+                  description: Create a bridge with the ingress bridge type. An ingress bridge is a ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud.
+                  type: object
+                  properties:
+                    MaxBitrate:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: maxBitrate
+                          description: The maximum expected bitrate (in bps).
+                    MaxOutputs:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: maxOutputs
+                          description: The maximum number of expected outputs.
+                name:
+                  description: The name of the bridge. This name can not be modified after the bridge is created.
+                  type: string
+                outputs:
+                  description: The outputs that you want to add to this bridge.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AddBridgeOutputRequest'
+                placementArn:
+                  description: The bridge placement Amazon Resource Number (ARN).
+                  type: string
+                sourceFailoverConfig:
+                  description: The settings for source failover.
+                  type: object
+                  properties:
+                    FailoverMode:
+                      allOf:
+                        - $ref: '#/components/schemas/FailoverMode'
+                        - xml:
+                            name: failoverMode
+                          description: 'The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.'
+                    RecoveryWindow:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: recoveryWindow
+                          description: Search window time to look for dash-7 packets
+                    SourcePriority:
+                      allOf:
+                        - $ref: '#/components/schemas/SourcePriority'
+                        - xml:
+                            name: sourcePriority
+                          description: The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
+                    State:
+                      allOf:
+                        - $ref: '#/components/schemas/State'
+                        - xml:
+                            name: state
+                sources:
+                  description: The sources that you want to add to this bridge.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AddBridgeSourceRequest'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListBridges
+      description: Displays a list of bridges that are associated with this account and an optionally specified Arn. This request returns a paginated result.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBridgesResponse'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: filterArn
+          in: query
+          required: false
+          description: Filter the list results to display only the bridges associated with the selected Amazon Resource Name (ARN).
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return per API request. For example, you submit a ListBridges request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListBridges request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListBridges request a second time and specify the NextToken value.'
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
   /v1/flows:
     post:
       operationId: CreateFlow
@@ -512,7 +891,7 @@ paths:
                         - $ref: '#/components/schemas/Encryption'
                         - xml:
                             name: decryption
-                          description: The type of encryption that is used on the content ingested from this source.
+                          description: 'The type of encryption that is used on the content ingested from this source. Allowable encryption types: static-key.'
                     Description:
                       allOf:
                         - $ref: '#/components/schemas/__string'
@@ -522,7 +901,8 @@ paths:
                     EntitlementArn:
                       allOf:
                         - $ref: '#/components/schemas/__string'
-                        - xml:
+                        - pattern: '^arn:.+:mediaconnect.+:entitlement:.+$'
+                          xml:
                             name: entitlementArn
                           description: 'The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator''s flow.'
                     IngestPort:
@@ -536,7 +916,7 @@ paths:
                         - $ref: '#/components/schemas/__integer'
                         - xml:
                             name: maxBitrate
-                          description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
+                          description: 'The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.'
                     MaxLatency:
                       allOf:
                         - $ref: '#/components/schemas/__integer'
@@ -602,7 +982,7 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: streamId
-                          description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+                          description: The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams.
                     VpcInterfaceName:
                       allOf:
                         - $ref: '#/components/schemas/__string'
@@ -615,6 +995,12 @@ paths:
                         - xml:
                             name: whitelistCidr
                           description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+                    GatewayBridgeSource:
+                      allOf:
+                        - $ref: '#/components/schemas/SetGatewayBridgeSourceRequest'
+                        - xml:
+                            name: gatewayBridgeSource
+                          description: The source configuration for cloud flows receiving a stream from a bridge.
                 sourceFailoverConfig:
                   description: The settings for source failover.
                   type: object
@@ -737,6 +1123,405 @@ paths:
             type: string
           description: Pagination token
           required: false
+  /v1/gateways:
+    post:
+      operationId: CreateGateway
+      description: Creates a new gateway. The request must include at least one network (up to 4).
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGatewayResponse'
+        '480':
+          description: CreateGateway420Exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGateway420Exception'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - egressCidrBlocks
+                - name
+                - networks
+              properties:
+                egressCidrBlocks:
+                  description: 'The range of IP addresses that are allowed to contribute content or initiate output requests for flows communicating with this gateway. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                name:
+                  description: The name of the gateway. This name can not be modified after the gateway is created.
+                  type: string
+                networks:
+                  description: The list of networks that you want to add.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/GatewayNetwork'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListGateways
+      description: Displays a list of gateways that are associated with this account. This request returns a paginated result.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListGatewaysResponse'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return per API request. For example, you submit a ListGateways request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListGateways request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListGateways request a second time and specify the NextToken value.'
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/v1/bridges/{bridgeArn}':
+    delete:
+      operationId: DeleteBridge
+      description: 'Deletes a bridge. Before you can delete a bridge, you must stop the bridge.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteBridgeResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: bridgeArn
+          in: path
+          required: true
+          description: The ARN of the bridge that you want to delete.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeBridge
+      description: Displays the details of a bridge.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBridgeResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: bridgeArn
+          in: path
+          required: true
+          description: The ARN of the bridge that you want to describe.
+          schema:
+            type: string
+    put:
+      operationId: UpdateBridge
+      description: Updates the bridge
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBridgeResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: bridgeArn
+          in: path
+          required: true
+          description: The Amazon Resource Number (ARN) of the bridge that you want to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                egressGatewayBridge:
+                  description: ''
+                  type: object
+                  properties:
+                    MaxBitrate:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: maxBitrate
+                          description: Update an existing egress-type bridge.
+                ingressGatewayBridge:
+                  description: ''
+                  type: object
+                  properties:
+                    MaxBitrate:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: maxBitrate
+                          description: The maximum expected bitrate (in bps).
+                    MaxOutputs:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: maxOutputs
+                          description: The maximum number of expected outputs.
+                sourceFailoverConfig:
+                  description: The settings for source failover.
+                  type: object
+                  properties:
+                    FailoverMode:
+                      allOf:
+                        - $ref: '#/components/schemas/FailoverMode'
+                        - xml:
+                            name: failoverMode
+                          description: 'The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.'
+                    RecoveryWindow:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: recoveryWindow
+                          description: Recovery window time to look for dash-7 packets
+                    SourcePriority:
+                      allOf:
+                        - $ref: '#/components/schemas/SourcePriority'
+                        - xml:
+                            name: sourcePriority
+                          description: The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
+                    State:
+                      allOf:
+                        - $ref: '#/components/schemas/State'
+                        - xml:
+                            name: state
   '/v1/flows/{flowArn}':
     delete:
       operationId: DeleteFlow
@@ -961,6 +1746,338 @@ paths:
                         - xml:
                             name: maintenanceStartHour
                           description: 'UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.'
+  '/v1/gateways/{gatewayArn}':
+    delete:
+      operationId: DeleteGateway
+      description: 'Deletes a gateway. Before you can delete a gateway, you must deregister its instances and delete its bridges.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteGatewayResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: gatewayArn
+          in: path
+          required: true
+          description: The ARN of the gateway that you want to delete.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeGateway
+      description: 'Displays the details of a gateway. The response includes the gateway ARN, name, and CIDR blocks, as well as details about the networks.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeGatewayResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: gatewayArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the gateway that you want to describe.
+          schema:
+            type: string
+  '/v1/gateway-instances/{gatewayInstanceArn}':
+    delete:
+      operationId: DeregisterGatewayInstance
+      description: 'Deregisters an instance. Before you deregister an instance, all bridges running on the instance must be stopped. If you want to deregister an instance without stopping the bridges, you must use the --force option.'
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeregisterGatewayInstanceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: force
+          in: query
+          required: false
+          description: 'Force the deregistration of an instance. Force will deregister an instance, even if there are bridges running on it.'
+          schema:
+            type: boolean
+        - name: gatewayInstanceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the gateway that contains the instance that you want to deregister.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeGatewayInstance
+      description: Displays the details of an instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeGatewayInstanceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: gatewayInstanceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the gateway instance that you want to describe.
+          schema:
+            type: string
+    put:
+      operationId: UpdateGatewayInstance
+      description: Updates the configuration of an existing Gateway Instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateGatewayInstanceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: gatewayInstanceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the instance that you want to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bridgePlacement:
+                  description: 'The availability of the instance to host new bridges. The bridgePlacement property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be deployed to this instance. If it is AVAILABLE, new bridges can be added to this instance.'
+                  type: string
+                  enum:
+                    - AVAILABLE
+                    - LOCKED
   '/v1/offerings/{offeringArn}':
     get:
       operationId: DescribeOffering
@@ -1294,6 +2411,88 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/gateway-instances:
+    get:
+      operationId: ListGatewayInstances
+      description: Displays a list of instances associated with the AWS account. This request returns a paginated result. You can use the filterArn property to display only the instances associated with the selected Gateway Amazon Resource Name (ARN).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListGatewayInstancesResponse'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: filterArn
+          in: query
+          required: false
+          description: Filter the list results to display only the instances associated with the selected Gateway Amazon Resource Name (ARN).
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return per API request. For example, you submit a ListInstances request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListInstances request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListInstances request a second time and specify the NextToken value.'
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /v1/offerings:
     get:
       operationId: ListOfferings
@@ -1523,6 +2722,377 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
+  '/v1/bridges/{bridgeArn}/outputs/{outputName}':
+    delete:
+      operationId: RemoveBridgeOutput
+      description: Removes an output from a bridge.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveBridgeOutputResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: bridgeArn
+          in: path
+          required: true
+          description: The ARN of the bridge that you want to update.
+          schema:
+            type: string
+        - name: outputName
+          in: path
+          required: true
+          description: The name of the bridge output that you want to remove.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateBridgeOutput
+      description: Updates an existing bridge output.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBridgeOutputResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: bridgeArn
+          in: path
+          required: true
+          description: The ARN of the bridge that you want to update.
+          schema:
+            type: string
+        - name: outputName
+          in: path
+          required: true
+          description: The name of the bridge output that you want to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                networkOutput:
+                  description: Update an existing network output.
+                  type: object
+                  properties:
+                    IpAddress:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: ipAddress
+                          description: The network output IP Address.
+                    NetworkName:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: networkName
+                          description: The network output's gateway network name.
+                    Port:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: port
+                          description: The network output port.
+                    Protocol:
+                      allOf:
+                        - $ref: '#/components/schemas/Protocol'
+                        - xml:
+                            name: protocol
+                          description: The network output protocol.
+                    Ttl:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: ttl
+                          description: The network output TTL.
+  '/v1/bridges/{bridgeArn}/sources/{sourceName}':
+    delete:
+      operationId: RemoveBridgeSource
+      description: Removes a source from a bridge.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveBridgeSourceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: bridgeArn
+          in: path
+          required: true
+          description: The ARN of the bridge that you want to update.
+          schema:
+            type: string
+        - name: sourceName
+          in: path
+          required: true
+          description: The name of the bridge source that you want to remove.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateBridgeSource
+      description: Updates an existing bridge source.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBridgeSourceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: bridgeArn
+          in: path
+          required: true
+          description: The ARN of the bridge that you want to update.
+          schema:
+            type: string
+        - name: sourceName
+          in: path
+          required: true
+          description: The name of the source that you want to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                flowSource:
+                  description: Update the flow source of the bridge.
+                  type: object
+                  properties:
+                    FlowArn:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - pattern: '^arn:.+:mediaconnect.+:flow:.+$'
+                          xml:
+                            name: flowArn
+                          description: The ARN of the cloud flow to use as a source of this bridge.
+                    FlowVpcInterfaceAttachment:
+                      allOf:
+                        - $ref: '#/components/schemas/VpcInterfaceAttachment'
+                        - xml:
+                            name: flowVpcInterfaceAttachment
+                          description: The name of the VPC interface attachment to use for this source.
+                networkSource:
+                  description: Update the network source of the bridge.
+                  type: object
+                  properties:
+                    MulticastIp:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: multicastIp
+                          description: The network source multicast IP.
+                    NetworkName:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: networkName
+                          description: The network source's gateway network name.
+                    Port:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: port
+                          description: The network source port.
+                    Protocol:
+                      allOf:
+                        - $ref: '#/components/schemas/Protocol'
+                        - xml:
+                            name: protocol
+                          description: The network source protocol.
   '/v1/flows/{flowArn}/mediaStreams/{mediaStreamName}':
     delete:
       operationId: RemoveFlowMediaStream
@@ -1920,6 +3490,7 @@ paths:
                     - srt-listener
                     - srt-caller
                     - fujitsu-qos
+                    - udp
                 remoteId:
                   description: The remote ID for the Zixi-pull stream.
                   type: string
@@ -1933,10 +3504,10 @@ paths:
                   description: 'The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.'
                   type: integer
                 streamId:
-                  description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+                  description: The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams.
                   type: string
                 vpcInterfaceAttachment:
-                  description: The settings for attaching a VPC interface to an output.
+                  description: The settings for attaching a VPC interface to an resource.
                   type: object
                   properties:
                     VpcInterfaceName:
@@ -1944,7 +3515,7 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: vpcInterfaceName
-                          description: The name of the VPC interface to use for this output.
+                          description: The name of the VPC interface to use for this resource.
   '/v1/flows/{flowArn}/source/{sourceArn}':
     delete:
       operationId: RemoveFlowSource
@@ -2147,7 +3718,7 @@ paths:
                   description: The port that the flow will be listening on for incoming content.
                   type: integer
                 maxBitrate:
-                  description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
+                  description: 'The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.'
                   type: integer
                 maxLatency:
                   description: 'The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.'
@@ -2177,6 +3748,7 @@ paths:
                     - srt-listener
                     - srt-caller
                     - fujitsu-qos
+                    - udp
                 senderControlPort:
                   description: The port that the flow uses to send outbound requests to initiate connection with the sender.
                   type: integer
@@ -2190,7 +3762,7 @@ paths:
                   description: Source port for SRT-caller protocol.
                   type: integer
                 streamId:
-                  description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+                  description: The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams.
                   type: string
                 vpcInterfaceName:
                   description: The name of the VPC interface to use for this source.
@@ -2198,6 +3770,23 @@ paths:
                 whitelistCidr:
                   description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
                   type: string
+                gatewayBridgeSource:
+                  description: The source configuration for cloud flows receiving a stream from a bridge.
+                  type: object
+                  properties:
+                    BridgeArn:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - pattern: '^arn:.+:mediaconnect.+:bridge:.+$'
+                          xml:
+                            name: bridgeArn
+                          description: The ARN of the bridge feeding this flow.
+                    VpcInterfaceAttachment:
+                      allOf:
+                        - $ref: '#/components/schemas/VpcInterfaceAttachment'
+                        - xml:
+                            name: vpcInterfaceAttachment
+                          description: The name of the VPC interface attachment to use for this bridge source.
   '/v1/flows/{flowArn}/vpcInterfaces/{vpcInterfaceName}':
     delete:
       operationId: RemoveFlowVpcInterface
@@ -2644,6 +4233,90 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/bridges/{bridgeArn}/state':
+    put:
+      operationId: UpdateBridgeState
+      description: Updates the bridge state
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBridgeStateResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: bridgeArn
+          in: path
+          required: true
+          description: The ARN of the bridge that you want to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - desiredState
+              properties:
+                desiredState:
+                  description: ''
+                  type: string
+                  enum:
+                    - ACTIVE
+                    - STANDBY
+                    - DELETED
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -2696,6 +4369,66 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AddBridgeOutputsResponse:
+      type: object
+      properties:
+        BridgeArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bridgeArn
+              description: The Amazon Resource Number (ARN) of the bridge.
+        Outputs:
+          allOf:
+            - $ref: '#/components/schemas/__listOfBridgeOutput'
+            - xml:
+                name: outputs
+              description: The outputs that you added to this bridge.
+    AddBridgeOutputRequest:
+      type: object
+      properties:
+        NetworkOutput:
+          allOf:
+            - $ref: '#/components/schemas/AddBridgeNetworkOutputRequest'
+            - xml:
+                name: networkOutput
+      description: Add an output to a bridge.
+    BadRequestException: {}
+    InternalServerErrorException: {}
+    ForbiddenException: {}
+    NotFoundException: {}
+    ServiceUnavailableException: {}
+    TooManyRequestsException: {}
+    ConflictException: {}
+    AddBridgeSourcesResponse:
+      type: object
+      properties:
+        BridgeArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bridgeArn
+              description: The Amazon Resource Number (ARN) of the bridge.
+        Sources:
+          allOf:
+            - $ref: '#/components/schemas/__listOfBridgeSource'
+            - xml:
+                name: sources
+              description: The sources that you added to this bridge.
+    AddBridgeSourceRequest:
+      type: object
+      properties:
+        FlowSource:
+          allOf:
+            - $ref: '#/components/schemas/AddBridgeFlowSourceRequest'
+            - xml:
+                name: flowSource
+        NetworkSource:
+          allOf:
+            - $ref: '#/components/schemas/AddBridgeNetworkSourceRequest'
+            - xml:
+                name: networkSource
+      description: Add a source to an existing bridge.
     AddFlowMediaStreamsResponse:
       type: object
       properties:
@@ -2761,12 +4494,6 @@ components:
                 name: videoFormat
               description: The resolution of the video.
       description: The media stream that you want to add to the flow.
-    BadRequestException: {}
-    InternalServerErrorException: {}
-    ForbiddenException: {}
-    NotFoundException: {}
-    ServiceUnavailableException: {}
-    TooManyRequestsException: {}
     AddFlowOutputsResponse:
       type: object
       properties:
@@ -2810,7 +4537,7 @@ components:
             - $ref: '#/components/schemas/Encryption'
             - xml:
                 name: encryption
-              description: 'The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
+              description: 'The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key). Allowable encryption types: static-key.'
         MaxLatency:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -2870,7 +4597,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: streamId
-              description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+              description: The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams.
         VpcInterfaceAttachment:
           allOf:
             - $ref: '#/components/schemas/VpcInterfaceAttachment'
@@ -2902,7 +4629,7 @@ components:
             - $ref: '#/components/schemas/Encryption'
             - xml:
                 name: decryption
-              description: The type of encryption that is used on the content ingested from this source.
+              description: 'The type of encryption that is used on the content ingested from this source. Allowable encryption types: static-key.'
         Description:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2912,7 +4639,8 @@ components:
         EntitlementArn:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - xml:
+            - pattern: '^arn:.+:mediaconnect.+:entitlement:.+$'
+              xml:
                 name: entitlementArn
               description: 'The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator''s flow.'
         IngestPort:
@@ -2926,7 +4654,7 @@ components:
             - $ref: '#/components/schemas/__integer'
             - xml:
                 name: maxBitrate
-              description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
+              description: 'The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.'
         MaxLatency:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -2992,7 +4720,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: streamId
-              description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+              description: The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams.
         VpcInterfaceName:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3005,6 +4733,12 @@ components:
             - xml:
                 name: whitelistCidr
               description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+        GatewayBridgeSource:
+          allOf:
+            - $ref: '#/components/schemas/SetGatewayBridgeSourceRequest'
+            - xml:
+                name: gatewayBridgeSource
+              description: The source configuration for cloud flows receiving a stream from a bridge.
       description: The settings for the source of the flow.
     AddFlowVpcInterfacesResponse:
       type: object
@@ -3060,6 +4794,37 @@ components:
                 name: subnetId
               description: Subnet must be in the AZ of the Flow
       description: Desired VPC Interface for a Flow
+    CreateBridgeResponse:
+      type: object
+      properties:
+        Bridge:
+          allOf:
+            - $ref: '#/components/schemas/Bridge'
+            - xml:
+                name: bridge
+    __integer:
+      type: integer
+    FailoverMode:
+      type: string
+      enum:
+        - MERGE
+        - FAILOVER
+    SourcePriority:
+      type: object
+      properties:
+        PrimarySource:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: primarySource
+              description: The name of the source you choose as the primary source for this flow.
+      description: The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
+    State:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    CreateBridge420Exception: {}
     CreateFlowResponse:
       type: object
       properties:
@@ -3090,7 +4855,7 @@ components:
             - $ref: '#/components/schemas/Encryption'
             - xml:
                 name: encryption
-              description: The type of encryption that will be used on the output that is associated with this entitlement.
+              description: 'The type of encryption that will be used on the output that is associated with this entitlement. Allowable encryption types: static-key, speke.'
         EntitlementStatus:
           allOf:
             - $ref: '#/components/schemas/EntitlementStatus'
@@ -3172,8 +4937,6 @@ components:
       description: Information about the encryption of the flow.
     __string:
       type: string
-    __integer:
-      type: integer
     __listOfMediaStreamSourceConfigurationRequest:
       type: array
       items:
@@ -3191,26 +4954,26 @@ components:
         - srt-listener
         - srt-caller
         - fujitsu-qos
-    FailoverMode:
-      type: string
-      enum:
-        - MERGE
-        - FAILOVER
-    SourcePriority:
+        - udp
+    SetGatewayBridgeSourceRequest:
       type: object
+      required:
+        - BridgeArn
       properties:
-        PrimarySource:
+        BridgeArn:
           allOf:
             - $ref: '#/components/schemas/__string'
+            - pattern: '^arn:.+:mediaconnect.+:bridge:.+$'
+              xml:
+                name: bridgeArn
+              description: The ARN of the bridge feeding this flow.
+        VpcInterfaceAttachment:
+          allOf:
+            - $ref: '#/components/schemas/VpcInterfaceAttachment'
             - xml:
-                name: primarySource
-              description: The name of the source you choose as the primary source for this flow.
-      description: The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
-    State:
-      type: string
-      enum:
-        - ENABLED
-        - DISABLED
+                name: vpcInterfaceAttachment
+              description: The name of the VPC interface attachment to use for this bridge source.
+      description: The source configuration for cloud flows receiving a stream from a bridge.
     MaintenanceDay:
       type: string
       enum:
@@ -3222,6 +4985,43 @@ components:
         - Saturday
         - Sunday
     CreateFlow420Exception: {}
+    CreateGatewayResponse:
+      type: object
+      properties:
+        Gateway:
+          allOf:
+            - $ref: '#/components/schemas/Gateway'
+            - xml:
+                name: gateway
+    GatewayNetwork:
+      type: object
+      required:
+        - CidrBlock
+        - Name
+      properties:
+        CidrBlock:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: cidrBlock
+              description: 'A unique IP address range to use for this network. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The name of the network. This name is used to reference the network and must be unique among networks in this gateway.
+      description: The network settings for a gateway.
+    CreateGateway420Exception: {}
+    DeleteBridgeResponse:
+      type: object
+      properties:
+        BridgeArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bridgeArn
+              description: The Amazon Resource Number (ARN) of the deleted bridge.
     DeleteFlowResponse:
       type: object
       properties:
@@ -3237,6 +5037,38 @@ components:
             - xml:
                 name: status
               description: The status of the flow when the DeleteFlow process begins.
+    DeleteGatewayResponse:
+      type: object
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: gatewayArn
+              description: The Amazon Resource Name (ARN) of the gateway that was deleted.
+    DeregisterGatewayInstanceResponse:
+      type: object
+      properties:
+        GatewayInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: gatewayInstanceArn
+              description: The Amazon Resource Name (ARN) of the instance.
+        InstanceState:
+          allOf:
+            - $ref: '#/components/schemas/InstanceState'
+            - xml:
+                name: instanceState
+              description: The status of the instance.
+    DescribeBridgeResponse:
+      type: object
+      properties:
+        Bridge:
+          allOf:
+            - $ref: '#/components/schemas/Bridge'
+            - xml:
+                name: bridge
     DescribeFlowResponse:
       type: object
       properties:
@@ -3250,6 +5082,22 @@ components:
             - $ref: '#/components/schemas/Messages'
             - xml:
                 name: messages
+    DescribeGatewayResponse:
+      type: object
+      properties:
+        Gateway:
+          allOf:
+            - $ref: '#/components/schemas/Gateway'
+            - xml:
+                name: gateway
+    DescribeGatewayInstanceResponse:
+      type: object
+      properties:
+        GatewayInstance:
+          allOf:
+            - $ref: '#/components/schemas/GatewayInstance'
+            - xml:
+                name: gatewayInstance
     DescribeOfferingResponse:
       type: object
       properties:
@@ -3282,6 +5130,21 @@ components:
                 name: flowArn
               description: The ARN of the flow that these entitlements were granted to.
     GrantFlowEntitlements420Exception: {}
+    ListBridgesResponse:
+      type: object
+      properties:
+        Bridges:
+          allOf:
+            - $ref: '#/components/schemas/__listOfListedBridge'
+            - xml:
+                name: bridges
+              description: A list of bridge summaries.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListBridges request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListBridges request a second time and specify the NextToken value.'
     ListEntitlementsResponse:
       type: object
       properties:
@@ -3312,6 +5175,36 @@ components:
             - xml:
                 name: nextToken
               description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value.'
+    ListGatewayInstancesResponse:
+      type: object
+      properties:
+        Instances:
+          allOf:
+            - $ref: '#/components/schemas/__listOfListedGatewayInstance'
+            - xml:
+                name: instances
+              description: A list of instance summaries.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListInstances request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListInstances request a second time and specify the NextToken value.'
+    ListGatewaysResponse:
+      type: object
+      properties:
+        Gateways:
+          allOf:
+            - $ref: '#/components/schemas/__listOfListedGateway'
+            - xml:
+                name: gateways
+              description: A list of gateway summaries.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListGateways request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListGateways request a second time and specify the NextToken value.'
     ListOfferingsResponse:
       type: object
       properties:
@@ -3359,6 +5252,32 @@ components:
             - $ref: '#/components/schemas/Reservation'
             - xml:
                 name: reservation
+    RemoveBridgeOutputResponse:
+      type: object
+      properties:
+        BridgeArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bridgeArn
+        OutputName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: outputName
+    RemoveBridgeSourceResponse:
+      type: object
+      properties:
+        BridgeArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bridgeArn
+        SourceName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: sourceName
     RemoveFlowMediaStreamResponse:
       type: object
       properties:
@@ -3470,6 +5389,68 @@ components:
             - xml:
                 name: status
               description: The status of the flow when the StopFlow process begins.
+    UpdateBridgeResponse:
+      type: object
+      properties:
+        Bridge:
+          allOf:
+            - $ref: '#/components/schemas/Bridge'
+            - xml:
+                name: bridge
+    UpdateBridgeOutputResponse:
+      type: object
+      properties:
+        BridgeArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bridgeArn
+              description: The Amazon Resource Number (ARN) of the bridge.
+        Output:
+          allOf:
+            - $ref: '#/components/schemas/BridgeOutput'
+            - xml:
+                name: output
+              description: The output that you updated.
+    UpdateBridgeSourceResponse:
+      type: object
+      properties:
+        BridgeArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bridgeArn
+              description: The Amazon Resource Number (ARN) of the bridge.
+        Source:
+          allOf:
+            - $ref: '#/components/schemas/BridgeSource'
+            - xml:
+                name: source
+    VpcInterfaceAttachment:
+      type: object
+      properties:
+        VpcInterfaceName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: vpcInterfaceName
+              description: The name of the VPC interface to use for this resource.
+      description: The settings for attaching a VPC interface to an resource.
+    UpdateBridgeStateResponse:
+      type: object
+      properties:
+        BridgeArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bridgeArn
+              description: The Amazon Resource Number (ARN) of the bridge.
+        DesiredState:
+          allOf:
+            - $ref: '#/components/schemas/DesiredState'
+            - xml:
+                name: desiredState
+              description: The state of the bridge. ACTIVE or STANDBY.
     UpdateFlowResponse:
       type: object
       properties:
@@ -3652,6 +5633,187 @@ components:
                 name: mediaStreamName
               description: The name of the media stream.
       description: The definition of a media stream that you want to associate with the source.
+    UpdateGatewayInstanceResponse:
+      type: object
+      properties:
+        BridgePlacement:
+          allOf:
+            - $ref: '#/components/schemas/BridgePlacement'
+            - xml:
+                name: bridgePlacement
+              description: 'The availability of the instance to host new bridges. The bridgePlacement property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be deployed to this instance. If it is AVAILABLE, new bridges can be added to this instance.'
+        GatewayInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: gatewayInstanceArn
+              description: The Amazon Resource Name (ARN) of the instance.
+    AddBridgeFlowSourceRequest:
+      type: object
+      required:
+        - FlowArn
+        - Name
+      properties:
+        FlowArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - pattern: '^arn:.+:mediaconnect.+:flow:.+$'
+              xml:
+                name: flowArn
+              description: The Amazon Resource Number (ARN) of the cloud flow to use as a source of this bridge.
+        FlowVpcInterfaceAttachment:
+          allOf:
+            - $ref: '#/components/schemas/VpcInterfaceAttachment'
+            - xml:
+                name: flowVpcInterfaceAttachment
+              description: The name of the VPC interface attachment to use for this source.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The name of the flow source. This name is used to reference the source and must be unique among sources in this bridge.
+      description: Add a flow source to an existing bridge.
+    AddBridgeNetworkOutputRequest:
+      type: object
+      required:
+        - NetworkName
+        - Port
+        - IpAddress
+        - Protocol
+        - Ttl
+        - Name
+      properties:
+        IpAddress:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: ipAddress
+              description: The network output IP Address.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The network output name. This name is used to reference the output and must be unique among outputs in this bridge.
+        NetworkName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: networkName
+              description: The network output's gateway network name.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: port
+              description: The network output port.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - xml:
+                name: protocol
+              description: The network output protocol.
+        Ttl:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: ttl
+              description: The network output TTL.
+      description: Add a network output to an existing bridge.
+    AddBridgeNetworkSourceRequest:
+      type: object
+      required:
+        - NetworkName
+        - MulticastIp
+        - Port
+        - Protocol
+        - Name
+      properties:
+        MulticastIp:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: multicastIp
+              description: The network source multicast IP.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The name of the network source. This name is used to reference the source and must be unique among sources in this bridge.
+        NetworkName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: networkName
+              description: The network source's gateway network name.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: port
+              description: The network source port.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - xml:
+                name: protocol
+              description: The network source protocol.
+      description: Add a network source to an existing bridge.
+    __listOfAddBridgeOutputRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/AddBridgeOutputRequest'
+    AddBridgeOutputsRequest:
+      type: object
+      required:
+        - Outputs
+      title: AddBridgeOutputsRequest
+      properties:
+        Outputs:
+          allOf:
+            - $ref: '#/components/schemas/__listOfAddBridgeOutputRequest'
+            - xml:
+                name: outputs
+              description: The outputs that you want to add to this bridge.
+      description: A request to add outputs to the specified bridge.
+    __listOfBridgeOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/BridgeOutput'
+    __listOfAddBridgeSourceRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/AddBridgeSourceRequest'
+    AddBridgeSourcesRequest:
+      type: object
+      required:
+        - Sources
+      title: AddBridgeSourcesRequest
+      properties:
+        Sources:
+          allOf:
+            - $ref: '#/components/schemas/__listOfAddBridgeSourceRequest'
+            - xml:
+                name: sources
+              description: The sources that you want to add to this bridge.
+      description: A request to add sources to the specified bridge.
+    __listOfBridgeSource:
+      type: array
+      items:
+        $ref: '#/components/schemas/BridgeSource'
+    AddEgressGatewayBridgeRequest:
+      type: object
+      required:
+        - MaxBitrate
+      properties:
+        MaxBitrate:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxBitrate
+              description: The maximum expected bitrate (in bps).
     __listOfAddMediaStreamRequest:
       type: array
       items:
@@ -3736,6 +5898,24 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/VpcInterface'
+    AddIngressGatewayBridgeRequest:
+      type: object
+      required:
+        - MaxOutputs
+        - MaxBitrate
+      properties:
+        MaxBitrate:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxBitrate
+              description: The maximum expected bitrate (in bps).
+        MaxOutputs:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxOutputs
+              description: The maximum number of expected outputs.
     AddMaintenance:
       type: object
       required:
@@ -3785,30 +5965,66 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/MediaStreamOutputConfigurationRequest'
-    VpcInterfaceAttachment:
+    __listOfMessageDetail:
+      type: array
+      items:
+        $ref: '#/components/schemas/MessageDetail'
+    BridgeState:
+      type: string
+      enum:
+        - CREATING
+        - STANDBY
+        - STARTING
+        - DEPLOYING
+        - ACTIVE
+        - STOPPING
+        - DELETING
+        - DELETED
+        - START_FAILED
+        - START_PENDING
+        - STOP_FAILED
+        - UPDATING
+    EgressGatewayBridge:
       type: object
+      required:
+        - MaxBitrate
       properties:
-        VpcInterfaceName:
+        InstanceId:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
-                name: vpcInterfaceName
-              description: The name of the VPC interface to use for this output.
-      description: The settings for attaching a VPC interface to an output.
-    Colorimetry:
-      type: string
-      enum:
-        - BT601
-        - BT709
-        - BT2020
-        - BT2100
-        - ST2065-1
-        - ST2065-3
-        - XYZ
-    __listOfGrantEntitlementRequest:
-      type: array
-      items:
-        $ref: '#/components/schemas/GrantEntitlementRequest'
+                name: instanceId
+              description: The ID of the instance running this bridge.
+        MaxBitrate:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxBitrate
+              description: The maximum expected bitrate (in bps) of the egress bridge.
+    IngressGatewayBridge:
+      type: object
+      required:
+        - MaxOutputs
+        - MaxBitrate
+      properties:
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: instanceId
+              description: The ID of the instance running this bridge.
+        MaxBitrate:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxBitrate
+              description: The maximum expected bitrate (in bps) of the ingress bridge.
+        MaxOutputs:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxOutputs
+              description: The maximum number of outputs on the ingress bridge.
     FailoverConfig:
       type: object
       properties:
@@ -3836,6 +6052,317 @@ components:
             - xml:
                 name: state
       description: The settings for source failover.
+    Bridge:
+      type: object
+      required:
+        - BridgeArn
+        - BridgeState
+        - PlacementArn
+        - Name
+      properties:
+        BridgeArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bridgeArn
+              description: The Amazon Resource Number (ARN) of the bridge.
+        BridgeMessages:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMessageDetail'
+            - xml:
+                name: bridgeMessages
+        BridgeState:
+          allOf:
+            - $ref: '#/components/schemas/BridgeState'
+            - xml:
+                name: bridgeState
+        EgressGatewayBridge:
+          allOf:
+            - $ref: '#/components/schemas/EgressGatewayBridge'
+            - xml:
+                name: egressGatewayBridge
+        IngressGatewayBridge:
+          allOf:
+            - $ref: '#/components/schemas/IngressGatewayBridge'
+            - xml:
+                name: ingressGatewayBridge
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The name of the bridge.
+        Outputs:
+          allOf:
+            - $ref: '#/components/schemas/__listOfBridgeOutput'
+            - xml:
+                name: outputs
+              description: The outputs on this bridge.
+        PlacementArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: placementArn
+              description: The placement Amazon Resource Number (ARN) of the bridge.
+        SourceFailoverConfig:
+          allOf:
+            - $ref: '#/components/schemas/FailoverConfig'
+            - xml:
+                name: sourceFailoverConfig
+        Sources:
+          allOf:
+            - $ref: '#/components/schemas/__listOfBridgeSource'
+            - xml:
+                name: sources
+              description: The sources on this bridge.
+      description: A Bridge is the connection between your datacenter's Instances and the AWS cloud. A bridge can be used to send video from the AWS cloud to your datacenter or from your datacenter to the AWS cloud.
+    BridgeFlowOutput:
+      type: object
+      required:
+        - FlowSourceArn
+        - FlowArn
+        - Name
+      properties:
+        FlowArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: flowArn
+              description: The Amazon Resource Number (ARN) of the cloud flow.
+        FlowSourceArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: flowSourceArn
+              description: The Amazon Resource Number (ARN) of the flow source.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The name of the bridge's output.
+      description: The output of the bridge. A flow output is delivered to the AWS cloud.
+    BridgeFlowSource:
+      type: object
+      required:
+        - FlowArn
+        - Name
+      properties:
+        FlowArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: flowArn
+              description: The ARN of the cloud flow used as a source of this bridge.
+        FlowVpcInterfaceAttachment:
+          allOf:
+            - $ref: '#/components/schemas/VpcInterfaceAttachment'
+            - xml:
+                name: flowVpcInterfaceAttachment
+              description: The name of the VPC interface attachment to use for this source.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The name of the flow source.
+        OutputArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: outputArn
+              description: The Amazon Resource Number (ARN) of the output.
+      description: The source of the bridge. A flow source originates in MediaConnect as an existing cloud flow.
+    BridgeNetworkOutput:
+      type: object
+      required:
+        - NetworkName
+        - Port
+        - IpAddress
+        - Protocol
+        - Ttl
+        - Name
+      properties:
+        IpAddress:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: ipAddress
+              description: The network output IP Address.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The network output name.
+        NetworkName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: networkName
+              description: The network output's gateway network name.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: port
+              description: The network output port.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - xml:
+                name: protocol
+              description: The network output protocol.
+        Ttl:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: ttl
+              description: The network output TTL.
+      description: The output of the bridge. A network output is delivered to your premises.
+    BridgeNetworkSource:
+      type: object
+      required:
+        - NetworkName
+        - MulticastIp
+        - Port
+        - Protocol
+        - Name
+      properties:
+        MulticastIp:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: multicastIp
+              description: The network source multicast IP.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The name of the network source.
+        NetworkName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: networkName
+              description: The network source's gateway network name.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: port
+              description: The network source port.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - xml:
+                name: protocol
+              description: The network source protocol.
+      description: The source of the bridge. A network source originates at your premises.
+    BridgeOutput:
+      type: object
+      properties:
+        FlowOutput:
+          allOf:
+            - $ref: '#/components/schemas/BridgeFlowOutput'
+            - xml:
+                name: flowOutput
+        NetworkOutput:
+          allOf:
+            - $ref: '#/components/schemas/BridgeNetworkOutput'
+            - xml:
+                name: networkOutput
+      description: The output of the bridge.
+    BridgePlacement:
+      type: string
+      enum:
+        - AVAILABLE
+        - LOCKED
+    BridgeSource:
+      type: object
+      properties:
+        FlowSource:
+          allOf:
+            - $ref: '#/components/schemas/BridgeFlowSource'
+            - xml:
+                name: flowSource
+        NetworkSource:
+          allOf:
+            - $ref: '#/components/schemas/BridgeNetworkSource'
+            - xml:
+                name: networkSource
+      description: The bridge's source.
+    Colorimetry:
+      type: string
+      enum:
+        - BT601
+        - BT709
+        - BT2020
+        - BT2100
+        - ST2065-1
+        - ST2065-3
+        - XYZ
+    ConnectionStatus:
+      type: string
+      enum:
+        - CONNECTED
+        - DISCONNECTED
+    CreateBridgeRequest:
+      type: object
+      required:
+        - Sources
+        - PlacementArn
+        - Name
+      title: CreateBridgeRequest
+      properties:
+        EgressGatewayBridge:
+          allOf:
+            - $ref: '#/components/schemas/AddEgressGatewayBridgeRequest'
+            - xml:
+                name: egressGatewayBridge
+              description: Create a bridge with the egress bridge type. An egress bridge is a cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises.
+        IngressGatewayBridge:
+          allOf:
+            - $ref: '#/components/schemas/AddIngressGatewayBridgeRequest'
+            - xml:
+                name: ingressGatewayBridge
+              description: Create a bridge with the ingress bridge type. An ingress bridge is a ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The name of the bridge. This name can not be modified after the bridge is created.
+        Outputs:
+          allOf:
+            - $ref: '#/components/schemas/__listOfAddBridgeOutputRequest'
+            - xml:
+                name: outputs
+              description: The outputs that you want to add to this bridge.
+        PlacementArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: placementArn
+              description: The bridge placement Amazon Resource Number (ARN).
+        SourceFailoverConfig:
+          allOf:
+            - $ref: '#/components/schemas/FailoverConfig'
+            - xml:
+                name: sourceFailoverConfig
+              description: The settings for source failover.
+        Sources:
+          allOf:
+            - $ref: '#/components/schemas/__listOfAddBridgeSourceRequest'
+            - xml:
+                name: sources
+              description: The sources that you want to add to this bridge.
+      description: Creates a new bridge. The request must include one source.
+    __listOfGrantEntitlementRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/GrantEntitlementRequest'
     CreateFlowRequest:
       type: object
       required:
@@ -3903,12 +6430,12 @@ components:
       type: object
       required:
         - Status
-        - Entitlements
-        - Outputs
         - AvailabilityZone
-        - FlowArn
         - Source
         - Name
+        - Entitlements
+        - Outputs
+        - FlowArn
       properties:
         AvailabilityZone:
           allOf:
@@ -3939,7 +6466,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: flowArn
-              description: 'The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.'
+              description: The Amazon Resource Name (ARN) of the flow.
         MediaStreams:
           allOf:
             - $ref: '#/components/schemas/__listOfMediaStream'
@@ -3991,6 +6518,85 @@ components:
             - xml:
                 name: maintenance
       description: 'The settings for a flow, including its source, outputs, and entitlements.'
+    __listOfGatewayNetwork:
+      type: array
+      items:
+        $ref: '#/components/schemas/GatewayNetwork'
+    CreateGatewayRequest:
+      type: object
+      required:
+        - Networks
+        - EgressCidrBlocks
+        - Name
+      title: CreateGatewayRequest
+      properties:
+        EgressCidrBlocks:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: egressCidrBlocks
+              description: 'The range of IP addresses that are allowed to contribute content or initiate output requests for flows communicating with this gateway. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The name of the gateway. This name can not be modified after the gateway is created.
+        Networks:
+          allOf:
+            - $ref: '#/components/schemas/__listOfGatewayNetwork'
+            - xml:
+                name: networks
+              description: The list of networks that you want to add.
+      description: Creates a new gateway. The request must include at least one network (up to 4).
+    Gateway:
+      type: object
+      required:
+        - GatewayArn
+        - Networks
+        - EgressCidrBlocks
+        - Name
+      properties:
+        EgressCidrBlocks:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: egressCidrBlocks
+              description: 'The range of IP addresses that contribute content or initiate output requests for flows communicating with this gateway. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: gatewayArn
+              description: The Amazon Resource Name (ARN) of the gateway.
+        GatewayMessages:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMessageDetail'
+            - xml:
+                name: gatewayMessages
+        GatewayState:
+          allOf:
+            - $ref: '#/components/schemas/GatewayState'
+            - xml:
+                name: gatewayState
+              description: The current status of the gateway.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The name of the gateway. This name can not be modified after the gateway is created.
+        Networks:
+          allOf:
+            - $ref: '#/components/schemas/__listOfGatewayNetwork'
+            - xml:
+                name: networks
+              description: The list of networks in the gateway.
+      description: 'The settings for a gateway, including its networks.'
+    DeleteBridgeRequest:
+      type: object
+      title: DeleteBridgeRequest
+      properties: {}
     DeleteFlowRequest:
       type: object
       title: DeleteFlowRequest
@@ -4005,6 +6611,29 @@ components:
         - STARTING
         - STOPPING
         - ERROR
+    DeleteGatewayRequest:
+      type: object
+      title: DeleteGatewayRequest
+      properties: {}
+    __boolean:
+      type: boolean
+    DeregisterGatewayInstanceRequest:
+      type: object
+      title: DeregisterGatewayInstanceRequest
+      properties: {}
+    InstanceState:
+      type: string
+      enum:
+        - REGISTERING
+        - ACTIVE
+        - DEREGISTERING
+        - DEREGISTERED
+        - REGISTRATION_ERROR
+        - DEREGISTRATION_ERROR
+    DescribeBridgeRequest:
+      type: object
+      title: DescribeBridgeRequest
+      properties: {}
     DescribeFlowRequest:
       type: object
       title: DescribeFlowRequest
@@ -4021,6 +6650,73 @@ components:
                 name: errors
               description: A list of errors that might have been generated from processes on this flow.
       description: Messages that provide the state of the flow.
+    DescribeGatewayInstanceRequest:
+      type: object
+      title: DescribeGatewayInstanceRequest
+      properties: {}
+    GatewayInstance:
+      type: object
+      required:
+        - GatewayArn
+        - InstanceState
+        - GatewayInstanceArn
+        - InstanceId
+        - RunningBridgeCount
+        - BridgePlacement
+        - ConnectionStatus
+      properties:
+        BridgePlacement:
+          allOf:
+            - $ref: '#/components/schemas/BridgePlacement'
+            - xml:
+                name: bridgePlacement
+              description: 'The availability of the instance to host new bridges. The bridgePlacement property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be deployed to this instance. If it is AVAILABLE, new bridges can be added to this instance.'
+        ConnectionStatus:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionStatus'
+            - xml:
+                name: connectionStatus
+              description: The connection state of the instance.
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: gatewayArn
+              description: The Amazon Resource Name (ARN) of the instance.
+        GatewayInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: gatewayInstanceArn
+              description: The Amazon Resource Name (ARN) of the gateway.
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: instanceId
+              description: The managed instance ID generated by the SSM install. This will begin with "mi-".
+        InstanceMessages:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMessageDetail'
+            - xml:
+                name: instanceMessages
+        InstanceState:
+          allOf:
+            - $ref: '#/components/schemas/InstanceState'
+            - xml:
+                name: instanceState
+              description: The status of the instance.
+        RunningBridgeCount:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: runningBridgeCount
+              description: The running bridge count.
+      description: The settings for an instance in a gateway.
+    DescribeGatewayRequest:
+      type: object
+      title: DescribeGatewayRequest
+      properties: {}
     DescribeOfferingRequest:
       type: object
       title: DescribeOfferingRequest
@@ -4186,6 +6882,12 @@ components:
                 name: start
               description: The day and time that the reservation becomes active. You set this value when you purchase the offering.
       description: 'A pricing agreement for a discounted rate for a specific outbound bandwidth that your MediaConnect account will use each month over a specific time period. The discounted rate in the reservation applies to outbound bandwidth for all flows from your account until your account reaches the amount of bandwidth in your reservation. If you use more outbound bandwidth than the agreed upon amount in a single month, the overage is charged at the on-demand rate.'
+    DesiredState:
+      type: string
+      enum:
+        - ACTIVE
+        - STANDBY
+        - DELETED
     Interface:
       type: object
       required:
@@ -4388,8 +7090,8 @@ components:
     Source:
       type: object
       required:
-        - SourceArn
         - Name
+        - SourceArn
       properties:
         DataTransferSubscriberFeePercent:
           allOf:
@@ -4475,6 +7177,12 @@ components:
             - xml:
                 name: whitelistCidr
               description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+        GatewayBridgeSource:
+          allOf:
+            - $ref: '#/components/schemas/GatewayBridgeSource'
+            - xml:
+                name: gatewayBridgeSource
+              description: The source configuration for cloud flows receiving a stream from a bridge.
       description: The settings for the source of the flow.
     Maintenance:
       type: object
@@ -4574,6 +7282,33 @@ components:
                 name: tcs
               description: The transfer characteristic system (TCS) that is used in the video.
       description: FMTP
+    GatewayState:
+      type: string
+      enum:
+        - CREATING
+        - ACTIVE
+        - UPDATING
+        - ERROR
+        - DELETING
+        - DELETED
+    GatewayBridgeSource:
+      type: object
+      required:
+        - BridgeArn
+      properties:
+        BridgeArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bridgeArn
+              description: The ARN of the bridge feeding this flow.
+        VpcInterfaceAttachment:
+          allOf:
+            - $ref: '#/components/schemas/VpcInterfaceAttachment'
+            - xml:
+                name: vpcInterfaceAttachment
+              description: The name of the VPC interface attachment to use for this bridge source.
+      description: The source configuration for cloud flows receiving a stream from a bridge.
     GrantFlowEntitlementsRequest:
       type: object
       required:
@@ -4636,6 +7371,14 @@ components:
       type: integer
       minimum: 1
       maximum: 1000
+    ListBridgesRequest:
+      type: object
+      title: ListBridgesRequest
+      properties: {}
+    __listOfListedBridge:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListedBridge'
     ListEntitlementsRequest:
       type: object
       title: ListEntitlementsRequest
@@ -4652,6 +7395,22 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ListedFlow'
+    ListGatewayInstancesRequest:
+      type: object
+      title: ListGatewayInstancesRequest
+      properties: {}
+    __listOfListedGatewayInstance:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListedGatewayInstance'
+    ListGatewaysRequest:
+      type: object
+      title: ListGatewaysRequest
+      properties: {}
+    __listOfListedGateway:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListedGateway'
     ListOfferingsRequest:
       type: object
       title: ListOfferingsRequest
@@ -4676,6 +7435,45 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/__string'
+    ListedBridge:
+      type: object
+      required:
+        - BridgeArn
+        - BridgeState
+        - PlacementArn
+        - BridgeType
+        - Name
+      properties:
+        BridgeArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bridgeArn
+              description: The ARN of the bridge.
+        BridgeState:
+          allOf:
+            - $ref: '#/components/schemas/BridgeState'
+            - xml:
+                name: bridgeState
+        BridgeType:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bridgeType
+              description: The type of the bridge.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The name of the bridge.
+        PlacementArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: placementArn
+              description: The ARN of the gateway associated with the bridge.
+      description: Displays details of the selected bridge.
     ListedEntitlement:
       type: object
       required:
@@ -4758,6 +7556,63 @@ components:
             - xml:
                 name: maintenance
       description: 'Provides a summary of a flow, including its ARN, Availability Zone, and source type.'
+    ListedGateway:
+      type: object
+      required:
+        - GatewayArn
+        - GatewayState
+        - Name
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: gatewayArn
+              description: The Amazon Resource Name (ARN) of the gateway.
+        GatewayState:
+          allOf:
+            - $ref: '#/components/schemas/GatewayState'
+            - xml:
+                name: gatewayState
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: The name of the gateway.
+      description: 'Provides a summary of a gateway, including its name, ARN, and status.'
+    ListedGatewayInstance:
+      type: object
+      required:
+        - GatewayArn
+        - GatewayInstanceArn
+        - InstanceId
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: gatewayArn
+              description: The Amazon Resource Name (ARN) of the gateway.
+        GatewayInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: gatewayInstanceArn
+              description: The Amazon Resource Name (ARN) of the instance.
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: instanceId
+              description: The managed instance ID generated by the SSM install. This will begin with "mi-".
+        InstanceState:
+          allOf:
+            - $ref: '#/components/schemas/InstanceState'
+            - xml:
+                name: instanceState
+              description: The status of the instance.
+      description: Provides a summary of an instance.
     MediaStreamAttributes:
       type: object
       required:
@@ -4905,6 +7760,30 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/InputConfigurationRequest'
+    MessageDetail:
+      type: object
+      required:
+        - Message
+        - Code
+      properties:
+        Code:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: code
+              description: The error code.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: message
+              description: The specific error message that MediaConnect returns to help you understand the reason that the request did not succeed.
+        ResourceName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: resourceName
+              description: The name of the resource.
     NetworkInterfaceType:
       type: string
       enum:
@@ -4952,7 +7831,7 @@ components:
             - $ref: '#/components/schemas/__integer'
             - xml:
                 name: maxBitrate
-              description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
+              description: 'The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.'
         MaxLatency:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -5018,8 +7897,12 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: streamId
-              description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+              description: The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams.
       description: Attributes related to the transport stream that are used in a source or output.
+    __listOf__integer:
+      type: array
+      items:
+        $ref: '#/components/schemas/__integer'
     Output:
       type: object
       required:
@@ -5104,6 +7987,18 @@ components:
             - xml:
                 name: vpcInterfaceAttachment
               description: The name of the VPC interface attachment to use for this output.
+        BridgeArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bridgeArn
+              description: The ARN of the bridge that added this output.
+        BridgePorts:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__integer'
+            - xml:
+                name: bridgePorts
+              description: The bridge output ports currently in use.
       description: The settings for an output.
     PurchaseOfferingRequest:
       type: object
@@ -5125,6 +8020,14 @@ components:
                 name: start
               description: 'The date and time that you want the reservation to begin, in Coordinated Universal Time (UTC). You can specify any date and time between 12:00am on the first day of the current month to the current time on today''s date, inclusive. Specify the start in a 24-hour notation. Use the following format: YYYY-MM-DDTHH:mm:SSZ, where T and Z are literal characters. For example, to specify 11:30pm on March 5, 2020, enter 2020-03-05T23:30:00Z.'
       description: A request to purchase a offering.
+    RemoveBridgeOutputRequest:
+      type: object
+      title: RemoveBridgeOutputRequest
+      properties: {}
+    RemoveBridgeSourceRequest:
+      type: object
+      title: RemoveBridgeSourceRequest
+      properties: {}
     RemoveFlowMediaStreamRequest:
       type: object
       title: RemoveFlowMediaStreamRequest
@@ -5185,6 +8088,193 @@ components:
       type: object
       title: UntagResourceRequest
       properties: {}
+    UpdateBridgeFlowSourceRequest:
+      type: object
+      properties:
+        FlowArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - pattern: '^arn:.+:mediaconnect.+:flow:.+$'
+              xml:
+                name: flowArn
+              description: The ARN of the cloud flow to use as a source of this bridge.
+        FlowVpcInterfaceAttachment:
+          allOf:
+            - $ref: '#/components/schemas/VpcInterfaceAttachment'
+            - xml:
+                name: flowVpcInterfaceAttachment
+              description: The name of the VPC interface attachment to use for this source.
+      description: Update the flow source of the bridge.
+    UpdateBridgeNetworkOutputRequest:
+      type: object
+      properties:
+        IpAddress:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: ipAddress
+              description: The network output IP Address.
+        NetworkName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: networkName
+              description: The network output's gateway network name.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: port
+              description: The network output port.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - xml:
+                name: protocol
+              description: The network output protocol.
+        Ttl:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: ttl
+              description: The network output TTL.
+      description: Update an existing network output.
+    UpdateBridgeNetworkSourceRequest:
+      type: object
+      properties:
+        MulticastIp:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: multicastIp
+              description: The network source multicast IP.
+        NetworkName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: networkName
+              description: The network source's gateway network name.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: port
+              description: The network source port.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - xml:
+                name: protocol
+              description: The network source protocol.
+      description: Update the network source of the bridge.
+    UpdateBridgeOutputRequest:
+      type: object
+      title: UpdateBridgeOutputRequest
+      properties:
+        NetworkOutput:
+          allOf:
+            - $ref: '#/components/schemas/UpdateBridgeNetworkOutputRequest'
+            - xml:
+                name: networkOutput
+      description: The fields that you want to update in the bridge output.
+    UpdateEgressGatewayBridgeRequest:
+      type: object
+      properties:
+        MaxBitrate:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxBitrate
+              description: Update an existing egress-type bridge.
+    UpdateIngressGatewayBridgeRequest:
+      type: object
+      properties:
+        MaxBitrate:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxBitrate
+              description: The maximum expected bitrate (in bps).
+        MaxOutputs:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxOutputs
+              description: The maximum number of expected outputs.
+    UpdateFailoverConfig:
+      type: object
+      properties:
+        FailoverMode:
+          allOf:
+            - $ref: '#/components/schemas/FailoverMode'
+            - xml:
+                name: failoverMode
+              description: 'The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.'
+        RecoveryWindow:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: recoveryWindow
+              description: Recovery window time to look for dash-7 packets
+        SourcePriority:
+          allOf:
+            - $ref: '#/components/schemas/SourcePriority'
+            - xml:
+                name: sourcePriority
+              description: The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/State'
+            - xml:
+                name: state
+      description: The settings for source failover.
+    UpdateBridgeRequest:
+      type: object
+      title: UpdateBridgeRequest
+      properties:
+        EgressGatewayBridge:
+          allOf:
+            - $ref: '#/components/schemas/UpdateEgressGatewayBridgeRequest'
+            - xml:
+                name: egressGatewayBridge
+        IngressGatewayBridge:
+          allOf:
+            - $ref: '#/components/schemas/UpdateIngressGatewayBridgeRequest'
+            - xml:
+                name: ingressGatewayBridge
+        SourceFailoverConfig:
+          allOf:
+            - $ref: '#/components/schemas/UpdateFailoverConfig'
+            - xml:
+                name: sourceFailoverConfig
+      description: A request to update the bridge.
+    UpdateBridgeSourceRequest:
+      type: object
+      title: UpdateBridgeSourceRequest
+      properties:
+        FlowSource:
+          allOf:
+            - $ref: '#/components/schemas/UpdateBridgeFlowSourceRequest'
+            - xml:
+                name: flowSource
+        NetworkSource:
+          allOf:
+            - $ref: '#/components/schemas/UpdateBridgeNetworkSourceRequest'
+            - xml:
+                name: networkSource
+      description: The fields that you want to update in the bridge source.
+    UpdateBridgeStateRequest:
+      type: object
+      required:
+        - DesiredState
+      title: UpdateBridgeStateRequest
+      properties:
+        DesiredState:
+          allOf:
+            - $ref: '#/components/schemas/DesiredState'
+            - xml:
+                name: desiredState
+      description: A request to update the bridge state.
     UpdateEncryption:
       type: object
       properties:
@@ -5243,33 +8333,6 @@ components:
                 name: url
               description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
       description: Information about the encryption of the flow.
-    UpdateFailoverConfig:
-      type: object
-      properties:
-        FailoverMode:
-          allOf:
-            - $ref: '#/components/schemas/FailoverMode'
-            - xml:
-                name: failoverMode
-              description: 'The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.'
-        RecoveryWindow:
-          allOf:
-            - $ref: '#/components/schemas/__integer'
-            - xml:
-                name: recoveryWindow
-              description: Recovery window time to look for dash-7 packets
-        SourcePriority:
-          allOf:
-            - $ref: '#/components/schemas/SourcePriority'
-            - xml:
-                name: sourcePriority
-              description: The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
-        State:
-          allOf:
-            - $ref: '#/components/schemas/State'
-            - xml:
-                name: state
-      description: The settings for source failover.
     UpdateFlowEntitlementRequest:
       type: object
       title: UpdateFlowEntitlementRequest
@@ -5285,7 +8348,7 @@ components:
             - $ref: '#/components/schemas/UpdateEncryption'
             - xml:
                 name: encryption
-              description: The type of encryption that will be used on the output associated with this entitlement.
+              description: 'The type of encryption that will be used on the output associated with this entitlement. Allowable encryption types: static-key, speke.'
         EntitlementStatus:
           allOf:
             - $ref: '#/components/schemas/EntitlementStatus'
@@ -5361,7 +8424,7 @@ components:
             - $ref: '#/components/schemas/UpdateEncryption'
             - xml:
                 name: encryption
-              description: 'The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
+              description: 'The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key). Allowable encryption types: static-key.'
         MaxLatency:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -5421,7 +8484,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: streamId
-              description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+              description: The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams.
         VpcInterfaceAttachment:
           allOf:
             - $ref: '#/components/schemas/VpcInterfaceAttachment'
@@ -5466,6 +8529,23 @@ components:
             - xml:
                 name: maintenance
       description: A request to update flow.
+    UpdateGatewayBridgeSourceRequest:
+      type: object
+      properties:
+        BridgeArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - pattern: '^arn:.+:mediaconnect.+:bridge:.+$'
+              xml:
+                name: bridgeArn
+              description: The ARN of the bridge feeding this flow.
+        VpcInterfaceAttachment:
+          allOf:
+            - $ref: '#/components/schemas/VpcInterfaceAttachment'
+            - xml:
+                name: vpcInterfaceAttachment
+              description: The name of the VPC interface attachment to use for this bridge source.
+      description: The source configuration for cloud flows receiving a stream from a bridge.
     UpdateFlowSourceRequest:
       type: object
       title: UpdateFlowSourceRequest
@@ -5475,7 +8555,7 @@ components:
             - $ref: '#/components/schemas/UpdateEncryption'
             - xml:
                 name: decryption
-              description: The type of encryption used on the content ingested from this source.
+              description: 'The type of encryption used on the content ingested from this source. Allowable encryption types: static-key.'
         Description:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5485,7 +8565,8 @@ components:
         EntitlementArn:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - xml:
+            - pattern: '^arn:.+:mediaconnect.+:entitlement:.+$'
+              xml:
                 name: entitlementArn
               description: 'The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator''s flow.'
         IngestPort:
@@ -5499,7 +8580,7 @@ components:
             - $ref: '#/components/schemas/__integer'
             - xml:
                 name: maxBitrate
-              description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
+              description: 'The smoothing max bitrate (in bps) for RIST, RTP, and RTP-FEC streams.'
         MaxLatency:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -5559,7 +8640,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: streamId
-              description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+              description: The stream ID that you want to use for this transport. This parameter applies only to Zixi and SRT caller-based streams.
         VpcInterfaceName:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5572,7 +8653,24 @@ components:
             - xml:
                 name: whitelistCidr
               description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+        GatewayBridgeSource:
+          allOf:
+            - $ref: '#/components/schemas/UpdateGatewayBridgeSourceRequest'
+            - xml:
+                name: gatewayBridgeSource
+              description: The source configuration for cloud flows receiving a stream from a bridge.
       description: A request to update the source of a flow.
+    UpdateGatewayInstanceRequest:
+      type: object
+      title: UpdateGatewayInstanceRequest
+      properties:
+        BridgePlacement:
+          allOf:
+            - $ref: '#/components/schemas/BridgePlacement'
+            - xml:
+                name: bridgePlacement
+              description: 'The availability of the instance to host new bridges. The bridgePlacement property can be LOCKED or AVAILABLE. If it is LOCKED, no new bridges can be deployed to this instance. If it is AVAILABLE, new bridges can be added to this instance.'
+      description: A request to update gateway instance state.
     VpcInterface:
       type: object
       required:
