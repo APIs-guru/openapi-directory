@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.3
 servers:
   - url: https://unify.apideck.com
 info:
@@ -6,9 +6,9 @@ info:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |+
-    Welcome to the Connector API.
+    Welcome to the Webhook API.
 
-    You can use this API to access all Connector API endpoints.
+    You can use this API to access all Webhook API endpoints.
 
     ## Base URL
 
@@ -270,9 +270,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: Connector API
-  version: 9.1.3
-  x-apideck-api: connector
+  title: Webhook API
+  version: 9.1.4
+  x-apideck-api: webhook
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -280,10 +280,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/connector.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/webhook.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: connector
+  x-serviceName: webhook
   x-tags:
     - partner
 externalDocs:
@@ -293,94 +293,40 @@ security:
   - apiKey: []
 tags:
   - description: ""
-    name: Connectors
+    name: Webhooks
     x-apideck-model:
-      $ref: "#/components/schemas/Connector"
-  - description: ""
-    name: Connector Docs
-    x-apideck-model:
-      $ref: "#/components/schemas/ConnectorDoc"
-  - description: ""
-    name: APIs
-    x-apideck-model:
-      $ref: "#/components/schemas/Api"
-  - description: ""
-    name: Connector Resources
-    x-apideck-model:
-      $ref: "#/components/schemas/ConnectorResource"
-  - description: ""
-    name: API Resources
-    x-apideck-model:
-      $ref: "#/components/schemas/ApiResource"
+      $ref: "#/components/schemas/Webhook"
 paths:
-  /connector/apis:
+  /webhook/logs:
     get:
-      description: List APIs
-      operationId: apisAll
+      description: List event logs
+      operationId: eventLogsAll
       parameters:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
-        - $ref: "#/components/parameters/apis_filter"
+        - $ref: "#/components/parameters/filter"
       responses:
         "200":
-          $ref: "#/components/responses/GetApisResponse"
+          $ref: "#/components/responses/GetWebhookEventLogsResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
         "402":
           $ref: "#/components/responses/PaymentRequiredResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: List APIs
-      tags:
-        - APIs
-      x-apideck-api: connector
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
-            })
-
-            try {
-              const { data } = await apideck.connector.apisAll({})
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-      x-graphql-field-name: APIs
-  "/connector/apis/{id}":
-    get:
-      description: Get API
-      operationId: apisOne
-      parameters:
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/id"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetApiResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
           $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get API
+      summary: List event logs
       tags:
-        - APIs
-      x-apideck-api: connector
+        - Webhooks
+      x-apideck-api: webhook
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -393,133 +339,49 @@ paths:
             })
 
             try {
-              const { data } = await apideck.connector.apisOne({
-                id: 'id_example'
-              })
+              const { data } = await apideck.webhook.eventLogsAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/connector/apis/{id}/resources/{resource_id}":
-    get:
-      description: Get API Resource
-      operationId: apiResourcesOne
+      x-graphql-field-name: eventLogs
+  "/webhook/w/{id}/{serviceId}":
+    post:
+      description: Resolve a webhook based on lookup_id and then execute it
+      operationId: webhooksResolve
       parameters:
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/resourceId"
+        - $ref: "#/components/parameters/lookupIdToken"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/downstreamEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/ResolveWebhookEventRequest"
+                - $ref: "#/components/schemas/ResolveWebhookEventsRequest"
+        required: true
       responses:
         "200":
-          $ref: "#/components/responses/GetApiResourceResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Get API Resource
-      tags:
-        - API Resources
-      x-apideck-api: connector
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
-            })
-
-            const params = {
-              id: 'id_example',
-              resourceId: 'resource_id_example'
-            }
-
-            try {
-              const { data } = await apideck.connector.apiResourcesOne(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  "/connector/apis/{id}/resources/{resource_id}/coverage":
-    get:
-      description: Get API Resource Coverage
-      operationId: apiResourceCoverageOne
-      parameters:
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/resourceId"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetApiResourceCoverageResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Get API Resource Coverage
-      tags:
-        - API Resources
-      x-apideck-api: connector
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
-            })
-
-            const params = {
-              id: 'id_example',
-              resourceId: 'resource_id_example'
-            }
-
-            try {
-              const { data } = await apideck.connector.apiResourceCoverageOne(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  /connector/connectors:
-    get:
-      description: List Connectors
-      operationId: connectorsAll
-      parameters:
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/cursor"
-        - $ref: "#/components/parameters/limit"
-        - $ref: "#/components/parameters/connectors_filter"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetConnectorsResponse"
+          $ref: "#/components/responses/ResolveWebhookResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
         "402":
           $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Connectors
+      summary: Resolve and Execute a connection webhook
       tags:
-        - Connectors
-      x-apideck-api: connector
+        - Webhooks
+      x-apideck-api: webhook
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -527,41 +389,53 @@ paths:
             import { Apideck } from '@apideck/node'
 
             const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID'
+              apiKey: 'REPLACE_WITH_API_KEY'
             })
 
+            const params = {
+              id: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk2MDAwYzIzLWI1NmItNGRlOC1iZmEzLTMxNTAzMTE3YzBmNyJ9.rAXnsmZ4O7eF0aDwdflkxAJQwMUfWs5989WfmspNZ6Q',
+              serviceId: 'factorialhr',
+              webhooksResolve: {}
+            }
+
             try {
-              const { data } = await apideck.connector.connectorsAll({})
+              const { data } = await apideck.webhook.webhooksResolve(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: connectors
-  "/connector/connectors/{id}":
+      x-graphql-exclude: true
+      x-internal: true
+      x-sdk-exclude: true
+  /webhook/webhooks:
     get:
-      description: Get Connector
-      operationId: connectorsOne
+      description: List all webhook subscriptions
+      operationId: webhooksAll
       parameters:
         - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
       responses:
         "200":
-          $ref: "#/components/responses/GetConnectorResponse"
+          $ref: "#/components/responses/GetWebhooksResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
         "402":
           $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
           $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Connector
+      summary: List webhook subscriptions
       tags:
-        - Connectors
-      x-apideck-api: connector
+        - Webhooks
+      x-apideck-api: webhook
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -574,38 +448,145 @@ paths:
             })
 
             try {
-              const { data } = await apideck.connector.connectorsOne({
+              const { data } = await apideck.webhook.webhooksAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: webhooks
+    post:
+      description: Create a webhook subscription to receive events
+      operationId: webhooksAdd
+      parameters:
+        - $ref: "#/components/parameters/applicationId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateWebhookRequest"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateWebhookResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create webhook subscription
+      tags:
+        - Webhooks
+      x-apideck-api: webhook
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID'
+            })
+
+            const params = {
+              webhook: {
+                description: 'A description',
+                unified_api: 'crm',
+                status: 'enabled',
+                delivery_url: 'https://example.com/my/webhook/endpoint',
+                events: ['vault.connection.created', 'vault.connection.updated']
+              }
+            }
+
+            try {
+              const { data } = await apideck.webhook.webhooksAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/webhook/webhooks/{id}":
+    delete:
+      description: Delete a webhook subscription
+      operationId: webhooksDelete
+      parameters:
+        - $ref: "#/components/parameters/webhookToken"
+        - $ref: "#/components/parameters/applicationId"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteWebhookResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete webhook subscription
+      tags:
+        - Webhooks
+      x-apideck-api: webhook
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID'
+            })
+
+            try {
+              const { data } = await apideck.webhook.webhooksDelete({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/connector/connectors/{id}/docs/{doc_id}":
     get:
-      description: Get Connector Doc content
-      operationId: connectorDocsOne
+      description: Get the webhook subscription details
+      operationId: webhooksOne
       parameters:
+        - $ref: "#/components/parameters/webhookToken"
         - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/doc_id"
       responses:
         "200":
-          $ref: "#/components/responses/GetConnectorDocResponse"
+          $ref: "#/components/responses/GetWebhookResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
         "402":
           $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
           $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Connector Doc content
+      summary: Get webhook subscription
       tags:
-        - Connector Docs
-      x-apideck-api: connector
+        - Webhooks
+      x-apideck-api: webhook
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -618,40 +599,46 @@ paths:
             })
 
             try {
-              const { data } = await apideck.connector.connectorDocsOne({
-                id: 'id_example',
-                docId: 'doc_id_example'
+              const { data } = await apideck.webhook.webhooksOne({
+                id: 'id_example'
               })
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/connector/connectors/{id}/resources/{resource_id}":
-    get:
-      description: Get Connector Resource
-      operationId: connectorResourcesOne
+    patch:
+      description: Update a webhook subscription
+      operationId: webhooksUpdate
       parameters:
+        - $ref: "#/components/parameters/webhookToken"
         - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/resourceId"
-        - $ref: "#/components/parameters/unifiedApi"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateWebhookRequest"
+        required: true
       responses:
         "200":
-          $ref: "#/components/responses/GetConnectorResourceResponse"
+          $ref: "#/components/responses/UpdateWebhookResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
         "402":
           $ref: "#/components/responses/PaymentRequiredResponse"
         "404":
           $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
         default:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Connector Resource
+      summary: Update webhook subscription
       tags:
-        - Connector Resources
-      x-apideck-api: connector
+        - Webhooks
+      x-apideck-api: webhook
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -665,25 +652,146 @@ paths:
 
             const params = {
               id: 'id_example',
-              resourceId: 'resource_id_example'
+              webhook: {
+                description: 'A description',
+                status: 'enabled',
+                delivery_url: 'https://example.com/my/webhook/endpoint',
+                events: ['vault.connection.created', 'vault.connection.updated']
+              }
             }
 
             try {
-              const { data } = await apideck.connector.connectorResourcesOne(params)
+              const { data } = await apideck.webhook.webhooksUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
+  "/webhook/webhooks/{id}/execute/{serviceId}":
+    post:
+      description: Execute a webhook
+      operationId: webhooksExecute
+      parameters:
+        - $ref: "#/components/parameters/webhookToken"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/ExecuteWebhookEventRequest"
+                - $ref: "#/components/schemas/ExecuteWebhookEventsRequest"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/ExecuteWebhookResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Execute a webhook
+      tags:
+        - Webhooks
+      x-apideck-api: webhook
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY'
+            })
+
+            const params = {
+              id: 'id_example',
+              serviceId: 'factorialhr',
+              webhooksExecute: {}
+            }
+
+            try {
+              const { data } = await apideck.webhook.webhooksExecute(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+      x-internal: true
+      x-sdk-exclude: true
+  "/webhook/webhooks/{id}/x/{serviceId}":
+    post:
+      description: Execute a webhook
+      operationId: webhooksShortExecute
+      parameters:
+        - $ref: "#/components/parameters/webhookToken"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/lookupId"
+        - $ref: "#/components/parameters/downstreamEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/ExecuteWebhookEventRequest"
+                - $ref: "#/components/schemas/ExecuteWebhookEventsRequest"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/ExecuteWebhookResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Execute a webhook
+      tags:
+        - Webhooks
+      x-apideck-api: webhook
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY'
+            })
+
+            const params = {
+              id: 'id_example',
+              serviceId: 'factorialhr',
+              webhooksShortExecute: {}
+            }
+
+            try {
+              const { data } = await apideck.webhook.webhooksShortExecute(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+      x-internal: true
+      x-sdk-exclude: true
 components:
   parameters:
-    apis_filter:
-      description: Apply filters
-      explode: true
-      in: query
-      name: filter
-      schema:
-        $ref: "#/components/schemas/ApisFilter"
-      style: deepObject
     applicationId:
       description: The ID of your Unify application
       example: dSBdXd2H6Mqwfg0atXHXYcysLJE9qyn1VwBtXHX
@@ -692,14 +800,13 @@ components:
       required: true
       schema:
         type: string
-    connectors_filter:
-      description: Apply filters
-      explode: true
-      in: query
-      name: filter
+    consumerId:
+      description: ID of the consumer which you want to get or push data from
+      in: header
+      name: x-apideck-consumer-id
+      required: true
       schema:
-        $ref: "#/components/schemas/ConnectorsFilter"
-      style: deepObject
+        type: string
     cursor:
       description: Cursor to start from. You can find cursors for next/previous pages in the meta.cursors property of the response.
       in: query
@@ -707,13 +814,21 @@ components:
       schema:
         nullable: true
         type: string
-    doc_id:
-      description: ID of the Doc
-      in: path
-      name: doc_id
-      required: true
+    downstreamEventType:
+      description: The name of downstream event when connector does not supply in body or header
+      example: Employees::Events::EmployeeCreated
+      in: query
+      name: e
       schema:
         type: string
+    filter:
+      description: Filter results
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/WebhookEventLogsFilter"
+      style: deepObject
     id:
       description: ID of the record you are acting upon.
       in: path
@@ -722,7 +837,7 @@ components:
       schema:
         type: string
     limit:
-      description: Number of records to return
+      description: Number of results to return. Minimum 1, Maximum 200, Default 20
       in: query
       name: limit
       schema:
@@ -730,20 +845,36 @@ components:
         maximum: 200
         minimum: 1
         type: integer
-    resourceId:
-      description: ID of the resource you are acting upon.
+    lookupId:
+      description: Unique identifier to used to look up consumer/connection when receiving connector events from downstream.
+      example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA3NWUwNmEzLTUwNzUtNDY3Yi1hNTk5LWVkNmM5YTg5NTYyOCJ9._ppKdmBaCB2RHjBTifMNP2xKNeLBfNPim2CiHSUd0Zg
+      in: query
+      name: l_id
+      schema:
+        type: string
+    lookupIdToken:
+      description: JWT Webhook token that represents the connection lookupId. Signed so we know source came from us
+      example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk2MDAwYzIzLWI1NmItNGRlOC1iZmEzLTMxNTAzMTE3YzBmNyJ9.rAXnsmZ4O7eF0aDwdflkxAJQwMUfWs5989WfmspNZ6Q
       in: path
-      name: resource_id
+      name: id
       required: true
       schema:
         type: string
-    unifiedApi:
-      description: Specify unified API for the connector resource. This is useful when a resource appears in multiple APIs
-      in: query
-      name: unified_api
-      required: false
+    serviceId:
+      description: Service provider ID.
+      example: factorialhr
+      in: path
+      name: serviceId
+      required: true
       schema:
-        $ref: "#/components/schemas/UnifiedApiId"
+        type: string
+    webhookToken:
+      description: JWT Webhook token that represents the unifiedApi and applicationId associated to the event source.
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
   responses:
     BadRequestResponse:
       content:
@@ -751,73 +882,66 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    GetApiResourceCoverageResponse:
+    CreateWebhookResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetApiResourceCoverageResponse"
-      description: ApiResources
-    GetApiResourceResponse:
+            $ref: "#/components/schemas/CreateWebhookResponse"
+      description: Webhooks
+    DeleteWebhookResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetApiResourceResponse"
-      description: ApiResources
-    GetApiResponse:
+            $ref: "#/components/schemas/DeleteWebhookResponse"
+      description: Webhooks
+    ExecuteWebhookResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetApiResponse"
-      description: Apis
-    GetApisResponse:
+            $ref: "#/components/schemas/ExecuteWebhookResponse"
+      description: Execute Webhook
+    GetWebhookEventLogsResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetApisResponse"
-      description: Apis
-    GetConnectorDocResponse:
-      content:
-        text/markdown:
-          schema:
-            format: markdown
-            type: string
-      description: Connectors
-    GetConnectorResourceResponse:
+            $ref: "#/components/schemas/GetWebhookEventLogsResponse"
+      description: EventLogs
+    GetWebhookResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetConnectorResourceResponse"
-      description: ConnectorResources
-    GetConnectorResponse:
+            $ref: "#/components/schemas/GetWebhookResponse"
+      description: Webhooks
+    GetWebhooksResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetConnectorResponse"
-      description: Connectors
-    GetConnectorsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetConnectorsResponse"
-      description: Connectors
+            $ref: "#/components/schemas/GetWebhooksResponse"
+      description: Webhooks
     NotFoundResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/NotFoundResponse"
       description: The specified resource was not found
+    NotImplementedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/NotImplementedResponse"
+      description: Not Implemented
     PaymentRequiredResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
-    TooManyRequestsResponse:
+    ResolveWebhookResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/TooManyRequestsResponse"
-      description: Too Many Requests
+            $ref: "#/components/schemas/ResolveWebhookResponse"
+      description: Resolve Webhook
     UnauthorizedResponse:
       content:
         application/json:
@@ -830,227 +954,23 @@ components:
           schema:
             $ref: "#/components/schemas/UnexpectedErrorResponse"
       description: Unexpected error
+    UnprocessableResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UnprocessableResponse"
+      description: Unprocessable
+    UpdateWebhookResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateWebhookResponse"
+      description: Webhooks
   schemas:
-    Api:
-      properties:
-        api_reference_url:
-          description: Link to the API reference of the API.
-          example: https://developers.apideck.com/apis/file-storage/reference
-          type: string
-        categories:
-          description: List of categories the API belongs to.
-          example:
-            - files
-            - file-storage
-            - cloud-storage
-            - object-storage
-          items:
-            type: string
-          type: array
-        description:
-          description: Description of the API.
-          example: Manage API keys, access tokens, OAuth flows and integrations.
-          nullable: true
-          type: string
-        events:
-          description: List of event types this API supports.
-          example:
-            - crm.contact.updated
-            - accounting.invoice.created
-          items:
-            type: string
-          type: array
-        id:
-          description: ID of the API.
-          example: file-storage
-          readOnly: true
-          type: string
-        name:
-          description: Name of the API.
-          example: File Storage API
-          type: string
-        postman_collection_id:
-          description: ID of the Postman collection of the API.
-          example: 1311564-00e7266b-a3d6-4f40-b172-baaa66a3ed6f
-          nullable: true
-          type: string
-        resources:
-          description: List of resources supported in this API.
-          items:
-            properties:
-              excluded_from_coverage:
-                description: Exclude from mapping coverage
-                example: false
-                type: boolean
-              id:
-                description: ID of the resource, typically a lowercased version of its name.
-                example: companies
-                type: string
-              name:
-                description: Name of the resource (plural)
-                example: Companies
-                type: string
-              status:
-                $ref: "#/components/schemas/ResourceStatus"
-            type: object
-          type: array
-        spec_url:
-          description: Link to the latest OpenAPI specification of the API.
-          example: https://specs.apideck.com/file-storage.yml
-          type: string
-        status:
-          $ref: "#/components/schemas/ApiStatus"
-        type:
-          description: Indicates whether the API is a Unified API. If unified_api is false, the API is a Platform API.
-          enum:
-            - platform
-            - unified
-          type: string
-      type: object
-      x-apideck-schema-id: Api
-    ApiResource:
-      properties:
-        id:
-          description: ID of the resource, typically a lowercased version of name.
-          example: companies
-          type: string
-        linked_resources:
-          description: List of linked resources.
-          items:
-            properties:
-              id:
-                $ref: "#/components/schemas/ResourceId"
-              unified_property:
-                $ref: "#/components/schemas/UnifiedProperty"
-            type: object
-          type: array
-        name:
-          description: Name of the resource (plural)
-          example: Companies
-          type: string
-        schema:
-          description: JSON Schema of the resource in our Unified API
-          example:
-            additionalProperties: false
-            properties:
-              created_at:
-                example: 2020-09-30T07:43:32.000Z
-                readOnly: true
-                type: string
-              id:
-                example: "12345"
-                readOnly: true
-                type: string
-              name:
-                example: Elon Musk
-                minLength: 1
-                type: string
-              updated_at:
-                example: 2020-09-30T07:43:32.000Z
-                readOnly: true
-                type: string
-            required:
-              - name
-              - company_name
-            x-pii:
-              - name
-              - email
-              - first_name
-              - last_name
-          type: object
-          x-json-schema: true
-        status:
-          $ref: "#/components/schemas/ResourceStatus"
-      type: object
-      x-apideck-schema-id: ApiResource
-    ApiResourceCoverage:
-      properties:
-        coverage:
-          items:
-            properties:
-              downstream_id:
-                description: ID of the resource in the Connector's API (downstream)
-                example: accounts
-                type: string
-              downstream_name:
-                description: Name of the resource in the Connector's API (downstream)
-                example: Accounts
-                type: string
-              pagination:
-                $ref: "#/components/schemas/PaginationCoverage"
-              pagination_supported:
-                description: Indicates if pagination (cursor and limit parameters) is supported on the list endpoint of the resource.
-                type: boolean
-              supported_fields:
-                description: Supported fields on the detail endpoint.
-                items:
-                  $ref: "#/components/schemas/SupportedProperty"
-                type: array
-              supported_filters:
-                description: Supported filters on the list endpoint of the resource.
-                example:
-                  - name
-                  - email
-                items:
-                  type: string
-                type: array
-              supported_list_fields:
-                description: Supported fields on the list endpoint.
-                items:
-                  $ref: "#/components/schemas/SupportedProperty"
-                type: array
-              supported_operations:
-                description: List of supported operations on the resource.
-                example:
-                  - all
-                  - one
-                  - add
-                  - update
-                  - delete
-                items:
-                  type: string
-                type: array
-              supported_sort_by:
-                description: Supported sorting properties on the list endpoint of the resource.
-                example:
-                  - updated_at
-                  - created_at
-                  - name
-                items:
-                  type: string
-                type: array
-            type: object
-          type: array
-        id:
-          description: ID of the resource, typically a lowercased version of name.
-          example: companies
-          type: string
-        name:
-          description: Name of the resource (plural)
-          example: Companies
-          type: string
-        status:
-          $ref: "#/components/schemas/ResourceStatus"
-      type: object
-      x-apideck-schema-id: ApiResourceCoverage
-    ApiStatus:
-      description: Status of the API. APIs with status live or beta are callable.
-      enum:
-        - live
-        - beta
-        - development
-        - considering
+    ApplicationId:
+      description: ID of your Apideck Application
+      example: dSBdXd2H6Mqwfg0atXHXYcysLJE9qyn1VwBtXHX
       type: string
-    ApisFilter:
-      additionalProperties: false
-      example:
-        status: beta
-      properties:
-        status:
-          $ref: "#/components/schemas/ApiStatus"
-      type: object
-      x-apideck-schema-id: ApisFilter
-      x-graphql-type-name: ApisFilter
     BadRequestResponse:
       properties:
         detail:
@@ -1084,387 +1004,41 @@ components:
           type: string
       type: object
       x-apideck-schema-id: BadRequest
-    Connector:
-      properties:
-        auth_only:
-          description: Indicates whether a connector only supports authentication. In this case the connector is not mapped to a Unified API, but can be used with the Proxy API
-          example: true
-          readOnly: true
-          type: boolean
-        auth_type:
-          description: Type of authorization used by the connector
-          enum:
-            - oauth2
-            - apiKey
-            - basic
-            - custom
-            - none
-          example: oauth2
-          readOnly: true
-          type: string
-          x-apideck-enum-id: auth_types
-        blind_mapped:
-          description: Set to `true` when connector was implemented from downstream docs only and without API access. This state indicates that integration will require Apideck support, and access to downstream API to validate mapping quality.
-          example: true
-          readOnly: true
-          type: boolean
-        configurable_resources:
-          description: List of resources that have settings that can be configured.
-          example:
-            - leads
-            - companies
-          items:
-            $ref: "#/components/schemas/ResourceId"
-          type: array
-        custom_scopes:
-          description: Set to `true` when connector allows the definition of custom scopes.
-          example: true
-          readOnly: true
-          type: boolean
-        description:
-          description: A description of the object.
-          example: A description
-          nullable: true
-          title: Description
-          type: string
-        docs:
-          items:
-            $ref: "#/components/schemas/ConnectorDoc"
-          type: array
-        free_trial_available:
-          description: Set to `true` when the connector offers a free trial. Use `signup_url` to sign up for a free trial
-          type: boolean
-        has_sandbox_credentials:
-          description: Indicates whether Apideck Sandbox OAuth credentials are available.
-          example: true
-          type: boolean
-        icon_url:
-          description: Link to a small square icon for the connector.
-          example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
-          format: uri
-          type: string
-        id:
-          description: ID of the connector.
-          example: crm+salesforce
-          readOnly: true
-          type: string
-        logo_url:
-          description: Link to the full logo for the connector.
-          example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
-          format: uri
-          type: string
-        name:
-          description: Name of the connector.
-          example: Salesforce
-          type: string
-        oauth_credentials_source:
-          description: Location of the OAuth client credentials. For most connectors the OAuth client credentials are stored on integration and managed by the application owner. For others they are stored on connection and managed by the consumer in Vault.
-          enum:
-            - integration
-            - connection
-          example: integration
-          readOnly: true
-          type: string
-          x-apideck-enum-id: oauth_credentials_source
-        oauth_grant_type:
-          description: "OAuth grant type used by the connector. More info: https://oauth.net/2/grant-types"
-          enum:
-            - authorization_code
-            - client_credentials
-            - password
-          example: authorization_code
-          readOnly: true
-          type: string
-          x-apideck-enum-id: oauth_grant_types
-        oauth_scopes:
-          description: List of OAuth Scopes available for this connector.
-          items:
-            properties:
-              default_apis:
-                description: List of Unified APIs that request this OAuth Scope by default. Application owners can customize the requested scopes.
-                items:
-                  description: ID of the Unified API.
-                  example: crm
-                  type: string
-                type: array
-              id:
-                description: ID of the OAuth scope.
-                example: contacts:all
-                type: string
-              label:
-                description: Label of the OAuth scope.
-                example: Read/write on the Contacts resource
-                type: string
-            type: object
-          type: array
-        service_id:
-          description: Service provider identifier
-          example: close
-          type: string
-        settings:
-          items:
-            $ref: "#/components/schemas/ConnectorSetting"
-          type: array
-        signup_url:
-          description: Link to the connector's signup page.
-          example: https://www.salesforce.com/signup
-          format: uri
-          type: string
-        status:
-          $ref: "#/components/schemas/ConnectorStatus"
-        supported_events:
-          description: List of events that are supported on the connector across all Unified APIs.
-          items:
-            $ref: "#/components/schemas/ConnectorEvent"
-          type: array
-        supported_resources:
-          description: List of resources that are supported on the connector.
-          items:
-            $ref: "#/components/schemas/LinkedConnectorResource"
-          type: array
-        tls_support:
-          properties:
-            description:
-              description: Description of the TLS support
-              type: string
-            type:
-              type: string
-          type: object
-        unified_apis:
-          description: List of Unified APIs that feature this connector.
-          items:
-            properties:
-              downstream_unsupported_resources:
-                description: List of resources that are not supported on the downstream.
-                items:
-                  $ref: "#/components/schemas/ResourceId"
-                type: array
-              id:
-                $ref: "#/components/schemas/UnifiedApiId"
-              name:
-                description: Name of the API.
-                example: File Storage API
-                type: string
-              oauth_scopes:
-                items:
-                  description: OAuth scopes required for the connector. Add these scopes to your OAuth app.
-                  example:
-                    id: contacts:all
-                    label: Read/write on the Contacts resource
-                  properties:
-                    id:
-                      description: ID of the OAuth scope.
-                      example: contacts:all
-                      type: string
-                    label:
-                      description: Label of the OAuth scope.
-                      example: Read/write on the Contacts resource
-                      type: string
-                  type: object
-                type: array
-              supported_events:
-                description: List of events that are supported on the connector for this Unified API.
-                items:
-                  $ref: "#/components/schemas/ConnectorEvent"
-                type: array
-              supported_resources:
-                description: List of resources that are supported on the connector.
-                items:
-                  $ref: "#/components/schemas/LinkedConnectorResource"
-                type: array
-            type: object
-          type: array
-        webhook_support:
-          $ref: "#/components/schemas/WebhookSupport"
-        website_url:
-          description: Link to the connector's website.
-          example: https://www.salesforce.com
-          format: uri
-          type: string
-      type: object
-      x-apideck-schema-id: Connector
-    ConnectorDoc:
-      properties:
-        audience:
-          description: Audience for the doc.
-          enum:
-            - application_owner
-            - consumer
-          type: string
-        format:
-          description: Format of the doc.
-          enum:
-            - markdown
-          type: string
-        id:
-          $ref: "#/components/schemas/Id"
-        name:
-          description: Name of the doc.
-          example: connection
-          type: string
-        url:
-          description: Link to fetch the content of the doc.
-          example: https://unify.apideck.com/connector/connectors/workday/docs/consumer+connection
-          format: uri
-          type: string
-      type: object
-      x-apideck-schema-id: ConnectorDoc
-    ConnectorEvent:
-      description: Unify event that is supported on the connector. Events are delivered via Webhooks.
-      properties:
-        downstream_event_type:
-          description: Downstream event type
-          example: person_created
-          type: string
-        entity_type:
-          description: Unify entity type
-          example: employee
-          type: string
-        event_source:
-          description: Unify event source
-          enum:
-            - native
-            - virtual
-          example: native
-          type: string
-        event_type:
-          description: Unify event type
-          example: employee.created
-          type: string
-        resources:
-          items:
-            $ref: "#/components/schemas/ResourceId"
-          type: array
-      type: object
-      x-apideck-schema-id: ConnectorEvent
-    ConnectorResource:
-      properties:
-        custom_fields_supported:
-          description: Indicates if custom fields are supported on this resource.
-          type: boolean
-        downstream_id:
-          description: ID of the resource in the Connector's API (downstream)
-          example: accounts
-          type: string
-        downstream_name:
-          description: Name of the resource in the Connector's API (downstream)
-          example: Accounts
-          type: string
-        downstream_unsupported_operations:
-          description: List of operations that are not supported on the downstream.
-          example:
-            - upload
-          items:
-            type: string
-          type: array
-        id:
-          $ref: "#/components/schemas/ResourceId"
-        name:
-          description: Name of the resource (plural)
-          example: Companies
-          type: string
-        pagination:
-          $ref: "#/components/schemas/PaginationCoverage"
-        pagination_supported:
-          description: Indicates if pagination (cursor and limit parameters) is supported on the list endpoint of the resource.
-          type: boolean
-        status:
-          $ref: "#/components/schemas/ResourceStatus"
-        supported_fields:
-          description: Supported fields on the detail endpoint.
-          items:
-            $ref: "#/components/schemas/SupportedProperty"
-          type: array
-        supported_filters:
-          description: Supported filters on the list endpoint of the resource.
-          example:
-            - name
-            - email
-          items:
-            type: string
-          type: array
-        supported_list_fields:
-          description: Supported fields on the list endpoint.
-          items:
-            $ref: "#/components/schemas/SupportedProperty"
-          type: array
-        supported_operations:
-          description: List of supported operations on the resource.
-          example:
-            - all
-            - one
-            - add
-            - update
-            - delete
-          items:
-            type: string
-          type: array
-        supported_sort_by:
-          description: Supported sorting properties on the list endpoint of the resource.
-          example:
-            - updated_at
-            - created_at
-            - name
-          items:
-            type: string
-          type: array
-      type: object
-      x-apideck-schema-id: ConnectorResource
-    ConnectorSetting:
-      properties:
-        id:
-          example: pipeline_id
-          type: string
-        label:
-          example: Pipeline
-          type: string
-        type:
-          enum:
-            - text
-            - checkbox
-            - tel
-            - email
-            - url
-            - textarea
-            - select
-            - filtered-select
-            - multi-select
-            - datetime
-            - date
-            - time
-            - number
-            - password
-          example: select
-      type: object
-      x-apideck-schema-id: ConnectorSetting
-    ConnectorStatus:
-      description: Status of the connector. Connectors with status live or beta are callable.
-      enum:
-        - live
-        - beta
-        - development
-        - considering
+    ConsumerId:
+      description: Unique consumer identifier. You can freely choose a consumer ID yourself. Most of the time, this is an ID of your internal data model that represents a user or account in your system (for example account:12345). If the consumer doesn't exist yet, Vault will upsert a consumer based on your ID.
+      example: test_consumer_id
       type: string
-    ConnectorsFilter:
+    CreateWebhookRequest:
       additionalProperties: false
-      example:
-        unified_api: file-storage
       properties:
+        delivery_url:
+          $ref: "#/components/schemas/DeliveryUrl"
+        description:
+          $ref: "#/components/schemas/Description"
+        events:
+          description: The list of subscribed events for this webhook. [`*`] indicates that all events are enabled.
+          example:
+            - vault.connection.created
+            - vault.connection.updated
+          items:
+            $ref: "#/components/schemas/WebhookEventType"
+          title: Subscribed events
+          type: array
         status:
-          $ref: "#/components/schemas/ConnectorStatus"
+          $ref: "#/components/schemas/Status"
         unified_api:
           $ref: "#/components/schemas/UnifiedApiId"
+      required:
+        - delivery_url
+        - status
+        - events
+        - unified_api
       type: object
-      x-apideck-schema-id: ConnectorsFilter
-      x-graphql-type-name: ConnectorsFilter
-    GetApiResourceCoverageResponse:
+      x-apideck-schema-id: CreateWebhookRequest
+    CreateWebhookResponse:
       properties:
         data:
-          $ref: "#/components/schemas/ApiResourceCoverage"
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
+          $ref: "#/components/schemas/Webhook"
         status:
           description: HTTP Response Status
           example: OK
@@ -1478,171 +1052,154 @@ components:
         - status
         - data
       type: object
-      x-apideck-schema-id: GetApiResourceCoverageResponse
-    GetApiResourceResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/ApiResource"
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-      x-apideck-schema-id: GetApiResourceResponse
-    GetApiResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/Api"
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-      x-apideck-schema-id: GetApiResponse
-    GetApisResponse:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/Api"
-          type: array
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-      x-apideck-schema-id: GetApisResponse
-      x-graphql-type-name: ApiList
-    GetConnectorResourceResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/ConnectorResource"
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-      x-apideck-schema-id: GetConnectorResourceResponse
-    GetConnectorResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/Connector"
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-      x-apideck-schema-id: GetConnectorResponse
-    GetConnectorsResponse:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/Connector"
-          type: array
-        links:
-          $ref: "#/components/schemas/Links"
-        meta:
-          $ref: "#/components/schemas/Meta"
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - data
-      type: object
-      x-apideck-schema-id: GetConnectorsResponse
-      x-graphql-type-name: ConnectorList
-    Id:
-      description: A unique identifier for an object.
-      example: "12345"
+      x-apideck-schema-id: CreateWebhookResponse
+    CreatedAt:
+      description: The date and time when the object was created.
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
       readOnly: true
-      title: ID
+      title: Created at (timestamp)
       type: string
-    LinkedConnectorResource:
+    DeleteWebhookResponse:
       properties:
-        downstream_id:
-          description: ID of the resource in the Connector's API (downstream)
-          example: accounts
+        data:
+          $ref: "#/components/schemas/Webhook"
+        status:
+          description: HTTP Response Status
+          example: OK
           type: string
-        downstream_name:
-          description: Name of the resource in the Connector's API (downstream)
-          example: Accounts
-          type: string
-        id:
-          $ref: "#/components/schemas/ResourceId"
-        name:
-          description: Name of the resource (plural)
-          example: Companies
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+      x-apideck-schema-id: DeleteWebhookResponse
+    DeliveryUrl:
+      description: The delivery url of the webhook endpoint.
+      example: https://example.com/my/webhook/endpoint
+      format: uri
+      pattern: ^(https?)://
+      type: string
+    Description:
+      description: A description of the object.
+      example: A description
+      nullable: true
+      title: Description
+      type: string
+    ExecuteBaseUrl:
+      description: The Unify Base URL events from connectors will be sent to after service id is appended.
+      example: https://unify.apideck.com/webhook/webhooks/1234/execute
+      format: uri
+      pattern: ^(https?)://
+      readOnly: true
+      type: string
+    ExecuteWebhookEventRequest:
+      additionalProperties: true
+      type: object
+      x-apideck-schema-id: ExecuteWebhookEventRequest
+    ExecuteWebhookEventsRequest:
+      items:
+        additionalProperties: true
+        type: object
+      type: array
+      x-apideck-schema-id: ExecuteWebhookEventsRequest
+    ExecuteWebhookResponse:
+      properties:
+        request_id:
+          description: UUID of the request received
+          example: c6af9ac6-7b61-11e6-9a41-93e8deadbeef
           type: string
         status:
-          $ref: "#/components/schemas/ResourceStatus"
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+        timestamp:
+          description: ISO Datetime webhook event was received
+          example: 2021-10-01T08:26:28.039Z
+          type: string
+      required:
+        - status_code
+        - status
+        - data
       type: object
-      x-apideck-schema-id: LinkedConnectorResource
+      x-apideck-schema-id: ExecuteWebhookResponse
+    GetWebhookEventLogsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/WebhookEventLog"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+      x-apideck-schema-id: GetWebhookEventLogsResponse
+      x-graphql-type-name: EventLogList
+    GetWebhookResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Webhook"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+      x-apideck-schema-id: GetWebhookResponse
+      x-graphql-type-name: Webhook
+    GetWebhooksResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Webhook"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+      x-apideck-schema-id: GetWebhooksResponse
+      x-graphql-type-name: WebhookList
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -1724,23 +1281,36 @@ components:
           type: string
       type: object
       x-apideck-schema-id: NotFound
-    PaginationCoverage:
+    NotImplementedResponse:
       properties:
-        limit_support:
-          description: Indicates whether the connector supports changing the page size by using the limit parameter.
-          type: boolean
-        mode:
-          description: How pagination is implemented on this connector. Native mode means Apideck is using the pagination parameters of the connector. With virtual pagination, the connector does not support pagination, but Apideck emulates it.
-          enum:
-            - native
-            - virtual
-          example: native
+        detail:
+          anyOf:
+            - example: Failed to retrieve Widget tokenUrl from 'components.securitySchemes.OAuth2.flows'
+              type: string
+            - type: object
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Not Implemented
           type: string
-        paging_support:
-          description: Indicates whether the connector supports paging through results using the cursor parameter.
-          type: boolean
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Unmapped Attribute
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#mappingerror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 501
+          type: number
+        type_name:
+          description: The type of error returned
+          example: MappingError
+          type: string
       type: object
-      x-apideck-schema-id: ConnectorResource
+      x-apideck-schema-id: NotImplemented
     PaymentRequiredResponse:
       properties:
         detail:
@@ -1769,64 +1339,53 @@ components:
           type: string
       type: object
       x-apideck-schema-id: PaymentRequired
-    ResourceId:
-      description: ID of the resource, typically a lowercased version of name.
-      example: companies
-      type: string
-    ResourceStatus:
-      description: Status of the resource. Resources with status live or beta are callable.
-      enum:
-        - live
-        - beta
-        - development
-        - upcoming
-        - considering
-      type: string
-    SupportedProperty:
-      properties:
-        child_properties:
-          description: List of child properties of the unified property.
-          items:
-            properties:
-              unified_property:
-                $ref: "#/components/schemas/SupportedProperty"
-            type: object
-          type: array
-        unified_property:
-          $ref: "#/components/schemas/UnifiedProperty"
+    ResolveWebhookEventRequest:
+      additionalProperties: true
       type: object
-    TooManyRequestsResponse:
+      x-apideck-schema-id: ResolveWebhookEventRequest
+    ResolveWebhookEventsRequest:
+      items:
+        additionalProperties: true
+        type: object
+      type: array
+      x-apideck-schema-id: ResolveWebhookEventRequest
+    ResolveWebhookResponse:
       properties:
-        detail:
-          properties:
-            context:
-              type: string
-            error:
-              additionalProperties: true
-              type: object
-          type: object
-        error:
-          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 6585)
-          example: Too Many Requests
+        request_id:
+          description: UUID of the request received
+          example: c6af9ac6-7b61-11e6-9a41-93e8deadbeef
           type: string
-        message:
-          description: A human-readable message providing more details about the error.
-          example: Connector Rate Limit Error
-          type: string
-        ref:
-          description: Link to documentation of error type
-          example: https://developers.apideck.com/errors#connectorratelimiterror
+        status:
+          description: HTTP Response Status
+          example: OK
           type: string
         status_code:
-          description: HTTP status code
-          example: 429
-          type: number
-        type_name:
-          description: The type of error returned
-          example: ConnectorRateLimitError
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+        timestamp:
+          description: ISO Datetime webhook event was received
+          example: 2021-10-01T08:26:28.039Z
           type: string
+      required:
+        - status_code
+        - status
+        - data
       type: object
-      x-apideck-schema-id: TooManyRequests
+      x-apideck-schema-id: ResolveWebhookResponse
+    ServiceId:
+      description: Service provider identifier
+      example: close
+      type: string
+    Status:
+      description: The status of the webhook.
+      enum:
+        - enabled
+        - disabled
+      example: enabled
+      type: string
+      x-apideck-enum-id: webhooks.status
+      x-graphql-type-name: WebhookStatus
     UnauthorizedResponse:
       properties:
         detail:
@@ -1920,84 +1479,384 @@ components:
       example: crm
       type: string
       x-apideck-enum-id: unified_api
-    UnifiedProperty:
-      description: Name of the property in our Unified API.
-      example: owner_id
-      type: string
-    WebhookSupport:
-      description: How webhooks are supported for the connector. Sometimes the connector natively supports webhooks, other times Apideck virtualizes them based on polling.
+    UnprocessableResponse:
       properties:
-        managed_via:
-          description: How the subscription is managed in the downstream.
-          enum:
-            - manual
-            - api
-          example: api
+        detail:
+          description: Contains parameter or domain specific information related to the error and why it occurred.
+          example: Unprocessable request, please verify your request headers and body.
           type: string
-        mode:
-          description: Mode of the webhook support.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Unprocessable Entity
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Invalid State
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#invalidstateerror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 422
+          type: number
+        type_name:
+          description: The type of error returned
+          example: InvalidStateError
+          type: string
+      type: object
+      x-apideck-schema-id: Unprocessable
+    UpdateWebhookRequest:
+      additionalProperties: false
+      properties:
+        delivery_url:
+          $ref: "#/components/schemas/DeliveryUrl"
+        description:
+          $ref: "#/components/schemas/Description"
+        events:
+          description: The list of subscribed events for this webhook. [`*`] indicates that all events are enabled.
+          example:
+            - vault.connection.created
+            - vault.connection.updated
+          items:
+            $ref: "#/components/schemas/WebhookEventType"
+          title: Subscribed events
+          type: array
+        status:
+          $ref: "#/components/schemas/Status"
+      type: object
+      x-apideck-schema-id: UpdateWebhookRequest
+    UpdateWebhookResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Webhook"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+      x-apideck-schema-id: UpdateWebhookResponse
+    UpdatedAt:
+      description: The date and time when the object was last updated.
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      nullable: true
+      readOnly: true
+      title: Updated at (timestamp)
+      type: string
+    Webhook:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        delivery_url:
+          $ref: "#/components/schemas/DeliveryUrl"
+        description:
+          $ref: "#/components/schemas/Description"
+        disabled_reason:
+          description: Indicates if the webhook has has been disabled as it reached its retry limit or if account is over the usage allocated by it's plan.
           enum:
-            - native
-            - virtual
             - none
-          example: native
+            - retry_limit
+            - usage_limit
+          example: retry_limit
           type: string
-        subscription_level:
-          description: Received events are scoped to connection or across integration.
-          enum:
-            - connection
-            - integration
-          example: integration
+          x-apideck-enum-id: webhook.disabled_reasons
+        events:
+          description: The list of subscribed events for this webhook. [`*`] indicates that all events are enabled.
+          example:
+            - vault.connection.created
+            - vault.connection.updated
+          items:
+            $ref: "#/components/schemas/WebhookEventType"
+          title: Subscribed events
+          type: array
+        execute_base_url:
+          $ref: "#/components/schemas/ExecuteBaseUrl"
+        id:
+          example: "1234"
+          readOnly: true
           type: string
-        virtual_webhooks:
+        status:
+          $ref: "#/components/schemas/Status"
+        unified_api:
+          $ref: "#/components/schemas/UnifiedApiId"
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+      required:
+        - delivery_url
+        - status
+        - events
+        - unified_api
+        - execute_base_url
+      type: object
+      x-apideck-schema-id: Webhook
+    WebhookEvent:
+      properties:
+        entity_id:
+          description: The service provider's ID of the entity that triggered this event
+          example: 123456ASDF
+          type: string
+        entity_type:
+          description: The type entity that triggered this event
+          example: Company
+          type: string
+        entity_url:
+          description: The url to retrieve entity detail.
+          example: https://unify.apideck.com/crm/contacts/123456
+          type: string
+        event_id:
+          description: Unique reference to this request event
+          example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+          type: string
+        event_type:
+          $ref: "#/components/schemas/WebhookEventType"
+        execution_attempt:
+          description: The current count this request event has been attempted
+          example: 2
+          type: number
+        occurred_at:
+          description: ISO Datetime for when the original event occurred
+          example: 2021-10-01T03:14:55.419Z
+          format: date-time
+          type: string
+        service_id:
+          $ref: "#/components/schemas/ServiceId"
+      type: object
+      x-sdk-exclude: true
+    WebhookEventLog:
+      additionalProperties: false
+      properties:
+        application_id:
+          $ref: "#/components/schemas/ApplicationId"
+        attempts:
+          description: record of each attempt to call webhook endpoint
+          items:
+            properties:
+              execution_attempt:
+                description: Number of attempts webhook endpoint was called before a success was returned or eventually failed
+                example: 3
+                type: number
+              status_code:
+                description: HTTP Status code that was returned.
+                example: 200
+                type: integer
+              success:
+                description: Whether or not the request was successful.
+                example: true
+                type: boolean
+              timestamp:
+                description: ISO Date and time when the request was made.
+                example: 2021-07-12T14:26:17.420Z
+                type: string
+            type: object
+          type: array
+        consumer_id:
+          $ref: "#/components/schemas/ConsumerId"
+        endpoint:
+          description: The URL of the webhook endpoint.
+          example: https://example.com/my/webhook/endpoint
+          format: uri
+          pattern: ^(https?)://
+          type: string
+        entity_type:
+          description: Name of the Entity described by the attributes delivered within payload
+          example: Connection
+          type: string
+        event_type:
+          description: Name of source event that webhook is subscribed to.
+          example: vault.connection.updated
+          type: string
+        execution_attempt:
+          description: Number of attempts webhook endpoint was called before a success was returned or eventually failed
+          example: 3
+          type: number
+        http_method:
+          description: HTTP Method of request to endpoint.
+          example: GET
+          type: string
+        id:
+          example: 1d174c4d-fe9e-4377-a76c-6da22fe9cd87
+          type: string
+        request_body:
+          description: The JSON stringified payload that was delivered to the webhook endpoint.
+          example: '{"entity":{"id":"2222+test_user_id","application_id":"2222","consumer_id":"test_user_id","name":"ActiveCampaign","icon":"https://res.cloudinary.com/apideck/image/upload/v1529455970/catalog/activecampaign/icon128x128.png","logo":"https://www.activecampaign.com/site/assets/social-2x.png","unified_api":"crm","service_id":"activecampaign","auth_type":"apiKey","enabled":true,"tag_line":"Integrated email marketing, marketing automation, and small business CRM. Save time while growing your business with sales automation.","website":"https://www.activecampaign.com/","settings":{"instance_url":"https://eu28.salesforce.com","base_url":"https://updated.api-us1.com"},"metadata":{"plan":"enterprise","account":{"name":"My Company"}},"state":"callable","created_at":"2021-09-10T10:39:49.628Z","updated_at":"2021-09-10T10:39:52.715Z"},"entityType":"Connection"}'
+          type: string
+        response_body:
+          description: The JSON stringified response that was returned from the webhook endpoint.
+          example: '{"status":"OK"}'
+          type: string
+        retry_scheduled:
+          description: If the request has not hit the max retry limit and will be retried.
+          example: true
+          type: boolean
+        service:
           additionalProperties: false
-          description: Virtual webhook config for the connector.
+          description: Apideck service provider associated with event.
           properties:
-            request_rate:
-              additionalProperties: false
-              description: The rate at which requests for resources will be made to downstream.
-              properties:
-                rate:
-                  description: The number of requests per window unit.
-                  title: Rate
-                  type: integer
-                size:
-                  description: Size of request window.
-                  title: Size of rate window
-                  type: integer
-                unit:
-                  description: The window unit for the rate.
-                  enum:
-                    - second
-                    - minute
-                    - hour
-                    - day
-                  title: Unit
-                  type: string
-              required:
-                - rate
-                - size
-                - unit
-              title: Request Rate
-              type: object
-            resources:
-              description: The resources that will be requested from downstream.
-              title: Resources
-              type: object
-              x-patternProperties:
-                ^.*$:
-                  properties:
-                    events:
-                      items:
-                        type: string
-                      type: array
-                  type: object
+            id:
+              description: Apideck service provider id.
+              example: 101-data-solution
+              type: string
+            name:
+              description: Apideck service provider name.
+              example: 101 Data Solution
+              type: string
           required:
-            - request_rate
-          title: Virtual Webhooks
+            - id
+            - name
+          type: object
+        status_code:
+          description: HTTP Status code that was returned.
+          example: 200
+          type: integer
+        success:
+          description: Whether or not the request was successful.
+          example: true
+          type: boolean
+        timestamp:
+          description: ISO Date and time when the request was made.
+          example: 2021-07-12T14:26:17.420Z
+          type: string
+        unified_api:
+          $ref: "#/components/schemas/UnifiedApiId"
+      type: object
+      x-apideck-schema-id: WebhookEventLog
+    WebhookEventLogsFilter:
+      properties:
+        consumer_id:
+          example: test_user_id
+          nullable: true
+          type: string
+        entity_type:
+          example: Connection
+          nullable: true
+          type: string
+        event_type:
+          example: vault.connection.callable
+          nullable: true
+          type: string
+        exclude_apis:
+          example: vault,proxy
+          nullable: true
+          type: string
+        service:
+          nullable: true
+          properties:
+            id:
+              type: string
           type: object
       type: object
-      x-apideck-schema-id: WebhookSupport
+      x-apideck-schema-id: WebhookEventLogsFilter
+      x-graphql-type-name: WebhookEventLogsFilter
+    WebhookEventType:
+      enum:
+        - "*"
+        - crm.activity.created
+        - crm.activity.updated
+        - crm.activity.deleted
+        - crm.company.created
+        - crm.company.updated
+        - crm.company.deleted
+        - crm.contact.created
+        - crm.contact.updated
+        - crm.contact.deleted
+        - crm.lead.created
+        - crm.lead.updated
+        - crm.lead.deleted
+        - crm.note.created
+        - crm.notes.updated
+        - crm.notes.deleted
+        - crm.opportunity.created
+        - crm.opportunity.updated
+        - crm.opportunity.deleted
+        - lead.lead.created
+        - lead.lead.updated
+        - lead.lead.deleted
+        - vault.connection.created
+        - vault.connection.updated
+        - vault.connection.disabled
+        - vault.connection.deleted
+        - vault.connection.callable
+        - vault.connection.token_refresh.failed
+        - ats.job.created
+        - ats.job.updated
+        - ats.job.deleted
+        - ats.applicant.created
+        - ats.applicant.updated
+        - ats.applicant.deleted
+        - accounting.customer.created
+        - accounting.customer.updated
+        - accounting.customer.deleted
+        - accounting.invoice.created
+        - accounting.invoice.updated
+        - accounting.invoice.deleted
+        - accounting.invoice_item.created
+        - accounting.invoice_item.updated
+        - accounting.invoice_item.deleted
+        - accounting.ledger_account.created
+        - accounting.ledger_account.updated
+        - accounting.ledger_account.deleted
+        - accounting.tax_rate.created
+        - accounting.tax_rate.updated
+        - accounting.tax_rate.deleted
+        - accounting.bill.created
+        - accounting.bill.updated
+        - accounting.bill.deleted
+        - accounting.payment.created
+        - accounting.payment.updated
+        - accounting.payment.deleted
+        - accounting.supplier.created
+        - accounting.supplier.updated
+        - accounting.supplier.deleted
+        - pos.order.created
+        - pos.order.updated
+        - pos.order.deleted
+        - pos.product.created
+        - pos.product.updated
+        - pos.product.deleted
+        - pos.payment.created
+        - pos.payment.updated
+        - pos.payment.deleted
+        - pos.merchant.created
+        - pos.merchant.updated
+        - pos.merchant.deleted
+        - pos.location.created
+        - pos.location.updated
+        - pos.location.deleted
+        - pos.item.created
+        - pos.item.updated
+        - pos.item.deleted
+        - pos.modifier.created
+        - pos.modifier.updated
+        - pos.modifier.deleted
+        - pos.modifier-group.created
+        - pos.modifier-group.updated
+        - pos.modifier-group.deleted
+        - hris.employee.created
+        - hris.employee.updated
+        - hris.employee.deleted
+        - hris.company.created
+        - hris.company.updated
+        - hris.company.deleted
+        - file-storage.file.created
+        - file-storage.file.updated
+        - file-storage.file.deleted
+        - issue-tracking.ticket.created
+        - issue-tracking.ticket.updated
+        - issue-tracking.ticket.deleted
+      example: crm.company.created
+      type: string
+      x-apideck-enum-id: webhooks.event_type
   securitySchemes:
     apiKey:
       description: |

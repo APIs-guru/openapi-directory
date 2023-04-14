@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 9.1.3
+  version: 9.1.4
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1548,7 +1548,7 @@ components:
       schema:
         type: string
     limit:
-      description: Number of records to return
+      description: Number of results to return. Minimum 1, Maximum 200, Default 20
       in: query
       name: limit
       schema:

@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 9.1.3
+  version: 9.1.4
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -3612,7 +3612,7 @@ components:
         $ref: "#/components/schemas/LeadsSort"
       style: deepObject
     limit:
-      description: Number of records to return
+      description: Number of results to return. Minimum 1, Maximum 200, Default 20
       in: query
       name: limit
       schema:
