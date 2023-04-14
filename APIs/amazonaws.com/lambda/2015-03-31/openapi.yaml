@@ -4109,7 +4109,7 @@ paths:
   '/2021-11-15/functions/{FunctionName}/response-streaming-invocations':
     post:
       operationId: InvokeWithResponseStream
-      description: 'Configure your Lambda functions to stream response payloads back to clients. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-response-streaming.html">Configuring a Lambda function to stream responses</a>.'
+      description: '<p>Configure your Lambda functions to stream response payloads back to clients. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-response-streaming.html">Configuring a Lambda function to stream responses</a>.</p> <p>This operation requires permission for the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html">lambda:InvokeFunction</a> action. For details on how to set up permissions for cross-account invocations, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke">Granting function access to other accounts</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4202,72 +4202,90 @@ paths:
               schema:
                 $ref: '#/components/schemas/EFSIOException'
         '494':
+          description: SnapStartException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapStartException'
+        '495':
+          description: SnapStartTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapStartTimeoutException'
+        '496':
+          description: SnapStartNotReadyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapStartNotReadyException'
+        '497':
           description: EC2ThrottledException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/EC2ThrottledException'
-        '495':
+        '498':
           description: EC2AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/EC2AccessDeniedException'
-        '496':
+        '499':
           description: InvalidSubnetIDException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidSubnetIDException'
-        '497':
+        '500':
           description: InvalidSecurityGroupIDException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidSecurityGroupIDException'
-        '498':
+        '501':
           description: InvalidZipFileException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidZipFileException'
-        '499':
+        '502':
           description: KMSDisabledException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSDisabledException'
-        '500':
+        '503':
           description: KMSInvalidStateException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInvalidStateException'
-        '501':
+        '504':
           description: KMSAccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSAccessDeniedException'
-        '502':
+        '505':
           description: KMSNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSNotFoundException'
-        '503':
+        '506':
           description: InvalidRuntimeException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRuntimeException'
-        '504':
+        '507':
           description: ResourceConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceConflictException'
-        '505':
+        '508':
           description: ResourceNotReadyException
           content:
             application/json:
@@ -5791,7 +5809,7 @@ components:
         MaximumRecordAgeInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
-            - description: '(Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records. '
+            - description: '<p>(Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records.</p> <note> <p>The minimum value that can be set is 60 seconds.</p> </note>'
         BisectBatchOnFunctionError:
           allOf:
             - $ref: '#/components/schemas/BisectBatchOnFunctionError'
@@ -5915,7 +5933,7 @@ components:
         Runtime:
           allOf:
             - $ref: '#/components/schemas/Runtime'
-            - description: The runtime environment for the Lambda function.
+            - description: '<p>The identifier of the function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>. Runtime is required if the deployment package is a .zip file archive.</p> <p>The following list includes deprecated runtimes. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy">Runtime deprecation policy</a>.</p>'
         Role:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
