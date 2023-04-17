@@ -171,7 +171,6 @@ paths:
               type: object
               required:
                 - MonitorName
-                - MaxCityNetworksToMonitor
               properties:
                 MonitorName:
                   description: 'The name of the monitor. '
@@ -200,13 +199,18 @@ paths:
                   minimum: 1
                   maximum: 500000
                 InternetMeasurementsLogDelivery:
-                  description: 'Configuration information for other locations that you choose to publish Amazon CloudWatch Internet Monitor internet measurements to, such as Amazon S3. The measurements are also published to Amazon CloudWatch Logs.'
+                  description: Publish internet measurements to an Amazon S3 bucket in addition to CloudWatch Logs.
                   type: object
                   properties:
                     S3Config:
                       allOf:
                         - $ref: '#/components/schemas/S3Config'
                         - description: 'The configuration information for publishing Internet Monitor internet measurements to Amazon S3. The configuration includes the bucket name and (optionally) prefix for the S3 bucket to store the measurements, and the delivery status. The delivery status is <code>ENABLED</code> or <code>DISABLED</code>, depending on whether you choose to deliver internet measurements to S3 logs.'
+                TrafficPercentageToMonitor:
+                  description: The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -457,13 +461,18 @@ paths:
                   minimum: 1
                   maximum: 500000
                 InternetMeasurementsLogDelivery:
-                  description: 'Configuration information for other locations that you choose to publish Amazon CloudWatch Internet Monitor internet measurements to, such as Amazon S3. The measurements are also published to Amazon CloudWatch Logs.'
+                  description: Publish internet measurements to an Amazon S3 bucket in addition to CloudWatch Logs.
                   type: object
                   properties:
                     S3Config:
                       allOf:
                         - $ref: '#/components/schemas/S3Config'
                         - description: 'The configuration information for publishing Internet Monitor internet measurements to Amazon S3. The configuration includes the bucket name and (optionally) prefix for the S3 bucket to store the measurements, and the delivery status. The delivery status is <code>ENABLED</code> or <code>DISABLED</code>, depending on whether you choose to deliver internet measurements to S3 logs.'
+                TrafficPercentageToMonitor:
+                  description: The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
   '/v20210603/Monitors/{MonitorName}/HealthEvents/{EventId}':
     get:
       operationId: GetHealthEvent
@@ -970,7 +979,6 @@ components:
         - Status
         - CreatedAt
         - ModifiedAt
-        - MaxCityNetworksToMonitor
       properties:
         MonitorName:
           allOf:
@@ -1016,6 +1024,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/InternetMeasurementsLogDelivery'
             - description: 'Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.'
+        TrafficPercentageToMonitor:
+          allOf:
+            - $ref: '#/components/schemas/TrafficPercentageToMonitor'
+            - description: The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
     ListHealthEventsOutput:
       type: object
       required:
@@ -1125,12 +1137,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3Config'
             - description: 'The configuration information for publishing Internet Monitor internet measurements to Amazon S3. The configuration includes the bucket name and (optionally) prefix for the S3 bucket to store the measurements, and the delivery status. The delivery status is <code>ENABLED</code> or <code>DISABLED</code>, depending on whether you choose to deliver internet measurements to S3 logs.'
-      description: 'Configuration information for other locations that you choose to publish Amazon CloudWatch Internet Monitor internet measurements to, such as Amazon S3. The measurements are also published to Amazon CloudWatch Logs.'
+      description: Publish internet measurements to an Amazon S3 bucket in addition to CloudWatch Logs.
+    TrafficPercentageToMonitor:
+      type: integer
+      minimum: 1
+      maximum: 100
     CreateMonitorInput:
       type: object
       required:
         - MonitorName
-        - MaxCityNetworksToMonitor
       title: CreateMonitorInput
       properties:
         MonitorName:
@@ -1156,7 +1171,11 @@ components:
         InternetMeasurementsLogDelivery:
           allOf:
             - $ref: '#/components/schemas/InternetMeasurementsLogDelivery'
-            - description: 'Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.'
+            - description: Publish internet measurements for Internet Monitor to an Amazon S3 bucket in addition to CloudWatch Logs.
+        TrafficPercentageToMonitor:
+          allOf:
+            - $ref: '#/components/schemas/TrafficPercentageToMonitor'
+            - description: The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
     MonitorArn:
       type: string
       pattern: 'arn:.*'
@@ -1527,5 +1546,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/InternetMeasurementsLogDelivery'
             - description: 'Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.'
+        TrafficPercentageToMonitor:
+          allOf:
+            - $ref: '#/components/schemas/TrafficPercentageToMonitor'
+            - description: The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
 security:
   - hmac: []

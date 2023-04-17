@@ -231,6 +231,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ConnectorProfileCredentials'
                         - description: ' The connector-specific credentials required by each connector. '
+                clientToken:
+                  description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>CreateConnectorProfile</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs. If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>CreateConnectorProfile</code>. The token is active for 8 hours.</p>'
+                  type: string
+                  pattern: '[ -~]+'
+                  minLength: 1
+                  maxLength: 256
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -383,6 +389,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/GlueDataCatalogConfig'
                         - description: Specifies the configuration that Amazon AppFlow uses when it catalogs your data with the Glue Data Catalog.
+                clientToken:
+                  description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>CreateFlow</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs. If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>CreateFlow</code>. The token is active for 8 hours.</p>'
+                  type: string
+                  pattern: '[ -~]+'
+                  minLength: 1
+                  maxLength: 256
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1399,6 +1411,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/LambdaConnectorProvisioningConfig'
                         - description: Contains information about the configuration of the lambda which is being registered as the connector.
+                clientToken:
+                  description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>RegisterConnector</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs. If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>RegisterConnector</code>. The token is active for 8 hours.</p>'
+                  type: string
+                  pattern: '[ -~]+'
+                  minLength: 1
+                  maxLength: 256
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1456,6 +1474,12 @@ paths:
                   description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
                   type: string
                   pattern: '[a-zA-Z0-9][\w!@#.-]+'
+                  maxLength: 256
+                clientToken:
+                  description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>StartFlow</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs for flows that run on a schedule or based on an event. However, the error doesn''t occur for flows that run on demand. You set the conditions that initiate your flow for the <code>triggerConfig</code> parameter.</p> <p>If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>StartFlow</code>. The token is active for 8 hours.</p>'
+                  type: string
+                  pattern: '[ -~]+'
+                  minLength: 1
                   maxLength: 256
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1710,6 +1734,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ConnectorProfileCredentials'
                         - description: ' The connector-specific credentials required by each connector. '
+                clientToken:
+                  description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>UpdateConnectorProfile</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs. If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>UpdateConnectorProfile</code>. The token is active for 8 hours.</p>'
+                  type: string
+                  pattern: '[ -~]+'
+                  minLength: 1
+                  maxLength: 256
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1811,6 +1841,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/LambdaConnectorProvisioningConfig'
                         - description: Contains information about the configuration of the lambda which is being registered as the connector.
+                clientToken:
+                  description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>UpdateConnectorRegistration</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs. If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>UpdateConnectorRegistration</code>. The token is active for 8 hours.</p>'
+                  type: string
+                  pattern: '[ -~]+'
+                  minLength: 1
+                  maxLength: 256
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1950,6 +1986,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/GlueDataCatalogConfig'
                         - description: Specifies the configuration that Amazon AppFlow uses when it catalogs your data with the Glue Data Catalog.
+                clientToken:
+                  description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>UpdateFlow</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs. If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>UpdateFlow</code>. The token is active for 8 hours.</p>'
+                  type: string
+                  pattern: '[ -~]+'
+                  minLength: 1
+                  maxLength: 256
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2962,6 +3004,11 @@ components:
       pattern: \S+
       maxLength: 512
       format: password
+    ClientToken:
+      type: string
+      pattern: '[ -~]+'
+      minLength: 1
+      maxLength: 256
     ClusterIdentifier:
       type: string
       pattern: \S+
@@ -4711,6 +4758,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileConfig'
             - description: ' Defines the connector-specific configuration and credentials. '
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>CreateConnectorProfile</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs. If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>CreateConnectorProfile</code>. The token is active for 8 hours.</p>'
     FlowName:
       type: string
       pattern: '[a-zA-Z0-9][\w!@#.-]+'
@@ -4828,6 +4879,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MetadataCatalogConfig'
             - description: 'Specifies the configuration that Amazon AppFlow uses when it catalogs the data that''s transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.'
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>CreateFlow</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs. If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>CreateFlow</code>. The token is active for 8 hours.</p>'
     FlowArn:
       type: string
       pattern: 'arn:aws:appflow:.*:[0-9]+:.*'
@@ -6175,6 +6230,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorProvisioningConfig'
             - description: The provisioning type of the connector. Currently the only supported value is LAMBDA.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>RegisterConnector</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs. If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>RegisterConnector</code>. The token is active for 8 hours.</p>'
     S3OutputFormatConfig:
       type: object
       properties:
@@ -6431,6 +6490,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/FlowName'
             - description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>StartFlow</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs for flows that run on a schedule or based on an event. However, the error doesn''t occur for flows that run on demand. You set the conditions that initiate your flow for the <code>triggerConfig</code> parameter.</p> <p>If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>StartFlow</code>. The token is active for 8 hours.</p>'
     StopFlowRequest:
       type: object
       required:
@@ -6520,6 +6583,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileConfig'
             - description: ' Defines the connector-specific profile configuration and credentials. '
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>UpdateConnectorProfile</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs. If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>UpdateConnectorProfile</code>. The token is active for 8 hours.</p>'
     UpdateConnectorRegistrationRequest:
       type: object
       required:
@@ -6536,6 +6603,10 @@ components:
             - description: A description about the update that you're applying to the connector.
         connectorProvisioningConfig:
           $ref: '#/components/schemas/ConnectorProvisioningConfig'
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>UpdateConnectorRegistration</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs. If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>UpdateConnectorRegistration</code>. The token is active for 8 hours.</p>'
     UpdateFlowRequest:
       type: object
       required:
@@ -6572,6 +6643,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MetadataCatalogConfig'
             - description: 'Specifies the configuration that Amazon AppFlow uses when it catalogs the data that''s transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.'
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>UpdateFlow</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs. If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>UpdateFlow</code>. The token is active for 8 hours.</p>'
     UpsolverBucketName:
       type: string
       pattern: ^(upsolver-appflow)\S*

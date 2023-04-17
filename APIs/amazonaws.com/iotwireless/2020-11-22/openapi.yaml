@@ -1109,6 +1109,10 @@ paths:
                       $ref: '#/components/schemas/SessionStartTimeTimestamp'
                     SessionTimeout:
                       $ref: '#/components/schemas/SessionTimeout'
+                    PingSlotPeriod:
+                      allOf:
+                        - $ref: '#/components/schemas/PingSlotPeriod'
+                        - description: The PingSlotPeriod value.
   /destinations:
     post:
       operationId: CreateDestination
@@ -2083,6 +2087,14 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/DrMaxBox'
                         - description: The DrMax value.
+                    PrAllowed:
+                      allOf:
+                        - $ref: '#/components/schemas/PrAllowed'
+                        - description: The PRAllowed value that describes whether passive roaming is allowed.
+                    RaAllowed:
+                      allOf:
+                        - $ref: '#/components/schemas/RaAllowed'
+                        - description: The RAAllowed value that describes whether roaming activation is allowed.
                 Tags:
                   description: The tag to attach to the specified resource. Tags are metadata that you can use to manage a resource.
                   type: array
@@ -2504,6 +2516,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Beaconing'
                         - description: 'Beaconing object information, which consists of the data rate and frequency parameters.'
+                    MaxEirp:
+                      allOf:
+                        - $ref: '#/components/schemas/GatewayMaxEirp'
+                        - description: The MaxEIRP value.
                 Tags:
                   description: The tag to attach to the specified resource. Tags are metadata that you can use to manage a resource.
                   type: array
@@ -4560,6 +4576,12 @@ paths:
                     $ref: '#/components/schemas/NetId'
                   minItems: 0
                   maxItems: 10
+                MaxEirp:
+                  description: The MaxEIRP value.
+                  type: number
+                  format: float
+                  minimum: 0
+                  maximum: 30
   '/wireless-gateway-task-definitions/{Id}':
     delete:
       operationId: DeleteWirelessGatewayTaskDefinition
@@ -8083,7 +8105,7 @@ components:
       maximum: 1000
     PingSlotPeriod:
       type: integer
-      minimum: 128
+      minimum: 32
       maximum: 4096
     PingSlotDr:
       type: integer
@@ -8231,6 +8253,10 @@ components:
       type: integer
       minimum: 0
       maximum: 15
+    PrAllowed:
+      type: boolean
+    RaAllowed:
+      type: boolean
     CreateWirelessDeviceResponse:
       type: object
       properties:
@@ -8380,6 +8406,11 @@ components:
             - $ref: '#/components/schemas/BeaconingFrequencies'
             - description: The frequency list for the gateways to send the beacons.
       description: Beaconing parameters for configuring the wireless gateways.
+    GatewayMaxEirp:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 30
     CreateWirelessGatewayTaskResponse:
       type: object
       properties:
@@ -10376,6 +10407,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/DrMaxBox'
             - description: The DrMax value.
+        PrAllowed:
+          allOf:
+            - $ref: '#/components/schemas/PrAllowed'
+            - description: The PRAllowed value that describes whether passive roaming is allowed.
+        RaAllowed:
+          allOf:
+            - $ref: '#/components/schemas/RaAllowed'
+            - description: The RAAllowed value that describes whether roaming activation is allowed.
       description: LoRaWANServiceProfile object.
     CreateServiceProfileRequest:
       type: object
@@ -10523,6 +10562,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Beaconing'
             - description: 'Beaconing object information, which consists of the data rate and frequency parameters.'
+        MaxEirp:
+          allOf:
+            - $ref: '#/components/schemas/GatewayMaxEirp'
+            - description: The MaxEIRP value.
       description: LoRaWANGateway object.
     CreateWirelessGatewayRequest:
       type: object
@@ -11249,6 +11292,10 @@ components:
           $ref: '#/components/schemas/SessionStartTimeTimestamp'
         SessionTimeout:
           $ref: '#/components/schemas/SessionTimeout'
+        PingSlotPeriod:
+          allOf:
+            - $ref: '#/components/schemas/PingSlotPeriod'
+            - description: The PingSlotPeriod value.
       description: The LoRaWAN information used with the multicast session.
     GetNetworkAnalyzerConfigurationRequest:
       type: object
@@ -12023,10 +12070,6 @@ components:
     ReportDevStatusBattery:
       type: boolean
     ReportDevStatusMargin:
-      type: boolean
-    PrAllowed:
-      type: boolean
-    RaAllowed:
       type: boolean
     NwkGeoLoc:
       type: boolean
@@ -12993,6 +13036,10 @@ components:
           $ref: '#/components/schemas/JoinEuiFilters'
         NetIdFilters:
           $ref: '#/components/schemas/NetIdFilters'
+        MaxEirp:
+          allOf:
+            - $ref: '#/components/schemas/GatewayMaxEirp'
+            - description: The MaxEIRP value.
     UpdateWirelessGatewayTaskEntry:
       type: object
       properties:

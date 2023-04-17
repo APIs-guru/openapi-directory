@@ -197,6 +197,100 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /CreateLaunchConfigurationTemplate:
+    post:
+      operationId: CreateLaunchConfigurationTemplate
+      description: Creates a new Launch Configuration Template.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLaunchConfigurationTemplateResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                copyPrivateIp:
+                  description: Copy private IP.
+                  type: boolean
+                copyTags:
+                  description: Copy tags.
+                  type: boolean
+                launchDisposition:
+                  description: Launch disposition.
+                  type: string
+                  enum:
+                    - STOPPED
+                    - STARTED
+                licensing:
+                  description: Configuration of a machine's license.
+                  type: object
+                  properties:
+                    osByol:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Whether to enable "Bring your own license" or not.
+                tags:
+                  description: Request to associate tags during creation of a Launch Configuration Template.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                targetInstanceTypeRightSizingMethod:
+                  description: Target instance type right-sizing method.
+                  type: string
+                  enum:
+                    - NONE
+                    - BASIC
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /CreateReplicationConfigurationTemplate:
     post:
       operationId: CreateReplicationConfigurationTemplate
@@ -407,6 +501,71 @@ paths:
                   pattern: '^drsjob-[0-9a-zA-Z]{17}$'
                   minLength: 24
                   maxLength: 24
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeleteLaunchConfigurationTemplate:
+    post:
+      operationId: DeleteLaunchConfigurationTemplate
+      description: Deletes a single Launch Configuration Template by ID.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteLaunchConfigurationTemplateResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launchConfigurationTemplateID
+              properties:
+                launchConfigurationTemplateID:
+                  description: The ID of the Launch Configuration Template to be deleted.
+                  type: string
+                  pattern: '^lct-[0-9a-zA-Z]{17}$'
+                  minLength: 21
+                  maxLength: 21
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -763,6 +922,92 @@ paths:
                   minimum: 1
                 nextToken:
                   description: The token of the next Job to retrieve.
+                  type: string
+                  minLength: 0
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DescribeLaunchConfigurationTemplates:
+    post:
+      operationId: DescribeLaunchConfigurationTemplates
+      description: 'Lists all Launch Configuration Templates, filtered by Launch Configuration Template IDs'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeLaunchConfigurationTemplatesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                launchConfigurationTemplateIDs:
+                  description: Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LaunchConfigurationTemplateID'
+                  minItems: 0
+                  maxItems: 1
+                maxResults:
+                  description: Maximum results to be returned in DescribeLaunchConfigurationTemplates.
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: The token of the next Launch Configuration Template to retrieve.
                   type: string
                   minLength: 0
                   maxLength: 2048
@@ -2549,6 +2794,103 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UpdateLaunchConfigurationTemplate:
+    post:
+      operationId: UpdateLaunchConfigurationTemplate
+      description: Updates an existing Launch Configuration Template by ID.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateLaunchConfigurationTemplateResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launchConfigurationTemplateID
+              properties:
+                copyPrivateIp:
+                  description: Copy private IP.
+                  type: boolean
+                copyTags:
+                  description: Copy tags.
+                  type: boolean
+                launchConfigurationTemplateID:
+                  description: Launch Configuration Template ID.
+                  type: string
+                  pattern: '^lct-[0-9a-zA-Z]{17}$'
+                  minLength: 21
+                  maxLength: 21
+                launchDisposition:
+                  description: Launch disposition.
+                  type: string
+                  enum:
+                    - STOPPED
+                    - STARTED
+                licensing:
+                  description: Configuration of a machine's license.
+                  type: object
+                  properties:
+                    osByol:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Whether to enable "Bring your own license" or not.
+                targetInstanceTypeRightSizingMethod:
+                  description: Target instance type right-sizing method.
+                  type: string
+                  enum:
+                    - NONE
+                    - BASIC
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /UpdateReplicationConfiguration:
     post:
       operationId: UpdateReplicationConfiguration
@@ -2929,6 +3271,15 @@ components:
     AccessDeniedException: {}
     ValidationException: {}
     UninitializedAccountException: {}
+    CreateLaunchConfigurationTemplateResponse:
+      type: object
+      properties:
+        launchConfigurationTemplate:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplate'
+            - description: Created Launch Configuration Template.
+    Boolean:
+      type: boolean
     ReplicationConfigurationTemplate:
       type: object
       required:
@@ -3039,6 +3390,9 @@ components:
       type: object
       properties: {}
     ConflictException: {}
+    DeleteLaunchConfigurationTemplateResponse:
+      type: object
+      properties: {}
     DeleteReplicationConfigurationTemplateResponse:
       type: object
       properties: {}
@@ -3078,6 +3432,22 @@ components:
         $ref: '#/components/schemas/JobID'
       minItems: 0
       maxItems: 1000
+    DescribeLaunchConfigurationTemplatesResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplates'
+            - description: List of items returned by DescribeLaunchConfigurationTemplates.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token of the next Launch Configuration Template to retrieve.
+    LaunchConfigurationTemplateID:
+      type: string
+      pattern: '^lct-[0-9a-zA-Z]{17}$'
+      minLength: 21
+      maxLength: 21
     DescribeRecoveryInstancesResponse:
       type: object
       properties:
@@ -3428,8 +3798,13 @@ components:
       type: string
       minLength: 0
       maxLength: 256
-    Boolean:
-      type: boolean
+    UpdateLaunchConfigurationTemplateResponse:
+      type: object
+      properties:
+        launchConfigurationTemplate:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplate'
+            - description: Updated Launch Configuration Template.
     ReplicationConfigurationReplicatedDisk:
       type: object
       properties:
@@ -3579,6 +3954,88 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
             - description: A list of tags associated with the extended source server.
+    LaunchDisposition:
+      type: string
+      enum:
+        - STOPPED
+        - STARTED
+    Licensing:
+      type: object
+      properties:
+        osByol:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to enable "Bring your own license" or not.
+      description: Configuration of a machine's license.
+    TargetInstanceTypeRightSizingMethod:
+      type: string
+      enum:
+        - NONE
+        - BASIC
+    CreateLaunchConfigurationTemplateRequest:
+      type: object
+      title: CreateLaunchConfigurationTemplateRequest
+      properties:
+        copyPrivateIp:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Copy private IP.
+        copyTags:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Copy tags.
+        launchDisposition:
+          allOf:
+            - $ref: '#/components/schemas/LaunchDisposition'
+            - description: Launch disposition.
+        licensing:
+          allOf:
+            - $ref: '#/components/schemas/Licensing'
+            - description: Licensing.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: Request to associate tags during creation of a Launch Configuration Template.
+        targetInstanceTypeRightSizingMethod:
+          allOf:
+            - $ref: '#/components/schemas/TargetInstanceTypeRightSizingMethod'
+            - description: Target instance type right-sizing method.
+    LaunchConfigurationTemplate:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: ARN of the Launch Configuration Template.
+        copyPrivateIp:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Copy private IP.
+        copyTags:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Copy tags.
+        launchConfigurationTemplateID:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplateID'
+            - description: ID of the Launch Configuration Template.
+        launchDisposition:
+          allOf:
+            - $ref: '#/components/schemas/LaunchDisposition'
+            - description: Launch disposition.
+        licensing:
+          allOf:
+            - $ref: '#/components/schemas/Licensing'
+            - description: Licensing.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: Tags of the Launch Configuration Template.
+        targetInstanceTypeRightSizingMethod:
+          allOf:
+            - $ref: '#/components/schemas/TargetInstanceTypeRightSizingMethod'
+            - description: Target instance type right-sizing method.
+      description: Account level Launch Configuration Template.
     ReplicationConfigurationDataPlaneRouting:
       type: string
       enum:
@@ -3871,6 +4328,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobID'
             - description: The ID of the Job to be deleted.
+    DeleteLaunchConfigurationTemplateRequest:
+      type: object
+      required:
+        - launchConfigurationTemplateID
+      title: DeleteLaunchConfigurationTemplateRequest
+      properties:
+        launchConfigurationTemplateID:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplateID'
+            - description: The ID of the Launch Configuration Template to be deleted.
     DeleteRecoveryInstanceRequest:
       type: object
       required:
@@ -3971,6 +4438,38 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Job'
+    LaunchConfigurationTemplateIDs:
+      type: array
+      items:
+        $ref: '#/components/schemas/LaunchConfigurationTemplateID'
+      minItems: 0
+      maxItems: 1
+    MaxResultsType:
+      type: integer
+      minimum: 1
+      maximum: 1000
+    DescribeLaunchConfigurationTemplatesRequest:
+      type: object
+      title: DescribeLaunchConfigurationTemplatesRequest
+      properties:
+        launchConfigurationTemplateIDs:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplateIDs'
+            - description: Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsType'
+            - description: Maximum results to be returned in DescribeLaunchConfigurationTemplates.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token of the next Launch Configuration Template to retrieve.
+    LaunchConfigurationTemplates:
+      type: array
+      items:
+        $ref: '#/components/schemas/LaunchConfigurationTemplate'
+      minItems: 0
+      maxItems: 200
     RecoveryInstance:
       type: object
       properties:
@@ -4476,28 +4975,10 @@ components:
       enum:
         - RECOVERY
         - DRILL
-    LaunchDisposition:
-      type: string
-      enum:
-        - STOPPED
-        - STARTED
-    Licensing:
-      type: object
-      properties:
-        osByol:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Whether to enable "Bring your own license" or not.
-      description: Configuration of a machine's license.
     SmallBoundedString:
       type: string
       minLength: 0
       maxLength: 128
-    TargetInstanceTypeRightSizingMethod:
-      type: string
-      enum:
-        - NONE
-        - BASIC
     LaunchStatus:
       type: string
       enum:
@@ -5031,6 +5512,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EC2InstanceType'
             - description: The recommended EC2 instance type that will be used when recovering the Source Server.
+        supportsNitroInstances:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Are EC2 nitro instance types supported when recovering the Source Server.
       description: Properties of the Source Server machine.
     StagingArea:
       type: object
@@ -5226,6 +5711,36 @@ components:
           allOf:
             - $ref: '#/components/schemas/TargetInstanceTypeRightSizingMethod'
             - description: 'Whether Elastic Disaster Recovery should try to automatically choose the instance type that best matches the OS, CPU, and RAM of your Source Server.'
+    UpdateLaunchConfigurationTemplateRequest:
+      type: object
+      required:
+        - launchConfigurationTemplateID
+      title: UpdateLaunchConfigurationTemplateRequest
+      properties:
+        copyPrivateIp:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Copy private IP.
+        copyTags:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Copy tags.
+        launchConfigurationTemplateID:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplateID'
+            - description: Launch Configuration Template ID.
+        launchDisposition:
+          allOf:
+            - $ref: '#/components/schemas/LaunchDisposition'
+            - description: Launch disposition.
+        licensing:
+          allOf:
+            - $ref: '#/components/schemas/Licensing'
+            - description: Licensing.
+        targetInstanceTypeRightSizingMethod:
+          allOf:
+            - $ref: '#/components/schemas/TargetInstanceTypeRightSizingMethod'
+            - description: Target instance type right-sizing method.
     UpdateReplicationConfigurationRequest:
       type: object
       required:
