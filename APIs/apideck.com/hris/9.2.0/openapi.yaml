@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 9.1.4
+  version: 9.2.0
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1131,6 +1131,7 @@ paths:
                 division_id: '12345',
                 department: 'R&D',
                 department_id: '12345',
+                department_name: '12345',
                 team: {
                   id: '1234',
                   name: 'Full Stack Engineers'
@@ -1471,6 +1472,7 @@ paths:
                 division_id: '12345',
                 department: 'R&D',
                 department_id: '12345',
+                department_name: '12345',
                 team: {
                   id: '1234',
                   name: 'Full Stack Engineers'
@@ -3982,7 +3984,8 @@ components:
           title: Deleted
           type: boolean
         department:
-          description: The department the person is currently in.
+          deprecated: true
+          description: The department the person is currently in. [Deprecated](https://developers.apideck.com/changelog) in favor of the dedicated department_id and department_name field.
           example: R&D
           nullable: true
           title: Department
@@ -3992,6 +3995,12 @@ components:
           example: "12345"
           nullable: true
           title: Department ID
+          type: string
+        department_name:
+          description: Name of the department this employee belongs to.
+          example: "12345"
+          nullable: true
+          title: Department Name
           type: string
         description:
           $ref: "#/components/schemas/Description"

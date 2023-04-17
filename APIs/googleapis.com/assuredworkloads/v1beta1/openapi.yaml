@@ -682,6 +682,12 @@ components:
           description: "Output only. Immutable. Audit Log link to find business justification provided for violation exception. Format: https://console.cloud.google.com/logs/query;query={logName}{protoPayload.resourceName}{protoPayload.methodName}{timeRange}{organization}"
           readOnly: true
           type: string
+        exceptionContexts:
+          description: Output only. List of all the exception detail added for the violation.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1ViolationExceptionContext"
+          readOnly: true
+          type: array
         name:
           description: "Output only. Immutable. Name of the Violation. Format: organizations/{organization}/locations/{location}/workloads/{workload_id}/violations/{violations_id}"
           readOnly: true
@@ -716,6 +722,20 @@ components:
           description: Output only. The last time when the Violation record was updated.
           format: google-datetime
           readOnly: true
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1beta1ViolationExceptionContext:
+      description: "Violation exception detail. Next Id: 5"
+      properties:
+        acknowledgementTime:
+          description: Timestamp when the violation was acknowledged.
+          format: google-datetime
+          type: string
+        comment:
+          description: Business justification provided towards the acknowledgement of the violation.
+          type: string
+        principalEmail:
+          description: Email address of the user (or service account) who acknowledged the violation.
           type: string
       type: object
     GoogleCloudAssuredworkloadsV1beta1ViolationRemediation:
@@ -899,6 +919,9 @@ components:
           $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadSaaEnrollmentResponse"
           description: Output only. Represents the SAA enrollment response of the given workload. SAA enrollment response is queried during GetWorkload call. In failure cases, user friendly error message is shown in SAA details page.
           readOnly: true
+        violationNotificationsEnabled:
+          description: Optional. Indicates whether the e-mail notification for a violation is enabled for a workload. This value will be by default True, and if not present will be considered as true. This should only be updated via updateWorkload call. Any Changes to this field during the createWorkload call will not be honored. This will always be true while creating the workload.
+          type: boolean
       type: object
     GoogleCloudAssuredworkloadsV1beta1WorkloadCJISSettings:
       description: Settings specific to resources needed for CJIS.

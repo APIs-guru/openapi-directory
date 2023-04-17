@@ -348,6 +348,46 @@ paths:
             - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - properties
+  /v1alpha/properties:fetchConnectedGa4Property:
+    get:
+      description: "Given a specified UA property, looks up the GA4 property connected to it. Note: this cannot be used with GA4 properties."
+      operationId: analyticsadmin.properties.fetchConnectedGa4Property
+      parameters:
+        - description: "Required. The UA property for which to look up the connected GA4 property. Note this request uses the internal property ID, not the tracking ID of the form UA-XXXXXX-YY. Format: properties/{internal_web_property_id} Example: properties/1234"
+          in: query
+          name: property
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaFetchConnectedGa4PropertyResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1alpha/properties:listConnectedSiteTags:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -4020,6 +4060,13 @@ components:
         optOut:
           description: The opt out status for the UA property.
           type: boolean
+      type: object
+    GoogleAnalyticsAdminV1alphaFetchConnectedGa4PropertyResponse:
+      description: Response for looking up GA4 property connected to a UA property.
+      properties:
+        property:
+          description: "The GA4 property connected to the UA property. An empty string is returned when there is no connected GA4 property. Format: properties/{property_id} Example: properties/1234"
+          type: string
       type: object
     GoogleAnalyticsAdminV1alphaFirebaseLink:
       description: A link between a GA4 property and a Firebase project.

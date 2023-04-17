@@ -31,13 +31,18 @@ tags:
 paths:
   "/v1/{name}":
     delete:
-      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: certificatemanager.projects.locations.operations.delete
+      description: Deletes a single TrustConfig.
+      operationId: certificatemanager.projects.locations.trustConfigs.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: Required. A name of the TrustConfig to delete. Must be in the format `projects/*/locations/*/trustConfigs/*`.
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: The current etag of the TrustConfig. If an etag is provided and does not match the current etag of the resource, deletion will be blocked and an ABORTED error will be returned.
+          in: query
+          name: etag
           schema:
             type: string
       responses:
@@ -45,7 +50,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Empty"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -55,10 +60,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: certificatemanager.projects.locations.operations.get
+      description: Gets details of a single TrustConfig.
+      operationId: certificatemanager.projects.locations.trustConfigs.get
       parameters:
-        - description: The name of the operation resource.
+        - description: Required. A name of the TrustConfig to describe. Must be in the format `projects/*/locations/*/trustConfigs/*`.
           in: path
           name: name
           required: true
@@ -69,7 +74,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/TrustConfig"
           description: Successful response
       security:
         - Oauth2:
@@ -91,10 +96,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates a DnsAuthorization.
-      operationId: certificatemanager.projects.locations.dnsAuthorizations.patch
+      description: Updates a TrustConfig.
+      operationId: certificatemanager.projects.locations.trustConfigs.patch
       parameters:
-        - description: A user-defined name of the dns authorization. DnsAuthorization names must be unique globally and match pattern `projects/*/locations/*/dnsAuthorizations/*`.
+        - description: A user-defined name of the trust config. TrustConfig names must be unique globally and match pattern `projects/*/locations/*/trustConfigs/*`.
           in: path
           name: name
           required: true
@@ -109,7 +114,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DnsAuthorization"
+              $ref: "#/components/schemas/TrustConfig"
       responses:
         "200":
           content:
@@ -725,6 +730,97 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{parent}/trustConfigs":
+    get:
+      description: Lists TrustConfigs in a given project and location.
+      operationId: certificatemanager.projects.locations.trustConfigs.list
+      parameters:
+        - description: Required. The project and location from which the TrustConfigs should be listed, specified in the format `projects/*/locations/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filter expression to restrict the TrustConfigs returned.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: A list of TrustConfig field names used to specify the order of the returned results. The default sorting order is ascending. To specify descending order for a field, add a suffix " desc".
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Maximum number of TrustConfigs to return per call.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The value returned by the last `ListTrustConfigsResponse`. Indicates that this is a continuation of a prior `ListTrustConfigs` call, and that the system should return the next page of data.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTrustConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new TrustConfig in a given project and location.
+      operationId: certificatemanager.projects.locations.trustConfigs.create
+      parameters:
+        - description: Required. The parent resource of the TrustConfig. Must be in the format `projects/*/locations/*`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. A user-provided name of the TrustConfig.
+          in: query
+          name: trustConfigId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrustConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
 components:
   parameters:
     _.xgafv:
@@ -1091,6 +1187,13 @@ components:
           readOnly: true
           type: string
       type: object
+    IntermediateCA:
+      description: Defines an intermediate CA.
+      properties:
+        pemCertificate:
+          description: PEM intermediate certificate used for building up paths for validation. Each certificate provided in PEM format may occupy up to 5kB.
+          type: string
+      type: object
     IpConfig:
       description: Defines IP configuration where this Certificate Map is serving.
       properties:
@@ -1213,6 +1316,23 @@ components:
           description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListTrustConfigsResponse:
+      description: Response for the `ListTrustConfigs` method.
+      properties:
+        nextPageToken:
+          description: If there might be more results than those appearing in this response, then `next_page_token` is included. To get the next set of results, call this method again using the value of `next_page_token` as `page_token`.
+          type: string
+        trustConfigs:
+          description: A list of TrustConfigs for the parent resource.
+          items:
+            $ref: "#/components/schemas/TrustConfig"
+          type: array
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
           type: array
       type: object
     Location:
@@ -1367,6 +1487,60 @@ components:
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
+      type: object
+    TrustAnchor:
+      description: Defines a trust anchor.
+      properties:
+        pemCertificate:
+          description: PEM root certificate of the PKI used for validation. Each certificate provided in PEM format may occupy up to 5kB.
+          type: string
+      type: object
+    TrustConfig:
+      description: Defines a trust config.
+      properties:
+        createTime:
+          description: Output only. The creation timestamp of a TrustConfig.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: One or more paragraphs of text description of a TrustConfig.
+          type: string
+        etag:
+          description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Set of labels associated with a TrustConfig.
+          type: object
+        name:
+          description: A user-defined name of the trust config. TrustConfig names must be unique globally and match pattern `projects/*/locations/*/trustConfigs/*`.
+          type: string
+        trustStores:
+          description: Set of trust stores to perform validation against. This field is supported when TrustConfig is configured with Load Balancers, currently not supported for SPIFFE certificate validation. Only one TrustStore specified is currently allowed.
+          items:
+            $ref: "#/components/schemas/TrustStore"
+          type: array
+        updateTime:
+          description: Output only. The last update timestamp of a TrustConfig.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    TrustStore:
+      description: Defines a trust store.
+      properties:
+        intermediateCas:
+          description: Set of intermediate CA certificates used for the path building phase of chain validation. The field is currently not supported if TrustConfig is used for the workload certificate feature.
+          items:
+            $ref: "#/components/schemas/IntermediateCA"
+          type: array
+        trustAnchors:
+          description: List of Trust Anchors to be used while performing validation against a given TrustStore.
+          items:
+            $ref: "#/components/schemas/TrustAnchor"
+          type: array
       type: object
   securitySchemes:
     Oauth2:

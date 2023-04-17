@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: File storage API
-  version: 9.1.4
+  version: 9.2.0
   x-apideck-api: file-storage
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2281,12 +2281,7 @@ components:
       in: query
       name: pass_through
       schema:
-        additionalProperties: true
-        properties:
-          example_downstream_property:
-            description: All passthrough query parameters are passed along to the connector as is (?pass_through[search]=leads becomes ?search=leads)
-            type: string
-        type: object
+        $ref: "#/components/schemas/PassThroughQuery"
       style: deepObject
     raw:
       description: Include raw response. Mostly used for debugging purposes
@@ -3858,6 +3853,13 @@ components:
       example: "1234"
       type: string
       x-apideck-schema-id: ParentFolderId
+    PassThroughQuery:
+      additionalProperties: true
+      properties:
+        example_downstream_property:
+          description: All passthrough query parameters are passed along to the connector as is (?pass_through[search]=leads becomes ?search=leads)
+          type: string
+      type: object
     PaymentRequiredResponse:
       properties:
         detail:

@@ -2301,6 +2301,26 @@ components:
         draftEntity:
           description: Target entity full name. The draft entity can also include a column, index or constraint using the same naming notation schema.table.column.
           type: string
+        draftType:
+          description: Type of draft entity.
+          enum:
+            - DATABASE_ENTITY_TYPE_UNSPECIFIED
+            - DATABASE_ENTITY_TYPE_SCHEMA
+            - DATABASE_ENTITY_TYPE_TABLE
+            - DATABASE_ENTITY_TYPE_COLUMN
+            - DATABASE_ENTITY_TYPE_CONSTRAINT
+            - DATABASE_ENTITY_TYPE_INDEX
+            - DATABASE_ENTITY_TYPE_TRIGGER
+            - DATABASE_ENTITY_TYPE_VIEW
+            - DATABASE_ENTITY_TYPE_SEQUENCE
+            - DATABASE_ENTITY_TYPE_STORED_PROCEDURE
+            - DATABASE_ENTITY_TYPE_FUNCTION
+            - DATABASE_ENTITY_TYPE_SYNONYM
+            - DATABASE_ENTITY_TYPE_DATABASE_PACKAGE
+            - DATABASE_ENTITY_TYPE_UDT
+            - DATABASE_ENTITY_TYPE_MATERIALIZED_VIEW
+            - DATABASE_ENTITY_TYPE_DATABASE
+          type: string
         mappingLog:
           description: Entity mapping log entries. Multiple rules can be effective and contribute changes to a converted entity, such as a rule can handle the entity name, another rule can handle an entity type. In addition, rules which did not change the entity are also logged along with the reason preventing them to do so.
           items:
@@ -2308,6 +2328,26 @@ components:
           type: array
         sourceEntity:
           description: Source entity full name. The source entity can also be a column, index or constraint using the same naming notation schema.table.column.
+          type: string
+        sourceType:
+          description: Type of source entity.
+          enum:
+            - DATABASE_ENTITY_TYPE_UNSPECIFIED
+            - DATABASE_ENTITY_TYPE_SCHEMA
+            - DATABASE_ENTITY_TYPE_TABLE
+            - DATABASE_ENTITY_TYPE_COLUMN
+            - DATABASE_ENTITY_TYPE_CONSTRAINT
+            - DATABASE_ENTITY_TYPE_INDEX
+            - DATABASE_ENTITY_TYPE_TRIGGER
+            - DATABASE_ENTITY_TYPE_VIEW
+            - DATABASE_ENTITY_TYPE_SEQUENCE
+            - DATABASE_ENTITY_TYPE_STORED_PROCEDURE
+            - DATABASE_ENTITY_TYPE_FUNCTION
+            - DATABASE_ENTITY_TYPE_SYNONYM
+            - DATABASE_ENTITY_TYPE_DATABASE_PACKAGE
+            - DATABASE_ENTITY_TYPE_UDT
+            - DATABASE_ENTITY_TYPE_MATERIALIZED_VIEW
+            - DATABASE_ENTITY_TYPE_DATABASE
           type: string
       type: object
     EntityMappingLogEntry:
@@ -2752,6 +2792,9 @@ components:
             - UNSUPPORTED_DEFINER
             - CANT_RESTART_RUNNING_MIGRATION
             - TABLES_WITH_LIMITED_SUPPORT
+            - UNSUPPORTED_DATABASE_LOCALE
+            - UNSUPPORTED_DATABASE_FDW_CONFIG
+            - ERROR_RDBMS
           readOnly: true
           type: string
         errorDetailMessage:

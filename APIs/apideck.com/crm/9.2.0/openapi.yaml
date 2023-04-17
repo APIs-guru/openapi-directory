@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 9.1.4
+  version: 9.2.0
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -8319,7 +8319,8 @@ components:
           readOnly: true
           type: string
         department:
-          description: The department the person is currently in.
+          deprecated: true
+          description: The department the person is currently in. [Deprecated](https://developers.apideck.com/changelog) in favor of the dedicated department_id and department_name field.
           example: R&D
           nullable: true
           title: Department

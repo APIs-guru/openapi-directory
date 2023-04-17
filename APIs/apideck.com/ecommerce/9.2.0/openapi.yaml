@@ -6,9 +6,9 @@ info:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |+
-    Welcome to the Customer Support API.
+    Welcome to the Ecommerce API.
 
-    You can use this API to access all Customer Support API endpoints.
+    You can use this API to access all Ecommerce API endpoints.
 
     ## Base URL
 
@@ -270,9 +270,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: Customer Support
-  version: 9.1.4
-  x-apideck-api: customer-support
+  title: Ecommerce API
+  version: 9.2.0
+  x-apideck-api: ecommerce
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -280,10 +280,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/customer-support.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/ecommerce.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: customer-support
+  x-serviceName: ecommerce
   x-tags:
     - partner
 externalDocs:
@@ -293,14 +293,29 @@ security:
   - apiKey: []
 tags:
   - description: ""
+    name: Orders
+    x-apideck-model:
+      $ref: "#/components/schemas/EcommerceOrder"
+    x-apideck-resource-id: orders
+  - description: ""
+    name: Products
+    x-apideck-model:
+      $ref: "#/components/schemas/EcommerceProduct"
+    x-apideck-resource-id: products
+  - description: ""
     name: Customers
     x-apideck-model:
-      $ref: "#/components/schemas/CustomerSupportCustomer"
+      $ref: "#/components/schemas/EcommerceCustomer"
     x-apideck-resource-id: customers
+  - description: ""
+    name: Stores
+    x-apideck-model:
+      $ref: "#/components/schemas/EcommerceStore"
+    x-apideck-resource-id: stores
 paths:
-  /customer-support/customers:
+  /ecommerce/customers:
     get:
-      description: List Customer Support Customers
+      description: List Customers
       operationId: customersAll
       parameters:
         - $ref: "#/components/parameters/raw"
@@ -309,10 +324,11 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/customersFilter"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
-          $ref: "#/components/responses/GetCustomerSupportCustomersResponse"
+          $ref: "#/components/responses/GetEcommerceCustomersResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -327,10 +343,13 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Customer Support Customers
+      summary: List Customers
       tags:
         - Customers
-      x-apideck-api: customerSupport
+      x-apideck-api: ecommerce
+      x-apideck-gotchas:
+        - connector: woocommerce
+          description: Woocommerce will only return customers that have placed an order and created and account.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -344,186 +363,15 @@ paths:
             })
 
             try {
-              const { data } = await apideck.customerSupport.customersAll({})
+              const { data } = await apideck.ecommerce.customersAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: customerSupportCustomers
-    post:
-      description: Create Customer Support Customer
-      operationId: customersAdd
-      parameters:
-        - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CustomerSupportCustomer"
-        required: true
-      responses:
-        "201":
-          $ref: "#/components/responses/CreateCustomerSupportCustomerResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Create Customer Support Customer
-      tags:
-        - Customers
-      x-apideck-api: customerSupport
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            const params = {
-              customer: {
-                company_name: 'SpaceX',
-                first_name: 'Elon',
-                last_name: 'Musk',
-                individual: true,
-                addresses: [
-                  {
-                    id: '123',
-                    type: 'primary',
-                    string: '25 Spring Street, Blackburn, VIC 3130',
-                    name: 'HQ US',
-                    line1: 'Main street',
-                    line2: 'apt #',
-                    line3: 'Suite #',
-                    line4: 'delivery instructions',
-                    street_number: '25',
-                    city: 'San Francisco',
-                    state: 'CA',
-                    postal_code: '94104',
-                    country: 'US',
-                    latitude: '40.759211',
-                    longitude: '-73.984638',
-                    county: 'Santa Clara',
-                    contact_name: 'Elon Musk',
-                    salutation: 'Mr',
-                    phone_number: '111-111-1111',
-                    fax: '122-111-1111',
-                    email: 'elon@musk.com',
-                    website: 'https://elonmusk.com',
-                    row_version: '1-12345'
-                  }
-                ],
-                notes: 'Some notes about this customer',
-                phone_numbers: [
-                  {
-                    id: '12345',
-                    country_code: '1',
-                    area_code: '323',
-                    number: '111-111-1111',
-                    extension: '105',
-                    type: 'primary'
-                  }
-                ],
-                emails: [
-                  {
-                    id: '123',
-                    email: 'elon@musk.com',
-                    type: 'primary'
-                  }
-                ],
-                tax_number: 'US123945459',
-                currency: 'USD',
-                bank_accounts: {
-                  account_number: '123465',
-                  account_name: 'SPACEX LLC',
-                  account_type: 'credit_card',
-                  iban: 'CH2989144532982975332',
-                  bic: 'AUDSCHGGXXX',
-                  bsb_number: '062-001',
-                  branch_identifier: '001',
-                  bank_code: 'BNH',
-                  currency: 'USD'
-                },
-                status: 'active'
-              }
-            }
-
-            try {
-              const { data } = await apideck.customerSupport.customersAdd(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  "/customer-support/customers/{id}":
-    delete:
-      description: Delete Customer Support Customer
-      operationId: customersDelete
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/DeleteCustomerSupportCustomerResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Delete Customer Support Customer
-      tags:
-        - Customers
-      x-apideck-api: customerSupport
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.customerSupport.customersDelete({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
+      x-graphql-field-name: customers
+  "/ecommerce/customers/{id}":
     get:
-      description: Get Customer Support Customer
+      description: Get Customer
       operationId: customersOne
       parameters:
         - $ref: "#/components/parameters/id"
@@ -534,7 +382,7 @@ paths:
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
-          $ref: "#/components/responses/GetCustomerSupportCustomerResponse"
+          $ref: "#/components/responses/GetEcommerceCustomerResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -549,10 +397,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Customer Support Customer
+      summary: Get Customer
       tags:
         - Customers
-      x-apideck-api: customerSupport
+      x-apideck-api: ecommerce
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -566,31 +414,29 @@ paths:
             })
 
             try {
-              const { data } = await apideck.customerSupport.customersOne({
+              const { data } = await apideck.ecommerce.customersOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-    patch:
-      description: Update Customer Support Customer
-      operationId: customersUpdate
+  /ecommerce/orders:
+    get:
+      description: List Orders
+      operationId: ordersAll
       parameters:
-        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CustomerSupportCustomer"
-        required: true
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/ordersFilter"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
-          $ref: "#/components/responses/UpdateCustomerSupportCustomerResponse"
+          $ref: "#/components/responses/GetEcommerceOrdersResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -605,10 +451,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update Customer Support Customer
+      summary: List Orders
       tags:
-        - Customers
-      x-apideck-api: customerSupport
+        - Orders
+      x-apideck-api: ecommerce
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -621,77 +467,220 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
-            const params = {
-              id: 'id_example',
-              customer: {
-                company_name: 'SpaceX',
-                first_name: 'Elon',
-                last_name: 'Musk',
-                individual: true,
-                addresses: [
-                  {
-                    id: '123',
-                    type: 'primary',
-                    string: '25 Spring Street, Blackburn, VIC 3130',
-                    name: 'HQ US',
-                    line1: 'Main street',
-                    line2: 'apt #',
-                    line3: 'Suite #',
-                    line4: 'delivery instructions',
-                    street_number: '25',
-                    city: 'San Francisco',
-                    state: 'CA',
-                    postal_code: '94104',
-                    country: 'US',
-                    latitude: '40.759211',
-                    longitude: '-73.984638',
-                    county: 'Santa Clara',
-                    contact_name: 'Elon Musk',
-                    salutation: 'Mr',
-                    phone_number: '111-111-1111',
-                    fax: '122-111-1111',
-                    email: 'elon@musk.com',
-                    website: 'https://elonmusk.com',
-                    row_version: '1-12345'
-                  }
-                ],
-                notes: 'Some notes about this customer',
-                phone_numbers: [
-                  {
-                    id: '12345',
-                    country_code: '1',
-                    area_code: '323',
-                    number: '111-111-1111',
-                    extension: '105',
-                    type: 'primary'
-                  }
-                ],
-                emails: [
-                  {
-                    id: '123',
-                    email: 'elon@musk.com',
-                    type: 'primary'
-                  }
-                ],
-                tax_number: 'US123945459',
-                currency: 'USD',
-                bank_accounts: {
-                  account_number: '123465',
-                  account_name: 'SPACEX LLC',
-                  account_type: 'credit_card',
-                  iban: 'CH2989144532982975332',
-                  bic: 'AUDSCHGGXXX',
-                  bsb_number: '062-001',
-                  branch_identifier: '001',
-                  bank_code: 'BNH',
-                  currency: 'USD'
-                },
-                status: 'active'
-              }
+            try {
+              const { data } = await apideck.ecommerce.ordersAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
             }
+      x-graphql-field-name: orders
+  "/ecommerce/orders/{id}":
+    get:
+      description: Get Order
+      operationId: ordersOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetEcommerceOrderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Order
+      tags:
+        - Orders
+      x-apideck-api: ecommerce
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
 
             try {
-              const { data } = await apideck.customerSupport.customersUpdate(params)
+              const { data } = await apideck.ecommerce.ordersOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  /ecommerce/products:
+    get:
+      description: List Products
+      operationId: productsAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetProductsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Products
+      tags:
+        - Products
+      x-apideck-api: ecommerce
+      x-apideck-gotchas:
+        - connector: prestashop
+          description: "Prestashop primarily uses an `id` field to identify product associations (Ie: categories, variants etc). To maintain performance on the list endpoint, fewer properties are returned than other connectors."
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.ecommerce.productsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: products
+  "/ecommerce/products/{id}":
+    get:
+      description: Get Product
+      operationId: productsOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetProductResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Product
+      tags:
+        - Products
+      x-apideck-api: ecommerce
+      x-apideck-gotchas:
+        - connector: prestashop
+          description: Product images for Prestashop are limited to the default image set on the product.
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.ecommerce.productsOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  /ecommerce/store:
+    get:
+      description: Get Store
+      operationId: storesOne
+      parameters:
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetStoreResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Store
+      tags:
+        - Stores
+      x-apideck-api: ecommerce
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.ecommerce.storesOne({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -720,6 +709,14 @@ components:
       schema:
         nullable: true
         type: string
+    customersFilter:
+      description: Apply filters
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/EcommerceCustomersFilter"
+      style: deepObject
     fields:
       description: "The 'fields' parameter allows API users to specify the fields they want to include in the API response. If this parameter is not present, the API will return all available fields. If this parameter is present, only the fields specified in the comma-separated string will be included in the response. Nested properties can also be requested by using a dot notation. <br /><br />Example: `fields=name,email,addresses.city`<br /><br />In the example above, the response will only include the fields \"name\", \"email\" and \"addresses.city\". If any other fields are available, they will be excluded."
       example: id,updated_at
@@ -744,6 +741,14 @@ components:
         maximum: 200
         minimum: 1
         type: integer
+    ordersFilter:
+      description: Apply filters
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/EcommerceOrdersFilter"
+      style: deepObject
     raw:
       description: Include raw response. Mostly used for debugging purposes
       in: query
@@ -764,30 +769,90 @@ components:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateCustomerSupportCustomerResponse:
+    CreateEcommerceCustomerResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateCustomerSupportCustomerResponse"
-      description: CustomerSupportCustomers
-    DeleteCustomerSupportCustomerResponse:
+            $ref: "#/components/schemas/CreateEcommerceCustomerResponse"
+      description: Customers
+    CreateEcommerceOrderResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteCustomerSupportCustomerResponse"
-      description: CustomerSupportCustomers
-    GetCustomerSupportCustomerResponse:
+            $ref: "#/components/schemas/CreateEcommerceOrderResponse"
+      description: Orders
+    CreateProductResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetCustomerSupportCustomerResponse"
-      description: CustomerSupportCustomers
-    GetCustomerSupportCustomersResponse:
+            $ref: "#/components/schemas/CreateProductResponse"
+      description: Products
+    DeleteEcommerceCustomerResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetCustomerSupportCustomersResponse"
-      description: CustomerSupportCustomers
+            $ref: "#/components/schemas/DeleteEcommerceCustomerResponse"
+      description: Customers
+    DeleteEcommerceOrderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteEcommerceOrderResponse"
+      description: Orders
+    DeleteProductResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteProductResponse"
+      description: Products
+    GetEcommerceCustomerResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetEcommerceCustomerResponse"
+      description: Customers
+    GetEcommerceCustomersResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetEcommerceCustomersResponse"
+      description: Customers
+    GetEcommerceOrderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetEcommerceOrderResponse"
+      description: Orders
+    GetEcommerceOrdersResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetEcommerceOrdersResponse"
+      description: Orders
+    GetProductResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetProductResponse"
+      description: Products
+    GetProductsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetProductsResponse"
+      description: Products
+    GetStoreResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetStoreResponse"
+      description: Stores
+    GetStoresResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetStoresResponse"
+      description: Stores
     NotFoundResponse:
       content:
         application/json:
@@ -806,12 +871,6 @@ components:
           schema:
             $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
-    TooManyRequestsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/TooManyRequestsResponse"
-      description: Too Many Requests
     UnauthorizedResponse:
       content:
         application/json:
@@ -830,12 +889,24 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateCustomerSupportCustomerResponse:
+    UpdateEcommerceCustomerResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateCustomerSupportCustomerResponse"
-      description: CustomerSupportCustomers
+            $ref: "#/components/schemas/UpdateEcommerceCustomerResponse"
+      description: Customers
+    UpdateEcommerceOrderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateEcommerceOrderResponse"
+      description: Orders
+    UpdateProductResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateProductResponse"
+      description: Products
   schemas:
     Address:
       additionalProperties: false
@@ -1009,541 +1080,7 @@ components:
           type: string
       type: object
       x-apideck-schema-id: BadRequest
-    BankAccount:
-      additionalProperties: false
-      properties:
-        account_name:
-          description: The name which you used in opening your bank account.
-          example: SPACEX LLC
-          nullable: true
-          title: Bank Account Name
-          type: string
-        account_number:
-          description: A bank account number is a number that is tied to your bank account. If you have several bank accounts, such as personal, joint, business (and so on), each account will have a different account number.
-          example: "123465"
-          nullable: true
-          title: Bank Account Number
-          type: string
-        account_type:
-          description: The type of bank account.
-          enum:
-            - bank_account
-            - credit_card
-            - other
-          example: credit_card
-          nullable: true
-          title: Account Type
-          type: string
-          x-apideck-enum-id: bank-accounts.account_type
-        bank_code:
-          description: A bank code is a code assigned by a central bank, a bank supervisory body or a Bankers Association in a country to all its licensed member banks or financial institutions.
-          example: BNH
-          nullable: true
-          title: Bank Code
-          type: string
-        bic:
-          example: AUDSCHGGXXX
-          nullable: true
-          type: string
-        branch_identifier:
-          description: A branch identifier is a unique identifier for a branch of a bank or financial institution.
-          example: "001"
-          nullable: true
-          title: Branch Identifier
-          type: string
-        bsb_number:
-          description: A BSB is a 6 digit numeric code used for identifying the branch of an Australian or New Zealand bank or financial institution.
-          example: 062-001
-          nullable: true
-          title: BSB Number
-          type: string
-        currency:
-          $ref: "#/components/schemas/Currency"
-        iban:
-          example: CH2989144532982975332
-          nullable: true
-          type: string
-      type: object
-      x-apideck-schema-id: BankAccount
-      x-apideck-weights:
-        account_name: medium
-        account_number: critical
-        account_type: medium
-        bank_code: low
-        bic: medium
-        branch_identifier: low
-        bsb_number: edge-case
-        currency: medium
-        iban: high
-    Company:
-      additionalProperties: false
-      properties:
-        abn_branch:
-          description: An ABN Branch (also known as a GST Branch) is used if part of your business needs to account for GST separately from its parent entity.
-          example: "123"
-          nullable: true
-          title: ABN Branch
-          type: string
-        abn_or_tfn:
-          description: An ABN is necessary for operating a business, while a TFN (Tax File Number) is required for any person working in Australia.
-          example: 46 115 614 695
-          nullable: true
-          title: ABN or TFN
-          type: string
-        acn:
-          description: The Australian Company Number (ACN) is a nine digit number with the last digit being a check digit calculated using a modified modulus 10 calculation. ASIC has adopted a convention of always printing and displaying the ACN in the format XXX XXX XXX; three blocks of three characters, each block separated by a blank.
-          example: XXX XXX XXX
-          nullable: true
-          title: ACN
-          type: string
-        addresses:
-          items:
-            $ref: "#/components/schemas/Address"
-          type: array
-        annual_revenue:
-          description: Annual revenue
-          example: +$35m
-          nullable: true
-          type: string
-        bank_accounts:
-          items:
-            $ref: "#/components/schemas/BankAccount"
-          type: array
-        birthday:
-          description: The date of birth of the person.
-          example: 2000-08-12
-          format: date
-          nullable: true
-          title: Birth Date
-          type: string
-        created_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        created_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          type: string
-        currency:
-          $ref: "#/components/schemas/Currency"
-        custom_fields:
-          items:
-            $ref: "#/components/schemas/CustomField"
-          type: array
-        deleted:
-          example: false
-          readOnly: true
-          type: boolean
-        description:
-          example: Space Exploration Technologies Corp. is an American aerospace manufacturer, space transportation services and communications company headquartered in Hawthorne, California.
-          nullable: true
-          type: string
-        emails:
-          items:
-            $ref: "#/components/schemas/Email"
-          type: array
-        fax:
-          example: "+12129876543"
-          nullable: true
-          type: string
-        first_name:
-          $ref: "#/components/schemas/FirstName"
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-        image:
-          example: https://www.spacex.com/static/images/share.jpg
-          nullable: true
-          type: string
-        industry:
-          description: Industry
-          example: Apparel
-          nullable: true
-          type: string
-        interaction_count:
-          example: 1
-          nullable: true
-          readOnly: true
-          type: integer
-        last_activity_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        last_name:
-          $ref: "#/components/schemas/LastName"
-        name:
-          example: SpaceX
-          minLength: 1
-          type: string
-        number_of_employees:
-          description: Number of employees
-          example: 500-1000
-          nullable: true
-          type: string
-        owner_id:
-          example: "12345"
-          type: string
-        ownership:
-          description: Ownership
-          example: Public
-          nullable: true
-          type: string
-        parent_id:
-          description: Parent ID
-          example: "22345"
-          readOnly: true
-          type: string
-        payee_number:
-          example: 78932EN
-          nullable: true
-          title: Payee number
-          type: string
-        phone_numbers:
-          items:
-            $ref: "#/components/schemas/PhoneNumber"
-          type: array
-        read_only:
-          example: false
-          nullable: true
-          title: Read-only
-          type: boolean
-        row_type:
-          properties:
-            id:
-              example: "12345"
-              type: string
-            name:
-              example: Customer Account
-              type: string
-          title: Company Row Type
-          type: object
-          x-apideck-weights:
-            id: critical
-            name: medium
-          x-graphql-type-name: CompanyRowType
-        sales_tax_number:
-          example: 12456EN
-          nullable: true
-          title: Sales tax number
-          type: string
-        salutation:
-          description: A formal salutation for the person. For example, 'Mr', 'Mrs'
-          example: Mr
-          nullable: true
-          type: string
-        social_links:
-          items:
-            $ref: "#/components/schemas/SocialLink"
-          type: array
-        status:
-          example: Open
-          nullable: true
-          type: string
-        tags:
-          $ref: "#/components/schemas/Tags"
-        updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        updated_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          type: string
-        vat_number:
-          description: VAT number
-          example: BE0689615164
-          nullable: true
-          type: string
-        websites:
-          items:
-            $ref: "#/components/schemas/Website"
-          type: array
-      required:
-        - name
-      type: object
-      x-apideck-schema-id: Company
-      x-apideck-weights:
-        abn_branch: edge-case
-        abn_or_tfn: edge-case
-        acn: edge-case
-        addresses: high
-        annual_revenue: low
-        bank_accounts: medium
-        birthday: edge-case
-        created_at: medium
-        created_by: edge-case
-        currency: medium
-        custom_fields: medium
-        deleted: medium
-        description: medium
-        emails: high
-        fax: low
-        first_name: edge-case
-        id: critical
-        image: low
-        industry: medium
-        interaction_count: edge-case
-        last_activity_at: low
-        last_name: edge-case
-        name: critical
-        number_of_employees: low
-        owner_id: high
-        ownership: low
-        parent_id: edge-case
-        payee_number: edge-case
-        phone_numbers: high
-        read_only: low
-        row_type: edge-case
-        sales_tax_number: medium
-        salutation: edge-case
-        social_links: low
-        status: high
-        tags: low
-        updated_at: high
-        updated_by: edge-case
-        vat_number: high
-        websites: medium
-    CompanyName:
-      description: The name of the company.
-      example: SpaceX
-      nullable: true
-      title: Company name
-      type: string
-    Contact:
-      additionalProperties: false
-      properties:
-        active:
-          example: true
-          nullable: true
-          type: boolean
-        addresses:
-          items:
-            $ref: "#/components/schemas/Address"
-          type: array
-        birthday:
-          example: 2000-08-12
-          nullable: true
-          type: string
-        company_id:
-          example: "23456"
-          nullable: true
-          type: string
-        company_name:
-          example: "23456"
-          nullable: true
-          type: string
-        created_at:
-          example: 2017-08-12T20:43:21.291Z
-          format: date-time
-          readOnly: true
-          type: string
-        current_balance:
-          example: 10.5
-          nullable: true
-          title: Current Balance
-          type: number
-        custom_fields:
-          items:
-            $ref: "#/components/schemas/CustomField"
-          type: array
-        department:
-          example: Engineering
-          nullable: true
-          type: string
-        description:
-          example: Internal champion
-          nullable: true
-          title: Description
-          type: string
-        email_domain:
-          example: gmail.com
-          nullable: true
-          type: string
-        emails:
-          items:
-            $ref: "#/components/schemas/Email"
-          type: array
-        fax:
-          example: "+12129876543"
-          nullable: true
-          type: string
-        first_call_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        first_email_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        first_name:
-          example: Elon
-          nullable: true
-          type: string
-        gender:
-          enum:
-            - male
-            - female
-            - unisex
-          example: female
-          nullable: true
-          type: string
-          x-apideck-enum-id: contacts.gender
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-        image:
-          deprecated: true
-          example: https://unavatar.io/elon-musk
-          nullable: true
-          type: string
-        language:
-          description: language code according to ISO 639-1. For the United States - EN
-          example: EN
-          nullable: true
-          type: string
-        last_activity_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        last_name:
-          example: Musk
-          nullable: true
-          type: string
-        lead_id:
-          example: "34567"
-          nullable: true
-          type: string
-        lead_source:
-          example: Cold Call
-          nullable: true
-          type: string
-        middle_name:
-          example: D.
-          nullable: true
-          type: string
-        name:
-          example: Elon Musk
-          minLength: 1
-          type: string
-        owner_id:
-          example: "54321"
-          nullable: true
-          type: string
-        phone_numbers:
-          items:
-            $ref: "#/components/schemas/PhoneNumber"
-          type: array
-        photo_url:
-          description: The URL of the photo of a person.
-          example: https://unavatar.io/elon-musk
-          nullable: true
-          title: Photo URL
-          type: string
-        prefix:
-          example: Mr.
-          nullable: true
-          type: string
-        social_links:
-          items:
-            $ref: "#/components/schemas/SocialLink"
-          type: array
-        status:
-          example: open
-          nullable: true
-          type: string
-        suffix:
-          example: PhD
-          nullable: true
-          type: string
-        tags:
-          $ref: "#/components/schemas/Tags"
-        title:
-          example: CEO
-          nullable: true
-          type: string
-        type:
-          enum:
-            - customer
-            - supplier
-            - employee
-            - personal
-          example: personal
-          nullable: true
-          type: string
-          x-apideck-enum-id: contacts.type
-        updated_at:
-          example: 2017-08-12T20:43:21.291Z
-          format: date-time
-          readOnly: true
-          type: string
-        websites:
-          items:
-            $ref: "#/components/schemas/Website"
-          type: array
-      required:
-        - name
-      type: object
-      x-apideck-schema-id: Contact
-      x-apideck-weights:
-        active: edge-case
-        addresses: high
-        birthday: medium
-        company_id: high
-        company_name: medium
-        created_at: medium
-        current_balance: edge-case
-        custom_fields: medium
-        department: medium
-        description: low
-        email_domain: edge-case
-        emails: high
-        fax: low
-        first_call_at: edge-case
-        first_email_at: edge-case
-        first_name: high
-        gender: medium
-        id: critical
-        image: medium
-        language: medium
-        last_activity_at: medium
-        last_name: high
-        lead_id: medium
-        lead_source: low
-        middle_name: low
-        name: critical
-        owner_id: medium
-        phone_numbers: high
-        photo_url: medium
-        prefix: low
-        social_links: low
-        status: edge-case
-        suffix: low
-        tags: low
-        title: medium
-        type: medium
-        updated_at: high
-        websites: medium
-      x-pii:
-        - name
-        - first_name
-        - middle_name
-        - last_name
-        - email
-    CreateCustomerSupportCustomerResponse:
+    CreateEcommerceCustomerResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -1557,7 +1094,7 @@ components:
           type: string
         service:
           description: Apideck ID of service provider
-          example: kustomer
+          example: shopify
           type: string
         status:
           description: HTTP Response Status
@@ -1575,7 +1112,87 @@ components:
         - operation
         - data
       type: object
-      x-apideck-schema-id: CreateCustomerSupportCustomerResponse
+      x-apideck-schema-id: CreateEcommerceCustomerResponse
+    CreateEcommerceOrderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: add
+          type: string
+        resource:
+          description: Unified API resource name
+          example: orders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: shopify
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: CreateEcommerceOrderResponse
+    CreateProductResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: add
+          type: string
+        resource:
+          description: Unified API resource name
+          example: products
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: shopify
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: CreateProductResponse
+    CreatedAt:
+      description: The date and time when the object was created.
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      readOnly: true
+      title: Created at (timestamp)
+      type: string
+    CreatedBy:
+      description: The user who created the object.
+      example: "12345"
+      nullable: true
+      readOnly: true
+      title: Created by
+      type: string
     Currency:
       description: Indicates the associated currency for an amount of money. Values correspond to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
       enum:
@@ -2173,99 +1790,7 @@ components:
         id: critical
         name: medium
         value: critical
-    CustomerSupportCustomer:
-      additionalProperties: false
-      properties:
-        addresses:
-          items:
-            $ref: "#/components/schemas/Address"
-          type: array
-        bank_accounts:
-          $ref: "#/components/schemas/BankAccount"
-        company_name:
-          $ref: "#/components/schemas/CompanyName"
-        created_at:
-          description: The date and time when the object was created.
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          title: Created at (timestamp)
-          type: string
-        created_by:
-          description: The user who created the object.
-          example: "12345"
-          nullable: true
-          readOnly: true
-          title: Created by
-          type: string
-        currency:
-          $ref: "#/components/schemas/Currency"
-        emails:
-          items:
-            $ref: "#/components/schemas/Email"
-          type: array
-        first_name:
-          $ref: "#/components/schemas/FirstName"
-        id:
-          description: A unique identifier for an object.
-          example: "12345"
-          readOnly: true
-          title: ID
-          type: string
-        individual:
-          example: true
-          nullable: true
-          title: Is individual
-          type: boolean
-        last_name:
-          $ref: "#/components/schemas/LastName"
-        notes:
-          example: Some notes about this customer
-          nullable: true
-          title: Notes
-          type: string
-        phone_numbers:
-          items:
-            $ref: "#/components/schemas/PhoneNumber"
-          type: array
-        status:
-          description: Customer status
-          enum:
-            - active
-            - archived
-            - gdpr-erasure-request
-            - unknown
-          example: active
-          nullable: true
-          title: Status
-          type: string
-          x-apideck-enum-id: customers.status
-          x-graphql-type-name: CustomerStatus
-        tax_number:
-          example: US123945459
-          nullable: true
-          title: Tax number
-          type: string
-        updated_at:
-          description: The date and time when the object was last updated.
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          title: Updated at (timestamp)
-          type: string
-        updated_by:
-          description: The user who last updated the object.
-          example: "12345"
-          nullable: true
-          readOnly: true
-          title: Updated by
-          type: string
-      type: object
-      x-apideck-schema-id: CustomerSupportCustomer
-      x-apideck-weights:
-        id: critical
-    DeleteCustomerSupportCustomerResponse:
+    DeleteEcommerceCustomerResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -2279,7 +1804,7 @@ components:
           type: string
         service:
           description: Apideck ID of service provider
-          example: kustomer
+          example: shopify
           type: string
         status:
           description: HTTP Response Status
@@ -2297,7 +1822,877 @@ components:
         - operation
         - data
       type: object
-      x-apideck-schema-id: DeleteCustomerSupportCustomerResponse
+      x-apideck-schema-id: DeleteEcommerceCustomerResponse
+    DeleteEcommerceOrderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: delete
+          type: string
+        resource:
+          description: Unified API resource name
+          example: orders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: shopify
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: DeleteEcommerceOrderResponse
+    DeleteProductResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: delete
+          type: string
+        resource:
+          description: Unified API resource name
+          example: products
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: shopify
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: DeleteProductResponse
+    Department:
+      additionalProperties: false
+      properties:
+        code:
+          example: "2"
+          nullable: true
+          title: Code
+          type: string
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        description:
+          example: R&D
+          nullable: true
+          title: Description
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: Department name
+          example: R&D
+          nullable: true
+          title: Name
+          type: string
+        parent_id:
+          description: Parent ID
+          example: "22345"
+          readOnly: true
+          type: string
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+      type: object
+      x-apideck-schema-id: Department
+      x-apideck-weights:
+        code: medium
+        created_at: medium
+        created_by: edge-case
+        description: low
+        id: critical
+        name: critical
+        updated_at: medium
+        updated_by: edge-case
+    Description:
+      description: A description of the object.
+      example: A description
+      nullable: true
+      title: Description
+      type: string
+    Division:
+      description: The division the person is currently in. Usually a collection of departments or teams or regions.
+      example: Europe
+      nullable: true
+      title: Division
+      type: string
+    EcommerceAddress:
+      description: An object representing a shipping or billing address.
+      properties:
+        city:
+          description: City of the billing address.
+          example: New York
+          title: City
+          type: string
+        company_name:
+          description: Company name of the customer
+          example: Acme Inc.
+          title: Company Name
+          type: string
+        country:
+          description: Country of the billing address.
+          example: US
+          maxLength: 2
+          title: Country
+          type: string
+        line1:
+          description: Address line 1 of the billing address.
+          example: 123 Main Street
+          title: Address line 1
+          type: string
+        line2:
+          description: Address line 2 of the billing address.
+          example: Apt 1
+          title: Address line 2
+          type: string
+        postal_code:
+          description: Postal/ZIP code of the billing address.
+          example: "10001"
+          title: Postal code
+          type: string
+        state:
+          description: State/province of the billing address.
+          example: NY
+          title: State
+          type: string
+      title: Ecommerce Address
+      type: object
+      x-apideck-schema-id: EcommerceAddress
+      x-apideck-strict-required:
+        - line1
+        - city
+        - state
+        - postal_code
+        - country
+      x-apideck-weights:
+        city: critical
+        company_name: low
+        country: critical
+        line1: critical
+        postal_code: critical
+        state: critical
+    EcommerceCustomer:
+      additionalProperties: false
+      properties:
+        addresses:
+          description: An array of addresses for the customer.
+          items:
+            additionalProperties: false
+            properties:
+              city:
+                description: City of the customer
+                example: Anytown
+                title: City
+                type: string
+              country:
+                description: Country of the customer
+                example: US
+                title: Country
+                type: string
+              id:
+                $ref: "#/components/schemas/Id"
+              line1:
+                description: First line of the street address of the customer
+                example: Main street
+                title: Address Line 1
+                type: string
+              line2:
+                description: Second line of the street address of the customer
+                example: "apt #"
+                title: Address Line 2
+                type: string
+              postal_code:
+                description: Postal code of the customer
+                example: "12345"
+                title: Postal Code
+                type: string
+              state:
+                description: State of the customer
+                example: Ohio
+                title: State
+                type: string
+              type:
+                enum:
+                  - billing
+                  - shipping
+                  - other
+                example: billing
+                type: string
+                x-apideck-enum-id: ecommerce.customer.addresses.type
+                x-graphql-type-name: EcommerceCustomerAddressType
+            type: object
+            x-apideck-strict-required:
+              - line1
+              - city
+              - state
+              - postal_code
+              - country
+            x-apideck-weights:
+              city: critical
+              country: critical
+              line1: critical
+              postal_code: critical
+              state: critical
+          title: Addresses
+          type: array
+        company_name:
+          description: Company name of the customer
+          example: Acme Inc.
+          title: Company Name
+          type: string
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        currency:
+          $ref: "#/components/schemas/Currency"
+        emails:
+          description: An array of email addresses for the customer.
+          items:
+            $ref: "#/components/schemas/Email"
+          title: Email Addresses
+          type: array
+        first_name:
+          description: First name of the customer
+          example: John
+          title: First Name
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        last_name:
+          description: Last name of the customer
+          example: Doe
+          title: Last Name
+          type: string
+        name:
+          description: Full name of the customer
+          example: John Doe
+          title: Full Name
+          type: string
+        orders:
+          items:
+            $ref: "#/components/schemas/LinkedEcommerceOrder"
+          type: array
+        phone_numbers:
+          description: An array of phone numbers for the customer.
+          items:
+            $ref: "#/components/schemas/PhoneNumber"
+          title: Phone Numbers
+          type: array
+        status:
+          description: The current status of the customer
+          enum:
+            - active
+            - archived
+          example: active
+          title: Customer status
+          type: string
+          x-apideck-enum-id: ecommerce.customer.status
+          x-graphql-type-name: EcommerceCustomerStatus
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+      required:
+        - id
+      type: object
+      x-apideck-schema-id: EcommerceCustomer
+      x-apideck-strict-any-of:
+        - required:
+            - name
+            - first_name
+            - last_name
+        - required:
+            - company_name
+      x-apideck-strict-required:
+        - emails
+        - addresses
+      x-apideck-weights:
+        currency: edge-case
+        emails: critical
+        first_name: critical
+        id: critical
+        last_name: critical
+        name: critical
+    EcommerceCustomersFilter:
+      additionalProperties: false
+      example:
+        email: elon@musk.com
+        phone_number: 111-111-1111
+      properties:
+        email:
+          description: Customer email address to filter on
+          example: elon@musk.com
+          type: string
+        phone_number:
+          description: Customer phone number to filter on
+          example: 111-111-1111
+          type: string
+      type: object
+      x-apideck-schema-id: EcommerceCustomersFilter
+      x-graphql-type-name: EcommerceCustomersFilter
+    EcommerceDiscount:
+      description: An object representing a discount applied to an ecommerce order or product.
+      properties:
+        amount:
+          description: The fixed amount of the discount.
+          example: "5.99"
+          title: Discount amount
+          type: string
+        code:
+          description: The code used to apply the discount.
+          example: SUMMER20
+          title: Discount code
+          type: string
+        percentage:
+          description: The percentage of the discount.
+          example: "0.1"
+          title: Discount percentage
+          type: string
+      title: Ecommerce Discount
+      type: object
+      x-apideck-schema-id: EcommerceDiscount
+      x-apideck-strict-one-of:
+        - required:
+            - amount
+        - required:
+            - percentage
+      x-apideck-weights:
+        code: low
+    EcommerceOrder:
+      additionalProperties: false
+      properties:
+        billing_address:
+          $ref: "#/components/schemas/EcommerceAddress"
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        currency:
+          $ref: "#/components/schemas/Currency"
+        customer:
+          $ref: "#/components/schemas/LinkedEcommerceCustomer"
+        discounts:
+          items:
+            $ref: "#/components/schemas/EcommerceDiscount"
+          type: array
+        fulfillment_status:
+          description: Current fulfillment status of the order.
+          enum:
+            - pending
+            - shipped
+            - partial
+            - delivered
+            - cancelled
+            - returned
+            - unknown
+          example: shipped
+          title: Fulfillment status
+          type: string
+          x-apideck-enum-id: ecommerce.order.fulfillment_status
+          x-graphql-type-name: EcommerceFulfillmentStatus
+        id:
+          $ref: "#/components/schemas/Id"
+        line_items:
+          items:
+            $ref: "#/components/schemas/EcommerceOrderLineItem"
+          type: array
+        note:
+          description: Note for the order.
+          example: Special instructions for delivery
+          title: Note
+          type: string
+        order_number:
+          description: Order number, if any.
+          example: "123456789"
+          title: Order number
+          type: string
+        payment_method:
+          description: Payment method used for this order.
+          example: credit_card
+          title: Payment method
+          type: string
+        payment_status:
+          description: Current payment status of the order.
+          enum:
+            - pending
+            - authorized
+            - paid
+            - partial
+            - refunded
+            - voided
+            - unknown
+          example: paid
+          title: Payment status
+          type: string
+          x-apideck-enum-id: ecommerce.order.payment_status
+          x-graphql-type-name: EcommercePaymentStatus
+        shipping_address:
+          $ref: "#/components/schemas/EcommerceAddress"
+        shipping_cost:
+          description: Shipping cost, if any.
+          example: "5.17"
+          title: Shipping cost
+          type: string
+        status:
+          $ref: "#/components/schemas/EcommerceOrderStatus"
+        sub_total:
+          description: Sub-total amount, normally before tax.
+          example: "45.17"
+          title: Sub-total amount
+          type: string
+        total_amount:
+          description: Total amount due.
+          example: "50.17"
+          title: Total amount
+          type: string
+        total_discount:
+          description: Total discount, if any.
+          example: "5.5"
+          title: Total discount
+          type: string
+        total_tax:
+          description: Total tax, if any.
+          example: "5.16"
+          title: Total tax
+          type: string
+        tracking:
+          items:
+            $ref: "#/components/schemas/TrackingItem"
+          type: array
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+      required:
+        - id
+      type: object
+      x-apideck-schema-id: EcommerceOrder
+      x-apideck-strict-any-of:
+        - required:
+            - status
+        - required:
+            - payment_status
+        - required:
+            - fulfillment_status
+      x-apideck-strict-required:
+        - currency
+        - total_tax
+        - total_amount
+        - customer
+        - billing_address
+        - shipping_address
+        - line_items
+      x-apideck-weights:
+        billing_address: critical
+        currency: critical
+        customer: critical
+        fulfillment_status: critical
+        id: critical
+        line_items: critical
+        payment_method: critical
+        payment_status: critical
+        shipping_address: critical
+        status: critical
+        total_amount: critical
+        total_tax: critical
+    EcommerceOrderLineItem:
+      description: A single line item of an ecommerce order, representing a product or variant with associated options, quantity, and pricing information.
+      properties:
+        description:
+          description: The description of the product or variant associated with the line item.
+          example: Powerful and portable, the MacBook Pro is perfect for professionals and creatives.
+          title: Description
+          type: string
+        discounts:
+          items:
+            $ref: "#/components/schemas/EcommerceDiscount"
+          type: array
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The name of the product or variant associated with the line item.
+          example: Midnight 16inch MacBook Pro
+          title: Name
+          type: string
+        options:
+          items:
+            properties:
+              id:
+                description: A unique identifier for the option.
+                example: jkl012
+                title: Option identifier
+                type: string
+              name:
+                description: The name of the option.
+                example: Color
+                title: Option Name
+                type: string
+              value:
+                description: The value of the option.
+                example: Silver
+                title: Option Value
+                type: string
+          type: array
+        product_id:
+          description: A unique identifier for the product associated with the line item.
+          example: def456
+          title: Product ID
+          type: string
+        quantity:
+          description: The quantity of the product or variant associated with the line item.
+          example: "2"
+          title: Quantity
+          type: string
+        sku:
+          description: The SKU of the product or variant associated with the line item.
+          example: MBP123-16GB-SILVER-13
+          title: SKU
+          type: string
+        tax_amount:
+          description: The total tax amount applied to the product or variant associated with the line item.
+          example: "1.6"
+          title: Tax amount
+          type: string
+        tax_rate:
+          description: The tax rate applied to the product or variant associated with the line item.
+          example: "0.08"
+          title: Tax rate
+          type: string
+        total_amount:
+          description: The total amount for the product(s) or variant associated with the line item, including taxes and discounts.
+          example: "43.18"
+          title: Total amount
+          type: string
+        unit_price:
+          description: The unit price of the product or variant associated with the line item.
+          example: "19.99"
+          title: Unit price
+          type: string
+        variant_id:
+          description: A unique identifier for the variant of the product associated with the line item, if applicable.
+          example: ghi789
+          title: Variant ID
+          type: string
+      required:
+        - name
+        - quantity
+        - total_amount
+      title: Ecommerce Order Line Item
+      type: object
+      x-apideck-schema-id: EcommerceOrderLineItem
+      x-apideck-strict-any-of:
+        - required:
+            - id
+        - required:
+            - product_id
+      x-apideck-strict-required:
+        - name
+        - quantity
+        - total_amount
+      x-apideck-weights:
+        name: critical
+        quantity: critical
+        total_amount: critical
+        unit_price: critical
+    EcommerceOrderStatus:
+      description: Current status of the order.
+      enum:
+        - active
+        - completed
+        - cancelled
+        - archived
+        - unknown
+      example: active
+      title: Order Status
+      type: string
+      x-apideck-enum-id: order.status
+      x-graphql-type-name: EcommerceOrderStatus
+    EcommerceOrdersFilter:
+      additionalProperties: false
+      example:
+        email: elon@musk.com
+      properties:
+        email:
+          description: Customer email address to filter on
+          example: elon@musk.com
+          type: string
+      type: object
+      x-apideck-schema-id: EcommerceOrdersFilter
+      x-graphql-type-name: EcommerceOrdersFilter
+    EcommerceProduct:
+      additionalProperties: false
+      properties:
+        categories:
+          description: An array of categories for the product, used for organization and searching.
+          items:
+            properties:
+              id:
+                $ref: "#/components/schemas/Id"
+              name:
+                description: The name of the category.
+                example: Laptops
+                title: Product Category Name
+                type: string
+            type: object
+            x-apideck-strict-required:
+              - name
+            x-graphql-type-name: EcommerceProductCategory
+          title: Product Categories
+          type: array
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        description:
+          description: A detailed description of the product.
+          example: Powerful and portable, the MacBook Pro is perfect for professionals and creatives.
+          title: Product Description
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        images:
+          description: An array of image URLs for the product.
+          items:
+            properties:
+              id:
+                $ref: "#/components/schemas/Id"
+              url:
+                description: The URL of an image of the product.
+                example: https://example.com/macbook-pro.jpg
+                title: Image URL
+                type: string
+            type: object
+            x-apideck-strict-required:
+              - url
+            x-graphql-type-name: EcommerceProductImage
+          title: Product Images
+          type: array
+        inventory_quantity:
+          description: The quantity of the product in stock.
+          example: "10"
+          title: Inventory Quantity
+          type: string
+        name:
+          description: The name of the product as it should be displayed to customers.
+          example: MacBook Pro
+          title: Product Name
+          type: string
+        options:
+          description: An array of options for the product.
+          items:
+            properties:
+              id:
+                description: A unique identifier for the option of the product.
+                example: "1"
+                title: Option ID
+                type: string
+              name:
+                description: The name of the option for the product.
+                example: Color
+                title: Option Name
+                type: string
+              values:
+                items:
+                  description: The possible values of the option for the product.
+                  example: Red
+                  title: Option Values
+                  type: string
+                type: array
+            type: object
+            x-apideck-strict-required:
+              - name
+              - values
+            x-graphql-type-name: EcommerceProductOption
+          title: Product Options
+          type: array
+        price:
+          description: The price of the product.
+          example: "1999.99"
+          title: Product Price
+          type: string
+        sku:
+          description: The stock keeping unit of the product.
+          example: MBP123
+          title: Product SKU
+          type: string
+        status:
+          description: The current status of the product (active or archived).
+          enum:
+            - active
+            - archived
+          example: active
+          title: Product Status
+          type: string
+          x-apideck-enum-id: ecommerce.products.status
+          x-graphql-type-name: EcommerceProductStatus
+        tags:
+          description: An array of tags for the product, used for organization and searching.
+          items:
+            example: Apple
+            type: string
+          title: Product Tags
+          type: array
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        variants:
+          items:
+            properties:
+              id:
+                description: A unique identifier for the variant of the product.
+                example: "1"
+                title: Variant ID
+                type: string
+              images:
+                items:
+                  properties:
+                    id:
+                      $ref: "#/components/schemas/Id"
+                    url:
+                      description: The URL of an image of the variant.
+                      example: https://example.com/macbook-pro.jpg
+                      title: Image URL
+                      type: string
+                  type: object
+                  x-apideck-strict-required:
+                    - url
+                  x-graphql-type-name: EcommerceVariantImage
+                type: array
+              inventory_quantity:
+                description: The quantity of the variant in stock.
+                example: "5"
+                title: Inventory Quantity
+                type: string
+              name:
+                description: The name for the variant, used for displaying to customers.
+                example: Midnight 16inch MacBook Pro
+                title: Variant Name
+                type: string
+              options:
+                items:
+                  properties:
+                    id:
+                      description: A unique identifier for the option of the variant.
+                      example: "1"
+                      title: Option ID
+                      type: string
+                    name:
+                      description: The name of the option for the variant.
+                      example: Color
+                      title: Option Name
+                      type: string
+                    value:
+                      description: The value of the option for the variant.
+                      example: Silver
+                      title: Option Value
+                      type: string
+                  type: object
+                  x-graphql-type-name: EcommerceVariantOption
+                type: array
+              price:
+                description: The price of the variant.
+                example: "1999.99"
+                title: Variant Price
+                type: string
+              sku:
+                description: The stock keeping unit of the variant.
+                example: MBP123-16GB-SILVER-13
+                title: Variant SKU
+                type: string
+              weight:
+                description: The weight of the variant.
+                example: "1.25"
+                title: Weight
+                type: string
+              weight_unit:
+                description: The unit of measurement for the weight of the variant.
+                example: lb
+                title: Weight Unit
+                type: string
+            type: object
+            x-apideck-strict-required:
+              - id
+              - name
+              - price
+              - options
+          type: array
+        weight:
+          description: The weight of the product.
+          example: "1.25"
+          title: Product Weight
+          type: string
+        weight_unit:
+          description: The unit of measurement for the weight of the product.
+          example: lb
+          title: Weight Unit
+          type: string
+      required:
+        - id
+      type: object
+      x-apideck-schema-id: EcommerceProduct
+      x-apideck-strict-any-of:
+        - required:
+            - price
+        - required:
+            - variants
+      x-apideck-strict-required:
+        - name
+      x-apideck-weights:
+        id: critical
+        name: critical
+        price: critical
+    EcommerceStore:
+      additionalProperties: false
+      properties:
+        admin_url:
+          description: The store's admin login URL
+          example: https://mybrand.com/admin
+          format: uri
+          pattern: ^https?://
+          title: Store Admin URL
+          type: string
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: The store's name
+          example: My Store
+          title: Store name
+          type: string
+        store_url:
+          description: The store's website URL
+          example: https://mybrand.com/shop
+          format: uri
+          pattern: ^https?://
+          title: Store URL
+          type: string
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+      required:
+        - id
+      type: object
+      x-apideck-schema-id: EcommerceStore
     Email:
       additionalProperties: false
       properties:
@@ -2335,10 +2730,23 @@ components:
       nullable: true
       title: First name
       type: string
-    GetCustomerSupportCustomerResponse:
+    Gender:
+      description: The gender represents the gender identity of a person.
+      enum:
+        - male
+        - female
+        - unisex
+        - other
+        - not_specified
+      example: male
+      nullable: true
+      title: Gender
+      type: string
+      x-apideck-enum-id: genders
+    GetEcommerceCustomerResponse:
       properties:
         data:
-          $ref: "#/components/schemas/CustomerSupportCustomer"
+          $ref: "#/components/schemas/EcommerceCustomer"
         operation:
           description: Operation performed
           example: one
@@ -2349,7 +2757,7 @@ components:
           type: string
         service:
           description: Apideck ID of service provider
-          example: kustomer
+          example: shopify
           type: string
         status:
           description: HTTP Response Status
@@ -2367,13 +2775,13 @@ components:
         - operation
         - data
       type: object
-      x-apideck-schema-id: GetCustomerSupportCustomerResponse
-      x-graphql-type-name: CustomerSupportCustomer
-    GetCustomerSupportCustomersResponse:
+      x-apideck-schema-id: GetEcommerceCustomerResponse
+      x-graphql-type-name: EcommerceCustomer
+    GetEcommerceCustomersResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/CustomerSupportCustomer"
+            $ref: "#/components/schemas/EcommerceCustomer"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -2389,7 +2797,7 @@ components:
           type: string
         service:
           description: Apideck ID of service provider
-          example: kustomer
+          example: shopify
           type: string
         status:
           description: HTTP Response Status
@@ -2407,154 +2815,324 @@ components:
         - operation
         - data
       type: object
-      x-apideck-schema-id: GetCustomerSupportCustomersResponse
-      x-graphql-type-name: CustomerSupportCustomerList
+      x-apideck-schema-id: GetEcommerceCustomersResponse
+      x-graphql-type-name: EcommerceCustomerList
+    GetEcommerceOrderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/EcommerceOrder"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: orders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: shopify
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetEcommerceOrderResponse
+      x-graphql-type-name: EcommerceOrder
+    GetEcommerceOrdersResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/EcommerceOrder"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: orders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: shopify
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetEcommerceOrdersResponse
+      x-graphql-type-name: EcommerceOrderList
+    GetProductResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/EcommerceProduct"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: products
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: shopify
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetProductResponse
+      x-graphql-type-name: EcommerceProduct
+    GetProductsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/EcommerceProduct"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: products
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: shopify
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetProductsResponse
+      x-graphql-type-name: EcommerceProductList
+    GetStoreResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/EcommerceStore"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: stores
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: shopify
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetStoreResponse
+      x-graphql-type-name: EcommerceStore
+    GetStoresResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/EcommerceStore"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: stores
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: shopify
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetStoresResponse
+      x-graphql-type-name: EcommerceStoreList
+    Id:
+      description: A unique identifier for an object.
+      example: "12345"
+      readOnly: true
+      title: ID
+      type: string
+    Language:
+      description: language code according to ISO 639-1. For the United States - EN
+      example: EN
+      nullable: true
+      type: string
     LastName:
       description: The last name of the person.
       example: Musk
       nullable: true
       title: Last name
       type: string
-    Lead:
+    LinkedEcommerceCustomer:
       additionalProperties: false
+      description: The customer this entity is linked to.
       properties:
-        addresses:
-          items:
-            $ref: "#/components/schemas/Address"
-          type: array
-        company_id:
-          example: "2"
-          nullable: true
-          type: string
         company_name:
-          example: Spacex
-          nullable: true
-          type: string
-        contact_id:
-          example: "2"
-          nullable: true
-          type: string
-        created_at:
-          example: 2020-09-30T07:43:32.000Z
-          readOnly: true
-          type: string
-        currency:
-          $ref: "#/components/schemas/Currency"
-        custom_fields:
-          items:
-            $ref: "#/components/schemas/CustomField"
-          type: array
-        description:
-          example: A thinker
-          nullable: true
+          description: Company name of the customer
+          example: Acme Inc.
+          title: Company Name
           type: string
         emails:
           items:
             $ref: "#/components/schemas/Email"
           type: array
-        fax:
-          example: "+12129876543"
-          nullable: true
-          type: string
         first_name:
-          example: Elon
-          nullable: true
+          description: First name of the customer
+          example: John
+          title: First Name
           type: string
         id:
+          description: The ID of the customer this entity is linked to.
           example: "12345"
-          readOnly: true
-          type: string
-        language:
-          description: language code according to ISO 639-1. For the United States - EN
-          example: EN
-          nullable: true
+          title: Customer ID
           type: string
         last_name:
-          example: Musk
-          nullable: true
+          description: Last name of the customer
+          example: Doe
+          title: Last Name
           type: string
-        lead_source:
-          example: Cold Call
-          nullable: true
-          type: string
-        monetary_amount:
-          example: 75000
-          nullable: true
-          type: number
         name:
-          example: Elon Musk
-          minLength: 1
-          type: string
-        owner_id:
-          example: "54321"
+          description: Full name of the customer
+          example: John Doe
+          title: Full Name
           type: string
         phone_numbers:
           items:
             $ref: "#/components/schemas/PhoneNumber"
           type: array
-        prefix:
-          example: Sir
-          nullable: true
-          type: string
-        social_links:
-          items:
-            $ref: "#/components/schemas/SocialLink"
-          type: array
-        status:
-          example: New
-          nullable: true
-          type: string
-        tags:
-          $ref: "#/components/schemas/Tags"
-        title:
-          example: CEO
-          nullable: true
-          type: string
-        updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          readOnly: true
-          type: string
-        websites:
-          items:
-            $ref: "#/components/schemas/Website"
-          type: array
       required:
-        - name
-        - company_name
+        - id
+      title: LinkedEcommerceCustomer
       type: object
-      x-apideck-schema-id: Lead
+      x-apideck-schema-id: LinkedEcommerceCustomer
+      x-apideck-strict-any-of:
+        - required:
+            - name
+            - first_name
+            - last_name
+        - required:
+            - company_name
+      x-apideck-strict-required:
+        - emails
       x-apideck-weights:
-        addresses: high
-        company_id: high
-        company_name: high
-        contact_id: low
-        created_at: medium
-        currency: low
-        custom_fields: medium
-        description: low
-        emails: high
-        fax: low
-        first_name: high
+        company_name: medium
+        emails: medium
+        first_name: medium
         id: critical
-        language: medium
-        last_name: high
-        lead_source: low
-        monetary_amount: low
-        name: critical
-        owner_id: high
-        phone_numbers: high
-        prefix: low
-        social_links: low
-        status: high
-        tags: low
-        title: high
-        updated_at: medium
-        websites: medium
-      x-pii:
-        - name
-        - email
-        - first_name
-        - last_name
+        last_name: medium
+        phone_numbers: medium
+      x-graphql-type-name: LinkedEcommerceCustomer
+    LinkedEcommerceOrder:
+      additionalProperties: false
+      description: The order this entity is linked to.
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        status:
+          $ref: "#/components/schemas/EcommerceOrderStatus"
+        total:
+          description: The total amount of the order.
+          example: "199.99"
+          title: Order Total
+          type: string
+      title: LinkedEcommerceOrder
+      type: object
+      x-apideck-schema-id: LinkedEcommerceOrder
+      x-apideck-weights:
+        id: critical
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -2602,6 +3180,12 @@ components:
           type: integer
       type: object
       x-apideck-schema-id: Meta
+    MiddleName:
+      description: Middle name of the person.
+      example: D.
+      nullable: true
+      title: Middle name
+      type: string
     NotFoundResponse:
       properties:
         detail:
@@ -2666,263 +3250,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: NotImplemented
-    Opportunity:
-      additionalProperties: false
-      properties:
-        close_date:
-          description: The actual closing date for the opportunity. If close_date is null, the opportunity is not closed yet.
-          example: 2020-10-30
-          format: date
-          nullable: true
-          type: string
-        company_id:
-          description: The unique identifier of the company associated with the opportunity.
-          example: "12345"
-          nullable: true
-          type: string
-        company_name:
-          description: The name of the company associated with the opportunity.
-          example: Copper
-          nullable: true
-          type: string
-        contact_id:
-          description: The unique identifier of the contact associated with the opportunity.
-          example: "12345"
-          nullable: true
-          type: string
-        contact_ids:
-          description: An array of unique identifiers of all contacts associated with the opportunity.
-          items:
-            example: "12345"
-            type: string
-          type: array
-        created_at:
-          description: The date and time when the opportunity was created.
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        created_by:
-          description: The unique identifier of the user who created the opportunity.
-          example: "12345"
-          nullable: true
-          readOnly: true
-          type: string
-        currency:
-          $ref: "#/components/schemas/Currency"
-        custom_fields:
-          items:
-            $ref: "#/components/schemas/CustomField"
-          type: array
-        date_last_contacted:
-          description: The date and time when the opportunity was last contacted.
-          example: 2020-09-30T00:00:00.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        date_lead_created:
-          description: The date and time when the lead associated with the opportunity was created.
-          example: 2020-09-30T00:00:00.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        date_stage_changed:
-          description: The date and time when the stage of the opportunity was last changed.
-          example: 2020-09-30T00:00:00.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        deleted:
-          description: Indicates whether the opportunity has been deleted.
-          example: false
-          readOnly: true
-          type: boolean
-        description:
-          description: A description of the opportunity.
-          example: Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.
-          nullable: true
-          type: string
-        expected_revenue:
-          description: The expected revenue from the opportunity
-          example: 75000
-          nullable: true
-          readOnly: true
-          type: number
-        id:
-          description: A unique identifier for the opportunity.
-          example: "12345"
-          readOnly: true
-          type: string
-        interaction_count:
-          description: The number of interactions with the opportunity.
-          example: 0
-          nullable: true
-          readOnly: true
-          type: number
-        last_activity_at:
-          description: The date and time of the last activity associated with the opportunity.
-          example: 2020-09-30T07:43:32.000Z
-          nullable: true
-          readOnly: true
-          type: string
-        lead_id:
-          description: The unique identifier of the lead associated with the opportunity.
-          example: "12345"
-          nullable: true
-          type: string
-        lead_source:
-          description: The source of the lead associated with the opportunity.
-          example: Website
-          nullable: true
-          type: string
-        loss_reason:
-          description: The reason why the opportunity was lost.
-          example: No budget
-          nullable: true
-          type: string
-        loss_reason_id:
-          description: The unique identifier of the reason why the opportunity was lost.
-          example: "12345"
-          nullable: true
-          type: string
-        monetary_amount:
-          description: The monetary value associated with the opportunity
-          example: 75000
-          nullable: true
-          type: number
-        owner_id:
-          description: The unique identifier of the user who owns the opportunity.
-          example: "12345"
-          nullable: true
-          type: string
-        pipeline_id:
-          description: The unique identifier of the pipeline associated with the opportunity
-          example: "12345"
-          nullable: true
-          type: string
-        pipeline_stage_id:
-          description: The unique identifier of the stage in the pipeline associated with the opportunity.
-          example: "12345"
-          nullable: true
-          type: string
-        primary_contact_id:
-          description: The unique identifier of the primary contact associated with the opportunity.
-          example: "12345"
-          nullable: true
-          type: string
-        priority:
-          description: The priority level of the opportunity.
-          example: None
-          nullable: true
-          type: string
-        source_id:
-          description: The unique identifier of the source of the opportunity.
-          example: "12345"
-          nullable: true
-          type: string
-        stage_last_changed_at:
-          description: The date and time when the stage of the opportunity was last changed.
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          nullable: true
-          type: string
-        status:
-          description: The current status of the opportunity.
-          example: Open
-          nullable: true
-          type: string
-        status_id:
-          description: The unique identifier of the current status of the opportunity.
-          example: "12345"
-          nullable: true
-          type: string
-        tags:
-          $ref: "#/components/schemas/Tags"
-        title:
-          description: The title or name of the opportunity.
-          example: New Rocket
-          minLength: 1
-          type: string
-        type:
-          description: The type of the opportunity
-          example: Existing Customer - Upgrade
-          nullable: true
-          type: string
-        updated_at:
-          description: The date and time when the opportunity was last updated.
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        updated_by:
-          description: The unique identifier of the user who last updated the opportunity.
-          example: "12345"
-          nullable: true
-          readOnly: true
-          type: string
-        win_probability:
-          description: The probability of winning the opportunity, expressed as a percentage.
-          example: 40
-          nullable: true
-          type: number
-        won_reason:
-          description: The reason why the opportunity was won.
-          example: Best pitch
-          nullable: true
-          type: string
-        won_reason_id:
-          description: The unique identifier of the reason why the opportunity was won.
-          example: "12345"
-          nullable: true
-          type: string
-      required:
-        - title
-        - primary_contact_id
-      type: object
-      x-apideck-schema-id: Opportunity
-      x-apideck-weights:
-        close_date: medium
-        company_id: high
-        company_name: medium
-        contact_id: medium
-        created_at: medium
-        created_by: edge-case
-        currency: high
-        custom_fields: medium
-        date_last_contacted: medium
-        date_lead_created: edge-case
-        date_stage_changed: edge-case
-        deleted: low
-        description: medium
-        expected_revenue: medium
-        id: critical
-        interaction_count: low
-        last_activity_at: medium
-        lead_id: medium
-        lead_source: edge-case
-        loss_reason: edge-case
-        loss_reason_id: edge-case
-        monetary_amount: high
-        owner_id: high
-        pipeline_id: edge-case
-        pipeline_stage_id: edge-case
-        primary_contact_id: critical
-        priority: medium
-        source_id: medium
-        stage_last_changed_at: edge-case
-        status: high
-        status_id: edge-case
-        tags: low
-        title: critical
-        type: high
-        updated_at: medium
-        updated_by: edge-case
-        win_probability: high
-        won_reason: edge-case
-        won_reason_id: edge-case
     PaymentRequiredResponse:
       properties:
         detail:
@@ -2951,6 +3278,18 @@ components:
           type: string
       type: object
       x-apideck-schema-id: PaymentRequired
+    PaymentUnit:
+      description: Unit of measurement for employee compensation.
+      enum:
+        - hour
+        - week
+        - month
+        - year
+        - paycheck
+      example: year
+      title: Payment Unit
+      type: string
+      x-apideck-enum-id: payment_unit
     PhoneNumber:
       additionalProperties: false
       properties:
@@ -3006,42 +3345,24 @@ components:
         id: edge-case
         number: critical
         type: critical
+    PhotoUrl:
+      description: The URL of the photo of a person.
+      example: https://unavatar.io/elon-musk
+      nullable: true
+      title: Photo URL
+      type: string
     RowVersion:
       description: A binary value used to detect updates to a object and prevent data conflicts. It is incremented each time an update is made to the object.
       example: 1-12345
       nullable: true
       title: Row version
       type: string
-    SocialLink:
-      additionalProperties: false
-      properties:
-        id:
-          example: "12345"
-          nullable: true
-          type: string
-        type:
-          example: twitter
-          nullable: true
-          type: string
-        url:
-          example: https://www.twitter.com/apideck-io
-          minLength: 1
-          type: string
-      required:
-        - url
-      type: object
-      x-apideck-schema-id: SocialLink
-      x-apideck-weights:
-        id: edge-case
-        type: critical
-        url: critical
-    Tags:
-      example:
-        - New
-      items:
-        type: string
-      type: array
-      x-apideck-schema-id: Tags
+    Title:
+      description: The job title of the person.
+      example: CEO
+      nullable: true
+      title: Job title
+      type: string
     TooManyRequestsResponse:
       properties:
         detail:
@@ -3074,6 +3395,43 @@ components:
           type: string
       type: object
       x-apideck-schema-id: TooManyRequests
+    TrackingItem:
+      description: Represents the tracking information associated with an ecommerce order.
+      properties:
+        number:
+          description: " The tracking number associated with the shipment, which can be used to track the progress of the delivery."
+          example: 1Z9999999999999999
+          nullable: true
+          title: Tracking number
+          type: string
+        provider:
+          description: The name or code of the carrier or shipping company that is handling the shipment.
+          example: UPS
+          nullable: true
+          title: Provider
+          type: string
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        url:
+          description: The URL of the carrier's tracking page, which can be used to view detailed information about the shipment's progress.
+          example: https://www.ups.com/track?tracknum=1Z9999999999999999
+          nullable: true
+          title: Tracking url
+          type: string
+      required:
+        - provider
+        - number
+      title: Ecommerce Order Tracking Item
+      type: object
+      x-apideck-schema-id: EcommerceOrderLineItem
+      x-apideck-strict-required:
+        - provider
+        - number
+      x-apideck-weights:
+        number: critical
+        provider: high
+        updated_at: medium
+        url: medium
     UnauthorizedResponse:
       properties:
         detail:
@@ -3176,7 +3534,7 @@ components:
           type: string
       type: object
       x-apideck-schema-id: Unprocessable
-    UpdateCustomerSupportCustomerResponse:
+    UpdateEcommerceCustomerResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -3190,7 +3548,7 @@ components:
           type: string
         service:
           description: Apideck ID of service provider
-          example: kustomer
+          example: shopify
           type: string
         status:
           description: HTTP Response Status
@@ -3208,7 +3566,88 @@ components:
         - operation
         - data
       type: object
-      x-apideck-schema-id: UpdateCustomerSupportCustomerResponse
+      x-apideck-schema-id: UpdateEcommerceCustomerResponse
+    UpdateEcommerceOrderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: update
+          type: string
+        resource:
+          description: Unified API resource name
+          example: orders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: shopify
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: UpdateEcommerceOrderResponse
+    UpdateProductResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: update
+          type: string
+        resource:
+          description: Unified API resource name
+          example: products
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: shopify
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: UpdateProductResponse
+    UpdatedAt:
+      description: The date and time when the object was last updated.
+      example: 2020-09-30T07:43:32.000Z
+      format: date-time
+      nullable: true
+      readOnly: true
+      title: Updated at (timestamp)
+      type: string
+    UpdatedBy:
+      description: The user who last updated the object.
+      example: "12345"
+      nullable: true
+      readOnly: true
+      title: Updated by
+      type: string
     Website:
       additionalProperties: false
       properties:
