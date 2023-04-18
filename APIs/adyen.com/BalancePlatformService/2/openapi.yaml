@@ -52,12 +52,14 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformService
-  x-timestamp: 2023-04-03T11:30:38Z
+  x-timestamp: 2023-04-17T12:23:49Z
 tags:
   - name: Platform
+  - name: Grant offers
   - name: Payment instrument groups
   - name: Account holders
   - name: Payment instruments
+  - name: Grant accounts
   - name: Bank account validation
   - name: Balance accounts
   - name: Transaction rules
@@ -1315,6 +1317,225 @@ paths:
       x-groupName: Platform
       x-methodName: getAllAccountHoldersUnderBalancePlatform
       x-sortIndex: 2
+  "/grantAccounts/{id}":
+    get:
+      description: Returns the details of the [grant account](https://docs.adyen.com/marketplaces-and-platforms/capital#grant-account).
+      operationId: get-grantAccounts-id
+      parameters:
+        - description: The unique identifier of the grant account.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CapitalGrantAccount"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-400"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get a grant account
+      tags:
+        - Grant accounts
+      x-addedInVersion: "1"
+      x-groupName: Grant accounts
+      x-methodName: getGrantAccount
+      x-sortIndex: 1
+  /grantOffers:
+    get:
+      description: Returns a list of all [grant offers](https://docs.adyen.com/marketplaces-and-platforms/capital#grant-offers) available for `accountHolderId` specified as a query parameter.
+      operationId: get-grantOffers
+      parameters:
+        - description: The unique identifier of the grant account.
+          in: query
+          name: accountHolderId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GrantOffers"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-400"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get all available grant offers
+      tags:
+        - Grant offers
+      x-addedInVersion: "2"
+      x-groupName: Grant offers
+      x-methodName: getAllAvailableGrantOffers
+      x-sortIndex: 1
+  "/grantOffers/{grantOfferId}":
+    get:
+      description: Returns the details of a single grant offer.
+      operationId: get-grantOffers-grantOfferId
+      parameters:
+        - description: The unique identifier of the grant offer.
+          in: path
+          name: grantOfferId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GrantOffer"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-400"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get a grant offer
+      tags:
+        - Grant offers
+      x-addedInVersion: "2"
+      x-groupName: Grant offers
+      x-methodName: getGrantOffer
+      x-sortIndex: 1
   /paymentInstrumentGroups:
     post:
       description: Creates a payment instrument group to associate and group payment instrument resources together. You can apply a transaction rule to a payment instrument group.
@@ -4051,6 +4272,48 @@ components:
       type: object
     CapabilityProblem:
       type: object
+    CapitalBalance:
+      properties:
+        currency:
+          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
+          type: string
+        fee:
+          description: Fee amount.
+          format: int64
+          type: integer
+        principal:
+          description: Principal amount.
+          format: int64
+          type: integer
+        total:
+          description: Total amount. A sum of principal amount and fee amount.
+          format: int64
+          type: integer
+      required:
+        - principal
+        - fee
+        - total
+        - currency
+      type: object
+    CapitalGrantAccount:
+      properties:
+        balances:
+          description: The balances of the grant account.
+          items:
+            $ref: "#/components/schemas/CapitalBalance"
+          type: array
+        fundingBalanceAccountId:
+          description: The unique identifier of the balance account used to fund the grant.
+          type: string
+        id:
+          description: The identifier of the grant account.
+          type: string
+        limits:
+          description: The limits of the grant account.
+          items:
+            $ref: "#/components/schemas/GrantLimit"
+          type: array
+      type: object
     Card:
       properties:
         authentication:
@@ -4424,6 +4687,62 @@ components:
           description: The year in which the card will expire.
           type: string
       type: object
+    Fee:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: An object containing the fee amount.
+      required:
+        - amount
+      type: object
+    GrantLimit:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount available on the grant account.
+      type: object
+    GrantOffer:
+      properties:
+        accountHolderId:
+          description: The identifier of the account holder to which the grant is offered.
+          type: string
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The principal amount of the grant.
+        contractType:
+          description: "The contract type of the grant offer. Possible value: **cashAdvance**, **loan**."
+          enum:
+            - cashAdvance
+            - loan
+          type: string
+        expiresAt:
+          $ref: "#/components/schemas/LocalDateTime"
+          description: The end date of the grant offer validity period.
+        fee:
+          $ref: "#/components/schemas/Fee"
+          description: Details of the fee configuration.
+        id:
+          description: The unique identifier of the grant offer.
+          type: string
+        repayment:
+          $ref: "#/components/schemas/Repayment"
+          description: Details of the repayment configuration.
+        startsAt:
+          $ref: "#/components/schemas/LocalDateTime"
+          description: The starting date of the grant offer validity period.
+      required:
+        - accountHolderId
+      type: object
+    GrantOffers:
+      properties:
+        grantOffers:
+          description: A list of available grant offers.
+          items:
+            $ref: "#/components/schemas/GrantOffer"
+          type: array
+      required:
+        - grantOffers
+      type: object
     HULocalAccountIdentification:
       additionalProperties: false
       properties:
@@ -4508,6 +4827,8 @@ components:
           items:
             type: string
           type: array
+      type: object
+    LocalDateTime:
       type: object
     MatchingTransactionsRestriction:
       properties:
@@ -5072,6 +5393,34 @@ components:
       required:
         - operation
       type: object
+    Repayment:
+      properties:
+        basisPoints:
+          description: The repayment that is deducted daily from incoming net volume, in [basis points](https://www.investopedia.com/terms/b/basispoint.asp).
+          format: int32
+          type: integer
+        term:
+          $ref: "#/components/schemas/RepaymentTerm"
+          description: An object containing the details of the configuration for repayment term.
+        threshold:
+          $ref: "#/components/schemas/ThresholdRepayment"
+          description: An object containing the details of the 30-day repayment threshold.
+      required:
+        - basisPoints
+      type: object
+    RepaymentTerm:
+      properties:
+        estimatedDays:
+          description: The estimated term for repaying the grant, in days.
+          format: int32
+          type: integer
+        maximumDays:
+          description: The maximum term for repaying the grant, in days. Only applies when `contractType` is **loan**.
+          format: int32
+          type: integer
+      required:
+        - estimatedDays
+      type: object
     RestServiceError:
       properties:
         detail:
@@ -5363,6 +5712,14 @@ components:
             - balance
             - cron
           type: string
+      type: object
+    ThresholdRepayment:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount to be repaid on a 30-day basis.
+      required:
+        - amount
       type: object
     TimeOfDay:
       properties:
@@ -6043,3 +6400,5 @@ x-groups:
   - Payment instrument groups
   - Transaction rules
   - Bank account validation
+  - Grant accounts
+  - Grant offers

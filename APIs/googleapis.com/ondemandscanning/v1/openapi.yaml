@@ -582,6 +582,7 @@ components:
             - ATTACK_COMPLEXITY_UNSPECIFIED
             - ATTACK_COMPLEXITY_LOW
             - ATTACK_COMPLEXITY_HIGH
+            - ATTACK_COMPLEXITY_MEDIUM
           type: string
         attackVector:
           description: Base Metrics Represents the intrinsic characteristics of a vulnerability that are constant over time and across user environments.
@@ -605,6 +606,8 @@ components:
             - IMPACT_HIGH
             - IMPACT_LOW
             - IMPACT_NONE
+            - IMPACT_PARTIAL
+            - IMPACT_COMPLETE
           type: string
         baseScore:
           description: The base score is a function of the base metric scores.
@@ -616,6 +619,8 @@ components:
             - IMPACT_HIGH
             - IMPACT_LOW
             - IMPACT_NONE
+            - IMPACT_PARTIAL
+            - IMPACT_COMPLETE
           type: string
         exploitabilityScore:
           format: float
@@ -629,6 +634,8 @@ components:
             - IMPACT_HIGH
             - IMPACT_LOW
             - IMPACT_NONE
+            - IMPACT_PARTIAL
+            - IMPACT_COMPLETE
           type: string
         privilegesRequired:
           enum:

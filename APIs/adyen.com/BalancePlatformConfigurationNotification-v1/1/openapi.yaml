@@ -26,7 +26,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformConfigurationNotification-v1
-  x-timestamp: 2023-03-30T18:22:05Z
+  x-timestamp: 2023-04-18T11:25:58Z
 tags: []
 components:
   examples:
@@ -841,6 +841,79 @@ components:
           type: string
       required:
         - configurationProfileId
+      type: object
+    CardOrderItem:
+      properties:
+        balancePlatform:
+          description: The unique identifier of the balance platform.
+          type: string
+        card:
+          $ref: "#/components/schemas/CardOrderItemDeliveryStatus"
+          description: Card delivery status.
+        cardOrderItemReference:
+          description: The unique identifier of the card order.
+          type: string
+        creationDate:
+          description: The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+          format: date-time
+          type: string
+        id:
+          description: The ID of the resource.
+          type: string
+        paymentInstrumentReference:
+          description: The unique identifier of the payment instrument related to the card order.
+          type: string
+        pin:
+          $ref: "#/components/schemas/CardOrderItemDeliveryStatus"
+          description: PIN delivery status.
+        shippingMethod:
+          description: Shipping method used to deliver the card or the PIN.
+          type: string
+      type: object
+    CardOrderItemDeliveryStatus:
+      properties:
+        status:
+          description: Status of the delivery.
+          enum:
+            - created
+            - delivered
+            - processing
+            - produced
+            - rejected
+            - shipped
+            - unknown
+          type: string
+        statusError:
+          description: Error status, if any.
+          type: string
+        statusErrorMessage:
+          description: Error message, if any.
+          type: string
+        trackingNumber:
+          description: Tracking number of the delivery.
+          type: string
+      type: object
+    CardOrderNotificationRequest:
+      properties:
+        data:
+          $ref: "#/components/schemas/CardOrderItem"
+          description: Contains event details.
+        environment:
+          description: |-
+            The environment from which the webhook originated.
+
+            Possible values: **test**, **live**.
+          type: string
+        type:
+          description: Type of notification.
+          enum:
+            - balancePlatform.cardorder.created
+            - balancePlatform.cardorder.updated
+          type: string
+      required:
+        - environment
+        - type
+        - data
       type: object
     Contact:
       properties:
@@ -1707,6 +1780,54 @@ webhooks:
       x-groupName: Balance account
       x-methodName: sweepUpdated
       x-sortIndex: 4
+  balancePlatform.cardorder.created:
+    post:
+      description: Adyen sends this webhook to indicate a successful creation of a card order after you create a [payment instrument](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/paymentInstruments) of `type` **card** and `formFactor` **physical**.
+      operationId: post-balancePlatform.cardorder.created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardOrderNotificationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BalancePlatformNotificationResponse"
+          description: OK - the request has succeeded.
+      security:
+        - ApiKeyAuth: []
+      summary: Card order created
+      tags:
+        - Card order
+      x-groupName: Card order
+      x-methodName: cardOrderCreated
+      x-sortIndex: 1
+  balancePlatform.cardorder.updated:
+    post:
+      description: Adyen sends this webhook when there is an update in card order status.
+      operationId: post-balancePlatform.cardorder.updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardOrderNotificationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BalancePlatformNotificationResponse"
+          description: OK - the request has succeeded.
+      security:
+        - ApiKeyAuth: []
+      summary: Card order updated
+      tags:
+        - Card order
+      x-groupName: Card order
+      x-methodName: cardOrderUpdated
+      x-sortIndex: 2
   balancePlatform.paymentInstrument.created:
     post:
       description: |-
@@ -1773,4 +1894,5 @@ x-groups:
   - Account holder
   - Balance account
   - Payment instrument
+  - Card order
 x-staticResponse: response.json

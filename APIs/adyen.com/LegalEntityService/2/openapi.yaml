@@ -45,7 +45,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-03-22T19:20:50Z
+  x-timestamp: 2023-04-11T19:23:17Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -53,6 +53,7 @@ tags:
   - name: Documents
   - name: Terms of Service
   - name: Transfer instruments
+  - name: PCI questionnaires
 paths:
   /businessLines:
     post:
@@ -124,7 +125,7 @@ paths:
       description: |-
         Deletes a business line.
 
-         >"If you delete a business line linked to a [payment method](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api), it can affect your merchant account's ability to use the [payment method](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/_merchantId_/paymentMethodSettings). The business line is removed from all linked merchant accounts.
+         >If you delete a business line linked to a [payment method](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api), it can affect your merchant account's ability to use the [payment method](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/_merchantId_/paymentMethodSettings). The business line is removed from all linked merchant accounts.
       operationId: delete-businessLines-id
       parameters:
         - description: The unique identifier of the business line to be deleted.
@@ -913,6 +914,272 @@ paths:
       x-groupName: Hosted Onboarding
       x-methodName: getLinkToAdyenhostedOnboardingPage
       x-sortIndex: 1
+  "/legalEntities/{id}/pciQuestionnaires":
+    get:
+      description: Get a list of signed PCI questionnaires.
+      operationId: get-legalEntities-id-pciQuestionnaires
+      parameters:
+        - description: The unique identifier of the legal entity to get PCI questionnaire information.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                success:
+                  $ref: "#/components/examples/get-legalEntities-id-pciQuestionnaires-success-200"
+              schema:
+                $ref: "#/components/schemas/GetPciQuestionnaireInfosResponse"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get PCI questionnaire details
+      tags:
+        - PCI questionnaires
+      x-addedInVersion: "1"
+      x-groupName: PCI questionnaires
+      x-methodName: getPciQuestionnaireDetails
+      x-sortIndex: 3
+  "/legalEntities/{id}/pciQuestionnaires/generatePciTemplates":
+    post:
+      description: Generates the required PCI questionnaire based on the user's [salesChannel](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businessLines__reqParam_salesChannels). If multiple questionnaires are required, this request creates a single consodilated document to be signed.
+      operationId: post-legalEntities-id-pciQuestionnaires-generatePciTemplates
+      parameters:
+        - description: The legal entity ID of the individual who will sign the PCI questionnaire.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              createPciQuestionnaire:
+                $ref: "#/components/examples/post-legalEntities-id-pciQuestionnaires-generatePciTemplates-createPciQuestionnaire"
+            schema:
+              $ref: "#/components/schemas/GeneratePciDescriptionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                createPciQuestionnaire:
+                  $ref: "#/components/examples/post-legalEntities-id-pciQuestionnaires-generatePciTemplates-createPciQuestionnaire-200"
+              schema:
+                $ref: "#/components/schemas/GeneratePciDescriptionResponse"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Generate PCI questionnaire
+      tags:
+        - PCI questionnaires
+      x-addedInVersion: "1"
+      x-groupName: PCI questionnaires
+      x-methodName: generatePciQuestionnaire
+      x-sortIndex: 1
+  "/legalEntities/{id}/pciQuestionnaires/signPciTemplates":
+    post:
+      description: Signs the required PCI questionnaire.
+      operationId: post-legalEntities-id-pciQuestionnaires-signPciTemplates
+      parameters:
+        - description: The legal entity ID of the individual who signed the PCI questionnaire.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              signPciQuestionnaire:
+                $ref: "#/components/examples/post-legalEntities-id-pciQuestionnaires-signPciTemplates-signPciQuestionnaire"
+            schema:
+              $ref: "#/components/schemas/PciSigningRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                signPciQuestionnaire:
+                  $ref: "#/components/examples/post-legalEntities-id-pciQuestionnaires-signPciTemplates-signPciQuestionnaire-200"
+              schema:
+                $ref: "#/components/schemas/PciSigningResponse"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Sign PCI questionnaire
+      tags:
+        - PCI questionnaires
+      x-addedInVersion: "1"
+      x-groupName: PCI questionnaires
+      x-methodName: signPciQuestionnaire
+      x-sortIndex: 2
+  "/legalEntities/{id}/pciQuestionnaires/{pciid}":
+    get:
+      description: Returns the signed PCI questionnaire.
+      operationId: get-legalEntities-id-pciQuestionnaires-pciid
+      parameters:
+        - description: The legal entity ID of the individual who signed the PCI questionnaire.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: The unique identifier of the signed PCI questionnaire.
+          in: path
+          name: pciid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                success:
+                  $ref: "#/components/examples/get-legalEntities-id-pciQuestionnaires-pciid-success-200"
+              schema:
+                $ref: "#/components/schemas/GetPciQuestionnaireResponse"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get PCI questionnaire
+      tags:
+        - PCI questionnaires
+      x-addedInVersion: "1"
+      x-groupName: PCI questionnaires
+      x-methodName: getPciQuestionnaire
+      x-sortIndex: 4
   "/legalEntities/{id}/termsOfService":
     post:
       description: Returns the Terms of Service document for a legal entity.
@@ -981,7 +1248,7 @@ paths:
       x-addedInVersion: "1"
       x-groupName: Terms of Service
       x-methodName: getTermsOfServiceDocument
-      x-sortIndex: 2
+      x-sortIndex: 1
   "/legalEntities/{id}/termsOfService/{termsofservicedocumentid}":
     patch:
       description: Accepts Terms of Service.
@@ -1050,7 +1317,7 @@ paths:
       x-addedInVersion: "1"
       x-groupName: Terms of Service
       x-methodName: acceptTermsOfService
-      x-sortIndex: 3
+      x-sortIndex: 2
   "/legalEntities/{id}/termsOfServiceAcceptanceInfos":
     get:
       description: Returns Terms of Service information for a legal entity.
@@ -1111,68 +1378,7 @@ paths:
       x-addedInVersion: "1"
       x-groupName: Terms of Service
       x-methodName: getTermsOfServiceInformationForLegalEntity
-      x-sortIndex: 4
-  "/legalEntities/{id}/termsOfServiceStatus":
-    get:
-      description: Returns the required types of Terms of Service that need to be accepted by a legal entity.
-      operationId: get-legalEntities-id-termsOfServiceStatus
-      parameters:
-        - description: The unique identifier of the legal entity.
-          in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                success:
-                  $ref: "#/components/examples/get-legalEntities-id-termsOfServiceStatus-success-200"
-              schema:
-                $ref: "#/components/schemas/CalculateTermsOfServiceStatusResponse"
-          description: OK - the request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceError"
-          description: Bad Request - a problem reading or understanding the request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceError"
-          description: Unauthorized - authentication required.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceError"
-          description: Forbidden - insufficient permissions to process the request.
-        "422":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceError"
-          description: Unprocessable Entity - a request validation error.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceError"
-          description: Internal Server Error - the server could not process the request.
-      security:
-        - BasicAuth: []
-        - ApiKeyAuth: []
-      summary: Get Terms of Service status
-      tags:
-        - Terms of Service
-      x-addedInVersion: "1"
-      x-groupName: Terms of Service
-      x-methodName: getTermsOfServiceStatus
-      x-sortIndex: 1
+      x-sortIndex: 3
   /themes:
     get:
       description: Returns a list of hosted onboarding page themes.
@@ -1591,6 +1797,25 @@ components:
             webData:
               - webAddress: https://yoururl.com
                 webAddressId: SE616CG45905K5H&M90J8BLM
+    get-legalEntities-id-pciQuestionnaires-pciid-success-200:
+      description: Example response when getting the details of a PCI questionnaire
+      summary: Details of a PCI questionnaire
+      value:
+        content: JVBERi0xLjUKJdDUxdgKMTAg.....
+        createdAt: 2023-03-02T17:54:19.538365Z
+        id: PCID422GZ22322565HHMH48CW63CPH
+        validUntil: 2024-03-01T17:54:19.538365Z
+    get-legalEntities-id-pciQuestionnaires-success-200:
+      description: Example response when getting the list of PCI questionnaires
+      summary: Details of PCI questionnaires signed by a user
+      value:
+        data:
+          - createdAt: 2023-03-02T17:54:19.538365Z
+            id: PCID422GZ22322565HHMH48CW63CPH
+            validUntil: 2024-03-01T17:54:19.538365Z
+          - createdAt: 2023-03-02T17:54:19.538365Z
+            id: PCID422GZ22322565HHMH49CW75Z9H
+            validUntil: 2024-03-01T17:54:19.538365Z
     get-legalEntities-id-success-200:
       description: Example response when getting the details of a legal entity
       summary: Details of a legal entity
@@ -1641,12 +1866,6 @@ components:
             createdAt: 2022-12-05T13:36:58.212253Z
             id: TOSA000AB00000000B2AAAB2BA0AA0
             type: adyenIssuing
-    get-legalEntities-id-termsOfServiceStatus-success-200:
-      description: Example response when getting the type of Terms of Service
-      summary: Terms of Service status for a legal entity
-      value:
-        termsOfServiceTypes:
-          - adyenIssuing
     get-themes-id-success-200:
       description: Example response when getting the details of a page theme
       summary: Details of a page theme
@@ -2115,6 +2334,35 @@ components:
       summary: Hosted onboarding link created
       value:
         url: https://balanceplatform-test.adyen.com/balanceplatform/uo/form/xtl-...?signature=..&cd=..&redirectUrl=https%3A%2F%2Fyour.redirect-url.com%2F&expiry=1667226404807&locale=nl-NL
+    post-legalEntities-id-pciQuestionnaires-generatePciTemplates-createPciQuestionnaire:
+      description: Example request for generating the PCI questionnaire in French
+      summary: Generate the PCI questionnaire
+      value:
+        language: fr
+    post-legalEntities-id-pciQuestionnaires-generatePciTemplates-createPciQuestionnaire-200:
+      description: Example response for getting a PCI questionnaire
+      summary: PCI questionnaire returned
+      value:
+        content: l345JKNFj345FJLG3lk...
+        language: fr
+        pciTemplateReferences:
+          - PCIT-T7KC6VGL
+          - PCIT-PKB6DKS4
+    post-legalEntities-id-pciQuestionnaires-signPciTemplates-signPciQuestionnaire:
+      description: Example request for signing the PCI questionnaires
+      summary: Sign the PCI questionnaires
+      value:
+        pciTemplateReferences:
+          - PCIT-T7KC6VGL
+          - PCIT-PKB6DKS4
+        signedBy: LE00000000000000000000002
+    post-legalEntities-id-pciQuestionnaires-signPciTemplates-signPciQuestionnaire-200:
+      description: Example response for signing PCI questionnaires
+      summary: PCI questionnaires signed
+      value:
+        pciQuestionnaireIds:
+          - PCID422GZ22322565HHMH48CW63CPH
+          - PCID422GZ22322565HHMH49CW75Z9H
     post-legalEntities-id-termsOfService-createTermsofService:
       description: Example request for getting the Terms of Service document
       summary: Get the Terms of Service document
@@ -2469,22 +2717,6 @@ components:
       required:
         - businessLines
       type: object
-    CalculateTermsOfServiceStatusResponse:
-      properties:
-        termsOfServiceTypes:
-          description: The type of Terms of Service that the legal entity needs to accept. If empty, no Terms of Service needs to be accepted.
-          items:
-            enum:
-              - adyenAccount
-              - adyenCapital
-              - adyenCard
-              - adyenForPlatformsAdvanced
-              - adyenForPlatformsManage
-              - adyenFranchisee
-              - adyenIssuing
-            type: string
-          type: array
-      type: object
     CapabilityProblem:
       properties:
         entity:
@@ -2675,6 +2907,53 @@ components:
       properties:
         id:
           description: The unique identifier of the resource.
+          type: string
+      type: object
+    GeneratePciDescriptionRequest:
+      properties:
+        language:
+          description: Sets the language of the PCI questionnaire. Its value is a two-character [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) language code, for example, **en**.
+          type: string
+      type: object
+    GeneratePciDescriptionResponse:
+      properties:
+        content:
+          contentEncoding: base64
+          description: The generated questionnaires in a base64 encoded format.
+          type: string
+        language:
+          description: The two-letter [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code for the questionnaire. For example, **en**.
+          type: string
+        pciTemplateReferences:
+          description: The array of Adyen-generated unique identifiers for the questionnaires.
+          items:
+            type: string
+          type: array
+      type: object
+    GetPciQuestionnaireInfosResponse:
+      properties:
+        data:
+          description: Information about the signed PCI questionnaires.
+          items:
+            $ref: "#/components/schemas/PciDocumentInfo"
+          type: array
+      type: object
+    GetPciQuestionnaireResponse:
+      properties:
+        content:
+          contentEncoding: base64
+          description: The generated questionnaire in a base64 encoded format.
+          type: string
+        createdAt:
+          description: The date the questionnaire was created, in ISO 8601 extended format. For example, 2022-12-18T10:15:30+01:00
+          format: date-time
+          type: string
+        id:
+          description: The unique identifier of the signed questionnaire.
+          type: string
+        validUntil:
+          description: The expiration date of the questionnaire, in ISO 8601 extended format. For example, 2022-12-18T10:15:30+01:00
+          format: date-time
           type: string
       type: object
     GetTermsOfServiceAcceptanceInfosResponse:
@@ -3286,6 +3565,45 @@ components:
         - id
         - type
       type: object
+    PciDocumentInfo:
+      properties:
+        createdAt:
+          description: The date the questionnaire was created, in ISO 8601 extended format. For example, 2022-12-18T10:15:30+01:00
+          format: date-time
+          type: string
+        id:
+          description: The unique identifier of the signed questionnaire.
+          type: string
+        validUntil:
+          description: The expiration date of the questionnaire, in ISO 8601 extended format. For example, 2022-12-18T10:15:30+01:00
+          format: date-time
+          type: string
+      type: object
+    PciSigningRequest:
+      properties:
+        pciTemplateReferences:
+          description: The array of Adyen-generated unique identifiers for the questionnaires.
+          items:
+            type: string
+          type: array
+        signedBy:
+          description: The [legal entity ID](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) of the individual who signs the PCI questionnaire.
+          type: string
+      required:
+        - signedBy
+        - pciTemplateReferences
+      type: object
+    PciSigningResponse:
+      properties:
+        pciQuestionnaireIds:
+          description: The unique identifiers of the signed PCI documents.
+          items:
+            type: string
+          type: array
+        signedBy:
+          description: The [legal entity ID](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) of the individual who signed the PCI questionnaire.
+          type: string
+      type: object
     PhoneNumber:
       properties:
         number:
@@ -3779,3 +4097,4 @@ x-groups:
   - Documents
   - Terms of Service
   - Hosted Onboarding
+  - PCI questionnaires

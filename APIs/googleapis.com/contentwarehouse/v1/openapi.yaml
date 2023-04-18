@@ -2493,6 +2493,7 @@ components:
             - LEGAL_CONTRACTS_EXTERNAL_AFFINITY
             - CONTACTS_TO_STAR_AFFINITY
             - DECS_AFFINITY
+            - GSOX_MOCHI_AFFINITY
           type: string
         containerId:
           description: The ID of the container
@@ -7966,6 +7967,9 @@ components:
         fallbackToTetheredDeviceAppCapabilities:
           description: If true, APP_ID queries initiated by this device should fall back to execution on the tethered device if it's available and if the primary device cannot perform the action (e.g. due to the app not being installed).
           type: boolean
+        preferTargetingPrimaryDevice:
+          description: For chat_message.SEND targeting, when either the primary or secondary (tethered) device is capable of handling the chat_message.SEND action, prefer targeting it to the primary device.
+          type: boolean
         supportedRecipientTypes:
           description: Should only be checked if nonempty.
           items:
@@ -10193,7 +10197,7 @@ components:
           description: Each onboarded provider has a unique provider key. KG provider keys are string identifiers used to identify a provider in some Media backends since mids, names, etc can change.
           type: string
         mid:
-          description: The MID of the provider. A MID is a unique identifier issued by Knowledge Graph for all entities contained in it's graph.
+          description: The MID of the provider. A MID is a unique identifier issued by Knowledge Graph for all entities contained in its graph.
           type: string
         providerVariant:
           $ref: "#/components/schemas/AssistantContextProviderVariant"
@@ -10219,7 +10223,7 @@ components:
           $ref: "#/components/schemas/AssistantContextMediaProviderId"
           description: DEPRECATED. Fields in MediaProviderId have been pulled out into separate fields in ProviderId and ProviderMetadata. TODO(b/243953766) Deprecate this field.
         mid:
-          description: The MID of the provider. A MID is a unique identifier issued by Knowledge Graph for all entities contained in it's graph.
+          description: The MID of the provider. A MID is a unique identifier issued by Knowledge Graph for all entities contained in its graph.
           type: string
         naturalProviderId:
           $ref: "#/components/schemas/AssistantContextProviderIdNaturalProviderId"
@@ -10247,6 +10251,7 @@ components:
             - CAST_APP
             - ZEROTH_PARTY
             - ANDROID_SYSTEM_API
+            - LLM_ACTIONS
           type: string
         value:
           description: String of provider_id_value is the actual value of the id.
@@ -10367,6 +10372,9 @@ components:
         url:
           description: The URL for this endpoint, it must start with https.
           type: string
+      type: object
+    AssistantDevicesPlatformProtoCoreDismissAssistantCapability:
+      properties: {}
       type: object
     AssistantDevicesPlatformProtoDeviceActionCapability:
       description: "This capability represents device action needed capability. Next ID: 10"
@@ -10577,6 +10585,9 @@ components:
     AssistantDevicesPlatformProtoMediaResumeCapability:
       properties: {}
       type: object
+    AssistantDevicesPlatformProtoMediaShowControlsCapability:
+      properties: {}
+      type: object
     AssistantDevicesPlatformProtoMediaStopCapability:
       properties: {}
       type: object
@@ -10637,7 +10648,7 @@ components:
       properties: {}
       type: object
     AssistantDevicesPlatformProtoSupportedDeviceOps:
-      description: This message will specify supports for fields in |assistant.embedded.v1.DeviceOp|, for a device model package. See go/easi-client-op2 for more info.
+      description: "This message will specify supports for fields in |assistant.embedded.v1.DeviceOp|, for a device model package. See go/easi-client-op2 for more info. Next ID: 16"
       properties:
         callCall:
           $ref: "#/components/schemas/AssistantDevicesPlatformProtoCallCallCapability"
@@ -10645,6 +10656,9 @@ components:
         clientReconnect:
           $ref: "#/components/schemas/AssistantDevicesPlatformProtoClientReconnectCapability"
           description: "|client_reconnect| indicates support for client.RECONNECT using assistant.embedded.v1.DeviceOp. There is an alternative API/capability for client.RECONNECT specified in RoutineCapability.supports_reconnect. Client should choose between this and RoutineCapability but not both."
+        coreDismissAssistant:
+          $ref: "#/components/schemas/AssistantDevicesPlatformProtoCoreDismissAssistantCapability"
+          description: "[core_dismiss_assistant] specifies the support for core.DISMISS_ASSISTANT client_op and the corresponding core_dismiss_assistant field in assistant.embedded.v1.DeviceOp."
         deviceModifySetting:
           $ref: "#/components/schemas/AssistantDevicesPlatformProtoDeviceModifySettingCapability"
           description: "|device_modify_setting| specifies the support for device.MODIFY_SETTING client_op, and the corresponding device_modify_setting field in assistant.embedded.v1.DeviceOp."
@@ -10661,6 +10675,8 @@ components:
           $ref: "#/components/schemas/AssistantDevicesPlatformProtoMediaPreviousCapability"
         mediaResume:
           $ref: "#/components/schemas/AssistantDevicesPlatformProtoMediaResumeCapability"
+        mediaShowControls:
+          $ref: "#/components/schemas/AssistantDevicesPlatformProtoMediaShowControlsCapability"
         mediaStop:
           $ref: "#/components/schemas/AssistantDevicesPlatformProtoMediaStopCapability"
         providerFulfill:
@@ -10908,7 +10924,7 @@ components:
           $ref: "#/components/schemas/AssistantGroundingRankerAssistantInteractionFeatures"
       type: object
     AssistantGroundingRankerMediaGroundingProviderFeatures:
-      description: "Features to be passed from Media GP to HGR. Next ID: 12"
+      description: "Features to be passed from Media GP to HGR. Next ID: 14"
       properties:
         albumReleaseType:
           description: Release type for an album container.
@@ -10941,12 +10957,59 @@ components:
         isSeedRadioRequest:
           description: True if the user requests seed radio.
           type: boolean
+        mediaContentType:
+          description: MediaAquaAction::media_content_type from interpretation. It can be used for cross-content type ranking, for example, if a candidate's content type does not match this content type from interpretation, this candidate will be slightly demoted. Also, we might avoid fetching some signals when the content type is generic music, since some content types do not need ranking.
+          enum:
+            - MEDIA_CONTENT_TYPE_UNSPECIFIED
+            - MUSIC_TRACK
+            - MUSIC_ARTIST
+            - MUSIC_ALBUM
+            - PUBLIC_PLAYLIST
+            - PERSONAL_PLAYLIST
+            - MUSIC_PERSONALIZED_MIX
+            - MUSIC_GENRE_MIX
+            - MUSIC_SEED_RADIO
+            - MUSIC_STATION
+            - RADIO_STATION
+            - RADIO_NETWORK
+            - PODCAST_SERIES
+            - PODCAST_GENERIC
+            - PODCAST_GENRE
+            - PODCAST_TOPIC
+            - PODCAST_RESUME
+            - PODCAST_EPISODE
+            - VIDEO
+            - MUSIC_VIDEO
+            - VIDEO_RECOMMENDED_PLAYLIST
+            - MUSIC_VIDEO_PERSONALIZED_PLAYLIST
+            - TV_SHOW
+            - TV_SHOW_SEASON
+            - TV_SHOW_EPISODE
+            - MOVIE
+            - YOUTUBE_CHANNEL
+            - TV_CHANNEL
+            - SPORTS_TEAM_GAME
+            - AUDIO_BOOK
+            - AUDIO_STORY
+            - YOUTUBE_VIDEO_PLAYLIST
+            - TV_ARTIST
+            - NEWS
+            - VIDEO_GAME
+            - DIRECTOR
+            - ACTOR
+            - MOVIE_SERIES
+            - APP
+          type: string
         mscRate:
           description: "MSC(Media Short Click) rate. MSC rate = total number of MSC events / total number of MSC candidates The event is considered as MSC candidate if the event is a media seeking query(excluding follow-ons) and the media result is successfully fulfilled. The event is MSC event if any of the following is in the following queries within 30 secs: FOLLOWED_BY_DUPLICATE FOLLOWED_BY_ADD_OR_DELETE_MANUAL_REFINEMENT FOLLOWED_BY_SAME_VERTICAL (MEDIA) FOLLOWED_BY_STOP More details: go/media-ranking, go/billboard-navboost, go/magma-music-actions-efrac"
           format: float
           type: number
         scubedPSaiMusic:
-          description: Scubed predicted SAI value (pSAI) for music populated by a regression model that incorporates a BERT model signal as well as other Scubed signals.
+          description: Scubed predicted SAI value (pSAI - SCUBED_MUSIC_ACTIONS) for music populated by a regression model that incorporates a BERT model signal as well as other Scubed signals.
+          format: double
+          type: number
+        scubedPSaiTvm:
+          description: Scubed predicted SAI value (pSAI - SCUBED_TVM_ACTIONS) for music populated by a regression model that incorporates a BERT model signal as well as other Scubed signals.
           format: double
           type: number
         type:
@@ -11733,6 +11796,7 @@ components:
             - ERROR_DEVICE_PROPERTIES
             - ERROR_HOME_GRAPH
             - ERROR_CAPABILITIES_ACROSS_DEVICES
+            - ERROR_SURFACE_IDENTITIES_ACROSS_DEVICES
           type: string
       type: object
     AssistantLogsLowConfidenceTargetDeviceLog:
@@ -12217,6 +12281,8 @@ components:
             - RANKER_NAME_GROUNDING_RANKER_COMMS_EXP
             - RANKER_NAME_CONSOLIDATED_PFR_HGR
             - RANKER_NAME_CONSOLIDATED_PFR_HGR_V2
+            - RANKER_NAME_GROUNDING_RANKER_COMMS_EXP_CALIBRATED
+            - RANKER_NAME_CONSOLIDATED_PFR_HGR_V2_COMMS_CALIBRATED
           type: string
         searchDispatch:
           description: The determination made by the SearchDispatchingConfig as to whether and how this interpretation should be dispatched to Search.
@@ -19684,6 +19750,8 @@ components:
             - SEGMENT_ELEVATION
             - SEGMENT_ENDPOINT
             - SEGMENT_GRADE_LEVEL_LIST
+            - SEGMENT_INTERNAL_DISALLOWED_CONNECTIONS
+            - SEGMENT_INTERNAL_DISALLOWED_PRIMARY_CONNECTION
             - SEGMENT_INTERNAL_TRAVEL_ALLOWANCE
             - SEGMENT_INTERPOLATION_OFFSET_METERS
             - SEGMENT_IS_MAX_PERMITTED_SPEED_DERIVED
@@ -20743,11 +20811,36 @@ components:
     GeostoreInternalSegmentProto:
       description: Internal-only proto used to express additional information about segments. This is intended for communicating extra information between editing clients and the repository, and should not be used by or visible to clients. WARNING - if you add new fields to InternalSegmentProto, make sure that geostore/tools/internal/mr-mergesegments_test.cc is aware of them.
       properties:
+        disallowedConnections:
+          description: RESERVED
+          items:
+            $ref: "#/components/schemas/GeostoreInternalSegmentProtoLaneConnectionReference"
+          type: array
+        disallowedPrimaryConnection:
+          description: RESERVED
+          items:
+            $ref: "#/components/schemas/GeostoreInternalSegmentProtoLaneConnectionReference"
+          type: array
         travelAllowance:
           description: The set of restrictions that apply to this segment; these are actually *POSITIVE* restrictions, i.e. they are known to be allowed.
           items:
             $ref: "#/components/schemas/GeostoreRestrictionProto"
           type: array
+      type: object
+    GeostoreInternalSegmentProtoLaneConnectionReference:
+      description: Specifies a single outgoing lane connection.
+      properties:
+        fromLaneNumber:
+          description: The lane number on this segment.
+          format: int32
+          type: integer
+        segment:
+          $ref: "#/components/schemas/GeostoreFeatureIdProto"
+          description: This reference to the other segment is weak, since strong would blow up bounds of all segments.
+        toLaneNumber:
+          description: This is the lane number on the target segment.
+          format: int32
+          type: integer
       type: object
     GeostoreInternalSourceSummaryProto:
       properties:
@@ -24755,7 +24848,7 @@ components:
           $ref: "#/components/schemas/GeostoreFeatureIdProto"
           description: The other segment of this segment pair (see above). The segment that is referenced by the sibling field refers to this feature back via the same sibling field. Both segment and sibling should have the same properties such as geometry, country code, elevation, level relation, priority etc. Since routes are required to have segment and sibling at the same time, the set of routes on a segment is same to that of the sibling.
         slope:
-          description: RESERVED
+          description: Each slope instance is tied to a point along the segment polyline (unrelated to the vertices in the segment's polyline) and represents the slope of the segment between that point and the point tied to the next slope istance, or the end of the segment if it's the last slope instance. A segment should have at least one slope.
           items:
             $ref: "#/components/schemas/GeostoreSlopeProto"
           type: array
@@ -29051,6 +29144,9 @@ components:
         provenance:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentProvenance"
           description: The history of this annotation.
+        styleInfo:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentPageTokenStyleInfo"
+          description: Text style attributes.
       type: object
     GoogleCloudDocumentaiV1DocumentPageTokenDetectedBreak:
       description: Detected break at the end of a Token.
@@ -29063,6 +29159,59 @@ components:
             - WIDE_SPACE
             - HYPHEN
           type: string
+      type: object
+    GoogleCloudDocumentaiV1DocumentPageTokenStyleInfo:
+      description: Font and other text style attributes.
+      properties:
+        backgroundColor:
+          $ref: "#/components/schemas/GoogleTypeColor"
+          description: Color of the background.
+        bold:
+          description: Whether the text is bold (equivalent to font weight >= 700).
+          type: boolean
+        fontSize:
+          description: Font size in points (1 point is 1/72").
+          format: int32
+          type: integer
+        fontType:
+          description: Name or style of the font.
+          type: string
+        fontWeight:
+          description: TrueType weight on a scale 100 (Thin) to 1000 (Ultra-heavy). Normal is 400, Bold is 700.
+          format: int32
+          type: integer
+        handwritten:
+          description: Whether the text is handwritten.
+          type: boolean
+        italic:
+          description: Whether the text is italic.
+          type: boolean
+        letterSpacing:
+          description: Letter spacing in points.
+          format: double
+          type: number
+        pixelFontSize:
+          description: Font size in pixels, equal to unrounded_fontsize * resolution / 72.0.
+          format: double
+          type: number
+        smallcaps:
+          description: Whether the text are small caps.
+          type: boolean
+        strikeout:
+          description: Whether the text is strikethrough.
+          type: boolean
+        subscript:
+          description: Whether the text is a subscript.
+          type: boolean
+        superscript:
+          description: Whether the text is a superscript.
+          type: boolean
+        textColor:
+          $ref: "#/components/schemas/GoogleTypeColor"
+          description: Color of the text.
+        underlined:
+          description: Whether the text is underlined.
+          type: boolean
       type: object
     GoogleCloudDocumentaiV1DocumentPageVisualElement:
       description: Detected non-text visual elements e.g. checkbox, signature etc. on the page.
@@ -36671,16 +36820,6 @@ components:
         remodelings:
           $ref: "#/components/schemas/NlpMeaningMeaningRemodelings"
           description: Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework.
-        stbrDomain:
-          description: This field is deprecated. It is not removed completely since this proto was saved with this field in proto text files used by the Grammy tool.
-          items:
-            enum:
-              - UNKNOWN
-              - DEFAULT
-              - SPORTS
-              - FINANCE
-            type: string
-          type: array
       type: object
     KnowledgeAnswersIntentModifiers:
       description: "Modifiers decorate a Meaning Expression (i.e. intent FunctionCall) with signals that depend on the source language's grammar and syntax. See go/intent-modifiers for details. NOTE: Modifiers don't necessarily impact go/intent-resolution semantics. LINT.IfChange"
@@ -36982,7 +37121,7 @@ components:
             type: string
           type: array
         deprecatedSupportingMid:
-          description: A list of mids that "support" this argument in voting, i.e, results that support these mids will be treated as if they support the argument. This field has been deprecated in favor of related_entity. b/27363861
+          description: A list of mids that "support" this argument in voting, i.e., results that support these mids will be treated as if they support the argument. This field has been deprecated in favor of related_entity. b/27363861
           items:
             type: string
           type: array
@@ -37486,7 +37625,7 @@ components:
           type: array
       type: object
     KnowledgeAnswersIntentQueryGroundingSignals:
-      description: "Grounding-related signals to be propagated down stream. Next ID: 12"
+      description: "Grounding-related signals to be propagated down stream. Next ID: 14"
       properties:
         addedByGrounding:
           description: True if the argument was added during grounding. This signal is intended to be used with ArgumentSignals. Note that the added argument's value must be a FunctionCall that only contains resolutions, i.e. grounding cannot add/modify/delete any ungrounded values.
@@ -37525,6 +37664,16 @@ components:
             - INTENT_FORMAT_UNSPECIFIED
             - PROD_INTENT_FACTORY
             - PORTMON_FULFILLMENT
+          type: string
+        provenance:
+          enum:
+            - UNKNOWN_PROVENANCE
+            - FIELD_CANDIDATE
+          type: string
+        sentiment:
+          enum:
+            - UNKNOWN_SENTIMENT
+            - REJECT
           type: string
         usesGroundingBox:
           description: If true, then GroundingBox and PGRP are used in AnswersRewriter to process the intent. Other post-processing steps, including IGDP, are adjusted accordingly. Note this will be removed once GroundingBox is fully launched and all prod traffic goes through it. Before that happens, each IG that needs to go through GB and PGRP (post GB ranking pruning) will need to explicitly set this field to true. See http://go/gb-impl and http://go/gb-post-ranker-pruner for details.
@@ -37569,6 +37718,7 @@ components:
             - BROADCAST
             - MESSAGE_CONTENT
             - INLINE_INVENTORY
+            - MEDIA_PLAYBACK
           type: string
       type: object
     KnowledgeAnswersIntentQueryImpliedEntity:
@@ -38614,17 +38764,6 @@ components:
           $ref: "#/components/schemas/NlpMeaningMeaningRemodelings"
           description: Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework.
       type: object
-    KnowledgeAnswersTypeTrait:
-      description: "A TypeTrait configures a value that has a property with any of the given trait_id. In practice this means: - any entity that has a metadata ID defined in the KP type_schema, - any intent that has a slot with the given ID. When comparing trait_id to metadata IDs or slot IDs, we lowercase and normalize for comparison."
-      properties:
-        remodelings:
-          $ref: "#/components/schemas/NlpMeaningMeaningRemodelings"
-          description: Contains data about current schema remodelings at this ValueType level. For more information see go/meaning-remodeling-framework.
-        traitId:
-          items:
-            type: string
-          type: array
-      type: object
     KnowledgeAnswersUnionType:
       properties:
         slotNames:
@@ -38675,12 +38814,6 @@ components:
           $ref: "#/components/schemas/KnowledgeAnswersOpaqueType"
         plexityRequirement:
           $ref: "#/components/schemas/KnowledgeAnswersPlexityRequirement"
-        pluralityType:
-          enum:
-            - ALL
-            - PLURAL_ONLY
-            - SINGULAR_ONLY
-          type: string
         polarQuestionType:
           $ref: "#/components/schemas/KnowledgeAnswersPolarQuestionType"
         semanticType:
@@ -38693,9 +38826,6 @@ components:
           $ref: "#/components/schemas/KnowledgeAnswersTimeZoneType"
         trackingNumberType:
           $ref: "#/components/schemas/KnowledgeAnswersTrackingNumberType"
-        withTrait:
-          $ref: "#/components/schemas/KnowledgeAnswersTypeTrait"
-          description: 'Extra trait information for compound value types. Note: currently the semantics of having both the data type (e.g. "entity_type") and "with_trait" is an OR operation. Eg. HorizontalDateRestrict has a SetToModify slot that accepts some collections like /collection/films. And also intent queries with_trait date, start_date, etc.'
       type: object
     KnowledgeGraphDateTimeProto:
       description: /////////// DATE //////////
@@ -48129,6 +48259,7 @@ components:
             - MY_ACCOUNT
             - NUDGEIT_CAMPAIGN_MANAGER
             - DECS
+            - GSOX_MOCHI
             - DEPRECATED_QUICKSTART_FLUME
             - DUO_CLIENT
             - ALBERT
@@ -51068,6 +51199,7 @@ components:
             - REMINDER_NOTIFICATION_ENABLE_FIRST_NOTICE
             - REMINDER_NOTIFICATION_ENABLE_NOTICE
             - REMINDER_ONE_OFF_DUP_NOTIFICATION_POST_MIGRATION
+            - REMINDER_NOTIFICATION_FORCED_MIGRATED
             - CROSS_SURFACE
             - CROSS_SURFACE_MOVIE_SHOWTIMES
             - CROSS_SURFACE_EVENTS
@@ -51241,10 +51373,10 @@ components:
             - REENGAGEMENT_NOTIFICATION
             - BLUE_GINGER_RESPONSE
             - BLUE_GINGER_SURVEY
-            - SMARTHOME_DOORBELL
             - SMARTHOME_ALARM
             - SMARTHOME_ASYNCHRONOUS
             - SMARTHOME_BROADCAST
+            - SMARTHOME_DOORBELL
             - SMARTHOME_FOLLOW_UP
             - SMARTHOME_PHONES
             - COMMUNICATION_MISSED_CALL
@@ -51799,6 +51931,7 @@ components:
             - OFFER
             - IAP_SKU_DEALS
             - FEATURED_PRODUCTS
+            - PLAY_PASS
           type: string
         eventUrl:
           description: ios
@@ -53359,13 +53492,13 @@ components:
               - CRIME
               - SHOPPING_TOPN
               - AUTHENTICITY
-              - TANGRAM_INFORMATION_OTHER
-              - TANGRAM_NEWS_PUBLISHER
-              - TANGRAM_ENCYCLOPEDIA
-              - TANGRAM_MERCHANT
-              - TANGRAM_GOVERNMENT
-              - TANGRAM_UGC
-              - TANGRAM_RESEARCH_INSTITUTE
+              - INFORMATION_SOURCE_OTHER
+              - INFORMATION_SOURCE_NEWS_PUBLISHER
+              - INFORMATION_SOURCE_ENCYCLOPEDIA
+              - INFORMATION_SOURCE_MERCHANT
+              - INFORMATION_SOURCE_GOVERNMENT
+              - INFORMATION_SOURCE_UGC
+              - INFORMATION_SOURCE_RESEARCH_INSTITUTE
               - RESERVED_FOR_NEW_ENUM_135
               - RESERVED_FOR_NEW_ENUM_136
               - RESERVED_FOR_NEW_ENUM_137
@@ -53530,13 +53663,13 @@ components:
               - CRIME
               - SHOPPING_TOPN
               - AUTHENTICITY
-              - TANGRAM_INFORMATION_OTHER
-              - TANGRAM_NEWS_PUBLISHER
-              - TANGRAM_ENCYCLOPEDIA
-              - TANGRAM_MERCHANT
-              - TANGRAM_GOVERNMENT
-              - TANGRAM_UGC
-              - TANGRAM_RESEARCH_INSTITUTE
+              - INFORMATION_SOURCE_OTHER
+              - INFORMATION_SOURCE_NEWS_PUBLISHER
+              - INFORMATION_SOURCE_ENCYCLOPEDIA
+              - INFORMATION_SOURCE_MERCHANT
+              - INFORMATION_SOURCE_GOVERNMENT
+              - INFORMATION_SOURCE_UGC
+              - INFORMATION_SOURCE_RESEARCH_INSTITUTE
               - RESERVED_FOR_NEW_ENUM_135
               - RESERVED_FOR_NEW_ENUM_136
               - RESERVED_FOR_NEW_ENUM_137
@@ -53704,13 +53837,13 @@ components:
               - CRIME
               - SHOPPING_TOPN
               - AUTHENTICITY
-              - TANGRAM_INFORMATION_OTHER
-              - TANGRAM_NEWS_PUBLISHER
-              - TANGRAM_ENCYCLOPEDIA
-              - TANGRAM_MERCHANT
-              - TANGRAM_GOVERNMENT
-              - TANGRAM_UGC
-              - TANGRAM_RESEARCH_INSTITUTE
+              - INFORMATION_SOURCE_OTHER
+              - INFORMATION_SOURCE_NEWS_PUBLISHER
+              - INFORMATION_SOURCE_ENCYCLOPEDIA
+              - INFORMATION_SOURCE_MERCHANT
+              - INFORMATION_SOURCE_GOVERNMENT
+              - INFORMATION_SOURCE_UGC
+              - INFORMATION_SOURCE_RESEARCH_INSTITUTE
               - RESERVED_FOR_NEW_ENUM_135
               - RESERVED_FOR_NEW_ENUM_136
               - RESERVED_FOR_NEW_ENUM_137
@@ -54113,7 +54246,6 @@ components:
             - NUM_LANGUAGES
           type: string
         docRelevance:
-          description: Represents how relavant this title candidate is to the document. Ranged in [0, 1], and this signal is basically calculated as Cosine-similarity between salient term vector and pQ2T model of title candidate sentence.
           format: float
           type: number
         dupTokens:
@@ -54258,7 +54390,7 @@ components:
           format: float
           type: number
         queryRelevance:
-          description: Represents how relavant this title candidate is to the query. Ranged in [0, 1], and this signal is basically calculated as Cosine-similarity between QBST term vector and pQ2T model of title candidate sentence.
+          description: Deprecated experimental features.
           format: float
           type: number
         sourceGeometry:
@@ -61449,7 +61581,7 @@ components:
           type: string
       type: object
     ResearchScienceSearchReconciledMetadata:
-      description: "A proto for storing inferred and reconciled metadata for Science Search. Next available tag: 70"
+      description: "A proto for storing inferred and reconciled metadata for Science Search. Next available tag: 71"
       properties:
         alternateName:
           description: Alternate names and acronyms for the dataset.
@@ -61458,6 +61590,10 @@ components:
           type: array
         authorList:
           description: A string representation of the authors of the dataset, collected from author and creator in raw metadata. The exact format (e.g., comma-separated, etc.) is up to the extender that populates this field. The assumption is that this string may appear in the UI "as is".
+          type: string
+        basicFieldsHash:
+          description: A hash of the fields copied by BasicMetadataExtender and the importers. See cs/research/science_search/backend/extender/basic_metadata_extender.h for the list of fields.
+          format: uint64
           type: string
         catalog:
           $ref: "#/components/schemas/ResearchScienceSearchCatalog"
@@ -65726,6 +65862,7 @@ components:
             - CONTRACTUAL_YOUVIEW_DATA
             - CONTRACTUAL_YOUTUBE_ALC_DATA
             - CREATOR_PRESENCE_DATA
+            - YOUTUBE_PODCASTS_DATA
             - TECHNICAL_UNRECONCILED_MEDIA_ACTION
             - CONTRACTUAL_AUDIBLE_DATA
             - CONTRACTUAL_SEARCH_NETFLIX_DATA
@@ -65871,6 +66008,7 @@ components:
             - RIGHTS_MANAGEMENT_100
             - RIGHTS_MANAGEMENT_101
             - RIGHTS_MANAGEMENT_102
+            - RIGHTS_MANAGEMENT_INSIDER_RISK
             - DICTIONARY_DATA_OXFORD
             - DICTIONARY_DATA_LE_ROBERT
             - ENTITY_TEXT_FEATURES
@@ -67390,7 +67528,7 @@ components:
           type: string
       type: object
     TrawlerHostBucketData:
-      description: "============================ Next Tag: 21 ============================ Data about the scheduling host bucket a URL was in (if the client wants to use this, e.g. for more intelligent scheduling, etc)."
+      description: "============================ Next Tag: 22 ============================ Data about the scheduling host bucket a URL was in (if the client wants to use this, e.g. for more intelligent scheduling, etc)."
       properties:
         ClientTrafficFraction:
           description: How much existing traffic
@@ -67460,6 +67598,14 @@ components:
           description: "# of urls currently in the queue"
           format: int32
           type: integer
+        PartnerTotalCapacityQps:
+          description: Total qps for this partner dedicated hostload, for non partner it will be -1.0.
+          format: float
+          type: number
+        PartnerTotalUsedQps:
+          description: Currently used qps for this partner dedicated hostlaod, for non partner it will be -1.0.
+          format: float
+          type: number
         RequestType:
           description: The type of the request (low latency vs. high throughput)
           enum:
@@ -68030,6 +68176,7 @@ components:
               - EDITORS_CHOICE_CLUSTER_SERP_EVENT_LEVEL
               - BESTK_CLUSTER_SERP_EVENT_LEVEL
               - LIVEOPS_CLUSTER_SERP_EVENT_LEVEL
+              - LIVEOPS_CLUSTER_SERP_TRIGGERING_EVENT_LEVEL
               - QUICKPICKS_CLUSTER_SERP_EVENT_LEVEL
               - INLINE_DETAILS_AQUALITY_CHECK_PASS
               - INLINE_DETAILS_AQUALITY_CHECK_FAIL
@@ -68092,6 +68239,36 @@ components:
               - SHOULD_SEE_ICON_XSELL_CLUSTER_LOW_Q_DP_EVENT_LEVEL
               - SHOULD_SEE_SCREENSHOT_XSELL_CLUSTER_LOW_Q_DP_EVENT_LEVEL
               - SHOULD_SEE_RICH_LIST_XSELL_CLUSTER_LOW_Q_DP_EVENT_LEVEL
+              - DEVICE_TIER_HIGH_EVENT_LEVEL
+              - DEVICE_TIER_MED_EVENT_LEVEL
+              - DEVICE_TIER_LOW_EVENT_LEVEL
+              - QUERY_TYPE_UNKNOWN_EVENT_LEVEL
+              - QUERY_TYPE_CATEGORICAL_EVENT_LEVEL
+              - QUERY_TYPE_NAVIGATIONAL_EVENT_LEVEL
+              - QUERY_TYPE_MULTI_NAVIGATIONAL_EVENT_LEVEL
+              - QUERY_TYPE_NAVIGATIONAL_EXT_EVENT_LEVEL
+              - MR_HIGH_QUALITY_ZERO_EVENT_LEVEL
+              - MR_HIGH_QUALITY_ONE_OR_TWO_EVENT_LEVEL
+              - MR_HIGH_QUALITY_TRHEE_OR_MORE_EVENT_LEVEL
+              - MR_HIGH_QUALITY_TOP_EVENT_LEVEL
+              - MR_HIGH_RELEVANCE_ZERO_EVENT_LEVEL
+              - MR_HIGH_RELEVANCE_ONE_OR_TWO_EVENT_LEVEL
+              - MR_HIGH_RELEVANCE_TRHEE_OR_MORE_EVENT_LEVEL
+              - MR_HIGH_RELEVANCE_TOP_EVENT_LEVEL
+              - SR_HIGH_QUALITY_ZERO_EVENT_LEVEL
+              - SR_HIGH_QUALITY_ONE_OR_TWO_EVENT_LEVEL
+              - SR_HIGH_QUALITY_TRHEE_OR_MORE_EVENT_LEVEL
+              - SR_HIGH_QUALITY_TOP_EVENT_LEVEL
+              - SR_HIGH_RELEVANCE_ZERO_EVENT_LEVEL
+              - SR_HIGH_RELEVANCE_ONE_OR_TWO_EVENT_LEVEL
+              - SR_HIGH_RELEVANCE_TRHEE_OR_MORE_EVENT_LEVEL
+              - SR_HIGH_RELEVANCE_TOP_EVENT_LEVEL
+              - RAM_0GB_TO_1GB_EVENT_LEVEL
+              - RAM_1GB_TO_2GB_EVENT_LEVEL
+              - RAM_2GB_TO_3GB_EVENT_LEVEL
+              - RAM_3GB_TO_4GB_EVENT_LEVEL
+              - RAM_4GB_TO_6GB_EVENT_LEVEL
+              - RAM_6GB_AND_MORE_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
               - BEST_SELLER_CART_TAG_AT_SESSION_LEVEL
@@ -68255,11 +68432,15 @@ components:
               - IN_APP_OFFER_APP_2_AT_SESSION_LEVEL
               - IN_APP_OFFER_APP_3_AT_SESSION_LEVEL
               - IN_APP_OFFER_APP_4_AT_SESSION_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_APP_GAMELOFT_AT_SESSION_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_APP_EVONY_AT_SESSION_LEVEL
               - IN_APP_OFFER_ELIGIBLE_AT_SESSION_LEVEL
               - IN_APP_OFFER_ELIGIBLE_APP_1_AT_SESSION_LEVEL
               - IN_APP_OFFER_ELIGIBLE_APP_2_AT_SESSION_LEVEL
               - IN_APP_OFFER_ELIGIBLE_APP_3_AT_SESSION_LEVEL
               - IN_APP_OFFER_ELIGIBLE_APP_4_AT_SESSION_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_GAMELOFT_AT_SESSION_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_EVONY_AT_SESSION_LEVEL
               - IN_APP_OFFER_SAVED_AT_SESSION_LEVEL
               - IN_APP_OFFER_SAVED_APP_1_AT_SESSION_LEVEL
               - IN_APP_OFFER_SAVED_APP_2_AT_SESSION_LEVEL
@@ -68390,6 +68571,7 @@ components:
               - EDITORS_CHOICE_CLUSTER_SERP_SESSION_LEVEL
               - BESTK_CLUSTER_SERP_SESSION_LEVEL
               - LIVEOPS_CLUSTER_SERP_SESSION_LEVEL
+              - LIVEOPS_CLUSTER_SERP_TRIGGERING_SESSION_LEVEL
               - QUICKPICKS_CLUSTER_SERP_SESSION_LEVEL
               - WIDE_MEDIA_CLUSTER_INVALID_VIDEO_ASSET_SESSION_LEVEL
               - ALTERNATE_DEVICE_PRESENT_SESSION_LEVEL
@@ -68610,6 +68792,49 @@ components:
               - SHOULD_SEE_ICON_XSELL_CLUSTER_LOW_Q_DP_SESSION_LEVEL
               - SHOULD_SEE_SCREENSHOT_XSELL_CLUSTER_LOW_Q_DP_SESSION_LEVEL
               - SHOULD_SEE_RICH_LIST_XSELL_CLUSTER_LOW_Q_DP_SESSION_LEVEL
+              - DEVICE_TIER_HIGH_SESSION_LEVEL
+              - DEVICE_TIER_MED_SESSION_LEVEL
+              - DEVICE_TIER_LOW_SESSION_LEVEL
+              - QUERY_TYPE_UNKNOWN_SESSION_LEVEL
+              - QUERY_TYPE_CATEGORICAL_SESSION_LEVEL
+              - QUERY_TYPE_NAVIGATIONAL_SESSION_LEVEL
+              - QUERY_TYPE_MULTI_NAVIGATIONAL_SESSION_LEVEL
+              - QUERY_TYPE_NAVIGATIONAL_EXT_SESSION_LEVEL
+              - MR_HIGH_QUALITY_ZERO_SESSION_LEVEL
+              - MR_HIGH_QUALITY_ONE_OR_TWO_SESSION_LEVEL
+              - MR_HIGH_QUALITY_TRHEE_OR_MORE_SESSION_LEVEL
+              - MR_HIGH_QUALITY_TOP_SESSION_LEVEL
+              - MR_HIGH_RELEVANCE_ZERO_SESSION_LEVEL
+              - MR_HIGH_RELEVANCE_ONE_OR_TWO_SESSION_LEVEL
+              - MR_HIGH_RELEVANCE_TRHEE_OR_MORE_SESSION_LEVEL
+              - MR_HIGH_RELEVANCE_TOP_SESSION_LEVEL
+              - SR_HIGH_QUALITY_ZERO_SESSION_LEVEL
+              - SR_HIGH_QUALITY_ONE_OR_TWO_SESSION_LEVEL
+              - SR_HIGH_QUALITY_TRHEE_OR_MORE_SESSION_LEVEL
+              - SR_HIGH_QUALITY_TOP_SESSION_LEVEL
+              - SR_HIGH_RELEVANCE_ZERO_SESSION_LEVEL
+              - SR_HIGH_RELEVANCE_ONE_OR_TWO_SESSION_LEVEL
+              - SR_HIGH_RELEVANCE_TRHEE_OR_MORE_SESSION_LEVEL
+              - SR_HIGH_RELEVANCE_TOP_SESSION_LEVEL
+              - RAM_0GB_TO_1GB_SESSION_LEVEL
+              - RAM_1GB_TO_2GB_SESSION_LEVEL
+              - RAM_2GB_TO_3GB_SESSION_LEVEL
+              - RAM_3GB_TO_4GB_SESSION_LEVEL
+              - RAM_4GB_TO_6GB_SESSION_LEVEL
+              - RAM_6GB_AND_MORE_SESSION_LEVEL
+              - FOP_ORDERING_RECOMMENDATION_ELIGIBLE_SESSION_LEVEL
+              - FOP_ORDERING_NO_RECOMMENDATION_SESSION_LEVEL
+              - FOP_ORDERING_RECOMMENDATION_ACTUALLY_USED_SESSION_LEVEL
+              - FOP_ORDERING_RECOMMENDATION_SAME_FOP_SESSION_LEVEL
+              - DMA_PRE_CONSENT_PROMPT_SHOWN_SESSION_LEVEL
+              - DMA_PRE_CONSENT_DECISION_MADE_SESSION_LEVEL
+              - DMA_PRE_CONSENT_FLOW_DISMISSED_SESSION_LEVEL
+              - BOOKS_LOYALTY_PROMO_BANNER_UNENROLLED_SESSION_LEVEL
+              - BOOKS_LOYALTY_PROMO_BANNER_MULTIPLIER_SESSION_LEVEL
+              - BOOKS_LOYALTY_PROMO_BANNER_BOOSTER_SESSION_LEVEL
+              - BOOKS_LOYALTY_PROMO_BANNER_WEEKLY_PRIZE_SESSION_LEVEL
+              - MDP_WITH_LIVE_OPS_EVER_INSTALLED_USERS_SESSION_LEVEL
+              - MDP_WITH_LIVE_OPS_NEVER_INSTALLED_USERS_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - CART_ABANDONMENT_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL
@@ -68672,11 +68897,15 @@ components:
               - IN_APP_OFFER_APP_2_AT_USER_LEVEL
               - IN_APP_OFFER_APP_3_AT_USER_LEVEL
               - IN_APP_OFFER_APP_4_AT_USER_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_APP_GAMELOFT_AT_USER_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_APP_EVONY_AT_USER_LEVEL
               - IN_APP_OFFER_ELIGIBLE_AT_USER_LEVEL
               - IN_APP_OFFER_ELIGIBLE_APP_1_AT_USER_LEVEL
               - IN_APP_OFFER_ELIGIBLE_APP_2_AT_USER_LEVEL
               - IN_APP_OFFER_ELIGIBLE_APP_3_AT_USER_LEVEL
               - IN_APP_OFFER_ELIGIBLE_APP_4_AT_USER_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_GAMELOFT_AT_USER_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_EVONY_AT_USER_LEVEL
               - IN_APP_OFFER_SAVED_AT_USER_LEVEL
               - IN_APP_OFFER_SAVED_APP_1_AT_USER_LEVEL
               - IN_APP_OFFER_SAVED_APP_2_AT_USER_LEVEL
@@ -68755,8 +68984,10 @@ components:
               - GROWTH_CORPUS_WIDE_STAMP_CARD_PURCHASE_FLOW_SERVER_USER_LEVEL
               - GROWTH_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_USER_LEVEL
               - LOYALTY_PURCHASE_QUEST_GAMES_HOME_USER_LEVEL
+              - LOYALTY_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_CLIENT_USER_LEVEL
               - GROWTH_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_SERVER_USER_LEVEL
               - LOYALTY_PURCHASE_QUEST_GAMES_HOME_SERVER_USER_LEVEL
+              - LOYALTY_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_SERVER_USER_LEVEL
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL_V2
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_WITH_EXISTING_FOP_USER_LEVEL
@@ -68851,6 +69082,13 @@ components:
               - PURCHASE_READINESS_ADD_FOP_USER_LEVEL
               - PURCHASE_READINESS_ADD_AUTH_USER_LEVEL
               - PURCHASE_READINESS_ADD_FOP_AUTH_USER_LEVEL
+              - MERCH_CONTENT_EXP_ACTIVE_PUBG_USER_LEVEL
+              - MERCH_CONTENT_EXP_ACTIVE_GENSHIN_USER_LEVEL
+              - MERCH_CONTENT_EXP_ACTIVE_ROBLOX_USER_LEVEL
+              - MERCH_CONTENT_EXP_ACTIVE_POKEMON_GO_USER_LEVEL
+              - DMA_PRE_CONSENT_PROMPT_SHOWN_USER_LEVEL
+              - DMA_PRE_CONSENT_DECISION_MADE_USER_LEVEL
+              - DMA_PRE_CONSENT_FLOW_DISMISSED_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -70248,6 +70486,7 @@ components:
             - PRODUCT_ANCHOR
             - ANCHOR
             - RANKEMBED_GENERATED_NAVBOOST_ANCHOR
+            - GENERATED_ORACLE_ANCHOR
           type: string
       type: object
     VideoContentSearchMultimodalTopicTrainingFeatures:
@@ -72358,6 +72597,7 @@ components:
         mediaClipInfoOverview:
           $ref: "#/components/schemas/VideoMediaOverviewMediaClipInfoOverview"
         orientation:
+          description: The orientation is annotated based on the final displayed resolution of the video file. A video will be labelled PORTRAIT whenever the height is greater than the width. The orientation is only labelled UNKNOWN in the case that the video stream had some transformation that was not a rotation in the video stream.
           enum:
             - ORIENTATION_UNKNOWN
             - ORIENTATION_PORTRAIT
@@ -72378,6 +72618,7 @@ components:
             - PROJECTION_PARTIALLY_SPHERICAL
           type: string
         resolution:
+          description: "The resolution for a video takes into account the displayed video size, and takes into account the orientation. For example: - A 1920x1080 video will have ORIENTATION_LANDSCAPE and RESOLUTION_1080P - A 1080x1920 video will have ORIENTATION_PORTRAIT and RESOLUTION_1080P - A 1080x1080 video will have ORIENTATION_LANDSCAPE and RESOLUTION_1080P"
           enum:
             - RESOLUTION_UNKNOWN
             - RESOLUTION_ULTRA_LOW
@@ -73069,7 +73310,7 @@ components:
           format: int64
           type: string
         width:
-          description: video width and height.
+          description: "The video stream's width and height. Important notes: 1) These are the coded dimensions of the video stream and DO NOT take into account any rotation metadata that may be present in the video container. Prefer to use the MediaOverview::resolution and MediaOverview::orientation when possible. 2) In the case you want detailed displayed width/height information, you can use the MediaOverview::orientation to determine the displayed dimensions. E.g., in the case of PORTRAIT orientation: displayed_width = min(width, height) displayed_height = max(width, height) And for LANDSCAPE orientation: displayed_width = max(width, height) displayed_height = min(width, height)"
           format: int32
           type: integer
       type: object
