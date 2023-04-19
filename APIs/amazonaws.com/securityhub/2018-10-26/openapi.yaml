@@ -5492,6 +5492,12 @@ components:
       properties: {}
     BatchDisableStandardsResponse:
       type: object
+      example:
+        StandardsSubscriptions:
+          - StandardsArn: 'arn:aws:securityhub:eu-central-1::standards/pci-dss/v/3.2.1'
+            StandardsInput: {}
+            StandardsStatus: DELETING
+            StandardsSubscriptionArn: 'arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1'
       properties:
         StandardsSubscriptions:
           allOf:
@@ -5502,6 +5508,12 @@ components:
       pattern: .*\S.*
     BatchEnableStandardsResponse:
       type: object
+      example:
+        StandardsSubscriptions:
+          - StandardsArn: 'arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1'
+            StandardsInput: {}
+            StandardsStatus: PENDING
+            StandardsSubscriptionArn: 'arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1'
       properties:
         StandardsSubscriptions:
           allOf:
@@ -5567,6 +5579,10 @@ components:
       required:
         - FailedCount
         - SuccessCount
+      example:
+        FailedCount: 123
+        FailedFindings: []
+        SuccessCount: 123
       properties:
         FailedCount:
           allOf:
@@ -5764,6 +5780,13 @@ components:
       required:
         - ProcessedFindings
         - UnprocessedFindings
+      example:
+        ProcessedFindings:
+          - Id: 'arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1/PCI.Lambda.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111'
+            ProductArn: 'arn:aws:securityhub:us-west-1::product/aws/securityhub'
+          - Id: 'arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1/PCI.Lambda.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222'
+            ProductArn: 'arn:aws:securityhub:us-west-1::product/aws/securityhub'
+        UnprocessedFindings: []
       properties:
         ProcessedFindings:
           allOf:
@@ -5860,6 +5883,8 @@ components:
       type: object
       required:
         - ActionTargetArn
+      example:
+        ActionTargetArn: 'arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation'
       properties:
         ActionTargetArn:
           allOf:
@@ -5868,6 +5893,13 @@ components:
     ResourceConflictException: {}
     CreateFindingAggregatorResponse:
       type: object
+      example:
+        FindingAggregationRegion: us-east-1
+        FindingAggregatorArn: 'arn:aws:securityhub:us-east-1:222222222222:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111'
+        RegionLinkingMode: SPECIFIED_REGIONS
+        Regions:
+          - us-west-1
+          - us-west-2
       properties:
         FindingAggregatorArn:
           allOf:
@@ -5890,6 +5922,8 @@ components:
       type: object
       required:
         - InsightArn
+      example:
+        InsightArn: 'arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111'
       properties:
         InsightArn:
           allOf:
@@ -5925,6 +5959,8 @@ components:
         $ref: '#/components/schemas/BooleanFilter'
     CreateMembersResponse:
       type: object
+      example:
+        UnprocessedAccounts: []
       properties:
         UnprocessedAccounts:
           allOf:
@@ -5946,6 +5982,8 @@ components:
       description: The details of an Amazon Web Services account.
     DeclineInvitationsResponse:
       type: object
+      example:
+        UnprocessedAccounts: []
       properties:
         UnprocessedAccounts:
           allOf:
@@ -5955,6 +5993,8 @@ components:
       type: object
       required:
         - ActionTargetArn
+      example:
+        ActionTargetArn: 'arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation'
       properties:
         ActionTargetArn:
           allOf:
@@ -5967,6 +6007,8 @@ components:
       type: object
       required:
         - InsightArn
+      example:
+        InsightArn: 'arn:aws:securityhub:eu-central-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111'
       properties:
         InsightArn:
           allOf:
@@ -5974,6 +6016,8 @@ components:
             - description: The ARN of the insight that was deleted.
     DeleteInvitationsResponse:
       type: object
+      example:
+        UnprocessedAccounts: []
       properties:
         UnprocessedAccounts:
           allOf:
@@ -5981,6 +6025,8 @@ components:
             - description: 'The list of Amazon Web Services accounts for which the invitations were not deleted. For each account, the list includes the account ID and the email address.'
     DeleteMembersResponse:
       type: object
+      example:
+        UnprocessedAccounts: []
       properties:
         UnprocessedAccounts:
           allOf:
@@ -5990,6 +6036,11 @@ components:
       type: object
       required:
         - ActionTargets
+      example:
+        ActionTargets:
+          - ActionTargetArn: 'arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation'
+            Description: Action to send the finding for remediation tracking
+            Name: Send to remediation
       properties:
         ActionTargets:
           allOf:
@@ -6001,6 +6052,11 @@ components:
             - description: The pagination token to use to request the next page of results.
     DescribeHubResponse:
       type: object
+      example:
+        AutoEnableControls: true
+        ControlFindingGenerator: SECURITY_CONTROL
+        HubArn: 'arn:aws:securityhub:us-west-1:123456789012:hub/default'
+        SubscribedAt: '2019-11-19T23:15:10.046Z'
       properties:
         HubArn:
           allOf:
@@ -6020,6 +6076,10 @@ components:
             - description: '<p>Specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards.</p> <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards.</p> <p>The value for this field in a member account matches the value in the administrator account. For accounts that aren''t part of an organization, the default value of this field is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 23, 2023.</p>'
     DescribeOrganizationConfigurationResponse:
       type: object
+      example:
+        AutoEnable: true
+        AutoEnableStandards: DEFAULT
+        MemberAccountLimitReached: true
       properties:
         AutoEnable:
           allOf:
@@ -6037,6 +6097,24 @@ components:
       type: object
       required:
         - Products
+      example:
+        NextToken: U2FsdGVkX18vvPlOqb7RDrWRWVFBJI46MOIAb+nZmRJmR15NoRi2gm13sdQEn3O/pq/78dGs+bKpgA+7HMPHO0qX33/zoRI+uIG/F9yLNhcOrOWzFUdy36JcXLQji3Rpnn/cD1SVkGA98qI3zPOSDg==
+        Products:
+          - ActivationUrl: 'https://falcon.crowdstrike.com/support/documentation'
+            Categories:
+              - Endpoint Detection and Response (EDR)
+              - AV Scanning and Sandboxing
+              - Threat Intelligence Feeds and Reports
+              - Endpoint Forensics
+              - Network Forensics
+            CompanyName: CrowdStrike
+            Description: 'CrowdStrike Falcon''s single lightweight sensor unifies next-gen antivirus, endpoint detection and response, and 24/7 managed hunting, via the cloud.'
+            IntegrationTypes:
+              - SEND_FINDINGS_TO_SECURITY_HUB
+            MarketplaceUrl: 'https://aws.amazon.com/marketplace/seller-profile?id=a1b2c3d4-5678-90ab-cdef-EXAMPLE11111'
+            ProductArn: 'arn:aws:securityhub:us-east-1:517716713836:product/crowdstrike/crowdstrike-falcon'
+            ProductName: CrowdStrike Falcon
+            ProductSubscriptionResourcePolicy: '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"AWS":"123456789333"},"Action":["securityhub:BatchImportFindings"],"Resource":"arn:aws:securityhub:us-west-1:123456789012:product-subscription/crowdstrike/crowdstrike-falcon","Condition":{"StringEquals":{"securityhub:TargetAccount":"123456789012"}}},{"Effect":"Allow","Principal":{"AWS":"123456789012"},"Action":["securityhub:BatchImportFindings"],"Resource":"arn:aws:securityhub:us-west-1:123456789333:product/crowdstrike/crowdstrike-falcon","Condition":{"StringEquals":{"securityhub:TargetAccount":"123456789012"}}}]}'
       properties:
         Products:
           allOf:
@@ -6048,6 +6126,24 @@ components:
             - description: The pagination token to use to request the next page of results.
     DescribeStandardsResponse:
       type: object
+      example:
+        Standards:
+          - Description: 'The AWS Foundational Security Best Practices standard is a set of automated security checks that detect when AWS accounts and deployed resources do not align to security best practices. The standard is defined by AWS security experts. This curated set of controls helps improve your security posture in AWS, and cover AWS''s most popular and foundational services.'
+            EnabledByDefault: true
+            Name: AWS Foundational Security Best Practices v1.0.0
+            StandardsArn: 'arn:aws:securityhub:us-west-1::standards/aws-foundational-security-best-practices/v/1.0.0'
+          - Description: The Center for Internet Security (CIS) AWS Foundations Benchmark v1.2.0 is a set of security configuration best practices for AWS. This Security Hub standard automatically checks for your compliance readiness against a subset of CIS requirements.
+            EnabledByDefault: true
+            Name: CIS AWS Foundations Benchmark v1.2.0
+            StandardsArn: 'arn:aws:securityhub:us-west-1::ruleset/cis-aws-foundations-benchmark/v/1.2.0'
+          - Description: The Center for Internet Security (CIS) AWS Foundations Benchmark v1.4.0 is a set of security configuration best practices for AWS. This Security Hub standard automatically checks for your compliance readiness against a subset of CIS requirements.
+            EnabledByDefault: false
+            Name: CIS AWS Foundations Benchmark v1.4.0
+            StandardsArn: 'arn:aws::securityhub:us-west-1::standards/cis-aws-foundations-benchmark/v/1.4.0'
+          - Description: 'The Payment Card Industry Data Security Standard (PCI DSS) v3.2.1 is an information security standard for entities that store, process, and/or transmit cardholder data. This Security Hub standard automatically checks for your compliance readiness against a subset of PCI DSS requirements.'
+            EnabledByDefault: false
+            Name: PCI DSS v3.2.1
+            StandardsArn: 'arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1'
       properties:
         Standards:
           allOf:
@@ -6059,6 +6155,29 @@ components:
             - description: The pagination token to use to request the next page of results.
     DescribeStandardsControlsResponse:
       type: object
+      example:
+        Controls:
+          - ControlId: PCI.AutoScaling.1
+            ControlStatus: ENABLED
+            ControlStatusUpdatedAt: '2020-05-15T18:49:04.473000+00:00'
+            Description: This AWS control checks whether your Auto Scaling groups that are associated with a load balancer are using Elastic Load Balancing health checks.
+            RelatedRequirements:
+              - PCI DSS 2.2
+            RemediationUrl: 'https://docs.aws.amazon.com/console/securityhub/PCI.AutoScaling.1/remediation'
+            SeverityRating: LOW
+            StandardsControlArn: 'arn:aws:securityhub:us-west-1:123456789012:control/pci-dss/v/3.2.1/PCI.AutoScaling.1'
+            Title: Auto scaling groups associated with a load balancer should use health checks
+          - ControlId: PCI.CW.1
+            ControlStatus: ENABLED
+            ControlStatusUpdatedAt: '2020-05-15T18:49:04.498000+00:00'
+            Description: 'This control checks for the CloudWatch metric filters using the following pattern { $.userIdentity.type = "Root" && $.userIdentity.invokedBy NOT EXISTS && $.eventType != "AwsServiceEvent" } It checks that the log group name is configured for use with active multi-region CloudTrail, that there is at least one Event Selector for a Trail with IncludeManagementEvents set to true and ReadWriteType set to All, and that there is at least one active subscriber to an SNS topic associated with the alarm.'
+            RelatedRequirements:
+              - PCI DSS 7.2.1
+            RemediationUrl: 'https://docs.aws.amazon.com/console/securityhub/PCI.CW.1/remediation'
+            SeverityRating: MEDIUM
+            StandardsControlArn: 'arn:aws:securityhub:us-west-1:123456789012:control/pci-dss/v/3.2.1/PCI.CW.1'
+            Title: A log metric filter and alarm should exist for usage of the "root" user
+        NextToken: U2FsdGVkX1+eNkPoZHVl11ip5HUYQPWSWZGmftcmJiHL8JoKEsCDuaKayiPDyLK+LiTkShveoOdvfxXCkOBaGhohIXhsIedN+LSjQV/l7kfCfJcq4PziNC1N9xe9aq2pjlLVZnznTfSImrodT5bRNHe4fELCQq/z+5ka+5Lzmc11axcwTd5lKgQyQqmUVoeriHZhyIiBgWKf7oNYdBVG8OEortVWvSkoUTt+B2ThcnC7l43kI0UNxlkZ6sc64AsW
       properties:
         Controls:
           allOf:
@@ -6088,6 +6207,8 @@ components:
       properties: {}
     EnableImportFindingsForProductResponse:
       type: object
+      example:
+        ProductSubscriptionArn: 'arn:aws:securityhub:us-east-1:517716713836:product-subscription/crowdstrike/crowdstrike-falcon'
       properties:
         ProductSubscriptionArn:
           allOf:
@@ -6104,11 +6225,23 @@ components:
       maxLength: 256
     GetAdministratorAccountResponse:
       type: object
+      example:
+        Administrator:
+          AccountId: '123456789012'
+          InvitationId: 7ab938c5d52d7904ad09f9e7c20cc4eb
+          InvitedAt: '2020-06-01T20:21:18.042000+00:00'
+          MemberStatus: ASSOCIATED
       properties:
         Administrator:
           $ref: '#/components/schemas/Invitation'
     GetEnabledStandardsResponse:
       type: object
+      example:
+        StandardsSubscriptions:
+          - StandardsArn: 'arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1'
+            StandardsInput: {}
+            StandardsStatus: READY
+            StandardsSubscriptionArn: 'arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1'
       properties:
         StandardsSubscriptions:
           allOf:
@@ -6120,6 +6253,13 @@ components:
             - description: The pagination token to use to request the next page of results.
     GetFindingAggregatorResponse:
       type: object
+      example:
+        FindingAggregationRegion: us-east-1
+        FindingAggregatorArn: 'arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111'
+        RegionLinkingMode: SPECIFIED_REGIONS
+        Regions:
+          - us-west-1
+          - us-west-2
       properties:
         FindingAggregatorArn:
           allOf:
@@ -6141,6 +6281,67 @@ components:
       type: object
       required:
         - Findings
+      example:
+        Findings:
+          - AwsAccountId: '123456789012'
+            CompanyName: AWS
+            Compliance:
+              AssociatedStandards:
+                - StandardsId: standards/aws-foundational-security-best-practices/v/1.0.0
+                - StandardsId: standards/pci-dss/v/3.2.1
+                - StandardsId: ruleset/cis-aws-foundations-benchmark/v/1.2.0
+                - StandardsId: standards/cis-aws-foundations-benchmark/v/1.4.0
+                - StandardsId: standards/service-managed-aws-control-tower/v/1.0.0
+              RelatedRequirements:
+                - PCI DSS v3.2.1/3.4
+                - CIS AWS Foundations Benchmark v1.2.0/2.7
+                - CIS AWS Foundations Benchmark v1.4.0/3.7
+              SecurityControlId: CloudTrail.2
+              Status: FAILED
+            CreatedAt: '2022-10-06T02:18:23.076Z'
+            Description: This AWS control checks whether AWS CloudTrail is configured to use the server side encryption (SSE) AWS Key Management Service (AWS KMS) customer master key (CMK) encryption. The check will pass if the KmsKeyId is defined.
+            FindingProviderFields:
+              Severity:
+                Label: MEDIUM
+                Original: MEDIUM
+              Types:
+                - Software and Configuration Checks/Industry and Regulatory Standards
+            FirstObservedAt: '2022-10-06T02:18:23.076Z'
+            GeneratorId: security-control/CloudTrail.2
+            Id: 'arn:aws:securityhub:us-east-2:123456789012:security-control/CloudTrail.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111'
+            LastObservedAt: '2022-10-28T16:10:06.956Z'
+            ProductArn: 'arn:aws:securityhub:us-east-2::product/aws/securityhub'
+            ProductFields:
+              'RelatedAWSResources:0/name': securityhub-cloud-trail-encryption-enabled-fe95bf3f
+              'RelatedAWSResources:0/type': 'AWS::Config::ConfigRule'
+              'Resources:0/Id': 'arn:aws:cloudtrail:us-east-2:123456789012:trail/AWSMacieTrail-DO-NOT-EDIT'
+              aws/securityhub/CompanyName: AWS
+              aws/securityhub/FindingId: 'arn:aws:securityhub:us-east-2::product/aws/securityhub/arn:aws:securityhub:us-east-2:123456789012:security-control/CloudTrail.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111'
+              aws/securityhub/ProductName: Security Hub
+            ProductName: Security Hub
+            RecordState: ACTIVE
+            Region: us-east-2
+            Remediation:
+              Recommendation:
+                Text: 'For directions on how to correct this issue, consult the AWS Security Hub controls documentation.'
+                Url: 'https://docs.aws.amazon.com/console/securityhub/CloudTrail.2/remediation'
+            Resources:
+              - Id: 'arn:aws:cloudtrail:us-east-2:123456789012:trail/AWSMacieTrail-DO-NOT-EDIT'
+                Partition: aws
+                Region: us-east-2
+                Type: AwsCloudTrailTrail
+            SchemaVersion: '2018-10-08'
+            Severity:
+              Label: MEDIUM
+              Normalized: 40
+              Original: MEDIUM
+            Title: CloudTrail should have encryption at-rest enabled
+            Types:
+              - Software and Configuration Checks/Industry and Regulatory Standards
+            UpdatedAt: '2022-10-28T16:10:00.093Z'
+            Workflow:
+              Status: NEW
+            WorkflowState: NEW
       properties:
         Findings:
           allOf:
@@ -6166,6 +6367,15 @@ components:
       type: object
       required:
         - InsightResults
+      example:
+        InsightResults:
+          GroupByAttribute: ResourceId
+          InsightArn: 'arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111'
+          ResultValues:
+            - Count: 10
+              GroupByAttributeValue: 'AWS::::Account:111122223333'
+            - Count: 3
+              GroupByAttributeValue: 'AWS::::Account:444455556666'
       properties:
         InsightResults:
           allOf:
@@ -6175,6 +6385,18 @@ components:
       type: object
       required:
         - Insights
+      example:
+        Insights:
+          - Filters:
+              ResourceType:
+                - Comparison: EQUALS
+                  Value: AwsIamRole
+              SeverityLabel:
+                - Comparison: EQUALS
+                  Value: CRITICAL
+            GroupByAttribute: ResourceId
+            InsightArn: 'arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111'
+            Name: Critical role findings
       properties:
         Insights:
           allOf:
@@ -6186,6 +6408,8 @@ components:
             - description: The pagination token to use to request the next page of results.
     GetInvitationsCountResponse:
       type: object
+      example:
+        InvitationsCount: 3
       properties:
         InvitationsCount:
           allOf:
@@ -6200,6 +6424,21 @@ components:
             - description: 'A list of details about the Security Hub administrator account for the current member account. '
     GetMembersResponse:
       type: object
+      example:
+        Members:
+          - AccountId: '444455556666'
+            AdministratorId: '123456789012'
+            InvitedAt: '2020-06-01T20:15:15.289000+00:00'
+            MasterId: '123456789012'
+            MemberStatus: ASSOCIATED
+            UpdatedAt: '2020-06-01T20:15:15.289000+00:00'
+          - AccountId: '777788889999'
+            AdministratorId: '123456789012'
+            InvitedAt: '2020-06-01T20:15:15.289000+00:00'
+            MasterId: '123456789012'
+            MemberStatus: ASSOCIATED
+            UpdatedAt: '2020-06-01T20:15:15.289000+00:00'
+        UnprocessedAccounts: []
       properties:
         Members:
           allOf:
@@ -6211,6 +6450,8 @@ components:
             - description: 'The list of Amazon Web Services accounts that could not be processed. For each account, the list includes the account ID and the email address.'
     InviteMembersResponse:
       type: object
+      example:
+        UnprocessedAccounts: []
       properties:
         UnprocessedAccounts:
           allOf:
@@ -6218,6 +6459,10 @@ components:
             - description: 'The list of Amazon Web Services accounts that could not be processed. For each account, the list includes the account ID and the email address.'
     ListEnabledProductsForImportResponse:
       type: object
+      example:
+        ProductSubscriptions:
+          - 'arn:aws:securityhub:us-east-1:517716713836:product-subscription/crowdstrike/crowdstrike-falcon'
+          - 'arn:aws:securityhub:us-east-1::product/3coresec/3coresec'
       properties:
         ProductSubscriptions:
           allOf:
@@ -6229,6 +6474,9 @@ components:
             - description: The pagination token to use to request the next page of results.
     ListFindingAggregatorsResponse:
       type: object
+      example:
+        FindingAggregators:
+          - FindingAggregatorArn: 'arn:aws:securityhub:us-east-1:222222222222:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111'
       properties:
         FindingAggregators:
           allOf:
@@ -6240,6 +6488,12 @@ components:
             - description: '<p>If there are more results, this is the token to provide in the next call to <code>ListFindingAggregators</code>.</p> <p>This operation currently only returns a single result. </p>'
     ListInvitationsResponse:
       type: object
+      example:
+        Invitations:
+          - AccountId: '123456789012'
+            InvitationId: 7ab938c5d52d7904ad09f9e7c20cc4eb
+            InvitedAt: '2020-06-01T20:21:18.042000+00:00'
+            MemberStatus: ASSOCIATED
       properties:
         Invitations:
           allOf:
@@ -6251,6 +6505,20 @@ components:
             - description: The pagination token to use to request the next page of results.
     ListMembersResponse:
       type: object
+      example:
+        Members:
+          - AccountId: '111122223333'
+            AdministratorId: '123456789012'
+            InvitedAt: '2020-06-01T20:15:15.289000+00:00'
+            MasterId: '123456789012'
+            MemberStatus: ASSOCIATED
+            UpdatedAt: '2020-06-01T20:15:15.289000+00:00'
+          - AccountId: '444455556666'
+            AdministratorId: '123456789012'
+            InvitedAt: '2020-06-01T20:15:15.289000+00:00'
+            MasterId: '123456789012'
+            MemberStatus: ASSOCIATED
+            UpdatedAt: '2020-06-01T20:15:15.289000+00:00'
       properties:
         Members:
           allOf:
@@ -6262,6 +6530,10 @@ components:
             - description: The pagination token to use to request the next page of results.
     ListOrganizationAdminAccountsResponse:
       type: object
+      example:
+        AdminAccounts:
+          - AccountId: '777788889999'
+          - Status: ENABLED
       properties:
         AdminAccounts:
           allOf:
@@ -6275,6 +6547,27 @@ components:
       type: object
       required:
         - SecurityControlDefinitions
+      example:
+        NextToken: U2FsdGVkX1...
+        SecurityControlDefinitions:
+          - CurrentRegionAvailability: AVAILABLE
+            Description: This AWS control checks whether ACM Certificates in your account are marked for expiration within a specified time period. Certificates provided by ACM are automatically renewed. ACM does not automatically renew certificates that you import.
+            RemediationUrl: 'https://docs.aws.amazon.com/console/securityhub/ACM.1/remediation'
+            SecurityControlId: ACM.1
+            SeverityRating: MEDIUM
+            Title: Imported and ACM-issued certificates should be renewed after a specified time period
+          - CurrentRegionAvailability: AVAILABLE
+            Description: This control checks whether all stages of Amazon API Gateway REST and WebSocket APIs have logging enabled. The control fails if logging is not enabled for all methods of a stage or if loggingLevel is neither ERROR nor INFO.
+            RemediationUrl: 'https://docs.aws.amazon.com/console/securityhub/APIGateway.1/remediation'
+            SecurityControlId: APIGateway.1
+            SeverityRating: MEDIUM
+            Title: API Gateway REST and WebSocket API execution logging should be enabled
+          - CurrentRegionAvailability: AVAILABLE
+            Description: This control checks whether Amazon API Gateway REST API stages have SSL certificates configured that backend systems can use to authenticate that incoming requests are from the API Gateway.
+            RemediationUrl: 'https://docs.aws.amazon.com/console/securityhub/APIGateway.2/remediation'
+            SecurityControlId: APIGateway.2
+            SeverityRating: MEDIUM
+            Title: API Gateway REST API stages should be configured to use SSL certificates for backend authentication
       properties:
         SecurityControlDefinitions:
           allOf:
@@ -6288,6 +6581,30 @@ components:
       type: object
       required:
         - StandardsControlAssociationSummaries
+      example:
+        StandardsControlAssociationSummaries:
+          - AssociationStatus: ENABLED
+            RelatedRequirements:
+              - PCI DSS 1.2.1
+              - PCI DSS 1.3.1
+              - PCI DSS 1.3.2
+              - PCI DSS 1.3.4
+              - PCI DSS 1.3.6
+            SecurityControlArn: 'arn:aws:securityhub:us-west-2:110479873537:security-control/S3.1'
+            SecurityControlId: S3.1
+            StandardsArn: 'arn:aws:securityhub:us-west-2::standards/pci-dss/v/3.2.1'
+            StandardsControlDescription: 'This AWS control checks whether the following public access block settings are configured from account level: ignorePublicAcls: True, blockPublicPolicy: True, blockPublicAcls: True, restrictPublicBuckets: True.'
+            StandardsControlTitle: S3 Block Public Access setting should be enabled
+            UpdatedAt: '2022-01-13T23:03:46.648000+00:00'
+          - AssociationStatus: DISABLED
+            RelatedRequirements: []
+            SecurityControlArn: 'arn:aws:securityhub:us-west-2:110479873537:security-control/S3.1'
+            SecurityControlId: S3.1
+            StandardsArn: 'arn:aws:securityhub:us-west-2::standards/aws-foundational-security-best-practices/v/1.0.0'
+            StandardsControlDescription: 'This AWS control checks whether the following public access block settings are configured from account level: ignorePublicAcls: True, blockPublicPolicy: True, blockPublicAcls: True, restrictPublicBuckets: True.'
+            StandardsControlTitle: S3 Block Public Access setting should be enabled
+            UpdatedAt: '2022-08-12T22:59:04.924000+00:00'
+            UpdatedReason: Not relevant to environment
       properties:
         StandardsControlAssociationSummaries:
           allOf:
@@ -6299,6 +6616,10 @@ components:
             - description: ' A pagination parameter that''s included in the response only if it was included in the request. '
     ListTagsForResourceResponse:
       type: object
+      example:
+        Tags:
+          Area: USMidwest
+          Department: Operations
       properties:
         Tags:
           allOf:
@@ -6320,6 +6641,13 @@ components:
       properties: {}
     UpdateFindingAggregatorResponse:
       type: object
+      example:
+        FindingAggregationRegion: us-east-1
+        FindingAggregatorArn: 'arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111'
+        RegionLinkingMode: SPECIFIED_REGIONS
+        Regions:
+          - us-west-1
+          - us-west-2
       properties:
         FindingAggregatorArn:
           allOf:
