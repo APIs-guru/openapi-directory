@@ -59,7 +59,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: CheckoutService
-  x-timestamp: 2023-02-20T18:22:16Z
+  x-timestamp: 2023-04-18T11:26:13Z
 tags:
   - name: Modifications
   - name: Orders
@@ -3237,7 +3237,7 @@ components:
             type: klarna
           - name: Pay over time with Klarna.
             type: klarna_account
-          - name: Klarna B2B
+          - name: Buy Now, Pay Later with Billie
             type: klarna_b2b
           - name: Pay now with Klarna.
             type: klarna_paynow
@@ -5077,6 +5077,7 @@ components:
           description: "**ach**"
           enum:
             - ach
+            - ach_plaid
           type: string
       required:
         - bankAccountNumber
@@ -5763,105 +5764,110 @@ components:
         lodging.checkInDate:
           description: |-
             The arrival date.
-            * Date format: `yyyyMMdd`
+            * Date format: **yyyyMmDd**. For example, for 2023 April 22, **20230422**.
           type: string
         lodging.checkOutDate:
           description: |-
             The departure date.
-            * Date format: `yyyyMMdd`
+            * Date format: **yyyyMmDd**. For example, for 2023 April 22, **20230422**.
           type: string
         lodging.customerServiceTollFreeNumber:
           description: |-
-            The toll free phone number for the hotel/lodgings.
-            * Format: Alphanumeric
-            * maxLength: 17
+            The toll-free phone number for the lodging.
+            * Format: alphanumeric.
+            * Max length: 17 characters.
+            * For US numbers: must start with 3 digits and be at least 10 characters in length. Otherwise, the capture can fail.
           type: string
         lodging.fireSafetyActIndicator:
           description: |-
             Identifies that the facility complies with the Hotel and Motel Fire Safety Act of 1990. Values can be: 'Y' or 'N'.
-            * Format: Alphabetic
-            * maxLength: 1
+            * Format: alphabetic.
+            * Max length: 1 character.
           type: string
         lodging.folioCashAdvances:
           description: |-
             The folio cash advances.
-            * Format: Numeric
-            * maxLength: 12
+            * Format: numeric.
+            * Max length: 12 characters.
           type: string
         lodging.folioNumber:
           description: |-
-            Card acceptor’s internal invoice or billing ID reference number.
-            * Format: Alphanumeric
-            * maxLength: 25
+            The card acceptor’s internal invoice or billing ID reference number.
+            * Format: alphanumeric.
+            * Max length: 25 characters.
           type: string
         lodging.foodBeverageCharges:
           description: |-
-            Any charges for food and beverages associated with the booking.
-            * Format: Numeric
-            * maxLength: 12
+            The additional charges for food and beverages associated with the booking.
+            * Format: numeric.
+            * Max length: 12 characters.
           type: string
         lodging.noShowIndicator:
           description: |-
-            Indicates if the customer was a "no-show" (neither keeps nor cancels their booking).
-
-            Value should be Y or N.
-            * Format: Numeric
-            * maxLength: 1
+            Indicates if the customer didn't check in for their booking.
+             Possible values: 
+             * **Y**: the customer didn't check in. 
+             **N**: the customer checked in.
           type: string
         lodging.prepaidExpenses:
           description: |-
-            Prepaid expenses for the booking.
-            * Format: Numeric
-            * maxLength: 12
+            The prepaid expenses for the booking.
+            * Format: numeric.
+            * Max length: 12 characters.
           type: string
         lodging.propertyPhoneNumber:
           description: |-
-            Identifies specific lodging property location by its local phone number.
-            * Format: Alphanumeric
-            * maxLength: 17
+            Identifies the location of the lodging by its local phone number.
+            * Format: alphanumeric.
+            * Max length: 17 characters.
+            * For US numbers: must start with 3 digits and be at least 10 characters in length. Otherwise, the capture can fail.
           type: string
         lodging.room1.numberOfNights:
           description: |-
-            Total number of nights the room will be rented.
-            * Format: Numeric
-            * maxLength: 4
+            The total number of nights the room is booked for.
+            * Format: numeric.
+            * Max length: 4 characters.
           type: string
         lodging.room1.rate:
           description: |-
             The rate of the room.
-            * Format: Numeric
-            * maxLength: 12
+            * Format: numeric.
+            * Max length: 12 characters.
+            * Must be in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           type: string
         lodging.room1.tax:
           description: |-
             The total amount of tax to be paid.
-            * Format: Numeric
-            * maxLength: 12
+            * Format: numeric.
+            * Max length: 12 chracters.
+            * Must be in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           type: string
         lodging.totalRoomTax:
           description: |-
-            Total room tax amount.
-            * Format: Numeric
-            * maxLength: 12
+            The total room tax amount.
+            * Format: numeric.
+            * Max length: 12 characters.
+            * Must be in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           type: string
         lodging.totalTax:
           description: |-
-            Total tax amount.
-            * Format: Numeric
-            * maxLength: 12
+            The total tax amount.
+            * Format: numeric.
+            * Max length: 12 characters.
+            * Must be in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           type: string
         travelEntertainmentAuthData.duration:
           description: |-
-            Number of nights. This should be included in the auth message.
-            * Format: Numeric
-            * maxLength: 2
+            The number of nights. This should be included in the auth message.
+            * Format: numeric.
+            * Max length: 2 characters.
           type: string
         travelEntertainmentAuthData.market:
           description: |-
             Indicates what market-specific dataset will be submitted or is being submitted. Value should be "H" for Hotel. This should be included in the auth message.
 
-            * Format: Alphanumeric
-            * maxLength: 1
+            * Format: alphanumeric.
+            * Max length: 1 character.
           type: string
       type: object
     AdditionalDataOpenInvoice:
@@ -6629,9 +6635,6 @@ components:
           maxLength: 4
           minLength: 4
           type: string
-      required:
-        - expiryYear
-        - holderName
       type: object
     CardBrandDetails:
       properties:
@@ -6910,7 +6913,7 @@ components:
           description: The recurring settings for the payment. Use this property when you want to enable [recurring payments](https://docs.adyen.com/classic-integration/recurring-payments).
         recurringProcessingModel:
           description: |
-            Defines a recurring payment type.
+            Defines a recurring payment type. Required when creating a token to store payment details or using stored payment details.
             Allowed values:
             * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule.
             * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.
@@ -7081,7 +7084,7 @@ components:
           description: The merchant account identifier that orderData belongs to.
           type: string
         order:
-          $ref: "#/components/schemas/CheckoutOrder"
+          $ref: "#/components/schemas/EncryptedOrderData"
           description: The order request object that contains a pspReference that represents the order and the matching encrypted order data.
       required:
         - order
@@ -7177,18 +7180,6 @@ components:
         - expiresAt
         - orderData
         - resultCode
-      type: object
-    CheckoutOrder:
-      properties:
-        orderData:
-          description: The encrypted order data.
-          type: string
-        pspReference:
-          description: The `pspReference` that belongs to the order.
-          type: string
-      required:
-        - pspReference
-        - orderData
       type: object
     CheckoutOrderResponse:
       properties:
@@ -7361,8 +7352,8 @@ components:
           description: The amount that you want to capture. The `currency` must match the currency used in authorisation, the `value` must be smaller than or equal to the authorised amount.
         lineItems:
           description: |-
-            Price and product information of the captured items, required for [partial captures](https://docs.adyen.com/online-payments/capture#partial-capture).
-            > This field is required for partial captures with 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
+            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
+            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -7385,7 +7376,7 @@ components:
       properties:
         allowedPaymentMethods:
           description: |-
-            List of payment methods to be presented to the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).
+            List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).
 
             Example: `"allowedPaymentMethods":["ideal","giropay"]`
           items:
@@ -7396,14 +7387,13 @@ components:
           description: The payment amount and currency.
         applicationInfo:
           $ref: "#/components/schemas/ApplicationInfo"
-          deprecated: true
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
         billingAddress:
           $ref: "#/components/schemas/Address"
           description: The address where to send the invoice.
         blockedPaymentMethods:
           description: |-
-            List of payment methods to be hidden from the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).
+            List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).
 
             Example: `"blockedPaymentMethods":["ideal","giropay"]`
           items:
@@ -7507,6 +7497,8 @@ components:
           description: |-
             Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
             > Your reference must not include personally identifiable information (PII), for example name or email address.
+          maxLength: 256
+          minLength: 3
           type: string
         showRemovePaymentMethodButton:
           default: true
@@ -7533,7 +7525,7 @@ components:
         lineItems:
           description: |-
             Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
-            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
+            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -7770,6 +7762,18 @@ components:
         - telephoneNumber
       title: Voucher
       type: object
+    EncryptedOrderData:
+      properties:
+        orderData:
+          description: The encrypted order data.
+          type: string
+        pspReference:
+          description: The `pspReference` that belongs to the order.
+          type: string
+      required:
+        - pspReference
+        - orderData
+      type: object
     ExternalPlatform:
       properties:
         integrator:
@@ -7844,6 +7848,10 @@ components:
         - name
         - accountScore
       type: object
+    FraudCheckResultWrapper:
+      properties:
+        FraudCheckResult:
+          $ref: "#/components/schemas/FraudCheckResult"
     FraudResult:
       properties:
         accountScore:
@@ -7853,7 +7861,7 @@ components:
         results:
           description: The result of the individual risk checks.
           items:
-            $ref: "#/components/schemas/FraudCheckResult"
+            $ref: "#/components/schemas/FraudCheckResultWrapper"
           type: array
       required:
         - accountScore
@@ -8480,8 +8488,8 @@ components:
           description: The captured amount.
         lineItems:
           description: |-
-            Price and product information of the captured items, required for [partial captures](https://docs.adyen.com/online-payments/capture#partial-capture).
-            > This field is required for partial captures with 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
+            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
+            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -8611,13 +8619,11 @@ components:
             - upi_qr
             - paytm
             - molpay_ebanking_VN
-            - openbanking_UK
             - paybybank
             - ebanking_FI
             - molpay_ebanking_MY
             - molpay_ebanking_direct_MY
             - swish
-            - twint
             - walley
             - walley_b2b
             - pix
@@ -8667,7 +8673,6 @@ components:
             - maybank2u_mae
             - duitnow
             - promptpay
-            - twint_pos
             - alipay_hk
             - alipay_hk_web
             - alipay_hk_wap
@@ -8786,6 +8791,11 @@ components:
             Shopper account information for 3D Secure 2.
             > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
           x-addedInVersion: "40"
+        additionalAmount:
+          $ref: "#/components/schemas/Amount"
+          description: |-
+            If you want a [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification).
+            Required to be in the same currency as the `amount`. 
         additionalData:
           additionalProperties:
             type: string
@@ -8926,8 +8936,8 @@ components:
           x-addedInVersion: "4"
         lineItems:
           description: |-
-            Price and product information about the purchased items, to be included on the invoice sent to the shopper.
-            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
+            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
+            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -8970,7 +8980,7 @@ components:
           $ref: "#/components/schemas/ThreeDSecureData"
           description: Authentication data produced by an MPI (Mastercard SecureCode, Visa Secure, or Cartes Bancaires).
         order:
-          $ref: "#/components/schemas/CheckoutOrder"
+          $ref: "#/components/schemas/EncryptedOrderData"
           description: The order information required for partial payments.
         orderReference:
           description: When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
@@ -8980,7 +8990,7 @@ components:
             Required for the 3D Secure 2 `channel` **Web** integration.
 
             Set this parameter to the origin URL of the page that you are loading the 3D Secure Component from.
-          maxLength: 8000
+          maxLength: 80
           type: string
           x-addedInVersion: "40"
         paymentMethod:
@@ -9033,7 +9043,7 @@ components:
           type: string
         recurringProcessingModel:
           description: |
-            Defines a recurring payment type.
+            Defines a recurring payment type. Required when creating a token to store payment details or using stored payment details.
             Allowed values:
             * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule.
             * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.
@@ -9166,7 +9176,7 @@ components:
       properties:
         allowedPaymentMethods:
           description: |-
-            List of payment methods to be presented to the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).
+            List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).
 
             Example: `"allowedPaymentMethods":["ideal","giropay"]`
           items:
@@ -9177,14 +9187,13 @@ components:
           description: The payment amount and currency.
         applicationInfo:
           $ref: "#/components/schemas/ApplicationInfo"
-          deprecated: true
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
         billingAddress:
           $ref: "#/components/schemas/Address"
           description: The address where to send the invoice.
         blockedPaymentMethods:
           description: |-
-            List of payment methods to be hidden from the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).
+            List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).
 
             Example: `"blockedPaymentMethods":["ideal","giropay"]`
           items:
@@ -9288,6 +9297,8 @@ components:
           description: |-
             Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
             > Your reference must not include personally identifiable information (PII), for example name or email address.
+          maxLength: 256
+          minLength: 3
           type: string
         showRemovePaymentMethodButton:
           default: true
@@ -9437,7 +9448,7 @@ components:
           type: object
         allowedPaymentMethods:
           description: |-
-            List of payment methods to be presented to the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).
+            List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).
 
             Example: `"allowedPaymentMethods":["ideal","giropay"]`
           items:
@@ -9449,7 +9460,7 @@ components:
           description: The amount information for the transaction (in [minor units](https://docs.adyen.com/development-resources/currency-codes)). For [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).
         blockedPaymentMethods:
           description: |-
-            List of payment methods to be hidden from the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).
+            List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).
 
             Example: `"blockedPaymentMethods":["ideal","giropay"]`
           items:
@@ -9518,7 +9529,7 @@ components:
         lineItems:
           description: |-
             Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
-            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
+            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -9568,6 +9579,11 @@ components:
             Shopper account information for 3D Secure 2.
             > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
           x-addedInVersion: "40"
+        additionalAmount:
+          $ref: "#/components/schemas/Amount"
+          description: |-
+            If you want a [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification).
+            Required to be in the same currency as the `amount`. 
         additionalData:
           additionalProperties:
             type: string
@@ -9699,8 +9715,8 @@ components:
           x-addedInVersion: "4"
         lineItems:
           description: |-
-            Price and product information about the purchased items, to be included on the invoice sent to the shopper.
-            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
+            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
+            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -9743,7 +9759,7 @@ components:
           $ref: "#/components/schemas/ThreeDSecureData"
           description: Authentication data produced by an MPI (Mastercard SecureCode, Visa Secure, or Cartes Bancaires).
         order:
-          $ref: "#/components/schemas/CheckoutOrder"
+          $ref: "#/components/schemas/EncryptedOrderData"
           description: The order information required for partial payments.
         orderReference:
           description: When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
@@ -9753,7 +9769,7 @@ components:
             Required for the 3D Secure 2 `channel` **Web** integration.
 
             Set this parameter to the origin URL of the page that you are loading the 3D Secure Component from.
-          maxLength: 8000
+          maxLength: 80
           type: string
           x-addedInVersion: "40"
         paymentMethod:
@@ -9806,7 +9822,7 @@ components:
           type: string
         recurringProcessingModel:
           description: |
-            Defines a recurring payment type.
+            Defines a recurring payment type. Required when creating a token to store payment details or using stored payment details.
             Allowed values:
             * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule.
             * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.
@@ -10059,6 +10075,11 @@ components:
       type: object
     PaymentSetupRequest:
       properties:
+        additionalAmount:
+          $ref: "#/components/schemas/Amount"
+          description: |-
+            If you want a [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification).
+            Required to be in the same currency as the `amount`. 
         additionalData:
           additionalProperties:
             type: string
@@ -10085,7 +10106,7 @@ components:
           type: object
         allowedPaymentMethods:
           description: |-
-            List of payment methods to be presented to the shopper. To refer to payment methods, use their `paymentMethod.type`from [Payment methods overview](https://docs.adyen.com/payment-methods).
+            List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).
 
             Example: `"allowedPaymentMethods":["ideal","giropay"]`
           items:
@@ -10109,7 +10130,7 @@ components:
           x-addedInVersion: "4"
         blockedPaymentMethods:
           description: |-
-            List of payment methods to be hidden from the shopper. To refer to payment methods, use their `paymentMethod.type`from [Payment methods overview](https://docs.adyen.com/payment-methods).
+            List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).
 
             Example: `"blockedPaymentMethods":["ideal","giropay"]`
           items:
@@ -10201,8 +10222,8 @@ components:
           x-addedInVersion: "4"
         lineItems:
           description: |-
-            Price and product information about the purchased items, to be included on the invoice sent to the shopper.
-            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, Zip and Atome.
+            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
+            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -11410,6 +11431,7 @@ components:
             - bcmc_mobile_app
             - momo_wallet
             - momo_wallet_app
+            - twint
             - paymaya_wallet
             - grabpay_SG
             - grabpay_MY
@@ -11421,6 +11443,7 @@ components:
             - gcash
             - kakaopay
             - truemoney
+            - twint_pos
           type: string
       title: Stored Payment Method
       type: object
@@ -11790,6 +11813,7 @@ x-groups:
   - Payments
   - Payment links
   - Modifications
+  - Recurring
   - Orders
-  - Classic Checkout SDK
   - Utility
+  - Classic Checkout SDK

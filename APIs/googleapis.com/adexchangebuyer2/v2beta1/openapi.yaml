@@ -2485,7 +2485,7 @@ components:
           description: The number of bids that were permitted to compete in the auction.
         billedImpressions:
           $ref: "#/components/schemas/MetricValue"
-          description: The number of bids for which the buyer was billed.
+          description: The number of bids for which the buyer was billed. Also called valid impressions as invalid impressions are not billed.
         impressionsWon:
           $ref: "#/components/schemas/MetricValue"
           description: The number of bids that won the auction.

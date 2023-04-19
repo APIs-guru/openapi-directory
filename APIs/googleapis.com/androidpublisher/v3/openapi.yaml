@@ -1953,7 +1953,7 @@ paths:
           name: maxResults
           schema:
             type: integer
-        - description: Deprecated and ignored. Set the `token` parameter to rertieve the next page.
+        - description: Deprecated and ignored. Set the `token` parameter to retrieve the next page.
           in: query
           name: startIndex
           schema:
@@ -1990,7 +1990,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an in-app product (i.e. a managed product or a subscriptions).
+      description: Creates an in-app product (i.e. a managed product or a subscription).
       operationId: androidpublisher.inappproducts.insert
       parameters:
         - description: Package name of the app.
@@ -2025,7 +2025,7 @@ paths:
         - inappproducts
   "/androidpublisher/v3/applications/{packageName}/inappproducts/{sku}":
     delete:
-      description: Deletes an in-app product (i.e. a managed product or a subscriptions).
+      description: Deletes an in-app product (i.e. a managed product or a subscription).
       operationId: androidpublisher.inappproducts.delete
       parameters:
         - description: Package name of the app.
@@ -2093,7 +2093,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Patches an in-app product (i.e. a managed product or a subscriptions).
+      description: Patches an in-app product (i.e. a managed product or a subscription).
       operationId: androidpublisher.inappproducts.patch
       parameters:
         - description: Package name of the app.
@@ -2133,7 +2133,7 @@ paths:
       tags:
         - inappproducts
     put:
-      description: Updates an in-app product (i.e. a managed product or a subscriptions).
+      description: Updates an in-app product (i.e. a managed product or a subscription).
       operationId: androidpublisher.inappproducts.update
       parameters:
         - description: Package name of the app.
@@ -5120,6 +5120,7 @@ components:
               - CAN_MANAGE_PUBLIC_LISTING
               - CAN_MANAGE_DRAFT_APPS
               - CAN_MANAGE_ORDERS
+              - CAN_MANAGE_APP_CONTENT
             type: string
           type: array
         name:
@@ -6401,6 +6402,7 @@ components:
               - CAN_CREATE_MANAGED_PLAY_APPS_GLOBAL
               - CAN_CHANGE_MANAGED_PLAY_SETTING_GLOBAL
               - CAN_MANAGE_ORDERS_GLOBAL
+              - CAN_MANAGE_APP_CONTENT_GLOBAL
             type: string
           type: array
         email:

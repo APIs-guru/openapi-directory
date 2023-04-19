@@ -67,7 +67,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: PaymentService
-  x-timestamp: 2023-02-20T18:23:09Z
+  x-timestamp: 2023-04-17T17:24:20Z
 tags:
   - name: Modifications
   - name: General
@@ -1203,7 +1203,7 @@ components:
           number: "4111111111111111"
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         recurring:
-          contract: RECURRING,ONECLICK
+          contract: RECURRING
         reference: YOUR_REFERENCE
         shopperEmail: s.hopper@test.com
         shopperIP: 61.294.12.12
@@ -1243,8 +1243,13 @@ components:
     post-authorise3ds2-authorise3ds2:
       summary: Submit 3D Secure 2 authentication data to the issuer
       value:
+        amount:
+          currency: EUR
+          value: 1000
         merchantAccount: YOUR_MERCHANT_ACCOUNT
+        reference: YOUR_ORDER_NUMBER
         threeDS2RequestData:
+          deviceChannel: app
           threeDSCompInd: Y
         threeDS2Token: — - BINARY DATA - -
     post-cancel-cancel:
@@ -2166,105 +2171,110 @@ components:
         lodging.checkInDate:
           description: |-
             The arrival date.
-            * Date format: `yyyyMMdd`
+            * Date format: **yyyyMmDd**. For example, for 2023 April 22, **20230422**.
           type: string
         lodging.checkOutDate:
           description: |-
             The departure date.
-            * Date format: `yyyyMMdd`
+            * Date format: **yyyyMmDd**. For example, for 2023 April 22, **20230422**.
           type: string
         lodging.customerServiceTollFreeNumber:
           description: |-
-            The toll free phone number for the hotel/lodgings.
-            * Format: Alphanumeric
-            * maxLength: 17
+            The toll-free phone number for the lodging.
+            * Format: alphanumeric.
+            * Max length: 17 characters.
+            * For US numbers: must start with 3 digits and be at least 10 characters in length. Otherwise, the capture can fail.
           type: string
         lodging.fireSafetyActIndicator:
           description: |-
             Identifies that the facility complies with the Hotel and Motel Fire Safety Act of 1990. Values can be: 'Y' or 'N'.
-            * Format: Alphabetic
-            * maxLength: 1
+            * Format: alphabetic.
+            * Max length: 1 character.
           type: string
         lodging.folioCashAdvances:
           description: |-
             The folio cash advances.
-            * Format: Numeric
-            * maxLength: 12
+            * Format: numeric.
+            * Max length: 12 characters.
           type: string
         lodging.folioNumber:
           description: |-
-            Card acceptor’s internal invoice or billing ID reference number.
-            * Format: Alphanumeric
-            * maxLength: 25
+            The card acceptor’s internal invoice or billing ID reference number.
+            * Format: alphanumeric.
+            * Max length: 25 characters.
           type: string
         lodging.foodBeverageCharges:
           description: |-
-            Any charges for food and beverages associated with the booking.
-            * Format: Numeric
-            * maxLength: 12
+            The additional charges for food and beverages associated with the booking.
+            * Format: numeric.
+            * Max length: 12 characters.
           type: string
         lodging.noShowIndicator:
           description: |-
-            Indicates if the customer was a "no-show" (neither keeps nor cancels their booking).
-
-            Value should be Y or N.
-            * Format: Numeric
-            * maxLength: 1
+            Indicates if the customer didn't check in for their booking.
+             Possible values: 
+             * **Y**: the customer didn't check in. 
+             **N**: the customer checked in.
           type: string
         lodging.prepaidExpenses:
           description: |-
-            Prepaid expenses for the booking.
-            * Format: Numeric
-            * maxLength: 12
+            The prepaid expenses for the booking.
+            * Format: numeric.
+            * Max length: 12 characters.
           type: string
         lodging.propertyPhoneNumber:
           description: |-
-            Identifies specific lodging property location by its local phone number.
-            * Format: Alphanumeric
-            * maxLength: 17
+            Identifies the location of the lodging by its local phone number.
+            * Format: alphanumeric.
+            * Max length: 17 characters.
+            * For US numbers: must start with 3 digits and be at least 10 characters in length. Otherwise, the capture can fail.
           type: string
         lodging.room1.numberOfNights:
           description: |-
-            Total number of nights the room will be rented.
-            * Format: Numeric
-            * maxLength: 4
+            The total number of nights the room is booked for.
+            * Format: numeric.
+            * Max length: 4 characters.
           type: string
         lodging.room1.rate:
           description: |-
             The rate of the room.
-            * Format: Numeric
-            * maxLength: 12
+            * Format: numeric.
+            * Max length: 12 characters.
+            * Must be in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           type: string
         lodging.room1.tax:
           description: |-
             The total amount of tax to be paid.
-            * Format: Numeric
-            * maxLength: 12
+            * Format: numeric.
+            * Max length: 12 chracters.
+            * Must be in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           type: string
         lodging.totalRoomTax:
           description: |-
-            Total room tax amount.
-            * Format: Numeric
-            * maxLength: 12
+            The total room tax amount.
+            * Format: numeric.
+            * Max length: 12 characters.
+            * Must be in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           type: string
         lodging.totalTax:
           description: |-
-            Total tax amount.
-            * Format: Numeric
-            * maxLength: 12
+            The total tax amount.
+            * Format: numeric.
+            * Max length: 12 characters.
+            * Must be in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           type: string
         travelEntertainmentAuthData.duration:
           description: |-
-            Number of nights. This should be included in the auth message.
-            * Format: Numeric
-            * maxLength: 2
+            The number of nights. This should be included in the auth message.
+            * Format: numeric.
+            * Max length: 2 characters.
           type: string
         travelEntertainmentAuthData.market:
           description: |-
             Indicates what market-specific dataset will be submitted or is being submitted. Value should be "H" for Hotel. This should be included in the auth message.
 
-            * Format: Alphanumeric
-            * maxLength: 1
+            * Format: alphanumeric.
+            * Max length: 1 character.
           type: string
       type: object
     AdditionalDataModifications:
@@ -3184,9 +3194,6 @@ components:
           maxLength: 4
           minLength: 4
           type: string
-      required:
-        - expiryYear
-        - holderName
       type: object
     CommonField:
       properties:
@@ -3334,6 +3341,10 @@ components:
         - name
         - accountScore
       type: object
+    FraudCheckResultWrapper:
+      properties:
+        FraudCheckResult:
+          $ref: "#/components/schemas/FraudCheckResult"
     FraudResult:
       properties:
         accountScore:
@@ -3343,7 +3354,7 @@ components:
         results:
           description: The result of the individual risk checks.
           items:
-            $ref: "#/components/schemas/FraudCheckResult"
+            $ref: "#/components/schemas/FraudCheckResultWrapper"
           type: array
       required:
         - accountScore
@@ -3717,7 +3728,7 @@ components:
           description: The recurring settings for the payment. Use this property when you want to enable [recurring payments](https://docs.adyen.com/classic-integration/recurring-payments).
         recurringProcessingModel:
           description: |
-            Defines a recurring payment type.
+            Defines a recurring payment type. Required when creating a token to store payment details or using stored payment details.
             Allowed values:
             * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule.
             * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.
@@ -3988,7 +3999,7 @@ components:
           description: The recurring settings for the payment. Use this property when you want to enable [recurring payments](https://docs.adyen.com/classic-integration/recurring-payments).
         recurringProcessingModel:
           description: |
-            Defines a recurring payment type.
+            Defines a recurring payment type. Required when creating a token to store payment details or using stored payment details.
             Allowed values:
             * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule.
             * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.
@@ -4253,7 +4264,7 @@ components:
           description: The recurring settings for the payment. Use this property when you want to enable [recurring payments](https://docs.adyen.com/classic-integration/recurring-payments).
         recurringProcessingModel:
           description: |
-            Defines a recurring payment type.
+            Defines a recurring payment type. Required when creating a token to store payment details or using stored payment details.
             Allowed values:
             * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule.
             * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.

@@ -63,7 +63,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BinLookupService
-  x-timestamp: 2023-02-20T18:23:06Z
+  x-timestamp: 2023-04-11T19:24:00Z
 tags:
   - name: General
 paths:
@@ -238,9 +238,9 @@ components:
     post-get3dsAvailability-get3dsAvailability-200:
       summary: Example response for request 'get3dsAvailability'
       value:
-        threeDS1Supported: "true"
+        threeDS1Supported: true
         threeDS2CardRangeDetails: []
-        threeDS2supported: "false"
+        threeDS2supported: false
     post-getCostEstimate-getCostEstimate:
       description: Example request to get the estimated cost of a transaction
       summary: Estimate the transaction cost

@@ -443,7 +443,7 @@ components:
           $ref: "#/components/schemas/Date"
           description: The date that the datapoint corresponds to. This represents a month value if the day field is not set.
         value:
-          description: The value of the datapoint.
+          description: The value of the datapoint. This will not be present when the value is zero.
           format: int64
           type: string
       type: object

@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 9.2.0
+  version: 9.3.0
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2091,6 +2091,9 @@ components:
           nullable: true
           readOnly: true
           type: number
+        validation_support:
+          readOnly: true
+          type: boolean
         website:
           description: The website URL of the connection
           example: https://www.salesforce.com
@@ -2194,6 +2197,7 @@ components:
         - callable
         - added
         - authorized
+        - invalid
       example: authorized
       readOnly: true
       type: string
@@ -2694,6 +2698,11 @@ components:
           example: Select a channel
           nullable: true
           type: string
+        prefix:
+          description: Prefix to display in front of the form field.
+          example: https://
+          nullable: true
+          type: string
         required:
           description: Indicates if the form field is required, which means it must be filled in before the form can be submitted
           example: true
@@ -2703,6 +2712,11 @@ components:
           example: false
           nullable: true
           type: boolean
+        suffix:
+          description: Suffix to display next to the form field.
+          example: .shopify.com
+          nullable: true
+          type: string
         type:
           enum:
             - text

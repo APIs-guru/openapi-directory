@@ -744,17 +744,17 @@ components:
           type: string
       type: object
     ApnsCertificateExpirationInfo:
-      description: The explanation message associated with ApnsCertificationExpiring and ApnsCertificationExpired alerts.
+      description: The explanation message associated with "APNS certificate is expiring soon" and "APNS certificate has expired" alerts.
       properties:
         appleId:
-          description: The Apple ID used for the certificate may be blank if admins didn't enter it.
+          description: The Apple ID used to create the certificate. It may be blank if admins didn't enter it.
           type: string
         expirationTime:
-          description: The expiration date of the APNS Certificate.
+          description: The expiration date of the APNS certificate.
           format: google-datetime
           type: string
         uid:
-          description: The UID for the certificate.
+          description: The UID of the certificate.
           type: string
       type: object
     AppMakerSqlSetupNotification:
