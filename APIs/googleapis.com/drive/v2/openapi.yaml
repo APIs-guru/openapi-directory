@@ -1247,6 +1247,11 @@ paths:
       description: Permanently deletes all of the user's trashed files.
       operationId: drive.files.emptyTrash
       parameters:
+        - description: If set, empties the trash of the provided shared drive.
+          in: query
+          name: driveId
+          schema:
+            type: string
         - description: Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
           in: query
           name: enforceSingleParent

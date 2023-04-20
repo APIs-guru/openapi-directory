@@ -800,7 +800,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v3/{name}/notificationChannels":
     get:
-      description: Lists the notification channels that have been created for the project.
+      description: Lists the notification channels that have been created for the project. To list the types of notification channels that are supported, use the ListNotificationChannelDescriptors method.
       operationId: monitoring.projects.notificationChannels.list
       parameters:
         - description: "Required. The project (https://cloud.google.com/monitoring/api/v3#project_name) on which to execute the request. The format is: projects/[PROJECT_ID_OR_NUMBER] This names the container in which to look for the notification channels; it does not name a specific channel. To query a specific channel by REST resource name, use the GetNotificationChannel operation."

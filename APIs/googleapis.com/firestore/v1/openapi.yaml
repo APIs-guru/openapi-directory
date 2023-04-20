@@ -1786,7 +1786,7 @@ components:
             - OPTIMISTIC_WITH_ENTITY_GROUPS
           type: string
         createTime:
-          description: Output only. The timestamp at which this database was created.
+          description: Output only. The timestamp at which this database was created. Databases created before 2016 do not populate create_time.
           format: google-datetime
           readOnly: true
           type: string
