@@ -6998,6 +6998,7 @@ components:
         - EBS_MALWARE_PROTECTION
         - RDS_LOGIN_EVENTS
         - EKS_RUNTIME_MONITORING
+        - LAMBDA_NETWORK_LOGS
     DetectorFeatureResult:
       type: string
       enum:
@@ -7009,6 +7010,7 @@ components:
         - EBS_MALWARE_PROTECTION
         - RDS_LOGIN_EVENTS
         - EKS_RUNTIME_MONITORING
+        - LAMBDA_NETWORK_LOGS
     DetectorFeatureConfigurationResult:
       type: object
       properties:
@@ -7549,6 +7551,12 @@ components:
             - xml:
                 name: rdsDbUserDetails
               description: Contains information about the user details through which anomalous login attempt was made.
+        LambdaDetails:
+          allOf:
+            - $ref: '#/components/schemas/LambdaDetails'
+            - xml:
+                name: lambdaDetails
+              description: Contains information about the Lambda function that was involved in a finding.
       description: Contains information about the Amazon Web Services resource associated with the activity that prompted GuardDuty to generate a finding.
     Service:
       type: object
@@ -7778,6 +7786,7 @@ components:
         - EBS_MALWARE_PROTECTION
         - RDS_LOGIN_EVENTS
         - EKS_RUNTIME_MONITORING
+        - LAMBDA_NETWORK_LOGS
     FreeTrialFeatureConfigurationResult:
       type: object
       properties:
@@ -8448,6 +8457,86 @@ components:
                 name: kubernetesWorkloadDetails
               description: Details about the Kubernetes workload involved in a Kubernetes finding.
       description: Details about Kubernetes resources such as a Kubernetes user or workload resource involved in a Kubernetes finding.
+    VpcConfig:
+      type: object
+      properties:
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - xml:
+                name: subnetIds
+              description: The identifiers of the subnets that are associated with your Lambda function.
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: vpcId
+              description: The identifier of the Amazon Virtual Private Cloud.
+        SecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroups'
+            - xml:
+                name: securityGroups
+              description: The identifier of the security group attached to the Lambda function.
+      description: Amazon Virtual Private Cloud configuration details associated with your Lambda function.
+    LambdaDetails:
+      type: object
+      properties:
+        FunctionArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: functionArn
+              description: Amazon Resource Name (ARN) of the Lambda function.
+        FunctionName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: functionName
+              description: Name of the Lambda function.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: description
+              description: Description of the Lambda function.
+        LastModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - xml:
+                name: lastModifiedAt
+              description: 'The timestamp when the Lambda function was last modified. This field is in the UTC date string format <code>(2023-03-22T19:37:20.168Z)</code>.'
+        RevisionId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: revisionId
+              description: The revision ID of the Lambda function version.
+        FunctionVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: functionVersion
+              description: The version of the Lambda function.
+        Role:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: role
+              description: The execution role of the Lambda function.
+        VpcConfig:
+          allOf:
+            - $ref: '#/components/schemas/VpcConfig'
+            - xml:
+                name: vpcConfig
+              description: Amazon Virtual Private Cloud configuration details associated with your Lambda function.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+              description: 'A list of tags attached to this resource, listed in the format of <code>key</code>:<code>value</code> pair.'
+      description: Information about the Lambda function involved in the finding.
     LineageObject:
       type: object
       properties:
@@ -8853,6 +8942,7 @@ components:
         - EBS_MALWARE_PROTECTION
         - RDS_LOGIN_EVENTS
         - EKS_RUNTIME_MONITORING
+        - LAMBDA_NETWORK_LOGS
     MemberFeaturesConfigurationResult:
       type: object
       properties:
@@ -9951,6 +10041,10 @@ components:
             - xml:
                 name: accountIds
               description: A list of account IDs for the member accounts to stop monitoring.
+    SubnetIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
     Tag:
       type: object
       properties:

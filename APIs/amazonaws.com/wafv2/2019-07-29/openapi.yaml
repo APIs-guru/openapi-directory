@@ -264,6 +264,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSWAF_20190729.CreateAPIKey:
+    post:
+      operationId: CreateAPIKey
+      description: '<p>Creates an API key for use in the integration of the CAPTCHA API in your JavaScript client applications. The integration lets you customize the placement and characteristics of the CAPTCHA puzzle for your end users. For more information about the CAPTCHA JavaScript integration, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p> <p>The CAPTCHA API requires a key that authorizes CAPTCHA use from the client application domain. You can use a single key for up to 5 domains. After you generate a key, you can copy it for use in your JavaScript integration. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAPIKeyResponse'
+        '480':
+          description: WAFInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInternalErrorException'
+        '481':
+          description: WAFInvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidParameterException'
+        '482':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
+        '483':
+          description: WAFLimitsExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFLimitsExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAPIKeyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSWAF_20190729.CreateAPIKey
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSWAF_20190729.CreateIPSet:
     post:
       operationId: CreateIPSet
@@ -1326,6 +1383,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSWAF_20190729.GetDecryptedAPIKey:
+    post:
+      operationId: GetDecryptedAPIKey
+      description: 'Returns your API key in decrypted form. Use this to check the token domains that you have defined for the key. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDecryptedAPIKeyResponse'
+        '480':
+          description: WAFInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInternalErrorException'
+        '481':
+          description: WAFInvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidParameterException'
+        '482':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
+        '483':
+          description: WAFInvalidResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidResourceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDecryptedAPIKeyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSWAF_20190729.GetDecryptedAPIKey
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSWAF_20190729.GetIPSet:
     post:
       operationId: GetIPSet
@@ -1939,6 +2053,63 @@ paths:
             type: string
             enum:
               - AWSWAF_20190729.GetWebACLForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSWAF_20190729.ListAPIKeys:
+    post:
+      operationId: ListAPIKeys
+      description: 'Retrieves a list of the API keys that you''ve defined for the specified scope. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAPIKeysResponse'
+        '480':
+          description: WAFInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInternalErrorException'
+        '481':
+          description: WAFInvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidParameterException'
+        '482':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
+        '483':
+          description: WAFInvalidResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidResourceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAPIKeysRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSWAF_20190729.ListAPIKeys
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3395,6 +3566,28 @@ components:
     WAFInvalidResourceException: {}
     WAFSubscriptionNotFoundException: {}
     WAFExpiredManagedRuleGroupVersionException: {}
+    CreateAPIKeyResponse:
+      type: object
+      properties:
+        APIKey:
+          allOf:
+            - $ref: '#/components/schemas/APIKey'
+            - description: '<p>The generated, encrypted API key. You can copy this for use in your JavaScript CAPTCHA integration. </p> <p>For information about how to use this in your CAPTCHA JavaScript integration, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>'
+    CreateAPIKeyRequest:
+      type: object
+      required:
+        - Scope
+        - TokenDomains
+      title: CreateAPIKeyRequest
+      properties:
+        Scope:
+          allOf:
+            - $ref: '#/components/schemas/Scope'
+            - description: '<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner service. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+        TokenDomains:
+          allOf:
+            - $ref: '#/components/schemas/APIKeyTokenDomains'
+            - description: 'The client application domains that you want to use this API key for. '
     CreateIPSetResponse:
       type: object
       properties:
@@ -3838,6 +4031,32 @@ components:
           allOf:
             - $ref: '#/components/schemas/VersionKeyString'
             - description: 'The release version. For the latest available version, specify <code>LATEST</code>.'
+    GetDecryptedAPIKeyResponse:
+      type: object
+      properties:
+        TokenDomains:
+          allOf:
+            - $ref: '#/components/schemas/TokenDomains'
+            - description: 'The token domains that are defined in this API key. '
+        CreationTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time that the key was created. '
+    GetDecryptedAPIKeyRequest:
+      type: object
+      required:
+        - Scope
+        - APIKey
+      title: GetDecryptedAPIKeyRequest
+      properties:
+        Scope:
+          allOf:
+            - $ref: '#/components/schemas/Scope'
+            - description: '<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner service. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+        APIKey:
+          allOf:
+            - $ref: '#/components/schemas/APIKey'
+            - description: 'The encrypted API key. '
     GetIPSetResponse:
       type: object
       properties:
@@ -4155,6 +4374,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceArn'
             - description: '<p>The Amazon Resource Name (ARN) of the resource whose web ACL you want to retrieve. </p> <p>The ARN must be in one of the following formats:</p> <ul> <li> <p>For an Application Load Balancer: <code>arn:<i>partition</i>:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> </p> </li> <li> <p>For an Amazon API Gateway REST API: <code>arn:<i>partition</i>:apigateway:<i>region</i>::/restapis/<i>api-id</i>/stages/<i>stage-name</i> </code> </p> </li> <li> <p>For an AppSync GraphQL API: <code>arn:<i>partition</i>:appsync:<i>region</i>:<i>account-id</i>:apis/<i>GraphQLApiId</i> </code> </p> </li> <li> <p>For an Amazon Cognito user pool: <code>arn:<i>partition</i>:cognito-idp:<i>region</i>:<i>account-id</i>:userpool/<i>user-pool-id</i> </code> </p> </li> <li> <p>For an App Runner service: <code>arn:<i>partition</i>:apprunner:<i>region</i>:<i>account-id</i>:service/<i>apprunner-service-name</i>/<i>apprunner-service-id</i> </code> </p> </li> </ul>'
+    ListAPIKeysResponse:
+      type: object
+      properties:
+        NextMarker:
+          allOf:
+            - $ref: '#/components/schemas/NextMarker'
+            - description: 'When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a <code>NextMarker</code> value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.'
+        APIKeySummaries:
+          allOf:
+            - $ref: '#/components/schemas/APIKeySummaries'
+            - description: 'The array of key summaries. If you specified a <code>Limit</code> in your request, this might not be the full list. '
+        ApplicationIntegrationURL:
+          allOf:
+            - $ref: '#/components/schemas/OutputUrl'
+            - description: '<p>The CAPTCHA application integration URL, for use in your JavaScript implementation. </p> <p>For information about how to use this in your CAPTCHA JavaScript integration, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>'
+    ListAPIKeysRequest:
+      type: object
+      required:
+        - Scope
+      title: ListAPIKeysRequest
+      properties:
+        Scope:
+          allOf:
+            - $ref: '#/components/schemas/Scope'
+            - description: '<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner service. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+        NextMarker:
+          allOf:
+            - $ref: '#/components/schemas/NextMarker'
+            - description: 'When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a <code>NextMarker</code> value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.'
+        Limit:
+          allOf:
+            - $ref: '#/components/schemas/PaginationLimit'
+            - description: 'The maximum number of objects that you want WAF to return for this request. If more objects are available, in the response, WAF provides a <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.'
     ListAvailableManagedRuleGroupVersionsResponse:
       type: object
       properties:
@@ -4165,7 +4417,7 @@ components:
         Versions:
           allOf:
             - $ref: '#/components/schemas/ManagedRuleGroupVersions'
-            - description: 'The versions that are currently available for the specified managed rule group. '
+            - description: 'The versions that are currently available for the specified managed rule group. If you specified a <code>Limit</code> in your request, this might not be the full list. '
         CurrentDefaultVersion:
           allOf:
             - $ref: '#/components/schemas/VersionKeyString'
@@ -4208,7 +4460,7 @@ components:
         ManagedRuleGroups:
           allOf:
             - $ref: '#/components/schemas/ManagedRuleGroupSummaries'
-            - description: <p/>
+            - description: 'Array of managed rule groups that you can use. If you specified a <code>Limit</code> in your request, this might not be the full list. '
     ListAvailableManagedRuleGroupsRequest:
       type: object
       required:
@@ -4237,7 +4489,7 @@ components:
         IPSets:
           allOf:
             - $ref: '#/components/schemas/IPSetSummaries'
-            - description: Array of IPSets. This may not be the full list of IPSets that you have defined. See the <code>Limit</code> specification for this request.
+            - description: 'Array of IPSets. If you specified a <code>Limit</code> in your request, this might not be the full list. '
     ListIPSetsRequest:
       type: object
       required:
@@ -4262,7 +4514,7 @@ components:
         LoggingConfigurations:
           allOf:
             - $ref: '#/components/schemas/LoggingConfigurations'
-            - description: <p/>
+            - description: 'Array of logging configurations. If you specified a <code>Limit</code> in your request, this might not be the full list. '
         NextMarker:
           allOf:
             - $ref: '#/components/schemas/NextMarker'
@@ -4295,7 +4547,7 @@ components:
         ManagedRuleSets:
           allOf:
             - $ref: '#/components/schemas/ManagedRuleSetSummaries'
-            - description: 'Your managed rule sets. '
+            - description: 'Your managed rule sets. If you specified a <code>Limit</code> in your request, this might not be the full list. '
     ListManagedRuleSetsRequest:
       type: object
       required:
@@ -4320,7 +4572,7 @@ components:
         ReleaseSummaries:
           allOf:
             - $ref: '#/components/schemas/ReleaseSummaries'
-            - description: 'High level information for the available SDK releases. '
+            - description: 'The high level information for the available SDK releases. If you specified a <code>Limit</code> in your request, this might not be the full list. '
         NextMarker:
           allOf:
             - $ref: '#/components/schemas/NextMarker'
@@ -4353,7 +4605,7 @@ components:
         RegexPatternSets:
           allOf:
             - $ref: '#/components/schemas/RegexPatternSetSummaries'
-            - description: <p/>
+            - description: 'Array of regex pattern sets. If you specified a <code>Limit</code> in your request, this might not be the full list. '
     ListRegexPatternSetsRequest:
       type: object
       required:
@@ -4403,7 +4655,7 @@ components:
         RuleGroups:
           allOf:
             - $ref: '#/components/schemas/RuleGroupSummaries'
-            - description: <p/>
+            - description: 'Array of rule groups. If you specified a <code>Limit</code> in your request, this might not be the full list. '
     ListRuleGroupsRequest:
       type: object
       required:
@@ -4432,7 +4684,7 @@ components:
         TagInfoForResource:
           allOf:
             - $ref: '#/components/schemas/TagInfoForResource'
-            - description: 'The collection of tagging definitions for the resource. '
+            - description: 'The collection of tagging definitions for the resource. If you specified a <code>Limit</code> in your request, this might not be the full list. '
     ListTagsForResourceRequest:
       type: object
       required:
@@ -4461,7 +4713,7 @@ components:
         WebACLs:
           allOf:
             - $ref: '#/components/schemas/WebACLSummaries'
-            - description: <p/>
+            - description: 'Array of web ACLs. If you specified a <code>Limit</code> in your request, this might not be the full list. '
     ListWebACLsRequest:
       type: object
       required:
@@ -4845,6 +5097,55 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssociationConfig'
             - description: '<p>Specifies custom configurations for the associations between the web ACL and protected resources. </p> <p>Use this to customize the maximum size of the request body that your protected CloudFront distributions forward to WAF for inspection. The default is 16 KB (16,384 kilobytes). </p> <note> <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href="http://aws.amazon.com/waf/pricing/">WAF Pricing</a>.</p> </note>'
+    APIKey:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 2048
+    APIKeySummary:
+      type: object
+      properties:
+        TokenDomains:
+          allOf:
+            - $ref: '#/components/schemas/TokenDomains'
+            - description: 'The token domains that are defined in this API key. '
+        APIKey:
+          allOf:
+            - $ref: '#/components/schemas/APIKey'
+            - description: '<p>The generated, encrypted API key. You can copy this for use in your JavaScript CAPTCHA integration. </p> <p>For information about how to use this in your CAPTCHA JavaScript integration, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>'
+        CreationTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time that the key was created. '
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/APIKeyVersion'
+            - description: 'Internal value used by WAF to manage the key. '
+      description: 'Information for a single API key. '
+    APIKeySummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/APIKeySummary'
+    TokenDomains:
+      type: array
+      items:
+        $ref: '#/components/schemas/TokenDomain'
+    Timestamp:
+      type: string
+      format: date-time
+    APIKeyVersion:
+      type: integer
+      minimum: 0
+    TokenDomain:
+      type: string
+      pattern: '^[\w\.\-/]+$'
+      minLength: 1
+      maxLength: 253
+    APIKeyTokenDomains:
+      type: array
+      items:
+        $ref: '#/components/schemas/TokenDomain'
+      minItems: 1
     String:
       type: string
     RequestInspection:
@@ -5728,10 +6029,6 @@ components:
             - $ref: '#/components/schemas/AllowAction'
             - description: Specifies that WAF should allow requests by default.
       description: 'In a <a>WebACL</a>, this is the action that you want WAF to perform when a web request doesn''t match any of the rules in the <code>WebACL</code>. The default action must be a terminating action.'
-    TokenDomains:
-      type: array
-      items:
-        $ref: '#/components/schemas/TokenDomain'
     WebACLSummary:
       type: object
       properties:
@@ -6926,9 +7223,6 @@ components:
             - $ref: '#/components/schemas/EntityDescription'
             - description: 'The description of the managed rule group, provided by Amazon Web Services Managed Rules or the Amazon Web Services Marketplace seller who manages it.'
       description: 'High-level information about a managed rule group, returned by <a>ListAvailableManagedRuleGroups</a>. This provides information like the name and vendor name, that you provide when you add a <a>ManagedRuleGroupStatement</a> to a web ACL. Managed rule groups include Amazon Web Services Managed Rules rule groups, which are free of charge to WAF customers, and Amazon Web Services Marketplace managed rule groups, which you can subscribe to through Amazon Web Services Marketplace. '
-    Timestamp:
-      type: string
-      format: date-time
     ManagedRuleGroupVersion:
       type: object
       properties:
@@ -7570,11 +7864,6 @@ components:
             - $ref: '#/components/schemas/TextTransformationType'
             - description: '<p>You can specify the following transformation types:</p> <p> <b>BASE64_DECODE</b> - Decode a <code>Base64</code>-encoded string.</p> <p> <b>BASE64_DECODE_EXT</b> - Decode a <code>Base64</code>-encoded string, but use a forgiving implementation that ignores characters that aren''t valid.</p> <p> <b>CMD_LINE</b> - Command-line transformations. These are helpful in reducing effectiveness of attackers who inject an operating system command-line command and use unusual formatting to disguise some or all of the command. </p> <ul> <li> <p>Delete the following characters: <code>\ " '' ^</code> </p> </li> <li> <p>Delete spaces before the following characters: <code>/ (</code> </p> </li> <li> <p>Replace the following characters with a space: <code>, ;</code> </p> </li> <li> <p>Replace multiple spaces with one space</p> </li> <li> <p>Convert uppercase letters (A-Z) to lowercase (a-z)</p> </li> </ul> <p> <b>COMPRESS_WHITE_SPACE</b> - Replace these characters with a space character (decimal 32): </p> <ul> <li> <p> <code>\f</code>, formfeed, decimal 12</p> </li> <li> <p> <code>\t</code>, tab, decimal 9</p> </li> <li> <p> <code>\n</code>, newline, decimal 10</p> </li> <li> <p> <code>\r</code>, carriage return, decimal 13</p> </li> <li> <p> <code>\v</code>, vertical tab, decimal 11</p> </li> <li> <p>Non-breaking space, decimal 160</p> </li> </ul> <p> <code>COMPRESS_WHITE_SPACE</code> also replaces multiple spaces with one space.</p> <p> <b>CSS_DECODE</b> - Decode characters that were encoded using CSS 2.x escape rules <code>syndata.html#characters</code>. This function uses up to two bytes in the decoding process, so it can help to uncover ASCII characters that were encoded using CSS encoding that wouldn’t typically be encoded. It''s also useful in countering evasion, which is a combination of a backslash and non-hexadecimal characters. For example, <code>ja\vascript</code> for javascript. </p> <p> <b>ESCAPE_SEQ_DECODE</b> - Decode the following ANSI C escape sequences: <code>\a</code>, <code>\b</code>, <code>\f</code>, <code>\n</code>, <code>\r</code>, <code>\t</code>, <code>\v</code>, <code>\\</code>, <code>\?</code>, <code>\''</code>, <code>\"</code>, <code>\xHH</code> (hexadecimal), <code>\0OOO</code> (octal). Encodings that aren''t valid remain in the output. </p> <p> <b>HEX_DECODE</b> - Decode a string of hexadecimal characters into a binary.</p> <p> <b>HTML_ENTITY_DECODE</b> - Replace HTML-encoded characters with unencoded characters. <code>HTML_ENTITY_DECODE</code> performs these operations: </p> <ul> <li> <p>Replaces <code>(ampersand)quot;</code> with <code>"</code> </p> </li> <li> <p>Replaces <code>(ampersand)nbsp;</code> with a non-breaking space, decimal 160</p> </li> <li> <p>Replaces <code>(ampersand)lt;</code> with a "less than" symbol</p> </li> <li> <p>Replaces <code>(ampersand)gt;</code> with <code>&gt;</code> </p> </li> <li> <p>Replaces characters that are represented in hexadecimal format, <code>(ampersand)#xhhhh;</code>, with the corresponding characters</p> </li> <li> <p>Replaces characters that are represented in decimal format, <code>(ampersand)#nnnn;</code>, with the corresponding characters</p> </li> </ul> <p> <b>JS_DECODE</b> - Decode JavaScript escape sequences. If a <code>\</code> <code>u</code> <code>HHHH</code> code is in the full-width ASCII code range of <code>FF01-FF5E</code>, then the higher byte is used to detect and adjust the lower byte. If not, only the lower byte is used and the higher byte is zeroed, causing a possible loss of information. </p> <p> <b>LOWERCASE</b> - Convert uppercase letters (A-Z) to lowercase (a-z). </p> <p> <b>MD5</b> - Calculate an MD5 hash from the data in the input. The computed hash is in a raw binary form. </p> <p> <b>NONE</b> - Specify <code>NONE</code> if you don''t want any text transformations. </p> <p> <b>NORMALIZE_PATH</b> - Remove multiple slashes, directory self-references, and directory back-references that are not at the beginning of the input from an input string. </p> <p> <b>NORMALIZE_PATH_WIN</b> - This is the same as <code>NORMALIZE_PATH</code>, but first converts backslash characters to forward slashes. </p> <p> <b>REMOVE_NULLS</b> - Remove all <code>NULL</code> bytes from the input. </p> <p> <b>REPLACE_COMMENTS</b> - Replace each occurrence of a C-style comment (<code>/* ... */</code>) with a single space. Multiple consecutive occurrences are not compressed. Unterminated comments are also replaced with a space (ASCII 0x20). However, a standalone termination of a comment (<code>*/</code>) is not acted upon. </p> <p> <b>REPLACE_NULLS</b> - Replace NULL bytes in the input with space characters (ASCII <code>0x20</code>). </p> <p> <b>SQL_HEX_DECODE</b> - Decode SQL hex data. Example (<code>0x414243</code>) will be decoded to (<code>ABC</code>).</p> <p> <b>URL_DECODE</b> - Decode a URL-encoded value. </p> <p> <b>URL_DECODE_UNI</b> - Like <code>URL_DECODE</code>, but with support for Microsoft-specific <code>%u</code> encoding. If the code is in the full-width ASCII code range of <code>FF01-FF5E</code>, the higher byte is used to detect and adjust the lower byte. Otherwise, only the lower byte is used and the higher byte is zeroed. </p> <p> <b>UTF8_TO_UNICODE</b> - Convert all UTF-8 character sequences to Unicode. This helps input normalization, and minimizing false-positives and false-negatives for non-English languages.</p>'
       description: 'Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. '
-    TokenDomain:
-      type: string
-      pattern: '^[\w\.\-/]+$'
-      minLength: 1
-      maxLength: 253
     VersionToPublish:
       type: object
       properties:

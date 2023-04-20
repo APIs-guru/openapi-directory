@@ -3,7 +3,7 @@ info:
   version: '2018-05-01'
   x-release: v4
   title: Amazon Chime
-  description: '<p>The Amazon Chime API (application programming interface) is designed for developers to perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes. It also includes API actions for use with the Amazon Chime SDK, which developers use to build their own communication applications. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html"> Using the Amazon Chime SDK </a> in the <i>Amazon Chime Developer Guide</i>.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p> You don''t need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href="http://aws.amazon.com/developer/">AWS Developer Center</a>. </p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/installing.html">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href="https://docs.aws.amazon.com/cli/latest/reference/chime/index.html">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>. </p> </dd> <dt>Using REST APIs</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports signature version 4. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/security-iam.html">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>'
+  description: '<p>The Amazon Chime application programming interface (API) is designed so administrators can perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls for Amazon Chime. We recommend using an AWS SDK or the AWS CLI. The page for each API action contains a <i>See Also</i> section that includes links to information about using the action with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p> You don''t need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href="http://aws.amazon.com/developer/">AWS Developer Center</a>. </p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/installing.html">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href="https://docs.aws.amazon.com/cli/latest/reference/chime/index.html">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>. </p> </dd> <dt>Using REST APIs</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports Signature Version 4. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/security-iam.html">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -452,7 +452,7 @@ paths:
   '/meetings/{meetingId}/attendees#operation=batch-create':
     post:
       operationId: BatchCreateAttendee
-      description: ' Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. '
+      description: ' Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>. '
       responses:
         '201':
           description: Success
@@ -1940,7 +1940,7 @@ paths:
   '/meetings/{meetingId}/attendees':
     post:
       operationId: CreateAttendee
-      description: ' Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. '
+      description: ' Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>. '
       responses:
         '201':
           description: Success
@@ -2036,7 +2036,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListAttendees
-      description: ' Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. '
+      description: ' Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>. '
       responses:
         '200':
           description: Success
@@ -3127,7 +3127,7 @@ paths:
                   maxLength: 1024
                   format: password
                 ClientRequestToken:
-                  description: The token assigned to the client making the pipeline request.
+                  description: The unique identifier for the client request. The token makes the API request idempotent. Use a different token for different media pipeline requests.
                   type: string
                   pattern: '[-_a-zA-Z0-9]*'
                   minLength: 2
@@ -3140,7 +3140,7 @@ paths:
                     SourceConfiguration:
                       allOf:
                         - $ref: '#/components/schemas/SourceConfiguration'
-                        - description: The source configuration for a specified media capture pipline.
+                        - description: The source configuration for a specified media capture pipeline.
                     ArtifactsConfiguration:
                       allOf:
                         - $ref: '#/components/schemas/ArtifactsConfiguration'
@@ -3229,7 +3229,7 @@ paths:
   /meetings:
     post:
       operationId: CreateMeeting
-      description: ' Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime Developer Guide</i> . For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . '
+      description: ' Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime SDK Developer Guide</i> . For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i> . '
       responses:
         '201':
           description: Success
@@ -3340,7 +3340,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListMeetings
-      description: ' Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      description: ' Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>.'
       responses:
         '200':
           description: Success
@@ -3517,7 +3517,7 @@ paths:
   /meetings#operation=create-attendees:
     post:
       operationId: CreateMeetingWithAttendees
-      description: ' Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime Developer Guide</i> . For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . '
+      description: ' Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime SDK Developer Guide</i> . For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i> . '
       responses:
         '201':
           description: Success
@@ -6282,7 +6282,7 @@ paths:
   '/meetings/{meetingId}/attendees/{attendeeId}':
     delete:
       operationId: DeleteAttendee
-      description: 'Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their <code>JoinToken</code>. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      description: 'Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their <code>JoinToken</code>. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>.'
       responses:
         '204':
           description: Success
@@ -6353,7 +6353,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetAttendee
-      description: ' Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . '
+      description: ' Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i> . '
       responses:
         '200':
           description: Success
@@ -7740,7 +7740,7 @@ paths:
   '/meetings/{meetingId}':
     delete:
       operationId: DeleteMeeting
-      description: 'Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      description: 'Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>.'
       responses:
         '204':
           description: Success
@@ -7804,7 +7804,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetMeeting
-      description: ' Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . '
+      description: ' Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i> . '
       responses:
         '200':
           description: Success
@@ -12832,11 +12832,11 @@ paths:
                     EnableSIPLogs:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
-                        - description: 'When true, enables SIP message logs for sending to Amazon CloudWatch Logs.'
+                        - description: Boolean that enables SIP message logs to Amazon CloudWatch logs.
                     EnableMediaMetricLogs:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
-                        - description: Boolean that enables the logging of Voice Connector metrics to Cloudwatch.
+                        - description: Boolean that enables logging of detailed media metrics for Voice Connectors to Amazon CloudWatch logs.
   '/voice-connectors/{voiceConnectorId}/termination/health':
     get:
       operationId: GetVoiceConnectorTerminationHealth
@@ -14984,7 +14984,7 @@ paths:
   '/meetings/{meetingId}/transcription#operation=start':
     post:
       operationId: StartMeetingTranscription
-      description: 'Starts transcription for the specified <code>meetingId</code>. '
+      description: '<p>Starts transcription for the specified <code>meetingId</code>. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meeting-transcription.html"> Using Amazon Chime SDK live transcription </a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> <p>If you specify an invalid configuration, a <code>TranscriptFailed</code> event will be sent with the contents of the <code>BadRequestException</code> generated by Amazon Transcribe. For more information on each parameter and which combinations are valid, refer to the <a href="https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_StartStreamTranscription.html">StartStreamTranscription</a> API in the <i>Amazon Transcribe Developer Guide</i>.</p> <important> <p>Amazon Chime SDK live transcription is powered by Amazon Transcribe. Use of Amazon Transcribe is subject to the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>, including the terms specific to the AWS Machine Learning and Artificial Intelligence Services.</p> </important>'
       responses:
         '200':
           description: Success
@@ -16399,7 +16399,9 @@ components:
       type: object
       properties:
         Meeting:
-          $ref: '#/components/schemas/Meeting'
+          allOf:
+            - $ref: '#/components/schemas/Meeting'
+            - description: A meeting created using the Amazon Chime SDK.
         Attendees:
           allOf:
             - $ref: '#/components/schemas/AttendeeList'
@@ -16460,7 +16462,7 @@ components:
         LambdaArn:
           allOf:
             - $ref: '#/components/schemas/FunctionArn'
-            - description: Valid Amazon Resource Name (ARN) of the Lambda function. The function must be created in the same AWS Region as the SIP media application.
+            - description: 'Valid Amazon Resource Name (ARN) of the Lambda function, version, or alias. The function must be created in the same AWS Region as the SIP media application.'
       description: The endpoint assigned to the SIP media application.
     CreateSipMediaApplicationCallResponse:
       type: object
@@ -16499,7 +16501,9 @@ components:
       type: object
       properties:
         User:
-          $ref: '#/components/schemas/User'
+          allOf:
+            - $ref: '#/components/schemas/User'
+            - description: The user on the Amazon Chime account.
     CreateVoiceConnectorResponse:
       type: object
       properties:
@@ -16984,7 +16988,7 @@ components:
         ChannelMemberships:
           allOf:
             - $ref: '#/components/schemas/ChannelMembershipForAppInstanceUserSummaryList'
-            - description: The token passed by previous API calls until all requested users are returned.
+            - description: The information for the requested channel memberships.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -17249,7 +17253,9 @@ components:
       type: object
       properties:
         EventsConfiguration:
-          $ref: '#/components/schemas/EventsConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/EventsConfiguration'
+            - description: The configuration that allows a bot to receive outgoing events. Can be an HTTPS endpoint or an AWS Lambda function ARN.
     PutRetentionSettingsResponse:
       type: object
       properties:
@@ -17281,7 +17287,9 @@ components:
       type: object
       properties:
         SipMediaApplicationLoggingConfiguration:
-          $ref: '#/components/schemas/SipMediaApplicationLoggingConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplicationLoggingConfiguration'
+            - description: The logging configuration of the SIP media application.
     Boolean:
       type: boolean
     PutVoiceConnectorEmergencyCallingConfigurationResponse:
@@ -17387,7 +17395,9 @@ components:
       type: object
       properties:
         Bot:
-          $ref: '#/components/schemas/Bot'
+          allOf:
+            - $ref: '#/components/schemas/Bot'
+            - description: A resource that allows Enterprise account administrators to configure an interface that receives events from Amazon Chime.
     ResetPersonalPINResponse:
       type: object
       properties:
@@ -17429,54 +17439,72 @@ components:
       properties: {}
     EngineTranscribeSettings:
       type: object
-      required:
-        - LanguageCode
       properties:
         LanguageCode:
           allOf:
             - $ref: '#/components/schemas/TranscribeLanguageCode'
-            - description: The language code specified for the Amazon Transcribe engine.
+            - description: '<p>Specify the language code that represents the language spoken.</p> <p>If you''re unsure of the language spoken in your audio, consider using <code>IdentifyLanguage</code> to enable automatic language identification.</p>'
         VocabularyFilterMethod:
           allOf:
             - $ref: '#/components/schemas/TranscribeVocabularyFilterMethod'
-            - description: The filtering method passed to Amazon Transcribe.
+            - description: '<p>Specify how you want your vocabulary filter applied to your transcript.</p> <p> To replace words with <code>***</code>, choose <code>mask</code>.</p> <p>To delete words, choose <code>remove</code>.</p> <p>To flag words without changing them, choose <code>tag</code>.</p>'
         VocabularyFilterName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the vocabulary filter passed to Amazon Transcribe.
+            - description: '<p>Specify the name of the custom vocabulary filter that you want to use when processing your transcription. Note that vocabulary filter names are case sensitive. </p> <p>If you use Amazon Transcribe in multiple Regions, the vocabulary filter must be available in Amazon Transcribe in each Region.</p> <p>If you include <code>IdentifyLanguage</code> and want to use one or more vocabulary filters with your transcription, use the <code>VocabularyFilterNames</code> parameter instead.</p>'
         VocabularyName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the vocabulary passed to Amazon Transcribe.
+            - description: '<p>Specify the name of the custom vocabulary that you want to use when processing your transcription. Note that vocabulary names are case sensitive.</p> <p>If you use Amazon Transcribe multiple Regions, the vocabulary must be available in Amazon Transcribe in each Region.</p> <p>If you include <code>IdentifyLanguage</code> and want to use one or more custom vocabularies with your transcription, use the <code>VocabularyNames</code> parameter instead.</p>'
         Region:
           allOf:
             - $ref: '#/components/schemas/TranscribeRegion'
-            - description: 'The AWS Region passed to Amazon Transcribe. If you don''t specify a Region, Amazon Chime uses the meeting''s Region.'
+            - description: '<p>The AWS Region in which to use Amazon Transcribe.</p> <p>If you don''t specify a Region, then the <code>MediaRegion</code> parameter of the <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html">CreateMeeting.html</a> API will be used. However, if Amazon Transcribe is not available in the <code>MediaRegion</code>, then a TranscriptFailed event is sent.</p> <p>Use <code>auto</code> to use Amazon Transcribe in a Region near the meeting’s <code>MediaRegion</code>. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/transcription-options.html#choose-region">Choosing a transcription Region</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p>'
         EnablePartialResultsStabilization:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Generates partial transcription results that are less likely to change as meeting attendees speak. It does so by only allowing the last few words from the partial results to change.
+            - description: 'Enables partial result stabilization for your transcription. Partial result stabilization can reduce latency in your output, but may impact accuracy.'
         PartialResultsStability:
           allOf:
             - $ref: '#/components/schemas/TranscribePartialResultsStability'
-            - description: The stabity level of a partial results transcription. Determines how stable you want the transcription results to be. A higher level means the transcription results are less likely to change.
+            - description: '<p>Specify the level of stability to use when you enable partial results stabilization (<code>EnablePartialResultsStabilization</code>).</p> <p>Low stability provides the highest accuracy. High stability transcribes faster, but with slightly lower accuracy.</p>'
         ContentIdentificationType:
           allOf:
             - $ref: '#/components/schemas/TranscribeContentIdentificationType'
-            - description: Set this field to <code>PII</code> to identify personally identifiable information in the transcription output.
+            - description: '<p>Labels all personally identifiable information (PII) identified in your transcript. If you don''t include <code>PiiEntityTypes</code>, all PII is identified.</p> <p>You can’t set <code>ContentIdentificationType</code> and <code>ContentRedactionType</code>.</p>'
         ContentRedactionType:
           allOf:
             - $ref: '#/components/schemas/TranscribeContentRedactionType'
-            - description: Set this field to <code>PII</code> to redact personally identifiable information in the transcription output. Content redaction is performed only upon complete transcription of the audio segments.
+            - description: '<p>Content redaction is performed at the segment level. If you don''t include <code>PiiEntityTypes</code>, all PII is redacted.</p> <p>You can’t set <code>ContentIdentificationType</code> and <code>ContentRedactionType</code>.</p>'
         PiiEntityTypes:
           allOf:
             - $ref: '#/components/schemas/TranscribePiiEntityTypes'
-            - description: '<p>Lists the PII entity types you want to identify or redact. To specify entity types, you must enable <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p> <p> <code>PIIEntityTypes</code> must be comma-separated. The available values are: <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING, CREDIT_DEBIT_NUMBER</code>, <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>, <code>PIN</code>, <code>EMAIL</code>, <code>ADDRESS</code>, <code>NAME</code>, <code>PHONE</code>, <code>SSN</code>, and <code>ALL</code>.</p> <p> <code>PiiEntityTypes</code> is an optional parameter with a default value of <code>ALL</code>.</p>'
+            - description: '<p>Specify which types of personally identifiable information (PII) you want to redact in your transcript. You can include as many types as you''d like, or you can select <code>ALL</code>.</p> <p>Values must be comma-separated and can include: <code>ADDRESS</code>, <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>, <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code> <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>,<code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, <code>SSN</code>, or <code>ALL</code>.</p> <p>Note that if you include <code>PiiEntityTypes</code>, you must also include <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p> <p>If you include <code>ContentRedactionType</code> or <code>ContentIdentificationType</code>, but do not include <code>PiiEntityTypes</code>, all PII is redacted or identified.</p>'
         LanguageModelName:
           allOf:
             - $ref: '#/components/schemas/TranscribeLanguageModelName'
-            - description: The name of the language model used during transcription.
-      description: Settings specific to the Amazon Transcribe engine.
+            - description: '<p>Specify the name of the custom language model that you want to use when processing your transcription. Note that language model names are case sensitive.</p> <p>The language of the specified language model must match the language code. If the languages don''t match, the custom language model isn''t applied. There are no errors or warnings associated with a language mismatch.</p> <p>If you use Amazon Transcribe in multiple Regions, the custom language model must be available in Amazon Transcribe in each Region.</p>'
+        IdentifyLanguage:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Enables automatic language identification for your transcription.</p> <p>If you include <code>IdentifyLanguage</code>, you can optionally use <code>LanguageOptions</code> to include a list of language codes that you think may be present in your audio stream. Including language options can improve transcription accuracy.</p> <p>You can also use <code>PreferredLanguage</code> to include a preferred language. Doing so can help Amazon Transcribe identify the language faster.</p> <p>You must include either <code>LanguageCode</code> or <code>IdentifyLanguage</code>.</p> <p>Language identification can''t be combined with custom language models or redaction.</p>'
+        LanguageOptions:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeLanguageOptions'
+            - description: '<p>Specify two or more language codes that represent the languages you think may be present in your media; including more than five is not recommended. If you''re unsure what languages are present, do not include this parameter.</p> <p>Including language options can improve the accuracy of language identification.</p> <p>If you include <code>LanguageOptions</code>, you must also include <code>IdentifyLanguage</code>.</p> <important> <p>You can only include one language dialect per language. For example, you cannot include <code>en-US</code> and <code>en-AU</code>.</p> </important>'
+        PreferredLanguage:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeLanguageCode'
+            - description: <p>Specify a preferred language from the subset of languages codes you specified in <code>LanguageOptions</code>.</p> <p>You can only use this parameter if you include <code>IdentifyLanguage</code> and <code>LanguageOptions</code>.</p>
+        VocabularyNames:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeVocabularyNamesOrFilterNamesString'
+            - description: '<p>Specify the names of the custom vocabularies that you want to use when processing your transcription. Note that vocabulary names are case sensitive.</p> <p>If you use Amazon Transcribe in multiple Regions, the vocabulary must be available in Amazon Transcribe in each Region.</p> <p>If you don''t include <code>IdentifyLanguage</code> and want to use a custom vocabulary with your transcription, use the <code>VocabularyName</code> parameter instead.</p>'
+        VocabularyFilterNames:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeVocabularyNamesOrFilterNamesString'
+            - description: '<p>Specify the names of the custom vocabulary filters that you want to use when processing your transcription. Note that vocabulary filter names are case sensitive.</p> <p>If you use Amazon Transcribe in multiple Regions, the vocabulary filter must be available in Amazon Transcribe in each Region.</p> <p> If you''re <i>not</i> including <code>IdentifyLanguage</code> and want to use a custom vocabulary filter with your transcription, use the <code>VocabularyFilterName</code> parameter instead.</p>'
+      description: '<p>Settings specific for Amazon Transcribe as the live transcription engine.</p> <p>If you specify an invalid combination of parameters, a <code>TranscriptFailed</code> event will be sent with the contents of the <code>BadRequestException</code> generated by Amazon Transcribe. For more information on each parameter and which combinations are valid, refer to the <a href="https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_StartStreamTranscription.html">StartStreamTranscription</a> API in the <i>Amazon Transcribe Developer Guide</i>.</p>'
     EngineTranscribeMedicalSettings:
       type: object
       required:
@@ -17507,7 +17535,7 @@ components:
         ContentIdentificationType:
           allOf:
             - $ref: '#/components/schemas/TranscribeMedicalContentIdentificationType'
-            - description: Set this field to <code>PHI</code> to identify personal health information in the transcription output.
+            - description: '<p>Labels all personally identifiable information (PII) identified in your transcript. If you don''t include <code>PiiEntityTypes</code>, all PII is identified.</p> <p>You can’t set <code>ContentIdentificationType</code> and <code>ContentRedactionType</code>.</p>'
       description: Settings specific to the Amazon Transcribe Medical engine.
     StopMeetingTranscriptionResponse:
       type: object
@@ -17612,7 +17640,9 @@ components:
       type: object
       properties:
         SipMediaApplicationCall:
-          $ref: '#/components/schemas/SipMediaApplicationCall'
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplicationCall'
+            - description: A <code>Call</code> instance for a SIP media application.
     UpdateSipRuleResponse:
       type: object
       properties:
@@ -18639,9 +18669,13 @@ components:
       type: object
       properties:
         ChannelSummary:
-          $ref: '#/components/schemas/ChannelSummary'
+          allOf:
+            - $ref: '#/components/schemas/ChannelSummary'
+            - description: Summary of the details of a <code>Channel</code>.
         AppInstanceUserMembershipSummary:
-          $ref: '#/components/schemas/AppInstanceUserMembershipSummary'
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceUserMembershipSummary'
+            - description: Summary of the membership details of an <code>AppInstanceUser</code>.
       description: Summary of the channel membership details of an <code>AppInstanceUser</code>.
     ChannelMembershipForAppInstanceUserSummaryList:
       type: array
@@ -18832,7 +18866,7 @@ components:
         SourceConfiguration:
           allOf:
             - $ref: '#/components/schemas/SourceConfiguration'
-            - description: The source configuration for a specified media capture pipline.
+            - description: The source configuration for a specified media capture pipeline.
         ArtifactsConfiguration:
           allOf:
             - $ref: '#/components/schemas/ArtifactsConfiguration'
@@ -19077,7 +19111,7 @@ components:
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
-            - description: The token assigned to the client making the pipeline request.
+            - description: The unique identifier for the client request. The token makes the API request idempotent. Use a different token for different media pipeline requests.
         ChimeSdkMeetingConfiguration:
           allOf:
             - $ref: '#/components/schemas/ChimeSdkMeetingConfiguration'
@@ -19248,7 +19282,9 @@ components:
             - $ref: '#/components/schemas/MeetingTagList'
             - description: The tag key-value pairs.
         NotificationsConfiguration:
-          $ref: '#/components/schemas/MeetingNotificationConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/MeetingNotificationConfiguration'
+            - description: The resource target configurations for receiving Amazon Chime SDK meeting and attendee event notifications. The Amazon Chime SDK supports resource targets located in the US East (N. Virginia) AWS Region (us-east-1).
         Attendees:
           allOf:
             - $ref: '#/components/schemas/CreateMeetingWithAttendeesRequestItemList'
@@ -19463,7 +19499,9 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The room ID.
         Member:
-          $ref: '#/components/schemas/Member'
+          allOf:
+            - $ref: '#/components/schemas/Member'
+            - description: 'The member details, such as email address, name, member ID, and member type.'
         Role:
           allOf:
             - $ref: '#/components/schemas/RoomMembershipRole'
@@ -20159,6 +20197,8 @@ components:
         - ja-JP
         - ko-KR
         - zh-CN
+        - th-TH
+        - hi-IN
     TranscribeVocabularyFilterMethod:
       type: string
       enum:
@@ -20204,6 +20244,16 @@ components:
       pattern: '^[0-9a-zA-Z._-]+'
       minLength: 1
       maxLength: 200
+    TranscribeLanguageOptions:
+      type: string
+      pattern: '^[a-zA-Z-,]+'
+      minLength: 1
+      maxLength: 200
+    TranscribeVocabularyNamesOrFilterNamesString:
+      type: string
+      pattern: '^[a-zA-Z0-9,-._]+'
+      minLength: 1
+      maxLength: 3000
     EventsConfiguration:
       type: object
       properties:
@@ -20434,11 +20484,11 @@ components:
         EnableSIPLogs:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'When true, enables SIP message logs for sending to Amazon CloudWatch Logs.'
+            - description: Boolean that enables SIP message logs to Amazon CloudWatch logs.
         EnableMediaMetricLogs:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Boolean that enables the logging of Voice Connector metrics to Cloudwatch.
+            - description: Boolean that enables logging of detailed media metrics for Voice Connectors to Amazon CloudWatch logs.
       description: The logging configuration associated with an Amazon Chime Voice Connector. Specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
     GetVoiceConnectorOriginationRequest:
       type: object
