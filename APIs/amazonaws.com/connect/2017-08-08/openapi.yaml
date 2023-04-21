@@ -2008,6 +2008,99 @@ paths:
             type: string
           description: Pagination token
           required: false
+  /contact/create-participant:
+    post:
+      operationId: CreateParticipant
+      description: 'Adds a new participant into an on-going chat contact. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html">Customize chat flow experiences by integrating custom participants</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateParticipantResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - InstanceId
+                - ContactId
+                - ParticipantDetails
+              properties:
+                InstanceId:
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance. '
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                ContactId:
+                  description: The identifier of the contact in this instance of Amazon Connect. Only contacts in the CHAT channel are supported.
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                ClientToken:
+                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
+                  type: string
+                  maxLength: 500
+                ParticipantDetails:
+                  description: The details to add for the participant.
+                  type: object
+                  properties:
+                    ParticipantRole:
+                      allOf:
+                        - $ref: '#/components/schemas/ParticipantRole'
+                        - description: The role of the participant being added.
+                    DisplayName:
+                      allOf:
+                        - $ref: '#/components/schemas/DisplayName'
+                        - description: The display name of the participant.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/queues/{InstanceId}':
     put:
       operationId: CreateQueue
@@ -14765,6 +14858,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/ARN'
             - description: The Amazon Resource Name (ARN) for the association.
+    CreateParticipantResponse:
+      type: object
+      properties:
+        ParticipantCredentials:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantTokenCredentials'
+            - description: The token used by the chat participant to call <code>CreateParticipantConnection</code>. The participant token is valid for the lifetime of a chat participant.
+        ParticipantId:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantId'
+            - description: The identifier for a chat participant. The participantId for a chat participant is the same throughout the chat lifecycle.
+    ParticipantRole:
+      type: string
+      enum:
+        - AGENT
+        - CUSTOMER
+        - SYSTEM
+        - CUSTOM_BOT
+    DisplayName:
+      type: string
+      minLength: 1
+      maxLength: 256
     CreateQueueResponse:
       type: object
       properties:
@@ -16380,10 +16495,6 @@ components:
       type: string
       minLength: 0
       maxLength: 32767
-    DisplayName:
-      type: string
-      minLength: 1
-      maxLength: 256
     ChatContentType:
       type: string
       minLength: 1
@@ -17877,6 +17988,58 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
+    ParticipantDetailsToAdd:
+      type: object
+      properties:
+        ParticipantRole:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantRole'
+            - description: The role of the participant being added.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The display name of the participant.
+      description: The details to add for the participant.
+    CreateParticipantRequest:
+      type: object
+      required:
+        - InstanceId
+        - ContactId
+        - ParticipantDetails
+      title: CreateParticipantRequest
+      properties:
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance. '
+        ContactId:
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: The identifier of the contact in this instance of Amazon Connect. Only contacts in the CHAT channel are supported.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
+        ParticipantDetails:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantDetailsToAdd'
+            - description: <p>Information identifying the participant.</p> <important> <p>The only Valid value for <code>ParticipantRole</code> is <code>CUSTOM_BOT</code>. </p> <p> <code>DisplayName</code> is <b>Required</b>.</p> </important>
+    ParticipantTokenCredentials:
+      type: object
+      properties:
+        ParticipantToken:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantToken'
+            - description: 'The token used by the chat participant to call <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html">CreateParticipantConnection</a>. The participant token is valid for the lifetime of a chat participant. '
+        Expiry:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601Datetime'
+            - description: 'The expiration of the token. It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.'
+      description: The credentials used by the participant.
+    ParticipantId:
+      type: string
+      minLength: 1
+      maxLength: 256
     QueueDescription:
       type: string
       minLength: 1
@@ -19913,6 +20076,8 @@ components:
       type: integer
       minimum: 0
       maximum: 59
+    ISO8601Datetime:
+      type: string
     InstanceStatus:
       type: string
       enum:
@@ -20411,7 +20576,7 @@ components:
         MetricFilterKey:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The key to use for filtering data. </p> <p>Valid metric filter keys: <code>INITIATION_METHOD</code>, <code>DISCONNECT_REASON</code> </p>'
+            - description: '<p>The key to use for filtering data. </p> <p>Valid metric filter keys: <code>INITIATION_METHOD</code>, <code>DISCONNECT_REASON</code>. These are the same values as the <code>InitiationMethod</code> and <code>DisconnectReason</code> in the contact record. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord">ContactTraceRecord</a> in the <i>Amazon Connect Administrator''s Guide</i>. </p>'
         MetricFilterValues:
           allOf:
             - $ref: '#/components/schemas/MetricFilterValueList'
@@ -20519,10 +20684,6 @@ components:
             - $ref: '#/components/schemas/DisplayName'
             - description: Display name of the participant.
       description: The customer's details.
-    ParticipantId:
-      type: string
-      minLength: 1
-      maxLength: 256
     ParticipantTimerAction:
       type: string
       enum:
