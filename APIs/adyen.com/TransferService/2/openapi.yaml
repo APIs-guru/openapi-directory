@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TransferService
-  x-timestamp: 2023-04-11T19:23:59Z
+  x-timestamp: 2023-04-18T17:29:01Z
 tags:
   - name: Transactions
   - name: Transfers
@@ -916,6 +916,7 @@ components:
         balanceAccountId:
           description: The unique identifier of the source [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).
           type: string
+          x-addedInVersion: "2"
         bank:
           $ref: "#/components/schemas/Bank"
           description: Contains settings for bank transfers. If you are transferring funds to bank accounts and you don't provide this object, Adyen applies default settings.
@@ -946,8 +947,9 @@ components:
           description: The ID of the resource.
           type: string
         paymentInstrumentId:
-          description: The unique identifier of the source [payment instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/paymentInstruments__resParam_id).
+          description: The unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) used in the transfer.
           type: string
+          x-addedInVersion: "2"
         reason:
           description: Additional information about the status of the transfer.
           enum:

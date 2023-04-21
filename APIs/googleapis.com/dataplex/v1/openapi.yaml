@@ -2804,6 +2804,7 @@ components:
           description: The minimum column statistic value allowed for a row to pass this validation.At least one of min_value and max_value need to be provided.
           type: string
         statistic:
+          description: The aggregate metric to evaluate.
           enum:
             - STATISTIC_UNDEFINED
             - MEAN

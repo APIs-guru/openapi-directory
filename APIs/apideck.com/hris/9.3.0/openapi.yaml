@@ -1039,6 +1039,8 @@ paths:
           description: We keep track of the "List Employees" response for NMBRS virtual webhooks events, which contains fewer fields compared to the "Get Employee" response.
         - connector: ceridian-dayforce
           description: For virtual webhook events on Ceridian Dayforce, we monitor the "List Employees" response, which has a very small set of fields in comparison of the "Get Employee" response. This is the reason why we only support `hris.employee.created` events for this connector.
+        - connector: freshteam
+          description: The minimum pagination `limit` is 50, since Freshteam does not support pagination with a lower limit.
         - connector: paylocity
           description: For virtual webhook events on Paylocity, we monitor the "List Employees" response, which has a very small set of fields in comparison of the "Get Employee" response. This is the reason why we only support `hris.employee.created` events for this connector.
       x-codeSamples:

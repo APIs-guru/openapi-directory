@@ -25,7 +25,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformTransferNotification-v3
-  x-timestamp: 2023-04-05T18:24:48Z
+  x-timestamp: 2023-04-18T17:29:02Z
 tags: []
 components:
   examples: {}
@@ -483,19 +483,28 @@ components:
           description: Address of the bank account owner.
         dateOfBirth:
           description: |-
-            The date of birth of the individual.
-            Format: [ISO-8601](https://www.w3.org/TR/NOTE-datetime); example: YYYY-MM-DD
+            The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**.
+
             Allowed only when `type` is **individual**.
           format: date
           type: string
         firstName:
-          description: First name of the individual. Allowed only when `type` is **individual**.
+          description: |-
+            First name of the individual.
+
+            Allowed only when `type` is **individual**.
           type: string
         fullName:
           description: The name of the entity.
           type: string
         lastName:
-          description: Last name of the individual. Allowed only when `type` is **individual**.
+          description: |-
+            Last name of the individual.
+
+            Allowed only when `type` is **individual**.
+          type: string
+        reference:
+          description: Your unique reference of the party. This should be consistent for all transfers initiated to/from the same party/counterparty. e.g Your client's unique wallet or payee ID
           type: string
         type:
           default: unknown
@@ -836,7 +845,7 @@ components:
           deprecated: true
           description: The unique identifier of the source [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).
           type: string
-          x-addedInVersion: "3"
+          x-addedInVersion: "2"
           x-deprecatedInVersion: "3"
           x-deprecatedMessage: Use the ID in the [`balanceAccount`](https://docs.adyen.com/api-explorer/transfer-webhooks/latest/post/balancePlatform.transfer.created#request-data-balanceAccount-id) object instead.
         balancePlatform:
@@ -935,7 +944,7 @@ components:
           deprecated: true
           description: The unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) used in the transfer.
           type: string
-          x-addedInVersion: "3"
+          x-addedInVersion: "2"
           x-deprecatedInVersion: "3"
           x-deprecatedMessage: Use the ID in the [`paymentInstrument`](https://docs.adyen.com/api-explorer/transfer-webhooks/latest/post/balancePlatform.transfer.created#request-data-paymentInstrument-id) object instead.
         paymentMerchantReference:

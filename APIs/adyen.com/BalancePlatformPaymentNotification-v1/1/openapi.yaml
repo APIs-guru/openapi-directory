@@ -27,7 +27,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformPaymentNotification-v1
-  x-timestamp: 2023-03-30T18:22:09Z
+  x-timestamp: 2023-04-17T15:23:17Z
 tags: []
 components:
   examples:
@@ -715,7 +715,7 @@ components:
             * **Authorised**, **Refused**, or **Error** for type `balancePlatform.payment.created`
 
 
-            \ * **Expired** or **Cancelled** or **AuthAdjustmentAuthorised** for type `balancePlatform.payment.updated`
+            \ * **Expired** or **Cancelled** or **AuthAdjustmentAuthorised** or **AuthAdjustmentRefused** for type `balancePlatform.payment.updated`
 
 
             * **PendingIncomingTransfer** for type `balancePlatform.incomingTransfer.created`\ 
@@ -926,7 +926,7 @@ components:
             * **Authorised**, **Refused**, or **Error** for type `balancePlatform.payment.created`
 
 
-            \ * **Expired** or **Cancelled** or **AuthAdjustmentAuthorised** for type `balancePlatform.payment.updated`
+            \ * **Expired** or **Cancelled** or **AuthAdjustmentAuthorised** or **AuthAdjustmentRefused** for type `balancePlatform.payment.updated`
 
 
             * **PendingIncomingTransfer** for type `balancePlatform.incomingTransfer.created`\ 
@@ -1063,7 +1063,7 @@ components:
             * **Authorised**, **Refused**, or **Error** for type `balancePlatform.payment.created`
 
 
-            \ * **Expired** or **Cancelled** or **AuthAdjustmentAuthorised** for type `balancePlatform.payment.updated`
+            \ * **Expired** or **Cancelled** or **AuthAdjustmentAuthorised** or **AuthAdjustmentRefused** for type `balancePlatform.payment.updated`
 
 
             * **PendingIncomingTransfer** for type `balancePlatform.incomingTransfer.created`\ 
@@ -1297,7 +1297,7 @@ components:
             * **Authorised**, **Refused**, or **Error** for type `balancePlatform.payment.created`
 
 
-            \ * **Expired** or **Cancelled** or **AuthAdjustmentAuthorised** for type `balancePlatform.payment.updated`
+            \ * **Expired** or **Cancelled** or **AuthAdjustmentAuthorised** or **AuthAdjustmentRefused** for type `balancePlatform.payment.updated`
 
 
             * **PendingIncomingTransfer** for type `balancePlatform.incomingTransfer.created`\ 

@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TransferService
-  x-timestamp: 2023-04-11T19:23:59Z
+  x-timestamp: 2023-04-18T17:29:01Z
 tags:
   - name: Transactions
   - name: Transfers
@@ -422,9 +422,17 @@ components:
       description: Example response for a transfers request
       summary: Response code - 200 OK
       value:
+        accountHolder:
+          description: Your account holder description
+          id: AH3227C223222C5GXQXF658WB
+          reference: Your account holder reference
         amount:
           currency: EUR
           value: 110000
+        balanceAccount:
+          description: Your balance account description
+          id: BAB8B2C3D4E5F6G7H8D9J6GD4
+          reference: Your balance account reference
         balanceAccountId: BAB8B2C3D4E5F6G7H8D9J6GD4
         category: bank
         counterparty:
@@ -442,14 +450,19 @@ components:
               accountNumber: "123456789"
               bic: BOFAUS3NXXX
               type: numberAndBic
-          description: Your description for the transfer
-          direction: outgoing
-          priority: crossBorder
-          reason: approved
-          reference: Your internal reference for the transfer
-          referenceForBeneficiary: Your-reference-sent-to-the-beneficiary
-          status: authorised
+        description: Your description for the transfer
+        direction: outgoing
         id: 1W1UG35U8A9J5ZLG
+        paymentInstrument:
+          description: Your payment instrument description
+          id: PI3222G223222G59347DAA265
+          reference: Your payment instrument reference
+        paymentInstrumentId: PI3222G223222G59347DAA265
+        priority: crossBorder
+        reason: approved
+        reference: Your internal reference for the transfer
+        referenceForBeneficiary: Your-reference-sent-to-the-beneficiary
+        status: authorised
     post-transfers-payout-local-transfer-sepa:
       description: Example request to make a SEPA funds transfer
       summary: Make a SEPA funds transfer
@@ -474,9 +487,17 @@ components:
       description: Example response for a transfers request
       summary: Response code - 200 OK
       value:
+        accountHolder:
+          description: Your account holder description
+          id: AH3227C223222C5GXQXF658WB
+          reference: Your account holder reference
         amount:
           currency: EUR
           value: 110000
+        balanceAccount:
+          description: Your balance account description
+          id: BAB8B2C3D4E5F6G7H8D9J6GD4
+          reference: Your balance account reference
         balanceAccountId: BAB8B2C3D4E5F6G7H8D9J6GD4
         category: bank
         counterparty:
@@ -489,6 +510,11 @@ components:
         description: Your description for the transfer
         direction: outgoing
         id: 1W1UG35U8A9J5ZLG
+        paymentInstrument:
+          description: Your payment instrument description
+          id: PI3222G223222G59347DAA265
+          reference: Your payment instrument reference
+        paymentInstrumentId: PI3222G223222G59347DAA265
         priority: regular
         reason: approved
         reference: Your internal reference for the transfer
@@ -519,9 +545,17 @@ components:
       description: Example response for a transfers request
       summary: Response code - 200 OK
       value:
+        accountHolder:
+          description: Your account holder description
+          id: AH3227C223222C5GXQXF658WB
+          reference: Your account holder reference
         amount:
           currency: USD
           value: 110000
+        balanceAccount:
+          description: Your balance account description
+          id: BAB8B2C3D4E5F6G7H8D9J6GD4
+          reference: Your balance account reference
         balanceAccountId: BAB8B2C3D4E5F6G7H8D9J6GD4
         category: bank
         counterparty:
@@ -535,6 +569,11 @@ components:
         description: Your description for the transfer
         direction: outgoing
         id: 1W1UG35U8A9J5ZLG
+        paymentInstrument:
+          description: Your payment instrument description
+          id: PI3222G223222G59347DAA265
+          reference: Your payment instrument reference
+        paymentInstrumentId: PI3222G223222G59347DAA265
         priority: regular
         reason: approved
         reference: Your internal reference for the transfer
@@ -558,9 +597,17 @@ components:
       description: Example response for a transfers request
       summary: Response code - 200 OK
       value:
+        accountHolder:
+          description: Your account holder description
+          id: AH3227C223222C5GXQXF658WB
+          reference: Your account holder reference
         amount:
           currency: EUR
           value: 10000
+        balanceAccount:
+          description: Your balance account description
+          id: BAB8B2C3D4E5F6G7H8D9J6GD4
+          reference: Your balance account reference
         balanceAccountId: BAB8B2C3D4E5F6G7H8D9J6GD4
         category: internal
         counterparty:
@@ -591,9 +638,17 @@ components:
       description: Example response for a transfers request
       summary: Response code - 200 OK
       value:
+        accountHolder:
+          description: Your account holder description
+          id: AH3227C223222C5GXQXF658WB
+          reference: Your account holder reference
         amount:
           currency: EUR
           value: 80000
+        balanceAccount:
+          description: Your balance account description
+          id: BAB8B2C3D4E5F6G7H8D9J6GD4
+          reference: Your balance account reference
         balanceAccountId: BAB8B2C3D4E5F6G7H8D9J6GD4
         category: bank
         counterparty:
@@ -601,6 +656,11 @@ components:
         description: Your description for the transfer
         direction: outgoing
         id: 1W1UG35U8A9J5ZLG
+        paymentInstrument:
+          description: Your payment instrument description
+          id: PI3222G223222G59347DAA265
+          reference: Your payment instrument reference
+        paymentInstrumentId: PI3222G223222G59347DAA265
         priority: regular
         reason: approved
         reference: Your internal reference for the transfer
@@ -1066,19 +1126,28 @@ components:
           description: Address of the bank account owner.
         dateOfBirth:
           description: |-
-            The date of birth of the individual.
-            Format: [ISO-8601](https://www.w3.org/TR/NOTE-datetime); example: YYYY-MM-DD
+            The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**.
+
             Allowed only when `type` is **individual**.
           format: date
           type: string
         firstName:
-          description: First name of the individual. Allowed only when `type` is **individual**.
+          description: |-
+            First name of the individual.
+
+            Allowed only when `type` is **individual**.
           type: string
         fullName:
           description: The name of the entity.
           type: string
         lastName:
-          description: Last name of the individual. Allowed only when `type` is **individual**.
+          description: |-
+            Last name of the individual.
+
+            Allowed only when `type` is **individual**.
+          type: string
+        reference:
+          description: Your unique reference of the party. This should be consistent for all transfers initiated to/from the same party/counterparty. e.g Your client's unique wallet or payee ID
           type: string
         type:
           default: unknown
@@ -1093,6 +1162,34 @@ components:
           type: string
       required:
         - fullName
+      type: object
+    PaymentInstrument:
+      properties:
+        description:
+          description: The description of the resource.
+          type: string
+        id:
+          description: The unique identifier of the resource.
+          type: string
+        reference:
+          description: The reference for the resource.
+          type: string
+        tokenType:
+          description: The type of wallet the network token is associated with.
+          type: string
+          x-addedInVersion: "3"
+      type: object
+    ResourceReference:
+      properties:
+        description:
+          description: The description of the resource.
+          type: string
+        id:
+          description: The unique identifier of the resource.
+          type: string
+        reference:
+          description: The reference for the resource.
+          type: string
       type: object
     RestServiceError:
       properties:
@@ -1347,13 +1444,25 @@ components:
       type: object
     Transfer:
       properties:
+        accountHolder:
+          $ref: "#/components/schemas/ResourceReference"
+          description: The account holder associated with the balance account used in the transfer.
+          x-addedInVersion: "3"
         amount:
           $ref: "#/components/schemas/Amount"
           description: The amount of the transfer.
           x-addedInVersion: "1"
+        balanceAccount:
+          $ref: "#/components/schemas/ResourceReference"
+          description: Contains information about the balance account involved in the transfer.
+          x-addedInVersion: "3"
         balanceAccountId:
+          deprecated: true
           description: The unique identifier of the source [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).
           type: string
+          x-addedInVersion: "2"
+          x-deprecatedInVersion: "3"
+          x-deprecatedMessage: Use the ID in the [`balanceAccount`](https://docs.adyen.com/api-explorer/transfer-webhooks/latest/post/balancePlatform.transfer.created#request-data-balanceAccount-id) object instead.
         category:
           description: |-
             The type of transfer.
@@ -1400,9 +1509,17 @@ components:
         id:
           description: The ID of the resource.
           type: string
+        paymentInstrument:
+          $ref: "#/components/schemas/PaymentInstrument"
+          description: Contains information about the payment instrument used in the transfer.
+          x-addedInVersion: "3"
         paymentInstrumentId:
-          description: The unique identifier of the source [payment instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/paymentInstruments__resParam_id).
+          deprecated: true
+          description: The unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) used in the transfer.
           type: string
+          x-addedInVersion: "2"
+          x-deprecatedInVersion: "3"
+          x-deprecatedMessage: Use the ID in the [`paymentInstrument`](https://docs.adyen.com/api-explorer/transfer-webhooks/latest/post/balancePlatform.transfer.created#request-data-paymentInstrument-id) object instead.
         priority:
           description: |-
             The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Required for transfers with `category` **bank**.
@@ -1632,6 +1749,10 @@ components:
           maxLength: 80
           type: string
           x-addedInVersion: "2"
+        ultimateParty:
+          $ref: "#/components/schemas/UltimatePartyIdentification"
+          description: The ultimate sender of the funds of the transfer (ultimate debtor).
+          x-addedInVersion: "3"
       required:
         - category
         - amount
@@ -1694,6 +1815,50 @@ components:
         - type
         - accountNumber
         - routingNumber
+      type: object
+    UltimatePartyIdentification:
+      properties:
+        address:
+          $ref: "#/components/schemas/Address-2"
+          description: Address of the bank account owner.
+        dateOfBirth:
+          description: |-
+            The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**.
+
+            Allowed only when `type` is **individual**.
+          format: date
+          type: string
+        firstName:
+          description: |-
+            First name of the individual.
+
+            Allowed only when `type` is **individual**.
+          type: string
+        fullName:
+          description: The name of the entity.
+          type: string
+        lastName:
+          description: |-
+            Last name of the individual.
+
+            Allowed only when `type` is **individual**.
+          type: string
+        reference:
+          description: Your unique reference of the party. This should be consistent for all transfers initiated to/from the same party/counterparty. e.g Your client's unique wallet or payee ID
+          type: string
+        type:
+          default: unknown
+          description: |-
+            The type of entity that owns the bank account.
+
+             Possible values: **individual**, **organization**, or **unknown**.
+          enum:
+            - individual
+            - organization
+            - unknown
+          type: string
+      required:
+        - fullName
       type: object
   securitySchemes:
     ApiKeyAuth:
